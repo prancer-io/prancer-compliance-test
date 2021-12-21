@@ -173,13 +173,13 @@ source_path[{"aks_monitoring":metadata}] {
 azure_issue["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
-    input.properties.addonProfiles.omsagent.enabled != true
+    resource.properties.addonProfiles.omsagent.enabled != true
 }
 
 source_path[{"aks_monitoring":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
-    input.properties.addonProfiles.omsagent.enabled != true
+    resource.properties.addonProfiles.omsagent.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","addonProfiles","omsagent","enabled"]]
     }
@@ -243,7 +243,7 @@ source_path[{"aks_nodes":metadata}] {
 azure_issue["aks_nodes"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
-    agentPoolProfiles := resource.properties.agentPoolProfiles[j]
+    agentPoolProfiles := resource.properties.agentPoolProfiles[_]
     min([ c | c := agentPoolProfiles.count]) < 3
 }
 

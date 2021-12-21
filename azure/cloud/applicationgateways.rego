@@ -14,32 +14,11 @@ azure_attribute_absence["gw_tls"] {
     not resource.properties.sslPolicy.minProtocolVersion
 }
 
-
-source_path[{"gw_tls":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/applicationgateways"
-    not resource.properties.sslPolicy.minProtocolVersion
-    metadata:= {
-        "resource_path": [["resources",i,"properties","sslPolicy","minProtocolVersion"]]
-    }
-}
-
-
 azure_issue["gw_tls"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
     lower(resource.properties.sslPolicy.minProtocolVersion) != "tlsv1_2"
     lower(resource.properties.sslPolicy.minProtocolVersion) != "tlsv1_3"
-}
-
-source_path[{"gw_tls":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/applicationgateways"
-    lower(resource.properties.sslPolicy.minProtocolVersion) != "tlsv1_2"
-    lower(resource.properties.sslPolicy.minProtocolVersion) != "tlsv1_3"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","sslPolicy","minProtocolVersion"]]
-    }
 }
 
 gw_tls {
@@ -88,28 +67,11 @@ azure_attribute_absence["gw_waf"] {
     not resource.properties.webApplicationFirewallConfiguration.enabled
 }
 
-source_path[{"gw_waf":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/applicationgateways"
-    not resource.properties.webApplicationFirewallConfiguration.enabled
-    metadata:= {
-        "resource_path": [["resources",i,"properties","webApplicationFirewallConfiguration","enabled"]]
-    }
-}
 
 azure_issue["gw_waf"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
     resource.properties.webApplicationFirewallConfiguration.enabled != true
-}
-
-source_path[{"gw_waf":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/applicationgateways"
-    resource.properties.webApplicationFirewallConfiguration.enabled != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","webApplicationFirewallConfiguration","enabled"]]
-    }
 }
 
 gw_waf {
@@ -159,32 +121,12 @@ azure_attribute_absence ["protocol"] {
     not httpListener.properties.protocol
 }  
 
-source_path[{"protocol":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/applicationgateways"
-    httpListener := resource.properties.httpListeners[j]
-    not httpListener.properties.protocol
-    metadata:= {
-        "resource_path": [["resources",i,"properties","httpListeners",j,"properties","protocol"]]
-    }
-}
-
 azure_issue ["protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
     httpListener := resource.properties.httpListeners[_]
     lower(httpListener.properties.protocol) != "https"
 } 
-
-source_path[{"protocol":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/applicationgateways"
-    httpListener := resource.properties.httpListeners[j]
-    lower(httpListener.properties.protocol) != "https"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","httpListeners",j,"properties","protocol"]]
-    }
-}
 
 protocol {
     lower(input.resources[_].type) == "microsoft.network/applicationgateways"

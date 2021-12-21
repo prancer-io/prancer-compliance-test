@@ -11,45 +11,17 @@ azure_attribute_absence ["maria_ingress_from_any_ip_disabled"] {
     not resource.properties.startIpAddress
 }
 
-source_path[{"maria_ingress_from_any_ip_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
-    not resource.properties.startIpAddress
-    metadata:= {
-        "resource_path": [["resources",i,"properties","startIpAddress"]]
-    }
-}
-
 azure_attribute_absence ["maria_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
     not resource.properties.endIpAddress
 }
 
-source_path[{"maria_ingress_from_any_ip_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
-    not resource.properties.endIpAddress
-    metadata:= {
-        "resource_path": [["resources",i,"properties","endIpAddress"]]
-    }
-}
-
 azure_issue ["maria_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
     contains(resource.properties.startIpAddress, "0.0.0.0")
 }
-
-source_path[{"maria_ingress_from_any_ip_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
-    contains(resource.properties.startIpAddress, "0.0.0.0")
-    metadata:= {
-        "resource_path": [["resources",i,"properties","startIpAddress"]]
-    }
-}
-
 
 azure_issue ["maria_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
@@ -57,14 +29,6 @@ azure_issue ["maria_ingress_from_any_ip_disabled"] {
     contains(resource.properties.endIpAddress, "0.0.0.0")
 }
 
-source_path[{"maria_ingress_from_any_ip_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
-    contains(resource.properties.endIpAddress, "0.0.0.0")
-    metadata:= {
-        "resource_path": [["resources",i,"properties","endIpAddress"]]
-    }
-}
 
 maria_ingress_from_any_ip_disabled {
     lower(input.resources[_].type) == "microsoft.dbformariadb/servers/firewallrules"
@@ -113,16 +77,6 @@ azure_attribute_absence ["dbmaria_ingress_from_any_ip_disabled"] {
     not dbsql_resources.properties.startIpAddress
 }
 
-source_path[{"dbmaria_ingress_from_any_ip_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers"
-    dbsql_resources := resource.resources[j]
-    lower(dbsql_resources.type) == "firewallrules"
-    not dbsql_resources.properties.startIpAddress
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","startIpAddress"]]
-    }
-}
 
 azure_attribute_absence ["dbmaria_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
@@ -132,16 +86,6 @@ azure_attribute_absence ["dbmaria_ingress_from_any_ip_disabled"] {
     not dbsql_resources.properties.endIpAddress
 }
 
-source_path[{"dbmaria_ingress_from_any_ip_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers"
-    dbsql_resources := resource.resources[j]
-    lower(dbsql_resources.type) == "firewallrules"
-    not dbsql_resources.properties.endIpAddress
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","endIpAddress"]]
-    }
-}
 
 azure_issue ["dbmaria_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
@@ -151,35 +95,12 @@ azure_issue ["dbmaria_ingress_from_any_ip_disabled"] {
     contains(dbsql_resources.properties.startIpAddress, "0.0.0.0")
 }
 
-source_path[{"dbmaria_ingress_from_any_ip_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers"
-    dbsql_resources := resource.resources[j]
-    lower(dbsql_resources.type) == "firewallrules"
-    contains(dbsql_resources.properties.startIpAddress, "0.0.0.0")
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","startIpAddress"]]
-    }
-}
-
 azure_issue ["dbmaria_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers"
     dbsql_resources := resource.resources[_]
     lower(dbsql_resources.type) == "firewallrules"
     contains(dbsql_resources.properties.endIpAddress, "0.0.0.0")
-}
-
-
-source_path[{"dbmaria_ingress_from_any_ip_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers"
-    dbsql_resources := resource.resources[j]
-    lower(dbsql_resources.type) == "firewallrules"
-    contains(dbsql_resources.properties.endIpAddress, "0.0.0.0")
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","endIpAddress"]]
-    }
 }
 
 
@@ -230,28 +151,10 @@ azure_attribute_absence ["mairadb_ssl_enforcement_enabled"] {
     not resource.properties.sslEnforcement
 }
 
-source_path[{"mairadb_ssl_enforcement_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers"
-    not resource.properties.sslEnforcement
-    metadata:= {
-        "resource_path": [["resources",i,"properties","sslEnforcement"]]
-    }
-}
-
 azure_issue ["mairadb_ssl_enforcement_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers"
     lower(resource.properties.sslEnforcement) != "enabled"
-}
-
-source_path[{"mairadb_ssl_enforcement_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers"
-    lower(resource.properties.sslEnforcement) != "enabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","sslEnforcement"]]
-    }
 }
 
 mairadb_ssl_enforcement_enabled {
@@ -299,29 +202,11 @@ azure_attribute_absence["mairadb_public_access_disabled"] {
     not resource.properties.publicNetworkAccess
 }
 
-source_path[{"mairadb_public_access_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers"
-    not resource.properties.publicNetworkAccess
-    metadata:= {
-        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
-    }
-}
-
 
 azure_issue["mairadb_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers"
     lower(resource.properties.publicNetworkAccess) != "disabled"
-}
-
-source_path[{"mairadb_public_access_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers"
-    lower(resource.properties.publicNetworkAccess) != "disabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
-    }
 }
 
 mairadb_public_access_disabled {
@@ -367,29 +252,12 @@ azure_attribute_absence["mariadb_geo_redundant_backup_enabled"] {
     not resource.properties.storageProfile.geoRedundantBackup
 }
 
-source_path[{"mariadb_geo_redundant_backup_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers"
-    not resource.properties.storageProfile.geoRedundantBackup
-    metadata:= {
-        "resource_path": [["resources",i,"properties","geoRedundantBackup"]]
-    }
-}
-
 azure_issue["mariadb_geo_redundant_backup_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers"
     lower(resource.properties.storageProfile.geoRedundantBackup) != "enabled"
 }
 
-source_path[{"mariadb_geo_redundant_backup_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers"
-    lower(resource.properties.storageProfile.geoRedundantBackup) != "enabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","geoRedundantBackup"]]
-    }
-}
 
 mariadb_geo_redundant_backup_enabled {
     lower(input.resources[_].type) == "microsoft.dbformariadb/servers"

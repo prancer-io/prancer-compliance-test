@@ -15,18 +15,6 @@ azure_attribute_absence["sql_logical_server_alert"] {
     not sql_resources.properties.state
 }
 
-source_path[{"sql_logical_server_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    not sql_resources.properties.state
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","state"]]
-    }
-}
-
-
 azure_sql_security_alert_disabled["sql_logical_server_alert"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
@@ -34,18 +22,6 @@ azure_sql_security_alert_disabled["sql_logical_server_alert"] {
     lower(sql_resources.type) == "securityalertpolicies"
     lower(sql_resources.properties.state) == "disabled"
 }
-
-source_path[{"sql_logical_server_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    lower(sql_resources.properties.state) == "disabled"
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","state"]]
-    }
-}
-
 
 sql_logical_server_alert {
     lower(input.resources[_].type) == "microsoft.sql/servers"
@@ -95,15 +71,6 @@ azure_attribute_absence["sql_server_alert"] {
     not resource.properties.state
 }
 
-source_path[{"sql_server_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.properties.state
-    metadata:= {
-        "resource_path": [["resources",i,"properties","state"]]
-    }
-}
-
 
 azure_sql_security_alert_disabled["sql_server_alert"] {
     resource := input.resources[_]
@@ -111,14 +78,6 @@ azure_sql_security_alert_disabled["sql_server_alert"] {
     lower(resource.properties.state) == "disabled"
 }
 
-source_path[{"sql_server_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    lower(resource.properties.state) == "disabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","state"]]
-    }
-}
 
 sql_server_alert {
     lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"
@@ -169,29 +128,12 @@ azure_attribute_absence["sql_managed_instance_alert"] {
     not resource.properties.state
 }
 
-source_path[{"sql_managed_instance_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/managedinstances/securityalertpolicies"
-    not resource.properties.state
-    metadata:= {
-        "resource_path": [["resources",i,"properties","state"]]
-    }
-}
-
 azure_sql_security_alert_disabled["sql_managed_instance_alert"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/managedinstances/securityalertpolicies"
     lower(resource.properties.state) == "disabled"
 }
 
-source_path[{"sql_managed_instance_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/managedinstances/securityalertpolicies"
-    lower(resource.properties.state) == "disabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","state"]]
-    }
-}
 
 sql_managed_instance_alert {
     lower(input.resources[_].type) == "microsoft.sql/managedinstances/securityalertpolicies"
@@ -242,16 +184,6 @@ azure_issue["sql_logical_server_email_account"] {
     not sql_resources.properties.emailAccountAdmins
 }
 
-source_path[{"sql_logical_server_email_account":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    not sql_resources.properties.emailAccountAdmins
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","emailAccountAdmins"]]
-    }
-}
 
 azure_issue["sql_logical_server_email_account"] {
     resource := input.resources[_]
@@ -259,17 +191,6 @@ azure_issue["sql_logical_server_email_account"] {
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     sql_resources.properties.emailAccountAdmins != true
-}
-
-source_path[{"sql_logical_server_email_account":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    sql_resources.properties.emailAccountAdmins != true
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","emailAccountAdmins"]]
-    }
 }
 
 
@@ -323,28 +244,11 @@ azure_issue["sql_server_email_account"] {
     not resource.properties.emailAccountAdmins
 }
 
-source_path[{"sql_server_email_account":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.properties.emailAccountAdmins
-    metadata:= {
-        "resource_path": [["resources",i,"properties","emailAccountAdmins"]]
-    }
-}
 
 azure_issue["sql_server_email_account"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
     resource.properties.emailAccountAdmins != true
-}
-
-source_path[{"sql_server_email_account":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    resource.properties.emailAccountAdmins != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","emailAccountAdmins"]]
-    }
 }
 
 
@@ -399,16 +303,6 @@ azure_attribute_absence["sql_logical_server_email_addressess"] {
     not sql_resources.properties.emailAddresses
 }
 
-source_path[{"sql_logical_server_email_addressess":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    not sql_resources.properties.emailAddresses
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","emailAddresses"]]
-    }
-}
 
 azure_issue["sql_logical_server_email_addressess"] {
     resource := input.resources[_]
@@ -418,16 +312,6 @@ azure_issue["sql_logical_server_email_addressess"] {
     count(sql_resources.properties.emailAddresses) == 0  
 }
 
-source_path[{"sql_logical_server_email_addressess":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    count(sql_resources.properties.emailAddresses) == 0  
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","emailAddresses"]]
-    }
-}
 
 sql_logical_server_email_addressess {
     lower(input.resources[_].type) == "microsoft.sql/servers"
@@ -485,29 +369,12 @@ azure_attribute_absence["sql_server_email_addressess"] {
     not resource.properties.emailAddresses
 }
 
-source_path[{"sql_server_email_addressess":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.properties.emailAddresses 
-    metadata:= {
-        "resource_path": [["resources",i,"properties","emailAddresses"]]
-    }
-}
-
 azure_issue["sql_server_email_addressess"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
     count(resource.properties.emailAddresses) == 0  
 }
 
-source_path[{"sql_server_email_addressess":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    count(resource.properties.emailAddresses) == 0  
-    metadata:= {
-        "resource_path": [["resources",i,"properties","emailAddresses"]]
-    }
-}
 
 sql_server_email_addressess {
     lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"
@@ -563,17 +430,6 @@ azure_attribute_absence["sql_logical_server_retention_days"] {
     not sql_resources.properties.retentionDays
 }
 
-source_path[{"sql_logical_server_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    not sql_resources.properties.retentionDays
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
-    }
-}
-
 azure_issue["sql_logical_server_retention_days"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
@@ -582,17 +438,6 @@ azure_issue["sql_logical_server_retention_days"] {
     to_number(sql_resources.properties.retentionDays) == 0  
 }
 
-source_path[{"sql_logical_server_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    to_number(sql_resources.properties.retentionDays) == 0
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
-    }
-}
-
 
 azure_issue["sql_logical_server_retention_days"] {
     resource := input.resources[_]
@@ -600,17 +445,6 @@ azure_issue["sql_logical_server_retention_days"] {
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     to_number(sql_resources.properties.retentionDays) >= 90 
-}
-
-source_path[{"sql_logical_server_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    to_number(sql_resources.properties.retentionDays) >= 90 
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
-    }
 }
 
 
@@ -674,28 +508,11 @@ azure_attribute_absence["sql_server_retention_days"] {
     not resource.properties.retentionDays
 }
 
-source_path[{"sql_server_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.properties.retentionDays
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionDays"]]
-    }
-}
 
 azure_issue["sql_server_retention_days"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
     to_number(resource.properties.retentionDays) == 0  
-}
-
-source_path[{"sql_server_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    to_number(resource.properties.retentionDays) == 0  
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionDays"]]
-    }
 }
 
 
@@ -705,14 +522,6 @@ azure_issue["sql_server_retention_days"] {
     to_number(resource.properties.retentionDays) >= 90 
 }
 
-source_path[{"sql_server_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    to_number(resource.properties.retentionDays) >= 90
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionDays"]]
-    }
-}
 
 sql_server_retention_days {
     not azure_attribute_absence["sql_server_retention_days"]
@@ -766,16 +575,6 @@ azure_attribute_absence["sql_logical_server_disabled_alerts"] {
     not sql_resources.properties.disabledAlerts
 }
 
-source_path[{"sql_logical_server_disabled_alerts":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    not sql_resources.properties.disabledAlerts
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","disabledAlerts"]]
-    }
-}
 
 azure_issue["sql_logical_server_disabled_alerts"] {
     resource := input.resources[_]
@@ -785,16 +584,6 @@ azure_issue["sql_logical_server_disabled_alerts"] {
     count(sql_resources.properties.disabledAlerts) > 0
 }
 
-source_path[{"sql_logical_server_disabled_alerts":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    count(sql_resources.properties.disabledAlerts) > 0
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","disabledAlerts"]]
-    }
-}
 
 sql_logical_server_disabled_alerts {
     resource := input.resources[_]
@@ -846,28 +635,11 @@ azure_attribute_absence["sql_server_disabled_alerts"] {
     not resource.properties.disabledAlerts
 }
 
-source_path[{"sql_server_disabled_alerts":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.properties.disabledAlerts
-    metadata:= {
-        "resource_path": [["resources",i,"properties","disabledAlerts"]]
-    }
-}
 
 azure_issue["sql_server_disabled_alerts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
     count(resource.properties.disabledAlerts) > 0
-}
-
-source_path[{"sql_server_disabled_alerts":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    count(resource.properties.disabledAlerts) > 0
-    metadata:= {
-        "resource_path": [["resources",i,"properties","disabledAlerts"]]
-    }
 }
 
 sql_server_disabled_alerts {

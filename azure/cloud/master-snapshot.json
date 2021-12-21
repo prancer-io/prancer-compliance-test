@@ -90,8 +90,23 @@
                     "collection": "Microsoft.Storage"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_302",
+                    "type": "Microsoft.Storage/storageAccounts/encryptionScopes",
+                    "collection": "Microsoft.Storage"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_221",
                     "type": "Microsoft.Network/applicationGateways",
+                    "collection": "Microsoft.Network"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_225",
+                    "type": "Microsoft.Network/azureFirewalls",
+                    "collection": "Microsoft.Network"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_220",
+                    "type": "Microsoft.Network/frontDoors",
                     "collection": "Microsoft.Network"
                 },
                 {
@@ -147,6 +162,11 @@
                 {
                     "masterSnapshotId": "AZRSNP_263",
                     "type": "Microsoft.Sql/servers/databases/securityAlertPolicies",
+                    "collection": "Microsoft.Sql"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_264",
+                    "type": "Microsoft.Sql/servers/databases",
                     "collection": "Microsoft.Sql"
                 },
                 {
@@ -293,6 +313,11 @@
                     "masterSnapshotId": "AZRSNP_440",
                     "type": "Microsoft.Databricks/workspaces",
                     "collection": "Microsoft.Databricks"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_500",
+                    "type": "Microsoft.Network/privateEndpoints",
+                    "collection": "Microsoft.Network"
                 }
             ]
         }

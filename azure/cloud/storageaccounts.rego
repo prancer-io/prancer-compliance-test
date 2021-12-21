@@ -20,15 +20,6 @@ azure_attribute_absence_new["storage_secure"] {
     not resource.properties.supportsHttpsTrafficOnly
 }
 
-source_path[{"storage_secure":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    resource.apiVersion >= "2019-04-01"
-    not resource.properties.supportsHttpsTrafficOnly
-    metadata:= {
-        "resource_path": [["resources",i,"properties","supportsHttpsTrafficOnly"]]
-    }
-}
 
 #in older API before 2019-04-01, supportsHttpsTrafficOnly is false by default if not exist
 azure_attribute_absence_old["storage_secure"] {
@@ -38,15 +29,6 @@ azure_attribute_absence_old["storage_secure"] {
     not resource.properties.supportsHttpsTrafficOnly
 }
 
-source_path[{"storage_secure":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    resource.apiVersion < "2019-04-01"
-    not resource.properties.supportsHttpsTrafficOnly
-    metadata:= {
-        "resource_path": [["resources",i,"properties","supportsHttpsTrafficOnly"]]
-    }
-}
 
 azure_issue["storage_secure"] {
     resource := input.resources[_]
@@ -54,14 +36,6 @@ azure_issue["storage_secure"] {
     resource.properties.supportsHttpsTrafficOnly == false
 }
 
-source_path[{"storage_secure":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    resource.properties.supportsHttpsTrafficOnly == false
-    metadata:= {
-        "resource_path": [["resources",i,"properties","supportsHttpsTrafficOnly"]]
-    }
-}
 
 storage_secure {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
@@ -112,14 +86,6 @@ azure_attribute_absence["storage_acl"] {
     not resource.properties.networkAcls.defaultAction
 }
 
-source_path[{"storage_acl":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.networkAcls.defaultAction
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
-    }
-}
 
 azure_issue["storage_acl"] {
     resource := input.resources[_]
@@ -127,14 +93,6 @@ azure_issue["storage_acl"] {
     lower(resource.properties.networkAcls.defaultAction) != "deny"
 }
 
-source_path[{"storage_acl":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    lower(resource.properties.networkAcls.defaultAction) != "deny"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
-    }
-}
 
 storage_acl {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
@@ -186,16 +144,6 @@ azure_issue["storage_threat_protection"] {
     count([ c | lower(resource.resources[_].type) == nested_type; c = 1]) == 0
 }
 
-source_path[{"storage_threat_protection":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    nested_type := "providers/advancedthreatprotectionsettings"
-    resources := resource.resources[j]
-    count([ c | lower(resources.type) == nested_type; c = 1]) == 0
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"type"]]
-    }
-}
 
 azure_issue["storage_threat_protection"] {
     resource := input.resources[_]
@@ -203,17 +151,6 @@ azure_issue["storage_threat_protection"] {
     nested := resource.resources[_]
     lower(nested.type) == "providers/advancedthreatprotectionsettings"
     not nested.properties.isEnabled
-}
-
-source_path[{"storage_threat_protection":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    nested := resource.resources[j]
-    lower(nested.type) == "providers/advancedthreatprotectionsettings"
-    not nested.properties.isEnabled
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","isEnabled"]]
-    }
 }
 
 azure_issue["storage_threat_protection"] {
@@ -224,16 +161,6 @@ azure_issue["storage_threat_protection"] {
     nested.properties.isEnabled != true
 }
 
-source_path[{"storage_threat_protection":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    nested := resource.resources[j]
-    lower(nested.type) == "providers/advancedthreatprotectionsettings"
-    nested.properties.isEnabled != true
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","isEnabled"]]
-    }
-}
 
 storage_threat_protection {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
@@ -273,29 +200,12 @@ azure_attribute_absence["blobService"] {
     not resource.properties.encryption.services.blob.enabled
 }
 
-source_path[{"blobService":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.encryption.services.blob.enabled
-    metadata:= {
-        "resource_path": [["resources",i,"properties","encryption","services","blob","enabled"]]
-    }
-}
-
 azure_issue["blobService"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     resource.properties.encryption.services.blob.enabled != true
 }
 
-source_path[{"blobService":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    resource.properties.encryption.services.blob.enabled != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","encryption","services","blob","enabled"]]
-    }
-}
 
 blobService {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
@@ -342,14 +252,6 @@ azure_attribute_absence["fileService"] {
     not resource.properties.encryption.services.file.enabled
 }
 
-source_path[{"fileService":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.encryption.services.file.enabled
-    metadata:= {
-        "resource_path": [["resources",i,"properties","encryption","services","file","enabled"]]
-    }
-}
 
 azure_issue["fileService"] {
     resource := input.resources[_]
@@ -357,14 +259,6 @@ azure_issue["fileService"] {
     resource.properties.encryption.services.file.enabled != true
 }
 
-source_path[{"fileService":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    resource.properties.encryption.services.file.enabled != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","encryption","services","file","enabled"]]
-    }
-}
 
 fileService {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
@@ -412,14 +306,6 @@ azure_attribute_absence["keySource"] {
     not resource.properties.encryption.keySource
 }
 
-source_path[{"keySource":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.encryption.keySource
-    metadata:= {
-        "resource_path": [["resources",i,"properties","encryption","keySource"]]
-    }
-}
 
 azure_issue["keySource"] {
     resource := input.resources[_]
@@ -427,14 +313,6 @@ azure_issue["keySource"] {
     lower(resource.properties.encryption.keySource) != "microsoft.keyvault"
 }
 
-source_path[{"keySource":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    lower(resource.properties.encryption.keySource) != "microsoft.keyvault"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","encryption","keySource"]]
-    }
-}
 
 keySource {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
@@ -482,14 +360,6 @@ azure_issue["region"] {
     not resource.location
 }
 
-source_path[{"region":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.location
-    metadata:= {
-        "resource_path": [["resources",i,"location"]]
-    }
-}
 
 azure_issue["region"] {
     resource := input.resources[_]
@@ -498,15 +368,6 @@ azure_issue["region"] {
     lower(resource.location) != "westeurope"
 }
 
-source_path[{"region":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    lower(resource.location) != "northeurope"
-    lower(resource.location) != "westeurope"
-    metadata:= {
-        "resource_path": [["resources",i,"location"]]
-    }
-}
 
 region {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
@@ -544,14 +405,6 @@ azure_issue["blobServicePublicAccessDisabled"] {
     not resource.properties.allowBlobPublicAccess
 }
 
-source_path[{"blobServicePublicAccessDisabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.allowBlobPublicAccess
-    metadata:= {
-        "resource_path": [["resources",i,"properties","allowBlobPublicAccess"]]
-    }
-}
 
 azure_issue["blobServicePublicAccessDisabled"] {
     resource := input.resources[_]
@@ -559,14 +412,6 @@ azure_issue["blobServicePublicAccessDisabled"] {
     resource.properties.allowBlobPublicAccess == true
 }
 
-source_path[{"blobServicePublicAccessDisabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    resource.properties.allowBlobPublicAccess == true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","allowBlobPublicAccess"]]
-    }
-}
 
 blobServicePublicAccessDisabled {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
@@ -605,28 +450,11 @@ azure_attribute_absence["storage_acount_by_pass"] {
     not resource.properties.networkAcls.bypass
 }
 
-source_path[{"storage_acount_by_pass":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.networkAcls.bypass
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","bypass"]]
-    }
-}
 
 azure_issue["storage_acount_by_pass"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     lower(resource.properties.networkAcls.bypass) != "azureservices"
-}
-
-source_path[{"storage_acount_by_pass":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    lower(resource.properties.networkAcls.bypass) != "azureservices"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","bypass"]]
-    }
 }
 
 storage_acount_by_pass {
@@ -675,29 +503,12 @@ azure_attribute_absence["storage_account_latest_tls_configured"] {
     not resource.properties.minimumTlsVersion
 }
 
-source_path[{"storage_account_latest_tls_configured":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.minimumTlsVersion
-    metadata:= {
-        "resource_path": [["resources",i,"properties","minimumTlsVersion"]]
-    }
-}
-
 azure_issue["storage_account_latest_tls_configured"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     lower(resource.properties.minimumTlsVersion) != "tls1_2"
 }
 
-source_path[{"storage_account_latest_tls_configured":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    lower(resource.properties.minimumTlsVersion) != "tls1_2"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","minimumTlsVersion"]]
-    }
-}
 
 storage_account_latest_tls_configured {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
@@ -746,15 +557,6 @@ no_azure_issue["storage_account_private_endpoint"] {
     contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.storage/storageaccounts")
 }
 
-source_path[{"storage_account_private_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/privateendpoints"
-    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[j]
-    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.storage/storageaccounts")
-    metadata:= {
-        "resource_path": [["resources",i,"properties","privateLinkServiceConnections",j,"properties","privateLinkServiceId"]]
-    }
-}
 
 storage_account_private_endpoint {
 	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
@@ -805,15 +607,6 @@ azure_attribute_absence["storage_account_require_encryption"] {
     not resource.properties.encryption.requireInfrastructureEncryption
 }
 
-source_path[{"storage_account_require_encryption":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.encryption.requireInfrastructureEncryption
-    metadata:= {
-        "resource_path": [["resources",i,"properties","encryption","requireInfrastructureEncryption"]]
-    }
-}
-
 
 azure_issue["storage_account_require_encryption"] {
     resource := input.resources[_]
@@ -821,15 +614,6 @@ azure_issue["storage_account_require_encryption"] {
     resource.properties.encryption.requireInfrastructureEncryption != true
 }
 
-
-source_path[{"storage_account_require_encryption":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    resource.properties.encryption.requireInfrastructureEncryption != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","encryption","requireInfrastructureEncryption"]]
-    }
-}
 
 storage_account_require_encryption {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
@@ -876,15 +660,6 @@ azure_attribute_absence["storage_account_scopes_require_encryption"] {
     not resource.properties.requireInfrastructureEncryption
 }
 
-source_path[{"storage_account_scopes_require_encryption":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
-    not resource.properties.requireInfrastructureEncryption
-    metadata:= {
-        "resource_path": [["resources",i,"properties","requireInfrastructureEncryption"]]
-    }
-}
-
 
 azure_issue["storage_account_scopes_require_encryption"] {
     resource := input.resources[_]
@@ -893,14 +668,6 @@ azure_issue["storage_account_scopes_require_encryption"] {
 }
 
 
-source_path[{"storage_account_scopes_require_encryption":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
-    resource.properties.requireInfrastructureEncryption != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","requireInfrastructureEncryption"]]
-    }
-}
 
 storage_account_scopes_require_encryption {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts/encryptionscopes"
@@ -946,15 +713,6 @@ azure_attribute_absence["storage_account_encryption_scopes_source"] {
     not resource.properties.source
 }
 
-source_path[{"storage_account_encryption_scopes_source":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
-    not resource.properties.source
-    metadata:= {
-        "resource_path": [["resources",i,"properties","source"]]
-    }
-}
-
 
 azure_issue["storage_account_encryption_scopes_source"] {
     resource := input.resources[_]
@@ -962,15 +720,6 @@ azure_issue["storage_account_encryption_scopes_source"] {
     lower(resource.properties.source) != "microsoft.keyvault"
 }
 
-
-source_path[{"storage_account_encryption_scopes_source":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
-    lower(resource.properties.source) != "microsoft.keyvault"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","source"]]
-    }
-}
 
 storage_account_encryption_scopes_source {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts/encryptionscopes"
@@ -1017,14 +766,6 @@ azure_attribute_absence["storage_vnet_service_endpoint"] {
     not resource.properties.networkAcls.defaultAction
 }
 
-source_path[{"storage_vnet_service_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.networkAcls.defaultAction
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
-    }
-}
 
 azure_attribute_absence["storage_vnet_service_endpoint"] {
     resource := input.resources[_]
@@ -1032,28 +773,11 @@ azure_attribute_absence["storage_vnet_service_endpoint"] {
     not resource.properties.networkAcls.virtualNetworkRules
 }
 
-source_path[{"storage_vnet_service_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.networkAcls.virtualNetworkRules
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules"]]
-    }
-}
 
 azure_issue["storage_vnet_service_endpoint"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     lower(resource.properties.networkAcls.defaultAction) != "deny"
-}
-
-source_path[{"storage_vnet_service_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    lower(resource.properties.networkAcls.defaultAction) != "deny"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
-    }
 }
 
 
@@ -1064,15 +788,6 @@ azure_issue["storage_vnet_service_endpoint"] {
     count(virtualNetworkRule.id) == 0
 }
 
-source_path[{"storage_vnet_service_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[j]
-    count(virtualNetworkRule.id) == 0
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules",j,"id"]]
-    }
-}
 
 storage_vnet_service_endpoint {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
@@ -1120,15 +835,6 @@ azure_attribute_absence["storage_account_allow_shared_key_access"] {
     not has_property(resource.properties,"allowSharedKeyAccess")
 }
 
-source_path[{"storage_account_allow_shared_key_access":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not has_property(resource.properties,"allowSharedKeyAccess")
-    metadata:= {
-        "resource_path": [["resources",i,"properties","allowSharedKeyAccess"]]
-    }
-}
-
 
 azure_issue["storage_account_allow_shared_key_access"] {
     resource := input.resources[_]
@@ -1136,15 +842,6 @@ azure_issue["storage_account_allow_shared_key_access"] {
     resource.properties.allowSharedKeyAccess != false
 }
 
-
-source_path[{"storage_account_allow_shared_key_access":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    resource.properties.allowSharedKeyAccess != false
-    metadata:= {
-        "resource_path": [["resources",i,"properties","allowSharedKeyAccess"]]
-    }
-}
 
 storage_account_allow_shared_key_access {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"

@@ -21,15 +21,6 @@ azure_issue["sql_mi_public_endpoint_disabled"] {
     resource.properties.publicDataEndpointEnabled == true
 }
 
-source_path[{"sql_mi_public_endpoint_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/managedinstances"
-    resource.properties.publicDataEndpointEnabled == true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","publicDataEndpointEnabled"]]
-    }
-}
-
 sql_mi_public_endpoint_disabled {
     lower(input.resources[_].type) == "microsoft.sql/managedinstances"
     not azure_issue["sql_mi_public_endpoint_disabled"]
@@ -47,7 +38,7 @@ sql_mi_public_endpoint_disabled_err = "SQL Managed Instance currently have publi
 sql_mi_public_endpoint_disabled_metadata := {
     "Policy Code": "PR-AZR-CLD-SQL-041",
     "Type": "Cloud",
-    "Product": "",
+    "Product": "AZR",
     "Language": "",
     "Policy Title": "SQL Managed Instance should have public endpoint access disabled",
     "Policy Description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",

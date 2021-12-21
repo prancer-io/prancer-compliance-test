@@ -21,14 +21,6 @@ azure_issue["vnet_subnet_nsg"] {
     not resource.properties.networkSecurityGroup
 }
 
-source_path[{"vnet_subnet_nsg":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/virtualnetworks/subnets"
-    not resource.properties.networkSecurityGroup
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkSecurityGroup"]]
-    }
-}
 
 
 vnet_subnet_nsg {

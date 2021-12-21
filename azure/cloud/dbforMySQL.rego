@@ -11,29 +11,12 @@ azure_attribute_absence ["ssl_enforcement"] {
     not resource.properties.sslEnforcement
 }
 
-source_path[{"ssl_enforcement":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformysql/servers"
-    not resource.properties.sslEnforcement
-    metadata:= {
-        "resource_path": [["resources",i,"properties","sslEnforcement"]]
-    }
-}
-
 azure_issue ["ssl_enforcement"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformysql/servers"
     lower(resource.properties.sslEnforcement) != "enabled"
 }
 
-source_path[{"ssl_enforcement":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformysql/servers"
-    lower(resource.properties.sslEnforcement) != "enabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","sslEnforcement"]]
-    }
-}
 
 ssl_enforcement {
     lower(input.resources[_].type) == "microsoft.dbformysql/servers"
@@ -79,14 +62,6 @@ azure_attribute_absence["mysql_public_access_disabled"] {
     not resource.properties.publicNetworkAccess 
 }
 
-source_path[{"mysql_public_access_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformysql/servers"
-    not resource.properties.publicNetworkAccess
-    metadata:= {
-        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
-    }
-}
 
 azure_issue["mysql_public_access_disabled"] {
     resource := input.resources[_]
@@ -94,14 +69,6 @@ azure_issue["mysql_public_access_disabled"] {
     lower(resource.properties.publicNetworkAccess) != "disabled"
 }
 
-source_path[{"mysql_public_access_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformysql/servers"
-    lower(resource.properties.publicNetworkAccess) != "disabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
-    }
-}
 
 mysql_public_access_disabled {
     azure_attribute_absence["mysql_public_access_disabled"]
@@ -146,29 +113,12 @@ azure_attribute_absence["mysql_server_latest_tls_configured"] {
     not resource.properties.minimalTlsVersion
 }
 
-source_path[{"mysql_server_latest_tls_configured":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformysql/servers"
-    not resource.properties.minimalTlsVersion
-    metadata:= {
-        "resource_path": [["resources",i,"properties","minimalTlsVersion"]]
-    }
-}
-
 azure_issue["mysql_server_latest_tls_configured"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformysql/servers"
     lower(resource.properties.minimalTlsVersion) != "tls1_2"
 }
 
-source_path[{"mysql_server_latest_tls_configured":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformysql/servers"
-    lower(resource.properties.minimalTlsVersion) != "tls1_2"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","minimalTlsVersion"]]
-    }
-}
 
 mysql_server_latest_tls_configured {
     lower(input.resources[_].type) == "microsoft.dbformysql/servers"

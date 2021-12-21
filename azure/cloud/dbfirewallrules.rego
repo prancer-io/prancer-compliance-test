@@ -17,16 +17,6 @@ azure_attribute_absence["db_logical_firewall"] {
     not sql_db.properties.startIpAddress
 }
 
-source_path[{"db_logical_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[j]
-    lower(sql_db.type) == "firewallrules"
-    not sql_db.properties.startIpAddress
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","startIpAddress"]]
-    }
-}
 
 azure_attribute_absence["db_logical_firewall"] {
     resource := input.resources[_]
@@ -36,16 +26,6 @@ azure_attribute_absence["db_logical_firewall"] {
     not sql_db.properties.endIpAddress
 }
 
-source_path[{"db_logical_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[j]
-    lower(sql_db.type) == "firewallrules"
-    not sql_db.properties.endIpAddress
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","endIpAddress"]]
-    }
-}
 
 azure_issue["db_logical_firewall"] {
     resource := input.resources[_]
@@ -55,19 +35,6 @@ azure_issue["db_logical_firewall"] {
     sql_db.properties.startIpAddress == "0.0.0.0"
 }
 
-source_path[{"db_logical_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[j]
-    lower(sql_db.type) == "firewallrules"
-    sql_db.properties.startIpAddress == "0.0.0.0"
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","startIpAddress"]]
-   
-    }
-}
-
-
 azure_issue["db_logical_firewall"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
@@ -75,18 +42,6 @@ azure_issue["db_logical_firewall"] {
     lower(sql_db.type) == "firewallrules"
     sql_db.properties.endIpAddress == "0.0.0.0"
 }
-
-source_path[{"db_logical_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[j]
-    lower(sql_db.type) == "firewallrules"
-    sql_db.properties.endIpAddress == "0.0.0.0"
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","endIpAddress"]]
-    }
-}
-
 
 db_logical_firewall {
     resource := input.resources[_]
@@ -135,30 +90,12 @@ azure_attribute_absence["db_firewall"] {
     not resource.properties.startIpAddress
 }
 
-source_path[{"db_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/firewallrules"
-    not resource.properties.startIpAddress
-    metadata:= {
-        "resource_path": [["resources",i,"properties","startIpAddress"]]
-    }
-}
-
-
 azure_attribute_absence["db_firewall"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/firewallrules"
     not resource.properties.endIpAddress
 }
 
-source_path[{"db_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/firewallrules"
-    not resource.properties.endIpAddress
-    metadata:= {
-        "resource_path": [["resources",i,"properties","endIpAddress"]]
-    }
-}
 
 azure_issue["db_firewall"] {
     resource := input.resources[_]
@@ -166,28 +103,11 @@ azure_issue["db_firewall"] {
     resource.properties.startIpAddress == "0.0.0.0"
 }
 
-source_path[{"db_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/firewallrules"
-    resource.properties.startIpAddress == "0.0.0.0"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","startIpAddress"]]
-    }
-}
 
 azure_issue["db_firewall"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/firewallrules"
     resource.properties.endIpAddress == "0.0.0.0"
-}
-
-source_path[{"db_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/firewallrules"
-    resource.properties.endIpAddress == "0.0.0.0"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","endIpAddress"]]
-    }
 }
 
 

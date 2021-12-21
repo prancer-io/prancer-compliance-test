@@ -16,15 +16,6 @@ azure_attribute_absence["kv_expire"] {
     not resource.properties.attributes.exp
 }
 
-source_path[{"kv_expire":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults/secrets"
-    #resource.properties.attributes.enabled != false
-    not resource.properties.attributes.exp
-    metadata:= {
-        "resource_path": [["resources",i,"properties","attributes","exp"]]
-    }
-}
 
 azure_issue["kv_expire"] {
     resource := input.resources[_]
@@ -32,16 +23,6 @@ azure_issue["kv_expire"] {
     #resource.properties.attributes.enabled != false
     #Expiry date in seconds since 1970-01-01T00:00:00Z.
     to_number(resource.properties.attributes.exp) < 0
-}
-
-source_path[{"kv_expire":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults/secrets"
-    #resource.properties.attributes.enabled != false
-    to_number(resource.properties.attributes.exp) < 0
-    metadata:= {
-        "resource_path": [["resources",i,"properties","attributes","exp"]]
-    }
 }
 
 kv_expire {

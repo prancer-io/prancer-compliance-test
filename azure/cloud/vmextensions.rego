@@ -14,14 +14,6 @@ azure_attribute_absence["vm_protection"] {
     not resource.properties.type
 }
 
-source_path[{"vm_protection":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
-    not resource.properties.type
-    metadata:= {
-        "resource_path": [["resources",i,"properties","type"]]
-    }
-}
 
 azure_issue["vm_protection"] {
     resource := input.resources[_]
@@ -29,14 +21,6 @@ azure_issue["vm_protection"] {
     lower(resource.properties.type) != "iaasantimalware"
 }
 
-source_path[{"vm_protection":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
-    lower(resource.properties.type) != "iaasantimalware"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","type"]]
-    }
-}
 
 vm_protection {
     lower(input.resources[_].type) == "microsoft.compute/virtualmachines/extensions"

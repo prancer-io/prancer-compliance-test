@@ -14,14 +14,6 @@ azure_issue["vm_aset"] {
     not resource.properties.availabilitySet
 }
 
-source_path[{"vm_aset":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.compute/virtualmachines"
-    not resource.properties.availabilitySet
-    metadata:= {
-        "resource_path": [["resources",i,"properties","availabilitySet"]]
-    }
-}
 
 vm_aset {
     lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
@@ -62,29 +54,11 @@ azure_attribute_absence["linux_configuration"] {
     not resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication
 }
 
-source_path[{"linux_configuration":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.compute/virtualmachines"
-    not resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication
-    metadata:= {
-        "resource_path": [["resources",i,"properties","osProfile","linuxConfiguration","disablePasswordAuthentication"]]
-    }
-}
-
 
 azure_issue["linux_configuration"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/virtualmachines"
     resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication != true
-}
-
-source_path[{"linux_configuration":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.compute/virtualmachines"
-    resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","osProfile","linuxConfiguration","disablePasswordAuthentication"]]
-    }
 }
 
 

@@ -5,16 +5,16 @@
             "version": "0.1",
             "cases": [
                 {
-                    "masterTestId": "AZURE_TEST_KV_01",
+                    "masterTestId": "AZURE_TEST_KV_1",
                     "type": "rego",
                     "rule": "file(Keyvault.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-KV-001",
+                            "id": "PR-AZR-CLD-KV-001",
                             "eval": "data.rule.KeyVault",
                             "message": "data.rule.KeyVault_err",
                             "remediationDescription": "1. Go to 'Key vaults' and choose your Key Vault<br>2. Select 'Keys/Secrets/Certificates' under 'Settings' in the navigation menu<br>3. Select 'Generate/Import' and complete the wizard.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_KV_001.py"
+                            "remediationFunction": "PR_AZR_CLD_KV_001.py"
                         }
                     ],
                     "tags": [
@@ -34,20 +34,20 @@
                         "AZRSNP_228"
                     ],
                     "severity": "Low",
-                    "title": "Ensure that keyvault is in use",
+                    "title": "Ensure at least one principal has access to Keyvault",
                     "description": "Use the Azure Key Vault to store secrets within the Microsoft Azure environment. Secrets in Azure Key Vault are octet sequences with a maximum size of 25k bytes each."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_02",
+                    "masterTestId": "AZURE_TEST_KV_2",
                     "type": "rego",
                     "rule": "file(Keyvault.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-KV-002",
+                            "id": "PR-AZR-CLD-KV-002",
                             "eval": "data.rule.enableSoftDelete",
                             "message": "data.rule.enableSoftDelete_err",
                             "remediationDescription": "Via Azure Portal<br>Azure Portal does not have provision to update the respective configurations<br><br>Via Azure CLI<br>Existing key vault:<br><br>For an existing key vault named ContosoVault, enable soft-delete as follows:<br><br>az resource update --id $(az keyvault show --name ContosoVault -o tsv , awk '{print $1}') --set properties.enableSoftDelete=true.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_KV_002.py"
+                            "remediationFunction": "PR_AZR_CLD_KV_002.py"
                         }
                     ],
                     "tags": [
@@ -69,16 +69,16 @@
                     "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_03",
+                    "masterTestId": "AZURE_TEST_KV_3",
                     "type": "rego",
                     "rule": "file(Keyvault.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-KV-003",
+                            "id": "PR-AZR-CLD-KV-003",
                             "eval": "data.rule.enablePurgeProtection",
                             "message": "data.rule.enablePurgeProtection_err",
                             "remediationDescription": "Via Azure Portal<br>Azure Portal does not have provision to update the respective configurations<br><br>Via Azure CLI<br>Existing key vault:<br><br>For an existing key vault named ContosoVault, enable soft-delete as follows:<br><br>az resource update --id $(az keyvault show --name ContosoVault -o tsv , awk '{print $1}') --set properties.enableSoftDelete=true.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_KV_003.py"
+                            "remediationFunction": "PR_AZR_CLD_KV_003.py"
                         }
                     ],
                     "tags": [
@@ -100,16 +100,16 @@
                     "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_04",
+                    "masterTestId": "AZURE_TEST_KV_4",
                     "type": "rego",
                     "rule": "file(KeyvaultKey.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-KV-004",
+                            "id": "PR-AZR-CLD-KV-004",
                             "eval": "data.rule.kv_expire",
                             "message": "data.rule.kv_expire_err",
                             "remediationDescription": "1. Go to 'Key vaults' and choose your Key Vault<br>2. Select 'Keys' under 'Settings' in the navigation menu<br>3. Select the relevant key and reselect its current version<br>3. Check 'Set expiration date'<br>4. Save.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_KV_004.py"
+                            "remediationFunction": "PR_AZR_CLD_KV_004.py"
                         }
                     ],
                     "tags": [
@@ -136,16 +136,16 @@
                     "description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_05",
+                    "masterTestId": "AZURE_TEST_KV_5",
                     "type": "rego",
                     "rule": "file(KeyvaultSecrets.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-KV-005",
+                            "id": "PR-AZR-CLD-KV-005",
                             "eval": "data.rule.kv_expire",
                             "message": "data.rule.kv_expire_err",
                             "remediationDescription": "1. Go to Key vaults<br>2. For each Key vault, click on Secrets.<br>3. Ensure that each secret in the vault has EXPIRATION DATE set as appropriate.<br>Please visit <a href='https://docs.microsoft.com/en-us/rest/api/keyvault/vaults/get' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_KV_005.py"
+                            "remediationFunction": "PR_AZR_CLD_KV_005.py"
                         }
                     ],
                     "tags": [
@@ -172,9 +172,163 @@
                     "description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_03",
+                    "masterTestId": "AZURE_TEST_KV_6",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-KV-006",
+                            "eval": "data.rule.keyvault_Acl",
+                            "message": "data.rule.keyvault_Acl_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_KV_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_228"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Key Vault should disable public network access",
+                    "description": "Disable public network access for your key vault so that it's not accessible over the public internet. This can reduce data leakage risks."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_KV_7",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-KV-007",
+                            "eval": "data.rule.keyvault_bypass",
+                            "message": "data.rule.keyvault_bypass_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_KV_007.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_228"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Key Vault Trusted Microsoft Services access should be enabled",
+                    "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging, Metrics, AzureServices (For example, 'Logging, Metrics'), or None to bypass none of those traffics. - None, Logging, Metrics, AzureServices."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_KV_8",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-KV-008",
+                            "eval": "data.rule.keyvault_service_endpoint",
+                            "message": "data.rule.keyvault_service_endpoint_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_KV_008.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_228"
+                    ],
+                    "severity": "Medium",
+                    "title": "Key Vault should use a virtual network service endpoint",
+                    "description": "This policy audits any Key Vault not configured to use a virtual network service endpoint."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_KV_9",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-KV-009",
+                            "eval": "data.rule.kv_private_endpoint",
+                            "message": "data.rule.kv_private_endpoint_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_KV_009.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_228"
+                    ],
+                    "severity": "Medium",
+                    "title": "Configure Azure Key Vaults with private endpoints",
+                    "description": "Private endpoints connect your virtual networks to Azure services without a public IP address at the source or destination. By mapping private endpoints to key vault, you can reduce data leakage risks. Learn more about private links at: https://aka.ms/akvprivatelink."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_KV_10",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-KV-010",
+                            "eval": "data.rule.kv_public_access_disabled",
+                            "message": "data.rule.kv_public_access_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_KV_010.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_228"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure KeyVault don't have public network access enabled",
+                    "description": "Always use Private Endpoint for Azure KeyVault"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_3",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-003",
+                            "eval": "data.rule.storage_secure",
+                            "message": "data.rule.storage_secure_err",
+                            "remediationDescription": "1. Go to 'Storage accounts' and choose your storage account<br>2. Select 'Configuration' under 'Settings' in the navigation menu<br>3. Set 'Secure transfer required' to 'Enabled'<br>4. Save.<br>Please visit <a href='https://docs.microsoft.com/en-us/rest/api/storagerp/storage-accounts/get-properties' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_CLD_STR_003.py"
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -191,15 +345,6 @@
                             ]
                         }
                     ],
-                    "evals": [
-                        {
-                            "id": "PR-AZR-STR-003",
-                            "eval": "data.rule.storage_secure",
-                            "message": "data.rule.storage_secure_err",
-                            "remediationDescription": "1. Go to 'Storage accounts' and choose your storage account<br>2. Select 'Configuration' under 'Settings' in the navigation menu<br>3. Set 'Secure transfer required' to 'Enabled'<br>4. Save.<br>Please visit <a href='https://docs.microsoft.com/en-us/rest/api/storagerp/storage-accounts/get-properties' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_STR_003.py"
-                        }
-                    ],
                     "severity": "High",
                     "title": "Storage Accounts https based secure transfer should be enabled",
                     "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
@@ -208,9 +353,18 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_04",
+                    "masterTestId": "AZURE_TEST_STR_4",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-004",
+                            "eval": "data.rule.storage_acl",
+                            "message": "data.rule.storage_acl_err",
+                            "remediationDescription": "1. Go to Storage Accounts<br>2. For each storage account, Click on the settings menu called Firewalls and virtual networks.<br>3. Ensure that you have selected to allow access from Selected networks.<br>4. Add rules to allow traffic from specific network.<br>5. Click Save to apply your changes.<br>Azure Command Line Interface 2.0 Use the below command to update default-action to Deny.<br>Please visit <a href='https://docs.microsoft.com/en-us/rest/api/storagerp/storage-accounts/get-properties' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_CLD_STR_004.py"
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -227,15 +381,6 @@
                             ]
                         }
                     ],
-                    "evals": [
-                        {
-                            "id": "PR-AZR-STR-004",
-                            "eval": "data.rule.storage_acl",
-                            "message": "data.rule.storage_acl_err",
-                            "remediationDescription": "1. Go to Storage Accounts<br>2. For each storage account, Click on the settings menu called Firewalls and virtual networks.<br>3. Ensure that you have selected to allow access from Selected networks.<br>4. Add rules to allow traffic from specific network.<br>5. Click Save to apply your changes.<br>Azure Command Line Interface 2.0 Use the below command to update default-action to Deny.<br>Please visit <a href='https://docs.microsoft.com/en-us/rest/api/storagerp/storage-accounts/get-properties' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_STR_004.py"
-                        }
-                    ],
                     "severity": "High",
                     "title": "Storage Accounts should have firewall rules enabled",
                     "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.<br><br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
@@ -244,9 +389,18 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_06",
+                    "masterTestId": "AZURE_TEST_STR_6",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-006",
+                            "eval": "data.rule.blobService",
+                            "message": "data.rule.blobService_err",
+                            "remediationDescription": "Currently, Storage account supports customer-managed keys encryption for blobs by default upon account creation, this cannot be changed after.<br>Note: When customer-managed keys are configured, your data in Blob storage and Azure Files is automatically protected using the customer-managed keys.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-service-encryption' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_CLD_STR_006.py"
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -262,15 +416,6 @@
                             ]
                         }
                     ],
-                    "evals": [
-                        {
-                            "id": "PR-AZR-STR-006",
-                            "eval": "data.rule.blobService",
-                            "message": "data.rule.blobService_err",
-                            "remediationDescription": "Currently, Storage account supports customer-managed keys encryption for blobs by default upon account creation, this cannot be changed after.<br>Note: When customer-managed keys are configured, your data in Blob storage and Azure Files is automatically protected using the customer-managed keys.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-service-encryption' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_STR_006.py"
-                        }
-                    ],
                     "severity": "High",
                     "title": "Ensure that 'Storage service encryption' is enabled for the Blob Service",
                     "description": "Enable data encryption at rest for blobs. Storage service encryption protects your data at rest. Azure Storage encrypts data when it's written, and automatically decrypts it when it is accessed.",
@@ -279,9 +424,18 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_07",
+                    "masterTestId": "AZURE_TEST_STR_7",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-007",
+                            "eval": "data.rule.fileService",
+                            "message": "data.rule.fileService_err",
+                            "remediationDescription": "Currently, Storage account supports customer-managed keys encryption for files by default upon account creation, this cannot be changed after.<br>Note: When customer-managed keys are configured, your data in Blob storage and Azure Files is automatically protected using the customer-managed keys.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-service-encryption' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_CLD_STR_007.py"
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -297,15 +451,6 @@
                             ]
                         }
                     ],
-                    "evals": [
-                        {
-                            "id": "PR-AZR-STR-007",
-                            "eval": "data.rule.fileService",
-                            "message": "data.rule.fileService_err",
-                            "remediationDescription": "Currently, Storage account supports customer-managed keys encryption for files by default upon account creation, this cannot be changed after.<br>Note: When customer-managed keys are configured, your data in Blob storage and Azure Files is automatically protected using the customer-managed keys.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-service-encryption' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_STR_007.py"
-                        }
-                    ],
                     "severity": "High",
                     "title": "Ensure that 'Storage service encryption' is enabled for the File Service",
                     "description": "Azure Storage encryption protects your data and to help you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows.",
@@ -314,9 +459,18 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_08",
+                    "masterTestId": "AZURE_TEST_STR_8",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-008",
+                            "eval": "data.rule.keySource",
+                            "message": "data.rule.keySource_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_STR_008.py"
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -328,15 +482,6 @@
                             ]
                         }
                     ],
-                    "evals": [
-                        {
-                            "id": "PR-AZR-STR-008",
-                            "eval": "data.rule.keySource",
-                            "message": "data.rule.keySource_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_STR_008.py"
-                        }
-                    ],
                     "severity": "High",
                     "title": "Ensure critical data storage in Storage Account is encrypted with Customer Managed Key",
                     "description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",
@@ -345,9 +490,18 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_09",
+                    "masterTestId": "AZURE_TEST_STR_9",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-009",
+                            "eval": "data.rule.region",
+                            "message": "data.rule.region_err",
+                            "remediationDescription": "Please refer to Azure documentations about Storage Accounts:<br><a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-create-storage-account' target='_blank'>here</a>.<br>and<br>Azure documentations about Regions:<br><a href='https://azure.microsoft.com/en-us/global-infrastructure/regions/#services' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_STR_009.py"
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -357,15 +511,6 @@
                             "service": [
                                 "Storage"
                             ]
-                        }
-                    ],
-                    "evals": [
-                        {
-                            "id": "PR-AZR-STR-009",
-                            "eval": "data.rule.region",
-                            "message": "data.rule.region_err",
-                            "remediationDescription": "Please refer to Azure documentations about Storage Accounts:<br><a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-create-storage-account' target='_blank'>here</a>.<br>and<br>Azure documentations about Regions:<br><a href='https://azure.microsoft.com/en-us/global-infrastructure/regions/#services' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AZR_STR_009.py"
                         }
                     ],
                     "severity": "High",
@@ -379,6 +524,15 @@
                     "masterTestId": "AZURE_TEST_STR_10",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-010",
+                            "eval": "data.rule.blobServicePublicAccessDisabled",
+                            "message": "data.rule.blobServicePublicAccessDisabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_STR_010.py"
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -393,15 +547,6 @@
                             "service": [
                                 "Storage"
                             ]
-                        }
-                    ],
-                    "evals": [
-                        {
-                            "id": "PR-AZR-STR-010",
-                            "eval": "data.rule.blobServicePublicAccessDisabled",
-                            "message": "data.rule.blobServicePublicAccessDisabled_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_STR_010.py"
                         }
                     ],
                     "severity": "High",
@@ -415,6 +560,15 @@
                     "masterTestId": "AZURE_TEST_STR_11",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-011",
+                            "eval": "data.rule.storage_acount_by_pass",
+                            "message": "data.rule.storage_acount_by_pass_err",
+                            "remediationDescription": "1. Go to Storage Accounts<br>2. For each storage account, Click on the settings menu called Firewalls and virtual networks.<br>3. Ensure that you have elected to allow access from 'Selected networks'.<br>4. Enable check box for Allow trusted Microsoft services to access this storage account.<br>5. Click Save to apply your changes.<br>Azure Command Line Interface 2.0 Use the below command to update trusted Microsoft services.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-network-security' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_CLD_STR_011.py"
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -431,15 +585,6 @@
                             ]
                         }
                     ],
-                    "evals": [
-                        {
-                            "id": "PR-AZR-STR-011",
-                            "eval": "data.rule.storage_acount_by_pass",
-                            "message": "data.rule.storage_acount_by_pass_err",
-                            "remediationDescription": "1. Go to Storage Accounts<br>2. For each storage account, Click on the settings menu called Firewalls and virtual networks.<br>3. Ensure that you have elected to allow access from 'Selected networks'.<br>4. Enable check box for Allow trusted Microsoft services to access this storage account.<br>5. Click Save to apply your changes.<br>Azure Command Line Interface 2.0 Use the below command to update trusted Microsoft services.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-network-security' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_STR_011.py"
-                        }
-                    ],
                     "severity": "High",
                     "title": "Azure Storage Account Trusted Microsoft Services access should be enabled",
                     "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging, Metrics, AzureServices (For example, 'Logging, Metrics'), or None to bypass none of those traffics. - None, Logging, Metrics, AzureServices.",
@@ -448,16 +593,237 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_1",
+                    "masterTestId": "AZURE_TEST_STR_18",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-001",
+                            "id": "PR-AZR-CLD-STR-018",
+                            "eval": "data.rule.storage_account_latest_tls_configured",
+                            "message": "data.rule.storage_account_latest_tls_configured_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_STR_018.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Azure Storage Account has latest version of tls configured",
+                    "description": "This policy will identify the Azure Storage Account which dont have latest version of tls configured and give alert",
+                    "masterSnapshotId": [
+                        "AZRSNP_301"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_19",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-019",
+                            "eval": "data.rule.storage_account_private_endpoint",
+                            "message": "data.rule.storage_account_private_endpoint_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_STR_019.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage accounts should use private link",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your storage account, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview",
+                    "masterSnapshotId": [
+                        "AZRSNP_301",
+                        "AZRSNP_500"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_20",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-020",
+                            "eval": "data.rule.storage_account_require_encryption",
+                            "message": "data.rule.storage_account_require_encryption_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_STR_020.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage accounts should have infrastructure encryption",
+                    "description": "Enable infrastructure encryption for higher level of assurance that the data is secure. When infrastructure encryption is enabled, data in a storage account is encrypted twice.",
+                    "masterSnapshotId": [
+                        "AZRSNP_301"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_21",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-021",
+                            "eval": "data.rule.storage_account_scopes_require_encryption",
+                            "message": "data.rule.storage_account_scopes_require_encryption_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_STR_021.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage account encryption scopes should use double encryption for data at rest",
+                    "description": "Enable infrastructure encryption for encryption at rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
+                    "masterSnapshotId": [
+                        "AZRSNP_302"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_22",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-022",
+                            "eval": "data.rule.storage_account_encryption_scopes_source",
+                            "message": "data.rule.storage_account_encryption_scopes_source_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_STR_022.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage account encryption scopes should use customer-managed keys to encrypt data at rest",
+                    "description": "Use customer-managed keys to manage the encryption at rest of your storage account encryption scopes. Customer-managed keys enable the data to be encrypted with an Azure key-vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more about storage account encryption scopes at https://aka.ms/encryption-scopes-overview.",
+                    "masterSnapshotId": [
+                        "AZRSNP_302"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_23",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-023",
+                            "eval": "data.rule.storage_vnet_service_endpoint",
+                            "message": "data.rule.storage_vnet_service_endpoint_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_STR_023.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage Accounts should use a virtual network service endpoint",
+                    "description": "This policy audits any Storage Account not configured to use a virtual network service endpoint.",
+                    "masterSnapshotId": [
+                        "AZRSNP_301"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_24",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-STR-024",
+                            "eval": "data.rule.storage_account_allow_shared_key_access",
+                            "message": "data.rule.storage_account_allow_shared_key_access_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_STR_024.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage accounts should prevent shared key access",
+                    "description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials, or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key, and is recommended by Microsoft.",
+                    "masterSnapshotId": [
+                        "AZRSNP_301"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_1",
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-WEB-001",
                             "eval": "data.rule.https_only",
                             "message": "data.rule.https_only_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_001.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_001.py"
                         }
                     ],
                     "tags": [
@@ -486,14 +852,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_2",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-002",
+                            "id": "PR-AZR-CLD-WEB-002",
                             "eval": "data.rule.min_tls_version",
                             "message": "data.rule.min_tls_version_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_002.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_002.py"
                         }
                     ],
                     "tags": [
@@ -522,14 +888,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_3",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-003",
+                            "id": "PR-AZR-CLD-WEB-003",
                             "eval": "data.rule.client_cert_enabled",
                             "message": "data.rule.client_cert_enabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_003.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_003.py"
                         }
                     ],
                     "tags": [
@@ -558,14 +924,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_4",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-004",
+                            "id": "PR-AZR-CLD-WEB-004",
                             "eval": "data.rule.http_20_enabled",
                             "message": "data.rule.http_20_enabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_004.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_004.py"
                         }
                     ],
                     "tags": [
@@ -594,14 +960,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_6",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-006",
+                            "id": "PR-AZR-CLD-WEB-006",
                             "eval": "data.rule.web_service_cors_not_allowing_all",
                             "message": "data.rule.web_service_cors_not_allowing_all_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_006.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_006.py"
                         }
                     ],
                     "tags": [
@@ -623,14 +989,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_7",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-007",
+                            "id": "PR-AZR-CLD-WEB-007",
                             "eval": "data.rule.web_service_http_logging_enabled",
                             "message": "data.rule.web_service_http_logging_enabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_007.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_007.py"
                         }
                     ],
                     "tags": [
@@ -652,14 +1018,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_8",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-008",
+                            "id": "PR-AZR-CLD-WEB-008",
                             "eval": "data.rule.web_service_detaild_error_message_enabled",
                             "message": "data.rule.web_service_detaild_error_message_enabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_008.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_008.py"
                         }
                     ],
                     "tags": [
@@ -681,14 +1047,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_9",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-009",
+                            "id": "PR-AZR-CLD-WEB-009",
                             "eval": "data.rule.web_service_request_tracing_enabled",
                             "message": "data.rule.web_service_request_tracing_enabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_009.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_009.py"
                         }
                     ],
                     "tags": [
@@ -710,14 +1076,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_10",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-010",
+                            "id": "PR-AZR-CLD-WEB-010",
                             "eval": "data.rule.web_service_managed_identity_provider_enabled",
                             "message": "data.rule.web_service_managed_identity_provider_enabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_010.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_010.py"
                         }
                     ],
                     "tags": [
@@ -739,14 +1105,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_11",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-011",
+                            "id": "PR-AZR-CLD-WEB-011",
                             "eval": "data.rule.web_service_remote_debugging_disabled",
                             "message": "data.rule.web_service_remote_debugging_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_011.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_011.py"
                         }
                     ],
                     "tags": [
@@ -768,14 +1134,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_12",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-012",
+                            "id": "PR-AZR-CLD-WEB-012",
                             "eval": "data.rule.web_service_ftp_deployment_disabled",
                             "message": "data.rule.web_service_ftp_deployment_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_012.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_012.py"
                         }
                     ],
                     "tags": [
@@ -797,14 +1163,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_13",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-013",
+                            "id": "PR-AZR-CLD-WEB-013",
                             "eval": "data.rule.web_service_net_framework_latest",
                             "message": "data.rule.web_service_net_framework_latest_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_013.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_013.py"
                         }
                     ],
                     "tags": [
@@ -826,14 +1192,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_14",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-014",
+                            "id": "PR-AZR-CLD-WEB-014",
                             "eval": "data.rule.web_service_php_version_latest",
                             "message": "data.rule.web_service_php_version_latest_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_014.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_014.py"
                         }
                     ],
                     "tags": [
@@ -855,14 +1221,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_15",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-015",
+                            "id": "PR-AZR-CLD-WEB-015",
                             "eval": "data.rule.web_service_python_version_latest",
                             "message": "data.rule.web_service_python_version_latest_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_015.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_015.py"
                         }
                     ],
                     "tags": [
@@ -884,14 +1250,14 @@
                 {
                     "masterTestId": "AZURE_TEST_WEB_16",
                     "type": "rego",
-                    "rule": "file(appService.rego)",
+                    "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-WEB-016",
+                            "id": "PR-AZR-CLD-WEB-016",
                             "eval": "data.rule.web_service_java_version_latest",
                             "message": "data.rule.web_service_java_version_latest_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_WEB_016.py"
+                            "remediationFunction": "PR_AZR_CLD_WEB_016.py"
                         }
                     ],
                     "tags": [
@@ -911,16 +1277,404 @@
                     "description": "This policy will identify the Azure web service which dont have latest version of Java and give alert"
                 },
                 {
+                    "masterTestId": "AZURE_TEST_SQL_1",
+                    "type": "rego",
+                    "rule": "file(dbadministrators.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-001",
+                            "eval": "data.rule.sql_server_ad_admin",
+                            "message": "data.rule.sql_server_ad_admin_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_294"
+                    ],
+                    "severity": "Medium",
+                    "title": "SQL servers should be integrated with Azure Active Directory for administration",
+                    "description": "Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory (Azure AD) authentication is a mechanism for connecting to Azure SQL Database, Azure SQL Managed Instance, and Synapse SQL in Azure Synapse Analytics by using identities in Azure AD. With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location. Central ID management provides a single place to manage database users and simplifies permission management."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_2",
+                    "type": "rego",
+                    "rule": "file(dbadministrators.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-002",
+                            "eval": "data.rule.sql_logical_server_ad_admin",
+                            "message": "data.rule.sql_logical_server_ad_admin_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_400"
+                    ],
+                    "severity": "Medium",
+                    "title": "SQL servers should be integrated with Azure Active Directory for administration",
+                    "description": "Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory (Azure AD) authentication is a mechanism for connecting to Azure SQL Database, Azure SQL Managed Instance, and Synapse SQL in Azure Synapse Analytics by using identities in Azure AD. With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location. Central ID management provides a single place to manage database users and simplifies permission management."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_3",
+                    "type": "rego",
+                    "rule": "file(dbadministrators.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-003",
+                            "eval": "data.rule.sql_managedinstances_ad_admin",
+                            "message": "data.rule.sql_managedinstances_ad_admin_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_406"
+                    ],
+                    "severity": "Medium",
+                    "title": "SQL managedInstances should be integrated with Azure Active Directory for administration",
+                    "description": "Checks to ensure that SQL managedInstances are configured with Active Directory admin authentication. Azure Active Directory (Azure AD) authentication is a mechanism for connecting to Azure SQL Database, Azure SQL Managed Instance, and Synapse SQL in Azure Synapse Analytics by using identities in Azure AD. With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location. Central ID management provides a single place to manage database users and simplifies permission management."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_4",
+                    "type": "rego",
+                    "rule": "file(dbauditingsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-004",
+                            "eval": "data.rule.sql_db_log_audit",
+                            "message": "data.rule.sql_db_log_audit_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_212"
+                    ],
+                    "severity": "Medium",
+                    "title": "Auditing for SQL database should be enabled",
+                    "description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_5",
+                    "type": "rego",
+                    "rule": "file(dbauditingsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-005",
+                            "eval": "data.rule.sql_logical_db_log_audit",
+                            "message": "data.rule.sql_logical_db_log_audit_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "Medium",
+                    "title": "Auditing for SQL database should be enabled",
+                    "description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_6",
+                    "type": "rego",
+                    "rule": "file(dbauditingsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-006",
+                            "eval": "data.rule.sql_db_log_retention",
+                            "message": "data.rule.sql_db_log_retention_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_404"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Database Auditing Retention should be 90 days or more",
+                    "description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_7",
+                    "type": "rego",
+                    "rule": "file(dbauditingsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-007",
+                            "eval": "data.rule.sql_logical_db_log_retention",
+                            "message": "data.rule.sql_logical_db_log_retention_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_007.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Database Auditing Retention should be 90 days or more",
+                    "description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_8",
+                    "type": "rego",
+                    "rule": "file(dbdataencryption.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-008",
+                            "eval": "data.rule.db_logical_encrypt",
+                            "message": "data.rule.db_logical_encrypt_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_008.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL databases should have transparent data encryption enabled",
+                    "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchange log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_9",
+                    "type": "rego",
+                    "rule": "file(dbdataencryption.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-009",
+                            "eval": "data.rule.db_encrypt",
+                            "message": "data.rule.db_encrypt_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_009.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_293"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL databases should have transparent data encryption enabled",
+                    "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchange log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_10",
+                    "type": "rego",
+                    "rule": "file(dbfirewallrules.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-010",
+                            "eval": "data.rule.db_logical_firewall",
+                            "message": "data.rule.db_logical_firewall_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_010.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_400"
+                    ],
+                    "severity": "Medium",
+                    "title": "SQL Server Firewall rules should not configure to allow full inbound access to everyone",
+                    "description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with \"0.0.0.0\" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_11",
+                    "type": "rego",
+                    "rule": "file(dbfirewallrules.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-011",
+                            "eval": "data.rule.db_firewall",
+                            "message": "data.rule.db_firewall_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_011.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_291"
+                    ],
+                    "severity": "Medium",
+                    "title": "SQL Server Firewall rules should not configure to allow full inbound access to everyone",
+                    "description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with \"0.0.0.0\" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access."
+                },
+                {
                     "masterTestId": "AZURE_TEST_SQL_12",
                     "type": "rego",
                     "rule": "file(dbforMariaDB.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-012",
+                            "id": "PR-AZR-CLD-SQL-012",
                             "eval": "data.rule.maria_ingress_from_any_ip_disabled",
                             "message": "data.rule.maria_ingress_from_any_ip_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_012.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_012.py"
                         }
                     ],
                     "tags": [
@@ -945,11 +1699,11 @@
                     "rule": "file(dbforMariaDB.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-013",
+                            "id": "PR-AZR-CLD-SQL-013",
                             "eval": "data.rule.dbmaria_ingress_from_any_ip_disabled",
                             "message": "data.rule.dbmaria_ingress_from_any_ip_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_013.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_013.py"
                         }
                     ],
                     "tags": [
@@ -974,11 +1728,11 @@
                     "rule": "file(dbforMySQL_firewallrules.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-014",
+                            "id": "PR-AZR-CLD-SQL-014",
                             "eval": "data.rule.mysql_ingress_from_any_ip_disabled",
                             "message": "data.rule.mysql_ingress_from_any_ip_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_014.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_014.py"
                         }
                     ],
                     "tags": [
@@ -1003,11 +1757,11 @@
                     "rule": "file(dbforMySQL_firewallrules.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-015",
+                            "id": "PR-AZR-CLD-SQL-015",
                             "eval": "data.rule.my_logical_sql_ingress_from_any_ip_disabled",
                             "message": "data.rule.my_logical_sql_ingress_from_any_ip_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_015.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_015.py"
                         }
                     ],
                     "tags": [
@@ -1032,11 +1786,11 @@
                     "rule": "file(dbforMySQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-016",
+                            "id": "PR-AZR-CLD-SQL-016",
                             "eval": "data.rule.ssl_enforcement",
                             "message": "data.rule.ssl_enforcement_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_016.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_016.py"
                         }
                     ],
                     "tags": [
@@ -1063,16 +1817,365 @@
                     "description": "Enable SSL connection on MySQL Servers databases. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application."
                 },
                 {
+                    "masterTestId": "AZURE_TEST_SQL_17",
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-017",
+                            "eval": "data.rule.dbsec_threat_off",
+                            "message": "data.rule.dbsec_threat_off_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_017.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "Medium",
+                    "title": "SQL Databases should have security alert policies enabled",
+                    "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_18",
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-018",
+                            "eval": "data.rule.dbsec_threat_retention",
+                            "message": "data.rule.dbsec_threat_retention_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_018.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Database security alert policies thread retention should be configured for more than 90 days",
+                    "description": "This policy identifies SQL Databases which have security alert policies retention set less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_19",
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-019",
+                            "eval": "data.rule.dbsec_threat_email",
+                            "message": "data.rule.dbsec_threat_email_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_019.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "High",
+                    "title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators and configured email addresses",
+                    "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_20",
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-020",
+                            "eval": "data.rule.dbsec_threat_alert",
+                            "message": "data.rule.dbsec_threat_alert_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_020.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "High",
+                    "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F<br>_x005F<br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_21",
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-021",
+                            "eval": "data.rule.sql_alert",
+                            "message": "data.rule.sql_alert_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_021.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "High",
+                    "title": "Threat Detection alert should be configured to sent notification to the sql server account administrators",
+                    "description": "Ensure that threat detection alert is configured to sent notification to the sql server account administrators"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_22",
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-022",
+                            "eval": "data.rule.db_ads_scan",
+                            "message": "data.rule.db_ads_scan_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_022.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_265"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server advanced data security should be enabled",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_23",
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-023",
+                            "eval": "data.rule.db_logical_ads_scan",
+                            "message": "data.rule.db_logical_ads_scan_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_023.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server advanced data security should be enabled",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_24",
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-024",
+                            "eval": "data.rule.db_ads_mail",
+                            "message": "data.rule.db_ads_mail_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_024.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_265"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_25",
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-025",
+                            "eval": "data.rule.db_logical_ads_mail",
+                            "message": "data.rule.db_logical_ads_mail_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_025.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_26",
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-026",
+                            "eval": "data.rule.db_ads_alert",
+                            "message": "data.rule.db_ads_alert_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_026.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_265"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_27",
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-027",
+                            "eval": "data.rule.db_logical_ads_alert",
+                            "message": "data.rule.db_logical_ads_alert_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_027.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers."
+                },
+                {
                     "masterTestId": "AZURE_TEST_SQL_60",
                     "type": "rego",
                     "rule": "file(dbforMySQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-060",
+                            "id": "PR-AZR-CLD-SQL-060",
                             "eval": "data.rule.mysql_public_access_disabled",
                             "message": "data.rule.mysql_public_access_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_060.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_060.py"
                         }
                     ],
                     "tags": [
@@ -1099,11 +2202,11 @@
                     "rule": "file(dbforMySQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-061",
+                            "id": "PR-AZR-CLD-SQL-061",
                             "eval": "data.rule.mysql_server_latest_tls_configured",
                             "message": "data.rule.mysql_server_latest_tls_configured_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_061.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_061.py"
                         }
                     ],
                     "tags": [
@@ -1130,11 +2233,11 @@
                     "rule": "file(dbforMariaDB.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-056",
+                            "id": "PR-AZR-CLD-SQL-056",
                             "eval": "data.rule.mairadb_ssl_enforcement_enabled",
                             "message": "data.rule.mairadb_ssl_enforcement_enabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_056.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_056.py"
                         }
                     ],
                     "tags": [
@@ -1159,11 +2262,11 @@
                     "rule": "file(dbforMariaDB.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-057",
+                            "id": "PR-AZR-CLD-SQL-057",
                             "eval": "data.rule.mairadb_public_access_disabled",
                             "message": "data.rule.mairadb_public_access_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_057.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_057.py"
                         }
                     ],
                     "tags": [
@@ -1190,11 +2293,11 @@
                     "rule": "file(dbforMariaDB.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-058",
+                            "id": "PR-AZR-CLD-SQL-058",
                             "eval": "data.rule.mariadb_geo_redundant_backup_enabled",
                             "message": "data.rule.mariadb_geo_redundant_backup_enabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_058.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_058.py"
                         }
                     ],
                     "tags": [
@@ -1221,11 +2324,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-030",
+                            "id": "PR-AZR-CLD-SQL-030",
                             "eval": "data.rule.sql_logical_server_alert",
                             "message": "data.rule.sql_logical_server_alert_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_030.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_030.py"
                         }
                     ],
                     "tags": [
@@ -1256,11 +2359,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-031",
+                            "id": "PR-AZR-CLD-SQL-031",
                             "eval": "data.rule.sql_server_alert",
                             "message": "data.rule.sql_server_alert_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_031.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_031.py"
                         }
                     ],
                     "tags": [
@@ -1291,11 +2394,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-032",
+                            "id": "PR-AZR-CLD-SQL-032",
                             "eval": "data.rule.sql_managed_instance_alert",
                             "message": "data.rule.sql_managed_instance_alert_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_032.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_032.py"
                         }
                     ],
                     "tags": [
@@ -1326,11 +2429,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-033",
+                            "id": "PR-AZR-CLD-SQL-033",
                             "eval": "data.rule.sql_logical_server_email_account",
                             "message": "data.rule.sql_logical_server_email_account_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_033.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_033.py"
                         }
                     ],
                     "tags": [
@@ -1361,11 +2464,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-034",
+                            "id": "PR-AZR-CLD-SQL-034",
                             "eval": "data.rule.sql_server_email_account",
                             "message": "data.rule.sql_server_email_account_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_034.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_034.py"
                         }
                     ],
                     "tags": [
@@ -1396,11 +2499,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-035",
+                            "id": "PR-AZR-CLD-SQL-035",
                             "eval": "data.rule.sql_logical_server_email_addressess",
                             "message": "data.rule.sql_logical_server_email_addressess_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_035.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_035.py"
                         }
                     ],
                     "tags": [
@@ -1431,11 +2534,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-036",
+                            "id": "PR-AZR-CLD-SQL-036",
                             "eval": "data.rule.sql_server_email_addressess",
                             "message": "data.rule.sql_server_email_addressess_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_036.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_036.py"
                         }
                     ],
                     "tags": [
@@ -1466,11 +2569,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-037",
+                            "id": "PR-AZR-CLD-SQL-037",
                             "eval": "data.rule.sql_logical_server_retention_days",
                             "message": "data.rule.sql_logical_server_retention_days_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_037.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_037.py"
                         }
                     ],
                     "tags": [
@@ -1501,11 +2604,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-038",
+                            "id": "PR-AZR-CLD-SQL-038",
                             "eval": "data.rule.sql_server_retention_days",
                             "message": "data.rule.sql_server_retention_days_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_038.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_038.py"
                         }
                     ],
                     "tags": [
@@ -1530,11 +2633,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-039",
+                            "id": "PR-AZR-CLD-SQL-039",
                             "eval": "data.rule.sql_logical_server_disabled_alerts",
                             "message": "data.rule.sql_logical_server_disabled_alerts_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_039.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_039.py"
                         }
                     ],
                     "tags": [
@@ -1565,11 +2668,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-040",
+                            "id": "PR-AZR-CLD-SQL-040",
                             "eval": "data.rule.sql_server_disabled_alerts",
                             "message": "data.rule.sql_server_disabled_alerts_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_040.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_040.py"
                         }
                     ],
                     "tags": [
@@ -1600,11 +2703,11 @@
                     "rule": "file(sql_managedinstance.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-041",
+                            "id": "PR-AZR-CLD-SQL-041",
                             "eval": "data.rule.sql_mi_public_endpoint_disabled",
                             "message": "data.rule.sql_mi_public_endpoint_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_041.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_041.py"
                         }
                     ],
                     "tags": [
@@ -1629,11 +2732,11 @@
                     "rule": "file(sql_servers_auditing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-042",
+                            "id": "PR-AZR-CLD-SQL-042",
                             "eval": "data.rule.sql_server_log_audit",
                             "message": "data.rule.sql_server_log_audit_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_042.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_042.py"
                         }
                     ],
                     "tags": [
@@ -1658,11 +2761,11 @@
                     "rule": "file(sql_servers_auditing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-043",
+                            "id": "PR-AZR-CLD-SQL-043",
                             "eval": "data.rule.sql_logical_server_log_audit",
                             "message": "data.rule.sql_logical_server_log_audit_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_043.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_043.py"
                         }
                     ],
                     "tags": [
@@ -1694,11 +2797,11 @@
                     "rule": "file(sql_servers_auditing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-044",
+                            "id": "PR-AZR-CLD-SQL-044",
                             "eval": "data.rule.sql_server_audit_log_retention",
                             "message": "data.rule.sql_server_audit_log_retention_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_044.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_044.py"
                         }
                     ],
                     "tags": [
@@ -1730,11 +2833,11 @@
                     "rule": "file(sql_servers_auditing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-045",
+                            "id": "PR-AZR-CLD-SQL-045",
                             "eval": "data.rule.sql_logial_server_audit_log_retention",
                             "message": "data.rule.sql_logial_server_audit_log_retention_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_045.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_045.py"
                         }
                     ],
                     "tags": [
@@ -1766,11 +2869,11 @@
                     "rule": "file(sql_servers_encryption.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-046",
+                            "id": "PR-AZR-CLD-SQL-046",
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_046.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_046.py"
                         }
                     ],
                     "tags": [
@@ -1802,11 +2905,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-047",
+                            "id": "PR-AZR-CLD-SQL-047",
                             "eval": "data.rule.sql_public_access_disabled",
                             "message": "data.rule.sql_public_access_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_047.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_047.py"
                         }
                     ],
                     "tags": [
@@ -1838,11 +2941,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-048",
+                            "id": "PR-AZR-CLD-SQL-048",
                             "eval": "data.rule.sql_server_login",
                             "message": "data.rule.sql_server_login_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_048.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_048.py"
                         }
                     ],
                     "tags": [
@@ -1874,11 +2977,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-049",
+                            "id": "PR-AZR-CLD-SQL-049",
                             "eval": "data.rule.sql_logical_server_login",
                             "message": "data.rule.sql_logical_server_login_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_049.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_049.py"
                         }
                     ],
                     "tags": [
@@ -1910,11 +3013,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-050",
+                            "id": "PR-AZR-CLD-SQL-050",
                             "eval": "data.rule.fail_over_groups",
                             "message": "data.rule.fail_over_groups_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_050.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_050.py"
                         }
                     ],
                     "tags": [
@@ -1934,47 +3037,16 @@
                     "description": "SQL Server data should be replicated to avoid loss of unreplicated data."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_51",
-                    "type": "rego",
-                    "rule": "file(sql_servers.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-SQL-051",
-                            "eval": "data.rule.sql_server_administrators",
-                            "message": "data.rule.sql_server_administrators_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_051.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "Best Practices"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
-                    ],
-                    "severity": "High",
-                    "title": "Ensure that Azure Active Directory Admin is configured for SQL Server",
-                    "description": "Use Azure Active Directory Authentication for authentication with SQL Databases. Azure Active Directory authentication is a mechanism of connecting Microsoft Azure SQL Databases and SQL Data Warehouses using identities in an Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location."
-                },
-                {
                     "masterTestId": "AZURE_TEST_SQL_69",
                     "type": "rego",
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-069",
+                            "id": "PR-AZR-CLD-SQL-069",
                             "eval": "data.rule.sql_server_latest_tls_configured",
                             "message": "data.rule.sql_server_latest_tls_configured_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_069.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_069.py"
                         }
                     ],
                     "tags": [
@@ -1996,16 +3068,47 @@
                     "description": "This policy will identify the Azure SQL Server which dont have latest version of tls configured and give alert"
                 },
                 {
+                    "masterTestId": "AZURE_TEST_SQL_70",
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-070",
+                            "eval": "data.rule.sql_public_access",
+                            "message": "data.rule.sql_public_access_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_SQL_070.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_400"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure SQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance"
+                },
+                {
                     "masterTestId": "AZURE_TEST_AKS_1",
                     "type": "rego",
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AKS-001",
+                            "id": "PR-AZR-CLD-AKS-001",
                             "eval": "data.rule.aks_cni_net",
                             "message": "data.rule.aks_cni_net_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AKS_001.py"
+                            "remediationFunction": "PR_AZR_CLD_AKS_001.py"
                         }
                     ],
                     "tags": [
@@ -2036,11 +3139,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AKS-002",
+                            "id": "PR-AZR-CLD-AKS-002",
                             "eval": "data.rule.aks_http_routing",
                             "message": "data.rule.aks_http_routing_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AKS_002.py"
+                            "remediationFunction": "PR_AZR_CLD_AKS_002.py"
                         }
                     ],
                     "tags": [
@@ -2072,11 +3175,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AKS-003",
+                            "id": "PR-AZR-CLD-AKS-003",
                             "eval": "data.rule.aks_monitoring",
                             "message": "data.rule.aks_monitoring_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AKS_003.py"
+                            "remediationFunction": "PR_AZR_CLD_AKS_003.py"
                         }
                     ],
                     "tags": [
@@ -2107,11 +3210,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AKS-004",
+                            "id": "PR-AZR-CLD-AKS-004",
                             "eval": "data.rule.aks_nodes",
                             "message": "data.rule.aks_nodes_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AKS_004.py"
+                            "remediationFunction": "PR_AZR_CLD_AKS_004.py"
                         }
                     ],
                     "tags": [
@@ -2142,11 +3245,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AKS-005",
+                            "id": "PR-AZR-CLD-AKS-005",
                             "eval": "data.rule.aks_rbac",
                             "message": "data.rule.aks_rbac_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AKS_005.py"
+                            "remediationFunction": "PR_AZR_CLD_AKS_005.py"
                         }
                     ],
                     "tags": [
@@ -2178,11 +3281,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AKS-006",
+                            "id": "PR-AZR-CLD-AKS-006",
                             "eval": "data.rule.aks_aad_azure_rbac",
                             "message": "data.rule.aks_aad_azure_rbac_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AKS_006.py"
+                            "remediationFunction": "PR_AZR_CLD_AKS_006.py"
                         }
                     ],
                     "tags": [
@@ -2207,11 +3310,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AKS-007",
+                            "id": "PR-AZR-CLD-AKS-007",
                             "eval": "data.rule.aks_authorized_Ip",
                             "message": "data.rule.aks_authorized_Ip_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AKS_007.py"
+                            "remediationFunction": "PR_AZR_CLD_AKS_007.py"
                         }
                     ],
                     "tags": [
@@ -2236,11 +3339,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AKS-008",
+                            "id": "PR-AZR-CLD-AKS-008",
                             "eval": "data.rule.network_policy",
                             "message": "data.rule.network_policy_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AKS_008.py"
+                            "remediationFunction": "PR_AZR_CLD_AKS_008.py"
                         }
                     ],
                     "tags": [
@@ -2265,11 +3368,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AKS-009",
+                            "id": "PR-AZR-CLD-AKS-009",
                             "eval": "data.rule.aks_kub_dashboard_disabled",
                             "message": "data.rule.aks_kub_dashboard_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AKS_009.py"
+                            "remediationFunction": "PR_AZR_CLD_AKS_009.py"
                         }
                     ],
                     "tags": [
@@ -2289,16 +3392,47 @@
                     "description": "Disable the Kubernetes dashboard on Azure Kubernetes Service"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AGW_1",
+                    "masterTestId": "AZURE_TEST_AKS_10",
                     "type": "rego",
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AGW-001",
+                            "id": "PR-AZR-CLD-AKS-010",
+                            "eval": "data.rule.aks_local_account_disabled",
+                            "message": "data.rule.aks_local_account_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_AKS_010.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Kubernetes Service Clusters should have local authentication methods disabled",
+                    "description": "Disabling local authentication methods improves security by ensuring that Azure Kubernetes Service Clusters should exclusively require Azure Active Directory identities for authentication."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AGW_1",
+                    "type": "rego",
+                    "rule": "file(2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-AGW-001",
                             "eval": "data.rule.gw_tls",
                             "message": "data.rule.gw_tls_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AGW_001.py"
+                            "remediationFunction": "PR_AZR_CLD_AGW_001.py"
                         }
                     ],
                     "tags": [
@@ -2327,14 +3461,14 @@
                 {
                     "masterTestId": "AZURE_TEST_AGW_2",
                     "type": "rego",
-                    "rule": "file(aks.rego)",
+                    "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AGW-002",
+                            "id": "PR-AZR-CLD-AGW-002",
                             "eval": "data.rule.gw_waf",
                             "message": "data.rule.gw_waf_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AGW_002.py"
+                            "remediationFunction": "PR_AZR_CLD_AGW_002.py"
                         }
                     ],
                     "tags": [
@@ -2362,14 +3496,14 @@
                 {
                     "masterTestId": "AZURE_TEST_AGW_3",
                     "type": "rego",
-                    "rule": "file(aks.rego)",
+                    "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AGW-003",
+                            "id": "PR-AZR-CLD-AGW-003",
                             "eval": "data.rule.protocol",
                             "message": "data.rule.protocol_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AGW_003.py"
+                            "remediationFunction": "PR_AZR_CLD_AGW_003.py"
                         }
                     ],
                     "tags": [
@@ -2397,14 +3531,14 @@
                 {
                     "masterTestId": "AZURE_TEST_AGW_4",
                     "type": "rego",
-                    "rule": "file(aks.rego)",
+                    "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AGW-004",
+                            "id": "PR-AZR-CLD-AGW-004",
                             "eval": "data.rule.frontendPublicIPConfigurationsDisabled",
                             "message": "data.rule.frontendPublicIPConfigurationsDisabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AGW_004.py"
+                            "remediationFunction": "PR_AZR_CLD_AGW_004.py"
                         }
                     ],
                     "tags": [
@@ -2432,14 +3566,14 @@
                 {
                     "masterTestId": "AZURE_TEST_AGW_5",
                     "type": "rego",
-                    "rule": "file(aks.rego)",
+                    "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AGW-005",
+                            "id": "PR-AZR-CLD-AGW-005",
                             "eval": "data.rule.backend_https_protocol_enabled",
                             "message": "data.rule.backend_https_protocol_enabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AGW_005.py"
+                            "remediationFunction": "PR_AZR_CLD_AGW_005.py"
                         }
                     ],
                     "tags": [
@@ -2467,14 +3601,49 @@
                 {
                     "masterTestId": "AZURE_TEST_AGW_6",
                     "type": "rego",
-                    "rule": "file(aks.rego)",
+                    "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AGW-006",
+                            "id": "PR-AZR-CLD-AGW-006",
                             "eval": "data.rule.secret_certificate_is_in_keyvalut",
                             "message": "data.rule.secret_certificate_is_in_keyvalut_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AGW_006.py"
+                            "remediationFunction": "PR_AZR_CLD_AGW_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_221"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway secret certificates stores in keyvault",
+                    "description": "This policy will identify application gateways which dont have ssl certificates stored in keyvalut and alert"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AGW_7",
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-AGW-007",
+                            "eval": "data.rule.application_gateways_v2_waf_ruleset_OWASP_active",
+                            "message": "data.rule.application_gateways_v2_waf_ruleset_OWASP_active_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_AGW_007.py"
                         }
                     ],
                     "tags": [
@@ -2505,11 +3674,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARC-001",
+                            "id": "PR-AZR-CLD-ARC-001",
                             "eval": "data.rule.enableSslPort",
                             "message": "data.rule.enableSslPort_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_ARC_001.py"
+                            "remediationFunction": "PR_AZR_CLD_ARC_001.py"
                         }
                     ],
                     "tags": [
@@ -2541,11 +3710,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARC-002",
+                            "id": "PR-AZR-CLD-ARC-002",
                             "eval": "data.rule.serverRole",
                             "message": "data.rule.serverRole_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_ARC_002.py"
+                            "remediationFunction": "PR_AZR_CLD_ARC_002.py"
                         }
                     ],
                     "tags": [
@@ -2572,16 +3741,109 @@
                     "description": "Replicate Redis Cache server data to another Redis Cache server using geo replication. This feature is only available for Premium tier Redis Cache. From performance point of view, Microsoft recommends that both Redis Caches (Primary and the linked secondary) reside in the same region."
                 },
                 {
+                    "masterTestId": "AZURE_TEST_ARC_",
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ARC-003",
+                            "eval": "data.rule.redis_public_access",
+                            "message": "data.rule.redis_public_access_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_ARC_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_420"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cache for Redis should disable public network access",
+                    "description": "Disabling public network access improves security by ensuring that the Azure Cache for Redis isn't exposed on the public internet. You can limit exposure of your Azure Cache for Redis by creating private endpoints instead. Learn more at: https://docs.microsoft.com/azure/azure-cache-for-redis/cache-private-link."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_ARC_4",
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ARC-004",
+                            "eval": "data.rule.arc_subnet_id",
+                            "message": "data.rule.arc_subnet_id_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_ARC_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_420"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cache for Redis should reside within a virtual network",
+                    "description": "Azure Virtual Network deployment provides enhanced security and isolation for your Azure Cache for Redis, as well as subnets, access control policies, and other features to further restrict access.When an Azure Cache for Redis instance is configured with a virtual network, it is not publicly addressable and can only be accessed from virtual machines and applications within the virtual network."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_ARC_5",
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ARC-005",
+                            "eval": "data.rule.arc_private_endpoint",
+                            "message": "data.rule.arc_private_endpoint_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_ARC_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_420"
+                    ],
+                    "severity": "Medium",
+                    "title": "Configure Azure Cache for redis with private endpoints",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your cache for redis, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview"
+                },
+                {
                     "masterTestId": "AZURE_TEST_VM_1",
                     "type": "rego",
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-VM-001",
+                            "id": "PR-AZR-CLD-VM-001",
                             "eval": "data.rule.vm_aset",
                             "message": "data.rule.vm_aset_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_VM_001.py"
+                            "remediationFunction": "PR_AZR_CLD_VM_001.py"
                         }
                     ],
                     "tags": [
@@ -2613,11 +3875,11 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-VM-002",
+                            "id": "PR-AZR-CLD-VM-002",
                             "eval": "data.rule.linux_configuration",
                             "message": "data.rule.linux_configuration_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_VM_002.py"
+                            "remediationFunction": "PR_AZR_CLD_VM_002.py"
                         }
                     ],
                     "tags": [
@@ -2639,14 +3901,14 @@
                 {
                     "masterTestId": "AZURE_TEST_VM_3",
                     "type": "rego",
-                    "rule": "file(vm.rego)",
+                    "rule": "file(vmextensions.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-VM-003",
+                            "id": "PR-AZR-CLD-VM-003",
                             "eval": "data.rule.vm_protection",
                             "message": "data.rule.vm_protection_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_VM_003.py"
+                            "remediationFunction": "PR_AZR_CLD_VM_003.py"
                         }
                     ],
                     "tags": [
@@ -2671,11 +3933,11 @@
                     "rule": "file(disks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-DSK-001",
+                            "id": "PR-AZR-CLD-DSK-001",
                             "eval": "data.rule.disk_encrypt",
                             "message": "data.rule.disk_encrypt_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_DSK_001.py"
+                            "remediationFunction": "PR_AZR_CLD_DSK_001.py"
                         }
                     ],
                     "tags": [
@@ -2702,16 +3964,47 @@
                     "description": "To meet your organizational security or compliance requirement, Azure provides disk encryption at rest using Azure Storage Service Encryption (SSE) and Azure Disk Encryption (ADE). Starting February 2017, SSE is enabled by default for all managed disks. ADE is integrated with Azure Key Vault to help you control, manage, and audit the disk encryption keys and secrets.<br><br>This policy detects Virtual Machine (VM) OS disks that are not encrypted at rest using ADE. As a best practice, enable ADE for provide volume encryption for the OS disk. For more information, see https://docs.microsoft.com/en-us/azure/security/azure-security-disk-encryption-overview."
                 },
                 {
+                    "masterTestId": "AZURE_TEST_DSK_2",
+                    "type": "rego",
+                    "rule": "file(disks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-DSK-002",
+                            "eval": "data.rule.disk_encryption_2",
+                            "message": "data.rule.disk_encryption_2_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_DSK_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_277"
+                    ],
+                    "severity": "High",
+                    "title": "Enable server-side encryption with customer-managed keys for managed disks",
+                    "description": "Azure Disk Storage allows you to manage your own keys when using server-side encryption (SSE) for managed disks, if you choose"
+                },
+                {
                     "masterTestId": "AZURE_TEST_VNET_4",
                     "type": "rego",
                     "rule": "file(vnetpeerings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NET-004",
+                            "id": "PR-AZR-CLD-NET-004",
                             "eval": "data.rule.vnet_peer",
                             "message": "data.rule.vnet_peer_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NET_004.py"
+                            "remediationFunction": "PR_AZR_CLD_NET_004.py"
                         }
                     ],
                     "tags": [
@@ -2736,11 +4029,11 @@
                     "rule": "file(vnetsubnets.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NET-005",
+                            "id": "PR-AZR-CLD-NET-005",
                             "eval": "data.rule.vnet_subnet_nsg",
                             "message": "data.rule.vnet_subnet_nsg_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NET-005.py"
+                            "remediationFunction": "PR_AZR_CLD_NET-005.py"
                         }
                     ],
                     "tags": [
@@ -2771,11 +4064,11 @@
                     "rule": "file(vpngateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NET-006",
+                            "id": "PR-AZR-CLD-NET-006",
                             "eval": "data.rule.vpn_encrypt",
                             "message": "data.rule.vpn_encrypt_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NET_006.py"
+                            "remediationFunction": "PR_AZR_CLD_NET_006.py"
                         }
                     ],
                     "tags": [
@@ -2805,11 +4098,11 @@
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NTW-001",
+                            "id": "PR-AZR-CLD-NTW-001",
                             "eval": "data.rule.netwatchFlowlogs",
                             "message": "data.rule.netwatchFlowlogs_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NTW_001.py"
+                            "remediationFunction": "PR_AZR_CLD_NTW_001.py"
                         }
                     ],
                     "tags": [
@@ -2840,11 +4133,11 @@
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NTW-002",
+                            "id": "PR-AZR-CLD-NTW-002",
                             "eval": "data.rule.netwatch_logs",
                             "message": "data.rule.netwatch_logs_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NTW_002.py"
+                            "remediationFunction": "PR_AZR_CLD_NTW_002.py"
                         }
                     ],
                     "tags": [
@@ -2875,11 +4168,11 @@
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NTW-003",
+                            "id": "PR-AZR-CLD-NTW-003",
                             "eval": "data.rule.netwatch_log_retention",
                             "message": "data.rule.netwatch_log_retention_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NTW_003.py"
+                            "remediationFunction": "PR_AZR_CLD_NTW_003.py"
                         }
                     ],
                     "tags": [
@@ -2910,11 +4203,11 @@
                     "rule": "file(databricks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-DBK-001",
+                            "id": "PR-AZR-CLD-DBK-001",
                             "eval": "data.rule.databrics_workspace_has_public_ip_disabled",
                             "message": "data.rule.databrics_workspace_has_public_ip_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_DBK_001.py"
+                            "remediationFunction": "PR_AZR_CLD_DBK_001.py"
                         }
                     ],
                     "tags": [
@@ -2941,11 +4234,11 @@
                     "rule": "file(databricks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-DBK-002",
+                            "id": "PR-AZR-CLD-DBK-002",
                             "eval": "data.rule.databrics_workspace_has_vnet_integration",
                             "message": "data.rule.databrics_workspace_has_vnet_integration_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_DBK_002.py"
+                            "remediationFunction": "PR_AZR_CLD_DBK_002.py"
                         }
                     ],
                     "tags": [
@@ -2973,11 +4266,11 @@
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-028",
+                            "id": "PR-AZR-CLD-SQL-028",
                             "eval": "data.rule.geoRedundantBackup",
                             "message": "data.rule.geoRedundantBackup_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_028.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_028.py"
                         }
                     ],
                     "tags": [
@@ -3008,11 +4301,11 @@
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-029",
+                            "id": "PR-AZR-CLD-SQL-029",
                             "eval": "data.rule.sslEnforcement",
                             "message": "data.rule.sslEnforcement_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_029.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_029.py"
                         }
                     ],
                     "tags": [
@@ -3044,11 +4337,11 @@
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-066",
+                            "id": "PR-AZR-CLD-SQL-066",
                             "eval": "data.rule.postgresql_public_access_disabled",
                             "message": "data.rule.postgresql_public_access_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_066.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_066.py"
                         }
                     ],
                     "tags": [
@@ -3075,11 +4368,11 @@
                     "rule": "file(registrieswebhooks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ACR-001",
+                            "id": "PR-AZR-CLD-ACR-001",
                             "eval": "data.rule.acr_webhooks",
                             "message": "data.rule.acr_webhooks_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_ACR_001.py"
+                            "remediationFunction": "PR_AZR_CLD_ACR_001.py"
                         }
                     ],
                     "tags": [
@@ -3111,11 +4404,11 @@
                     "rule": "file(registry.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ACR-002",
+                            "id": "PR-AZR-CLD-ACR-002",
                             "eval": "data.rule.adminUserDisabled",
                             "message": "data.rule.adminUserDisabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_ACR_002.py"
+                            "remediationFunction": "PR_AZR_CLD_ACR_002.py"
                         }
                     ],
                     "tags": [
@@ -3142,11 +4435,11 @@
                     "rule": "file(registry.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ACR-003",
+                            "id": "PR-AZR-CLD-ACR-003",
                             "eval": "data.rule.acr_classic",
                             "message": "data.rule.acr_classic_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_ACR_003.py"
+                            "remediationFunction": "PR_AZR_CLD_ACR_003.py"
                         }
                     ],
                     "tags": [
@@ -3177,11 +4470,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-001",
+                            "id": "PR-AZR-CLD-NSG-001",
                             "eval": "data.rule.nsg_in_tcp_all_src",
                             "message": "data.rule.nsg_in_tcp_all_src_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_001.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_001.py"
                         }
                     ],
                     "tags": [
@@ -3213,11 +4506,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-002",
+                            "id": "PR-AZR-CLD-NSG-002",
                             "eval": "data.rule.nsg_in_udp_all_src",
                             "message": "data.rule.nsg_in_udp_all_src_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_002.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_002.py"
                         }
                     ],
                     "tags": [
@@ -3249,11 +4542,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-003",
+                            "id": "PR-AZR-CLD-NSG-003",
                             "eval": "data.rule.nsg_in_tcp_all",
                             "message": "data.rule.nsg_in_tcp_all_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_003.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_003.py"
                         }
                     ],
                     "tags": [
@@ -3285,11 +4578,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-004",
+                            "id": "PR-AZR-CLD-NSG-004",
                             "eval": "data.rule.nsg_in_udp_all",
                             "message": "data.rule.nsg_in_udp_all_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_004.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_004.py"
                         }
                     ],
                     "tags": [
@@ -3321,11 +4614,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-005",
+                            "id": "PR-AZR-CLD-NSG-005",
                             "eval": "data.rule.nsg_in_all",
                             "message": "data.rule.nsg_in_all_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_005.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_005.py"
                         }
                     ],
                     "tags": [
@@ -3357,11 +4650,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-006",
+                            "id": "PR-AZR-CLD-NSG-006",
                             "eval": "data.rule.nsg_in_all_src",
                             "message": "data.rule.nsg_in_all_src_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_006.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_006.py"
                         }
                     ],
                     "tags": [
@@ -3393,11 +4686,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-007",
+                            "id": "PR-AZR-CLD-NSG-007",
                             "eval": "data.rule.nsg_in_all_dst",
                             "message": "data.rule.nsg_in_all_dst_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_007.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_007.py"
                         }
                     ],
                     "tags": [
@@ -3429,11 +4722,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-008",
+                            "id": "PR-AZR-CLD-NSG-008",
                             "eval": "data.rule.nsg_allow_icmp",
                             "message": "data.rule.nsg_allow_icmp_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_008.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_008.py"
                         }
                     ],
                     "tags": [
@@ -3465,11 +4758,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-009",
+                            "id": "PR-AZR-CLD-NSG-009",
                             "eval": "data.rule.inbound_port_21",
                             "message": "data.rule.inbound_port_21_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_009.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_009.py"
                         }
                     ],
                     "tags": [
@@ -3501,11 +4794,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-010",
+                            "id": "PR-AZR-CLD-NSG-010",
                             "eval": "data.rule.inbound_insecure_port",
                             "message": "data.rule.inbound_insecure_port_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_010.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_010.py"
                         }
                     ],
                     "tags": [
@@ -3536,11 +4829,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-011",
+                            "id": "PR-AZR-CLD-NSG-011",
                             "eval": "data.rule.inbound_port_11211",
                             "message": "data.rule.inbound_port_11211_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_011.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_011.py"
                         }
                     ],
                     "tags": [
@@ -3572,11 +4865,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-012",
+                            "id": "PR-AZR-CLD-NSG-012",
                             "eval": "data.rule.inbound_port_6379",
                             "message": "data.rule.inbound_port_6379_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_012.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_012.py"
                         }
                     ],
                     "tags": [
@@ -3608,11 +4901,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-013",
+                            "id": "PR-AZR-CLD-NSG-013",
                             "eval": "data.rule.inbound_port_dbs",
                             "message": "data.rule.inbound_port_dbs_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_013.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_013.py"
                         }
                     ],
                     "tags": [
@@ -3644,11 +4937,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-014",
+                            "id": "PR-AZR-CLD-NSG-014",
                             "eval": "data.rule.inbound_port_22",
                             "message": "data.rule.inbound_port_22_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_014.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_014.py"
                         }
                     ],
                     "tags": [
@@ -3679,11 +4972,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-015",
+                            "id": "PR-AZR-CLD-NSG-015",
                             "eval": "data.rule.inbound_port_3389",
                             "message": "data.rule.inbound_port_3389_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_015.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_015.py"
                         }
                     ],
                     "tags": [
@@ -3714,11 +5007,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-016",
+                            "id": "PR-AZR-CLD-NSG-016",
                             "eval": "data.rule.inbound_port_445",
                             "message": "data.rule.inbound_port_445_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_016.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_016.py"
                         }
                     ],
                     "tags": [
@@ -3750,11 +5043,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-018",
+                            "id": "PR-AZR-CLD-NSG-018",
                             "eval": "data.rule.inbound_port_53",
                             "message": "data.rule.inbound_port_53_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_018.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_018.py"
                         }
                     ],
                     "tags": [
@@ -3786,11 +5079,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-019",
+                            "id": "PR-AZR-CLD-NSG-019",
                             "eval": "data.rule.inbound_port_20",
                             "message": "data.rule.inbound_port_20_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_019.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_019.py"
                         }
                     ],
                     "tags": [
@@ -3822,11 +5115,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-020",
+                            "id": "PR-AZR-CLD-NSG-020",
                             "eval": "data.rule.inbound_port_4333",
                             "message": "data.rule.inbound_port_4333_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_020.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_020.py"
                         }
                     ],
                     "tags": [
@@ -3858,11 +5151,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-021",
+                            "id": "PR-AZR-CLD-NSG-021",
                             "eval": "data.rule.inbound_port_3306",
                             "message": "data.rule.inbound_port_3306_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_021.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_021.py"
                         }
                     ],
                     "tags": [
@@ -3894,11 +5187,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-022",
+                            "id": "PR-AZR-CLD-NSG-022",
                             "eval": "data.rule.inbound_port_netbios",
                             "message": "data.rule.inbound_port_netbios_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_022.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_022.py"
                         }
                     ],
                     "tags": [
@@ -3930,11 +5223,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-023",
+                            "id": "PR-AZR-CLD-NSG-023",
                             "eval": "data.rule.inbound_port_5432",
                             "message": "data.rule.inbound_port_5432_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_023.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_023.py"
                         }
                     ],
                     "tags": [
@@ -3966,11 +5259,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-024",
+                            "id": "PR-AZR-CLD-NSG-024",
                             "eval": "data.rule.inbound_port_25",
                             "message": "data.rule.inbound_port_25_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_024.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_024.py"
                         }
                     ],
                     "tags": [
@@ -4002,11 +5295,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-025",
+                            "id": "PR-AZR-CLD-NSG-025",
                             "eval": "data.rule.inbound_port_sqlserver",
                             "message": "data.rule.inbound_port_sqlserver_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_025.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_025.py"
                         }
                     ],
                     "tags": [
@@ -4038,11 +5331,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-026",
+                            "id": "PR-AZR-CLD-NSG-026",
                             "eval": "data.rule.inbound_port_23",
                             "message": "data.rule.inbound_port_23_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_026.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_026.py"
                         }
                     ],
                     "tags": [
@@ -4074,11 +5367,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-027",
+                            "id": "PR-AZR-CLD-NSG-027",
                             "eval": "data.rule.inbound_port_5500",
                             "message": "data.rule.inbound_port_5500_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_027.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_027.py"
                         }
                     ],
                     "tags": [
@@ -4110,11 +5403,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-028",
+                            "id": "PR-AZR-CLD-NSG-028",
                             "eval": "data.rule.inbound_port_5900",
                             "message": "data.rule.inbound_port_5900_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_028.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_028.py"
                         }
                     ],
                     "tags": [
@@ -4146,11 +5439,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-029",
+                            "id": "PR-AZR-CLD-NSG-029",
                             "eval": "data.rule.inbound_port_135",
                             "message": "data.rule.inbound_port_135_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_029.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_029.py"
                         }
                     ],
                     "tags": [
@@ -4182,11 +5475,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-030",
+                            "id": "PR-AZR-CLD-NSG-030",
                             "eval": "data.rule.nsg_out_all",
                             "message": "data.rule.nsg_out_all_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_030.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_030.py"
                         }
                     ],
                     "tags": [
@@ -4218,11 +5511,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-031",
+                            "id": "PR-AZR-CLD-NSG-031",
                             "eval": "data.rule.outbound_port_bitcoin",
                             "message": "data.rule.outbound_port_bitcoin_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_031.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_031.py"
                         }
                     ],
                     "tags": [
@@ -4250,11 +5543,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-032",
+                            "id": "PR-AZR-CLD-NSG-032",
                             "eval": "data.rule.outbound_port_ethereum",
                             "message": "data.rule.outbound_port_ethereum_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_032.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_032.py"
                         }
                     ],
                     "tags": [
@@ -4282,11 +5575,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-NSG-017",
+                            "id": "PR-AZR-CLD-NSG-017",
                             "eval": "data.rule.inbound_insecure_omi_port",
                             "message": "data.rule.inbound_insecure_omi_port_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_NSG_017.py"
+                            "remediationFunction": "PR_AZR_CLD_NSG_017.py"
                         }
                     ],
                     "tags": [
@@ -4318,11 +5611,11 @@
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-MNT-001",
+                            "id": "PR-AZR-CLD-MNT-001",
                             "eval": "data.rule.alerts",
                             "message": "data.rule.alerts_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_MNT_001.py"
+                            "remediationFunction": "PR_AZR_CLD_MNT_001.py"
                         }
                     ],
                     "tags": [
@@ -4354,11 +5647,11 @@
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-MNT-009",
+                            "id": "PR-AZR-CLD-MNT-009",
                             "eval": "data.rule.log_profiles_retention_days",
                             "message": "data.rule.log_profiles_retention_days_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_MNT_009.py"
+                            "remediationFunction": "PR_AZR_CLD_MNT_009.py"
                         }
                     ],
                     "tags": [
@@ -4383,11 +5676,11 @@
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-MNT-010",
+                            "id": "PR-AZR-CLD-MNT-010",
                             "eval": "data.rule.log_profiles_retention_enabled",
                             "message": "data.rule.log_profiles_retention_enabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_MNT_010.py"
+                            "remediationFunction": "PR_AZR_CLD_MNT_010.py"
                         }
                     ],
                     "tags": [
@@ -4412,11 +5705,11 @@
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-MNT-011",
+                            "id": "PR-AZR-CLD-MNT-011",
                             "eval": "data.rule.log_profile_category",
                             "message": "data.rule.log_profile_category_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_MNT_011.py"
+                            "remediationFunction": "PR_AZR_CLD_MNT_011.py"
                         }
                     ],
                     "tags": [
@@ -4448,11 +5741,11 @@
                     "rule": "file(blobservices.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-STR-001",
+                            "id": "PR-AZR-CLD-STR-001",
                             "eval": "data.rule.storage_blob_soft_delete",
                             "message": "data.rule.storage_blob_soft_delete_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_STR_001.py"
+                            "remediationFunction": "PR_AZR_CLD_STR_001.py"
                         }
                     ],
                     "tags": [
@@ -4484,11 +5777,11 @@
                     "rule": "file(blobservices.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-STR-002",
+                            "id": "PR-AZR-CLD-STR-002",
                             "eval": "data.rule.storage_blob_container_soft_delete",
                             "message": "data.rule.storage_blob_container_soft_delete_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_STR_002.py"
+                            "remediationFunction": "PR_AZR_CLD_STR_002.py"
                         }
                     ],
                     "tags": [
@@ -4520,11 +5813,11 @@
                     "rule": "file(locks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-AML-008",
+                            "id": "PR-AZR-CLD-AML-008",
                             "eval": "data.rule.rg_locks",
                             "message": "data.rule.rg_locks_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_AML_008.py"
+                            "remediationFunction": "PR_AZR_CLD_AML_008.py"
                         }
                     ],
                     "tags": [
@@ -4556,11 +5849,11 @@
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-STR-012",
+                            "id": "PR-AZR-CLD-STR-012",
                             "eval": "data.rule.storage_container_public_access_disabled",
                             "message": "data.rule.storage_container_public_access_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_STR_012.py"
+                            "remediationFunction": "PR_AZR_CLD_STR_012.py"
                         }
                     ],
                     "tags": [
@@ -4591,11 +5884,11 @@
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-STR-013",
+                            "id": "PR-AZR-CLD-STR-013",
                             "eval": "data.rule.storage__logical_container_public_access_disabled",
                             "message": "data.rule.storage__logical_container_public_access_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_STR_013.py"
+                            "remediationFunction": "PR_AZR_CLD_STR_013.py"
                         }
                     ],
                     "tags": [
@@ -4620,11 +5913,11 @@
                     "rule": "file(pricing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ASC-001",
+                            "id": "PR-AZR-CLD-ASC-001",
                             "eval": "data.rule.pricing",
                             "message": "data.rule.pricing_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_ASC_001.py"
+                            "remediationFunction": "PR_AZR_CLD_ASC_001.py"
                         }
                     ],
                     "tags": [
@@ -4652,11 +5945,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ASC-002",
+                            "id": "PR-AZR-CLD-ASC-002",
                             "eval": "data.rule.securitycontacts",
                             "message": "data.rule.securitycontacts_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_ASC_002.py"
+                            "remediationFunction": "PR_AZR_CLD_ASC_002.py"
                         }
                     ],
                     "tags": [
@@ -4688,11 +5981,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ASC-003",
+                            "id": "PR-AZR-CLD-ASC-003",
                             "eval": "data.rule.alert_notifications",
                             "message": "data.rule.alert_notifications_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_ASC_003.py"
+                            "remediationFunction": "PR_AZR_CLD_ASC_003.py"
                         }
                     ],
                     "tags": [
@@ -4724,11 +6017,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ASC-005",
+                            "id": "PR-AZR-CLD-ASC-005",
                             "eval": "data.rule.securitycontacts_alerts_to_admins_enabled",
                             "message": "data.rule.securitycontacts_alerts_to_admins_enabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_ASC_005.py"
+                            "remediationFunction": "PR_AZR_CLD_ASC_005.py"
                         }
                     ],
                     "tags": [
@@ -4753,6 +6046,68 @@
                     "severity": "Medium",
                     "title": "Security Center shoud send security alerts notifications to subscription admins",
                     "description": "This policy will identify security centers which dont have configuration enabled to send security alerts notifications to subscription admins and alert if missing."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AFW_1",
+                    "type": "rego",
+                    "rule": "file(azure_firewalls.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-AFW-001",
+                            "eval": "data.rule.azure_firewall_configured_with_idpc_and_tls_inspection",
+                            "message": "data.rule.azure_firewall_configured_with_idpc_and_tls_inspection_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_AFW_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_225"
+                    ],
+                    "severity": "High",
+                    "title": "Azure Firewall Premium should be configured with both IDPS Alert & Deny mode and TLS inspection enabled for proactive protection against CVE-2021-44228 exploit",
+                    "description": "Azure Firewall Premium has enhanced protection from the Log4j RCE CVE-2021-44228 vulnerability and exploit. Azure Firewall premium IDPS (Intrusion Detection and Prevention System) provides IDPS inspection for all east-west traffic and outbound traffic to internet. details at https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_FRD_1",
+                    "type": "rego",
+                    "rule": "file(frontdoors.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-FRD-001",
+                            "eval": "data.rule.frontdoors_has_drs_configured",
+                            "message": "data.rule.frontdoors_has_drs_configured_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_FRD_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_220"
+                    ],
+                    "severity": "High",
+                    "title": "Azure frontDoors should have configured with WAF policy with Default Rule Set 1.0/1.1 for proactive protection against CVE-2021-44228 exploit",
+                    "description": "It is recommended to enable WAF policy with Default Rule Set 1.0/1.1 on Front Door deployments to immediately avail of additional protection from log4j Remote Command Execution. details at https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/"
                 }
             ]
         }
