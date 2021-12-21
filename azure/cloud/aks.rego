@@ -18,30 +18,10 @@ azure_attribute_absence["aks_cni_net"] {
     not resource.properties.networkProfile.networkPlugin
 }
 
-source_path[{"aks_cni_net":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.networkProfile.networkPlugin
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkProfile","networkPlugin"]]
-    }
-}
-
-
 azure_issue["aks_cni_net"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     lower(resource.properties.networkProfile.networkPlugin) != "azure"
-}
-
-
-source_path[{"aks_cni_net":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    lower(resource.properties.networkProfile.networkPlugin) != "azure"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkProfile","networkPlugin"]]
-    }
 }
 
 aks_cni_net {
@@ -90,29 +70,10 @@ azure_attribute_absence["aks_http_routing"] {
     not resource.properties.addonProfiles.httpApplicationRouting.enabled
 }
 
-
-source_path[{"aks_http_routing":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.addonProfiles.httpApplicationRouting.enabled
-    metadata:= {
-        "resource_path": [["resources",i,"properties","addonProfiles","httpApplicationRouting","enabled"]]
-    }
-}
-
 azure_issue["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     resource.properties.addonProfiles.httpApplicationRouting.enabled == true
-}
-
-source_path[{"aks_http_routing":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    resource.properties.addonProfiles.httpApplicationRouting.enabled == true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","addonProfiles","httpApplicationRouting","enabled"]]
-    }
 }
 
 aks_http_routing {
@@ -161,28 +122,10 @@ azure_attribute_absence["aks_monitoring"] {
     not resource.properties.addonProfiles.omsagent.enabled
 }
 
-source_path[{"aks_monitoring":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.addonProfiles.omsagent.enabled   
-    metadata:= {
-        "resource_path": [["resources",i,"properties","addonProfiles","omsagent","enabled"]]
-    }
-}
-
 azure_issue["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     resource.properties.addonProfiles.omsagent.enabled != true
-}
-
-source_path[{"aks_monitoring":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    input.properties.addonProfiles.omsagent.enabled != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","addonProfiles","omsagent","enabled"]]
-    }
 }
 
 aks_monitoring {
@@ -231,32 +174,12 @@ azure_attribute_absence["aks_nodes"] {
     not resource.properties.agentPoolProfiles
 }
 
-source_path[{"aks_nodes":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.agentPoolProfiles
-    metadata:= {
-        "resource_path": [["resources",i,"properties","agentPoolProfiles"]]
-    }
-}
-
 azure_issue["aks_nodes"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     agentPoolProfiles := resource.properties.agentPoolProfiles[_]
     min([ c | c := agentPoolProfiles.count]) < 3
 }
-
-source_path[{"aks_nodes":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    agentPoolProfiles := resource.properties.agentPoolProfiles[j]
-    min([ c | c := agentPoolProfiles.count]) < 3
-    metadata:= {
-        "resource_path": [["resources",i,"properties","agentPoolProfiles",j,"count"]]
-    }
-}
-
 
 aks_nodes {
     lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
@@ -304,28 +227,10 @@ azure_attribute_absence["aks_rbac"] {
     not resource.properties.enableRBAC
 }
 
-source_path[{"aks_rbac":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.enableRBAC
-    metadata:= {
-        "resource_path": [["resources",i,"properties","enableRBAC"]]
-    }
-}
-
 azure_issue["aks_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     resource.properties.enableRBAC != true
-}
-
-source_path[{"aks_rbac":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    resource.properties.enableRBAC != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","enableRBAC"]]
-    }
 }
 
 aks_rbac {
@@ -374,28 +279,10 @@ azure_issue["aks_aad_azure_rbac"] {
     not resource.properties.aadProfile.managed
 }
 
-source_path[{"aks_aad_azure_rbac":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.aadProfile.managed
-    metadata:= {
-        "resource_path": [["resources",i,"properties","aadProfile","managed"]]
-    }
-}
-
 azure_issue["aks_aad_azure_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     not resource.properties.aadProfile.enableAzureRBAC
-}
-
-source_path[{"aks_aad_azure_rbac":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.aadProfile.enableAzureRBAC
-    metadata:= {
-        "resource_path": [["resources",i,"properties","aadProfile","enableAzureRBAC"]]
-    }
 }
 
 azure_issue["aks_aad_azure_rbac"] {
@@ -404,32 +291,11 @@ azure_issue["aks_aad_azure_rbac"] {
     resource.properties.aadProfile.managed != true
 }
 
-
-source_path[{"aks_aad_azure_rbac":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    resource.properties.aadProfile.managed != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","aadProfile","managed"]]
-    }
-}
-
 azure_issue["aks_aad_azure_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     resource.properties.aadProfile.enableAzureRBAC != true
 }
-
-
-source_path[{"aks_aad_azure_rbac":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    resource.properties.aadProfile.enableAzureRBAC != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","aadProfile","enableAzureRBAC"]]
-    }
-}
-
 
 aks_aad_azure_rbac {
     lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
@@ -469,30 +335,11 @@ azure_attribute_absence["aks_authorized_Ip"] {
     not resource.properties.apiServerAccessProfile.authorizedIPRanges
 }
 
-source_path[{"aks_authorized_Ip":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.apiServerAccessProfile.authorizedIPRanges
-    metadata:= {
-        "resource_path": [["resources",i,"properties","apiServerAccessProfile","authorizedIPRanges"]]
-    }
-}
-
 azure_issue["aks_authorized_Ip"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     count(resource.properties.apiServerAccessProfile.authorizedIPRanges) == 0
 }
-
-source_path[{"aks_authorized_Ip":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    count(resource.properties.apiServerAccessProfile.authorizedIPRanges) == 0
-    metadata:= {
-        "resource_path": [["resources",i,"properties","apiServerAccessProfile","authorizedIPRanges"]]
-    }
-}
-
 
 aks_authorized_Ip {
     lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
@@ -541,28 +388,10 @@ azure_attribute_absence["network_policy"] {
     not resource.properties.networkProfile.networkPolicy
 }
 
-source_path[{"network_policy":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.networkProfile.networkPolicy
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkProfile","networkPolicy"]]
-    }
-}
-
 azure_issue["network_policy"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     lower(resource.properties.networkProfile.networkPolicy) != "azure"
-}
-
-source_path[{"network_policy":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    lower(resource.properties.networkProfile.networkPolicy) != "azure"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkProfile","networkPolicy"]]
-    }
 }
 
 network_policy {
@@ -611,32 +440,11 @@ azure_attribute_absence["aks_kub_dashboard_disabled"] {
     not resource.properties.addonProfiles.kubeDashboard.enabled
 }
 
-
-source_path[{"aks_kub_dashboard_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.addonProfiles.kubeDashboard.enabled
-    metadata:= {
-        "resource_path": [["resources",i,"properties","addonProfiles","kubeDashboard","enabled"]]
-    }
-}
-
 azure_issue["aks_kub_dashboard_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     resource.properties.addonProfiles.kubeDashboard.enabled != false
 }
-
-source_path[{"aks_kub_dashboard_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    resource.properties.addonProfiles.kubeDashboard.enabled != false
-    metadata:= {
-        "resource_path": [["resources",i,"properties","addonProfiles","kubeDashboard","enabled"]]
-    }
-}
-
-
 
 aks_kub_dashboard_disabled {
     azure_attribute_absence["aks_kub_dashboard_disabled"]

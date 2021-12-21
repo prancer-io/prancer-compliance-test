@@ -18,14 +18,6 @@ azure_attribute_absence["rg_locks"] {
     not resource.properties.scope
 }
 
-source_path[{"rg_locks":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.authorization/locks"
-    not resource.properties.scope
-    metadata:= {
-        "resource_path": [["resources",i,"properties","scope"]]
-    }
-}
 
 azure_attribute_absence["rg_locks"] {
     resource := input.resources[_]
@@ -33,14 +25,6 @@ azure_attribute_absence["rg_locks"] {
     not resource.properties.level
 }
 
-source_path[{"rg_locks":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.authorization/locks"
-    not resource.properties.level
-    metadata:= {
-        "resource_path": [["resources",i,"properties","level"]]
-    }
-}
 
 azure_issue["rg_locks"] {
     resource := input.resources[_]
@@ -49,15 +33,6 @@ azure_issue["rg_locks"] {
     lower(resource.properties.level) != "cannotdelete"
 }
 
-source_path[{"rg_locks":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.authorization/locks"
-    contains(lower(resource.properties.scope), "resourcegroups")
-    lower(resource.properties.level) != "cannotdelete"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","level"]]
-    }
-}
 
 rg_locks {
     lower(input.resources[_].type) == "microsoft.resources/resourcegroups"

@@ -14,28 +14,10 @@ azure_attribute_absence["sql_db_log_audit"] {
     not resource.properties.state
 }
 
-source_path[{"sql_db_log_audit":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
-    not resource.properties.state
-    metadata:= {
-        "resource_path": [["resources",i,"properties","state"]]
-    }
-}
-
 azure_issue["sql_db_log_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
     lower(resource.properties.state) != "enabled"
-}
-
-source_path[{"sql_db_log_audit":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
-    lower(resource.properties.state) != "enabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","state"]]
-    }
 }
 
 sql_db_log_audit {
@@ -87,18 +69,6 @@ azure_attribute_absence["sql_logical_db_log_audit"] {
     not sql_db.properties.state
 }
 
-source_path[{"sql_logical_db_log_audit":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/databases"
-    sql_db := resource.resources[j]
-    lower(sql_db.type) == "auditingsettings"
-    not sql_db.properties.state
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","state"]]
-    }
-}
-
-
 azure_issue["sql_logical_db_log_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases"
@@ -107,16 +77,6 @@ azure_issue["sql_logical_db_log_audit"] {
     lower(sql_db.properties.state) != "enabled"
 }
 
-source_path[{"sql_logical_db_log_audit":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/databases"
-    sql_db := resource.resources[j]
-    lower(sql_db.type) == "auditingsettings"
-    lower(sql_db.properties.state) != "enabled"
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","state"]]
-    }
-}
 
 sql_logical_db_log_audit {
     resource := input.resources[_]
@@ -168,14 +128,6 @@ azure_attribute_absence["sql_db_log_retention"] {
     not resource.properties.retentionDays
 }
 
-source_path[{"sql_db_log_retention":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
-    not resource.properties.retentionDays
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionDays"]]
-    }
-}
 
 azure_issue["sql_db_log_retention"] {
     resource := input.resources[_]
@@ -183,14 +135,6 @@ azure_issue["sql_db_log_retention"] {
     to_number(resource.properties.retentionDays) < 90
 }
 
-source_path[{"sql_db_log_retention":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
-    to_number(resource.properties.retentionDays) < 90
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionDays"]]
-    }
-}
 
 sql_db_log_retention {
     lower(input.resources[_].type) == "microsoft.sql/servers/databases/auditingsettings"
@@ -241,18 +185,6 @@ azure_attribute_absence["sql_logical_db_log_retention"] {
     not sql_db.properties.retentionDays
 }
 
-source_path[{"sql_logical_db_log_retention":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/databases"
-    sql_db := resource.resources[j]
-    lower(sql_db.type) == "auditingsettings"
-    not sql_db.properties.retentionDays
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
-    }
-}
-
-
 azure_issue["sql_logical_db_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases"
@@ -261,16 +193,6 @@ azure_issue["sql_logical_db_log_retention"] {
     to_number(sql_db.properties.retentionDays) < 90
 }
 
-source_path[{"sql_logical_db_log_retention":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/databases"
-    sql_db := resource.resources[j]
-    lower(sql_db.type) == "auditingsettings"
-    to_number(sql_db.properties.retentionDays) < 90
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
-    }
-}
 
 sql_logical_db_log_retention {
     resource := input.resources[_]

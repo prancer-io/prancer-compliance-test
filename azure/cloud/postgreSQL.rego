@@ -12,30 +12,11 @@ azure_attribute_absence["geoRedundantBackup"] {
     not resource.properties.storageProfile.geoRedundantBackup
 }
 
-source_path[{"geoRedundantBackup":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbforpostgresql/servers"
-    not resource.properties.storageProfile.geoRedundantBackup
-    metadata:= {
-        "resource_path": [["resources",i,"properties","storageProfile","geoRedundantBackup"]]
-    }
-}
-
 
 azure_issue["geoRedundantBackup"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     lower(resource.properties.storageProfile.geoRedundantBackup) != "enabled"
-}
-
-
-source_path[{"geoRedundantBackup":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbforpostgresql/servers"
-    lower(resource.properties.storageProfile.geoRedundantBackup) != "enabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","storageProfile","geoRedundantBackup"]]
-    }
 }
 
 
@@ -87,28 +68,11 @@ azure_attribute_absence ["sslEnforcement"] {
     not resource.properties.sslEnforcement
 }
 
-source_path[{"sslEnforcement":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbforpostgresql/servers"
-    not resource.properties.sslEnforcement
-    metadata:= {
-        "resource_path": [["resources",i,"properties","sslEnforcement"]]
-    }
-}
 
 azure_issue ["sslEnforcement"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     lower(resource.properties.sslEnforcement) != "enabled"
-}
-
-source_path[{"sslEnforcement":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbforpostgresql/servers"
-    lower(resource.properties.sslEnforcement) != "enabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","sslEnforcement"]]
-    }
 }
 
 sslEnforcement {
@@ -156,14 +120,6 @@ azure_attribute_absence["postgresql_public_access_disabled"] {
     not resource.properties.publicNetworkAccess
 }
 
-source_path[{"postgresql_public_access_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbforpostgresql/servers"
-    not resource.properties.publicNetworkAccess
-    metadata:= {
-        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
-    }
-}
 
 azure_issue["postgresql_public_access_disabled"] {
     resource := input.resources[_]
@@ -171,14 +127,6 @@ azure_issue["postgresql_public_access_disabled"] {
     lower(resource.properties.publicNetworkAccess) != "disabled"
 }
 
-source_path[{"mairadb_public_access_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbforpostgresql/servers"
-    not resource.properties.publicNetworkAccess
-    metadata:= {
-        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
-    }
-}
 
 postgresql_public_access_disabled {
     azure_attribute_absence["postgresql_public_access_disabled"]

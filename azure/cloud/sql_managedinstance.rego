@@ -21,15 +21,6 @@ azure_issue["sql_mi_public_endpoint_disabled"] {
     resource.properties.publicDataEndpointEnabled == true
 }
 
-source_path[{"sql_mi_public_endpoint_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/managedinstances"
-    resource.properties.publicDataEndpointEnabled == true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","publicDataEndpointEnabled"]]
-    }
-}
-
 sql_mi_public_endpoint_disabled {
     lower(input.resources[_].type) == "microsoft.sql/managedinstances"
     not azure_issue["sql_mi_public_endpoint_disabled"]

@@ -60,13 +60,6 @@ azure_attribute_absence ["serverRole"] {
     count([c | resource.type == "microsoft.cache/redis"; c := 1]) != count([c | resource.type == "microsoft.cache/redis/linkedservers"; c := 1])
 }
 
-source_path[{"serverRole":metadata}] {
-    resource := input.resources[i]
-    count([c | resource.type == "microsoft.cache/redis"; c := 1]) != count([c | resource.type == "microsoft.cache/redis/linkedservers"; c := 1])
-    metadata:= {
-        "resource_path": [["resources",i,"type"]]
-    }
-}
 
 # as linkedservers is child resource of microsoft.cache/redis, we need to make sure microsoft.cache/redis exist in the same template first.
 # azure_attribute_absence["serverRole"] {
@@ -83,30 +76,12 @@ azure_attribute_absence ["serverRole"] {
 }
 
 
-source_path[{"serverRole":metadata}] {
-   resource := input.resources[i]
-   lower(resource.type) == "microsoft.cache/redis/linkedservers"
-   not resource.properties.serverRole
-   metadata:= {
-        "resource_path": [["resources",i,"properties","serverRole"]]
-    }
-}
 
 azure_issue ["serverRole"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis/linkedservers"
     lower(resource.properties.serverRole) != "secondary"
 }
-
-source_path[{"serverRole":metadata}] {
-   resource := input.resources[i]
-   lower(resource.type) == "microsoft.cache/redis/linkedservers"
-    lower(resource.properties.serverRole) != "secondary"
-   metadata:= {
-        "resource_path": [["resources",i,"properties","serverRole"]]
-    }
-}
-
 
 serverRole {
     lower(input.resources[_].type) == "microsoft.cache/redis/linkedservers"
@@ -157,30 +132,12 @@ azure_attribute_absence["redis_public_access"] {
     not resource.properties.publicNetworkAccess
 }
 
-source_path[{"redis_public_access":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.cache/redis"
-    not resource.properties.publicNetworkAccess
-    metadata:= {
-        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
-    }
-}
 
 azure_issue["redis_public_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
     lower(resource.properties.publicNetworkAccess) != "disabled"
 }
-
-source_path[{"redis_public_access":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.cache/redis"
-    lower(resource.properties.publicNetworkAccess) != "disabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
-    }
-}
-
 
 
 redis_public_access {
@@ -227,30 +184,11 @@ azure_attribute_absence["arc_subnet_id"] {
     not resource.properties.subnetId
 }
 
-source_path[{"arc_subnet_id":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.cache/redis"
-    not resource.properties.subnetId
-    metadata:= {
-        "resource_path": [["resources",i,"properties","subnetId"]]
-    }
-}
-
 
 azure_issue["arc_subnet_id"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
     count(resource.properties.subnetId) == 0
-}
-
-
-source_path[{"arc_subnet_id":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.cache/redis"
-    count(resource.properties.subnetId) == 0
-    metadata:= {
-        "resource_path": [["resources",i,"properties","subnetId"]]
-    }
 }
 
 arc_subnet_id {
@@ -302,15 +240,6 @@ no_azure_issue["arc_private_endpoint"] {
     contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.cache/redis")
 }
 
-source_path[{"arc_private_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/privateendpoints"
-    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[j]
-    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.cache/redis")
-    metadata:= {
-        "resource_path": [["resources",i,"properties","privateLinkServiceConnections",j,"properties","privateLinkServiceId"]]
-    }
-}
 
 arc_private_endpoint {
 	lower(input.resources[_].type) == "microsoft.cache/redis"

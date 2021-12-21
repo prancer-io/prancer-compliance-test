@@ -16,20 +16,6 @@ azure_attribute_absence["KeyVault"] {
     not accessPolicy.permissions.storage
 }
 
-source_path[{"KeyVault":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    accessPolicy := resource.properties.accessPolicies[j]
-    not accessPolicy.permissions.keys
-    not accessPolicy.permissions.secrets
-    not accessPolicy.permissions.certificates
-    not accessPolicy.permissions.storage
-    metadata:= {
-        "resource_path": [["resources",i,"properties","accessPolicies",j,"permissions"]]
-    }
-}
-
-
 azure_issue["KeyVault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
@@ -40,18 +26,6 @@ azure_issue["KeyVault"] {
     count(accessPolicy.permissions.storage) == 0
 }
 
-source_path[{"KeyVault":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    accessPolicy := resource.properties.accessPolicies[j]
-    count(accessPolicy.permissions.keys) == 0
-    count(accessPolicy.permissions.secrets) == 0
-    count(accessPolicy.permissions.certificates) == 0
-    count(accessPolicy.permissions.storage) == 0
-    metadata:= {
-        "resource_path": [["resources",i,"properties","accessPolicies",j,"permissions"]]
-    }
-}
 
 KeyVault {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
@@ -96,14 +70,6 @@ azure_attribute_absence ["enableSoftDelete"] {
     not resource.properties.enableSoftDelete
 }
 
-source_path[{"enableSoftDelete":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    not resource.properties.enableSoftDelete
-    metadata:= {
-        "resource_path": [["resources",i,"properties","enableSoftDelete"]]
-    }
-}
 
 azure_issue ["enableSoftDelete"] {
     resource := input.resources[_]
@@ -111,14 +77,6 @@ azure_issue ["enableSoftDelete"] {
     resource.properties.enableSoftDelete != true
 }
 
-source_path[{"enableSoftDelete":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    resource.properties.enableSoftDelete != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","enableSoftDelete"]]
-    }
-}
 
 enableSoftDelete {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
@@ -163,14 +121,6 @@ azure_attribute_absence ["enablePurgeProtection"] {
     not resource.properties.enablePurgeProtection
 }
 
-source_path[{"enablePurgeProtection":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    not resource.properties.enablePurgeProtection
-    metadata:= {
-        "resource_path": [["resources",i,"properties","enablePurgeProtection"]]
-    }
-}
 
 azure_issue ["enablePurgeProtection"] {
     resource := input.resources[_]
@@ -178,14 +128,6 @@ azure_issue ["enablePurgeProtection"] {
     resource.properties.enablePurgeProtection != true
 }
 
-source_path[{"enablePurgeProtection":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    resource.properties.enablePurgeProtection != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","enablePurgeProtection"]]
-    }
-}
 
 enablePurgeProtection {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
@@ -230,14 +172,6 @@ azure_attribute_absence ["keyvault_Acl"] {
     not resource.properties.networkAcls.defaultAction
 }
 
-source_path[{"keyvault_Acl":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    not resource.properties.networkAcls.defaultAction
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
-    }
-}
 
 azure_issue ["keyvault_Acl"] {
     resource := input.resources[_]
@@ -245,14 +179,6 @@ azure_issue ["keyvault_Acl"] {
     lower(resource.properties.networkAcls.defaultAction) != "deny"
 }
 
-source_path[{"keyvault_Acl":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    lower(resource.properties.networkAcls.defaultAction) != "deny"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
-    }
-}
 
 keyvault_Acl {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
@@ -297,28 +223,11 @@ azure_attribute_absence ["keyvault_bypass"] {
     not resource.properties.networkAcls.bypass
 }
 
-source_path[{"keyvault_bypass":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    not resource.properties.networkAcls.bypass
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","bypass"]]
-    }
-}
 
 azure_issue ["keyvault_bypass"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     lower(resource.properties.networkAcls.bypass) != "azureservices"
-}
-
-source_path[{"keyvault_bypass":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    lower(resource.properties.networkAcls.bypass) != "azureservices"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","bypass"]]
-    }
 }
 
 keyvault_bypass {
@@ -365,30 +274,12 @@ azure_attribute_absence ["keyvault_service_endpoint"] {
     not virtualNetworkRule.id
 }
 
-source_path[{"keyvault_service_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[j]
-    not virtualNetworkRule.id
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules",j,"id"]]
-    }
-}
-
 azure_attribute_absence ["keyvault_service_endpoint"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     not resource.properties.networkAcls.virtualNetworkRules
 }
 
-source_path[{"keyvault_service_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules"]]
-    }
-}
 
 azure_issue ["keyvault_service_endpoint"] {
     resource := input.resources[_]
@@ -397,15 +288,6 @@ azure_issue ["keyvault_service_endpoint"] {
     count(virtualNetworkRule.id) == 0
 }
 
-source_path[{"keyvault_service_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[j]
-    count(virtualNetworkRule.id) == 0
-    metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules",j,"id"]]
-    }
-}
 
 keyvault_service_endpoint {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
@@ -449,22 +331,6 @@ azure_attribute_absence["kv_private_endpoint"] {
     count([c | lower(input.resources[_].type) == "microsoft.network/privateendpoints"; c := 1]) == 0 
 }
 
-no_azure_issue["kv_private_endpoint"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.network/privateendpoints"
-    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[_]
-    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.keyvault/vaults")
-}
-
-source_path[{"kv_private_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/privateendpoints"
-    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[j]
-    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.keyvault/vaults")
-    metadata:= {
-        "resource_path": [["resources",i,"properties","privateLinkServiceConnections",j,"properties","privateLinkServiceId"]]
-    }
-}
 
 kv_private_endpoint {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
@@ -514,29 +380,12 @@ azure_attribute_absence["kv_public_access_disabled"] {
     not resource.properties.publicNetworkAccess
 }
 
-source_path[{"kv_public_access_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    not resource.properties.publicNetworkAccess
-    metadata:= {
-        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
-    }
-}
-
 azure_issue["kv_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     lower(resource.properties.publicNetworkAccess) != "disabled"
 }
 
-source_path[{"kv_public_access_disabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    lower(resource.properties.publicNetworkAccess) != "disabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
-    }
-}
 
 kv_public_access_disabled {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"

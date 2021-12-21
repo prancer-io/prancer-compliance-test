@@ -14,29 +14,11 @@ azure_attribute_absence["securitycontacts"] {
     not resource.properties.email
 }
 
-source_path[{"securitycontacts":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.security/securitycontacts"
-    not resource.properties.email
-    metadata:= {
-        "resource_path": [["resources",i,"properties","email"]]
-    }
-}
-
 
 azure_issue["securitycontacts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
     re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
-}
-
-source_path[{"securitycontacts":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.security/securitycontacts"
-    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
-    metadata:= {
-        "resource_path": [["resources",i,"properties","email"]]
-    }
 }
 
 securitycontacts {
@@ -88,30 +70,12 @@ azure_attribute_absence["alert_notifications"] {
     not resource.properties.alertNotifications
 }
 
-source_path[{"alert_notifications":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.security/securitycontacts"
-    not resource.properties.alertNotifications
-    metadata:= {
-        "resource_path": [["resources",i,"properties","alertNotifications"]]
-    }
-}
-
-
 azure_issue["alert_notifications"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
     lower(resource.properties.alertNotifications) != "on"
 }
 
-source_path[{"alert_notifications":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.security/securitycontacts"
-    lower(resource.properties.alertNotifications) != "on"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","alertNotifications"]]
-    }
-}
 
 alert_notifications {
     lower(input.resources[_].type) == "microsoft.security/securitycontacts"
@@ -157,28 +121,11 @@ azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"] {
     not resource.properties.alertsToAdmins
 }
 
-source_path[{"securitycontacts_alerts_to_admins_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.security/securitycontacts"
-    not resource.properties.alertsToAdmins
-    metadata:= {
-        "resource_path": [["resources",i,"properties","alertsToAdmins"]]
-    }
-}
 
 azure_issue["securitycontacts_alerts_to_admins_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
     lower(resource.properties.alertsToAdmins) != "on"
-}
-
-source_path[{"securitycontacts_alerts_to_admins_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.security/securitycontacts"
-    lower(resource.properties.alertsToAdmins) != "on"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","alertsToAdmins"]]
-    }
 }
 
 securitycontacts_alerts_to_admins_enabled {

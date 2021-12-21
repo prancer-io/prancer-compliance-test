@@ -15,33 +15,11 @@ azure_attribute_absence["alerts"] {
     not resource.properties.enabled
 }
 
-source_path[{"alerts":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/activitylogalerts"
-    not resource.properties.enabled
-    metadata:= {
-        "resource_path": [["resources",i,"properties","enabled"]]
-    }
-}
-
-
-
 azure_issue["alerts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/activitylogalerts"
     resource.properties.enabled != true
 }
-
-
-source_path[{"alerts":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/activitylogalerts"
-    resource.properties.enabled != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","enabled"]]
-    }
-}
-
 
 alerts {
     azure_attribute_absence["alerts"]
@@ -89,43 +67,16 @@ azure_attribute_absence["log_profiles_retention_days"] {
     not resource.properties.retentionPolicy
 }
 
-source_path[{"log_profiles_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/logprofiles"
-    not resource.properties.retentionPolicy
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionPolicy"]]
-    }
-}
-
 azure_attribute_absence["log_profiles_retention_days"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/logprofiles"
     not resource.properties.retentionPolicy.days
 }
 
-source_path[{"log_profiles_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/logprofiles"
-    not resource.properties.retentionPolicy.days
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionPolicy","days"]]
-    }
-}
-
 azure_issue["log_profiles_retention_days"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/logprofiles"
     to_number(resource.properties.retentionPolicy.days) < 365
-}
-
-source_path[{"log_profiles_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/logprofiles"
-    to_number(resource.properties.retentionPolicy.days) < 365
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionPolicy","days"]]
-    }
 }
 
 log_profiles_retention_days {
@@ -173,28 +124,10 @@ azure_attribute_absence["log_profiles_retention_enabled"] {
     not resource.properties.retentionPolicy
 }
 
-source_path[{"log_profiles_retention_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/logprofiles"
-    not resource.properties.retentionPolicy
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionPolicy"]]
-    }
-}
-
 azure_attribute_absence["log_profiles_retention_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/logprofiles"
     not resource.properties.retentionPolicy.enabled
-}
-
-source_path[{"log_profiles_retention_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/logprofiles"
-    not resource.properties.retentionPolicy.enabled
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionPolicy"],"enabled"]
-    }
 }
 
 azure_issue_1["log_profiles_retention_enabled"] {
@@ -202,16 +135,6 @@ azure_issue_1["log_profiles_retention_enabled"] {
     lower(resource.type) == "microsoft.insights/logprofiles"
     resource.properties.retentionPolicy.enabled != true
 }
-
-source_path[{"log_profiles_retention_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/logprofiles"
-    resource.properties.retentionPolicy.enabled != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionPolicy","enabled"]]
-    }
-}
-
 
 log_profiles_retention_enabled {
     lower(input.resources[_].type) == "microsoft.insights/logprofiles"
@@ -256,32 +179,12 @@ azure_attribute_absence ["log_profile_category"] {
     not resource.properties.categories
 }
 
-source_path[{"log_profiles_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/logprofiles"
-    not resource.properties.categories
-    metadata:= {
-        "resource_path": [["resources",i,"properties","categories"]]
-    }
-}
-
-
 no_azure_issue ["log_profile_category"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/logprofiles"
     contains(lower(resource.properties.categories[_]), "write")
     contains(lower(resource.properties.categories[_]), "delete")
     contains(lower(resource.properties.categories[_]), "action")
-}
-
-source_path[{"log_profiles_retention_days":metadata}] {
-    resource := input.resources[i]
-    contains(lower(resource.properties.categories), "write")
-    contains(lower(resource.properties.categories), "delete")
-    contains(lower(resource.properties.categories), "action")
-    metadata:= {
-        "resource_path": [["resources",i,"properties","categories"]]
-    }
 }
 
 log_profile_category {

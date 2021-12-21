@@ -14,30 +14,12 @@ azure_attribute_absence["vpn_encrypt"] {
     not resource.properties.connections
 }
 
-source_path[{"vpn_encrypt":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/vpngateways"
-    not resource.properties.connections
-    metadata:= {
-        "resource_path": [["resources",i,"properties","connections"]]
-    }
-}
 
 azure_attribute_absence["vpn_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/vpngateways"
     con := resource.properties.connections[_]
     not con.properties.ipsecPolicies
-}
-
-source_path[{"vpn_encrypt":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/vpngateways"
-    con := resource.properties.connections[j]
-    not con.properties.ipsecPolicies
-    metadata:= {
-        "resource_path": [["resources",i,"properties","connections",j,"properties","ipsecPolicies"]]
-    }
 }
 
 azure_attribute_absence["vpn_encrypt"] {
@@ -48,16 +30,6 @@ azure_attribute_absence["vpn_encrypt"] {
     not ipsec.ipsecEncryption
 }
 
-source_path[{"vpn_encrypt":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/vpngateways"
-    con := resource.properties.connections[j]
-    ipsec := con.properties.ipsecPolicies[k]
-    not ipsec.ipsecEncryption
-    metadata:= {
-        "resource_path": [["resources",i,"properties","connections",j,"properties","ipsecPolicies",k,"ipsecEncryption"]]
-    }
-}
 
 azure_issue["vpn_encrypt"] {
     resource := input.resources[_]
@@ -67,16 +39,6 @@ azure_issue["vpn_encrypt"] {
     lower(ipsec.ipsecEncryption) == "none"
 }
 
-source_path[{"vpn_encrypt":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/vpngateways"
-    con := resource.properties.connections[j]
-    ipsec := con.properties.ipsecPolicies[k]
-    lower(ipsec.ipsecEncryption) == "none"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","connections",j,"properties","ipsecPolicies",k,"ipsecEncryption"]]
-    }
-}
 
 vpn_encrypt {
     lower(input.resources[_].type) == "microsoft.network/vpngateways"
