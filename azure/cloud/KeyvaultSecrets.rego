@@ -1,24 +1,32 @@
 package rule
 
-# https://docs.microsoft.com/en-us/rest/api/keyvault/get-keys/get-keys
+# https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets
 
 #
-# PR-AZR-KV-005
+# PR-AZR-CLD-KV-005
 #
 
 default kv_expire = null
 
 azure_attribute_absence["kv_expire"] {
-    not input.properties.attributes.exp
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults/secrets"
+    #create seperate rule with this property
+    #resource.properties.attributes.enabled != false
+    not resource.properties.attributes.exp
 }
 
 
 azure_issue["kv_expire"] {
-    to_number(input.properties.attributes.exp) < 0
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults/secrets"
+    #resource.properties.attributes.enabled != false
+    #Expiry date in seconds since 1970-01-01T00:00:00Z.
+    to_number(resource.properties.attributes.exp) < 0
 }
 
-
 kv_expire {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults/secrets"
     not azure_attribute_absence["kv_expire"]
     not azure_issue["kv_expire"]
 }
@@ -31,14 +39,16 @@ kv_expire = false {
     azure_attribute_absence["kv_expire"]
 }
 
-kv_expire_err = "Azure Key Vault attribute 'exp' is missing from the resource" {
-    azure_attribute_absence["kv_expire"]
-} else = "Azure Key Vault secrets currently dont have any expiration date" {
+kv_expire_err = "Azure Key Vault secrets currently dont have any expiration date" {
     azure_issue["kv_expire"]
 }
 
+kv_expire_miss_err = "Azure Key Vault attribute 'exp' is missing from the resource" {
+    azure_attribute_absence["kv_expire"]
+}
+
 kv_expire_metadata := {
-    "Policy Code": "PR-AZR-KV-005",
+    "Policy Code": "PR-AZR-CLD-KV-005",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -46,5 +56,5 @@ kv_expire_metadata := {
     "Policy Description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly.",
     "Resource Type": "microsoft.keyvault/vaults/secrets",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/keyvault/get-keys/get-keys"
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets"
 }

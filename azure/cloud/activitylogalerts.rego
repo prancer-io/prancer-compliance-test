@@ -3,17 +3,22 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts
 
 #
-# PR-AZR-MNT-001
+# PR-AZR-CLD-MNT-001
 #
 
 default alerts = null
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
 # by default alert get enabled if not exist.
 azure_attribute_absence["alerts"] {
-    not input.properties.enabled
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/activitylogalerts"
+    not resource.properties.enabled
 }
 
-azure_issue["alerts"] {input
-    input.properties.enabled != true
+azure_issue["alerts"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/activitylogalerts"
+    resource.properties.enabled != true
 }
 
 alerts {
@@ -22,6 +27,7 @@ alerts {
 }
 
 alerts {
+    lower(input.resources[_].type) == "microsoft.insights/activitylogalerts"
     not azure_attribute_absence["alerts"]
     not azure_issue["alerts"]
 }
@@ -35,7 +41,7 @@ alerts_err = "Activity log alerts is not enabled" {
 }
 
 alerts_metadata := {
-    "Policy Code": "PR-AZR-MNT-001",
+    "Policy Code": "PR-AZR-CLD-MNT-001",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -51,23 +57,30 @@ alerts_metadata := {
 # https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles
 
 
-# PR-AZR-MNT-009
+# PR-AZR-CLD-MNT-009
 
 default log_profiles_retention_days = null
 
 azure_attribute_absence["log_profiles_retention_days"] {
-    not input.properties.retentionPolicy
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    not resource.properties.retentionPolicy
 }
 
 azure_attribute_absence["log_profiles_retention_days"] {
-    not input.properties.retentionPolicy.days
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    not resource.properties.retentionPolicy.days
 }
 
 azure_issue["log_profiles_retention_days"] {
-    to_number(input.properties.retentionPolicy.days) < 365
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    to_number(resource.properties.retentionPolicy.days) < 365
 }
 
 log_profiles_retention_days {
+    lower(input.resources[_].type) == "microsoft.insights/logprofiles"
     not azure_attribute_absence["log_profiles_retention_days"]
     not azure_issue["log_profiles_retention_days"]
 }
@@ -90,7 +103,7 @@ log_profiles_retention_days_err = "Microsoft.Insights/logprofiles resource prope
 
 
 log_profiles_retention_days_metadata := {
-    "Policy Code": "PR-AZR-MNT-009",
+    "Policy Code": "PR-AZR-CLD-MNT-009",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -101,23 +114,30 @@ log_profiles_retention_days_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles"
 }
 
-# PR-AZR-MNT-010
+# PR-AZR-CLD-MNT-010
 
 default log_profiles_retention_enabled = null
 
 azure_attribute_absence["log_profiles_retention_enabled"] {
-    not input.properties.retentionPolicy
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    not resource.properties.retentionPolicy
 }
 
 azure_attribute_absence["log_profiles_retention_enabled"] {
-    not input.properties.retentionPolicy.enabled
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    not resource.properties.retentionPolicy.enabled
 }
 
-azure_issue["log_profiles_retention_enabled"] {
-    input.properties.retentionPolicy.enabled != true
+azure_issue_1["log_profiles_retention_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    resource.properties.retentionPolicy.enabled != true
 }
 
 log_profiles_retention_enabled {
+    lower(input.resources[_].type) == "microsoft.insights/logprofiles"
     not azure_attribute_absence["log_profiles_retention_enabled"]
     not azure_issue["log_profiles_retention_enabled"]
 }
@@ -130,15 +150,15 @@ log_profiles_retention_enabled = false {
     azure_attribute_absence["log_profiles_retention_enabled"]
 }
 
-log_profiles_retention_enabled_err = "Activity log profile retention is currently not enabled" {
-    azure_issue["log_profiles_retention_enabled"]
-} else = "Microsoft.Insights/logprofiles property 'retentionPolicy.enabled' is missing from the resource. Please set the value to 'true' after property addition." {
+log_profiles_retention_enabled_err = "Microsoft.Insights/logprofiles property 'retentionPolicy.enabled' is missing from the resource. Please set the value to 'true' after property addition." {
     azure_attribute_absence["log_profiles_retention_enabled"]
+} else = "Activity log profile retention is currently not enabled" {
+    azure_issue["log_profiles_retention_enabled"]
 }
 
 
 log_profiles_retention_enabled_metadata := {
-    "Policy Code": "PR-AZR-MNT-010",
+    "Policy Code": "PR-AZR-CLD-MNT-010",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -150,18 +170,21 @@ log_profiles_retention_enabled_metadata := {
 }
 
 
-# PR-AZR-MNT-011
+# PR-AZR-CLD-MNT-011
 
 default log_profile_category = null
-
 azure_attribute_absence ["log_profile_category"] {
-    not input.properties.categories
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    not resource.properties.categories
 }
 
 no_azure_issue ["log_profile_category"] {
-    contains(lower(input.properties.categories[_]), "write")
-    contains(lower(input.properties.categories[_]), "delete")
-    contains(lower(input.properties.categories[_]), "action")
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    contains(lower(resource.properties.categories[_]), "write")
+    contains(lower(resource.properties.categories[_]), "delete")
+    contains(lower(resource.properties.categories[_]), "action")
 }
 
 log_profile_category {
@@ -174,17 +197,19 @@ log_profile_category = false {
 }
 
 log_profile_category = false {
+    lower(input.resources[_].type) == "microsoft.insights/logprofiles"
     not no_azure_issue["log_profile_category"]
 }
 
 log_profile_category_err = "microsoft.insights/logprofiles property 'categories' missing in the resource." {
     azure_attribute_absence["log_profile_category"]
 } else = "Log profile is not configured to capture all activities" {
+    lower(input.resources[_].type) == "microsoft.insights/logprofiles"
     not no_azure_issue["log_profile_category"]
 }
 
 log_profile_category_metadata := {
-    "Policy Code": "PR-AZR-MNT-011",
+    "Policy Code": "PR-AZR-CLD-MNT-011",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

@@ -4,24 +4,31 @@ package rule
 
 #
 
-# PR-AZR-SQL-008
+# PR-AZR-CLD-SQL-008
 
 default db_logical_encrypt = null
 
 azure_attribute_absence["db_logical_encrypt"] {
-    sql_db := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[_]
     lower(sql_db.type) == "transparentdataencryption"
     not sql_db.properties.status
 }
 
-azure_issue["db_logical_encrypt"] {=
-    sql_db := input.resources[_]
+azure_issue["db_logical_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[_]
     lower(sql_db.type) == "transparentdataencryption"
     lower(sql_db.properties.status) != "enabled"
 }
 
+
 db_logical_encrypt {
-    sql_db := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[_]
     lower(sql_db.type) == "transparentdataencryption"
     not azure_attribute_absence["db_logical_encrypt"]
     not azure_issue["db_logical_encrypt"]
@@ -36,13 +43,13 @@ db_logical_encrypt = false {
 }
 
 db_logical_encrypt_err = "Azure SQL databases currently dont have transparent data encryption enabled" {
-    azure_issue["db_logical_encrypt"]
-} else = "Azure SQL databases transparent encryption attribute 'status' is missing from the resource" {
     azure_attribute_absence["db_logical_encrypt"]
+} else = "Azure SQL databases currently dont have transparent data encryption enabled" {
+    azure_issue["db_logical_encrypt"]
 }
 
 db_logical_encrypt_metadata := {
-    "Policy Code": "PR-AZR-SQL-008",
+    "Policy Code": "PR-AZR-CLD-SQL-008",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -54,20 +61,28 @@ db_logical_encrypt_metadata := {
 }
 
 
-# PR-AZR-SQL-009
-
-
+# PR-AZR-CLD-SQL-009
+#
+# This encryption is by default enabled for sql database. Thats why its not available in Terraform.
+# See https://github.com/hashicorp/terraform-provider-azurerm/issues/7187
+# ToDo: We need to make sure its enabled for MSSQL Server
 default db_encrypt = null
 
 azure_attribute_absence["db_encrypt"] {
-    not input.properties.status
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/transparentdataencryption"
+    not resource.properties.status
 }
 
 azure_issue["db_encrypt"] {
-    lower(input.properties.status) != "enabled"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/transparentdataencryption"
+    lower(resource.properties.status) != "enabled"
 }
 
+
 db_encrypt {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases/transparentdataencryption"
     not azure_attribute_absence["db_encrypt"]
     not azure_issue["db_encrypt"]
 }
@@ -82,12 +97,14 @@ db_encrypt = false {
 
 db_encrypt_err = "Azure SQL databases currently dont have transparent data encryption enabled" {
     azure_issue["db_encrypt"]
-} else = "Azure SQL databases transparent encryption attribute 'status' is missing from the resource" {
+}
+
+db_encrypt_miss_err = "Azure SQL databases transparent encryption attribute 'status' is missing from the resource" {
     azure_attribute_absence["db_encrypt"]
 }
 
 db_encrypt_metadata := {
-    "Policy Code": "PR-AZR-SQL-009",
+    "Policy Code": "PR-AZR-CLD-SQL-009",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

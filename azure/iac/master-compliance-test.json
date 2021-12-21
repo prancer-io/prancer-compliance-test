@@ -6655,41 +6655,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MSSQL_SERVER_4",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(sql_servers.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-ARM-SQL-051",
-                            "eval": "data.rule.sql_server_administrators",
-                            "message": "data.rule.sql_server_administrators_err",
-                            "remediationDescription": "For Resource type 'microsoft.sql/servers/administrators' make sure name exists and the value is set to 'activedirectory'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_ARM_SQL_051.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "Ensure that Azure Active Directory Admin is configured for SQL Server",
-                    "description": "Use Azure Active Directory Authentication for authentication with SQL Databases. Azure Active Directory authentication is a mechanism of connecting Microsoft Azure SQL Databases and SQL Data Warehouses using identities in an Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practice"
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "microsoft.sql/servers",
-                        "microsoft.sql/servers/administrators"
-                    ]
-                },
-                {
                     "masterTestId": "TEST_MSSQL_SERVER_5",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"

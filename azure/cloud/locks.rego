@@ -3,23 +3,36 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/2016-09-01/locks
 
 #
-# PR-AZR-AML-008
+# PR-AZR-CLD-AML-008
 #
 
 default rg_locks = null
 
-azure_attribute_absence["rg_locks"] {
-    not input.properties.scope
-}
+# azure_attribute_absence["rg_locks"] {
+#     count([c | lower(input.resources[_].type) == "microsoft.resources/resourcegroups"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.authorization/locks"; c := 1])
+# }
 
 azure_attribute_absence["rg_locks"] {
-    not input.properties.level
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/locks"
+    not resource.properties.scope
 }
+
+
+azure_attribute_absence["rg_locks"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/locks"
+    not resource.properties.level
+}
+
 
 azure_issue["rg_locks"] {
-    contains(lower(input.properties.scope), "resourcegroups")
-    lower(input.properties.level) != "cannotdelete"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/locks"
+    contains(lower(resource.properties.scope), "resourcegroups")
+    lower(resource.properties.level) != "cannotdelete"
 }
+
 
 rg_locks {
     lower(input.resources[_].type) == "microsoft.resources/resourcegroups"
@@ -48,7 +61,7 @@ rg_locks_miss_err = "Resource lock property 'level' is missing from the resource
 }
 
 rg_locks_metadata := {
-    "Policy Code": "PR-AZR-AML-008",
+    "Policy Code": "PR-AZR-CLD-AML-008",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

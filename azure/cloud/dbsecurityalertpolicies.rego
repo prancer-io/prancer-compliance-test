@@ -4,25 +4,34 @@ package rule
 
 
 #
-# PR-AZR-SQL-017
+# PR-AZR-CLD-SQL-017
 #
 
 default dbsec_threat_off = null
 
 azure_attribute_absence["dbsec_threat_off"] {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     not sql_resources.properties.state
 }
 
+
+
 azure_issue["dbsec_threat_off"] {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     lower(sql_resources.properties.state) != "enabled"
 }
 
+
 dbsec_threat_off {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     not azure_attribute_absence["dbsec_threat_off"]
     not azure_issue["dbsec_threat_off"]
@@ -36,15 +45,15 @@ dbsec_threat_off = false {
     azure_attribute_absence["dbsec_threat_off"]
 }
 
-dbsec_threat_off_err = "SQL Databases security alert policy is currently not enabled" {
-    azure_issue["dbsec_threat_off"]
-} else = "SQL Databases securityAlertPolicies attribute 'state' is missing from the resource" {
+dbsec_threat_off_err = "SQL Databases securityAlertPolicies attribute 'state' is missing from the resource" {
     azure_attribute_absence["dbsec_threat_off"]
+} else = "SQL Databases security alert policy is currently not enabled" {
+    azure_issue["dbsec_threat_off"]
 }
 
 
 dbsec_threat_off_metadata := {
-    "Policy Code": "PR-AZR-SQL-017",
+    "Policy Code": "PR-AZR-CLD-SQL-017",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -57,26 +66,33 @@ dbsec_threat_off_metadata := {
 
 
 #
-# PR-AZR-SQL-018
+# PR-AZR-CLD-SQL-018
 #
 
 default dbsec_threat_retention = null
 
 azure_attribute_absence["dbsec_threat_retention"] {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     not sql_resources.properties.retentionDays
 }
 
+
 azure_issue["dbsec_threat_retention"] {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     to_number(sql_resources.properties.retentionDays) <= 90
 }
 
 
 dbsec_threat_retention {
-    sql_resources := input.resources[_]
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
+    resource := input.resources[_]
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     not azure_attribute_absence["dbsec_threat_retention"]
     not azure_issue["dbsec_threat_retention"]
@@ -92,12 +108,14 @@ dbsec_threat_retention = false {
 
 dbsec_threat_retention_err = "Azure SQL Database security alert policies thread retention is currently not configured for more than 90 days" {
     azure_issue["dbsec_threat_retention"]
-} else = "Azure SQL Database security alert policies retention attribute 'retentionDays' is missing from the resource" {
+}
+
+dbsec_threat_retention_miss_err = "Azure SQL Database security alert policies retention attribute 'retentionDays' is missing from the resource" {
     azure_attribute_absence["dbsec_threat_retention"]
 }
 
 dbsec_threat_retention_metadata := {
-    "Policy Code": "PR-AZR-SQL-018",
+    "Policy Code": "PR-AZR-CLD-SQL-018",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -109,26 +127,33 @@ dbsec_threat_retention_metadata := {
 }
 
 #
-# PR-AZR-SQL-019
+# PR-AZR-CLD-SQL-019
 #
 
 default dbsec_threat_email = null
 
 
 azure_attribute_absence["dbsec_threat_email"] {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     not sql_resources.properties.emailAddresses
 }
 
+
 azure_issue["dbsec_threat_email"] {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     count(sql_resources.properties.emailAddresses) == 0  
 }
 
 dbsec_threat_email {
-    sql_resources := input.resources[_]
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
+    resource := input.resources[_]
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     not azure_attribute_absence["dbsec_threat_email"]
     not azure_issue["dbsec_threat_email"]
@@ -145,15 +170,15 @@ dbsec_threat_email = false {
 }
 
 
-dbsec_threat_email_err = "Azure SQL Databases security alert policy is currently not configured to sent alert to the account administrators via email" {
-    azure_issue["dbsec_threat_email"]
-} else = "Azure SQL Databases security alert policy attribute 'emailAccountAdmins' or 'emailAddresses' is missing from the resource" {
+dbsec_threat_email_err = "Azure SQL Databases security alert policy attribute 'emailAccountAdmins' or 'emailAddresses' is missing from the resource" {
     azure_attribute_absence["dbsec_threat_email"]
+} else = "Azure SQL Databases security alert policy is currently not configured to sent alert to the account administrators via email" {
+    azure_issue["dbsec_threat_email"]
 }
 
 
 dbsec_threat_email_metadata := {
-    "Policy Code": "PR-AZR-SQL-019",
+    "Policy Code": "PR-AZR-CLD-SQL-019",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -165,25 +190,33 @@ dbsec_threat_email_metadata := {
 }
 
 #
-# PR-AZR-SQL-020
+# PR-AZR-CLD-SQL-020
 #
 
 default dbsec_threat_alert = null
 
 azure_attribute_absence["dbsec_threat_alert"] {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     not sql_resources.properties.disabledAlerts
 }
 
+
 azure_issue["dbsec_threat_alert"] {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     count(sql_resources.properties.disabledAlerts) > 0
 }
 
+
 dbsec_threat_alert {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     not azure_attribute_absence["dbsec_threat_alert"]
     not azure_issue["dbsec_threat_alert"]
@@ -204,7 +237,7 @@ dbsec_threat_alert_err = "Azure SQL Server Security Alert Policy currently have 
 
 
 dbsec_threat_alert_metadata := {
-    "Policy Code": "PR-AZR-SQL-020",
+    "Policy Code": "PR-AZR-CLD-SQL-020",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -216,25 +249,33 @@ dbsec_threat_alert_metadata := {
 }
 
 #
-# PR-AZR-SQL-021
+# PR-AZR-CLD-SQL-021
 #
 
 default sql_alert = null
 
 azure_issue["sql_alert"] {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     not sql_resources.properties.emailAccountAdmins
 }
 
+
 azure_issue["sql_alert"] {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     sql_resources.properties.emailAccountAdmins != true
 }
 
+
 sql_alert {
-    sql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     not azure_attribute_absence["sql_alert"]
     not azure_issue["sql_alert"]
@@ -250,14 +291,14 @@ sql_alert = false {
     azure_issue["sql_alert"]
 }
 
-sql_alert_err = "Threat Detection alert currently is not configured to sent notification to the sql server account administrators" {
-    azure_issue["sql_alert"]
-} else = "microsoft.sql/servers/databases/securityalertpolicies property 'emailAccountAdmins' need to be exist. Its missing from the resource." {
+sql_alert_err = "microsoft.sql/servers/databases/securityalertpolicies property 'emailAccountAdmins' need to be exist. Its missing from the resource." {
     azure_attribute_absence["sql_alert"]
+} else = "Threat Detection alert currently is not configured to sent notification to the sql server account administrators" {
+    azure_issue["sql_alert"]
 }
 
 sql_alert_metadata := {
-    "Policy Code": "PR-AZR-SQL-021",
+    "Policy Code": "PR-AZR-CLD-SQL-021",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

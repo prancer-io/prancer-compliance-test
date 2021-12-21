@@ -2,22 +2,30 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites
 
-# PR-AZR-WEB-001
+# PR-AZR-CLD-WEB-001
 
 default https_only = null
 
 azure_attribute_absence ["https_only"] {
-    not input.properties.httpsOnly
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.httpsOnly
 }
+
 
 azure_issue ["https_only"] {
-    input.properties.httpsOnly != true
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.httpsOnly != true
 }
 
+
 https_only {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["https_only"]
     not azure_issue["https_only"]
 }
+
 
 https_only = false {
     azure_attribute_absence["https_only"]
@@ -34,7 +42,7 @@ https_only_err = "Microsoft.web/Sites resource property httpsOnly missing in the
 }
 
 https_only_metadata := {
-    "Policy Code": "PR-AZR-WEB-001",
+    "Policy Code": "PR-AZR-CLD-WEB-001",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -46,19 +54,25 @@ https_only_metadata := {
 }
 
 
-# PR-AZR-WEB-002
+# PR-AZR-CLD-WEB-002
 
 default min_tls_version = null
 
 azure_attribute_absence ["min_tls_version"] {
-    not input.properties.siteConfig.minTlsVersion
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.minTlsVersion
 }
 
 azure_issue ["min_tls_version"] {
-    input.properties.siteConfig.minTlsVersion != "1.2"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.minTlsVersion != "1.2"
 }
 
+
 min_tls_version {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["min_tls_version"]
     not azure_issue["min_tls_version"]
 }
@@ -78,7 +92,7 @@ min_tls_version_err = "microsoft.web/sites resource property minTlsVersion missi
 }
 
 min_tls_version_metadata := {
-    "Policy Code": "PR-AZR-WEB-002",
+    "Policy Code": "PR-AZR-CLD-WEB-002",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -92,20 +106,25 @@ min_tls_version_metadata := {
 
 
 
-# PR-AZR-WEB-003
+# PR-AZR-CLD-WEB-003
 
 default client_cert_enabled = null
 
 azure_attribute_absence ["client_cert_enabled"] {
-    not input.properties.clientCertEnabled
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.clientCertEnabled
 }
 
 azure_issue ["client_cert_enabled"] {
-    input.properties.clientCertEnabled != true
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.clientCertEnabled != true
 }
 
 
 client_cert_enabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["client_cert_enabled"]
     not azure_issue["client_cert_enabled"]
 }
@@ -125,7 +144,7 @@ client_cert_enabled_err = "microsoft.web/sites resource property clientCertEnabl
 }
 
 client_cert_enabled_metadata := {
-    "Policy Code": "PR-AZR-WEB-003",
+    "Policy Code": "PR-AZR-CLD-WEB-003",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -140,20 +159,26 @@ client_cert_enabled_metadata := {
 
 
 
-# PR-AZR-WEB-004
+# PR-AZR-CLD-WEB-004
 
 default http_20_enabled = null
 
 azure_attribute_absence ["http_20_enabled"] {
-    not input.properties.siteConfig.http20Enabled
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.http20Enabled
 }
 
 
 azure_issue ["http_20_enabled"] {
-    input.properties.siteConfig.http20Enabled != true
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.http20Enabled != true
 }
 
+
 http_20_enabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["http_20_enabled"]
     not azure_issue["http_20_enabled"]
 }
@@ -173,7 +198,7 @@ http_20_enabled_err = "microsoft.web/sites resource property http20Enabled missi
 }
 
 http_20_enabled_metadata := {
-    "Policy Code": "PR-AZR-WEB-004",
+    "Policy Code": "PR-AZR-CLD-WEB-004",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -185,34 +210,48 @@ http_20_enabled_metadata := {
 }
 
 
-# PR-AZR-WEB-006
+# PR-AZR-CLD-WEB-006
 #
 
 default web_service_cors_not_allowing_all = null
 
 azure_attribute_absence["web_service_cors_not_allowing_all"] {
-    not input.properties.siteConfig
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig
+}
+
+
+
+azure_attribute_absence["web_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.cors
 }
 
 azure_attribute_absence["web_service_cors_not_allowing_all"] {
-    not input.properties.siteConfig.cors
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.cors.allowedOrigins
 }
 
-azure_attribute_absence["web_service_cors_not_allowing_all"] {
-    not input.properties.siteConfig.cors.allowedOrigins
-}
 
 azure_issue["web_service_cors_not_allowing_all"] {
-    allowedOrigin := input.properties.siteConfig.cors.allowedOrigins[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    allowedOrigin := resource.properties.siteConfig.cors.allowedOrigins[_]
     contains(allowedOrigin, "*")
 }
 
+
 web_service_cors_not_allowing_all {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     azure_attribute_absence["web_service_cors_not_allowing_all"]
     not azure_issue["web_service_cors_not_allowing_all"]
 }
 
 web_service_cors_not_allowing_all {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["web_service_cors_not_allowing_all"]
     not azure_issue["web_service_cors_not_allowing_all"]
 }
@@ -226,7 +265,7 @@ web_service_cors_not_allowing_all_err = "CORS configuration is currently allowin
 }
 
 web_service_cors_not_allowing_all_metadata := {
-    "Policy Code": "PR-AZR-WEB-006",
+    "Policy Code": "PR-AZR-CLD-WEB-006",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -238,20 +277,27 @@ web_service_cors_not_allowing_all_metadata := {
 }
 
 
-# PR-AZR-WEB-007
+# PR-AZR-CLD-WEB-007
 #
 
 default web_service_http_logging_enabled = null
 
 azure_attribute_absence["web_service_http_logging_enabled"] {
-    not input.properties.siteConfig.httpLoggingEnabled
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.httpLoggingEnabled
 }
+
 
 azure_issue["web_service_http_logging_enabled"] {
-    input.properties.siteConfig.httpLoggingEnabled != true
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.httpLoggingEnabled != true
 }
 
+
 web_service_http_logging_enabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["web_service_http_logging_enabled"]
     not azure_issue["web_service_http_logging_enabled"]
 }
@@ -271,7 +317,7 @@ web_service_http_logging_enabled_err = "Azure Web Service http logging currently
 }
 
 web_service_http_logging_enabled_metadata := {
-    "Policy Code": "PR-AZR-WEB-007",
+    "Policy Code": "PR-AZR-CLD-WEB-007",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -283,21 +329,27 @@ web_service_http_logging_enabled_metadata := {
 }
 
 
-# PR-AZR-WEB-008
+# PR-AZR-CLD-WEB-008
 #
 
 default web_service_detaild_error_message_enabled = null
 
 azure_attribute_absence["web_service_detaild_error_message_enabled"] {
-    not input.properties.siteConfig.detailedErrorLoggingEnabled
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.detailedErrorLoggingEnabled
 }
 
+
 azure_issue["web_service_detaild_error_message_enabled"] {
-    input.properties.siteConfig.detailedErrorLoggingEnabled != true
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.detailedErrorLoggingEnabled != true
 }
 
 
 web_service_detaild_error_message_enabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["web_service_detaild_error_message_enabled"]
     not azure_issue["web_service_detaild_error_message_enabled"]
 }
@@ -317,7 +369,7 @@ web_service_detaild_error_message_enabled_err = "Azure Web Service detaild error
 }
 
 web_service_detaild_error_message_enabled_metadata := {
-    "Policy Code": "PR-AZR-WEB-008",
+    "Policy Code": "PR-AZR-CLD-WEB-008",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -329,20 +381,26 @@ web_service_detaild_error_message_enabled_metadata := {
 }
 
 
-# PR-AZR-WEB-009
+# PR-AZR-CLD-WEB-009
 #
 
 default web_service_request_tracing_enabled = null
 
 azure_attribute_absence["web_service_request_tracing_enabled"] {
-    not input.properties.siteConfig.requestTracingEnabled
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.requestTracingEnabled
 }
 
 azure_issue["web_service_request_tracing_enabled"] {
-    input.properties.siteConfig.requestTracingEnabled != true
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.requestTracingEnabled != true
 }
 
+
 web_service_request_tracing_enabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["web_service_request_tracing_enabled"]
     not azure_issue["web_service_request_tracing_enabled"]
 }
@@ -362,7 +420,7 @@ web_service_request_tracing_enabled_err = "Azure Web Service Failed request trac
 }
 
 web_service_request_tracing_enabled_metadata := {
-    "Policy Code": "PR-AZR-WEB-009",
+    "Policy Code": "PR-AZR-CLD-WEB-009",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -374,17 +432,23 @@ web_service_request_tracing_enabled_metadata := {
 }
 
 
-# PR-AZR-WEB-010
+# PR-AZR-CLD-WEB-010
 
 default web_service_managed_identity_provider_enabled = null
 
 azure_attribute_absence["web_service_managed_identity_provider_enabled"] {
-    not input.identity
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.identity
 }
 
+
 azure_attribute_absence["web_service_managed_identity_provider_enabled"] {
-    not input.identity.type
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.identity.type
 }
+
 
 web_service_managed_identity_provider_enabled = false {
     azure_attribute_absence["web_service_managed_identity_provider_enabled"]
@@ -397,7 +461,7 @@ web_service_managed_identity_provider_enabled_err = "microsoft.web/sites propert
 }
 
 web_service_managed_identity_provider_enabled_metadata := {
-    "Policy Code": "PR-AZR-WEB-010",
+    "Policy Code": "PR-AZR-CLD-WEB-010",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -409,19 +473,27 @@ web_service_managed_identity_provider_enabled_metadata := {
 }
 
 
-# PR-AZR-WEB-011
+# PR-AZR-CLD-WEB-011
 
 default web_service_remote_debugging_disabled = null
 
 azure_attribute_absence["web_service_remote_debugging_disabled"] {
-    not input.properties.siteConfig.remoteDebuggingEnabled
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.remoteDebuggingEnabled
 }
+
 
 azure_issue["web_service_remote_debugging_disabled"] {
-    input.properties.siteConfig.remoteDebuggingEnabled != false
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.remoteDebuggingEnabled != false
 }
 
+
+
 web_service_remote_debugging_disabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     azure_attribute_absence["web_service_remote_debugging_disabled"]
     not azure_issue["web_service_remote_debugging_disabled"]
 }
@@ -435,7 +507,7 @@ web_service_remote_debugging_disabled_err = "Azure Web Service remote debugging 
 }
 
 web_service_remote_debugging_disabled_metadata := {
-    "Policy Code": "PR-AZR-WEB-011",
+    "Policy Code": "PR-AZR-CLD-WEB-011",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -447,19 +519,24 @@ web_service_remote_debugging_disabled_metadata := {
 }
 
 
-# PR-AZR-WEB-012
+# PR-AZR-CLD-WEB-012
 #
 
 default web_service_ftp_deployment_disabled = null
 
 azure_attribute_absence["web_service_ftp_deployment_disabled"] {
-    not input.properties.siteConfig.ftpsState
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.ftpsState
 }
 
+
 azure_issue["web_service_ftp_deployment_disabled"] {
-    input.properties.siteConfig.ftpsState
-    lower(input.properties.siteConfig.ftpsState) != "disabled"
-    lower(input.properties.siteConfig.ftpsState) != "ftpsonly"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.ftpsState
+    lower(resource.properties.siteConfig.ftpsState) != "disabled"
+    lower(resource.properties.siteConfig.ftpsState) != "ftpsonly"
 }
 
 web_service_ftp_deployment_disabled = false {
@@ -467,6 +544,7 @@ web_service_ftp_deployment_disabled = false {
 }
 
 web_service_ftp_deployment_disabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["web_service_ftp_deployment_disabled"]
     not azure_issue["web_service_ftp_deployment_disabled"]
 }
@@ -475,6 +553,8 @@ web_service_ftp_deployment_disabled = false {
     azure_issue["web_service_ftp_deployment_disabled"]
 }
 
+
+
 web_service_ftp_deployment_disabled_err = "Azure Web Service FTP deployment is currently not disabled" {
     azure_issue["web_service_ftp_deployment_disabled"]
 } else = "microsoft.web/sites property 'siteConfig.ftpsState' need to be exist. Its missing from the resource." {
@@ -482,7 +562,7 @@ web_service_ftp_deployment_disabled_err = "Azure Web Service FTP deployment is c
 }
 
 web_service_ftp_deployment_disabled_metadata := {
-    "Policy Code": "PR-AZR-WEB-012",
+    "Policy Code": "PR-AZR-CLD-WEB-012",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -493,7 +573,7 @@ web_service_ftp_deployment_disabled_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
 }
 
-# PR-AZR-WEB-013
+# PR-AZR-CLD-WEB-013
 #
 
 default web_service_net_framework_latest = null
@@ -502,21 +582,27 @@ default web_service_net_framework_latest = null
 latest_dotnet_framework_version := "v6.0"
 
 azure_attribute_absence["web_service_net_framework_latest"] {
-    not input.properties.siteConfig.netFrameworkVersion
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.netFrameworkVersion
 }
 
 
 azure_issue["web_service_net_framework_latest"] {
-    lower(input.properties.siteConfig.netFrameworkVersion) != latest_dotnet_framework_version
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    lower(resource.properties.siteConfig.netFrameworkVersion) != latest_dotnet_framework_version
 }
 
 # we need to make it pass if property is missing, as microsoft.web/sites may not need dot net framework
 web_service_net_framework_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     azure_attribute_absence["web_service_net_framework_latest"]
     not azure_issue["web_service_net_framework_latest"]
 }
 
 web_service_net_framework_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["web_service_net_framework_latest"]
     not azure_issue["web_service_net_framework_latest"]
 }
@@ -530,7 +616,7 @@ web_service_det_framework_latest_err = "Azure web Service currently dont have la
 }
 
 web_service_dot_neamework_latest_metadata := {
-    "Policy Code": "PR-AZR-WEB-013",
+    "Policy Code": "PR-AZR-CLD-WEB-013",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -543,7 +629,7 @@ web_service_dot_neamework_latest_metadata := {
 
 
 #
-# PR-AZR-WEB-014
+# PR-AZR-CLD-WEB-014
 #
 
 default web_service_php_version_latest = null
@@ -551,20 +637,28 @@ default web_service_php_version_latest = null
 latest_php_version := 7.4
 
 azure_attribute_absence["web_service_php_version_latest"] {
-    not input.properties.siteConfig.phpVersion
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.phpVersion
 }
 
+
 azure_issue["web_service_php_version_latest"] {
-    to_number(input.properties.siteConfig.phpVersion) != latest_php_version
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    to_number(resource.properties.siteConfig.phpVersion) != latest_php_version
 }
+
 
 # we need to make it pass if property is missing, as microsoft.web/sites may not need php
 web_service_php_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     azure_attribute_absence["web_service_php_version_latest"]
     not azure_issue["web_service_php_version_latest"]
 }
 
 web_service_php_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["web_service_php_version_latest"]
     not azure_issue["web_service_php_version_latest"]
 }
@@ -578,7 +672,7 @@ web_service_php_version_latest_err = "Azure Web Service currently dont have late
 }
 
 web_service_php_version_latest_metadata := {
-    "Policy Code": "PR-AZR-WEB-014",
+    "Policy Code": "PR-AZR-CLD-WEB-014",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -591,7 +685,7 @@ web_service_php_version_latest_metadata := {
 
 
 #
-# PR-AZR-WEB-015
+# PR-AZR-CLD-WEB-015
 #
 
 default web_service_python_version_latest = null
@@ -600,21 +694,30 @@ latest_python_version_three := 3.9
 latest_python_version_two := 2.7
 
 azure_attribute_absence["web_service_python_version_latest"] {
-    not input.properties.siteConfig.pythonVersion
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.pythonVersion
 }
 
+
+
 azure_issue["web_service_python_version_latest"] {
-    to_number(input.properties.siteConfig.pythonVersion) != latest_python_version_three
-    to_number(input.properties.siteConfig.pythonVersion) != latest_python_version_two
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    to_number(resource.properties.siteConfig.pythonVersion) != latest_python_version_three
+    to_number(resource.properties.siteConfig.pythonVersion) != latest_python_version_two
 }
+
 
 # we need to make it pass if property is missing, as microsoft.web/sites may not need python
 web_service_python_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     azure_attribute_absence["web_service_python_version_latest"]
     not azure_issue["web_service_python_version_latest"]
 }
 
 web_service_python_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["web_service_python_version_latest"]
     not azure_issue["web_service_python_version_latest"]
 }
@@ -628,7 +731,7 @@ web_service_python_version_latest_err = "Azure Web Service currently dont have l
 }
 
 web_service_python_version_latest_metadata := {
-    "Policy Code": "PR-AZR-WEB-015",
+    "Policy Code": "PR-AZR-CLD-WEB-015",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -641,7 +744,7 @@ web_service_python_version_latest_metadata := {
 
 
 #
-# PR-AZR-WEB-016
+# PR-AZR-CLD-WEB-016
 #
 
 default web_service_java_version_latest = null
@@ -650,21 +753,29 @@ default web_service_java_version_latest = null
 latest_java_version := "11"
 
 azure_attribute_absence["web_service_java_version_latest"] {
-    not input.properties.siteConfig.javaVersion
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.javaVersion
 }
+
 
 # valid values are 1.7.0_80, 1.8.0_181, 11
 azure_issue["web_service_java_version_latest"] {
-    input.properties.siteConfig.javaVersion != latest_java_version
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.javaVersion != latest_java_version
 }
+
 
 # we need to make it pass if property is missing, as microsoft.web/sites may not need java
 web_service_java_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     azure_attribute_absence["web_service_java_version_latest"]
     not azure_issue["web_service_java_version_latest"]
 }
 
 web_service_java_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["web_service_java_version_latest"]
     not azure_issue["web_service_java_version_latest"]
 }
@@ -678,7 +789,7 @@ web_service_java_version_latest_err = "Azure Web Service currently dont have lat
 }
 
 web_service_java_version_latest_metadata := {
-    "Policy Code": "PR-AZR-WEB-016",
+    "Policy Code": "PR-AZR-CLD-WEB-016",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

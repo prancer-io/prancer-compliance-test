@@ -2,27 +2,36 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/2018-06-01/servers/firewallrules
 
-# PR-AZR-SQL-012
+# PR-AZR-CLD-SQL-012
 
 default maria_ingress_from_any_ip_disabled = null
-
 azure_attribute_absence ["maria_ingress_from_any_ip_disabled"] {
-    not input.properties.startIpAddress
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
+    not resource.properties.startIpAddress
 }
 
 azure_attribute_absence ["maria_ingress_from_any_ip_disabled"] {
-    not input.properties.endIpAddress
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
+    not resource.properties.endIpAddress
 }
 
 azure_issue ["maria_ingress_from_any_ip_disabled"] {
-    contains(input.properties.startIpAddress, "0.0.0.0")
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
+    contains(resource.properties.startIpAddress, "0.0.0.0")
 }
 
 azure_issue ["maria_ingress_from_any_ip_disabled"] {
-    contains(input.properties.endIpAddress, "0.0.0.0")
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
+    contains(resource.properties.endIpAddress, "0.0.0.0")
 }
+
 
 maria_ingress_from_any_ip_disabled {
+    lower(input.resources[_].type) == "microsoft.dbformariadb/servers/firewallrules"
     not azure_attribute_absence["maria_ingress_from_any_ip_disabled"]
     not azure_issue["maria_ingress_from_any_ip_disabled"]
 }
@@ -43,7 +52,7 @@ maria_ingress_from_any_ip_disabled_err = "microsoft.dbformariadb/servers/firewal
 }
 
 maria_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-SQL-012",
+    "Policy Code": "PR-AZR-CLD-SQL-012",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -57,35 +66,48 @@ maria_ingress_from_any_ip_disabled_metadata := {
 
 
 
-# PR-AZR-SQL-013
+# PR-AZR-CLD-SQL-013
 
 default dbmaria_ingress_from_any_ip_disabled = null
 azure_attribute_absence ["dbmaria_ingress_from_any_ip_disabled"] {
-    dbsql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    dbsql_resources := resource.resources[_]
     lower(dbsql_resources.type) == "firewallrules"
     not dbsql_resources.properties.startIpAddress
 }
 
+
 azure_attribute_absence ["dbmaria_ingress_from_any_ip_disabled"] {
-    dbsql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    dbsql_resources := resource.resources[_]
     lower(dbsql_resources.type) == "firewallrules"
     not dbsql_resources.properties.endIpAddress
 }
 
+
 azure_issue ["dbmaria_ingress_from_any_ip_disabled"] {
-    dbsql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    dbsql_resources := resource.resources[_]
     lower(dbsql_resources.type) == "firewallrules"
     contains(dbsql_resources.properties.startIpAddress, "0.0.0.0")
 }
 
 azure_issue ["dbmaria_ingress_from_any_ip_disabled"] {
-    dbsql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    dbsql_resources := resource.resources[_]
     lower(dbsql_resources.type) == "firewallrules"
     contains(dbsql_resources.properties.endIpAddress, "0.0.0.0")
 }
 
+
 dbmaria_ingress_from_any_ip_disabled {
-    dbsql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    dbsql_resources := resource.resources[_]
     lower(dbsql_resources.type) == "firewallrules"
     not azure_attribute_absence["dbmaria_ingress_from_any_ip_disabled"]
     not azure_issue["dbmaria_ingress_from_any_ip_disabled"]
@@ -107,7 +129,7 @@ dbmaria_ingress_from_any_ip_disabled_err = "microsoft.dbformariadb/servers/firew
 }
 
 dbmaria_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-SQL-013",
+    "Policy Code": "PR-AZR-CLD-SQL-013",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -120,19 +142,23 @@ dbmaria_ingress_from_any_ip_disabled_metadata := {
 
 
 
-# PR-AZR-SQL-056
+# PR-AZR-CLD-SQL-056
 
 default mairadb_ssl_enforcement_enabled = null
-
 azure_attribute_absence ["mairadb_ssl_enforcement_enabled"] {
-    not input.properties.sslEnforcement
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    not resource.properties.sslEnforcement
 }
 
 azure_issue ["mairadb_ssl_enforcement_enabled"] {
-    lower(input.properties.sslEnforcement) != "enabled"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    lower(resource.properties.sslEnforcement) != "enabled"
 }
 
 mairadb_ssl_enforcement_enabled {
+    lower(input.resources[_].type) == "microsoft.dbformariadb/servers"
     not azure_attribute_absence["mairadb_ssl_enforcement_enabled"]
     not azure_issue["mairadb_ssl_enforcement_enabled"]
 }
@@ -153,7 +179,7 @@ mairadb_ssl_enforcement_enabled_err = "ssl enforcement is currently not enabled 
 }
 
 mairadb_ssl_enforcement_enabled_metadata := {
-    "Policy Code": "PR-AZR-SQL-056",
+    "Policy Code": "PR-AZR-CLD-SQL-056",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -165,17 +191,22 @@ mairadb_ssl_enforcement_enabled_metadata := {
 }
 
 
-# PR-AZR-SQL-057
+# PR-AZR-CLD-SQL-057
 
 default mairadb_public_access_disabled = null
 
 
 azure_attribute_absence["mairadb_public_access_disabled"] {
-    not input.properties.publicNetworkAccess
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    not resource.properties.publicNetworkAccess
 }
 
+
 azure_issue["mairadb_public_access_disabled"] {
-    lower(input.properties.publicNetworkAccess) != "disabled"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    lower(resource.properties.publicNetworkAccess) != "disabled"
 }
 
 mairadb_public_access_disabled {
@@ -183,6 +214,7 @@ mairadb_public_access_disabled {
 } 
 
 mairadb_public_access_disabled {
+    lower(input.resources[_].type) == "microsoft.dbformariadb/servers"
     not azure_attribute_absence["mairadb_public_access_disabled"]
     not azure_issue["mairadb_public_access_disabled"]
 }
@@ -191,12 +223,14 @@ mairadb_public_access_disabled = false {
     azure_issue["mairadb_public_access_disabled"]
 }
 
+
+
 mairadb_public_access_disabled_err = "Public Network Access is currently not disabled on MariaDB Server." {
     azure_issue["mairadb_public_access_disabled"]
 }
 
 mairadb_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-SQL-057",
+    "Policy Code": "PR-AZR-CLD-SQL-057",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -208,19 +242,25 @@ mairadb_public_access_disabled_metadata := {
 }
 
 
-# PR-AZR-SQL-058
+# PR-AZR-CLD-SQL-058
 
 default mariadb_geo_redundant_backup_enabled = null
 
 azure_attribute_absence["mariadb_geo_redundant_backup_enabled"] {
-    not input.properties.storageProfile.geoRedundantBackup
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    not resource.properties.storageProfile.geoRedundantBackup
 }
 
 azure_issue["mariadb_geo_redundant_backup_enabled"] {
-    lower(input.properties.storageProfile.geoRedundantBackup) != "enabled"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    lower(resource.properties.storageProfile.geoRedundantBackup) != "enabled"
 }
 
+
 mariadb_geo_redundant_backup_enabled {
+    lower(input.resources[_].type) == "microsoft.dbformariadb/servers"
     not azure_attribute_absence["mariadb_geo_redundant_backup_enabled"]
     not azure_issue["mariadb_geo_redundant_backup_enabled"]
 }
@@ -241,7 +281,7 @@ mariadb_geo_redundant_backup_enabled_err = "Geo-redundant backup is currently no
 }
 
 mariadb_geo_redundant_backup_enabled_metadata := {
-    "Policy Code": "PR-AZR-SQL-058",
+    "Policy Code": "PR-AZR-CLD-SQL-058",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
