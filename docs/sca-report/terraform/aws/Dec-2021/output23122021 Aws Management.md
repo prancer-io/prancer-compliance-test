@@ -1,11 +1,11 @@
 # Automated Vulnerability Scan result and Static Code Analysis for Terraform Provider AWS (Dec 2021)
 
-#### Compute: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output11182021%20Aws%20Compute.md
-#### Data Store: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output11182021%20Aws%20DataStore.md
-#### Management: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output11182021%20Aws%20Management.md
-#### Networking (Part1): https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output11182021%20Aws%20Networking%20(Part1).md
-#### Networking (Part2): https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output11182021%20Aws%20Networking%20(Part2).md
-#### Networking (Part3): https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output11182021%20Aws%20Networking%20(Part3).md
+#### Compute: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output23122021%20Aws%20Compute.md
+#### Data Store: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output23122021%20Aws%20DataStore.md
+#### Management: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output23122021%20Aws%20Management.md
+#### Networking (Part1): https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output23122021%20Aws%20Networking%20(Part1).md
+#### Networking (Part2): https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output23122021%20Aws%20Networking%20(Part2).md
+#### Networking (Part3): https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output23122021%20Aws%20Networking%20(Part3).md
 #### Security: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Dec-2021/output11232021%20Aws%20Security.md
 
 ## Terraform Aws Management Services
