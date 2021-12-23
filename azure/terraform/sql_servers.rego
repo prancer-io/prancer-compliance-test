@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server
 
 #
@@ -11,24 +15,74 @@ package rule
 
 default sql_public_access_disabled = null
 
-azure_secure["sql_public_access_disabled"] {
+mssql_dont_have_private_endpoint ["sql_public_access_disabled"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+mssql_dont_have_private_endpoint ["sql_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server"
-    resource.properties.public_network_access_enabled == false
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
+
+azure_attribute_absence["sql_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server"
+    not has_property(resource.properties, "public_network_access_enabled")
+}
+
+azure_issue["sql_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server"
+    resource.properties.public_network_access_enabled == true
 }
 
 sql_public_access_disabled {
-    azure_secure["sql_public_access_disabled"]
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    not mssql_dont_have_private_endpoint["sql_public_access_disabled"]
+} 
+
+sql_public_access_disabled {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    not azure_attribute_absence["sql_public_access_disabled"]
+    not azure_issue["sql_public_access_disabled"]
 }
 
 sql_public_access_disabled = false {
     lower(input.resources[_].type) == "azurerm_mssql_server"
-    not azure_secure["sql_public_access_disabled"]
+    azure_attribute_absence["sql_public_access_disabled"]
+    mssql_dont_have_private_endpoint["sql_public_access_disabled"]
 }
 
-sql_public_access_disabled_err = "Public Network Access is currently not disabled on MSSQL Server." {
+sql_public_access_disabled = false {
     lower(input.resources[_].type) == "azurerm_mssql_server"
-    not azure_secure["sql_public_access_disabled"]
+    azure_issue["sql_public_access_disabled"]
+    mssql_dont_have_private_endpoint["sql_public_access_disabled"]
+}
+
+sql_public_access_disabled_err = "Resource azurerm_mssql_server and azurerm_private_endpoint or property 'public_network_access_enabled' need to be exist. Its missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    azure_attribute_absence["sql_public_access_disabled"]
+    mssql_dont_have_private_endpoint["sql_public_access_disabled"]
+} else = "Public Network Access is currently not disabled on SQL Server." {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    azure_issue["sql_public_access_disabled"]
+    mssql_dont_have_private_endpoint["sql_public_access_disabled"]
 }
 
 sql_public_access_disabled_metadata := {
@@ -41,45 +95,6 @@ sql_public_access_disabled_metadata := {
     "Resource Type": "azurerm_mssql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server"
-}
-
-# https://docs.microsoft.com/en-us/azure/templates/azurerm_sql_server
-# Always use Private Endpoint for Azure SQL Database and SQL Managed Instance
-# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server
-# This resource provides usage of Microsoft SQL Azure Database server using an older sku based model. 
-# It is recommended going forward to use azurerm_mssql_server resource which provides support for vcores.
-# (code is kept for reference but not used anywhere)
-default sql_public_access = null
-
-azure_issue["sql_public_access"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_sql_server"
-    lower(resource.properties.publicNetworkAccess) != "disabled"
-}
-
-sql_public_access {
-    lower(input.resources[_].type) == "azurerm_sql_server"
-    not azure_issue["sql_public_access"]
-}
-
-sql_public_access = false {
-    azure_issue["sql_public_access"]
-}
-
-sql_public_access_err = "SQL servers with public access detected!" {
-    azure_issue["sql_public_access"]
-}
-
-sql_public_access_metadata := {
-    "Policy Code": "",
-    "Type": "IaC",
-    "Product": "",
-    "Language": "Terraform",
-    "Policy Title": "SQL servers with public access detected!",
-    "Policy Description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
-    "Resource Type": "azurerm_sql_server",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server"
 }
 
 
@@ -137,8 +152,39 @@ sql_server_login_metadata := {
 }
 
 # PR-AZR-TRF-SQL-068
+# As per Farshid Mahdavipour
+# this shoud be a smart policy 
+# we have to check for firewall 
+# but if it is on private endpoint
+# it means there is no public connectivity
+# so the rule should pass
 
 default mssql_ingress_from_any_ip_disabled = null
+
+mssql_dont_have_private_endpoint["mssql_ingress_from_any_ip_disabled"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+mssql_dont_have_private_endpoint["mssql_ingress_from_any_ip_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
 
 azure_attribute_absence ["mssql_ingress_from_any_ip_disabled"] {
     count([c | input.resources[_].type == "azurerm_mssql_firewall_rule"; c := 1]) == 0
@@ -156,16 +202,38 @@ azure_attribute_absence ["mssql_ingress_from_any_ip_disabled"] {
     not resource.properties.end_ip_address
 }
 
-azure_issue ["mssql_ingress_from_any_ip_disabled"] {
+azure_issue["mssql_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_firewall_rule"
-    contains(resource.properties.start_ip_address, "0.0.0.0")
+    lower(resource.type) == "azurerm_mssql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_firewall_rule";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              not contains(r.properties.start_ip_address, "0.0.0.0");
+              not contains(r.properties.end_ip_address, "0.0.0.0");
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_firewall_rule";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              not contains(r.properties.start_ip_address, "0.0.0.0");
+              not contains(r.properties.end_ip_address, "0.0.0.0");
+              c := 1]) == 0
 }
 
-azure_issue ["mssql_ingress_from_any_ip_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_firewall_rule"
-    contains(resource.properties.end_ip_address, "0.0.0.0")
+# azure_issue ["mssql_ingress_from_any_ip_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_mssql_firewall_rule"
+#     contains(resource.properties.start_ip_address, "0.0.0.0")
+# }
+
+# azure_issue ["mssql_ingress_from_any_ip_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_mssql_firewall_rule"
+#     contains(resource.properties.end_ip_address, "0.0.0.0")
+# }
+
+mssql_ingress_from_any_ip_disabled {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    not mssql_dont_have_private_endpoint["mssql_ingress_from_any_ip_disabled"]
 }
 
 mssql_ingress_from_any_ip_disabled {
@@ -177,20 +245,23 @@ mssql_ingress_from_any_ip_disabled {
 mssql_ingress_from_any_ip_disabled = false {
     lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["mssql_ingress_from_any_ip_disabled"]
+    mssql_dont_have_private_endpoint["mssql_ingress_from_any_ip_disabled"]
 }
 
 mssql_ingress_from_any_ip_disabled = false {
     lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["mssql_ingress_from_any_ip_disabled"]
+    mssql_dont_have_private_endpoint["mssql_ingress_from_any_ip_disabled"]
 }
 
-
-mssql_ingress_from_any_ip_disabled_err = "Resource azurerm_mssql_server and azurerm_mssql_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_mssql_firewall_rule as well. one or all are missing from the resource." {
+mssql_ingress_from_any_ip_disabled_err = "Resource azurerm_mssql_server and azurerm_private_endpoint or azurerm_mssql_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_mssql_firewall_rule as well. one or all are missing from the resource." {
     lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["mssql_ingress_from_any_ip_disabled"]
+    mssql_dont_have_private_endpoint["mssql_ingress_from_any_ip_disabled"]
 } else = "MSSQL Database Server currently allowing ingress from all Azure-internal IP addresses" {
     lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["mssql_ingress_from_any_ip_disabled"]
+    mssql_dont_have_private_endpoint["mssql_ingress_from_any_ip_disabled"]
 }
 
 mssql_ingress_from_any_ip_disabled_metadata := {
