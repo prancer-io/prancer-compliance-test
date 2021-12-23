@@ -3,20 +3,27 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks
 
 #
-# PR-AZR-ACR-001
+# PR-AZR-CLD-ACR-001
 #
 
 default acr_webhooks = null
 
 azure_attribute_absence["acr_webhooks"] {
-    not input.properties.serviceUri
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerregistry/registries/webhooks"
+    not resource.properties.serviceUri
 }
+
 
 azure_issue["acr_webhooks"] {
-    substring(lower(input.properties.serviceUri), 0, 6) != "https:"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerregistry/registries/webhooks"
+    substring(lower(resource.properties.serviceUri), 0, 6) != "https:"
 }
 
+
 acr_webhooks {
+    lower(input.resources[_].type) == "microsoft.containerregistry/registries/webhooks"
     not azure_attribute_absence["acr_webhooks"]
     not azure_issue["acr_webhooks"]
 }
@@ -31,12 +38,14 @@ acr_webhooks = false {
 
 acr_webhooks_err = "Azure ACR webhook currently dont have HTTPS protocol enabled" {
     azure_issue["acr_webhooks"]
-} else = "ACR webhook property 'serviceUri' is missing from the resource" {
+}
+
+acr_webhooks_miss_err = "ACR webhook property 'serviceUri' is missing from the resource" {
     azure_attribute_absence["acr_webhooks"]
 }
 
 acr_webhooks_metadata := {
-    "Policy Code": "PR-AZR-ACR-001",
+    "Policy Code": "PR-AZR-CLD-ACR-001",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

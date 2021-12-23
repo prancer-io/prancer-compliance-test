@@ -765,6 +765,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-AGW-007",
+                            "eval": "data.rule.application_gateways_v2_waf_ruleset_OWASP_active",
+                            "message": "data.rule.application_gateways_v2_waf_ruleset_OWASP_active_err",
+                            "remediationDescription": "For resource type 'azurerm_application_gateway' make sure 'properties.sku.name' and 'properties.sku.tier' contains either 'Standard_v2' or 'WAF_v2', value of 'properties.waf_configuration.enabled' is set to true, value of 'properties.waf_configuration.rule_set_type' is set to 'OWASP' and 'properties.webApplicationFirewallConfiguration.rule_set_version' has minimum '3.1' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#waf_configuration' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_AGW_007.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Application Gateway V2 should have the Web application firewall (WAF) enabled with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 for proactive protection against CVE-2021-44228 exploit",
+                    "description": "It is recommended to enable WAF policy with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 on Application Gateway V2 to immediately avail of additional protection from log4j Remote Command Execution. details at https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_application_gateway"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_APP_SERVICE_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1366,6 +1400,42 @@
                     ],
                     "resourceTypes": [
                         "azurerm_app_service"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_AZURE_FIREWALLS_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(azure_firewalls.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-AFW-001",
+                            "eval": "data.rule.azure_firewall_configured_with_idpc_and_tls_inspection",
+                            "message": "data.rule.azure_firewall_configured_with_idpc_and_tls_inspection_err",
+                            "remediationDescription": "In 'azurerm_firewall' resource, make sure property 'sku_tier' contains 'Premium', value of 'properties.firewall_policy_id' contains 'id' of 'azurerm_firewall_policy'. Also make sure 'azurerm_firewall_policy' 'properties.sku' contains 'Premium', value of 'properties.intrusion_detection.mode' is set to 'Deny' and 'properties.tls_certificate.key_vault_secret_id' has 'id' of target 'azurerm_key_vault_secret' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall#firewall_policy_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_AFW_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Firewall Premium should be configured with both IDPS Alert & Deny mode and TLS inspection enabled for proactive protection against CVE-2021-44228 exploit",
+                    "description": "Azure Firewall Premium has enhanced protection from the Log4j RCE CVE-2021-44228 vulnerability and exploit. Azure Firewall premium IDPS (Intrusion Detection and Prevention System) provides IDPS inspection for all east-west traffic and outbound traffic to internet. details at https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_firewall",
+                        "azurerm_firewall_policy",
+                        "azurerm_key_vault_secret"
                     ]
                 },
                 {
@@ -2411,6 +2481,41 @@
                     "resourceTypes": [
                         "azurerm_managed_disk",
                         "azurerm_disk_encryption_set"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_FRONTDOORS_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(frontdoors.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-FRD-001",
+                            "eval": "data.rule.frontdoors_has_drs_configured",
+                            "message": "data.rule.frontdoors_has_drs_configured_err",
+                            "remediationDescription": "In 'azurerm_frontdoor' resource, make sure 'web_application_firewall_policy_link_id' contains 'id' from 'azurerm_frontdoor_firewall_policy' under 'frontend_endpoint' block. Also make sure 'azurerm_frontdoor_firewall_policy' 'properties.managed_rule' contains either 'Microsoft_DefaultRuleSet' or 'DefaultRuleSet' as type and '1.1' or '1.0' as version respectively to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/frontdoor#web_application_firewall_policy_link_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_FRD_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure frontDoors should have configured with WAF policy with Default Rule Set 1.0/1.1 for proactive protection against CVE-2021-44228 exploit",
+                    "description": "It is recommended to enable WAF policy with Default Rule Set 1.0/1.1 on Front Door deployments to immediately avail of additional protection from log4j Remote Command Execution. details at https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_frontdoor",
+                        "azurerm_frontdoor_firewall_policy"
                     ]
                 },
                 {

@@ -3,20 +3,26 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts
 
 #
-# PR-AZR-ASC-002
+# PR-AZR-CLD-ASC-002
 #
 
 default securitycontacts = null
 
 azure_attribute_absence["securitycontacts"] {
-    not input.properties.email
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    not resource.properties.email
 }
 
+
 azure_issue["securitycontacts"] {
-    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", input.properties.email) == false
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
 }
 
 securitycontacts {
+    lower(input.resources[_].type) == "microsoft.security/securitycontacts"
     not azure_attribute_absence["securitycontacts"]
     not azure_issue["securitycontacts"]
 }
@@ -31,12 +37,14 @@ securitycontacts = false {
 
 securitycontacts_err = "Security Center currently does not have any valid security contact email configured" {
     azure_issue["securitycontacts"]
-} else = "Security Center security contacts property 'email' is missing from the resource" {
+}
+
+securitycontacts_miss_err = "Security Center security contacts property 'email' is missing from the resource" {
     azure_attribute_absence["securitycontacts"]
 }
 
 securitycontacts_metadata := {
-    "Policy Code": "PR-AZR-ASC-002",
+    "Policy Code": "PR-AZR-CLD-ASC-002",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -51,20 +59,26 @@ securitycontacts_metadata := {
 
 
 #
-# PR-AZR-ASC-003
+# PR-AZR-CLD-ASC-003
 #
 
 default alert_notifications = null
 
 azure_attribute_absence["alert_notifications"] {
-    not input.properties.alertNotifications
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    not resource.properties.alertNotifications
 }
 
 azure_issue["alert_notifications"] {
-    lower(input.properties.alertNotifications) != "on"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    lower(resource.properties.alertNotifications) != "on"
 }
 
+
 alert_notifications {
+    lower(input.resources[_].type) == "microsoft.security/securitycontacts"
     not azure_attribute_absence["alert_notifications"]
     not azure_issue["alert_notifications"]
 }
@@ -84,7 +98,7 @@ alert_notifications_err = "microsoft.security/securitycontacts resource property
 }
 
 alert_notifications_metadata := {
-    "Policy Code": "PR-AZR-ASC-003",
+    "Policy Code": "PR-AZR-CLD-ASC-003",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -96,20 +110,26 @@ alert_notifications_metadata := {
 }
 
 
-# PR-AZR-ASC-005
+# PR-AZR-CLD-ASC-005
 #
 
 default securitycontacts_alerts_to_admins_enabled = null
 
 azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"] {
-    not input.properties.alertsToAdmins
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    not resource.properties.alertsToAdmins
 }
 
+
 azure_issue["securitycontacts_alerts_to_admins_enabled"] {
-    lower(input.properties.alertsToAdmins) != "on"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    lower(resource.properties.alertsToAdmins) != "on"
 }
 
 securitycontacts_alerts_to_admins_enabled {
+    lower(input.resources[_].type) == "microsoft.security/securitycontacts"
     not azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"]
     not azure_issue["securitycontacts_alerts_to_admins_enabled"]
 }
@@ -129,7 +149,7 @@ securitycontacts_alerts_to_admins_enabled_err = "Security Center currently not c
 }
 
 securitycontacts_alerts_to_admins_enabled_metadata := {
-    "Policy Code": "PR-AZR-ASC-005",
+    "Policy Code": "PR-AZR-CLD-ASC-005",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
