@@ -384,6 +384,58 @@
 							]
 						}
 					]
+				},
+				{
+					"masterSnapshotId": "TEST_EC2NETWORKACL",
+					"arn": "arn:aws:ec2:::",
+					"collection": "aws_ec2",
+					"listMethod": "describe_network_acls",
+					"detailMethods": [
+						"describe_network_acls"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ec2"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ACM",
+					"arn": "arn:aws:acm:::",
+					"collection": "aws_acm",
+					"listMethod": "list_certificates",
+					"detailMethods": [
+						"describe_certificate"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"acm"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ECR",
+					"arn": "arn:aws:ecr:::",
+					"collection": "aws_ecr",
+					"listMethod": "describe_repositories",
+					"detailMethods": [
+						"describe_repositories",
+						"get_lifecycle_policy"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ecr"
+							]
+						}
+					]
 				}
 			]
 		}
