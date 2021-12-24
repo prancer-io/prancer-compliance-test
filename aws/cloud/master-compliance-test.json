@@ -2576,6 +2576,1083 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_SNS_1",
+                    "masterSnapshotId": [
+                        "TEST_SNS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-001",
+                            "eval": "data.rule.sns_protocol",
+                            "message": "data.rule.sns_protocol_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SNS subscription is not configured with HTTPS",
+                    "description": "This policy identifies SNS subscriptions using HTTP instead of HTTPS as the delivery protocol in order to enforce SSL encryption for all subscription requests. It is strongly recommended use only HTTPS-based subscriptions by implementing secure SNS topic policies.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SNS_2",
+                    "masterSnapshotId": [
+                        "TEST_SNS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-002",
+                            "eval": "data.rule.sns_encrypt_key",
+                            "message": "data.rule.sns_encrypt_key_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SNS topic encrypted using default KMS key instead of CMK",
+                    "description": "This policy identifies Amazon Simple Notification Service (SNS) topics that are encrypted with the default AWS Key Management Service (KMS) keys. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your SNS topics and ensure full control over your data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SNS_3",
+                    "masterSnapshotId": [
+                        "TEST_SNS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-003",
+                            "eval": "data.rule.sns_encrypt",
+                            "message": "data.rule.sns_encrypt_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SNS topic with server-side encryption disabled",
+                    "description": "This policy identifies Amazon Simple Notification Service (SNS) topics that have server-side encryption disabled. As a best practice, enable server-side encryption for at-rest encryption of message content published to SNS topics. When you publish a message, the SNS encrypts your message as soon as it receives it, and decrypts it just prior to delivery.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SNS_4",
+                    "masterSnapshotId": [
+                        "TEST_SNS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-004",
+                            "eval": "data.rule.sns_policy_public",
+                            "message": "data.rule.sns_policy_public_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SNS Topic policy is not publicly accessible",
+                    "description": "Public SNS Topic potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2_1",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-001",
+                            "eval": "data.rule.ec2_iam_role",
+                            "message": "data.rule.ec2_iam_role_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EC2 Instance IAM Role not enabled",
+                    "description": "AWS provides Identity Access Management (IAM) roles to securely access AWS services and resources. The role is an identity with permission policies that define what the identity can and cannot do in AWS. As a best practice, create IAM roles and attach the role to manage EC2 instance permissions securely instead of distributing or sharing keys or passwords.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2_2",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-002",
+                            "eval": "data.rule.ec2_no_vpc",
+                            "message": "data.rule.ec2_no_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_002.py"
+                        }
+                    ],
+                    "severity": "high",
+                    "title": "AWS EC2 instance is not configured with VPC",
+                    "description": "This policy identifies the EC2 instances which are still using EC2 Classic. There are no VPCs deployed any EC2 instances will be running on AWS EC2 Classic. Deploying VPCs will enable you to leverage enhanced infrastructure security controls.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2_3",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-003",
+                            "eval": "data.rule.ec2_public_ip",
+                            "message": "data.rule.ec2_public_ip_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EC2 instances with Public IP and associated with Security Groups have Internet Access",
+                    "description": "This policy identifies AWS EC2 instances with Public IP and associated with Security Groups have Internet Access. EC2 instance receives a public IP address when launched in a default VPC security group (A security group acts as a virtual firewall for your instance to control inbound and outbound traffic.) and we don't assign a public IP address to instances launched in a non-default subnet. Therefore it's a best practice to ensure that there are no EC2 instances with Public IP that are associated with Security Groups which have Internet Access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2_4",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-004",
+                            "eval": "data.rule.ec2_ebs_optimized",
+                            "message": "data.rule.ec2_ebs_optimized_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-ebsoptimized' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that EC2 instace is EBS Optimized",
+                    "description": "Enable EbsOptimized provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2_5",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-005",
+                            "eval": "data.rule.ec2_monitoring",
+                            "message": "data.rule.ec2_monitoring_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-monitoring' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure detailed monitoring is enabled for EC2 instances",
+                    "description": "Ensure that detailed monitoring is enabled for your Amazon EC2 instances in order to have enough monitoring data to help you make better decisions on architecting and managing compute resources within your AWS account",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2NETWORKACL_1",
+                    "masterSnapshotId": [
+                        "TEST_EC2NETWORKACL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2networkacl.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-NACL-001",
+                            "eval": "data.rule.acl_all_icmp_ipv4",
+                            "message": "data.rule.acl_all_icmp_ipv4_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_NACL_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Network ACLs with Inbound rule to allow All ICMP IPv4",
+                    "description": "This policy identifies ACLs which allows traffic on all ICMP IPv4 protocol. A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. By default, ACL allows all inbound and outbound IPv4 traffic and, if applicable, IPv6 traffic. Inbound rules that allow unrestricted traffic to the internet can be a security risk. As a best practice, it is recommended to configure ACL to restrict traffic on authorized protocols.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "nacl"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2NETWORKACL_2",
+                    "masterSnapshotId": [
+                        "TEST_EC2NETWORKACL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2networkacl.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-NACL-002",
+                            "eval": "data.rule.acl_all_icmp_ipv6",
+                            "message": "data.rule.acl_all_icmp_ipv6_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_NACL_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Network ACLs with Inbound rule to allow All ICMP IPv6",
+                    "description": "This policy identifies ACLs which allows traffic on all ICMP IPv6 protocol. A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. By default, ACL allows all inbound and outbound IPv4 traffic and, if applicable, IPv6 traffic. Inbound rules that allow unrestricted traffic to the internet can be a security risk. As a best practice, it is recommended to configure ACL to restrict traffic on authorized protocols.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "nacl"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2NETWORKACL_3",
+                    "masterSnapshotId": [
+                        "TEST_EC2NETWORKACL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2networkacl.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-NACL-003",
+                            "eval": "data.rule.acl_all_traffic",
+                            "message": "data.rule.acl_all_traffic_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_NACL_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Network ACLs with Inbound rule to allow All Traffic",
+                    "description": "This policy identifies ACLs which allows traffic on all protocols. A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. By default, ACL allows all inbound and outbound IPv4 traffic and, if applicable, IPv6 traffic. Inbound rules that allow unrestricted traffic to the internet can be a security risk. As a best practice, it is recommended to configure ACLs to restrict traffic on authorized protocols.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "nacl"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2NETWORKACL_4",
+                    "masterSnapshotId": [
+                        "TEST_EC2NETWORKACL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2networkacl.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-NACL-004",
+                            "eval": "data.rule.acl_all_icmp_ipv4_out",
+                            "message": "data.rule.acl_all_icmp_ipv4_out_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_NACL_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Network ACLs with Outbound rule to allow All ICMP IPv4",
+                    "description": "This policy identifies ACLs which allows traffic on all protocol. A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. By default, ACL allows all inbound and outbound IPv4 traffic and, if applicable, IPv6 traffic. Outbound rules that allow unrestricted traffic to the internet can be a security risk. As a best practice, it is recommended to configure ACL to restrict traffic on authorized protocols.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "nacl"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2NETWORKACL_5",
+                    "masterSnapshotId": [
+                        "TEST_EC2NETWORKACL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2networkacl.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-NACL-005",
+                            "eval": "data.rule.acl_all_icmp_ipv6_out",
+                            "message": "data.rule.acl_all_icmp_ipv6_out_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_NACL_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Network ACLs with Outbound rule to allow All ICMP IPv6",
+                    "description": "This policy identifies ACLs which allows traffic on all protocol. A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. By default, ACL allows all inbound and outbound IPv4 traffic and, if applicable, IPv6 traffic. Outbound rules that allow unrestricted traffic to the internet can be a security risk. As a best practice, it is recommended to configure ACL to restrict traffic on authorized protocols.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "nacl"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2NETWORKACL_6",
+                    "masterSnapshotId": [
+                        "TEST_EC2NETWORKACL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2networkacl.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-NACL-006",
+                            "eval": "data.rule.acl_all_traffic_out",
+                            "message": "data.rule.acl_all_traffic_out_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_NACL_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Network ACLs with Outbound rule to allow All Traffic",
+                    "description": "This policy identifies ACLs which allows traffic on all protocols. A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. By default, ACL allows all inbound and outbound IPv4 traffic and, if applicable, IPv6 traffic. Outbound rules that allow unrestricted traffic to the internet can be a security risk. As a best practice, it is recommended to configure ACLs to restrict traffic on authorized protocols.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "nacl"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2NETWORKACL_7",
+                    "masterSnapshotId": [
+                        "TEST_EC2NETWORKACL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2networkacl.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-NACL-007",
+                            "eval": "data.rule.acl_unrestricted_admin_port",
+                            "message": "data.rule.acl_unrestricted_admin_port_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_NACL_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Unrestricted Inbound Traffic on Remote Server Administration Ports",
+                    "description": "Check your Amazon VPC Network Access Control Lists (NACLs) for inbound/ingress rules that allow unrestricted traffic (i.e. 0.0.0.0/0) on TCP ports 22 (SSH) and 3389 (RDP) and limit access to trusted IP addresses or IP ranges only in order to implement the Principle of Least Privilege (POLP) and reduce the attack surface at the subnet level.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "nacl"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ACM_1",
+                    "masterSnapshotId": [
+                        "TEST_ACM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(acm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ACM-001",
+                            "eval": "data.rule.acm_wildcard",
+                            "message": "data.rule.acm_wildcard_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ACM_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ACM Certificate with wildcard domain name",
+                    "description": "This policy identifies ACM Certificates which are using wildcard certificates for wildcard domain name instead of single domain name certificates. ACM allows you to use an asterisk (*) in the domain name to create an ACM Certificate containing a wildcard name that can protect several sites in the same domain. For example, a wildcard certificate issued for *.<compliance-software>.io can match both www.<compliance-software>.io and images.<compliance-software>.io. When you use wildcard certificates, if the private key of a certificate is compromised, then all domain and subdomains that use the compromised certificate are potentially impacted. So it is recommended to use single domain name certificates instead of wildcard certificates to reduce the associated risks with a compromised domain or subdomain.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "acm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ACM_2",
+                    "masterSnapshotId": [
+                        "TEST_ACM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(acm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ACM-002",
+                            "eval": "data.rule.acm_ct_log",
+                            "message": "data.rule.acm_ct_log_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ACM_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Certificate Manager (ACM) has certificates with Certificate Transparency Logging disabled",
+                    "description": "This policy identifies AWS Certificate Manager certificates in which Certificate Transparency Logging is disabled. AWS Certificate Manager (ACM) is the preferred tool to provision, manage, and deploy your server certificates. Certificate Transparency Logging is used to guard against SSL/TLS certificates that are issued by mistake or by a compromised CA, some browsers require that public certificates issued for your domain can also be recorded. This policy generates alerts for certificates which have transparency logging disabled. As a best practice, it is recommended to enable Transparency logging for all certificates.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "acm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ACM_3",
+                    "masterSnapshotId": [
+                        "TEST_ACM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(acm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ACM-003",
+                            "eval": "data.rule.acm_certificate_arn",
+                            "message": "data.rule.acm_certificate_arn_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html#cfn-certificatemanager-certificate-certificateauthorityarn' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ACM_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that the CertificateManager certificates reference only Private ACMPCA certificate authorities",
+                    "description": "Ensure that the aws certificate manager/ACMPCA Certificate CertificateAuthorityArn property references (using Fn::GetAtt or Ref) a Private CA, or that the property is not used.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "acm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECR_1",
+                    "masterSnapshotId": [
+                        "TEST_ECR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECR-001",
+                            "eval": "data.rule.ecr_imagetag",
+                            "message": "data.rule.ecr_imagetag_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECR_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ECR image tags are immutable",
+                    "description": "Amazon ECR supports immutable tags, preventing image tags from being overwritten. In the past, ECR tags could have been overwritten, this could be overcome by requiring users to uniquely identify an image using a naming convention.Tag Immutability enables users can rely on the descriptive tags of an image as a mechanism to track and uniquely identify images. By setting an image tag as immutable, developers can use the tag to correlate the deployed image version with the build that produced the image.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECR_2",
+                    "masterSnapshotId": [
+                        "TEST_ECR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECR-002",
+                            "eval": "data.rule.ecr_encryption",
+                            "message": "data.rule.ecr_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECR_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ECR repositories are encrypted",
+                    "description": "Make sure EncryptionType is present in ECR EncryptionConfiguration To increase control of the encryption and control the management of factors like key rotation",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECR_3",
+                    "masterSnapshotId": [
+                        "TEST_ECR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECR-003",
+                            "eval": "data.rule.ecr_scan",
+                            "message": "data.rule.ecr_scan_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-imagescanningconfiguration.html#cfn-ecr-repository-imagescanningconfiguration-scanonpush' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECR_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ECR image scan on push is enabled",
+                    "description": "Amazon ECR is a fully managed container registry used to store, manage and deploy container images. ECR Image Scanning assesses and identifies operating system vulnerabilities. Using automated image scans you can ensure container image vulnerabilities are found before getting pushed to production. ECR APIs notify if vulnerabilities were found when a scan completes",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECR_4",
+                    "masterSnapshotId": [
+                        "TEST_ECR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECR-004",
+                            "eval": "data.rule.ecr_public_access_disable",
+                            "message": "data.rule.ecr_public_access_disable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-imagescanningconfiguration.html#cfn-ecr-repository-imagescanningconfiguration-scanonpush' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECR_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS ECR Repository is not publicly accessible",
+                    "description": "Public AWS ECR Repository potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_1",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-001",
+                            "eval": "data.rule.ecs_task_evelated",
+                            "message": "data.rule.ecs_task_evelated_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS task definition elevated privileges enabled",
+                    "description": "Ensure your ECS containers are not given elevated privileges on the host container instance. When the Privileged parameter is true, the container is given elevated privileges on the host container instance (similar to the root user). This policy checks the security configuration of your task definition and alerts if elevated privileges are enabled. Note: This parameter is not supported for Windows containers or tasks using the Fargate launch type.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_2",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-002",
+                            "eval": "data.rule.ecs_exec",
+                            "message": "data.rule.ecs_exec_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS/Fargate task definition execution IAM Role not found",
+                    "description": "The execution IAM Role is required by tasks to pull container images and publish container logs to Amazon CloudWatch on your behalf. This policy generates an alert if a task execution role is not found in your task definition.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_3",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-003",
+                            "eval": "data.rule.ecs_root_user",
+                            "message": "data.rule.ecs_root_user_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS/ Fargate task definition root user found",
+                    "description": "The user name to use inside the container should not be root. This policy generates an alert if root user is found in your container definition. The User parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run Note: This parameter is not supported for Windows containers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_4",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-004",
+                            "eval": "data.rule.ecs_root_filesystem",
+                            "message": "data.rule.ecs_root_filesystem_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS Task Definition readonlyRootFilesystem Not Enabled",
+                    "description": "It is recommended that readonlyRootFilesystem is enabled for AWS ECS task definition. Please make sure your 'ContainerDefinitions' template has 'ReadonlyRootFilesystem' and is set to 'true'.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_5",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-005",
+                            "eval": "data.rule.ecs_resource_limit",
+                            "message": "data.rule.ecs_resource_limit_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS task definition resource limits not set.",
+                    "description": "It is recommended that resource limits are set for AWS ECS task definition. Please make sure attributes 'Cpu' or 'Memory' exists and its value is not set to 0 under 'TaskDefinition' or 'ContainerDefinitions'.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_6",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-006",
+                            "eval": "data.rule.ecs_logging",
+                            "message": "data.rule.ecs_logging_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS task definition logging not enabled. or only valid option for LogDriver is 'awslogs'",
+                    "description": "It is recommended that logging is enabled for AWS ECS task definition. Please make sure your 'TaskDefinition' template has 'LogConfiguration' and 'LogDriver' configured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_7",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-007",
+                            "eval": "data.rule.ecs_transit_enabled",
+                            "message": "data.rule.ecs_transit_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-efsvolumeconfiguration.html#cfn-ecs-taskdefinition-efsvolumeconfiguration-transitencryption' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure EFS volumes in ECS task definitions have encryption in transit enabled",
+                    "description": "ECS task definitions that have volumes using EFS configuration should explicitly enable in transit encryption to prevent the risk of data loss due to interception.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_8",
+                    "masterSnapshotId": [
+                        "TEST_ECS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-008",
+                            "eval": "data.rule.ecs_container_insight_enable",
+                            "message": "data.rule.ecs_container_insight_enable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-cluster-clustersettings.html#cfn-ecs-cluster-clustersettings-name' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure container insights are enabled on ECS cluster",
+                    "description": "Container Insights can be used to collect, aggregate, and summarize metrics and logs from containerized applications and microservices. They can also be extended to collect metrics at the cluster, task, and service levels. Using Container Insights allows you to monitor, troubleshoot, and set alarms for all your Amazon ECS resources. It provides a simple to use native and fully managed service for managing ECS issues.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_9",
+                    "masterSnapshotId": [
+                        "TEST_ECS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-009",
+                            "eval": "data.rule.ecs_enable_execute_command",
+                            "message": "data.rule.ecs_enable_execute_command_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-enableexecutecommand' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ECS Services and Task Set EnableExecuteCommand property set to False",
+                    "description": "If the EnableExecuteCommand property is set to True on an ECS Service then any third person can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_10",
+                    "masterSnapshotId": [
+                        "TEST_ECS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-010",
+                            "eval": "data.rule.ecs_assign_public_ip",
+                            "message": "data.rule.ecs_assign_public_ip_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-enableexecutecommand' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that ECS Service and Task Set network configuration disallows the assignment of public IPs",
+                    "description": "Ensure that the ecs service and Task Set Network has set [AssignPublicIp/assign_public_ip] property is set to DISABLED else an Actor can exfiltrate data by associating ECS resources with non-ADATUM resources",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_11",
+                    "masterSnapshotId": [
+                        "TEST_ECS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-011",
+                            "eval": "data.rule.ecs_launch_type",
+                            "message": "data.rule.ecs_launch_type_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-launchtype' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that ECS services and Task Sets are launched as Fargate type",
+                    "description": "Ensure that ECS services and Task Sets are launched as Fargate type else Actor can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_12",
+                    "masterSnapshotId": [
+                        "TEST_ECS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-012",
+                            "eval": "data.rule.ecs_subnet",
+                            "message": "data.rule.ecs_subnet_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-subnets' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Value(s) of subnets attached to aws ecs service or taskset AwsVpcConfiguration resources are vended",
+                    "description": "Value(s) of subnets attached to aws ecs service or taskset AwsVpcConfiguration resources are vended else Actor can exfiltrate data by associating ECS resources with non-ADATUM resources.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_13",
+                    "masterSnapshotId": [
+                        "TEST_ECS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-013",
+                            "eval": "data.rule.ecs_security_group",
+                            "message": "data.rule.ecs_security_group_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-securitygroups' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "VPC configurations on ECS Services and TaskSets must use either vended security groups",
+                    "description": "ECS Service and ECS TaskSet resources set a SecurityGroup in the AwsvpcConfiguration. else Actor can exfiltrate data by associating ECS resources with non-ADATUM resources.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_14",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-014",
+                            "eval": "data.rule.ecs_network_mode",
+                            "message": "data.rule.ecs_network_mode_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-networkmode' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that ECS Task Definition have their network mode property set to awsvpc",
+                    "description": "Ensure that ECS Task Definition have their network mode property set to awsvpc. else an Actor can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
                 }
             ]
         }

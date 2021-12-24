@@ -332,6 +332,161 @@
 							]
 						}
 					]
+				},
+				{
+					"masterSnapshotId": "TEST_SNS_01",
+					"arn": "arn:aws:sns:::",
+					"collection": "aws_sns_01",
+					"listMethod": "list_subscriptions",
+					"detailMethods": [
+						"list_subscriptions",
+						"get_subscription_attributes"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"sns"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_SNS_02",
+					"arn": "arn:aws:sns:::",
+					"collection": "aws_sns_02",
+					"listMethod": "list_topics",
+					"detailMethods": [
+						"get_topic_attributes"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"sns"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_EC2",
+					"arn": "arn:aws:ec2:::",
+					"collection": "aws_ec2",
+					"listMethod": "describe_instances",
+					"detailMethods": [
+						"describe_instances"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ec2"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_EC2NETWORKACL",
+					"arn": "arn:aws:ec2:::",
+					"collection": "aws_ec2",
+					"listMethod": "describe_network_acls",
+					"detailMethods": [
+						"describe_network_acls"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ec2"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ACM",
+					"arn": "arn:aws:acm:::",
+					"collection": "aws_acm",
+					"listMethod": "list_certificates",
+					"detailMethods": [
+						"describe_certificate"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"acm"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ECR",
+					"arn": "arn:aws:ecr:::",
+					"collection": "aws_ecr",
+					"listMethod": "describe_repositories",
+					"detailMethods": [
+						"describe_repositories",
+						"get_lifecycle_policy"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ecr"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ECS_01",
+					"arn": "arn:aws:ecs:::",
+					"collection": "aws_ecs_01",
+					"listMethod": "list_clusters",
+					"detailMethods": [
+						"describe_clusters"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ecs"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ECS_02",
+					"arn": "arn:aws:ecs:::",
+					"collection": "aws_ecs_02",
+					"listMethod": "list_services",
+					"detailMethods": [
+						"describe_services"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ecs"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ECS_03",
+					"arn": "arn:aws:ecs:::",
+					"collection": "aws_ecs_03",
+					"listMethod": "list_task_definitions",
+					"detailMethods": [
+						"describe_task_definition"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ecs"
+							]
+						}
+					]
 				}
 			]
 		}

@@ -5,7 +5,7 @@ has_property(parent_object, target_property) {
 }
 
 #
-# PR-AWS-CFR-WAF-001
+# PR-AWS-CLD-WAF-001
 #
 
 default waf_log4j_vulnerability = true
@@ -30,10 +30,10 @@ waf_log4j_vulnerability_err = "JMSAppender in Log4j 1.2 is vulnerable to deseria
 }
 
 waf_log4j_vulnerability_metadata := {
-    "Policy Code": "PR-AWS-CFR-WAF-001",
-    "Type": "IaC",
+    "Policy Code": "PR-AWS-CLD-WAF-001",
+    "Type": "cloud",
     "Product": "AWS",
-    "Language": "AWS Cloud formation",
+    "Language": "AWS Cloud",
     "Policy Title": "JMSAppender in Log4j 1.2 is vulnerable to deserialization of untrusted data when the attacker has write access to the Log4j configuration",
     "Policy Description": "Apache Log4j2 2.0-beta9 through 2.12.1 and 2.13.0 through 2.15.0 JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints",
     "Resource Type": "",

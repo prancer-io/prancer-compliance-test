@@ -47,7 +47,7 @@ ct_log_validation_err = "AWS CloudTrail is not enabled in all regions" {
 
 ct_log_validation_metadata := {
     "Policy Code": "PR-AWS-CLD-CT-002",
-    "Type": "IaC",
+    "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
     "Policy Title": "AWS CloudTrail log validation is not enabled in all regions",

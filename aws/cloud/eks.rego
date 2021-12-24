@@ -62,7 +62,7 @@ eks_encryption_resources_metadata := {
 
 
 #
-# PR-AWS-CFR-EKS-004
+# PR-AWS-CLD-EKS-004
 #
 
 default eks_encryption_kms = null
