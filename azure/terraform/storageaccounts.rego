@@ -4,6 +4,10 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+contains(array_property, element) = true {
+  lower(array_property[_]) == element
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_storage_account
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 #
@@ -77,9 +81,24 @@ azure_attribute_absence["storage_acl"] {
 
 azure_issue["storage_acl"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account_network_rules"
-    lower(resource.properties.default_action) != "deny"
+    lower(resource.type) == "azurerm_storage_account"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_account_network_rules";
+              contains(r.properties.storage_account_name, resource.properties.compiletime_identity);
+              lower(r.properties.default_action) == "deny";
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_account_network_rules";
+              contains(r.properties.storage_account_name, concat(".", [resource.type, resource.name]));
+              lower(r.properties.default_action) == "deny";
+              c := 1]) == 0
 }
+
+# azure_issue["storage_acl"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_storage_account_network_rules"
+#     lower(resource.properties.default_action) != "deny"
+# }
 
 azure_inner_attribute_absence["storage_acl"] {
     resource := input.resources[_]
@@ -93,13 +112,26 @@ azure_inner_attribute_absence["storage_acl"] {
     network_rules := resource.properties.network_rules[_]
     not network_rules.default_action
 }
-
 azure_inner_issue["storage_acl"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    network_rules := resource.properties.network_rules[_]
-    lower(network_rules.default_action) != "deny"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_account";
+              lower(r.properties.network_rules[_].default_action) == "deny";
+              c := 1]) == 0
 }
+
+# azure_inner_attribute_absence["storage_acl"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_storage_account"
+#     not resource.properties.network_rules
+# }
+
+
+# azure_inner_issue["storage_acl"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_storage_account"
+#     network_rules := resource.properties.network_rules[_]
+#     lower(network_rules.default_action) != "deny"
+# }
 
 storage_acl {
     lower(input.resources[_].type) == "azurerm_storage_account"
@@ -122,12 +154,13 @@ storage_acl = false {
 storage_acl = false {
     lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["storage_acl"]
-}
-
-storage_acl = false {
-    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_inner_issue["storage_acl"]
 }
+
+# storage_acl = false {
+#     lower(input.resources[_].type) == "azurerm_storage_account"
+#     azure_inner_issue["storage_acl"]
+# }
 
 storage_acl_err = "azurerm_storage_account_network_rules property 'default_action' or azurerm_storage_account's inner block 'network_rules' with property 'default_action' need to be exist. Its missing from the resource. Please set the value to 'deny' after property addition." {
     lower(input.resources[_].type) == "azurerm_storage_account"
@@ -136,10 +169,12 @@ storage_acl_err = "azurerm_storage_account_network_rules property 'default_actio
 } else = "Storage Accounts firewall rule is currently not enabled" {
     lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["storage_acl"]
-} else = "Storage Accounts firewall rule is currently not enabled" {
- 	lower(input.resources[_].type) == "azurerm_storage_account"
- 	azure_inner_issue["storage_acl"]
-}
+    azure_inner_issue["storage_acl"]
+} 
+# else = "Storage Accounts firewall rule is currently not enabled" {
+#  	lower(input.resources[_].type) == "azurerm_storage_account"
+#  	azure_inner_issue["storage_acl"]
+# }
 
 storage_acl_metadata := {
     "Policy Code": "PR-AZR-TRF-STR-004",
@@ -171,9 +206,24 @@ azure_attribute_absence["storage_threat_protection"] {
 
 azure_issue["storage_threat_protection"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_advanced_threat_protection"
-    resource.properties.enabled == false
+    lower(resource.type) == "azurerm_storage_account"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_advanced_threat_protection";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              r.properties.enabled == true;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_advanced_threat_protection";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              r.properties.enabled == true;
+              c := 1]) == 0
 }
+
+# azure_issue["storage_threat_protection"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_advanced_threat_protection"
+#     resource.properties.enabled == false
+# }
 
 storage_threat_protection {
     lower(input.resources[_].type) == "azurerm_storage_account"
@@ -475,10 +525,25 @@ azure_attribute_absence["storage_nr_allow_trusted_azure_services"] {
 
 azure_issue["storage_nr_allow_trusted_azure_services"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account_network_rules"
-    #lower(resource.properties.bypass[_]) != "azureservices"
-    count([c | lower(resource.properties.bypass[_]) == "azureservices"; c := 1]) == 0
+    lower(resource.type) == "azurerm_storage_account"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_account_network_rules";
+              contains(r.properties.storage_account_name, resource.properties.compiletime_identity);
+              contains(r.properties.bypass, "azureservices");
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_account_network_rules";
+              contains(r.properties.storage_account_name, concat(".", [resource.type, resource.name]));
+              contains(r.properties.bypass, "azureservices");
+              c := 1]) == 0
 }
+
+# azure_issue["storage_nr_allow_trusted_azure_services"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_storage_account_network_rules"
+#     #lower(resource.properties.bypass[_]) != "azureservices"
+#     count([c | lower(resource.properties.bypass[_]) == "azureservices"; c := 1]) == 0
+# }
 
 azure_inner_attribute_absence["storage_nr_allow_trusted_azure_services"] {
     resource := input.resources[_]
@@ -494,11 +559,19 @@ azure_inner_attribute_absence["storage_nr_allow_trusted_azure_services"] {
 }
 
 azure_inner_issue["storage_nr_allow_trusted_azure_services"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    network_rules := resource.properties.network_rules[_]
-    count([c | lower(network_rules.bypass[_]) == "azureservices"; c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_account";
+              contains(r.properties.network_rules[_].bypass, "azureservices");
+              #count([ci | lower(r.properties.network_rules[_].bypass[_]) == "azureservices"; c := 1]) > 0;
+              c := 1]) == 0
 }
+
+# azure_inner_issue["storage_nr_allow_trusted_azure_services"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_storage_account"
+#     network_rules := resource.properties.network_rules[_]
+#     not contains(network_rules.bypass, "azureservices")
+# }
 
 storage_nr_allow_trusted_azure_services {
     lower(input.resources[_].type) == "azurerm_storage_account"
@@ -521,12 +594,13 @@ storage_nr_allow_trusted_azure_services = false {
 storage_nr_allow_trusted_azure_services = false {
     lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["storage_nr_allow_trusted_azure_services"]
-}
-
-storage_nr_allow_trusted_azure_services = false {
-    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_inner_issue["storage_nr_allow_trusted_azure_services"]
 }
+
+# storage_nr_allow_trusted_azure_services = false {
+#     lower(input.resources[_].type) == "azurerm_storage_account"
+#     azure_inner_issue["storage_nr_allow_trusted_azure_services"]
+# }
 
 storage_nr_allow_trusted_azure_services_err = "azurerm_storage_account_network_rules property 'bypass' or azurerm_storage_account's inner block 'network_rules' with property 'bypass' need to be exist. Its missing from the resource. Please add 'AzureServices' in the array element after property addition." {
     lower(input.resources[_].type) == "azurerm_storage_account"
@@ -535,10 +609,12 @@ storage_nr_allow_trusted_azure_services_err = "azurerm_storage_account_network_r
 } else = "Storage Accounts is not currently allowing trusted Microsoft services" {
     lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["storage_nr_allow_trusted_azure_services"]
-} else = "Storage Accounts is not currently allowing trusted Microsoft services" {
-    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_inner_issue["storage_nr_allow_trusted_azure_services"]
-}
+} 
+# else = "Storage Accounts is not currently allowing trusted Microsoft services" {
+#     lower(input.resources[_].type) == "azurerm_storage_account"
+#     azure_inner_issue["storage_nr_allow_trusted_azure_services"]
+# }
 
 storage_nr_allow_trusted_azure_services_metadata := {
     "Policy Code": "PR-AZR-TRF-STR-011",
