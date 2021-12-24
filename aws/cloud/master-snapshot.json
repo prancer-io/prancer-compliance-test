@@ -436,6 +436,57 @@
 							]
 						}
 					]
+				},
+				{
+					"masterSnapshotId": "TEST_ECS_01",
+					"arn": "arn:aws:ecs:::",
+					"collection": "aws_ecs_01",
+					"listMethod": "list_clusters",
+					"detailMethods": [
+						"describe_clusters"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ecs"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ECS_02",
+					"arn": "arn:aws:ecs:::",
+					"collection": "aws_ecs_02",
+					"listMethod": "list_services",
+					"detailMethods": [
+						"describe_services"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ecs"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ECS_03",
+					"arn": "arn:aws:ecs:::",
+					"collection": "aws_ecs_03",
+					"listMethod": "list_task_definitions",
+					"detailMethods": [
+						"describe_task_definition"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ecs"
+							]
+						}
+					]
 				}
 			]
 		}

@@ -3247,6 +3247,412 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_1",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-001",
+                            "eval": "data.rule.ecs_task_evelated",
+                            "message": "data.rule.ecs_task_evelated_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS task definition elevated privileges enabled",
+                    "description": "Ensure your ECS containers are not given elevated privileges on the host container instance. When the Privileged parameter is true, the container is given elevated privileges on the host container instance (similar to the root user). This policy checks the security configuration of your task definition and alerts if elevated privileges are enabled. Note: This parameter is not supported for Windows containers or tasks using the Fargate launch type.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_2",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-002",
+                            "eval": "data.rule.ecs_exec",
+                            "message": "data.rule.ecs_exec_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS/Fargate task definition execution IAM Role not found",
+                    "description": "The execution IAM Role is required by tasks to pull container images and publish container logs to Amazon CloudWatch on your behalf. This policy generates an alert if a task execution role is not found in your task definition.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_3",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-003",
+                            "eval": "data.rule.ecs_root_user",
+                            "message": "data.rule.ecs_root_user_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS/ Fargate task definition root user found",
+                    "description": "The user name to use inside the container should not be root. This policy generates an alert if root user is found in your container definition. The User parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run Note: This parameter is not supported for Windows containers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_4",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-004",
+                            "eval": "data.rule.ecs_root_filesystem",
+                            "message": "data.rule.ecs_root_filesystem_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS Task Definition readonlyRootFilesystem Not Enabled",
+                    "description": "It is recommended that readonlyRootFilesystem is enabled for AWS ECS task definition. Please make sure your 'ContainerDefinitions' template has 'ReadonlyRootFilesystem' and is set to 'true'.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_5",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-005",
+                            "eval": "data.rule.ecs_resource_limit",
+                            "message": "data.rule.ecs_resource_limit_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS task definition resource limits not set.",
+                    "description": "It is recommended that resource limits are set for AWS ECS task definition. Please make sure attributes 'Cpu' or 'Memory' exists and its value is not set to 0 under 'TaskDefinition' or 'ContainerDefinitions'.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_6",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-006",
+                            "eval": "data.rule.ecs_logging",
+                            "message": "data.rule.ecs_logging_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS task definition logging not enabled. or only valid option for LogDriver is 'awslogs'",
+                    "description": "It is recommended that logging is enabled for AWS ECS task definition. Please make sure your 'TaskDefinition' template has 'LogConfiguration' and 'LogDriver' configured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_7",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-007",
+                            "eval": "data.rule.ecs_transit_enabled",
+                            "message": "data.rule.ecs_transit_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-efsvolumeconfiguration.html#cfn-ecs-taskdefinition-efsvolumeconfiguration-transitencryption' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure EFS volumes in ECS task definitions have encryption in transit enabled",
+                    "description": "ECS task definitions that have volumes using EFS configuration should explicitly enable in transit encryption to prevent the risk of data loss due to interception.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_8",
+                    "masterSnapshotId": [
+                        "TEST_ECS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-008",
+                            "eval": "data.rule.ecs_container_insight_enable",
+                            "message": "data.rule.ecs_container_insight_enable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-cluster-clustersettings.html#cfn-ecs-cluster-clustersettings-name' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure container insights are enabled on ECS cluster",
+                    "description": "Container Insights can be used to collect, aggregate, and summarize metrics and logs from containerized applications and microservices. They can also be extended to collect metrics at the cluster, task, and service levels. Using Container Insights allows you to monitor, troubleshoot, and set alarms for all your Amazon ECS resources. It provides a simple to use native and fully managed service for managing ECS issues.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_9",
+                    "masterSnapshotId": [
+                        "TEST_ECS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-009",
+                            "eval": "data.rule.ecs_enable_execute_command",
+                            "message": "data.rule.ecs_enable_execute_command_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-enableexecutecommand' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ECS Services and Task Set EnableExecuteCommand property set to False",
+                    "description": "If the EnableExecuteCommand property is set to True on an ECS Service then any third person can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_10",
+                    "masterSnapshotId": [
+                        "TEST_ECS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-010",
+                            "eval": "data.rule.ecs_assign_public_ip",
+                            "message": "data.rule.ecs_assign_public_ip_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-enableexecutecommand' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that ECS Service and Task Set network configuration disallows the assignment of public IPs",
+                    "description": "Ensure that the ecs service and Task Set Network has set [AssignPublicIp/assign_public_ip] property is set to DISABLED else an Actor can exfiltrate data by associating ECS resources with non-ADATUM resources",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_11",
+                    "masterSnapshotId": [
+                        "TEST_ECS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-011",
+                            "eval": "data.rule.ecs_launch_type",
+                            "message": "data.rule.ecs_launch_type_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-launchtype' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that ECS services and Task Sets are launched as Fargate type",
+                    "description": "Ensure that ECS services and Task Sets are launched as Fargate type else Actor can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_12",
+                    "masterSnapshotId": [
+                        "TEST_ECS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-012",
+                            "eval": "data.rule.ecs_subnet",
+                            "message": "data.rule.ecs_subnet_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-subnets' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Value(s) of subnets attached to aws ecs service or taskset AwsVpcConfiguration resources are vended",
+                    "description": "Value(s) of subnets attached to aws ecs service or taskset AwsVpcConfiguration resources are vended else Actor can exfiltrate data by associating ECS resources with non-ADATUM resources.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_13",
+                    "masterSnapshotId": [
+                        "TEST_ECS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-013",
+                            "eval": "data.rule.ecs_security_group",
+                            "message": "data.rule.ecs_security_group_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-securitygroups' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "VPC configurations on ECS Services and TaskSets must use either vended security groups",
+                    "description": "ECS Service and ECS TaskSet resources set a SecurityGroup in the AwsvpcConfiguration. else Actor can exfiltrate data by associating ECS resources with non-ADATUM resources.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_14",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-014",
+                            "eval": "data.rule.ecs_network_mode",
+                            "message": "data.rule.ecs_network_mode_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-networkmode' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that ECS Task Definition have their network mode property set to awsvpc",
+                    "description": "Ensure that ECS Task Definition have their network mode property set to awsvpc. else an Actor can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
