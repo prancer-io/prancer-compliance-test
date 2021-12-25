@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway
 
 #
@@ -322,20 +326,34 @@ secret_certificate_is_in_keyvalut_metadata := {
 
 default application_gateways_v2_waf_ruleset_OWASP_active = null
 
-azure_attribute_absence ["application_gateways_v2_waf_ruleset_OWASP_active"] {
+has_any_safe_owasp(managed_rules) = true {
+  managed_rule := managed_rules[_]
+  managed_rule_set := managed_rule.managed_rule_set[_]
+  lower(managed_rule_set.type) == "owasp"
+  to_number(managed_rule_set.version) >= 3.1
+} else = false { true }
+
+has_any_inner_safe_owasp(waf_configuration) = true {
+  waf_configuration_found := waf_configuration[_]
+  waf_configuration_found.enabled == true
+  lower(waf_configuration_found.rule_set_type) == "owasp"
+  to_number(waf_configuration_found.rule_set_version) >= 3.1
+} else = false { true }
+
+azure_common_attribute_absence ["application_gateways_v2_waf_ruleset_OWASP_active"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
     not resource.properties.sku
 }  
 
-azure_attribute_absence ["application_gateways_v2_waf_ruleset_OWASP_active"] {
+azure_common_attribute_absence ["application_gateways_v2_waf_ruleset_OWASP_active"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
     sku := resource.properties.sku[_]
     not sku.name
 }  
 
-azure_attribute_absence ["application_gateways_v2_waf_ruleset_OWASP_active"] {
+azure_common_attribute_absence ["application_gateways_v2_waf_ruleset_OWASP_active"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
     sku := resource.properties.sku[_]
@@ -345,38 +363,21 @@ azure_attribute_absence ["application_gateways_v2_waf_ruleset_OWASP_active"] {
 azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
-    not resource.properties.waf_configuration
+    not resource.properties.firewall_policy_id
 }
 
-azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_application_gateway"
-    waf_configuration := resource.properties.waf_configuration[_]
-    not waf_configuration.enabled
+azure_attribute_absence ["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    count([c | input.resources[_].type == "azurerm_web_application_firewall_policy"; c := 1]) == 0
 }
 
-azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_application_gateway"
-    waf_configuration := resource.properties.waf_configuration[_]
-    not waf_configuration.rule_set_type
-}
-
-azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_application_gateway"
-    waf_configuration := resource.properties.waf_configuration[_]
-    not waf_configuration.rule_set_version
-}
-
-azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
+azure_common_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
     sku := resource.properties.sku[_]
     not contains(lower(sku.name), "v2")
 }
 
-azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
+azure_common_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
     sku := resource.properties.sku[_]
@@ -386,43 +387,106 @@ azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
 azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
-    waf_configuration := resource.properties.waf_configuration[_]
-    waf_configuration.enabled != true
+    count([c | r := input.resources[_];
+              r.type == "azurerm_web_application_firewall_policy";
+              contains(resource.properties.firewall_policy_id, r.properties.compiletime_identity);
+              r.properties.policy_settings[_].enabled == true; 
+              has_any_safe_owasp(r.properties.managed_rules);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_web_application_firewall_policy";
+              contains(resource.properties.firewall_policy_id, concat(".", [r.type, r.name]));
+              r.properties.policy_settings[_].enabled == true;              
+              has_any_safe_owasp(r.properties.managed_rules);
+              c := 1]) == 0
 }
 
-azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
+azure_inner_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_application_gateway"
+    not resource.properties.waf_configuration
+}
+
+azure_inner_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
     waf_configuration := resource.properties.waf_configuration[_]
-    lower(waf_configuration.rule_set_type) != "owasp"
+    not has_property(waf_configuration, "enabled")
 }
 
-azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
+azure_inner_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
     waf_configuration := resource.properties.waf_configuration[_]
-    # The above protection is also available on OWASP ModSecurity Core Rule Set (CRS) version 3.2 for preview version of Azure Application Gateway V2 along with 3.1
-    to_number(waf_configuration.rule_set_version) < 3.1
+    not waf_configuration.rule_set_type
+}
+
+azure_inner_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_application_gateway"
+    waf_configuration := resource.properties.waf_configuration[_]
+    not waf_configuration.rule_set_version
+}
+
+azure_inner_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    count([c | r := input.resources[_];
+              r.type == "azurerm_application_gateway";
+              has_any_inner_safe_owasp(r.properties.waf_configuration);
+              c := 1]) == 0
 }
 
 application_gateways_v2_waf_ruleset_OWASP_active {
     lower(input.resources[_].type) == "azurerm_application_gateway"
     not azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
+    not azure_common_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
     not azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
+    not azure_common_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
+}
+
+application_gateways_v2_waf_ruleset_OWASP_active {
+    lower(input.resources[_].type) == "azurerm_application_gateway"
+    not azure_inner_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
+    not azure_common_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
+    not azure_inner_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
+    not azure_common_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
 }
 
 application_gateways_v2_waf_ruleset_OWASP_active = false {
+    lower(input.resources[_].type) == "azurerm_application_gateway"
+    azure_common_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
+}
+
+application_gateways_v2_waf_ruleset_OWASP_active = false {
+    lower(input.resources[_].type) == "azurerm_application_gateway"
+    azure_common_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
+}
+
+application_gateways_v2_waf_ruleset_OWASP_active = false {
+    lower(input.resources[_].type) == "azurerm_application_gateway"
     azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
+    azure_inner_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
 }
 
 application_gateways_v2_waf_ruleset_OWASP_active = false {
+    lower(input.resources[_].type) == "azurerm_application_gateway"
     azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
+    azure_inner_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
 } 
 
-application_gateways_v2_waf_ruleset_OWASP_active_err = "Azure Application Gateway V2 currently does not have the Web application firewall (WAF) enabled with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1" {
+application_gateways_v2_waf_ruleset_OWASP_active_err = "'azurerm_application_gateway' resource property 'name' and 'tier' under 'sku' block and 'enabled', 'rule_set_type' and 'rule_set_version' under 'waf_configuration' block need to be exist. one or all are missing." {
+    lower(input.resources[_].type) == "azurerm_application_gateway"
+   	azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
+    azure_inner_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
+} else = "Azure Application Gateway V2 currently does not have the Web application firewall (WAF) enabled with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1" {
+    lower(input.resources[_].type) == "azurerm_application_gateway"
     azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
+    azure_inner_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
+} else = "Azure Application Gateway V2 currently does not have the Web application firewall (WAF) enabled with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1" {
+    lower(input.resources[_].type) == "azurerm_application_gateway"
+    azure_common_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
 } else = "'azurerm_application_gateway' resource property 'name' and 'tier' under 'sku' block and 'enabled', 'rule_set_type' and 'rule_set_version' under 'waf_configuration' block need to be exist. one or all are missing." {
-    azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
+    lower(input.resources[_].type) == "azurerm_application_gateway"
+    azure_common_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
 }
 
 application_gateways_v2_waf_ruleset_OWASP_active_metadata := {
