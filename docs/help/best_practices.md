@@ -240,8 +240,8 @@ s3_accesslog_metadata := {
 
 ## Handle dependency between resource in Azure Terraform
 
-- Each terraform resources will have a `compiletime_identity` under resoruce `property` in snapshot json.
-- If a resource has a dependecy with another resource, we just need to do a `contains` check on source resource property (which should contains the target resources identity) with taget resources `compiletime_identity` or `dot (.)` combination of taget resources `type` and `name`.
+- Each terraform resources will have a `compiletime_identity` under resource `property` in snapshot json.
+- If a resource has a dependency with another resource, we just need to do a `contains` check on source resource property (which should contains the target resources identity) with taget resources `compiletime_identity` or `dot (.)` combination of taget resources `type` and `name`.
 - Example: `azurerm_virtual_machine_extension` has dependency with `azurerm_virtual_machine`. `azurerm_virtual_machine_extension` property `virtual_machine_id` should contains `id` of target `azurerm_virtual_machine`. We will raise an issue if `virtual_machine_id` does not contains `compiletime_identity` or `dot (.)` combination of `type` and `name` of `azurerm_virtual_machine`
 
 ```
