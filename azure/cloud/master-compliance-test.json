@@ -3107,7 +3107,7 @@
                             "id": "PR-AZR-CLD-AKS-001",
                             "eval": "data.rule.aks_cni_net",
                             "message": "data.rule.aks_cni_net_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To configure Azure CNI Networking in AKS please refer to the following guide - <br><a href='https://docs.microsoft.com/en-us/azure/aks/configure-azure-cni' target='_blank'>https://docs.microsoft.com/en-us/azure/aks/configure-azure-cni</a>",
                             "remediationFunction": "PR_AZR_CLD_AKS_001.py"
                         }
                     ],
@@ -3213,7 +3213,7 @@
                             "id": "PR-AZR-CLD-AKS-004",
                             "eval": "data.rule.aks_nodes",
                             "message": "data.rule.aks_nodes_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In order to add additional worker nodes to your cluster pool, run the following CLI command: <br>az aks nodepool add --cluster-name --name --resource-group",
                             "remediationFunction": "PR_AZR_CLD_AKS_004.py"
                         }
                     ],
@@ -3248,7 +3248,7 @@
                             "id": "PR-AZR-CLD-AKS-005",
                             "eval": "data.rule.aks_rbac",
                             "message": "data.rule.aks_rbac_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To enable Azure RBAC for Kubernetes Authorization please refer to the following guide -<br><a href='https://docs.microsoft.com/en-us/azure/aks/manage-azure-rbac' target='_blank'>https://docs.microsoft.com/en-us/azure/aks/manage-azure-rbac</a>",
                             "remediationFunction": "PR_AZR_CLD_AKS_005.py"
                         }
                     ],
@@ -3313,7 +3313,7 @@
                             "id": "PR-AZR-CLD-AKS-007",
                             "eval": "data.rule.aks_authorized_Ip",
                             "message": "data.rule.aks_authorized_Ip_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "API server authorized IP ranges only work for new AKS clusters and are not supported for private AKS clusters.<br><br>To create a cluster with API server authorized IP ranges enabled : <a href='https://docs.microsoft.com/en-us/azure/aks/api-server-authorized-ip-ranges?ocid=AID754288&wt.mc_id=CFID0533#create-an-aks-cluster-with-api-server-authorized-ip-ranges-enabled' target='_blank'>https://docs.microsoft.com/en-us/azure/aks/api-server-authorized-ip-ranges?ocid=AID754288&wt.mc_id=CFID0533#create-an-aks-cluster-with-api-server-authorized-ip-ranges-enabled</a><br><br>To update a cluster's API server authorized IP ranges: <a href='https://docs.microsoft.com/en-us/azure/aks/api-server-authorized-ip-ranges?ocid=AID754288&wt.mc_id=CFID0533#update-a-clusters-api-server-authorized-ip-ranges' target='_blank'>https://docs.microsoft.com/en-us/azure/aks/api-server-authorized-ip-ranges?ocid=AID754288&wt.mc_id=CFID0533#update-a-clusters-api-server-authorized-ip-ranges</a>",
                             "remediationFunction": "PR_AZR_CLD_AKS_007.py"
                         }
                     ],
@@ -3342,14 +3342,16 @@
                             "id": "PR-AZR-CLD-AKS-008",
                             "eval": "data.rule.network_policy",
                             "message": "data.rule.network_policy_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In an AKS cluster, all pods can send and receive traffic without limitations, by default. To improve security, you can define rules that control the flow of traffic.<br>Network Policy is a Kubernetes specification that defines access policies for communication between Pods. These network policy rules are defined as YAML manifests.<br>The network policy feature can only be enabled when the cluster is created. You can't enable network policy on an existing AKS cluster.<br>To create AKS cluster that supports network policy, please refer - <br><a href='https://docs.microsoft.com/en-us/azure/aks/use-network-policies?ocid=AID754288&wt.mc_id=CFID0471#create-an-aks-cluster-and-enable-network-policy' target='_blank'>https://docs.microsoft.com/en-us/azure/aks/use-network-policies?ocid=AID754288&wt.mc_id=CFID0471#create-an-aks-cluster-and-enable-network-policy</a>",
                             "remediationFunction": "PR_AZR_CLD_AKS_008.py"
                         }
                     ],
                     "tags": [
                         {
                             "cloud": "azure",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practices"
+                            ],
                             "service": [
                                 "Containers"
                             ]
@@ -3408,7 +3410,7 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practices"
                             ],
                             "service": [
                                 "Containers"
@@ -3936,7 +3938,7 @@
                             "id": "PR-AZR-CLD-DSK-001",
                             "eval": "data.rule.disk_encrypt",
                             "message": "data.rule.disk_encrypt_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Attach the disk to the VM:<br>az vm disk attach --disk --new --resource-group --size-gb 128 --sku --vm-name<br><br>2. Enable encryption on the VM data disk:<br>az vm encryption enable --resource-group --vm-name --disk-encryption-keyvault --volume-type<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/vm/disk?view=azure-cli-latest#az-vm-disk-attach' target='_blank'>1. https://docs.microsoft.com/en-us/cli/azure/vm/disk?view=azure-cli-latest#az-vm-disk-attach</a><a href='https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-windows#enable-encryption-on-a-newly-added-disk-with-azure-cli' target='_blank'>2. https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-windows#enable-encryption-on-a-newly-added-disk-with-azure-cli</a>",
                             "remediationFunction": "PR_AZR_CLD_DSK_001.py"
                         }
                     ],
@@ -3980,7 +3982,7 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practices"
                             ],
                             "service": [
                                 "Compute"
@@ -4304,7 +4306,7 @@
                             "id": "PR-AZR-CLD-SQL-029",
                             "eval": "data.rule.sslEnforcement",
                             "message": "data.rule.sslEnforcement_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Go to 'PostgreSQL server' from Azure Management console and choose your PostgreSQL database server that you want to examine.<br>2. In the navigation panel, under Settings, select Connection security.<br>3. On the Connection security configuration page, under SSL settings section, select ENABLED next to Enforce SSL connection setting.<br>4. Click Save.",
                             "remediationFunction": "PR_AZR_CLD_SQL_029.py"
                         }
                     ],
@@ -6064,7 +6066,7 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practices"
                             ],
                             "service": [
                                 "Networking"
@@ -6095,7 +6097,7 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practices"
                             ],
                             "service": [
                                 "Networking"
