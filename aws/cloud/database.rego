@@ -602,468 +602,292 @@ db_instance_monitor_metadata := {
 }
 
 
-# #
-# # PR-AWS-CLD-DAX-001
-# #
-
-# default dax_encrypt = true
-
-# dax_encrypt = false {
-#     lower(resource.Type) == "aws::dax::cluster"
-#     not resource.Properties.SSESpecification.SSEEnabled
-# }
-
-# source_path[{"db_instance_monitor": metadata}] {
-#     lower(resource.Type) == "aws::dax::cluster"
-#     not resource.Properties.SSESpecification.SSEEnabled
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "SSESpecification", "SSEEnabled"]
-#         ],
-#     }
-# }
-
-# dax_encrypt {
-#     lower(input.Resources[i].Type) == "aws::dax::cluster"
-#     not not dax_encrypt
-#     not aws_bool_issue["dax_encrypt"]
-# }
-
-# dax_encrypt = false {
-#     not dax_encrypt
-# }
-
-# dax_encrypt = false {
-#     aws_bool_issue["dax_encrypt"]
-# }
-
-# dax_encrypt_err = "Ensure DAX is securely encrypted at rest" {
-#     not dax_encrypt
-# } else = "Ensure DAX is securely encrypted at rest" {
-#     aws_bool_issue["dax_encrypt"]
-# }
-
-# dax_encrypt_metadata := {
-#     "Policy Code": "PR-AWS-CLD-DAX-001",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure DAX is securely encrypted at rest",
-#     "Policy Description": "Amazon DynamoDB Accelerator (DAX) encryption at rest provides an additional layer of data protection, helping secure your data from unauthorized access to underlying storage. With encryption at rest the data persisted by DAX on disk is encrypted using 256-bit Advanced Encryption Standard (AES-256). DAX writes data to disk as part of propagating changes from the primary node to read replicas. DAX encryption at rest automatically integrates with AWS KMS for managing the single service default key used to encrypt clusters.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html"
-# }
-
-
-# #
-# # PR-AWS-CLD-QLDB-001
-# #
-
-# default qldb_permission_mode = true
-
-# qldb_permission_mode = false {
-#     lower(resource.Type) == "aws::qldb::ledger"
-#     lower(resource.Properties.PermissionsMode) != "standard"
-# }
-
-# source_path[{"qldb_permission_mode": metadata}] {
-#     lower(resource.Type) == "aws::qldb::ledger"
-#     lower(resource.Properties.PermissionsMode) != "standard"
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "PermissionsMode"]
-#         ],
-#     }
-# }
-
-# qldb_permission_mode = false {
-#     lower(resource.Type) == "aws::qldb::ledger"
-#     not resource.Properties.PermissionsMode
-# }
-
-# source_path[{"qldb_permission_mode": metadata}] {
-#     lower(resource.Type) == "aws::qldb::ledger"
-#     not resource.Properties.PermissionsMode
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "PermissionsMode"]
-#         ],
-#     }
-# }
-
-# qldb_permission_mode {
-#     lower(input.Resources[i].Type) == "aws::qldb::ledger"
-#     not not qldb_permission_mode
-# }
-
-# qldb_permission_mode = false {
-#     not qldb_permission_mode
-# }
-
-# qldb_permission_mode_err = "Ensure QLDB ledger permissions mode is set to STANDARD" {
-#     not qldb_permission_mode
-# }
-
-# qldb_permission_mode_metadata := {
-#     "Policy Code": "PR-AWS-CLD-QLDB-001",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure QLDB ledger permissions mode is set to STANDARD",
-#     "Policy Description": "In Amazon Quantum Ledger Database define PermissionsMode value to STANDARD permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-qldb-ledger.html#cfn-qldb-ledger-permissionsmode"
-# }
-
-
-
-# #
-# # PR-AWS-CLD-DDB-001
-# #
-
-# default docdb_cluster_encrypt = true
-
-# docdb_cluster_encrypt = false {
-#     lower(resource.Type) == "aws::docdb::dbcluster"
-#     not resource.Properties.StorageEncrypted
-# }
-
-# source_path[{"docdb_cluster_encrypt": metadata}] {
-#     lower(resource.Type) == "aws::docdb::dbcluster"
-#     not resource.Properties.StorageEncrypted
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "StorageEncrypted"]
-#         ],
-#     }
-# }
-
-# docdb_cluster_encrypt {
-#     lower(input.Resources[i].Type) == "aws::docdb::dbcluster"
-#     not not docdb_cluster_encrypt
-# }
-
-# docdb_cluster_encrypt = false {
-#     not docdb_cluster_encrypt
-# }
-
-# docdb_cluster_encrypt_err = "Ensure DocumentDB cluster is encrypted at rest" {
-#     not docdb_cluster_encrypt
-# }
-
-# docdb_cluster_encrypt_metadata := {
-#     "Policy Code": "PR-AWS-CLD-DDB-001",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure DocumentDB cluster is encrypted at rest",
-#     "Policy Description": "Ensure that encryption is enabled for your AWS DocumentDB (with MongoDB compatibility) clusters for additional data security and in order to meet compliance requirements for data-at-rest encryption",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-storageencrypted"
-# }
-
-
-# #
-# # PR-AWS-CLD-DDB-002
-# #
-
-# default docdb_cluster_logs = true
-
-# docdb_cluster_logs = false {
-#     lower(resource.Type) == "aws::docdb::dbcluster"
-#     not resource.Properties.EnableCloudwatchLogsExports
-# }
-
-# source_path[{"docdb_cluster_logs": metadata}] {
-#     lower(resource.Type) == "aws::docdb::dbcluster"
-#     not resource.Properties.EnableCloudwatchLogsExports
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "EnableCloudwatchLogsExports"]
-#         ],
-#     }
-# }
-
-# docdb_cluster_logs = false {
-#     lower(resource.Type) == "aws::docdb::dbcluster"
-#     count(resource.Properties.EnableCloudwatchLogsExports) == 0
-# }
-
-# source_path[{"docdb_cluster_logs": metadata}] {
-#     lower(resource.Type) == "aws::docdb::dbcluster"
-#     count(resource.Properties.EnableCloudwatchLogsExports) == 0
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "EnableCloudwatchLogsExports"]
-#         ],
-#     }
-# }
-
-# docdb_cluster_logs {
-#     lower(input.Resources[i].Type) == "aws::docdb::dbcluster"
-#     not not docdb_cluster_logs
-# }
-
-# docdb_cluster_logs = false {
-#     not docdb_cluster_logs
-# }
-
-# docdb_cluster_logs_err = "Ensure AWS DocumentDB logging is enabled" {
-#     not docdb_cluster_logs
-# }
-
-# docdb_cluster_logs_metadata := {
-#     "Policy Code": "PR-AWS-CLD-DDB-002",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure AWS DocumentDB logging is enabled",
-#     "Policy Description": "The events recorded by the AWS DocumentDB audit logs include: successful and failed authentication attempts, creating indexes or dropping a collection in a database within the DocumentDB cluster.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-enablecloudwatchlogsexports"
-# }
-
-# #
-# # PR-AWS-CLD-DDB-003
-# #
-
-# default docdb_parameter_group_tls_enable = true
-
-# docdb_parameter_group_tls_enable = false {
-#     lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
-#     not resource.Properties.Parameters.tls
-# }
-
-# source_path[{"docdb_parameter_group_tls_enable": metadata}] {
-#     lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
-#     not resource.Properties.Parameters.tls
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "Parameters", "tls"]
-#         ],
-#     }
-# }
-
-# docdb_parameter_group_tls_enable = false {
-#     lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
-#     lower(resource.Properties.Parameters.tls) != "enabled"
-# }
-
-# source_path[{"docdb_parameter_group_tls_enable": metadata}] {
-#     lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
-#     lower(resource.Properties.Parameters.tls) != "enabled"
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "Parameters", "tls"]
-#         ],
-#     }
-# }
-
-# docdb_parameter_group_tls_enable {
-#     lower(input.Resources[i].Type) == "aws::docdb::dbclusterparametergroup"
-#     not not docdb_parameter_group_tls_enable
-# }
-
-# docdb_parameter_group_tls_enable = false {
-#     not docdb_parameter_group_tls_enable
-# }
-
-# docdb_parameter_group_tls_enable_err = "Ensure DocDB ParameterGroup has TLS enable" {
-#     not docdb_parameter_group_tls_enable
-# }
-
-# docdb_parameter_group_tls_enable_metadata := {
-#     "Policy Code": "PR-AWS-CLD-DDB-003",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure DocDB ParameterGroup has TLS enable",
-#     "Policy Description": "TLS can be used to encrypt the connection between an application and a DocDB cluster. By default, encryption in transit is enabled for newly created clusters. It can optionally be disabled when the cluster is created, or at a later time. When enabled, secure connections using TLS are required to connect to the cluster.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#cfn-docdb-dbclusterparametergroup-parameters"
-# }
-
-
-# #
-# # PR-AWS-CLD-DDB-004
-# #
-
-# default docdb_parameter_group_audit_logs = true
-
-# docdb_parameter_group_audit_logs = false {
-#     lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
-#     not resource.Properties.Parameters.audit_logs
-# }
-
-# source_path[{"docdb_parameter_group_audit_logs": metadata}] {
-#     lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
-#     not resource.Properties.Parameters.audit_logs
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "Parameters", "audit_logs"]
-#         ],
-#     }
-# }
-
-# docdb_parameter_group_audit_logs = false {
-#     lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
-#     lower(resource.Properties.Parameters.audit_logs) != "enabled"
-# }
-
-# source_path[{"docdb_parameter_group_audit_logs": metadata}] {
-#     lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
-#     lower(resource.Properties.Parameters.audit_logs) != "enabled"
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "Parameters", "audit_logs"]
-#         ],
-#     }
-# }
-
-# docdb_parameter_group_audit_logs {
-#     lower(input.Resources[i].Type) == "aws::docdb::dbclusterparametergroup"
-#     not not docdb_parameter_group_audit_logs
-# }
-
-# docdb_parameter_group_audit_logs = false {
-#     not docdb_parameter_group_audit_logs
-# }
-
-# docdb_parameter_group_audit_logs_err = "Ensure DocDB has audit logs enabled" {
-#     not docdb_parameter_group_audit_logs
-# }
-
-# docdb_parameter_group_audit_logs_metadata := {
-#     "Policy Code": "PR-AWS-CLD-DDB-004",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure DocDB has audit logs enabled",
-#     "Policy Description": "Ensure DocDB has audit logs enabled, this will export logs in docdb",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#aws-resource-docdb-dbclusterparametergroup--examples"
-# }
-
-
-# #
-# # PR-AWS-CLD-ATH-001
-# #
-
-# default athena_encryption_disabling_prevent = true
-
-# athena_encryption_disabling_prevent = false {
-#     lower(resource.Type) == "aws::athena::workgroup"
-#     not resource.Properties.WorkGroupConfiguration.EnforceWorkGroupConfiguration
-# }
-
-# source_path[{"athena_encryption_disabling_prevent": metadata}] {
-#     lower(resource.Type) == "aws::athena::workgroup"
-#     not resource.Properties.WorkGroupConfiguration.EnforceWorkGroupConfiguration
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "WorkGroupConfiguration", "EnforceWorkGroupConfiguration"]
-#         ],
-#     }
-# }
-
-# athena_encryption_disabling_prevent {
-#     lower(input.Resources[i].Type) == "aws::athena::workgroup"
-#     not not athena_encryption_disabling_prevent
-# }
-
-# athena_encryption_disabling_prevent = false {
-#     not athena_encryption_disabling_prevent
-# }
-
-# athena_encryption_disabling_prevent_err = "Ensure to enable EnforceWorkGroupConfiguration for athena workgroup" {
-#     not athena_encryption_disabling_prevent
-# }
-
-# athena_encryption_disabling_prevent_metadata := {
-#     "Policy Code": "PR-AWS-CLD-ATH-001",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure to enable EnforceWorkGroupConfiguration for athena workgroup",
-#     "Policy Description": "Athena workgroups support the ability for clients to override configuration options, including encryption requirements. This setting should be disabled to enforce encryption mandates",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-storageencrypted"
-# }
-
-
-
-# #
-# # PR-AWS-CLD-TS-001
-# #
-
-# default timestream_database_encryption = true
-
-# timestream_database_encryption = false {
-#     lower(resource.Type) == "aws::timestream::database"
-#     not resource.Properties.KmsKeyId
-# }
-
-# source_path[{"timestream_database_encryption": metadata}] {
-#     lower(resource.Type) == "aws::timestream::database"
-#     not resource.Properties.KmsKeyId
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "KmsKeyId"]
-#         ],
-#     }
-# }
-
-# timestream_database_encryption = false {
-#     lower(resource.Type) == "aws::timestream::database"
-#     count(resource.Properties.KmsKeyId) == 0
-# }
-
-# source_path[{"timestream_database_encryption": metadata}] {
-#     lower(resource.Type) == "aws::timestream::database"
-#     count(resource.Properties.KmsKeyId) == 0
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "KmsKeyId"]
-#         ],
-#     }
-# }
-
-# timestream_database_encryption = false {
-#     lower(resource.Type) == "aws::timestream::database"
-#     resource.Properties.KmsKeyId == null
-# }
-
-# timestream_database_encryption {
-#     lower(input.Resources[i].Type) == "aws::timestream::database"
-#     not not timestream_database_encryption
-# }
-
-# timestream_database_encryption = false {
-#     not timestream_database_encryption
-# }
-
-# timestream_database_encryption_err = "Ensure Timestream database is encrypted using KMS" {
-#     not timestream_database_encryption
-# }
-
-# timestream_database_encryption_metadata := {
-#     "Policy Code": "PR-AWS-CLD-TS-001",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure Timestream database is encrypted using KMS",
-#     "Policy Description": "The timestream databases must be secured with KMS instead of default kms.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-timestream-database.html#cfn-timestream-database-kmskeyid"
-# }
+#
+# PR-AWS-CLD-DAX-001
+#
+
+default dax_encrypt = true
+
+dax_encrypt = false {
+    # lower(resource.Type) == "aws::dax::cluster"
+    Clusters := input.Clusters[_]
+    not Clusters.SSEDescription.Status
+}
+
+dax_encrypt = false {
+    # lower(resource.Type) == "aws::dax::cluster"
+    Clusters := input.Clusters[_]
+    lower(Clusters.SSEDescription.Status) != "enabling"
+    lower(Clusters.SSEDescription.Status) != "enabled"
+}
+
+dax_encrypt_err = "Ensure DAX is securely encrypted at rest" {
+    not dax_encrypt
+}
+
+dax_encrypt_metadata := {
+    "Policy Code": "PR-AWS-CLD-DAX-001",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure DAX is securely encrypted at rest",
+    "Policy Description": "Amazon DynamoDB Accelerator (DAX) encryption at rest provides an additional layer of data protection, helping secure your data from unauthorized access to underlying storage. With encryption at rest the data persisted by DAX on disk is encrypted using 256-bit Advanced Encryption Standard (AES-256). DAX writes data to disk as part of propagating changes from the primary node to read replicas. DAX encryption at rest automatically integrates with AWS KMS for managing the single service default key used to encrypt clusters.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html"
+}
+
+
+#
+# PR-AWS-CLD-QLDB-001
+#
+
+default qldb_permission_mode = true
+
+qldb_permission_mode = false {
+    # lower(resource.Type) == "aws::qldb::ledger"
+    lower(input.PermissionsMode) != "standard"
+}
+
+qldb_permission_mode_err = "Ensure QLDB ledger permissions mode is set to STANDARD" {
+    not qldb_permission_mode
+}
+
+qldb_permission_mode_metadata := {
+    "Policy Code": "PR-AWS-CLD-QLDB-001",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure QLDB ledger permissions mode is set to STANDARD",
+    "Policy Description": "In Amazon Quantum Ledger Database define PermissionsMode value to STANDARD permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-qldb-ledger.html#cfn-qldb-ledger-permissionsmode"
+}
+
+
+
+#
+# PR-AWS-CLD-DDB-001
+#
+
+default docdb_cluster_encrypt = true
+
+docdb_cluster_encrypt = false {
+    # lower(resource.Type) == "aws::docdb::dbcluster"
+    DBClusters := input.DBClusters[_]
+    not DBClusters.StorageEncrypted
+}
+
+docdb_cluster_encrypt_err = "Ensure DocumentDB cluster is encrypted at rest" {
+    not docdb_cluster_encrypt
+}
+
+docdb_cluster_encrypt_metadata := {
+    "Policy Code": "PR-AWS-CLD-DDB-001",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure DocumentDB cluster is encrypted at rest",
+    "Policy Description": "Ensure that encryption is enabled for your AWS DocumentDB (with MongoDB compatibility) clusters for additional data security and in order to meet compliance requirements for data-at-rest encryption",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-storageencrypted"
+}
+
+
+#
+# PR-AWS-CLD-DDB-002
+#
+
+default docdb_cluster_logs = true
+
+docdb_cluster_logs = false {
+    # lower(resource.Type) == "aws::docdb::dbcluster"
+    DBClusters := input.DBClusters[_]
+    not DBClusters.EnabledCloudwatchLogsExports
+}
+
+
+docdb_cluster_logs = false {
+    # lower(resource.Type) == "aws::docdb::dbcluster"
+    DBClusters := input.DBClusters[_]
+    count(DBClusters.EnabledCloudwatchLogsExports) == 0
+}
+
+docdb_cluster_logs_err = "Ensure AWS DocumentDB logging is enabled" {
+    not docdb_cluster_logs
+}
+
+docdb_cluster_logs_metadata := {
+    "Policy Code": "PR-AWS-CLD-DDB-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS DocumentDB logging is enabled",
+    "Policy Description": "The events recorded by the AWS DocumentDB audit logs include: successful and failed authentication attempts, creating indexes or dropping a collection in a database within the DocumentDB cluster.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-enablecloudwatchlogsexports"
+}
+
+#
+# PR-AWS-CLD-DDB-003
+#
+
+default docdb_parameter_group_tls_enable = true
+
+docdb_parameter_group_tls_enable = false {
+    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    not input.Parameters
+}
+
+docdb_parameter_group_tls_enable = false {
+    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    count(input.Parameters) == 0
+}
+
+docdb_parameter_group_tls_enable = false {
+    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    count([c | input.Parameters[_].ParameterName == "tls"; c:=1]) == 0
+}
+
+docdb_parameter_group_tls_enable = false {
+    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    Parameters := input.Parameters[_]
+    lower(Parameters.ParameterName) == "tls"
+    lower(Parameters.ParameterValue) != "enabled"
+}
+
+docdb_parameter_group_tls_enable_err = "Ensure DocDB ParameterGroup has TLS enable" {
+    not docdb_parameter_group_tls_enable
+}
+
+docdb_parameter_group_tls_enable_metadata := {
+    "Policy Code": "PR-AWS-CLD-DDB-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure DocDB ParameterGroup has TLS enable",
+    "Policy Description": "TLS can be used to encrypt the connection between an application and a DocDB cluster. By default, encryption in transit is enabled for newly created clusters. It can optionally be disabled when the cluster is created, or at a later time. When enabled, secure connections using TLS are required to connect to the cluster.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#cfn-docdb-dbclusterparametergroup-parameters"
+}
+
+
+#
+# PR-AWS-CLD-DDB-004
+#
+
+default docdb_parameter_group_audit_logs = true
+
+docdb_parameter_group_audit_logs = false {
+    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    not input.Parameters
+}
+
+docdb_parameter_group_audit_logs = false {
+    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    count(input.Parameters) == 0
+}
+
+docdb_parameter_group_audit_logs = false {
+    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    count([c | input.Parameters[_].ParameterName == "audit_logs"; c:=1]) == 0
+}
+
+docdb_parameter_group_audit_logs = false {
+    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    Parameters := input.Parameters[_]
+    lower(Parameters.ParameterName) == "audit_logs"
+    lower(Parameters.ParameterValue) != "enabled"
+}
+
+docdb_parameter_group_audit_logs_err = "Ensure DocDB has audit logs enabled" {
+    not docdb_parameter_group_audit_logs
+}
+
+docdb_parameter_group_audit_logs_metadata := {
+    "Policy Code": "PR-AWS-CLD-DDB-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure DocDB has audit logs enabled",
+    "Policy Description": "Ensure DocDB has audit logs enabled, this will export logs in docdb",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#aws-resource-docdb-dbclusterparametergroup--examples"
+}
+
+
+#
+# PR-AWS-CLD-ATH-001
+#
+
+default athena_encryption_disabling_prevent = true
+
+athena_encryption_disabling_prevent = false {
+    # lower(resource.Type) == "aws::athena::workgroup"
+    not input.WorkGroup.Configuration.EnforceWorkGroupConfiguration
+}
+
+athena_encryption_disabling_prevent_err = "Ensure to enable EnforceWorkGroupConfiguration for athena workgroup" {
+    not athena_encryption_disabling_prevent
+}
+
+athena_encryption_disabling_prevent_metadata := {
+    "Policy Code": "PR-AWS-CLD-ATH-001",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure to enable EnforceWorkGroupConfiguration for athena workgroup",
+    "Policy Description": "Athena workgroups support the ability for clients to override configuration options, including encryption requirements. This setting should be disabled to enforce encryption mandates",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-storageencrypted"
+}
+
+
+#
+# PR-AWS-CLD-TS-001
+#
+
+default timestream_database_encryption = true
+
+timestream_database_encryption = false {
+    # lower(resource.Type) == "aws::timestream::database"
+    Databases := input.Databases[_]
+    not Databases.KmsKeyId
+}
+
+timestream_database_encryption = false {
+    # lower(resource.Type) == "aws::timestream::database"
+    Databases := input.Databases[_]
+    count(Databases.KmsKeyId) == 0
+}
+
+timestream_database_encryption = false {
+    # lower(resource.Type) == "aws::timestream::database"
+    Databases := input.Databases[_]
+    Databases.KmsKeyId == null
+}
+
+timestream_database_encryption_err = "Ensure Timestream database is encrypted using KMS" {
+    not timestream_database_encryption
+}
+
+timestream_database_encryption_metadata := {
+    "Policy Code": "PR-AWS-CLD-TS-001",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Timestream database is encrypted using KMS",
+    "Policy Description": "The timestream databases must be secured with KMS instead of default kms.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-timestream-database.html#cfn-timestream-database-kmskeyid"
+}
 
 
 

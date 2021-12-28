@@ -587,6 +587,108 @@
 							]
 						}
 					]
+				},
+				{
+					"masterSnapshotId": "TEST_DAX",
+					"arn": "arn:aws:dax:::",
+					"collection": "aws_dax",
+					"listMethod": "describe_clusters",
+					"detailMethods": [
+						"describe_clusters"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"dax"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_QLDB",
+					"arn": "arn:aws:qldb:::",
+					"collection": "aws_qldb",
+					"listMethod": "list_ledgers",
+					"detailMethods": [
+						"describe_ledger"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"qldb"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_DDB_01",
+					"arn": "arn:aws:docdb:::",
+					"collection": "aws_docdb_01",
+					"listMethod": "describe_db_clusters",
+					"detailMethods": [
+						"describe_db_clusters"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"docdb"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_DDB_02",
+					"arn": "arn:aws:docdb:::",
+					"collection": "aws_docdb_02",
+					"listMethod": "describe_db_cluster_parameter_groups",
+					"detailMethods": [
+						"describe_db_cluster_parameters"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"docdb"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ATH",
+					"arn": "arn:aws:athena:::",
+					"collection": "aws_athena",
+					"listMethod": "list_work_groups",
+					"detailMethods": [
+						"get_work_group"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"athena"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_TS",
+					"arn": "arn:aws:timestream:::",
+					"collection": "aws_ts",
+					"listMethod": "list_databases",
+					"detailMethods": [
+						"list_databases"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"timestream"
+							]
+						}
+					]
 				}
 			]
 		}

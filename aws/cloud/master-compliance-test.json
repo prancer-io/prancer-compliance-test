@@ -4479,6 +4479,238 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_20",
+                    "masterSnapshotId": [
+                        "TEST_DAX"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DAX-001",
+                            "eval": "data.rule.dax_encrypt",
+                            "message": "data.rule.dax_encrypt_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DAX_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure DAX is securely encrypted at rest",
+                    "description": "Amazon DynamoDB Accelerator (DAX) encryption at rest provides an additional layer of data protection, helping secure your data from unauthorized access to underlying storage. With encryption at rest the data persisted by DAX on disk is encrypted using 256-bit Advanced Encryption Standard (AES-256). DAX writes data to disk as part of propagating changes from the primary node to read replicas. DAX encryption at rest automatically integrates with AWS KMS for managing the single service default key used to encrypt clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "dax"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_21",
+                    "masterSnapshotId": [
+                        "TEST_QLDB"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-QLDB-001",
+                            "eval": "data.rule.qldb_permission_mode",
+                            "message": "data.rule.qldb_permission_mode_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-qldb-ledger.html#cfn-qldb-ledger-permissionsmode' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_QLDB_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure QLDB ledger permissions mode is set to STANDARD",
+                    "description": "In Amazon Quantum Ledger Database define PermissionsMode value to STANDARD permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "docdb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_22",
+                    "masterSnapshotId": [
+                        "TEST_DDB_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DDB-001",
+                            "eval": "data.rule.docdb_cluster_encrypt",
+                            "message": "data.rule.docdb_cluster_encrypt_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-storageencrypted' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DDB_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure DocumentDB cluster is encrypted at rest",
+                    "description": "Ensure that encryption is enabled for your AWS DocumentDB (with MongoDB compatibility) clusters for additional data security and in order to meet compliance requirements for data-at-rest encryption",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "docdb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_23",
+                    "masterSnapshotId": [
+                        "TEST_DDB_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DDB-002",
+                            "eval": "data.rule.docdb_cluster_logs",
+                            "message": "data.rule.docdb_cluster_logs_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-enablecloudwatchlogsexports' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DDB_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS DocumentDB logging is enabled",
+                    "description": "The events recorded by the AWS DocumentDB audit logs include: successful and failed authentication attempts, creating indexes or dropping a collection in a database within the DocumentDB cluster.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "docdb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_24",
+                    "masterSnapshotId": [
+                        "TEST_DDB_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DDB-003",
+                            "eval": "data.rule.docdb_parameter_group_tls_enable",
+                            "message": "data.rule.docdb_parameter_group_tls_enable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#cfn-docdb-dbclusterparametergroup-parameters' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DDB_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure DocDB ParameterGroup has TLS enable",
+                    "description": "TLS can be used to encrypt the connection between an application and a DocDB cluster. By default, encryption in transit is enabled for newly created clusters. It can optionally be disabled when the cluster is created, or at a later time. When enabled, secure connections using TLS are required to connect to the cluster.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "docdb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_25",
+                    "masterSnapshotId": [
+                        "TEST_DDB_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DDB-004",
+                            "eval": "data.rule.docdb_parameter_group_audit_logs",
+                            "message": "data.rule.docdb_parameter_group_audit_logs_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#aws-resource-docdb-dbclusterparametergroup--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DDB_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure DocDB has audit logs enabled",
+                    "description": "Ensure DocDB has audit logs enabled, this will export logs in docdb",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "docdb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_26",
+                    "masterSnapshotId": [
+                        "TEST_ATH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ATH-001",
+                            "eval": "data.rule.athena_encryption_disabling_prevent",
+                            "message": "data.rule.athena_encryption_disabling_prevent_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-storageencrypted' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ATH_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure to enable EnforceWorkGroupConfiguration for athena workgroup",
+                    "description": "Athena workgroups support the ability for clients to override configuration options, including encryption requirements. This setting should be disabled to enforce encryption mandates",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "athena"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_27",
+                    "masterSnapshotId": [
+                        "TEST_TS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-TS-001",
+                            "eval": "data.rule.timestream_database_encryption",
+                            "message": "data.rule.timestream_database_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-timestream-database.html#cfn-timestream-database-kmskeyid' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_TS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Timestream database is encrypted using KMS",
+                    "description": "The timestream databases must be secured with KMS instead of default kms.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "timestream"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
