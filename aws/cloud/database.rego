@@ -546,13 +546,13 @@ default db_instance_cloudwatch_logs = true
 db_instance_cloudwatch_logs = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
-    count(DBInstances.EnableCloudwatchLogsExports) == 0
+    count(DBInstances.EnabledCloudwatchLogsExports) == 0
 }
 
 db_instance_cloudwatch_logs = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
-    not DBInstances.EnableCloudwatchLogsExports
+    not DBInstances.EnabledCloudwatchLogsExports
 }
 
 db_instance_cloudwatch_logs_err = "Ensure respective logs of Amazon RDS instance are enabled" {
@@ -891,722 +891,356 @@ timestream_database_encryption_metadata := {
 
 
 
-# #
-# # PR-AWS-CLD-NPT-001
-# #
-
-# default neptune_cluster_logs = true
-
-# neptune_cluster_logs = false {
-#     lower(resource.Type) == "aws::neptune::dbcluster"
-#     not resource.Properties.EnableCloudwatchLogsExports
-# }
-
-# source_path[{"neptune_cluster_logs": metadata}] {
-#     lower(resource.Type) == "aws::neptune::dbcluster"
-#     not resource.Properties.EnableCloudwatchLogsExports
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "EnableCloudwatchLogsExports"]
-#         ],
-#     }
-# }
-
-# neptune_cluster_logs = false {
-#     lower(resource.Type) == "aws::neptune::dbcluster"
-#     count(resource.Properties.EnableCloudwatchLogsExports) == 0
-# }
-
-# source_path[{"neptune_cluster_logs": metadata}] {
-#     lower(resource.Type) == "aws::neptune::dbcluster"
-#     count(resource.Properties.EnableCloudwatchLogsExports) == 0
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "EnableCloudwatchLogsExports"]
-#         ],
-#     }
-# }
-
-# neptune_cluster_logs {
-#     lower(input.Resources[i].Type) == "aws::neptune::dbcluster"
-#     not not neptune_cluster_logs
-# }
-
-# neptune_cluster_logs = false {
-#     not neptune_cluster_logs
-# }
-
-# neptune_cluster_logs_err = "Ensure Neptune logging is enabled" {
-#     not neptune_cluster_logs
-# }
-
-# neptune_cluster_logs_metadata := {
-#     "Policy Code": "PR-AWS-CLD-NPT-001",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure Neptune logging is enabled",
-#     "Policy Description": "These access logs can be used to analyze traffic patterns and troubleshoot security and operational issues.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-neptune-dbcluster.html#cfn-neptune-dbcluster-enablecloudwatchlogsexports"
-# }
-
-
-# #
-# # PR-AWS-CLD-DD-001
-# #
-
-# default dynamodb_encrypt = true
-
-# dynamodb_encrypt = false {
-#     lower(resource.Type) == "aws::dynamodb::table"
-#     not resource.Properties.SSESpecification.SSEEnabled
-# }
-
-# source_path[{"dynamodb_encrypt": metadata}] {
-#     lower(resource.Type) == "aws::dynamodb::table"
-#     not resource.Properties.SSESpecification.SSEEnabled
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "SSESpecification", "SSEEnabled"]
-#         ],
-#     }
-# }
-
-# dynamodb_encrypt {
-#     lower(input.Resources[i].Type) == "aws::dynamodb::table"
-#     not not dynamodb_encrypt
-#     not aws_bool_issue["dynamodb_encrypt"]
-# }
-
-# dynamodb_encrypt = false {
-#     not dynamodb_encrypt
-# }
-
-# dynamodb_encrypt = false {
-#     aws_bool_issue["dynamodb_encrypt"]
-# }
-
-# dynamodb_encrypt_err = "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK" {
-#     not dynamodb_encrypt
-# } else = "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK" {
-#     aws_bool_issue["dynamodb_encrypt"]
-# }
-
-# dynamodb_encrypt_metadata := {
-#     "Policy Code": "PR-AWS-CLD-DD-001",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK",
-#     "Policy Description": "This policy identifies the DynamoDB tables that use AWS owned CMK (default ) instead of AWS managed CMK (KMS ) to encrypt data. AWS managed CMK provide additional features such as the ability to view the CMK and key policy, and audit the encryption and decryption of DynamoDB tables.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html"
-# }
-
-
-# #
-# # PR-AWS-CLD-DD-002
-# #
-
-# default dynamodb_PITR_enable = true
-
-# dynamodb_PITR_enable = false {
-#     lower(resource.Type) == "aws::dynamodb::table"
-#     not resource.Properties.PointInTimeRecoverySpecification.PointInTimeRecoveryEnabled
-# }
-
-# source_path[{"dynamodb_PITR_enable": metadata}] {
-#     lower(resource.Type) == "aws::dynamodb::table"
-#     not resource.Properties.PointInTimeRecoverySpecification.PointInTimeRecoveryEnabled
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "PointInTimeRecoverySpecification", "PointInTimeRecoveryEnabled"]
-#         ],
-#     }
-# }
-
-# dynamodb_PITR_enable {
-#     lower(input.Resources[i].Type) == "aws::dynamodb::table"
-#     not not dynamodb_PITR_enable
-#     not aws_bool_issue["dynamodb_PITR_enable"]
-# }
-
-# dynamodb_PITR_enable = false {
-#     not dynamodb_PITR_enable
-# }
-
-# dynamodb_PITR_enable = false {
-#     aws_bool_issue["dynamodb_PITR_enable"]
-# }
-
-# dynamodb_PITR_enable_err = "Ensure DynamoDB PITR is enabled" {
-#     not dynamodb_PITR_enable
-# } else = "Ensure DynamoDB PITR is enabled" {
-#     aws_bool_issue["dynamodb_PITR_enable"]
-# }
-
-# dynamodb_PITR_enable_metadata := {
-#     "Policy Code": "PR-AWS-CLD-DD-002",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure DynamoDB PITR is enabled",
-#     "Policy Description": "DynamoDB Point-In-Time Recovery (PITR) is an automatic backup service for DynamoDB table data that helps protect your DynamoDB tables from accidental write or delete operations. Once enabled, PITR provides continuous backups that can be controlled using various programmatic parameters. PITR can also be used to restore table data from any point in time during the last 35 days, as well as any incremental backups of DynamoDB tables",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html"
-# }
-
-
-# #
-# # PR-AWS-CLD-DD-003
-# #
-
-# default dynamodb_kinesis_stream = true
-
-# dynamodb_kinesis_stream = false {
-#     lower(resource.Type) == "aws::dynamodb::table"
-#     count(resource.Properties.KinesisStreamSpecification.StreamArn) == 0
-# }
-
-# source_path[{"dynamodb_kinesis_stream": metadata}] {
-#     lower(resource.Type) == "aws::dynamodb::table"
-#     count(resource.Properties.KinesisStreamSpecification.StreamArn) == 0
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "KinesisStreamSpecification", "StreamArn"]
-#         ],
-#     }
-# }
-
-# dynamodb_kinesis_stream {
-#     lower(input.Resources[i].Type) == "aws::dynamodb::table"
-#     not not dynamodb_kinesis_stream
-# }
-
-# dynamodb_kinesis_stream = false {
-#     not dynamodb_kinesis_stream
-# }
-
-# dynamodb_kinesis_stream_err = "Dynamo DB kinesis specification property should not be null" {
-#     not dynamodb_kinesis_stream
-# }
-
-# dynamodb_kinesis_stream_metadata := {
-#     "Policy Code": "PR-AWS-CLD-DD-003",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Dynamo DB kinesis specification property should not be null",
-#     "Policy Description": "Dynamo DB kinesis specification property should not be null",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-kinesisstreamspecification.html#cfn-dynamodb-kinesisstreamspecification-streamarn"
-# }
-
-
-# #
-# # PR-AWS-CLD-EC-001
-# #
-
-# default cache_failover = true
-
-# cache_failover = false {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     resource.Properties.AutomaticFailoverEnabled == false
-# }
-
-# source_path[{"cache_failover": metadata}] {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     resource.Properties.AutomaticFailoverEnabled == false
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "AutomaticFailoverEnabled"]
-#         ],
-#     }
-# }
-
-# cache_failover {
-#     lower(input.Resources[i].Type) == "aws::elasticache::replicationgroup"
-#     not not cache_failover
-#     not aws_bool_issue["cache_failover"]
-# }
-
-# cache_failover = false {
-#     not cache_failover
-# }
-
-# cache_failover = false {
-#     aws_bool_issue["cache_failover"]
-# }
-
-# cache_failover_err = "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled" {
-#     not cache_failover
-# } else = "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled" {
-#     aws_bool_issue["cache_failover"]
-# }
-
-# cache_failover_metadata := {
-#     "Policy Code": "PR-AWS-CLD-EC-001",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled",
-#     "Policy Description": "This policy identifies ElastiCache Redis clusters which have Multi-AZ Automatic Failover feature set to disabled. It is recommended to enable the Multi-AZ Automatic Failover feature for your Redis Cache cluster, which will improve primary node reachability by providing read replica in case of network connectivity loss or loss of availability in the primary's availability zone for read/write operations._x005F_x000D_ Note: Redis cluster Multi-AZ with automatic failover does not support T1 and T2 cache node types and is only available if the cluster has at least one read replica.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html"
-# }
-
-# #
-# # PR-AWS-CLD-EC-002
-# #
-
-# default cache_redis_auth = true
-
-# cache_redis_auth = false {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not resource.Properties.AuthToken
-# }
-
-# source_path[{"cache_redis_auth": metadata}] {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not resource.Properties.AuthToken
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "AuthToken"]
-#         ],
-#     }
-# }
-
-# cache_redis_auth = false {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     count(resource.Properties.AuthToken) == 0
-# }
-
-# source_path[{"cache_redis_auth": metadata}] {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     count(resource.Properties.AuthToken) == 0
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "AuthToken"]
-#         ],
-#     }
-# }
-
-# cache_redis_auth = false {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not resource.Properties.TransitEncryptionEnabled
-# }
-
-# source_path[{"cache_redis_auth": metadata}] {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not resource.Properties.TransitEncryptionEnabled
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "TransitEncryptionEnabled"]
-#         ],
-#     }
-# }
-
-# cache_redis_auth {
-#     lower(input.Resources[i].Type) == "aws::elasticache::replicationgroup"
-#     not not cache_redis_auth
-#     not aws_bool_issue["cache_redis_auth"]
-#     not aws_attribute_absence["cache_redis_auth"]
-# }
-
-# cache_redis_auth = false {
-#     not cache_redis_auth
-# }
-
-# cache_redis_auth = false {
-#     aws_bool_issue["cache_redis_auth"]
-# }
-
-# cache_redis_auth = false {
-#     aws_attribute_absence["cache_redis_auth"]
-# }
-
-# cache_redis_auth_err = "AWS ElastiCache Redis cluster with encryption for data at rest disabled" {
-#     not cache_redis_auth
-# } else = "AWS ElastiCache Redis cluster with encryption for data at rest disabled" {
-#     aws_bool_issue["cache_redis_auth"]
-# }
-
-# cache_redis_auth_miss_err = "ElastiCache Redis cluster attribute AuthToken missing in the resource" {
-#     aws_attribute_absence["cache_redis_auth"]
-# }
-
-# cache_redis_auth_metadata := {
-#     "Policy Code": "PR-AWS-CLD-EC-002",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "AWS ElastiCache Redis cluster with Redis AUTH feature disabled",
-#     "Policy Description": "This policy identifies ElastiCache Redis clusters which have Redis AUTH feature disabled. Redis AUTH can improve data security by requiring the user to enter a password before they are granted permission to execute Redis commands on a password protected Redis server.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html"
-# }
-
-# #
-# # PR-AWS-CLD-EC-003
-# #
-
-# default cache_redis_encrypt = true
-
-
-# cache_redis_encrypt = false {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not resource.Properties.AtRestEncryptionEnabled
-# }
-
-# source_path[{"cache_redis_encrypt": metadata}] {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not resource.Properties.AtRestEncryptionEnabled
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "AtRestEncryptionEnabled"]
-#         ],
-#     }
-# }
-
-# cache_redis_encrypt {
-#     lower(input.Resources[i].Type) == "aws::elasticache::replicationgroup"
-#     not not cache_redis_encrypt
-#     not aws_bool_issue["cache_redis_encrypt"]
-# }
-
-# cache_redis_encrypt = false {
-#     not cache_redis_encrypt
-# }
-
-# cache_redis_encrypt = false {
-#     aws_bool_issue["cache_redis_encrypt"]
-# }
-
-# cache_redis_encrypt_err = "AWS ElastiCache Redis cluster with encryption for data at rest disabled" {
-#     not cache_redis_encrypt
-# } else = "AWS ElastiCache Redis cluster with encryption for data at rest disabled" {
-#     aws_bool_issue["cache_redis_encrypt"]
-# }
-
-# cache_redis_encrypt_metadata := {
-#     "Policy Code": "PR-AWS-CLD-EC-003",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "AWS ElastiCache Redis cluster with encryption for data at rest disabled",
-#     "Policy Description": "This policy identifies ElastiCache Redis clusters which have encryption for data at rest(at-rest) is disabled. It is highly recommended to implement at-rest encryption in order to prevent unauthorized users from reading sensitive data saved to persistent media available on your Redis clusters and their associated cache storage systems.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html"
-# }
-
-# #
-# # PR-AWS-CLD-EC-004
-# #
-
-# default cache_encrypt = true
-
-# cache_encrypt = false {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not resource.Properties.TransitEncryptionEnabled
-# }
-
-# source_path[{"cache_encrypt": metadata}] {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not resource.Properties.TransitEncryptionEnabled
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "TransitEncryptionEnabled"]
-#         ],
-#     }
-# }
-
-# cache_encrypt {
-#     lower(input.Resources[i].Type) == "aws::elasticache::replicationgroup"
-#     not not cache_encrypt
-#     not aws_bool_issue["cache_encrypt"]
-# }
-
-# cache_encrypt = false {
-#     not cache_encrypt
-# }
-
-# cache_encrypt = false {
-#     aws_bool_issue["cache_encrypt"]
-# }
-
-
-# cache_encrypt_err = "AWS ElastiCache Redis cluster with in-transit encryption disabled" {
-#     not cache_encrypt
-# } else = "AWS ElastiCache Redis cluster with in-transit encryption disabled" {
-#     aws_bool_issue["cache_encrypt"]
-# }
-
-# cache_encrypt_metadata := {
-#     "Policy Code": "PR-AWS-CLD-EC-004",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "AWS ElastiCache Redis cluster with in-transit encryption disabled",
-#     "Policy Description": "This policy identifies ElastiCache Redis clusters which have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis clusters and their associated cache storage systems.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html"
-# }
-
-
-# #
-# # PR-AWS-CLD-EC-005
-# #
-
-# default cache_ksm_key = true
-
-# cache_ksm_key = false {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not resource.Properties.KmsKeyId
-# }
-
-# source_path[{"cache_ksm_key": metadata}] {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not resource.Properties.KmsKeyId
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "KmsKeyId"]
-#         ],
-#     }
-# }
-
-# cache_ksm_key = false {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not startswith(resource.Properties.KmsKeyId, "arn:")
-# }
-
-# source_path[{"cache_ksm_key": metadata}] {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not startswith(resource.Properties.KmsKeyId, "arn:")
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "KmsKeyId"]
-#         ],
-#     }
-# }
-
-# cache_ksm_key {
-#     lower(input.Resources[i].Type) == "aws::elasticache::replicationgroup"
-#     not not cache_ksm_key
-# }
-
-# cache_ksm_key = false {
-#     not cache_ksm_key
-# }
-
-# cache_ksm_key_err = "Ensure that ElastiCache replication Group (Redis) are encrypted at rest with customer managed CMK key" {
-#     not cache_ksm_key
-# }
-
-# cache_ksm_key_metadata := {
-#     "Policy Code": "PR-AWS-CLD-EC-005",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure that ElastiCache replication Group (Redis) are encrypted at rest with customer managed CMK key",
-#     "Policy Description": "This policy identifies ElastiCache Redis clusters which have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis clusters and their associated cache storage systems.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-kmskeyid"
-# }
-
-
-# #
-# # PR-AWS-CLD-EC-006
-# #
-
-# default cache_default_sg = true
-
-# cache_default_sg = false {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not resource.Properties.CacheSecurityGroupNames
-# }
-
-# source_path[{"cache_default_sg": metadata}] {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     not resource.Properties.CacheSecurityGroupNames
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "CacheSecurityGroupNames"]
-#         ],
-#     }
-# }
-
-# cache_default_sg = false {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     count(resource.Properties.CacheSecurityGroupNames) == 0
-# }
-
-# source_path[{"cache_default_sg": metadata}] {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     count(resource.Properties.CacheSecurityGroupNames) == 0
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "CacheSecurityGroupNames"]
-#         ],
-#     }
-# }
-
-# cache_default_sg = false {
-#     lower(resource.Type) == "aws::elasticache::replicationgroup"
-#     cache_sg := resource.Properties.CacheSecurityGroupNames[_]
-#     count([c | lower(cache_sg) == "default"; c:=1]) != 0
-# }
-
-# cache_default_sg {
-#     lower(input.Resources[i].Type) == "aws::elasticache::replicationgroup"
-#     not not cache_default_sg
-# }
-
-# cache_default_sg = false {
-#     not cache_default_sg
-# }
-
-# cache_default_sg_err = "Ensure 'default' value is not used on Security Group setting for Redis cache engines" {
-#     not cache_default_sg
-# }
-
-# cache_default_sg_metadata := {
-#     "Policy Code": "PR-AWS-CLD-EC-006",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure 'default' value is not used on Security Group setting for Redis cache engines",
-#     "Policy Description": "Ensure 'default' value is not used on Security Group setting for Redis cache engines",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-cachesubnetgroupname"
-# }
-
-
-# #
-# # PR-AWS-CLD-DMS-001
-# #
-
-# default dms_endpoint = true
-
-# dms_endpoint = false {
-#     lower(resource.Type) == "aws::dms::endpoint"
-#     lower(resource.Properties.EngineName) != "s3"
-#     lower(resource.Properties.SslMode) == "none"
-# }
-
-# source_path[{"dms_endpoint": metadata}] {
-#     lower(resource.Type) == "aws::dms::endpoint"
-#     lower(resource.Properties.EngineName) != "s3"
-#     lower(resource.Properties.SslMode) == "none"
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "SslMode"]
-#         ],
-#     }
-# }
-
-# dms_endpoint = false {
-#     lower(resource.Type) == "aws::dms::endpoint"
-#     lower(resource.Properties.EngineName) != "s3"
-#     not resource.Properties.SslMode
-# }
-
-# source_path[{"dms_endpoint": metadata}] {
-#     lower(resource.Type) == "aws::dms::endpoint"
-#     lower(resource.Properties.EngineName) != "s3"
-#     not resource.Properties.SslMode
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "SslMode"]
-#         ],
-#     }
-# }
-
-# dms_endpoint {
-#     lower(input.Resources[i].Type) == "aws::dms::endpoint"
-#     not not dms_endpoint
-# }
-
-# dms_endpoint = false {
-#     not dms_endpoint
-# }
-
-# dms_endpoint_err = "Ensure DMS endpoints are supporting SSL configuration" {
-#     not dms_endpoint
-# }
-
-# dms_endpoint_metadata := {
-#     "Policy Code": "PR-AWS-CLD-DMS-001",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure DMS endpoints are supporting SSL configuration",
-#     "Policy Description": "This policy identifies Database Migration Service (DMS) endpoints that are not configured with SSL to encrypt connections for source and target endpoints. It is recommended to use SSL connection for source and target endpoints; enforcing SSL connections help protect against 'man in the middle' attacks by encrypting the data stream between endpoint connections.\n\nNOTE: Not all databases use SSL in the same way. An Amazon Redshift endpoint already uses an SSL connection and does not require an SSL connection set up by AWS DMS. So there are some exlcusions included in policy RQL to report only those endpoints which can be configured using DMS SSL feature. \n\nFor more details:\nhttps://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.SSL",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.amazonaws.cn/en_us/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html#cfn-dms-endpoint-enginename"
-# }
-
-
-# #
-# # PR-AWS-CLD-DMS-002
-# #
-
-# default dms_public_access = true
-
-# dms_public_access = false {
-#     lower(resource.Type) == "aws::dms::replicationinstance"
-#     resource.Properties.PubliclyAccessible == true
-# }
-
-# source_path[{"dms_public_access": metadata}] {
-#     lower(resource.Type) == "aws::dms::replicationinstance"
-#     resource.Properties.PubliclyAccessible == true
-#     metadata := {
-#         "resource_path": [
-#             ["Resources", i, "Properties", "PubliclyAccessible"]
-#         ],
-#     }
-# }
-
-# dms_public_access {
-#     lower(input.Resources[i].Type) == "aws::dms::replicationinstance"
-#     not not dms_public_access
-#     not aws_bool_issue["dms_public_access"]
-# }
-
-# dms_public_access = false {
-#     not dms_public_access
-# }
-
-# dms_public_access = false {
-#     aws_bool_issue["dms_public_access"]
-# }
-
-# dms_public_access_err = "Ensure DMS replication instance is not publicly accessible" {
-#     not dms_public_access
-# } else = "Ensure DMS replication instance is not publicly accessible" {
-#     aws_bool_issue["dms_public_access"]
-# }
-
-# dms_public_access_metadata := {
-#     "Policy Code": "PR-AWS-CLD-DMS-002",
-#     "Type": "cloud",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud",
-#     "Policy Title": "Ensure DMS replication instance is not publicly accessible",
-#     "Policy Description": "Ensure DMS replication instance is not publicly accessible, this might cause sensitive data leak.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html#cfn-dms-replicationinstance-publiclyaccessible"
-# }
+#
+# PR-AWS-CLD-NPT-001
+#
+
+default neptune_cluster_logs = true
+
+neptune_cluster_logs = false {
+    # lower(resource.Type) == "aws::neptune::dbcluster"
+    DBClusters := input.DBClusters[_]
+    not DBClusters.EnabledCloudwatchLogsExports
+}
+
+neptune_cluster_logs = false {
+    # lower(resource.Type) == "aws::neptune::dbcluster"
+    DBClusters := input.DBClusters[_]
+    count(DBClusters.EnabledCloudwatchLogsExports) == 0
+}
+
+neptune_cluster_logs_err = "Ensure Neptune logging is enabled" {
+    not neptune_cluster_logs
+}
+
+neptune_cluster_logs_metadata := {
+    "Policy Code": "PR-AWS-CLD-NPT-001",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Neptune logging is enabled",
+    "Policy Description": "These access logs can be used to analyze traffic patterns and troubleshoot security and operational issues.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-neptune-dbcluster.html#cfn-neptune-dbcluster-EnableCloudwatchLogsExports"
+}
+
+
+#
+# PR-AWS-CLD-DD-001
+#
+
+default dynamodb_encrypt = true
+
+dynamodb_encrypt = false {
+    # lower(resource.Type) == "aws::dynamodb::table"
+    lower(input.Table.SSEDescription.Status) != "enabling"
+    lower(input.Table.SSEDescription.Status) != "enabled"
+}
+
+dynamodb_encrypt = false {
+    # lower(resource.Type) == "aws::dynamodb::table"
+    not input.Table.SSEDescription.Status
+}
+
+dynamodb_encrypt_err = "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK" {
+    not dynamodb_encrypt
+}
+
+dynamodb_encrypt_metadata := {
+    "Policy Code": "PR-AWS-CLD-DD-001",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK",
+    "Policy Description": "This policy identifies the DynamoDB tables that use AWS owned CMK (default ) instead of AWS managed CMK (KMS ) to encrypt data. AWS managed CMK provide additional features such as the ability to view the CMK and key policy, and audit the encryption and decryption of DynamoDB tables.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html"
+}
+
+
+#
+# PR-AWS-CLD-DD-002
+#
+
+default dynamodb_PITR_enable = true
+
+dynamodb_PITR_enable = false {
+    # lower(resource.Type) == "aws::dynamodb::table"
+    not input.ContinuousBackupsDescription.PointInTimeRecoveryDescription.PointInTimeRecoveryStatus
+}
+
+dynamodb_PITR_enable = false {
+    # lower(resource.Type) == "aws::dynamodb::table"
+    lower(input.ContinuousBackupsDescription.PointInTimeRecoveryDescription.PointInTimeRecoveryStatus) != "enabled"
+}
+
+dynamodb_PITR_enable_err = "Ensure DynamoDB PITR is enabled" {
+    not dynamodb_PITR_enable
+}
+
+dynamodb_PITR_enable_metadata := {
+    "Policy Code": "PR-AWS-CLD-DD-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure DynamoDB PITR is enabled",
+    "Policy Description": "DynamoDB Point-In-Time Recovery (PITR) is an automatic backup service for DynamoDB table data that helps protect your DynamoDB tables from accidental write or delete operations. Once enabled, PITR provides continuous backups that can be controlled using various programmatic parameters. PITR can also be used to restore table data from any point in time during the last 35 days, as well as any incremental backups of DynamoDB tables",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html"
+}
+
+
+#
+# PR-AWS-CLD-DD-003
+#
+
+default dynamodb_kinesis_stream = true
+
+dynamodb_kinesis_stream = false {
+    # lower(resource.Type) == "aws::dynamodb::table"
+    KinesisDataStreamDestinations := input.KinesisDataStreamDestinations[_]
+    count(KinesisDataStreamDestinations.StreamArn) == 0
+}
+
+dynamodb_kinesis_stream = false {
+    # lower(resource.Type) == "aws::dynamodb::table"
+    KinesisDataStreamDestinations := input.KinesisDataStreamDestinations[_]
+    not KinesisDataStreamDestinations.StreamArn
+}
+
+dynamodb_kinesis_stream_err = "Dynamo DB kinesis specification property should not be null" {
+    not dynamodb_kinesis_stream
+}
+
+dynamodb_kinesis_stream_metadata := {
+    "Policy Code": "PR-AWS-CLD-DD-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Dynamo DB kinesis specification property should not be null",
+    "Policy Description": "Dynamo DB kinesis specification property should not be null",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-kinesisstreamspecification.html#cfn-dynamodb-kinesisstreamspecification-streamarn"
+}
+
+
+#
+# PR-AWS-CLD-EC-001
+#
+
+default cache_failover = true
+
+cache_failover = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    lower(ReplicationGroups.AutomaticFailover) != "enabled"
+    lower(ReplicationGroups.AutomaticFailover) != "enabling"
+}
+
+cache_failover_err = "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled" {
+    not cache_failover
+}
+
+cache_failover_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-001",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled",
+    "Policy Description": "This policy identifies ElastiCache Redis clusters which have Multi-AZ Automatic Failover feature set to disabled. It is recommended to enable the Multi-AZ Automatic Failover feature for your Redis Cache cluster, which will improve primary node reachability by providing read replica in case of network connectivity loss or loss of availability in the primary's availability zone for read/write operations._x005F_x000D_ Note: Redis cluster Multi-AZ with automatic failover does not support T1 and T2 cache node types and is only available if the cluster has at least one read replica.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html"
+}
+
+#
+# PR-AWS-CLD-EC-002
+#
+
+default cache_redis_auth = true
+
+cache_redis_auth = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    not ReplicationGroups.AuthTokenEnabled
+}
+
+cache_redis_auth_err = "AWS ElastiCache Redis cluster with encryption for data at rest disabled" {
+    not cache_redis_auth
+}
+
+cache_redis_auth_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS ElastiCache Redis cluster with Redis AUTH feature disabled",
+    "Policy Description": "This policy identifies ElastiCache Redis clusters which have Redis AUTH feature disabled. Redis AUTH can improve data security by requiring the user to enter a password before they are granted permission to execute Redis commands on a password protected Redis server.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html"
+}
+
+
+#
+# PR-AWS-CLD-EC-003
+#
+
+default cache_redis_encrypt = true
+
+
+cache_redis_encrypt = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    not ReplicationGroups.AtRestEncryptionEnabled
+}
+
+cache_redis_encrypt_err = "AWS ElastiCache Redis cluster with encryption for data at rest disabled" {
+    not cache_redis_encrypt
+}
+
+cache_redis_encrypt_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS ElastiCache Redis cluster with encryption for data at rest disabled",
+    "Policy Description": "This policy identifies ElastiCache Redis clusters which have encryption for data at rest(at-rest) is disabled. It is highly recommended to implement at-rest encryption in order to prevent unauthorized users from reading sensitive data saved to persistent media available on your Redis clusters and their associated cache storage systems.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html"
+}
+
+
+#
+# PR-AWS-CLD-EC-004
+#
+
+default cache_encrypt = true
+
+cache_encrypt = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    not ReplicationGroups.TransitEncryptionEnabled
+}
+
+cache_encrypt_err = "AWS ElastiCache Redis cluster with in-transit encryption disabled" {
+    not cache_encrypt
+}
+
+cache_encrypt_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS ElastiCache Redis cluster with in-transit encryption disabled",
+    "Policy Description": "This policy identifies ElastiCache Redis clusters which have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis clusters and their associated cache storage systems.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html"
+}
+
+
+#
+# PR-AWS-CLD-EC-005
+#
+
+default cache_ksm_key = true
+
+cache_ksm_key = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    not ReplicationGroups.KmsKeyId
+}
+
+cache_ksm_key = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    not startswith(ReplicationGroups.KmsKeyId, "arn:")
+}
+
+cache_ksm_key_err = "Ensure that ElastiCache replication Group (Redis) are encrypted at rest with customer managed CMK key" {
+    not cache_ksm_key
+}
+
+cache_ksm_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-005",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that ElastiCache replication Group (Redis) are encrypted at rest with customer managed CMK key",
+    "Policy Description": "This policy identifies ElastiCache Redis clusters which have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis clusters and their associated cache storage systems.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-kmskeyid"
+}
+
+
+#
+# PR-AWS-CLD-DMS-001
+#
+
+default dms_endpoint = true
+
+dms_endpoint = false {
+    # lower(resource.Type) == "aws::dms::endpoint"
+    Endpoints := input.Endpoints[_]
+    lower(Endpoints.EngineName) != "s3"
+    lower(Endpoints.SslMode) == "none"
+}
+
+dms_endpoint = false {
+    # lower(resource.Type) == "aws::dms::endpoint"
+    Endpoints := input.Endpoints[_]
+    lower(Endpoints.EngineName) != "s3"
+    not Endpoints.SslMode
+}
+
+dms_endpoint_err = "Ensure DMS endpoints are supporting SSL configuration" {
+    not dms_endpoint
+}
+
+dms_endpoint_metadata := {
+    "Policy Code": "PR-AWS-CLD-DMS-001",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure DMS endpoints are supporting SSL configuration",
+    "Policy Description": "This policy identifies Database Migration Service (DMS) endpoints that are not configured with SSL to encrypt connections for source and target endpoints. It is recommended to use SSL connection for source and target endpoints; enforcing SSL connections help protect against 'man in the middle' attacks by encrypting the data stream between endpoint connections.\n\nNOTE: Not all databases use SSL in the same way. An Amazon Redshift endpoint already uses an SSL connection and does not require an SSL connection set up by AWS DMS. So there are some exlcusions included in policy RQL to report only those endpoints which can be configured using DMS SSL feature. \n\nFor more details:\nhttps://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.SSL",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.amazonaws.cn/en_us/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html#cfn-dms-endpoint-enginename"
+}
+
+
+#
+# PR-AWS-CLD-DMS-002
+#
+
+default dms_public_access = true
+
+dms_public_access = false {
+    # lower(resource.Type) == "aws::dms::replicationinstance"
+    Endpoints := input.Endpoints[_]
+    Endpoints.PubliclyAccessible == true
+}
+
+dms_public_access_err = "Ensure DMS replication instance is not publicly accessible" {
+    not dms_public_access
+}
+
+dms_public_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-DMS-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure DMS replication instance is not publicly accessible",
+    "Policy Description": "Ensure DMS replication instance is not publicly accessible, this might cause sensitive data leak.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html#cfn-dms-replicationinstance-publiclyaccessible"
+}
