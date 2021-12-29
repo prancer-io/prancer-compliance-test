@@ -6655,7 +6655,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MSSQL_SERVER_5",
+                    "masterTestId": "TEST_MSSQL_SERVER_4",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -6690,7 +6690,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MSSQL_SERVER_6",
+                    "masterTestId": "TEST_MSSQL_SERVER_5",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -7045,7 +7045,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MSSQL_SERVER_5",
+                    "masterTestId": "TEST_MSSQL_SERVER_6",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],

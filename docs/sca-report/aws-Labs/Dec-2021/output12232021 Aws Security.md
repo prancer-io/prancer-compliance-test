@@ -1,0 +1,1995 @@
+# Automated Vulnerability Scan result and Static Code Analysis for Amazon Web Services Labs (Dec 2021)
+
+## All Services
+
+#### Compute: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/Dec-2021/output12232021%20Aws%20Compute.md
+#### DataStore (Part1): https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/Dec-2021/output12232021%20Aws%20DataStore%20(Part1).md
+#### DataStore (Part2): https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/Dec-2021/output12232021%20Aws%20DataStore%20(Part2).md
+#### Management: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/Dec-2021/output12232021%20Aws%20Management.md
+#### Networking (Part1): https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/Dec-2021/output12232021%20Aws%20Networking%20(Part1).md
+#### Networking (Part2): https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/Dec-2021/output12232021%20Aws%20Networking%20(Part2).md
+#### Networking (Part3): https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/Dec-2021/output12232021%20Aws%20Networking%20(Part3).md
+#### Networking (Part4): https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/Dec-2021/output12232021%20Aws%20Networking%20(Part4).md
+#### Networking (Part5): https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/Dec-2021/output12232021%20Aws%20Networking%20(Part5).md
+#### Networking (Part6): https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/Dec-2021/output12232021%20Aws%20Networking%20(Part6).md
+#### Networking (Part7): https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/Dec-2021/output12232021%20Aws%20Networking%20(Part7).md
+#### Security: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/Dec-2021/output12232021%20Aws%20Security.md
+
+## AWS Security Services
+
+Source Repository: https://github.com/awslabs/aws-cloudformation-templates
+
+Scan engine: **Prancer Framework** (https://www.prancer.io)
+
+Compliance Database: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac
+
+## Compliance run Meta Data
+| Title     | Description         |
+|:----------|:--------------------|
+| timestamp | 1640270434964       |
+| snapshot  | master-snapshot_gen |
+| container | scenario-aws-Labs   |
+| test      | master-test.json    |
+
+## Results
+
+### Test ID - PR-AWS-CFR-KMS-001
+Title: AWS Customer Master Key (CMK) rotation is not enabled\
+Test Result: **passed**\
+Description : This policy identifies Customer Master Keys (CMKs) that are not enabled with key rotation. AWS KMS (Key Management Service) allows customers to create master keys to encrypt sensitive data in different services. As a security best practice, it is important to rotate the keys periodically so that if the keys are compromised, the data in the underlying service is still secure with the new keys.\
+
+#### Test Details
+- eval: data.rule.kms_key_rotation
+- id : PR-AWS-CFR-KMS-001
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                  |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT69                                                                                                                                                      |
+| structure     | filesystem                                                                                                                                                                   |
+| reference     | master                                                                                                                                                                       |
+| source        | gitConnectorAwsLabs                                                                                                                                                          |
+| collection    | cloudformationtemplate                                                                                                                                                       |
+| type          | cloudformation                                                                                                                                                               |
+| region        |                                                                                                                                                                              |
+| resourceTypes | ['aws::iam::role', 'aws::lambda::function', 'aws::kms::key', 'aws::s3::bucket', 'aws::iam::managedpolicy', 'aws::s3::bucketpolicy', 'aws::kms::alias', 'custom::lambdatrig'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/AutomateCreatingHanaBackupBucket/CFT/CreateHanaBackupSecureBackut.yaml']                 |
+
+- masterTestId: TEST_KMS_1
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/kms.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-KMS-001
+Title: AWS Customer Master Key (CMK) rotation is not enabled\
+Test Result: **passed**\
+Description : This policy identifies Customer Master Keys (CMKs) that are not enabled with key rotation. AWS KMS (Key Management Service) allows customers to create master keys to encrypt sensitive data in different services. As a security best practice, it is important to rotate the keys periodically so that if the keys are compromised, the data in the underlying service is still secure with the new keys.\
+
+#### Test Details
+- eval: data.rule.kms_key_rotation
+- id : PR-AWS-CFR-KMS-001
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT74                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| reference     | master                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| region        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| resourceTypes | ['aws::iam::role', 'aws::lambda::function', 'aws::ec2::securitygroupegress', 'aws::kms::key', 'aws::elasticloadbalancingv2::listenerrule', 'aws::ec2::securitygroup', 'aws::cloudfront::distribution', 'custom::lambdaversion', 'aws::ec2::instance', 'aws::ec2::securitygroupingress', 'aws::s3::bucket', 'aws::s3::bucketpolicy', 'aws::kms::alias', 'aws::elasticloadbalancingv2::loadbalancer', 'aws::elasticloadbalancingv2::listener', 'aws::elasticloadbalancingv2::targetgroup'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/CloudFrontCustomOriginLambda@Edge/CloudFront.yaml']                                                                                                                                                                                                                                                                                                                                                  |
+
+- masterTestId: TEST_KMS_1
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/kms.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-KMS-002
+Title: AWS KMS Customer Managed Key not in use\
+Test Result: **failed**\
+Description : This policy identifies KMS Customer Managed Keys(CMKs) which are not usable. When you create a CMK, it is enabled by default. If you disable a CMK or schedule it for deletion makes it unusable, it cannot be used to encrypt or decrypt data and AWS KMS does not rotate the backing keys until you re-enable it.\
+
+#### Test Details
+- eval: data.rule.kms_key_state
+- id : PR-AWS-CFR-KMS-002
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                  |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT69                                                                                                                                                      |
+| structure     | filesystem                                                                                                                                                                   |
+| reference     | master                                                                                                                                                                       |
+| source        | gitConnectorAwsLabs                                                                                                                                                          |
+| collection    | cloudformationtemplate                                                                                                                                                       |
+| type          | cloudformation                                                                                                                                                               |
+| region        |                                                                                                                                                                              |
+| resourceTypes | ['aws::iam::role', 'aws::lambda::function', 'aws::kms::key', 'aws::s3::bucket', 'aws::iam::managedpolicy', 'aws::s3::bucketpolicy', 'aws::kms::alias', 'custom::lambdatrig'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/AutomateCreatingHanaBackupBucket/CFT/CreateHanaBackupSecureBackut.yaml']                 |
+
+- masterTestId: TEST_KMS_2
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/kms.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-KMS-002
+Title: AWS KMS Customer Managed Key not in use\
+Test Result: **passed**\
+Description : This policy identifies KMS Customer Managed Keys(CMKs) which are not usable. When you create a CMK, it is enabled by default. If you disable a CMK or schedule it for deletion makes it unusable, it cannot be used to encrypt or decrypt data and AWS KMS does not rotate the backing keys until you re-enable it.\
+
+#### Test Details
+- eval: data.rule.kms_key_state
+- id : PR-AWS-CFR-KMS-002
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT74                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| reference     | master                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| region        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| resourceTypes | ['aws::iam::role', 'aws::lambda::function', 'aws::ec2::securitygroupegress', 'aws::kms::key', 'aws::elasticloadbalancingv2::listenerrule', 'aws::ec2::securitygroup', 'aws::cloudfront::distribution', 'custom::lambdaversion', 'aws::ec2::instance', 'aws::ec2::securitygroupingress', 'aws::s3::bucket', 'aws::s3::bucketpolicy', 'aws::kms::alias', 'aws::elasticloadbalancingv2::loadbalancer', 'aws::elasticloadbalancingv2::listener', 'aws::elasticloadbalancingv2::targetgroup'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/CloudFrontCustomOriginLambda@Edge/CloudFront.yaml']                                                                                                                                                                                                                                                                                                                                                  |
+
+- masterTestId: TEST_KMS_2
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/kms.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-KMS-003
+Title: Ensure no KMS key policy contain wildcard (*) principal\
+Test Result: **passed**\
+Description : This policy revents all user access to specific resource/s and actions\
+
+#### Test Details
+- eval: data.rule.kms_key_allow_all_principal
+- id : PR-AWS-CFR-KMS-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                  |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT69                                                                                                                                                      |
+| structure     | filesystem                                                                                                                                                                   |
+| reference     | master                                                                                                                                                                       |
+| source        | gitConnectorAwsLabs                                                                                                                                                          |
+| collection    | cloudformationtemplate                                                                                                                                                       |
+| type          | cloudformation                                                                                                                                                               |
+| region        |                                                                                                                                                                              |
+| resourceTypes | ['aws::iam::role', 'aws::lambda::function', 'aws::kms::key', 'aws::s3::bucket', 'aws::iam::managedpolicy', 'aws::s3::bucketpolicy', 'aws::kms::alias', 'custom::lambdatrig'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/AutomateCreatingHanaBackupBucket/CFT/CreateHanaBackupSecureBackut.yaml']                 |
+
+- masterTestId: TEST_KMS_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/kms.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-KMS-003
+Title: Ensure no KMS key policy contain wildcard (*) principal\
+Test Result: **passed**\
+Description : This policy revents all user access to specific resource/s and actions\
+
+#### Test Details
+- eval: data.rule.kms_key_allow_all_principal
+- id : PR-AWS-CFR-KMS-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT74                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| reference     | master                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| region        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| resourceTypes | ['aws::iam::role', 'aws::lambda::function', 'aws::ec2::securitygroupegress', 'aws::kms::key', 'aws::elasticloadbalancingv2::listenerrule', 'aws::ec2::securitygroup', 'aws::cloudfront::distribution', 'custom::lambdaversion', 'aws::ec2::instance', 'aws::ec2::securitygroupingress', 'aws::s3::bucket', 'aws::s3::bucketpolicy', 'aws::kms::alias', 'aws::elasticloadbalancingv2::loadbalancer', 'aws::elasticloadbalancingv2::listener', 'aws::elasticloadbalancingv2::targetgroup'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/CloudFrontCustomOriginLambda@Edge/CloudFront.yaml']                                                                                                                                                                                                                                                                                                                                                  |
+
+- masterTestId: TEST_KMS_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/kms.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-SM-001
+Title: Ensure that Secrets Manager secret is encrypted using KMS\
+Test Result: **passed**\
+Description : Ensure that your Amazon Secrets Manager secrets (i.e. database credentials, API keys, OAuth tokens, etc) are encrypted with Amazon KMS Customer Master Keys instead of default encryption keys that Secrets Manager service creates for you, in order to have a more control over secret data encryption and decryption process\
+
+#### Test Details
+- eval: data.rule.secret_manager_kms
+- id : PR-AWS-CFR-SM-001
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                              |
+|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT54                                                                                                                                                                                                                                  |
+| structure     | filesystem                                                                                                                                                                                                                                               |
+| reference     | master                                                                                                                                                                                                                                                   |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                      |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                   |
+| type          | cloudformation                                                                                                                                                                                                                                           |
+| region        |                                                                                                                                                                                                                                                          |
+| resourceTypes | ['aws::iam::role', 'aws::ec2::dhcpoptions', 'aws::secretsmanager::secret', 'aws::iam::instanceprofile', 'aws::lambda::function', 'aws::ec2::securitygroup', 'aws::logs::loggroup', 'aws::ec2::vpcdhcpoptionsassociation', 'custom::adconnectorresource'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/ADConnector/templates/ADCONNECTOR.cfn.yaml']                                                                                                                         |
+
+- masterTestId: TEST_ALL_1
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/all.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-SM-001
+Title: Ensure that Secrets Manager secret is encrypted using KMS\
+Test Result: **passed**\
+Description : Ensure that your Amazon Secrets Manager secrets (i.e. database credentials, API keys, OAuth tokens, etc) are encrypted with Amazon KMS Customer Master Keys instead of default encryption keys that Secrets Manager service creates for you, in order to have a more control over secret data encryption and decryption process\
+
+#### Test Details
+- eval: data.rule.secret_manager_kms
+- id : PR-AWS-CFR-SM-001
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                     |
+|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT83                                                                                                                                                                                         |
+| structure     | filesystem                                                                                                                                                                                                      |
+| reference     | master                                                                                                                                                                                                          |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                             |
+| collection    | cloudformationtemplate                                                                                                                                                                                          |
+| type          | cloudformation                                                                                                                                                                                                  |
+| region        |                                                                                                                                                                                                                 |
+| resourceTypes | ['aws::iam::role', 'aws::ec2::dhcpoptions', 'aws::secretsmanager::secret', 'aws::iam::instanceprofile', 'aws::directoryservice::microsoftad', 'aws::ec2::securitygroup', 'aws::ec2::vpcdhcpoptionsassociation'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/ManagedAD/templates/MANAGEDAD.cfn.yaml']                                                                                    |
+
+- masterTestId: TEST_ALL_1
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/all.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-002
+Title: Ensure no wildcards are specified in IAM policy with 'Action' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Action element in a role's trust policy would allow any IAM user in an account to Manage all resources and a user can manipulate data. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_action
+- id : PR-AWS-CFR-IAM-002
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                      |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT35                                                                                                                                                                                                                                                                                          |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                       |
+| reference     | master                                                                                                                                                                                                                                                                                                           |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                              |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                           |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                   |
+| region        |                                                                                                                                                                                                                                                                                                                  |
+| resourceTypes | ['aws::neptune::dbparametergroup', 'aws::neptune::dbinstance', 'aws::iam::role', 'aws::sns::subscription', 'aws::sns::topic', 'aws::ec2::securitygroup', 'aws::neptune::dbclusterparametergroup', 'aws::neptune::dbcluster', 'aws::iam::managedpolicy', 'aws::neptune::dbsubnetgroup', 'aws::cloudwatch::alarm'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/NeptuneDB/Neptune.yaml']                                                                                                                                                                                                      |
+
+- masterTestId: TEST_IAM_2
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-002
+Title: Ensure no wildcards are specified in IAM policy with 'Action' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Action element in a role's trust policy would allow any IAM user in an account to Manage all resources and a user can manipulate data. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_action
+- id : PR-AWS-CFR-IAM-002
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                  |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT69                                                                                                                                                      |
+| structure     | filesystem                                                                                                                                                                   |
+| reference     | master                                                                                                                                                                       |
+| source        | gitConnectorAwsLabs                                                                                                                                                          |
+| collection    | cloudformationtemplate                                                                                                                                                       |
+| type          | cloudformation                                                                                                                                                               |
+| region        |                                                                                                                                                                              |
+| resourceTypes | ['aws::iam::role', 'aws::lambda::function', 'aws::kms::key', 'aws::s3::bucket', 'aws::iam::managedpolicy', 'aws::s3::bucketpolicy', 'aws::kms::alias', 'custom::lambdatrig'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/AutomateCreatingHanaBackupBucket/CFT/CreateHanaBackupSecureBackut.yaml']                 |
+
+- masterTestId: TEST_IAM_2
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-002
+Title: Ensure no wildcards are specified in IAM policy with 'Action' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Action element in a role's trust policy would allow any IAM user in an account to Manage all resources and a user can manipulate data. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_action
+- id : PR-AWS-CFR-IAM-002
+
+#### Snapshots
+| Title         | Description                                                                                                                    |
+|:--------------|:-------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT107                                                                                                       |
+| structure     | filesystem                                                                                                                     |
+| reference     | master                                                                                                                         |
+| source        | gitConnectorAwsLabs                                                                                                            |
+| collection    | cloudformationtemplate                                                                                                         |
+| type          | cloudformation                                                                                                                 |
+| region        |                                                                                                                                |
+| resourceTypes | ['aws::iam::user', 'aws::iam::managedpolicy', 'aws::iam::policy']                                                              |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/community/solutions/read_only_user/read_only_user.json'] |
+
+- masterTestId: TEST_IAM_2
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                          |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT2                                                                                                                                                                               |
+| structure     | filesystem                                                                                                                                                                                           |
+| reference     | master                                                                                                                                                                                               |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                  |
+| collection    | cloudformationtemplate                                                                                                                                                                               |
+| type          | cloudformation                                                                                                                                                                                       |
+| region        |                                                                                                                                                                                                      |
+| resourceTypes | ['aws::iam::role', 'aws::iam::instanceprofile', 'aws::ec2::securitygroup', 'aws::autoscaling::launchconfiguration', 'aws::autoscaling::autoscalinggroup', 'aws::elasticloadbalancing::loadbalancer'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/AutoScaling/AutoScalingRollingUpdates.yaml']                                                                      |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                              |
+|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT7                                                                                                                                   |
+| structure     | filesystem                                                                                                                                               |
+| reference     | master                                                                                                                                                   |
+| source        | gitConnectorAwsLabs                                                                                                                                      |
+| collection    | cloudformationtemplate                                                                                                                                   |
+| type          | cloudformation                                                                                                                                           |
+| region        |                                                                                                                                                          |
+| resourceTypes | ['aws::iam::role']                                                                                                                                       |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/CloudFormation/MacrosExamples/ExecutionRoleBuilder/example.template'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                           |
+|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT8                                                                                                                                                |
+| structure     | filesystem                                                                                                                                                            |
+| reference     | master                                                                                                                                                                |
+| source        | gitConnectorAwsLabs                                                                                                                                                   |
+| collection    | cloudformationtemplate                                                                                                                                                |
+| type          | cloudformation                                                                                                                                                        |
+| region        |                                                                                                                                                                       |
+| resourceTypes | ['aws::lambda::permission', 'aws::iam::role', 'aws::cloudformation::macro', 'aws::lambda::function']                                                                  |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/CloudFormation/MacrosExamples/Public-and-Private-Subnet-per-AZ/Create-Macro.yaml'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                            |
+|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT10                                                                                                                |
+| structure     | filesystem                                                                                                                             |
+| reference     | master                                                                                                                                 |
+| source        | gitConnectorAwsLabs                                                                                                                    |
+| collection    | cloudformationtemplate                                                                                                                 |
+| type          | cloudformation                                                                                                                         |
+| region        |                                                                                                                                        |
+| resourceTypes | ['aws::lambda::permission', 'aws::iam::role', 'aws::cloudformation::macro', 'aws::lambda::function']                                   |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/CloudFormation/MacrosExamples/PyPlate/python.yaml'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                    |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT12                                                                                                                        |
+| structure     | filesystem                                                                                                                                     |
+| reference     | master                                                                                                                                         |
+| source        | gitConnectorAwsLabs                                                                                                                            |
+| collection    | cloudformationtemplate                                                                                                                         |
+| type          | cloudformation                                                                                                                                 |
+| region        |                                                                                                                                                |
+| resourceTypes | ['aws::lambda::permission', 'aws::iam::role', 'aws::cloudformation::macro', 'aws::lambda::function']                                           |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/CloudFormation/MacrosExamples/StringFunctions/string.yaml'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                                                                                                                            |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT14                                                                                                                                                                                                                                                                                                                                                                                                |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                                                                                                                             |
+| reference     | master                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                                                                                                                                    |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                                                                                                                                 |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                                                                                                                         |
+| region        |                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| resourceTypes | ['aws::iam::role', 'aws::ec2::internetgateway', 'aws::elasticache::parametergroup', 'aws::ec2::routetable', 'aws::lambda::permission', 'aws::lambda::function', 'aws::elasticache::subnetgroup', 'aws::ec2::securitygroup', 'aws::ec2::route', 'aws::ec2::subnet', 'aws::ec2::subnetroutetableassociation', 'aws::elasticache::replicationgroup', 'aws::ec2::vpc', 'custom::region', 'aws::ec2::vpcgatewayattachment'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/CloudFormation/Elasticache-snapshot.template']                                                                                                                                                                                                                                                                                      |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT18                                                                                                                                                                                                                                    |
+| structure     | filesystem                                                                                                                                                                                                                                                 |
+| reference     | master                                                                                                                                                                                                                                                     |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                        |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                     |
+| type          | cloudformation                                                                                                                                                                                                                                             |
+| region        |                                                                                                                                                                                                                                                            |
+| resourceTypes | ['aws::iam::role', 'aws::ec2::volume', 'aws::sns::topic', 'aws::lambda::function', 'aws::sns::topicpolicy', 'aws::lambda::permission', 'aws::config::configrule', 'aws::s3::bucket', 'aws::config::deliverychannel', 'aws::config::configurationrecorder'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/Config/Config.yaml']                                                                                                                                                    |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|:--------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT19                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| reference     | master                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| region        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| resourceTypes | ['aws::iam::role', 'aws::dms::replicationtask', 'aws::ec2::internetgateway', 'aws::rds::dbsubnetgroup', 'aws::dms::replicationsubnetgroup', 'aws::ec2::routetable', 'aws::dms::replicationinstance', 'aws::rds::dbclusterparametergroup', 'aws::dms::endpoint', 'aws::rds::dbcluster', 'aws::ec2::securitygroup', 'aws::ec2::subnet', 'aws::ec2::route', 'aws::ec2::subnetroutetableassociation', 'aws::rds::dbinstance', 'aws::s3::bucket', 'aws::ec2::vpc', 'aws::ec2::vpcgatewayattachment'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/DMS/DMSAuroraToS3FullLoadAndOngoingReplication.json']                                                                                                                                                                                                                                                                                                                                                        |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT26                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| reference     | master                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| region        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| resourceTypes | ['aws::ecs::service', 'aws::iam::role', 'aws::iam::instanceprofile', 'aws::elasticloadbalancingv2::listenerrule', 'aws::ec2::securitygroup', 'aws::ecs::taskdefinition', 'aws::autoscaling::launchconfiguration', 'aws::logs::loggroup', 'aws::autoscaling::autoscalinggroup', 'aws::events::rule', 'aws::applicationautoscaling::scalabletarget', 'aws::ec2::securitygroupingress', 'aws::applicationautoscaling::scalingpolicy', 'aws::cloudwatch::alarm', 'aws::ecs::cluster', 'aws::elasticloadbalancingv2::listener', 'aws::elasticloadbalancingv2::loadbalancer', 'aws::elasticloadbalancingv2::targetgroup'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/ECS/ECS_Schedule_Example.template']                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                          |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT27                                                                                                                                                                              |
+| structure     | filesystem                                                                                                                                                                                           |
+| reference     | master                                                                                                                                                                                               |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                  |
+| collection    | cloudformationtemplate                                                                                                                                                                               |
+| type          | cloudformation                                                                                                                                                                                       |
+| region        |                                                                                                                                                                                                      |
+| resourceTypes | ['aws::iam::role', 'aws::iam::instanceprofile', 'aws::ec2::securitygroup', 'aws::autoscaling::launchconfiguration', 'aws::autoscaling::autoscalinggroup', 'aws::elasticloadbalancing::loadbalancer'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/ElasticLoadBalancing/ELBGuidedAutoScalingRollingUpgrade.yaml']                                                    |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                             |
+|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT32                                                                                                                 |
+| structure     | filesystem                                                                                                                              |
+| reference     | master                                                                                                                                  |
+| source        | gitConnectorAwsLabs                                                                                                                     |
+| collection    | cloudformationtemplate                                                                                                                  |
+| type          | cloudformation                                                                                                                          |
+| region        |                                                                                                                                         |
+| resourceTypes | ['aws::iam::role', 'aws::emr::cluster', 'aws::iam::instanceprofile']                                                                    |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/EMR/EMRCLusterGangliaWithSparkOrS3backedHbase.json'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                           |
+|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT33                                                                                                               |
+| structure     | filesystem                                                                                                                            |
+| reference     | master                                                                                                                                |
+| source        | gitConnectorAwsLabs                                                                                                                   |
+| collection    | cloudformationtemplate                                                                                                                |
+| type          | cloudformation                                                                                                                        |
+| region        |                                                                                                                                       |
+| resourceTypes | ['aws::iam::role', 'aws::emr::cluster', 'aws::iam::instanceprofile']                                                                  |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/EMR/EMRClusterWithAdditioanalSecurityGroups.json'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                      |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT35                                                                                                                                                                                                                                                                                          |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                       |
+| reference     | master                                                                                                                                                                                                                                                                                                           |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                              |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                           |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                   |
+| region        |                                                                                                                                                                                                                                                                                                                  |
+| resourceTypes | ['aws::neptune::dbparametergroup', 'aws::neptune::dbinstance', 'aws::iam::role', 'aws::sns::subscription', 'aws::sns::topic', 'aws::ec2::securitygroup', 'aws::neptune::dbclusterparametergroup', 'aws::neptune::dbcluster', 'aws::iam::managedpolicy', 'aws::neptune::dbsubnetgroup', 'aws::cloudwatch::alarm'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/NeptuneDB/Neptune.yaml']                                                                                                                                                                                                      |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                              |
+|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT54                                                                                                                                                                                                                                  |
+| structure     | filesystem                                                                                                                                                                                                                                               |
+| reference     | master                                                                                                                                                                                                                                                   |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                      |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                   |
+| type          | cloudformation                                                                                                                                                                                                                                           |
+| region        |                                                                                                                                                                                                                                                          |
+| resourceTypes | ['aws::iam::role', 'aws::ec2::dhcpoptions', 'aws::secretsmanager::secret', 'aws::iam::instanceprofile', 'aws::lambda::function', 'aws::ec2::securitygroup', 'aws::logs::loggroup', 'aws::ec2::vpcdhcpoptionsassociation', 'custom::adconnectorresource'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/ADConnector/templates/ADCONNECTOR.cfn.yaml']                                                                                                                         |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                  |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT69                                                                                                                                                      |
+| structure     | filesystem                                                                                                                                                                   |
+| reference     | master                                                                                                                                                                       |
+| source        | gitConnectorAwsLabs                                                                                                                                                          |
+| collection    | cloudformationtemplate                                                                                                                                                       |
+| type          | cloudformation                                                                                                                                                               |
+| region        |                                                                                                                                                                              |
+| resourceTypes | ['aws::iam::role', 'aws::lambda::function', 'aws::kms::key', 'aws::s3::bucket', 'aws::iam::managedpolicy', 'aws::s3::bucketpolicy', 'aws::kms::alias', 'custom::lambdatrig'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/AutomateCreatingHanaBackupBucket/CFT/CreateHanaBackupSecureBackut.yaml']                 |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                       |
+|:--------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT71                                                                                                                                                                                                                                                                                           |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                        |
+| reference     | master                                                                                                                                                                                                                                                                                                            |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                               |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                            |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                    |
+| region        |                                                                                                                                                                                                                                                                                                                   |
+| resourceTypes | ['aws::iam::role', 'aws::ec2::internetgateway', 'aws::ec2::routetable', 'aws::iam::instanceprofile', 'aws::ec2::securitygroup', 'aws::ec2::subnet', 'aws::ec2::route', 'aws::ec2::subnetroutetableassociation', 'aws::ec2::instance', 'aws::ec2::vpc', 'aws::ec2::vpcendpoint', 'aws::ec2::vpcgatewayattachment'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/CloudFormationEndpointSignals/cfn-endpoint-creationpolicy.yaml']                                                                                                                                                              |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                                                                                                         |
+|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT73                                                                                                                                                                                                                                                                                                                                                                             |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                                                                                                          |
+| reference     | master                                                                                                                                                                                                                                                                                                                                                                                              |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                                                                                                                 |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                                                                                                              |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                                                                                                      |
+| region        |                                                                                                                                                                                                                                                                                                                                                                                                     |
+| resourceTypes | ['aws::iam::role', 'aws::ec2::internetgateway', 'aws::ec2::routetable', 'aws::iam::instanceprofile', 'aws::ec2::securitygroup', 'aws::ec2::subnet', 'aws::ec2::route', 'aws::ec2::subnetroutetableassociation', 'aws::ec2::instance', 'aws::cloudformation::waitconditionhandle', 'aws::cloudformation::waitcondition', 'aws::ec2::vpc', 'aws::ec2::vpcendpoint', 'aws::ec2::vpcgatewayattachment'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/CloudFormationEndpointSignals/cfn-endpoint-waitcondition.yaml']                                                                                                                                                                                                                                                 |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT74                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| reference     | master                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| region        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| resourceTypes | ['aws::iam::role', 'aws::lambda::function', 'aws::ec2::securitygroupegress', 'aws::kms::key', 'aws::elasticloadbalancingv2::listenerrule', 'aws::ec2::securitygroup', 'aws::cloudfront::distribution', 'custom::lambdaversion', 'aws::ec2::instance', 'aws::ec2::securitygroupingress', 'aws::s3::bucket', 'aws::s3::bucketpolicy', 'aws::kms::alias', 'aws::elasticloadbalancingv2::loadbalancer', 'aws::elasticloadbalancingv2::listener', 'aws::elasticloadbalancingv2::targetgroup'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/CloudFrontCustomOriginLambda@Edge/CloudFront.yaml']                                                                                                                                                                                                                                                                                                                                                  |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                 |
+|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT75                                                                                                                     |
+| structure     | filesystem                                                                                                                                  |
+| reference     | master                                                                                                                                      |
+| source        | gitConnectorAwsLabs                                                                                                                         |
+| collection    | cloudformationtemplate                                                                                                                      |
+| type          | cloudformation                                                                                                                              |
+| region        |                                                                                                                                             |
+| resourceTypes | ['aws::iam::role', 'custom::vpceinterface', 'aws::lambda::function']                                                                        |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/createVPCInterfaceEndpoint/lambda_vpce_interface.json'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                          |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT77                                                                                                                              |
+| structure     | filesystem                                                                                                                                           |
+| reference     | master                                                                                                                                               |
+| source        | gitConnectorAwsLabs                                                                                                                                  |
+| collection    | cloudformationtemplate                                                                                                                               |
+| type          | cloudformation                                                                                                                                       |
+| region        |                                                                                                                                                      |
+| resourceTypes | ['aws::iam::role', 'custom::directorysettingsresource', 'aws::sns::topic', 'aws::lambda::function', 'aws::logs::loggroup']                           |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/DirectoryServiceSettings/templates/DIRECTORY_SETTINGS.cfn.yaml'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                              |
+|:--------------|:-------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT78                                                                                                  |
+| structure     | filesystem                                                                                                               |
+| reference     | master                                                                                                                   |
+| source        | gitConnectorAwsLabs                                                                                                      |
+| collection    | cloudformationtemplate                                                                                                   |
+| type          | cloudformation                                                                                                           |
+| region        |                                                                                                                          |
+| resourceTypes | ['aws::iam::role', 'aws::iam::instanceprofile', 'aws::ec2::securitygroup', 'aws::ssm::document', 'aws::ec2::instance']   |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/EC2DomainJoin/EC2-Domain-Join.json'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                  |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT81                                                                                                                                                                                                                                                      |
+| structure     | filesystem                                                                                                                                                                                                                                                                   |
+| reference     | master                                                                                                                                                                                                                                                                       |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                          |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                       |
+| type          | cloudformation                                                                                                                                                                                                                                                               |
+| region        |                                                                                                                                                                                                                                                                              |
+| resourceTypes | ['aws::iam::role', 'aws::ec2::internetgateway', 'aws::ec2::eip', 'aws::ec2::routetable', 'aws::lambda::function', 'aws::ec2::subnet', 'aws::ec2::route', 'aws::ec2::subnetroutetableassociation', 'aws::ec2::natgateway', 'aws::ec2::vpc', 'aws::ec2::vpcgatewayattachment'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/LambaStaticIP/lambda-static.cfn.yaml']                                                                                                                                                   |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                         |
+|:--------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT82                                                                                                                                                             |
+| structure     | filesystem                                                                                                                                                                          |
+| reference     | master                                                                                                                                                                              |
+| source        | gitConnectorAwsLabs                                                                                                                                                                 |
+| collection    | cloudformationtemplate                                                                                                                                                              |
+| type          | cloudformation                                                                                                                                                                      |
+| region        |                                                                                                                                                                                     |
+| resourceTypes | ['aws::iam::role', 'aws::ec2::internetgateway', 'custom::routetablelambda', 'aws::lambda::function', 'aws::ec2::route', 'aws::ec2::vpc', 'aws::ec2::vpcgatewayattachment']          |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/lambda-backed-cloudformation-custom-resources/get_vpc_main_route_table_id/RouteTable.template'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                     |
+|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT83                                                                                                                                                                                         |
+| structure     | filesystem                                                                                                                                                                                                      |
+| reference     | master                                                                                                                                                                                                          |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                             |
+| collection    | cloudformationtemplate                                                                                                                                                                                          |
+| type          | cloudformation                                                                                                                                                                                                  |
+| region        |                                                                                                                                                                                                                 |
+| resourceTypes | ['aws::iam::role', 'aws::ec2::dhcpoptions', 'aws::secretsmanager::secret', 'aws::iam::instanceprofile', 'aws::directoryservice::microsoftad', 'aws::ec2::securitygroup', 'aws::ec2::vpcdhcpoptionsassociation'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/ManagedAD/templates/MANAGEDAD.cfn.yaml']                                                                                    |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                                                                                                                          |
+|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT89                                                                                                                                                                                                                                                                                                                                                                                              |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                                                                                                                           |
+| reference     | master                                                                                                                                                                                                                                                                                                                                                                                                               |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                                                                                                                                  |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                                                                                                                               |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                                                                                                                       |
+| region        |                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| resourceTypes | ['aws::iam::role', 'custom::getpl', 'aws::ec2::internetgateway', 'aws::ec2::routetable', 'aws::iam::instanceprofile', 'aws::ec2::securitygroup', 'aws::ec2::subnet', 'aws::ec2::route', 'aws::ec2::subnetroutetableassociation', 'aws::ec2::instance', 'aws::cloudformation::waitconditionhandle', 'aws::cloudformation::waitcondition', 'aws::ec2::vpc', 'aws::ec2::vpcendpoint', 'aws::ec2::vpcgatewayattachment'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/PrefixListResource/Templates/cfn-endpoint-waitcondition.yaml']                                                                                                                                                                                                                                                                   |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                               |
+|:--------------|:------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT90                                                                                                                   |
+| structure     | filesystem                                                                                                                                |
+| reference     | master                                                                                                                                    |
+| source        | gitConnectorAwsLabs                                                                                                                       |
+| collection    | cloudformationtemplate                                                                                                                    |
+| type          | cloudformation                                                                                                                            |
+| region        |                                                                                                                                           |
+| resourceTypes | ['aws::logs::loggroup', 'aws::iam::role', 'aws::lambda::function']                                                                        |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/PrefixListResource/Templates/function-template.yaml'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                       |
+|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT93                                                                                                                           |
+| structure     | filesystem                                                                                                                                        |
+| reference     | master                                                                                                                                            |
+| source        | gitConnectorAwsLabs                                                                                                                               |
+| collection    | cloudformationtemplate                                                                                                                            |
+| type          | cloudformation                                                                                                                                    |
+| region        |                                                                                                                                                   |
+| resourceTypes | ['aws::logs::loggroup', 'aws::iam::role', 'aws::lambda::function']                                                                                |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/StackSetsResource/Templates/stackset-function-template.yaml'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                            |
+|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT95                                                                                                                |
+| structure     | filesystem                                                                                                                             |
+| reference     | master                                                                                                                                 |
+| source        | gitConnectorAwsLabs                                                                                                                    |
+| collection    | cloudformationtemplate                                                                                                                 |
+| type          | cloudformation                                                                                                                         |
+| region        |                                                                                                                                        |
+| resourceTypes | ['aws::iam::role', 'aws::ec2::instance', 'aws::iam::instanceprofile']                                                                  |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/TaggingRootVolumesInEC2/Tagging_Root_volume.yaml'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                |
+|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT97                                                                                                                    |
+| structure     | filesystem                                                                                                                                 |
+| reference     | master                                                                                                                                     |
+| source        | gitConnectorAwsLabs                                                                                                                        |
+| collection    | cloudformationtemplate                                                                                                                     |
+| type          | cloudformation                                                                                                                             |
+| region        |                                                                                                                                            |
+| resourceTypes | ['aws::logs::loggroup', 'aws::iam::role', 'aws::ec2::flowlog']                                                                             |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/VPCFlowLogs/templates/VPCFlowLogsCloudWatch.cfn.yaml'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                                                                                                                            |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT99                                                                                                                                                                                                                                                                                                                                                                                                |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                                                                                                                             |
+| reference     | master                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                                                                                                                                    |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                                                                                                                                 |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                                                                                                                         |
+| region        |                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| resourceTypes | ['aws::iam::role', 'aws::ec2::internetgateway', 'aws::elasticache::parametergroup', 'aws::ec2::routetable', 'aws::lambda::permission', 'aws::lambda::function', 'aws::elasticache::subnetgroup', 'aws::ec2::securitygroup', 'aws::ec2::route', 'aws::ec2::subnet', 'aws::ec2::subnetroutetableassociation', 'aws::elasticache::replicationgroup', 'aws::ec2::vpc', 'custom::region', 'aws::ec2::vpcgatewayattachment'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/Elasticache-snapshot.template']                                                                                                                                                                                                                                                                                                    |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                        |
+|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT104                                                                                                                                                                                                                                                                                           |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                         |
+| reference     | master                                                                                                                                                                                                                                                                                                             |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                                |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                             |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                     |
+| region        |                                                                                                                                                                                                                                                                                                                    |
+| resourceTypes | ['aws::iam::role', 'aws::iam::instanceprofile', 'aws::efs::mounttarget', 'aws::ec2::securitygroup', 'aws::efs::filesystem', 'aws::autoscaling::launchconfiguration', 'aws::autoscaling::autoscalinggroup', 'aws::autoscaling::scalingpolicy', 'aws::elasticloadbalancing::loadbalancer', 'aws::cloudwatch::alarm'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/community/services/EFS/efs_with_automount_to_ec2.json']                                                                                                                                                                                      |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-003
+Title: Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section\
+Test Result: **passed**\
+Description : Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.\
+
+#### Test Details
+- eval: data.rule.iam_wildcard_principal
+- id : PR-AWS-CFR-IAM-003
+
+#### Snapshots
+| Title         | Description                                                                                                         |
+|:--------------|:--------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT105                                                                                            |
+| structure     | filesystem                                                                                                          |
+| reference     | master                                                                                                              |
+| source        | gitConnectorAwsLabs                                                                                                 |
+| collection    | cloudformationtemplate                                                                                              |
+| type          | cloudformation                                                                                                      |
+| region        |                                                                                                                     |
+| resourceTypes | ['aws::iam::role', 'aws::lambda::function']                                                                         |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/community/services/Lambda/LambdaSample.yaml'] |
+
+- masterTestId: TEST_IAM_3
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-004
+Title: Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*'\
+Test Result: **passed**\
+Description : Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*' AWS only allows fully qualified ARNs or '*'. The above mentioned ARN is not supported in an identity-based policy\
+
+#### Test Details
+- eval: data.rule.iam_resource_format
+- id : PR-AWS-CFR-IAM-004
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                                                                                                                                                      |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT35                                                                                                                                                                                                                                                                                          |
+| structure     | filesystem                                                                                                                                                                                                                                                                                                       |
+| reference     | master                                                                                                                                                                                                                                                                                                           |
+| source        | gitConnectorAwsLabs                                                                                                                                                                                                                                                                                              |
+| collection    | cloudformationtemplate                                                                                                                                                                                                                                                                                           |
+| type          | cloudformation                                                                                                                                                                                                                                                                                                   |
+| region        |                                                                                                                                                                                                                                                                                                                  |
+| resourceTypes | ['aws::neptune::dbparametergroup', 'aws::neptune::dbinstance', 'aws::iam::role', 'aws::sns::subscription', 'aws::sns::topic', 'aws::ec2::securitygroup', 'aws::neptune::dbclusterparametergroup', 'aws::neptune::dbcluster', 'aws::iam::managedpolicy', 'aws::neptune::dbsubnetgroup', 'aws::cloudwatch::alarm'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/NeptuneDB/Neptune.yaml']                                                                                                                                                                                                      |
+
+- masterTestId: TEST_IAM_4
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-004
+Title: Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*'\
+Test Result: **passed**\
+Description : Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*' AWS only allows fully qualified ARNs or '*'. The above mentioned ARN is not supported in an identity-based policy\
+
+#### Test Details
+- eval: data.rule.iam_resource_format
+- id : PR-AWS-CFR-IAM-004
+
+#### Snapshots
+| Title         | Description                                                                                                                                                                  |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT69                                                                                                                                                      |
+| structure     | filesystem                                                                                                                                                                   |
+| reference     | master                                                                                                                                                                       |
+| source        | gitConnectorAwsLabs                                                                                                                                                          |
+| collection    | cloudformationtemplate                                                                                                                                                       |
+| type          | cloudformation                                                                                                                                                               |
+| region        |                                                                                                                                                                              |
+| resourceTypes | ['aws::iam::role', 'aws::lambda::function', 'aws::kms::key', 'aws::s3::bucket', 'aws::iam::managedpolicy', 'aws::s3::bucketpolicy', 'aws::kms::alias', 'custom::lambdatrig'] |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/solutions/AutomateCreatingHanaBackupBucket/CFT/CreateHanaBackupSecureBackut.yaml']                 |
+
+- masterTestId: TEST_IAM_4
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-004
+Title: Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*'\
+Test Result: **passed**\
+Description : Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*' AWS only allows fully qualified ARNs or '*'. The above mentioned ARN is not supported in an identity-based policy\
+
+#### Test Details
+- eval: data.rule.iam_resource_format
+- id : PR-AWS-CFR-IAM-004
+
+#### Snapshots
+| Title         | Description                                                                                                                    |
+|:--------------|:-------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT107                                                                                                       |
+| structure     | filesystem                                                                                                                     |
+| reference     | master                                                                                                                         |
+| source        | gitConnectorAwsLabs                                                                                                            |
+| collection    | cloudformationtemplate                                                                                                         |
+| type          | cloudformation                                                                                                                 |
+| region        |                                                                                                                                |
+| resourceTypes | ['aws::iam::user', 'aws::iam::managedpolicy', 'aws::iam::policy']                                                              |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/community/solutions/read_only_user/read_only_user.json'] |
+
+- masterTestId: TEST_IAM_4
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-005
+Title: AWS IAM policy allows assume role permission across all services\
+Test Result: **passed**\
+Description : This policy identifies AWS IAM policy which allows assume role permission across all services. Typically, AssumeRole is used if you have multiple accounts and need to access resources from each account then you can create long term credentials in one account and then use temporary security credentials to access all the other accounts by assuming roles in those accounts.\
+
+#### Test Details
+- eval: data.rule.iam_assume_permission
+- id : PR-AWS-CFR-IAM-005
+
+#### Snapshots
+| Title         | Description                                                                                                                 |
+|:--------------|:----------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT34                                                                                                     |
+| structure     | filesystem                                                                                                                  |
+| reference     | master                                                                                                                      |
+| source        | gitConnectorAwsLabs                                                                                                         |
+| collection    | cloudformationtemplate                                                                                                      |
+| type          | cloudformation                                                                                                              |
+| region        |                                                                                                                             |
+| resourceTypes | ['aws::iam::group', 'aws::iam::user', 'aws::iam::usertogroupaddition', 'aws::iam::accesskey', 'aws::iam::policy']           |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/IAM/IAM_Users_Groups_and_Policies.yaml'] |
+
+- masterTestId: TEST_IAM_5
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-005
+Title: AWS IAM policy allows assume role permission across all services\
+Test Result: **passed**\
+Description : This policy identifies AWS IAM policy which allows assume role permission across all services. Typically, AssumeRole is used if you have multiple accounts and need to access resources from each account then you can create long term credentials in one account and then use temporary security credentials to access all the other accounts by assuming roles in those accounts.\
+
+#### Test Details
+- eval: data.rule.iam_assume_permission
+- id : PR-AWS-CFR-IAM-005
+
+#### Snapshots
+| Title         | Description                                                                                                                    |
+|:--------------|:-------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT107                                                                                                       |
+| structure     | filesystem                                                                                                                     |
+| reference     | master                                                                                                                         |
+| source        | gitConnectorAwsLabs                                                                                                            |
+| collection    | cloudformationtemplate                                                                                                         |
+| type          | cloudformation                                                                                                                 |
+| region        |                                                                                                                                |
+| resourceTypes | ['aws::iam::user', 'aws::iam::managedpolicy', 'aws::iam::policy']                                                              |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/community/solutions/read_only_user/read_only_user.json'] |
+
+- masterTestId: TEST_IAM_5
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-006
+Title: AWS IAM policy is overly permissive to all traffic via condition clause\
+Test Result: **passed**\
+Description : This policy identifies IAM policies that have a policy that is overly permissive to all traffic via condition clause. If any IAM policy statement with a condition containing 0.0.0.0/0 or ::/0, it allows all traffic to resources attached to that IAM policy. It is highly recommended to have the least privileged IAM policy to protect the data leakage and unauthorized access.\
+
+#### Test Details
+- eval: data.rule.iam_all_traffic
+- id : PR-AWS-CFR-IAM-006
+
+#### Snapshots
+| Title         | Description                                                                                                                 |
+|:--------------|:----------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT34                                                                                                     |
+| structure     | filesystem                                                                                                                  |
+| reference     | master                                                                                                                      |
+| source        | gitConnectorAwsLabs                                                                                                         |
+| collection    | cloudformationtemplate                                                                                                      |
+| type          | cloudformation                                                                                                              |
+| region        |                                                                                                                             |
+| resourceTypes | ['aws::iam::group', 'aws::iam::user', 'aws::iam::usertogroupaddition', 'aws::iam::accesskey', 'aws::iam::policy']           |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/IAM/IAM_Users_Groups_and_Policies.yaml'] |
+
+- masterTestId: TEST_IAM_6
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-006
+Title: AWS IAM policy is overly permissive to all traffic via condition clause\
+Test Result: **passed**\
+Description : This policy identifies IAM policies that have a policy that is overly permissive to all traffic via condition clause. If any IAM policy statement with a condition containing 0.0.0.0/0 or ::/0, it allows all traffic to resources attached to that IAM policy. It is highly recommended to have the least privileged IAM policy to protect the data leakage and unauthorized access.\
+
+#### Test Details
+- eval: data.rule.iam_all_traffic
+- id : PR-AWS-CFR-IAM-006
+
+#### Snapshots
+| Title         | Description                                                                                                                    |
+|:--------------|:-------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT107                                                                                                       |
+| structure     | filesystem                                                                                                                     |
+| reference     | master                                                                                                                         |
+| source        | gitConnectorAwsLabs                                                                                                            |
+| collection    | cloudformationtemplate                                                                                                         |
+| type          | cloudformation                                                                                                                 |
+| region        |                                                                                                                                |
+| resourceTypes | ['aws::iam::user', 'aws::iam::managedpolicy', 'aws::iam::policy']                                                              |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/community/solutions/read_only_user/read_only_user.json'] |
+
+- masterTestId: TEST_IAM_6
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-007
+Title: AWS IAM policy allows full administrative privileges\
+Test Result: **passed**\
+Description : This policy identifies IAM policies with full administrative privileges. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended and considered a standard security advice to grant least privilege like granting only the permissions required to perform a task. Determine what users need to do and then craft policies for them that let the users perform only those tasks, instead of allowing full administrative privileges.\
+
+#### Test Details
+- eval: data.rule.iam_administrative_privileges
+- id : PR-AWS-CFR-IAM-007
+
+#### Snapshots
+| Title         | Description                                                                                                                 |
+|:--------------|:----------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT34                                                                                                     |
+| structure     | filesystem                                                                                                                  |
+| reference     | master                                                                                                                      |
+| source        | gitConnectorAwsLabs                                                                                                         |
+| collection    | cloudformationtemplate                                                                                                      |
+| type          | cloudformation                                                                                                              |
+| region        |                                                                                                                             |
+| resourceTypes | ['aws::iam::group', 'aws::iam::user', 'aws::iam::usertogroupaddition', 'aws::iam::accesskey', 'aws::iam::policy']           |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/IAM/IAM_Users_Groups_and_Policies.yaml'] |
+
+- masterTestId: TEST_IAM_7
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-007
+Title: AWS IAM policy allows full administrative privileges\
+Test Result: **passed**\
+Description : This policy identifies IAM policies with full administrative privileges. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended and considered a standard security advice to grant least privilege like granting only the permissions required to perform a task. Determine what users need to do and then craft policies for them that let the users perform only those tasks, instead of allowing full administrative privileges.\
+
+#### Test Details
+- eval: data.rule.iam_administrative_privileges
+- id : PR-AWS-CFR-IAM-007
+
+#### Snapshots
+| Title         | Description                                                                                                                    |
+|:--------------|:-------------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT107                                                                                                       |
+| structure     | filesystem                                                                                                                     |
+| reference     | master                                                                                                                         |
+| source        | gitConnectorAwsLabs                                                                                                            |
+| collection    | cloudformationtemplate                                                                                                         |
+| type          | cloudformation                                                                                                                 |
+| region        |                                                                                                                                |
+| resourceTypes | ['aws::iam::user', 'aws::iam::managedpolicy', 'aws::iam::policy']                                                              |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/community/solutions/read_only_user/read_only_user.json'] |
+
+- masterTestId: TEST_IAM_7
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+
+
+### Test ID - PR-AWS-CFR-IAM-008
+Title: Ensure IAM groups contains at least one IAM user\
+Test Result: **passed**\
+Description : Ensure that your Amazon Identity and Access Management (IAM) users are members of at least one IAM group in order to adhere to IAM security best practices\
+
+#### Test Details
+- eval: data.rule.iam_user_group_attach
+- id : PR-AWS-CFR-IAM-008
+
+#### Snapshots
+| Title         | Description                                                                                                                 |
+|:--------------|:----------------------------------------------------------------------------------------------------------------------------|
+| id            | CFR_TEMPLATE_SNAPSHOT34                                                                                                     |
+| structure     | filesystem                                                                                                                  |
+| reference     | master                                                                                                                      |
+| source        | gitConnectorAwsLabs                                                                                                         |
+| collection    | cloudformationtemplate                                                                                                      |
+| type          | cloudformation                                                                                                              |
+| region        |                                                                                                                             |
+| resourceTypes | ['aws::iam::group', 'aws::iam::user', 'aws::iam::usertogroupaddition', 'aws::iam::accesskey', 'aws::iam::policy']           |
+| paths         | ['https://github.com/awslabs/aws-cloudformation-templates/tree/master/aws/services/IAM/IAM_Users_Groups_and_Policies.yaml'] |
+
+- masterTestId: TEST_IAM_8
+- masterSnapshotId: ['CFR_TEMPLATE_SNAPSHOT']
+- type: rego
+- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/iam.rego)
+- severity: Medium
+
+tags
+| Title      | Description        |
+|:-----------|:-------------------|
+| cloud      | git                |
+| compliance | []                 |
+| service    | ['cloudformation'] |
+----------------------------------------------------------------
+

@@ -9,9 +9,9 @@ package rule
 default frontdoors_has_drs_configured = null
 
 has_any_defaultruleset(managed_rule) = true {
-  managed_rule := managed_rule[_]
-  contains(lower(managed_rule.type), "defaultruleset")
-  to_number(managed_rule.version) >= 1
+  managed_rule_found := managed_rule[_]
+  contains(lower(managed_rule_found.type), "defaultruleset")
+  to_number(managed_rule_found.version) >= 1
 } else = false { true }
 
 
