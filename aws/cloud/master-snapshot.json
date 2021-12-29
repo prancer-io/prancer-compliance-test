@@ -2,9 +2,7 @@
 	"snapshots": [
 		{
 			"type": "aws",
-			"source": "aws_cloud_connector",
-			"testUser": "USER_1",
-			"accountId": "155603667260",
+			"connectorUser": "USER_1",
 			"nodes": [
 				{
 					"masterSnapshotId": "TEST_KMS",
@@ -484,6 +482,210 @@
 							"cloud": "AWS",
 							"service": [
 								"ecs"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_CF",
+					"arn": "arn:aws:cloudfront:::",
+					"collection": "aws_cf",
+					"listMethod": "list_distributions",
+					"detailMethods": [
+						"get_distribution"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"cloudfront"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_RDS_01",
+					"arn": "arn:aws:rds:::",
+					"collection": "aws_rds_01",
+					"listMethod": "describe_db_instances",
+					"detailMethods": [
+						"describe_db_instances"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"rds"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_RDS_02",
+					"arn": "arn:aws:rds:::",
+					"collection": "aws_rds_02",
+					"listMethod": "describe_db_clusters",
+					"detailMethods": [
+						"describe_db_clusters"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"rds"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_RDS_03",
+					"arn": "arn:aws:rds:::",
+					"collection": "aws_rds_03",
+					"listMethod": "describe_db_parameter_groups",
+					"detailMethods": [
+						"describe_db_parameters"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"rds"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_RDS_04",
+					"arn": "arn:aws:rds:::",
+					"collection": "aws_rds_04",
+					"listMethod": "describe_global_clusters",
+					"detailMethods": [
+						"describe_global_clusters"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"rds"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_RDS_05",
+					"arn": "arn:aws:rds:::",
+					"collection": "aws_rds_05",
+					"listMethod": "describe_event_subscriptions",
+					"detailMethods": [
+						"describe_event_subscriptions"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"rds"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_DAX",
+					"arn": "arn:aws:dax:::",
+					"collection": "aws_dax",
+					"listMethod": "describe_clusters",
+					"detailMethods": [
+						"describe_clusters"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"dax"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_QLDB",
+					"arn": "arn:aws:qldb:::",
+					"collection": "aws_qldb",
+					"listMethod": "list_ledgers",
+					"detailMethods": [
+						"describe_ledger"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"qldb"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_DDB_01",
+					"arn": "arn:aws:docdb:::",
+					"collection": "aws_docdb_01",
+					"listMethod": "describe_db_clusters",
+					"detailMethods": [
+						"describe_db_clusters"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"docdb"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_DDB_02",
+					"arn": "arn:aws:docdb:::",
+					"collection": "aws_docdb_02",
+					"listMethod": "describe_db_cluster_parameter_groups",
+					"detailMethods": [
+						"describe_db_cluster_parameters"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"docdb"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ATH",
+					"arn": "arn:aws:athena:::",
+					"collection": "aws_athena",
+					"listMethod": "list_work_groups",
+					"detailMethods": [
+						"get_work_group"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"athena"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_TS",
+					"arn": "arn:aws:timestream:::",
+					"collection": "aws_ts",
+					"listMethod": "list_databases",
+					"detailMethods": [
+						"list_databases"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"timestream"
 							]
 						}
 					]
