@@ -66,7 +66,7 @@
                     ],
                     "severity": "High",
                     "title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
-                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user."
+                    "description": "The key vault contains object keys, secrets, and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates), etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user."
                 },
                 {
                     "masterTestId": "AZURE_TEST_KV_3",
@@ -97,7 +97,7 @@
                     ],
                     "severity": "High",
                     "title": "Key vault should have purge protection enabled",
-                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation"
+                    "description": "The key vault contains object keys, secrets, and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation"
                 },
                 {
                     "masterTestId": "AZURE_TEST_KV_4",
@@ -132,8 +132,8 @@
                         "AZRSNP_229"
                     ],
                     "severity": "High",
-                    "title": "Azure Key Vault secrets should have an expiration date",
-                    "description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly."
+                    "title": "Azure Key Vault keys should have an expiration date",
+                    "description": "This policy identifies Azure Key Vault keys that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly."
                 },
                 {
                     "masterTestId": "AZURE_TEST_KV_5",
@@ -197,8 +197,8 @@
                         "AZRSNP_228"
                     ],
                     "severity": "Medium",
-                    "title": "Azure Key Vault should disable public network access",
-                    "description": "Disable public network access for your key vault so that it's not accessible over the public internet. This can reduce data leakage risks."
+                    "title": "Azure Key Vault Network Access default action should be 'deny'",
+                    "description": "Azure Key Vault Network Access default action should be 'deny' so that it's not accessible over the public internet. This can reduce data leakage risks."
                 },
                 {
                     "masterTestId": "AZURE_TEST_KV_7",
@@ -285,7 +285,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Configure Azure Key Vaults with private endpoints",
-                    "description": "Private endpoints connect your virtual networks to Azure services without a public IP address at the source or destination. By mapping private endpoints to key vault, you can reduce data leakage risks. Learn more about private links at: https://aka.ms/akvprivatelink."
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your key vault, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview"
                 },
                 {
                     "masterTestId": "AZURE_TEST_KV_10",
@@ -313,8 +313,8 @@
                         "AZRSNP_228"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Azure KeyVault don't have public network access enabled",
-                    "description": "Always use Private Endpoint for Azure KeyVault"
+                    "title": "Azure KeyVault Public Network Access should be 'disabled'",
+                    "description": "Azure KeyVault Public Network Access should be 'disabled' so that it's not accessible over the public internet. This can reduce data leakage risks."
                 },
                 {
                     "masterTestId": "AZURE_TEST_STR_3",
@@ -347,7 +347,7 @@
                     ],
                     "severity": "High",
                     "title": "Storage Accounts https based secure transfer should be enabled",
-                    "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
+                    "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPS. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesn't support HTTPS for custom domain names, this option is not applied when using a custom domain name.",
                     "masterSnapshotId": [
                         "AZRSNP_301"
                     ]
@@ -453,7 +453,7 @@
                     ],
                     "severity": "High",
                     "title": "Ensure that 'Storage service encryption' is enabled for the File Service",
-                    "description": "Azure Storage encryption protects your data and to help you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows.",
+                    "description": "Azure Storage encryption protects your data and helps you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows",
                     "masterSnapshotId": [
                         "AZRSNP_301"
                     ]
@@ -551,7 +551,7 @@
                     ],
                     "severity": "High",
                     "title": "Ensure that Storage Account should not allow public access to all blobs or containers",
-                    "description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
+                    "description": "This policy will identify which Storage Account has public access enabled for all blobs or containers",
                     "masterSnapshotId": [
                         "AZRSNP_301"
                     ]
@@ -621,7 +621,7 @@
                     ],
                     "severity": "High",
                     "title": "Ensure Azure Storage Account has latest version of tls configured",
-                    "description": "This policy will identify the Azure Storage Account which dont have latest version of tls configured and give alert",
+                    "description": "This policy will identify the Azure Storage Account which don't have the latest version of tls configured and give the alert",
                     "masterSnapshotId": [
                         "AZRSNP_301"
                     ]
@@ -684,7 +684,7 @@
                     ],
                     "severity": "High",
                     "title": "Storage accounts should have infrastructure encryption",
-                    "description": "Enable infrastructure encryption for higher level of assurance that the data is secure. When infrastructure encryption is enabled, data in a storage account is encrypted twice.",
+                    "description": "Enable infrastructure encryption for a higher level of assurance that the data is secure. When infrastructure encryption is enabled, data in a storage account is encrypted twice.",
                     "masterSnapshotId": [
                         "AZRSNP_301"
                     ]
@@ -714,8 +714,8 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "Storage account encryption scopes should use double encryption for data at rest",
-                    "description": "Enable infrastructure encryption for encryption at rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
+                    "title": "Storage account encryption scopes should have infrastructure encryption",
+                    "description": "Enable infrastructure encryption for encryption at the rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
                     "masterSnapshotId": [
                         "AZRSNP_302"
                     ]
@@ -746,7 +746,7 @@
                     ],
                     "severity": "High",
                     "title": "Storage account encryption scopes should use customer-managed keys to encrypt data at rest",
-                    "description": "Use customer-managed keys to manage the encryption at rest of your storage account encryption scopes. Customer-managed keys enable the data to be encrypted with an Azure key-vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more about storage account encryption scopes at https://aka.ms/encryption-scopes-overview.",
+                    "description": "Use customer-managed keys to manage the encryption at the rest of your storage account encryption scopes. Customer-managed keys enable the data to be encrypted with an Azure key-vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more about storage account encryption scopes at https://aka.ms/encryption-scopes-overview.",
                     "masterSnapshotId": [
                         "AZRSNP_302"
                     ]
@@ -808,7 +808,7 @@
                     ],
                     "severity": "High",
                     "title": "Storage accounts should prevent shared key access",
-                    "description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials, or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key, and is recommended by Microsoft.",
+                    "description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key and is recommended by Microsoft.",
                     "masterSnapshotId": [
                         "AZRSNP_301"
                     ]
@@ -847,7 +847,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure Azure App Service Web App enforce https connection",
-                    "description": "Azure Web Apps by default allows sites to run under both HTTP and HTTPS, and can be accessed by anyone using non-secure HTTP links. Non-secure HTTP requests can be restricted and all HTTP requests redirected to the secure HTTPS port. We recommend you enforce HTTPS-only traffic to increase security. This will redirect all non-secure HTTP requests to HTTPS ports. HTTPS uses the SSL/TLS protocol to provide a secure connection, which is both encrypted and authenticated."
+                    "description": "Azure Web Apps by default allow sites to run under both HTTP and HTTPS and can be accessed by anyone using non-secure HTTP links. Non-secure HTTP requests can be restricted and all HTTP requests redirected to the secure HTTPS port. We recommend you enforce HTTPS-only traffic to increase security. This will redirect all non-secure HTTP requests to HTTPS ports. HTTPS uses the SSL/TLS protocol to provide a secure connection, which is both encrypted and authenticated."
                 },
                 {
                     "masterTestId": "AZURE_TEST_WEB_2",
@@ -882,8 +882,8 @@
                         "AZRSNP_100"
                     ],
                     "severity": "Medium",
-                    "title": "Web App should uses the latest version of TLS encryption",
-                    "description": "App service currently allows the web app to set TLS versions 1.0, 1.1 and 1.2. For secure web app connections it is highly recommended to only use the latest TLS 1.2 version."
+                    "title": "Web App should use the latest version of TLS encryption",
+                    "description": "App service currently allows the web app to set TLS versions 1.0, 1.1, and 1.2. For secure web app connections, it is highly recommended to only use the latest TLS 1.2 version."
                 },
                 {
                     "masterTestId": "AZURE_TEST_WEB_3",
@@ -918,7 +918,7 @@
                         "AZRSNP_100"
                     ],
                     "severity": "Medium",
-                    "title": "Web App should has incoming client certificates enabled",
+                    "title": "Web App should have incoming client certificates enabled",
                     "description": "Client certificates allow the Web App to require a certificate for incoming requests. Only clients that have a valid certificate will be able to reach the app. The TLS mutual authentication technique in enterprise environments ensures the authenticity of clients to the server. If incoming client certificates are enabled only an authenticated client with valid certificates can access the app."
                 },
                 {
@@ -954,7 +954,7 @@
                         "AZRSNP_100"
                     ],
                     "severity": "Medium",
-                    "title": "Web App should uses the latest version of HTTP",
+                    "title": "Web App should use the latest version of HTTP",
                     "description": "We recommend you use the latest HTTP version for web apps and take advantage of any security fixes and new functionalities featured. With each software installation you can determine if a given update meets your organization's requirements. Organizations should verify the compatibility and support provided for any additional software, assessing the current version against the update revision being considered."
                 },
                 {
@@ -984,7 +984,7 @@
                     ],
                     "severity": "High",
                     "title": "Ensure CORS configuration is not allowing every resources to access Azure Web Service",
-                    "description": "This policy will identify CORS configuration which are allowing every resoruces to access Azure Web service and give alert"
+                    "description": "This policy will identify CORS configuration which are allowing every resoruce to access Azure Web service and give alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_WEB_7",
@@ -1013,7 +1013,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service http logging should be enabled",
-                    "description": "This policy will identify the Azure Web service which dont have http logging enabled and give alert"
+                    "description": "This policy will identify the Azure Web service which don't have http logging enabled and give alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_WEB_8",
@@ -1041,8 +1041,8 @@
                         "AZRSNP_100"
                     ],
                     "severity": "Medium",
-                    "title": "Azure Web Service detaild error message should be enabled",
-                    "description": "This policy will identify the Azure Web service which dont have detaild error message enabled and give alert"
+                    "title": "Azure Web Service detailed error message should be enabled",
+                    "description": "This policy will identify the Azure Web service which doesn't have a detailed error message enabled and give the alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_WEB_9",
@@ -1071,7 +1071,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service request tracing should be enabled",
-                    "description": "This policy will identify the Azure web service which dont have request tracing enabled and give alert"
+                    "description": "This policy will identify the Azure web service which doesn't have request tracing enabled and give the alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_WEB_10",
@@ -1100,7 +1100,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Managed Identity provider should be enabled",
-                    "description": "This policy will identify the Azure Web service which dont have Managed Identity provider enabled and give alert"
+                    "description": "This policy will identify the Azure Web service which doesn't have Managed Identity provider enabled and give the alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_WEB_11",
@@ -1129,7 +1129,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service remote debugging should be disabled",
-                    "description": "This policy will identify the Azure web service which have remote debugging enabled and give alert"
+                    "description": "This policy will identify the Azure web service which has remote debugging enabled and give the alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_WEB_12",
@@ -1158,7 +1158,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service FTP deployments should be disabled",
-                    "description": "This policy will identify the Azure web service which have FTP deployment enabled and give alert"
+                    "description": "This policy will identify the Azure web service which has FTP deployment enabled and gives the alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_WEB_13",
@@ -1187,7 +1187,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Dot Net Framework should be latest",
-                    "description": "This policy will identify the Azure web service which dont have latest version of Net Framework and give alert"
+                    "description": "This policy will identify the Azure web service which doesn't have the latest version of Net Framework and give the alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_WEB_14",
@@ -1216,7 +1216,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service PHP version should be latest",
-                    "description": "This policy will identify the Azure web service which dont have latest version of PHP and give alert"
+                    "description": "This policy will identify the Azure web service which doesn't have the latest version of PHP and give the alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_WEB_15",
@@ -1244,8 +1244,8 @@
                         "AZRSNP_100"
                     ],
                     "severity": "Medium",
-                    "title": "Azure Web Service Pyhton version should be latest",
-                    "description": "This policy will identify the Azure web service which dont have latest version of Pyhton and give alert"
+                    "title": "Azure Web Service Python version should be latest",
+                    "description": "This policy will identify the Azure web service which doesn't have the latest version of Python and give the alert"
                 },  
                 {
                     "masterTestId": "AZURE_TEST_WEB_16",
@@ -1274,7 +1274,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Java version should be latest",
-                    "description": "This policy will identify the Azure web service which dont have latest version of Java and give alert"
+                    "description": "This policy will identify the Azure web service which doesn't have the latest version of Java and give the alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_1",
@@ -1484,7 +1484,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Database Auditing Retention should be 90 days or more",
-                    "description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days."
+                    "description": "This policy identifies SQL Databases that have Auditing Retention of fewer than 90 days. Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days."
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_7",
@@ -1520,7 +1520,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Database Auditing Retention should be 90 days or more",
-                    "description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days."
+                    "description": "This policy identifies SQL Databases that have Auditing Retention of fewer than 90 days. Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days."
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_8",
@@ -1556,7 +1556,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL databases should have transparent data encryption enabled",
-                    "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchange log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key."
+                    "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchanges log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key."
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_9",
@@ -1592,7 +1592,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL databases should have transparent data encryption enabled",
-                    "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchange log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key."
+                    "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchanges log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key."
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_10",
@@ -1720,7 +1720,7 @@
                     ],
                     "severity": "High",
                     "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses"
+                    "description": "This policy will identify MariaDB firewall rule that is currently allowing ingress from all Azure-internal IP addresses"
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_14",
@@ -1749,7 +1749,7 @@
                     ],
                     "severity": "High",
                     "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-                    "description": "This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses"
+                    "description": "This policy will identify MySQL Database Server firewall rule that is currently allowing ingress from all Azure-internal IP addresses"
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_15",
@@ -1778,7 +1778,7 @@
                     ],
                     "severity": "High",
                     "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-                    "description": "This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses"
+                    "description": "This policy will identify MySQL Database Server firewall rule that is currently allowing ingress from all Azure-internal IP addresses"
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_16",
@@ -1884,7 +1884,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Database security alert policies thread retention should be configured for more than 90 days",
-                    "description": "This policy identifies SQL Databases which have security alert policies retention set less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days."
+                    "description": "This policy identifies SQL Databases that have security alert policies retention set less than or equal to 90 days. Threat Logs can be used to check for anomalies and give an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days."
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_19",
@@ -1954,7 +1954,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F<br>_x005F<br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_21",
@@ -1988,8 +1988,8 @@
                         "AZRSNP_264"
                     ],
                     "severity": "High",
-                    "title": "Threat Detection alert should be configured to sent notification to the sql server account administrators",
-                    "description": "Ensure that threat detection alert is configured to sent notification to the sql server account administrators"
+                    "title": "Threat Detection alert should be configured to send notifications to the SQL server account administrators",
+                    "description": "Ensure that threat detection alert is configured to send notifications to the sql server account administrators"
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_22",
@@ -2225,7 +2225,7 @@
                     ],
                     "severity": "High",
                     "title": "Ensure Azure MySQL Server has latest version of tls configured",
-                    "description": "This policy will identify the Azure MySQL Server which dont have latest version of tls configured and give alert"
+                    "description": "This policy will identify the Azure MySQL Server which doesn't have the latest version of tls configured and give the alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_56",
@@ -2660,7 +2660,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F<br>_x005F<br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_40",
@@ -2695,7 +2695,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F<br>_x005F<br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_41",
@@ -2968,7 +2968,7 @@
                         "AZRSNP_400"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure SQL Server administrator login does not contains 'Admin/Administrator' as name",
+                    "title": "Ensure SQL Server administrator login does not contain 'Admin/Administrator' as name",
                     "description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks."
                 },
                 {
@@ -3004,7 +3004,7 @@
                         "AZRSNP_405"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure SQL Server administrator login does not contains 'Admin/Administrator' as name",
+                    "title": "Ensure SQL Server administrator login does not contain 'Admin/Administrator' as name",
                     "description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks."
                 },
                 {
@@ -3065,7 +3065,7 @@
                     ],
                     "severity": "High",
                     "title": "Ensure Azure SQL Server has latest version of tls configured",
-                    "description": "This policy will identify the Azure SQL Server which dont have latest version of tls configured and give alert"
+                    "description": "This policy will identify the Azure SQL Server which doesn't have the latest version of tls configured and give the alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_70",
@@ -3273,7 +3273,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure AKS enable role-based access control (RBAC) should be enforced",
-                    "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F<br>_x005F<br>This policy checks your AKS cluster RBAC setting and alerts if disabled."
+                    "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled."
                 },
                 {
                     "masterTestId": "AZURE_TEST_AKS_6",
@@ -3526,7 +3526,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure Application Gateway is using Https protocol",
-                    "description": "Application Gateway allows to set network protocols Http and Https. It is highly recommended to use Https protocol for secure connections."
+                    "description": "Application Gateway allows setting network protocols Http and Https. It is highly recommended to use Https protocol for secure connections."
                 },
                 {
                     "masterTestId": "AZURE_TEST_AGW_4",
@@ -3561,7 +3561,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure Application Gateway frontendIPConfigurations does not have public ip configured",
-                    "description": "Application Gateway allows to set public or private ip in frontendIPConfigurations. It is highly recommended to only configure private ip in frontendIPConfigurations."
+                    "description": "Application Gateway allows setting public or private ip in frontendIPConfigurations. It is highly recommended to only configure private ip in frontendIPConfigurations."
                 },
                 {
                     "masterTestId": "AZURE_TEST_AGW_5",
@@ -3596,7 +3596,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure Application Gateway Backend is using Https protocol",
-                    "description": "Application Gateway allows to set backend network protocols Http and Https. It is highly recommended to use Https protocol for secure connections."
+                    "description": "Application Gateway allows setting backend network protocols Http and Https. It is highly recommended to use Https protocol for secure connections."
                 },
                 {
                     "masterTestId": "AZURE_TEST_AGW_6",
@@ -3631,7 +3631,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure Application Gateway secret certificates stores in keyvault",
-                    "description": "This policy will identify application gateways which dont have ssl certificates stored in keyvalut and alert"
+                    "description": "This policy will identify application gateways that don't have SSL certificates stored in keyVault and alert"
                 },
                 {
                     "masterTestId": "AZURE_TEST_AGW_7",
@@ -3665,8 +3665,8 @@
                         "AZRSNP_221"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Application Gateway secret certificates stores in keyvault",
-                    "description": "This policy will identify application gateways which dont have ssl certificates stored in keyvalut and alert"
+                    "title": "Azure Application Gateway V2 should have the Web application firewall (WAF) enabled with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 for proactive protection against CVE-2021-44228 exploit",
+                    "description": "It is recommended to enable WAF policy with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 on Application Gateway V2 to immediately avail of additional protection from log4j Remote Command Execution. details at <a href='https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/' target='_blank'>here</a>"
                 },
                 {
                     "masterTestId": "AZURE_TEST_ARC_1",
@@ -4056,7 +4056,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Virtual Network subnet should be configured with Network Security Group",
-                    "description": "This policy identifies Azure Virtual Network (VNet) subnet which dont have any association with Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level._x005F<br>_x005F<br>For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/"
+                    "description": "This policy identifies Azure Virtual Network (VNet) subnet which doesn't have any association with Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level.<br><br>For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/"
                 },
                 {
                     "masterTestId": "AZURE_TEST_VNET_6",
@@ -4225,7 +4225,7 @@
                         "AZRSNP_440"
                     ],
                     "severity": "High",
-                    "title": "Azure Databricks shoud not use public IP address",
+                    "title": "Azure Databricks should not use public IP address",
                     "description": "Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have public ip disabled and warn."
                 },
                 {
@@ -4713,7 +4713,7 @@
                         "AZRSNP_231"
                     ],
                     "severity": "High",
-                    "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source to any destination",
+                    "title": "Azure Network Security Group (NSG) has an Inbound rule overly permissive to allow all traffic from any source to any destination",
                     "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports."
                 },
                 {
@@ -4749,7 +4749,7 @@
                         "AZRSNP_231"
                     ],
                     "severity": "High",
-                    "title": "Azure Network Security Group shouldn't allows ICMP (Ping)",
+                    "title": "Azure Network Security Group shouldn't allow ICMP (Ping)",
                     "description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.<br><br>This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
@@ -5215,7 +5215,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group allows NetBIOS (UDP Port 137 and 138)",
-                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 and 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F<br>As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 and 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "AZURE_TEST_NSG_23",
@@ -5323,7 +5323,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)",
-                    "description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP Port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F<br>As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP Port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "AZURE_TEST_NSG_26",
@@ -5697,7 +5697,7 @@
                     ],
                     "severity": "High",
                     "title": "Activity log profile retention should be enabled",
-                    "description": "This policy identifies Microsoft.Insights/logprofiles which dont have log retention enabled. Activity Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access."
+                    "description": "This policy identifies Microsoft.Insights/logprofiles which don't have log retention enabled. Activity Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access."
                 },
                 {
                     "masterTestId": "AZURE_TEST_MNT_11",
@@ -5876,7 +5876,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure storage blob container should not have public access enabled",
-                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x005F<br>_x005F<br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers."
+                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature.<br><br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers."
                 },
                 {
                     "masterTestId": "AZURE_TEST_STR_13",
@@ -5905,7 +5905,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure storage blob container should not have public access enabled",
-                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x005F<br>_x005F<br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers."
+                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature.<br><br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers."
                 },
                 {
                     "masterTestId": "AZURE_TEST_ASC_1",
@@ -5972,7 +5972,7 @@
                         "AZRSNP_296"
                     ],
                     "severity": "Low",
-                    "title": "Security Center shoud have security contact emails configured to get notifications",
+                    "title": "Security Center should have security contact emails configured to get notifications",
                     "description": "Setting a valid email address in Security contact emails will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks."
                 },
                 {

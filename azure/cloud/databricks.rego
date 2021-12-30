@@ -45,7 +45,7 @@ databrics_workspace_has_public_ip_disabled_metadata := {
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
-    "Policy Title": "Azure Databricks shoud not use public IP address",
+    "Policy Title": "Azure Databricks should not use public IP address",
     "Policy Description": "Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have public ip disabled and warn.",
     "Resource Type": "Microsoft.Databricks/workspaces",
     "Policy Help URL": "",
