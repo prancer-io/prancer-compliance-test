@@ -93,7 +93,7 @@ mysql_ingress_from_any_ip_disabled_metadata := {
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-    "Policy Description": "This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+    "Policy Description": "This policy will identify MySQL Database Server firewall rule that is currently allowing ingress from all Azure-internal IP addresses",
     "Resource Type": "microsoft.dbformysql/servers/firewallrules",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules"
@@ -210,7 +210,7 @@ my_logical_sql_ingress_from_any_ip_disabled_metadata := {
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-    "Policy Description": "This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+    "Policy Description": "This policy will identify MySQL Database Server firewall rule that is currently allowing ingress from all Azure-internal IP addresses",
     "Resource Type": "microsoft.dbformysql/servers/firewallrules",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules"

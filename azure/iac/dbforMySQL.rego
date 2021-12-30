@@ -196,7 +196,7 @@ storage_account_latest_tls_configured_metadata := {
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Ensure Azure MySQL Server has latest version of tls configured",
-    "Policy Description": "This policy will identify the Azure MySQL Server which dont have latest version of tls configured and give alert",
+    "Policy Description": "This policy will identify the Azure MySQL Server which doesn't have the latest version of tls configured and give the alert",
     "Resource Type": "microsoft.dbformysql/servers",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers"

@@ -205,8 +205,8 @@ keyvault_Acl_metadata := {
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
-    "Policy Title": "Azure Key Vault should disable public network access",
-    "Policy Description": "Disable public network access for your key vault so that it's not accessible over the public internet. This can reduce data leakage risks.",
+    "Policy Title": "Azure Key Vault Network Access default action should be 'deny'",
+    "Policy Description": "Azure Key Vault Network Access default action should be 'deny' so that it's not accessible over the public internet. This can reduce data leakage risks.",
     "Resource Type": "microsoft.keyvault/vaults",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults"
@@ -419,8 +419,8 @@ kv_public_access_disabled_metadata := {
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
-    "Policy Title": "Ensure Azure KeyVault don't have public network access enabled",
-    "Policy Description": "Always use Private Endpoint for Azure KeyVault",
+    "Policy Title": "Azure KeyVault Public Network Access should be 'disabled'",
+    "Policy Description": "Azure KeyVault Public Network Access should be 'disabled' so that it's not accessible over the public internet. This can reduce data leakage risks.",
     "Resource Type": "microsoft.keyvault/vaults",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults"

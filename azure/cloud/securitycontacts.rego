@@ -48,7 +48,7 @@ securitycontacts_metadata := {
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
-    "Policy Title": "Security Center shoud have security contact emails configured to get notifications",
+    "Policy Title": "Security Center should have security contact emails configured to get notifications",
     "Policy Description": "Setting a valid email address in Security contact emails will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
     "Resource Type": "microsoft.security/securitycontacts",
     "Policy Help URL": "",

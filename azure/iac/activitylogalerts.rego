@@ -240,7 +240,7 @@ log_profiles_retention_enabled_metadata := {
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Activity log profile retention should be enabled",
-    "Policy Description": "This policy identifies Microsoft.Insights/logprofiles which dont have log retention enabled. Activity Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access.",
+    "Policy Description": "This policy identifies Microsoft.Insights/logprofiles which don't have log retention enabled. Activity Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access.",
     "Resource Type": "microsoft.insights/logprofiles",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles"

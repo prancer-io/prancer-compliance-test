@@ -164,7 +164,7 @@ sql_db_log_retention_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Azure SQL Database Auditing Retention should be 90 days or more",
-    "Policy Description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.",
+    "Policy Description": "This policy identifies SQL Databases that have Auditing Retention of fewer than 90 days. Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.",
     "Resource Type": "microsoft.sql/servers/databases/auditingsettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings"
@@ -223,7 +223,7 @@ sql_logical_db_log_retention_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Azure SQL Database Auditing Retention should be 90 days or more",
-    "Policy Description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.",
+    "Policy Description": "This policy identifies SQL Databases that have Auditing Retention of fewer than 90 days. Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.",
     "Resource Type": "microsoft.sql/servers/databases/auditingsettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings"
