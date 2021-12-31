@@ -154,7 +154,7 @@ protocol_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Ensure Application Gateway is using Https protocol",
-    "Policy Description": "Application Gateway allows to set network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
+    "Policy Description": "Application Gateway allows setting network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
     "Resource Type": "microsoft.network/applicationgateways",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
@@ -191,7 +191,7 @@ frontendPublicIPConfigurationsDisabled_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Ensure Application Gateway frontendIPConfigurations does not have public ip configured",
-    "Policy Description": "Application Gateway allows to set public or private ip in frontendIPConfigurations. It is highly recommended to only configure private ip in frontendIPConfigurations.",
+    "Policy Description": "Application Gateway allows seting public or private ip in frontendIPConfigurations. It is highly recommended to only configure private ip in frontendIPConfigurations.",
     "Resource Type": "microsoft.network/applicationgateways",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
@@ -241,7 +241,7 @@ backend_https_protocol_enabled_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Ensure Application Gateway Backend is using Https protocol",
-    "Policy Description": "Application Gateway allows to set backend network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
+    "Policy Description": "Application Gateway allows setting backend network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
     "Resource Type": "microsoft.network/applicationgateways",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
@@ -298,7 +298,7 @@ secret_certificate_is_in_keyvalut_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Ensure Application Gateway secret certificates stores in keyvault",
-    "Policy Description": "This policy will identify application gateways which dont have ssl certificates stored in keyvalut and alert",
+    "Policy Description": "This policy will identify application gateways that don't have SSL certificates stored in keyVault and alert",
     "Resource Type": "microsoft.network/applicationgateways",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
@@ -398,7 +398,7 @@ application_gateways_v2_waf_ruleset_OWASP_active_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Azure Application Gateway V2 should have the Web application firewall (WAF) enabled with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 for proactive protection against CVE-2021-44228 exploit",
-    "Policy Description": "It is recommended to enable WAF policy with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 on Application Gateway V2 to immediately avail of additional protection from log4j Remote Command Execution. details at https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/",
+    "Policy Description": "It is recommended to enable WAF policy with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 on Application Gateway V2 to immediately avail of additional protection from log4j Remote Command Execution. details at <a href='https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/' target='_blank'>here</a>",
     "Resource Type": "microsoft.network/applicationgateways",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"

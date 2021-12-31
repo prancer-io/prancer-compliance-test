@@ -213,7 +213,7 @@ dbmaria_ingress_from_any_ip_disabled_metadata := {
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-    "Policy Description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+    "Policy Description": "This policy will identify MariaDB firewall rule that is currently allowing ingress from all Azure-internal IP addresses",
     "Resource Type": "microsoft.dbformariadb/servers/firewallrules",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/servers/firewallrules"
