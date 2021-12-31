@@ -2549,9 +2549,481 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_ALL_1",
+                    "masterSnapshotId": [
+                        "TEST_ALL_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SM-001",
+                            "eval": "data.rule.secret_manager_kms",
+                            "message": "data.rule.secret_manager_kms_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SM_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that Secrets Manager secret is encrypted using KMS",
+                    "description": "Ensure that your Amazon Secrets Manager secrets (i.e. database credentials, API keys, OAuth tokens, etc) are encrypted with Amazon KMS Customer Master Keys instead of default encryption keys that Secrets Manager service creates for you, in order to have a more control over secret data encryption and decryption process",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "secret manager"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_2",
+                    "masterSnapshotId": [
+                        "TEST_ALL_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LG-001",
+                            "eval": "data.rule.log_group_encryption",
+                            "message": "data.rule.log_group_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LG_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure CloudWatch log groups are encrypted with KMS CMKs",
+                    "description": "CloudWatch log groups are encrypted by default. However, utilizing KMS CMKs gives you more control over key rotation and provides auditing visibility into key usage.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "cloudwatch"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_3",
+                    "masterSnapshotId": [
+                        "TEST_ALL_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LG-002",
+                            "eval": "data.rule.log_group_retention",
+                            "message": "data.rule.log_group_retention_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LG_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure CloudWatch log groups has retention days defined",
+                    "description": "Ensure that your web-tier CloudWatch log group has the retention period feature configured in order to establish how long log events are kept in AWS CloudWatch Logs",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudwatch"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_4",
+                    "masterSnapshotId": [
+                        "TEST_ALL_04"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-WS-001",
+                            "eval": "data.rule.workspace_volume_encrypt",
+                            "message": "data.rule.workspace_volume_encrypt_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_WS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that Workspace user volumes is encrypted",
+                    "description": "Ensure that your Amazon WorkSpaces storage volumes are encrypted in order to meet security and compliance requirements. Your data is transparently encrypted while being written and transparently decrypted while being read from your storage volumes, therefore the encryption process does not require any additional action from you",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "workspace"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_5",
+                    "masterSnapshotId": [
+                        "TEST_ALL_05"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-GLUE-001",
+                            "eval": "data.rule.glue_catalog_encryption",
+                            "message": "data.rule.glue_catalog_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-encryptionatrest.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_GLUE_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Glue Data Catalog encryption is enabled",
+                    "description": "Ensure that encryption at rest is enabled for your Amazon Glue Data Catalogs in order to meet regulatory requirements and prevent unauthorized users from getting access to sensitive data",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "glue"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_6",
+                    "masterSnapshotId": [
+                        "TEST_ALL_06"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-GLUE-002",
+                            "eval": "data.rule.glue_security_config",
+                            "message": "data.rule.glue_security_config_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-encryptionconfiguration.html#cfn-glue-securityconfiguration-encryptionconfiguration-s3encryptions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_GLUE_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS Glue security configuration encryption is enabled",
+                    "description": "Ensure AWS Glue security configuration encryption is enabled",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "glue"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_7",
+                    "masterSnapshotId": [
+                        "TEST_ALL_07"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AS-001",
+                            "eval": "data.rule.as_volume_encrypted",
+                            "message": "data.rule.as_volume_encrypted_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-template.html#cfn-as-launchconfig-blockdev-template-encrypted' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure EBS volumes have encrypted launch configurations",
+                    "description": "Amazon Elastic Block Store (EBS) volumes allow you to create encrypted launch configurations when creating EC2 instances and auto scaling. When the entire EBS volume is encrypted, data stored at rest on the volume, disk I/O, snapshots created from the volume, and data in-transit between EBS and EC2 are all encrypted.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "auto scaling"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_8",
+                    "masterSnapshotId": [
+                        "TEST_ALL_08"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AS-002",
+                            "eval": "data.rule.as_elb_health_check",
+                            "message": "data.rule.as_elb_health_check_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-healthchecktype' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure auto scaling groups associated with a load balancer use elastic load balancing health checks",
+                    "description": "If you configure an Auto Scaling group to use load balancer (ELB) health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "auto scaling"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_9",
+                    "masterSnapshotId": [
+                        "TEST_ALL_14"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CFR-001",
+                            "eval": "data.rule.cf_sns",
+                            "message": "data.rule.cf_sns_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CFR_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS CloudFormation stack configured without SNS topic",
+                    "description": "This policy identifies CloudFormation stacks which are configured without SNS topic. It is recommended to configure Simple Notification Service (SNS) topic to be notified of CloudFormation stack status and changes.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_10",
+                    "masterSnapshotId": [
+                        "TEST_ALL_09"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CFG-001",
+                            "eval": "data.rule.config_all_resource",
+                            "message": "data.rule.config_all_resource_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CFG_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Config must record all possible resources",
+                    "description": "This policy identifies resources for which AWS Config recording is enabled but recording for all possible resources are disabled. AWS Config provides an inventory of your AWS resources and a history of configuration changes to these resources. You can use AWS Config to define rules that evaluate these configurations for compliance. Hence, it is important to enable this feature.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "mq"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_11",
+                    "masterSnapshotId": [
+                        "TEST_ALL_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CFG-002",
+                            "eval": "data.rule.aws_config_configuration_aggregator",
+                            "message": "data.rule.aws_config_configuration_aggregator_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html#cfn-config-configurationaggregator-accountaggregationsource-allawsregions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CFG_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS config is enabled in all regions",
+                    "description": "AWS Config is a web service that performs the configuration management of supported AWS resources within your account and delivers log files to you.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "config"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_12",
+                    "masterSnapshotId": [
+                        "TEST_ALL_11"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-KNS-001",
+                            "eval": "data.rule.kinesis_encryption",
+                            "message": "data.rule.kinesis_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html#aws-resource-kinesis-stream--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_KNS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Kinesis streams are not encrypted using Server Side Encryption",
+                    "description": "This Policy identifies the AWS Kinesis streams which are not encrypted using Server Side Encryption. Server Side Encryption is used to encrypt your sensitive data before it is written to the Kinesis stream storage layer and decrypted after it is retrieved from storage.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "kinesis"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_13",
+                    "masterSnapshotId": [
+                        "TEST_ALL_11"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-KNS-002",
+                            "eval": "data.rule.kinesis_encryption_kms",
+                            "message": "data.rule.kinesis_encryption_kms_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html#aws-resource-kinesis-stream--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_KNS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Kinesis streams encryption using default KMS keys instead of Customer's Managed Master Keys",
+                    "description": "This policy identifies the AWS Kinesis streams which are encrypted with default KMS keys and not with Master Keys managed by Customer. It is a best practice to use customer managed Master Keys to encrypt your Amazon Kinesis streams data. It gives you full control over the encrypted data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "kinesis"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_14",
+                    "masterSnapshotId": [
+                        "TEST_ALL_12"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MQ-001",
+                            "eval": "data.rule.mq_publicly_accessible",
+                            "message": "data.rule.mq_publicly_accessible_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-publiclyaccessible' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MQ_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS MQ is publicly accessible",
+                    "description": "This policy identifies the AWS MQ brokers which are publicly accessible. It is advisable to use MQ brokers privately only from within your AWS Virtual Private Cloud (VPC). Ensure that the AWS MQ brokers provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "mq"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_15",
+                    "masterSnapshotId": [
+                        "TEST_ALL_12"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MQ-002",
+                            "eval": "data.rule.mq_logging_enable",
+                            "message": "data.rule.mq_logging_enable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-publiclyaccessible' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MQ_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Amazon MQ Broker logging is enabled",
+                    "description": "Amazon MQ is integrated with CloudTrail and provides a record of the Amazon MQ calls made by a user, role, or AWS service. It supports logging both the request parameters and the responses for APIs as events in CloudTrail",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "mq"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_16",
+                    "masterSnapshotId": [
+                        "TEST_ALL_13"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-R53-001",
+                            "eval": "data.rule.route_healthcheck_disable",
+                            "message": "data.rule.route_healthcheck_disable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_R53_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Route53 DNS evaluateTargetHealth is enabled",
+                    "description": "The EvaluateTargetHealth of Route53 is not enabled, an alias record can't inherits the health of the referenced AWS resource, such as an ELB load balancer or another record in the hosted zone.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "route53"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_ALL_17",
                     "masterSnapshotId": [
-                        "TEST_ALL"
+                        "TEST_ALL_01"
                     ],
                     "type": "rego",
                     "rule": "file(all.rego)",
@@ -3037,6 +3509,238 @@
                             "compliance": [],
                             "service": [
                                 "nacl"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SAGEMAKER_1",
+                    "masterSnapshotId": [
+                        "TEST_SAGEMAKER"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sagemaker.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SGM-001",
+                            "eval": "data.rule.sagemaker_encryption_kms",
+                            "message": "data.rule.sagemaker_encryption_kms_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SGM_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SageMaker notebook instance not configured with data encryption at rest using KMS key",
+                    "description": "This policy identifies SageMaker notebook instances that are not configured with data encryption at rest using the AWS managed KMS key. It is recommended to implement encryption at rest in order to protect data from unauthorized entities.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SAGEMAKER_2",
+                    "masterSnapshotId": [
+                        "TEST_SAGEMAKER"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sagemaker.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SGM-002",
+                            "eval": "data.rule.sagemaker_rootaccess_enabled",
+                            "message": "data.rule.sagemaker_rootaccess_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SGM_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SageMaker notebook instance with root access enabled",
+                    "description": "This policy identifies the SageMaker notebook instances which are enabled with root access. Root access means having administrator privileges, users with root access can access and edit all files on the compute instance, including system-critical files. Removing root access prevents notebook users from deleting system-level software, installing new software, and modifying essential environment components.\nNOTE: Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/nbi-root-access.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SAGEMAKER_3",
+                    "masterSnapshotId": [
+                        "TEST_SAGEMAKER"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sagemaker.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SGM-003",
+                            "eval": "data.rule.sagemaker_direct_internet_access_enabled",
+                            "message": "data.rule.sagemaker_direct_internet_access_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SGM_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SageMaker notebook instance configured with direct internet access feature",
+                    "description": "This policy identifies SageMaker notebook instances that are configured with direct internet access feature. If AWS SageMaker notebook instances are configured with direct internet access feature, any machine outside the VPC can establish a connection to these instances, which provides an additional avenue for unauthorized access to data and the opportunity for malicious activity.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SAGEMAKER_4",
+                    "masterSnapshotId": [
+                        "TEST_SAGEMAKER"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sagemaker.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SGM-004",
+                            "eval": "data.rule.sagemaker_vpc",
+                            "message": "data.rule.sagemaker_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SGM_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SageMaker notebook instance is not placed in VPC",
+                    "description": "This policy identifies SageMaker notebook instances that are not placed inside a VPC. It is recommended to place your SageMaker inside VPC so that VPC-only resources able to access your SageMaker data, which cannot be accessed outside a VPC network.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/process-vpc.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_CODE_1",
+                    "masterSnapshotId": [
+                        "TEST_CB"
+                    ],
+                    "type": "rego",
+                    "rule": "file(code.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CB-001",
+                            "eval": "data.rule.codebuild_encryption_disable",
+                            "message": "data.rule.codebuild_encryption_disable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-artifacts.html#cfn-codebuild-project-artifacts-encryptiondisabled' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CB_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure CodeBuild project Artifact encryption is not disabled",
+                    "description": "AWS CodeBuild is a fully managed build service in the cloud. CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. Build artifacts, such as a cache, logs, exported raw test report data files, and build results, are encrypted by default using CMKs for Amazon S3 that are managed by the AWS Key Management Service. If you do not want to use these CMKs, you must create and configure a customer-managed CMK.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "codebuild"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_CODE_2",
+                    "masterSnapshotId": [
+                        "TEST_CB"
+                    ],
+                    "type": "rego",
+                    "rule": "file(code.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CB-002",
+                            "eval": "data.rule.codebuild_encryption",
+                            "message": "data.rule.codebuild_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codebuild-project.html#cfn-codebuild-project-encryptionkey' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CB_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that CodeBuild projects are encrypted using CMK",
+                    "description": "The AWS Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "codebuild"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_CODE_3",
+                    "masterSnapshotId": [
+                        "TEST_CP"
+                    ],
+                    "type": "rego",
+                    "rule": "file(code.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CP-001",
+                            "eval": "data.rule.cp_artifact_encrypt",
+                            "message": "data.rule.cp_artifact_encrypt_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-application.html#cfn-codedeploy-application-computeplatform' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CP_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Code Pipeline Encryption at rest with customer-managed key (CMK) should be enabled",
+                    "description": "The type of encryption key When creating or updating a pipeline, the value must be cmk(customer-managed key)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "codepipeline"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_CODE_4",
+                    "masterSnapshotId": [
+                        "TEST_CD"
+                    ],
+                    "type": "rego",
+                    "rule": "file(code.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CD-001",
+                            "eval": "data.rule.deploy_compute_platform",
+                            "message": "data.rule.deploy_compute_platform_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-application.html#cfn-codedeploy-application-computeplatform' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CD_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS CodeDeploy application compute platform must be ECS or Lambda",
+                    "description": "AWS CodeDeploy application compute platform must be ECS or Lambda",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "codedeploy"
                             ]
                         }
                     ]
@@ -3650,6 +4354,154 @@
                             "compliance": [],
                             "service": [
                                 "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_LAMBDA_1",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-001",
+                            "eval": "data.rule.lambda_env",
+                            "message": "data.rule.lambda_env_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Lambda Environment Variables not encrypted at-rest using CMK",
+                    "description": "When you create or update Lambda functions that use environment variables, AWS Lambda encrypts them using the AWS Key Management Service. When your Lambda function is invoked, those values are decrypted and made available to the Lambda code._x005F_x000D_ _x005F_x000D_ This policy verifies that Lambda function uses the AMS Key Management Service to encrypt variables at-rest with CMK.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "lambda"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_LAMBDA_2",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-002",
+                            "eval": "data.rule.lambda_vpc",
+                            "message": "data.rule.lambda_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Lambda Function is not assigned to access within VPC",
+                    "description": "This policy identifies the AWS Lambda functions which do not have access within the VPC. Amazon Lambda functions should have access to VPC-only resources such as AWS Redshift data warehouses, AWS ElastiCache clusters, AWS RDS database instances, and service endpoints that should be only accessible from within a particular Virtual Private Cloud (VPC).",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "lambda"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_LAMBDA_3",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-003",
+                            "eval": "data.rule.lambda_tracing",
+                            "message": "data.rule.lambda_tracing_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Lambda functions with tracing not enabled",
+                    "description": "TracingConfig is a property of the AWS::Lambda::Function resource that configures tracing settings for your AWS Lambda (Lambda) function. When enabled, AWS Lambda tracing acitivates AWS X-Ray service that collects information on requests that a specific function performed. It reduces the time and effort for debugging and diagnosing the errors._x005F_x000D_ _x005F_x000D_ The value can be either PassThrough or Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with 'sampled=1'. If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HITRUST",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "lambda"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_LAMBDA_4",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-004",
+                            "eval": "data.rule.lambda_concurrent_execution",
+                            "message": "data.rule.lambda_concurrent_execution_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-reservedconcurrentexecutions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS Lambda function is configured for function-level concurrent execution limit",
+                    "description": "Concurrency is the number of requests that your function is serving at any given time. When your function is invoked, Lambda allocates an instance of it to process the event",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "lambda"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_LAMBDA_5",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-005",
+                            "eval": "data.rule.lambda_dlq",
+                            "message": "data.rule.lambda_dlq_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS Lambda function is configured for a DLQ",
+                    "description": "A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. it is required to get all items which is been not processed for some reason",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "lambda"
                             ]
                         }
                     ]
