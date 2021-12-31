@@ -29,7 +29,7 @@
                     "description": "This policy identifies Customer Master Keys (CMKs) that are not enabled with key rotation. AWS KMS (Key Management Service) allows customers to create master keys to encrypt sensitive data in different services. As a security best practice, it is important to rotate the keys periodically so that if the keys are compromised, the data in the underlying service is still secure with the new keys.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "kms"
@@ -58,7 +58,7 @@
                     "description": "This policy identifies KMS Customer Managed Keys(CMKs) which are not usable. When you create a CMK, it is enabled by default. If you disable a CMK or schedule it for deletion makes it unusable, it cannot be used to encrypt or decrypt data and AWS KMS does not rotate the backing keys until you re-enable it.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "kms"
@@ -87,7 +87,7 @@
                     "description": "Checks to ensure that CloudTrail is enabled across all regions. AWS CloudTrail is a service that enables governance, compliance, operational risk auditing of the AWS account. It is a compliance and security best practice to turn on CloudTrail across different regions to get a complete audit trail of activities across various services.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudtrail"
@@ -113,10 +113,10 @@
                     ],
                     "severity": "Medium",
                     "title": "AWS CloudTrail log validation is not enabled in all regions",
-                    "description": "This policy identifies AWS CloudTrails in which log validation is not enabled in all regions. CloudTrail log file validation creates a digitally signed digest file containing a hash of each log that CloudTrail writes to S3. These digest files can be used to determine whether a log file was modified after CloudTrail delivered the log. It is recommended that file validation be enabled on all CloudTrails.",
+                    "description": "This policy identifies AWS CloudTrails in which log validation is not enabled in all regions. CloudTrail log file validation creates a diAWSally signed digest file containing a hash of each log that CloudTrail writes to S3. These digest files can be used to determine whether a log file was modified after CloudTrail delivered the log. It is recommended that file validation be enabled on all CloudTrails.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudtrail"
@@ -145,7 +145,7 @@
                     "description": "Checks to ensure that CloudTrail logs are encrypted. AWS CloudTrail is a service that enables governance, compliance, operational risk auditing of the AWS account. It is a compliance and security best practice to encrypt the CloudTrail data since it may contain sensitive information.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudtrail"
@@ -174,7 +174,7 @@
                     "description": "Enabling the CloudTrail trail logs integrated with CloudWatch Logs will enable the real-time as well as historic activity logging. This will further effective monitoring and alarm capability.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudtrail"
@@ -203,7 +203,7 @@
                     "description": "This policy identifies VPC subnets which allow automatic public IP assignment. VPC subnet is a part of the VPC having its own rules for traffic. Assigning the Public IP to the subnet automatically (on launch) can accidentally expose the instances within this subnet to internet and should be edited to 'No' post creation of the Subnet.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "subnet"
@@ -232,7 +232,7 @@
                     "description": "Ensure that a managed Config rule for AWS Elastic IPs (EIPs) attached to EC2 instances launched inside a VPC is created. Config service tracks changes within your AWS resources configuration and saves the recorded data for security and compliance audits",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elastic IP"
@@ -261,7 +261,7 @@
                     "description": "AcceptanceRequired Indicates whether requests from service consumers to create an endpoint to your service must be accepted, we recommend you to enable this feature",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "vpc"
@@ -290,7 +290,7 @@
                     "description": "Ensure that the Api endpoint type in api gateway is set to private and Is not exposed to the public internet",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "api gateway"
@@ -319,7 +319,7 @@
                     "description": "This policy identifies the AWS API gateways for with the request parameters are not validated. It is recommended to validate the request parameters in the URI, query string, and headers of an incoming request to focus on the validation efforts specific to your application.\n",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "api gateway"
@@ -348,7 +348,7 @@
                     "description": "This policy identifies AWS API Gateways of protocol type REST for which the request authorisation is not set. The method request for API gateways takes the client input that is passed to the back end through the integration request. It is recommended to add authorization type to each of the method to add a layer of protection.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "api gateway"
@@ -377,7 +377,7 @@
                     "description": "Enabling the custom access logging option in API Gateway allows delivery of custom logs to CloudWatch Logs, which can be analyzed using CloudWatch Logs Insights. Using custom domain names in Amazon API Gateway allows insights into requests sent to each custom domain name.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "api gateway"
@@ -406,7 +406,7 @@
                     "description": "With tracing enabled X-Ray can provide an end-to-end view of an entire HTTP request. You can use this to analyze latencies in APIs and their backend services",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "api gateway"
@@ -435,7 +435,7 @@
                     "description": "We recommend you configure a custom authorizer OR an API key for every method in the API Gateway.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "api gateway"
@@ -464,7 +464,7 @@
                     "description": "API Gateway can generate an SSL certificate and use its public key in the backend to verify that HTTP requests to your backend system are from API Gateway. This allows your HTTP backend to control and accept only requests originating from Amazon API Gateway, even if the backend is publicly accessible._x005F_x000D_ _x005F_x000D_ Note: Some backend servers may not support SSL client authentication as API Gateway does and could return an SSL certificate error. For a list of incompatible backend servers, see Known Issues. https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "api gateway"
@@ -493,7 +493,7 @@
                     "description": "Amazon EKS strongly recommends that you use a dedicated security group for each cluster control plane (one per cluster). This policy checks the number of security groups assigned to your cluster's control plane and alerts if there are more than one.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "eks"
@@ -522,7 +522,7 @@
                     "description": "Secrets in Kubernetes enables managing sensitive information such as passwords and API keys using Kubernetes-native APIs. When creating a secret resource the Kubernetes API server stores it in etcd in a base64 encoded form.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "eks"
@@ -551,7 +551,7 @@
                     "description": "Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as user defined Secrets and Secrets required for the operation of the cluster, such as service account keys, which are all stored in etcd. Using this functionality, you can use a key, that you manage in AWS KMS, to encrypt data at the application layer",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "eks"
@@ -580,7 +580,7 @@
                     "description": "VPC support for Amazon ES is easy to configure, reliable, and offers an extra layer of security. With VPC support, traffic between other services and Amazon ES stays entirely within the AWS network, isolated from the public Internet. You can manage network access using existing VPC security groups, and you can use AWS Identity and Access Management (IAM) policies for additional protection. VPC support for Amazon ES domains is available at no additional charge.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elasticsearch"
@@ -609,7 +609,7 @@
                     "description": "This policy identifies Elasticsearch domains for which encryption is disabled. Encryption of data at rest is required to prevent unauthorized users from accessing the sensitive information available on your Elasticsearch domains components. This may include all data of file systems, primary and replica indices, log files, memory swap files and automated snapshots. The Elasticsearch uses AWS KMS service to store and manage the encryption keys. It is highly recommended to implement encryption at rest when you are working with production data that have sensitive information, to protect from unauthorized access.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "HITRUST",
@@ -643,7 +643,7 @@
                     "description": "This policy identifies Elasticsearch domains for which Dedicated master is disabled in your AWS account. If dedicated master nodes are provided those handle the management tasks and cluster nodes can easily manage index and search requests from different types of workload and make them more resilient in production. Dedicated master nodes improve environmental stability by freeing all the management tasks from the cluster data nodes.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elasticsearch"
@@ -672,7 +672,7 @@
                     "description": "This policy identifies Elasticsearch domains for which Index slow logs is disabled in your AWS account. Enabling support for publishing indexing slow logs to AWS CloudWatch Logs enables you have full insight into the performance of indexing operations performed on your Elasticsearch clusters. This will help you in identifying performance issues caused by specific queries or due to changes in cluster usage, so that you can optimize your index configuration to address the problem.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "HITRUST",
@@ -705,7 +705,7 @@
                     "description": "This policy identifies Elasticsearch domains for which Search slow logs is disabled in your AWS account. Enabling support for publishing Search slow logs to AWS CloudWatch Logs enables you to have full insight into the performance of search operations performed on your Elasticsearch clusters. This will help you in identifying performance issues caused by specific search queries so that you can optimize your queries to address the problem.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "HITRUST",
@@ -738,7 +738,7 @@
                     "description": "This policy identifies Elasticsearch domains for which Zone Awareness is disabled in your AWS account. Enabling Zone Awareness (cross-zone replication) increases the availability by distributing your Elasticsearch data nodes across two availability zones available in the same AWS region. It also prevents data loss and minimizes downtime in the event of node or availability zone failure.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "NIST 800"
@@ -770,7 +770,7 @@
                     "description": "Ensure that node-to-node encryption feature is enabled for your AWS ElasticSearch domains (clusters) in order to add an extra layer of data protection on top of the existing ES security features such as HTTPS client to cluster encryption and data-at-rest encryption, and meet strict compliance requirements. The ElasticSearch node-to-node encryption capability provides the additional layer of security by implementing Transport Layer Security (TLS) for all communications between the nodes provisioned within the cluster. The feature ensures that any data sent to your AWS ElasticSearch domain over HTTPS remains encrypted in transit while it is being distributed and replicated between the nodes.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "NIST 800"
@@ -802,7 +802,7 @@
                     "description": "This policy identifies Elasticsearch domains that are not configured with HTTPS. Amazon Elasticsearch domains allow all traffic to be submitted over HTTPS, ensuring all communications between application and domain are encrypted. It is recommended to enable HTTPS so that all communication between the application and all data access goes across an encrypted communication channel to eliminate man-in-the-middle attacks",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elasticsearch"
@@ -831,7 +831,7 @@
                     "description": "Ensure that your Amazon ElasticSearch (ES) domains are encrypted with KMS Customer Master Keys (CMKs) instead of AWS managed-keys (default keys used by the ES service when there are no customer keys defined) in order to have more granular control over the data-at-rest encryption/decryption process and to meet compliance requirements.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elasticsearch"
@@ -860,7 +860,7 @@
                     "description": "Checks for S3 buckets without access logging turned on. Access logging allows customers to view complete audit trail on sensitive workloads such as S3 buckets",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "GDPR",
@@ -896,7 +896,7 @@
                     "description": "This policy identifies S3 CloudTrail buckets for which access is disabled.S3 Bucket access logging generates access records for each request made to your S3 bucket. An access log record contains information such as the request type, the resources specified in the request worked, and the time and date the request was processed. It is recommended that bucket access logging be enabled on the CloudTrail S3 bucket",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -925,7 +925,7 @@
                     "description": "This policy identifies the S3 buckets which have Object Versioning disabled. S3 Object Versioning is an important capability in protecting your data within a bucket. Once you enable Object Versioning, you cannot remove it; you can suspend Object Versioning at any time on a bucket if you do not wish for it to persist. It is recommended to enable Object Versioning on S3.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -954,7 +954,7 @@
                     "description": "This policy determines if any S3 bucket(s) has Global View ACL permissions enabled for the All Users group. These permissions allow external resources to see the permission settings associated to the object.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -980,10 +980,10 @@
                     ],
                     "severity": "high",
                     "title": "AWS S3 buckets are accessible to any authenticated user.",
-                    "description": "This policy identifies S3 buckets accessible to any authenticated AWS users. Amazon S3 allows customer to store and retrieve any type of content from anywhere in the web. Often, customers have legitimate reasons to expose the S3 bucket to public, for example to host website content. However, these buckets often contain highly sensitive enterprise data which if left accessible to anyone with valid AWS credentials, may result in sensitive data leaks.",
+                    "description": "This policy identifies S3 buckets accessible to any authenticated AWS users. Amazon S3 allows customer to store and retrieve any type of content from anywhere in the web. Often, customers have leAWSimate reasons to expose the S3 bucket to public, for example to host website content. However, these buckets often contain highly sensitive enterprise data which if left accessible to anyone with valid AWS credentials, may result in sensitive data leaks.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -1009,10 +1009,10 @@
                     ],
                     "severity": "high",
                     "title": "AWS S3 buckets are accessible to public",
-                    "description": "This policy identifies S3 buckets which are publicly accessible. Amazon S3 allows customers to store and retrieve any type of content from anywhere in the web. Often, customers have legitimate reasons to expose the S3 bucket to public, for example, to host website content. However, these buckets often contain highly sensitive enterprise data which if left open to public may result in sensitive data leaks.",
+                    "description": "This policy identifies S3 buckets which are publicly accessible. Amazon S3 allows customers to store and retrieve any type of content from anywhere in the web. Often, customers have leAWSimate reasons to expose the S3 bucket to public, for example, to host website content. However, these buckets often contain highly sensitive enterprise data which if left open to public may result in sensitive data leaks.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -1041,7 +1041,7 @@
                     "description": "Customers can protect the data in S3 buckets using the AWS server-side encryption. If the server-side encryption is not turned on for S3 buckets with sensitive data, in the event of a data breach, malicious users can gain access to the data.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -1070,7 +1070,7 @@
                     "description": "To host a website on AWS S3 you should configure a bucket as a website. This policy identifies all the S3 buckets that are configured to host websites. By frequently surveying these S3 buckets you can ensure that only authorized buckets are enabled to host websites. Make sure to disable static website hosting for unauthorized S3 buckets.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "ISO 27001"
                             ],
@@ -1101,7 +1101,7 @@
                     "description": "Ensure that AllowedOrigins, AllowedMethods should not be set to *. this allows all cross site users to access s3 bucket and they have permission to manipulate data",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -1130,7 +1130,7 @@
                     "description": "Ensure that your AWS S3 buckets are configured to use Server-Side Encryption with customer managed CMKs instead of S3-Managed Keys (SSE-S3) in order to obtain a fine-grained control over Amazon S3 data-at-rest encryption and decryption process",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -1159,7 +1159,7 @@
                     "description": "Indicates whether this bucket has an Object Lock configuration enabled. Enable ObjectLockEnabled when you apply ObjectLockConfiguration to a bucket.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -1188,7 +1188,7 @@
                     "description": "Cross-region replication enables automatic, asynchronous copying of objects across S3 buckets. By default, replication supports copying new S3 objects after it is enabled",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -1217,7 +1217,7 @@
                     "description": "We recommend you ensure S3 bucket has public access blocks. If the public access block is not attached it defaults to False",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -1246,7 +1246,7 @@
                     "description": "Enabling this setting does not affect previously stored bucket policies. Public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -1275,7 +1275,7 @@
                     "description": "This will block public access granted by ACLs while still allowing PUT Object calls that include a public ACL",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -1304,7 +1304,7 @@
                     "description": "If an AWS account is used to host a data lake or another business application, blocking public access will serve as an account-level guard against accidental public exposure.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloud"
@@ -1333,7 +1333,7 @@
                     "description": "This policy identifies Elastic File Systems (EFSs) which are encrypted with default KMS keys and not with Keys managed by Customer. It is a best practice to use customer managed KMS Keys to encrypt your EFS data. It gives you full control over the encrypted data.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "efs"
@@ -1362,7 +1362,7 @@
                     "description": "This policy identifies Elastic File Systems (EFSs) for which encryption for data at rest disabled. It is highly recommended to implement at-rest encryption in order to prevent unauthorized users from reading sensitive data saved to EFS.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "efs"
@@ -1391,7 +1391,7 @@
                     "description": "This policy identifies the EBS volumes which are not encrypted. The snapshots that you take of an encrypted EBS volume are also encrypted and can be moved between AWS Regions as needed. You cannot share encrypted snapshots with other AWS accounts and you cannot make them public. It is recommended that EBS volume should be encrypted.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "GDPR",
@@ -1429,7 +1429,7 @@
                     "description": "It is recommended that you use VPC as the EndpointType. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server's endpoint and use VPC security groups to restrict traffic by the client's public IP address. This is not possible with EndpointType set to VPC_ENDPOINT.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "emr"
@@ -1458,7 +1458,7 @@
                     "description": "This policy identifies EMR clusters which are not configured with security configuration. With Amazon EMR release version 4.8.0 or later, you can use security configurations to configure data encryption, Kerberos authentication, and Amazon S3 authorization for EMRFS.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "emr"
@@ -1487,7 +1487,7 @@
                     "description": "This policy identifies EMR clusters which are not configured with Kerberos Authentication. Kerberos uses secret-key cryptography to provide strong authentication so that passwords or other credentials aren't sent over the network in an unencrypted format.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "emr"
@@ -1516,7 +1516,7 @@
                     "description": "This policy identifies EMR clusters which are not configured with Client Side Encryption with Customer Master Keys(CSE CMK) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your EMR cluster and ensure full control over your data.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "emr"
@@ -1545,7 +1545,7 @@
                     "description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption using CMK(Customer Managed Key). Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "emr"
@@ -1574,7 +1574,7 @@
                     "description": "This policy identifies AWS EMR clusters for which data encryption at rest is not enabled. Encryption of data at rest is required to prevent unauthorized users from accessing the sensitive information available on your  EMR clusters and associated storage systems.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "emr"
@@ -1603,7 +1603,7 @@
                     "description": "This policy identifies AWS EMR clusters which are not enabled with data encryption in transit. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and storage server. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your EMR clusters and their associated storage systems.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "emr"
@@ -1632,7 +1632,7 @@
                     "description": "This policy identifies CloudFront web distributions which have a default SSL certificate to access CloudFront content. It is a best practice to use custom SSL Certificate to access CloudFront content. It gives you full control over the content data. custom SSL certificates also allow your users to access your content by using an alternate domain name. You can use a certificate stored in AWS Certificate Manager (ACM) or you can use a certificate stored in IAM.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "sqs"
@@ -1661,7 +1661,7 @@
                     "description": "SSE lets you transmit sensitive data in encrypted queues. SSE protects the contents of messages in Amazon SQS queues using keys managed in the AWS Key Management Service (AWS KMS). SSE encrypts messages as soon as Amazon SQS receives them. The messages are stored in encrypted form and Amazon SQS decrypts messages only when they are sent to an authorized consumer._x005F_x000D_ _x005F_x000D_ SQS SSE and the AWS KMS security standards can help you meet encryption-related compliance requirements.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "sqs"
@@ -1690,7 +1690,7 @@
                     "description": "Ensure that Amazon Managed Streaming for Kafka (MSK) clusters are using AWS KMS Customer Master Keys (CMKs) instead of AWS managed-keys (i.e. default keys) for data encryption, in order to have a fine-grained control over data-at-rest encryption/decryption process and meet compliance requirements. MSK is a fully managed AWS service that enables you to migrate, build and run real-time streaming applications on Apache Kafka.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "msk"
@@ -1719,7 +1719,7 @@
                     "description": "Ensure data is Encrypted in transit (TLS)",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "msk"
@@ -1748,7 +1748,7 @@
                     "description": "Enable TLS by setting EncryptionInfo.EncryptionInTransit.ClientBroker value to 'TLS'. to provide trasport layes security to MSK instance",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "msk"
@@ -1777,7 +1777,7 @@
                     "description": "To Add MKS Cluster in gs VPC,Specify exactly two subnets if you are using the US West (N. California) Region. For other Regions where Amazon MSK is available, you can specify either two or three subnets. The subnets that you specify must be in distinct Availability Zones. When you create a cluster, Amazon MSK distributes the broker nodes evenly across the subnets that you specify.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "msk"
@@ -1806,7 +1806,7 @@
                     "description": "Consistent cluster logging helps you determine if a request was made with root or AWS Identity and Access Management (IAM) user credentials and whether the request was made with temporary security credentials for a role or federated user.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "msk"
@@ -1835,7 +1835,7 @@
                     "description": "This policy identifies Elastic Load Balancers (Classic) which are configured with SSL negotiation policy containing insecure ciphers. An SSL cipher is an encryption algorithm that uses encryption keys to create a coded message. SSL protocols use several SSL ciphers to encrypt data over the Internet. As many of the other ciphers are not secure, it is recommended to use only the ciphers recommended in the following AWS link: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -1864,7 +1864,7 @@
                     "description": "This policy identifies Elastic Load Balancers (Classic) which are configured with SSL negotiation policy containing vulnerable SSL protocol. The SSL protocol establishes a secure connection between a client and a server and ensures that all the data passed between the client and your load balancer is private. As a security best practice, it is recommended to use the latest version SSL protocol.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -1893,7 +1893,7 @@
                     "description": "This policy identifies Classic Elastic Load Balancers which have access log disabled. When Access log enabled, Classic load balancer captures detailed information about requests sent to your load balancer. Each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses. You can use these access logs to analyze traffic patterns and to troubleshoot issues.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -1922,7 +1922,7 @@
                     "description": "This policy identifies Classic Elastic Load Balancers which have connection draining disabled. Connection Draining feature ensures that a Classic load balancer stops sending requests to instances that are de-registering or unhealthy, while keeping the existing connections open. This enables the load balancer to complete in-flight requests made to instances that are de-registering or unhealthy.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -1951,7 +1951,7 @@
                     "description": "This policy identifies Classic Elastic Load Balancers which have cross-zone load balancing disabled. When Cross-zone load balancing enabled, classic load balancer distributes requests evenly across the registered instances in all enabled Availability Zones. Cross-zone load balancing reduces the need to maintain equivalent numbers of instances in each enabled Availability Zone, and improves your application's ability to handle the loss of one or more instances.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -1980,7 +1980,7 @@
                     "description": "This policy identifies unused Elastic Load Balancers (ELBs) in your AWS account. Any Elastic Load Balancer in your AWS account is adding charges to your monthly bill, although it is not used by any resources. As a best practice, it is recommended to remove ELBs that are not associated with any instances, it will also help you avoid unexpected charges on your bill.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "ISO 27001"
                             ],
@@ -2011,7 +2011,7 @@
                     "description": "This policy identifies ELBv2 ALBs which have access log disabled. Access logs capture detailed information about requests sent to your load balancer and each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses. You can use these access logs to analyze traffic patterns and troubleshoot issues.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -2040,7 +2040,7 @@
                     "description": "This policy identifies Elastic Load Balancers which have listener TLS/SSL disabled. As Load Balancers will be handling all incoming requests and routing the traffic accordingly; The listeners on the load balancers should always receive traffic over secure channel with a valid SSL certificate configured.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "GDPR",
@@ -2077,7 +2077,7 @@
                     "description": "This policy identifies Application Load Balancer (ALB) listeners that are configured to accept connection requests over HTTP instead of HTTPS. As a best practice, use the HTTPS protocol to encrypt the communication between the application clients and the application load balancer.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -2106,7 +2106,7 @@
                     "description": "This policy identifies Elastic Load Balancer V2 (ELBV2) which have listener TLS/SSL disabled. As Load Balancers will be handling all incoming requests and routing the traffic accordingly; The listeners on the load balancers should always receive traffic over secure channel with a valid SSL certificate configured.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -2135,7 +2135,7 @@
                     "description": "Checks if rule evaluates AWS Application Load Balancers (ALB) to ensure they are configured to drop http headers. The rule is NON_COMPLIANT if the value of routing.http.drop_invalid_header_fields.enabled is set to false",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -2164,7 +2164,7 @@
                     "description": "Ensure the ELBv2 ListenerCertificate ListenerArn value is defined, else an Actor can provide access to CA to non-ADATUM principals.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -2193,7 +2193,7 @@
                     "description": "Ensure the Load Balancer Listener SSLPolicy is set to at least one value from approved policies, else an Actor can gain access to ADATUM information due to misconfigured cryptographic settings",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -2222,7 +2222,7 @@
                     "description": "Ensure one of Subnets or SubnetMappings is defined for loadbalancer",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -2251,7 +2251,7 @@
                     "description": "LoadBalancer scheme must be explicitly set to internal, else an Actor can allow access to ADATUM information through the misconfiguration of an ELB resource",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -2280,7 +2280,7 @@
                     "description": "Ensure the value of Type for each LoadBalancer resource is application or the Type is not set, since it defaults to application",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -2309,7 +2309,7 @@
                     "description": "The only allowed Protocol value for LoadBalancer TargetGroups is HTTPS, though the property is ignored if the target type is lambda.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "elb"
@@ -2338,7 +2338,7 @@
                     "description": "This policy identifies Redshift Clusters which are encrypted with default KMS keys and not with Keys managed by Customer. It is a best practice to use customer managed KMS Keys to encrypt your Redshift databases data. Customer-managed CMKs give you more flexibility, including the ability to create, rotate, disable, define access control for, and audit the encryption keys used to help protect your data.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "redshift"
@@ -2367,7 +2367,7 @@
                     "description": "This policy identifies AWS Redshift clusters which are accessible publicly.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "GDPR",
@@ -2403,7 +2403,7 @@
                     "description": "This policy identifies Redshift databases in which data connection to and from is occurring on an insecure channel. SSL connections ensures the security of the data in transit.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "GDPR",
@@ -2438,7 +2438,7 @@
                     "description": "This policy identifies AWS Redshift instances which are not encrypted. These instances should be encrypted for clusters to help protect data at rest which otherwise can result in a data breach.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "GDPR",
@@ -2475,7 +2475,7 @@
                     "description": "This policy identifies AWS Redshift instances which has not enabled AllowVersionUpgrade. major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. When a new major version of the Amazon Redshift engine is released, you can request that the service automatically apply upgrades during the maintenance window to the Amazon Redshift engine that is running on your cluster.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "redshift"
@@ -2504,7 +2504,7 @@
                     "description": "Ensure that your Redshift clusters are provisioned within the AWS EC2-VPC platform instead of EC2-Classic platform (outdated) for better flexibility and control over clusters security, traffic routing, availability and more.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "redshift"
@@ -2533,7 +2533,7 @@
                     "description": "Audit logging is not enabled by default in Amazon Redshift. When you enable logging on your cluster, Amazon Redshift creates and uploads logs to Amazon S3 that capture data from the creation of the cluster to the present time.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "GDPR",
@@ -2569,7 +2569,7 @@
                     "description": "Apache Log4j2 2.0-beta9 through 2.12.1 and 2.13.0 through 2.15.0 JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "waf"
@@ -2598,7 +2598,7 @@
                     "description": "This policy identifies SNS subscriptions using HTTP instead of HTTPS as the delivery protocol in order to enforce SSL encryption for all subscription requests. It is strongly recommended use only HTTPS-based subscriptions by implementing secure SNS topic policies.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "sns"
@@ -2627,7 +2627,7 @@
                     "description": "This policy identifies Amazon Simple Notification Service (SNS) topics that are encrypted with the default AWS Key Management Service (KMS) keys. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your SNS topics and ensure full control over your data.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "sns"
@@ -2656,7 +2656,7 @@
                     "description": "This policy identifies Amazon Simple Notification Service (SNS) topics that have server-side encryption disabled. As a best practice, enable server-side encryption for at-rest encryption of message content published to SNS topics. When you publish a message, the SNS encrypts your message as soon as it receives it, and decrypts it just prior to delivery.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "sns"
@@ -2685,7 +2685,7 @@
                     "description": "Public SNS Topic potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "sns"
@@ -2714,7 +2714,7 @@
                     "description": "AWS provides Identity Access Management (IAM) roles to securely access AWS services and resources. The role is an identity with permission policies that define what the identity can and cannot do in AWS. As a best practice, create IAM roles and attach the role to manage EC2 instance permissions securely instead of distributing or sharing keys or passwords.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ec2"
@@ -2743,7 +2743,7 @@
                     "description": "This policy identifies the EC2 instances which are still using EC2 Classic. There are no VPCs deployed any EC2 instances will be running on AWS EC2 Classic. Deploying VPCs will enable you to leverage enhanced infrastructure security controls.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ec2"
@@ -2772,7 +2772,7 @@
                     "description": "This policy identifies AWS EC2 instances with Public IP and associated with Security Groups have Internet Access. EC2 instance receives a public IP address when launched in a default VPC security group (A security group acts as a virtual firewall for your instance to control inbound and outbound traffic.) and we don't assign a public IP address to instances launched in a non-default subnet. Therefore it's a best practice to ensure that there are no EC2 instances with Public IP that are associated with Security Groups which have Internet Access.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ec2"
@@ -2801,7 +2801,7 @@
                     "description": "Enable EbsOptimized provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ec2"
@@ -2830,7 +2830,7 @@
                     "description": "Ensure that detailed monitoring is enabled for your Amazon EC2 instances in order to have enough monitoring data to help you make better decisions on architecting and managing compute resources within your AWS account",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ec2"
@@ -2859,7 +2859,7 @@
                     "description": "This policy identifies ACLs which allows traffic on all ICMP IPv4 protocol. A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. By default, ACL allows all inbound and outbound IPv4 traffic and, if applicable, IPv6 traffic. Inbound rules that allow unrestricted traffic to the internet can be a security risk. As a best practice, it is recommended to configure ACL to restrict traffic on authorized protocols.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "nacl"
@@ -2888,7 +2888,7 @@
                     "description": "This policy identifies ACLs which allows traffic on all ICMP IPv6 protocol. A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. By default, ACL allows all inbound and outbound IPv4 traffic and, if applicable, IPv6 traffic. Inbound rules that allow unrestricted traffic to the internet can be a security risk. As a best practice, it is recommended to configure ACL to restrict traffic on authorized protocols.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "nacl"
@@ -2917,7 +2917,7 @@
                     "description": "This policy identifies ACLs which allows traffic on all protocols. A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. By default, ACL allows all inbound and outbound IPv4 traffic and, if applicable, IPv6 traffic. Inbound rules that allow unrestricted traffic to the internet can be a security risk. As a best practice, it is recommended to configure ACLs to restrict traffic on authorized protocols.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "nacl"
@@ -2946,7 +2946,7 @@
                     "description": "This policy identifies ACLs which allows traffic on all protocol. A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. By default, ACL allows all inbound and outbound IPv4 traffic and, if applicable, IPv6 traffic. Outbound rules that allow unrestricted traffic to the internet can be a security risk. As a best practice, it is recommended to configure ACL to restrict traffic on authorized protocols.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "nacl"
@@ -2975,7 +2975,7 @@
                     "description": "This policy identifies ACLs which allows traffic on all protocol. A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. By default, ACL allows all inbound and outbound IPv4 traffic and, if applicable, IPv6 traffic. Outbound rules that allow unrestricted traffic to the internet can be a security risk. As a best practice, it is recommended to configure ACL to restrict traffic on authorized protocols.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "nacl"
@@ -3004,7 +3004,7 @@
                     "description": "This policy identifies ACLs which allows traffic on all protocols. A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. By default, ACL allows all inbound and outbound IPv4 traffic and, if applicable, IPv6 traffic. Outbound rules that allow unrestricted traffic to the internet can be a security risk. As a best practice, it is recommended to configure ACLs to restrict traffic on authorized protocols.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "nacl"
@@ -3033,7 +3033,7 @@
                     "description": "Check your Amazon VPC Network Access Control Lists (NACLs) for inbound/ingress rules that allow unrestricted traffic (i.e. 0.0.0.0/0) on TCP ports 22 (SSH) and 3389 (RDP) and limit access to trusted IP addresses or IP ranges only in order to implement the Principle of Least Privilege (POLP) and reduce the attack surface at the subnet level.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "nacl"
@@ -3062,7 +3062,7 @@
                     "description": "This policy identifies ACM Certificates which are using wildcard certificates for wildcard domain name instead of single domain name certificates. ACM allows you to use an asterisk (*) in the domain name to create an ACM Certificate containing a wildcard name that can protect several sites in the same domain. For example, a wildcard certificate issued for *.<compliance-software>.io can match both www.<compliance-software>.io and images.<compliance-software>.io. When you use wildcard certificates, if the private key of a certificate is compromised, then all domain and subdomains that use the compromised certificate are potentially impacted. So it is recommended to use single domain name certificates instead of wildcard certificates to reduce the associated risks with a compromised domain or subdomain.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "acm"
@@ -3091,7 +3091,7 @@
                     "description": "This policy identifies AWS Certificate Manager certificates in which Certificate Transparency Logging is disabled. AWS Certificate Manager (ACM) is the preferred tool to provision, manage, and deploy your server certificates. Certificate Transparency Logging is used to guard against SSL/TLS certificates that are issued by mistake or by a compromised CA, some browsers require that public certificates issued for your domain can also be recorded. This policy generates alerts for certificates which have transparency logging disabled. As a best practice, it is recommended to enable Transparency logging for all certificates.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "HITRUST",
@@ -3124,7 +3124,7 @@
                     "description": "Ensure that the aws certificate manager/ACMPCA Certificate CertificateAuthorityArn property references (using Fn::GetAtt or Ref) a Private CA, or that the property is not used.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "acm"
@@ -3153,7 +3153,7 @@
                     "description": "Amazon ECR supports immutable tags, preventing image tags from being overwritten. In the past, ECR tags could have been overwritten, this could be overcome by requiring users to uniquely identify an image using a naming convention.Tag Immutability enables users can rely on the descriptive tags of an image as a mechanism to track and uniquely identify images. By setting an image tag as immutable, developers can use the tag to correlate the deployed image version with the build that produced the image.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecr"
@@ -3182,7 +3182,7 @@
                     "description": "Make sure EncryptionType is present in ECR EncryptionConfiguration To increase control of the encryption and control the management of factors like key rotation",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecr"
@@ -3211,7 +3211,7 @@
                     "description": "Amazon ECR is a fully managed container registry used to store, manage and deploy container images. ECR Image Scanning assesses and identifies operating system vulnerabilities. Using automated image scans you can ensure container image vulnerabilities are found before getting pushed to production. ECR APIs notify if vulnerabilities were found when a scan completes",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecr"
@@ -3240,7 +3240,7 @@
                     "description": "Public AWS ECR Repository potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecr"
@@ -3269,7 +3269,7 @@
                     "description": "Ensure your ECS containers are not given elevated privileges on the host container instance. When the Privileged parameter is true, the container is given elevated privileges on the host container instance (similar to the root user). This policy checks the security configuration of your task definition and alerts if elevated privileges are enabled. Note: This parameter is not supported for Windows containers or tasks using the Fargate launch type.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3298,7 +3298,7 @@
                     "description": "The execution IAM Role is required by tasks to pull container images and publish container logs to Amazon CloudWatch on your behalf. This policy generates an alert if a task execution role is not found in your task definition.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3327,7 +3327,7 @@
                     "description": "The user name to use inside the container should not be root. This policy generates an alert if root user is found in your container definition. The User parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run Note: This parameter is not supported for Windows containers.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3356,7 +3356,7 @@
                     "description": "It is recommended that readonlyRootFilesystem is enabled for AWS ECS task definition. Please make sure your 'ContainerDefinitions' template has 'ReadonlyRootFilesystem' and is set to 'true'.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3385,7 +3385,7 @@
                     "description": "It is recommended that resource limits are set for AWS ECS task definition. Please make sure attributes 'Cpu' or 'Memory' exists and its value is not set to 0 under 'TaskDefinition' or 'ContainerDefinitions'.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3414,7 +3414,7 @@
                     "description": "It is recommended that logging is enabled for AWS ECS task definition. Please make sure your 'TaskDefinition' template has 'LogConfiguration' and 'LogDriver' configured.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3443,7 +3443,7 @@
                     "description": "ECS task definitions that have volumes using EFS configuration should explicitly enable in transit encryption to prevent the risk of data loss due to interception.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3472,7 +3472,7 @@
                     "description": "Container Insights can be used to collect, aggregate, and summarize metrics and logs from containerized applications and microservices. They can also be extended to collect metrics at the cluster, task, and service levels. Using Container Insights allows you to monitor, troubleshoot, and set alarms for all your Amazon ECS resources. It provides a simple to use native and fully managed service for managing ECS issues.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3501,7 +3501,7 @@
                     "description": "If the EnableExecuteCommand property is set to True on an ECS Service then any third person can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3530,7 +3530,7 @@
                     "description": "Ensure that the ecs service and Task Set Network has set [AssignPublicIp/assign_public_ip] property is set to DISABLED else an Actor can exfiltrate data by associating ECS resources with non-ADATUM resources",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3559,7 +3559,7 @@
                     "description": "Ensure that ECS services and Task Sets are launched as Fargate type else Actor can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3588,7 +3588,7 @@
                     "description": "Value(s) of subnets attached to aws ecs service or taskset AwsVpcConfiguration resources are vended else Actor can exfiltrate data by associating ECS resources with non-ADATUM resources.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3617,7 +3617,7 @@
                     "description": "ECS Service and ECS TaskSet resources set a SecurityGroup in the AwsvpcConfiguration. else Actor can exfiltrate data by associating ECS resources with non-ADATUM resources.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3646,7 +3646,7 @@
                     "description": "Ensure that ECS Task Definition have their network mode property set to awsvpc. else an Actor can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "ecs"
@@ -3675,7 +3675,7 @@
                     "description": "This policy identifies CloudFront distributions for which field-level encryption is not enabled. Field-level encryption adds an additional layer of security along with HTTPS which protects specific data throughout system processing so that only certain applications can see it.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudfront"
@@ -3704,7 +3704,7 @@
                     "description": "CloudFront, a content delivery network (CDN) offered by AWS, is not using a secure cipher for distribution. It is a best security practice to enforce the use of secure ciphers TLSv1.0, TLSv1.1, and/or TLSv1.2 in a CloudFront Distribution's certificate configuration. This policy scans for any deviations from this practice and returns the results.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudfront"
@@ -3733,7 +3733,7 @@
                     "description": "This policy identifies CloudFront distributions which have access logging disabled. Enabling access log on distributions creates log files that contain detailed information about every user request that CloudFront receives. Access logs are available for web distributions. If you enable logging, you can also specify the Amazon S3 bucket that you want CloudFront to save files in.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudfront"
@@ -3762,7 +3762,7 @@
                     "description": "It is a best security practice to enforce HTTPS-only traffic between a CloudFront distribution and the origin. This policy scans for any deviations from this practice and returns the results.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudfront"
@@ -3791,7 +3791,7 @@
                     "description": "For web distributions, you can configure CloudFront to require that viewers use HTTPS to request your objects, so connections are encrypted when CloudFront communicates with viewers.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudfront"
@@ -3820,7 +3820,7 @@
                     "description": "This policy identifies AWS CloudFront web distributions which are configured with TLS versions for HTTPS communication between viewers and CloudFront. As a best practice, use TLSv1.1_2016 or later as the minimum protocol version in your CloudFront distribution security policies.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudfront"
@@ -3849,7 +3849,7 @@
                     "description": "This policy identifies Amazon CloudFront web distributions which have the AWS Web Application Firewall (AWS WAF) service disabled. As a best practice, enable the AWS WAF service on CloudFront web distributions to protect against application layer attacks. To block malicious requests to your Cloudfront Content Delivery Network, define the block criteria in the WAF web access control list (web ACL).",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudfront"
@@ -3878,7 +3878,7 @@
                     "description": "This policy identifies CloudFront web distributions which have a default SSL certificate to access CloudFront content. It is a best practice to use custom SSL Certificate to access CloudFront content. It gives you full control over the content data. custom SSL certificates also allow your users to access your content by using an alternate domain name. You can use a certificate stored in AWS Certificate Manager (ACM) or you can use a certificate stored in IAM.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudfront"
@@ -3907,7 +3907,7 @@
                     "description": "This policy identifies CloudFront web distributions which have geo restriction feature disabled. Geo Restriction has the ability to block IP addresses based on Geo IP by whitelist or blacklist a country in order to allow or restrict users in specific locations from accessing web application content.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "cloudfront"
@@ -3936,7 +3936,7 @@
                     "description": "This policy identifies RDS DB clusters for which encryption is disabled. Amazon Aurora encrypted DB clusters provide an additional layer of data protection by securing your data from unauthorized access to the underlying storage. You can use Amazon Aurora encryption to increase data protection of your applications deployed in the cloud, and to fulfill compliance requirements for data-at-rest encryption._x005F_x000D_ NOTE: This policy is applicable only for Aurora DB clusters._x005F_x000D_ https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -3965,7 +3965,7 @@
                     "description": "This policy identifies RDS database instances which are publicly accessible.DB instances should not be publicly accessible to protect the integrety of data.Public accessibility of DB instances can be modified by turning on or off the Public accessibility parameter.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "HITRUST",
@@ -3999,7 +3999,7 @@
                     "description": "This policy identifies RDS databases that are encrypted with default KMS keys and not with customer managed keys. As a best practice, use customer managed keys to encrypt the data on your RDS databases and maintain control of your keys and data on sensitive workloads.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4028,7 +4028,7 @@
                     "description": "This policy identifies RDS event subscriptions for which DB instance event subscription is disabled. You can create an Amazon RDS event notification subscription so that you can be notified when an event occurs for a given DB instance.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4057,7 +4057,7 @@
                     "description": "This policy identifies RDS event subscriptions for which DB security groups event subscription is disabled. You can create an Amazon RDS event notification subscription so that you can be notified when an event occurs for given DB security groups.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4086,7 +4086,7 @@
                     "description": "This policy identifies AWS RDS instances which are not encrypted. Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up and manage databases. Amazon allows customers to turn on encryption for RDS which is recommended for compliance and security reasons.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "CSA-CCM",
                                 "GDPR",
@@ -4124,7 +4124,7 @@
                     "description": "This policy identifies RDS instances which have Multi-Availability Zone(Multi-AZ) disabled. When RDS DB instance is enabled with Multi-AZ, RDS automatically creates a primary DB Instance and synchronously replicates the data to a standby instance in a different availability zone. These Multi-AZ deployments will improve primary node reachability by providing read replica in case of network connectivity loss or loss of availability in the primary\u00e2\u20ac\u2122s availability zone for read/write operations, so by making them the best fit for production database workloads.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4153,7 +4153,7 @@
                     "description": "This policy identifies RDS instances which have copy tags to snapshots disabled. Copy tags to snapshots copies all the user-defined tags from the DB instance to snapshots. Copying tags allow you to add metadata and apply access policies to your Amazon RDS resources.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4182,7 +4182,7 @@
                     "description": "This policy identifies RDS instances which are not set with the Automatic Backup setting. If Automatic Backup is set, RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases which provide for point-in-time recovery. The automatic backup will happen during the specified backup window time and keeps the backups for a limited period of time as defined in the retention period. It is recommended to set Automatic backups for your critical RDS servers that will help in the data restoration process.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4211,7 +4211,7 @@
                     "description": "When Amazon Relational Database Service (Amazon RDS) supports a new version of a database engine, you can upgrade your DB instances to the new version. There are two kinds of upgrades: major version upgrades and minor version upgrades. Minor upgrades helps maintain a secure and stable RDS with minimal impact on the application. For this reason, we recommend that your automatic minor upgrade is enabled. Minor version upgrades only occur automatically if a minor upgrade replaces an unsafe version, such as a minor upgrade that contains bug fixes for a previous version.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4240,7 +4240,7 @@
                     "description": "RDS Retention Policies for Backups are an important part of your DR/BCP strategy. Recovering data from catastrophic failures, malicious attacks, or corruption often requires a several day window of potentially good backup material to leverage. As such, the best practice is to ensure your RDS clusters are retaining at least 7 days of backups, if not more (up to a maximum of 35).",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4269,7 +4269,7 @@
                     "description": "RDS cluster Retention Policies for Backups are an important part of your DR/BCP strategy. Recovering data from catastrophic failures, malicious attacks, or corruption often requires a several day window of potentially good backup material to leverage. As such, the best practice is to ensure your RDS clusters are retaining at least 7 days of backups, if not more (up to a maximum of 35).",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4298,7 +4298,7 @@
                     "description": "This rule Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4327,7 +4327,7 @@
                     "description": "Postgres database instances can be enabled for auditing with PGAudit, the PostgresSQL Audit Extension. With PGAudit enabled you will be able to audit any database, its roles, relations, or columns.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4356,7 +4356,7 @@
                     "description": "This policy identifies RDS Global DB clusters for which encryption is disabled. Amazon Aurora encrypted Global DB clusters provide an additional layer of data protection by securing your data from unauthorized access to the underlying storage. You can use Amazon Aurora encryption to increase data protection of your applications deployed in the cloud, and to fulfill compliance requirements",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4385,7 +4385,7 @@
                     "description": "Ensure IAM Database Authentication feature is enabled in order to use AWS Identity and Access Management (IAM) service to manage database access to your Amazon RDS MySQL and PostgreSQL instances. With this feature enabled, you don't have to use a password when you connect to your MySQL/PostgreSQL database instances, instead you use an authentication token",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4414,7 +4414,7 @@
                     "description": "Ensure IAM Database Authentication feature is enabled in order to use AWS Identity and Access Management (IAM) service to manage database access to your Amazon RDS MySQL and PostgreSQL instances. With this feature enabled, you don't have to use a password when you connect to your MySQL/PostgreSQL database instances, instead you use an authentication token",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4443,7 +4443,7 @@
                     "description": "Use CloudWatch logging types for Amazon Relational Database Service (Amazon RDS) instances",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4472,7 +4472,7 @@
                     "description": "This New Relic integration allows you to monitor and alert on RDS Enhanced Monitoring. You can use integration data and alerts to monitor the DB processes and identify potential trouble spots as well as to profile the DB allowing you to improve and optimize their response and cost",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "rds"
@@ -4501,7 +4501,7 @@
                     "description": "Amazon DynamoDB Accelerator (DAX) encryption at rest provides an additional layer of data protection, helping secure your data from unauthorized access to underlying storage. With encryption at rest the data persisted by DAX on disk is encrypted using 256-bit Advanced Encryption Standard (AES-256). DAX writes data to disk as part of propagating changes from the primary node to read replicas. DAX encryption at rest automatically integrates with AWS KMS for managing the single service default key used to encrypt clusters.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "dax"
@@ -4530,7 +4530,7 @@
                     "description": "In Amazon Quantum Ledger Database define PermissionsMode value to STANDARD permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "docdb"
@@ -4559,7 +4559,7 @@
                     "description": "Ensure that encryption is enabled for your AWS DocumentDB (with MongoDB compatibility) clusters for additional data security and in order to meet compliance requirements for data-at-rest encryption",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "docdb"
@@ -4588,7 +4588,7 @@
                     "description": "The events recorded by the AWS DocumentDB audit logs include: successful and failed authentication attempts, creating indexes or dropping a collection in a database within the DocumentDB cluster.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "docdb"
@@ -4617,7 +4617,7 @@
                     "description": "TLS can be used to encrypt the connection between an application and a DocDB cluster. By default, encryption in transit is enabled for newly created clusters. It can optionally be disabled when the cluster is created, or at a later time. When enabled, secure connections using TLS are required to connect to the cluster.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "docdb"
@@ -4646,7 +4646,7 @@
                     "description": "Ensure DocDB has audit logs enabled, this will export logs in docdb",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "docdb"
@@ -4675,7 +4675,7 @@
                     "description": "Athena workgroups support the ability for clients to override configuration options, including encryption requirements. This setting should be disabled to enforce encryption mandates",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "athena"
@@ -4704,10 +4704,1314 @@
                     "description": "The timestream databases must be secured with KMS instead of default kms.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "timestream"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_28",
+                    "masterSnapshotId": [
+                        "TEST_NPT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-NPT-001",
+                            "eval": "data.rule.neptune_cluster_logs",
+                            "message": "data.rule.neptune_cluster_logs_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-neptune-dbcluster.html#cfn-neptune-dbcluster-enablecloudwatchlogsexports' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_NPT_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Neptune logging is enabled",
+                    "description": "These access logs can be used to analyze traffic patterns and troubleshoot security and operational issues.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "neptune"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_29",
+                    "masterSnapshotId": [
+                        "TEST_DD"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DD-001",
+                            "eval": "data.rule.dynamodb_encrypt",
+                            "message": "data.rule.dynamodb_encrypt_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DD_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK",
+                    "description": "This policy identifies the DynamoDB tables that use AWS owned CMK (default ) instead of AWS managed CMK (KMS ) to encrypt data. AWS managed CMK provide additional features such as the ability to view the CMK and key policy, and audit the encryption and decryption of DynamoDB tables.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "dynamodb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_30",
+                    "masterSnapshotId": [
+                        "TEST_DD"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DD-002",
+                            "eval": "data.rule.dynamodb_PITR_enable",
+                            "message": "data.rule.dynamodb_PITR_enable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DD_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure DynamoDB PITR is enabled",
+                    "description": "DynamoDB Point-In-Time Recovery (PITR) is an automatic backup service for DynamoDB table data that helps protect your DynamoDB tables from accidental write or delete operations. Once enabled, PITR provides continuous backups that can be controlled using various programmatic parameters. PITR can also be used to restore table data from any point in time during the last 35 days, as well as any incremental backups of DynamoDB tables",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "dynamodb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_31",
+                    "masterSnapshotId": [
+                        "TEST_DD"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DD-003",
+                            "eval": "data.rule.dynamodb_kinesis_stream",
+                            "message": "data.rule.dynamodb_kinesis_stream_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-kinesisstreamspecification.html#cfn-dynamodb-kinesisstreamspecification-streamarn' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DD_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "dynamodb kinesis specification property should not be null",
+                    "description": "dynamodb kinesis specification property should not be null",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "dynamodb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_32",
+                    "masterSnapshotId": [
+                        "TEST_EC"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC-001",
+                            "eval": "data.rule.cache_failover",
+                            "message": "data.rule.cache_failover_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled",
+                    "description": "This policy identifies ElastiCache Redis clusters which have Multi-AZ Automatic Failover feature set to disabled. It is recommended to enable the Multi-AZ Automatic Failover feature for your Redis Cache cluster, which will improve primary node reachability by providing read replica in case of network connectivity loss or loss of availability in the primary's availability zone for read/write operations._x005F_x000D_ Note: Redis cluster Multi-AZ with automatic failover does not support T1 and T2 cache node types and is only available if the cluster has at least one read replica.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticache"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_33",
+                    "masterSnapshotId": [
+                        "TEST_EC"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC-002",
+                            "eval": "data.rule.cache_redis_auth",
+                            "message": "data.rule.cache_redis_auth_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ElastiCache Redis cluster with Redis AUTH feature disabled",
+                    "description": "This policy identifies ElastiCache Redis clusters which have Redis AUTH feature disabled. Redis AUTH can improve data security by requiring the user to enter a password before they are granted permission to execute Redis commands on a password protected Redis server.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticache"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_34",
+                    "masterSnapshotId": [
+                        "TEST_EC"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC-003",
+                            "eval": "data.rule.cache_redis_encrypt",
+                            "message": "data.rule.cache_redis_encrypt_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ElastiCache Redis cluster with encryption for data at rest disabled",
+                    "description": "This policy identifies ElastiCache Redis clusters which have encryption for data at rest(at-rest) is disabled. It is highly recommended to implement at-rest encryption in order to prevent unauthorized users from reading sensitive data saved to persistent media available on your Redis clusters and their associated cache storage systems.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticache"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_35",
+                    "masterSnapshotId": [
+                        "TEST_EC"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC-004",
+                            "eval": "data.rule.cache_encrypt",
+                            "message": "data.rule.cache_encrypt_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ElastiCache Redis cluster with in-transit encryption disabled",
+                    "description": "This policy identifies ElastiCache Redis clusters which have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis clusters and their associated cache storage systems.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticache"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_36",
+                    "masterSnapshotId": [
+                        "TEST_EC"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC-005",
+                            "eval": "data.rule.cache_ksm_key",
+                            "message": "data.rule.cache_ksm_key_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-kmskeyid' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that ElastiCache replication Group (Redis) are encrypted at rest with customer managed CMK key",
+                    "description": "This policy identifies ElastiCache Redis clusters which have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis clusters and their associated cache storage systems.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticache"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_38",
+                    "masterSnapshotId": [
+                        "TEST_DMS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DMS-001",
+                            "eval": "data.rule.dms_endpoint",
+                            "message": "data.rule.dms_endpoint_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.amazonaws.cn/en_us/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html#cfn-dms-endpoint-enginename' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DMS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure DMS endpoints are supporting SSL configuration",
+                    "description": "This policy identifies Database Migration Service (DMS) endpoints that are not configured with SSL to encrypt connections for source and target endpoints. It is recommended to use SSL connection for source and target endpoints; enforcing SSL connections help protect against 'man in the middle' attacks by encrypting the data stream between endpoint connections.\n\nNOTE: Not all databases use SSL in the same way. An Amazon Redshift endpoint already uses an SSL connection and does not require an SSL connection set up by AWS DMS. So there are some exlcusions included in policy RQL to report only those endpoints which can be configured using DMS SSL feature. \n\nFor more details:\nhttps://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.SSL",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "dms"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_39",
+                    "masterSnapshotId": [
+                        "TEST_DMS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DMS-002",
+                            "eval": "data.rule.dms_public_access",
+                            "message": "data.rule.dms_public_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html#cfn-dms-replicationinstance-publiclyaccessible' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DMS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure DMS replication instance is not publicly accessible",
+                    "description": "Ensure DMS replication instance is not publicly accessible, this might cause sensitive data leak.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "dms"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_1",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-001",
+                            "eval": "data.rule.port_135",
+                            "message": "data.rule.port_135_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to Windows RPC port (135)",
+                    "description": "This policy identifies the security groups which are exposing Windows RPC port (135) to the internet. It is recommended that Global permission to access the well known services Windows RPC port (135) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_2",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-002",
+                            "eval": "data.rule.port_137",
+                            "message": "data.rule.port_137_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to NetBIOS port (137)",
+                    "description": "This policy identifies the security groups which are exposing NetBIOS port (137) to the internet. It is recommended that Global permission to access the well known services NetBIOS port (137) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_3",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-003",
+                            "eval": "data.rule.port_138",
+                            "message": "data.rule.port_138_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to NetBIOS port (138)",
+                    "description": "This policy identifies the security groups which are exposing NetBIOS port (138) to the internet. It is recommended that Global permission to access the well known services NetBIOS port (138) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_4",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-004",
+                            "eval": "data.rule.port_1433",
+                            "message": "data.rule.port_1433_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1433)",
+                    "description": "This policy identifies the security groups which are exposing SQLServer port (1433) to the internet. It is recommended that Global permission to access the well known services SQLServer port (1433) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_5",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-005",
+                            "eval": "data.rule.port_1434",
+                            "message": "data.rule.port_1434_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1434)",
+                    "description": "This policy identifies the security groups which are exposing SQLServer port (1434) to the internet. It is recommended that Global permission to access the well known services SQLServer port (1434) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_6",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-006",
+                            "eval": "data.rule.port_20",
+                            "message": "data.rule.port_20_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to FTP-Data port (20)",
+                    "description": "This policy identifies the security groups which are exposing FTP-Data port (20) to the internet. It is recommended that Global permission to access the well known services FTP-Data port (20) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_7",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-007",
+                            "eval": "data.rule.port_21",
+                            "message": "data.rule.port_21_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to FTP port (21)",
+                    "description": "This policy identifies the security groups which are exposing FTP port (21) to the internet. It is recommended that Global permission to access the well known services FTP port (21) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_8",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-008",
+                            "eval": "data.rule.port_22",
+                            "message": "data.rule.port_22_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic to SSH port (22)",
+                    "description": "This policy identifies AWS Security Groups which do allow inbound traffic on SSH port (22) from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "GDPR",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_9",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-009",
+                            "eval": "data.rule.port_23",
+                            "message": "data.rule.port_23_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to Telnet port (23)",
+                    "description": "This policy identifies the security groups which are exposing Telnet port (23) to the internet. It is recommended that Global permission to access the well known services Telnet port (23) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_10",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-010",
+                            "eval": "data.rule.port_25",
+                            "message": "data.rule.port_25_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to SMTP port (25)",
+                    "description": "This policy identifies the security groups which are exposing SMTP port (25) to the internet. It is recommended that Global permission to access the well known services SMTP port (25) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_11",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-011",
+                            "eval": "data.rule.port_3306",
+                            "message": "data.rule.port_3306_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to MYSQL port (3306)",
+                    "description": "This policy identifies the security groups which are exposing MYSQL port (3306) to the internet. It is recommended that Global permission to access the well known services MYSQL port (3306) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_12",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-012",
+                            "eval": "data.rule.port_3389",
+                            "message": "data.rule.port_3389_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to RDP port (3389)",
+                    "description": "This policy identifies the security groups which is exposing RDP port (3389) to the internet. Security Groups do not allow inbound traffic on RDP port (3389) from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "GDPR",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_13",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-013",
+                            "eval": "data.rule.port_4333",
+                            "message": "data.rule.port_4333_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to MSQL port (4333)",
+                    "description": "This policy identifies the security groups which are exposing MSQL port (4333) to the internet. It is recommended that Global permission to access the well known services MSQL port (4333) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_14",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-014",
+                            "eval": "data.rule.port_445",
+                            "message": "data.rule.port_445_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to CIFS port (445)",
+                    "description": "This policy identifies the security groups which are exposing CIFS port (445) to the internet. It is recommended that Global permission to access the well known services CIFS port (445) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_15",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-015",
+                            "eval": "data.rule.port_53",
+                            "message": "data.rule.port_53_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_015.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to DNS port (53)",
+                    "description": "This policy identifies the security groups which are exposing DNS port (53) to the internet. It is recommended that Global permission to access the well known services DNS port (53) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_16",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-016",
+                            "eval": "data.rule.port_5432",
+                            "message": "data.rule.port_5432_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_016.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to PostgreSQL port (5432)",
+                    "description": "This policy identifies the security groups which are exposing PostgreSQL port (5432) to the internet. It is recommended that Global permission to access the well known services PostgreSQL port (5432) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_17",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-017",
+                            "eval": "data.rule.port_5500",
+                            "message": "data.rule.port_5500_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_017.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to VNC Listener port (5500)",
+                    "description": "This policy identifies the security groups which are exposing VNC Listener port (5500) to the internet. It is recommended that Global permission to access the well known services VNC Listener port (5500) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_18",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-018",
+                            "eval": "data.rule.port_5900",
+                            "message": "data.rule.port_5900_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_018.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to VNC Server port (5900)",
+                    "description": "This policy identifies the security groups which are exposing VNC Server port (5900) to the internet. It is recommended that Global permission to access the well known services VNC Server port (5900) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_19",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-019",
+                            "eval": "data.rule.port_all",
+                            "message": "data.rule.port_all_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_019.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Default Security Group does not restrict all traffic",
+                    "description": "This policy identifies the default security group which does not restrict all inbound and outbound traffic. A VPC comes with a default security group whose initial configuration deny all inbound traffic from internet and allow all outbound traffic. If you do not specify a security group when you launch an instance, the instance is automatically assigned to this default security group. As a result, the instance may accidentally send outbound traffic.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_20",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-020",
+                            "eval": "data.rule.port_proto_all",
+                            "message": "data.rule.port_proto_all_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_020.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups with Inbound rule overly permissive to All Traffic",
+                    "description": "This policy identifies AWS Security Groups which do allow inbound traffic on all protocols from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_21",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-021",
+                            "eval": "data.rule.port_69",
+                            "message": "data.rule.port_69_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_021.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to Trivial File Transfer Protocol Port (69)",
+                    "description": "This policy identifies the security groups which are exposing Trivial File Transfer Protocol Port (69) to the internet. It is recommended that Global permission to access the well known services Trivial File Transfer Protocol Port (69) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_22",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-022",
+                            "eval": "data.rule.sg_tag",
+                            "message": "data.rule.sg_tag_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-tags' target='_blank'>here</a>, provide security group tags",
+                            "remediationFunction": "PR_AWS_CLD_SG_022.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS resources that support tags have Tags",
+                    "description": "Many different types of AWS resources support tags. Tags allow you to add metadata to a resource to help identify ownership, perform cost / billing analysis, and to enrich a resource with other valuable information, such as descriptions and environment names. While there are many ways that tags can be used, we recommend you follow a tagging practice.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_23",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-023",
+                            "eval": "data.rule.sg_description_absent",
+                            "message": "data.rule.sg_description_absent_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule-1.html#cfn-ec2-security-group-rule-description' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_023.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure every Security Group rule contains a description",
+                    "description": "We recommend you add descriptive text to each of your Security Group Rules clarifying each rule's goals, this helps prevent developer errors.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_24",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-024",
+                            "eval": "data.rule.port_9300",
+                            "message": "data.rule.port_9300_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_024.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to ElasticSearch Protocol Port (9300)",
+                    "description": "This policy identifies the security groups which are exposing ElasticSearch Protocol Port (9300) to the internet. It is recommended that Global permission to access the well known services ElasticSearch Protocol Port (9300) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_25",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-025",
+                            "eval": "data.rule.port_5601",
+                            "message": "data.rule.port_5601_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_025.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to Kibana Protocol Port (5601)",
+                    "description": "This policy identifies the security groups which are exposing Kibana Protocol Port (5601) to the internet. It is recommended that Global permission to access the well known services Kibana Protocol Port (5601) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_26",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-026",
+                            "eval": "data.rule.port_2379",
+                            "message": "data.rule.port_2379_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_026.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to etcd-client Protocol Port (2379)",
+                    "description": "This policy identifies the security groups which are exposing etcd-client Protocol Port (2379) to the internet. It is recommended that Global permission to access the well known services etcd-client Protocol Port (2379) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_27",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-027",
+                            "eval": "data.rule.port_5986",
+                            "message": "data.rule.port_5986_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_027.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986)",
+                    "description": "This policy identifies the security groups which are exposing WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986) to the internet. It is recommended that Global permission to access the well known services WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_28",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-028",
+                            "eval": "data.rule.port_5985",
+                            "message": "data.rule.port_5985_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a> ",
+                            "remediationFunction": "PR_AWS_CLD_SG_028.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985)",
+                    "description": "This policy identifies the security groups which are exposing WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985) to the internet. It is recommended that Global permission to access the well known services WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_29",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-029",
+                            "eval": "data.rule.port_1270",
+                            "message": "data.rule.port_1270_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_029.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to Microsoft Operations Manager Protocol Port (1270)",
+                    "description": "This policy identifies the security groups which are exposing Microsoft Operations Manager Protocol Port (1270) to the internet. It is recommended that Global permission to access the well known services Microsoft Operations Manager Protocol Port (1270) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_30",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-030",
+                            "eval": "data.rule.db_exposed",
+                            "message": "data.rule.db_exposed_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_030.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Publicly exposed DB Ports",
+                    "description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_31",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-031",
+                            "eval": "data.rule.bitcoin_ports",
+                            "message": "data.rule.bitcoin_ports_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_031.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Instance is communicating with ports known to mine Bitcoin",
+                    "description": "Identifies traffic from internal workloads to internet IPs on ports 8332,8333 that are known to mine Bitcoins. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_32",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-032",
+                            "eval": "data.rule.ethereum_ports",
+                            "message": "data.rule.ethereum_ports_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_032.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Instance is communicating with ports known to mine Ethereum",
+                    "description": "Ethereum Identifies traffic from internal workloads to internet IPs on ports 8545,30303 that are known to mine Ethereum. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_33",
+                    "masterSnapshotId": [
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SG-033",
+                            "eval": "data.rule.sg_vpc",
+                            "message": "data.rule.sg_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-vpcid' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SG_033.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Security groups has attached to a VPCs",
+                    "description": "Ensure Security groups has attached to a VPCs else Shared security groups/port ranges lead to violation of principle of least privilege due to the reviewers not being aware that the security group/port range is shared.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "security group"
                             ]
                         }
                     ]
