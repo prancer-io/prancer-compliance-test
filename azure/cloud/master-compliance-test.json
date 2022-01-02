@@ -6072,7 +6072,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_225"
+                        "AZRSNP_225",
+                        "AZRSNP_230"
                     ],
                     "severity": "High",
                     "title": "Azure Firewall Premium should be configured with both IDPS Alert & Deny mode and TLS inspection enabled for proactive protection against CVE-2021-44228 exploit",
@@ -6103,7 +6104,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_220"
+                        "AZRSNP_220",
+                        "AZRSNP_502"
                     ],
                     "severity": "High",
                     "title": "Azure frontDoors should have configured with WAF policy with Default Rule Set 1.0/1.1 for proactive protection against CVE-2021-44228 exploit",
