@@ -120,7 +120,7 @@ dbsec_threat_retention_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Azure SQL Database security alert policies thread retention should be configured for more than 90 days",
-    "Policy Description": "This policy identifies SQL Databases which have security alert policies retention set less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days.",
+    "Policy Description": "This policy identifies SQL Databases that have security alert policies retention set less than or equal to 90 days. Threat Logs can be used to check for anomalies and give an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days.",
     "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies"
@@ -302,8 +302,8 @@ sql_alert_metadata := {
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
-    "Policy Title": "Threat Detection alert should be configured to sent notification to the sql server account administrators",
-    "Policy Description": "Ensure that threat detection alert is configured to sent notification to the sql server account administrators",
+    "Policy Title": "Threat Detection alert should be configured to send notifications to the SQL server account administrators",
+    "Policy Description": "Ensure that threat detection alert is configured to send notifications to the sql server account administrators",
     "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies"

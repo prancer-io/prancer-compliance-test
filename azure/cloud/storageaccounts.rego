@@ -68,7 +68,7 @@ storage_secure_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Storage Accounts https based secure transfer should be enabled",
-    "Policy Description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
+    "Policy Description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPS. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesn't support HTTPS for custom domain names, this option is not applied when using a custom domain name.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
@@ -287,7 +287,7 @@ fileService_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Ensure that 'Storage service encryption' is enabled for the File Service",
-    "Policy Description": "Azure Storage encryption protects your data and to help you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows.",
+    "Policy Description": "Azure Storage encryption protects your data and helps you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
@@ -536,7 +536,7 @@ storage_account_latest_tls_configured_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Ensure Azure Storage Account has latest version of tls configured",
-    "Policy Description": "This policy will identify the Azure Storage Account which dont have latest version of tls configured and give alert",
+    "Policy Description": "This policy will identify the Azure Storage Account which don't have the latest version of tls configured and give the alert",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
@@ -642,7 +642,7 @@ storage_account_require_encryption_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Storage accounts should have infrastructure encryption",
-    "Policy Description": "Enable infrastructure encryption for higher level of assurance that the data is secure. When infrastructure encryption is enabled, data in a storage account is encrypted twice.",
+    "Policy Description": "Enable infrastructure encryption for a higher level of assurance that the data is secure. When infrastructure encryption is enabled, data in a storage account is encrypted twice.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
@@ -696,7 +696,7 @@ storage_account_scopes_require_encryption_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Storage account encryption scopes should have infrastructure encryption",
-    "Policy Description": "Enable infrastructure encryption for encryption at rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
+    "Policy Description": "Enable infrastructure encryption for encryption at the rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
     "Resource Type": "microsoft.storage/storageaccounts/encryptionscopes",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/encryptionscopes"
@@ -748,7 +748,7 @@ storage_account_encryption_scopes_source_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Storage account encryption scopes should use customer-managed keys to encrypt data at rest",
-    "Policy Description": "Use customer-managed keys to manage the encryption at rest of your storage account encryption scopes. Customer-managed keys enable the data to be encrypted with an Azure key-vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more about storage account encryption scopes at https://aka.ms/encryption-scopes-overview.",
+    "Policy Description": "Use customer-managed keys to manage the encryption at the rest of your storage account encryption scopes. Customer-managed keys enable the data to be encrypted with an Azure key-vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more about storage account encryption scopes at https://aka.ms/encryption-scopes-overview.",
     "Resource Type": "microsoft.storage/storageaccounts/encryptionscopes",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/encryptionscopes"
@@ -870,7 +870,7 @@ storage_account_allow_shared_key_access_metadata := {
     "Product": "AZR",
     "Language": "",
     "Policy Title": "Storage accounts should prevent shared key access",
-    "Policy Description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials, or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key, and is recommended by Microsoft.",
+    "Policy Description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key and is recommended by Microsoft.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
