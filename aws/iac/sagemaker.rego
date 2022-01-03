@@ -10,13 +10,13 @@ default sagemaker_encryption_kms = null
 aws_issue["sagemaker_encryption_kms"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sagemaker::notebookinstance"
-    not resource.Properties.KMSKeyId
+    not resource.Properties.KmsKeyId
 }
 
 source_path[{"sagemaker_encryption_kms": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sagemaker::notebookinstance"
-    not resource.Properties.KMSKeyId
+    not resource.Properties.KmsKeyId
     metadata := {
         "resource_path": [
             ["Resources", i, "Properties", "KmsKeyId"]
@@ -27,13 +27,13 @@ source_path[{"sagemaker_encryption_kms": metadata}] {
 aws_issue["sagemaker_encryption_kms"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sagemaker::notebookinstance"
-    count(resource.Properties.KMSKeyId) == 0
+    count(resource.Properties.KmsKeyId) == 0
 }
 
 source_path[{"sagemaker_encryption_kms": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sagemaker::notebookinstance"
-    count(resource.Properties.KMSKeyId) == 0
+    count(resource.Properties.KmsKeyId) == 0
     metadata := {
         "resource_path": [
             ["Resources", i, "Properties", "KmsKeyId"]
@@ -207,16 +207,16 @@ default sagemaker_vpc = null
 aws_issue["sagemaker_vpc"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sagemaker::notebookinstance"
-    count(resource.Properties.subnetId) == 0
+    count(resource.Properties.SubnetId) == 0
 }
 
 source_path[{"sagemaker_vpc": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sagemaker::notebookinstance"
-    count(resource.Properties.subnetId) == 0
+    count(resource.Properties.SubnetId) == 0
     metadata := {
         "resource_path": [
-            ["Resources", i, "Properties", "subnetId"]
+            ["Resources", i, "Properties", "SubnetId"]
         ],
     }
 }
@@ -224,16 +224,16 @@ source_path[{"sagemaker_vpc": metadata}] {
 aws_issue["sagemaker_vpc"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sagemaker::notebookinstance"
-    not resource.Properties.subnetId
+    not resource.Properties.SubnetId
 }
 
 source_path[{"sagemaker_vpc": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sagemaker::notebookinstance"
-    not resource.Properties.subnetId
+    not resource.Properties.SubnetId
     metadata := {
         "resource_path": [
-            ["Resources", i, "Properties", "subnetId"]
+            ["Resources", i, "Properties", "SubnetId"]
         ],
     }
 }

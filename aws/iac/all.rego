@@ -397,13 +397,13 @@ source_path[{"glue_security_config": metadata}] {
 aws_issue["glue_security_config"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
-    lower(resource.Properties.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) != "SSE-KMS"
+    lower(resource.Properties.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) != "sse-kms"
 }
 
 source_path[{"glue_security_config": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
-    lower(resource.Properties.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) != "SSE-KMS"
+    lower(resource.Properties.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) != "sse-kms"
     metadata := {
         "resource_path": [
             ["Resources", i, "Properties", "EncryptionConfiguration", "CloudWatchEncryption", "CloudWatchEncryptionMode"]
@@ -414,13 +414,13 @@ source_path[{"glue_security_config": metadata}] {
 aws_issue["glue_security_config"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
-    lower(resource.Properties.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) != "SSE-KMS"
+    lower(resource.Properties.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) != "sse-kms"
 }
 
 source_path[{"glue_security_config": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
-    lower(resource.Properties.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) != "SSE-KMS"
+    lower(resource.Properties.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) != "sse-kms"
     metadata := {
         "resource_path": [
             ["Resources", i, "Properties", "EncryptionConfiguration", "JobBookmarksEncryption", "JobBookmarksEncryptionMode"]
@@ -431,13 +431,13 @@ source_path[{"glue_security_config": metadata}] {
 aws_issue["glue_security_config"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
-    lower(resource.Properties.EncryptionConfiguration.S3Encryptions.S3EncryptionMode) != "SSE-KMS"
+    lower(resource.Properties.EncryptionConfiguration.S3Encryptions.S3EncryptionMode) != "sse-kms"
 }
 
 source_path[{"glue_security_config": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
-    lower(resource.Properties.EncryptionConfiguration.S3Encryptions.S3EncryptionMode) != "SSE-KMS"
+    lower(resource.Properties.EncryptionConfiguration.S3Encryptions.S3EncryptionMode) != "sse-kms"
     metadata := {
         "resource_path": [
             ["Resources", i, "Properties", "EncryptionConfiguration", "S3Encryptions", "S3EncryptionMode"]

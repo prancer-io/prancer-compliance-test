@@ -178,16 +178,6 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_ALL",
-					"arn": "arn:aws:wafv2:::",
-					"collection": "aws_wafv2",
-					"listMethod": "list_web_acls",
-					"detailMethods": [
-						"list_web_acls",
-						"get_web_acl"
-					]
-				},
-				{
 					"masterSnapshotId": "TEST_SNS_01",
 					"arn": "arn:aws:sns:::",
 					"collection": "aws_sns_01",
@@ -423,6 +413,178 @@
 					"listMethod": "describe_security_groups",
 					"detailMethods": [
 						"describe_security_groups"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_LAMBDA",
+					"arn": "arn:aws:lambda:::",
+					"collection": "aws_lmd",
+					"listMethod": "list_functions",
+					"detailMethods": [
+						"get_function"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_01",
+					"arn": "arn:aws:wafv2:::",
+					"collection": "aws_wafv2",
+					"listMethod": "list_web_acls",
+					"detailMethods": [
+						"list_web_acls",
+						"get_web_acl"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_02",
+					"arn": "arn:aws:secretsmanager:::",
+					"collection": "aws_sm",
+					"listMethod": "list_secrets",
+					"detailMethods": [
+						"list_secrets"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_03",
+					"arn": "arn:aws:logs:::",
+					"collection": "aws_cloudwatch",
+					"listMethod": "describe_log_groups",
+					"detailMethods": [
+						"describe_log_groups"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_04",
+					"arn": "arn:aws:workspaces:::",
+					"collection": "aws_workspaces",
+					"listMethod": "describe_workspaces",
+					"detailMethods": [
+						"describe_workspaces"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_05",
+					"arn": "arn:aws:glue:::",
+					"collection": "aws_glue",
+					"listMethod": "get_data_catalog_encryption_settings",
+					"detailMethods": [
+						"get_data_catalog_encryption_settings"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_06",
+					"arn": "arn:aws:glue:::",
+					"collection": "aws_glue",
+					"listMethod": "get_security_configurations",
+					"detailMethods": [
+						"get_security_configuration"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_07",
+					"arn": "arn:aws:autoscaling:::",
+					"collection": "aws_autoscaling",
+					"listMethod": "describe_launch_configurations",
+					"detailMethods": [
+						"describe_launch_configurations"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_08",
+					"arn": "arn:aws:autoscaling:::",
+					"collection": "aws_autoscaling",
+					"listMethod": "describe_auto_scaling_groups",
+					"detailMethods": [
+						"describe_auto_scaling_groups"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_09",
+					"arn": "arn:aws:config:::",
+					"collection": "aws_config",
+					"listMethod": "describe_configuration_recorders",
+					"detailMethods": [
+						"describe_configuration_recorders"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_10",
+					"arn": "arn:aws:config:::",
+					"collection": "aws_config",
+					"listMethod": "describe_configuration_aggregators",
+					"detailMethods": [
+						"describe_configuration_aggregators"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_11",
+					"arn": "arn:aws:kinesis:::",
+					"collection": "aws_kinesis",
+					"listMethod": "list_streams",
+					"detailMethods": [
+						"describe_stream"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_12",
+					"arn": "arn:aws:mq:::",
+					"collection": "aws_mq",
+					"listMethod": "list_brokers",
+					"detailMethods": [
+						"describe_broker"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_13",
+					"arn": "arn:aws:route53:::",
+					"collection": "aws_route53",
+					"listMethod": "list_hosted_zones",
+					"detailMethods": [
+						"list_resource_record_sets"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_14",
+					"arn": "arn:aws:cloudformation:::",
+					"collection": "aws_cloudformation",
+					"listMethod": "describe_stacks",
+					"detailMethods": [
+						"describe_stacks"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_SAGEMAKER",
+					"arn": "arn:aws:sagemaker:::",
+					"collection": "aws_sagemaker",
+					"listMethod": "list_notebook_instances",
+					"detailMethods": [
+						"describe_notebook_instance"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_CB",
+					"arn": "arn:aws:codebuild:::",
+					"collection": "aws_codebuild",
+					"listMethod": "list_projects",
+					"detailMethods": [
+						"batch_get_projects"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_CP",
+					"arn": "arn:aws:codepipeline:::",
+					"collection": "aws_codepipeline",
+					"listMethod": "list_pipelines",
+					"detailMethods": [
+						"get_pipeline"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_CD",
+					"arn": "arn:aws:codedeploy:::",
+					"collection": "aws_codedeploy",
+					"listMethod": "list_applications",
+					"detailMethods": [
+						"batch_get_applications"
 					]
 				}
 			]
