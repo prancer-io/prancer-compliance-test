@@ -144,9 +144,9 @@ enablePurgeProtection = false {
 }
 
 enablePurgeProtection_err = "microsoft.keyvault/vaults resoruce property enablePurgeProtection is missing" {
-    azure_attribute_absence["enableSoftDelete"]
+    azure_attribute_absence["enablePurgeProtection"]
 } else = "Purge protection is currently not enabled on Key vault" {
-    azure_issue["enableSoftDelete"]
+    azure_issue["enablePurgeProtection"]
 }
 
 enablePurgeProtection_metadata := {

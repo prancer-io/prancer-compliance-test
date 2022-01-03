@@ -467,7 +467,7 @@
                             "id": "PR-AZR-CLD-STR-008",
                             "eval": "data.rule.keySource",
                             "message": "data.rule.keySource_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To configure customer-managed keys with automatic updating of the key version with Azure CLI:<br><br>key_vault_uri=$(az keyvault show --name --resource-group --query properties.vaultUri --output tsv)<br>az storage account update<br>--name --resource-group --encryption-key-name --encryption-key-source Microsoft.Keyvault --encryption-key-vault $key_vault_uri<br><br>References:<a href='https://docs.microsoft.com/en-us/azure/storage/common/customer-managed-keys-configure-key-vault?tabs=azure-cli' target='_blank'>https://docs.microsoft.com/en-us/azure/storage/common/customer-managed-keys-configure-key-vault?tabs=azure-cli</a>",
                             "remediationFunction": "PR_AZR_CLD_STR_008.py"
                         }
                     ],
@@ -822,7 +822,7 @@
                             "id": "PR-AZR-CLD-WEB-001",
                             "eval": "data.rule.https_only",
                             "message": "data.rule.https_only_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Sign on to Azure App services<br>2. Click on the name of the App service web application you want to examine<br>3. In the navigation panel,under Settings, select 'TLS/SSL settings'<br>4. In the 'HTTPS Only' toggle select ON<br><br>References:<br><a href='https://docs.microsoft.com/en-us/azure/app-service/configure-ssl-bindings' target='_blank'>https://docs.microsoft.com/en-us/azure/app-service/configure-ssl-bindings</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_001.py"
                         }
                     ],
@@ -858,7 +858,7 @@
                             "id": "PR-AZR-CLD-WEB-002",
                             "eval": "data.rule.min_tls_version",
                             "message": "data.rule.min_tls_version_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Go to 'App Services' and choose your App Service.<br>2. Select 'TLS/SSL settings' under 'Settings' on the navigation menu.<br>3. Under 'Bindings' set 'Minimum TLS Version' to '1.2'.<br><br><a href=' https://docs.microsoft.com/en-us/cli/azure/webapp/config?view=azure-cli-latest' target='_blank'> https://docs.microsoft.com/en-us/cli/azure/webapp/config?view=azure-cli-latest</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_002.py"
                         }
                     ],
@@ -894,7 +894,7 @@
                             "id": "PR-AZR-CLD-WEB-003",
                             "eval": "data.rule.client_cert_enabled",
                             "message": "data.rule.client_cert_enabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Go to 'App Services' from Azure Management console and choose your App Service.<br>2. Under 'Settings, select 'Configuration' on the navigation menu.<br>3. Select 'General Settings'.<br>4. Go to 'Client Certificate mode' under 'Incoming Client Certificates' and select 'Require' Button.<br>5. Click Save.<br><br>Note: By default, Client Certificate mode is set to Ignore.<br><br>References:<a href='https://docs.microsoft.com/en-us/azure/app-service/app-service-web-configure-tls-mutual-auth' target='_blank'>https://docs.microsoft.com/en-us/azure/app-service/app-service-web-configure-tls-mutual-auth</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_003.py"
                         }
                     ],
@@ -930,7 +930,7 @@
                             "id": "PR-AZR-CLD-WEB-004",
                             "eval": "data.rule.http_20_enabled",
                             "message": "data.rule.http_20_enabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Sign on to Azure Management console and navigate to App services<br>2. Click on the name of the App service web application you want to examine<br>3. In the navigation panel,under Settings, select Configuration to access the configuration settings defined for the selected application.<br>4. On the Configuration panel, select 'General settings' tab to access the application general settings<br>5. In the Platform settings section, select '2.0' from the HTTP version dropdown list to enable HTTP/2 – the latest version of HTTP protocol,for the selected web application<br>6. Click Save to apply the change<br><br>References:<br><a href='https://docs.microsoft.com/en-us/azure/app-service/configure-ssl-bindings#enforce-tls-versions' target='_blank'>https://docs.microsoft.com/en-us/azure/app-service/configure-ssl-bindings#enforce-tls-versions</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_004.py"
                         }
                     ],
@@ -1285,7 +1285,7 @@
                             "id": "PR-AZR-CLD-SQL-001",
                             "eval": "data.rule.sql_server_ad_admin",
                             "message": "data.rule.sql_server_ad_admin_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Azure Console<br>1. Go to SQL servers<br>2. For each SQL server, click on Active Directory admin<br>3. Click on Set admin<br>4. Select an admin<br>5. Click Save<br><br>Default Value:<br>Azure Active Directory Authentication for SQL Database/Server is not enabled by default<br>References:<br><a href='https://docs.microsoft.com/en-us/azure/sql-database/sql-database-aad-authentication-configure' target='_blank'>1. https://docs.microsoft.com/en-us/azure/sql-database/sql-database-aad-authentication-configure</a><br><a href='https://docs.microsoft.com/en-us/azure/sql-database/sql-database-aad-authentication' target='_blank'>2. https://docs.microsoft.com/en-us/azure/sql-database/sql-database-aad-authentication</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_001.py"
                         }
                     ],
@@ -1387,7 +1387,7 @@
                             "id": "PR-AZR-CLD-SQL-004",
                             "eval": "data.rule.sql_db_log_audit",
                             "message": "data.rule.sql_db_log_audit_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Azure Console<br>1. Go to SQL databases<br>2. For each DB instance<br>3. Click on Auditing & Threat Detection<br>4. Set Threat Detection to On<br><br>Default Value:<br>By default, Threat Detection is set to Off.<br><br>References:<br><a href='https://docs.microsoft.com/en-us/azure/sql-database/sql-database-threat-detection' target='_blank'>https://docs.microsoft.com/en-us/azure/sql-database/sql-database-threat-detection</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_004.py"
                         }
                     ],
@@ -1423,7 +1423,7 @@
                             "id": "PR-AZR-CLD-SQL-005",
                             "eval": "data.rule.sql_logical_db_log_audit",
                             "message": "data.rule.sql_logical_db_log_audit_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Azure Console<br>1. Go to SQL databases<br>2. For each DB instance<br>3. Click on Auditing & Threat Detection<br>4. Set Threat Detection to On<br><br>Default Value:<br>By default, Threat Detection is set to Off.<br><br>References:<br><a href='https://docs.microsoft.com/en-us/azure/sql-database/sql-database-threat-detection' target='_blank'>https://docs.microsoft.com/en-us/azure/sql-database/sql-database-threat-detection</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_005.py"
                         }
                     ],
@@ -1459,7 +1459,7 @@
                             "id": "PR-AZR-CLD-SQL-006",
                             "eval": "data.rule.sql_db_log_retention",
                             "message": "data.rule.sql_db_log_retention_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "With Azure CLI:<br>az sql db audit-policy update -g mygroup -s myserver -n mydb --state Enabled --bsts Enabled --storage-account mystorage --retention-days 0<br><br>References: <a href='https://docs.microsoft.com/en-us/cli/azure/sql/db/audit-policy?view=azure-cli-latest#az_sql_db_audit_policy_update' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/sql/db/audit-policy?view=azure-cli-latest#az_sql_db_audit_policy_update</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_006.py"
                         }
                     ],
@@ -1531,7 +1531,7 @@
                             "id": "PR-AZR-CLD-SQL-008",
                             "eval": "data.rule.db_logical_encrypt",
                             "message": "data.rule.db_logical_encrypt_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Go to 'SQL databases' and choose your database<br>2. Select 'Transparent data encryption' under 'Security' in the navigation menu<br>3. Set 'Data encryption' to 'On'<br>4. Save",
                             "remediationFunction": "PR_AZR_CLD_SQL_008.py"
                         }
                     ],
@@ -1567,7 +1567,7 @@
                             "id": "PR-AZR-CLD-SQL-009",
                             "eval": "data.rule.db_encrypt",
                             "message": "data.rule.db_encrypt_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Go to 'SQL databases' and choose your database<br>2. Select 'Transparent data encryption' under 'Security' in the navigation menu<br>3. Set 'Data encryption' to 'On'<br>4. Save",
                             "remediationFunction": "PR_AZR_CLD_SQL_009.py"
                         }
                     ],
@@ -1930,7 +1930,7 @@
                             "id": "PR-AZR-CLD-SQL-020",
                             "eval": "data.rule.dbsec_threat_alert",
                             "message": "data.rule.dbsec_threat_alert_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Set-AzSqlDatabaseThreatDetectionPolicy -ResourceGroupName -ServerName -DatabaseName - ExcludedDetectionType None -StorageAccountName<br><br>References:<br><a href='https://docs.microsoft.com/en-us/azure/azure-sql/database/threat-detection-configure' target='_blank'>https://docs.microsoft.com/en-us/azure/azure-sql/database/threat-detection-configure</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_020.py"
                         }
                     ],
@@ -1965,7 +1965,7 @@
                             "id": "PR-AZR-CLD-SQL-021",
                             "eval": "data.rule.sql_alert",
                             "message": "data.rule.sql_alert_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "With Azure CLI:<br>az sql db threat-policy update -g mygroup -s myserver -n mydb --state Enabled --email-addresses<br>me@examlee.comyou@example.com --email-account-admins Enabled<br><br>References: <a href='https://docs.microsoft.com/en-us/cli/azure/sql/db/threat-policy?view=azure-cli-latest' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/sql/db/threat-policy?view=azure-cli-latest</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_021.py"
                         }
                     ],
@@ -2735,7 +2735,7 @@
                             "id": "PR-AZR-CLD-SQL-042",
                             "eval": "data.rule.sql_server_log_audit",
                             "message": "data.rule.sql_server_log_audit_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "az sql server audit-policy show --name<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/mysql/server?view=azure-cli-latest#az_mysql_server_update' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/mysql/server?view=azure-cli-latest#az_mysql_server_update</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_042.py"
                         }
                     ],
@@ -2764,7 +2764,7 @@
                             "id": "PR-AZR-CLD-SQL-043",
                             "eval": "data.rule.sql_logical_server_log_audit",
                             "message": "data.rule.sql_logical_server_log_audit_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "az sql server audit-policy show --name<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/mysql/server?view=azure-cli-latest#az_mysql_server_update' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/mysql/server?view=azure-cli-latest#az_mysql_server_update</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_043.py"
                         }
                     ],
@@ -2800,7 +2800,7 @@
                             "id": "PR-AZR-CLD-SQL-044",
                             "eval": "data.rule.sql_server_audit_log_retention",
                             "message": "data.rule.sql_server_audit_log_retention_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "az sql server audit-policy update -g -n --state Enabled --storage-account --retention-days 91<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/sql/server/audit-policy?view=azure-cli-latest#az_sql_server_audit_policy_show' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/sql/server/audit-policy?view=azure-cli-latest#az_sql_server_audit_policy_show</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_044.py"
                         }
                     ],
@@ -2836,7 +2836,7 @@
                             "id": "PR-AZR-CLD-SQL-045",
                             "eval": "data.rule.sql_logial_server_audit_log_retention",
                             "message": "data.rule.sql_logial_server_audit_log_retention_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "az sql server audit-policy update -g -n --state Enabled --storage-account --retention-days 91<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/sql/server/audit-policy?view=azure-cli-latest#az_sql_server_audit_policy_show' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/sql/server/audit-policy?view=azure-cli-latest#az_sql_server_audit_policy_show</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_045.py"
                         }
                     ],
@@ -2872,7 +2872,7 @@
                             "id": "PR-AZR-CLD-SQL-046",
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Using Azure CLI:<br><br>Use the below command to encrypt SQL server's TDE protector with a Customer-managed key<br><br>az sql server tde-key >> Set --resource-group --server --server-key-type {AzureKeyVault} [--kid ]<br><br>References:<br><a href='https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/transparent-data-encryption-byok-azure-sql' target='_blank'>https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/transparent-data-encryption-byok-azure-sql</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_046.py"
                         }
                     ],
@@ -2900,42 +2900,6 @@
                     "description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure’s cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_47",
-                    "type": "rego",
-                    "rule": "file(sql_servers.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-047",
-                            "eval": "data.rule.sql_public_access_disabled",
-                            "message": "data.rule.sql_public_access_disabled_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_047.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HIPAA",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
-                    ],
-                    "severity": "High",
-                    "title": "Ensure SQL servers don't have public network access enabled",
-                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance"
-                },
-                {
                     "masterTestId": "AZURE_TEST_SQL_48",
                     "type": "rego",
                     "rule": "file(sql_servers.rego)",
@@ -2944,7 +2908,7 @@
                             "id": "PR-AZR-CLD-SQL-048",
                             "eval": "data.rule.sql_server_login",
                             "message": "data.rule.sql_server_login_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Azure Console<br>1. Go to SQL Servers<br>2. For each SQL Server<br>3. Select Active Directory admin<br>4. Press the Set Admin at the top of the page<br>5. Select the active directory user you want to set as AD Admin for the SQL server.<br>6. Press the Remove admin if not needed.<br><br>Default Value: By default no AD Administrator is set for SQL server<br><br>For more information: <a href='https://docs.microsoft.com/en-us/azure/sql-database/sql-database-manage-logins' target='_blank'>https://docs.microsoft.com/en-us/azure/sql-database/sql-database-manage-logins</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_048.py"
                         }
                     ],
@@ -2980,7 +2944,7 @@
                             "id": "PR-AZR-CLD-SQL-049",
                             "eval": "data.rule.sql_logical_server_login",
                             "message": "data.rule.sql_logical_server_login_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Azure Console<br>1. Go to SQL Servers<br>2. For each SQL Server<br>3. Select Active Directory admin<br>4. Press the Set Admin at the top of the page<br>5. Select the active directory user you want to set as AD Admin for the SQL server.<br>6. Press the Remove admin if not needed.<br><br>Default Value: By default no AD Administrator is set for SQL server<br><br>For more information: <a href='https://docs.microsoft.com/en-us/azure/sql-database/sql-database-manage-logins' target='_blank'>https://docs.microsoft.com/en-us/azure/sql-database/sql-database-manage-logins</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_049.py"
                         }
                     ],
@@ -3016,7 +2980,7 @@
                             "id": "PR-AZR-CLD-SQL-050",
                             "eval": "data.rule.fail_over_groups",
                             "message": "data.rule.fail_over_groups_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Azure Console:<br>1. Go to SQL Servers<br>2. For each SQL Server<br>3. Select Failover groups<br>4. Press the Add group link on top of the page",
                             "remediationFunction": "PR_AZR_CLD_SQL_050.py"
                         }
                     ],
@@ -3068,16 +3032,16 @@
                     "description": "This policy will identify the Azure SQL Server which dont have latest version of tls configured and give alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_70",
+                    "masterTestId": "AZURE_TEST_SQL_47",
                     "type": "rego",
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-CLD-SQL-070",
+                            "id": "PR-AZR-CLD-SQL-047",
                             "eval": "data.rule.sql_public_access",
                             "message": "data.rule.sql_public_access_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_070.py"
+                            "remediationFunction": "PR_AZR_CLD_SQL_047.py"
                         }
                     ],
                     "tags": [
@@ -3433,7 +3397,7 @@
                             "id": "PR-AZR-CLD-AGW-001",
                             "eval": "data.rule.gw_tls",
                             "message": "data.rule.gw_tls_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "az network application-gateway ssl-policy set --min-protocol-version TLSv1_2<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/network/application-gateway/ssl-policy?view=azure-cli-latest#az_network_application_gateway_ssl_policy_set' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/network/application-gateway/ssl-policy?view=azure-cli-latest#az_network_application_gateway_ssl_policy_set</a>",
                             "remediationFunction": "PR_AZR_CLD_AGW_001.py"
                         }
                     ],
@@ -3504,7 +3468,7 @@
                             "id": "PR-AZR-CLD-AGW-003",
                             "eval": "data.rule.protocol",
                             "message": "data.rule.protocol_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "az network application-gateway create --name --resource-group --http-settings-protocol Https<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/network/application-gateway?view=azure-cli-latest' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/network/application-gateway?view=azure-cli-latest</a>",
                             "remediationFunction": "PR_AZR_CLD_AGW_003.py"
                         }
                     ],
@@ -3644,7 +3608,7 @@
                             "id": "PR-AZR-CLD-AGW-007",
                             "eval": "data.rule.application_gateways_v2_waf_ruleset_OWASP_active",
                             "message": "data.rule.application_gateways_v2_waf_ruleset_OWASP_active_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Azure Console:<br>1. Navigate to the Application gateways<br>2. For each Application gateway:<br>3. Select Web application firewall from the menu<br>4. Make sure that Firewall Status is enabled and that tier is WAF.<br>Note: Choosing the WAF tier allows you to enable a web application firewall for enhanced security on your web applications. Changing from the WAF tier to the standard tier is not supported.",
                             "remediationFunction": "PR_AZR_CLD_AGW_007.py"
                         }
                     ],
@@ -3679,7 +3643,7 @@
                             "id": "PR-AZR-CLD-ARC-001",
                             "eval": "data.rule.enableSslPort",
                             "message": "data.rule.enableSslPort_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Azure Console:<br>1. Go to Redis Caches.<br>2. For each Redis Cache:<br>3. Click on Advanced settings<br>4. Set the Allow access only via SSL to 'Yes'<br>5. Select Save<br><br>Default Value:<br>By default, non-SSL access is disabled for new caches.<br><br>References:<br><a href='https://docs.microsoft.com/en-us/azure/redis-cache/cache-configure#advanced-settings' target='_blank'>https://docs.microsoft.com/en-us/azure/redis-cache/cache-configure#advanced-settings</a>",
                             "remediationFunction": "PR_AZR_CLD_ARC_001.py"
                         }
                     ],
@@ -3715,7 +3679,7 @@
                             "id": "PR-AZR-CLD-ARC-002",
                             "eval": "data.rule.serverRole",
                             "message": "data.rule.serverRole_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Azure Console:<br>1. Go to Redis Caches.<br>2. For each Redis Cache:<br>3. Make sure you have at least 2 Redis Caches in Premium tier.<br>4. Click on Geo-replication<br>5. Click Add cache replication link<br>6. Click the name of the desired secondary cache from the Compatible caches list.<br>7. Click the 3 dots on the right to open the context menu.<br>8. Select Link as secondary.<br>8. Select Link.<br><br>Default Value:<br>No linked<br><br>References:<br><a href='https://docs.microsoft.com/en-us/azure/redis-cache/cache-how-to-geo-replication' target='_blank'>https://docs.microsoft.com/en-us/azure/redis-cache/cache-how-to-geo-replication</a>",
                             "remediationFunction": "PR_AZR_CLD_ARC_002.py"
                         }
                     ],
@@ -3844,7 +3808,7 @@
                             "id": "PR-AZR-CLD-VM-001",
                             "eval": "data.rule.vm_aset",
                             "message": "data.rule.vm_aset_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To assign Azure Virtual Machine to an availability set please refer to the following document:<br><br><a href='https://docs.microsoft.com/en-us/azure/virtual-machines/windows/manage-availability#configure-multiple-virtual-machines-in-an-availability-set-for-redundancy' target='_blank'>https://docs.microsoft.com/en-us/azure/virtual-machines/windows/manage-availability#configure-multiple-virtual-machines-in-an-availability-set-for-redundancy</a>",
                             "remediationFunction": "PR_AZR_CLD_VM_001.py"
                         }
                     ],
@@ -4069,7 +4033,7 @@
                             "id": "PR-AZR-CLD-NET-006",
                             "eval": "data.rule.vpn_encrypt",
                             "message": "data.rule.vpn_encrypt_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "With Azure CLI:<br>az network vpn-connection ipsec-policy add -g MyResourceGroup --connection-name MyConnection --dh-group DHGroup14 --ike-encryption AES256 --ike-integrity SHA384 --ipsec-encryption DES3 --ipsec-integrity GCMAES256 --pfs-group PFS2048 --sa-lifetime 27000 --sa-max-size 102400000<br><br>References:<br><a href='https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-compliance-crypto' target='_blank'>1. https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-compliance-crypto</a><br><a href='https://docs.microsoft.com/en-us/cli/azure/network/vpn-connection/ipsec-policy?view=azure-cli-latest#az_network_vpn_connection_ipsec_policy_add' target='_blank'>2. https://docs.microsoft.com/en-us/cli/azure/network/vpn-connection/ipsec-policy?view=azure-cli-latest#az_network_vpn_connection_ipsec_policy_add</a>",
                             "remediationFunction": "PR_AZR_CLD_NET_006.py"
                         }
                     ],
@@ -4103,7 +4067,7 @@
                             "id": "PR-AZR-CLD-NTW-001",
                             "eval": "data.rule.netwatchFlowlogs",
                             "message": "data.rule.netwatchFlowlogs_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "With Azure CLI:<br>az network watcher flow-log create --resource-group resourceGroupName --enabled true --nsg nsgName --storage-account storageAccountName --location location<br><br>References: <a href='https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-cli' target='_blank'>https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-cli</a>",
                             "remediationFunction": "PR_AZR_CLD_NTW_001.py"
                         }
                     ],
@@ -4173,7 +4137,7 @@
                             "id": "PR-AZR-CLD-NTW-003",
                             "eval": "data.rule.netwatch_log_retention",
                             "message": "data.rule.netwatch_log_retention_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "With Azure CLI:<br>Keep Flow-Logs forever:<br>az network watcher flow-log configure -g MyResourceGroup --nsg MyNsg --retention 0<br>Keep Flow-Logs for a specific period of time (100 days):<br>az network watcher flow-log configure -g MyResourceGroup --nsg MyNsg --retention 100<br><br>References: <a href='https://docs.microsoft.com/en-us/cli/azure/network/watcher/flow-log?view=azure-cli-latest#az_network_watcher_flow_log_configure' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/network/watcher/flow-log?view=azure-cli-latest#az_network_watcher_flow_log_configure</a>",
                             "remediationFunction": "PR_AZR_CLD_NTW_003.py"
                         }
                     ],
@@ -4271,7 +4235,7 @@
                             "id": "PR-AZR-CLD-SQL-028",
                             "eval": "data.rule.geoRedundantBackup",
                             "message": "data.rule.geoRedundantBackup_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Configuring locally redundant or geo-redundant storage for backup is only allowed during server create. Once the server is provisioned, you cannot change the backup storage redundancy option.<br><br>To create an Azure Database for PostgreSQL server, take the following steps:<br>1. Select the Create a resource button (+) in the upper-left corner of the portal<br>2. Select Databases > Azure Database for PostgreSQL<br>3. Select the Single server deployment option<br>4. Fill out the Basics form required information<br>5. Ensure Backup Redundancy option is Geo_redundant<br><br>For More Information:<a href='https://docs.microsoft.com/en-us/azure/postgresql/concepts-backup' target='_blank'>https://docs.microsoft.com/en-us/azure/postgresql/concepts-backup</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_028.py"
                         }
                     ],
@@ -4440,7 +4404,7 @@
                             "id": "PR-AZR-CLD-ACR-003",
                             "eval": "data.rule.acr_classic",
                             "message": "data.rule.acr_classic_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Using Azure CLI:<br>az acr update --name --sku {Basic, Premium, Standard}<br><br>References : <a href='https://docs.microsoft.com/en-us/azure/container-registry/container-registry-skus' target='_blank'>https://docs.microsoft.com/en-us/azure/container-registry/container-registry-skus</a>",
                             "remediationFunction": "PR_AZR_CLD_ACR_003.py"
                         }
                     ],
