@@ -2519,7 +2519,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_FUNCTION_APP",
+                    "masterTestId": "TEST_FUNCTION_APP_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2540,7 +2540,77 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_function_app"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_FUNCTION_APP_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(functionapp.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-AFA-002",
+                            "eval": "data.rule.functionapp_not_accessible_from_all_region",
+                            "message": "data.rule.functionapp_not_accessible_from_all_region_err",
+                            "remediationDescription": "In 'azurerm_function_app' resource, make sure 'allowed_origins' dont have '*' as item under 'cors' block under 'site_config' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/function_app#allowed_origins' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_AFA_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Function apps should not be accessible from all regions",
+                    "description": "This policy will identify Azure Function Apps which allows accessibility from all region and give alert if found.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_function_app"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_FUNCTION_APP_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(functionapp.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-AFA-003",
+                            "eval": "data.rule.functionapp_enabled_latest_http2_protocol",
+                            "message": "data.rule.functionapp_enabled_latest_http2_protocol_err",
+                            "remediationDescription": "In 'azurerm_function_app' resource, set 'http2_enabled = true' under 'site_config' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/function_app#http2_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_AFA_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that 'HTTP Version' is the latest, if used to run the Function app",
+                    "description": "Periodically, newer versions are released for HTTP either due to security flaws or to include additional functionality. Using the latest HTTP version for web apps to take advantage of security fixes, if any, and/or new functionalities of the newer version. Currently, this policy only applies to Linux web apps.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -5659,6 +5729,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_STORAGE_SYNC",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage_sync.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-STS-001",
+                            "eval": "data.rule.storage_sync_public_network_access_disabled",
+                            "message": "data.rule.storage_sync_public_network_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_storage_sync' resource, set incoming_traffic_policy = 'AllowVirtualNetworksOnly' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_sync#incoming_traffic_policy' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_STS_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Public network access should be disabled for Azure File Sync",
+                    "description": "Disabling the public endpoint allows you to restrict access to your Storage Sync Service resource to requests destined to approved private endpoints on your organization's network. There is nothing inherently insecure about allowing requests to the public endpoint, however, you may wish to disable it to meet regulatory, legal, or organizational policy requirements. You can disable the public endpoint for a Storage Sync Service by setting the incomingTrafficPolicy of the resource to AllowVirtualNetworksOnly.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_sync"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_STORAGE_ACCOUNT_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -6205,6 +6309,40 @@
                     ],
                     "resourceTypes": [
                         "azurerm_storage_container"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SYNAPSE_WORKSPACE",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(synapse_workspace.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SWM-001",
+                            "eval": "data.rule.synapse_workspace_enables_managed_virtual_network",
+                            "message": "data.rule.synapse_workspace_enables_managed_virtual_network_err",
+                            "remediationDescription": "In 'azurerm_synapse_workspace' resource, set 'managed_virtual_network_enabled = true' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/synapse_workspace#managed_virtual_network_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SWM_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Managed workspace virtual network on Azure Synapse workspaces should be enabled",
+                    "description": "Enabling a managed workspace virtual network ensures that your workspace is network isolated from other workspaces. Data integration and Spark resources deployed in this virtual network also provides user level isolation for Spark activities.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_synapse_workspace"
                     ]
                 },
                 {

@@ -105,6 +105,11 @@
                     "collection": "Microsoft.Network"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_230",
+                    "type": "Microsoft.Network/firewallPolicies",
+                    "collection": "Microsoft.Network"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_220",
                     "type": "Microsoft.Network/frontDoors",
                     "collection": "Microsoft.Network"
@@ -318,6 +323,31 @@
                     "masterSnapshotId": "AZRSNP_500",
                     "type": "Microsoft.Network/privateEndpoints",
                     "collection": "Microsoft.Network"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_501",
+                    "type": "Microsoft.Insights/logprofiles",
+                    "collection": "microsoft.insights"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_502",
+                    "type": "Microsoft.Network/FrontDoorWebApplicationFirewallPolicies",
+                    "collection": "Microsoft.Network"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_503",
+                    "type": "Microsoft.Resources/resourceGroups",
+                    "collection": "Microsoft.Resources"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_504",
+                    "type": "Microsoft.Sql/servers/failoverGroups",
+                    "collection": "Microsoft.Sql"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_505",
+                    "type": "Microsoft.Security/advancedThreatProtectionSettings",
+                    "collection": "Microsoft.Security"
                 }
             ]
         }
