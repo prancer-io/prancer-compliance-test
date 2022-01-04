@@ -1817,7 +1817,7 @@
                 {
                     "masterTestId": "TEST_ELB_1",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_04"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -1846,7 +1846,7 @@
                 {
                     "masterTestId": "TEST_ELB_2",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_04"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -1875,7 +1875,7 @@
                 {
                     "masterTestId": "TEST_ELB_3",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_05"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -1904,7 +1904,7 @@
                 {
                     "masterTestId": "TEST_ELB_4",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_05"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -1933,7 +1933,7 @@
                 {
                     "masterTestId": "TEST_ELB_5",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_05"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -1962,7 +1962,7 @@
                 {
                     "masterTestId": "TEST_ELB_8",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_01"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -1993,7 +1993,7 @@
                 {
                     "masterTestId": "TEST_ELB_9",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_05"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2022,7 +2022,7 @@
                 {
                     "masterTestId": "TEST_ELB_10",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_01"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2059,7 +2059,7 @@
                 {
                     "masterTestId": "TEST_ELB_11",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_02"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2088,7 +2088,7 @@
                 {
                     "masterTestId": "TEST_ELB_12",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_02"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2117,7 +2117,7 @@
                 {
                     "masterTestId": "TEST_ELB_13",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_05"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2146,7 +2146,7 @@
                 {
                     "masterTestId": "TEST_ELB_14",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_02"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2175,7 +2175,7 @@
                 {
                     "masterTestId": "TEST_ELB_15",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_02"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2204,7 +2204,7 @@
                 {
                     "masterTestId": "TEST_ELB_16",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_01"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2233,7 +2233,7 @@
                 {
                     "masterTestId": "TEST_ELB_17",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_06"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2262,7 +2262,7 @@
                 {
                     "masterTestId": "TEST_ELB_18",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_06"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2291,7 +2291,7 @@
                 {
                     "masterTestId": "TEST_ELB_19",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_03"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -6864,6 +6864,238 @@
                             "compliance": [],
                             "service": [
                                 "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_1",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-001",
+                            "eval": "data.rule.iam_wildcard_resource",
+                            "message": "data.rule.iam_wildcard_resource_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure no wildcards are specified in IAM policy with 'Resource' section",
+                    "description": "Using a wildcard in the Resource element in a role's trust policy would allow any IAM user in an account to access all Resources. This is a significant security gap and can be used to gain access to sensitive data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_2",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-002",
+                            "eval": "data.rule.iam_wildcard_action",
+                            "message": "data.rule.iam_wildcard_action_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure no wildcards are specified in IAM policy with 'Action' section",
+                    "description": "Using a wildcard in the Action element in a role's trust policy would allow any IAM user in an account to Manage all resources and a user can manipulate data. This is a significant security gap and can be used to gain access to sensitive data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_3",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-003",
+                            "eval": "data.rule.iam_wildcard_principal",
+                            "message": "data.rule.iam_wildcard_principal_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section",
+                    "description": "Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_4",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-004",
+                            "eval": "data.rule.iam_resource_format",
+                            "message": "data.rule.iam_resource_format_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*'",
+                    "description": "Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*' AWS only allows fully qualified ARNs or '*'. The above mentioned ARN is not supported in an identity-based policy",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_5",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-005",
+                            "eval": "data.rule.iam_assume_permission",
+                            "message": "data.rule.iam_assume_permission_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS IAM policy allows assume role permission across all services",
+                    "description": "This policy identifies AWS IAM policy which allows assume role permission across all services. Typically, AssumeRole is used if you have multiple accounts and need to access resources from each account then you can create long term credentials in one account and then use temporary security credentials to access all the other accounts by assuming roles in those accounts.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_6",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-006",
+                            "eval": "data.rule.iam_all_traffic",
+                            "message": "data.rule.iam_all_traffic_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS IAM policy is overly permissive to all traffic via condition clause",
+                    "description": "This policy identifies IAM policies that have a policy that is overly permissive to all traffic via condition clause. If any IAM policy statement with a condition containing 0.0.0.0/0 or ::/0, it allows all traffic to resources attached to that IAM policy. It is highly recommended to have the least privileged IAM policy to protect the data leakage and unauthorized access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_7",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-007",
+                            "eval": "data.rule.iam_administrative_privileges",
+                            "message": "data.rule.iam_administrative_privileges_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS IAM policy allows full administrative privileges",
+                    "description": "This policy identifies IAM policies with full administrative privileges. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended and considered a standard security advice to grant least privilege like granting only the permissions required to perform a task. Determine what users need to do and then craft policies for them that let the users perform only those tasks, instead of allowing full administrative privileges.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_8",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-008",
+                            "eval": "data.rule.iam_user_group_attach",
+                            "message": "data.rule.iam_user_group_attach_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure IAM groups contains at least one IAM user",
+                    "description": "Ensure that your Amazon Identity and Access Management (IAM) users are members of at least one IAM group in order to adhere to IAM security best practices",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "iam"
                             ]
                         }
                     ]

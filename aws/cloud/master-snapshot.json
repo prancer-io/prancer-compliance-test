@@ -157,15 +157,64 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_ELB",
-					"arn": "arn:aws:elasticloadbalancing:::",
-					"collection": "aws_elb",
+					"masterSnapshotId": "TEST_ELB_01",
+					"arn": "arn:aws:elb:::",
+					"collection": "aws_elb_01",
 					"listMethod": "describe_load_balancers",
 					"detailMethods": [
-						"describe_load_balancers",
-						"describe_load_balancer_attributes",
+						"describe_load_balancers"
+					],
+					"type": "elb"
+				},
+				{
+					"masterSnapshotId": "TEST_ELB_02",
+					"arn": "arn:aws:elbv2:::",
+					"collection": "aws_elbv2_01",
+					"listMethod": "describe_load_balancers",
+					"detailMethods": [
+						"describe_listeners"
+					],
+					"type": "elbv2"
+				},
+				{
+					"masterSnapshotId": "TEST_ELB_06",
+					"arn": "arn:aws:elbv2:::",
+					"collection": "aws_elbv2_06",
+					"listMethod": "describe_load_balancers",
+					"detailMethods": [
+						"describe_load_balancers"
+					],
+					"type": "elbv2"
+				},
+				{
+					"masterSnapshotId": "TEST_ELB_03",
+					"arn": "arn:aws:elbv2:::",
+					"collection": "aws_elbv2_03",
+					"listMethod": "describe_target_groups",
+					"detailMethods": [
+						"describe_target_groups"
+					],
+					"type": "elbv2"
+				},
+				{
+					"masterSnapshotId": "TEST_ELB_04",
+					"arn": "arn:aws:elb:::",
+					"collection": "aws_elb_04",
+					"listMethod": "describe_load_balancers",
+					"detailMethods": [
 						"describe_load_balancer_policies"
-					]
+					],
+					"type": "elb"
+				},
+				{
+					"masterSnapshotId": "TEST_ELB_05",
+					"arn": "arn:aws:elb:::",
+					"collection": "aws_elb_05",
+					"listMethod": "describe_load_balancers",
+					"detailMethods": [
+						"describe_load_balancer_attributes"
+					],
+					"type": "elb"
 				},
 				{
 					"masterSnapshotId": "TEST_REDSHIFT",
@@ -585,6 +634,19 @@
 					"listMethod": "list_applications",
 					"detailMethods": [
 						"batch_get_applications"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_IAM",
+					"arn": "arn:aws:iam:::",
+					"collection": "aws_iam",
+					"listMethod": "list_users",
+					"detailMethods": [
+						"get_user",
+						"list_ssh_public_keys",
+						"get_account_summary",
+						"get_account_password_policy",
+						"list_attached_user_policies"
 					]
 				}
 			]
