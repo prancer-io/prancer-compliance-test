@@ -36,7 +36,6 @@ azure_issue["gw_tls"] {
     lower(resource.type) == "azurerm_application_gateway"
     ssl_policy := resource.properties.ssl_policy[_]
     lower(ssl_policy.min_protocol_version) != "tlsv1_2"
-    lower(ssl_policy.min_protocol_version) != "tlsv1_3"
 }
 
 gw_tls {
