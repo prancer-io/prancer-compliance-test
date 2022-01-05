@@ -1989,7 +1989,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -2023,7 +2028,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice "
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -2057,12 +2062,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "PCI-DSS",
-                                "GDPR",
-                                "ISO 27001",
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
                                 "NIST CSF",
-                                "HIPAA",
-                                "Best Practice"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -2231,7 +2236,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -2265,7 +2270,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -3915,7 +3920,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -3950,7 +3955,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -3985,7 +3990,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -6057,7 +6062,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -6091,7 +6096,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -6125,7 +6130,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -6159,7 +6164,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -6193,7 +6198,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -6227,7 +6232,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
