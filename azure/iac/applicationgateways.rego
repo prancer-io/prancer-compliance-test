@@ -29,14 +29,12 @@ azure_issue["gw_tls"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
     lower(resource.properties.sslPolicy.minProtocolVersion) != "tlsv1_2"
-    lower(resource.properties.sslPolicy.minProtocolVersion) != "tlsv1_3"
 }
 
 source_path[{"gw_tls":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.network/applicationgateways"
     lower(resource.properties.sslPolicy.minProtocolVersion) != "tlsv1_2"
-    lower(resource.properties.sslPolicy.minProtocolVersion) != "tlsv1_3"
     metadata:= {
         "resource_path": [["resources",i,"properties","sslPolicy","minProtocolVersion"]]
     }
@@ -58,9 +56,7 @@ gw_tls = false {
 
 gw_tls_err = "Azure Application Gateway currently allowing TLSv1.1 or lower" {
     azure_issue["gw_tls"]
-}
-
-gw_tls_miss_err = "App gateway attribute sslPolicy.minProtocolVersion is missing from the resource" {
+} else = "App gateway attribute sslPolicy.minProtocolVersion is missing from the resource" {
     azure_attribute_absence["gw_tls"]
 }
 
@@ -128,9 +124,7 @@ gw_waf = false {
 
 gw_waf_err = "Azure Application Gateway currently does not have the Web application firewall (WAF) enabled" {
     azure_issue["gw_waf"]
-}
-
-gw_waf_miss_err = "Azure Application Gateway attribute webApplicationFirewallConfiguration.enabled is missing from the resource" {
+} else = "Azure Application Gateway attribute webApplicationFirewallConfiguration.enabled is missing from the resource" {
     azure_attribute_absence["gw_waf"]
 }
 
