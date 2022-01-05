@@ -879,7 +879,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Web App should use the latest version of TLS encryption",

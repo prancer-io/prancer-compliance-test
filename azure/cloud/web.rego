@@ -60,34 +60,32 @@ default min_tls_version = null
 
 azure_attribute_absence ["min_tls_version"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.siteConfig.minTlsVersion
+    lower(resource.type) == "microsoft.web/sites/config"
+    not resource.properties.minTlsVersion
 }
 
 azure_issue ["min_tls_version"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    resource.properties.siteConfig.minTlsVersion != "1.2"
+    lower(resource.type) == "microsoft.web/sites/config"
+    resource.properties.minTlsVersion != "1.2"
+}
+
+min_tls_version {
+    azure_attribute_absence["min_tls_version"]
 }
 
 
 min_tls_version {
-    lower(input.resources[_].type) == "microsoft.web/sites"
-    not azure_attribute_absence["min_tls_version"]
+    lower(input.resources[_].type) == "microsoft.web/sites/config"
     not azure_issue["min_tls_version"]
 }
 
-min_tls_version = false {
-    azure_attribute_absence["min_tls_version"]
-}
 
 min_tls_version = false {
     azure_issue["min_tls_version"]
 }
 
-min_tls_version_err = "microsoft.web/sites resource property minTlsVersion missing in the resource" {
-    azure_attribute_absence["min_tls_version"]
-} else = "Web App does not use the latest version of TLS encryption" {
+min_tls_version_err = "Web App does not use the latest version of TLS encryption" {
     azure_issue["min_tls_version"]
 }
 
@@ -98,7 +96,7 @@ min_tls_version_metadata := {
     "Language": "",
     "Policy Title": "Web App should use the latest version of TLS encryption",
     "Policy Description": "App service currently allows the web app to set TLS versions 1.0, 1.1, and 1.2. For secure web app connections, it is highly recommended to only use the latest TLS 1.2 version.",
-    "Resource Type": "microsoft.web/sites",
+    "Resource Type": "microsoft.web/sites/config",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
 }

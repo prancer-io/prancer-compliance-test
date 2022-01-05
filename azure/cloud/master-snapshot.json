@@ -10,6 +10,11 @@
                     "collection": "Microsoft.Web"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_101",
+                    "type": "Microsoft.Web/sites/config",
+                    "collection": "Microsoft.Web"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_210",
                     "type": "Microsoft.OperationalInsights/workspaces",
                     "collection": "Microsoft.OperationalInsights"
