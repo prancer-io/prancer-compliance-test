@@ -4,6 +4,31 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
+storage_account_need_to_skip(target_storage_account_resource) {
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.storage/storageaccounts/blobservices/containers";
+              array_contains(r.dependsOn, concat("/", [target_storage_account_resource.type, target_storage_account_resource.name]));
+              contains(lower(r.name), "bootdiagnostics");
+              c := 1]) > 0
+}
+
+storage_account_need_to_skip(target_storage_account_resource) {
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.storage/storageaccounts/blobservices/containers";
+              array_contains(r.dependsOn, concat("/", [target_storage_account_resource.type, target_storage_account_resource.name]));
+              contains(lower(r.name), "insights-logs-networksecuritygroupflowevent");
+              c := 1]) > 0
+}
+
+storage_account_need_to_skip(target_storage_account_resource) {
+    has_property(target_storage_account_resource.tags, "ms-resource-usage")
+    lower(target_storage_account_resource.tags["ms-resource-usage"]) == "azure-cloud-shell"
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
 
 #
@@ -16,6 +41,7 @@ default storage_secure = null
 azure_attribute_absence_new["storage_secure"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.apiVersion >= "2019-04-01"
     not resource.properties.supportsHttpsTrafficOnly
 }
@@ -23,6 +49,7 @@ azure_attribute_absence_new["storage_secure"] {
 source_path[{"storage_secure":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.apiVersion >= "2019-04-01"
     not resource.properties.supportsHttpsTrafficOnly
     metadata:= {
@@ -34,6 +61,7 @@ source_path[{"storage_secure":metadata}] {
 azure_attribute_absence_old["storage_secure"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.apiVersion < "2019-04-01"
     not resource.properties.supportsHttpsTrafficOnly
 }
@@ -41,6 +69,7 @@ azure_attribute_absence_old["storage_secure"] {
 source_path[{"storage_secure":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.apiVersion < "2019-04-01"
     not resource.properties.supportsHttpsTrafficOnly
     metadata:= {
@@ -51,12 +80,14 @@ source_path[{"storage_secure":metadata}] {
 azure_issue["storage_secure"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.properties.supportsHttpsTrafficOnly == false
 }
 
 source_path[{"storage_secure":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.properties.supportsHttpsTrafficOnly == false
     metadata:= {
         "resource_path": [["resources",i,"properties","supportsHttpsTrafficOnly"]]
@@ -64,29 +95,41 @@ source_path[{"storage_secure":metadata}] {
 }
 
 storage_secure {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_attribute_absence_old["storage_secure"]
     not azure_issue["storage_secure"]
 }
 
 storage_secure {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence_new["storage_secure"]
     not azure_issue["storage_secure"]
 }
 
 storage_secure = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_secure"]
 }
 
 storage_secure = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence_old["storage_secure"]
 }
 
-
 storage_secure_err = "Storage Accounts https based secure transfer is not enabled" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_secure"]
 }
-
 
 storage_secure_metadata := {
     "Policy Code": "PR-AZR-ARM-STR-003",
@@ -109,12 +152,14 @@ default storage_acl = null
 azure_attribute_absence["storage_acl"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.networkAcls.defaultAction
 }
 
 source_path[{"storage_acl":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.networkAcls.defaultAction
     metadata:= {
         "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
@@ -124,12 +169,14 @@ source_path[{"storage_acl":metadata}] {
 azure_issue["storage_acl"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     lower(resource.properties.networkAcls.defaultAction) != "deny"
 }
 
 source_path[{"storage_acl":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     lower(resource.properties.networkAcls.defaultAction) != "deny"
     metadata:= {
         "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
@@ -137,24 +184,36 @@ source_path[{"storage_acl":metadata}] {
 }
 
 storage_acl {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_attribute_absence["storage_acl"]
     not azure_issue["storage_acl"]
 }
 
 storage_acl = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_acl"]
 }
 
 storage_acl = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_acl"]
 }
 
 storage_acl_err = "Storage Accounts firewall rule is currently not enabled" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_acl"]
-}
-
-storage_acl_miss_err = "Storage Account attribute networkAcls.defaultAction is missing from the resource" {
+} else = "Storage Account attribute networkAcls.defaultAction is missing from the resource" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_acl"]
 }
 
@@ -179,6 +238,7 @@ default storage_threat_protection = null
 azure_issue["storage_threat_protection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     #nested := input.resources[_]
     #lower(nested.type) == "providers/advancedthreatprotectionsettings"
     #nested.properties.isEnabled != true
@@ -189,6 +249,7 @@ azure_issue["storage_threat_protection"] {
 source_path[{"storage_threat_protection":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     nested_type := "providers/advancedthreatprotectionsettings"
     resources := resource.resources[j]
     count([ c | lower(resources.type) == nested_type; c = 1]) == 0
@@ -200,6 +261,7 @@ source_path[{"storage_threat_protection":metadata}] {
 azure_issue["storage_threat_protection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     nested := resource.resources[_]
     lower(nested.type) == "providers/advancedthreatprotectionsettings"
     not nested.properties.isEnabled
@@ -208,6 +270,7 @@ azure_issue["storage_threat_protection"] {
 source_path[{"storage_threat_protection":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     nested := resource.resources[j]
     lower(nested.type) == "providers/advancedthreatprotectionsettings"
     not nested.properties.isEnabled
@@ -219,6 +282,7 @@ source_path[{"storage_threat_protection":metadata}] {
 azure_issue["storage_threat_protection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     nested := resource.resources[_]
     lower(nested.type) == "providers/advancedthreatprotectionsettings"
     nested.properties.isEnabled != true
@@ -227,6 +291,7 @@ azure_issue["storage_threat_protection"] {
 source_path[{"storage_threat_protection":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     nested := resource.resources[j]
     lower(nested.type) == "providers/advancedthreatprotectionsettings"
     nested.properties.isEnabled != true
@@ -236,15 +301,23 @@ source_path[{"storage_threat_protection":metadata}] {
 }
 
 storage_threat_protection {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_issue["storage_threat_protection"]
 }
 
 storage_threat_protection = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_threat_protection"]
 }
 
 storage_threat_protection_err = "Advanced Threat Protection is currently not enabled for storage account" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_threat_protection"]
 }
 
@@ -270,12 +343,14 @@ default blobService = null
 azure_attribute_absence["blobService"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.encryption.services.blob.enabled
 }
 
 source_path[{"blobService":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.encryption.services.blob.enabled
     metadata:= {
         "resource_path": [["resources",i,"properties","encryption","services","blob","enabled"]]
@@ -285,12 +360,14 @@ source_path[{"blobService":metadata}] {
 azure_issue["blobService"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.properties.encryption.services.blob.enabled != true
 }
 
 source_path[{"blobService":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.properties.encryption.services.blob.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","encryption","services","blob","enabled"]]
@@ -298,25 +375,34 @@ source_path[{"blobService":metadata}] {
 }
 
 blobService {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_attribute_absence["blobService"]
     not azure_issue["blobService"]
 }
 
 blobService  {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["blobService"]
     not azure_issue["blobService"]
 }
 
 blobService = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["blobService"]
 }
-
 
 blobService_err = "Ensure that 'Storage service encryption' is enabled for the Blob Service" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["blobService"]
 }
-
 
 blobService_metadata := {
     "Policy Code": "PR-AZR-ARM-STR-006",
@@ -339,12 +425,14 @@ default fileService = null
 azure_attribute_absence["fileService"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.encryption.services.file.enabled
 }
 
 source_path[{"fileService":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.encryption.services.file.enabled
     metadata:= {
         "resource_path": [["resources",i,"properties","encryption","services","file","enabled"]]
@@ -354,12 +442,14 @@ source_path[{"fileService":metadata}] {
 azure_issue["fileService"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.properties.encryption.services.file.enabled != true
 }
 
 source_path[{"fileService":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.properties.encryption.services.file.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","encryption","services","file","enabled"]]
@@ -367,25 +457,34 @@ source_path[{"fileService":metadata}] {
 }
 
 fileService {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_attribute_absence["fileService"]
     not azure_issue["fileService"]
 }
 
 fileService {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["fileService"]
     not azure_issue["fileService"]
 }
 
 fileService = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["fileService"]
 }
-
 
 fileService_err = "Ensure that 'Storage service encryption' is enabled for the File Service" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["fileService"]
 }
-
 
 fileService_metadata := {
     "Policy Code": "PR-AZR-ARM-STR-007",
@@ -400,7 +499,6 @@ fileService_metadata := {
 }
 
 
-
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
 # PR-AZR-ARM-STR-008
 
@@ -409,12 +507,14 @@ default keySource = null
 azure_attribute_absence["keySource"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.encryption.keySource
 }
 
 source_path[{"keySource":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.encryption.keySource
     metadata:= {
         "resource_path": [["resources",i,"properties","encryption","keySource"]]
@@ -424,12 +524,14 @@ source_path[{"keySource":metadata}] {
 azure_issue["keySource"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     lower(resource.properties.encryption.keySource) != "microsoft.keyvault"
 }
 
 source_path[{"keySource":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     lower(resource.properties.encryption.keySource) != "microsoft.keyvault"
     metadata:= {
         "resource_path": [["resources",i,"properties","encryption","keySource"]]
@@ -437,27 +539,38 @@ source_path[{"keySource":metadata}] {
 }
 
 keySource {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_attribute_absence["keySource"]
     not azure_issue["keySource"]
 }
 
 keySource = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["keySource"]
 }
 
 keySource = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["keySource"]
 }
 
 keySource_err = "Critical data storage in Storage Account is currently not encrypted with Customer Managed Key" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["keySource"]
-}
-
-keySource_miss_err = "Storage Account encryption property 'keySource' is missing from the resource" {
+} else = "Storage Account encryption property 'keySource' is missing from the resource" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["keySource"]
 }
-
 
 keySource_metadata := {
     "Policy Code": "PR-AZR-ARM-STR-008",
@@ -479,12 +592,14 @@ default region = null
 azure_issue["region"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.location
 }
 
 source_path[{"region":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.location
     metadata:= {
         "resource_path": [["resources",i,"location"]]
@@ -494,6 +609,7 @@ source_path[{"region":metadata}] {
 azure_issue["region"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     lower(resource.location) != "northeurope"
     lower(resource.location) != "westeurope"
 }
@@ -501,6 +617,7 @@ azure_issue["region"] {
 source_path[{"region":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     lower(resource.location) != "northeurope"
     lower(resource.location) != "westeurope"
     metadata:= {
@@ -509,15 +626,23 @@ source_path[{"region":metadata}] {
 }
 
 region {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_issue["region"]
 }
 
 region = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["region"]
 }
 
 region_err = "Storage Accounts location configuration is currenly not inside of Europe" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["region"]
 }
 
@@ -538,47 +663,60 @@ region_metadata := {
 
 default blobServicePublicAccessDisabled = null
 
+azure_attribute_absent["blobServicePublicAccessDisabled"] {
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    not resource.properties
+}
+
+#default to true. ref: https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts?tabs=json#storageaccountpropertiescreateparameters
+azure_attribute_absent["blobServicePublicAccessDisabled"] {
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    not has_property(resource.properties, "allowBlobPublicAccess")
+}
+
 azure_issue["blobServicePublicAccessDisabled"] {
-    resource := input.resources[_]
+	resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.allowBlobPublicAccess
-}
-
-source_path[{"blobServicePublicAccessDisabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.allowBlobPublicAccess
-    metadata:= {
-        "resource_path": [["resources",i,"properties","allowBlobPublicAccess"]]
-    }
-}
-
-azure_issue["blobServicePublicAccessDisabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.properties.allowBlobPublicAccess == true
-}
-
-source_path[{"blobServicePublicAccessDisabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    resource.properties.allowBlobPublicAccess == true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","allowBlobPublicAccess"]]
-    }
 }
 
 blobServicePublicAccessDisabled {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    not azure_attribute_absent["blobServicePublicAccessDisabled"]
     not azure_issue["blobServicePublicAccessDisabled"]
 }
 
 blobServicePublicAccessDisabled = false {
+ 	resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_attribute_absent["blobServicePublicAccessDisabled"]
+}
+
+blobServicePublicAccessDisabled = false {
+ 	resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["blobServicePublicAccessDisabled"]
 }
 
 blobServicePublicAccessDisabled_err = "Storage Account currently allowing public access to all blobs or containers" {
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["blobServicePublicAccessDisabled"]
+} else = "microsoft.storage/storageaccounts property 'allowBlobPublicAccess' is missing from the resource. Please set the value to false after property addition." {
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_attribute_absent["blobServicePublicAccessDisabled"]
 }
 
 blobServicePublicAccessDisabled_metadata := {
@@ -594,7 +732,6 @@ blobServicePublicAccessDisabled_metadata := {
 }
 
 
-
  # PR-AZR-ARM-STR-011
 
 default storage_acount_by_pass = null
@@ -602,12 +739,14 @@ default storage_acount_by_pass = null
 azure_attribute_absence["storage_acount_by_pass"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.networkAcls.bypass
 }
 
 source_path[{"storage_acount_by_pass":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.networkAcls.bypass
     metadata:= {
         "resource_path": [["resources",i,"properties","networkAcls","bypass"]]
@@ -617,12 +756,14 @@ source_path[{"storage_acount_by_pass":metadata}] {
 azure_issue["storage_acount_by_pass"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     lower(resource.properties.networkAcls.bypass) != "azureservices"
 }
 
 source_path[{"storage_acount_by_pass":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     lower(resource.properties.networkAcls.bypass) != "azureservices"
     metadata:= {
         "resource_path": [["resources",i,"properties","networkAcls","bypass"]]
@@ -630,25 +771,38 @@ source_path[{"storage_acount_by_pass":metadata}] {
 }
 
 storage_acount_by_pass {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_attribute_absence["storage_acount_by_pass"]
     not azure_issue["storage_acount_by_pass"]
 }
 
 storage_acount_by_pass = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_acount_by_pass"]
 }
 
 storage_acount_by_pass = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_acount_by_pass"]
 }
 
-storage_acount_by_pass_err = "microsoft.storage/storageaccounts resource property networkAcls.bypass missing in the resource" {
-    azure_attribute_absence["storage_acount_by_pass"]
-} else = "Azure Storage Account Trusted Microsoft Services access is not enabled" {
+storage_acount_by_pass_err = "Azure Storage Account Trusted Microsoft Services access is not enabled" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_acount_by_pass"]
+} else = "microsoft.storage/storageaccounts resource property networkAcls.bypass missing in the resource" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_attribute_absence["storage_acount_by_pass"]
 }
-
 
 storage_acount_by_pass_metadata := {
     "Policy Code": "PR-AZR-ARM-STR-011",
@@ -672,12 +826,14 @@ default storage_account_latest_tls_configured = null
 azure_attribute_absence["storage_account_latest_tls_configured"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.minimumTlsVersion
 }
 
 source_path[{"storage_account_latest_tls_configured":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.minimumTlsVersion
     metadata:= {
         "resource_path": [["resources",i,"properties","minimumTlsVersion"]]
@@ -687,12 +843,14 @@ source_path[{"storage_account_latest_tls_configured":metadata}] {
 azure_issue["storage_account_latest_tls_configured"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     lower(resource.properties.minimumTlsVersion) != "tls1_2"
 }
 
 source_path[{"storage_account_latest_tls_configured":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     lower(resource.properties.minimumTlsVersion) != "tls1_2"
     metadata:= {
         "resource_path": [["resources",i,"properties","minimumTlsVersion"]]
@@ -700,22 +858,36 @@ source_path[{"storage_account_latest_tls_configured":metadata}] {
 }
 
 storage_account_latest_tls_configured {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_attribute_absence["storage_account_latest_tls_configured"]
     not azure_issue["storage_account_latest_tls_configured"]
 }
 
 storage_account_latest_tls_configured = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_account_latest_tls_configured"]
 }
 
 storage_account_latest_tls_configured = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_account_latest_tls_configured"]
 }
 
 storage_account_latest_tls_configured_err = "Azure Storage Account currently dont have latest version of tls configured" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_account_latest_tls_configured"]
 } else = "microsoft.storage/storageaccounts property 'minimumTlsVersion' need to be exist. Its missing from the resource. Please set the value to 'TLS1_2' after property addition." {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_account_latest_tls_configured"]
 }
 
@@ -733,50 +905,60 @@ storage_account_latest_tls_configured_metadata := {
 
 # PR-AZR-ARM-STR-019
 #
+
 default storage_account_private_endpoint = null
 
 azure_attribute_absence["storage_account_private_endpoint"] {
     count([c | lower(input.resources[_].type) == "microsoft.network/privateendpoints"; c := 1]) == 0
 }
 
-no_azure_issue["storage_account_private_endpoint"] {
+azure_issue ["storage_account_private_endpoint"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.network/privateendpoints"
-    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[_]
-    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.storage/storageaccounts")
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.network/privateendpoints";
+              contains(lower(r.properties.privateLinkServiceConnections[_].properties.privateLinkServiceId), lower(concat("/", [resource.type, resource.name])));
+              c := 1]) == 0
 }
 
-source_path[{"storage_account_private_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/privateendpoints"
-    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[j]
-    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.storage/storageaccounts")
-    metadata:= {
-        "resource_path": [["resources",i,"properties","privateLinkServiceConnections",j,"properties","privateLinkServiceId"]]
-    }
-}
+# no_azure_issue["storage_account_private_endpoint"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.network/privateendpoints"
+#     privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[_]
+#     contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.storage/storageaccounts")
+# }
 
 storage_account_private_endpoint {
-	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    no_azure_issue["storage_account_private_endpoint"]
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_attribute_absence["storage_account_private_endpoint"]
+    not azure_issue["storage_account_private_endpoint"]
 }
 
 storage_account_private_endpoint = false {
-	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    not no_azure_issue["storage_account_private_endpoint"]
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_issue["storage_account_private_endpoint"]
 }
 
 storage_account_private_endpoint = false {
-	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_account_private_endpoint"]
 }
 
 storage_account_private_endpoint_err = "Azure Storage Account does not configure with private endpoints" {
-	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    not no_azure_issue["storage_account_private_endpoint"]
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_issue["storage_account_private_endpoint"]
 } else = "Azure Private endpoints resoruce is missing" {
-	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_account_private_endpoint"]
 }
 
@@ -802,12 +984,14 @@ default storage_account_require_encryption = null
 azure_attribute_absence["storage_account_require_encryption"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.encryption.requireInfrastructureEncryption
 }
 
 source_path[{"storage_account_require_encryption":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.encryption.requireInfrastructureEncryption
     metadata:= {
         "resource_path": [["resources",i,"properties","encryption","requireInfrastructureEncryption"]]
@@ -818,6 +1002,7 @@ source_path[{"storage_account_require_encryption":metadata}] {
 azure_issue["storage_account_require_encryption"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.properties.encryption.requireInfrastructureEncryption != true
 }
 
@@ -825,6 +1010,7 @@ azure_issue["storage_account_require_encryption"] {
 source_path[{"storage_account_require_encryption":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.properties.encryption.requireInfrastructureEncryption != true
     metadata:= {
         "resource_path": [["resources",i,"properties","encryption","requireInfrastructureEncryption"]]
@@ -832,25 +1018,38 @@ source_path[{"storage_account_require_encryption":metadata}] {
 }
 
 storage_account_require_encryption {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_issue["storage_account_require_encryption"]
     not azure_attribute_absence["storage_account_require_encryption"]
 }
 
 storage_account_require_encryption = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_account_require_encryption"]
 }
 
 storage_account_require_encryption = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_account_require_encryption"]
 }
 
 storage_account_require_encryption_err = "Storage account encryption scopes currently disabled for double encryption for data at rest" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_account_require_encryption"]
 } else = "microsoft.storage/storageaccounts property 'encryption.requireInfrastructureEncryption' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_account_require_encryption"]
 }
-
 
 storage_account_require_encryption_metadata := {
     "Policy Code": "PR-AZR-ARM-STR-020",
@@ -885,13 +1084,11 @@ source_path[{"storage_account_scopes_require_encryption":metadata}] {
     }
 }
 
-
 azure_issue["storage_account_scopes_require_encryption"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
     resource.properties.requireInfrastructureEncryption != true
 }
-
 
 source_path[{"storage_account_scopes_require_encryption":metadata}] {
     resource := input.resources[i]
@@ -921,7 +1118,6 @@ storage_account_scopes_require_encryption_err = "Storage account encryption scop
 } else = "microsoft.storage/storageaccounts/encryptionscopes property 'requireInfrastructureEncryption' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
     azure_attribute_absence["storage_account_scopes_require_encryption"]
 }
-
 
 storage_account_scopes_require_encryption_metadata := {
     "Policy Code": "PR-AZR-ARM-STR-021",
@@ -955,13 +1151,11 @@ source_path[{"storage_account_encryption_scopes_source":metadata}] {
     }
 }
 
-
 azure_issue["storage_account_encryption_scopes_source"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
     lower(resource.properties.source) != "microsoft.keyvault"
 }
-
 
 source_path[{"storage_account_encryption_scopes_source":metadata}] {
     resource := input.resources[i]
@@ -992,7 +1186,6 @@ storage_account_encryption_scopes_source_err = "Critical data storage in Storage
     azure_attribute_absence["storage_account_encryption_scopes_source"]
 }
 
-
 storage_account_encryption_scopes_source_metadata := {
     "Policy Code": "PR-AZR-ARM-STR-022",
     "Type": "IaC",  
@@ -1014,12 +1207,14 @@ default storage_vnet_service_endpoint = null
 azure_attribute_absence["storage_vnet_service_endpoint"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.networkAcls.defaultAction
 }
 
 source_path[{"storage_vnet_service_endpoint":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.networkAcls.defaultAction
     metadata:= {
         "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
@@ -1029,12 +1224,14 @@ source_path[{"storage_vnet_service_endpoint":metadata}] {
 azure_attribute_absence["storage_vnet_service_endpoint"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.networkAcls.virtualNetworkRules
 }
 
 source_path[{"storage_vnet_service_endpoint":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not resource.properties.networkAcls.virtualNetworkRules
     metadata:= {
         "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules"]]
@@ -1044,12 +1241,14 @@ source_path[{"storage_vnet_service_endpoint":metadata}] {
 azure_issue["storage_vnet_service_endpoint"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     lower(resource.properties.networkAcls.defaultAction) != "deny"
 }
 
 source_path[{"storage_vnet_service_endpoint":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     lower(resource.properties.networkAcls.defaultAction) != "deny"
     metadata:= {
         "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
@@ -1060,6 +1259,7 @@ source_path[{"storage_vnet_service_endpoint":metadata}] {
 azure_issue["storage_vnet_service_endpoint"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[_]
     count(virtualNetworkRule.id) == 0
 }
@@ -1067,6 +1267,7 @@ azure_issue["storage_vnet_service_endpoint"] {
 source_path[{"storage_vnet_service_endpoint":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[j]
     count(virtualNetworkRule.id) == 0
     metadata:= {
@@ -1075,22 +1276,36 @@ source_path[{"storage_vnet_service_endpoint":metadata}] {
 }
 
 storage_vnet_service_endpoint {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_attribute_absence["storage_vnet_service_endpoint"]
     not azure_issue["storage_vnet_service_endpoint"]
 }
 
 storage_vnet_service_endpoint = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_vnet_service_endpoint"]
 }
 
 storage_vnet_service_endpoint = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_vnet_service_endpoint"]
 }
 
 storage_vnet_service_endpoint_err = "Storage Accounts firewall rule is currently not enabled" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_vnet_service_endpoint"]
 } else = "Storage Account attribute networkAcls.defaultAction or networkAcls.virtualNetworkRules.id is missing from the resource" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_vnet_service_endpoint"]
 }
 
@@ -1111,18 +1326,19 @@ storage_vnet_service_endpoint_metadata := {
 # PR-AZR-ARM-STR-024
 #
 
-
 default storage_account_allow_shared_key_access = null
 
 azure_attribute_absence["storage_account_allow_shared_key_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not has_property(resource.properties,"allowSharedKeyAccess")
 }
 
 source_path[{"storage_account_allow_shared_key_access":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not has_property(resource.properties,"allowSharedKeyAccess")
     metadata:= {
         "resource_path": [["resources",i,"properties","allowSharedKeyAccess"]]
@@ -1133,6 +1349,7 @@ source_path[{"storage_account_allow_shared_key_access":metadata}] {
 azure_issue["storage_account_allow_shared_key_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.properties.allowSharedKeyAccess != false
 }
 
@@ -1140,6 +1357,7 @@ azure_issue["storage_account_allow_shared_key_access"] {
 source_path[{"storage_account_allow_shared_key_access":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     resource.properties.allowSharedKeyAccess != false
     metadata:= {
         "resource_path": [["resources",i,"properties","allowSharedKeyAccess"]]
@@ -1147,25 +1365,38 @@ source_path[{"storage_account_allow_shared_key_access":metadata}] {
 }
 
 storage_account_allow_shared_key_access {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     not azure_issue["storage_account_allow_shared_key_access"]
     not azure_attribute_absence["storage_account_allow_shared_key_access"]
 }
 
 storage_account_allow_shared_key_access = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_account_allow_shared_key_access"]
 }
 
 storage_account_allow_shared_key_access = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_account_allow_shared_key_access"]
 }
 
 storage_account_allow_shared_key_access_err = "Storage accounts currently use shared key access" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_issue["storage_account_allow_shared_key_access"]
 } else = "microsoft.storage/storageaccounts property 'allowSharedKeyAccess' need to be exist. Its missing from the resource. Please set the value to 'false' after property addition." {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
     azure_attribute_absence["storage_account_allow_shared_key_access"]
 }
-
 
 storage_account_allow_shared_key_access_metadata := {
     "Policy Code": "PR-AZR-ARM-STR-024",
