@@ -30,7 +30,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800",
+                                "CIS"
+                            ],
                             "service": [
                                 "kms"
                             ]
@@ -59,7 +62,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "kms"
                             ]
@@ -88,7 +93,13 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
                             "service": [
                                 "cloudtrail"
                             ]
@@ -117,7 +128,13 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
                             "service": [
                                 "cloudtrail"
                             ]
@@ -146,7 +163,13 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
                             "service": [
                                 "cloudtrail"
                             ]
@@ -175,7 +198,12 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
                             "service": [
                                 "cloudtrail"
                             ]
@@ -204,7 +232,14 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "HITRUST",
+                                "SOC 2",
+                                "GDPR"
+                            ],
                             "service": [
                                 "subnet"
                             ]
@@ -227,13 +262,15 @@
                             "remediationFunction": "PR_AWS_CLD_VPC_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure all EIP addresses allocated to a VPC are attached related EC2 instances",
                     "description": "Ensure that a managed Config rule for AWS Elastic IPs (EIPs) attached to EC2 instances launched inside a VPC is created. Config service tracks changes within your AWS resources configuration and saves the recorded data for security and compliance audits",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "elastic IP"
                             ]
@@ -256,13 +293,15 @@
                             "remediationFunction": "PR_AWS_CLD_VPC_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure VPC endpoint service is configured for manual acceptance",
                     "description": "AcceptanceRequired Indicates whether requests from service consumers to create an endpoint to your service must be accepted, we recommend you to enable this feature",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "vpc"
                             ]
@@ -285,13 +324,15 @@
                             "remediationFunction": "PR_AWS_CLD_AG_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "API Gateway should have API Endpoint type as private and not exposed to internet",
                     "description": "Ensure that the Api endpoint type in api gateway is set to private and Is not exposed to the public internet",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "api gateway"
                             ]
@@ -320,7 +361,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "api gateway"
                             ]
@@ -349,7 +392,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "api gateway"
                             ]
@@ -372,13 +417,16 @@
                             "remediationFunction": "PR_AWS_CLD_AG_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure that API Gateway has enabled access logging",
                     "description": "Enabling the custom access logging option in API Gateway allows delivery of custom logs to CloudWatch Logs, which can be analyzed using CloudWatch Logs Insights. Using custom domain names in Amazon API Gateway allows insights into requests sent to each custom domain name.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR"
+                            ],
                             "service": [
                                 "api gateway"
                             ]
@@ -401,13 +449,15 @@
                             "remediationFunction": "PR_AWS_CLD_AG_005.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure API Gateway has tracing enabled",
                     "description": "With tracing enabled X-Ray can provide an end-to-end view of an entire HTTP request. You can use this to analyze latencies in APIs and their backend services",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "api gateway"
                             ]
@@ -430,13 +480,15 @@
                             "remediationFunction": "PR_AWS_CLD_AG_006.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure API gateway methods are not publicly accessible",
                     "description": "We recommend you configure a custom authorizer OR an API key for every method in the API Gateway.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "api gateway"
                             ]
@@ -465,7 +517,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "api gateway"
                             ]
@@ -488,13 +542,15 @@
                             "remediationFunction": "PR_AWS_CLD_EKS_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS EKS cluster control plane assigned multiple security groups",
                     "description": "Amazon EKS strongly recommends that you use a dedicated security group for each cluster control plane (one per cluster). This policy checks the number of security groups assigned to your cluster's control plane and alerts if there are more than one.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "eks"
                             ]
@@ -517,13 +573,16 @@
                             "remediationFunction": "PR_AWS_CLD_EKS_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure AWS EKS cluster has secrets encryption enabled",
                     "description": "Secrets in Kubernetes enables managing sensitive information such as passwords and API keys using Kubernetes-native APIs. When creating a secret resource the Kubernetes API server stores it in etcd in a base64 encoded form.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HIPAA",
+                                "Best Practice"
+                            ],
                             "service": [
                                 "eks"
                             ]
@@ -546,13 +605,15 @@
                             "remediationFunction": "PR_AWS_CLD_EKS_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure Kubernetes secrets are encrypted using CMKs managed in AWS KMS",
                     "description": "Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as user defined Secrets and Secrets required for the operation of the cluster, such as service account keys, which are all stored in etcd. Using this functionality, you can use a key, that you manage in AWS KMS, to encrypt data at the application layer",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "eks"
                             ]
@@ -581,7 +642,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "elasticsearch"
                             ]
@@ -604,17 +667,16 @@
                             "remediationFunction": "PR_AWS_CLD_ES_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS Elasticsearch domain Encryption for data at rest is disabled",
                     "description": "This policy identifies Elasticsearch domains for which encryption is disabled. Encryption of data at rest is required to prevent unauthorized users from accessing the sensitive information available on your Elasticsearch domains components. This may include all data of file systems, primary and replica indices, log files, memory swap files and automated snapshots. The Elasticsearch uses AWS KMS service to store and manage the encryption keys. It is highly recommended to implement encryption at rest when you are working with production data that have sensitive information, to protect from unauthorized access.",
                     "tags": [
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "CSA-CCM",
-                                "HITRUST",
-                                "ISO 27001",
-                                "NIST 800"
+                                "HIPAA",
+                                "NIST 800",
+                                "GDPR"
                             ],
                             "service": [
                                 "elasticsearch"
@@ -644,7 +706,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "elasticsearch"
                             ]
@@ -803,7 +867,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "elasticsearch"
                             ]
@@ -826,13 +892,16 @@
                             "remediationFunction": "PR_AWS_CLD_ES_009.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Elasticsearch Domain should not have Encrytion using AWS Managed Keys",
                     "description": "Ensure that your Amazon ElasticSearch (ES) domains are encrypted with KMS Customer Master Keys (CMKs) instead of AWS managed-keys (default keys used by the ES service when there are no customer keys defined) in order to have more granular control over the data-at-rest encryption/decryption process and to meet compliance requirements.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR"
+                            ],
                             "service": [
                                 "elasticsearch"
                             ]
@@ -897,7 +966,12 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -920,13 +994,16 @@
                             "remediationFunction": "PR_AWS_CLD_S3_007.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS S3 Object Versioning is disabled",
                     "description": "This policy identifies the S3 buckets which have Object Versioning disabled. S3 Object Versioning is an important capability in protecting your data within a bucket. Once you enable Object Versioning, you cannot remove it; you can suspend Object Versioning at any time on a bucket if you do not wish for it to persist. It is recommended to enable Object Versioning on S3.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -949,13 +1026,15 @@
                             "remediationFunction": "PR_AWS_CLD_S3_008.py"
                         }
                     ],
-                    "severity": "low",
+                    "severity": "High",
                     "title": "AWS S3 bucket has global view ACL permissions enabled.",
                     "description": "This policy determines if any S3 bucket(s) has Global View ACL permissions enabled for the All Users group. These permissions allow external resources to see the permission settings associated to the object.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -978,13 +1057,16 @@
                             "remediationFunction": "PR_AWS_CLD_S3_010.py"
                         }
                     ],
-                    "severity": "high",
+                    "severity": "High",
                     "title": "AWS S3 buckets are accessible to any authenticated user.",
                     "description": "This policy identifies S3 buckets accessible to any authenticated AWS users. Amazon S3 allows customer to store and retrieve any type of content from anywhere in the web. Often, customers have leAWSimate reasons to expose the S3 bucket to public, for example to host website content. However, these buckets often contain highly sensitive enterprise data which if left accessible to anyone with valid AWS credentials, may result in sensitive data leaks.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -1007,13 +1089,16 @@
                             "remediationFunction": "PR_AWS_CLD_S3_011.py"
                         }
                     ],
-                    "severity": "high",
+                    "severity": "High",
                     "title": "AWS S3 buckets are accessible to public",
                     "description": "This policy identifies S3 buckets which are publicly accessible. Amazon S3 allows customers to store and retrieve any type of content from anywhere in the web. Often, customers have leAWSimate reasons to expose the S3 bucket to public, for example, to host website content. However, these buckets often contain highly sensitive enterprise data which if left open to public may result in sensitive data leaks.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -1036,13 +1121,18 @@
                             "remediationFunction": "PR_AWS_CLD_S3_012.py"
                         }
                     ],
-                    "severity": "low",
+                    "severity": "High",
                     "title": "AWS S3 buckets do not have server side encryption.",
                     "description": "Customers can protect the data in S3 buckets using the AWS server-side encryption. If the server-side encryption is not turned on for S3 buckets with sensitive data, in the event of a data breach, malicious users can gain access to the data.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -1072,7 +1162,8 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "ISO 27001"
+                                "ISO 27001",
+                                "NIST 800"
                             ],
                             "service": [
                                 "cloud"
@@ -1102,7 +1193,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -1131,7 +1224,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -1154,13 +1250,15 @@
                             "remediationFunction": "PR_AWS_CLD_S3_016.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure S3 bucket has enabled lock configuration",
                     "description": "Indicates whether this bucket has an Object Lock configuration enabled. Enable ObjectLockEnabled when you apply ObjectLockConfiguration to a bucket.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -1189,7 +1287,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -1218,7 +1318,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -1247,7 +1349,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -1276,7 +1380,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -1305,7 +1411,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -1328,13 +1436,16 @@
                             "remediationFunction": "PR_AWS_CLD_EFS_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS Elastic File System (EFS) not encrypted using Customer Managed Key",
                     "description": "This policy identifies Elastic File Systems (EFSs) which are encrypted with default KMS keys and not with Keys managed by Customer. It is a best practice to use customer managed KMS Keys to encrypt your EFS data. It gives you full control over the encrypted data.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "efs"
                             ]
@@ -1357,13 +1468,17 @@
                             "remediationFunction": "PR_AWS_CLD_EFS_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS Elastic File System (EFS) with encryption for data at rest disabled",
                     "description": "This policy identifies Elastic File Systems (EFSs) for which encryption for data at rest disabled. It is highly recommended to implement at-rest encryption in order to prevent unauthorized users from reading sensitive data saved to EFS.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "efs"
                             ]
@@ -1386,7 +1501,7 @@
                             "remediationFunction": "PR_AWS_CLD_EBS_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS EBS volumes are not encrypted",
                     "description": "This policy identifies the EBS volumes which are not encrypted. The snapshots that you take of an encrypted EBS volume are also encrypted and can be moved between AWS Regions as needed. You cannot share encrypted snapshots with other AWS accounts and you cannot make them public. It is recommended that EBS volume should be encrypted.",
                     "tags": [
@@ -1430,7 +1545,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "emr"
                             ]
@@ -1453,13 +1570,15 @@
                             "remediationFunction": "PR_AWS_CLD_EMR_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS EMR cluster is not configured with security configuration",
                     "description": "This policy identifies EMR clusters which are not configured with security configuration. With Amazon EMR release version 4.8.0 or later, you can use security configurations to configure data encryption, Kerberos authentication, and Amazon S3 authorization for EMRFS.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "emr"
                             ]
@@ -1488,7 +1607,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "emr"
                             ]
@@ -1511,13 +1632,15 @@
                             "remediationFunction": "PR_AWS_CLD_EMR_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS EMR cluster is not configured with CSE CMK for data at rest encryption (Amazon S3 with EMRFS)",
                     "description": "This policy identifies EMR clusters which are not configured with Client Side Encryption with Customer Master Keys(CSE CMK) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your EMR cluster and ensure full control over your data.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "emr"
                             ]
@@ -1540,13 +1663,15 @@
                             "remediationFunction": "PR_AWS_CLD_EMR_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS EMR cluster is not enabled with local disk encryption using CMK",
                     "description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption using CMK(Customer Managed Key). Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "emr"
                             ]
@@ -1569,13 +1694,17 @@
                             "remediationFunction": "PR_AWS_CLD_EMR_006.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS EMR cluster is not enabled with data encryption at rest",
                     "description": "This policy identifies AWS EMR clusters for which data encryption at rest is not enabled. Encryption of data at rest is required to prevent unauthorized users from accessing the sensitive information available on your  EMR clusters and associated storage systems.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "emr"
                             ]
@@ -1598,13 +1727,17 @@
                             "remediationFunction": "PR_AWS_CLD_EMR_007.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS EMR cluster is not enabled with data encryption in transit",
                     "description": "This policy identifies AWS EMR clusters which are not enabled with data encryption in transit. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and storage server. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your EMR clusters and their associated storage systems.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "emr"
                             ]
@@ -1627,13 +1760,16 @@
                             "remediationFunction": "PR_AWS_CLD_SQS_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS SQS queue encryption using default KMS key instead of CMK",
                     "description": "This policy identifies CloudFront web distributions which have a default SSL certificate to access CloudFront content. It is a best practice to use custom SSL Certificate to access CloudFront content. It gives you full control over the content data. custom SSL certificates also allow your users to access your content by using an alternate domain name. You can use a certificate stored in AWS Certificate Manager (ACM) or you can use a certificate stored in IAM.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "sqs"
                             ]
@@ -1656,13 +1792,18 @@
                             "remediationFunction": "PR_AWS_CLD_SQS_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS SQS server side encryption not enabled",
                     "description": "SSE lets you transmit sensitive data in encrypted queues. SSE protects the contents of messages in Amazon SQS queues using keys managed in the AWS Key Management Service (AWS KMS). SSE encrypts messages as soon as Amazon SQS receives them. The messages are stored in encrypted form and Amazon SQS decrypts messages only when they are sent to an authorized consumer._x005F_x000D_ _x005F_x000D_ SQS SSE and the AWS KMS security standards can help you meet encryption-related compliance requirements.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HIPAA",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
                             "service": [
                                 "sqs"
                             ]
@@ -1691,7 +1832,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "msk"
                             ]
@@ -1714,13 +1857,16 @@
                             "remediationFunction": "PR_AWS_CLD_MSK_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure data is Encrypted in transit (TLS)",
                     "description": "Ensure data is Encrypted in transit (TLS)",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "msk"
                             ]
@@ -1743,13 +1889,16 @@
                             "remediationFunction": "PR_AWS_CLD_MSK_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure client authentication is enabled with TLS (mutual TLS authentication)",
                     "description": "Enable TLS by setting EncryptionInfo.EncryptionInTransit.ClientBroker value to 'TLS'. to provide trasport layes security to MSK instance",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "msk"
                             ]
@@ -1778,7 +1927,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "msk"
                             ]
@@ -1807,7 +1958,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "msk"
                             ]
@@ -1817,7 +1970,7 @@
                 {
                     "masterTestId": "TEST_ELB_1",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_04"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -1836,7 +1989,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HIPAA",
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -1846,7 +2003,7 @@
                 {
                     "masterTestId": "TEST_ELB_2",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_04"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -1865,7 +2022,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HIPAA",
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -1875,7 +2036,7 @@
                 {
                     "masterTestId": "TEST_ELB_3",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_05"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -1894,7 +2055,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HIPAA",
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -1904,7 +2069,7 @@
                 {
                     "masterTestId": "TEST_ELB_4",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_05"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -1923,7 +2088,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -1933,7 +2100,7 @@
                 {
                     "masterTestId": "TEST_ELB_5",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_05"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -1952,7 +2119,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -1962,7 +2131,7 @@
                 {
                     "masterTestId": "TEST_ELB_8",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_01"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -1993,7 +2162,7 @@
                 {
                     "masterTestId": "TEST_ELB_9",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_05"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2012,7 +2181,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800",
+                                "PCI-DSS",
+                                "HIPAA"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -2022,7 +2195,7 @@
                 {
                     "masterTestId": "TEST_ELB_10",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_01"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2035,7 +2208,7 @@
                             "remediationFunction": "PR_AWS_CLD_ELB_010.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS Elastic Load Balancer with listener TLS/SSL disabled",
                     "description": "This policy identifies Elastic Load Balancers which have listener TLS/SSL disabled. As Load Balancers will be handling all incoming requests and routing the traffic accordingly; The listeners on the load balancers should always receive traffic over secure channel with a valid SSL certificate configured.",
                     "tags": [
@@ -2059,7 +2232,7 @@
                 {
                     "masterTestId": "TEST_ELB_11",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_02"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2072,13 +2245,15 @@
                             "remediationFunction": "PR_AWS_CLD_ELB_011.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS Application Load Balancer (ALB) listener that allow connection requests over HTTP",
                     "description": "This policy identifies Application Load Balancer (ALB) listeners that are configured to accept connection requests over HTTP instead of HTTPS. As a best practice, use the HTTPS protocol to encrypt the communication between the application clients and the application load balancer.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -2088,7 +2263,7 @@
                 {
                     "masterTestId": "TEST_ELB_12",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_02"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2101,13 +2276,16 @@
                             "remediationFunction": "PR_AWS_CLD_ELB_012.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS Elastic Load Balancer V2 (ELBV2) with listener TLS/SSL disabled",
                     "description": "This policy identifies Elastic Load Balancer V2 (ELBV2) which have listener TLS/SSL disabled. As Load Balancers will be handling all incoming requests and routing the traffic accordingly; The listeners on the load balancers should always receive traffic over secure channel with a valid SSL certificate configured.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -2117,7 +2295,7 @@
                 {
                     "masterTestId": "TEST_ELB_13",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_05"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2136,7 +2314,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -2146,7 +2326,7 @@
                 {
                     "masterTestId": "TEST_ELB_14",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_02"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2165,7 +2345,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -2175,7 +2357,7 @@
                 {
                     "masterTestId": "TEST_ELB_15",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_02"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2194,7 +2376,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -2204,7 +2388,7 @@
                 {
                     "masterTestId": "TEST_ELB_16",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_01"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2223,7 +2407,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -2233,7 +2419,7 @@
                 {
                     "masterTestId": "TEST_ELB_17",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_06"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2246,13 +2432,16 @@
                             "remediationFunction": "PR_AWS_CLD_ELB_017.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure LoadBalancer scheme is set to internal and not internet-facing",
                     "description": "LoadBalancer scheme must be explicitly set to internal, else an Actor can allow access to ADATUM information through the misconfiguration of an ELB resource",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -2262,7 +2451,7 @@
                 {
                     "masterTestId": "TEST_ELB_18",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_06"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2281,7 +2470,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -2291,7 +2482,7 @@
                 {
                     "masterTestId": "TEST_ELB_19",
                     "masterSnapshotId": [
-                        "TEST_ELB"
+                        "TEST_ELB_03"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -2310,7 +2501,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -2333,13 +2527,16 @@
                             "remediationFunction": "PR_AWS_CLD_RSH_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS Redshift Cluster not encrypted using Customer Managed Key",
                     "description": "This policy identifies Redshift Clusters which are encrypted with default KMS keys and not with Keys managed by Customer. It is a best practice to use customer managed KMS Keys to encrypt your Redshift databases data. Customer-managed CMKs give you more flexibility, including the ability to create, rotate, disable, define access control for, and audit the encryption keys used to help protect your data.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "redshift"
                             ]
@@ -2362,7 +2559,7 @@
                             "remediationFunction": "PR_AWS_CLD_RSH_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS Redshift clusters should not be publicly accessible",
                     "description": "This policy identifies AWS Redshift clusters which are accessible publicly.",
                     "tags": [
@@ -2433,7 +2630,7 @@
                             "remediationFunction": "PR_AWS_CLD_RSH_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS Redshift instances are not encrypted",
                     "description": "This policy identifies AWS Redshift instances which are not encrypted. These instances should be encrypted for clusters to help protect data at rest which otherwise can result in a data breach.",
                     "tags": [
@@ -2476,7 +2673,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "redshift"
                             ]
@@ -2505,7 +2705,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "redshift"
                             ]
@@ -2564,13 +2768,16 @@
                             "remediationFunction": "PR_AWS_CLD_SM_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure that Secrets Manager secret is encrypted using KMS",
                     "description": "Ensure that your Amazon Secrets Manager secrets (i.e. database credentials, API keys, OAuth tokens, etc) are encrypted with Amazon KMS Customer Master Keys instead of default encryption keys that Secrets Manager service creates for you, in order to have a more control over secret data encryption and decryption process",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "secret manager"
                             ]
@@ -2593,13 +2800,15 @@
                             "remediationFunction": "PR_AWS_CLD_LG_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure CloudWatch log groups are encrypted with KMS CMKs",
                     "description": "CloudWatch log groups are encrypted by default. However, utilizing KMS CMKs gives you more control over key rotation and provides auditing visibility into key usage.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "cloudwatch"
                             ]
@@ -2627,8 +2836,10 @@
                     "description": "Ensure that your web-tier CloudWatch log group has the retention period feature configured in order to establish how long log events are kept in AWS CloudWatch Logs",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "cloudwatch"
                             ]
@@ -2656,8 +2867,13 @@
                     "description": "Ensure that your Amazon WorkSpaces storage volumes are encrypted in order to meet security and compliance requirements. Your data is transparently encrypted while being written and transparently decrypted while being read from your storage volumes, therefore the encryption process does not require any additional action from you",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "workspace"
                             ]
@@ -2680,13 +2896,17 @@
                             "remediationFunction": "PR_AWS_CLD_GLUE_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure Glue Data Catalog encryption is enabled",
                     "description": "Ensure that encryption at rest is enabled for your Amazon Glue Data Catalogs in order to meet regulatory requirements and prevent unauthorized users from getting access to sensitive data",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "NIST 800",
+                                "GDPR"
+                            ],
                             "service": [
                                 "glue"
                             ]
@@ -2714,8 +2934,11 @@
                     "description": "Ensure AWS Glue security configuration encryption is enabled",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "glue"
                             ]
@@ -2743,8 +2966,12 @@
                     "description": "Amazon Elastic Block Store (EBS) volumes allow you to create encrypted launch configurations when creating EC2 instances and auto scaling. When the entire EBS volume is encrypted, data stored at rest on the volume, disk I/O, snapshots created from the volume, and data in-transit between EBS and EC2 are all encrypted.",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
                             "service": [
                                 "auto scaling"
                             ]
@@ -2772,8 +2999,10 @@
                     "description": "If you configure an Auto Scaling group to use load balancer (ELB) health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "auto scaling"
                             ]
@@ -2801,8 +3030,10 @@
                     "description": "This policy identifies CloudFormation stacks which are configured without SNS topic. It is recommended to configure Simple Notification Service (SNS) topic to be notified of CloudFormation stack status and changes.",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloudformation"
                             ]
@@ -2830,18 +3061,13 @@
                     "description": "This policy identifies resources for which AWS Config recording is enabled but recording for all possible resources are disabled. AWS Config provides an inventory of your AWS resources and a history of configuration changes to these resources. You can use AWS Config to define rules that evaluate these configurations for compliance. Hence, it is important to enable this feature.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
-                                "CSA-CCM",
                                 "GDPR",
-                                "HITRUST",
-                                "ISO 27001",
-                                "NIST 800",
-                                "NIST CSF",
-                                "SOC 2"
+                                "NIST 800"
                             ],
                             "service": [
-                                "mq"
+                                "config"
                             ]
                         }
                     ]
@@ -2867,8 +3093,11 @@
                     "description": "AWS Config is a web service that performs the configuration management of supported AWS resources within your account and delivers log files to you.",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "config"
                             ]
@@ -2891,13 +3120,18 @@
                             "remediationFunction": "PR_AWS_CLD_KNS_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS Kinesis streams are not encrypted using Server Side Encryption",
                     "description": "This Policy identifies the AWS Kinesis streams which are not encrypted using Server Side Encryption. Server Side Encryption is used to encrypt your sensitive data before it is written to the Kinesis stream storage layer and decrypted after it is retrieved from storage.",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "kinesis"
                             ]
@@ -2920,13 +3154,16 @@
                             "remediationFunction": "PR_AWS_CLD_KNS_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS Kinesis streams encryption using default KMS keys instead of Customer's Managed Master Keys",
                     "description": "This policy identifies the AWS Kinesis streams which are encrypted with default KMS keys and not with Master Keys managed by Customer. It is a best practice to use customer managed Master Keys to encrypt your Amazon Kinesis streams data. It gives you full control over the encrypted data.",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "kinesis"
                             ]
@@ -2954,8 +3191,13 @@
                     "description": "This policy identifies the AWS MQ brokers which are publicly accessible. It is advisable to use MQ brokers privately only from within your AWS Virtual Private Cloud (VPC). Ensure that the AWS MQ brokers provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "mq"
                             ]
@@ -2978,13 +3220,15 @@
                             "remediationFunction": "PR_AWS_CLD_MQ_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure Amazon MQ Broker logging is enabled",
                     "description": "Amazon MQ is integrated with CloudTrail and provides a record of the Amazon MQ calls made by a user, role, or AWS service. It supports logging both the request parameters and the responses for APIs as events in CloudTrail",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "mq"
                             ]
@@ -3012,7 +3256,7 @@
                     "description": "The EvaluateTargetHealth of Route53 is not enabled, an alias record can't inherits the health of the referenced AWS resource, such as an ELB load balancer or another record in the hosted zone.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [],
                             "service": [
                                 "route53"
@@ -3071,7 +3315,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "sns"
                             ]
@@ -3094,13 +3340,16 @@
                             "remediationFunction": "PR_AWS_CLD_SNS_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS SNS topic encrypted using default KMS key instead of CMK",
                     "description": "This policy identifies Amazon Simple Notification Service (SNS) topics that are encrypted with the default AWS Key Management Service (KMS) keys. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your SNS topics and ensure full control over your data.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "sns"
                             ]
@@ -3123,13 +3372,18 @@
                             "remediationFunction": "PR_AWS_CLD_SNS_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS SNS topic with server-side encryption disabled",
                     "description": "This policy identifies Amazon Simple Notification Service (SNS) topics that have server-side encryption disabled. As a best practice, enable server-side encryption for at-rest encryption of message content published to SNS topics. When you publish a message, the SNS encrypts your message as soon as it receives it, and decrypts it just prior to delivery.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "sns"
                             ]
@@ -3158,7 +3412,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "GDPR"
+                            ],
                             "service": [
                                 "sns"
                             ]
@@ -3187,7 +3444,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "ec2"
                             ]
@@ -3210,13 +3470,17 @@
                             "remediationFunction": "PR_AWS_CLD_EC2_002.py"
                         }
                     ],
-                    "severity": "high",
+                    "severity": "Medium",
                     "title": "AWS EC2 instance is not configured with VPC",
                     "description": "This policy identifies the EC2 instances which are still using EC2 Classic. There are no VPCs deployed any EC2 instances will be running on AWS EC2 Classic. Deploying VPCs will enable you to leverage enhanced infrastructure security controls.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "ec2"
                             ]
@@ -3239,13 +3503,17 @@
                             "remediationFunction": "PR_AWS_CLD_EC2_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS EC2 instances with Public IP and associated with Security Groups have Internet Access",
                     "description": "This policy identifies AWS EC2 instances with Public IP and associated with Security Groups have Internet Access. EC2 instance receives a public IP address when launched in a default VPC security group (A security group acts as a virtual firewall for your instance to control inbound and outbound traffic.) and we don't assign a public IP address to instances launched in a non-default subnet. Therefore it's a best practice to ensure that there are no EC2 instances with Public IP that are associated with Security Groups which have Internet Access.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "ec2"
                             ]
@@ -3268,13 +3536,15 @@
                             "remediationFunction": "PR_AWS_CLD_EC2_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure that EC2 instace is EBS Optimized",
                     "description": "Enable EbsOptimized provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "ec2"
                             ]
@@ -3297,13 +3567,15 @@
                             "remediationFunction": "PR_AWS_CLD_EC2_005.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure detailed monitoring is enabled for EC2 instances",
                     "description": "Ensure that detailed monitoring is enabled for your Amazon EC2 instances in order to have enough monitoring data to help you make better decisions on architecting and managing compute resources within your AWS account",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "ec2"
                             ]
@@ -3332,7 +3604,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "nacl"
                             ]
@@ -3361,7 +3636,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "nacl"
                             ]
@@ -3390,7 +3668,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "nacl"
                             ]
@@ -3419,7 +3700,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "nacl"
                             ]
@@ -3448,7 +3732,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "nacl"
                             ]
@@ -3477,7 +3764,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "nacl"
                             ]
@@ -3506,7 +3796,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "Best Practice"
+                            ],
                             "service": [
                                 "nacl"
                             ]
@@ -3529,13 +3822,16 @@
                             "remediationFunction": "PR_AWS_CLD_SGM_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS SageMaker notebook instance not configured with data encryption at rest using KMS key",
                     "description": "This policy identifies SageMaker notebook instances that are not configured with data encryption at rest using the AWS managed KMS key. It is recommended to implement encryption at rest in order to protect data from unauthorized entities.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloudformation"
                             ]
@@ -3563,8 +3859,13 @@
                     "description": "This policy identifies the SageMaker notebook instances which are enabled with root access. Root access means having administrator privileges, users with root access can access and edit all files on the compute instance, including system-critical files. Removing root access prevents notebook users from deleting system-level software, installing new software, and modifying essential environment components.\nNOTE: Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/nbi-root-access.html",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloudformation"
                             ]
@@ -3592,8 +3893,13 @@
                     "description": "This policy identifies SageMaker notebook instances that are configured with direct internet access feature. If AWS SageMaker notebook instances are configured with direct internet access feature, any machine outside the VPC can establish a connection to these instances, which provides an additional avenue for unauthorized access to data and the opportunity for malicious activity.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloudformation"
                             ]
@@ -3621,8 +3927,10 @@
                     "description": "This policy identifies SageMaker notebook instances that are not placed inside a VPC. It is recommended to place your SageMaker inside VPC so that VPC-only resources able to access your SageMaker data, which cannot be accessed outside a VPC network.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/process-vpc.html",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "cloudformation"
                             ]
@@ -3645,13 +3953,17 @@
                             "remediationFunction": "PR_AWS_CLD_CB_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure CodeBuild project Artifact encryption is not disabled",
                     "description": "AWS CodeBuild is a fully managed build service in the cloud. CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. Build artifacts, such as a cache, logs, exported raw test report data files, and build results, are encrypted by default using CMKs for Amazon S3 that are managed by the AWS Key Management Service. If you do not want to use these CMKs, you must create and configure a customer-managed CMK.",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "codebuild"
                             ]
@@ -3674,13 +3986,18 @@
                             "remediationFunction": "PR_AWS_CLD_CB_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure that CodeBuild projects are encrypted using CMK",
                     "description": "The AWS Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "PCI-DSS",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "codebuild"
                             ]
@@ -3703,13 +4020,18 @@
                             "remediationFunction": "PR_AWS_CLD_CP_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Code Pipeline Encryption at rest with customer-managed key (CMK) should be enabled",
                     "description": "The type of encryption key When creating or updating a pipeline, the value must be cmk(customer-managed key)",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI-DSS",
+                                "ISO 27001",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "codepipeline"
                             ]
@@ -3737,8 +4059,13 @@
                     "description": "AWS CodeDeploy application compute platform must be ECS or Lambda",
                     "tags": [
                         {
-                            "cloud": "git",
-                            "compliance": [],
+                            "cloud": "AWS",
+                            "compliance": [
+                                "SOC 2",
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "codedeploy"
                             ]
@@ -3761,13 +4088,15 @@
                             "remediationFunction": "PR_AWS_CLD_ACM_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS ACM Certificate with wildcard domain name",
                     "description": "This policy identifies ACM Certificates which are using wildcard certificates for wildcard domain name instead of single domain name certificates. ACM allows you to use an asterisk (*) in the domain name to create an ACM Certificate containing a wildcard name that can protect several sites in the same domain. For example, a wildcard certificate issued for *.<compliance-software>.io can match both www.<compliance-software>.io and images.<compliance-software>.io. When you use wildcard certificates, if the private key of a certificate is compromised, then all domain and subdomains that use the compromised certificate are potentially impacted. So it is recommended to use single domain name certificates instead of wildcard certificates to reduce the associated risks with a compromised domain or subdomain.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practice"
+                            ],
                             "service": [
                                 "acm"
                             ]
@@ -3881,7 +4210,7 @@
                             "remediationFunction": "PR_AWS_CLD_ECR_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure ECR repositories are encrypted",
                     "description": "Make sure EncryptionType is present in ECR EncryptionConfiguration To increase control of the encryption and control the management of factors like key rotation",
                     "tags": [
@@ -3939,13 +4268,16 @@
                             "remediationFunction": "PR_AWS_CLD_ECR_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure AWS ECR Repository is not publicly accessible",
                     "description": "Public AWS ECR Repository potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "GDPR"
+                            ],
                             "service": [
                                 "ecr"
                             ]
@@ -3968,13 +4300,20 @@
                             "remediationFunction": "PR_AWS_CLD_ECS_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS ECS task definition elevated privileges enabled",
                     "description": "Ensure your ECS containers are not given elevated privileges on the host container instance. When the Privileged parameter is true, the container is given elevated privileges on the host container instance (similar to the root user). This policy checks the security configuration of your task definition and alerts if elevated privileges are enabled. Note: This parameter is not supported for Windows containers or tasks using the Fargate launch type.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HITRUST",
+                                "GDPR",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "CSA-CCM",
+                                "ISO 27001"
+                            ],
                             "service": [
                                 "ecs"
                             ]
@@ -4003,7 +4342,14 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HITRUST",
+                                "GDPR",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "CSA-CCM",
+                                "ISO 27001"
+                            ],
                             "service": [
                                 "ecs"
                             ]
@@ -4026,13 +4372,20 @@
                             "remediationFunction": "PR_AWS_CLD_ECS_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS ECS/ Fargate task definition root user found",
                     "description": "The user name to use inside the container should not be root. This policy generates an alert if root user is found in your container definition. The User parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run Note: This parameter is not supported for Windows containers.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HITRUST",
+                                "GDPR",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "CSA-CCM",
+                                "ISO 27001"
+                            ],
                             "service": [
                                 "ecs"
                             ]
@@ -4055,7 +4408,7 @@
                             "remediationFunction": "PR_AWS_CLD_ECS_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS ECS Task Definition readonlyRootFilesystem Not Enabled",
                     "description": "It is recommended that readonlyRootFilesystem is enabled for AWS ECS task definition. Please make sure your 'ContainerDefinitions' template has 'ReadonlyRootFilesystem' and is set to 'true'.",
                     "tags": [
@@ -4084,7 +4437,7 @@
                             "remediationFunction": "PR_AWS_CLD_ECS_005.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS ECS task definition resource limits not set.",
                     "description": "It is recommended that resource limits are set for AWS ECS task definition. Please make sure attributes 'Cpu' or 'Memory' exists and its value is not set to 0 under 'TaskDefinition' or 'ContainerDefinitions'.",
                     "tags": [
@@ -4113,13 +4466,15 @@
                             "remediationFunction": "PR_AWS_CLD_ECS_006.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS ECS task definition logging not enabled. or only valid option for LogDriver is 'awslogs'",
                     "description": "It is recommended that logging is enabled for AWS ECS task definition. Please make sure your 'TaskDefinition' template has 'LogConfiguration' and 'LogDriver' configured.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "ecs"
                             ]
@@ -4171,7 +4526,7 @@
                             "remediationFunction": "PR_AWS_CLD_ECS_009.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure container insights are enabled on ECS cluster",
                     "description": "Container Insights can be used to collect, aggregate, and summarize metrics and logs from containerized applications and microservices. They can also be extended to collect metrics at the cluster, task, and service levels. Using Container Insights allows you to monitor, troubleshoot, and set alarms for all your Amazon ECS resources. It provides a simple to use native and fully managed service for managing ECS issues.",
                     "tags": [
@@ -4200,7 +4555,7 @@
                             "remediationFunction": "PR_AWS_CLD_ECS_008.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure ECS Services and Task Set EnableExecuteCommand property set to False",
                     "description": "If the EnableExecuteCommand property is set to True on an ECS Service then any third person can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations.",
                     "tags": [
@@ -4374,13 +4729,21 @@
                             "remediationFunction": "PR_AWS_CLD_LMD_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS Lambda Environment Variables not encrypted at-rest using CMK",
                     "description": "When you create or update Lambda functions that use environment variables, AWS Lambda encrypts them using the AWS Key Management Service. When your Lambda function is invoked, those values are decrypted and made available to the Lambda code._x005F_x000D_ _x005F_x000D_ This policy verifies that Lambda function uses the AMS Key Management Service to encrypt variables at-rest with CMK.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "CIS",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF"
+                            ],
                             "service": [
                                 "lambda"
                             ]
@@ -4409,7 +4772,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "lambda"
                             ]
@@ -4493,7 +4858,7 @@
                             "remediationFunction": "PR_AWS_CLD_LMD_005.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure AWS Lambda function is configured for a DLQ",
                     "description": "A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. it is required to get all items which is been not processed for some reason",
                     "tags": [
@@ -4528,7 +4893,16 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "GDPR",
+                                "CSA-CCM",
+                                "CIS",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF"
+                            ],
                             "service": [
                                 "cloudfront"
                             ]
@@ -4557,7 +4931,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloudfront"
                             ]
@@ -4586,7 +4964,12 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloudfront"
                             ]
@@ -4609,13 +4992,21 @@
                             "remediationFunction": "PR_AWS_CLD_CF_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS CloudFront origin protocol policy does not enforce HTTPS-only",
                     "description": "It is a best security practice to enforce HTTPS-only traffic between a CloudFront distribution and the origin. This policy scans for any deviations from this practice and returns the results.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "GDPR"
+                            ],
                             "service": [
                                 "cloudfront"
                             ]
@@ -4644,7 +5035,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloudfront"
                             ]
@@ -4673,7 +5068,15 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "GDPR"
+                            ],
                             "service": [
                                 "cloudfront"
                             ]
@@ -4702,7 +5105,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "cloudfront"
                             ]
@@ -4731,7 +5137,15 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "GDPR"
+                            ],
                             "service": [
                                 "cloudfront"
                             ]
@@ -4754,13 +5168,15 @@
                             "remediationFunction": "PR_AWS_CLD_CF_009.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS CloudFront web distribution with geo restriction disabled",
                     "description": "This policy identifies CloudFront web distributions which have geo restriction feature disabled. Geo Restriction has the ability to block IP addresses based on Geo IP by whitelist or blacklist a country in order to allow or restrict users in specific locations from accessing web application content.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR"
+                            ],
                             "service": [
                                 "cloudfront"
                             ]
@@ -4789,7 +5205,15 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "GDPR"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -4812,7 +5236,7 @@
                             "remediationFunction": "PR_AWS_CLD_RDS_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS RDS database instance is publicly accessible",
                     "description": "This policy identifies RDS database instances which are publicly accessible.DB instances should not be publicly accessible to protect the integrety of data.Public accessibility of DB instances can be modified by turning on or off the Public accessibility parameter.",
                     "tags": [
@@ -4822,7 +5246,10 @@
                                 "CSA-CCM",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST 800"
+                                "NIST 800",
+                                "PCI-DSS",
+                                "HIPAA",
+                                "GDPR"
                             ],
                             "service": [
                                 "rds"
@@ -4846,13 +5273,16 @@
                             "remediationFunction": "PR_AWS_CLD_RDS_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS RDS database not encrypted using Customer Managed Key",
                     "description": "This policy identifies RDS databases that are encrypted with default KMS keys and not with customer managed keys. As a best practice, use customer managed keys to encrypt the data on your RDS databases and maintain control of your keys and data on sensitive workloads.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -4875,13 +5305,15 @@
                             "remediationFunction": "PR_AWS_CLD_RDS_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS RDS event subscription disabled for DB instance",
                     "description": "This policy identifies RDS event subscriptions for which DB instance event subscription is disabled. You can create an Amazon RDS event notification subscription so that you can be notified when an event occurs for a given DB instance.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -4904,13 +5336,15 @@
                             "remediationFunction": "PR_AWS_CLD_RDS_005.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS RDS event subscription disabled for DB security groups",
                     "description": "This policy identifies RDS event subscriptions for which DB security groups event subscription is disabled. You can create an Amazon RDS event notification subscription so that you can be notified when an event occurs for given DB security groups.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -4977,7 +5411,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -5000,7 +5436,7 @@
                             "remediationFunction": "PR_AWS_CLD_RDS_008.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS RDS instance with copy tags to snapshots disabled",
                     "description": "This policy identifies RDS instances which have copy tags to snapshots disabled. Copy tags to snapshots copies all the user-defined tags from the DB instance to snapshots. Copying tags allow you to add metadata and apply access policies to your Amazon RDS resources.",
                     "tags": [
@@ -5029,13 +5465,15 @@
                             "remediationFunction": "PR_AWS_CLD_RDS_009.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS RDS instance without Automatic Backup setting",
                     "description": "This policy identifies RDS instances which are not set with the Automatic Backup setting. If Automatic Backup is set, RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases which provide for point-in-time recovery. The automatic backup will happen during the specified backup window time and keeps the backups for a limited period of time as defined in the retention period. It is recommended to set Automatic backups for your critical RDS servers that will help in the data restoration process.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -5064,7 +5502,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -5093,7 +5533,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -5122,7 +5564,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -5151,7 +5595,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -5238,7 +5684,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -5267,7 +5715,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -5290,7 +5740,7 @@
                             "remediationFunction": "PR_AWS_CLD_RDS_018.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure respective logs of Amazon RDS instance are enabled",
                     "description": "Use CloudWatch logging types for Amazon Relational Database Service (Amazon RDS) instances",
                     "tags": [
@@ -5325,7 +5775,16 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "CIS",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -5354,7 +5813,12 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "dax"
                             ]
@@ -5406,13 +5870,18 @@
                             "remediationFunction": "PR_AWS_CLD_DDB_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure DocumentDB cluster is encrypted at rest",
                     "description": "Ensure that encryption is enabled for your AWS DocumentDB (with MongoDB compatibility) clusters for additional data security and in order to meet compliance requirements for data-at-rest encryption",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "docdb"
                             ]
@@ -5435,7 +5904,7 @@
                             "remediationFunction": "PR_AWS_CLD_DDB_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure AWS DocumentDB logging is enabled",
                     "description": "The events recorded by the AWS DocumentDB audit logs include: successful and failed authentication attempts, creating indexes or dropping a collection in a database within the DocumentDB cluster.",
                     "tags": [
@@ -5522,7 +5991,7 @@
                             "remediationFunction": "PR_AWS_CLD_ATH_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure to enable EnforceWorkGroupConfiguration for athena workgroup",
                     "description": "Athena workgroups support the ability for clients to override configuration options, including encryption requirements. This setting should be disabled to enforce encryption mandates",
                     "tags": [
@@ -5580,7 +6049,7 @@
                             "remediationFunction": "PR_AWS_CLD_NPT_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure Neptune logging is enabled",
                     "description": "These access logs can be used to analyze traffic patterns and troubleshoot security and operational issues.",
                     "tags": [
@@ -5609,13 +6078,16 @@
                             "remediationFunction": "PR_AWS_CLD_DD_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK",
                     "description": "This policy identifies the DynamoDB tables that use AWS owned CMK (default ) instead of AWS managed CMK (KMS ) to encrypt data. AWS managed CMK provide additional features such as the ability to view the CMK and key policy, and audit the encryption and decryption of DynamoDB tables.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "dynamodb"
                             ]
@@ -5638,13 +6110,15 @@
                             "remediationFunction": "PR_AWS_CLD_DD_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure DynamoDB PITR is enabled",
                     "description": "DynamoDB Point-In-Time Recovery (PITR) is an automatic backup service for DynamoDB table data that helps protect your DynamoDB tables from accidental write or delete operations. Once enabled, PITR provides continuous backups that can be controlled using various programmatic parameters. PITR can also be used to restore table data from any point in time during the last 35 days, as well as any incremental backups of DynamoDB tables",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800"
+                            ],
                             "service": [
                                 "dynamodb"
                             ]
@@ -5702,7 +6176,13 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "HITRUST",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "NIST CSF"
+                            ],
                             "service": [
                                 "elasticache"
                             ]
@@ -5731,7 +6211,15 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "HITRUST",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "NIST CSF",
+                                "ISO 27001",
+                                "CSA-CCM"
+                            ],
                             "service": [
                                 "elasticache"
                             ]
@@ -5754,13 +6242,17 @@
                             "remediationFunction": "PR_AWS_CLD_EC_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS ElastiCache Redis cluster with encryption for data at rest disabled",
                     "description": "This policy identifies ElastiCache Redis clusters which have encryption for data at rest(at-rest) is disabled. It is highly recommended to implement at-rest encryption in order to prevent unauthorized users from reading sensitive data saved to persistent media available on your Redis clusters and their associated cache storage systems.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "elasticache"
                             ]
@@ -5783,13 +6275,17 @@
                             "remediationFunction": "PR_AWS_CLD_EC_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS ElastiCache Redis cluster with in-transit encryption disabled",
                     "description": "This policy identifies ElastiCache Redis clusters which have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis clusters and their associated cache storage systems.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "elasticache"
                             ]
@@ -5870,13 +6366,18 @@
                             "remediationFunction": "PR_AWS_CLD_DMS_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure DMS replication instance is not publicly accessible",
                     "description": "Ensure DMS replication instance is not publicly accessible, this might cause sensitive data leak.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "dms"
                             ]
@@ -5905,7 +6406,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -5934,7 +6439,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -5963,7 +6472,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -5992,7 +6505,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6021,7 +6538,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6050,7 +6571,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6079,7 +6604,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6147,7 +6676,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6176,7 +6709,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6205,7 +6742,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6273,7 +6814,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6302,7 +6847,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6331,7 +6880,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6360,7 +6913,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6389,7 +6946,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6418,7 +6979,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6484,7 +7049,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6513,7 +7082,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6629,7 +7202,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6658,7 +7235,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6687,7 +7268,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6716,7 +7301,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6745,7 +7334,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6774,7 +7367,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6803,7 +7400,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6832,7 +7433,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
                             ]
@@ -6861,9 +7466,286 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "security group"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_1",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-001",
+                            "eval": "data.rule.iam_wildcard_resource",
+                            "message": "data.rule.iam_wildcard_resource_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure no wildcards are specified in IAM policy with 'Resource' section",
+                    "description": "Using a wildcard in the Resource element in a role's trust policy would allow any IAM user in an account to access all Resources. This is a significant security gap and can be used to gain access to sensitive data.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_2",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-002",
+                            "eval": "data.rule.iam_wildcard_action",
+                            "message": "data.rule.iam_wildcard_action_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_002.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure no wildcards are specified in IAM policy with 'Action' section",
+                    "description": "Using a wildcard in the Action element in a role's trust policy would allow any IAM user in an account to Manage all resources and a user can manipulate data. This is a significant security gap and can be used to gain access to sensitive data.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_3",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-003",
+                            "eval": "data.rule.iam_wildcard_principal",
+                            "message": "data.rule.iam_wildcard_principal_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_003.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section",
+                    "description": "Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_4",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-004",
+                            "eval": "data.rule.iam_resource_format",
+                            "message": "data.rule.iam_resource_format_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_004.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*'",
+                    "description": "Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*' AWS only allows fully qualified ARNs or '*'. The above mentioned ARN is not supported in an identity-based policy",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_5",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-005",
+                            "eval": "data.rule.iam_assume_permission",
+                            "message": "data.rule.iam_assume_permission_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_005.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "AWS IAM policy allows assume role permission across all services",
+                    "description": "This policy identifies AWS IAM policy which allows assume role permission across all services. Typically, AssumeRole is used if you have multiple accounts and need to access resources from each account then you can create long term credentials in one account and then use temporary security credentials to access all the other accounts by assuming roles in those accounts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_6",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-006",
+                            "eval": "data.rule.iam_all_traffic",
+                            "message": "data.rule.iam_all_traffic_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS IAM policy is overly permissive to all traffic via condition clause",
+                    "description": "This policy identifies IAM policies that have a policy that is overly permissive to all traffic via condition clause. If any IAM policy statement with a condition containing 0.0.0.0/0 or ::/0, it allows all traffic to resources attached to that IAM policy. It is highly recommended to have the least privileged IAM policy to protect the data leakage and unauthorized access.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_7",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-007",
+                            "eval": "data.rule.iam_administrative_privileges",
+                            "message": "data.rule.iam_administrative_privileges_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_007.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "AWS IAM policy allows full administrative privileges",
+                    "description": "This policy identifies IAM policies with full administrative privileges. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended and considered a standard security advice to grant least privilege like granting only the permissions required to perform a task. Determine what users need to do and then craft policies for them that let the users perform only those tasks, instead of allowing full administrative privileges.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_8",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-008",
+                            "eval": "data.rule.iam_user_group_attach",
+                            "message": "data.rule.iam_user_group_attach_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_008.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure IAM groups contains at least one IAM user",
+                    "description": "Ensure that your Amazon Identity and Access Management (IAM) users are members of at least one IAM group in order to adhere to IAM security best practices",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
                             ]
                         }
                     ]

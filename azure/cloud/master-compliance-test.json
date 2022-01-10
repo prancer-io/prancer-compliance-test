@@ -5,7 +5,7 @@
             "version": "0.1",
             "cases": [
                 {
-                    "masterTestId": "AZURE_TEST_KV_1",
+                    "masterTestId": "PR-AZR-CLD-KV-001",
                     "type": "rego",
                     "rule": "file(Keyvault.rego)",
                     "evals": [
@@ -38,7 +38,7 @@
                     "description": "Use the Azure Key Vault to store secrets within the Microsoft Azure environment. Secrets in Azure Key Vault are octet sequences with a maximum size of 25k bytes each."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_2",
+                    "masterTestId": "PR-AZR-CLD-KV-002",
                     "type": "rego",
                     "rule": "file(Keyvault.rego)",
                     "evals": [
@@ -69,7 +69,7 @@
                     "description": "The key vault contains object keys, secrets, and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates), etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_3",
+                    "masterTestId": "PR-AZR-CLD-KV-003",
                     "type": "rego",
                     "rule": "file(Keyvault.rego)",
                     "evals": [
@@ -100,7 +100,7 @@
                     "description": "The key vault contains object keys, secrets, and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_4",
+                    "masterTestId": "PR-AZR-CLD-KV-004",
                     "type": "rego",
                     "rule": "file(KeyvaultKey.rego)",
                     "evals": [
@@ -136,7 +136,7 @@
                     "description": "This policy identifies Azure Key Vault keys that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_5",
+                    "masterTestId": "PR-AZR-CLD-KV-005",
                     "type": "rego",
                     "rule": "file(KeyvaultSecrets.rego)",
                     "evals": [
@@ -172,7 +172,7 @@
                     "description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_6",
+                    "masterTestId": "PR-AZR-CLD-KV-006",
                     "type": "rego",
                     "rule": "file(Keyvault.rego)",
                     "evals": [
@@ -201,7 +201,7 @@
                     "description": "Azure Key Vault Network Access default action should be 'deny' so that it's not accessible over the public internet. This can reduce data leakage risks."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_7",
+                    "masterTestId": "PR-AZR-CLD-KV-007",
                     "type": "rego",
                     "rule": "file(Keyvault.rego)",
                     "evals": [
@@ -230,7 +230,7 @@
                     "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging, Metrics, AzureServices (For example, 'Logging, Metrics'), or None to bypass none of those traffics. - None, Logging, Metrics, AzureServices."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_8",
+                    "masterTestId": "PR-AZR-CLD-KV-008",
                     "type": "rego",
                     "rule": "file(Keyvault.rego)",
                     "evals": [
@@ -259,7 +259,7 @@
                     "description": "This policy audits any Key Vault not configured to use a virtual network service endpoint."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_9",
+                    "masterTestId": "PR-AZR-CLD-KV-009",
                     "type": "rego",
                     "rule": "file(Keyvault.rego)",
                     "evals": [
@@ -288,7 +288,7 @@
                     "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your key vault, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_KV_10",
+                    "masterTestId": "PR-AZR-CLD-KV-010",
                     "type": "rego",
                     "rule": "file(Keyvault.rego)",
                     "evals": [
@@ -317,7 +317,7 @@
                     "description": "Azure KeyVault Public Network Access should be 'disabled' so that it's not accessible over the public internet. This can reduce data leakage risks."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_3",
+                    "masterTestId": "PR-AZR-CLD-STR-003",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -354,7 +354,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_4",
+                    "masterTestId": "PR-AZR-CLD-STR-004",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -391,7 +391,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_6",
+                    "masterTestId": "PR-AZR-CLD-STR-006",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -427,7 +427,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_7",
+                    "masterTestId": "PR-AZR-CLD-STR-007",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -463,7 +463,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_8",
+                    "masterTestId": "PR-AZR-CLD-STR-008",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -495,7 +495,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_9",
+                    "masterTestId": "PR-AZR-CLD-STR-009",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -527,7 +527,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_10",
+                    "masterTestId": "PR-AZR-CLD-STR-010",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -564,7 +564,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_11",
+                    "masterTestId": "PR-AZR-CLD-STR-011",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -601,7 +601,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_18",
+                    "masterTestId": "PR-AZR-CLD-STR-018",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -636,7 +636,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_19",
+                    "masterTestId": "PR-AZR-CLD-STR-019",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -669,7 +669,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_20",
+                    "masterTestId": "PR-AZR-CLD-STR-020",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -701,7 +701,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_21",
+                    "masterTestId": "PR-AZR-CLD-STR-021",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -734,7 +734,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_22",
+                    "masterTestId": "PR-AZR-CLD-STR-022",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -767,7 +767,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_23",
+                    "masterTestId": "PR-AZR-CLD-STR-023",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -799,7 +799,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_24",
+                    "masterTestId": "PR-AZR-CLD-STR-024",
                     "type": "rego",
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
@@ -831,7 +831,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_1",
+                    "masterTestId": "PR-AZR-CLD-WEB-001",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -867,7 +867,7 @@
                     "description": "Azure Web Apps by default allow sites to run under both HTTP and HTTPS and can be accessed by anyone using non-secure HTTP links. Non-secure HTTP requests can be restricted and all HTTP requests redirected to the secure HTTPS port. We recommend you enforce HTTPS-only traffic to increase security. This will redirect all non-secure HTTP requests to HTTPS ports. HTTPS uses the SSL/TLS protocol to provide a secure connection, which is both encrypted and authenticated."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_2",
+                    "masterTestId": "PR-AZR-CLD-WEB-002",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -904,7 +904,7 @@
                     "description": "App service currently allows the web app to set TLS versions 1.0, 1.1, and 1.2. For secure web app connections, it is highly recommended to only use the latest TLS 1.2 version."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_3",
+                    "masterTestId": "PR-AZR-CLD-WEB-003",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -940,7 +940,7 @@
                     "description": "Client certificates allow the Web App to require a certificate for incoming requests. Only clients that have a valid certificate will be able to reach the app. The TLS mutual authentication technique in enterprise environments ensures the authenticity of clients to the server. If incoming client certificates are enabled only an authenticated client with valid certificates can access the app."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_4",
+                    "masterTestId": "PR-AZR-CLD-WEB-004",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -977,7 +977,7 @@
                     "description": "We recommend you use the latest HTTP version for web apps and take advantage of any security fixes and new functionalities featured. With each software installation you can determine if a given update meets your organization's requirements. Organizations should verify the compatibility and support provided for any additional software, assessing the current version against the update revision being considered."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_6",
+                    "masterTestId": "PR-AZR-CLD-WEB-006",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -1007,7 +1007,7 @@
                     "description": "This policy will identify CORS configuration which are allowing every resoruce to access Azure Web service and give alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_7",
+                    "masterTestId": "PR-AZR-CLD-WEB-007",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -1037,7 +1037,7 @@
                     "description": "This policy will identify the Azure Web service which don't have http logging enabled and give alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_8",
+                    "masterTestId": "PR-AZR-CLD-WEB-008",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -1067,7 +1067,7 @@
                     "description": "This policy will identify the Azure Web service which doesn't have a detailed error message enabled and give the alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_9",
+                    "masterTestId": "PR-AZR-CLD-WEB-009",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -1097,7 +1097,7 @@
                     "description": "This policy will identify the Azure web service which doesn't have request tracing enabled and give the alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_10",
+                    "masterTestId": "PR-AZR-CLD-WEB-010",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -1126,7 +1126,7 @@
                     "description": "This policy will identify the Azure Web service which doesn't have Managed Identity provider enabled and give the alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_11",
+                    "masterTestId": "PR-AZR-CLD-WEB-011",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -1156,7 +1156,7 @@
                     "description": "This policy will identify the Azure web service which has remote debugging enabled and give the alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_12",
+                    "masterTestId": "PR-AZR-CLD-WEB-012",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -1186,7 +1186,7 @@
                     "description": "This policy will identify the Azure web service which has FTP deployment enabled and gives the alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_13",
+                    "masterTestId": "PR-AZR-CLD-WEB-013",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -1216,7 +1216,7 @@
                     "description": "This policy will identify the Azure web service which doesn't have the latest version of Net Framework and give the alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_14",
+                    "masterTestId": "PR-AZR-CLD-WEB-014",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -1246,7 +1246,7 @@
                     "description": "This policy will identify the Azure web service which doesn't have the latest version of PHP and give the alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_WEB_15",
+                    "masterTestId": "PR-AZR-CLD-WEB-015",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -1276,7 +1276,7 @@
                     "description": "This policy will identify the Azure web service which doesn't have the latest version of Python and give the alert"
                 },  
                 {
-                    "masterTestId": "AZURE_TEST_WEB_16",
+                    "masterTestId": "PR-AZR-CLD-WEB-016",
                     "type": "rego",
                     "rule": "file(web.rego)",
                     "evals": [
@@ -1306,7 +1306,7 @@
                     "description": "This policy will identify the Azure web service which doesn't have the latest version of Java and give the alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_1",
+                    "masterTestId": "PR-AZR-CLD-SQL-001",
                     "type": "rego",
                     "rule": "file(dbadministrators.rego)",
                     "evals": [
@@ -1340,7 +1340,7 @@
                     "description": "Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory (Azure AD) authentication is a mechanism for connecting to Azure SQL Database, Azure SQL Managed Instance, and Synapse SQL in Azure Synapse Analytics by using identities in Azure AD. With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location. Central ID management provides a single place to manage database users and simplifies permission management."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_2",
+                    "masterTestId": "PR-AZR-CLD-SQL-002",
                     "type": "rego",
                     "rule": "file(dbadministrators.rego)",
                     "evals": [
@@ -1374,7 +1374,7 @@
                     "description": "Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory (Azure AD) authentication is a mechanism for connecting to Azure SQL Database, Azure SQL Managed Instance, and Synapse SQL in Azure Synapse Analytics by using identities in Azure AD. With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location. Central ID management provides a single place to manage database users and simplifies permission management."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_3",
+                    "masterTestId": "PR-AZR-CLD-SQL-003",
                     "type": "rego",
                     "rule": "file(dbadministrators.rego)",
                     "evals": [
@@ -1408,7 +1408,7 @@
                     "description": "Checks to ensure that SQL managedInstances are configured with Active Directory admin authentication. Azure Active Directory (Azure AD) authentication is a mechanism for connecting to Azure SQL Database, Azure SQL Managed Instance, and Synapse SQL in Azure Synapse Analytics by using identities in Azure AD. With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location. Central ID management provides a single place to manage database users and simplifies permission management."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_4",
+                    "masterTestId": "PR-AZR-CLD-SQL-004",
                     "type": "rego",
                     "rule": "file(dbauditingsettings.rego)",
                     "evals": [
@@ -1444,7 +1444,7 @@
                     "description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_5",
+                    "masterTestId": "PR-AZR-CLD-SQL-005",
                     "type": "rego",
                     "rule": "file(dbauditingsettings.rego)",
                     "evals": [
@@ -1480,7 +1480,7 @@
                     "description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_6",
+                    "masterTestId": "PR-AZR-CLD-SQL-006",
                     "type": "rego",
                     "rule": "file(dbauditingsettings.rego)",
                     "evals": [
@@ -1516,7 +1516,7 @@
                     "description": "This policy identifies SQL Databases that have Auditing Retention of fewer than 90 days. Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_7",
+                    "masterTestId": "PR-AZR-CLD-SQL-007",
                     "type": "rego",
                     "rule": "file(dbauditingsettings.rego)",
                     "evals": [
@@ -1552,7 +1552,7 @@
                     "description": "This policy identifies SQL Databases that have Auditing Retention of fewer than 90 days. Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_8",
+                    "masterTestId": "PR-AZR-CLD-SQL-008",
                     "type": "rego",
                     "rule": "file(dbdataencryption.rego)",
                     "evals": [
@@ -1588,7 +1588,7 @@
                     "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchanges log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_9",
+                    "masterTestId": "PR-AZR-CLD-SQL-009",
                     "type": "rego",
                     "rule": "file(dbdataencryption.rego)",
                     "evals": [
@@ -1624,7 +1624,7 @@
                     "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchanges log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_10",
+                    "masterTestId": "PR-AZR-CLD-SQL-010",
                     "type": "rego",
                     "rule": "file(dbfirewallrules.rego)",
                     "evals": [
@@ -1659,7 +1659,7 @@
                     "description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with \"0.0.0.0\" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_11",
+                    "masterTestId": "PR-AZR-CLD-SQL-011",
                     "type": "rego",
                     "rule": "file(dbfirewallrules.rego)",
                     "evals": [
@@ -1694,7 +1694,7 @@
                     "description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with \"0.0.0.0\" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_12",
+                    "masterTestId": "PR-AZR-CLD-SQL-012",
                     "type": "rego",
                     "rule": "file(dbforMariaDB.rego)",
                     "evals": [
@@ -1723,7 +1723,7 @@
                     "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_13",
+                    "masterTestId": "PR-AZR-CLD-SQL-013",
                     "type": "rego",
                     "rule": "file(dbforMariaDB.rego)",
                     "evals": [
@@ -1752,7 +1752,7 @@
                     "description": "This policy will identify MariaDB firewall rule that is currently allowing ingress from all Azure-internal IP addresses"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_14",
+                    "masterTestId": "PR-AZR-CLD-SQL-014",
                     "type": "rego",
                     "rule": "file(dbforMySQL_firewallrules.rego)",
                     "evals": [
@@ -1781,7 +1781,7 @@
                     "description": "This policy will identify MySQL Database Server firewall rule that is currently allowing ingress from all Azure-internal IP addresses"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_15",
+                    "masterTestId": "PR-AZR-CLD-SQL-015",
                     "type": "rego",
                     "rule": "file(dbforMySQL_firewallrules.rego)",
                     "evals": [
@@ -1810,7 +1810,7 @@
                     "description": "This policy will identify MySQL Database Server firewall rule that is currently allowing ingress from all Azure-internal IP addresses"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_16",
+                    "masterTestId": "PR-AZR-CLD-SQL-016",
                     "type": "rego",
                     "rule": "file(dbforMySQL.rego)",
                     "evals": [
@@ -1846,7 +1846,7 @@
                     "description": "Enable SSL connection on MySQL Servers databases. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_17",
+                    "masterTestId": "PR-AZR-CLD-SQL-017",
                     "type": "rego",
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
@@ -1880,7 +1880,7 @@
                     "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_18",
+                    "masterTestId": "PR-AZR-CLD-SQL-018",
                     "type": "rego",
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
@@ -1916,7 +1916,7 @@
                     "description": "This policy identifies SQL Databases that have security alert policies retention set less than or equal to 90 days. Threat Logs can be used to check for anomalies and give an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_19",
+                    "masterTestId": "PR-AZR-CLD-SQL-019",
                     "type": "rego",
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
@@ -1951,7 +1951,7 @@
                     "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_20",
+                    "masterTestId": "PR-AZR-CLD-SQL-020",
                     "type": "rego",
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
@@ -1986,7 +1986,7 @@
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_21",
+                    "masterTestId": "PR-AZR-CLD-SQL-021",
                     "type": "rego",
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
@@ -2021,7 +2021,7 @@
                     "description": "Ensure that threat detection alert is configured to send notifications to the sql server account administrators"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_22",
+                    "masterTestId": "PR-AZR-CLD-SQL-022",
                     "type": "rego",
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
@@ -2050,7 +2050,7 @@
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_23",
+                    "masterTestId": "PR-AZR-CLD-SQL-023",
                     "type": "rego",
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
@@ -2079,7 +2079,7 @@
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_24",
+                    "masterTestId": "PR-AZR-CLD-SQL-024",
                     "type": "rego",
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
@@ -2108,7 +2108,7 @@
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_25",
+                    "masterTestId": "PR-AZR-CLD-SQL-025",
                     "type": "rego",
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
@@ -2137,7 +2137,7 @@
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_26",
+                    "masterTestId": "PR-AZR-CLD-SQL-026",
                     "type": "rego",
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
@@ -2166,7 +2166,7 @@
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_27",
+                    "masterTestId": "PR-AZR-CLD-SQL-027",
                     "type": "rego",
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
@@ -2195,7 +2195,7 @@
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_60",
+                    "masterTestId": "PR-AZR-CLD-SQL-060",
                     "type": "rego",
                     "rule": "file(dbforMySQL.rego)",
                     "evals": [
@@ -2226,7 +2226,7 @@
                     "description": "Always use Private Endpoint for Azure MySQL Database Server"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_61",
+                    "masterTestId": "PR-AZR-CLD-SQL-061",
                     "type": "rego",
                     "rule": "file(dbforMySQL.rego)",
                     "evals": [
@@ -2257,7 +2257,7 @@
                     "description": "This policy will identify the Azure MySQL Server which doesn't have the latest version of tls configured and give the alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_56",
+                    "masterTestId": "PR-AZR-CLD-SQL-056",
                     "type": "rego",
                     "rule": "file(dbforMariaDB.rego)",
                     "evals": [
@@ -2286,7 +2286,7 @@
                     "description": "Enable SSL connection on MariaDB Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_57",
+                    "masterTestId": "PR-AZR-CLD-SQL-057",
                     "type": "rego",
                     "rule": "file(dbforMariaDB.rego)",
                     "evals": [
@@ -2317,7 +2317,7 @@
                     "description": "Always use Private Endpoint for MariaDB Server"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_58",
+                    "masterTestId": "PR-AZR-CLD-SQL-058",
                     "type": "rego",
                     "rule": "file(dbforMariaDB.rego)",
                     "evals": [
@@ -2348,7 +2348,7 @@
                     "description": "Azure Database for MariaDB provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_30",
+                    "masterTestId": "PR-AZR-CLD-SQL-030",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
@@ -2383,7 +2383,7 @@
                     "description": "Advanced data security should be enabled on your SQL servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_31",
+                    "masterTestId": "PR-AZR-CLD-SQL-031",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
@@ -2418,7 +2418,7 @@
                     "description": "Advanced data security should be enabled on your SQL servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_32",
+                    "masterTestId": "PR-AZR-CLD-SQL-032",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
@@ -2453,7 +2453,7 @@
                     "description": "Advanced data security should be enabled on your SQL managed instance."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_33",
+                    "masterTestId": "PR-AZR-CLD-SQL-033",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
@@ -2488,7 +2488,7 @@
                     "description": "VA scan reports and alerts will be sent to admins and subscription owners by enabling the setting 'Also send email notifications to admins and subscription owners'. This may help in reducing the time required for identifying risks and taking corrective measures."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_34",
+                    "masterTestId": "PR-AZR-CLD-SQL-034",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
@@ -2523,7 +2523,7 @@
                     "description": "VA scan reports and alerts will be sent to admins and subscription owners by enabling the setting 'Also send email notifications to admins and subscription owners'. This may help in reducing the time required for identifying risks and taking corrective measures."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_35",
+                    "masterTestId": "PR-AZR-CLD-SQL-035",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
@@ -2558,7 +2558,7 @@
                     "description": "Provide the email address where alerts will be sent when anomalous activities are detected on SQL servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_36",
+                    "masterTestId": "PR-AZR-CLD-SQL-036",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
@@ -2593,7 +2593,7 @@
                     "description": "Provide the email address where alerts will be sent when anomalous activities are detected on SQL servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_37",
+                    "masterTestId": "PR-AZR-CLD-SQL-037",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
@@ -2628,7 +2628,7 @@
                     "description": "Azure SQL Database Threat Detection is a security intelligence feature built into the Azure SQL Database service. Working around the clock to learn, profile and detect anomalous database activities, Azure SQL Database Threat Detection identifies potential threats to the database. Security officers or other designated administrators can get an immediate notification about suspicious database activities as they occur. Each notification provides details of the suspicious activity and recommends how to further investigate and mitigate the threat."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_38",
+                    "masterTestId": "PR-AZR-CLD-SQL-038",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
@@ -2657,7 +2657,7 @@
                     "description": "Azure SQL Database Threat Detection is a security intelligence feature built into the Azure SQL Database service. Working around the clock to learn, profile and detect anomalous database activities, Azure SQL Database Threat Detection identifies potential threats to the database. Security officers or other designated administrators can get an immediate notification about suspicious database activities as they occur. Each notification provides details of the suspicious activity and recommends how to further investigate and mitigate the threat."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_39",
+                    "masterTestId": "PR-AZR-CLD-SQL-039",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
@@ -2692,7 +2692,7 @@
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_40",
+                    "masterTestId": "PR-AZR-CLD-SQL-040",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
@@ -2727,7 +2727,7 @@
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_41",
+                    "masterTestId": "PR-AZR-CLD-SQL-041",
                     "type": "rego",
                     "rule": "file(sql_managedinstance.rego)",
                     "evals": [
@@ -2756,7 +2756,7 @@
                     "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_42",
+                    "masterTestId": "PR-AZR-CLD-SQL-042",
                     "type": "rego",
                     "rule": "file(sql_servers_auditing.rego)",
                     "evals": [
@@ -2785,7 +2785,7 @@
                     "description": "Ensure that SQL Server Auditing is enabled in order to keep track of Audit events."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_43",
+                    "masterTestId": "PR-AZR-CLD-SQL-043",
                     "type": "rego",
                     "rule": "file(sql_servers_auditing.rego)",
                     "evals": [
@@ -2821,7 +2821,7 @@
                     "description": "Ensure that SQL Server Auditing is enabled in order to keep track of Audit events."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_44",
+                    "masterTestId": "PR-AZR-CLD-SQL-044",
                     "type": "rego",
                     "rule": "file(sql_servers_auditing.rego)",
                     "evals": [
@@ -2857,7 +2857,7 @@
                     "description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be greater than 90 days."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_45",
+                    "masterTestId": "PR-AZR-CLD-SQL-045",
                     "type": "rego",
                     "rule": "file(sql_servers_auditing.rego)",
                     "evals": [
@@ -2893,7 +2893,7 @@
                     "description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be greater than 90 days."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_46",
+                    "masterTestId": "PR-AZR-CLD-SQL-046",
                     "type": "rego",
                     "rule": "file(sql_servers_encryption.rego)",
                     "evals": [
@@ -2929,7 +2929,7 @@
                     "description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure’s cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_48",
+                    "masterTestId": "PR-AZR-CLD-SQL-048",
                     "type": "rego",
                     "rule": "file(sql_servers.rego)",
                     "evals": [
@@ -2965,7 +2965,7 @@
                     "description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_49",
+                    "masterTestId": "PR-AZR-CLD-SQL-049",
                     "type": "rego",
                     "rule": "file(sql_servers.rego)",
                     "evals": [
@@ -3001,7 +3001,7 @@
                     "description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_50",
+                    "masterTestId": "PR-AZR-CLD-SQL-050",
                     "type": "rego",
                     "rule": "file(sql_servers.rego)",
                     "evals": [
@@ -3030,7 +3030,7 @@
                     "description": "SQL Server data should be replicated to avoid loss of unreplicated data."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_69",
+                    "masterTestId": "PR-AZR-CLD-SQL-069",
                     "type": "rego",
                     "rule": "file(sql_servers.rego)",
                     "evals": [
@@ -3061,7 +3061,7 @@
                     "description": "This policy will identify the Azure SQL Server which doesn't have the latest version of tls configured and give the alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_47",
+                    "masterTestId": "PR-AZR-CLD-SQL-047",
                     "type": "rego",
                     "rule": "file(sql_servers.rego)",
                     "evals": [
@@ -3092,7 +3092,7 @@
                     "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AKS_1",
+                    "masterTestId": "PR-AZR-CLD-AKS-001",
                     "type": "rego",
                     "rule": "file(aks.rego)",
                     "evals": [
@@ -3127,7 +3127,7 @@
                     "description": "Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AKS_2",
+                    "masterTestId": "PR-AZR-CLD-AKS-002",
                     "type": "rego",
                     "rule": "file(aks.rego)",
                     "evals": [
@@ -3163,7 +3163,7 @@
                     "description": "The HTTP application routing add-on is designed to let you quickly create an ingress controller and access your applications. This add-on is not currently designed for use in a production environment and is not recommended for production use. For production-ready ingress deployments that include multiple replicas and TLS support, see Create an HTTPS ingress controller."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AKS_3",
+                    "masterTestId": "PR-AZR-CLD-AKS-003",
                     "type": "rego",
                     "rule": "file(aks.rego)",
                     "evals": [
@@ -3198,7 +3198,7 @@
                     "description": "Azure Monitor for containers gives you performance visibility by collecting memory and processor metrics from controllers, nodes, and containers that are available in Kubernetes through the Metrics API. Container logs are also collected. After you enable monitoring from Kubernetes clusters, metrics and logs are automatically collected for you through a containerized version of the Log Analytics agent for Linux. Metrics are written to the metrics store and log data is written to the logs store associated with your Log Analytics workspace."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AKS_4",
+                    "masterTestId": "PR-AZR-CLD-AKS-004",
                     "type": "rego",
                     "rule": "file(aks.rego)",
                     "evals": [
@@ -3233,7 +3233,7 @@
                     "description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AKS_5",
+                    "masterTestId": "PR-AZR-CLD-AKS-005",
                     "type": "rego",
                     "rule": "file(aks.rego)",
                     "evals": [
@@ -3269,7 +3269,7 @@
                     "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AKS_6",
+                    "masterTestId": "PR-AZR-CLD-AKS-006",
                     "type": "rego",
                     "rule": "file(aks.rego)",
                     "evals": [
@@ -3298,7 +3298,7 @@
                     "description": "Azure Kubernetes Service (AKS) can be configured to use Azure Active Directory (AD) for user authentication. In this configuration, you sign in to an AKS cluster using an Azure AD authentication token. You can also configure Kubernetes role-based access control (Kubernetes RBAC) to limit access to cluster resources based a user's identity or group membership. Visit https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac for details."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AKS_7",
+                    "masterTestId": "PR-AZR-CLD-AKS-007",
                     "type": "rego",
                     "rule": "file(aks.rego)",
                     "evals": [
@@ -3327,7 +3327,7 @@
                     "description": "The AKS API server receives requests to perform actions in the cluster , for example, to create resources, and scale the number of nodes. The API server provides a secure way to manage a cluster."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AKS_8",
+                    "masterTestId": "PR-AZR-CLD-AKS-008",
                     "type": "rego",
                     "rule": "file(aks.rego)",
                     "evals": [
@@ -3358,7 +3358,7 @@
                     "description": "Network policy options in AKS include two ways to implement a network policy. You can choose between Azure Network Policies or Calico Network Policies. In both cases, the underlying controlling layer is based on Linux IPTables to enforce the specified policies. Policies are translated into sets of allowed and disallowed IP pairs. These pairs are then programmed as IPTable rules."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AKS_9",
+                    "masterTestId": "PR-AZR-CLD-AKS-009",
                     "type": "rego",
                     "rule": "file(aks.rego)",
                     "evals": [
@@ -3387,7 +3387,7 @@
                     "description": "Disable the Kubernetes dashboard on Azure Kubernetes Service"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AKS_10",
+                    "masterTestId": "PR-AZR-CLD-AKS-010",
                     "type": "rego",
                     "rule": "file(aks.rego)",
                     "evals": [
@@ -3418,7 +3418,7 @@
                     "description": "Disabling local authentication methods improves security by ensuring that Azure Kubernetes Service Clusters should exclusively require Azure Active Directory identities for authentication."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AGW_1",
+                    "masterTestId": "PR-AZR-CLD-AGW-001",
                     "type": "rego",
                     "rule": "file(2.rego)",
                     "evals": [
@@ -3454,7 +3454,7 @@
                     "description": "Transport Layer Security (TLS), previously known as Secure Sockets Layer (SSL), is the standard security technology for establishing an encrypted link between a web server and a browser. This link ensures that all data passed between the web server and browsers remain private and encrypted. Application gateway supports both TLS termination at the gateway as well as end to end TLS encryption. The minimum allowed TLS version should be 1.2"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AGW_2",
+                    "masterTestId": "PR-AZR-CLD-AGW-002",
                     "type": "rego",
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
@@ -3489,7 +3489,7 @@
                     "description": "Azure Web Application Firewall (WAF) on Azure Application Gateway provides centralized protection of your web applications from common exploits and vulnerabilities. Web applications are increasingly targeted by malicious attacks that exploit commonly known vulnerabilities. SQL injection and cross-site scripting are among the most common attacks."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AGW_3",
+                    "masterTestId": "PR-AZR-CLD-AGW-003",
                     "type": "rego",
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
@@ -3524,7 +3524,7 @@
                     "description": "Application Gateway allows setting network protocols Http and Https. It is highly recommended to use Https protocol for secure connections."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AGW_4",
+                    "masterTestId": "PR-AZR-CLD-AGW-004",
                     "type": "rego",
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
@@ -3559,7 +3559,7 @@
                     "description": "Application Gateway allows setting public or private ip in frontendIPConfigurations. It is highly recommended to only configure private ip in frontendIPConfigurations."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AGW_5",
+                    "masterTestId": "PR-AZR-CLD-AGW-005",
                     "type": "rego",
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
@@ -3594,7 +3594,7 @@
                     "description": "Application Gateway allows setting backend network protocols Http and Https. It is highly recommended to use Https protocol for secure connections."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AGW_6",
+                    "masterTestId": "PR-AZR-CLD-AGW-006",
                     "type": "rego",
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
@@ -3629,7 +3629,7 @@
                     "description": "This policy will identify application gateways that don't have SSL certificates stored in keyVault and alert"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AGW_7",
+                    "masterTestId": "PR-AZR-CLD-AGW-007",
                     "type": "rego",
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
@@ -3664,7 +3664,7 @@
                     "description": "It is recommended to enable WAF policy with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 on Application Gateway V2 to immediately avail of additional protection from log4j Remote Command Execution. details at <a href='https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/' target='_blank'>here</a>"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_ARC_1",
+                    "masterTestId": "PR-AZR-CLD-ARC-001",
                     "type": "rego",
                     "rule": "file(Redis.rego)",
                     "evals": [
@@ -3700,7 +3700,7 @@
                     "description": "It is recommended that Redis Cache should allow only SSL connections. Note: some Redis tools (like redis-cli) do not support SSL. When using such tools plain connection ports should be enabled."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_ARC_2",
+                    "masterTestId": "PR-AZR-CLD-ARC-002",
                     "type": "rego",
                     "rule": "file(Redis.rego)",
                     "evals": [
@@ -3736,7 +3736,7 @@
                     "description": "Replicate Redis Cache server data to another Redis Cache server using geo replication. This feature is only available for Premium tier Redis Cache. From performance point of view, Microsoft recommends that both Redis Caches (Primary and the linked secondary) reside in the same region."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_ARC_",
+                    "masterTestId": "PR-AZR-CLD-ARC-003",
                     "type": "rego",
                     "rule": "file(Redis.rego)",
                     "evals": [
@@ -3767,7 +3767,7 @@
                     "description": "Disabling public network access improves security by ensuring that the Azure Cache for Redis isn't exposed on the public internet. You can limit exposure of your Azure Cache for Redis by creating private endpoints instead. Learn more at: https://docs.microsoft.com/azure/azure-cache-for-redis/cache-private-link."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_ARC_4",
+                    "masterTestId": "PR-AZR-CLD-ARC-004",
                     "type": "rego",
                     "rule": "file(Redis.rego)",
                     "evals": [
@@ -3798,7 +3798,7 @@
                     "description": "Azure Virtual Network deployment provides enhanced security and isolation for your Azure Cache for Redis, as well as subnets, access control policies, and other features to further restrict access.When an Azure Cache for Redis instance is configured with a virtual network, it is not publicly addressable and can only be accessed from virtual machines and applications within the virtual network."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_ARC_5",
+                    "masterTestId": "PR-AZR-CLD-ARC-005",
                     "type": "rego",
                     "rule": "file(Redis.rego)",
                     "evals": [
@@ -3829,7 +3829,7 @@
                     "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your cache for redis, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_VM_1",
+                    "masterTestId": "PR-AZR-CLD-VM-001",
                     "type": "rego",
                     "rule": "file(vm.rego)",
                     "evals": [
@@ -3865,7 +3865,7 @@
                     "description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure.<br><br>This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_VM_2",
+                    "masterTestId": "PR-AZR-CLD-VM-002",
                     "type": "rego",
                     "rule": "file(vm.rego)",
                     "evals": [
@@ -3894,7 +3894,7 @@
                     "description": "SSH is an encrypted connection protocol that allows secure sign-ins over unsecured connections. SSH is the default connection protocol for Linux VMs hosted in Azure. Using secure shell (SSH) key pair, it is possible to spin up a Linux virtual machine on Azure that defaults to using SSH keys for authentication, eliminating the need for passwords to sign in. We recommend connecting to a VM using SSH keys. Using basic authentication with SSH connections leaves VMs vulnerable to brute-force attacks or guessing of passwords."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_VM_3",
+                    "masterTestId": "PR-AZR-CLD-VM-003",
                     "type": "rego",
                     "rule": "file(vmextensions.rego)",
                     "evals": [
@@ -3923,7 +3923,7 @@
                     "description": "This policy identifies Azure Virtual Machines (VMs) that do not have endpoint protection installed. Installing endpoint protection systems (like Antimalware for Azure) provides for real-time protection capability that helps identify and remove viruses, spyware, and other malicious software. As a best practice, install endpoint protection on all VMs and computers to help identify and remove viruses, spyware, and other malicious software."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_DSK_1",
+                    "masterTestId": "PR-AZR-CLD-DSK-001",
                     "type": "rego",
                     "rule": "file(disks.rego)",
                     "evals": [
@@ -3959,7 +3959,7 @@
                     "description": "To meet your organizational security or compliance requirement, Azure provides disk encryption at rest using Azure Storage Service Encryption (SSE) and Azure Disk Encryption (ADE). Starting February 2017, SSE is enabled by default for all managed disks. ADE is integrated with Azure Key Vault to help you control, manage, and audit the disk encryption keys and secrets.<br><br>This policy detects Virtual Machine (VM) OS disks that are not encrypted at rest using ADE. As a best practice, enable ADE for provide volume encryption for the OS disk. For more information, see https://docs.microsoft.com/en-us/azure/security/azure-security-disk-encryption-overview."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_DSK_2",
+                    "masterTestId": "PR-AZR-CLD-DSK-002",
                     "type": "rego",
                     "rule": "file(disks.rego)",
                     "evals": [
@@ -3990,7 +3990,7 @@
                     "description": "Azure Disk Storage allows you to manage your own keys when using server-side encryption (SSE) for managed disks, if you choose"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_VNET_4",
+                    "masterTestId": "PR-AZR-CLD-NET-004",
                     "type": "rego",
                     "rule": "file(vnetpeerings.rego)",
                     "evals": [
@@ -4019,7 +4019,7 @@
                     "description": "Virtual network peering enables you to connect two Azure virtual networks so that the resources in these networks are directly connected.<br><br>This policy identifies Azure virtual network peers that are disconnected. Typically, the disconnection happens when a peering configuration is deleted on one virtual network, and the other virtual network reports the peering status as disconnected."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_VNET_5",
+                    "masterTestId": "PR-AZR-CLD-NET-005",
                     "type": "rego",
                     "rule": "file(vnetsubnets.rego)",
                     "evals": [
@@ -4054,7 +4054,7 @@
                     "description": "This policy identifies Azure Virtual Network (VNet) subnet which doesn't have any association with Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level.<br><br>For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_VNET_6",
+                    "masterTestId": "PR-AZR-CLD-NET-006",
                     "type": "rego",
                     "rule": "file(vpngateways.rego)",
                     "evals": [
@@ -4088,7 +4088,7 @@
                     "description": "Azure VPN gateways to use a custom IPsec/IKE policy with specific cryptographic algorithms and key strengths, rather than the Azure default policy sets. IPsec and IKE protocol standard supports a wide range of cryptographic algorithms in various combinations. If customers do not request a specific combination of cryptographic algorithms and parameters, Azure VPN gateways use a set of default proposals. Typically due to compliance or security requirements, you can now configure your Azure VPN gateways to use a custom IPsec/IKE policy with specific cryptographic algorithms and key strengths, rather than the Azure default policy sets. It is thus recommended to use custom policy sets and choose strong cryptography."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NTW_1",
+                    "masterTestId": "PR-AZR-CLD-NTW-001",
                     "type": "rego",
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
@@ -4123,7 +4123,7 @@
                     "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs to improve network visibility."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NTW_2",
+                    "masterTestId": "PR-AZR-CLD-NTW-002",
                     "type": "rego",
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
@@ -4158,7 +4158,7 @@
                     "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs to improve network visibility."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NTW_3",
+                    "masterTestId": "PR-AZR-CLD-NTW-003",
                     "type": "rego",
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
@@ -4193,7 +4193,7 @@
                     "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs and set the log retention period to at least 90 days."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_DBK_1",
+                    "masterTestId": "PR-AZR-CLD-DBK-001",
                     "type": "rego",
                     "rule": "file(databricks.rego)",
                     "evals": [
@@ -4224,7 +4224,7 @@
                     "description": "Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have public ip disabled and warn."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_DBK_2",
+                    "masterTestId": "PR-AZR-CLD-DBK-002",
                     "type": "rego",
                     "rule": "file(databricks.rego)",
                     "evals": [
@@ -4256,7 +4256,7 @@
                     "description": "Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have vnet integration and warn."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_28",
+                    "masterTestId": "PR-AZR-CLD-SQL-028",
                     "type": "rego",
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
@@ -4291,7 +4291,7 @@
                     "description": "Azure Database for PostgreSQL provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_29",
+                    "masterTestId": "PR-AZR-CLD-SQL-029",
                     "type": "rego",
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
@@ -4327,7 +4327,7 @@
                     "description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_66",
+                    "masterTestId": "PR-AZR-CLD-SQL-066",
                     "type": "rego",
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
@@ -4358,7 +4358,7 @@
                     "description": "Always use Private Endpoint for PostgreSQL Server"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_ACR_001",
+                    "masterTestId": "PR-AZR-CLD-ACR-001",
                     "type": "rego",
                     "rule": "file(registrieswebhooks.rego)",
                     "evals": [
@@ -4394,7 +4394,7 @@
                     "description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_ACR_2",
+                    "masterTestId": "PR-AZR-CLD-ACR-002",
                     "type": "rego",
                     "rule": "file(registry.rego)",
                     "evals": [
@@ -4425,7 +4425,7 @@
                     "description": "The value that indicates whether the admin user is enabled. Each container registry includes an admin user account, which is disabled by default. You can enable the admin user and manage its credentials in the Azure portal, or by using the Azure CLI or other Azure tools. All users authenticating with the admin account appear as a single user with push and pull access to the registry. Changing or disabling this account disables registry access for all users who use its credentials."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_ACR_3",
+                    "masterTestId": "PR-AZR-CLD-ACR-003",
                     "type": "rego",
                     "rule": "file(registry.rego)",
                     "evals": [
@@ -4460,7 +4460,7 @@
                     "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry.<br><br>For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_1",
+                    "masterTestId": "PR-AZR-CLD-NSG-001",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4496,7 +4496,7 @@
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to open TCP traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_2",
+                    "masterTestId": "PR-AZR-CLD-NSG-002",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4532,7 +4532,7 @@
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to open UDP traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_3",
+                    "masterTestId": "PR-AZR-CLD-NSG-003",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4568,7 +4568,7 @@
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on TCP protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_4",
+                    "masterTestId": "PR-AZR-CLD-NSG-004",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4604,7 +4604,7 @@
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on UDP protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_5",
+                    "masterTestId": "PR-AZR-CLD-NSG-005",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4640,7 +4640,7 @@
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on any protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_6",
+                    "masterTestId": "PR-AZR-CLD-NSG-006",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4676,7 +4676,7 @@
                     "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_7",
+                    "masterTestId": "PR-AZR-CLD-NSG-007",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4712,7 +4712,7 @@
                     "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_8",
+                    "masterTestId": "PR-AZR-CLD-NSG-008",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4748,7 +4748,7 @@
                     "description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.<br><br>This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_9",
+                    "masterTestId": "PR-AZR-CLD-NSG-009",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4784,7 +4784,7 @@
                     "description": "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_10",
+                    "masterTestId": "PR-AZR-CLD-NSG-010",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4819,7 +4819,7 @@
                     "description": "Identify network traffic coming from internet which is plain text FTP, Telnet or HTTP from Internet."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_11",
+                    "masterTestId": "PR-AZR-CLD-NSG-011",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4855,7 +4855,7 @@
                     "description": "Memcached is a general-purpose distributed memory caching system. It is often used to speed up dynamic database-driven websites by caching data and objects in RAM to reduce the number of times an external data source (such as a database or API) must be read. It is reported that Memcache versions 1.5.5 and below are vulnerable to DDoS amplification attack. This policy aims at finding such attacks and generate alerts."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_12",
+                    "masterTestId": "PR-AZR-CLD-NSG-012",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4891,7 +4891,7 @@
                     "description": "RedisWannaMine is cryptojacking attack which aims at both database servers and application servers via remote code execution, exploiting an Apache Struts vulnerability. To inject cryptocurrency mining malware, RedWannaMine uses a transmission control protocol (TCP) scanner to check open port 445 of SMB and scans vulnerable Redis server database over port 6379(tcp), so that it can use EternalBlue to spread further."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_13",
+                    "masterTestId": "PR-AZR-CLD-NSG-013",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4927,7 +4927,7 @@
                     "description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000)."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_14",
+                    "masterTestId": "PR-AZR-CLD-NSG-014",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4962,7 +4962,7 @@
                     "description": "Blocking SSH port 22 will protect users from attacks like Account compromise."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_15",
+                    "masterTestId": "PR-AZR-CLD-NSG-015",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -4997,7 +4997,7 @@
                     "description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_16",
+                    "masterTestId": "PR-AZR-CLD-NSG-016",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5033,7 +5033,7 @@
                     "description": "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_18",
+                    "masterTestId": "PR-AZR-CLD-NSG-018",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5069,7 +5069,7 @@
                     "description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_19",
+                    "masterTestId": "PR-AZR-CLD-NSG-019",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5105,7 +5105,7 @@
                     "description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_20",
+                    "masterTestId": "PR-AZR-CLD-NSG-020",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5141,7 +5141,7 @@
                     "description": "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_21",
+                    "masterTestId": "PR-AZR-CLD-NSG-021",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5177,7 +5177,7 @@
                     "description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_22",
+                    "masterTestId": "PR-AZR-CLD-NSG-022",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5213,7 +5213,7 @@
                     "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 and 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_23",
+                    "masterTestId": "PR-AZR-CLD-NSG-023",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5249,7 +5249,7 @@
                     "description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_24",
+                    "masterTestId": "PR-AZR-CLD-NSG-024",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5285,7 +5285,7 @@
                     "description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_25",
+                    "masterTestId": "PR-AZR-CLD-NSG-025",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5321,7 +5321,7 @@
                     "description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP Port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_26",
+                    "masterTestId": "PR-AZR-CLD-NSG-026",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5357,7 +5357,7 @@
                     "description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH.<br>This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_27",
+                    "masterTestId": "PR-AZR-CLD-NSG-027",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5393,7 +5393,7 @@
                     "description": "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services,     or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_28",
+                    "masterTestId": "PR-AZR-CLD-NSG-028",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5429,7 +5429,7 @@
                     "description": "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_29",
+                    "masterTestId": "PR-AZR-CLD-NSG-029",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5465,7 +5465,7 @@
                     "description": "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_30",
+                    "masterTestId": "PR-AZR-CLD-NSG-030",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5501,7 +5501,7 @@
                     "description": "This policy identifies NSGs which allows outgoing traffic to any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic to known sources on authorized protocols and ports."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_31",
+                    "masterTestId": "PR-AZR-CLD-NSG-031",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5533,7 +5533,7 @@
                     "description": "Identifies traffic from internal workloads to internet IPs on ports 8332,8333 that are known to mine Bitcoins. Unless this traffic is part of authorized applications and processes, your instances may have been compromised."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_32",
+                    "masterTestId": "PR-AZR-CLD-NSG-032",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5565,7 +5565,7 @@
                     "description": "Identifies traffic from internal workloads to internet IPs on ports 8545,30303 that are known to mine Ethereum. Unless this traffic is part of authorized applications and processes, your instances may have been compromised."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_NSG_17",
+                    "masterTestId": "PR-AZR-CLD-NSG-017",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
                     "evals": [
@@ -5601,7 +5601,7 @@
                     "description": "Blocking OMI port 5985, 5986, 1270 will protect vnet/subnet/vms from OMIGOD attacks from internet."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_MNT_1",
+                    "masterTestId": "PR-AZR-CLD-MNT-001",
                     "type": "rego",
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
@@ -5637,7 +5637,7 @@
                     "description": "Activity log alerts are alerts that activate when a new activity log event occurs that matches the conditions specified in the alert. Based on the order and volume of the events recorded in Azure activity log, the alert rule will fire. Activity log alert rules are Azure resources, so they can be created by using an Azure Resource Manager template. "
                 },
                 {
-                    "masterTestId": "AZURE_TEST_MNT_9",
+                    "masterTestId": "PR-AZR-CLD-MNT-009",
                     "type": "rego",
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
@@ -5666,7 +5666,7 @@
                     "description": "Specifies the retention policy for the log. We recommend you set activity log retention for 365 days or greater. (A value of 0 will retain the events indefinitely.)"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_MNT_10",
+                    "masterTestId": "PR-AZR-CLD-MNT-010",
                     "type": "rego",
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
@@ -5695,7 +5695,7 @@
                     "description": "This policy identifies Microsoft.Insights/logprofiles which don't have log retention enabled. Activity Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_MNT_11",
+                    "masterTestId": "PR-AZR-CLD-MNT-011",
                     "type": "rego",
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
@@ -5731,7 +5731,7 @@
                     "description": "the categories of the logs. These categories are created as is convenient to the user. Some values are: 'Write', 'Delete', and/or 'Action.' We recommend you configure the log profile to export all activities from the control/management plane."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_1",
+                    "masterTestId": "PR-AZR-CLD-STR-001",
                     "type": "rego",
                     "rule": "file(blobservices.rego)",
                     "evals": [
@@ -5769,7 +5769,7 @@
                     "description": "The blob service properties for blob soft delete. It helps to restore removed blob within configured retention days"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_2",
+                    "masterTestId": "PR-AZR-CLD-STR-002",
                     "type": "rego",
                     "rule": "file(blobservices.rego)",
                     "evals": [
@@ -5807,7 +5807,7 @@
                     "description": "The blob service properties for container soft delete. It helps to restore removed blob containers within configured retention days."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AML_008",
+                    "masterTestId": "PR-AZR-CLD-AML-008",
                     "type": "rego",
                     "rule": "file(locks.rego)",
                     "evals": [
@@ -5843,7 +5843,7 @@
                     "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence.<br><br>This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_12",
+                    "masterTestId": "PR-AZR-CLD-STR-012",
                     "type": "rego",
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
@@ -5879,7 +5879,7 @@
                     "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature.<br><br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_STR_13",
+                    "masterTestId": "PR-AZR-CLD-STR-013",
                     "type": "rego",
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
@@ -5909,7 +5909,7 @@
                     "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature.<br><br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_ASC_1",
+                    "masterTestId": "PR-AZR-CLD-ASC-001",
                     "type": "rego",
                     "rule": "file(pricing.rego)",
                     "evals": [
@@ -5941,7 +5941,7 @@
                     "description": "Selecting the standard pricing tier will enable threat detection for networks and virtual systems by providing threat intelligence, anomaly detection, and behavior analytics in Azure Security Center."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_ASC_2",
+                    "masterTestId": "PR-AZR-CLD-ASC-002",
                     "type": "rego",
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
@@ -5977,7 +5977,7 @@
                     "description": "Setting a valid email address in Security contact emails will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_ASC_3",
+                    "masterTestId": "PR-AZR-CLD-ASC-003",
                     "type": "rego",
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
@@ -6013,7 +6013,7 @@
                     "description": "Setting the security alert Send email notification for alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_ASC_5",
+                    "masterTestId": "PR-AZR-CLD-ASC-005",
                     "type": "rego",
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
@@ -6049,7 +6049,7 @@
                     "description": "This policy will identify security centers which dont have configuration enabled to send security alerts notifications to subscription admins and alert if missing."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_AFW_1",
+                    "masterTestId": "PR-AZR-CLD-AFW-001",
                     "type": "rego",
                     "rule": "file(azure_firewalls.rego)",
                     "evals": [
@@ -6081,7 +6081,7 @@
                     "description": "Azure Firewall Premium has enhanced protection from the Log4j RCE CVE-2021-44228 vulnerability and exploit. Azure Firewall premium IDPS (Intrusion Detection and Prevention System) provides IDPS inspection for all east-west traffic and outbound traffic to internet. details at https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/"
                 },
                 {
-                    "masterTestId": "AZURE_TEST_FRD_1",
+                    "masterTestId": "PR-AZR-CLD-FRD-001",
                     "type": "rego",
                     "rule": "file(frontdoors.rego)",
                     "evals": [
