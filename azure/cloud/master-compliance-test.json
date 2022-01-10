@@ -349,7 +349,8 @@
                     "title": "Storage Accounts https based secure transfer should be enabled",
                     "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPS. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesn't support HTTPS for custom domain names, this option is not applied when using a custom domain name.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -385,7 +386,8 @@
                     "title": "Storage Accounts should have firewall rules enabled",
                     "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.<br><br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -420,7 +422,8 @@
                     "title": "Ensure that 'Storage service encryption' is enabled for the Blob Service",
                     "description": "Enable data encryption at rest for blobs. Storage service encryption protects your data at rest. Azure Storage encrypts data when it's written, and automatically decrypts it when it is accessed.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -455,7 +458,8 @@
                     "title": "Ensure that 'Storage service encryption' is enabled for the File Service",
                     "description": "Azure Storage encryption protects your data and helps you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -486,7 +490,8 @@
                     "title": "Ensure critical data storage in Storage Account is encrypted with Customer Managed Key",
                     "description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -517,7 +522,8 @@
                     "title": "Storage Accounts location configuration should be inside of Europe",
                     "description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -553,7 +559,8 @@
                     "title": "Ensure that Storage Account should not allow public access to all blobs or containers",
                     "description": "This policy will identify which Storage Account has public access enabled for all blobs or containers",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -589,7 +596,8 @@
                     "title": "Azure Storage Account Trusted Microsoft Services access should be enabled",
                     "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging, Metrics, AzureServices (For example, 'Logging, Metrics'), or None to bypass none of those traffics. - None, Logging, Metrics, AzureServices.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -623,7 +631,8 @@
                     "title": "Ensure Azure Storage Account has latest version of tls configured",
                     "description": "This policy will identify the Azure Storage Account which don't have the latest version of tls configured and give the alert",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -655,6 +664,7 @@
                     "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your storage account, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview",
                     "masterSnapshotId": [
                         "AZRSNP_301",
+                        "AZRSNP_222",
                         "AZRSNP_500"
                     ]
                 },
@@ -686,7 +696,8 @@
                     "title": "Storage accounts should have infrastructure encryption",
                     "description": "Enable infrastructure encryption for a higher level of assurance that the data is secure. When infrastructure encryption is enabled, data in a storage account is encrypted twice.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -717,7 +728,9 @@
                     "title": "Storage account encryption scopes should have infrastructure encryption",
                     "description": "Enable infrastructure encryption for encryption at the rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
                     "masterSnapshotId": [
-                        "AZRSNP_302"
+                        "AZRSNP_301",
+                        "AZRSNP_302",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -748,7 +761,9 @@
                     "title": "Storage account encryption scopes should use customer-managed keys to encrypt data at rest",
                     "description": "Use customer-managed keys to manage the encryption at the rest of your storage account encryption scopes. Customer-managed keys enable the data to be encrypted with an Azure key-vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more about storage account encryption scopes at https://aka.ms/encryption-scopes-overview.",
                     "masterSnapshotId": [
-                        "AZRSNP_302"
+                        "AZRSNP_301",
+                        "AZRSNP_302",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -779,7 +794,8 @@
                     "title": "Storage Accounts should use a virtual network service endpoint",
                     "description": "This policy audits any Storage Account not configured to use a virtual network service endpoint.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -810,7 +826,8 @@
                     "title": "Storage accounts should prevent shared key access",
                     "description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key and is recommended by Microsoft.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -879,7 +896,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Web App should use the latest version of TLS encryption",
@@ -951,7 +969,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Web App should use the latest version of HTTP",
@@ -980,7 +999,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "High",
                     "title": "Ensure CORS configuration is not allowing every resources to access Azure Web Service",
@@ -1009,7 +1029,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service http logging should be enabled",
@@ -1038,7 +1059,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service detailed error message should be enabled",
@@ -1067,7 +1089,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service request tracing should be enabled",
@@ -1125,7 +1148,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service remote debugging should be disabled",
@@ -1154,7 +1178,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service FTP deployments should be disabled",
@@ -1183,7 +1208,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Dot Net Framework should be latest",
@@ -1212,7 +1238,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service PHP version should be latest",
@@ -1241,7 +1268,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Python version should be latest",
@@ -1270,7 +1298,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Java version should be latest",
@@ -5731,7 +5760,9 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_223"
+                        "AZRSNP_223",
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ],
                     "severity": "Medium",
                     "title": "Soft delete on blob service should be enabled",
@@ -5767,7 +5798,9 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_223"
+                        "AZRSNP_223",
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ],
                     "severity": "Medium",
                     "title": "Soft delete on blob service container should be enabled",
@@ -5838,7 +5871,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_283"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ],
                     "severity": "High",
                     "title": "Azure storage blob container should not have public access enabled",
@@ -5867,7 +5901,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ],
                     "severity": "High",
                     "title": "Azure storage blob container should not have public access enabled",
