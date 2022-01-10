@@ -193,7 +193,6 @@ azure_issue ["client_cert_enabled"] {
     resource.properties.clientCertEnabled != true
 }
 
-
 client_cert_enabled {
     lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["client_cert_enabled"]
@@ -842,6 +841,7 @@ web_service_managed_identity_provider_enabled = false {
 }
 
 web_service_managed_identity_provider_enabled_err = "microsoft.web/sites property 'identity.type' need to be exist. Its missing from the resource." {
+    lower(resource.type) == "microsoft.web/sites"
     azure_attribute_absence["web_service_managed_identity_provider_enabled"]
 }
 
