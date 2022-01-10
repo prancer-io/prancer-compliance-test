@@ -1,7 +1,7 @@
 package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways
-
+# Todo: Along with existing feature, need to update this policy based on https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways/vpnconnections?tabs=json
 #
 # PR-AZR-CLD-NET-006
 #
@@ -13,7 +13,6 @@ azure_attribute_absence["vpn_encrypt"] {
     lower(resource.type) == "microsoft.network/vpngateways"
     not resource.properties.connections
 }
-
 
 azure_attribute_absence["vpn_encrypt"] {
     resource := input.resources[_]
