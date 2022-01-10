@@ -10,6 +10,11 @@
                     "collection": "Microsoft.Web"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_101",
+                    "type": "Microsoft.Web/sites/config",
+                    "collection": "Microsoft.Web"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_210",
                     "type": "Microsoft.OperationalInsights/workspaces",
                     "collection": "Microsoft.OperationalInsights"
@@ -48,11 +53,6 @@
                     "masterSnapshotId": "AZRSNP_250",
                     "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
                     "collection": "Microsoft.ManagedIdentity"
-                },
-                {
-                    "masterSnapshotId": "AZRSNP_283",
-                    "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
-                    "collection": "Microsoft.Storage"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_284",

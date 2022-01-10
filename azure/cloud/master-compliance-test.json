@@ -281,7 +281,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_228"
+                        "AZRSNP_228",
+                        "AZRSNP_500"
                     ],
                     "severity": "Medium",
                     "title": "Configure Azure Key Vaults with private endpoints",
@@ -349,7 +350,8 @@
                     "title": "Storage Accounts https based secure transfer should be enabled",
                     "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPS. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesn't support HTTPS for custom domain names, this option is not applied when using a custom domain name.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -385,7 +387,8 @@
                     "title": "Storage Accounts should have firewall rules enabled",
                     "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.<br><br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -420,7 +423,8 @@
                     "title": "Ensure that 'Storage service encryption' is enabled for the Blob Service",
                     "description": "Enable data encryption at rest for blobs. Storage service encryption protects your data at rest. Azure Storage encrypts data when it's written, and automatically decrypts it when it is accessed.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -455,7 +459,8 @@
                     "title": "Ensure that 'Storage service encryption' is enabled for the File Service",
                     "description": "Azure Storage encryption protects your data and helps you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -486,7 +491,8 @@
                     "title": "Ensure critical data storage in Storage Account is encrypted with Customer Managed Key",
                     "description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -517,7 +523,8 @@
                     "title": "Storage Accounts location configuration should be inside of Europe",
                     "description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -553,7 +560,8 @@
                     "title": "Ensure that Storage Account should not allow public access to all blobs or containers",
                     "description": "This policy will identify which Storage Account has public access enabled for all blobs or containers",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -589,7 +597,8 @@
                     "title": "Azure Storage Account Trusted Microsoft Services access should be enabled",
                     "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging, Metrics, AzureServices (For example, 'Logging, Metrics'), or None to bypass none of those traffics. - None, Logging, Metrics, AzureServices.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -623,7 +632,8 @@
                     "title": "Ensure Azure Storage Account has latest version of tls configured",
                     "description": "This policy will identify the Azure Storage Account which don't have the latest version of tls configured and give the alert",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -655,6 +665,7 @@
                     "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your storage account, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview",
                     "masterSnapshotId": [
                         "AZRSNP_301",
+                        "AZRSNP_222",
                         "AZRSNP_500"
                     ]
                 },
@@ -686,7 +697,8 @@
                     "title": "Storage accounts should have infrastructure encryption",
                     "description": "Enable infrastructure encryption for a higher level of assurance that the data is secure. When infrastructure encryption is enabled, data in a storage account is encrypted twice.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -717,7 +729,9 @@
                     "title": "Storage account encryption scopes should have infrastructure encryption",
                     "description": "Enable infrastructure encryption for encryption at the rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
                     "masterSnapshotId": [
-                        "AZRSNP_302"
+                        "AZRSNP_301",
+                        "AZRSNP_302",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -748,7 +762,9 @@
                     "title": "Storage account encryption scopes should use customer-managed keys to encrypt data at rest",
                     "description": "Use customer-managed keys to manage the encryption at the rest of your storage account encryption scopes. Customer-managed keys enable the data to be encrypted with an Azure key-vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more about storage account encryption scopes at https://aka.ms/encryption-scopes-overview.",
                     "masterSnapshotId": [
-                        "AZRSNP_302"
+                        "AZRSNP_301",
+                        "AZRSNP_302",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -779,7 +795,8 @@
                     "title": "Storage Accounts should use a virtual network service endpoint",
                     "description": "This policy audits any Storage Account not configured to use a virtual network service endpoint.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -810,7 +827,8 @@
                     "title": "Storage accounts should prevent shared key access",
                     "description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key and is recommended by Microsoft.",
                     "masterSnapshotId": [
-                        "AZRSNP_301"
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ]
                 },
                 {
@@ -879,7 +897,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Web App should use the latest version of TLS encryption",
@@ -951,7 +970,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Web App should use the latest version of HTTP",
@@ -980,7 +1000,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "High",
                     "title": "Ensure CORS configuration is not allowing every resources to access Azure Web Service",
@@ -1009,7 +1030,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service http logging should be enabled",
@@ -1038,7 +1060,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service detailed error message should be enabled",
@@ -1067,7 +1090,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service request tracing should be enabled",
@@ -1125,7 +1149,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service remote debugging should be disabled",
@@ -1154,7 +1179,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service FTP deployments should be disabled",
@@ -1183,7 +1209,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Dot Net Framework should be latest",
@@ -1212,7 +1239,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service PHP version should be latest",
@@ -1241,7 +1269,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Python version should be latest",
@@ -1270,7 +1299,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_100"
+                        "AZRSNP_100",
+                        "AZRSNP_101"
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Java version should be latest",
@@ -1305,40 +1335,6 @@
                     ],
                     "masterSnapshotId": [
                         "AZRSNP_294"
-                    ],
-                    "severity": "Medium",
-                    "title": "SQL servers should be integrated with Azure Active Directory for administration",
-                    "description": "Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory (Azure AD) authentication is a mechanism for connecting to Azure SQL Database, Azure SQL Managed Instance, and Synapse SQL in Azure Synapse Analytics by using identities in Azure AD. With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location. Central ID management provides a single place to manage database users and simplifies permission management."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-002",
-                    "type": "rego",
-                    "rule": "file(dbadministrators.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-002",
-                            "eval": "data.rule.sql_logical_server_ad_admin",
-                            "message": "data.rule.sql_logical_server_ad_admin_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_002.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CSA-CCM",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
                     ],
                     "severity": "Medium",
                     "title": "SQL servers should be integrated with Azure Active Directory for administration",
@@ -1415,42 +1411,6 @@
                     "description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-SQL-005",
-                    "type": "rego",
-                    "rule": "file(dbauditingsettings.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-005",
-                            "eval": "data.rule.sql_logical_db_log_audit",
-                            "message": "data.rule.sql_logical_db_log_audit_err",
-                            "remediationDescription": "Azure Console<br>1. Go to SQL databases<br>2. For each DB instance<br>3. Click on Auditing & Threat Detection<br>4. Set Threat Detection to On<br><br>Default Value:<br>By default, Threat Detection is set to Off.<br><br>References:<br><a href='https://docs.microsoft.com/en-us/azure/sql-database/sql-database-threat-detection' target='_blank'>https://docs.microsoft.com/en-us/azure/sql-database/sql-database-threat-detection</a>",
-                            "remediationFunction": "PR_AZR_CLD_SQL_005.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HIPAA",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_264"
-                    ],
-                    "severity": "Medium",
-                    "title": "Auditing for SQL database should be enabled",
-                    "description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations."
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-SQL-006",
                     "type": "rego",
                     "rule": "file(dbauditingsettings.rego)",
@@ -1487,78 +1447,6 @@
                     "description": "This policy identifies SQL Databases that have Auditing Retention of fewer than 90 days. Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-SQL-007",
-                    "type": "rego",
-                    "rule": "file(dbauditingsettings.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-007",
-                            "eval": "data.rule.sql_logical_db_log_retention",
-                            "message": "data.rule.sql_logical_db_log_retention_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_007.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HIPAA",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_264"
-                    ],
-                    "severity": "Medium",
-                    "title": "Azure SQL Database Auditing Retention should be 90 days or more",
-                    "description": "This policy identifies SQL Databases that have Auditing Retention of fewer than 90 days. Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-008",
-                    "type": "rego",
-                    "rule": "file(dbdataencryption.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-008",
-                            "eval": "data.rule.db_logical_encrypt",
-                            "message": "data.rule.db_logical_encrypt_err",
-                            "remediationDescription": "1. Go to 'SQL databases' and choose your database<br>2. Select 'Transparent data encryption' under 'Security' in the navigation menu<br>3. Set 'Data encryption' to 'On'<br>4. Save",
-                            "remediationFunction": "PR_AZR_CLD_SQL_008.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HIPAA",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_264"
-                    ],
-                    "severity": "Medium",
-                    "title": "Azure SQL databases should have transparent data encryption enabled",
-                    "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchanges log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key."
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-SQL-009",
                     "type": "rego",
                     "rule": "file(dbdataencryption.rego)",
@@ -1593,41 +1481,6 @@
                     "severity": "Medium",
                     "title": "Azure SQL databases should have transparent data encryption enabled",
                     "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchanges log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-010",
-                    "type": "rego",
-                    "rule": "file(dbfirewallrules.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-010",
-                            "eval": "data.rule.db_logical_firewall",
-                            "message": "data.rule.db_logical_firewall_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_010.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
-                    ],
-                    "severity": "Medium",
-                    "title": "SQL Server Firewall rules should not configure to allow full inbound access to everyone",
-                    "description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with \"0.0.0.0\" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-011",
@@ -1694,35 +1547,6 @@
                     "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses"
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-SQL-013",
-                    "type": "rego",
-                    "rule": "file(dbforMariaDB.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-013",
-                            "eval": "data.rule.dbmaria_ingress_from_any_ip_disabled",
-                            "message": "data.rule.dbmaria_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_013.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_409"
-                    ],
-                    "severity": "High",
-                    "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-                    "description": "This policy will identify MariaDB firewall rule that is currently allowing ingress from all Azure-internal IP addresses"
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-SQL-014",
                     "type": "rego",
                     "rule": "file(dbforMySQL_firewallrules.rego)",
@@ -1746,35 +1570,6 @@
                     ],
                     "masterSnapshotId": [
                         "AZRSNP_410"
-                    ],
-                    "severity": "High",
-                    "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-                    "description": "This policy will identify MySQL Database Server firewall rule that is currently allowing ingress from all Azure-internal IP addresses"
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-015",
-                    "type": "rego",
-                    "rule": "file(dbforMySQL_firewallrules.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-015",
-                            "eval": "data.rule.my_logical_sql_ingress_from_any_ip_disabled",
-                            "message": "data.rule.my_logical_sql_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_015.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_411"
                     ],
                     "severity": "High",
                     "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
@@ -1817,181 +1612,6 @@
                     "description": "Enable SSL connection on MySQL Servers databases. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-SQL-017",
-                    "type": "rego",
-                    "rule": "file(dbsecurityalertpolicies.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-017",
-                            "eval": "data.rule.dbsec_threat_off",
-                            "message": "data.rule.dbsec_threat_off_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_017.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_264"
-                    ],
-                    "severity": "Medium",
-                    "title": "SQL Databases should have security alert policies enabled",
-                    "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-018",
-                    "type": "rego",
-                    "rule": "file(dbsecurityalertpolicies.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-018",
-                            "eval": "data.rule.dbsec_threat_retention",
-                            "message": "data.rule.dbsec_threat_retention_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_018.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HIPAA",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_264"
-                    ],
-                    "severity": "Medium",
-                    "title": "Azure SQL Database security alert policies thread retention should be configured for more than 90 days",
-                    "description": "This policy identifies SQL Databases that have security alert policies retention set less than or equal to 90 days. Threat Logs can be used to check for anomalies and give an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-019",
-                    "type": "rego",
-                    "rule": "file(dbsecurityalertpolicies.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-019",
-                            "eval": "data.rule.dbsec_threat_email",
-                            "message": "data.rule.dbsec_threat_email_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_019.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CSA-CCM",
-                                "HIPAA",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_264"
-                    ],
-                    "severity": "High",
-                    "title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators and configured email addresses",
-                    "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-020",
-                    "type": "rego",
-                    "rule": "file(dbsecurityalertpolicies.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-020",
-                            "eval": "data.rule.dbsec_threat_alert",
-                            "message": "data.rule.dbsec_threat_alert_err",
-                            "remediationDescription": "Set-AzSqlDatabaseThreatDetectionPolicy -ResourceGroupName -ServerName -DatabaseName - ExcludedDetectionType None -StorageAccountName<br><br>References:<br><a href='https://docs.microsoft.com/en-us/azure/azure-sql/database/threat-detection-configure' target='_blank'>https://docs.microsoft.com/en-us/azure/azure-sql/database/threat-detection-configure</a>",
-                            "remediationFunction": "PR_AZR_CLD_SQL_020.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_264"
-                    ],
-                    "severity": "High",
-                    "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-021",
-                    "type": "rego",
-                    "rule": "file(dbsecurityalertpolicies.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-021",
-                            "eval": "data.rule.sql_alert",
-                            "message": "data.rule.sql_alert_err",
-                            "remediationDescription": "With Azure CLI:<br>az sql db threat-policy update -g mygroup -s myserver -n mydb --state Enabled --email-addresses<br>me@examlee.comyou@example.com --email-account-admins Enabled<br><br>References: <a href='https://docs.microsoft.com/en-us/cli/azure/sql/db/threat-policy?view=azure-cli-latest' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/sql/db/threat-policy?view=azure-cli-latest</a>",
-                            "remediationFunction": "PR_AZR_CLD_SQL_021.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_264"
-                    ],
-                    "severity": "High",
-                    "title": "Threat Detection alert should be configured to send notifications to the SQL server account administrators",
-                    "description": "Ensure that threat detection alert is configured to send notifications to the sql server account administrators"
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-SQL-022",
                     "type": "rego",
                     "rule": "file(dbvulnerabilityassessments.rego)",
@@ -2015,35 +1635,6 @@
                     ],
                     "masterSnapshotId": [
                         "AZRSNP_265"
-                    ],
-                    "severity": "Medium",
-                    "title": "Azure SQL Server advanced data security should be enabled",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-023",
-                    "type": "rego",
-                    "rule": "file(dbvulnerabilityassessments.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-023",
-                            "eval": "data.rule.db_logical_ads_scan",
-                            "message": "data.rule.db_logical_ads_scan_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_023.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_264"
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should be enabled",
@@ -2079,35 +1670,6 @@
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-SQL-025",
-                    "type": "rego",
-                    "rule": "file(dbvulnerabilityassessments.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-025",
-                            "eval": "data.rule.db_logical_ads_mail",
-                            "message": "data.rule.db_logical_ads_mail_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_025.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_264"
-                    ],
-                    "severity": "Medium",
-                    "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers."
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-SQL-026",
                     "type": "rego",
                     "rule": "file(dbvulnerabilityassessments.rego)",
@@ -2131,35 +1693,6 @@
                     ],
                     "masterSnapshotId": [
                         "AZRSNP_265"
-                    ],
-                    "severity": "Medium",
-                    "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-027",
-                    "type": "rego",
-                    "rule": "file(dbvulnerabilityassessments.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-027",
-                            "eval": "data.rule.db_logical_ads_alert",
-                            "message": "data.rule.db_logical_ads_alert_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_027.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_264"
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
@@ -2319,41 +1852,6 @@
                     "description": "Azure Database for MariaDB provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-SQL-030",
-                    "type": "rego",
-                    "rule": "file(sql_alert_policy.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-030",
-                            "eval": "data.rule.sql_logical_server_alert",
-                            "message": "data.rule.sql_logical_server_alert_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_030.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Security Alert is enabled on Azure SQL Logical Server",
-                    "description": "Advanced data security should be enabled on your SQL servers."
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-SQL-031",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
@@ -2424,41 +1922,6 @@
                     "description": "Advanced data security should be enabled on your SQL managed instance."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-SQL-033",
-                    "type": "rego",
-                    "rule": "file(sql_alert_policy.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-033",
-                            "eval": "data.rule.sql_logical_server_email_account",
-                            "message": "data.rule.sql_logical_server_email_account_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_033.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
-                    ],
-                    "severity": "High",
-                    "title": "Ensure that VA setting 'Also send email notifications to admins and subscription owners' is set for a SQL server",
-                    "description": "VA scan reports and alerts will be sent to admins and subscription owners by enabling the setting 'Also send email notifications to admins and subscription owners'. This may help in reducing the time required for identifying risks and taking corrective measures."
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-SQL-034",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
@@ -2492,41 +1955,6 @@
                     "severity": "High",
                     "title": "Ensure that VA setting 'Also send email notifications to admins and subscription owners' is set for a SQL server",
                     "description": "VA scan reports and alerts will be sent to admins and subscription owners by enabling the setting 'Also send email notifications to admins and subscription owners'. This may help in reducing the time required for identifying risks and taking corrective measures."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-035",
-                    "type": "rego",
-                    "rule": "file(sql_alert_policy.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-035",
-                            "eval": "data.rule.sql_logical_server_email_addressess",
-                            "message": "data.rule.sql_logical_server_email_addressess_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_035.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
-                    ],
-                    "severity": "High",
-                    "title": "Azure SQL Security Alert Policy should be configured to send alerts to the account administrators and configured email addresses",
-                    "description": "Provide the email address where alerts will be sent when anomalous activities are detected on SQL servers."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-036",
@@ -2564,41 +1992,6 @@
                     "description": "Provide the email address where alerts will be sent when anomalous activities are detected on SQL servers."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-SQL-037",
-                    "type": "rego",
-                    "rule": "file(sql_alert_policy.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-037",
-                            "eval": "data.rule.sql_logical_server_retention_days",
-                            "message": "data.rule.sql_logical_server_retention_days_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_037.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
-                    ],
-                    "severity": "High",
-                    "title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are greater than 90 days",
-                    "description": "Azure SQL Database Threat Detection is a security intelligence feature built into the Azure SQL Database service. Working around the clock to learn, profile and detect anomalous database activities, Azure SQL Database Threat Detection identifies potential threats to the database. Security officers or other designated administrators can get an immediate notification about suspicious database activities as they occur. Each notification provides details of the suspicious activity and recommends how to further investigate and mitigate the threat."
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-SQL-038",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
@@ -2626,41 +2019,6 @@
                     "severity": "High",
                     "title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are greater than 90 days",
                     "description": "Azure SQL Database Threat Detection is a security intelligence feature built into the Azure SQL Database service. Working around the clock to learn, profile and detect anomalous database activities, Azure SQL Database Threat Detection identifies potential threats to the database. Security officers or other designated administrators can get an immediate notification about suspicious database activities as they occur. Each notification provides details of the suspicious activity and recommends how to further investigate and mitigate the threat."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-039",
-                    "type": "rego",
-                    "rule": "file(sql_alert_policy.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-039",
-                            "eval": "data.rule.sql_logical_server_disabled_alerts",
-                            "message": "data.rule.sql_logical_server_disabled_alerts_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_SQL_039.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
-                    ],
-                    "severity": "High",
-                    "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-040",
@@ -2756,42 +2114,6 @@
                     "description": "Ensure that SQL Server Auditing is enabled in order to keep track of Audit events."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-SQL-043",
-                    "type": "rego",
-                    "rule": "file(sql_servers_auditing.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-043",
-                            "eval": "data.rule.sql_logical_server_log_audit",
-                            "message": "data.rule.sql_logical_server_log_audit_err",
-                            "remediationDescription": "az sql server audit-policy show --name<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/mysql/server?view=azure-cli-latest#az_mysql_server_update' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/mysql/server?view=azure-cli-latest#az_mysql_server_update</a>",
-                            "remediationFunction": "PR_AZR_CLD_SQL_043.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HITRUST",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
-                    ],
-                    "severity": "High",
-                    "title": "Ensure that SQL Server Auditing is Enabled",
-                    "description": "Ensure that SQL Server Auditing is enabled in order to keep track of Audit events."
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-SQL-044",
                     "type": "rego",
                     "rule": "file(sql_servers_auditing.rego)",
@@ -2822,42 +2144,6 @@
                     ],
                     "masterSnapshotId": [
                         "AZRSNP_404"
-                    ],
-                    "severity": "High",
-                    "title": "Azure SQL server audit log retention should be greater than 90 days",
-                    "description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be greater than 90 days."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-045",
-                    "type": "rego",
-                    "rule": "file(sql_servers_auditing.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-045",
-                            "eval": "data.rule.sql_logial_server_audit_log_retention",
-                            "message": "data.rule.sql_logial_server_audit_log_retention_err",
-                            "remediationDescription": "az sql server audit-policy update -g -n --state Enabled --storage-account --retention-days 91<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/sql/server/audit-policy?view=azure-cli-latest#az_sql_server_audit_policy_show' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/sql/server/audit-policy?view=azure-cli-latest#az_sql_server_audit_policy_show</a>",
-                            "remediationFunction": "PR_AZR_CLD_SQL_045.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HITRUST",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
                     ],
                     "severity": "High",
                     "title": "Azure SQL server audit log retention should be greater than 90 days",
@@ -2900,42 +2186,6 @@
                     "description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure’s cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-SQL-048",
-                    "type": "rego",
-                    "rule": "file(sql_servers.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-048",
-                            "eval": "data.rule.sql_server_login",
-                            "message": "data.rule.sql_server_login_err",
-                            "remediationDescription": "Azure Console<br>1. Go to SQL Servers<br>2. For each SQL Server<br>3. Select Active Directory admin<br>4. Press the Set Admin at the top of the page<br>5. Select the active directory user you want to set as AD Admin for the SQL server.<br>6. Press the Remove admin if not needed.<br><br>Default Value: By default no AD Administrator is set for SQL server<br><br>For more information: <a href='https://docs.microsoft.com/en-us/azure/sql-database/sql-database-manage-logins' target='_blank'>https://docs.microsoft.com/en-us/azure/sql-database/sql-database-manage-logins</a>",
-                            "remediationFunction": "PR_AZR_CLD_SQL_048.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "PCI-DSS",
-                                "GDPR",
-                                "ISO 27001",
-                                "NIST CSF",
-                                "HIPAA",
-                                "Best Practices"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure SQL Server administrator login does not contain 'Admin/Administrator' as name",
-                    "description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks."
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-SQL-049",
                     "type": "rego",
                     "rule": "file(sql_servers.rego)",
@@ -2970,35 +2220,6 @@
                     "severity": "Medium",
                     "title": "Ensure SQL Server administrator login does not contain 'Admin/Administrator' as name",
                     "description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-050",
-                    "type": "rego",
-                    "rule": "file(sql_servers.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-050",
-                            "eval": "data.rule.fail_over_groups",
-                            "message": "data.rule.fail_over_groups_err",
-                            "remediationDescription": "Azure Console:<br>1. Go to SQL Servers<br>2. For each SQL Server<br>3. Select Failover groups<br>4. Press the Add group link on top of the page",
-                            "remediationFunction": "PR_AZR_CLD_SQL_050.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_400"
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Azure SQL Server data replication with Fail Over groups",
-                    "description": "SQL Server data should be replicated to avoid loss of unreplicated data."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-069",
@@ -3793,7 +3014,8 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_420"
+                        "AZRSNP_420",
+                        "AZRSNP_500"
                     ],
                     "severity": "Medium",
                     "title": "Configure Azure Cache for redis with private endpoints",
@@ -5731,7 +4953,9 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_223"
+                        "AZRSNP_223",
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ],
                     "severity": "Medium",
                     "title": "Soft delete on blob service should be enabled",
@@ -5767,7 +4991,9 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_223"
+                        "AZRSNP_223",
+                        "AZRSNP_301",
+                        "AZRSNP_222"
                     ],
                     "severity": "Medium",
                     "title": "Soft delete on blob service container should be enabled",
@@ -5808,70 +5034,6 @@
                     "severity": "Low",
                     "title": "Azure Deployment Scope Resource Group should have a remove protection resource lock configured",
                     "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence.<br><br>This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-STR-012",
-                    "type": "rego",
-                    "rule": "file(storageblobcontainers.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-STR-012",
-                            "eval": "data.rule.storage_container_public_access_disabled",
-                            "message": "data.rule.storage_container_public_access_disabled_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_STR_012.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "HITRUST",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Storage"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_283"
-                    ],
-                    "severity": "High",
-                    "title": "Azure storage blob container should not have public access enabled",
-                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature.<br><br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-STR-013",
-                    "type": "rego",
-                    "rule": "file(storageblobcontainers.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-STR-013",
-                            "eval": "data.rule.storage__logical_container_public_access_disabled",
-                            "message": "data.rule.storage__logical_container_public_access_disabled_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_STR_013.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Storage"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_301"
-                    ],
-                    "severity": "High",
-                    "title": "Azure storage blob container should not have public access enabled",
-                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature.<br><br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-ASC-001",
