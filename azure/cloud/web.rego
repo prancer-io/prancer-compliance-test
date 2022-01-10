@@ -1450,6 +1450,32 @@ default web_service_java_version_latest = null
 # valid values are 1.7.0_80, 1.8.0_181, 11
 latest_java_version := "11"
 
+azure_attribute_absence ["web_service_java_version_latest"] {
+    count([c | lower(input.resources[_].type) == "microsoft.web/sites/config"; c := 1]) == 0
+}
+
+azure_attribute_absence["web_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites/config"
+    not resource.dependsOn
+}
+
+azure_attribute_absence["web_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites/config"
+    not resource.properties.javaVersion
+}
+
+azure_issue["web_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    count([c | r := input.resources[_];
+              r.type == "microsoft.web/sites/config";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              r.properties.javaVersion == latest_java_version;
+              c := 1]) == 0
+}
+
 azure_inner_attribute_absence["web_service_java_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
