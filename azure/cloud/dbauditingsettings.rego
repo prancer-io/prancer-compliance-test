@@ -1,5 +1,9 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings
 
 #
@@ -9,6 +13,10 @@ package rule
 default sql_db_log_audit = null
 
 azure_attribute_absence["sql_db_log_audit"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/databases/auditingsettings"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_db_log_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
     not resource.properties.state
@@ -16,29 +24,35 @@ azure_attribute_absence["sql_db_log_audit"] {
 
 azure_issue["sql_db_log_audit"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
-    lower(resource.properties.state) != "enabled"
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/databases/auditingsettings";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              lower(r.properties.state) == "enabled";
+              c := 1]) == 0
 }
 
 sql_db_log_audit {
-    lower(input.resources[_].type) == "microsoft.sql/servers/databases/auditingsettings"
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     not azure_attribute_absence["sql_db_log_audit"]
     not azure_issue["sql_db_log_audit"]
 }
 
 sql_db_log_audit = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     azure_issue["sql_db_log_audit"]
 }
 
 sql_db_log_audit = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     azure_attribute_absence["sql_db_log_audit"]
 }
 
 sql_db_log_audit_err = "Azure SQL Database auditing is currently not enabled" {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     azure_issue["sql_db_log_audit"]
-}
-
-sql_db_log_audit_miss_err = "Azure SQL Database Auditing settings attribute 'state' is missing" {
+} else = "Azure SQL Database Auditing settings attribute 'state' is missing" {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     azure_attribute_absence["sql_db_log_audit"]
 }
 
@@ -53,7 +67,6 @@ sql_db_log_audit_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings"
 }
-
 
 
 # PR-AZR-CLD-SQL-005
@@ -122,38 +135,46 @@ sql_db_log_audit_metadata := {
 default sql_db_log_retention = null
 
 azure_attribute_absence["sql_db_log_retention"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/databases/auditingsettings"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_db_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
     not resource.properties.retentionDays
 }
 
-
 azure_issue["sql_db_log_retention"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
-    to_number(resource.properties.retentionDays) < 90
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/databases/auditingsettings";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              to_number(r.properties.retentionDays) >= 90;
+              c := 1]) == 0
 }
 
-
 sql_db_log_retention {
-    lower(input.resources[_].type) == "microsoft.sql/servers/databases/auditingsettings"
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     not azure_attribute_absence["sql_db_log_retention"]
     not azure_issue["sql_db_log_retention"]
 }
 
 sql_db_log_retention = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     azure_issue["sql_db_log_retention"]
 }
 
 sql_db_log_retention = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     azure_attribute_absence["sql_db_log_retention"]
 }
 
 sql_db_log_retention_err = "Azure SQL Database Auditing Retention is currently less than 90 days. It should be 90 days or more" {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     azure_issue["sql_db_log_retention"]
-}
-
-sql_db_log_retention_miss_err = "Azure SQL Database Auditing settings attribute 'retentionDays' is missing from the resource" {
+} else = "Azure SQL Database Auditing settings attribute 'retentionDays' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     azure_attribute_absence["sql_db_log_retention"]
 }
 
@@ -168,7 +189,6 @@ sql_db_log_retention_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings"
 }
-
 
 
 # PR-AZR-CLD-SQL-007

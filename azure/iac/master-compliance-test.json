@@ -609,7 +609,7 @@
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(blobservices.rego)",
+                    "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-ARM-STR-001",
@@ -639,6 +639,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.storage/storageaccounts",
                         "microsoft.storage/storageaccounts/blobservices"
                     ]
                 },
@@ -648,7 +649,7 @@
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(blobservices.rego)",
+                    "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-ARM-STR-002",
@@ -678,6 +679,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.storage/storageaccounts",
                         "microsoft.storage/storageaccounts/blobservices"
                     ]
                 },

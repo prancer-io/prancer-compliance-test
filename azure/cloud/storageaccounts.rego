@@ -29,6 +29,158 @@ storage_account_need_to_skip(target_storage_account_resource) {
     lower(target_storage_account_resource.tags["ms-resource-usage"]) == "azure-cloud-shell"
 }
 
+
+# https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices
+
+#
+# PR-AZR-CLD-STR-001
+#
+# SideNote for Reference: This cannot be done via Terraform. terraform can only change retention days.
+# See the note section at https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#container_delete_retention_policy
+# Note is applicable for delete_retention_policy as well.
+default storage_blob_soft_delete = null
+
+azure_attribute_absence["storage_blob_soft_delete"] {
+    count([c | lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices"; c := 1]) == 0
+}
+
+azure_attribute_absence["storage_blob_soft_delete"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices"
+    not has_property(resource.properties.deleteRetentionPolicy, "enabled")
+}
+
+azure_issue["storage_blob_soft_delete"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.storage/storageaccounts/blobservices";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              r.properties.deleteRetentionPolicy.enabled;
+              c := 1]) == 0
+}
+
+storage_blob_soft_delete {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    not azure_attribute_absence["storage_blob_soft_delete"]
+    not azure_issue["storage_blob_soft_delete"]
+}
+
+storage_blob_soft_delete = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_attribute_absence["storage_blob_soft_delete"]
+}
+
+storage_blob_soft_delete = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_issue["storage_blob_soft_delete"]
+}
+
+storage_blob_soft_delete_err = "microsoft.storage/storageaccounts/blobservices resource property deleteRetentionPolicy.enabled is missing." {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_attribute_absence["storage_blob_soft_delete"]
+} else = "Soft delete on blob service should be enabled" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_issue["storage_blob_soft_delete"]
+}
+
+storage_blob_soft_delete_metadata := {
+    "Policy Code": "PR-AZR-CLD-STR-001",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Soft delete on blob service should be enabled",
+    "Policy Description": "The blob service properties for blob soft delete. It helps to restore removed blob within configured retention days",
+    "Resource Type": "microsoft.storage/storageaccounts/blobservices",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices"
+}
+
+#
+# PR-AZR-CLD-STR-002
+#
+# SideNote for Reference: This cannot be done via Terraform. terraform can only change retention days.
+# See the note section at https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#container_delete_retention_policy
+default storage_blob_container_soft_delete = null
+
+azure_attribute_absence["storage_blob_container_soft_delete"] {
+    count([c | lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices"; c := 1]) == 0
+}
+
+azure_attribute_absence["storage_blob_container_soft_delete"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices"
+    not has_property(resource.properties.containerDeleteRetentionPolicy, "enabled")
+}
+
+azure_issue["storage_blob_container_soft_delete"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.storage/storageaccounts/blobservices";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              r.properties.containerDeleteRetentionPolicy.enabled;
+              c := 1]) == 0
+}
+
+storage_blob_container_soft_delete {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    not azure_attribute_absence["storage_blob_container_soft_delete"]
+    not azure_issue["storage_blob_container_soft_delete"]
+}
+
+storage_blob_container_soft_delete = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_attribute_absence["storage_blob_container_soft_delete"]
+}
+
+storage_blob_container_soft_delete = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_issue["storage_blob_container_soft_delete"]
+}
+
+storage_blob_container_soft_delete_err = "microsoft.storage/storageaccounts/blobservices resource property containerDeleteRetentionPolicy.enabled is missing." {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_attribute_absence["storage_blob_container_soft_delete"]
+} else = "Soft delete on blob service container should be enabled" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not storage_account_need_to_skip(resource)
+    azure_issue["storage_blob_container_soft_delete"]
+}
+
+storage_blob_container_soft_delete_metadata := {
+    "Policy Code": "PR-AZR-CLD-STR-002",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Soft delete on blob service container should be enabled",
+    "Policy Description": "The blob service properties for container soft delete. It helps to restore removed blob containers within configured retention days.",
+    "Resource Type": "microsoft.storage/storageaccounts/blobservices",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices"
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
 
 #
