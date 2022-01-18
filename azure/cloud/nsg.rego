@@ -3,8 +3,8 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups
 
 iports := [
-    "20", "21", "22", "23", "25", "53", "80", "135", "137", "138", "445", "1433", "1434", "1521", 
-    "3306", "3389", "4333", "5000", "5432", "5500", "5900", "5984", "6379", "6380", "9042", "11211",
+    "20", "21", "22", "23", "25", "53", "80", "135", "137", "138", "445", "1270", "1433", "1434", "1521", 
+    "3306", "3389", "4333", "5000", "5432", "5500", "5900", "5984", "5985", "5986", "6379", "6380", "9042", "11211",
     "27017", "28015", "29015", "50000"
 ]
 
@@ -757,38 +757,36 @@ inbound_port_445_metadata := {
 
 #
 # PR-AZR-CLD-NSG-017
-
-
 #
  
-default inbound_insecure_omi_port = null
- 
-azure_issue["inbound_insecure_omi_port"] {
+default inbound_omi_port_blocked = null
+
+azure_issue["inbound_omi_port_blocked"] {
     to_number(nsg_inbound[_]) == 5985
 }
  
-azure_issue["inbound_insecure_omi_port"] {
+azure_issue["inbound_omi_port_blocked"] {
     to_number(nsg_inbound[_]) == 5986
 }
  
-azure_issue["inbound_insecure_omi_port"] {
+azure_issue["inbound_omi_port_blocked"] {
     to_number(nsg_inbound[_]) == 1270
 }
- 
-inbound_insecure_omi_port {
-    azure_issue["inbound_insecure_omi_port"]
+
+inbound_omi_port_blocked = false {
+    azure_issue["inbound_omi_port_blocked"]
 }
  
-inbound_insecure_omi_port = false {
+inbound_omi_port_blocked {
     lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
-    not azure_issue["inbound_insecure_omi_port"]
+    not azure_issue["inbound_omi_port_blocked"]
 }
  
-inbound_insecure_omi_port_err = "Azure Network Security Group (NSG) currently not protecting OMIGOD attack from internet" {
-    azure_issue["inbound_insecure_omi_port"]
+inbound_omi_port_blocked_err = "Azure Network Security Group (NSG) currently not protecting OMIGOD attack from internet" {
+    azure_issue["inbound_omi_port_blocked"]
 }
  
-inbound_insecure_omi_port_metadata := {
+inbound_omi_port_blocked_metadata := {
     "Policy Code": "PR-AZR-CLD-NSG-017",
     "Type": "Cloud",
     "Product": "AZR",

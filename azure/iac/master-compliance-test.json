@@ -3638,8 +3638,8 @@
                     "evals": [
                         {
                             "id": "PR-AZR-ARM-NSG-017",
-                            "eval": "data.rule.inbound_insecure_omi_port",
-                            "message": "data.rule.inbound_insecure_omi_port_err",
+                            "eval": "data.rule.inbound_omi_port_blocked",
+                            "message": "data.rule.inbound_omi_port_blocked_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_017.py"
                         }

@@ -4764,8 +4764,8 @@
                     "evals": [
                         {
                             "id": "PR-AZR-CLD-NSG-017",
-                            "eval": "data.rule.inbound_insecure_omi_port",
-                            "message": "data.rule.inbound_insecure_omi_port_err",
+                            "eval": "data.rule.inbound_omi_port_blocked",
+                            "message": "data.rule.inbound_omi_port_blocked_err",
                             "remediationDescription": "",
                             "remediationFunction": "PR_AZR_CLD_NSG_017.py"
                         }
