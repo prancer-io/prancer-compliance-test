@@ -446,7 +446,7 @@
 				},
 				{
 					"masterSnapshotId": "TEST_TS",
-					"arn": "arn:aws:timestream:::",
+					"arn": "arn:aws:timestream-write:::",
 					"type": "timestream",
 					"collection": "aws_ts",
 					"listMethod": "list_databases",
