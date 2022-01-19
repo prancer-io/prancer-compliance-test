@@ -1594,7 +1594,7 @@
                     "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchanges log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_10",
+                    "masterTestId": "PR-AZR-CLD-SQL-010",
                     "type": "rego",
                     "rule": "file(dbfirewallrules.rego)",
                     "evals": [
