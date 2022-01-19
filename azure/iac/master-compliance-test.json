@@ -5761,7 +5761,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Security Center shoud send security alerts notifications to subscription admins",
+                    "title": "Security Center should send security alerts notifications to subscription admins",
                     "description": "This policy will identify security centers which dont have configuration enabled to send security alerts notifications to subscription admins and alert if missing.",
                     "tags": [
                         {

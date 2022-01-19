@@ -422,7 +422,7 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "AKS cluster shoud have Network Policy configured",
+                    "title": "AKS cluster should have Network Policy configured",
                     "description": "Network policy used for building Kubernetes network. - calico or azure.",
                     "tags": [
                         {

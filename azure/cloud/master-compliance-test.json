@@ -185,7 +185,7 @@
                             "id": "PR-AZR-CLD-KV-006",
                             "eval": "data.rule.keyvault_Acl",
                             "message": "data.rule.keyvault_Acl_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/bs-latn-ba/azure/key-vault/general/how-to-azure-key-vault-network-security?tabs=azure-portal' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_KV_006.py"
                         }
                     ],
@@ -214,7 +214,7 @@
                             "id": "PR-AZR-CLD-KV-007",
                             "eval": "data.rule.keyvault_bypass",
                             "message": "data.rule.keyvault_bypass_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/key-vault/general/network-security' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_KV_007.py"
                         }
                     ],
@@ -243,7 +243,7 @@
                             "id": "PR-AZR-CLD-KV-008",
                             "eval": "data.rule.keyvault_service_endpoint",
                             "message": "data.rule.keyvault_service_endpoint_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/key-vault/general/overview-vnet-service-endpoints' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_KV_008.py"
                         }
                     ],
@@ -272,7 +272,7 @@
                             "id": "PR-AZR-CLD-KV-009",
                             "eval": "data.rule.kv_private_endpoint",
                             "message": "data.rule.kv_private_endpoint_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/key-vault/general/private-link-service?tabs=portal' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_KV_009.py"
                         }
                     ],
@@ -301,7 +301,7 @@
                             "id": "PR-AZR-CLD-KV-010",
                             "eval": "data.rule.kv_public_access_disabled",
                             "message": "data.rule.kv_public_access_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/key-vault/general/network-security' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_KV_010.py"
                         }
                     ],
@@ -534,7 +534,7 @@
                             "id": "PR-AZR-CLD-STR-010",
                             "eval": "data.rule.blobServicePublicAccessDisabled",
                             "message": "data.rule.blobServicePublicAccessDisabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To disallow public access for a storage account in the Azure portal, follow these steps:<br><br>1. Navigate to your storage account in the Azure portal.<br>2. Locate the Configuration setting under Settings.<br>3. Set Blob public access to Disabled.",
                             "remediationFunction": "PR_AZR_CLD_STR_010.py"
                         }
                     ],
@@ -606,7 +606,7 @@
                             "id": "PR-AZR-CLD-STR-018",
                             "eval": "data.rule.storage_account_latest_tls_configured",
                             "message": "data.rule.storage_account_latest_tls_configured_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To configure the minimum TLS version for an existing storage account with the Azure portal, follow these steps:<br><br>1. Navigate to your storage account in the Azure portal.<br>2. Under Settings, select Configuration.<br>3. Under Minimum TLS version, use the drop-down to select the minimum version of TLS required to access data in this storage account",
                             "remediationFunction": "PR_AZR_CLD_STR_018.py"
                         }
                     ],
@@ -640,7 +640,7 @@
                             "id": "PR-AZR-CLD-STR-019",
                             "eval": "data.rule.storage_account_private_endpoint",
                             "message": "data.rule.storage_account_private_endpoint_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-private-endpoints' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_STR_019.py"
                         }
                     ],
@@ -672,7 +672,7 @@
                             "id": "PR-AZR-CLD-STR-020",
                             "eval": "data.rule.storage_account_require_encryption",
                             "message": "data.rule.storage_account_require_encryption_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. In the Azure portal, navigate to the Storage accounts page.<br>2. Choose the Add button to add a new general-purpose v2 storage account.<br>3. On the Advanced tab, locate Infrastructure encryption, and select Enabled.<br>4. Select Review + create to finish creating the storage account.",
                             "remediationFunction": "PR_AZR_CLD_STR_020.py"
                         }
                     ],
@@ -703,7 +703,7 @@
                             "id": "PR-AZR-CLD-STR-021",
                             "eval": "data.rule.storage_account_scopes_require_encryption",
                             "message": "data.rule.storage_account_scopes_require_encryption_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. In the Azure portal, navigate to the Storage accounts page.<br>2. Choose the Add button to add a new general-purpose v2 storage account.<br>3. On the Advanced tab, locate Infrastructure encryption, and select Enabled.<br>4. Select Review + create to finish creating the storage account.",
                             "remediationFunction": "PR_AZR_CLD_STR_021.py"
                         }
                     ],
@@ -734,7 +734,7 @@
                             "id": "PR-AZR-CLD-STR-022",
                             "eval": "data.rule.storage_account_encryption_scopes_source",
                             "message": "data.rule.storage_account_encryption_scopes_source_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/storage/common/customer-managed-keys-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_STR_022.py"
                         }
                     ],
@@ -765,7 +765,7 @@
                             "id": "PR-AZR-CLD-STR-023",
                             "eval": "data.rule.storage_vnet_service_endpoint",
                             "message": "data.rule.storage_vnet_service_endpoint_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoint-policies-overviewv' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_STR_023.py"
                         }
                     ],
@@ -796,7 +796,7 @@
                             "id": "PR-AZR-CLD-STR-024",
                             "eval": "data.rule.storage_account_allow_shared_key_access",
                             "message": "data.rule.storage_account_allow_shared_key_access_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/storage/common/shared-key-authorization-prevent?tabs=portal' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_STR_024.py"
                         }
                     ],
@@ -971,7 +971,7 @@
                             "id": "PR-AZR-CLD-WEB-006",
                             "eval": "data.rule.web_service_cors_not_allowing_all",
                             "message": "data.rule.web_service_cors_not_allowing_all_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_006.py"
                         }
                     ],
@@ -1000,7 +1000,7 @@
                             "id": "PR-AZR-CLD-WEB-007",
                             "eval": "data.rule.web_service_http_logging_enabled",
                             "message": "data.rule.web_service_http_logging_enabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_007.py"
                         }
                     ],
@@ -1029,7 +1029,7 @@
                             "id": "PR-AZR-CLD-WEB-008",
                             "eval": "data.rule.web_service_detaild_error_message_enabled",
                             "message": "data.rule.web_service_detaild_error_message_enabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_008.py"
                         }
                     ],
@@ -1058,7 +1058,7 @@
                             "id": "PR-AZR-CLD-WEB-009",
                             "eval": "data.rule.web_service_request_tracing_enabled",
                             "message": "data.rule.web_service_request_tracing_enabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_009.py"
                         }
                     ],
@@ -1087,7 +1087,7 @@
                             "id": "PR-AZR-CLD-WEB-010",
                             "eval": "data.rule.web_service_managed_identity_provider_enabled",
                             "message": "data.rule.web_service_managed_identity_provider_enabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_010.py"
                         }
                     ],
@@ -1116,7 +1116,7 @@
                             "id": "PR-AZR-CLD-WEB-011",
                             "eval": "data.rule.web_service_remote_debugging_disabled",
                             "message": "data.rule.web_service_remote_debugging_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/visualstudio/debugger/remote-debugging-azure?view=vs-2022' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_011.py"
                         }
                     ],
@@ -1145,7 +1145,7 @@
                             "id": "PR-AZR-CLD-WEB-012",
                             "eval": "data.rule.web_service_ftp_deployment_disabled",
                             "message": "data.rule.web_service_ftp_deployment_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/app-service/deploy-ftp?tabs=portal' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_012.py"
                         }
                     ],
@@ -1174,7 +1174,7 @@
                             "id": "PR-AZR-CLD-WEB-013",
                             "eval": "data.rule.web_service_net_framework_latest",
                             "message": "data.rule.web_service_net_framework_latest_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/app-service/configure-language-dotnet-framework' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_013.py"
                         }
                     ],
@@ -1203,7 +1203,7 @@
                             "id": "PR-AZR-CLD-WEB-014",
                             "eval": "data.rule.web_service_php_version_latest",
                             "message": "data.rule.web_service_php_version_latest_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/app-service/configure-language-php?pivots=platform-linux' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_014.py"
                         }
                     ],
@@ -1232,7 +1232,7 @@
                             "id": "PR-AZR-CLD-WEB-015",
                             "eval": "data.rule.web_service_python_version_latest",
                             "message": "data.rule.web_service_python_version_latest_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/app-service/configure-language-python' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_015.py"
                         }
                     ],
@@ -1261,7 +1261,7 @@
                             "id": "PR-AZR-CLD-WEB-016",
                             "eval": "data.rule.web_service_java_version_latest",
                             "message": "data.rule.web_service_java_version_latest_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/app-service/configure-language-java?pivots=platform-linux' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_WEB_016.py"
                         }
                     ],
@@ -1324,7 +1324,7 @@
                             "id": "PR-AZR-CLD-SQL-002",
                             "eval": "data.rule.sql_logical_server_ad_admin",
                             "message": "data.rule.sql_logical_server_ad_admin_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Azure Console<br>1. Go to SQL servers<br>2. For each SQL server, click on Active Directory admin<br>3. Click on Set admin<br>4. Select an admin<br>5. Click Save<br><br>Default Value:<br>Azure Active Directory Authentication for SQL Database/Server is not enabled by default<br>References:<br><a href='https://docs.microsoft.com/en-us/azure/sql-database/sql-database-aad-authentication-configure' target='_blank'>1. https://docs.microsoft.com/en-us/azure/sql-database/sql-database-aad-authentication-configure</a><br><a href='https://docs.microsoft.com/en-us/azure/sql-database/sql-database-aad-authentication' target='_blank'>2. https://docs.microsoft.com/en-us/azure/sql-database/sql-database-aad-authentication</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_002.py"
                         }
                     ],
@@ -1358,7 +1358,7 @@
                             "id": "PR-AZR-CLD-SQL-003",
                             "eval": "data.rule.sql_managedinstances_ad_admin",
                             "message": "data.rule.sql_managedinstances_ad_admin_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/aad-security-configure-tutorial' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_003.py"
                         }
                     ],
@@ -1464,7 +1464,7 @@
                             "id": "PR-AZR-CLD-SQL-006",
                             "eval": "data.rule.sql_db_log_retention",
                             "message": "data.rule.sql_db_log_retention_err",
-                            "remediationDescription": "With Azure CLI:<br>az sql db audit-policy update -g mygroup -s myserver -n mydb --state Enabled --bsts Enabled --storage-account mystorage --retention-days 0<br><br>References: <a href='https://docs.microsoft.com/en-us/cli/azure/sql/db/audit-policy?view=azure-cli-latest#az_sql_db_audit_policy_update' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/sql/db/audit-policy?view=azure-cli-latest#az_sql_db_audit_policy_update</a>",
+                            "remediationDescription": "To change the policy using the Azure Portal, follow these steps:<br><br>1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Navigate to SQL Databases.<br>2. For each server instance:<br>a) Click Auditing.<br>b) Select Storage Details.<br>c) Set Retention (days) to greater than 90 days.<br>d) Click OK.<br>e) Click Save",
                             "remediationFunction": "PR_AZR_CLD_SQL_006.py"
                         }
                     ],
@@ -1500,7 +1500,7 @@
                             "id": "PR-AZR-CLD-SQL-007",
                             "eval": "data.rule.sql_logical_db_log_retention",
                             "message": "data.rule.sql_logical_db_log_retention_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To change the policy using the Azure Portal, follow these steps:<br><br>1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Navigate to SQL Databases.<br>2. For each server instance:<br>a) Click Auditing.<br>b) Select Storage Details.<br>c) Set Retention (days) to greater than 90 days.<br>d) Click OK.<br>e) Click Save",
                             "remediationFunction": "PR_AZR_CLD_SQL_007.py"
                         }
                     ],
@@ -1608,7 +1608,7 @@
                             "id": "PR-AZR-CLD-SQL-010",
                             "eval": "data.rule.db_logical_firewall",
                             "message": "data.rule.db_logical_firewall_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Navigate to SQL servers.<br>3. For each SQL server:<br>a) Click Firewall / Virtual Networks.<br>b) Set Allow access to Azure services to OFF.<br>c) Set firewall rules to limit access to authorized connections.",
                             "remediationFunction": "PR_AZR_CLD_SQL_010.py"
                         }
                     ],
@@ -1643,7 +1643,7 @@
                             "id": "PR-AZR-CLD-SQL-011",
                             "eval": "data.rule.db_firewall",
                             "message": "data.rule.db_firewall_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Navigate to SQL servers.<br>3. For each SQL server:<br>a) Click Firewall / Virtual Networks.<br>b) Set Allow access to Azure services to OFF.<br>c) Set firewall rules to limit access to authorized connections.",
                             "remediationFunction": "PR_AZR_CLD_SQL_011.py"
                         }
                     ],
@@ -1678,7 +1678,7 @@
                             "id": "PR-AZR-CLD-SQL-012",
                             "eval": "data.rule.maria_ingress_from_any_ip_disabled",
                             "message": "data.rule.maria_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/mariadb/concepts-firewall-rules' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_012.py"
                         }
                     ],
@@ -1707,7 +1707,7 @@
                             "id": "PR-AZR-CLD-SQL-013",
                             "eval": "data.rule.dbmaria_ingress_from_any_ip_disabled",
                             "message": "data.rule.dbmaria_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/mariadb/concepts-firewall-rules' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_013.py"
                         }
                     ],
@@ -1736,7 +1736,7 @@
                             "id": "PR-AZR-CLD-SQL-014",
                             "eval": "data.rule.mysql_ingress_from_any_ip_disabled",
                             "message": "data.rule.mysql_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/mysql/concepts-firewall-rules' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_014.py"
                         }
                     ],
@@ -1765,7 +1765,7 @@
                             "id": "PR-AZR-CLD-SQL-015",
                             "eval": "data.rule.my_logical_sql_ingress_from_any_ip_disabled",
                             "message": "data.rule.my_logical_sql_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/mysql/concepts-firewall-rules' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_015.py"
                         }
                     ],
@@ -1794,7 +1794,7 @@
                             "id": "PR-AZR-CLD-SQL-016",
                             "eval": "data.rule.ssl_enforcement",
                             "message": "data.rule.ssl_enforcement_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Using the Azure portal, visit your Azure Database for MySQL server, and then click Connection security. Use the toggle button to enable or disable the Enforce SSL connection setting, and then click Save. Microsoft recommends to always enable the Enforce SSL connection setting for enhanced security.",
                             "remediationFunction": "PR_AZR_CLD_SQL_016.py"
                         }
                     ],
@@ -1830,7 +1830,7 @@
                             "id": "PR-AZR-CLD-SQL-017",
                             "eval": "data.rule.dbsec_threat_off",
                             "message": "data.rule.dbsec_threat_off_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/rest/api/sql/2021-02-01-preview/server-security-alert-policies/create-or-update' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_017.py"
                         }
                     ],
@@ -1864,7 +1864,7 @@
                             "id": "PR-AZR-CLD-SQL-018",
                             "eval": "data.rule.dbsec_threat_retention",
                             "message": "data.rule.dbsec_threat_retention_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To change the policy using the Azure Portal, follow these steps:<br><br>1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Navigate to SQL servers Databases.<br>2. For each server instance:<br>a) Click Auditing.<br>b) Select Storage Details.<br>c) Set Retention (days) to greater than 90 days.<br>d) Click OK.<br>e) Click Save.",
                             "remediationFunction": "PR_AZR_CLD_SQL_018.py"
                         }
                     ],
@@ -1900,7 +1900,7 @@
                             "id": "PR-AZR-CLD-SQL-019",
                             "eval": "data.rule.dbsec_threat_email",
                             "message": "data.rule.dbsec_threat_email_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/database/alerts-insights-configure-portal' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_019.py"
                         }
                     ],
@@ -2005,7 +2005,7 @@
                             "id": "PR-AZR-CLD-SQL-022",
                             "eval": "data.rule.db_ads_scan",
                             "message": "data.rule.db_ads_scan_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment?tabs=azure-powershell' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_022.py"
                         }
                     ],
@@ -2034,7 +2034,7 @@
                             "id": "PR-AZR-CLD-SQL-023",
                             "eval": "data.rule.db_logical_ads_scan",
                             "message": "data.rule.db_logical_ads_scan_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment?tabs=azure-powershell' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_023.py"
                         }
                     ],
@@ -2063,7 +2063,7 @@
                             "id": "PR-AZR-CLD-SQL-024",
                             "eval": "data.rule.db_ads_mail",
                             "message": "data.rule.db_ads_mail_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment?tabs=azure-powershell' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_024.py"
                         }
                     ],
@@ -2092,7 +2092,7 @@
                             "id": "PR-AZR-CLD-SQL-025",
                             "eval": "data.rule.db_logical_ads_mail",
                             "message": "data.rule.db_logical_ads_mail_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment?tabs=azure-powershell' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_025.py"
                         }
                     ],
@@ -2121,7 +2121,7 @@
                             "id": "PR-AZR-CLD-SQL-026",
                             "eval": "data.rule.db_ads_alert",
                             "message": "data.rule.db_ads_alert_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment?tabs=azure-powershell' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_026.py"
                         }
                     ],
@@ -2150,7 +2150,7 @@
                             "id": "PR-AZR-CLD-SQL-027",
                             "eval": "data.rule.db_logical_ads_alert",
                             "message": "data.rule.db_logical_ads_alert_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment?tabs=azure-powershell' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_027.py"
                         }
                     ],
@@ -2179,7 +2179,7 @@
                             "id": "PR-AZR-CLD-SQL-060",
                             "eval": "data.rule.mysql_public_access_disabled",
                             "message": "data.rule.mysql_public_access_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Follow these steps to set MySQL server Deny Public Network Access:<br><br>1. In the Azure portal, select your existing Azure Database for MySQL server.<br>2. On the MySQL server page, under Settings, click Connection security to open the connection security configuration page.<br>3. In Deny Public Network Access, select Yes to enable deny public access for your MySQL server.<br>4. Click Save to save the changes.<br>5. A notification will confirm that connection security setting was successfully enabled.",
                             "remediationFunction": "PR_AZR_CLD_SQL_060.py"
                         }
                     ],
@@ -2210,7 +2210,7 @@
                             "id": "PR-AZR-CLD-SQL-061",
                             "eval": "data.rule.mysql_server_latest_tls_configured",
                             "message": "data.rule.mysql_server_latest_tls_configured_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Follow these steps to set MySQL server minimum TLS version:<br><br>1. In the Azure portal, select your existing Azure Database for MySQL server.<br>2. On the MySQL server page, under Settings, click Connection security to open the connection security configuration page.<br>3. In Minimum TLS version, select 1.2 to deny connections with TLS version less than TLS 1.2 for your MySQL server.<br>4. Click Save to save the changes.<br>5. A notification will confirm that connection security setting was successfully enabled and in effect immediately. There is no restart of the server required or performed. After the changes are saved, all new connections to the server are accepted only if the TLS version is greater than or equal to the minimum TLS version set on the portal.",
                             "remediationFunction": "PR_AZR_CLD_SQL_061.py"
                         }
                     ],
@@ -2241,7 +2241,7 @@
                             "id": "PR-AZR-CLD-SQL-056",
                             "eval": "data.rule.mairadb_ssl_enforcement_enabled",
                             "message": "data.rule.mairadb_ssl_enforcement_enabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Using the Azure portal, visit your Azure Database for MariaDB server, and then click Connection security. Use the toggle button to enable or disable the Enforce SSL connection setting, and then click Save. Microsoft recommends to always enable the Enforce SSL connection setting for enhanced security.",
                             "remediationFunction": "PR_AZR_CLD_SQL_056.py"
                         }
                     ],
@@ -2270,7 +2270,7 @@
                             "id": "PR-AZR-CLD-SQL-057",
                             "eval": "data.rule.mairadb_public_access_disabled",
                             "message": "data.rule.mairadb_public_access_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Follow these steps to set MariaDB server Deny Public Network Access:<br><br>1. In the Azure portal, select your existing Azure Database for MariaDB server.<br>2. On the MariaDB server page, under Settings, click Connection security to open the connection security configuration page.<br>3. In Deny Public Network Access, select Yes to enable deny public access for your MariaDB server.<br>4. Click Save to save the changes.<br>5. A notification will confirm that connection security setting was successfully enabled.",
                             "remediationFunction": "PR_AZR_CLD_SQL_057.py"
                         }
                     ],
@@ -2301,7 +2301,7 @@
                             "id": "PR-AZR-CLD-SQL-058",
                             "eval": "data.rule.mariadb_geo_redundant_backup_enabled",
                             "message": "data.rule.mariadb_geo_redundant_backup_enabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Sign in to Azure Management Console.<br>2. Navigate to All resources blade at https://portal.azure.com/#blade/HubsExtension/BrowseAll to access all your Microsoft Azure resources.<br>3. From the Type filter box, select Azure Database for MariaDB server to list the MariaDB servers provisioned within your Azure account.<br>4. Click on the name of the MariaDB database server that you want to examine.<br>5. In the navigation panel, under Settings, select Pricing tier to access the pricing tier settings available for the selected MariaDB server.<br>6. On the Pricing tier page, in the Backup Redundancy Options section, check the backup redundancy tier configured for the database server. If the selected tier is Locally Redundant, the data can be recovered from within the current region only, therefore the Geo-Redundant backup feature is not enabled for the selected Microsoft Azure MariaDB database server.<br>7. Repeat steps no. 4 – 6 for each MariaDB database server available in the current Azure subscription.<br>8. Repeat steps no. 3 – 7 for each subscription created in your Microsoft Azure cloud account.",
                             "remediationFunction": "PR_AZR_CLD_SQL_058.py"
                         }
                     ],
@@ -2332,7 +2332,7 @@
                             "id": "PR-AZR-CLD-SQL-030",
                             "eval": "data.rule.sql_logical_server_alert",
                             "message": "data.rule.sql_logical_server_alert_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_030.py"
                         }
                     ],
@@ -2367,7 +2367,7 @@
                             "id": "PR-AZR-CLD-SQL-031",
                             "eval": "data.rule.sql_server_alert",
                             "message": "data.rule.sql_server_alert_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_031.py"
                         }
                     ],
@@ -2402,7 +2402,7 @@
                             "id": "PR-AZR-CLD-SQL-032",
                             "eval": "data.rule.sql_managed_instance_alert",
                             "message": "data.rule.sql_managed_instance_alert_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/threat-detection-configure' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_032.py"
                         }
                     ],
@@ -2437,7 +2437,7 @@
                             "id": "PR-AZR-CLD-SQL-033",
                             "eval": "data.rule.sql_logical_server_email_account",
                             "message": "data.rule.sql_logical_server_email_account_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies?tabs=json' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_033.py"
                         }
                     ],
@@ -2472,7 +2472,7 @@
                             "id": "PR-AZR-CLD-SQL-034",
                             "eval": "data.rule.sql_server_email_account",
                             "message": "data.rule.sql_server_email_account_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies?tabs=json' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_034.py"
                         }
                     ],
@@ -2507,7 +2507,7 @@
                             "id": "PR-AZR-CLD-SQL-035",
                             "eval": "data.rule.sql_logical_server_email_addressess",
                             "message": "data.rule.sql_logical_server_email_addressess_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/defender-for-cloud/configure-email-notifications' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_035.py"
                         }
                     ],
@@ -2542,7 +2542,7 @@
                             "id": "PR-AZR-CLD-SQL-036",
                             "eval": "data.rule.sql_server_email_addressess",
                             "message": "data.rule.sql_server_email_addressess_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/defender-for-cloud/configure-email-notifications' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_036.py"
                         }
                     ],
@@ -2577,7 +2577,7 @@
                             "id": "PR-AZR-CLD-SQL-037",
                             "eval": "data.rule.sql_logical_server_retention_days",
                             "message": "data.rule.sql_logical_server_retention_days_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To change the policy using the Azure Portal, follow these steps:<br><br>1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Navigate to SQL servers.<br>2. For each server instance:<br>a) Click Auditing.<br>b) Select Storage Details.<br>c) Set Retention (days) to greater than 90 days.<br>d) Click OK.<br>e) Click Save.",
                             "remediationFunction": "PR_AZR_CLD_SQL_037.py"
                         }
                     ],
@@ -2612,7 +2612,7 @@
                             "id": "PR-AZR-CLD-SQL-038",
                             "eval": "data.rule.sql_server_retention_days",
                             "message": "data.rule.sql_server_retention_days_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To change the policy using the Azure Portal, follow these steps:<br><br>1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Navigate to SQL servers.<br>2. For each server instance:<br>a) Click Auditing.<br>b) Select Storage Details.<br>c) Set Retention (days) to greater than 90 days.<br>d) Click OK.<br>e) Click Save.",
                             "remediationFunction": "PR_AZR_CLD_SQL_038.py"
                         }
                     ],
@@ -2641,7 +2641,7 @@
                             "id": "PR-AZR-CLD-SQL-039",
                             "eval": "data.rule.sql_logical_server_disabled_alerts",
                             "message": "data.rule.sql_logical_server_disabled_alerts_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Sign into the Azure portal.<br>2. Navigate to the configuration page of the server you want to protect. In the security settings, select Defender for Cloud.<br>3.On the Microsoft Defender for SQL configuration page:<br>a) Enable Microsoft Defender for SQL on the server.<br>b) In Advanced Threat Protection Settings, provide the list of emails to receive security alerts upon detection of anomalous database activities in the Send alerts to text box.",
                             "remediationFunction": "PR_AZR_CLD_SQL_039.py"
                         }
                     ],
@@ -2676,7 +2676,7 @@
                             "id": "PR-AZR-CLD-SQL-040",
                             "eval": "data.rule.sql_server_disabled_alerts",
                             "message": "data.rule.sql_server_disabled_alerts_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Sign into the Azure portal.<br>2. Navigate to the configuration page of the server you want to protect. In the security settings, select Defender for Cloud.<br>3.On the Microsoft Defender for SQL configuration page:<br>a) Enable Microsoft Defender for SQL on the server.<br>b) In Advanced Threat Protection Settings, provide the list of emails to receive security alerts upon detection of anomalous database activities in the Send alerts to text box.",
                             "remediationFunction": "PR_AZR_CLD_SQL_040.py"
                         }
                     ],
@@ -2711,7 +2711,7 @@
                             "id": "PR-AZR-CLD-SQL-041",
                             "eval": "data.rule.sql_mi_public_endpoint_disabled",
                             "message": "data.rule.sql_mi_public_endpoint_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/public-endpoint-configure' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_041.py"
                         }
                     ],
@@ -3014,7 +3014,7 @@
                             "id": "PR-AZR-CLD-SQL-069",
                             "eval": "data.rule.sql_server_latest_tls_configured",
                             "message": "data.rule.sql_server_latest_tls_configured_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/minimal-tls-version-configure' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_069.py"
                         }
                     ],
@@ -3045,7 +3045,7 @@
                             "id": "PR-AZR-CLD-SQL-047",
                             "eval": "data.rule.sql_public_access",
                             "message": "data.rule.sql_public_access_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/database/connectivity-settings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_047.py"
                         }
                     ],
@@ -3111,7 +3111,7 @@
                             "id": "PR-AZR-CLD-AKS-002",
                             "eval": "data.rule.aks_http_routing",
                             "message": "data.rule.aks_http_routing_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/aks/http-application-routing' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_AKS_002.py"
                         }
                     ],
@@ -3253,7 +3253,7 @@
                             "id": "PR-AZR-CLD-AKS-006",
                             "eval": "data.rule.aks_aad_azure_rbac",
                             "message": "data.rule.aks_aad_azure_rbac_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/aks/managed-aad' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_AKS_006.py"
                         }
                     ],
@@ -3371,7 +3371,7 @@
                             "id": "PR-AZR-CLD-AKS-010",
                             "eval": "data.rule.aks_local_account_disabled",
                             "message": "data.rule.aks_local_account_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/aks/private-clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_AKS_010.py"
                         }
                     ],
@@ -3438,7 +3438,7 @@
                             "id": "PR-AZR-CLD-AGW-002",
                             "eval": "data.rule.gw_waf",
                             "message": "data.rule.gw_waf_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/web-application-firewall/ag/ag-overview#application-gateway-waf-sku-pricing' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_AGW_002.py"
                         }
                     ],
@@ -3508,7 +3508,7 @@
                             "id": "PR-AZR-CLD-AGW-004",
                             "eval": "data.rule.frontendPublicIPConfigurationsDisabled",
                             "message": "data.rule.frontendPublicIPConfigurationsDisabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/application-gateway/configuration-front-end-ip' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_AGW_004.py"
                         }
                     ],
@@ -3543,7 +3543,7 @@
                             "id": "PR-AZR-CLD-AGW-005",
                             "eval": "data.rule.backend_https_protocol_enabled",
                             "message": "data.rule.backend_https_protocol_enabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/application-gateway/end-to-end-ssl-portal' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_AGW_005.py"
                         }
                     ],
@@ -3578,7 +3578,7 @@
                             "id": "PR-AZR-CLD-AGW-006",
                             "eval": "data.rule.secret_certificate_is_in_keyvalut",
                             "message": "data.rule.secret_certificate_is_in_keyvalut_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/application-gateway/key-vault-certs' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_AGW_006.py"
                         }
                     ],
@@ -3720,7 +3720,7 @@
                             "id": "PR-AZR-CLD-ARC-003",
                             "eval": "data.rule.redis_public_access",
                             "message": "data.rule.redis_public_access_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-cache-for-redis/cache-private-link' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_ARC_003.py"
                         }
                     ],
@@ -3751,7 +3751,7 @@
                             "id": "PR-AZR-CLD-ARC-004",
                             "eval": "data.rule.arc_subnet_id",
                             "message": "data.rule.arc_subnet_id_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-cache-for-redis/cache-how-to-premium-vnet' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_ARC_004.py"
                         }
                     ],
@@ -3782,7 +3782,7 @@
                             "id": "PR-AZR-CLD-ARC-005",
                             "eval": "data.rule.arc_private_endpoint",
                             "message": "data.rule.arc_private_endpoint_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To create a private endpoint, follow these steps:<br><br>1. In the Azure portal, search for Azure Cache for Redis. Then, press enter or select it from the search suggestions.<br>2. Select the cache instance you want to add a private endpoint to.<br>3. On the left side of the screen, select Private Endpoint.<br>4. Select the Private Endpoint button to create your private endpoint.<br>5. On the Create a private endpoint page, configure the settings for your private endpoint.<br>6. Select the Next: Resource button at the bottom of the page.<br>7. In the Resource tab, select your subscription, choose the resource type as Microsoft.Cache/Redis, and then select the cache you want to connect the private endpoint to.<br>8. Select the Next: Configuration button at the bottom of the page.<br>9. In the Configuration tab, select the virtual network and subnet you created in the previous section.<br>10. Select the Next: Tags button at the bottom of the page.<br>11. Optionally, in the Tags tab, enter the name and value if you wish to categorize the resource.<br>12. Select Review + create. You're taken to the Review + create tab where Azure validates your configuration.<br>13. After the green Validation passed message appears, select Create.",
                             "remediationFunction": "PR_AZR_CLD_ARC_005.py"
                         }
                     ],
@@ -3838,7 +3838,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Virtual Machine should be assigned to an availability set",
-                    "description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure.<br><br>This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set."
+                    "description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure.<br><br>This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (Ha) best practice, deploy your VMs in an availability set."
                 },
                 {
                     "masterTestId": "AZURE_TEST_VM_2",
@@ -3849,7 +3849,7 @@
                             "id": "PR-AZR-CLD-VM-002",
                             "eval": "data.rule.linux_configuration",
                             "message": "data.rule.linux_configuration_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To change the policy using the Azure Portal, follow these steps:<br><br><br>1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Enter virtual machines in the search bar.<br>3. Under Services, select Virtual machines.<br>4. Under Administrator account, select SSH public key.<br>5. For SSH public key source, use the default Generate new key pair, then for Key pair name enter myKey.<br>6. Under Inbound port rules > Public inbound ports, select Allow selected ports, then select SSH (22) and HTTP (80) from the drop-down.<br>7. Leave the remaining defaults settings. At the bottom of the page click Review + create.",
                             "remediationFunction": "PR_AZR_CLD_VM_002.py"
                         }
                     ],
@@ -3878,7 +3878,7 @@
                             "id": "PR-AZR-CLD-VM-003",
                             "eval": "data.rule.vm_protection",
                             "message": "data.rule.vm_protection_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/antimalware' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_VM_003.py"
                         }
                     ],
@@ -3943,7 +3943,7 @@
                             "id": "PR-AZR-CLD-DSK-002",
                             "eval": "data.rule.disk_encryption_2",
                             "message": "data.rule.disk_encryption_2_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/virtual-machines/disks-enable-customer-managed-keys-portal' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_DSK_002.py"
                         }
                     ],
@@ -3974,7 +3974,7 @@
                             "id": "PR-AZR-CLD-NET-004",
                             "eval": "data.rule.vnet_peer",
                             "message": "data.rule.vnet_peer_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/virtual-network/tutorial-connect-virtual-networks-portal' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NET_004.py"
                         }
                     ],
@@ -4003,7 +4003,7 @@
                             "id": "PR-AZR-CLD-NET-005",
                             "eval": "data.rule.vnet_subnet_nsg",
                             "message": "data.rule.vnet_subnet_nsg_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NET-005.py"
                         }
                     ],
@@ -4107,7 +4107,7 @@
                             "id": "PR-AZR-CLD-NTW-002",
                             "eval": "data.rule.netwatch_logs",
                             "message": "data.rule.netwatch_logs_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/network-watcher/traffic-analytics' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NTW_002.py"
                         }
                     ],
@@ -4177,7 +4177,7 @@
                             "id": "PR-AZR-CLD-DBK-001",
                             "eval": "data.rule.databrics_workspace_has_public_ip_disabled",
                             "message": "data.rule.databrics_workspace_has_public_ip_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-inject' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_DBK_001.py"
                         }
                     ],
@@ -4208,7 +4208,7 @@
                             "id": "PR-AZR-CLD-DBK-002",
                             "eval": "data.rule.databrics_workspace_has_vnet_integration",
                             "message": "data.rule.databrics_workspace_has_vnet_integration_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-inject' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_DBK_002.py"
                         }
                     ],
@@ -4311,7 +4311,7 @@
                             "id": "PR-AZR-CLD-SQL-066",
                             "eval": "data.rule.postgresql_public_access_disabled",
                             "message": "data.rule.postgresql_public_access_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. In the Azure portal, select your existing Azure Database for PostgreSQL Single server.<br>2. On the PostgreSQL Single server page, under Settings, click Connection security to open the connection security configuration page.<br>3. In Deny Public Network Access, select Yes to enable deny public access for your PostgreSQL Single server.<br>4. Click Save to save the changes.<br>5. A notification will confirm that connection security setting was successfully enabled.",
                             "remediationFunction": "PR_AZR_CLD_SQL_066.py"
                         }
                     ],
@@ -4342,7 +4342,7 @@
                             "id": "PR-AZR-CLD-ACR-001",
                             "eval": "data.rule.acr_webhooks",
                             "message": "data.rule.acr_webhooks_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Sign in to the Azure portal.<br>2. Navigate to the container registry in which you want to create a webhook.<br>3. Under Services, select Webhooks.<br>4. Select Add in the webhook toolbar.<br>5. Complete the Create webhook form with the following information: <a href='https://docs.microsoft.com/en-us/azure/container-registry/container-registry-webhook' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_ACR_001.py"
                         }
                     ],
@@ -4378,7 +4378,7 @@
                             "id": "PR-AZR-CLD-ACR-002",
                             "eval": "data.rule.adminUserDisabled",
                             "message": "data.rule.adminUserDisabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Azure Portal:<br>1. navigating to Azure container registry<br>2. select Access keys under SETTINGS<br>3. Disable under Admin user.",
                             "remediationFunction": "PR_AZR_CLD_ACR_002.py"
                         }
                     ],
@@ -4444,7 +4444,7 @@
                             "id": "PR-AZR-CLD-NSG-001",
                             "eval": "data.rule.nsg_in_tcp_all_src",
                             "message": "data.rule.nsg_in_tcp_all_src_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_001.py"
                         }
                     ],
@@ -4480,7 +4480,7 @@
                             "id": "PR-AZR-CLD-NSG-002",
                             "eval": "data.rule.nsg_in_udp_all_src",
                             "message": "data.rule.nsg_in_udp_all_src_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_002.py"
                         }
                     ],
@@ -4516,7 +4516,7 @@
                             "id": "PR-AZR-CLD-NSG-003",
                             "eval": "data.rule.nsg_in_tcp_all",
                             "message": "data.rule.nsg_in_tcp_all_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_003.py"
                         }
                     ],
@@ -4552,7 +4552,7 @@
                             "id": "PR-AZR-CLD-NSG-004",
                             "eval": "data.rule.nsg_in_udp_all",
                             "message": "data.rule.nsg_in_udp_all_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_004.py"
                         }
                     ],
@@ -4588,7 +4588,7 @@
                             "id": "PR-AZR-CLD-NSG-005",
                             "eval": "data.rule.nsg_in_all",
                             "message": "data.rule.nsg_in_all_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_005.py"
                         }
                     ],
@@ -4624,7 +4624,7 @@
                             "id": "PR-AZR-CLD-NSG-006",
                             "eval": "data.rule.nsg_in_all_src",
                             "message": "data.rule.nsg_in_all_src_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_006.py"
                         }
                     ],
@@ -4660,7 +4660,7 @@
                             "id": "PR-AZR-CLD-NSG-007",
                             "eval": "data.rule.nsg_in_all_dst",
                             "message": "data.rule.nsg_in_all_dst_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_007.py"
                         }
                     ],
@@ -4696,7 +4696,7 @@
                             "id": "PR-AZR-CLD-NSG-008",
                             "eval": "data.rule.nsg_allow_icmp",
                             "message": "data.rule.nsg_allow_icmp_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_008.py"
                         }
                     ],
@@ -4732,7 +4732,7 @@
                             "id": "PR-AZR-CLD-NSG-009",
                             "eval": "data.rule.inbound_port_21",
                             "message": "data.rule.inbound_port_21_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_009.py"
                         }
                     ],
@@ -4768,7 +4768,7 @@
                             "id": "PR-AZR-CLD-NSG-010",
                             "eval": "data.rule.inbound_insecure_port",
                             "message": "data.rule.inbound_insecure_port_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_010.py"
                         }
                     ],
@@ -4803,7 +4803,7 @@
                             "id": "PR-AZR-CLD-NSG-011",
                             "eval": "data.rule.inbound_port_11211",
                             "message": "data.rule.inbound_port_11211_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_011.py"
                         }
                     ],
@@ -4839,7 +4839,7 @@
                             "id": "PR-AZR-CLD-NSG-012",
                             "eval": "data.rule.inbound_port_6379",
                             "message": "data.rule.inbound_port_6379_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_012.py"
                         }
                     ],
@@ -4875,7 +4875,7 @@
                             "id": "PR-AZR-CLD-NSG-013",
                             "eval": "data.rule.inbound_port_dbs",
                             "message": "data.rule.inbound_port_dbs_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_013.py"
                         }
                     ],
@@ -4911,7 +4911,7 @@
                             "id": "PR-AZR-CLD-NSG-014",
                             "eval": "data.rule.inbound_port_22",
                             "message": "data.rule.inbound_port_22_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_014.py"
                         }
                     ],
@@ -4946,7 +4946,7 @@
                             "id": "PR-AZR-CLD-NSG-015",
                             "eval": "data.rule.inbound_port_3389",
                             "message": "data.rule.inbound_port_3389_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_015.py"
                         }
                     ],
@@ -4981,7 +4981,7 @@
                             "id": "PR-AZR-CLD-NSG-016",
                             "eval": "data.rule.inbound_port_445",
                             "message": "data.rule.inbound_port_445_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_016.py"
                         }
                     ],
@@ -5017,7 +5017,7 @@
                             "id": "PR-AZR-CLD-NSG-018",
                             "eval": "data.rule.inbound_port_53",
                             "message": "data.rule.inbound_port_53_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_018.py"
                         }
                     ],
@@ -5053,7 +5053,7 @@
                             "id": "PR-AZR-CLD-NSG-019",
                             "eval": "data.rule.inbound_port_20",
                             "message": "data.rule.inbound_port_20_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_019.py"
                         }
                     ],
@@ -5089,7 +5089,7 @@
                             "id": "PR-AZR-CLD-NSG-020",
                             "eval": "data.rule.inbound_port_4333",
                             "message": "data.rule.inbound_port_4333_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_020.py"
                         }
                     ],
@@ -5125,7 +5125,7 @@
                             "id": "PR-AZR-CLD-NSG-021",
                             "eval": "data.rule.inbound_port_3306",
                             "message": "data.rule.inbound_port_3306_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_021.py"
                         }
                     ],
@@ -5161,7 +5161,7 @@
                             "id": "PR-AZR-CLD-NSG-022",
                             "eval": "data.rule.inbound_port_netbios",
                             "message": "data.rule.inbound_port_netbios_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_022.py"
                         }
                     ],
@@ -5197,7 +5197,7 @@
                             "id": "PR-AZR-CLD-NSG-023",
                             "eval": "data.rule.inbound_port_5432",
                             "message": "data.rule.inbound_port_5432_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_023.py"
                         }
                     ],
@@ -5233,7 +5233,7 @@
                             "id": "PR-AZR-CLD-NSG-024",
                             "eval": "data.rule.inbound_port_25",
                             "message": "data.rule.inbound_port_25_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_024.py"
                         }
                     ],
@@ -5269,7 +5269,7 @@
                             "id": "PR-AZR-CLD-NSG-025",
                             "eval": "data.rule.inbound_port_sqlserver",
                             "message": "data.rule.inbound_port_sqlserver_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_025.py"
                         }
                     ],
@@ -5305,7 +5305,7 @@
                             "id": "PR-AZR-CLD-NSG-026",
                             "eval": "data.rule.inbound_port_23",
                             "message": "data.rule.inbound_port_23_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_026.py"
                         }
                     ],
@@ -5341,7 +5341,7 @@
                             "id": "PR-AZR-CLD-NSG-027",
                             "eval": "data.rule.inbound_port_5500",
                             "message": "data.rule.inbound_port_5500_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_027.py"
                         }
                     ],
@@ -5377,7 +5377,7 @@
                             "id": "PR-AZR-CLD-NSG-028",
                             "eval": "data.rule.inbound_port_5900",
                             "message": "data.rule.inbound_port_5900_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_028.py"
                         }
                     ],
@@ -5413,7 +5413,7 @@
                             "id": "PR-AZR-CLD-NSG-029",
                             "eval": "data.rule.inbound_port_135",
                             "message": "data.rule.inbound_port_135_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_029.py"
                         }
                     ],
@@ -5449,7 +5449,7 @@
                             "id": "PR-AZR-CLD-NSG-030",
                             "eval": "data.rule.nsg_out_all",
                             "message": "data.rule.nsg_out_all_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_030.py"
                         }
                     ],
@@ -5485,7 +5485,7 @@
                             "id": "PR-AZR-CLD-NSG-031",
                             "eval": "data.rule.outbound_port_bitcoin",
                             "message": "data.rule.outbound_port_bitcoin_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_031.py"
                         }
                     ],
@@ -5517,7 +5517,7 @@
                             "id": "PR-AZR-CLD-NSG-032",
                             "eval": "data.rule.outbound_port_ethereum",
                             "message": "data.rule.outbound_port_ethereum_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_032.py"
                         }
                     ],
@@ -5549,7 +5549,7 @@
                             "id": "PR-AZR-CLD-NSG-017",
                             "eval": "data.rule.inbound_insecure_omi_port",
                             "message": "data.rule.inbound_insecure_omi_port_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_NSG_017.py"
                         }
                     ],
@@ -5585,7 +5585,7 @@
                             "id": "PR-AZR-CLD-MNT-001",
                             "eval": "data.rule.alerts",
                             "message": "data.rule.alerts_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='' target=https://docs.microsoft.com/en-us/azure/azure-monitor/alerts/activity-log-alerts'_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_MNT_001.py"
                         }
                     ],
@@ -5621,7 +5621,7 @@
                             "id": "PR-AZR-CLD-MNT-009",
                             "eval": "data.rule.log_profiles_retention_days",
                             "message": "data.rule.log_profiles_retention_days_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To change the policy using the Azure Portal, follow these steps:<br><br>1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Navigate to the Activity log.<br>3. Select Export.<br>4. Set Retention (days) to 365 or 0.<br>5. Click Save.",
                             "remediationFunction": "PR_AZR_CLD_MNT_009.py"
                         }
                     ],
@@ -5650,7 +5650,7 @@
                             "id": "PR-AZR-CLD-MNT-010",
                             "eval": "data.rule.log_profiles_retention_enabled",
                             "message": "data.rule.log_profiles_retention_enabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To change the policy using the Azure Portal, follow these steps:<br><br>1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Navigate to the Activity log.<br>3. Select Export.<br>4. Set Retention (days) to 365 or 0.<br>5. Click Save.",
                             "remediationFunction": "PR_AZR_CLD_MNT_010.py"
                         }
                     ],
@@ -5679,7 +5679,7 @@
                             "id": "PR-AZR-CLD-MNT-011",
                             "eval": "data.rule.log_profile_category",
                             "message": "data.rule.log_profile_category_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_MNT_011.py"
                         }
                     ],
@@ -5715,7 +5715,7 @@
                             "id": "PR-AZR-CLD-STR-001",
                             "eval": "data.rule.storage_blob_soft_delete",
                             "message": "data.rule.storage_blob_soft_delete_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To enable blob soft delete for your storage account by using the Azure portal, follow these steps:<br><br>1. In the Azure portal, navigate to your storage account.<br>2. Locate the Data Protection option under Blob service.<br>3. In the Recovery section, select Turn on soft delete for blobs.<br>4. Specify a retention period between 1 and 365 days. Microsoft recommends a minimum retention period of seven days.<br>5. Save your changes.",
                             "remediationFunction": "PR_AZR_CLD_STR_001.py"
                         }
                     ],
@@ -5751,7 +5751,7 @@
                             "id": "PR-AZR-CLD-STR-002",
                             "eval": "data.rule.storage_blob_container_soft_delete",
                             "message": "data.rule.storage_blob_container_soft_delete_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To enable blob soft delete for your storage account by using the Azure portal, follow these steps:<br><br>1. In the Azure portal, navigate to your storage account.<br>2. Locate the Data Protection option under Blob service.<br>3. In the Recovery section, select Turn on soft delete for blobs.<br>4. Specify a retention period between 1 and 365 days. Microsoft recommends a minimum retention period of seven days.<br>5. Save your changes.",
                             "remediationFunction": "PR_AZR_CLD_STR_002.py"
                         }
                     ],
@@ -5787,7 +5787,7 @@
                             "id": "PR-AZR-CLD-AML-008",
                             "eval": "data.rule.rg_locks",
                             "message": "data.rule.rg_locks_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. In the Settings blade for the resource, resource group, or subscription that you wish to lock, select Locks.<br>2. To add a lock, select Add. If you want to create a lock at a parent level, select the parent. The currently selected resource inherits the lock from the parent. For example, you could lock the resource group to apply a lock to all its resources.<br>3. Give the lock a name and lock level. Optionally, you can add notes that describe the lock.<br>4. To delete the lock, select the Delete button.",
                             "remediationFunction": "PR_AZR_CLD_AML_008.py"
                         }
                     ],
@@ -5823,7 +5823,7 @@
                             "id": "PR-AZR-CLD-STR-012",
                             "eval": "data.rule.storage_container_public_access_disabled",
                             "message": "data.rule.storage_container_public_access_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Log in to the Azure portal<br>2. Navigate to 'Storage Accounts'<br>3. Select the reported storage account<br>4. Under 'Blob service' section, Select 'Containers'<br>5. Select the blob container you need to modify<br>6. Click on 'Change access level'<br>7. Set 'Public access level' to 'Private (no anonymous access)'<br>8. Click on 'OK'",
                             "remediationFunction": "PR_AZR_CLD_STR_012.py"
                         }
                     ],
@@ -5858,7 +5858,7 @@
                             "id": "PR-AZR-CLD-STR-013",
                             "eval": "data.rule.storage__logical_container_public_access_disabled",
                             "message": "data.rule.storage__logical_container_public_access_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. Log in to the Azure portal<br>2. Navigate to 'Storage Accounts'<br>3. Select the reported storage account<br>4. Under 'Blob service' section, Select 'Containers'<br>5. Select the blob container you need to modify<br>6. Click on 'Change access level'<br>7. Set 'Public access level' to 'Private (no anonymous access)'<br>8. Click on 'OK'",
                             "remediationFunction": "PR_AZR_CLD_STR_013.py"
                         }
                     ],
@@ -5887,7 +5887,7 @@
                             "id": "PR-AZR-CLD-ASC-001",
                             "eval": "data.rule.pricing",
                             "message": "data.rule.pricing_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "To change the policy using the Azure Portal, follow these steps:<br>1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Navigate to the Azure Security Center.<br>3. Select Security policy blade.<br>4. To alter the the security policy for a subscription, click Edit Settings.<br>5. Select Pricing tier blade.<br>6. Select Standard.<br>7. Select Save.",
                             "remediationFunction": "PR_AZR_CLD_ASC_001.py"
                         }
                     ],
@@ -5919,7 +5919,7 @@
                             "id": "PR-AZR-CLD-ASC-002",
                             "eval": "data.rule.securitycontacts",
                             "message": "data.rule.securitycontacts_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. From Defender for Cloud's Environment settings area, select the relevant subscription, and open Email notifications.<br><br2. Define the recipients for your notifications with one or both of these options:<br>From the dropdown list,a) select from the available roles.<br>b) Enter specific email addresses separated by commas. There's no limit to the number of email addresses that you can enter.<br><br>3. To apply the security contact information to your subscription, select Save.<br><br>For more information please click <a href='https://docs.microsoft.com/en-us/azure/defender-for-cloud/configure-email-notifications' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_ASC_002.py"
                         }
                     ],
@@ -5955,7 +5955,7 @@
                             "id": "PR-AZR-CLD-ASC-003",
                             "eval": "data.rule.alert_notifications",
                             "message": "data.rule.alert_notifications_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. From Defender for Cloud's Environment settings area, select the relevant subscription, and open Email notifications.<br><br2. Define the recipients for your notifications with one or both of these options:<br>From the dropdown list,a) select from the available roles.<br>b) Enter specific email addresses separated by commas. There's no limit to the number of email addresses that you can enter.<br><br>3. To apply the security contact information to your subscription, select Save.<br><br>For more information please click <a href='https://docs.microsoft.com/en-us/azure/defender-for-cloud/configure-email-notifications' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_ASC_003.py"
                         }
                     ],
@@ -5991,7 +5991,7 @@
                             "id": "PR-AZR-CLD-ASC-005",
                             "eval": "data.rule.securitycontacts_alerts_to_admins_enabled",
                             "message": "data.rule.securitycontacts_alerts_to_admins_enabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "1. From Defender for Cloud's Environment settings area, select the relevant subscription, and open Email notifications.<br><br2. Define the recipients for your notifications with one or both of these options:<br>From the dropdown list,a) select from the available roles.<br>b) Enter specific email addresses separated by commas. There's no limit to the number of email addresses that you can enter.<br><br>3. To apply the security contact information to your subscription, select Save.<br><br>For more information please click <a href='https://docs.microsoft.com/en-us/azure/defender-for-cloud/configure-email-notifications' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_ASC_005.py"
                         }
                     ],
@@ -6015,7 +6015,7 @@
                         "AZRSNP_296"
                     ],
                     "severity": "Medium",
-                    "title": "Security Center shoud send security alerts notifications to subscription admins",
+                    "title": "Security Center should send security alerts notifications to subscription admins",
                     "description": "This policy will identify security centers which dont have configuration enabled to send security alerts notifications to subscription admins and alert if missing."
                 },
                 {
@@ -6027,7 +6027,7 @@
                             "id": "PR-AZR-CLD-AFW-001",
                             "eval": "data.rule.azure_firewall_configured_with_idpc_and_tls_inspection",
                             "message": "data.rule.azure_firewall_configured_with_idpc_and_tls_inspection_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/firewall/premium-features' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_AFW_001.py"
                         }
                     ],
@@ -6059,7 +6059,7 @@
                             "id": "PR-AZR-CLD-FRD-001",
                             "eval": "data.rule.frontdoors_has_drs_configured",
                             "message": "data.rule.frontdoors_has_drs_configured_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/web-application-firewall/afds/waf-front-door-tuning#understanding-waf-logs' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_CLD_FRD_001.py"
                         }
                     ],
