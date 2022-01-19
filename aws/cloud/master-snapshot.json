@@ -7,6 +7,7 @@
 				{
 					"masterSnapshotId": "TEST_KMS",
 					"arn": "arn:aws:kms:::",
+					"type": "kms",
 					"collection": "aws_kms",
 					"listMethod": "list_keys",
 					"detailMethods": [
@@ -17,6 +18,7 @@
 				{
 					"masterSnapshotId": "TEST_CT",
 					"arn": "arn:aws:cloudtrail:::",
+					"type": "cloudtrail",
 					"collection": "aws_cloudtrail",
 					"listMethod": "list_trails",
 					"detailMethods": [
@@ -27,6 +29,7 @@
 				{
 					"masterSnapshotId": "TEST_EC2",
 					"arn": "arn:aws:ec2:::",
+					"type": "ec2",
 					"collection": "aws_ec2",
 					"listMethod": "describe_instances",
 					"detailMethods": [
@@ -40,6 +43,7 @@
 				{
 					"masterSnapshotId": "TEST_API_GATEWAY_01",
 					"arn": "arn:aws:apigateway:::",
+					"type": "apigateway",
 					"collection": "aws_api_gateway_01",
 					"listMethod": "get_rest_apis",
 					"detailMethods": [
@@ -51,6 +55,7 @@
 				{
 					"masterSnapshotId": "TEST_API_GATEWAY_02",
 					"arn": "arn:aws:apigateway:::",
+					"type": "apigateway",
 					"collection": "aws_api_gateway_02",
 					"listMethod": "get_rest_apis",
 					"detailMethods": [
@@ -60,6 +65,7 @@
 				{
 					"masterSnapshotId": "TEST_API_GATEWAY_03",
 					"arn": "arn:aws:apigateway:::",
+					"type": "apigateway",
 					"collection": "aws_api_gateway_03",
 					"listMethod": "get_rest_apis",
 					"detailMethods": [
@@ -69,6 +75,7 @@
 				{
 					"masterSnapshotId": "TEST_EKS",
 					"arn": "arn:aws:eks:::",
+					"type": "eks",
 					"collection": "aws_eks",
 					"listMethod": "list_clusters",
 					"detailMethods": [
@@ -78,6 +85,7 @@
 				{
 					"masterSnapshotId": "TEST_ELASTICSEARCH",
 					"arn": "arn:aws:es:::",
+					"type": "es",
 					"collection": "aws_elasticsearch",
 					"listMethod": "list_domain_names",
 					"detailMethods": [
@@ -87,6 +95,7 @@
 				{
 					"masterSnapshotId": "TEST_S3",
 					"arn": "arn:aws:s3:::",
+					"type": "s3",
 					"collection": "aws_s3",
 					"listMethod": "list_buckets",
 					"detailMethods": [
@@ -104,6 +113,7 @@
 				{
 					"masterSnapshotId": "TEST_EFS",
 					"arn": "arn:aws:efs:::",
+					"type": "efs",
 					"collection": "aws_efs",
 					"listMethod": "describe_file_systems",
 					"detailMethods": [
@@ -113,6 +123,7 @@
 				{
 					"masterSnapshotId": "TEST_BKP",
 					"arn": "arn:aws:backup:::",
+					"type": "backup",
 					"collection": "aws_bkp",
 					"listMethod": "list_backup_vaults",
 					"detailMethods": [
@@ -122,6 +133,7 @@
 				{
 					"masterSnapshotId": "TEST_TRF",
 					"arn": "arn:aws:transfer:::",
+					"type": "transfer",
 					"collection": "aws_trf",
 					"listMethod": "list_servers",
 					"detailMethods": [
@@ -131,6 +143,7 @@
 				{
 					"masterSnapshotId": "TEST_EMR",
 					"arn": "arn:aws:emr:::",
+					"type": "emr",
 					"collection": "aws_emr",
 					"listMethod": "list_clusters",
 					"detailMethods": [
@@ -141,6 +154,7 @@
 				{
 					"masterSnapshotId": "TEST_SQS",
 					"arn": "arn:aws:sqs:::",
+					"type": "sqs",
 					"collection": "aws_sqs",
 					"listMethod": "list_queues",
 					"detailMethods": [
@@ -150,6 +164,7 @@
 				{
 					"masterSnapshotId": "TEST_MSK",
 					"arn": "arn:aws:kafka:::",
+					"type": "kafka",
 					"collection": "aws_msk",
 					"listMethod": "list_clusters",
 					"detailMethods": [
@@ -157,19 +172,69 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_ELB",
-					"arn": "arn:aws:elasticloadbalancing:::",
-					"collection": "aws_elb",
+					"masterSnapshotId": "TEST_ELB_01",
+					"arn": "arn:aws:elb:::",
+					"type": "elb",
+					"collection": "aws_elb_01",
 					"listMethod": "describe_load_balancers",
 					"detailMethods": [
-						"describe_load_balancers",
-						"describe_load_balancer_attributes",
+						"describe_load_balancers"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ELB_02",
+					"arn": "arn:aws:elbv2:::",
+					"type": "elbv2",
+					"collection": "aws_elbv2_01",
+					"listMethod": "describe_load_balancers",
+					"detailMethods": [
+						"describe_listeners"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ELB_06",
+					"arn": "arn:aws:elbv2:::",
+					"type": "elbv2",
+					"collection": "aws_elbv2_06",
+					"listMethod": "describe_load_balancers",
+					"detailMethods": [
+						"describe_load_balancers"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ELB_03",
+					"arn": "arn:aws:elbv2:::",
+					"type": "elbv2",
+					"collection": "aws_elbv2_03",
+					"listMethod": "describe_target_groups",
+					"detailMethods": [
+						"describe_target_groups"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ELB_04",
+					"arn": "arn:aws:elb:::",
+					"type": "elb",
+					"collection": "aws_elb_04",
+					"listMethod": "describe_load_balancers",
+					"detailMethods": [
 						"describe_load_balancer_policies"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ELB_05",
+					"arn": "arn:aws:elb:::",
+					"type": "elb",
+					"collection": "aws_elb_05",
+					"listMethod": "describe_load_balancers",
+					"detailMethods": [
+						"describe_load_balancer_attributes"
 					]
 				},
 				{
 					"masterSnapshotId": "TEST_REDSHIFT",
 					"arn": "arn:aws:redshift:::",
+					"type": "redshift",
 					"collection": "aws_redshift",
 					"listMethod": "describe_clusters",
 					"detailMethods": [
@@ -180,6 +245,7 @@
 				{
 					"masterSnapshotId": "TEST_SNS_01",
 					"arn": "arn:aws:sns:::",
+					"type": "sns",
 					"collection": "aws_sns_01",
 					"listMethod": "list_subscriptions",
 					"detailMethods": [
@@ -190,6 +256,7 @@
 				{
 					"masterSnapshotId": "TEST_SNS_02",
 					"arn": "arn:aws:sns:::",
+					"type": "sns",
 					"collection": "aws_sns_02",
 					"listMethod": "list_topics",
 					"detailMethods": [
@@ -199,6 +266,7 @@
 				{
 					"masterSnapshotId": "TEST_EC2",
 					"arn": "arn:aws:ec2:::",
+					"type": "ec2",
 					"collection": "aws_ec2",
 					"listMethod": "describe_instances",
 					"detailMethods": [
@@ -208,6 +276,7 @@
 				{
 					"masterSnapshotId": "TEST_EC2NETWORKACL",
 					"arn": "arn:aws:ec2:::",
+					"type": "ec2",
 					"collection": "aws_ec2",
 					"listMethod": "describe_network_acls",
 					"detailMethods": [
@@ -217,6 +286,7 @@
 				{
 					"masterSnapshotId": "TEST_ACM",
 					"arn": "arn:aws:acm:::",
+					"type": "acm",
 					"collection": "aws_acm",
 					"listMethod": "list_certificates",
 					"detailMethods": [
@@ -226,6 +296,7 @@
 				{
 					"masterSnapshotId": "TEST_ECR",
 					"arn": "arn:aws:ecr:::",
+					"type": "ecr",
 					"collection": "aws_ecr",
 					"listMethod": "describe_repositories",
 					"detailMethods": [
@@ -236,6 +307,7 @@
 				{
 					"masterSnapshotId": "TEST_ECS_01",
 					"arn": "arn:aws:ecs:::",
+					"type": "ecs",
 					"collection": "aws_ecs_01",
 					"listMethod": "list_clusters",
 					"detailMethods": [
@@ -245,6 +317,7 @@
 				{
 					"masterSnapshotId": "TEST_ECS_02",
 					"arn": "arn:aws:ecs:::",
+					"type": "ecs",
 					"collection": "aws_ecs_02",
 					"listMethod": "list_services",
 					"detailMethods": [
@@ -254,6 +327,7 @@
 				{
 					"masterSnapshotId": "TEST_ECS_03",
 					"arn": "arn:aws:ecs:::",
+					"type": "ecs",
 					"collection": "aws_ecs_03",
 					"listMethod": "list_task_definitions",
 					"detailMethods": [
@@ -263,6 +337,7 @@
 				{
 					"masterSnapshotId": "TEST_CF",
 					"arn": "arn:aws:cloudfront:::",
+					"type": "cloudfront",
 					"collection": "aws_cf",
 					"listMethod": "list_distributions",
 					"detailMethods": [
@@ -272,6 +347,7 @@
 				{
 					"masterSnapshotId": "TEST_RDS_01",
 					"arn": "arn:aws:rds:::",
+					"type": "rds",
 					"collection": "aws_rds_01",
 					"listMethod": "describe_db_instances",
 					"detailMethods": [
@@ -281,6 +357,7 @@
 				{
 					"masterSnapshotId": "TEST_RDS_02",
 					"arn": "arn:aws:rds:::",
+					"type": "rds",
 					"collection": "aws_rds_02",
 					"listMethod": "describe_db_clusters",
 					"detailMethods": [
@@ -290,6 +367,7 @@
 				{
 					"masterSnapshotId": "TEST_RDS_03",
 					"arn": "arn:aws:rds:::",
+					"type": "rds",
 					"collection": "aws_rds_03",
 					"listMethod": "describe_db_parameter_groups",
 					"detailMethods": [
@@ -299,6 +377,7 @@
 				{
 					"masterSnapshotId": "TEST_RDS_04",
 					"arn": "arn:aws:rds:::",
+					"type": "rds",
 					"collection": "aws_rds_04",
 					"listMethod": "describe_global_clusters",
 					"detailMethods": [
@@ -308,6 +387,7 @@
 				{
 					"masterSnapshotId": "TEST_RDS_05",
 					"arn": "arn:aws:rds:::",
+					"type": "rds",
 					"collection": "aws_rds_05",
 					"listMethod": "describe_event_subscriptions",
 					"detailMethods": [
@@ -317,6 +397,7 @@
 				{
 					"masterSnapshotId": "TEST_DAX",
 					"arn": "arn:aws:dax:::",
+					"type": "dax",
 					"collection": "aws_dax",
 					"listMethod": "describe_clusters",
 					"detailMethods": [
@@ -326,6 +407,7 @@
 				{
 					"masterSnapshotId": "TEST_QLDB",
 					"arn": "arn:aws:qldb:::",
+					"type": "qldb",
 					"collection": "aws_qldb",
 					"listMethod": "list_ledgers",
 					"detailMethods": [
@@ -335,6 +417,7 @@
 				{
 					"masterSnapshotId": "TEST_DDB_01",
 					"arn": "arn:aws:docdb:::",
+					"type": "docdb",
 					"collection": "aws_docdb_01",
 					"listMethod": "describe_db_clusters",
 					"detailMethods": [
@@ -344,6 +427,7 @@
 				{
 					"masterSnapshotId": "TEST_DDB_02",
 					"arn": "arn:aws:docdb:::",
+					"type": "docdb",
 					"collection": "aws_docdb_02",
 					"listMethod": "describe_db_cluster_parameter_groups",
 					"detailMethods": [
@@ -353,6 +437,7 @@
 				{
 					"masterSnapshotId": "TEST_ATH",
 					"arn": "arn:aws:athena:::",
+					"type": "athena",
 					"collection": "aws_athena",
 					"listMethod": "list_work_groups",
 					"detailMethods": [
@@ -361,7 +446,8 @@
 				},
 				{
 					"masterSnapshotId": "TEST_TS",
-					"arn": "arn:aws:timestream:::",
+					"arn": "arn:aws:timestream-write:::",
+					"type": "timestream",
 					"collection": "aws_ts",
 					"listMethod": "list_databases",
 					"detailMethods": [
@@ -371,6 +457,7 @@
 				{
 					"masterSnapshotId": "TEST_NPT",
 					"arn": "arn:aws:neptune:::",
+					"type": "neptune",
 					"collection": "aws_npt",
 					"listMethod": "describe_db_clusters",
 					"detailMethods": [
@@ -380,6 +467,7 @@
 				{
 					"masterSnapshotId": "TEST_DD",
 					"arn": "arn:aws:dynamodb:::",
+					"type": "dynamodb",
 					"collection": "aws_dd",
 					"listMethod": "list_tables",
 					"detailMethods": [
@@ -391,6 +479,7 @@
 				{
 					"masterSnapshotId": "TEST_EC",
 					"arn": "arn:aws:elasticache:::",
+					"type": "elasticache",
 					"collection": "aws_ec",
 					"listMethod": "describe_replication_groups",
 					"detailMethods": [
@@ -400,6 +489,7 @@
 				{
 					"masterSnapshotId": "TEST_DMS",
 					"arn": "arn:aws:dms:::",
+					"type": "dms",
 					"collection": "aws_dms",
 					"listMethod": "describe_endpoints",
 					"detailMethods": [
@@ -409,6 +499,7 @@
 				{
 					"masterSnapshotId": "TEST_SG",
 					"arn": "arn:aws:ec2:::",
+					"type": "ec2",
 					"collection": "aws_sg",
 					"listMethod": "describe_security_groups",
 					"detailMethods": [
@@ -418,6 +509,7 @@
 				{
 					"masterSnapshotId": "TEST_LAMBDA",
 					"arn": "arn:aws:lambda:::",
+					"type": "lambda",
 					"collection": "aws_lmd",
 					"listMethod": "list_functions",
 					"detailMethods": [
@@ -427,6 +519,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_01",
 					"arn": "arn:aws:wafv2:::",
+					"type": "wafv2",
 					"collection": "aws_wafv2",
 					"listMethod": "list_web_acls",
 					"detailMethods": [
@@ -437,6 +530,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_02",
 					"arn": "arn:aws:secretsmanager:::",
+					"type": "secretsmanager",
 					"collection": "aws_sm",
 					"listMethod": "list_secrets",
 					"detailMethods": [
@@ -446,6 +540,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_03",
 					"arn": "arn:aws:logs:::",
+					"type": "logs",
 					"collection": "aws_cloudwatch",
 					"listMethod": "describe_log_groups",
 					"detailMethods": [
@@ -455,6 +550,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_04",
 					"arn": "arn:aws:workspaces:::",
+					"type": "workspaces",
 					"collection": "aws_workspaces",
 					"listMethod": "describe_workspaces",
 					"detailMethods": [
@@ -464,6 +560,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_05",
 					"arn": "arn:aws:glue:::",
+					"type": "glue",
 					"collection": "aws_glue",
 					"listMethod": "get_data_catalog_encryption_settings",
 					"detailMethods": [
@@ -473,6 +570,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_06",
 					"arn": "arn:aws:glue:::",
+					"type": "glue",
 					"collection": "aws_glue",
 					"listMethod": "get_security_configurations",
 					"detailMethods": [
@@ -482,6 +580,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_07",
 					"arn": "arn:aws:autoscaling:::",
+					"type": "autoscaling",
 					"collection": "aws_autoscaling",
 					"listMethod": "describe_launch_configurations",
 					"detailMethods": [
@@ -491,6 +590,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_08",
 					"arn": "arn:aws:autoscaling:::",
+					"type": "autoscaling",
 					"collection": "aws_autoscaling",
 					"listMethod": "describe_auto_scaling_groups",
 					"detailMethods": [
@@ -500,6 +600,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_09",
 					"arn": "arn:aws:config:::",
+					"type": "config",
 					"collection": "aws_config",
 					"listMethod": "describe_configuration_recorders",
 					"detailMethods": [
@@ -509,6 +610,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_10",
 					"arn": "arn:aws:config:::",
+					"type": "config",
 					"collection": "aws_config",
 					"listMethod": "describe_configuration_aggregators",
 					"detailMethods": [
@@ -518,6 +620,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_11",
 					"arn": "arn:aws:kinesis:::",
+					"type": "kinesis",
 					"collection": "aws_kinesis",
 					"listMethod": "list_streams",
 					"detailMethods": [
@@ -527,6 +630,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_12",
 					"arn": "arn:aws:mq:::",
+					"type": "mq",
 					"collection": "aws_mq",
 					"listMethod": "list_brokers",
 					"detailMethods": [
@@ -536,6 +640,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_13",
 					"arn": "arn:aws:route53:::",
+					"type": "route53",
 					"collection": "aws_route53",
 					"listMethod": "list_hosted_zones",
 					"detailMethods": [
@@ -545,6 +650,7 @@
 				{
 					"masterSnapshotId": "TEST_ALL_14",
 					"arn": "arn:aws:cloudformation:::",
+					"type": "cloudformation",
 					"collection": "aws_cloudformation",
 					"listMethod": "describe_stacks",
 					"detailMethods": [
@@ -554,6 +660,7 @@
 				{
 					"masterSnapshotId": "TEST_SAGEMAKER",
 					"arn": "arn:aws:sagemaker:::",
+					"type": "sagemaker",
 					"collection": "aws_sagemaker",
 					"listMethod": "list_notebook_instances",
 					"detailMethods": [
@@ -563,6 +670,7 @@
 				{
 					"masterSnapshotId": "TEST_CB",
 					"arn": "arn:aws:codebuild:::",
+					"type": "codebuild",
 					"collection": "aws_codebuild",
 					"listMethod": "list_projects",
 					"detailMethods": [
@@ -572,6 +680,7 @@
 				{
 					"masterSnapshotId": "TEST_CP",
 					"arn": "arn:aws:codepipeline:::",
+					"type": "codepipeline",
 					"collection": "aws_codepipeline",
 					"listMethod": "list_pipelines",
 					"detailMethods": [
@@ -581,10 +690,22 @@
 				{
 					"masterSnapshotId": "TEST_CD",
 					"arn": "arn:aws:codedeploy:::",
+					"type": "codedeploy",
 					"collection": "aws_codedeploy",
 					"listMethod": "list_applications",
 					"detailMethods": [
 						"batch_get_applications"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_IAM",
+					"arn": "arn:aws:iam:::",
+					"type": "iam",
+					"collection": "aws_iam",
+					"listMethod": "list_policies",
+					"detailMethods": [
+						"get_policy",
+						"get_policy_version"
 					]
 				}
 			]

@@ -7,347 +7,416 @@
                 {
                     "masterSnapshotId": "AZRSNP_100",
                     "type": "Microsoft.Web/sites",
-                    "collection": "Microsoft.Web"
+                    "collection": "Microsoft.Web",
+                    "version": "2021-02-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_101",
+                    "type": "Microsoft.Web/sites/config",
+                    "collection": "Microsoft.Web",
+                    "version": "2021-02-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_210",
                     "type": "Microsoft.OperationalInsights/workspaces",
-                    "collection": "Microsoft.OperationalInsights"
+                    "collection": "Microsoft.OperationalInsights",
+                    "version": "2021-06-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_211",
                     "type": "Microsoft.Authorization/policyAssignments",
-                    "collection": "Microsoft.Authorization"
+                    "collection": "Microsoft.Authorization",
+                    "version": "2021-06-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_219",
                     "type": "Microsoft.ContainerService/managedClusters",
-                    "collection": "Microsoft.ContainerService"
+                    "collection": "Microsoft.ContainerService",
+                    "version": "2021-10-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_224",
                     "type": "Microsoft.ContainerRegistry/registries",
-                    "collection": "Microsoft.ContainerRegistry"
+                    "collection": "Microsoft.ContainerRegistry",
+                    "version": "2021-09-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_231",
                     "type": "Microsoft.Network/networkSecurityGroups",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_233",
                     "type": "Microsoft.Network/dnszones",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2018-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_240",
                     "type": "Microsoft.Logic/workflows",
-                    "collection": "Microsoft.Logic"
+                    "collection": "Microsoft.Logic",
+                    "version": "2019-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_250",
                     "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
-                    "collection": "Microsoft.ManagedIdentity"
-                },
-                {
-                    "masterSnapshotId": "AZRSNP_283",
-                    "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
-                    "collection": "Microsoft.Storage"
+                    "collection": "Microsoft.ManagedIdentity",
+                    "version": "2018-11-30"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_284",
                     "type": "Microsoft.Network/virtualNetworks",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_285",
                     "type": "Microsoft.Network/loadBalancers",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_286",
                     "type": "Microsoft.Network/networkInterfaces",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_277",
                     "type": "Microsoft.Compute/disks",
-                    "collection": "Microsoft.Compute"
+                    "collection": "Microsoft.Compute",
+                    "version": "2021-08-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_274",
                     "type": "Microsoft.Compute/virtualMachines",
-                    "collection": "Microsoft.Compute"
+                    "collection": "Microsoft.Compute",
+                    "version": "2021-07-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_276",
                     "type": "Microsoft.Compute/virtualMachineScaleSets",
-                    "collection": "Microsoft.Compute"
+                    "collection": "Microsoft.Compute",
+                    "version": "2021-07-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_301",
                     "type": "Microsoft.Storage/storageAccounts",
-                    "collection": "Microsoft.Storage"
+                    "collection": "Microsoft.Storage",
+                    "version": "2021-06-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_302",
                     "type": "Microsoft.Storage/storageAccounts/encryptionScopes",
-                    "collection": "Microsoft.Storage"
+                    "collection": "Microsoft.Storage",
+                    "version": "2021-06-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_221",
                     "type": "Microsoft.Network/applicationGateways",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_225",
                     "type": "Microsoft.Network/azureFirewalls",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_230",
                     "type": "Microsoft.Network/firewallPolicies",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_220",
                     "type": "Microsoft.Network/frontDoors",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2020-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_260",
                     "type": "Microsoft.Network/networkWatchers",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_212",
                     "type": "Microsoft.Sql/servers/databases/auditingSettings",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_214",
                     "type": "Microsoft.ContainerRegistry/registries/webhooks",
-                    "collection": "Microsoft.ContainerRegistry"
+                    "collection": "Microsoft.ContainerRegistry",
+                    "version": "2021-09-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_222",
                     "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
-                    "collection": "Microsoft.Storage"
+                    "collection": "Microsoft.Storage",
+                    "version": "2021-06-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_223",
                     "type": "Microsoft.Storage/storageAccounts/blobServices",
-                    "collection": "Microsoft.Storage"
+                    "collection": "Microsoft.Storage",
+                    "version": "2021-06-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_226",
                     "type": "Microsoft.Insights/diagnosticSettings",
-                    "collection": "Microsoft.Insights"
+                    "collection": "Microsoft.Insights",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_227",
                     "type": "Microsoft.KeyVault/vaults/secrets",
-                    "collection": "Microsoft.KeyVault"
+                    "collection": "Microsoft.KeyVault",
+                    "version": "2021-06-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_228",
                     "type": "Microsoft.KeyVault/vaults",
-                    "collection": "Microsoft.KeyVault"
+                    "collection": "Microsoft.KeyVault",
+                    "version": "2021-06-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_229",
                     "type": "Microsoft.KeyVault/vaults/keys",
-                    "collection": "Microsoft.KeyVault"
+                    "collection": "Microsoft.KeyVault",
+                    "version": "2021-06-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_261",
                     "type": "Microsoft.Authorization/locks",
-                    "collection": "Microsoft.Authorization"
+                    "collection": "Microsoft.Authorization",
+                    "version": "2020-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_263",
                     "type": "Microsoft.Sql/servers/databases/securityAlertPolicies",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_264",
                     "type": "Microsoft.Sql/servers/databases",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_265",
                     "type": "Microsoft.Sql/servers/databases/vulnerabilityAssessments",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_273",
                     "type": "Microsoft.Compute/virtualMachines/extensions",
-                    "collection": "Microsoft.Compute"
+                    "collection": "Microsoft.Compute",
+                    "version": "2021-07-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_275",
                     "type": "Microsoft.Network/virtualNetworks/subnets",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_291",
                     "type": "Microsoft.Sql/servers/firewallRules",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_293",
                     "type": "Microsoft.Sql/servers/databases/transparentDataEncryption",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_294",
                     "type": "Microsoft.Sql/servers/administrators",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_296",
                     "type": "Microsoft.Security/securityContacts",
-                    "collection": "Microsoft.Security"
+                    "collection": "Microsoft.Security",
+                    "version": "2017-08-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_299",
                     "type": "Microsoft.Insights/activityLogAlerts",
-                    "collection": "Microsoft.Insights"
+                    "collection": "Microsoft.Insights",
+                    "version": "2020-10-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_300",
                     "type": "Microsoft.Security/pricings",
-                    "collection": "Microsoft.Security"
+                    "collection": "Microsoft.Security",
+                    "version": "2018-06-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_307",
                     "type": "Microsoft.Network/vpnGateways",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_400",
                     "type": "Microsoft.Sql/servers",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_401",
                     "type": "Microsoft.Sql/managedInstances",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_402",
                     "type": "Microsoft.Sql/servers/securityAlertPolicies",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_403",
                     "type": "Microsoft.Sql/managedInstances/securityAlertPolicies",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_404",
                     "type": "Microsoft.Sql/servers/auditingSettings",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_232",
                     "type": "Microsoft.Network/publicIPAddresses",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_405",
                     "type": "Microsoft.Sql/servers/administrators",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_406",
                     "type": "Microsoft.Sql/managedInstances/administrators",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_407",
                     "type": "Microsoft.Sql/servers/encryptionprotector",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_408",
                     "type": "Microsoft.DBforMariaDB/servers/firewallRules",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.DBforMariaDB",
+                    "version": "2018-06-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_409",
                     "type": "Microsoft.DBforMariaDB/servers",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.DBforMariaDB",
+                    "version": "2018-06-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_410",
                     "type": "Microsoft.DBforMySQL/servers/firewallRules",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.DBforMySQL",
+                    "version": "2017-12-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_411",
                     "type": "Microsoft.DBforMySQL/servers",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.DBforMySQL",
+                    "version": "2017-12-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_412",
                     "type": "Microsoft.DBforPostgreSQL/servers",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.DBforPostgreSQL",
+                    "version": "2017-12-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_420",
                     "type": "Microsoft.Cache/redis",
-                    "collection": "Microsoft.Cache"
+                    "collection": "Microsoft.Cache",
+                    "version": "2020-12-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_421",
                     "type": "Microsoft.Cache/redis/linkedServers",
-                    "collection": "Microsoft.Cache"
+                    "collection": "Microsoft.Cache",
+                    "version": "2020-12-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_430",
                     "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_431",
                     "type": "Microsoft.Network/networkWatchers/flowLogs",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_440",
                     "type": "Microsoft.Databricks/workspaces",
-                    "collection": "Microsoft.Databricks"
+                    "collection": "Microsoft.Databricks",
+                    "version": "2021-04-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_500",
                     "type": "Microsoft.Network/privateEndpoints",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_501",
                     "type": "Microsoft.Insights/logprofiles",
-                    "collection": "microsoft.insights"
+                    "collection": "microsoft.Insights",
+                    "version": "2016-03-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_502",
                     "type": "Microsoft.Network/FrontDoorWebApplicationFirewallPolicies",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "version": "2020-11-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_503",
                     "type": "Microsoft.Resources/resourceGroups",
-                    "collection": "Microsoft.Resources"
+                    "collection": "Microsoft.Resources",
+                    "version": "2021-04-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_504",
                     "type": "Microsoft.Sql/servers/failoverGroups",
-                    "collection": "Microsoft.Sql"
+                    "collection": "Microsoft.Sql",
+                    "version": "2021-05-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_505",
                     "type": "Microsoft.Security/advancedThreatProtectionSettings",
-                    "collection": "Microsoft.Security"
+                    "collection": "Microsoft.Security",
+                    "version": "2019-01-01"
                 }
             ]
         }

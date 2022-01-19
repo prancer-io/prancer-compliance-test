@@ -66,76 +66,77 @@ mysql_ingress_from_any_ip_disabled_metadata := {
 
 
 # PR-AZR-CLD-SQL-015
+# Not valid for cloud provider as cloud seperates all the child resources into seperate resource
 
-default my_logical_sql_ingress_from_any_ip_disabled = null
-azure_attribute_absence ["my_logical_sql_ingress_from_any_ip_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.dbformysql/servers"
-    dbsql_resources := resource.resources[_]
-    lower(dbsql_resources.type) == "firewallrules"
-    not dbsql_resources.properties.startIpAddress
-}
-
-
-azure_attribute_absence ["my_logical_sql_ingress_from_any_ip_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.dbformysql/servers"
-    dbsql_resources := resource.resources[_]
-    lower(dbsql_resources.type) == "firewallrules"
-    not dbsql_resources.properties.endIpAddress
-}
+# default my_logical_sql_ingress_from_any_ip_disabled = null
+# azure_attribute_absence ["my_logical_sql_ingress_from_any_ip_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.dbformysql/servers"
+#     dbsql_resources := resource.resources[_]
+#     lower(dbsql_resources.type) == "firewallrules"
+#     not dbsql_resources.properties.startIpAddress
+# }
 
 
-azure_issue ["my_logical_sql_ingress_from_any_ip_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.dbformysql/servers"
-    dbsql_resources := resource.resources[_]
-    lower(dbsql_resources.type) == "firewallrules"
-    contains(dbsql_resources.properties.startIpAddress, "0.0.0.0")
-}
+# azure_attribute_absence ["my_logical_sql_ingress_from_any_ip_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.dbformysql/servers"
+#     dbsql_resources := resource.resources[_]
+#     lower(dbsql_resources.type) == "firewallrules"
+#     not dbsql_resources.properties.endIpAddress
+# }
 
 
-azure_issue ["my_logical_sql_ingress_from_any_ip_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.dbformysql/servers"
-    dbsql_resources := resource.resources[_]
-    lower(dbsql_resources.type) == "firewallrules"
-    contains(dbsql_resources.properties.endIpAddress, "0.0.0.0")
-}
+# azure_issue ["my_logical_sql_ingress_from_any_ip_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.dbformysql/servers"
+#     dbsql_resources := resource.resources[_]
+#     lower(dbsql_resources.type) == "firewallrules"
+#     contains(dbsql_resources.properties.startIpAddress, "0.0.0.0")
+# }
 
 
-my_logical_sql_ingress_from_any_ip_disabled {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.dbformysql/servers"
-    dbsql_resources := resource.resources[_]
-    lower(dbsql_resources.type) == "firewallrules"
-    not azure_attribute_absence["my_logical_sql_ingress_from_any_ip_disabled"]
-    not azure_issue["my_logical_sql_ingress_from_any_ip_disabled"]
-}
-
-my_logical_sql_ingress_from_any_ip_disabled = false {
-    azure_issue["my_logical_sql_ingress_from_any_ip_disabled"]
-}
-
-my_logical_sql_ingress_from_any_ip_disabled = false {
-    azure_attribute_absence["my_logical_sql_ingress_from_any_ip_disabled"]
-}
+# azure_issue ["my_logical_sql_ingress_from_any_ip_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.dbformysql/servers"
+#     dbsql_resources := resource.resources[_]
+#     lower(dbsql_resources.type) == "firewallrules"
+#     contains(dbsql_resources.properties.endIpAddress, "0.0.0.0")
+# }
 
 
-my_logical_sql_ingress_from_any_ip_disabled_err = "microsoft.dbformysql/servers/firewallrules property 'startIpAddress' and 'endIpAddress' need to be exist. one or both are missing from the resource." {
-    azure_attribute_absence["my_logical_sql_ingress_from_any_ip_disabled"]
-} else = "MSSQL Database Server currently allowing ingress from all Azure-internal IP addresses" {
-    azure_issue["my_logical_sql_ingress_from_any_ip_disabled"]
-}
+# my_logical_sql_ingress_from_any_ip_disabled {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.dbformysql/servers"
+#     dbsql_resources := resource.resources[_]
+#     lower(dbsql_resources.type) == "firewallrules"
+#     not azure_attribute_absence["my_logical_sql_ingress_from_any_ip_disabled"]
+#     not azure_issue["my_logical_sql_ingress_from_any_ip_disabled"]
+# }
 
-my_logical_sql_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-CLD-SQL-015",
-    "Type": "Cloud",
-    "Product": "AZR",
-    "Language": "",
-    "Policy Title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-    "Policy Description": "This policy will identify MySQL Database Server firewall rule that is currently allowing ingress from all Azure-internal IP addresses",
-    "Resource Type": "microsoft.dbformysql/servers/firewallrules",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules"
-}
+# my_logical_sql_ingress_from_any_ip_disabled = false {
+#     azure_issue["my_logical_sql_ingress_from_any_ip_disabled"]
+# }
+
+# my_logical_sql_ingress_from_any_ip_disabled = false {
+#     azure_attribute_absence["my_logical_sql_ingress_from_any_ip_disabled"]
+# }
+
+
+# my_logical_sql_ingress_from_any_ip_disabled_err = "microsoft.dbformysql/servers/firewallrules property 'startIpAddress' and 'endIpAddress' need to be exist. one or both are missing from the resource." {
+#     azure_attribute_absence["my_logical_sql_ingress_from_any_ip_disabled"]
+# } else = "MSSQL Database Server currently allowing ingress from all Azure-internal IP addresses" {
+#     azure_issue["my_logical_sql_ingress_from_any_ip_disabled"]
+# }
+
+# my_logical_sql_ingress_from_any_ip_disabled_metadata := {
+#     "Policy Code": "PR-AZR-CLD-SQL-015",
+#     "Type": "Cloud",
+#     "Product": "AZR",
+#     "Language": "",
+#     "Policy Title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+#     "Policy Description": "This policy will identify MySQL Database Server firewall rule that is currently allowing ingress from all Azure-internal IP addresses",
+#     "Resource Type": "microsoft.dbformysql/servers/firewallrules",
+#     "Policy Help URL": "",
+#     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules"
+# }
