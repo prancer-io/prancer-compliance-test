@@ -30,7 +30,6 @@ source_path[{"vnet_subnet_nsg":metadata}] {
     }
 }
 
-
 vnet_subnet_nsg {
     lower(input.resources[_].type) == "microsoft.network/virtualnetworks/subnets"
     not azure_issue["vnet_subnet_nsg"]

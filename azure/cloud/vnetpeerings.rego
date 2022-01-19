@@ -38,9 +38,7 @@ vnet_peer = false {
 
 vnet_peer_err = "Azure virtual network peering state is currently not connected" {
     azure_issue["vnet_peer"]
-}
-
-vnet_peer_miss_err = "Azure virtual network peering state property 'peeringState' is missing from the resource" {
+} else = "Azure virtual network peering state property 'peeringState' is missing from the resource" {
     azure_attribute_absence["vnet_peer"]
 }
 

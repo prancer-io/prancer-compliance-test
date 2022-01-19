@@ -1,5 +1,9 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways
 # Todo: Along with existing feature, need to update this policy based on https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways/vpnconnections?tabs=json
 #
@@ -9,19 +13,45 @@ package rule
 default vpn_encrypt = null
 
 azure_attribute_absence["vpn_encrypt"] {
+    count([c | lower(input.resources[_].type) == "microsoft.network/vpngateways/vpnconnections"; c := 1]) == 0
+}
+
+azure_attribute_absence["vpn_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/vpngateways/vpnconnections"
+    not resource.dependsOn
+}
+
+azure_attribute_absence["vpn_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/vpngateways/vpnconnections"
+    not resource.ipsecPolicies
+}
+
+azure_issue["vpn_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    count([c | r := input.resources[_];
+              r.type == "microsoft.network/vpngateways/vpnconnections";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              lower(r.properties.ipsecPolicies[_].ipsecEncryption) != "none";
+              c := 1]) == 0
+}
+
+azure_inner_attribute_absence["vpn_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/vpngateways"
     not resource.properties.connections
 }
 
-azure_attribute_absence["vpn_encrypt"] {
+azure_inner_attribute_absence["vpn_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/vpngateways"
     con := resource.properties.connections[_]
     not con.properties.ipsecPolicies
 }
 
-azure_attribute_absence["vpn_encrypt"] {
+azure_inner_attribute_absence["vpn_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/vpngateways"
     con := resource.properties.connections[_]
@@ -29,8 +59,7 @@ azure_attribute_absence["vpn_encrypt"] {
     not ipsec.ipsecEncryption
 }
 
-
-azure_issue["vpn_encrypt"] {
+azure_inner_issue["vpn_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/vpngateways"
     con := resource.properties.connections[_]
@@ -38,27 +67,58 @@ azure_issue["vpn_encrypt"] {
     lower(ipsec.ipsecEncryption) == "none"
 }
 
-
 vpn_encrypt {
     lower(input.resources[_].type) == "microsoft.network/vpngateways"
     not azure_attribute_absence["vpn_encrypt"]
     not azure_issue["vpn_encrypt"]
 }
 
+vpn_encrypt {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
+    not azure_inner_attribute_absence["vpn_encrypt"]
+    not azure_inner_issue["vpn_encrypt"]
+}
+
 vpn_encrypt = false {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
+    azure_attribute_absence["vpn_encrypt"]
+    azure_inner_attribute_absence["vpn_encrypt"]
+}
+
+vpn_encrypt = false {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
+    azure_issue["vpn_encrypt"]
+    azure_inner_issue["vpn_encrypt"]
+}
+
+vpn_encrypt = false {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
+    azure_inner_attribute_absence["vpn_encrypt"]
     azure_issue["vpn_encrypt"]
 }
 
 vpn_encrypt = false {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
     azure_attribute_absence["vpn_encrypt"]
+    azure_inner_issue["vpn_encrypt"]
 }
 
 vpn_encrypt_err = "VPN gateways is currently not configured with cryptographic algorithm" {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
     azure_issue["vpn_encrypt"]
-}
-
-vpn_encrypt_miss_err = "VPN gateways connections or ipsec policies property 'ipsecEncryption' is missing from the resource" {
+    azure_inner_issue["vpn_encrypt"]
+} else = "VPN gateways connections or ipsec policies property 'ipsecEncryption' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
     azure_attribute_absence["vpn_encrypt"]
+    azure_inner_attribute_absence["vpn_encrypt"]
+} else = "VPN gateways connections or ipsec policies property 'ipsecEncryption' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
+    azure_inner_attribute_absence["vpn_encrypt"]
+    azure_issue["vpn_encrypt"]
+} else = "VPN gateways connections or ipsec policies property 'ipsecEncryption' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
+    azure_attribute_absence["vpn_encrypt"]
+    azure_inner_issue["vpn_encrypt"]
 }
 
 vpn_encrypt_metadata := {

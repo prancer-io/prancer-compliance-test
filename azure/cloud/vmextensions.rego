@@ -1,5 +1,9 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions
 
 #
@@ -9,38 +13,52 @@ package rule
 default vm_protection = null
 
 azure_attribute_absence["vm_protection"] {
+    count([c | lower(input.resources[_].type) == "microsoft.compute/virtualmachines/extensions"; c := 1]) == 0
+}
+
+azure_attribute_absence["vm_protection"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
+    not resource.dependsOn
+}
+
+azure_attribute_absence["vm_protection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
     not resource.properties.type
 }
 
-
 azure_issue["vm_protection"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
-    lower(resource.properties.type) != "iaasantimalware"
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    count([c | r := input.resources[_];
+              r.type == "microsoft.compute/virtualmachines/extensions";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              lower(resource.properties.type) == "iaasantimalware";
+              c := 1]) == 0
 }
 
-
 vm_protection {
-    lower(input.resources[_].type) == "microsoft.compute/virtualmachines/extensions"
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
     not azure_attribute_absence["vm_protection"]
     not azure_issue["vm_protection"]
 }
 
 vm_protection = false {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
     azure_issue["vm_protection"]
 }
 
 vm_protection = false {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
     azure_attribute_absence["vm_protection"]
 }
 
 vm_protection_err = "Azure Virtual Machine does not have endpoint protection installed" {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
     azure_issue["vm_protection"]
-}
-
-vm_protection_miss_err = "VM extension attribute type missing in the resource" {
+} else = "VM extension attribute type missing in the resource" {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
     azure_attribute_absence["vm_protection"]
 }
 

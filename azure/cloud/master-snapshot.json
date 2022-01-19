@@ -269,6 +269,12 @@
                     "version": "2021-05-01"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_308",
+                    "type": "Microsoft.Network/vpnGateways/vpnConnections",
+                    "collection": "Microsoft.Network",
+                    "version": "2021-05-01"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_400",
                     "type": "Microsoft.Sql/servers",
                     "collection": "Microsoft.Sql",
@@ -417,6 +423,12 @@
                     "type": "Microsoft.Security/advancedThreatProtectionSettings",
                     "collection": "Microsoft.Security",
                     "version": "2019-01-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_506",
+                    "type": "microsoft.keyvault/vaults/accessPolicies",
+                    "collection": "Microsoft.KeyVault",
+                    "version": "2021-06-01-preview"
                 }
             ]
         }

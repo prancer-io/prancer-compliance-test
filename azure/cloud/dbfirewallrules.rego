@@ -109,8 +109,8 @@ azure_issue["db_firewall"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/firewallrules";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              r.properties.startIpAddress != "0.0.0.0";
-              r.properties.endIpAddress != "0.0.0.0";
+              not contains(r.properties.startIpAddress, "0.0.0.0");
+              not contains(r.properties.endIpAddress, "0.0.0.0");
               c := 1]) == 0
 }
 

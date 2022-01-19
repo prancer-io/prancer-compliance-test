@@ -114,7 +114,7 @@ linux_configuration_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Ensure Azure instance authenticates using SSH keys",
+    "Policy Title": "Azure Linux Instance should not use basic authentication(Use SSH Key Instead)",
     "Policy Description": "SSH is an encrypted connection protocol that allows secure sign-ins over unsecured connections. SSH is the default connection protocol for Linux VMs hosted in Azure. Using secure shell (SSH) key pair, it is possible to spin up a Linux virtual machine on Azure that defaults to using SSH keys for authentication, eliminating the need for passwords to sign in. We recommend connecting to a VM using SSH keys. Using basic authentication with SSH connections leaves VMs vulnerable to brute-force attacks or guessing of passwords.",
     "Resource Type": "microsoft.compute/virtualmachines",
     "Policy Help URL": "",

@@ -1,5 +1,9 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults
 
 # PR-AZR-ARM-KV-001
@@ -7,50 +11,56 @@ package rule
 default KeyVault = null
 
 azure_attribute_absence["KeyVault"] {
+    count([c | lower(input.resources[_].type) == "microsoft.keyvault/vaults/accessPolicies"; c := 1]) == 0
+}
+
+azure_attribute_absence["KeyVault"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.keyvault/vaults"
+    lower(resource.type) == "microsoft.keyvault/vaults/accessPolicies"
+    not resource.dependsOn
+}
+
+azure_attribute_absence["KeyVault"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults/accessPolicies"
     accessPolicy := resource.properties.accessPolicies[_]
     not accessPolicy.permissions.keys
     not accessPolicy.permissions.secrets
     not accessPolicy.permissions.certificates
     not accessPolicy.permissions.storage
 }
-
-source_path[{"KeyVault":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    accessPolicy := resource.properties.accessPolicies[j]
-    not accessPolicy.permissions.keys
-    not accessPolicy.permissions.secrets
-    not accessPolicy.permissions.certificates
-    not accessPolicy.permissions.storage
-    metadata:= {
-        "resource_path": [["resources",i,"properties","accessPolicies",j,"permissions"]]
-    }
-}
-
 
 azure_issue["KeyVault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
+    count([c | r := input.resources[_];
+              r.type == "microsoft.keyvault/vaults/accessPolicies";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              count(r.properties.accessPolicies[_].permissions.keys) == 0;
+              count(r.properties.accessPolicies[_].permissions.secrets) == 0;
+              count(r.properties.accessPolicies[_].permissions.certificates) == 0;
+              count(r.properties.accessPolicies[_].permissions.storage) == 0;
+              c := 1]) > 0
+}
+
+azure_inner_attribute_absence["KeyVault"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    accessPolicy := resource.properties.accessPolicies[_]
+    not accessPolicy.permissions.keys
+    not accessPolicy.permissions.secrets
+    not accessPolicy.permissions.certificates
+    not accessPolicy.permissions.storage
+}
+
+azure_inner_issue["KeyVault"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
     accessPolicy := resource.properties.accessPolicies[_]
     count(accessPolicy.permissions.keys) == 0
     count(accessPolicy.permissions.secrets) == 0
     count(accessPolicy.permissions.certificates) == 0
     count(accessPolicy.permissions.storage) == 0
-}
-
-source_path[{"KeyVault":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    accessPolicy := resource.properties.accessPolicies[j]
-    count(accessPolicy.permissions.keys) == 0
-    count(accessPolicy.permissions.secrets) == 0
-    count(accessPolicy.permissions.certificates) == 0
-    count(accessPolicy.permissions.storage) == 0
-    metadata:= {
-        "resource_path": [["resources",i,"properties","accessPolicies",j,"permissions"]]
-    }
 }
 
 KeyVault {
@@ -59,18 +69,52 @@ KeyVault {
     not azure_issue["KeyVault"]
 }
 
+KeyVault {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    not azure_inner_attribute_absence["KeyVault"]
+    not azure_inner_issue["KeyVault"]
+}
+
 KeyVault = false {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    azure_attribute_absence["min_tls_version"]
+    azure_inner_attribute_absence["min_tls_version"]
+}
+
+KeyVault = false {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    azure_issue["KeyVault"]
+    azure_inner_issue["KeyVault"]
+}
+
+KeyVault = false {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    azure_inner_attribute_absence["KeyVault"]
     azure_issue["KeyVault"]
 }
 
 KeyVault = false {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     azure_attribute_absence["KeyVault"]
+    azure_inner_issue["KeyVault"]
 }
-
-KeyVault_err = "accessPolicy property 'permissions.keys' or 'permissions.secrets' or 'permissions.certificates' or 'permissions.storage' is missing from the microsoft.keyvault/vaults resource." {
-    azure_attribute_absence["KeyVault"]
-} else = "Currently no principal has access to Keyvault" {
+ 
+KeyVault_err = "Currently no principal has access to Keyvault" {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     azure_issue["KeyVault"]
+    azure_inner_issue["KeyVault"]
+} else = "accessPolicy property 'permissions.keys' or 'permissions.secrets' or 'permissions.certificates' or 'permissions.storage' is missing from the microsoft.keyvault/vaults resource." {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    azure_attribute_absence["KeyVault"]
+    azure_inner_attribute_absence["KeyVault"]
+} else = "accessPolicy property 'permissions.keys' or 'permissions.secrets' or 'permissions.certificates' or 'permissions.storage' is missing from the microsoft.keyvault/vaults resource." {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    azure_inner_attribute_absence["KeyVault"]
+    azure_issue["KeyVault"]
+} else = "accessPolicy property 'permissions.keys' or 'permissions.secrets' or 'permissions.certificates' or 'permissions.storage' is missing from the microsoft.keyvault/vaults resource." {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    azure_attribute_absence["KeyVault"]
+    azure_inner_issue["KeyVault"]
 }
 
 KeyVault_metadata := {
@@ -449,32 +493,24 @@ azure_attribute_absence["kv_private_endpoint"] {
     count([c | lower(input.resources[_].type) == "microsoft.network/privateendpoints"; c := 1]) == 0 
 }
 
-no_azure_issue["kv_private_endpoint"] {
+azure_issue ["kv_private_endpoint"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.network/privateendpoints"
-    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[_]
-    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.keyvault/vaults")
-}
-
-source_path[{"kv_private_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/privateendpoints"
-    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[j]
-    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.keyvault/vaults")
-    metadata:= {
-        "resource_path": [["resources",i,"properties","privateLinkServiceConnections",j,"properties","privateLinkServiceId"]]
-    }
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.network/privateendpoints";
+              contains(lower(r.properties.privateLinkServiceConnections[_].properties.privateLinkServiceId), lower(concat("/", [resource.type, resource.name])));
+              c := 1]) == 0
 }
 
 kv_private_endpoint {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    no_azure_issue["kv_private_endpoint"]
+    not azure_issue["kv_private_endpoint"]
     not azure_attribute_absence["kv_private_endpoint"]
 }
 
 kv_private_endpoint = false {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    not no_azure_issue["kv_private_endpoint"]
+    azure_issue["kv_private_endpoint"]
 }
 
 kv_private_endpoint = false {
@@ -484,7 +520,7 @@ kv_private_endpoint = false {
 
 kv_private_endpoint_err = "Azure Key Vault does not configure with private endpoints" {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    not no_azure_issue["kv_private_endpoint"]
+    azure_issue["kv_private_endpoint"]
 } else = "Azure Private endpoints resoruce is missing" {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     azure_attribute_absence["kv_private_endpoint"]

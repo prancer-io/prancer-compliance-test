@@ -21,8 +21,6 @@ azure_issue["vnet_subnet_nsg"] {
     not resource.properties.networkSecurityGroup
 }
 
-
-
 vnet_subnet_nsg {
     lower(input.resources[_].type) == "microsoft.network/virtualnetworks/subnets"
     not azure_issue["vnet_subnet_nsg"]
