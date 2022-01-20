@@ -496,12 +496,12 @@
                     ]
                 },
                 {
-                    "masterTestId": "GOOGLE_TEST_317",
+                    "masterTestId": "PR-GCP-CLD-CLT-019",
                     "type": "rego",
                     "rule": "file(google_cluster_317.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0047",
+                            "id": "PR-GCP-CLD-CLT-019",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription": "",
@@ -1657,12 +1657,12 @@
                     ]
                 },
                 {
-                    "masterTestId": "GOOGLE_TEST_296",
+                    "masterTestId": "PR-GCP-IAM-001",
                     "type": "rego",
                     "rule": "file(google_iam_policy_296.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0026",
+                            "id": "PR-GCP-IAM-001",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription": "",
