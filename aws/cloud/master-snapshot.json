@@ -175,6 +175,7 @@
 					"masterSnapshotId": "TEST_ELB_01",
 					"arn": "arn:aws:elb:::",
 					"type": "elb",
+					"boto_type": "elb",
 					"collection": "aws_elb_01",
 					"listMethod": "describe_load_balancers",
 					"detailMethods": [
@@ -185,6 +186,7 @@
 					"masterSnapshotId": "TEST_ELB_02",
 					"arn": "arn:aws:elbv2:::",
 					"type": "elbv2",
+					"boto_type": "elbv2",
 					"collection": "aws_elbv2_01",
 					"listMethod": "describe_load_balancers",
 					"detailMethods": [
