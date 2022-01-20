@@ -1989,7 +1989,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -2023,7 +2028,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice "
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -2057,12 +2062,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "PCI-DSS",
-                                "GDPR",
-                                "ISO 27001",
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
                                 "NIST CSF",
-                                "HIPAA",
-                                "Best Practice"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -2231,7 +2236,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -2265,7 +2270,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -3915,7 +3920,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -3950,7 +3955,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -3985,7 +3990,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -5684,7 +5689,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Security Center shoud send security alerts notifications to subscription admins",
+                    "title": "Security Center should send security alerts notifications to subscription admins",
                     "description": "This policy will identify security centers which dont have configuration enabled to send security alerts notifications to subscription admins and alert if missing.",
                     "tags": [
                         {
@@ -5985,7 +5990,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -6019,7 +6024,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -6053,7 +6058,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -6087,7 +6092,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -6121,7 +6126,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
@@ -6155,7 +6160,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"
