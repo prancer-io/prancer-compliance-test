@@ -5,7 +5,7 @@
             "version": "0.1",
             "cases": [
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_DISK",
+                    "masterTestId": "PR-GCP-TRF-DISK-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -13,22 +13,26 @@
                     "rule": "file(compute.v1.disk.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0069-TRF",
+                            "id": "PR-GCP-TRF-DISK-001",
                             "eval": "data.rule.disk_encrypt",
                             "message": "data.rule.disk_encrypt_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP VM disks not encrypted with Customer-Supplied Encryption Keys (CSEK)",
                     "description": "This policy identifies VM disks which are not encrypted with Customer-Supplied Encryption Keys (CSEK). If you provide your own encryption keys, Compute Engine uses your key to protect the Google-generated keys used to encrypt and decrypt your data. It is recommended to use VM disks encrypted with CSEK for business-critical VM instances.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST CSF",
+                                "NIST 800",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -40,7 +44,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_1",
+                    "masterTestId": "PR-GCP-TRF-FW-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -48,14 +52,14 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0002-TRF",
+                            "id": "PR-GCP-TRF-FW-001",
                             "eval": "data.rule.firewall_default",
                             "message": "data.rule.firewall_default_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Default Firewall rule should not have any rules (except http and https)",
                     "description": "Checks to ensure that the default Firewall rule should not have any (non http, https) rules. The default Firewall rules will apply all instances by default in the absence of specific custom rules with higher priority. It is a safe practice to not have these rules in the default Firewall.",
                     "tags": [
@@ -64,9 +68,12 @@
                             "compliance": [
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -78,7 +85,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_2",
+                    "masterTestId": "PR-GCP-TRF-FW-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -86,7 +93,7 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0006-TRF",
+                            "id": "PR-GCP-TRF-FW-002",
                             "eval": "data.rule.firewall_port_53",
                             "message": "data.rule.firewall_port_53_err",
                             "remediationDescription": "",
@@ -100,10 +107,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -117,7 +127,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_3",
+                    "masterTestId": "PR-GCP-TRF-FW-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -125,24 +135,27 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0007-TRF",
+                            "id": "PR-GCP-TRF-FW-003",
                             "eval": "data.rule.firewall_port_21",
                             "message": "data.rule.firewall_port_21_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to FTP port (21)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on FTP port (21) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -156,7 +169,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_4",
+                    "masterTestId": "PR-GCP-TRF-FW-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -164,24 +177,27 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0008-TRF",
+                            "id": "PR-GCP-TRF-FW-004",
                             "eval": "data.rule.firewall_port_80",
                             "message": "data.rule.firewall_port_80_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to HTTP port (80)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on HTTP port (80) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -195,7 +211,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_5",
+                    "masterTestId": "PR-GCP-TRF-FW-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -203,7 +219,7 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0009-TRF",
+                            "id": "PR-GCP-TRF-FW-005",
                             "eval": "data.rule.firewall_port_445",
                             "message": "data.rule.firewall_port_445_err",
                             "remediationDescription": "",
@@ -217,10 +233,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -234,7 +253,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_6",
+                    "masterTestId": "PR-GCP-TRF-FW-006",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -242,24 +261,27 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0010-TRF",
+                            "id": "PR-GCP-TRF-FW-006",
                             "eval": "data.rule.firewall_port_27017",
                             "message": "data.rule.firewall_port_27017_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to MongoDB port (27017)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on MongoDB port (27017) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -273,7 +295,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_7",
+                    "masterTestId": "PR-GCP-TRF-FW-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -281,24 +303,27 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0011-TRF",
+                            "id": "PR-GCP-TRF-FW-007",
                             "eval": "data.rule.firewall_port_3306",
                             "message": "data.rule.firewall_port_3306_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to MySQL DB port (3306)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on MySQL DB port (3306) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -312,7 +337,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_8",
+                    "masterTestId": "PR-GCP-TRF-FW-008",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -320,7 +345,7 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0012-TRF",
+                            "id": "PR-GCP-TRF-FW-008",
                             "eval": "data.rule.firewall_port_139",
                             "message": "data.rule.firewall_port_139_err",
                             "remediationDescription": "",
@@ -334,10 +359,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -351,7 +379,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_9",
+                    "masterTestId": "PR-GCP-TRF-FW-009",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -359,24 +387,27 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0013-TRF",
+                            "id": "PR-GCP-TRF-FW-009",
                             "eval": "data.rule.firewall_port_1521",
                             "message": "data.rule.firewall_port_1521_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to Oracle DB port (1521)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on Oracle DB port (1521) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -390,7 +421,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_10",
+                    "masterTestId": "PR-GCP-TRF-FW-010",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -398,7 +429,7 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0014-TRF",
+                            "id": "PR-GCP-TRF-FW-010",
                             "eval": "data.rule.firewall_port_110",
                             "message": "data.rule.firewall_port_110_err",
                             "remediationDescription": "",
@@ -412,10 +443,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -429,7 +463,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_11",
+                    "masterTestId": "PR-GCP-TRF-FW-011",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -437,24 +471,27 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0015-TRF",
+                            "id": "PR-GCP-TRF-FW-011",
                             "eval": "data.rule.firewall_port_5432",
                             "message": "data.rule.firewall_port_5432_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to PostgreSQL port (5432)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on PostgreSQL port (5432) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -468,7 +505,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_12",
+                    "masterTestId": "PR-GCP-TRF-FW-012",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -476,25 +513,28 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0016-TRF",
+                            "id": "PR-GCP-TRF-FW-012",
                             "eval": "data.rule.firewall_port_3389",
                             "message": "data.rule.firewall_port_3389_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to RDP port (3389)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on RDP port (3389) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CIS",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -508,7 +548,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_13",
+                    "masterTestId": "PR-GCP-TRF-FW-013",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -516,7 +556,7 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0017-TRF",
+                            "id": "PR-GCP-TRF-FW-013",
                             "eval": "data.rule.firewall_port_25",
                             "message": "data.rule.firewall_port_25_err",
                             "remediationDescription": "",
@@ -530,10 +570,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -547,7 +590,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_14",
+                    "masterTestId": "PR-GCP-TRF-FW-014",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -555,25 +598,28 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0018-TRF",
+                            "id": "PR-GCP-TRF-FW-014",
                             "eval": "data.rule.firewall_port_22",
                             "message": "data.rule.firewall_port_22_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to SSH port (22)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on SSH port (22) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CIS",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -587,7 +633,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_15",
+                    "masterTestId": "PR-GCP-TRF-FW-015",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -595,24 +641,27 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0019-TRF",
+                            "id": "PR-GCP-TRF-FW-015",
                             "eval": "data.rule.firewall_port_23",
                             "message": "data.rule.firewall_port_23_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to Telnet port (23)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on Telnet port (23) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -626,7 +675,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_16",
+                    "masterTestId": "PR-GCP-TRF-FW-016",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -634,7 +683,7 @@
                     "rule": "file(compute.v1.firewall.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0020-TRF",
+                            "id": "PR-GCP-TRF-FW-016",
                             "eval": "data.rule.firewall_inbound",
                             "message": "data.rule.firewall_inbound_err",
                             "remediationDescription": "",
@@ -643,44 +692,17 @@
                     ],
                     "severity": "Medium",
                     "title": "GCP Firewall rules allow inbound traffic from anywhere with no target tags set",
-                    "description": "This policy identifies GCP Firewall rules which allow inbound traffic from anywhere with no target filtering.<br><br>The default target is all instances in the network. The use of target tags or target service accounts allows the rule to apply to select instances. Not using any firewall rule filtering may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "google_compute_firewall"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_COMPUTE_V1_FIREWALL_17",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(compute.v1.firewall.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-0021-TRF",
-                            "eval": "data.rule.firewall_inbound_all",
-                            "message": "data.rule.firewall_inbound_all_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "GCP Firewall with Inbound rule overly permissive to All Traffic",
-                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on all protocols from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+                    "description": "This policy identifies GCP Firewall rules which allow inbound traffic from anywhere with no target filtering. _x005F_x000D_ _x005F_x000D_ The default target is all instances in the network. The use of target tags or target service accounts allows the rule to apply to select instances. Not using any firewall rule filtering may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -692,7 +714,48 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_INSTANCE_1",
+                    "masterTestId": "PR-GCP-TRF-FW-017",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.v1.firewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-FW-017",
+                            "eval": "data.rule.firewall_inbound_all",
+                            "message": "data.rule.firewall_inbound_all_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "GCP Firewall with Inbound rule overly permissive to All Traffic",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on all protocols from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "GDPR",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_compute_firewall"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-INST-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -700,7 +763,7 @@
                     "rule": "file(compute.v1.instance.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0070-TRF",
+                            "id": "PR-GCP-TRF-INST-001",
                             "eval": "data.rule.vm_ip_forward",
                             "message": "data.rule.vm_ip_forward_err",
                             "remediationDescription": "",
@@ -714,8 +777,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CIS"
                             ],
                             "service": [
                                 "terraform"
@@ -727,7 +795,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_INSTANCE_2",
+                    "masterTestId": "PR-GCP-TRF-INST-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -735,7 +803,7 @@
                     "rule": "file(compute.v1.instance.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0071-TRF",
+                            "id": "PR-GCP-TRF-INST-002",
                             "eval": "data.rule.vm_block_project_ssh_keys",
                             "message": "data.rule.vm_block_project_ssh_keys_err",
                             "remediationDescription": "",
@@ -749,8 +817,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CIS"
                             ],
                             "service": [
                                 "terraform"
@@ -762,7 +835,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_INSTANCE_3",
+                    "masterTestId": "PR-GCP-TRF-INST-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -770,7 +843,7 @@
                     "rule": "file(compute.v1.instance.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0072-TRF",
+                            "id": "PR-GCP-TRF-INST-003",
                             "eval": "data.rule.vm_serial_port",
                             "message": "data.rule.vm_serial_port_err",
                             "remediationDescription": "",
@@ -784,6 +857,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
                                 "CIS"
                             ],
                             "service": [
@@ -796,7 +874,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_INSTANCE_4",
+                    "masterTestId": "PR-GCP-TRF-INST-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -804,7 +882,7 @@
                     "rule": "file(compute.v1.instance.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0091-TRF",
+                            "id": "PR-GCP-TRF-INST-004",
                             "eval": "data.rule.vm_pre_emptible",
                             "message": "data.rule.vm_pre_emptible_err",
                             "remediationDescription": "",
@@ -818,7 +896,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "ISO 27001"
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM"
                             ],
                             "service": [
                                 "terraform"
@@ -830,7 +913,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_INSTANCE_5",
+                    "masterTestId": "PR-GCP-TRF-INST-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -838,23 +921,25 @@
                     "rule": "file(compute.v1.instance.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0092-TRF",
+                            "id": "PR-GCP-TRF-INST-005",
                             "eval": "data.rule.vm_metadata",
                             "message": "data.rule.vm_metadata_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "VM Instances without any Custom metadata information",
                     "description": "VM instance does not have any Custom metadata. Custom metadata can be used for easy identification and searches.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CSA-CCM",
+                                "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM"
                             ],
                             "service": [
                                 "terraform"
@@ -866,7 +951,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_INSTANCE_6",
+                    "masterTestId": "PR-GCP-TRF-INST-006",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -874,7 +959,7 @@
                     "rule": "file(compute.v1.instance.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0093-TRF",
+                            "id": "PR-GCP-TRF-INST-006",
                             "eval": "data.rule.vm_no_labels",
                             "message": "data.rule.vm_no_labels_err",
                             "remediationDescription": "",
@@ -888,9 +973,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CSA-CCM",
+                                "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM"
                             ],
                             "service": [
                                 "terraform"
@@ -902,7 +989,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_INSTANCE_7",
+                    "masterTestId": "PR-GCP-TRF-INST-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -910,7 +997,7 @@
                     "rule": "file(compute.v1.instance.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0094-TRF",
+                            "id": "PR-GCP-TRF-INST-007",
                             "eval": "data.rule.vm_info",
                             "message": "data.rule.vm_info_err",
                             "remediationDescription": "",
@@ -924,9 +1011,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CSA-CCM",
+                                "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM"
                             ],
                             "service": [
                                 "terraform"
@@ -938,7 +1027,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_NETWORK_1",
+                    "masterTestId": "PR-GCP-TRF-NET-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -946,7 +1035,7 @@
                     "rule": "file(compute.v1.network.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0076-TRF",
+                            "id": "PR-GCP-TRF-NET-001",
                             "eval": "data.rule.net_legacy",
                             "message": "data.rule.net_legacy_err",
                             "remediationDescription": "",
@@ -960,8 +1049,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
                                 "CIS",
-                                "ISO 27001"
+                                "HITRUST"
                             ],
                             "service": [
                                 "terraform"
@@ -973,7 +1067,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_NETWORK_2",
+                    "masterTestId": "PR-GCP-TRF-NET-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -981,7 +1075,7 @@
                     "rule": "file(compute.v1.network.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0077-TRF",
+                            "id": "PR-GCP-TRF-NET-002",
                             "eval": "data.rule.net_default",
                             "message": "data.rule.net_default_err",
                             "remediationDescription": "",
@@ -995,8 +1089,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
                                 "CIS",
-                                "ISO 27001"
+                                "HITRUST"
                             ],
                             "service": [
                                 "terraform"
@@ -1008,7 +1107,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_SUBNETWORK_1",
+                    "masterTestId": "PR-GCP-TRF-SUBN-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1016,7 +1115,7 @@
                     "rule": "file(compute.v1.subnetwork.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0074-TRF",
+                            "id": "PR-GCP-TRF-SUBN-001",
                             "eval": "data.rule.vpc_flow_logs",
                             "message": "data.rule.vpc_flow_logs_err",
                             "remediationDescription": "",
@@ -1030,8 +1129,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
                                 "CIS",
-                                "ISO 27001"
+                                "HITRUST"
                             ],
                             "service": [
                                 "terraform"
@@ -1043,7 +1147,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_V1_SUBNETWORK_2",
+                    "masterTestId": "PR-GCP-TRF-SUBN-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1051,7 +1155,7 @@
                     "rule": "file(compute.v1.subnetwork.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0075-TRF",
+                            "id": "PR-GCP-TRF-SUBN-002",
                             "eval": "data.rule.vpc_private_ip_google",
                             "message": "data.rule.vpc_private_ip_google_err",
                             "remediationDescription": "",
@@ -1065,11 +1169,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
-                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
+                                "CIS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -1081,7 +1187,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_1",
+                    "masterTestId": "PR-GCP-TRF-CLT-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1089,7 +1195,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0030-TRF",
+                            "id": "PR-GCP-TRF-CLT-001",
                             "eval": "data.rule.k8s_svc_account",
                             "message": "data.rule.k8s_svc_account_err",
                             "remediationDescription": "",
@@ -1103,12 +1209,15 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "HIPAA",
+                                "CIS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -1121,7 +1230,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_2",
+                    "masterTestId": "PR-GCP-TRF-CLT-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1129,7 +1238,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0031-TRF",
+                            "id": "PR-GCP-TRF-CLT-002",
                             "eval": "data.rule.k8s_basicauth",
                             "message": "data.rule.k8s_basicauth_err",
                             "remediationDescription": "",
@@ -1144,8 +1253,14 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
+                                "CSA-CCM",
                                 "HIPAA",
-                                "ISO 27001"
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -1158,7 +1273,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_3",
+                    "masterTestId": "PR-GCP-TRF-CLT-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1166,14 +1281,14 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0032-TRF",
+                            "id": "PR-GCP-TRF-CLT-003",
                             "eval": "data.rule.k8s_client_cert",
                             "message": "data.rule.k8s_client_cert_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP Kubernetes Engine Clusters Client Certificate is set to Disabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have disabled Client Certificate. A client certificate is a base64-encoded public certificate used by clients to authenticate to the cluster endpoint. Enabling Client Certificate will provide more security to authenticate users to the cluster.",
                     "tags": [
@@ -1183,9 +1298,12 @@
                                 "CIS",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -1198,7 +1316,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_4",
+                    "masterTestId": "PR-GCP-TRF-CLT-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1206,25 +1324,29 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0033-TRF",
+                            "id": "PR-GCP-TRF-CLT-004",
                             "eval": "data.rule.k8s_alias_ip",
                             "message": "data.rule.k8s_alias_ip_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP Kubernetes Engine Clusters have Alias IP disabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have disabled Alias IP. Alias IP allows the networking layer to perform anti-spoofing checks to ensure that egress traffic is not sent with arbitrary source IPs. By enabling Alias IPs, Kubernetes Engine clusters can allocate IP addresses from a CIDR block known to Google Cloud Platform. This makes your cluster more scalable and allows your cluster to better interact with other GCP products and entities.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CIS",
                                 "CSA-CCM",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -1237,7 +1359,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_5",
+                    "masterTestId": "PR-GCP-TRF-CLT-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1245,7 +1367,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0034-TRF",
+                            "id": "PR-GCP-TRF-CLT-005",
                             "eval": "data.rule.k8s_alpha",
                             "message": "data.rule.k8s_alpha_err",
                             "remediationDescription": "",
@@ -1258,7 +1380,15 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -1270,7 +1400,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_6",
+                    "masterTestId": "PR-GCP-TRF-CLT-006",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1278,7 +1408,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0035-TRF",
+                            "id": "PR-GCP-TRF-CLT-006",
                             "eval": "data.rule.k8s_http_lbs",
                             "message": "data.rule.k8s_http_lbs_err",
                             "remediationDescription": "",
@@ -1292,7 +1422,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -1305,7 +1440,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_7",
+                    "masterTestId": "PR-GCP-TRF-CLT-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1313,7 +1448,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0036-TRF",
+                            "id": "PR-GCP-TRF-CLT-007",
                             "eval": "data.rule.k8s_legacy_abac",
                             "message": "data.rule.k8s_legacy_abac_err",
                             "remediationDescription": "",
@@ -1328,10 +1463,13 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -1344,7 +1482,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_8",
+                    "masterTestId": "PR-GCP-TRF-CLT-008",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1352,7 +1490,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0037-TRF",
+                            "id": "PR-GCP-TRF-CLT-008",
                             "eval": "data.rule.k8s_master_auth_net",
                             "message": "data.rule.k8s_master_auth_net_err",
                             "remediationDescription": "",
@@ -1371,7 +1509,9 @@
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -1384,7 +1524,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_9",
+                    "masterTestId": "PR-GCP-TRF-CLT-009",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1392,7 +1532,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0038-TRF",
+                            "id": "PR-GCP-TRF-CLT-009",
                             "eval": "data.rule.k8s_net_policy",
                             "message": "data.rule.k8s_net_policy_err",
                             "remediationDescription": "",
@@ -1411,7 +1551,9 @@
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -1424,7 +1566,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_10",
+                    "masterTestId": "PR-GCP-TRF-CLT-010",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1432,7 +1574,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0039-TRF",
+                            "id": "PR-GCP-TRF-CLT-010",
                             "eval": "data.rule.k8s_logging",
                             "message": "data.rule.k8s_logging_err",
                             "remediationDescription": "",
@@ -1447,10 +1589,13 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -1463,7 +1608,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_11",
+                    "masterTestId": "PR-GCP-TRF-CLT-011",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1471,7 +1616,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0040-TRF",
+                            "id": "PR-GCP-TRF-CLT-011",
                             "eval": "data.rule.k8s_monitor",
                             "message": "data.rule.k8s_monitor_err",
                             "remediationDescription": "",
@@ -1485,12 +1630,15 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CIS",
                                 "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -1503,7 +1651,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_12",
+                    "masterTestId": "PR-GCP-TRF-CLT-012",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1511,7 +1659,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0041-TRF",
+                            "id": "PR-GCP-TRF-CLT-012",
                             "eval": "data.rule.k8s_binary_auth",
                             "message": "data.rule.k8s_binary_auth_err",
                             "remediationDescription": "",
@@ -1524,281 +1672,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "google_container_node_pool",
-                        "google_container_cluster"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_13",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(container.v1.cluster.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-0042-TRF",
-                            "eval": "data.rule.k8s_legacy_endpoint",
-                            "message": "data.rule.k8s_legacy_endpoint_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "GCP Kubernetes Engine Clusters have legacy compute engine metadata endpoints enabled",
-                    "description": "This policy identifies Google Kubernetes Engine (GKE) clusters that have legacy compute engine metadata endpoints enabled. Because GKE uses instance metadata to configure node VMs, some of this metadata is potentially sensitive and should be protected from workloads running on the cluster. Legacy metadata APIs expose the Compute Engine's instance metadata of server endpoints. As a best practice, disable legacy API and use v1 APIs to restrict a potential attacker from retrieving instance metadata.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "google_container_node_pool",
-                        "google_container_cluster"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_14",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(container.v1.cluster.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-0043-TRF",
-                            "eval": "data.rule.k8s_pod_security",
-                            "message": "data.rule.k8s_pod_security_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "GCP Kubernetes Engine Clusters have pod security policy disabled",
-                    "description": "This policy identifies Kubernetes Engine Clusters which have pod security policy disabled. The Pod Security Policy defines a set of conditions that pods must meet to be accepted by the cluster; when a request to create or update a pod does not meet the conditions in the pod security policy, that request is rejected and an error is returned.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
-                                "ISO 27001"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "google_container_node_pool",
-                        "google_container_cluster"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_15",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(container.v1.cluster.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-0045-TRF",
-                            "eval": "data.rule.k8s_egress_metering",
-                            "message": "data.rule.k8s_egress_metering_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "GCP Kubernetes Engine Clusters not configured with network traffic egress metering",
-                    "description": "This policy identifies Kubernetes Engine Clusters which are not configured with network traffic egress metering. When network traffic egress metering enabled, deployed DaemonSet pod meters network egress traffic by collecting data from the conntrack table, and exports the metered metrics to the specified destination. It is recommended to use, network egress metering so that you will be having data and track over monitored network traffic.<br><br>NOTE: Measuring network egress requires a network metering agent (NMA) running on each node. The NMA runs as a privileged pod, consumes some resources on the node (CPU, memory, and disk space), and enables the nf_conntrack_acct sysctl flag on the kernel (for connection tracking flow accounting). If you are comfortable with these caveats, you can enable network egress tracking for use with GKE usage metering.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "google_container_node_pool",
-                        "google_container_cluster"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_16",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(container.v1.cluster.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-0046-TRF",
-                            "eval": "data.rule.k8s_private",
-                            "message": "data.rule.k8s_private_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "GCP Kubernetes Engine Clusters not configured with private cluster",
-                    "description": "This policy identifies Kubernetes Engine Clusters which are not configured with the Private cluster. Private cluster makes your master inaccessible from the public internet and nodes do not have public IP addresses, so your workloads run in an environment that is isolated from the internet.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
-                                "ISO 27001"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "google_container_node_pool",
-                        "google_container_cluster"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_17",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(container.v1.cluster.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-0047-TRF",
-                            "eval": "data.rule.k8s_private_node",
-                            "message": "data.rule.k8s_private_node_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "GCP Kubernetes Engine Clusters not configured with private nodes feature",
-                    "description": "This policy identifies Google Kubernetes Engine (GKE) Clusters which are not configured with the private nodes feature. Private nodes feature makes your master inaccessible from the public internet and nodes do not have public IP addresses, so your workloads run in an environment that is isolated from the internet.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "google_container_node_pool",
-                        "google_container_cluster"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_18",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(container.v1.cluster.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-0048-TRF",
-                            "eval": "data.rule.k8s_node_image",
-                            "message": "data.rule.k8s_node_image_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "GCP Kubernetes Engine Clusters not using Container-Optimized OS for Node image",
-                    "description": "This policy identifies Kubernetes Engine Clusters which do not have a container-optimized operating system for node image. Container-Optimized OS is an operating system image for your Compute Engine VMs that is optimized for running Docker containers. By using Container-Optimized OS for node image, you can bring up your Docker containers on Google Cloud Platform quickly, efficiently, and securely. The Container-Optimized OS node image is based on a recent version of the Linux kernel and is optimized to enhance node security. It is also regularly updated with features, security fixes, and patches. The Container-Optimized OS image provides better support, security, and stability than other images.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "google_container_node_pool",
-                        "google_container_cluster"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_19",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(container.v1.cluster.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-0049-TRF",
-                            "eval": "data.rule.k8s_network",
-                            "message": "data.rule.k8s_network_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "GCP Kubernetes Engine Clusters using the default network",
-                    "description": "This policy identifies Google Kubernetes Engine (GKE) clusters that are configured to use the default network. Because GKE uses this network when creating routes and firewalls for the cluster, as a best practice define a network configuration that meets your security and networking requirements for ingress and egress traffic, instead of using the default network.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "google_container_node_pool",
-                        "google_container_cluster"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_20",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(container.v1.cluster.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-0051-TRF",
-                            "eval": "data.rule.k8s_labels",
-                            "message": "data.rule.k8s_labels_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "GCP Kubernetes Engine Clusters without any label information",
-                    "description": "This policy identifies all Kubernetes Engine Clusters which do not have labels. Having a cluster label helps you identify and categorize Kubernetes clusters.",
-                    "tags": [
-                        {
-                            "cloud": "git",
                             "compliance": [
                                 "CIS",
                                 "CSA-CCM",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS"
                             ],
                             "service": [
@@ -1812,7 +1692,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_21",
+                    "masterTestId": "PR-GCP-TRF-CLT-013",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1820,7 +1700,332 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0052-TRF",
+                            "id": "PR-GCP-TRF-CLT-013",
+                            "eval": "data.rule.k8s_legacy_endpoint",
+                            "message": "data.rule.k8s_legacy_endpoint_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "GCP Kubernetes Engine Clusters have legacy compute engine metadata endpoints enabled",
+                    "description": "This policy identifies Google Kubernetes Engine (GKE) clusters that have legacy compute engine metadata endpoints enabled. Because GKE uses instance metadata to configure node VMs, some of this metadata is potentially sensitive and should be protected from workloads running on the cluster. Legacy metadata APIs expose the Compute Engine's instance metadata of server endpoints. As a best practice, disable legacy API and use v1 APIs to restrict a potential attacker from retrieving instance metadata.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_container_node_pool",
+                        "google_container_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-CLT-014",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container.v1.cluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-CLT-014",
+                            "eval": "data.rule.k8s_pod_security",
+                            "message": "data.rule.k8s_pod_security_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "GCP Kubernetes Engine Clusters have pod security policy disabled",
+                    "description": "This policy identifies Kubernetes Engine Clusters which have pod security policy disabled. The Pod Security Policy defines a set of conditions that pods must meet to be accepted by the cluster; when a request to create or update a pod does not meet the conditions in the pod security policy, that request is rejected and an error is returned.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_container_node_pool",
+                        "google_container_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-CLT-015",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container.v1.cluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-CLT-015",
+                            "eval": "data.rule.k8s_egress_metering",
+                            "message": "data.rule.k8s_egress_metering_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "GCP Kubernetes Engine Clusters not configured with network traffic egress metering",
+                    "description": "This policy identifies Kubernetes Engine Clusters which are not configured with network traffic egress metering. When network traffic egress metering enabled, deployed DaemonSet pod meters network egress traffic by collecting data from the conntrack table, and exports the metered metrics to the specified destination. It is recommended to use, network egress metering so that you will be having data and track over monitored network traffic._x005F_x000D_ _x005F_x000D_ NOTE: Measuring network egress requires a network metering agent (NMA) running on each node. The NMA runs as a privileged pod, consumes some resources on the node (CPU, memory, and disk space), and enables the nf_conntrack_acct sysctl flag on the kernel (for connection tracking flow accounting). If you are comfortable with these caveats, you can enable network egress tracking for use with GKE usage metering.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_container_node_pool",
+                        "google_container_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-CLT-016",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container.v1.cluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-CLT-016",
+                            "eval": "data.rule.k8s_private",
+                            "message": "data.rule.k8s_private_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "GCP Kubernetes Engine Clusters not configured with private cluster",
+                    "description": "This policy identifies Kubernetes Engine Clusters which are not configured with the Private cluster. Private cluster makes your master inaccessible from the public internet and nodes do not have public IP addresses, so your workloads run in an environment that is isolated from the internet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_container_node_pool",
+                        "google_container_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-CLT-017",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container.v1.cluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-CLT-017",
+                            "eval": "data.rule.k8s_private_node",
+                            "message": "data.rule.k8s_private_node_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "GCP Kubernetes Engine Clusters not configured with private nodes feature",
+                    "description": "This policy identifies Google Kubernetes Engine (GKE) Clusters which are not configured with the private nodes feature. Private nodes feature makes your master inaccessible from the public internet and nodes do not have public IP addresses, so your workloads run in an environment that is isolated from the internet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_container_node_pool",
+                        "google_container_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-CLT-018",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container.v1.cluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-CLT-018",
+                            "eval": "data.rule.k8s_node_image",
+                            "message": "data.rule.k8s_node_image_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "GCP Kubernetes Engine Clusters not using Container-Optimized OS for Node image",
+                    "description": "This policy identifies Kubernetes Engine Clusters which do not have a container-optimized operating system for node image. Container-Optimized OS is an operating system image for your Compute Engine VMs that is optimized for running Docker containers. By using Container-Optimized OS for node image, you can bring up your Docker containers on Google Cloud Platform quickly, efficiently, and securely. The Container-Optimized OS node image is based on a recent version of the Linux kernel and is optimized to enhance node security. It is also regularly updated with features, security fixes, and patches. The Container-Optimized OS image provides better support, security, and stability than other images.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_container_node_pool",
+                        "google_container_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-CLT-019",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container.v1.cluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-CLT-019",
+                            "eval": "data.rule.k8s_network",
+                            "message": "data.rule.k8s_network_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "GCP Kubernetes Engine Clusters using the default network",
+                    "description": "This policy identifies Google Kubernetes Engine (GKE) clusters that are configured to use the default network. Because GKE uses this network when creating routes and firewalls for the cluster, as a best practice define a network configuration that meets your security and networking requirements for ingress and egress traffic, instead of using the default network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_container_node_pool",
+                        "google_container_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-CLT-021",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container.v1.cluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-CLT-021",
+                            "eval": "data.rule.k8s_labels",
+                            "message": "data.rule.k8s_labels_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "GCP Kubernetes Engine Clusters without any label information",
+                    "description": "This policy identifies all Kubernetes Engine Clusters which do not have labels. Having a cluster label helps you identify and categorize Kubernetes clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_container_node_pool",
+                        "google_container_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-CLT-022",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container.v1.cluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-CLT-022",
                             "eval": "data.rule.k8s_db_encrypt",
                             "message": "data.rule.k8s_db_encrypt_err",
                             "remediationDescription": "",
@@ -1829,11 +2034,19 @@
                     ],
                     "severity": "Medium",
                     "title": "GCP Kubernetes cluster Application-layer Secrets not encrypted",
-                    "description": "Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers who gain access to an offline copy of etcd.<br><br>This policy checks your cluster for the Application-layer Secrets Encryption security feature and alerts if it is not enabled.",
+                    "description": "Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers who gain access to an offline copy of etcd._x005F_x000D_ _x005F_x000D_ This policy checks your cluster for the Application-layer Secrets Encryption security feature and alerts if it is not enabled.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -1845,7 +2058,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_22",
+                    "masterTestId": "PR-GCP-TRF-CLT-023",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1853,7 +2066,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0053-TRF",
+                            "id": "PR-GCP-TRF-CLT-023",
                             "eval": "data.rule.k8s_intra_node",
                             "message": "data.rule.k8s_intra_node_err",
                             "remediationDescription": "",
@@ -1862,11 +2075,19 @@
                     ],
                     "severity": "Medium",
                     "title": "GCP Kubernetes cluster intra-node visibility disabled",
-                    "description": "With Intranode Visibility, all network traffic in your cluster is seen by the Google Cloud Platform network. This means you can see flow logs for all traffic between Pods, including traffic between Pods on the same node. And you can create firewall rules that apply to all traffic between Pods.<br><br>This policy checks your cluster's intra-node visibility feature and generates an alert if it's disabled.",
+                    "description": "With Intranode Visibility, all network traffic in your cluster is seen by the Google Cloud Platform network. This means you can see flow logs for all traffic between Pods, including traffic between Pods on the same node. And you can create firewall rules that apply to all traffic between Pods._x005F_x000D_ _x005F_x000D_ This policy checks your cluster's intra-node visibility feature and generates an alert if it's disabled.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -1878,7 +2099,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_23",
+                    "masterTestId": "PR-GCP-TRF-CLT-024",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1886,7 +2107,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0054-TRF",
+                            "id": "PR-GCP-TRF-CLT-024",
                             "eval": "data.rule.k8s_istio",
                             "message": "data.rule.k8s_istio_err",
                             "remediationDescription": "",
@@ -1895,11 +2116,18 @@
                     ],
                     "severity": "Medium",
                     "title": "GCP Kubernetes cluster istioConfig not enabled",
-                    "description": "Istio is an open service mesh that provides a uniform way to connect, manage, and secure microservices. It supports managing traffic flows between services, enforcing access policies, and aggregating telemetry data, all without requiring changes to the microservice code.<br><br>This policy checks your cluster for the Istio add-on feature and alerts if it is not enabled.",
+                    "description": "Istio is an open service mesh that provides a uniform way to connect, manage, and secure microservices. It supports managing traffic flows between services, enforcing access policies, and aggregating telemetry data, all without requiring changes to the microservice code._x005F_x000D_ _x005F_x000D_ This policy checks your cluster for the Istio add-on feature and alerts if it is not enabled.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -1911,7 +2139,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_V1_CLUSTER_24",
+                    "masterTestId": "PR-GCP-TRF-CLT-025",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1919,7 +2147,7 @@
                     "rule": "file(container.v1.cluster.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0055-TRF",
+                            "id": "PR-GCP-TRF-CLT-025",
                             "eval": "data.rule.k8s_zones",
                             "message": "data.rule.k8s_zones_err",
                             "remediationDescription": "",
@@ -1928,11 +2156,18 @@
                     ],
                     "severity": "Medium",
                     "title": "GCP Kubernetes cluster not in redundant zones",
-                    "description": "Putting resources in different zones in a region provides isolation from many types of infrastructure, hardware, and software failures.<br><br>This policy alerts if your cluster is not located in at least 3 zones.",
+                    "description": "Putting resources in different zones in a region provides isolation from many types of infrastructure, hardware, and software failures._x005F_x000D_ _x005F_x000D_ This policy alerts if your cluster is not located in at least 3 zones.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -1944,7 +2179,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DNS_V1_MANAGED_ZONE_1",
+                    "masterTestId": "PR-GCP-TRF-MZ-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1952,7 +2187,7 @@
                     "rule": "file(dns.v1.managedzone.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0003-TRF",
+                            "id": "PR-GCP-TRF-MZ-001",
                             "eval": "data.rule.dnssec_state",
                             "message": "data.rule.dnssec_state_err",
                             "remediationDescription": "",
@@ -1967,7 +2202,12 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -1979,7 +2219,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DNS_V1_MANAGED_ZONE_2",
+                    "masterTestId": "PR-GCP-TRF-MZ-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1987,7 +2227,7 @@
                     "rule": "file(dns.v1.managedzone.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0004-TRF",
+                            "id": "PR-GCP-TRF-MZ-002",
                             "eval": "data.rule.dnssec_key_rsasha1",
                             "message": "data.rule.dnssec_key_rsasha1_err",
                             "remediationDescription": "",
@@ -2002,7 +2242,12 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -2014,7 +2259,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DNS_V1_MANAGED_ZONE_3",
+                    "masterTestId": "PR-GCP-TRF-MZ-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2022,7 +2267,7 @@
                     "rule": "file(dns.v1.managedzone.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0005-TRF",
+                            "id": "PR-GCP-TRF-MZ-003",
                             "eval": "data.rule.dnssec_zone_rsasha1",
                             "message": "data.rule.dnssec_zone_rsasha1_err",
                             "remediationDescription": "",
@@ -2036,7 +2281,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -2048,7 +2298,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQL_ADMIN_V1_BETA4_INSTANCE",
+                    "masterTestId": "PR-GCP-TRF-SQLI-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2056,14 +2306,14 @@
                     "rule": "file(sqladmin.v1beta4.instance.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0062-TRF",
+                            "id": "PR-GCP-TRF-SQLI-001",
                             "eval": "data.rule.sql_labels",
                             "message": "data.rule.sql_labels_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP SQL Instances without any Label information",
                     "description": "This policy identifies the SQL DB instance which does not have any Labels. Labels can be used for easy identification and searches.",
                     "tags": [
@@ -2071,7 +2321,10 @@
                             "cloud": "git",
                             "compliance": [
                                 "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS"
                             ],
                             "service": [
@@ -2084,7 +2337,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_V1_BUCKET_1",
+                    "masterTestId": "PR-GCP-TRF-BKT-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2092,7 +2345,7 @@
                     "rule": "file(storage.v1.bucket.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0063-TRF",
+                            "id": "PR-GCP-TRF-BKT-001",
                             "eval": "data.rule.storage_encrypt",
                             "message": "data.rule.storage_encrypt_err",
                             "remediationDescription": "",
@@ -2105,7 +2358,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2117,7 +2377,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_V1_BUCKET_2",
+                    "masterTestId": "PR-GCP-TRF-BKT-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2125,7 +2385,7 @@
                     "rule": "file(storage.v1.bucket.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0066-TRF",
+                            "id": "PR-GCP-TRF-BKT-002",
                             "eval": "data.rule.storage_versioning",
                             "message": "data.rule.storage_versioning_err",
                             "remediationDescription": "",
@@ -2140,7 +2400,12 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -2153,7 +2418,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_V1_BUCKET_3",
+                    "masterTestId": "PR-GCP-TRF-BKT-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2161,7 +2426,7 @@
                     "rule": "file(storage.v1.bucket.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0089-TRF",
+                            "id": "PR-GCP-TRF-BKT-004",
                             "eval": "data.rule.storage_logging",
                             "message": "data.rule.storage_logging_err",
                             "remediationDescription": "",
@@ -2175,12 +2440,15 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CIS",
                                 "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -2193,7 +2461,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_V1_BUCKET_4",
+                    "masterTestId": "PR-GCP-TRF-BKT-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2201,7 +2469,7 @@
                     "rule": "file(storage.v1.bucket.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0090-TRF",
+                            "id": "PR-GCP-TRF-BKT-005",
                             "eval": "data.rule.storage_public_logs",
                             "message": "data.rule.storage_public_logs_err",
                             "remediationDescription": "",
@@ -2215,11 +2483,14 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "CIS",
                                 "CSA-CCM",
-                                "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "terraform"
@@ -2232,7 +2503,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECRETS_1",
+                    "masterTestId": "PR-AWS-0001-RGX",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2240,11 +2511,11 @@
                     "rule": "file(secret_tf.py)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0001-RGX",
+                            "id": "PR-AWS-0001-RGX",
                             "eval": "password_leak",
                             "message": "password_leak_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "severity": "High",
@@ -2253,7 +2524,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2261,7 +2539,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECRETS_2",
+                    "masterTestId": "PR-AWS-0001-RGX",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2269,11 +2547,11 @@
                     "rule": "file(secret_tf.py)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0001-RGX",
+                            "id": "PR-AWS-0001-RGX",
                             "eval": "entropy_password",
                             "message": "entropy_password_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "severity": "High",
@@ -2282,7 +2560,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
