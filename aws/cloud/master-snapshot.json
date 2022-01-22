@@ -175,6 +175,7 @@
 					"masterSnapshotId": "TEST_ELB_01",
 					"arn": "arn:aws:elb:::",
 					"type": "elb",
+					"boto_type": "elb",
 					"collection": "aws_elb_01",
 					"listMethod": "describe_load_balancers",
 					"detailMethods": [
@@ -185,6 +186,7 @@
 					"masterSnapshotId": "TEST_ELB_02",
 					"arn": "arn:aws:elbv2:::",
 					"type": "elbv2",
+					"boto_type": "elbv2",
 					"collection": "aws_elbv2_01",
 					"listMethod": "describe_load_balancers",
 					"detailMethods": [
@@ -446,7 +448,7 @@
 				},
 				{
 					"masterSnapshotId": "TEST_TS",
-					"arn": "arn:aws:timestream:::",
+					"arn": "arn:aws:timestream-write:::",
 					"type": "timestream",
 					"collection": "aws_ts",
 					"listMethod": "list_databases",
@@ -702,13 +704,10 @@
 					"arn": "arn:aws:iam:::",
 					"type": "iam",
 					"collection": "aws_iam",
-					"listMethod": "list_users",
+					"listMethod": "list_policies",
 					"detailMethods": [
-						"get_user",
-						"list_ssh_public_keys",
-						"get_account_summary",
-						"get_account_password_policy",
-						"list_attached_user_policies"
+						"get_policy",
+						"get_policy_version"
 					]
 				}
 			]

@@ -5,7 +5,7 @@
             "version": "0.1",
             "cases": [
                 {
-                    "masterTestId": "TEST_ROLE",
+                    "masterTestId": "PR-AZR-TRF-ARD-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -37,7 +37,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_ACTIVITY_LOG_ALERT_1",
+                    "masterTestId": "PR-AZR-TRF-MNT-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -77,7 +77,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_ACTIVITY_LOG_ALERT_2",
+                    "masterTestId": "PR-AZR-TRF-MNT-009",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -110,7 +110,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_ACTIVITY_LOG_ALERT_3",
+                    "masterTestId": "PR-AZR-TRF-MNT-010",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -143,7 +143,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_ACTIVITY_LOG_ALERT_4",
+                    "masterTestId": "PR-AZR-TRF-MNT-011",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -176,7 +176,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_AKS_1",
+                    "masterTestId": "PR-AZR-TRF-AKS-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -214,7 +214,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_AKS_2",
+                    "masterTestId": "PR-AZR-TRF-AKS-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -253,7 +253,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_AKS_3",
+                    "masterTestId": "PR-AZR-TRF-AKS-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -291,7 +291,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_AKS_4",
+                    "masterTestId": "PR-AZR-TRF-AKS-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -329,7 +329,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_AKS_5",
+                    "masterTestId": "PR-AZR-TRF-AKS-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -368,7 +368,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_AKS_6",
+                    "masterTestId": "PR-AZR-TRF-AKS-006",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -406,7 +406,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_AKS_7",
+                    "masterTestId": "PR-AZR-TRF-AKS-008",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -422,7 +422,7 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "AKS cluster shoud have Network Policy configured",
+                    "title": "AKS cluster should have Network Policy configured",
                     "description": "Network policy used for building Kubernetes network. - calico or azure.",
                     "tags": [
                         {
@@ -438,7 +438,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_AKS_8",
+                    "masterTestId": "PR-AZR-TRF-AKS-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -470,7 +470,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_AKS_9",
+                    "masterTestId": "PR-AZR-TRF-AKS-009",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -502,7 +502,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_AKS_10",
+                    "masterTestId": "PR-AZR-TRF-AKS-010",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -536,7 +536,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APPLICATION_GATEWAYS_1",
+                    "masterTestId": "PR-AZR-TRF-AGW-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -575,7 +575,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APPLICATION_GATEWAYS_2",
+                    "masterTestId": "PR-AZR-TRF-AGW-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -613,7 +613,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APPLICATION_GATEWAYS_3",
+                    "masterTestId": "PR-AZR-TRF-AGW-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -651,7 +651,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APPLICATION_GATEWAYS_4",
+                    "masterTestId": "PR-AZR-TRF-AGW-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -689,7 +689,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APPLICATION_GATEWAYS_5",
+                    "masterTestId": "PR-AZR-TRF-AGW-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -727,7 +727,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APPLICATION_GATEWAYS_6",
+                    "masterTestId": "PR-AZR-TRF-AGW-006",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -765,7 +765,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APPLICATION_GATEWAYS_7",
+                    "masterTestId": "PR-AZR-TRF-AGW-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -799,7 +799,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_1",
+                    "masterTestId": "PR-AZR-TRF-WEB-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -831,7 +831,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_2",
+                    "masterTestId": "PR-AZR-TRF-WEB-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -870,7 +870,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_3",
+                    "masterTestId": "PR-AZR-TRF-WEB-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -909,7 +909,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_4",
+                    "masterTestId": "PR-AZR-TRF-WEB-018",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -941,7 +941,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_5",
+                    "masterTestId": "PR-AZR-TRF-WEB-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -980,7 +980,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_6",
+                    "masterTestId": "PR-AZR-TRF-WEB-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1019,7 +1019,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_7",
+                    "masterTestId": "PR-AZR-TRF-WEB-006",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1051,7 +1051,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_8",
+                    "masterTestId": "PR-AZR-TRF-WEB-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1083,7 +1083,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_9",
+                    "masterTestId": "PR-AZR-TRF-WEB-008",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1115,7 +1115,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_10",
+                    "masterTestId": "PR-AZR-TRF-WEB-009",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1147,7 +1147,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_11",
+                    "masterTestId": "PR-AZR-TRF-WEB-010",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1179,7 +1179,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_12",
+                    "masterTestId": "PR-AZR-TRF-WEB-011",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1211,7 +1211,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_13",
+                    "masterTestId": "PR-AZR-TRF-WEB-012",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1243,7 +1243,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_14",
+                    "masterTestId": "PR-AZR-TRF-WEB-013",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1275,7 +1275,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_15",
+                    "masterTestId": "PR-AZR-TRF-WEB-014",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1307,7 +1307,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_16",
+                    "masterTestId": "PR-AZR-TRF-WEB-015",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1339,7 +1339,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_17",
+                    "masterTestId": "PR-AZR-TRF-WEB-016",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1371,7 +1371,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APP_SERVICE_18",
+                    "masterTestId": "PR-AZR-TRF-WEB-017",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1403,7 +1403,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_AZURE_FIREWALLS_1",
+                    "masterTestId": "PR-AZR-TRF-AFW-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1439,7 +1439,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DATABASEACCOUNTS",
+                    "masterTestId": "PR-AZR-TRF-CDA-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1473,7 +1473,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DATABRICKS_1",
+                    "masterTestId": "PR-AZR-TRF-DBK-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1505,7 +1505,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DATABRICKS_2",
+                    "masterTestId": "PR-AZR-TRF-DBK-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1537,7 +1537,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_ADMINISTRATORS",
+                    "masterTestId": "PR-AZR-TRF-SQL-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1574,7 +1574,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_AUDITING_SETTINGS_1",
+                    "masterTestId": "PR-AZR-TRF-SQL-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1614,7 +1614,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_AUDITING_SETTINGS_2",
+                    "masterTestId": "PR-AZR-TRF-SQL-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1654,7 +1654,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_FIREWALL_RULES",
+                    "masterTestId": "PR-AZR-TRF-SQL-011",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1692,7 +1692,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_1",
+                    "masterTestId": "PR-AZR-TRF-SQL-017",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1729,7 +1729,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_2",
+                    "masterTestId": "PR-AZR-TRF-SQL-018",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1768,7 +1768,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_3",
+                    "masterTestId": "PR-AZR-TRF-SQL-019",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1806,7 +1806,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_4",
+                    "masterTestId": "PR-AZR-TRF-SQL-020",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1844,7 +1844,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_5",
+                    "masterTestId": "PR-AZR-TRF-SQL-021",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1882,7 +1882,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS_1",
+                    "masterTestId": "PR-AZR-TRF-SQL-044",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1916,7 +1916,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS_2",
+                    "masterTestId": "PR-AZR-TRF-SQL-045",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1950,7 +1950,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS_3",
+                    "masterTestId": "PR-AZR-TRF-SQL-054",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1984,7 +1984,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS_4",
+                    "masterTestId": "PR-AZR-TRF-SQL-055",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2018,7 +2018,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_VALENRABILITY_ASSESSMENTS_1",
+                    "masterTestId": "PR-AZR-TRF-SQL-024",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2050,7 +2050,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_VALENRABILITY_ASSESSMENTS_2",
+                    "masterTestId": "PR-AZR-TRF-SQL-026",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2082,7 +2082,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_VALENRABILITY_ASSESSMENTS_3",
+                    "masterTestId": "PR-AZR-TRF-SQL-022",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2114,7 +2114,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_1",
+                    "masterTestId": "PR-AZR-TRF-MNT-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2159,7 +2159,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_2",
+                    "masterTestId": "PR-AZR-TRF-MNT-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2197,7 +2197,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_3",
+                    "masterTestId": "PR-AZR-TRF-MNT-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2242,7 +2242,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_4",
+                    "masterTestId": "PR-AZR-TRF-MNT-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2287,7 +2287,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_5",
+                    "masterTestId": "PR-AZR-TRF-MNT-006",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2332,7 +2332,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_6",
+                    "masterTestId": "PR-AZR-TRF-MNT-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2370,7 +2370,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_7",
+                    "masterTestId": "PR-AZR-TRF-MNT-008",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2405,7 +2405,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DISKS_1",
+                    "masterTestId": "PR-AZR-TRF-DSK-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2444,7 +2444,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DISKS_2",
+                    "masterTestId": "PR-AZR-TRF-DSK-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2484,7 +2484,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_FRONTDOORS_1",
+                    "masterTestId": "PR-AZR-TRF-FRD-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2519,7 +2519,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_FUNCTION_APP_1",
+                    "masterTestId": "PR-AZR-TRF-AFA-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2553,7 +2553,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_FUNCTION_APP_2",
+                    "masterTestId": "PR-AZR-TRF-AFA-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2587,7 +2587,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_FUNCTION_APP_3",
+                    "masterTestId": "PR-AZR-TRF-AFA-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2621,7 +2621,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KeyVault_1",
+                    "masterTestId": "PR-AZR-TRF-KV-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2657,7 +2657,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KeyVault_2",
+                    "masterTestId": "PR-AZR-TRF-KV-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2679,7 +2679,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -2691,7 +2696,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KeyVault_3",
+                    "masterTestId": "PR-AZR-TRF-KV-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2725,7 +2730,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KeyVault_4",
+                    "masterTestId": "PR-AZR-TRF-KV-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2747,12 +2752,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "PCI-DSS",
-                                "GDPR",
-                                "ISO 27001",
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
                                 "NIST CSF",
-                                "HIPAA",
-                                "Best Practice"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -2764,7 +2769,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KeyVault_5",
+                    "masterTestId": "PR-AZR-TRF-KV-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2803,7 +2808,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KeyVault_6",
+                    "masterTestId": "PR-AZR-TRF-KV-006",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2837,7 +2842,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KeyVault_7",
+                    "masterTestId": "PR-AZR-TRF-KV-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2871,7 +2876,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KeyVault_8",
+                    "masterTestId": "PR-AZR-TRF-KV-008",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2905,7 +2910,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KeyVault_9",
+                    "masterTestId": "PR-AZR-TRF-KV-009",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2940,7 +2945,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_LOCKS",
+                    "masterTestId": "PR-AZR-TRF-AML-008",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2979,7 +2984,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MariaDB_1",
+                    "masterTestId": "PR-AZR-TRF-SQL-012",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3014,7 +3019,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MariaDB_2",
+                    "masterTestId": "PR-AZR-TRF-SQL-056",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3049,7 +3054,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MariaDB_3",
+                    "masterTestId": "PR-AZR-TRF-SQL-057",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3084,7 +3089,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MariaDB_4",
+                    "masterTestId": "PR-AZR-TRF-SQL-058",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3119,7 +3124,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MariaDB_5",
+                    "masterTestId": "PR-AZR-TRF-SQL-059",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3154,7 +3159,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MySQL_SERVER_1",
+                    "masterTestId": "PR-AZR-TRF-SQL-014",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3189,7 +3194,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MySQL_SERVER_2",
+                    "masterTestId": "PR-AZR-TRF-SQL-016",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3229,7 +3234,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MySQL_SERVER_3",
+                    "masterTestId": "PR-AZR-TRF-SQL-060",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3264,7 +3269,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MySQL_SERVER_4",
+                    "masterTestId": "PR-AZR-TRF-SQL-061",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3299,7 +3304,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MySQL_SERVER_5",
+                    "masterTestId": "PR-AZR-TRF-SQL-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3334,7 +3339,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_1",
+                    "masterTestId": "PR-AZR-TRF-NTW-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3372,7 +3377,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_2",
+                    "masterTestId": "PR-AZR-TRF-NTW-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3410,7 +3415,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_3",
+                    "masterTestId": "PR-AZR-TRF-NTW-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3448,7 +3453,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_1",
+                    "masterTestId": "PR-AZR-TRF-NSG-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3487,7 +3492,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_2",
+                    "masterTestId": "PR-AZR-TRF-NSG-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3526,7 +3531,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_3",
+                    "masterTestId": "PR-AZR-TRF-NSG-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3565,7 +3570,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_4",
+                    "masterTestId": "PR-AZR-TRF-NSG-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3604,7 +3609,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_5",
+                    "masterTestId": "PR-AZR-TRF-NSG-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3643,7 +3648,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_6",
+                    "masterTestId": "PR-AZR-TRF-NSG-006",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3682,7 +3687,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_7",
+                    "masterTestId": "PR-AZR-TRF-NSG-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3721,7 +3726,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_8",
+                    "masterTestId": "PR-AZR-TRF-NSG-008",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3760,7 +3765,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_9",
+                    "masterTestId": "PR-AZR-TRF-NSG-009",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3799,7 +3804,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_10",
+                    "masterTestId": "PR-AZR-TRF-NSG-010",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3837,7 +3842,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_11",
+                    "masterTestId": "PR-AZR-TRF-NSG-011",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3876,7 +3881,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_12",
+                    "masterTestId": "PR-AZR-TRF-NSG-012",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3915,7 +3920,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_13",
+                    "masterTestId": "PR-AZR-TRF-NSG-013",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3954,7 +3959,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_14",
+                    "masterTestId": "PR-AZR-TRF-NSG-014",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3992,7 +3997,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_15",
+                    "masterTestId": "PR-AZR-TRF-NSG-015",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4030,7 +4035,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_16",
+                    "masterTestId": "PR-AZR-TRF-NSG-016",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4069,7 +4074,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_17",
+                    "masterTestId": "PR-AZR-TRF-NSG-018",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4108,7 +4113,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_18",
+                    "masterTestId": "PR-AZR-TRF-NSG-019",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4147,7 +4152,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_19",
+                    "masterTestId": "PR-AZR-TRF-NSG-020",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4186,7 +4191,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_20",
+                    "masterTestId": "PR-AZR-TRF-NSG-021",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4225,7 +4230,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_21",
+                    "masterTestId": "PR-AZR-TRF-NSG-022",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4264,7 +4269,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_22",
+                    "masterTestId": "PR-AZR-TRF-NSG-023",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4303,7 +4308,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_23",
+                    "masterTestId": "PR-AZR-TRF-NSG-024",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4342,7 +4347,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_24",
+                    "masterTestId": "PR-AZR-TRF-NSG-025",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4381,7 +4386,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_25",
+                    "masterTestId": "PR-AZR-TRF-NSG-026",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4420,7 +4425,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_26",
+                    "masterTestId": "PR-AZR-TRF-NSG-027",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4459,7 +4464,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_27",
+                    "masterTestId": "PR-AZR-TRF-NSG-028",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4498,7 +4503,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_28",
+                    "masterTestId": "PR-AZR-TRF-NSG-029",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4537,7 +4542,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_29",
+                    "masterTestId": "PR-AZR-TRF-NSG-030",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4576,7 +4581,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_30",
+                    "masterTestId": "PR-AZR-TRF-NSG-031",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4611,7 +4616,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_31",
+                    "masterTestId": "PR-AZR-TRF-NSG-032",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4646,7 +4651,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_32",
+                    "masterTestId": "PR-AZR-TRF-NSG-033",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4678,7 +4683,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_33",
+                    "masterTestId": "PR-AZR-TRF-NSG-017",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4717,7 +4722,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_postgreSQL_1",
+                    "masterTestId": "PR-AZR-TRF-SQL-028",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4757,7 +4762,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_postgreSQL_2",
+                    "masterTestId": "PR-AZR-TRF-SQL-029",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4798,7 +4803,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_postgreSQL_3",
+                    "masterTestId": "PR-AZR-TRF-SQL-062",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4834,7 +4839,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_postgreSQL_4",
+                    "masterTestId": "PR-AZR-TRF-SQL-063",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4870,7 +4875,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_postgreSQL_5",
+                    "masterTestId": "PR-AZR-TRF-SQL-064",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4906,7 +4911,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_postgreSQL_6",
+                    "masterTestId": "PR-AZR-TRF-SQL-065",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4942,7 +4947,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_postgreSQL_7",
+                    "masterTestId": "PR-AZR-TRF-SQL-066",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -4978,7 +4983,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_postgreSQL_8",
+                    "masterTestId": "PR-AZR-TRF-SQL-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5013,7 +5018,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_PRICING",
+                    "masterTestId": "PR-AZR-TRF-ASC-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5048,7 +5053,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_Redis",
+                    "masterTestId": "PR-AZR-TRF-ARC-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5088,7 +5093,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_Redis_2",
+                    "masterTestId": "PR-AZR-TRF-ARC-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5127,7 +5132,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_Redis_3",
+                    "masterTestId": "PR-AZR-TRF-ARC-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5161,7 +5166,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_Redis_4",
+                    "masterTestId": "PR-AZR-TRF-ARC-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5195,7 +5200,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_Redis_5",
+                    "masterTestId": "PR-AZR-TRF-ARC-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5230,7 +5235,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_REGISTRIES_LIST",
+                    "masterTestId": "PR-AZR-TRF-ACR-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5268,7 +5273,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_REGISTRIES_WEBHOOK",
+                    "masterTestId": "PR-AZR-TRF-ACR-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5307,7 +5312,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_REGISTRY",
+                    "masterTestId": "PR-AZR-TRF-ACR-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5341,7 +5346,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECURITY_CONTACTS_1",
+                    "masterTestId": "PR-AZR-TRF-ASC-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5380,7 +5385,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECURITY_CONTACTS_2",
+                    "masterTestId": "PR-AZR-TRF-ASC-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5419,7 +5424,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECURITY_CONTACTS_3",
+                    "masterTestId": "PR-AZR-TRF-ASC-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5458,7 +5463,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECURITY_CONTACTS_4",
+                    "masterTestId": "PR-AZR-TRF-ASC-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5497,7 +5502,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQL_SERVER_ALERT",
+                    "masterTestId": "PR-AZR-TRF-SQL-031",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5535,7 +5540,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQL_SERVER_ENCRYPTION_2",
+                    "masterTestId": "PR-AZR-TRF-SQL-046",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5575,7 +5580,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MSSQL_SERVER_1",
+                    "masterTestId": "PR-AZR-TRF-SQL-047",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5616,7 +5621,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MSSQL_SERVER_2",
+                    "masterTestId": "PR-AZR-TRF-SQL-048",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5657,7 +5662,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MSSQL_SERVER_3",
+                    "masterTestId": "PR-AZR-TRF-SQL-068",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5693,7 +5698,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MSSQL_SERVER_4",
+                    "masterTestId": "PR-AZR-TRF-SQL-069",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5729,7 +5734,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_SYNC",
+                    "masterTestId": "PR-AZR-TRF-STS-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5763,7 +5768,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_1",
+                    "masterTestId": "PR-AZR-TRF-STR-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5802,7 +5807,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_2",
+                    "masterTestId": "PR-AZR-TRF-STR-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5840,7 +5845,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_3",
+                    "masterTestId": "PR-AZR-TRF-STR-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5880,7 +5885,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNTS_4",
+                    "masterTestId": "PR-AZR-TRF-STR-008",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5915,7 +5920,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNTS_5",
+                    "masterTestId": "PR-AZR-TRF-STR-009",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5949,7 +5954,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_6",
+                    "masterTestId": "PR-AZR-TRF-STR-010",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -5986,7 +5991,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_7",
+                    "masterTestId": "PR-AZR-TRF-STR-014",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6023,7 +6028,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_9",
+                    "masterTestId": "PR-AZR-TRF-STR-011",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6061,7 +6066,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_11",
+                    "masterTestId": "PR-AZR-TRF-STR-017",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6098,7 +6103,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_12",
+                    "masterTestId": "PR-AZR-TRF-STR-018",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6135,7 +6140,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_13",
+                    "masterTestId": "PR-AZR-TRF-STR-019",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6170,7 +6175,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_14",
+                    "masterTestId": "PR-AZR-TRF-STR-020",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6205,7 +6210,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_15",
+                    "masterTestId": "PR-AZR-TRF-STR-024",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6239,7 +6244,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_16",
+                    "masterTestId": "PR-AZR-TRF-STR-023",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6274,7 +6279,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_BLOB_CONTAINER",
+                    "masterTestId": "PR-AZR-TRF-STR-012",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6312,7 +6317,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SYNAPSE_WORKSPACE",
+                    "masterTestId": "PR-AZR-TRF-SWM-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6346,7 +6351,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VIRTUAL_MACHINE_1",
+                    "masterTestId": "PR-AZR-TRF-VM-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6388,7 +6393,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VIRTUAL_MACHINE_2",
+                    "masterTestId": "PR-AZR-TRF-VM-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6423,7 +6428,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VIRTUAL_MACHINE_3",
+                    "masterTestId": "PR-AZR-TRF-VM-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6458,7 +6463,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VIRTUAL_MACHINE_4",
+                    "masterTestId": "PR-AZR-TRF-VM-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6493,7 +6498,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VIRTUAL_MACHINE_5",
+                    "masterTestId": "PR-AZR-TRF-VM-006",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6528,7 +6533,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VIRTUAL_MACHINE_6",
+                    "masterTestId": "PR-AZR-TRF-VM-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6563,7 +6568,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VIRTUAL_MACHINE_EXTENSIONS",
+                    "masterTestId": "PR-AZR-TRF-VM-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6595,7 +6600,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VNET_PEERINGS",
+                    "masterTestId": "PR-AZR-TRF-NET-004",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6627,7 +6632,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VNET_SUBNETS",
+                    "masterTestId": "PR-AZR-TRF-NET-005",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6667,7 +6672,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VPN_GATEWAYS",
+                    "masterTestId": "PR-AZR-TRF-NET-006",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6704,7 +6709,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECRETS_1",
+                    "masterTestId": "PR-AZR-TRF-SEC-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6733,7 +6738,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECRET_2",
+                    "masterTestId": "PR-AZR-TRF-SEC-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -6762,7 +6767,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECRET_3",
+                    "masterTestId": "PR-AZR-TRF-SEC-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],

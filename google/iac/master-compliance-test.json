@@ -5,7 +5,7 @@
             "version": "0.1",
             "cases": [
                 {
-                    "masterTestId": "TEST_COMPUTE_1",
+                    "masterTestId": "PR-GCP-GDF-FW-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -20,7 +20,7 @@
                             "remediationFunction": "PR_GCP_GDF_FW_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Default Firewall rule should not have any rules (except http and https)",
                     "description": "Checks to ensure that the default Firewall rule should not have any (non http, https) rules. The default Firewall rules will apply all instances by default in the absence of specific custom rules with higher priority. It is a safe practice to not have these rules in the default Firewall.",
                     "tags": [
@@ -29,9 +29,12 @@
                             "compliance": [
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -43,7 +46,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_2",
+                    "masterTestId": "PR-GCP-GDF-FW-002",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -65,10 +68,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -82,7 +88,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_3",
+                    "masterTestId": "PR-GCP-GDF-FW-003",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -97,17 +103,20 @@
                             "remediationFunction": "PR_GCP_GDF_FW_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to FTP port (21)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on FTP port (21) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -121,7 +130,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_4",
+                    "masterTestId": "PR-GCP-GDF-FW-004",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -136,17 +145,20 @@
                             "remediationFunction": "PR_GCP_GDF_FW_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to HTTP port (80)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on HTTP port (80) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -160,7 +172,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_5",
+                    "masterTestId": "PR-GCP-GDF-FW-005",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -182,10 +194,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -199,7 +214,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_6",
+                    "masterTestId": "PR-GCP-GDF-FW-006",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -214,17 +229,20 @@
                             "remediationFunction": "PR_GCP_GDF_FW_006.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to MongoDB port (27017)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on MongoDB port (27017) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -238,7 +256,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_7",
+                    "masterTestId": "PR-GCP-GDF-FW-007",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -253,17 +271,20 @@
                             "remediationFunction": "PR_GCP_GDF_FW_007.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to MySQL DB port (3306)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on MySQL DB port (3306) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -277,7 +298,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_8",
+                    "masterTestId": "PR-GCP-GDF-FW-008",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -299,10 +320,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -316,7 +340,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_9",
+                    "masterTestId": "PR-GCP-GDF-FW-009",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -331,17 +355,20 @@
                             "remediationFunction": "PR_GCP_GDF_FW_009.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to Oracle DB port (1521)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on Oracle DB port (1521) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -355,7 +382,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_10",
+                    "masterTestId": "PR-GCP-GDF-FW-010",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -377,10 +404,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -394,7 +424,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_11",
+                    "masterTestId": "PR-GCP-GDF-FW-011",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -409,17 +439,20 @@
                             "remediationFunction": "PR_GCP_GDF_FW_011.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to PostgreSQL port (5432)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on PostgreSQL port (5432) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -433,7 +466,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_12",
+                    "masterTestId": "PR-GCP-GDF-FW-012",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -448,18 +481,21 @@
                             "remediationFunction": "PR_GCP_GDF_FW_012.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to RDP port (3389)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on RDP port (3389) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CIS",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -473,7 +509,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_13",
+                    "masterTestId": "PR-GCP-GDF-FW-013",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -495,10 +531,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -512,7 +551,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_14",
+                    "masterTestId": "PR-GCP-GDF-FW-014",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -527,18 +566,21 @@
                             "remediationFunction": "PR_GCP_GDF_FW_014.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to SSH port (22)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on SSH port (22) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CIS",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -552,7 +594,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_15",
+                    "masterTestId": "PR-GCP-GDF-FW-015",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -567,17 +609,20 @@
                             "remediationFunction": "PR_GCP_GDF_FW_015.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall rule allows internet traffic to Telnet port (23)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on Telnet port (23) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
@@ -591,7 +636,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_16",
+                    "masterTestId": "PR-GCP-GDF-FW-016",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -612,7 +657,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -623,7 +675,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_17",
+                    "masterTestId": "PR-GCP-GDF-FW-017",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -638,14 +690,21 @@
                             "remediationFunction": "PR_GCP_GDF_FW_017.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "GCP Firewall with Inbound rule overly permissive to All Traffic",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on all protocols from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
-                                "ISO 27001"
+                                "GDPR",
+                                "GDPR",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -657,7 +716,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_18",
+                    "masterTestId": "PR-GCP-GDF-DISK-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -672,15 +731,19 @@
                             "remediationFunction": "PR_GCP_GDF_DISK_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP VM disks not encrypted with Customer-Supplied Encryption Keys (CSEK)",
                     "description": "This policy identifies VM disks which are not encrypted with Customer-Supplied Encryption Keys (CSEK). If you provide your own encryption keys, Compute Engine uses your key to protect the Google-generated keys used to encrypt and decrypt your data. It is recommended to use VM disks encrypted with CSEK for business-critical VM instances.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST CSF",
+                                "NIST 800",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -692,7 +755,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_19",
+                    "masterTestId": "PR-GCP-GDF-INST-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -714,8 +777,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CIS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -727,7 +795,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_20",
+                    "masterTestId": "PR-GCP-GDF-INST-002",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -749,8 +817,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CIS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -762,7 +835,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_21",
+                    "masterTestId": "PR-GCP-GDF-INST-003",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -784,6 +857,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
                                 "CIS"
                             ],
                             "service": [
@@ -796,7 +874,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_22",
+                    "masterTestId": "PR-GCP-GDF-INST-004",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -818,7 +896,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "ISO 27001"
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -830,7 +913,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_23",
+                    "masterTestId": "PR-GCP-GDF-INST-005",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -845,16 +928,18 @@
                             "remediationFunction": "PR_GCP_GDF_INST_005.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "VM Instances without any Custom metadata information",
                     "description": "VM instance does not have any Custom metadata. Custom metadata can be used for easy identification and searches.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CSA-CCM",
+                                "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -866,7 +951,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_24",
+                    "masterTestId": "PR-GCP-GDF-INST-006",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -888,9 +973,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CSA-CCM",
+                                "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -902,7 +989,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_25",
+                    "masterTestId": "PR-GCP-GDF-INST-007",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -924,9 +1011,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CSA-CCM",
+                                "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -938,7 +1027,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_26",
+                    "masterTestId": "PR-GCP-GDF-NET-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -960,8 +1049,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
                                 "CIS",
-                                "ISO 27001"
+                                "HITRUST"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -973,7 +1067,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_27",
+                    "masterTestId": "PR-GCP-GDF-NET-002",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -995,8 +1089,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
                                 "CIS",
-                                "ISO 27001"
+                                "HITRUST"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1008,7 +1107,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_28",
+                    "masterTestId": "PR-GCP-GDF-SUBN-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1030,8 +1129,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
                                 "CIS",
-                                "ISO 27001"
+                                "HITRUST"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1043,7 +1147,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_29",
+                    "masterTestId": "PR-GCP-GDF-SUBN-002",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1065,11 +1169,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
-                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
+                                "CIS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1081,7 +1187,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_30",
+                    "masterTestId": "PR-GCP-GDF-THP-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1102,7 +1208,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
+                                "HITRUST"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -1113,7 +1226,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_COMPUTE_31",
+                    "masterTestId": "PR-GCP-GDF-THP-002",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1128,13 +1241,20 @@
                             "remediationFunction": "PR_GCP_GDF_THP_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP Load balancer HTTPS target proxy is not configured with QUIC protocol",
                     "description": "This policy identifies Load Balancer HTTPS target proxies which are not configured with QUIC protocol. Enabling QUIC protocol in load balancer target https proxies adds advantage by establishing connections faster, stream-based multiplexing, improved loss recovery, and eliminates head-of-line blocking.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
+                                "HITRUST"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -1145,7 +1265,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_1",
+                    "masterTestId": "PR-GCP-GDF-CLT-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1167,12 +1287,15 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "HIPAA",
+                                "CIS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1184,7 +1307,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_2",
+                    "masterTestId": "PR-GCP-GDF-CLT-002",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1207,8 +1330,14 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
+                                "CSA-CCM",
                                 "HIPAA",
-                                "ISO 27001"
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1220,7 +1349,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_3",
+                    "masterTestId": "PR-GCP-GDF-CLT-003",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1235,7 +1364,7 @@
                             "remediationFunction": "PR_GCP_GDF_CLT_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP Kubernetes Engine Clusters Client Certificate is set to Disabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have disabled Client Certificate. A client certificate is a base64-encoded public certificate used by clients to authenticate to the cluster endpoint. Enabling Client Certificate will provide more security to authenticate users to the cluster.",
                     "tags": [
@@ -1245,9 +1374,12 @@
                                 "CIS",
                                 "CSA-CCM",
                                 "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1259,7 +1391,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_4",
+                    "masterTestId": "PR-GCP-GDF-CLT-004",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1274,18 +1406,22 @@
                             "remediationFunction": "PR_GCP_GDF_CLT_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP Kubernetes Engine Clusters have Alias IP disabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have disabled Alias IP. Alias IP allows the networking layer to perform anti-spoofing checks to ensure that egress traffic is not sent with arbitrary source IPs. By enabling Alias IPs, Kubernetes Engine clusters can allocate IP addresses from a CIDR block known to Google Cloud Platform. This makes your cluster more scalable and allows your cluster to better interact with other GCP products and entities.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CIS",
                                 "CSA-CCM",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1297,7 +1433,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_5",
+                    "masterTestId": "PR-GCP-GDF-CLT-005",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1318,7 +1454,15 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -1329,7 +1473,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_6",
+                    "masterTestId": "PR-GCP-GDF-CLT-006",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1351,7 +1495,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1363,7 +1512,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_7",
+                    "masterTestId": "PR-GCP-GDF-CLT-007",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1386,10 +1535,13 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1401,7 +1553,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_8",
+                    "masterTestId": "PR-GCP-GDF-CLT-008",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1428,7 +1580,9 @@
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1440,7 +1594,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_9",
+                    "masterTestId": "PR-GCP-GDF-CLT-009",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1467,7 +1621,9 @@
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1479,7 +1635,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_10",
+                    "masterTestId": "PR-GCP-GDF-CLT-010",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1502,10 +1658,13 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1517,7 +1676,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_11",
+                    "masterTestId": "PR-GCP-GDF-CLT-011",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1539,12 +1698,15 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CIS",
                                 "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1556,7 +1718,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_12",
+                    "masterTestId": "PR-GCP-GDF-CLT-012",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1577,7 +1739,15 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -1588,7 +1758,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_13",
+                    "masterTestId": "PR-GCP-GDF-CLT-013",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1609,7 +1779,15 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -1620,7 +1798,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_14",
+                    "masterTestId": "PR-GCP-GDF-CLT-014",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1635,7 +1813,7 @@
                             "remediationFunction": "PR_GCP_GDF_CLT_014.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP Kubernetes Engine Clusters have pod security policy disabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have pod security policy disabled. The Pod Security Policy defines a set of conditions that pods must meet to be accepted by the cluster; when a request to create or update a pod does not meet the conditions in the pod security policy, that request is rejected and an error is returned.",
                     "tags": [
@@ -1643,7 +1821,12 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1655,7 +1838,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_15",
+                    "masterTestId": "PR-GCP-GDF-CLT-015",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1670,13 +1853,20 @@
                             "remediationFunction": "PR_GCP_GDF_CLT_015.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP Kubernetes Engine Clusters not configured with network traffic egress metering",
                     "description": "This policy identifies Kubernetes Engine Clusters which are not configured with network traffic egress metering. When network traffic egress metering enabled, deployed DaemonSet pod meters network egress traffic by collecting data from the conntrack table, and exports the metered metrics to the specified destination. It is recommended to use, network egress metering so that you will be having data and track over monitored network traffic._x005F_x000D_ _x005F_x000D_ NOTE: Measuring network egress requires a network metering agent (NMA) running on each node. The NMA runs as a privileged pod, consumes some resources on the node (CPU, memory, and disk space), and enables the nf_conntrack_acct sysctl flag on the kernel (for connection tracking flow accounting). If you are comfortable with these caveats, you can enable network egress tracking for use with GKE usage metering.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -1687,7 +1877,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_16",
+                    "masterTestId": "PR-GCP-GDF-CLT-016",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1702,7 +1892,7 @@
                             "remediationFunction": "PR_GCP_GDF_CLT_016.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP Kubernetes Engine Clusters not configured with private cluster",
                     "description": "This policy identifies Kubernetes Engine Clusters which are not configured with the Private cluster. Private cluster makes your master inaccessible from the public internet and nodes do not have public IP addresses, so your workloads run in an environment that is isolated from the internet.",
                     "tags": [
@@ -1710,7 +1900,12 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -1722,7 +1917,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_17",
+                    "masterTestId": "PR-GCP-GDF-CLT-017",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1743,7 +1938,15 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -1754,7 +1957,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_18",
+                    "masterTestId": "PR-GCP-GDF-CLT-018",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1769,13 +1972,21 @@
                             "remediationFunction": "PR_GCP_GDF_CLT_018.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP Kubernetes Engine Clusters not using Container-Optimized OS for Node image",
                     "description": "This policy identifies Kubernetes Engine Clusters which do not have a container-optimized operating system for node image. Container-Optimized OS is an operating system image for your Compute Engine VMs that is optimized for running Docker containers. By using Container-Optimized OS for node image, you can bring up your Docker containers on Google Cloud Platform quickly, efficiently, and securely. The Container-Optimized OS node image is based on a recent version of the Linux kernel and is optimized to enhance node security. It is also regularly updated with features, security fixes, and patches. The Container-Optimized OS image provides better support, security, and stability than other images.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -1786,7 +1997,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_19",
+                    "masterTestId": "PR-GCP-GDF-CLT-019",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1807,7 +2018,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -1818,7 +2036,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_20",
+                    "masterTestId": "PR-GCP-GDF-CLT-020",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1842,7 +2060,10 @@
                             "compliance": [
                                 "CIS",
                                 "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS"
                             ],
                             "service": [
@@ -1855,7 +2076,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_21",
+                    "masterTestId": "PR-GCP-GDF-CLT-021",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1870,7 +2091,7 @@
                             "remediationFunction": "PR_GCP_GDF_CLT_021.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP Kubernetes Engine Clusters without any label information",
                     "description": "This policy identifies all Kubernetes Engine Clusters which do not have labels. Having a cluster label helps you identify and categorize Kubernetes clusters.",
                     "tags": [
@@ -1881,6 +2102,7 @@
                                 "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS"
                             ],
                             "service": [
@@ -1893,7 +2115,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_22",
+                    "masterTestId": "PR-GCP-GDF-CLT-022",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1914,7 +2136,15 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -1925,7 +2155,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_23",
+                    "masterTestId": "PR-GCP-GDF-CLT-023",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1946,7 +2176,15 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -1957,7 +2195,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_24",
+                    "masterTestId": "PR-GCP-GDF-CLT-024",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1978,7 +2216,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -1989,7 +2234,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_25",
+                    "masterTestId": "PR-GCP-GDF-CLT-025",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2010,7 +2255,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -2021,7 +2273,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CONTAINER_26",
+                    "masterTestId": "PR-GCP-GDF-CLT-026",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2042,7 +2294,12 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -2053,7 +2310,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_1",
+                    "masterTestId": "PR-GCP-GDF-BKT-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2074,7 +2331,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -2085,7 +2349,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_2",
+                    "masterTestId": "PR-GCP-GDF-BKT-002",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2108,7 +2372,12 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -2120,7 +2389,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_3",
+                    "masterTestId": "PR-GCP-GDF-BKT-003",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2142,9 +2411,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "HIPAA",
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS"
                             ],
                             "service": [
@@ -2157,7 +2429,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_4",
+                    "masterTestId": "PR-GCP-GDF-BKT-004",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2179,12 +2451,15 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "GDPR",
                                 "CIS",
                                 "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -2196,7 +2471,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_5",
+                    "masterTestId": "PR-GCP-GDF-BKT-005",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2218,11 +2493,14 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "CIS",
                                 "CSA-CCM",
-                                "HIPAA",
+                                "HITRUST",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -2234,7 +2512,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQLADMIN_1",
+                    "masterTestId": "PR-GCP-GDF-SQLI-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2249,7 +2527,7 @@
                             "remediationFunction": "PR_GCP_GDF_SQLI_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "GCP SQL Instances without any Label information",
                     "description": "This policy identifies the SQL DB instance which does not have any Labels. Labels can be used for easy identification and searches.",
                     "tags": [
@@ -2257,7 +2535,10 @@
                             "cloud": "git",
                             "compliance": [
                                 "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS"
                             ],
                             "service": [
@@ -2270,7 +2551,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQLADMIN_2",
+                    "masterTestId": "PR-GCP-GDF-SQLI-002",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2307,7 +2588,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQLADMIN_3",
+                    "masterTestId": "PR-GCP-GDF-SQLI-003",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2343,7 +2624,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQLADMIN_4",
+                    "masterTestId": "PR-GCP-GDF-SQLI-004",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2382,7 +2663,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQLADMIN_5",
+                    "masterTestId": "PR-GCP-GDF-SQLI-005",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2421,7 +2702,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DNS_1",
+                    "masterTestId": "PR-GCP-GDF-MZ-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2444,7 +2725,12 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -2456,7 +2742,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DNS_2",
+                    "masterTestId": "PR-GCP-GDF-MZ-002",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2479,7 +2765,12 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -2491,7 +2782,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DNS_3",
+                    "masterTestId": "PR-GCP-GDF-MZ-003",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2513,7 +2804,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -2525,7 +2821,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_IAM_1",
+                    "masterTestId": "PR-GCP-GDF-SAK-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2547,8 +2843,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
-                                "ISO 27001"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -2560,7 +2860,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECRETS_1",
+                    "masterTestId": "PR-AWS-0001-RGX",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2568,11 +2868,11 @@
                     "rule": "file(secret_gcp_iac.py)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0001-RGX",
+                            "id": "PR-AWS-0001-RGX",
                             "eval": "google_password_leak",
                             "message": "google_password_leak_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "severity": "High",
@@ -2581,7 +2881,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
@@ -2589,7 +2896,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECRETS_2",
+                    "masterTestId": "PR-AWS-0001-RGX",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2597,11 +2904,11 @@
                     "rule": "file(secret_gcp_iac.py)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0001-RGX",
+                            "id": "PR-AWS-0001-RGX",
                             "eval": "entropy_password",
                             "message": "entropy_password_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "severity": "High",
@@ -2610,7 +2917,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "deploymentmanager"
                             ]
