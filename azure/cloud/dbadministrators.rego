@@ -16,11 +16,11 @@ azure_attribute_absence["sql_server_ad_admin"] {
     count([c | lower(input.resources[_].type) == "microsoft.sql/servers/administrators"; c := 1]) == 0
 }
 
-# azure_attribute_absence["sql_server_ad_admin"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "microsoft.sql/servers/administrators"
-#     not resource.dependsOn
-# }
+azure_attribute_absence["sql_server_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    not resource.dependsOn
+}
 
 azure_attribute_absence["sql_server_ad_admin"] {
     resource := input.resources[_]
@@ -192,11 +192,11 @@ azure_attribute_absence["sql_managedinstances_ad_admin"] {
     count([c | lower(input.resources[_].type) == "microsoft.sql/managedinstances/administrators"; c := 1]) == 0
 }
 
-# azure_attribute_absence["sql_managedinstances_ad_admin"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "microsoft.sql/managedinstances/administrators"
-#     not resource.dependsOn
-# }
+azure_attribute_absence["sql_managedinstances_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/managedinstances/administrators"
+    not resource.dependsOn
+}
 
 azure_attribute_absence["sql_managedinstances_ad_admin"] {
     resource := input.resources[_]
