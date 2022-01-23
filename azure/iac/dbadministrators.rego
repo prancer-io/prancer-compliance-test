@@ -19,6 +19,12 @@ azure_attribute_absence["sql_server_ad_admin"] {
 azure_attribute_absence["sql_server_ad_admin"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/administrators"
+    not resource.dependsOn
+}
+
+azure_attribute_absence["sql_server_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
     not resource.properties.administratorType
 }
 
@@ -32,28 +38,76 @@ azure_issue["sql_server_ad_admin"] {
               c := 1]) == 0
 }
 
+azure_inner_attribute_absence ["sql_server_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    not resource.properties.administrators
+}
+
+azure_inner_attribute_absence ["sql_server_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    not resource.properties.administrators.administratorType
+}
+
+azure_inner_issue ["sql_server_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    lower(resource.properties.administrators.administratorType) != "activedirectory"
+}
+
 sql_server_ad_admin {
     lower(input.resources[_].type) == "microsoft.sql/servers"
-    not azure_issue["sql_server_ad_admin"]
     not azure_attribute_absence["sql_server_ad_admin"]
+    not azure_issue["sql_server_ad_admin"]
+}
+
+sql_server_ad_admin {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    not azure_inner_attribute_absence["sql_server_ad_admin"]
+    not azure_inner_issue["sql_server_ad_admin"]
 }
 
 sql_server_ad_admin = false {
     lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_server_ad_admin"]
+    azure_inner_attribute_absence["sql_server_ad_admin"]
+}
+
+sql_server_ad_admin = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_issue["sql_server_ad_admin"]
+    azure_inner_issue["sql_server_ad_admin"]
+}
+
+sql_server_ad_admin = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_inner_attribute_absence["sql_server_ad_admin"]
     azure_issue["sql_server_ad_admin"]
 }
 
 sql_server_ad_admin = false {
     lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_server_ad_admin"]
+    azure_inner_issue["sql_server_ad_admin"]
 }
 
 sql_server_ad_admin_err = "SQL servers currently does not have Azure Active Directory admin configured" {
     lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_ad_admin"]
+    azure_inner_issue["sql_server_ad_admin"]
 } else = "SQL servers administrators attribute administratorType is missing from the resource" {
     lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_server_ad_admin"]
+    azure_inner_attribute_absence["sql_server_ad_admin"]
+} else = "SQL servers administrators attribute administratorType is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_inner_attribute_absence["sql_server_ad_admin"]
+    azure_issue["sql_server_ad_admin"]
+} else = "SQL servers administrators attribute administratorType is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_server_ad_admin"]
+    azure_inner_issue["sql_server_ad_admin"]
 }
 
 sql_server_ad_admin_metadata := {
@@ -153,10 +207,17 @@ sql_logical_server_ad_admin_metadata := {
 # PR-AZR-ARM-SQL-003
 #
 # SQL Managed Instance is not available for Terraform yet. see: https://github.com/hashicorp/terraform-provider-azurerm/issues/1747
+
 default sql_managedinstances_ad_admin = null
 
 azure_attribute_absence["sql_managedinstances_ad_admin"] {
     count([c | lower(input.resources[_].type) == "microsoft.sql/managedinstances/administrators"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_managedinstances_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/managedinstances/administrators"
+    not resource.dependsOn
 }
 
 azure_attribute_absence["sql_managedinstances_ad_admin"] {
@@ -175,28 +236,76 @@ azure_issue["sql_managedinstances_ad_admin"] {
               c := 1]) == 0
 }
 
+azure_inner_attribute_absence ["sql_managedinstances_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/managedinstances"
+    not resource.properties.administrators
+}
+
+azure_inner_attribute_absence ["sql_managedinstances_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/managedinstances"
+    not resource.properties.administrators.administratorType
+}
+
+azure_inner_issue ["sql_managedinstances_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/managedinstances"
+    lower(resource.properties.administrators.administratorType) != "activedirectory"
+}
+
 sql_managedinstances_ad_admin {
     lower(input.resources[_].type) == "microsoft.sql/managedinstances"
     not azure_attribute_absence["sql_managedinstances_ad_admin"]
     not azure_issue["sql_managedinstances_ad_admin"]
 }
 
+sql_managedinstances_ad_admin {
+    lower(input.resources[_].type) == "microsoft.sql/managedinstances"
+    not azure_inner_attribute_absence["sql_managedinstances_ad_admin"]
+    not azure_inner_issue["sql_managedinstances_ad_admin"]
+}
+
 sql_managedinstances_ad_admin = false {
     lower(input.resources[_].type) == "microsoft.sql/managedinstances"
+    azure_attribute_absence["sql_managedinstances_ad_admin"]
+    azure_inner_attribute_absence["sql_managedinstances_ad_admin"]
+}
+
+sql_managedinstances_ad_admin = false {
+    lower(input.resources[_].type) == "microsoft.sql/managedinstances"
+    azure_issue["sql_managedinstances_ad_admin"]
+    azure_inner_issue["sql_managedinstances_ad_admin"]
+}
+
+sql_managedinstances_ad_admin = false {
+    lower(input.resources[_].type) == "microsoft.sql/managedinstances"
+    azure_inner_attribute_absence["sql_managedinstances_ad_admin"]
     azure_issue["sql_managedinstances_ad_admin"]
 }
 
 sql_managedinstances_ad_admin = false {
     lower(input.resources[_].type) == "microsoft.sql/managedinstances"
     azure_attribute_absence["sql_managedinstances_ad_admin"]
+    azure_inner_issue["sql_managedinstances_ad_admin"]
 }
 
-sql_managedinstances_ad_admin_err = "SQL managedInstances currently does not have Azure Active Directory admin configured" {
+sql_managedinstances_ad_admin_err = "SQL managedinstances currently does not have Azure Active Directory admin configured" {
     lower(input.resources[_].type) == "microsoft.sql/managedinstances"
     azure_issue["sql_managedinstances_ad_admin"]
-} else = "SQL managedInstances administrators attribute administratorType is missing from the resource" {
+    azure_inner_issue["sql_managedinstances_ad_admin"]
+} else = "SQL managedinstances administrators attribute administratorType is missing from the resource" {
     lower(input.resources[_].type) == "microsoft.sql/managedinstances"
     azure_attribute_absence["sql_managedinstances_ad_admin"]
+    azure_inner_attribute_absence["sql_managedinstances_ad_admin"]
+} else = "SQL managedinstances administrators attribute administratorType is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/managedinstances"
+    azure_inner_attribute_absence["sql_managedinstances_ad_admin"]
+    azure_issue["sql_managedinstances_ad_admin"]
+} else = "SQL managedinstances administrators attribute administratorType is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/managedinstances"
+    azure_attribute_absence["sql_managedinstances_ad_admin"]
+    azure_inner_issue["sql_managedinstances_ad_admin"]
 }
 
 sql_managedinstances_ad_admin_metadata := {
