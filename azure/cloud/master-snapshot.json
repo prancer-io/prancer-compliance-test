@@ -17,18 +17,6 @@
                     "version": "2021-02-01"
                 },
                 {
-                    "masterSnapshotId": "AZRSNP_210",
-                    "type": "Microsoft.OperationalInsights/workspaces",
-                    "collection": "Microsoft.OperationalInsights",
-                    "version": "2021-06-01"
-                },
-                {
-                    "masterSnapshotId": "AZRSNP_211",
-                    "type": "Microsoft.Authorization/policyAssignments",
-                    "collection": "Microsoft.Authorization",
-                    "version": "2021-06-01"
-                },
-                {
                     "masterSnapshotId": "AZRSNP_219",
                     "type": "Microsoft.ContainerService/managedClusters",
                     "collection": "Microsoft.ContainerService",
@@ -47,38 +35,8 @@
                     "version": "2021-05-01"
                 },
                 {
-                    "masterSnapshotId": "AZRSNP_233",
-                    "type": "Microsoft.Network/dnszones",
-                    "collection": "Microsoft.Network",
-                    "version": "2018-05-01"
-                },
-                {
-                    "masterSnapshotId": "AZRSNP_240",
-                    "type": "Microsoft.Logic/workflows",
-                    "collection": "Microsoft.Logic",
-                    "version": "2019-05-01"
-                },
-                {
-                    "masterSnapshotId": "AZRSNP_250",
-                    "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
-                    "collection": "Microsoft.ManagedIdentity",
-                    "version": "2018-11-30"
-                },
-                {
                     "masterSnapshotId": "AZRSNP_284",
                     "type": "Microsoft.Network/virtualNetworks",
-                    "collection": "Microsoft.Network",
-                    "version": "2021-05-01"
-                },
-                {
-                    "masterSnapshotId": "AZRSNP_285",
-                    "type": "Microsoft.Network/loadBalancers",
-                    "collection": "Microsoft.Network",
-                    "version": "2021-05-01"
-                },
-                {
-                    "masterSnapshotId": "AZRSNP_286",
-                    "type": "Microsoft.Network/networkInterfaces",
                     "collection": "Microsoft.Network",
                     "version": "2021-05-01"
                 },
@@ -91,12 +49,6 @@
                 {
                     "masterSnapshotId": "AZRSNP_274",
                     "type": "Microsoft.Compute/virtualMachines",
-                    "collection": "Microsoft.Compute",
-                    "version": "2021-07-01"
-                },
-                {
-                    "masterSnapshotId": "AZRSNP_276",
-                    "type": "Microsoft.Compute/virtualMachineScaleSets",
                     "collection": "Microsoft.Compute",
                     "version": "2021-07-01"
                 },
@@ -167,12 +119,6 @@
                     "version": "2021-06-01"
                 },
                 {
-                    "masterSnapshotId": "AZRSNP_226",
-                    "type": "Microsoft.Insights/diagnosticSettings",
-                    "collection": "Microsoft.Insights",
-                    "version": "2021-05-01-preview"
-                },
-                {
                     "masterSnapshotId": "AZRSNP_227",
                     "type": "Microsoft.KeyVault/vaults/secrets",
                     "collection": "Microsoft.KeyVault",
@@ -239,12 +185,6 @@
                     "version": "2021-05-01-preview"
                 },
                 {
-                    "masterSnapshotId": "AZRSNP_294",
-                    "type": "Microsoft.Sql/servers/administrators",
-                    "collection": "Microsoft.Sql",
-                    "version": "2021-05-01-preview"
-                },
-                {
                     "masterSnapshotId": "AZRSNP_296",
                     "type": "Microsoft.Security/securityContacts",
                     "collection": "Microsoft.Security",
@@ -303,12 +243,6 @@
                     "type": "Microsoft.Sql/servers/auditingSettings",
                     "collection": "Microsoft.Sql",
                     "version": "2021-05-01-preview"
-                },
-                {
-                    "masterSnapshotId": "AZRSNP_232",
-                    "type": "Microsoft.Network/publicIPAddresses",
-                    "collection": "Microsoft.Network",
-                    "version": "2021-05-01"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_405",
