@@ -1310,8 +1310,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_400",
-                        "AZRSNP_294"
+                        "AZRSNP_400"
                     ],
                     "severity": "Medium",
                     "title": "SQL servers should be integrated with Azure Active Directory for administration",
@@ -1345,8 +1344,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_401",
-                        "AZRSNP_406"
+                        "AZRSNP_401"
                     ],
                     "severity": "Medium",
                     "title": "SQL managedInstances should be integrated with Azure Active Directory for administration",
