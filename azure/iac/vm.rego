@@ -49,8 +49,6 @@ vm_aset_metadata := {
 }
 
 
-
-
 # PR-AZR-ARM-VM-002
 #
 
@@ -62,50 +60,38 @@ azure_attribute_absence["linux_configuration"] {
     not resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication
 }
 
-source_path[{"linux_configuration":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.compute/virtualmachines"
-    not resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication
-    metadata:= {
-        "resource_path": [["resources",i,"properties","osProfile","linuxConfiguration","disablePasswordAuthentication"]]
-    }
-}
-
-
 azure_issue["linux_configuration"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/virtualmachines"
     resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication != true
 }
 
-source_path[{"linux_configuration":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.compute/virtualmachines"
-    resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","osProfile","linuxConfiguration","disablePasswordAuthentication"]]
-    }
-}
-
-
 linux_configuration {
     lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+    has_property(input.resources[_].properties.osProfile, "linuxConfiguration")
     not azure_attribute_absence["linux_configuration"]
     not azure_issue["linux_configuration"]
 }
 
 linux_configuration = false {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+    has_property(input.resources[_].properties.osProfile, "linuxConfiguration")
     azure_issue["linux_configuration"]
 }
 
-
 linux_configuration = false {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+    has_property(input.resources[_].properties.osProfile, "linuxConfiguration")
     azure_attribute_absence["linux_configuration"]
 }
 
 linux_configuration_err = "microsoft.compute/virtualmachines resource property linuxConfiguration.disablePasswordAuthentication missing in the resource" {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+    has_property(input.resources[_].properties.osProfile, "linuxConfiguration")
     azure_attribute_absence["linux_configuration"]
 } else = "Azure instance does not authenticate using SSH keys" {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+    has_property(input.resources[_].properties.osProfile, "linuxConfiguration")
     azure_issue["linux_configuration"]
 }
 
