@@ -831,17 +831,15 @@ azure_attribute_absence["web_service_managed_identity_provider_enabled"] {
 }
 
 web_service_managed_identity_provider_enabled {
-    lower(resource.type) == "microsoft.web/sites"
+    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["web_service_managed_identity_provider_enabled"]
 }
 
 web_service_managed_identity_provider_enabled = false {
-    lower(resource.type) == "microsoft.web/sites"
     azure_attribute_absence["web_service_managed_identity_provider_enabled"]
 }
 
 web_service_managed_identity_provider_enabled_err = "microsoft.web/sites property 'identity.type' need to be exist. Its missing from the resource." {
-    lower(resource.type) == "microsoft.web/sites"
     azure_attribute_absence["web_service_managed_identity_provider_enabled"]
 }
 
