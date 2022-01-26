@@ -609,7 +609,7 @@
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(blobservices.rego)",
+                    "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-ARM-STR-001",
@@ -639,6 +639,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.storage/storageaccounts",
                         "microsoft.storage/storageaccounts/blobservices"
                     ]
                 },
@@ -648,7 +649,7 @@
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(blobservices.rego)",
+                    "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-ARM-STR-002",
@@ -678,6 +679,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.storage/storageaccounts",
                         "microsoft.storage/storageaccounts/blobservices"
                     ]
                 },
@@ -3643,8 +3645,8 @@
                     "evals": [
                         {
                             "id": "PR-AZR-ARM-NSG-017",
-                            "eval": "data.rule.inbound_insecure_omi_port",
-                            "message": "data.rule.inbound_insecure_omi_port_err",
+                            "eval": "data.rule.inbound_omi_port_blocked",
+                            "message": "data.rule.inbound_omi_port_blocked_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_017.py"
                         }
@@ -5046,7 +5048,7 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure Azure instance authenticates using SSH keys",
+                    "title": "Azure Linux Instance should not use basic authentication(Use SSH Key Instead)",
                     "description": "SSH is an encrypted connection protocol that allows secure sign-ins over unsecured connections. SSH is the default connection protocol for Linux VMs hosted in Azure. Using secure shell (SSH) key pair, it is possible to spin up a Linux virtual machine on Azure that defaults to using SSH keys for authentication, eliminating the need for passwords to sign in. We recommend connecting to a VM using SSH keys. Using basic authentication with SSH connections leaves VMs vulnerable to brute-force attacks or guessing of passwords.",
                     "tags": [
                         {

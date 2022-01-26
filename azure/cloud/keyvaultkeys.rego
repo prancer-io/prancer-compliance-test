@@ -33,24 +33,19 @@ kv_keys_expire {
     not azure_issue["kv_keys_expire"]
 }
 
-
 kv_keys_expire = false {
     azure_attribute_absence["kv_keys_expire"]
 }
 
 kv_keys_expire = false {
     azure_issue["kv_keys_expire"]
-}
-
-
-kv_keys_expire_miss_err = "Azure Key Vault attribute 'exp' or 'expiryTime' is missing from the resource" {
-    azure_attribute_absence["kv_keys_expire"]
 }
 
 kv_keys_expire_err = "Azure Key Vault keys currently dont have any expiration date" {
     azure_issue["kv_keys_expire"]
+} else = "Azure Key Vault attribute 'exp' or 'expiryTime' is missing from the resource" {
+    azure_attribute_absence["kv_keys_expire"]
 }
-
 
 kv_keys_expire_metadata := {
     "Policy Code": "PR-AZR-CLD-KV-004",

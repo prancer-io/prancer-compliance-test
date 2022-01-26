@@ -1,5 +1,9 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/databases/transparentdataencryption
 
 #
@@ -70,6 +74,10 @@ package rule
 default db_encrypt = null
 
 azure_attribute_absence["db_encrypt"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/databases/transparentdataencryption"; c := 1]) == 0
+}
+
+azure_attribute_absence["db_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases/transparentdataencryption"
     not resource.properties.status
@@ -77,30 +85,35 @@ azure_attribute_absence["db_encrypt"] {
 
 azure_issue["db_encrypt"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/databases/transparentdataencryption"
-    lower(resource.properties.status) != "enabled"
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/databases/transparentdataencryption";
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              lower(r.properties.status) == "enabled";
+              c := 1]) == 0
 }
 
-
 db_encrypt {
-    lower(input.resources[_].type) == "microsoft.sql/servers/databases/transparentdataencryption"
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     not azure_attribute_absence["db_encrypt"]
     not azure_issue["db_encrypt"]
 }
 
 db_encrypt = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     azure_issue["db_encrypt"]
 }
 
 db_encrypt = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     azure_attribute_absence["db_encrypt"]
 }
 
 db_encrypt_err = "Azure SQL databases currently dont have transparent data encryption enabled" {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     azure_issue["db_encrypt"]
-}
-
-db_encrypt_miss_err = "Azure SQL databases transparent encryption attribute 'status' is missing from the resource" {
+} else = "Azure SQL databases transparent encryption attribute 'status' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     azure_attribute_absence["db_encrypt"]
 }
 

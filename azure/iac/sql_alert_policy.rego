@@ -1,5 +1,9 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies
 
@@ -90,56 +94,53 @@ sql_logical_server_alert_metadata := {
 default sql_server_alert = null
 
 azure_attribute_absence["sql_server_alert"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_server_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+    not resource.dependsOn
+}
+
+azure_attribute_absence["sql_server_alert"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
     not resource.properties.state
 }
 
-source_path[{"sql_server_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.properties.state
-    metadata:= {
-        "resource_path": [["resources",i,"properties","state"]]
-    }
-}
-
-
-azure_sql_security_alert_disabled["sql_server_alert"] {
+azure_issue["sql_server_alert"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    lower(resource.properties.state) == "disabled"
-}
-
-source_path[{"sql_server_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    lower(resource.properties.state) == "disabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","state"]]
-    }
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              lower(r.properties.state) == "enabled";
+              c := 1]) == 0
 }
 
 sql_server_alert {
-    lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     not azure_attribute_absence["sql_server_alert"]
-    not azure_sql_security_alert_disabled["sql_server_alert"]
+    not azure_issue["sql_server_alert"]
 }
 
 sql_server_alert = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_server_alert"]
 }
 
 sql_server_alert = false {
-    azure_sql_security_alert_disabled["sql_server_alert"]
-}
-
-sql_server_alert_miss_err = "securityAlertPolicies property 'state' is missing from the resource" {
-    azure_attribute_absence["sql_server_alert"]
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_issue["sql_server_alert"]
 }
 
 sql_server_alert_err = "Security alert is currently not enabled on SQL Server" {
-    azure_sql_security_alert_disabled["sql_server_alert"]
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_issue["sql_server_alert"]
+} else = "securityAlertPolicies property 'state' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_server_alert"]
 }
 
 sql_server_alert_metadata := {
@@ -155,13 +156,21 @@ sql_server_alert_metadata := {
 }
 
 
-
 # PR-AZR-ARM-SQL-032
 # SQL Managed Instance resource still not available for Terraform yet. 
 # see: https://github.com/hashicorp/terraform-provider-azurerm/issues/1747 for details
 
 default sql_managed_instance_alert = null
 
+azure_attribute_absence["sql_managed_instance_alert"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/managedinstances/securityalertpolicies"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_managed_instance_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/managedinstances/securityalertpolicies"
+    not resource.dependsOn
+}
 
 azure_attribute_absence["sql_managed_instance_alert"] {
     resource := input.resources[_]
@@ -169,50 +178,38 @@ azure_attribute_absence["sql_managed_instance_alert"] {
     not resource.properties.state
 }
 
-source_path[{"sql_managed_instance_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/managedinstances/securityalertpolicies"
-    not resource.properties.state
-    metadata:= {
-        "resource_path": [["resources",i,"properties","state"]]
-    }
-}
-
-azure_sql_security_alert_disabled["sql_managed_instance_alert"] {
+azure_issue["sql_managed_instance_alert"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/managedinstances/securityalertpolicies"
-    lower(resource.properties.state) == "disabled"
-}
-
-source_path[{"sql_managed_instance_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/managedinstances/securityalertpolicies"
-    lower(resource.properties.state) == "disabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","state"]]
-    }
+    lower(resource.type) == "microsoft.sql/managedinstances"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/managedinstances/securityalertpolicies";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              lower(r.properties.state) == "enabled";
+              c := 1]) == 0
 }
 
 sql_managed_instance_alert {
-    lower(input.resources[_].type) == "microsoft.sql/managedinstances/securityalertpolicies"
+    lower(input.resources[_].type) == "microsoft.sql/managedinstances"
     not azure_attribute_absence["sql_managed_instance_alert"]
-    not azure_sql_security_alert_disabled["sql_managed_instance_alert"]
+    not azure_issue["sql_managed_instance_alert"]
 }
 
 sql_managed_instance_alert = false {
+    lower(input.resources[_].type) == "microsoft.sql/managedinstances"
     azure_attribute_absence["sql_managed_instance_alert"]
 }
 
 sql_managed_instance_alert = false {
-    azure_sql_security_alert_disabled["sql_managed_instance_alert"]
-}
-
-sql_managed_instance_alert_miss_err = "securityAlertPolicies property 'state' is missing from the resource" {
-    azure_attribute_absence["sql_managed_instance_alert"]
+    lower(input.resources[_].type) == "microsoft.sql/managedinstances"
+    azure_issue["sql_managed_instance_alert"]
 }
 
 sql_managed_instance_alert_err = "Security alert is currently not enabled on SQL managed instance resource." {
-    azure_sql_security_alert_disabled["sql_managed_instance_alert"]
+    lower(input.resources[_].type) == "microsoft.sql/managedinstances"
+    azure_issue["sql_managed_instance_alert"]
+} else = "securityAlertPolicies property 'state' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/managedinstances"
+    azure_attribute_absence["sql_managed_instance_alert"]
 }
 
 sql_managed_instance_alert_metadata := {
@@ -317,58 +314,54 @@ sql_logical_server_email_account_metadata := {
 
 default sql_server_email_account = null
 
-azure_issue["sql_server_email_account"] {
+azure_attribute_absence["sql_server_email_account"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_server_email_account"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+    not resource.dependsOn
+}
+
+azure_attribute_absence["sql_server_email_account"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
     not resource.properties.emailAccountAdmins
 }
 
-source_path[{"sql_server_email_account":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.properties.emailAccountAdmins
-    metadata:= {
-        "resource_path": [["resources",i,"properties","emailAccountAdmins"]]
-    }
-}
-
 azure_issue["sql_server_email_account"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    resource.properties.emailAccountAdmins != true
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              r.properties.emailAccountAdmins == true;
+              c := 1]) == 0
 }
-
-source_path[{"sql_server_email_account":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    resource.properties.emailAccountAdmins != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","emailAccountAdmins"]]
-    }
-}
-
 
 sql_server_email_account {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     not azure_attribute_absence["sql_server_email_account"]
     not azure_issue["sql_server_email_account"]
 }
 
-
 sql_server_email_account = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_server_email_account"]
 }
 
-
 sql_server_email_account = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_email_account"]
 }
-
-sql_server_email_account_err = "microsoft.sql/servers/securityalertpolicies property 'emailAccountAdmins' need to be exist. Its missing from the resource." {
-    azure_attribute_absence["sql_server_email_account"]
-} else = "Threat Detection alert currently is not configured to sent notification to the sql server account administrators" {
+ 
+sql_server_email_account_err = "Threat Detection alert currently is not configured to sent notification to the sql server account administrators" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_email_account"]
+} else = "microsoft.sql/servers/securityalertpolicies property 'emailAccountAdmins' need to be exist. Its missing from the resource." {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_server_email_account"]
 }
 
 sql_server_email_account_metadata := {
@@ -470,14 +463,20 @@ sql_logical_server_email_addressess_metadata := {
 
 
 
-
-
-
 # PR-AZR-ARM-SQL-036
 #
 
 default sql_server_email_addressess = null
 
+azure_attribute_absence["sql_server_email_addressess"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_server_email_addressess"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+    not resource.dependsOn
+}
 
 azure_attribute_absence["sql_server_email_addressess"] {
     resource := input.resources[_]
@@ -485,53 +484,39 @@ azure_attribute_absence["sql_server_email_addressess"] {
     not resource.properties.emailAddresses
 }
 
-source_path[{"sql_server_email_addressess":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.properties.emailAddresses 
-    metadata:= {
-        "resource_path": [["resources",i,"properties","emailAddresses"]]
-    }
-}
-
 azure_issue["sql_server_email_addressess"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    count(resource.properties.emailAddresses) == 0  
-}
-
-source_path[{"sql_server_email_addressess":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    count(resource.properties.emailAddresses) == 0  
-    metadata:= {
-        "resource_path": [["resources",i,"properties","emailAddresses"]]
-    }
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              count(r.properties.emailAddresses) > 0;
+              c := 1]) == 0
 }
 
 sql_server_email_addressess {
-    lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     not azure_attribute_absence["sql_server_email_addressess"]
     not azure_issue["sql_server_email_addressess"]
 }
 
-
 sql_server_email_addressess = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_server_email_addressess"]
 }
 
-
 sql_server_email_addressess = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_email_addressess"]
 }
-
-
-sql_server_email_addressess_err = "Azure SQL security alert policy attribute 'emailAddresses' is missing from the resource" {
+ 
+sql_server_email_addressess_err = "Azure SQL security alert policy is currently not configured to sent alert to the account administrators via email" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_issue["sql_server_email_addressess"]
+} else = "Azure SQL security alert policy attribute 'emailAddresses' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_server_email_addressess"]
-} else = "Azure SQL security alert policy is currently not configured to sent alert to the account administrators via email" {
-    azure_issue["sql_server_email_addressess"]
 }
-
 
 sql_server_email_addressess_metadata := {
     "Policy Code": "PR-AZR-ARM-SQL-036",
@@ -544,8 +529,6 @@ sql_server_email_addressess_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies"
 }
-
-
 
 
 
@@ -659,14 +642,20 @@ sql_logical_server_retention_days_metadata := {
 
 
 
-
-
-
 # PR-AZR-ARM-SQL-038
 #
 
 default sql_server_retention_days = null
 
+azure_attribute_absence["sql_server_retention_days"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_server_retention_days"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+    not resource.dependsOn
+}
 
 azure_attribute_absence["sql_server_retention_days"] {
     resource := input.resources[_]
@@ -674,70 +663,49 @@ azure_attribute_absence["sql_server_retention_days"] {
     not resource.properties.retentionDays
 }
 
-source_path[{"sql_server_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.properties.retentionDays
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionDays"]]
-    }
+azure_issue["sql_server_retention_days"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              to_number(resource.properties.retentionDays) > 90;
+              c := 1]) == 0
 }
 
 azure_issue["sql_server_retention_days"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    to_number(resource.properties.retentionDays) == 0  
-}
-
-source_path[{"sql_server_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    to_number(resource.properties.retentionDays) == 0  
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionDays"]]
-    }
-}
-
-
-azure_issue["sql_server_retention_days"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    to_number(resource.properties.retentionDays) >= 90 
-}
-
-source_path[{"sql_server_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    to_number(resource.properties.retentionDays) >= 90
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionDays"]]
-    }
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              to_number(resource.properties.retentionDays) == 0;
+              c := 1]) == 0
 }
 
 sql_server_retention_days {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     not azure_attribute_absence["sql_server_retention_days"]
+    not azure_issue["sql_server_retention_days"]
+}
+
+sql_server_retention_days = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_server_retention_days"]
+}
+
+sql_server_retention_days = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_retention_days"]
 }
 
-
-sql_server_retention_days = false {
+sql_server_retention_days_err = "SQL Server security alert policy Retention Days are not greater than 90 days" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_issue["sql_server_retention_days"]
+} else = "Azure SQL security alert policy attribute 'retentionDays' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_server_retention_days"]
 }
-
-
-sql_server_retention_days = false {
-    lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"
-    not azure_issue["sql_server_retention_days"]
-}
-
-
-sql_server_retention_days_err = "Azure SQL security alert policy attribute 'retentionDays' is missing from the resource" {
-    azure_attribute_absence["sql_server_retention_days"]
-} else = "SQL Server security alert policy Retention Days are not greater than 90 days" {
-    lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"
-    not azure_issue["sql_server_retention_days"]
-}
-
 
 sql_server_retention_days_metadata := {
     "Policy Code": "PR-AZR-ARM-SQL-038",
@@ -832,13 +800,20 @@ sql_logical_server_disabled_alerts_metadata := {
 }
 
 
-
-
-
 # PR-AZR-ARM-SQL-040
 #
 
 default sql_server_disabled_alerts = null
+
+azure_attribute_absence["sql_server_disabled_alerts"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_server_disabled_alerts"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+    not resource.dependsOn
+}
 
 azure_attribute_absence["sql_server_disabled_alerts"] {
     resource := input.resources[_]
@@ -846,50 +821,36 @@ azure_attribute_absence["sql_server_disabled_alerts"] {
     not resource.properties.disabledAlerts
 }
 
-source_path[{"sql_server_disabled_alerts":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.properties.disabledAlerts
-    metadata:= {
-        "resource_path": [["resources",i,"properties","disabledAlerts"]]
-    }
-}
-
 azure_issue["sql_server_disabled_alerts"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    count(resource.properties.disabledAlerts) > 0
-}
-
-source_path[{"sql_server_disabled_alerts":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    count(resource.properties.disabledAlerts) > 0
-    metadata:= {
-        "resource_path": [["resources",i,"properties","disabledAlerts"]]
-    }
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              count(resource.properties.disabledAlerts) > 0;
+              c := 1]) > 0
 }
 
 sql_server_disabled_alerts {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     not azure_attribute_absence["sql_server_disabled_alerts"]
     not azure_issue["sql_server_disabled_alerts"]
 }
 
-
 sql_server_disabled_alerts {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_server_disabled_alerts"]
 }
 
 sql_server_disabled_alerts = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_disabled_alerts"]
 }
 
 sql_server_disabled_alerts_err = "Azure SQL Server Security Alert Policy currently have one or more alert type in disabled alerts list" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_disabled_alerts"]
 }
-
 
 sql_server_disabled_alerts_metadata := {
     "Policy Code": "PR-AZR-ARM-SQL-040",

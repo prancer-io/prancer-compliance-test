@@ -1,9 +1,12 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules
 
 #
-
 # PR-AZR-ARM-SQL-010
 #
 
@@ -130,20 +133,14 @@ db_logical_firewall_metadata := {
 default db_firewall = null
 
 azure_attribute_absence["db_firewall"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/firewallrules"; c := 1]) == 0
+}
+
+azure_attribute_absence["db_firewall"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/firewallrules"
     not resource.properties.startIpAddress
 }
-
-source_path[{"db_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/firewallrules"
-    not resource.properties.startIpAddress
-    metadata:= {
-        "resource_path": [["resources",i,"properties","startIpAddress"]]
-    }
-}
-
 
 azure_attribute_absence["db_firewall"] {
     resource := input.resources[_]
@@ -151,65 +148,38 @@ azure_attribute_absence["db_firewall"] {
     not resource.properties.endIpAddress
 }
 
-source_path[{"db_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/firewallrules"
-    not resource.properties.endIpAddress
-    metadata:= {
-        "resource_path": [["resources",i,"properties","endIpAddress"]]
-    }
-}
-
 azure_issue["db_firewall"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/firewallrules"
-    resource.properties.startIpAddress == "0.0.0.0"
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/firewallrules";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              not contains(r.properties.startIpAddress, "0.0.0.0");
+              not contains(r.properties.endIpAddress, "0.0.0.0");
+              c := 1]) == 0
 }
-
-source_path[{"db_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/firewallrules"
-    resource.properties.startIpAddress == "0.0.0.0"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","startIpAddress"]]
-    }
-}
-
-azure_issue["db_firewall"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/firewallrules"
-    resource.properties.endIpAddress == "0.0.0.0"
-}
-
-source_path[{"db_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/firewallrules"
-    resource.properties.endIpAddress == "0.0.0.0"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","endIpAddress"]]
-    }
-}
-
 
 db_firewall {
-    lower(input.resources[_].type) == "microsoft.sql/servers/firewallrules"
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     not azure_attribute_absence["db_firewall"]
     not azure_issue["db_firewall"]
 }
 
 db_firewall = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["db_firewall"]
 }
 
 db_firewall = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["db_firewall"]
 }
 
 db_firewall_err = "SQL Server Firewall rule configuration currently allowing full inbound access to everyone" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["db_firewall"]
-}
-
-db_firewall_miss_err = "Firewall rule attribute startIpAddress/endIpAddress is missing from the resource" {
+} else = "Firewall rule attribute startIpAddress/endIpAddress is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["db_firewall"]
 }
 
