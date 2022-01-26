@@ -16,11 +16,11 @@ azure_attribute_absence["vm_protection"] {
     count([c | lower(input.resources[_].type) == "microsoft.compute/virtualmachines/extensions"; c := 1]) == 0
 }
 
-azure_attribute_absence["vm_protection"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
-    not resource.dependsOn
-}
+# azure_attribute_absence["vm_protection"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
+#     not resource.dependsOn
+# }
 
 azure_attribute_absence["vm_protection"] {
     resource := input.resources[_]
@@ -33,7 +33,7 @@ azure_issue["vm_protection"] {
     lower(resource.type) == "microsoft.compute/virtualmachines"
     count([c | r := input.resources[_];
               r.type == "microsoft.compute/virtualmachines/extensions";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(resource.properties.type) == "iaasantimalware";
               c := 1]) == 0
 }

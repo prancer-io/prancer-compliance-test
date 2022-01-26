@@ -75,11 +75,11 @@ azure_attribute_absence["sql_server_alert"] {
     count([c | lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"; c := 1]) == 0
 }
 
-azure_attribute_absence["sql_server_alert"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.dependsOn
-}
+# azure_attribute_absence["sql_server_alert"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+#     not resource.dependsOn
+# }
 
 azure_attribute_absence["sql_server_alert"] {
     resource := input.resources[_]
@@ -92,7 +92,7 @@ azure_issue["sql_server_alert"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.state) == "enabled";
               c := 1]) == 0
 }
@@ -145,11 +145,11 @@ azure_attribute_absence["sql_managed_instance_alert"] {
     count([c | lower(input.resources[_].type) == "microsoft.sql/managedinstances/securityalertpolicies"; c := 1]) == 0
 }
 
-azure_attribute_absence["sql_managed_instance_alert"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/managedinstances/securityalertpolicies"
-    not resource.dependsOn
-}
+# azure_attribute_absence["sql_managed_instance_alert"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.sql/managedinstances/securityalertpolicies"
+#     not resource.dependsOn
+# }
 
 azure_attribute_absence["sql_managed_instance_alert"] {
     resource := input.resources[_]
@@ -162,7 +162,7 @@ azure_issue["sql_managed_instance_alert"] {
     lower(resource.type) == "microsoft.sql/managedinstances"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/managedinstances/securityalertpolicies";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.state) == "enabled";
               c := 1]) == 0
 }
@@ -275,11 +275,11 @@ azure_attribute_absence["sql_server_email_account"] {
     count([c | lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"; c := 1]) == 0
 }
 
-azure_attribute_absence["sql_server_email_account"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.dependsOn
-}
+# azure_attribute_absence["sql_server_email_account"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+#     not resource.dependsOn
+# }
 
 azure_attribute_absence["sql_server_email_account"] {
     resource := input.resources[_]
@@ -292,7 +292,7 @@ azure_issue["sql_server_email_account"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.emailAccountAdmins == true;
               c := 1]) == 0
 }
@@ -409,11 +409,11 @@ azure_attribute_absence["sql_server_email_addressess"] {
     count([c | lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"; c := 1]) == 0
 }
 
-azure_attribute_absence["sql_server_email_addressess"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.dependsOn
-}
+# azure_attribute_absence["sql_server_email_addressess"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+#     not resource.dependsOn
+# }
 
 azure_attribute_absence["sql_server_email_addressess"] {
     resource := input.resources[_]
@@ -426,7 +426,7 @@ azure_issue["sql_server_email_addressess"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               count(r.properties.emailAddresses) > 0;
               c := 1]) == 0
 }
@@ -555,11 +555,11 @@ azure_attribute_absence["sql_server_retention_days"] {
     count([c | lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"; c := 1]) == 0
 }
 
-azure_attribute_absence["sql_server_retention_days"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.dependsOn
-}
+# azure_attribute_absence["sql_server_retention_days"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+#     not resource.dependsOn
+# }
 
 azure_attribute_absence["sql_server_retention_days"] {
     resource := input.resources[_]
@@ -572,7 +572,7 @@ azure_issue["sql_server_retention_days"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               to_number(resource.properties.retentionDays) > 90;
               c := 1]) == 0
 }
@@ -582,7 +582,7 @@ azure_issue["sql_server_retention_days"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               to_number(resource.properties.retentionDays) == 0;
               c := 1]) == 0
 }
@@ -694,11 +694,11 @@ azure_attribute_absence["sql_server_disabled_alerts"] {
     count([c | lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"; c := 1]) == 0
 }
 
-azure_attribute_absence["sql_server_disabled_alerts"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.dependsOn
-}
+# azure_attribute_absence["sql_server_disabled_alerts"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+#     not resource.dependsOn
+# }
 
 azure_attribute_absence["sql_server_disabled_alerts"] {
     resource := input.resources[_]
@@ -711,7 +711,7 @@ azure_issue["sql_server_disabled_alerts"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               count(resource.properties.disabledAlerts) > 0;
               c := 1]) > 0
 }

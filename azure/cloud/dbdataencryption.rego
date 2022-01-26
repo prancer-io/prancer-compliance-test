@@ -88,7 +88,7 @@ azure_issue["db_encrypt"] {
     lower(resource.type) == "microsoft.sql/servers/databases"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/databases/transparentdataencryption";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.status) == "enabled";
               c := 1]) == 0
 }

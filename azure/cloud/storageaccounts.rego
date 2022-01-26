@@ -11,7 +11,7 @@ array_contains(target_array, element) = true {
 storage_account_need_to_skip(target_storage_account_resource) {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.storage/storageaccounts/blobservices/containers";
-              array_contains(r.dependsOn, concat("/", [target_storage_account_resource.type, target_storage_account_resource.name]));
+              #array_contains(r.dependsOn, concat("/", [target_storage_account_resource.type, target_storage_account_resource.name]));
               contains(lower(r.name), "bootdiagnostics");
               c := 1]) > 0
 }
@@ -19,7 +19,7 @@ storage_account_need_to_skip(target_storage_account_resource) {
 storage_account_need_to_skip(target_storage_account_resource) {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.storage/storageaccounts/blobservices/containers";
-              array_contains(r.dependsOn, concat("/", [target_storage_account_resource.type, target_storage_account_resource.name]));
+              #array_contains(r.dependsOn, concat("/", [target_storage_account_resource.type, target_storage_account_resource.name]));
               contains(lower(r.name), "insights-logs-networksecuritygroupflowevent");
               c := 1]) > 0
 }
@@ -56,7 +56,7 @@ azure_issue["storage_blob_soft_delete"] {
     not storage_account_need_to_skip(resource)
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.storage/storageaccounts/blobservices";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.deleteRetentionPolicy.enabled;
               c := 1]) == 0
 }
@@ -130,7 +130,7 @@ azure_issue["storage_blob_container_soft_delete"] {
     not storage_account_need_to_skip(resource)
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.storage/storageaccounts/blobservices";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.containerDeleteRetentionPolicy.enabled;
               c := 1]) == 0
 }

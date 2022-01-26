@@ -16,11 +16,11 @@ azure_attribute_absence["vpn_encrypt"] {
     count([c | lower(input.resources[_].type) == "microsoft.network/vpngateways/vpnconnections"; c := 1]) == 0
 }
 
-azure_attribute_absence["vpn_encrypt"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.network/vpngateways/vpnconnections"
-    not resource.dependsOn
-}
+# azure_attribute_absence["vpn_encrypt"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.network/vpngateways/vpnconnections"
+#     not resource.dependsOn
+# }
 
 azure_attribute_absence["vpn_encrypt"] {
     resource := input.resources[_]
@@ -33,7 +33,7 @@ azure_issue["vpn_encrypt"] {
     lower(resource.type) == "microsoft.network/vpngateways"
     count([c | r := input.resources[_];
               r.type == "microsoft.network/vpngateways/vpnconnections";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.ipsecPolicies[_].ipsecEncryption) != "none";
               c := 1]) == 0
 }
