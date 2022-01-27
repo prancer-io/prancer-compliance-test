@@ -1115,8 +1115,8 @@ azure_issue["web_service_net_framework_latest"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              lower(r.properties.netFrameworkVersion) == latest_dotnet_framework_version;
-              c := 1]) == 0
+              lower(r.properties.netFrameworkVersion) != latest_dotnet_framework_version;
+              c := 1]) > 0
 }
 
 azure_inner_attribute_absence["web_service_net_framework_latest"] {
@@ -1232,8 +1232,8 @@ azure_issue["web_service_php_version_latest"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(r.properties.phpVersion) == latest_php_version;
-              c := 1]) == 0
+              to_number(r.properties.phpVersion) != latest_php_version;
+              c := 1]) > 0
 }
 
 azure_inner_attribute_absence["web_service_php_version_latest"] {
@@ -1470,8 +1470,8 @@ azure_issue["web_service_java_version_latest"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              r.properties.javaVersion == latest_java_version;
-              c := 1]) == 0
+              r.properties.javaVersion != latest_java_version;
+              c := 1]) > 0
 }
 
 azure_inner_attribute_absence["web_service_java_version_latest"] {
