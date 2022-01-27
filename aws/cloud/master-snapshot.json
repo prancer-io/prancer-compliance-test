@@ -303,7 +303,8 @@
 					"listMethod": "describe_repositories",
 					"detailMethods": [
 						"describe_repositories",
-						"get_lifecycle_policy"
+						"get_lifecycle_policy",
+						"get_registry_scanning_configuration"
 					]
 				},
 				{
@@ -657,6 +658,16 @@
 					"listMethod": "describe_stacks",
 					"detailMethods": [
 						"describe_stacks"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_15",
+					"arn": "arn:aws:inspector:::",
+					"type": "inspector",
+					"collection": "aws_inspector",
+					"listMethod": "list_rules_packages",
+					"detailMethods": [
+						"list_rules_packages"
 					]
 				},
 				{

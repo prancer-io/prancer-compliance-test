@@ -1011,101 +1011,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-CLD-S3-008",
-                    "masterSnapshotId": [
-                        "TEST_S3"
-                    ],
-                    "type": "rego",
-                    "rule": "file(storage.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-S3-008",
-                            "eval": "data.rule.s3_public_acl",
-                            "message": "data.rule.s3_public_acl_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_S3_008.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "AWS S3 bucket has global view ACL permissions enabled.",
-                    "description": "This policy determines if any S3 bucket(s) has Global View ACL permissions enabled for the All Users group. These permissions allow external resources to see the permission settings associated to the object.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [
-                                "Best Practice"
-                            ],
-                            "service": [
-                                "cloud"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-S3-010",
-                    "masterSnapshotId": [
-                        "TEST_S3"
-                    ],
-                    "type": "rego",
-                    "rule": "file(storage.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-S3-010",
-                            "eval": "data.rule.s3_auth_acl",
-                            "message": "data.rule.s3_auth_acl_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_S3_010.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "AWS S3 buckets are accessible to any authenticated user.",
-                    "description": "This policy identifies S3 buckets accessible to any authenticated AWS users. Amazon S3 allows customer to store and retrieve any type of content from anywhere in the web. Often, customers have leAWSimate reasons to expose the S3 bucket to public, for example to host website content. However, these buckets often contain highly sensitive enterprise data which if left accessible to anyone with valid AWS credentials, may result in sensitive data leaks.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [
-                                "PCI-DSS",
-                                "NIST 800"
-                            ],
-                            "service": [
-                                "cloud"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-S3-011",
-                    "masterSnapshotId": [
-                        "TEST_S3"
-                    ],
-                    "type": "rego",
-                    "rule": "file(storage.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-S3-011",
-                            "eval": "data.rule.s3_public_access",
-                            "message": "data.rule.s3_public_access_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_S3_011.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "AWS S3 buckets are accessible to public",
-                    "description": "This policy identifies S3 buckets which are publicly accessible. Amazon S3 allows customers to store and retrieve any type of content from anywhere in the web. Often, customers have leAWSimate reasons to expose the S3 bucket to public, for example, to host website content. However, these buckets often contain highly sensitive enterprise data which if left open to public may result in sensitive data leaks.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [
-                                "PCI-DSS",
-                                "NIST 800"
-                            ],
-                            "service": [
-                                "cloud"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "PR-AWS-CLD-S3-012",
                     "masterSnapshotId": [
                         "TEST_S3"
@@ -3294,6 +3199,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-INS-001",
+                    "masterSnapshotId": [
+                        "TEST_ALL_15"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-INS-001",
+                            "eval": "data.rule.ins_log4j",
+                            "message": "data.rule.ins_log4j_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_web_acl' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_INS_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Enable AWS Inspector to detect Log4J Vulnerability",
+                    "description": "Enable AWS Inspector to detect Log4J Vulnerability",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "inspector"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-SNS-001",
                     "masterSnapshotId": [
                         "TEST_SNS_01"
@@ -4274,6 +4208,38 @@
                     "tags": [
                         {
                             "cloud": "AWS",
+                            "compliance": [
+                                "PCI-DSS",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "ecr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ECR-005",
+                    "masterSnapshotId": [
+                        "TEST_ECR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECR-005",
+                            "eval": "data.rule.ecr_log4j_vulnerability",
+                            "message": "data.rule.ecr_log4j_vulnerability_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECR_004.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Enable Enhanced scan type for AWS ECR registry to detect Log4J vulnerability",
+                    "description": "Enable Enhanced scan type for AWS ECR registry to detect Log4J vulnerability",
+                    "tags": [
+                        {
+                            "cloud": "git",
                             "compliance": [
                                 "PCI-DSS",
                                 "GDPR"

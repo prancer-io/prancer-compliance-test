@@ -4,6 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+rules_packages = [
+    "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-JnA8Zp85",
+    "arn:aws:inspector:us-east-1:316112463485:rulespackage/0-gEjTy7T7",
+    "arn:aws:inspector:us-west-1:166987590008:rulespackage/0-TKgzoVOa",
+    "arn:aws:inspector:us-west-2:758058086616:rulespackage/0-9hgA516p",
+    "arn:aws:inspector:ap-south-1:162588757376:rulespackage/0-LqnJE9dO",
+    "arn:aws:inspector:ap-northeast-2:526946625049:rulespackage/0-PoGHMznc",
+    "arn:aws:inspector:ap-southeast-2:454640832652:rulespackage/0-D5TGAxiR",
+    "arn:aws:inspector:ap-northeast-1:406045910587:rulespackage/0-gHP9oWNT",
+    "arn:aws:inspector:eu-central-1:537503971621:rulespackage/0-wNqHa8M9",
+    "arn:aws:inspector:eu-west-1:357557129151:rulespackage/0-ubA5XvBh",
+    "arn:aws:inspector:eu-west-2:146838936955:rulespackage/0-kZGCqcE1",
+    "arn:aws:inspector:eu-north-1:453420244670:rulespackage/0-IgdgIewd",
+    "arn:aws-us-gov:inspector:us-gov-east-1:206278770380:rulespackage/0-3IFKFuOb",
+    "arn:aws-us-gov:inspector:us-gov-west-1:850862329162:rulespackage/0-4oQgcI4G"
+]
+
 #
 # PR-AWS-TRF-SM-001
 #
@@ -1469,10 +1486,61 @@ waf_log4j_vulnerability_metadata := {
     "Policy Code": "PR-AWS-TRF-WAF-001",
     "Type": "IaC",
     "Product": "AWS",
-    "Language": "AWS Cloud formation",
+    "Language": "Terraform",
     "Policy Title": "JMSAppender in Log4j 1.2 is vulnerable to deserialization of untrusted data when the attacker has write access to the Log4j configuration",
     "Policy Description": "Apache Log4j2 2.0-beta9 through 2.12.1 and 2.13.0 through 2.15.0 JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafv2-webacl-managedrulegroupstatement.html#cfn-wafv2-webacl-managedrulegroupstatement-name"
+}
+
+
+
+#
+# PR-AWS-TRF-INS-001
+#
+
+default ins_log4j = null
+
+aws_issue["ins_log4j"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_inspector_assessment_template"
+    count([c | lower(resource.properties.rules_package_arns[_]) == lower(rules_packages[_]); c:=1]) == 0
+}
+
+aws_issue["ins_log4j"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_inspector_assessment_template"
+    count(resource.properties.rules_package_arns) == 0
+}
+
+aws_issue["ins_log4j"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_inspector_assessment_template"
+    not resource.properties.rules_package_arns
+}
+
+ins_log4j {
+    lower(input.resources[i].type) == "aws_inspector_assessment_template"
+    not aws_issue["ins_log4j"]
+}
+
+ins_log4j = false {
+    aws_issue["ins_log4j"]
+}
+
+ins_log4j_err = "Enable AWS Inspector to detect Log4J Vulnerability" {
+    aws_issue["ins_log4j"]
+}
+
+ins_log4j_metadata := {
+    "Policy Code": "PR-AWS-TRF-INS-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Enable AWS Inspector to detect Log4J Vulnerability",
+    "Policy Description": "Enable AWS Inspector to detect Log4J Vulnerability",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/inspector_assessment_template"
 }

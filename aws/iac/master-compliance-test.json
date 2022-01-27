@@ -1089,6 +1089,38 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CFR-INS-001",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-INS-001",
+                            "eval": "data.rule.ins_log4j",
+                            "message": "data.rule.ins_log4j_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_web_acl' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_INS_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Enable AWS Inspector to detect Log4J Vulnerability",
+                    "description": "Enable AWS Inspector to detect Log4J Vulnerability",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "inspector"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::inspector::assessmenttemplate"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CFR-VPC-001",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
