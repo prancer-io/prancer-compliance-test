@@ -34,7 +34,7 @@ azure_issue["KeyVault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     count([c | r := input.resources[_];
-              r.type == "microsoft.keyvault/vaults/accessPolicies";
+              lower(r.type) == "microsoft.keyvault/vaults/accessPolicies";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               count(r.properties.accessPolicies[_].permissions.keys) == 0;
               count(r.properties.accessPolicies[_].permissions.secrets) == 0;

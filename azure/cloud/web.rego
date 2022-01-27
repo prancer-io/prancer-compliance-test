@@ -87,7 +87,7 @@ azure_issue["min_tls_version"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
-              r.type == "microsoft.web/sites/config";
+              lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.minTlsVersion) == "1.2";
               c := 1]) == 0
@@ -250,7 +250,7 @@ azure_issue["http_20_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
-              r.type == "microsoft.web/sites/config";
+              lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.http20Enabled == true;
               c := 1]) == 0
@@ -372,7 +372,7 @@ azure_issue["web_service_cors_not_allowing_all"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
-              r.type == "microsoft.web/sites/config";
+              lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               array_contains(r.properties.cors.allowedOrigins, "*");
               c := 1]) > 0
@@ -491,7 +491,7 @@ azure_issue["web_service_http_logging_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
-              r.type == "microsoft.web/sites/config";
+              lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.httpLoggingEnabled == true;
               c := 1]) == 0
@@ -607,7 +607,7 @@ azure_issue["web_service_detaild_error_message_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
-              r.type == "microsoft.web/sites/config";
+              lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.detailedErrorLoggingEnabled == true;
               c := 1]) == 0
@@ -723,7 +723,7 @@ azure_issue["web_service_request_tracing_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
-              r.type == "microsoft.web/sites/config";
+              lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.requestTracingEnabled == true;
               c := 1]) == 0
@@ -880,7 +880,7 @@ azure_issue["web_service_remote_debugging_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
-              r.type == "microsoft.web/sites/config";
+              lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.remoteDebuggingEnabled == true;
               c := 1]) > 0
@@ -992,7 +992,7 @@ azure_issue["web_service_ftp_deployment_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
-              r.type == "microsoft.web/sites/config";
+              lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.ftpsState) != "disabled"
               lower(r.properties.ftpsState) != "ftpsonly"
@@ -1113,7 +1113,7 @@ azure_issue["web_service_net_framework_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
-              r.type == "microsoft.web/sites/config";
+              lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.netFrameworkVersion) == latest_dotnet_framework_version;
               c := 1]) == 0
@@ -1230,7 +1230,7 @@ azure_issue["web_service_php_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
-              r.type == "microsoft.web/sites/config";
+              lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               to_number(r.properties.phpVersion) == latest_php_version;
               c := 1]) == 0
@@ -1348,7 +1348,7 @@ azure_issue["web_service_python_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
-              r.type == "microsoft.web/sites/config";
+              lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               to_number(r.properties.pythonVersion) != latest_python_version_three;
               to_number(r.properties.pythonVersion) != latest_python_version_two;
@@ -1468,7 +1468,7 @@ azure_issue["web_service_java_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
-              r.type == "microsoft.web/sites/config";
+              lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.javaVersion == latest_java_version;
               c := 1]) == 0
