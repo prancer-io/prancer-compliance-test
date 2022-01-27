@@ -11,18 +11,18 @@ array_contains(target_array, element) = true {
 default KeyVault = null
 
 azure_attribute_absence["KeyVault"] {
-    count([c | lower(input.resources[_].type) == "microsoft.keyvault/vaults/accessPolicies"; c := 1]) == 0
+    count([c | lower(input.resources[_].type) == "microsoft.keyvault/vaults/accesspolicies"; c := 1]) == 0
 }
 
 azure_attribute_absence["KeyVault"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.keyvault/vaults/accessPolicies"
+    lower(resource.type) == "microsoft.keyvault/vaults/accesspolicies"
     not resource.dependsOn
 }
 
 azure_attribute_absence["KeyVault"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.keyvault/vaults/accessPolicies"
+    lower(resource.type) == "microsoft.keyvault/vaults/accesspolicies"
     accessPolicy := resource.properties.accessPolicies[_]
     not accessPolicy.permissions.keys
     not accessPolicy.permissions.secrets
@@ -34,7 +34,7 @@ azure_issue["KeyVault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     count([c | r := input.resources[_];
-              r.type == "microsoft.keyvault/vaults/accessPolicies";
+              lower(r.type) == "microsoft.keyvault/vaults/accesspolicies";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               count(r.properties.accessPolicies[_].permissions.keys) == 0;
               count(r.properties.accessPolicies[_].permissions.secrets) == 0;

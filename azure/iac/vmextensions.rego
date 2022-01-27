@@ -32,7 +32,7 @@ azure_issue["vm_protection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/virtualmachines"
     count([c | r := input.resources[_];
-              r.type == "microsoft.compute/virtualmachines/extensions";
+              lower(r.type) == "microsoft.compute/virtualmachines/extensions";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(resource.properties.type) == "iaasantimalware";
               c := 1]) == 0

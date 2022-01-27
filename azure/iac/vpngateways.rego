@@ -32,7 +32,7 @@ azure_issue["vpn_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/vpngateways"
     count([c | r := input.resources[_];
-              r.type == "microsoft.network/vpngateways/vpnconnections";
+              lower(r.type) == "microsoft.network/vpngateways/vpnconnections";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.ipsecPolicies[_].ipsecEncryption) != "none";
               c := 1]) == 0
