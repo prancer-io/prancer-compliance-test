@@ -3208,15 +3208,15 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-INS-001",
-                            "eval": "data.rule.ins_log4j",
-                            "message": "data.rule.ins_log4j_err",
+                            "eval": "data.rule.ins_package",
+                            "message": "data.rule.ins_package_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_web_acl' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_INS_001.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Enable AWS Inspector to detect Log4J Vulnerability",
-                    "description": "Enable AWS Inspector to detect Log4J Vulnerability",
+                    "title": "Enable AWS Inspector to detect Vulnerability",
+                    "description": "Enable AWS Inspector to detect Vulnerability",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -4228,15 +4228,15 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-ECR-005",
-                            "eval": "data.rule.ecr_log4j_vulnerability",
-                            "message": "data.rule.ecr_log4j_vulnerability_err",
+                            "eval": "data.rule.ecr_vulnerability",
+                            "message": "data.rule.ecr_vulnerability_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_ECR_004.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Enable Enhanced scan type for AWS ECR registry to detect Log4J vulnerability",
-                    "description": "Enable Enhanced scan type for AWS ECR registry to detect Log4J vulnerability",
+                    "title": "Enable Enhanced scan type for AWS ECR registry to detect vulnerability",
+                    "description": "Enable Enhanced scan type for AWS ECR registry to detect vulnerability",
                     "tags": [
                         {
                             "cloud": "git",

@@ -1500,46 +1500,46 @@ waf_log4j_vulnerability_metadata := {
 # PR-AWS-TRF-INS-001
 #
 
-default ins_log4j = null
+default ins_package = null
 
-aws_issue["ins_log4j"] {
+aws_issue["ins_package"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_inspector_assessment_template"
     count([c | lower(resource.properties.rules_package_arns[_]) == lower(rules_packages[_]); c:=1]) == 0
 }
 
-aws_issue["ins_log4j"] {
+aws_issue["ins_package"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_inspector_assessment_template"
     count(resource.properties.rules_package_arns) == 0
 }
 
-aws_issue["ins_log4j"] {
+aws_issue["ins_package"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_inspector_assessment_template"
     not resource.properties.rules_package_arns
 }
 
-ins_log4j {
+ins_package {
     lower(input.resources[i].type) == "aws_inspector_assessment_template"
-    not aws_issue["ins_log4j"]
+    not aws_issue["ins_package"]
 }
 
-ins_log4j = false {
-    aws_issue["ins_log4j"]
+ins_package = false {
+    aws_issue["ins_package"]
 }
 
-ins_log4j_err = "Enable AWS Inspector to detect Log4J Vulnerability" {
-    aws_issue["ins_log4j"]
+ins_package_err = "Enable AWS Inspector to detect Vulnerability" {
+    aws_issue["ins_package"]
 }
 
-ins_log4j_metadata := {
+ins_package_metadata := {
     "Policy Code": "PR-AWS-TRF-INS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
-    "Policy Title": "Enable AWS Inspector to detect Log4J Vulnerability",
-    "Policy Description": "Enable AWS Inspector to detect Log4J Vulnerability",
+    "Policy Title": "Enable AWS Inspector to detect Vulnerability",
+    "Policy Description": "Enable AWS Inspector to detect Vulnerability",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/inspector_assessment_template"

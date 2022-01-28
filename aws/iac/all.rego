@@ -1437,46 +1437,46 @@ waf_log4j_vulnerability_metadata := {
 # PR-AWS-CFR-INS-001
 #
 
-default ins_log4j = null
+default ins_package = null
 
-aws_issue["ins_log4j"] {
+aws_issue["ins_package"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::inspector::assessmenttemplate"
     count([c | lower(resource.Properties.RulesPackageArns[_]) == lower(rules_packages[_]); c:=1]) == 0
 }
 
-aws_issue["ins_log4j"] {
+aws_issue["ins_package"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::inspector::assessmenttemplate"
     count(resource.Properties.RulesPackageArns) == 0
 }
 
-aws_issue["ins_log4j"] {
+aws_issue["ins_package"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::inspector::assessmenttemplate"
     not resource.Properties.RulesPackageArns
 }
 
-ins_log4j {
+ins_package {
     lower(input.Resources[i].Type) == "aws::inspector::assessmenttemplate"
-    not aws_issue["ins_log4j"]
+    not aws_issue["ins_package"]
 }
 
-ins_log4j = false {
-    aws_issue["ins_log4j"]
+ins_package = false {
+    aws_issue["ins_package"]
 }
 
-ins_log4j_err = "Enable AWS Inspector to detect Log4J Vulnerability" {
-    aws_issue["ins_log4j"]
+ins_package_err = "Enable AWS Inspector to detect Vulnerability" {
+    aws_issue["ins_package"]
 }
 
-ins_log4j_metadata := {
+ins_package_metadata := {
     "Policy Code": "PR-AWS-CFR-INS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud Formation",
-    "Policy Title": "Enable AWS Inspector to detect Log4J Vulnerability",
-    "Policy Description": "Enable AWS Inspector to detect Log4J Vulnerability",
+    "Policy Title": "Enable AWS Inspector to detect Vulnerability",
+    "Policy Description": "Enable AWS Inspector to detect Vulnerability",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-inspector-assessmenttemplate.html"

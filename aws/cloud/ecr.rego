@@ -141,35 +141,35 @@ ecr_public_access_disable_metadata := {
 # PR-AWS-CLD-ECR-005
 #
 
-default ecr_log4j_vulnerability = true
+default ecr_vulnerability = true
 
-ecr_log4j_vulnerability = false {
+ecr_vulnerability = false {
     # lower(resource.Type) == "aws::ecr::repository"
     lower(input.scanningConfiguration.scanType) != "enhanced"
 }
 
-ecr_log4j_vulnerability = false {
+ecr_vulnerability = false {
     # lower(resource.Type) == "aws::ecr::repository"
     rule = input.scanningConfiguration.rules[_]
     lower(rule.scanFrequency) != "continuous_scan"
 }
 
-ecr_log4j_vulnerability = false {
+ecr_vulnerability = false {
     # lower(resource.Type) == "aws::ecr::repository"
     count(input.scanningConfiguration.rules) == 0
 }
 
-ecr_log4j_vulnerability_err = "Ensure ECR image scan on push is enabled" {
-    not ecr_log4j_vulnerability
+ecr_vulnerability_err = "Ensure ECR image scan on push is enabled" {
+    not ecr_vulnerability
 }
 
-ecr_log4j_vulnerability_metadata := {
+ecr_vulnerability_metadata := {
     "Policy Code": "PR-AWS-TRF-ECR-005",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "Aws Cloud",
-    "Policy Title": "Enable Enhanced scan type for AWS ECR registry to detect Log4J vulnerability",
-    "Policy Description": "Enable Enhanced scan type for AWS ECR registry to detect Log4J vulnerability",
+    "Policy Title": "Enable Enhanced scan type for AWS ECR registry to detect vulnerability",
+    "Policy Description": "Enable Enhanced scan type for AWS ECR registry to detect vulnerability",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_registry_scanning_configuration"

@@ -641,30 +641,30 @@ waf_log4j_vulnerability_metadata := {
 # PR-AWS-CLD-INS-001
 #
 
-default ins_log4j = true
+default ins_package = true
 
-ins_log4j = false {
+ins_package = false {
     # lower(resource.Type) == "aws::wafv2::webacl"
     rulesPackageArns := input.rulesPackageArns
     count([c | lower(rulesPackageArns[_]) == lower(rules_packages[_]); c:=1]) == 0
 }
 
-ins_log4j = false {
+ins_package = false {
     # lower(resource.Type) == "aws::wafv2::webacl"
     count(input.rulesPackageArns) == 0
 }
 
-ins_log4j_err = "JMSAppender in Log4j 1.2 is vulnerable to deserialization of untrusted data when the attacker has write access to the Log4j configuration" {
-    not ins_log4j
+ins_package_err = "Enable AWS Inspector to detect Vulnerability" {
+    not ins_package
 }
 
-ins_log4j_metadata := {
+ins_package_metadata := {
     "Policy Code": "PR-AWS-CLD-INS-001",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Enable AWS Inspector to detect Log4J Vulnerability",
-    "Policy Description": "Enable AWS Inspector to detect Log4J Vulnerability",
+    "Policy Title": "Enable AWS Inspector to detect Vulnerability",
+    "Policy Description": "Enable AWS Inspector to detect Vulnerability",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-inspector-assessmenttemplate.html"
