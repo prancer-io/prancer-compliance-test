@@ -716,6 +716,38 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-GCP-GDF-FW-018",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-FW-018",
+                            "eval": "data.rule.firewall_logging",
+                            "message": "data.rule.firewall_logging_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_FW_018.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP Firewall rule logging is enabled",
+                    "description": "This policy identifies GCP firewall rules that are not configured with firewall rule logging.  Firewall Rules Logging lets you audit, verify, and analyze the effects of your firewall rules. When you enable logging for a firewall rule, Google Cloud creates an entry called a connection record each time the rule allows or denies traffic. \n\nReference: https://cloud.google.com/vpc/docs/firewall-rules-logging",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "compute.v1.firewall"
+                    ]
+                },
+                {
                     "masterTestId": "PR-GCP-GDF-DISK-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
@@ -1016,6 +1048,123 @@
                                 "NIST CSF",
                                 "PCI-DSS",
                                 "CSA-CCM"
+                            ],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "compute.v1.instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-INST-008",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-INST-008",
+                            "eval": "data.rule.compute_disk_csek",
+                            "message": "data.rule.compute_disk_csek_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_INST_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP GCE Disk snapshot is encrypted with CSEK",
+                    "description": "This policy identifies GCP GCE Disk snapshots that are not encrypted with CSEK. It is recommended that to avoid data leakage provide your own encryption keys, Compute Engine uses your key to protect the Google-generated keys used to encrypt and decrypt your data. Only users who can provide the correct key can use resources protected by a customer-supplied encryption key",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "compute.v1.instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-INST-009",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-INST-009",
+                            "eval": "data.rule.compute_ssl_profile_restricted",
+                            "message": "data.rule.compute_ssl_profile_restricted_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_INST_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP HTTPS Load balancer SSL Policy is using restrictive profile",
+                    "description": "This policy identifies HTTPS Load balancers which are not using restrictive profile in it's SSL Policy, which controls sets of features used in negotiating SSL with clients. As a best security practice, use RESTRICTED as SSL policy profile as it meets stricter compliance requirements and does not include any out-of-date SSL features.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "compute.v1.instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-INST-010",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-INST-010",
+                            "eval": "data.rule.compute_ssl_min_tls",
+                            "message": "data.rule.compute_ssl_min_tls_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_INST_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP HTTPS Load balancer is configured with SSL policy not having TLS version 1.1 or lower",
+                    "description": "This policy identifies HTTPS Load balancers is configured with SSL policy having TLS version 1.1 or lower. As a best security practice, use TLS 1.2 as the minimum TLS version in your load balancers SSL security policies.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "deploymentmanager"
@@ -2857,6 +3006,172 @@
                     ],
                     "resourceTypes": [
                         "iam.v1.serviceaccounts.key"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-BQ-001",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-BQ-001",
+                            "eval": "data.rule.svc_account_key",
+                            "message": "data.rule.svc_account_key_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_BQ_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Big Query Datasets are not publically accessible",
+                    "description": "Ensure there are no anonymously and/or publicly accessible BigQuery datasets available within your Google Cloud Platform (GCP) account. Google Cloud BigQuery datasets have Identity and Access Management (IAM) policies configured to determine who can have access to these resources",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "bigquery.v2.dataset"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-CF-001",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-CF-001",
+                            "eval": "data.rule.function_security",
+                            "message": "data.rule.function_security_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://github.com/GoogleCloudPlatform/deploymentmanager-samples/tree/master/google/resource-snippets/cloudfunctions-v1' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_CF_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP Cloud Function HTTP trigger is secured",
+                    "description": "This policy identifies GCP Cloud Functions for which the HTTP trigger is not secured. When you configure HTTP functions to be triggered only with HTTPS, user requests will be redirected to use the HTTPS protocol, which is more secure. It is recommended to set the 'Require HTTPS' for configuring HTTP triggers while deploying your function.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "cloudfunctions.v1.function"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-CF-002",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-CF-002",
+                            "eval": "data.rule.function_ingress_allow_all",
+                            "message": "data.rule.function_ingress_allow_all_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://github.com/GoogleCloudPlatform/deploymentmanager-samples/tree/master/google/resource-snippets/cloudfunctions-v1' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_CF_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP Cloud Function is not configured with overly permissive Ingress setting",
+                    "description": "This policy identifies GCP Cloud Functions that are configured with overly permissive Ingress setting. With overly permissive Ingress setting, all inbound requests to the function are allowed, from both the public and resources within the same project. It is recommended to restrict the traffic from the public and other resources, to get better network-based access control and allow traffic from VPC networks in the same project or traffic through the Cloud Load Balancer.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "cloudfunctions.v1.function"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-CF-003",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-CF-003",
+                            "eval": "data.rule.function_vpc_connector",
+                            "message": "data.rule.function_vpc_connector_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://github.com/GoogleCloudPlatform/deploymentmanager-samples/tree/master/google/resource-snippets/cloudfunctions-v1' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_CF_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP Cloud Function is enabled with VPC connector",
+                    "description": "This policy identifies GCP Cloud Functions that are not configured with a VPC connector. VPC connector helps function to connect to a resource inside a VPC in the same project. Setting up the VPC connector allows you to set up a secure perimeter to guard against data exfiltration and prevent functions from accidentally sending any data to unwanted destinations. It is recommended to configure the GCP Cloud Function with a VPC connector.\n\nNote: For the Cloud Functions function to access the public traffic with Serverless VPC connector, you have to introduce Cloud NAT.\nLink: https://cloud.google.com/functions/docs/networking/network-settings#route-egress-to-vpc",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "cloudfunctions.v1.function"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-KMS-001",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-KMS-001",
+                            "eval": "data.rule.kms_key_rotation",
+                            "message": "data.rule.kms_key_rotation_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_KMS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP KMS encryption key rotating in every 90 days",
+                    "description": "This policy identifies GCP KMS encryption keys that are not rotating every 90 days.  A key is used to protect some corpus of data. A collection of files could be encrypted with the same key and people with decrypt permissions on that key would be able to decrypt those files. It's recommended to make sure the 'rotation period' is set to a specific time to ensure data cannot be accessed through the old key.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "kms.v1.projects.locations.keyRings.cryptoKeys"
                     ]
                 },
                 {
