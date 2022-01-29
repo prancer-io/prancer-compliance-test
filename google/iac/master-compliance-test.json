@@ -2512,6 +2512,111 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-GCP-GDF-BKT-006",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-BKT-006",
+                            "eval": "data.rule.storage_uniform_bucket_access",
+                            "message": "data.rule.storage_uniform_bucket_access_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_BKT_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure cloud storage bucket with uniform bucket-level access enabled",
+                    "description": "Checks to ensure that Stackdriver logs on Storage Buckets are not public. Giving public access to Stackdriver logs will enable anyone with a web association to retrieve sensitive information that is critical to business. Stackdriver Logging enables to store, search, investigate, monitor and alert on log information/events from Google Cloud Platform. The permission needs to be set only for authorized users.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "storage.v1.bucket"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-BKT-007",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-BKT-007",
+                            "eval": "data.rule.storage_event_based_hold",
+                            "message": "data.rule.storage_event_based_hold_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_BKT_007.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure GCP storage bucket is configured with default Event-Based hold",
+                    "description": "This policy identifies GCP storage buckets that are not configured with default Event-Based Hold. An event-based hold resets the object's time in the bucket for the purposes of the retention period. This behavior is useful when you want an object to persist in your bucket for a certain length of time after a certain event occurs. It is recommended to enable this feature to protect individual objects from deletion.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "storage.v1.bucket"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-BKT-008",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-BKT-008",
+                            "eval": "data.rule.storage_logging_itself",
+                            "message": "data.rule.storage_logging_itself_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_BKT_008.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure GCP storage bucket is not logging to itself",
+                    "description": "This policy identifies GCP storage buckets that are sending logs to themselves. When storage buckets use the same bucket to send their access logs, a loop of logs will be created, which is not a security best practice. It is recommended to spin up new and different log buckets for storage bucket logging.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "storage.v1.bucket"
+                    ]
+                },
+                {
                     "masterTestId": "PR-GCP-GDF-SQLI-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
