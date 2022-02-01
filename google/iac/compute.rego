@@ -1840,3 +1840,140 @@ lbs_quic_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies"
 }
+
+
+
+#
+# PR-GCP-GDF-INST-011
+#
+
+default compute_external_ip = null
+
+gc_issue["compute_external_ip"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    lower(resource.properties.status) == "running"
+    networkInterface := resource.properties.networkInterfaces[_]
+    networkInterface.accessConfigs
+    not startswith(lower(networkInterface.accessConfigs.name), "gke-")
+    not contains(lower(networkInterface.accessConfigs.name), "default-pool")
+}
+
+compute_external_ip {
+    lower(input.resources[i].type) == "compute.v1.instance"
+    not gc_issue["compute_external_ip"]
+}
+
+compute_external_ip = false {
+    gc_issue["compute_external_ip"]
+}
+
+compute_external_ip_err = "Ensure GCP VM instance not attached to the external IP address" {
+    gc_issue["compute_external_ip"]
+}
+
+compute_external_ip_metadata := {
+    "Policy Code": "PR-GCP-GDF-INST-011",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP VM instance not attached to the external IP address",
+    "Policy Description": "This policy identifies the VM instances with the external IP address associated. To reduce your attack surface, VM instances should not have public/external IP addresses. Instead, instances should be configured behind load balancers, to minimize the instance's exposure to the internet.\n\nNOTE: This policy will not report instances created by GKE because some of them have external IP addresses and cannot be changed by editing the instance settings. Instances created by GKE should be excluded. These instances have names that start with 'gke-' and contains 'default-pool'.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+
+
+#
+# PR-GCP-GDF-INST-012
+#
+
+default compute_shielded_vm = null
+
+gc_issue["compute_shielded_vm"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    lower(resource.properties.status) == "running"
+    not startswith(lower(networkInterface.accessConfigs.name), "gke-")
+    resource.properties.shieldedInstanceConfig
+    not resource.properties.shieldedInstanceConfig.enableVtpm
+}
+
+gc_issue["compute_shielded_vm"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    lower(resource.properties.status) == "running"
+    not startswith(lower(networkInterface.accessConfigs.name), "gke-")
+    resource.properties.shieldedInstanceConfig
+    not resource.properties.shieldedInstanceConfig.enableIntegrityMonitoring
+}
+
+compute_shielded_vm {
+    lower(input.resources[i].type) == "compute.v1.instance"
+    not gc_issue["compute_shielded_vm"]
+}
+
+compute_shielded_vm = false {
+    gc_issue["compute_shielded_vm"]
+}
+
+compute_shielded_vm_err = "Ensure GCP VM instance with Shielded VM features enabled" {
+    gc_issue["compute_shielded_vm"]
+}
+
+compute_shielded_vm_metadata := {
+    "Policy Code": "PR-GCP-GDF-INST-012",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP VM instance with Shielded VM features enabled",
+    "Policy Description": "This policy identifies VM instances which have Shielded VM features disabled. Shielded VMs are virtual machines (VMs) on Google Cloud Platform hardened by a set of security controls that help defend against rootkits and bootkits. Shielded VM's verifiable integrity is achieved through the use of Secure Boot, virtual trusted platform module (vTPM)-enabled Measured Boot, and integrity monitoring. Shielded VM instances run firmware which is signed and verified using Google's Certificate Authority, ensuring that the instance's firmware is unmodified and establishing the root of trust for Secure Boot.\n\nNOTE: You can only enable Shielded VM options on instances that have Shielded VM support. This policy reports VM instances that have Shielded VM support and are disabled with the Shielded VM features.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+
+
+#
+# PR-GCP-GDF-INST-013
+#
+
+default compute_default_service = null
+
+gc_issue["compute_default_service"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    lower(resource.properties.status) == "running"
+    not startswith(lower(networkInterface.accessConfigs.name), "gke-")
+    serviceAccount := resource.properties.serviceAccounts[_]
+    not contains(lower(serviceAccount.email), "-compute@developer.gserviceaccount.com")
+    scope := serviceAccount.scopes[_]
+    lower(scope) == "https://www.googleapis.com/auth/cloud-platform"
+}
+
+compute_default_service {
+    lower(input.resources[i].type) == "compute.v1.instance"
+    not gc_issue["compute_default_service"]
+}
+
+compute_default_service = false {
+    gc_issue["compute_default_service"]
+}
+
+compute_default_service_err = "Ensure GCP VM instance not using a default service account with full access to all Cloud APIs" {
+    gc_issue["compute_default_service"]
+}
+
+compute_default_service_metadata := {
+    "Policy Code": "PR-GCP-GDF-INST-013",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP VM instance not using a default service account with full access to all Cloud APIs",
+    "Policy Description": "This policy identifies the GCP VM instances which are using a default service account with full access to all Cloud APIs. To compliant with the principle of least privileges and prevent potential privilege escalation it is recommended that instances are not assigned to default service account 'Compute Engine default service account' with scope 'Allow full access to all Cloud APIs'.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+

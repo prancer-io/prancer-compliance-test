@@ -1265,6 +1265,126 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-GCP-GDF-INST-011",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-INST-011",
+                            "eval": "data.rule.compute_external_ip",
+                            "message": "data.rule.compute_external_ip_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_INST_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP VM instance not attached to the external IP address",
+                    "description": "This policy identifies the VM instances with the external IP address associated. To reduce your attack surface, VM instances should not have public/external IP addresses. Instead, instances should be configured behind load balancers, to minimize the instance's exposure to the internet.\n\nNOTE: This policy will not report instances created by GKE because some of them have external IP addresses and cannot be changed by editing the instance settings. Instances created by GKE should be excluded. These instances have names that start with 'gke-' and contains 'default-pool'.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "CIS",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "compute.v1.instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-INST-012",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-INST-012",
+                            "eval": "data.rule.compute_shielded_vm",
+                            "message": "data.rule.compute_shielded_vm_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_INST_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP VM instance with Shielded VM features enabled",
+                    "description": "This policy identifies VM instances which have Shielded VM features disabled. Shielded VMs are virtual machines (VMs) on Google Cloud Platform hardened by a set of security controls that help defend against rootkits and bootkits. Shielded VM's verifiable integrity is achieved through the use of Secure Boot, virtual trusted platform module (vTPM)-enabled Measured Boot, and integrity monitoring. Shielded VM instances run firmware which is signed and verified using Google's Certificate Authority, ensuring that the instance's firmware is unmodified and establishing the root of trust for Secure Boot.\n\nNOTE: You can only enable Shielded VM options on instances that have Shielded VM support. This policy reports VM instances that have Shielded VM support and are disabled with the Shielded VM features.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "CIS",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "compute.v1.instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-INST-013",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-INST-013",
+                            "eval": "data.rule.compute_default_service",
+                            "message": "data.rule.compute_default_service_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_INST_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP VM instance not using a default service account with full access to all Cloud APIs",
+                    "description": "This policy identifies the GCP VM instances which are using a default service account with full access to all Cloud APIs. To compliant with the principle of least privileges and prevent potential privilege escalation it is recommended that instances are not assigned to default service account 'Compute Engine default service account' with scope 'Allow full access to all Cloud APIs'.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "CIS",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "compute.v1.instance"
+                    ]
+                },
+                {
                     "masterTestId": "PR-GCP-GDF-CLT-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
@@ -2607,6 +2727,70 @@
                             "cloud": "git",
                             "compliance": [
                             ],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "storage.v1.bucket"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-BKT-009",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-BKT-009",
+                            "eval": "data.rule.storage_bucket_lock",
+                            "message": "data.rule.storage_bucket_lock_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_BKT_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP Log bucket retention policy is configured using bucket lock",
+                    "description": "This policy identifies GCP log buckets for which retention policy is not configured using bucket lock. It is recommended to configure the data retention policy for cloud storage buckets using bucket lock to permanently prevent the policy from being reduced or removed in case the system is compromised by an attacker or a malicious insider.\n\nNote: Locking a bucket is an irreversible action. Once you lock a bucket, you cannot remove the retention policy from the bucket or decrease the retention period for the policy.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "storage.v1.bucket"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-GDF-BKT-010",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-GDF-BKT-010",
+                            "eval": "data.rule.storage_bucket_retention_enable",
+                            "message": "data.rule.storage_bucket_retention_enable_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_GDF_BKT_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP Log bucket retention policy is enabled",
+                    "description": "This policy identifies GCP log buckets for which retention policy is not enabled. Enabling retention policies on log buckets will protect logs stored in cloud storage buckets from being overwritten or accidentally deleted. It is recommended to configure a data retention policy for these cloud storage buckets to store the activity logs for forensics and security investigations.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
                             "service": [
                                 "deploymentmanager"
                             ]

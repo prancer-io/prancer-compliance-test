@@ -533,3 +533,101 @@ storage_logging_itself_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
 }
+
+
+
+#
+# PR-GCP-GDF-BKT-009
+#
+
+default storage_bucket_lock = null
+
+gc_issue["storage_bucket_lock"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    not resource.properties.retentionPolicy.isLocked
+}
+
+gc_issue["storage_bucket_lock"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    lower(resource.properties.retentionPolicy.isLocked) == "false"
+}
+
+storage_bucket_lock {
+    lower(input.resources[i].type) == "storage.v1.bucket"
+    not gc_issue["storage_bucket_lock"]
+}
+
+storage_bucket_lock = false {
+    gc_issue["storage_bucket_lock"]
+}
+
+storage_bucket_lock_err = "Ensure GCP Log bucket retention policy is configured using bucket lock" {
+    gc_issue["storage_bucket_lock"]
+}
+
+storage_bucket_lock_metadata := {
+    "Policy Code": "PR-GCP-GDF-BKT-009",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP Log bucket retention policy is configured using bucket lock",
+    "Policy Description": "This policy identifies GCP log buckets for which retention policy is not configured using bucket lock. It is recommended to configure the data retention policy for cloud storage buckets using bucket lock to permanently prevent the policy from being reduced or removed in case the system is compromised by an attacker or a malicious insider.\n\nNote: Locking a bucket is an irreversible action. Once you lock a bucket, you cannot remove the retention policy from the bucket or decrease the retention period for the policy.",
+    "Resource Type": "storage.v1.bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
+
+
+#
+# PR-GCP-GDF-BKT-010
+#
+
+default storage_bucket_retention_enable = null
+
+gc_issue["storage_bucket_retention_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    not resource.properties.retentionPolicy
+}
+
+gc_issue["storage_bucket_retention_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    resource.properties.retentionPolicy == null
+}
+
+gc_issue["storage_bucket_retention_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    count(resource.properties.retentionPolicy) == 0
+}
+
+
+storage_bucket_retention_enable {
+    lower(input.resources[i].type) == "storage.v1.bucket"
+    not gc_issue["storage_bucket_retention_enable"]
+}
+
+storage_bucket_retention_enable = false {
+    gc_issue["storage_bucket_retention_enable"]
+}
+
+storage_bucket_retention_enable_err = "Ensure GCP Log bucket retention policy is enabled" {
+    gc_issue["storage_bucket_retention_enable"]
+}
+
+storage_bucket_retention_enable_metadata := {
+    "Policy Code": "PR-GCP-GDF-BKT-010",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP Log bucket retention policy is enabled",
+    "Policy Description": "This policy identifies GCP log buckets for which retention policy is not enabled. Enabling retention policies on log buckets will protect logs stored in cloud storage buckets from being overwritten or accidentally deleted. It is recommended to configure a data retention policy for these cloud storage buckets to store the activity logs for forensics and security investigations.",
+    "Resource Type": "storage.v1.bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
