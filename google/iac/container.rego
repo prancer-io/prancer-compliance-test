@@ -1626,7 +1626,7 @@ gc_issue["k8s_workload"] {
     resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     lower(resource.properties.status) == "running"
-    not startswith(lower(resource.properties.resourceLabels.goog-composer-version), "composer-1")
+    not startswith(lower(resource.properties.resourceLabels["goog-composer-version"]), "composer-1")
     not resource.properties.workloadIdentityConfig
 }
 
@@ -1635,7 +1635,7 @@ gc_issue["k8s_workload"] {
     resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     lower(resource.properties.status) == "running"
-    not startswith(lower(resource.properties.resourceLabels.goog-composer-version), "composer-1")
+    not startswith(lower(resource.properties.resourceLabels["goog-composer-version"]), "composer-1")
     resource.properties.workloadIdentityConfig
     node_pool := resource.properties.nodePools[_]
     lower(node_pool.config.workloadMetadataConfig.mode) != "gke_metadata"
