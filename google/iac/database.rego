@@ -241,6 +241,363 @@ storage_sql_local_infile_metadata := {
 
 
 #
+# PR-GCP-GDF-SQL-003
+#
+
+default storage_sql_label_info = null
+available_types = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
+
+gc_issue["storage_sql_label_info"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    not resource.properties.settings.userLabels
+}
+
+gc_issue["storage_sql_label_info"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    count(resource.properties.settings.userLabels) == 0
+}
+
+gc_issue["storage_sql_label_info"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    resource.properties.settings.userLabels == null
+}
+
+
+storage_sql_label_info {
+    lower(input.resources[i].type) == available_types[_]
+    not gc_issue["storage_sql_label_info"]
+}
+
+storage_sql_label_info = false {
+    gc_issue["storage_sql_label_info"]
+}
+
+storage_sql_label_info_err = "Ensure GCP SQL Instances contains Label information" {
+    gc_issue["storage_sql_label_info"]
+}
+
+storage_sql_label_info_metadata := {
+    "Policy Code": "PR-GCP-GDF-SQL-003",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP SQL Instances contains Label information",
+    "Policy Description": "This policy identifies the SQL DB instance which does not have any Labels. Labels can be used for easy identification and searches.",
+    "Resource Type": "sqladmin.v1beta4.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
+
+#
+# PR-GCP-GDF-SQL-004
+#
+
+default storage_sql_flag_authentication = null
+available_types = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
+
+gc_issue["storage_sql_flag_authentication"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    contains(lower(resource.properties.databaseVersion), "sqlserver")
+    count([c| contains(lower(resource.properties.settings.databaseFlags[j].name), "contained database authentication"); contains(lower(resource.properties.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
+}
+
+storage_sql_flag_authentication {
+    lower(input.resources[i].type) == available_types[_]
+    not gc_issue["storage_sql_flag_authentication"]
+}
+
+storage_sql_flag_authentication = false {
+    gc_issue["storage_sql_flag_authentication"]
+}
+
+storage_sql_flag_authentication_err = "Ensure SQL Server instance database flag 'contained database authentication' is disabled" {
+    gc_issue["storage_sql_flag_authentication"]
+}
+
+storage_sql_flag_authentication_metadata := {
+    "Policy Code": "PR-GCP-GDF-SQL-004",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure SQL Server instance database flag 'contained database authentication' is disabled",
+    "Policy Description": "This policy identifies SQL Server instance database flag 'contained database authentication' is enabled. Most of the threats associated with contained database are related to authentication process. So it is recommended to disable this flag.",
+    "Resource Type": "sqladmin.v1beta4.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
+
+#
+# PR-GCP-GDF-SQL-005
+#
+
+default storage_sql_owner_chaining = null
+available_types = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
+
+gc_issue["storage_sql_owner_chaining"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    contains(lower(resource.properties.databaseVersion), "sqlserver")
+    count([c| contains(lower(resource.properties.settings.databaseFlags[j].name), "cross db ownership chaining"); contains(lower(resource.properties.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
+}
+
+storage_sql_owner_chaining {
+    lower(input.resources[i].type) == available_types[_]
+    not gc_issue["storage_sql_owner_chaining"]
+}
+
+storage_sql_owner_chaining = false {
+    gc_issue["storage_sql_owner_chaining"]
+}
+
+storage_sql_owner_chaining_err = "Ensure GCP SQL Server instance database flag 'cross db ownership chaining' is disabled" {
+    gc_issue["storage_sql_owner_chaining"]
+}
+
+storage_sql_owner_chaining_metadata := {
+    "Policy Code": "PR-GCP-GDF-SQL-005",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP SQL Server instance database flag 'cross db ownership chaining' is disabled",
+    "Policy Description": "This policy identifies GCP SQL Server instance database flag 'cross db ownership chaining' is enabled. Enabling cross db ownership is not recommended unless all of the databases hosted by the instance of SQL Server must participate in cross-database ownership chaining and you are aware of the security implications of this setting.",
+    "Resource Type": "sqladmin.v1beta4.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
+
+#
+# PR-GCP-GDF-SQL-006
+#
+
+default storage_sql_automated_backup = null
+available_types = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
+
+gc_issue["storage_sql_automated_backup"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    not resource.properties.settings.backupConfiguration.enabled
+    lower(resource.properties.instanceType) != "read_replica_instance"
+    lower(resource.properties.instanceType) != "on_premises_instance"
+}
+
+storage_sql_automated_backup {
+    lower(input.resources[i].type) == available_types[_]
+    not gc_issue["storage_sql_automated_backup"]
+}
+
+storage_sql_automated_backup = false {
+    gc_issue["storage_sql_automated_backup"]
+}
+
+storage_sql_automated_backup_err = "Ensure GCP SQL database instance is configured with automated backups" {
+    gc_issue["storage_sql_automated_backup"]
+}
+
+storage_sql_automated_backup_metadata := {
+    "Policy Code": "PR-GCP-GDF-SQL-006",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP SQL database instance is configured with automated backups",
+    "Policy Description": "This policy identifies GCP SQL Server instance database flag 'cross db ownership chaining' is enabled. Enabling cross db ownership is not recommended unless all of the databases hosted by the instance of SQL Server must participate in cross-database ownership chaining and you are aware of the security implications of this setting.",
+    "Resource Type": "sqladmin.v1beta4.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
+
+#
+# PR-GCP-GDF-SQL-007
+#
+
+default storage_sql_public_ip = null
+available_types = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
+
+gc_issue["storage_sql_public_ip"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    lower(resource.properties.backendType) == "second_gen"
+    ipAddress := resource.properties.ipAddresses[_]
+    contains(lower(ipAddress.type), "primary")
+}
+
+storage_sql_public_ip {
+    lower(input.resources[i].type) == available_types[_]
+    not gc_issue["storage_sql_public_ip"]
+}
+
+storage_sql_public_ip = false {
+    gc_issue["storage_sql_public_ip"]
+}
+
+storage_sql_public_ip_err = "Ensure GCP SQL database is not assigned with public IP" {
+    gc_issue["storage_sql_public_ip"]
+}
+
+storage_sql_public_ip_metadata := {
+    "Policy Code": "PR-GCP-GDF-SQL-007",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP SQL database is not assigned with public IP",
+    "Policy Description": "This policy identifies GCP SQL databases which are assigned with public IP.  To lower the organisation's attack surface, Cloud SQL databases should not have public IPs. Private IPs provide improved network security and lower latency for your application. It is recommended to configure Second Generation Sql instance to use private IPs instead of public IPs.",
+    "Resource Type": "sqladmin.v1beta4.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
+
+#
+# PR-GCP-GDF-SQL-008
+#
+
+default storage_sql_overly_permissive = null
+available_types = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
+issued_ip = ["0.0.0.0/0", "::/0"]
+
+gc_issue["storage_sql_overly_permissive"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    lower(resource.properties.backendType) == "second_gen"
+    authorizedNetwork := resource.properties.settings.ipConfiguration.authorizedNetworks[_]
+    contains(lower(authorizedNetwork.value), issued_ip[_])
+}
+
+storage_sql_overly_permissive {
+    lower(input.resources[i].type) == available_types[_]
+    not gc_issue["storage_sql_overly_permissive"]
+}
+
+storage_sql_overly_permissive = false {
+    gc_issue["storage_sql_overly_permissive"]
+}
+
+storage_sql_overly_permissive_err = "Ensure GCP SQL instance is not configured with overly permissive authorized networks" {
+    gc_issue["storage_sql_overly_permissive"]
+}
+
+storage_sql_overly_permissive_metadata := {
+    "Policy Code": "PR-GCP-GDF-SQL-008",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP SQL instance is not configured with overly permissive authorized networks",
+    "Policy Description": "This policy identifies GCP Cloud SQL instances that are configured with overly permissive authorized networks. You can connect to the SQL instance securely by using the Cloud SQL Proxy or adding your client's public address as an authorized network. If your client application is connecting directly to a Cloud SQL instance on its public IP address, you have to add your client's external address as an Authorized network for securing the connection. It is recommended to add specific IPs instead of public IPs as authorized networks as per the requirement.\n\nReference: https://cloud.google.com/sql/docs/mysql/authorize-networks",
+    "Resource Type": "sqladmin.v1beta4.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
+
+#
+# PR-GCP-GDF-SQL-009
+#
+
+default storage_sql_external_script = null
+available_types = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
+issued_ip = ["0.0.0.0/0", "::/0"]
+
+gc_issue["storage_sql_external_script"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    lower(resource.properties.state) == "runnable"
+    lower(resource.properties.databaseVersion) == "sqlserver"
+    count([c| contains(lower(resource.properties.settings.databaseFlags[_].name), "external scripts enabled"); c:=1 ]) == 0
+}
+
+gc_issue["storage_sql_external_script"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    lower(resource.properties.state) == "runnable"
+    lower(resource.properties.databaseVersion) == "sqlserver"
+    count([c| contains(lower(resource.properties.settings.databaseFlags[j].name), "external scripts enabled"); contains(lower(resource.properties.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
+}
+
+storage_sql_external_script {
+    lower(input.resources[i].type) == available_types[_]
+    not gc_issue["storage_sql_external_script"]
+}
+
+storage_sql_external_script = false {
+    gc_issue["storage_sql_external_script"]
+}
+
+storage_sql_external_script_err = "Ensure GCP SQL server instance database flag external scripts enabled is set to off" {
+    gc_issue["storage_sql_external_script"]
+}
+
+storage_sql_external_script_metadata := {
+    "Policy Code": "PR-GCP-GDF-SQL-009",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP SQL server instance database flag external scripts enabled is set to off",
+    "Policy Description": "This policy identifies GCP SQL server instances for which database flag 'external scripts enabled' is not set to off. Feature 'external scripts enabled' enables the execution of scripts with certain remote language extensions. When Advanced Analytics Services is installed, setup can optionally set this property to true. As the External Scripts Enabled feature allows scripts external to SQL such as files located in an R library to be executed, which could adversely affect the security of the system. It is recommended to set external scripts enabled database flag for Cloud SQL SQL Server instance to off.",
+    "Resource Type": "sqladmin.v1beta4.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
+
+#
+# PR-GCP-GDF-SQL-010
+#
+
+default storage_sql_flag_remote = null
+available_types = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
+issued_ip = ["0.0.0.0/0", "::/0"]
+
+gc_issue["storage_sql_flag_remote"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    lower(resource.properties.state) == "runnable"
+    lower(resource.properties.databaseVersion) == "sqlserver"
+    count([c| contains(lower(resource.properties.settings.databaseFlags[_].name), "remote access"); c:=1 ]) == 0
+}
+
+gc_issue["storage_sql_flag_remote"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    lower(resource.properties.state) == "runnable"
+    lower(resource.properties.databaseVersion) == "sqlserver"
+    count([c| contains(lower(resource.properties.settings.databaseFlags[j].name), "remote access"); contains(lower(resource.properties.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
+}
+
+storage_sql_flag_remote {
+    lower(input.resources[i].type) == available_types[_]
+    not gc_issue["storage_sql_flag_remote"]
+}
+
+storage_sql_flag_remote = false {
+    gc_issue["storage_sql_flag_remote"]
+}
+
+storage_sql_flag_remote_err = "Ensure GCP SQL server instance database flag remote access is set to off" {
+    gc_issue["storage_sql_flag_remote"]
+}
+
+storage_sql_flag_remote_metadata := {
+    "Policy Code": "PR-GCP-GDF-SQL-010",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP SQL server instance database flag remote access is set to off",
+    "Policy Description": "This policy identifies GCP SQL server instances for which database flag remote access is not set to off. The remote access option controls the execution of stored procedures from local or remote servers on which instances of SQL Server are running. 'Remote access' functionality can be abused to launch a Denial-of-Service (DoS) attack on remote servers by off-loading query processing to a target. It is recommended to set the remote access database flag for SQL Server instance to off.",
+    "Resource Type": "sqladmin.v1beta4.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
+
+
+#
 # PR-GCP-GDF-PSQL-008
 #
 
@@ -283,6 +640,90 @@ storage_psql_log_min_duration_statement_metadata := {
     "Language": "GCP deployment",
     "Policy Title": "Ensure GCP PostgreSQL instance database flag log_min_duration_statement is set to -1",
     "Policy Description": "This policy identifies PostgreSQL database instances in which database flag log_min_duration_statement is not set to -1. The log_min_duration_statement flag defines the minimum amount of execution time of a statement in milliseconds where the total duration of the statement is logged. Logging SQL statements may include sensitive information that should not be recorded in logs. So it is recommended to set  log_min_duration_statement flag value to -1 so that execution statements logging will be disabled.",
+    "Resource Type": "sqladmin.v1beta4.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
+
+#
+# PR-GCP-GDF-SQL-011
+#
+
+default storage_sql_user_connection = null
+available_types = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
+issued_ip = ["0.0.0.0/0", "::/0"]
+
+gc_issue["storage_sql_user_connection"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    lower(resource.properties.state) == "runnable"
+    lower(resource.properties.databaseVersion) == "sqlserver"
+    count([c| contains(lower(resource.properties.settings.databaseFlags[_].name), "user connections"); c:=1 ]) == 0
+}
+
+storage_sql_user_connection {
+    lower(input.resources[i].type) == available_types[_]
+    not gc_issue["storage_sql_user_connection"]
+}
+
+storage_sql_user_connection = false {
+    gc_issue["storage_sql_user_connection"]
+}
+
+storage_sql_user_connection_err = "Ensure GCP SQL server instance database flag user connections is set" {
+    gc_issue["storage_sql_user_connection"]
+}
+
+storage_sql_user_connection_metadata := {
+    "Policy Code": "PR-GCP-GDF-SQL-011",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP SQL server instance database flag user connections is set",
+    "Policy Description": "This policy identifies GCP SQL server instances where the database flag 'user connections' is not set. The user connections option specifies the maximum number of simultaneous user connections (value varies in range 10-32,767) that are allowed on an instance of SQL Server. The default is 0, which means that the maximum (32,767) user connections are allowed. It is recommended to set database flag user connections for SQL Server instance according to organization-defined value.",
+    "Resource Type": "sqladmin.v1beta4.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
+
+#
+# PR-GCP-GDF-SQL-012
+#
+
+default storage_sql_user_option = null
+available_types = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
+issued_ip = ["0.0.0.0/0", "::/0"]
+
+gc_issue["storage_sql_user_option"] {
+    resource := input.resources[i]
+    lower(resource.type) == available_types[_]
+    lower(resource.properties.state) == "runnable"
+    lower(resource.properties.databaseVersion) == "sqlserver"
+    count([c| contains(lower(resource.properties.settings.databaseFlags[_].name), "user options"); c:=1 ]) != 0
+}
+
+storage_sql_user_option {
+    lower(input.resources[i].type) == available_types[_]
+    not gc_issue["storage_sql_user_option"]
+}
+
+storage_sql_user_option = false {
+    gc_issue["storage_sql_user_option"]
+}
+
+storage_sql_user_option_err = "Ensure GCP SQL server instance database flag user options is not set" {
+    gc_issue["storage_sql_user_option"]
+}
+
+storage_sql_user_option_metadata := {
+    "Policy Code": "PR-GCP-GDF-SQL-012",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP SQL server instance database flag user options is not set",
+    "Policy Description": "This policy identifies GCP SQL server instances fo which database flag user options is set. The user options option specifies global defaults for all users. A list of default query processing options is established for the duration of a user's work session. A user can override these defaults by using the SET statement. It is recommended that, user options database flag for SQL Server instance should not be configured.",
     "Resource Type": "sqladmin.v1beta4.instance",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
@@ -818,7 +1259,6 @@ storage_psql_log_temp_files_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
 }
-
 
 
 #
