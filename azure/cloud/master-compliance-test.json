@@ -134,7 +134,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_229"
+                        "AZRSNP_228"
                     ],
                     "severity": "High",
                     "title": "Azure Key Vault keys should have an expiration date",
@@ -170,7 +170,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_227"
+                        "AZRSNP_228"
                     ],
                     "severity": "High",
                     "title": "Azure Key Vault secrets should have an expiration date",
