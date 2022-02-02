@@ -669,7 +669,7 @@ azure_issue["sql_server_retention_days"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(resource.properties.retentionDays) > 90;
+              to_number(r.properties.retentionDays) > 90;
               c := 1]) == 0
 }
 
@@ -679,7 +679,7 @@ azure_issue["sql_server_retention_days"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(resource.properties.retentionDays) == 0;
+              to_number(r.properties.retentionDays) == 0;
               c := 1]) == 0
 }
 
@@ -827,7 +827,7 @@ azure_issue["sql_server_disabled_alerts"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              count(resource.properties.disabledAlerts) > 0;
+              count(r.properties.disabledAlerts) > 0;
               c := 1]) > 0
 }
 
