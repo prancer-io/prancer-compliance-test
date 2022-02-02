@@ -1239,6 +1239,57 @@ firewall_inbound_all_metadata := {
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
 }
 
+
+#
+# PR-GCP-GDF-FW-018
+#
+
+default firewall_logging = null
+
+gc_issue["firewall_logging"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.firewall"
+    not resource.logConfig
+}
+
+gc_issue["firewall_logging"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.firewall"
+    resource.logConfig.enable == false
+}
+
+gc_issue["firewall_logging"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.firewall"
+    lower(resource.logConfig.enable) == "false"
+}
+
+firewall_logging {
+    lower(input.resources[i].type) == "compute.v1.firewall"
+    not gc_issue["firewall_logging"]
+}
+
+firewall_logging = false {
+    gc_issue["firewall_logging"]
+}
+
+firewall_logging_err = "GCP Firewall with Inbound rule overly permissive to All Traffic" {
+    gc_issue["firewall_logging"]
+}
+
+firewall_logging_metadata := {
+    "Policy Code": "PR-GCP-GDF-FW-018",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP Firewall rule logging is enabled",
+    "Policy Description": "This policy identifies GCP firewall rules that are not configured with firewall rule logging.  Firewall Rules Logging lets you audit, verify, and analyze the effects of your firewall rules. When you enable logging for a firewall rule, Google Cloud creates an entry called a connection record each time the rule allows or denies traffic. \n\nReference: https://cloud.google.com/vpc/docs/firewall-rules-logging",
+    "Resource Type": "compute.v1.firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
+}
+
+
 #
 # PR-GCP-GDF-DISK-001
 #
@@ -1576,6 +1627,138 @@ vm_info_metadata := {
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
 }
 
+
+#
+# PR-GCP-GDF-INST-008
+#
+
+default compute_disk_csek = null
+
+gc_issue["compute_disk_csek"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    disks := resource.properties.disks[_]
+    not disks.sourceSnapshotEncryptionKey.sha256
+}
+
+gc_issue["compute_disk_csek"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    disks := resource.properties.disks[_]
+    count(disks.sourceSnapshotEncryptionKey.sha256) == 0
+}
+
+gc_issue["compute_disk_csek"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    disks := resource.properties.disks[_]
+    disks.sourceSnapshotEncryptionKey.sha256 == null
+}
+
+compute_disk_csek {
+    lower(input.resources[i].type) == "compute.v1.instance"
+    not gc_issue["compute_disk_csek"]
+}
+
+compute_disk_csek = false {
+    gc_issue["compute_disk_csek"]
+}
+
+compute_disk_csek_err = "Ensure GCP GCE Disk snapshot is encrypted with CSEK" {
+    gc_issue["compute_disk_csek"]
+}
+
+compute_disk_csek_metadata := {
+    "Policy Code": "PR-GCP-GDF-INST-008",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP GCE Disk snapshot is encrypted with CSEK",
+    "Policy Description": "This policy identifies GCP GCE Disk snapshots that are not encrypted with CSEK. It is recommended that to avoid data leakage provide your own encryption keys, Compute Engine uses your key to protect the Google-generated keys used to encrypt and decrypt your data. Only users who can provide the correct key can use resources protected by a customer-supplied encryption key",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+
+
+#
+# PR-GCP-GDF-INST-009
+#
+
+default compute_ssl_profile_restricted = null
+
+gc_issue["compute_ssl_profile_restricted"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.sslPolicies"
+    lower(resource.properties.profile) != "custom"
+    lower(resource.properties.profile) != "restricted"
+}
+
+compute_ssl_profile_restricted {
+    lower(input.resources[i].type) == "compute.v1.instance"
+    not gc_issue["compute_ssl_profile_restricted"]
+}
+
+compute_ssl_profile_restricted = false {
+    gc_issue["compute_ssl_profile_restricted"]
+}
+
+compute_ssl_profile_restricted_err = "Ensure GCP HTTPS Load balancer SSL Policy is using restrictive profile" {
+    gc_issue["compute_ssl_profile_restricted"]
+}
+
+compute_ssl_profile_restricted_metadata := {
+    "Policy Code": "PR-GCP-GDF-INST-009",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP HTTPS Load balancer SSL Policy is using restrictive profile",
+    "Policy Description": "This policy identifies HTTPS Load balancers which are not using restrictive profile in it's SSL Policy, which controls sets of features used in negotiating SSL with clients. As a best security practice, use RESTRICTED as SSL policy profile as it meets stricter compliance requirements and does not include any out-of-date SSL features.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+
+
+#
+# PR-GCP-GDF-INST-010
+#
+
+deprecated_min_tls_version = ["tls_1_0", "tls_1_1"]
+
+default compute_ssl_min_tls = null
+
+gc_issue["compute_ssl_min_tls"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.sslPolicies"
+    lower(resource.properties.minTlsVersion) == deprecated_min_tls_version[_]
+}
+
+compute_ssl_min_tls {
+    lower(input.resources[i].type) == "compute.v1.instance"
+    not gc_issue["compute_ssl_min_tls"]
+}
+
+compute_ssl_min_tls = false {
+    gc_issue["compute_ssl_min_tls"]
+}
+
+compute_ssl_min_tls_err = "Ensure GCP HTTPS Load balancer is configured with SSL policy not having TLS version 1.1 or lower" {
+    gc_issue["compute_ssl_min_tls"]
+}
+
+compute_ssl_min_tls_metadata := {
+    "Policy Code": "PR-GCP-GDF-INST-010",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP HTTPS Load balancer is configured with SSL policy not having TLS version 1.1 or lower",
+    "Policy Description": "This policy identifies HTTPS Load balancers is configured with SSL policy having TLS version 1.1 or lower. As a best security practice, use TLS 1.2 as the minimum TLS version in your load balancers SSL security policies.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+
 # https://cloud.google.com/compute/docs/reference/rest/v1/networks
 
 #
@@ -1839,4 +2022,266 @@ lbs_quic_metadata := {
     "Resource Type": "compute.v1.targethttpsproxy",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies"
+}
+
+
+
+#
+# PR-GCP-GDF-CF-001
+#
+
+default function_security = null
+
+gc_issue["function_security"] {
+    resource := input.resources[i]
+    lower(resource.type) == "cloudfunctions.v1.function"
+    lower(resource.properties.status) == "active"
+    lower(resource.properties.httpsTrigger.securityLevel) != "secure_always"
+}
+
+function_security {
+    lower(input.resources[i].type) == "cloudfunctions.v1.function"
+    not gc_issue["function_security"]
+}
+
+function_security = false {
+    gc_issue["function_security"]
+}
+
+function_security_err = "Ensure GCP Cloud Function HTTP trigger is secured" {
+    gc_issue["function_security"]
+}
+
+function_security_metadata := {
+    "Policy Code": "PR-GCP-GDF-CF-001",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP Cloud Function HTTP trigger is secured",
+    "Policy Description": "This policy identifies GCP Cloud Functions for which the HTTP trigger is not secured. When you configure HTTP functions to be triggered only with HTTPS, user requests will be redirected to use the HTTPS protocol, which is more secure. It is recommended to set the 'Require HTTPS' for configuring HTTP triggers while deploying your function.",
+    "Resource Type": "cloudfunctions.v1.function",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://github.com/GoogleCloudPlatform/deploymentmanager-samples/tree/master/google/resource-snippets/cloudfunctions-v1"
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+
+
+#
+# PR-GCP-GDF-INST-011
+#
+
+default compute_external_ip = null
+
+gc_issue["compute_external_ip"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    lower(resource.properties.status) == "running"
+    networkInterface := resource.properties.networkInterfaces[_]
+    networkInterface.accessConfigs
+    not startswith(lower(networkInterface.accessConfigs.name), "gke-")
+    not contains(lower(networkInterface.accessConfigs.name), "default-pool")
+}
+
+compute_external_ip {
+    lower(input.resources[i].type) == "compute.v1.instance"
+    not gc_issue["compute_external_ip"]
+}
+
+compute_external_ip = false {
+    gc_issue["compute_external_ip"]
+}
+
+compute_external_ip_err = "Ensure GCP VM instance not attached to the external IP address" {
+    gc_issue["compute_external_ip"]
+}
+
+compute_external_ip_metadata := {
+    "Policy Code": "PR-GCP-GDF-INST-011",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP VM instance not attached to the external IP address",
+    "Policy Description": "This policy identifies the VM instances with the external IP address associated. To reduce your attack surface, VM instances should not have public/external IP addresses. Instead, instances should be configured behind load balancers, to minimize the instance's exposure to the internet.\n\nNOTE: This policy will not report instances created by GKE because some of them have external IP addresses and cannot be changed by editing the instance settings. Instances created by GKE should be excluded. These instances have names that start with 'gke-' and contains 'default-pool'.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+
+
+#
+# PR-GCP-GDF-CF-002
+#
+
+default function_ingress_allow_all = null
+
+gc_issue["function_ingress_allow_all"] {
+    resource := input.resources[i]
+    lower(resource.type) == "cloudfunctions.v1.function"
+    lower(resource.properties.status) == "active"
+    lower(resource.properties.ingressSettings) == "allow_all"
+}
+
+function_ingress_allow_all {
+    lower(input.resources[i].type) == "cloudfunctions.v1.function"
+    not gc_issue["function_ingress_allow_all"]
+}
+
+function_ingress_allow_all = false {
+    gc_issue["function_ingress_allow_all"]
+}
+
+function_ingress_allow_all_err = "Ensure GCP Cloud Function is not configured with overly permissive Ingress setting" {
+    gc_issue["function_ingress_allow_all"]
+}
+
+function_ingress_allow_all_metadata := {
+    "Policy Code": "PR-GCP-GDF-CF-002",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP Cloud Function is not configured with overly permissive Ingress setting",
+    "Policy Description": "This policy identifies GCP Cloud Functions that are configured with overly permissive Ingress setting. With overly permissive Ingress setting, all inbound requests to the function are allowed, from both the public and resources within the same project. It is recommended to restrict the traffic from the public and other resources, to get better network-based access control and allow traffic from VPC networks in the same project or traffic through the Cloud Load Balancer.",
+    "Resource Type": "cloudfunctions.v1.function",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://github.com/GoogleCloudPlatform/deploymentmanager-samples/tree/master/google/resource-snippets/cloudfunctions-v1"
+}
+
+
+#
+# PR-GCP-GDF-INST-012
+#
+
+default compute_shielded_vm = null
+
+gc_issue["compute_shielded_vm"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    lower(resource.properties.status) == "running"
+    not startswith(lower(networkInterface.accessConfigs.name), "gke-")
+    resource.properties.shieldedInstanceConfig
+    not resource.properties.shieldedInstanceConfig.enableVtpm
+}
+
+gc_issue["compute_shielded_vm"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    lower(resource.properties.status) == "running"
+    not startswith(lower(networkInterface.accessConfigs.name), "gke-")
+    resource.properties.shieldedInstanceConfig
+    not resource.properties.shieldedInstanceConfig.enableIntegrityMonitoring
+}
+
+compute_shielded_vm {
+    lower(input.resources[i].type) == "compute.v1.instance"
+    not gc_issue["compute_shielded_vm"]
+}
+
+compute_shielded_vm = false {
+    gc_issue["compute_shielded_vm"]
+}
+
+compute_shielded_vm_err = "Ensure GCP VM instance with Shielded VM features enabled" {
+    gc_issue["compute_shielded_vm"]
+}
+
+compute_shielded_vm_metadata := {
+    "Policy Code": "PR-GCP-GDF-INST-012",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP VM instance with Shielded VM features enabled",
+    "Policy Description": "This policy identifies VM instances which have Shielded VM features disabled. Shielded VMs are virtual machines (VMs) on Google Cloud Platform hardened by a set of security controls that help defend against rootkits and bootkits. Shielded VM's verifiable integrity is achieved through the use of Secure Boot, virtual trusted platform module (vTPM)-enabled Measured Boot, and integrity monitoring. Shielded VM instances run firmware which is signed and verified using Google's Certificate Authority, ensuring that the instance's firmware is unmodified and establishing the root of trust for Secure Boot.\n\nNOTE: You can only enable Shielded VM options on instances that have Shielded VM support. This policy reports VM instances that have Shielded VM support and are disabled with the Shielded VM features.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+
+
+#
+# PR-GCP-GDF-CF-003
+#
+
+default function_vpc_connector = null
+
+gc_issue["function_vpc_connector"] {
+    resource := input.resources[i]
+    lower(resource.type) == "cloudfunctions.v1.function"
+    lower(resource.properties.status) == "active"
+    not resource.properties.vpcConnector
+}
+
+gc_issue["function_vpc_connector"] {
+    resource := input.resources[i]
+    lower(resource.type) == "cloudfunctions.v1.function"
+    lower(resource.properties.status) == "active"
+    count(resource.properties.vpcConnector) == 0
+}
+
+function_vpc_connector {
+    lower(input.resources[i].type) == "cloudfunctions.v1.function"
+    not gc_issue["function_vpc_connector"]
+}
+
+function_vpc_connector = false {
+    gc_issue["function_vpc_connector"]
+}
+
+function_vpc_connector_err = "Ensure GCP Cloud Function is enabled with VPC connector" {
+    gc_issue["function_vpc_connector"]
+}
+
+function_vpc_connector_metadata := {
+    "Policy Code": "PR-GCP-GDF-CF-003",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP Cloud Function is enabled with VPC connector",
+    "Policy Description": "This policy identifies GCP Cloud Functions that are not configured with a VPC connector. VPC connector helps function to connect to a resource inside a VPC in the same project. Setting up the VPC connector allows you to set up a secure perimeter to guard against data exfiltration and prevent functions from accidentally sending any data to unwanted destinations. It is recommended to configure the GCP Cloud Function with a VPC connector.\n\nNote: For the Cloud Functions function to access the public traffic with Serverless VPC connector, you have to introduce Cloud NAT.\nLink: https://cloud.google.com/functions/docs/networking/network-settings#route-egress-to-vpc",
+    "Resource Type": "cloudfunctions.v1.function",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://github.com/GoogleCloudPlatform/deploymentmanager-samples/tree/master/google/resource-snippets/cloudfunctions-v1"
+}
+
+#
+# PR-GCP-GDF-INST-013
+#
+
+default compute_default_service = null
+
+gc_issue["compute_default_service"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    lower(resource.properties.status) == "running"
+    not startswith(lower(networkInterface.accessConfigs.name), "gke-")
+    serviceAccount := resource.properties.serviceAccounts[_]
+    not contains(lower(serviceAccount.email), "-compute@developer.gserviceaccount.com")
+    scope := serviceAccount.scopes[_]
+    lower(scope) == "https://www.googleapis.com/auth/cloud-platform"
+}
+
+compute_default_service {
+    lower(input.resources[i].type) == "compute.v1.instance"
+    not gc_issue["compute_default_service"]
+}
+
+compute_default_service = false {
+    gc_issue["compute_default_service"]
+}
+
+compute_default_service_err = "Ensure GCP VM instance not using a default service account with full access to all Cloud APIs" {
+    gc_issue["compute_default_service"]
+}
+
+compute_default_service_metadata := {
+    "Policy Code": "PR-GCP-GDF-INST-013",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP VM instance not using a default service account with full access to all Cloud APIs",
+    "Policy Description": "This policy identifies the GCP VM instances which are using a default service account with full access to all Cloud APIs. To compliant with the principle of least privileges and prevent potential privilege escalation it is recommended that instances are not assigned to default service account 'Compute Engine default service account' with scope 'Allow full access to all Cloud APIs'.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
 }

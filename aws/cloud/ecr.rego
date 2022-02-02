@@ -135,3 +135,42 @@ ecr_public_access_disable_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-imageScanningConfiguration.html#cfn-ecr-repository-imageScanningConfiguration-scanOnPush"
 }
+
+
+#
+# PR-AWS-CLD-ECR-005
+#
+
+default ecr_vulnerability = true
+
+ecr_vulnerability = false {
+    # lower(resource.Type) == "aws::ecr::repository"
+    lower(input.scanningConfiguration.scanType) != "enhanced"
+}
+
+ecr_vulnerability = false {
+    # lower(resource.Type) == "aws::ecr::repository"
+    rule = input.scanningConfiguration.rules[_]
+    lower(rule.scanFrequency) != "continuous_scan"
+}
+
+ecr_vulnerability = false {
+    # lower(resource.Type) == "aws::ecr::repository"
+    count(input.scanningConfiguration.rules) == 0
+}
+
+ecr_vulnerability_err = "Ensure ECR image scan on push is enabled" {
+    not ecr_vulnerability
+}
+
+ecr_vulnerability_metadata := {
+    "Policy Code": "PR-AWS-TRF-ECR-005",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "Aws Cloud",
+    "Policy Title": "Enable Enhanced scan type for AWS ECR registry to detect vulnerability",
+    "Policy Description": "Enable Enhanced scan type for AWS ECR registry to detect vulnerability",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_registry_scanning_configuration"
+}

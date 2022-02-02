@@ -295,3 +295,61 @@ ecr_public_access_disable_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy"
 }
+
+
+#
+# PR-AWS-TRF-ECR-005
+#
+
+default ecr_vulnerability = null
+
+aws_issue["ecr_vulnerability"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_registry_scanning_configuration"
+    not resource.properties.scan_type
+}
+
+aws_issue["ecr_vulnerability"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_registry_scanning_configuration"
+    lower(resource.properties.scan_type) != "enhanced"
+}
+
+aws_issue["ecr_vulnerability"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_registry_scanning_configuration"
+    count(resource.rule) == 0
+}
+
+
+aws_issue["ecr_vulnerability"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_registry_scanning_configuration"
+    rule := resource.rule[_]
+    lower(rule.scan_frequency) != "continuous_scan"
+}
+
+ecr_vulnerability {
+    lower(input.resources[i].type) == "aws_ecr_registry_scanning_configuration"
+    not aws_issue["ecr_vulnerability"]
+}
+
+ecr_vulnerability = false {
+    aws_issue["ecr_vulnerability"]
+}
+
+ecr_vulnerability_err = "Enable Enhanced scan type for AWS ECR registry to detect vulnerability" {
+    aws_issue["ecr_vulnerability"]
+}
+
+ecr_vulnerability_metadata := {
+    "Policy Code": "PR-AWS-TRF-ECR-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Enable Enhanced scan type for AWS ECR registry to detect vulnerability",
+    "Policy Description": "Enable Enhanced scan type for AWS ECR registry to detect vulnerability",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_registry_scanning_configuration"
+}

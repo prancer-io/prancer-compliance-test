@@ -374,3 +374,260 @@ storage_public_logs_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
 }
+
+
+#
+# PR-GCP-GDF-BKT-006
+#
+
+default storage_uniform_bucket_access = null
+
+gc_attribute_absence["storage_uniform_bucket_access"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    not resource.properties.iamConfiguration
+}
+
+gc_attribute_absence["storage_uniform_bucket_access"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    not resource.properties.iamConfiguration.uniformBucketLevelAccess.enabled
+}
+
+gc_issue["storage_uniform_bucket_access"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    resource.properties.iamConfiguration.uniformBucketLevelAccess.enabled == false   
+}
+
+storage_uniform_bucket_access {
+    lower(input.resources[i].type) == "storage.v1.bucket"
+    not gc_issue["storage_uniform_bucket_access"]
+    not gc_attribute_absence["storage_uniform_bucket_access"]
+}
+
+storage_uniform_bucket_access = false {
+    gc_issue["storage_uniform_bucket_access"]
+}
+
+storage_uniform_bucket_access = false {
+    gc_attribute_absence["storage_uniform_bucket_access"]
+}
+
+storage_uniform_bucket_access_err = "GCP cloud storage bucket with uniform bucket-level access disabled" {
+    gc_issue["storage_uniform_bucket_access"]
+} else = "GCP cloud storage bucket `iamConfiguration.uniformBucketLevelAccess.enabled` property is missing" {
+    gc_attribute_absence["storage_uniform_bucket_access"]
+}
+
+storage_uniform_bucket_access_metadata := {
+    "Policy Code": "PR-GCP-GDF-BKT-006",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure cloud storage bucket with uniform bucket-level access enabled",
+    "Policy Description": "Checks to ensure that Stackdriver logs on Storage Buckets are not public. Giving public access to Stackdriver logs will enable anyone with a web association to retrieve sensitive information that is critical to business. Stackdriver Logging enables to store, search, investigate, monitor and alert on log information/events from Google Cloud Platform. The permission needs to be set only for authorized users.",
+    "Resource Type": "storage.v1.bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
+
+#
+# PR-GCP-GDF-BKT-007
+#
+
+default storage_event_based_hold = null
+
+gc_attribute_absence["storage_event_based_hold"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    not resource.properties.defaultEventBasedHold
+}
+
+gc_issue["storage_event_based_hold"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    resource.properties.defaultEventBasedHold == false   
+}
+
+storage_event_based_hold {
+    lower(input.resources[i].type) == "storage.v1.bucket"
+    not gc_issue["storage_event_based_hold"]
+    not gc_attribute_absence["storage_event_based_hold"]
+}
+
+storage_event_based_hold = false {
+    gc_issue["storage_event_based_hold"]
+}
+
+storage_event_based_hold = false {
+    gc_attribute_absence["storage_event_based_hold"]
+}
+
+storage_event_based_hold_err = "GCP cloud storage bucket is not configured with default Event-Based hold" {
+    gc_issue["storage_event_based_hold"]
+} else = "GCP cloud storage bucket `defaultEventBasedHold` property is missing" {
+    gc_attribute_absence["storage_event_based_hold"]
+}
+
+storage_event_based_hold_metadata := {
+    "Policy Code": "PR-GCP-GDF-BKT-007",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP storage bucket is configured with default Event-Based hold",
+    "Policy Description": "This policy identifies GCP storage buckets that are not configured with default Event-Based Hold. An event-based hold resets the object's time in the bucket for the purposes of the retention period. This behavior is useful when you want an object to persist in your bucket for a certain length of time after a certain event occurs. It is recommended to enable this feature to protect individual objects from deletion.",
+    "Resource Type": "storage.v1.bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
+
+#
+# PR-GCP-GDF-BKT-008
+#
+
+default storage_logging_itself = null
+
+gc_attribute_absence["storage_logging_itself"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    not resource.properties.logging.logBucket
+}
+
+gc_issue["storage_logging_itself"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    resource.properties.logging.logBucket == resource.name
+}
+
+storage_logging_itself {
+    lower(input.resources[i].type) == "storage.v1.bucket"
+    not gc_issue["storage_logging_itself"]
+    not gc_attribute_absence["storage_logging_itself"]
+}
+
+storage_logging_itself = false {
+    gc_issue["storage_logging_itself"]
+}
+
+storage_logging_itself = false {
+    gc_attribute_absence["storage_logging_itself"]
+}
+
+storage_logging_itself_err = "GCP cloud storage bucket is logging to itself" {
+    gc_issue["storage_logging_itself"]
+} else = "GCP cloud storage bucket `logging.logBucket` property is missing" {
+    gc_attribute_absence["storage_logging_itself"]
+}
+
+storage_logging_itself_metadata := {
+    "Policy Code": "PR-GCP-GDF-BKT-008",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP storage bucket is not logging to itself",
+    "Policy Description": "This policy identifies GCP storage buckets that are sending logs to themselves. When storage buckets use the same bucket to send their access logs, a loop of logs will be created, which is not a security best practice. It is recommended to spin up new and different log buckets for storage bucket logging.",
+    "Resource Type": "storage.v1.bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
+
+
+#
+# PR-GCP-GDF-BKT-009
+#
+
+default storage_bucket_lock = null
+
+gc_issue["storage_bucket_lock"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    not resource.properties.retentionPolicy.isLocked
+}
+
+gc_issue["storage_bucket_lock"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    lower(resource.properties.retentionPolicy.isLocked) == "false"
+}
+
+storage_bucket_lock {
+    lower(input.resources[i].type) == "storage.v1.bucket"
+    not gc_issue["storage_bucket_lock"]
+}
+
+storage_bucket_lock = false {
+    gc_issue["storage_bucket_lock"]
+}
+
+storage_bucket_lock_err = "Ensure GCP Log bucket retention policy is configured using bucket lock" {
+    gc_issue["storage_bucket_lock"]
+}
+
+storage_bucket_lock_metadata := {
+    "Policy Code": "PR-GCP-GDF-BKT-009",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP Log bucket retention policy is configured using bucket lock",
+    "Policy Description": "This policy identifies GCP log buckets for which retention policy is not configured using bucket lock. It is recommended to configure the data retention policy for cloud storage buckets using bucket lock to permanently prevent the policy from being reduced or removed in case the system is compromised by an attacker or a malicious insider.\n\nNote: Locking a bucket is an irreversible action. Once you lock a bucket, you cannot remove the retention policy from the bucket or decrease the retention period for the policy.",
+    "Resource Type": "storage.v1.bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
+
+
+#
+# PR-GCP-GDF-BKT-010
+#
+
+default storage_bucket_retention_enable = null
+
+gc_issue["storage_bucket_retention_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    not resource.properties.retentionPolicy
+}
+
+gc_issue["storage_bucket_retention_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    resource.properties.retentionPolicy == null
+}
+
+gc_issue["storage_bucket_retention_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    count(resource.properties.retentionPolicy) == 0
+}
+
+
+storage_bucket_retention_enable {
+    lower(input.resources[i].type) == "storage.v1.bucket"
+    not gc_issue["storage_bucket_retention_enable"]
+}
+
+storage_bucket_retention_enable = false {
+    gc_issue["storage_bucket_retention_enable"]
+}
+
+storage_bucket_retention_enable_err = "Ensure GCP Log bucket retention policy is enabled" {
+    gc_issue["storage_bucket_retention_enable"]
+}
+
+storage_bucket_retention_enable_metadata := {
+    "Policy Code": "PR-GCP-GDF-BKT-010",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP Log bucket retention policy is enabled",
+    "Policy Description": "This policy identifies GCP log buckets for which retention policy is not enabled. Enabling retention policies on log buckets will protect logs stored in cloud storage buckets from being overwritten or accidentally deleted. It is recommended to configure a data retention policy for these cloud storage buckets to store the activity logs for forensics and security investigations.",
+    "Resource Type": "storage.v1.bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
