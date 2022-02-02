@@ -1088,6 +1088,38 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-INS-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-INS-001",
+                            "eval": "data.rule.ins_package",
+                            "message": "data.rule.ins_package_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_web_acl' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_INS_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Enable AWS Inspector to detect Vulnerability",
+                    "description": "Enable AWS Inspector to detect Vulnerability",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "inspector"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_inspector_assessment_template"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-VPC-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -5120,6 +5152,41 @@
                     ],
                     "resourceTypes": [
                         "aws_ecr_repository_policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ECR-005",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ECR-005",
+                            "eval": "data.rule.ecr_vulnerability",
+                            "message": "data.rule.ecr_vulnerability_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ECR_004.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Enable Enhanced scan type for AWS ECR registry to detect vulnerability",
+                    "description": "Enable Enhanced scan type for AWS ECR registry to detect vulnerability",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "PCI-DSS",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_ecr_registry_scanning_configuration"
                     ]
                 },
                 {
