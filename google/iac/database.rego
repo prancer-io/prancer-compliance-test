@@ -7,7 +7,7 @@ package rule
 default storage_encrypt = null
 available_types = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
-vulnerable_iam_members = ["allUsers", "allAuthenticatedUsers"]
+vulnerable_iam_members = ["allusers", "allauthenticatedusers"]
 vulnerable_roles = ["roles/editor", "roles/owner"]
 
 gc_issue["storage_encrypt"] {

@@ -1,9 +1,15 @@
 package rule
 
+concat_string(value1, value2) = output {
+    out := array.concat([value1], [value2])
+    x := concat("", out)
+    output := x
+}
+
 # https://cloud.google.com/storage/docs/json_api/v1/buckets
 
 #
-# PR-GCP-0063-TRF
+# PR-GCP-TRF-BKT-001
 #
 
 default storage_encrypt = null
@@ -50,7 +56,7 @@ storage_encrypt_miss_err = "GCP Storage bucket attribute encryption missing in t
 }
 
 storage_encrypt_metadata := {
-    "Policy Code": "PR-GCP-0063-TRF",
+    "Policy Code": "PR-GCP-TRF-BKT-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -62,7 +68,7 @@ storage_encrypt_metadata := {
 }
 
 #
-# PR-GCP-0066-TRF
+# PR-GCP-TRF-BKT-002
 #
 
 default storage_versioning = null
@@ -109,7 +115,7 @@ storage_versioning_miss_err = "GCP Storage attribute versioning missing in the r
 }
 
 storage_versioning_metadata := {
-    "Policy Code": "PR-GCP-0066-TRF",
+    "Policy Code": "PR-GCP-TRF-BKT-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -121,7 +127,7 @@ storage_versioning_metadata := {
 }
 
 #
-# PR-GCP-0089-TRF
+# PR-GCP-TRF-BKT-004
 #
 
 default storage_logging = null
@@ -158,7 +164,7 @@ storage_logging = false {
 }
 
 storage_logging_metadata := {
-    "Policy Code": "PR-GCP-0089-TRF",
+    "Policy Code": "PR-GCP-TRF-BKT-004",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -170,7 +176,7 @@ storage_logging_metadata := {
 }
 
 #
-# PR-GCP-0090-TRF
+# PR-GCP-TRF-BKT-005
 #
 
 default storage_public_logs = null
@@ -205,12 +211,212 @@ storage_public_logs_err = "Storage Buckets with publicly accessible Stackdriver 
 }
 
 storage_public_logs_metadata := {
-    "Policy Code": "PR-GCP-0090-TRF",
+    "Policy Code": "PR-GCP-TRF-BKT-005",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
     "Policy Title": "Storage Buckets with publicly accessible Stackdriver logs",
     "Policy Description": "Checks to ensure that Stackdriver logs on Storage Buckets are not public. Giving public access to Stackdriver logs will enable anyone with a web association to retrieve sensitive information that is critical to business. Stackdriver Logging enables to store, search, investigate, monitor and alert on log information/events from Google Cloud Platform. The permission needs to be set only for authorized users.",
+    "Resource Type": "google_storage_bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
+
+#
+# PR-GCP-TRF-BKT-006
+#
+
+default storage_uniform_bucket_access = null
+
+gc_attribute_absence["storage_uniform_bucket_access"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_storage_bucket"
+    not resource.properties.uniform_bucket_level_access
+}
+
+gc_issue["storage_uniform_bucket_access"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_storage_bucket"
+    resource.properties.uniform_bucket_level_access == false   
+}
+
+storage_uniform_bucket_access {
+    lower(input.resources[i].type) == "google_storage_bucket"
+    not gc_issue["storage_uniform_bucket_access"]
+    not gc_attribute_absence["storage_uniform_bucket_access"]
+}
+
+storage_uniform_bucket_access = false {
+    gc_issue["storage_uniform_bucket_access"]
+}
+
+storage_uniform_bucket_access = false {
+    gc_attribute_absence["storage_uniform_bucket_access"]
+}
+
+storage_uniform_bucket_access_err = "GCP cloud storage bucket with uniform bucket-level access disabled" {
+    gc_issue["storage_uniform_bucket_access"]
+} else = "GCP cloud storage bucket `uniform_bucket_level_access` property is missing" {
+    gc_attribute_absence["storage_uniform_bucket_access"]
+}
+
+storage_uniform_bucket_access_metadata := {
+    "Policy Code": "PR-GCP-TRF-BKT-006",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure cloud storage bucket with uniform bucket-level access enabled",
+    "Policy Description": "Checks to ensure that Stackdriver logs on Storage Buckets are not public. Giving public access to Stackdriver logs will enable anyone with a web association to retrieve sensitive information that is critical to business. Stackdriver Logging enables to store, search, investigate, monitor and alert on log information/events from Google Cloud Platform. The permission needs to be set only for authorized users.",
+    "Resource Type": "google_storage_bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
+
+#
+# PR-GCP-GDF-BKT-008
+#
+
+default storage_logging_itself = null
+
+gc_attribute_absence["storage_logging_itself"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_storage_bucket"
+    not resource.properties.logging.log_bucket
+}
+
+gc_issue["storage_logging_itself"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_storage_bucket"
+    contains(resource.properties.logging.log_bucket, concat_string("google_storage_bucket.", resource.name)
+}
+
+gc_issue["storage_logging_itself"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_storage_bucket"
+    resource.properties.logging.log_bucket == resource.name
+}
+
+storage_logging_itself {
+    lower(input.resources[i].type) == "google_storage_bucket"
+    not gc_issue["storage_logging_itself"]
+    not gc_attribute_absence["storage_logging_itself"]
+}
+
+storage_logging_itself = false {
+    gc_issue["storage_logging_itself"]
+}
+
+storage_logging_itself = false {
+    gc_attribute_absence["storage_logging_itself"]
+}
+
+storage_logging_itself_err = "GCP cloud storage bucket is logging to itself" {
+    gc_issue["storage_logging_itself"]
+} else = "GCP cloud storage bucket `logging.log_bucket` property is missing" {
+    gc_attribute_absence["storage_logging_itself"]
+}
+
+storage_logging_itself_metadata := {
+    "Policy Code": "PR-GCP-GDF-BKT-008",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure GCP storage bucket is not logging to itself",
+    "Policy Description": "This policy identifies GCP storage buckets that are sending logs to themselves. When storage buckets use the same bucket to send their access logs, a loop of logs will be created, which is not a security best practice. It is recommended to spin up new and different log buckets for storage bucket logging.",
+    "Resource Type": "google_storage_bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
+#
+# PR-GCP-GDF-BKT-009
+#
+
+default storage_bucket_lock = null
+
+gc_attribute_absence["storage_bucket_lock"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_storage_bucket"
+    not resource.properties.retention_policy.is_locked
+}
+
+gc_issue["storage_bucket_lock"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_storage_bucket"
+    resource.properties.retention_policy.is_locked == false
+}
+
+storage_bucket_lock {
+    lower(input.resources[i].type) == "google_storage_bucket"
+    not gc_issue["storage_bucket_lock"]
+}
+
+storage_bucket_lock = false {
+    gc_issue["storage_bucket_lock"]
+}
+
+storage_bucket_lock = false {
+    gc_attribute_absence["storage_bucket_lock"]
+}
+
+storage_bucket_lock_err = "Ensure GCP Log bucket retention policy is configured using bucket lock" {
+    gc_issue["storage_bucket_lock"]
+} else = "GCP cloud storage bucket `retention_policy.is_locked` property is missing" {
+    gc_attribute_absence["storage_bucket_lock"]
+}
+
+storage_bucket_lock_metadata := {
+    "Policy Code": "PR-GCP-GDF-BKT-009",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure GCP Log bucket retention policy is configured using bucket lock",
+    "Policy Description": "This policy identifies GCP log buckets for which retention policy is not configured using bucket lock. It is recommended to configure the data retention policy for cloud storage buckets using bucket lock to permanently prevent the policy from being reduced or removed in case the system is compromised by an attacker or a malicious insider.\n\nNote: Locking a bucket is an irreversible action. Once you lock a bucket, you cannot remove the retention policy from the bucket or decrease the retention period for the policy.",
+    "Resource Type": "google_storage_bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
+#
+# PR-GCP-GDF-BKT-010
+#
+
+default storage_bucket_retention_enable = null
+
+gc_attribute_absence["storage_bucket_retention_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_storage_bucket"
+    not resource.properties.retention_policy
+}
+
+gc_attribute_absence["storage_bucket_retention_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_storage_bucket"
+    not resource.properties.retention_policy.retention_period
+}
+
+storage_bucket_retention_enable {
+    lower(input.resources[i].type) == "google_storage_bucket"
+    not gc_attribute_absence["storage_bucket_retention_enable"]
+}
+
+storage_bucket_retention_enable = false {
+    gc_attribute_absence["storage_bucket_retention_enable"]
+}
+
+storage_bucket_retention_enable_err = "Ensure GCP Log bucket retention policy is enabled" {
+    gc_attribute_absence["storage_bucket_retention_enable"]
+}
+
+storage_bucket_retention_enable_metadata := {
+    "Policy Code": "PR-GCP-GDF-BKT-010",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP Log bucket retention policy is enabled",
+    "Policy Description": "This policy identifies GCP log buckets for which retention policy is not enabled. Enabling retention policies on log buckets will protect logs stored in cloud storage buckets from being overwritten or accidentally deleted. It is recommended to configure a data retention policy for these cloud storage buckets to store the activity logs for forensics and security investigations.",
     "Resource Type": "google_storage_bucket",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
