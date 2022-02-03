@@ -573,8 +573,9 @@ azure_issue["sql_server_retention_days"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(r.properties.retentionDays) > 90;
-              c := 1]) == 0
+              to_number(r.properties.retentionDays) > 0;
+              to_number(r.properties.retentionDays) < 90;
+              c := 1]) > 0
 }
 
 azure_issue["sql_server_retention_days"] {
@@ -583,8 +584,8 @@ azure_issue["sql_server_retention_days"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(r.properties.retentionDays) == 0;
-              c := 1]) == 0
+              to_number(r.properties.retentionDays) < 0;
+              c := 1]) > 0
 }
 
 sql_server_retention_days {
@@ -603,7 +604,7 @@ sql_server_retention_days = false {
     azure_issue["sql_server_retention_days"]
 }
 
-sql_server_retention_days_err = "SQL Server security alert policy Retention Days are not greater than 90 days" {
+sql_server_retention_days_err = "SQL Server security alert policy Retention Days are not equal or greater than 90 days" {
     lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_retention_days"]
 } else = "Azure SQL security alert policy attribute 'retentionDays' is missing from the resource" {
@@ -616,7 +617,7 @@ sql_server_retention_days_metadata := {
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
-    "Policy Title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are greater than 90 days",
+    "Policy Title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are equal or greater than 90 days",
     "Policy Description": "Azure SQL Database Threat Detection is a security intelligence feature built into the Azure SQL Database service. Working around the clock to learn, profile and detect anomalous database activities, Azure SQL Database Threat Detection identifies potential threats to the database. Security officers or other designated administrators can get an immediate notification about suspicious database activities as they occur. Each notification provides details of the suspicious activity and recommends how to further investigate and mitigate the threat.",
     "Resource Type": "microsoft.sql/servers/securityalertpolicies",
     "Policy Help URL": "",

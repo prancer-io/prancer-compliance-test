@@ -1639,7 +1639,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_265"
+                        "AZRSNP_264"
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
@@ -1856,7 +1856,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_402"
+                        "AZRSNP_400"
                     ],
                     "severity": "Medium",
                     "title": "Ensure Security Alert is enabled on Azure SQL Server",
@@ -1891,77 +1891,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_403"
-                    ],
-                    "severity": "Medium",
-                    "title": "Advanced data security should be enabled on your SQL managed instance.",
-                    "description": "Advanced data security should be enabled on your SQL managed instance."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-031",
-                    "type": "rego",
-                    "rule": "file(sql_alert_policy.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-031",
-                            "eval": "data.rule.sql_server_alert",
-                            "message": "data.rule.sql_server_alert_err",
-                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AZR_CLD_SQL_031.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_402"
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Security Alert is enabled on Azure SQL Server",
-                    "description": "Advanced data security should be enabled on your SQL servers."
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-SQL-032",
-                    "type": "rego",
-                    "rule": "file(sql_alert_policy.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-SQL-032",
-                            "eval": "data.rule.sql_managed_instance_alert",
-                            "message": "data.rule.sql_managed_instance_alert_err",
-                            "remediationDescription": "Make sure you are following the ARM template format presented <a href='https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/threat-detection-configure' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AZR_CLD_SQL_032.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_403"
+                        "AZRSNP_401"
                     ],
                     "severity": "Medium",
                     "title": "Advanced data security should be enabled on your SQL managed instance.",
@@ -1996,7 +1926,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_402"
+                        "AZRSNP_400"
                     ],
                     "severity": "High",
                     "title": "Ensure that VA setting 'Also send email notifications to admins and subscription owners' is set for a SQL server",
@@ -2031,7 +1961,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_402"
+                        "AZRSNP_400"
                     ],
                     "severity": "High",
                     "title": "Azure SQL Security Alert Policy should be configured to send alerts to the account administrators and configured email addresses",
@@ -2046,7 +1976,7 @@
                             "id": "PR-AZR-CLD-SQL-038",
                             "eval": "data.rule.sql_server_retention_days",
                             "message": "data.rule.sql_server_retention_days_err",
-                            "remediationDescription": "To change the policy using the Azure Portal, follow these steps:<br><br>1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Navigate to SQL servers.<br>2. For each server instance:<br>a) Click Auditing.<br>b) Select Storage Details.<br>c) Set Retention (days) to greater than 90 days.<br>d) Click OK.<br>e) Click Save.",
+                            "remediationDescription": "To change the policy using the Azure Portal, follow these steps:<br><br>1. Log in to the Azure Portal at https://portal.azure.com.<br>2. Navigate to SQL servers.<br>2. For each server instance:<br>a) Click Auditing.<br>b) Select Storage Details.<br>c) Set Retention (days) to equal or greater than 90 days.<br>d) Click OK.<br>e) Click Save.",
                             "remediationFunction": "PR_AZR_CLD_SQL_038.py"
                         }
                     ],
@@ -2060,10 +1990,10 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_402"
+                        "AZRSNP_400"
                     ],
                     "severity": "High",
-                    "title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are greater than 90 days",
+                    "title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are equal or greater than 90 days",
                     "description": "Azure SQL Database Threat Detection is a security intelligence feature built into the Azure SQL Database service. Working around the clock to learn, profile and detect anomalous database activities, Azure SQL Database Threat Detection identifies potential threats to the database. Security officers or other designated administrators can get an immediate notification about suspicious database activities as they occur. Each notification provides details of the suspicious activity and recommends how to further investigate and mitigate the threat."
                 },
                 {
@@ -2095,7 +2025,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_402"
+                        "AZRSNP_400"
                     ],
                     "severity": "High",
                     "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
@@ -2153,7 +2083,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_404"
+                        "AZRSNP_400"
                     ],
                     "severity": "High",
                     "title": "Ensure that SQL Server Auditing is Enabled",
@@ -2168,7 +2098,7 @@
                             "id": "PR-AZR-CLD-SQL-044",
                             "eval": "data.rule.sql_server_audit_log_retention",
                             "message": "data.rule.sql_server_audit_log_retention_err",
-                            "remediationDescription": "az sql server audit-policy update -g -n --state Enabled --storage-account --retention-days 91<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/sql/server/audit-policy?view=azure-cli-latest#az_sql_server_audit_policy_show' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/sql/server/audit-policy?view=azure-cli-latest#az_sql_server_audit_policy_show</a>",
+                            "remediationDescription": "az sql server audit-policy update -g -n --state Enabled --storage-account --retention-days 90<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/sql/server/audit-policy?view=azure-cli-latest#az_sql_server_audit_policy_show' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/sql/server/audit-policy?view=azure-cli-latest#az_sql_server_audit_policy_show</a>",
                             "remediationFunction": "PR_AZR_CLD_SQL_044.py"
                         }
                     ],
@@ -2189,11 +2119,11 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_404"
+                        "AZRSNP_400"
                     ],
                     "severity": "High",
-                    "title": "Azure SQL server audit log retention should be greater than 90 days",
-                    "description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be greater than 90 days."
+                    "title": "Azure SQL server audit log retention should be 90 days or higher",
+                    "description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be 90 days or higher."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-046",
@@ -2225,7 +2155,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_407"
+                        "AZRSNP_400"
                     ],
                     "severity": "Medium",
                     "title": "Ensure SQL server's TDE protector is encrypted with Customer-managed key",
@@ -4897,7 +4827,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_299"
+                        "AZRSNP_501"
                     ],
                     "severity": "High",
                     "title": "activity log retention should be set to 365 days or greater",
@@ -4926,7 +4856,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_299"
+                        "AZRSNP_501"
                     ],
                     "severity": "High",
                     "title": "Activity log profile retention should be enabled",
@@ -4962,7 +4892,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_299"
+                        "AZRSNP_501"
                     ],
                     "severity": "High",
                     "title": "log profile should be configured to capture all activities",

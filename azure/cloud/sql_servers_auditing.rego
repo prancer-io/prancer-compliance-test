@@ -1,5 +1,9 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings
 
 #
@@ -167,8 +171,9 @@ azure_issue["sql_server_audit_log_retention"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/auditingsettings";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(r.properties.retentionDays) > 90;
-              c := 1]) == 0
+              to_number(r.properties.retentionDays) > 0;
+              to_number(r.properties.retentionDays) < 90;
+              c := 1]) > 0
 }
 
 azure_issue["sql_server_audit_log_retention"] {
@@ -177,8 +182,8 @@ azure_issue["sql_server_audit_log_retention"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/auditingsettings";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(r.properties.retentionDays) == 0;
-              c := 1]) == 0
+              to_number(r.properties.retentionDays) < 0;
+              c := 1]) > 0
 }
 
 # azure_issue["sql_server_audit_log_retention"] {
@@ -203,7 +208,7 @@ sql_server_audit_log_retention = false {
     azure_attribute_absence["sql_server_audit_log_retention"]
 }
 
-sql_server_audit_log_retention_err = "Azure SQL server audit log retention is less than 91 days" {
+sql_server_audit_log_retention_err = "Azure SQL server audit log retention is less than 90 days" {
     lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_audit_log_retention"]
 } else = "microsoft.sql/servers/auditingsettings resource property retentionDays missing in the resource" {
@@ -216,8 +221,8 @@ sql_server_audit_log_retention_metadata := {
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
-    "Policy Title": "Azure SQL server audit log retention should be greater than 90 days",
-    "Policy Description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be greater than 90 days.",
+    "Policy Title": "Azure SQL server audit log retention should be 90 days or higher",
+    "Policy Description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be 90 days or higher.",
     "Resource Type": "Microsoft.Sql/servers/auditingSettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings"

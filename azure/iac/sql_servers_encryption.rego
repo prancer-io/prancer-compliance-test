@@ -1,5 +1,9 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/encryptionprotector
 
 # PR-AZR-ARM-SQL-046
@@ -7,51 +11,59 @@ package rule
 default serverKeyType = null
 
 azure_attribute_absence["serverKeyType"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/encryptionprotector"; c := 1]) == 0
+}
+
+azure_attribute_absence["serverKeyType"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/encryptionprotector"
+    not resource.dependsOn
+}
+
+azure_attribute_absence["serverKeyType"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/encryptionprotector"
     not resource.properties.serverKeyType
-}
-
-source_path[{"serverKeyType":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/encryptionprotector"
-    not resource.properties.serverKeyType
-    metadata:= {
-        "resource_path": [["resources",i,"properties","serverKeyType"]]
-    }
 }
 
 azure_issue["serverKeyType"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/encryptionprotector"
-    lower(resource.properties.serverKeyType) != "azurekeyvault"
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/encryptionprotector";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              lower(r.properties.serverKeyType) == "azurekeyvault";
+              c := 1]) == 0
 }
 
-source_path[{"serverKeyType":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/encryptionprotector"
-    lower(resource.properties.serverKeyType) != "azurekeyvault"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","serverKeyType"]]
-    }
-}
+# azure_issue["serverKeyType"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.sql/servers/encryptionprotector"
+#     lower(resource.properties.serverKeyType) != "azurekeyvault"
+# }
 
 serverKeyType {
-    lower(input.resources[_].type) == "microsoft.sql/servers/encryptionprotector"
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     not azure_attribute_absence["serverKeyType"]
     not azure_issue["serverKeyType"]
 }
 
 serverKeyType = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["serverKeyType"]
 }
 
 serverKeyType = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["serverKeyType"]
 }
 
 serverKeyType_err = "SQL server's TDE protector is currently not encrypted with Customer-managed key." {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["serverKeyType"]
+} else = "Azure SQL Server encryption protector settings property 'serverKeyType' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["serverKeyType"]
 }
 
 serverKeyType_metadata := {
