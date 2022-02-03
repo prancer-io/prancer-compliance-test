@@ -6,7 +6,6 @@ package rule
 
 default bigquery_public_access = null
 available_types_bigquery_public_access = ["bigquery.v2.dataset", "gcp-types/bigquery-v2:datasets"]
-
 vulnerable_iam_members = ["allUsers", "allAuthenticatedUsers"]
 vulnerable_roles = ["roles/editor", "roles/owner"]
 
@@ -27,11 +26,11 @@ bigquery_public_access = false {
     gc_issue["bigquery_public_access"]
 }
 
-bigquery_public_access = "Ensure Big Query Datasets are not publically accessible" {
+bigquery_public_access_err = "Ensure Big Query Datasets are not publically accessible" {
     gc_issue["bigquery_public_access"]
 }
 
-bigquery_public_access := {
+bigquery_public_access_metadata := {
     "Policy Code": "PR-GCP-GDF-BQ-001",
     "Type": "IaC",
     "Product": "GCP",
@@ -42,7 +41,6 @@ bigquery_public_access := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets"
 }
-
 
 #
 # PR-GCP-GDF-PSQL-006
