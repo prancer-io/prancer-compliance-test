@@ -4295,7 +4295,7 @@
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(iam.rego)",
+                    "rule": "file(compute.rego)",
                     "evals": [
                         {
                             "id": "PR-GCP-GDF-CF-001",
@@ -4417,7 +4417,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "gcp-types/cloudkms-v1:projects.locations.keyRings.cryptoKeys"
+                        "gcp-types/cloudkms-v1:projects.locations.keyrings.cryptokeys"
                     ]
                 },
                 {
