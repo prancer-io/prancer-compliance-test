@@ -1574,126 +1574,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-GCP-GDF-INST-011",
-                    "masterSnapshotId": [
-                        "GDF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(compute.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-GDF-INST-011",
-                            "eval": "data.rule.compute_external_ip",
-                            "message": "data.rule.compute_external_ip_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
-                            "remediationFunction": "PR_GCP_GDF_INST_011.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure GCP VM instance not attached to the external IP address",
-                    "description": "This policy identifies the VM instances with the external IP address associated. To reduce your attack surface, VM instances should not have public/external IP addresses. Instead, instances should be configured behind load balancers, to minimize the instance's exposure to the internet.\n\nNOTE: This policy will not report instances created by GKE because some of them have external IP addresses and cannot be changed by editing the instance settings. Instances created by GKE should be excluded. These instances have names that start with 'gke-' and contains 'default-pool'.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CSA-CCM",
-                                "CIS",
-                                "HITRUST",
-                                "ISO 27001",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "deploymentmanager"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "compute.v1.instance"
-                    ]
-                },
-                {
-                    "masterTestId": "PR-GCP-GDF-INST-012",
-                    "masterSnapshotId": [
-                        "GDF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(compute.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-GDF-INST-012",
-                            "eval": "data.rule.compute_shielded_vm",
-                            "message": "data.rule.compute_shielded_vm_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
-                            "remediationFunction": "PR_GCP_GDF_INST_012.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure GCP VM instance with Shielded VM features enabled",
-                    "description": "This policy identifies VM instances which have Shielded VM features disabled. Shielded VMs are virtual machines (VMs) on Google Cloud Platform hardened by a set of security controls that help defend against rootkits and bootkits. Shielded VM's verifiable integrity is achieved through the use of Secure Boot, virtual trusted platform module (vTPM)-enabled Measured Boot, and integrity monitoring. Shielded VM instances run firmware which is signed and verified using Google's Certificate Authority, ensuring that the instance's firmware is unmodified and establishing the root of trust for Secure Boot.\n\nNOTE: You can only enable Shielded VM options on instances that have Shielded VM support. This policy reports VM instances that have Shielded VM support and are disabled with the Shielded VM features.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CSA-CCM",
-                                "CIS",
-                                "HITRUST",
-                                "ISO 27001",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "deploymentmanager"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "compute.v1.instance"
-                    ]
-                },
-                {
-                    "masterTestId": "PR-GCP-GDF-INST-013",
-                    "masterSnapshotId": [
-                        "GDF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(compute.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-GDF-INST-013",
-                            "eval": "data.rule.compute_default_service",
-                            "message": "data.rule.compute_default_service_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
-                            "remediationFunction": "PR_GCP_GDF_INST_013.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure GCP VM instance not using a default service account with full access to all Cloud APIs",
-                    "description": "This policy identifies the GCP VM instances which are using a default service account with full access to all Cloud APIs. To compliant with the principle of least privileges and prevent potential privilege escalation it is recommended that instances are not assigned to default service account 'Compute Engine default service account' with scope 'Allow full access to all Cloud APIs'.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CSA-CCM",
-                                "CIS",
-                                "HITRUST",
-                                "ISO 27001",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "deploymentmanager"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "compute.v1.instance"
-                    ]
-                },
-                {
                     "masterTestId": "PR-GCP-GDF-CLT-001",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"
@@ -3748,8 +3628,8 @@
                     "evals": [
                         {
                             "id": "PR-GCP-GDF-BQ-001",
-                            "eval": "data.rule.svc_account_key",
-                            "message": "data.rule.svc_account_key_err",
+                            "eval": "data.rule.bigquery_public_access",
+                            "message": "data.rule.bigquery_public_access_err",
                             "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_BQ_001.py"
                         }
@@ -3773,7 +3653,8 @@
                         }
                     ],
                     "resourceTypes": [
-                        "bigquery.v2.dataset"
+                        "bigquery.v2.dataset",
+                        "gcp-types/bigquery-v2:datasets"
                     ]
                 },
                 {
@@ -4437,7 +4318,8 @@
                         }
                     ],
                     "resourceTypes": [
-                        "cloudfunctions.v1.function"
+                        "cloudfunctions.v1.function",
+                        "gcp-types/cloudfunctions-v1:projects.locations.functions"
                     ]
                 },
                 {
@@ -4446,7 +4328,7 @@
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(iam.rego)",
+                    "rule": "file(compute.rego)",
                     "evals": [
                         {
                             "id": "PR-GCP-GDF-CF-002",
@@ -4469,7 +4351,8 @@
                         }
                     ],
                     "resourceTypes": [
-                        "cloudfunctions.v1.function"
+                        "cloudfunctions.v1.function",
+                        "gcp-types/cloudfunctions-v1:projects.locations.functions"
                     ]
                 },
                 {
@@ -4478,7 +4361,7 @@
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(iam.rego)",
+                    "rule": "file(compute.rego)",
                     "evals": [
                         {
                             "id": "PR-GCP-GDF-CF-003",
@@ -4501,7 +4384,8 @@
                         }
                     ],
                     "resourceTypes": [
-                        "cloudfunctions.v1.function"
+                        "cloudfunctions.v1.function",
+                        "gcp-types/cloudfunctions-v1:projects.locations.functions"
                     ]
                 },
                 {
@@ -4533,7 +4417,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "kms.v1.projects.locations.keyRings.cryptoKeys"
+                        "gcp-types/cloudkms-v1:projects.locations.keyRings.cryptoKeys"
                     ]
                 },
                 {
@@ -4586,8 +4470,8 @@
                     "evals": [
                         {
                             "id": "PR-GCP-GDF-LOG-002",
-                            "eval": "data.rule.logging_audit_config",
-                            "message": "data.rule.logging_audit_config_err",
+                            "eval": "data.rule.logging_iam_permission_change",
+                            "message": "data.rule.logging_iam_permission_change_err",
                             "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.metrics' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_LOG_002.py"
                         }
@@ -4900,42 +4784,6 @@
                             "id": "PR-AWS-0001-RGX",
                             "eval": "google_password_leak",
                             "message": "google_password_leak_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "There is a possibility that secure password is exposed",
-                    "description": "There is a possibility that secure password is exposed",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CSA-CCM",
-                                "HITRUST",
-                                "ISO 27001",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "deploymentmanager"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-0001-RGX",
-                    "masterSnapshotId": [
-                        "GDF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "python",
-                    "rule": "file(secret_gcp_iac.py)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-0001-RGX",
-                            "eval": "entropy_password",
-                            "message": "entropy_password_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }

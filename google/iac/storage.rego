@@ -394,12 +394,6 @@ gc_attribute_absence["storage_uniform_bucket_access"] {
     not resource.properties.iamConfiguration.uniformBucketLevelAccess.enabled
 }
 
-gc_issue["storage_uniform_bucket_access"] {
-    resource := input.resources[i]
-    lower(resource.type) == "storage.v1.bucket"
-    resource.properties.iamConfiguration.uniformBucketLevelAccess.enabled == false   
-}
-
 storage_uniform_bucket_access {
     lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_uniform_bucket_access"]

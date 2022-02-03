@@ -1176,7 +1176,16 @@ gc_issue["firewall_inbound"] {
     resource := input.resources[i]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[j] == "0.0.0.0/0"
-    lower(resource.properties.direction) == "ingress"
+    lower(resource.properties.direction) != "egress"
+    not resource.properties.targetTags
+    not resource.properties.targetServiceAccounts
+}
+
+gc_issue["firewall_inbound"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.firewall"
+    resource.properties.sourceRanges[j] == "0.0.0.0/0"
+    not resource.properties.direction
     not resource.properties.targetTags
     not resource.properties.targetServiceAccounts
 }
@@ -1421,6 +1430,14 @@ gc_issue["vm_serial_port"] {
     items := resource.properties.metadata.items[_]
     contains(lower(items.key), "serial-port-enable")
     lower(items.value) == "true"
+}
+
+gc_issue["vm_serial_port"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    items := resource.properties.metadata.items[_]
+    contains(lower(items.key), "serial-port-enable")
+    items.value == true
 }
 
 vm_serial_port {
@@ -1775,7 +1792,7 @@ gc_issue["compute_configure_default_service"] {
     resource := input.resources[i]
     lower(resource.type) == "compute.v1.instance"
     lower(resource.properties.status) == "running"
-    not startswith(lower(resource.properties.status), "gke-")
+    not startswith(lower(resource.properties.name), "gke-")
     serviceAccount := resource.properties.serviceAccounts[_]
     contains(lower(serviceAccount.email), "compute@developer.gserviceaccount.com")
 }
@@ -1816,7 +1833,7 @@ gc_issue["compute_default_service_full_access"] {
     resource := input.resources[i]
     lower(resource.type) == "compute.v1.instance"
     lower(resource.properties.status) == "running"
-    not startswith(lower(resource.properties.status), "gke-")
+    not startswith(lower(resource.properties.name), "gke-")
     serviceAccount := resource.properties.serviceAccounts[_]
     contains(lower(serviceAccount.email), "compute@developer.gserviceaccount.com")
     lower(serviceAccount.scopes) == "https://www.googleapis.com/auth/cloud-platform"
@@ -1858,7 +1875,7 @@ gc_issue["compute_shielded_vm"] {
     resource := input.resources[i]
     lower(resource.type) == "compute.v1.instance"
     lower(resource.properties.status) == "running"
-    not startswith(lower(resource.properties.status), "gke-")
+    not startswith(lower(resource.properties.name), "gke-")
     resource.properties.shieldedInstanceConfig
     not resource.properties.shieldedInstanceConfig.enableVtpm
 }
@@ -1867,7 +1884,7 @@ gc_issue["compute_shielded_vm"] {
     resource := input.resources[i]
     lower(resource.type) == "compute.v1.instance"
     lower(resource.properties.status) == "running"
-    not startswith(lower(resource.properties.status), "gke-")
+    not startswith(lower(resource.properties.name), "gke-")
     resource.properties.shieldedInstanceConfig
     not resource.properties.shieldedInstanceConfig.enableIntegrityMonitoring
 }
@@ -1910,8 +1927,8 @@ gc_issue["compute_instance_external_ip"] {
     lower(resource.properties.status) == "running"
     networkInterface := resource.properties.networkInterfaces[_]
     has_property(networkInterface, "accessConfigs")
-    not startswith(lower(resource.properties.status), "gke-")
-    not contains(lower(resource.properties.status), "default-pool")
+    not startswith(lower(resource.properties.name), "gke-")
+    not contains(lower(resource.properties.name), "default-pool")
 }
 
 compute_instance_external_ip {
@@ -2128,6 +2145,12 @@ gc_issue["lbs_ssl_policy"] {
     count(resource.properties.sslPolicy) == 0
 }
 
+gc_issue["lbs_ssl_policy"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.targethttpsproxy"
+    resource.properties.sslPolicy == null
+}
+
 lbs_ssl_policy {
     lower(input.resources[i].type) == "compute.v1.targethttpsproxy"
     not gc_issue["lbs_ssl_policy"]
@@ -2211,16 +2234,17 @@ lbs_quic_metadata := {
 #
 
 default function_security = null
+available_types = ["cloudfunctions.v1.function", "gcp-types/cloudfunctions-v1:projects.locations.functions"]
 
 gc_issue["function_security"] {
     resource := input.resources[i]
-    lower(resource.type) == "cloudfunctions.v1.function"
+    lower(resource.type) == available_types[_]
     lower(resource.properties.status) == "active"
     lower(resource.properties.httpsTrigger.securityLevel) != "secure_always"
 }
 
 function_security {
-    lower(input.resources[i].type) == "cloudfunctions.v1.function"
+    lower(input.resources[i].type) == available_types[_]
     not gc_issue["function_security"]
 }
 
@@ -2292,16 +2316,17 @@ compute_external_ip_metadata := {
 #
 
 default function_ingress_allow_all = null
+available_types = ["cloudfunctions.v1.function", "gcp-types/cloudfunctions-v1:projects.locations.functions"]
 
 gc_issue["function_ingress_allow_all"] {
     resource := input.resources[i]
-    lower(resource.type) == "cloudfunctions.v1.function"
+    lower(resource.type) == available_types[_]
     lower(resource.properties.status) == "active"
     lower(resource.properties.ingressSettings) == "allow_all"
 }
 
 function_ingress_allow_all {
-    lower(input.resources[i].type) == "cloudfunctions.v1.function"
+    lower(input.resources[i].type) == available_types[_]
     not gc_issue["function_ingress_allow_all"]
 }
 
@@ -2331,23 +2356,24 @@ function_ingress_allow_all_metadata := {
 #
 
 default function_vpc_connector = null
+available_types = ["cloudfunctions.v1.function", "gcp-types/cloudfunctions-v1:projects.locations.functions"]
 
 gc_issue["function_vpc_connector"] {
     resource := input.resources[i]
-    lower(resource.type) == "cloudfunctions.v1.function"
+    lower(resource.type) == available_types[_]
     lower(resource.properties.status) == "active"
     not resource.properties.vpcConnector
 }
 
 gc_issue["function_vpc_connector"] {
     resource := input.resources[i]
-    lower(resource.type) == "cloudfunctions.v1.function"
+    lower(resource.type) == available_types[_]
     lower(resource.properties.status) == "active"
     count(resource.properties.vpcConnector) == 0
 }
 
 function_vpc_connector {
-    lower(input.resources[i].type) == "cloudfunctions.v1.function"
+    lower(input.resources[i].type) == available_types[_]
     not gc_issue["function_vpc_connector"]
 }
 
