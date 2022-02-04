@@ -16,13 +16,11 @@ azure_attribute_absence["netwatchFlowlogs"] {
     not resource.properties.enabled
 }
 
-
 azure_issue["netwatchFlowlogs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     resource.properties.enabled != true
 }
-
 
 netwatchFlowlogs {
     lower(input.resources[_].type) == "microsoft.network/networkwatchers/flowlogs"
@@ -38,15 +36,11 @@ netwatchFlowlogs = false {
     azure_issue["netwatchFlowlogs"]
 }
 
-netwatchFlowlogs_miss_err = "Network watchers flowlog attribute 'enabled' is missing from the resource." {
-    azure_attribute_absence["netwatchFlowlogs"]
-}
-
-
 netwatchFlowlogs_err = "Azure Network Watcher NSG flow log is currently not enabled" {
     azure_issue["netwatchFlowlogs"]
+} else = "Network watchers flowlog attribute 'enabled' is missing from the resource." {
+    azure_attribute_absence["netwatchFlowlogs"]
 }
-
 
 netwatchFlowlogs_metadata := {
     "Policy Code": "PR-AZR-CLD-NTW-001",
@@ -60,11 +54,11 @@ netwatchFlowlogs_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs"
 }
 
+
 # PR-AZR-CLD-NTW-002
 #
 
 default netwatch_logs = null
-
 
 azure_attribute_absence["netwatch_logs"] {
     resource := input.resources[_]
@@ -72,13 +66,11 @@ azure_attribute_absence["netwatch_logs"] {
     not resource.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled
 }
 
-
 azure_issue["netwatch_logs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     resource.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled == false
 }
-
 
 netwatch_logs {
     lower(input.resources[_].type) == "microsoft.network/networkwatchers/flowlogs"
@@ -94,15 +86,11 @@ netwatch_logs = false {
     azure_issue["netwatch_logs"]
 }
 
-netwatch_logs_miss_err = "Network watchers flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration attribute 'enabled' is missing from the resource." {
-    azure_attribute_absence["netwatch_logs"]
-}
-
-
 netwatch_logs_err = "Azure Network Watcher NSG traffic analytics is currently not enabled" {
     azure_issue["netwatch_logs"]
+} else = "Network watchers flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration attribute 'enabled' is missing from the resource." {
+    azure_attribute_absence["netwatch_logs"]
 }
-
 
 netwatch_logs_metadata := {
     "Policy Code": "PR-AZR-CLD-NTW-002",
@@ -128,14 +116,11 @@ azure_attribute_absence["netwatch_log_retention"] {
     not resource.properties.retentionPolicy.enabled
 }
 
-
-
 azure_attribute_absence["netwatch_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     not resource.properties.retentionPolicy.days
 }
-
 
 azure_issue["netwatch_log_retention"] {
     resource := input.resources[_]
@@ -143,13 +128,18 @@ azure_issue["netwatch_log_retention"] {
     resource.properties.retentionPolicy.enabled != true
 }
 
+azure_issue["netwatch_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    to_number(resource.properties.retentionPolicy.days) > 0
+    to_number(resource.properties.retentionPolicy.days) < 90
+}
 
 azure_issue["netwatch_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
-    to_number(resource.properties.retentionPolicy.days) < 90
+    to_number(resource.properties.retentionPolicy.days) < 0
 }
-
 
 netwatch_log_retention {
     lower(input.resources[_].type) == "microsoft.network/networkwatchers/flowlogs"
@@ -165,14 +155,11 @@ netwatch_log_retention = false {
     azure_issue["netwatch_log_retention"]
 }
 
-netwatch_log_retention_miss_err = "Network watchers flowlog attribute 'retentionPolicy' is missing from the resource." {
-    azure_attribute_absence["netwatch_log_retention"]
-}
-
 netwatch_log_retention_err = "Azure Network Watcher NSG flow logs retention is currently not equal or greater than 90 days" {
     azure_issue["netwatch_log_retention"]
+} else = "Network watchers flowlog attribute 'retentionPolicy' is missing from the resource." {
+    azure_attribute_absence["netwatch_log_retention"]
 }
-
 
 netwatch_log_retention_metadata := {
     "Policy Code": "PR-AZR-CLD-NTW-003",

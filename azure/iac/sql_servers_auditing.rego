@@ -1,5 +1,9 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings
 
 #
@@ -9,54 +13,58 @@ package rule
 default sql_server_log_audit = null
 
 azure_attribute_absence["sql_server_log_audit"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_server_log_audit"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
+    not resource.dependsOn
+}
+
+azure_attribute_absence["sql_server_log_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/auditingsettings"
     not resource.properties.state
-}
-
-source_path[{"sql_server_log_audit":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
-    not resource.properties.state
-    metadata:= {
-        "resource_path": [["resources",i,"properties","state"]]
-    }
 }
 
 azure_issue["sql_server_log_audit"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
-    lower(resource.properties.state) != "enabled"
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/auditingsettings";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              lower(r.properties.state) == "enabled";
+              c := 1]) == 0
 }
 
-source_path[{"sql_server_log_audit":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
-    lower(resource.properties.state) != "enabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","state"]]
-    }
-}
+# azure_issue["sql_server_log_audit"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.sql/servers/auditingsettings"
+#     lower(resource.properties.state) != "enabled"
+# }
 
 sql_server_log_audit {
-    lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     not azure_attribute_absence["sql_server_log_audit"]
     not azure_issue["sql_server_log_audit"]
 }
 
 sql_server_log_audit = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_log_audit"]
 }
 
 sql_server_log_audit = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_server_log_audit"]
 }
 
 sql_server_log_audit_err = "Azure SQL Server auditing is currently not enabled" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_log_audit"]
-}
-
-sql_server_log_audit_miss_err = "Azure SQL Server Auditing settings attribute 'state' is missing" {
+} else = "Azure SQL Server Auditing settings attribute 'state' is missing" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_server_log_audit"]
 }
 
@@ -71,9 +79,6 @@ sql_server_log_audit_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings"
 }
-
-
-
 
 
 # PR-AZR-ARM-SQL-043
@@ -164,6 +169,15 @@ sql_logical_server_log_audit_metadata := {
 
 default sql_server_audit_log_retention = null
 
+azure_attribute_absence["sql_server_audit_log_retention"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_server_audit_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
+    not resource.dependsOn
+}
 
 azure_attribute_absence["sql_server_audit_log_retention"] {
     resource := input.resources[_]
@@ -171,58 +185,64 @@ azure_attribute_absence["sql_server_audit_log_retention"] {
     not resource.properties.retentionDays
 }
 
-source_path[{"sql_server_audit_log_retention":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
-    not resource.properties.retentionDays
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionDays"]]
-    }
+azure_issue["sql_server_audit_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/auditingsettings";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              to_number(r.properties.retentionDays) > 0;
+              to_number(r.properties.retentionDays) < 90;
+              c := 1]) > 0
 }
 
 azure_issue["sql_server_audit_log_retention"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
-    to_number(resource.properties.retentionDays) < 91
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/auditingsettings";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              to_number(r.properties.retentionDays) < 0;
+              c := 1]) > 0
 }
 
-source_path[{"sql_server_audit_log_retention":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
-    to_number(resource.properties.retentionDays) < 91
-    metadata:= {
-        "resource_path": [["resources",i,"properties","retentionDays"]]
-    }
-}
+# azure_issue["sql_server_audit_log_retention"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.sql/servers/auditingsettings"
+#     to_number(resource.properties.retentionDays) < 91
+# }
 
 sql_server_audit_log_retention {
-    lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     not azure_attribute_absence["sql_server_audit_log_retention"]
     not azure_issue["sql_server_audit_log_retention"]
 }
 
 sql_server_audit_log_retention = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_audit_log_retention"]
 }
 
 sql_server_audit_log_retention = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_server_audit_log_retention"]
 }
 
-sql_server_audit_log_retention_err = "microsoft.sql/servers/auditingsettings resource property retentionDays missing in the resource" {
-    azure_attribute_absence["sql_server_audit_log_retention"]
-} else = "Azure SQL server audit log retention is less than 91 days" {
+sql_server_audit_log_retention_err = "Azure SQL server audit log retention is less than 91 days" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_issue["sql_server_audit_log_retention"]
+} else = "microsoft.sql/servers/auditingsettings resource property retentionDays missing in the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_server_audit_log_retention"]
 }
-
 
 sql_server_audit_log_retention_metadata := {
     "Policy Code": "PR-AZR-ARM-SQL-044",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure SQL server audit log retention should be greater than 90 days",
-    "Policy Description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be greater than 90 days.",
+    "Policy Title": "Azure SQL server audit log retention should be 90 days or higher",
+    "Policy Description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be 90 days or higher.",
     "Resource Type": "Microsoft.Sql/servers/auditingSettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings"
@@ -260,7 +280,16 @@ azure_issue["sql_logial_server_audit_log_retention"] {
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "auditingsettings"
-    to_number(sql_resources.properties.retentionDays) < 91
+    to_number(sql_resources.properties.retentionDays) > 0
+    to_number(sql_resources.properties.retentionDays) < 90
+}
+
+azure_issue["sql_logial_server_audit_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "auditingsettings"
+    to_number(sql_resources.properties.retentionDays) < 0
 }
 
 source_path[{"sql_logial_server_audit_log_retention":metadata}] {
@@ -293,18 +322,17 @@ sql_logial_server_audit_log_retention = false {
 
 sql_logial_server_audit_log_retention_err = "microsoft.sql/servers/auditingsettings resource property retentionDays missing in the resource" {
     azure_attribute_absence["sql_logial_server_audit_log_retention"]
-} else = "Azure SQL server audit log retention is less than 91 days" {
+} else = "Azure SQL server audit log retention is less than 90 days" {
     azure_issue["sql_logial_server_audit_log_retention"]
 }
-
 
 sql_logial_server_audit_log_retention_metadata := {
     "Policy Code": "PR-AZR-ARM-SQL-045",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure SQL server audit log retention should be greater than 90 days",
-    "Policy Description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be greater than 90 days.",
+    "Policy Title": "Azure SQL server audit log retention should be 90 days or higher",
+    "Policy Description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be 90 days or higher.",
     "Resource Type": "Microsoft.Sql/servers/auditingSettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings"

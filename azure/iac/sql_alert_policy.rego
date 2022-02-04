@@ -546,15 +546,13 @@ azure_attribute_absence["sql_logical_server_retention_days"] {
     not sql_resources.properties.retentionDays
 }
 
-source_path[{"sql_logical_server_retention_days":metadata}] {
-    resource := input.resources[i]
+azure_issue["sql_logical_server_retention_days"] {
+    resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
+    sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
-    not sql_resources.properties.retentionDays
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
-    }
+    to_number(sql_resources.properties.retentionDays) > 0
+    to_number(sql_resources.properties.retentionDays) < 90  
 }
 
 azure_issue["sql_logical_server_retention_days"] {
@@ -562,64 +560,25 @@ azure_issue["sql_logical_server_retention_days"] {
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
-    to_number(sql_resources.properties.retentionDays) == 0  
+    to_number(sql_resources.properties.retentionDays) < 0 
 }
-
-source_path[{"sql_logical_server_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    to_number(sql_resources.properties.retentionDays) == 0
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
-    }
-}
-
-
-azure_issue["sql_logical_server_retention_days"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[_]
-    lower(sql_resources.type) == "securityalertpolicies"
-    to_number(sql_resources.properties.retentionDays) >= 90 
-}
-
-source_path[{"sql_logical_server_retention_days":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    to_number(sql_resources.properties.retentionDays) >= 90 
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
-    }
-}
-
 
 sql_logical_server_retention_days {
     not azure_attribute_absence["sql_logical_server_retention_days"]
-    azure_issue["sql_logical_server_retention_days"]
-}
-
-
-sql_logical_server_retention_days = false {
-    azure_attribute_absence["sql_logical_server_retention_days"]
-}
-
-
-sql_logical_server_retention_days = false {
-    lower(input.resources[_].type) == "microsoft.sql/servers"
-    resource := input.resources[_]
-    sql_resources := resource.resources[_]
-    lower(sql_resources.type) == "securityalertpolicies"
     not azure_issue["sql_logical_server_retention_days"]
 }
 
+sql_logical_server_retention_days = false {
+    azure_attribute_absence["sql_logical_server_retention_days"]
+}
+
+sql_logical_server_retention_days = false {
+    azure_issue["sql_logical_server_retention_days"]
+}
 
 sql_logical_server_retention_days_err = "Azure SQL security alert policy attribute 'retentionDays' is missing from the resource" {
     azure_attribute_absence["sql_logical_server_retention_days"]
-} else = "SQL Server security alert policy Retention Days are not greater than 90 days" {
+} else = "SQL Server security alert policy Retention Days are not equal or greater than 90 days" {
     lower(input.resources[_].type) == "microsoft.sql/servers"
     resource := input.resources[_]
     sql_resources := resource.resources[_]
@@ -633,7 +592,7 @@ sql_logical_server_retention_days_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are greater than 90 days",
+    "Policy Title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are equal or greater than 90 days",
     "Policy Description": "Azure SQL Database Threat Detection is a security intelligence feature built into the Azure SQL Database service. Working around the clock to learn, profile and detect anomalous database activities, Azure SQL Database Threat Detection identifies potential threats to the database. Security officers or other designated administrators can get an immediate notification about suspicious database activities as they occur. Each notification provides details of the suspicious activity and recommends how to further investigate and mitigate the threat.",
     "Resource Type": "microsoft.sql/servers/securityalertpolicies",
     "Policy Help URL": "",
@@ -669,8 +628,9 @@ azure_issue["sql_server_retention_days"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(resource.properties.retentionDays) > 90;
-              c := 1]) == 0
+              to_number(r.properties.retentionDays) > 0;
+              to_number(r.properties.retentionDays) < 90;
+              c := 1]) > 0
 }
 
 azure_issue["sql_server_retention_days"] {
@@ -679,8 +639,8 @@ azure_issue["sql_server_retention_days"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(resource.properties.retentionDays) == 0;
-              c := 1]) == 0
+              to_number(r.properties.retentionDays) < 0;
+              c := 1]) > 0
 }
 
 sql_server_retention_days {
@@ -712,7 +672,7 @@ sql_server_retention_days_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are greater than 90 days",
+    "Policy Title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are equal or greater than 90 days",
     "Policy Description": "Azure SQL Database Threat Detection is a security intelligence feature built into the Azure SQL Database service. Working around the clock to learn, profile and detect anomalous database activities, Azure SQL Database Threat Detection identifies potential threats to the database. Security officers or other designated administrators can get an immediate notification about suspicious database activities as they occur. Each notification provides details of the suspicious activity and recommends how to further investigate and mitigate the threat.",
     "Resource Type": "microsoft.sql/servers/securityalertpolicies",
     "Policy Help URL": "",
@@ -827,7 +787,7 @@ azure_issue["sql_server_disabled_alerts"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              count(resource.properties.disabledAlerts) > 0;
+              count(r.properties.disabledAlerts) > 0;
               c := 1]) > 0
 }
 
