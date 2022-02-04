@@ -23,7 +23,6 @@ source_path[{"securitycontacts":metadata}] {
     }
 }
 
-
 azure_issue["securitycontacts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
@@ -55,9 +54,7 @@ securitycontacts = false {
 
 securitycontacts_err = "Security Center currently does not have any valid security contact email configured" {
     azure_issue["securitycontacts"]
-}
-
-securitycontacts_miss_err = "Security Center security contacts property 'email' is missing from the resource" {
+} else = "Security Center security contacts property 'email' is missing from the resource" {
     azure_attribute_absence["securitycontacts"]
 }
 
@@ -72,8 +69,6 @@ securitycontacts_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts"
 }
-
-
 
 
 #
@@ -96,7 +91,6 @@ source_path[{"alert_notifications":metadata}] {
         "resource_path": [["resources",i,"properties","alertNotifications"]]
     }
 }
-
 
 azure_issue["alert_notifications"] {
     resource := input.resources[_]

@@ -54,9 +54,7 @@ pricing = false {
 
 pricing_err = "Azure Security Center currently dont have 'standard' pricing tier configured" {
     azure_issue["pricing"]
-}
-
-pricing_miss_err = "Azure Security Center property 'pricingTier' is missing from the resource" {
+} else = "Azure Security Center property 'pricingTier' is missing from the resource" {
     azure_attribute_absence["pricing"]
 }
 

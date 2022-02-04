@@ -14,13 +14,11 @@ azure_attribute_absence["acr_webhooks"] {
     not resource.properties.serviceUri
 }
 
-
 azure_issue["acr_webhooks"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries/webhooks"
     substring(lower(resource.properties.serviceUri), 0, 6) != "https:"
 }
-
 
 acr_webhooks {
     lower(input.resources[_].type) == "microsoft.containerregistry/registries/webhooks"
@@ -38,9 +36,7 @@ acr_webhooks = false {
 
 acr_webhooks_err = "Azure ACR webhook currently dont have HTTPS protocol enabled" {
     azure_issue["acr_webhooks"]
-}
-
-acr_webhooks_miss_err = "ACR webhook property 'serviceUri' is missing from the resource" {
+} else = "ACR webhook property 'serviceUri' is missing from the resource" {
     azure_attribute_absence["acr_webhooks"]
 }
 
