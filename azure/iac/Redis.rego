@@ -1,5 +1,13 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/Microsoft.Cache/redis
 
 # PR-AZR-ARM-ARC-001
@@ -9,7 +17,7 @@ default enableSslPort = null
 azure_attribute_absence ["enableSslPort"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
-    not resource.properties.enableNonSslPort
+    not has_property(resource.properties, "enableNonSslPort")
 }
 
 azure_issue ["enableSslPort"] {
@@ -19,13 +27,13 @@ azure_issue ["enableSslPort"] {
 }
 
 enableSslPort {
-    azure_attribute_absence["enableSslPort"]
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    not azure_attribute_absence["enableSslPort"]
     not azure_issue["enableSslPort"]
 }
 
 enableSslPort {
-    lower(input.resources[_].type) == "microsoft.cache/redis"
-    not azure_issue["enableSslPort"]
+    azure_attribute_absence["enableSslPort"]
 }
 
 enableSslPort = false {
@@ -55,26 +63,15 @@ enableSslPort_metadata := {
 
 default serverRole = null
 
-azure_attribute_absence ["serverRole"] {
-    resource := input.resources[i]
-    count([c | resource.type == "microsoft.cache/redis"; c := 1]) != count([c | resource.type == "microsoft.cache/redis/linkedservers"; c := 1])
+azure_attribute_absence["serverRole"] {
+    count([c | lower(input.resources[_].type) == "microsoft.cache/redis/linkedservers"; c := 1]) == 0
 }
 
-source_path[{"serverRole":metadata}] {
-    resource := input.resources[i]
-    count([c | resource.type == "microsoft.cache/redis"; c := 1]) != count([c | resource.type == "microsoft.cache/redis/linkedservers"; c := 1])
-    metadata:= {
-        "resource_path": [["resources",i,"type"]]
-    }
+azure_attribute_absence["serverRole"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis/linkedservers"
+    not resource.dependsOn
 }
-
-# as linkedservers is child resource of microsoft.cache/redis, we need to make sure microsoft.cache/redis exist in the same template first.
-# azure_attribute_absence["serverRole"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "microsoft.cache/redis"
-#     count([c | input.resources[_].type == "microsoft.cache/redis/linkedservers";
-#     	   c := 1]) == 0
-# }
 
 azure_attribute_absence ["serverRole"] {
    resource := input.resources[_]
@@ -82,54 +79,44 @@ azure_attribute_absence ["serverRole"] {
    not resource.properties.serverRole
 }
 
-
-source_path[{"serverRole":metadata}] {
-   resource := input.resources[i]
-   lower(resource.type) == "microsoft.cache/redis/linkedservers"
-   not resource.properties.serverRole
-   metadata:= {
-        "resource_path": [["resources",i,"properties","serverRole"]]
-    }
-}
-
-azure_issue ["serverRole"] {
+azure_issue["serverRole"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.cache/redis/linkedservers"
-    lower(resource.properties.serverRole) != "secondary"
+    lower(resource.type) == "microsoft.cache/redis"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.cache/redis/linkedservers";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              lower(r.properties.serverRole) == "secondary";
+              c := 1]) == 0
 }
 
-source_path[{"serverRole":metadata}] {
-   resource := input.resources[i]
-   lower(resource.type) == "microsoft.cache/redis/linkedservers"
-    lower(resource.properties.serverRole) != "secondary"
-   metadata:= {
-        "resource_path": [["resources",i,"properties","serverRole"]]
-    }
-}
-
+# azure_issue ["serverRole"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.cache/redis/linkedservers"
+#     lower(resource.properties.serverRole) != "secondary"
+# }
 
 serverRole {
-    lower(input.resources[_].type) == "microsoft.cache/redis/linkedservers"
+    lower(input.resources[_].type) == "microsoft.cache/redis"
     not azure_attribute_absence["serverRole"]
     not azure_issue["serverRole"]
 }
 
-
 serverRole = false {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
     azure_attribute_absence["serverRole"]
 }
 
-
 serverRole = false {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
     azure_issue["serverRole"]
-}
-
-serverRole_miss_err = "Azure Redis Cache linked server property 'serverRole' is missing from the resource" {
-    azure_attribute_absence["serverRole"]
 }
 
 serverRole_err = "Azure Redis Cache linked backup server currently does not have secondary role." {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
     azure_issue["serverRole"]
+} else = "Azure Redis Cache linked server property 'serverRole' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_attribute_absence["serverRole"]
 }
 
 serverRole_metadata := {
@@ -180,8 +167,6 @@ source_path[{"redis_public_access":metadata}] {
         "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
     }
 }
-
-
 
 redis_public_access {
     lower(input.resources[_].type) == "microsoft.cache/redis"
@@ -236,13 +221,11 @@ source_path[{"arc_subnet_id":metadata}] {
     }
 }
 
-
 azure_issue["arc_subnet_id"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
     count(resource.properties.subnetId) == 0
 }
-
 
 source_path[{"arc_subnet_id":metadata}] {
     resource := input.resources[i]
@@ -273,7 +256,6 @@ arc_subnet_id_err = "Azure Cache for Redis is not reside within a virtual networ
     azure_attribute_absence["arc_subnet_id"]
 }
 
-
 arc_subnet_id_metadata := {
     "Policy Code": "PR-AZR-ARM-ARC-004",
     "Type": "IaC",
@@ -295,32 +277,24 @@ azure_attribute_absence["arc_private_endpoint"] {
     count([c | lower(input.resources[_].type) == "microsoft.network/privateendpoints"; c := 1]) == 0
 }
 
-no_azure_issue["arc_private_endpoint"] {
+azure_issue ["arc_private_endpoint"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.network/privateendpoints"
-    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[_]
-    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.cache/redis")
-}
-
-source_path[{"arc_private_endpoint":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.network/privateendpoints"
-    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[j]
-    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.cache/redis")
-    metadata:= {
-        "resource_path": [["resources",i,"properties","privateLinkServiceConnections",j,"properties","privateLinkServiceId"]]
-    }
+    lower(resource.type) == "microsoft.cache/redis"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.network/privateendpoints";
+              contains(lower(r.properties.privateLinkServiceConnections[_].properties.privateLinkServiceId), lower(concat("/", [resource.type, resource.name])));
+              c := 1]) == 0
 }
 
 arc_private_endpoint {
 	lower(input.resources[_].type) == "microsoft.cache/redis"
-    no_azure_issue["arc_private_endpoint"]
     not azure_attribute_absence["arc_private_endpoint"]
+    not azure_issue["arc_private_endpoint"]
 }
 
 arc_private_endpoint = false {
 	lower(input.resources[_].type) == "microsoft.cache/redis"
-    not no_azure_issue["arc_private_endpoint"]
+    azure_issue["arc_private_endpoint"]
 }
 
 arc_private_endpoint = false {
@@ -330,7 +304,7 @@ arc_private_endpoint = false {
 
 arc_private_endpoint_err = "Azure Storage Account does not configure with private endpoints" {
 	lower(input.resources[_].type) == "microsoft.cache/redis"
-    not no_azure_issue["arc_private_endpoint"]
+    azure_issue["arc_private_endpoint"]
 } else = "Azure Private endpoints resoruce is missing" {
 	lower(input.resources[_].type) == "microsoft.cache/redis"
     azure_attribute_absence["arc_private_endpoint"]

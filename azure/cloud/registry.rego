@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries
 
 # PR-AZR-CLD-ACR-002
@@ -9,9 +13,8 @@ default adminUserDisabled = null
 azure_attribute_absence ["adminUserDisabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
-    not resource.properties.adminUserEnabled
+    not has_property(resource.properties, "adminUserEnabled")
 }
-
 
 azure_issue ["adminUserDisabled"] {
     resource := input.resources[_]
@@ -19,14 +22,14 @@ azure_issue ["adminUserDisabled"] {
     resource.properties.adminUserEnabled != false
 }
 
-
 adminUserDisabled {
-    azure_attribute_absence["adminUserDisabled"]
+    lower(input.resources[_].type) == "microsoft.containerregistry/registries"
+    not azure_attribute_absence["adminUserDisabled"]
+    not azure_issue["adminUserDisabled"]
 }
 
 adminUserDisabled {
-    lower(input.resources[_].type) == "microsoft.containerregistry/registries"
-    not azure_issue["adminUserDisabled"]
+    azure_attribute_absence["adminUserDisabled"]
 }
 
 adminUserDisabled = false {
@@ -63,13 +66,11 @@ azure_attribute_absence["acr_classic"] {
     not resource.sku.name
 }
 
-
 azure_issue["acr_classic"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
     lower(resource.sku.name) == "classic"
 }
-
 
 acr_classic {
     lower(input.resources[_].type) == "microsoft.containerregistry/registries"
@@ -87,9 +88,7 @@ acr_classic = false {
 
 acr_classic_err = "Azure Container Registry currently configured with deprecated classic registry. Please change the SKU" {
     azure_issue["acr_classic"]
-}
-
-acr_classic_miss_err = "Azure Container registry property sku.name is missing from the resource" {
+} else = "Azure Container registry property sku.name is missing from the resource" {
     azure_attribute_absence["acr_classic"]
 }
 

@@ -54,9 +54,7 @@ acr_webhooks = false {
 
 acr_webhooks_err = "Azure ACR webhook currently dont have HTTPS protocol enabled" {
     azure_issue["acr_webhooks"]
-}
-
-acr_webhooks_miss_err = "ACR webhook property 'serviceUri' is missing from the resource" {
+} else = "ACR webhook property 'serviceUri' is missing from the resource" {
     azure_attribute_absence["acr_webhooks"]
 }
 
