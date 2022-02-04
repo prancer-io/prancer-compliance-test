@@ -1780,3 +1780,42 @@ firewall_inbound_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
 }
+
+
+
+#
+# PR-GCP-TRF-FW-018
+#
+
+default firewall_logging = null
+
+gc_issue["firewall_logging"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_compute_firewall"
+    not resource.properties.log_config
+}
+
+firewall_logging {
+    lower(input.resources[i].type) == "google_compute_firewall"
+    not gc_issue["firewall_logging"]
+}
+
+firewall_logging = false {
+    gc_issue["firewall_logging"]
+}
+
+firewall_logging_err = "Ensure GCP Firewall rule logging is enabled" {
+    gc_issue["firewall_logging"]
+}
+
+firewall_logging_metadata := {
+    "Policy Code": "PR-GCP-TRF-FW-018",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP Firewall rule logging is enabled",
+    "Policy Description": "This policy identifies GCP firewall rules that are not configured with firewall rule logging.  Firewall Rules Logging lets you audit, verify, and analyze the effects of your firewall rules. When you enable logging for a firewall rule, Google Cloud creates an entry called a connection record each time the rule allows or denies traffic. \n\nReference: https://cloud.google.com/vpc/docs/firewall-rules-logging",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
+}

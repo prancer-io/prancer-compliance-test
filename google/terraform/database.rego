@@ -718,3 +718,139 @@ storage_psql_log_checkpoints_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
 }
+
+
+#
+# PR-GCP-TRF-SQL-001
+#
+
+default storage_sql_skip_show_database = null
+
+gc_issue["storage_sql_skip_show_database"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_sql_database_instance"
+    contains(lower(resource.properties.database_version), "mysql")
+    settings := resource.properties.settings[_]
+    count([c| contains(lower(settings.database_flags[_].name), "skip_show_database"); c:=1 ]) == 0
+}
+
+gc_issue["storage_sql_skip_show_database"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_sql_database_instance"
+    contains(lower(resource.properties.database_version), "mysql")
+    settings := resource.properties.settings[_]
+    count([c| contains(lower(settings.database_flags[j].name), "skip_show_database"); not contains(lower(settings.database_flags[j].value), "on"); c:=1 ]) != 0
+}
+
+storage_sql_skip_show_database {
+    lower(input.resources[i].type) == "google_sql_database_instance"
+    not gc_issue["storage_sql_skip_show_database"]
+}
+
+storage_sql_skip_show_database = false {
+    gc_issue["storage_sql_skip_show_database"]
+}
+
+storage_sql_skip_show_database_err = "Ensure GCP MySQL instance database flag skip_show_database is set to on" {
+    gc_issue["storage_sql_skip_show_database"]
+}
+
+storage_sql_skip_show_database_metadata := {
+    "Policy Code": "PR-GCP-TRF-SQL-001",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure GCP MySQL instance database flag skip_show_database is set to on",
+    "Policy Description": "This policy identifies Mysql database instances in which database flag skip_show_database is not set to on. This prevents people from using the SHOW DATABASES statement if they do not have the SHOW DATABASES privilege. This can improve security if you have concerns about users being able to see databases belonging to other users. It is recommended to set skip_show_database to on.",
+    "Resource Type": "google_sql_database_instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
+
+#
+# PR-GCP-TRF-SQL-002
+#
+
+default storage_sql_local_infile = null
+
+gc_issue["storage_sql_local_infile"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_sql_database_instance"
+    contains(lower(resource.properties.database_version), "mysql")
+    settings := resource.properties.settings[_]
+    count([c| contains(lower(settings.database_flags[_].name), "local_infile"); c:=1 ]) == 0
+}
+
+gc_issue["storage_sql_local_infile"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_sql_database_instance"
+    contains(lower(resource.properties.database_version), "mysql")
+    settings := resource.properties.settings[_]
+    count([c| contains(lower(settings.database_flags[j].name), "local_infile"); contains(lower(settings.database_flags[j].value), "on"); c:=1 ]) != 0
+}
+
+storage_sql_local_infile {
+    lower(input.resources[i].type) == "google_sql_database_instance"
+    not gc_issue["storage_sql_local_infile"]
+}
+
+storage_sql_local_infile = false {
+    gc_issue["storage_sql_local_infile"]
+}
+
+storage_sql_local_infile_err = "Ensure GCP MySQL instance database flag local_infile is set to on" {
+    gc_issue["storage_sql_local_infile"]
+}
+
+storage_sql_local_infile_metadata := {
+    "Policy Code": "PR-GCP-TRF-SQL-002",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure GCP MySQL instance with local_infile database flag is not enabled",
+    "Policy Description": "This policy identifies MySQL instances in which local_infile database flag is not disabled. The local_infile flag controls the server-side LOCAL capability for LOAD DATA statements. Based on the settings in local_infile server refuses or permits local data loading by clients. Disabling the local_infile flag setting, would disable the local data loading by clients that have LOCAL enabled on the client side.",
+    "Resource Type": "google_sql_database_instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
+
+#
+# PR-GCP-GDF-SQL-005
+#
+
+default storage_sql_owner_chaining = null
+
+gc_issue["storage_sql_owner_chaining"] {
+    resource := input.resources[i]
+    lower(resource.type) == google_sql_database_instance
+    contains(lower(resource.properties.database_version), "sqlserver")
+    settings := resource.properties.settings[_]
+    count([c| contains(lower(settings.database_flags[j].name), "cross db ownership chaining"); contains(lower(settings.database_flags[j].value), "on"); c:=1 ]) != 0
+}
+
+storage_sql_owner_chaining {
+    lower(input.resources[i].type) == google_sql_database_instance
+    not gc_issue["storage_sql_owner_chaining"]
+}
+
+storage_sql_owner_chaining = false {
+    gc_issue["storage_sql_owner_chaining"]
+}
+
+storage_sql_owner_chaining_err = "Ensure GCP SQL Server instance database flag 'cross db ownership chaining' is disabled" {
+    gc_issue["storage_sql_owner_chaining"]
+}
+
+storage_sql_owner_chaining_metadata := {
+    "Policy Code": "PR-GCP-GDF-SQL-005",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure GCP SQL Server instance database flag 'cross db ownership chaining' is disabled",
+    "Policy Description": "This policy identifies GCP SQL Server instance database flag 'cross db ownership chaining' is enabled. Enabling cross db ownership is not recommended unless all of the databases hosted by the instance of SQL Server must participate in cross-database ownership chaining and you are aware of the security implications of this setting.",
+    "Resource Type": "google_sql_database_instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
