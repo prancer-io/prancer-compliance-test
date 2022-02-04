@@ -35,7 +35,7 @@ kms_key_rotation_metadata := {
     "Policy Code": "PR-GCP-TRF-KMS-001",
     "Type": "IaC",
     "Product": "GCP",
-    "Language": "GCP deployment",
+    "Language": "Terraform",
     "Policy Title": "Ensure GCP KMS encryption key rotating in every 90 days",
     "Policy Description": "This policy identifies GCP KMS encryption keys that are not rotating every 90 days.  A key is used to protect some corpus of data. A collection of files could be encrypted with the same key and people with decrypt permissions on that key would be able to decrypt those files. It's recommended to make sure the 'rotation period' is set to a specific time to ensure data cannot be accessed through the old key.",
     "Resource Type": "google_kms_key_ring",
