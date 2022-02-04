@@ -413,7 +413,7 @@ gc_issue["k8s_master_auth_net"] {
 source_path[{"k8s_master_auth_net": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
-    resource.properties.legacyAbac.enabled
+    not resource.properties.masterAuthorizedNetworksConfig.enabled
     metadata := {
         "resource_path": [
             ["resources", i, "properties", "masterAuthorizedNetworksConfig", "enabled"]
