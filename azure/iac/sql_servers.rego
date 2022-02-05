@@ -1,5 +1,9 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers
 
 # PR-AZR-ARM-SQL-048
@@ -93,6 +97,15 @@ sql_server_login_metadata := {
 
 default sql_logical_server_login = null
 
+azure_attribute_absence["sql_logical_server_login"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/administrators"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_logical_server_login"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    not resource.dependsOn
+}
 
 azure_attribute_absence["sql_logical_server_login"] {
     resource := input.resources[_]
@@ -100,53 +113,100 @@ azure_attribute_absence["sql_logical_server_login"] {
     not resource.properties.login
 }
 
-source_path[{"sql_logical_server_login":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/administrators"
-    not resource.properties.login
-    metadata:= {
-        "resource_path": [["resources",i,"properties","login"]]
-    }
-}
-
-no_azure_issue["sql_logical_server_login"] {
+azure_issue["sql_logical_server_login"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/administrators"
-    lower(resource.properties.login) != "admin"
-    lower(resource.properties.login) != "administrator"
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/administrators";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              not contains(lower(r.properties.login), "admin");
+              not contains(lower(r.properties.login), "administrator");
+              c := 1]) == 0
 }
 
-source_path[{"sql_logical_server_login":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/administrators"
-    lower(resource.properties.login) != "admin"
-    lower(resource.properties.login) != "administrator"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","login"]]
-    }
+# no_azure_issue["sql_logical_server_login"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.sql/servers/administrators"
+#     lower(resource.properties.login) != "admin"
+#     lower(resource.properties.login) != "administrator"
+# }
+
+azure_inner_attribute_absence ["sql_logical_server_login"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    not resource.properties.administrators
+}
+
+azure_inner_attribute_absence ["sql_logical_server_login"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    not resource.properties.administrators.login
+}
+
+azure_inner_issue ["sql_logical_server_login"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    contains(lower(resource.properties.administrator.login), "admin")
+}
+
+azure_inner_issue ["sql_logical_server_login"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    contains(lower(resource.properties.administrator.login), "administrator")
 }
 
 sql_logical_server_login {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     not azure_attribute_absence["sql_logical_server_login"]
-    no_azure_issue["sql_logical_server_login"]
+    not azure_issue["sql_logical_server_login"]
+}
+
+sql_logical_server_login {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    not azure_inner_attribute_absence["sql_logical_server_login"]
+    not azure_inner_issue["sql_logical_server_login"]
 }
 
 sql_logical_server_login = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_logical_server_login"]
+    azure_inner_attribute_absence["sql_logical_server_login"]
 }
 
 sql_logical_server_login = false {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/administrators"
-    not no_azure_issue["sql_logical_server_login"]
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_issue["sql_logical_server_login"]
+    azure_inner_issue["sql_logical_server_login"]
 }
 
-sql_logical_server_login_err = "Azure SQL Server property 'login' is missing from the resource" {
+sql_logical_server_login = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_inner_attribute_absence["sql_logical_server_login"]
+    azure_issue["sql_logical_server_login"]
+}
+
+sql_logical_server_login = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     azure_attribute_absence["sql_logical_server_login"]
-} else = "Azure SQL Server login is currently set to admin or administrator on the resource. Please change the name" {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/administrators"
-    not no_azure_issue["sql_logical_server_login"]
+    azure_inner_issue["sql_logical_server_login"]
+}
+
+sql_logical_server_login_err = "Azure SQL Server login id currently contains 'admin' or 'administrator'. Please change the name." {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_issue["sql_logical_server_login"]
+    azure_inner_issue["sql_logical_server_login"]
+} else = "SQL servers administrators attribute 'login' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_logical_server_login"]
+    azure_inner_attribute_absence["sql_logical_server_login"]
+} else = "SQL servers administrators attribute 'login' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_inner_attribute_absence["sql_logical_server_login"]
+    azure_issue["sql_logical_server_login"]
+} else = "SQL servers administrators attribute 'login' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_logical_server_login"]
+    azure_inner_issue["sql_logical_server_login"]
 }
 
 sql_logical_server_login_metadata := {

@@ -2191,7 +2191,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_405"
+                        "AZRSNP_400"
                     ],
                     "severity": "Medium",
                     "title": "Ensure SQL Server administrator login does not contain 'Admin/Administrator' as name",
