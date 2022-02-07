@@ -274,8 +274,49 @@ storage_uniform_bucket_access_metadata := {
 }
 
 
+
 #
-# PR-GCP-GDF-BKT-008
+# PR-GCP-TRF-BKT-007
+#
+
+default storage_event_based_hold = null
+
+gc_issue["storage_event_based_hold"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_storage_bucket"
+    not resource.properties.default_event_based_hold
+}
+
+storage_event_based_hold {
+    lower(input.resources[i].type) == "google_storage_bucket"
+    not gc_issue["storage_event_based_hold"]
+}
+
+storage_event_based_hold = false {
+    gc_issue["storage_event_based_hold"]
+}
+
+
+storage_event_based_hold_err = "GCP cloud storage bucket is not configured with default Event-Based hold" {
+    gc_issue["storage_event_based_hold"]
+}
+
+storage_event_based_hold_metadata := {
+    "Policy Code": "PR-GCP-TRF-BKT-007",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "terraform",
+    "Policy Title": "Ensure GCP storage bucket is configured with default Event-Based hold",
+    "Policy Description": "This policy identifies GCP storage buckets that are not configured with default Event-Based Hold. An event-based hold resets the object's time in the bucket for the purposes of the retention period. This behavior is useful when you want an object to persist in your bucket for a certain length of time after a certain event occurs. It is recommended to enable this feature to protect individual objects from deletion.",
+    "Resource Type": "google_storage_bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
+
+
+#
+# PR-GCP-TRF-BKT-008
 #
 
 default storage_logging_itself = null
@@ -319,7 +360,7 @@ storage_logging_itself_err = "GCP cloud storage bucket is logging to itself" {
 }
 
 storage_logging_itself_metadata := {
-    "Policy Code": "PR-GCP-GDF-BKT-008",
+    "Policy Code": "PR-GCP-TRF-BKT-008",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -331,7 +372,7 @@ storage_logging_itself_metadata := {
 }
 
 #
-# PR-GCP-GDF-BKT-009
+# PR-GCP-TRF-BKT-009
 #
 
 default storage_bucket_lock = null
@@ -368,7 +409,7 @@ storage_bucket_lock_err = "Ensure GCP Log bucket retention policy is configured 
 }
 
 storage_bucket_lock_metadata := {
-    "Policy Code": "PR-GCP-GDF-BKT-009",
+    "Policy Code": "PR-GCP-TRF-BKT-009",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -380,7 +421,7 @@ storage_bucket_lock_metadata := {
 }
 
 #
-# PR-GCP-GDF-BKT-010
+# PR-GCP-TRF-BKT-010
 #
 
 default storage_bucket_retention_enable = null
@@ -411,7 +452,7 @@ storage_bucket_retention_enable_err = "Ensure GCP Log bucket retention policy is
 }
 
 storage_bucket_retention_enable_metadata := {
-    "Policy Code": "PR-GCP-GDF-BKT-010",
+    "Policy Code": "PR-GCP-TRF-BKT-010",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",

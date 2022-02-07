@@ -229,61 +229,62 @@ sql_ssl_metadata := {
     "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
 }
 
+
 #
-# PR-GCP-0067-TRF
+# PR-GCP-TRF-SAK-001
 #
 
-default sql_exposed = null
+default svc_account_key = null
 
 
-gc_attribute_absence["sql_exposed"] {
+gc_attribute_absence["svc_account_key"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
     not resource.properties.settings.ip_configuration.authorized_networks
 }
 
-gc_issue["sql_exposed"] {
+gc_issue["svc_account_key"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
     resource.properties.settings.ip_configuration.authorized_networks[_] == "0.0.0.0"
 }
 
-gc_issue["sql_exposed"] {
+gc_issue["svc_account_key"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
     resource.properties.settings.ip_configuration.authorized_networks[_] == "0.0.0.0/0"
 }
 
-gc_issue["sql_exposed"] {
+gc_issue["svc_account_key"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
     resource.properties.settings.ip_configuration.authorized_networks[_] == "::/0"
 }
 
-sql_exposed {
+svc_account_key {
     lower(input.resources[_].type) == "google_sql_database_instance"
-    not gc_issue["sql_exposed"]
-    not gc_attribute_absence["sql_exposed"]
+    not gc_issue["svc_account_key"]
+    not gc_attribute_absence["svc_account_key"]
 }
 
-sql_exposed = false {
-    gc_issue["sql_exposed"]
+svc_account_key = false {
+    gc_issue["svc_account_key"]
 }
 
-sql_exposed = false {
-    gc_attribute_absence["sql_exposed"]
+svc_account_key = false {
+    gc_attribute_absence["svc_account_key"]
 }
 
-sql_exposed_err = "SQL Instances with network authorization exposing them to the Internet" {
-    gc_issue["sql_exposed"]
+svc_account_key_err = "SQL Instances with network authorization exposing them to the Internet" {
+    gc_issue["svc_account_key"]
 }
 
-sql_exposed_miss_err = "GCP DB Instance attribute ip_configuration.authorized_networks missing in the resource" {
-    gc_attribute_absence["sql_exposed"]
+svc_account_key_miss_err = "GCP DB Instance attribute ip_configuration.authorized_networks missing in the resource" {
+    gc_attribute_absence["svc_account_key"]
 }
 
-sql_exposed_metadata := {
-    "Policy Code": "PR-GCP-0067-TRF",
+svc_account_key_metadata := {
+    "Policy Code": "PR-GCP-TRF-SAK-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
