@@ -1263,19 +1263,19 @@ default firewall_logging = null
 gc_issue["firewall_logging"] {
     resource := input.resources[i]
     lower(resource.type) == "compute.v1.firewall"
-    not resource.logConfig
+    not resource.properties.logConfig
 }
 
 gc_issue["firewall_logging"] {
     resource := input.resources[i]
     lower(resource.type) == "compute.v1.firewall"
-    resource.logConfig.enable == false
+    resource.properties.logConfig.enable == false
 }
 
 gc_issue["firewall_logging"] {
     resource := input.resources[i]
     lower(resource.type) == "compute.v1.firewall"
-    lower(resource.logConfig.enable) == "false"
+    lower(resource.properties.logConfig.enable) == "false"
 }
 
 firewall_logging {
@@ -1287,7 +1287,7 @@ firewall_logging = false {
     gc_issue["firewall_logging"]
 }
 
-firewall_logging_err = "GCP Firewall with Inbound rule overly permissive to All Traffic" {
+firewall_logging_err = "Ensure GCP Firewall rule logging is enabled" {
     gc_issue["firewall_logging"]
 }
 
@@ -1736,7 +1736,7 @@ compute_ssl_profile_restricted_metadata := {
     "Language": "GCP deployment",
     "Policy Title": "Ensure GCP HTTPS Load balancer SSL Policy is using restrictive profile",
     "Policy Description": "This policy identifies HTTPS Load balancers which are not using restrictive profile in it's SSL Policy, which controls sets of features used in negotiating SSL with clients. As a best security practice, use RESTRICTED as SSL policy profile as it meets stricter compliance requirements and does not include any out-of-date SSL features.",
-    "Resource Type": "compute.v1.instance",
+    "Resource Type": "compute.v1.sslPolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
 }
@@ -1757,7 +1757,7 @@ gc_issue["compute_ssl_min_tls"] {
 }
 
 compute_ssl_min_tls {
-    lower(input.resources[i].type) == "compute.v1.instance"
+    lower(input.resources[i].type) == "compute.v1.sslPolicies"
     not gc_issue["compute_ssl_min_tls"]
 }
 
@@ -1776,7 +1776,7 @@ compute_ssl_min_tls_metadata := {
     "Language": "GCP deployment",
     "Policy Title": "Ensure GCP HTTPS Load balancer is configured with SSL policy not having TLS version 1.1 or lower",
     "Policy Description": "This policy identifies HTTPS Load balancers is configured with SSL policy having TLS version 1.1 or lower. As a best security practice, use TLS 1.2 as the minimum TLS version in your load balancers SSL security policies.",
-    "Resource Type": "compute.v1.instance",
+    "Resource Type": "compute.v1.sslPolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
 }

@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/compute/docs/reference/rest/v1/instances
 
 #
-# PR-GCP-0070-TRF
+# PR-GCP-TRF-INST-001
 #
 
 default vm_ip_forward = null
@@ -28,7 +28,7 @@ vm_ip_forward_err = "GCP VM instances have IP forwarding enabled" {
 }
 
 vm_ip_forward_metadata := {
-    "Policy Code": "PR-GCP-0070-TRF",
+    "Policy Code": "PR-GCP-TRF-INST-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",

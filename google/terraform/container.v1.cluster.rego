@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters
 
 #
@@ -48,7 +52,7 @@ k8s_svc_account = false {
 
 k8s_svc_account_err = "GCP Kubernetes Engine Cluster Nodes have default Service account for Project access" {
     gc_issue["k8s_svc_account"]
-} else = "Kubernetes Engine Cluster attribute nodePools config missing in the resource" {
+} else = "Kubernetes Engine Cluster attribute management config missing in the resource" {
     gc_attribute_absence["k8s_svc_account"]
 }
 
@@ -928,7 +932,7 @@ gc_issue["k8s_node_image"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_node_pool"
     node_config := resource.properties.node_config[_]
-    not startswith(lower(node_config.config.image_type), "cos")
+    not startswith(lower(node_config.image_type), "cos")
 }
 
 k8s_node_image {
@@ -1260,4 +1264,285 @@ k8s_zones_metadata := {
     "Resource Type": "google_container_cluster",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
+}
+
+
+#
+# PR-GCP-TRF-CLT-027
+#
+
+default k8s_channel = null
+
+gc_issue["k8s_channel"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_container_cluster"
+    not resource.properties.release_channel.channel
+}
+
+k8s_channel {
+    lower(input.resources[i].type) == "google_container_cluster"
+    not gc_issue["k8s_channel"]
+}
+
+k8s_channel = false {
+    gc_issue["k8s_channel"]
+}
+
+k8s_channel_err = "Ensure GCP Kubernetes Engine cluster using Release Channel for version management" {
+    gc_issue["k8s_channel"]
+}
+
+k8s_channel_metadata := {
+    "Policy Code": "PR-GCP-TRF-CLT-027",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure GCP Kubernetes Engine cluster using Release Channel for version management",
+    "Policy Description": "This policy identifies GCP Kubernetes Engine clusters that are not using Release Channel for version management. Subscribing to a specific release channel reduces version management complexity. \n\nThe Regular release channel upgrades every few weeks and is for production users who need features not yet offered in the Stable channel. These versions have passed internal validation, but don't have enough historical data to guarantee their stability. Known issues generally have known workarounds.\n\nThe Stable release channel upgrades every few months and is for production users who need stability above all else, and for whom frequent upgrades are too risky. These versions have passed internal validation and have been shown to be stable and reliable in production, based on the observed performance of those clusters.",
+    "Resource Type": "google_container_cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/Shared.Types/ReleaseChannel"
+}
+
+
+#
+# PR-GCP-TRF-CLT-028
+#
+
+default k8s_workload = null
+gc_issue["k8s_workload"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_container_cluster"
+    not startswith(lower(resource.properties.resource_labels["goog-composer-version"]), "composer-1")
+    not resource.properties.workload_identity_config
+    gc_node_pool_issue["k8s_workload"]
+}
+
+
+gc_node_pool_issue["k8s_workload"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_container_node_pool"
+    node_config := resource.properties.node_config[_]
+    lower(node_config.workload_metadata_config[_].mode) != "gke_metadata"
+}
+
+k8s_workload {
+    lower(input.resources[i].type) == "google_container_cluster"
+    not gc_issue["k8s_workload"]
+}
+
+k8s_workload = false {
+    gc_issue["k8s_workload"]
+}
+
+k8s_workload_err = "Ensure GCP Kubernetes Engine cluster workload identity is enabled" {
+    gc_issue["k8s_workload"]
+}
+
+k8s_workload_metadata := {
+    "Policy Code": "PR-GCP-TRF-CLT-028",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure GCP Kubernetes Engine cluster workload identity is enabled",
+    "Policy Description": "This policy identifies GCP Kubernetes Engine clusters for which workload identity is disabled. Manual approaches for authenticating Kubernetes workloads violates the principle of least privilege on a multi-tenanted node when one pod needs to have access to a service, but every other pod on the node that uses the service account does not. Enabling Workload Identity manages the distribution and rotation of Service account keys for the workloads to use.",
+    "Resource Type": "google_container_cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/NodeConfig"
+}
+
+
+#
+# PR-GCP-TRF-CLT-029
+#
+
+default k8s_shield_node = null
+
+gc_issue["k8s_shield_node"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_container_cluster"
+    has_property(resource.properties, "enable_shielded_nodes")
+    resource.properties.enable_shielded_nodes == false
+}
+
+k8s_shield_node {
+    lower(input.resources[i].type) == "google_container_cluster"
+    not gc_issue["k8s_shield_node"]
+}
+
+k8s_shield_node = false {
+    gc_issue["k8s_shield_node"]
+}
+
+k8s_shield_node_err = "Ensure GCP Kubernetes cluster Shielded GKE Nodes feature enabled" {
+    gc_issue["k8s_shield_node"]
+}
+
+k8s_shield_node_metadata := {
+    "Policy Code": "PR-GCP-TRF-CLT-029",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure GCP Kubernetes cluster Shielded GKE Nodes feature enabled",
+    "Policy Description": "This policy identifies GCP Kubernetes clusters for which the Shielded GKE Nodes feature is not enabled. Shielded GKE nodes protect clusters against boot- or kernel-level malware or rootkits\nwhich persist beyond infected OS. It is recommended to enable Shielded GKE Nodes for all the Kubernetes clusters.\n\nFMI: https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes",
+    "Resource Type": "google_container_cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters#Cluster.ShieldedNodes"
+}
+
+
+
+#
+# PR-GCP-TRF-CLT-030
+#
+
+default k8s_node_autorepair = null
+
+gc_issue["k8s_node_autorepair"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_container_node_pool"
+    management := resource.properties.management[_]
+    not management.auto_repair
+}
+
+k8s_node_autorepair {
+    lower(input.resources[i].type) == "google_container_node_pool"
+    not gc_issue["k8s_node_autorepair"]
+}
+
+k8s_node_autorepair = false {
+    gc_issue["k8s_node_autorepair"]
+}
+
+k8s_node_autorepair_err = "Ensure GCP Kubernetes cluster node auto-repair configuration enabled" {
+    gc_issue["k8s_node_autorepair"]
+}
+
+k8s_node_autorepair_metadata := {
+    "Policy Code": "PR-GCP-TRF-CLT-030",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure GCP Kubernetes cluster node auto-repair configuration enabled",
+    "Policy Description": "This policy identifies GCP Kubernetes cluster nodes with auto-repair configuration disabled. GKE's node auto-repair feature helps you keep the nodes in your cluster in a healthy, running state. When enabled, GKE makes periodic checks on the health state of each node in your cluster. If a node fails consecutive health checks over an extended time period, GKE initiates a repair process for that node.\n\nFMI: https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-repair",
+    "Resource Type": "google_container_node_pool",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/NodeManagement"
+}
+
+
+#
+# PR-GCP-TRF-CLT-031
+#
+
+default k8s_node_autoupgrade = null
+
+gc_issue["k8s_node_autoupgrade"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_container_node_pool"
+    management := resource.properties.management[_]
+    not management.auto_upgrade
+}
+
+k8s_node_autoupgrade {
+    lower(input.resources[i].type) == "google_container_node_pool"
+    not gc_issue["k8s_node_autoupgrade"]
+}
+
+k8s_node_autoupgrade = false {
+    gc_issue["k8s_node_autoupgrade"]
+}
+
+k8s_node_autoupgrade_err = "Ensure GCP Kubernetes cluster node auto-upgrade configuration enabled" {
+    gc_issue["k8s_node_autoupgrade"]
+}
+
+k8s_node_autoupgrade_metadata := {
+    "Policy Code": "PR-GCP-TRF-CLT-031",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure GCP Kubernetes cluster node auto-upgrade configuration enabled",
+    "Policy Description": "This policy identifies GCP Kubernetes cluster nodes with auto-upgrade configuration disabled. Node auto-upgrades help you keep the nodes in your cluster up to date with the cluster master version when your master is updated on your behalf. When you create a new cluster using Google Cloud Platform Console, node auto-upgrade is enabled by default.\n\nFMI: https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades",
+    "Resource Type": "google_container_node_pool",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/NodeManagement"
+}
+
+
+#
+# PR-GCP-TRF-CLT-032
+#
+
+default k8s_secure_boot = null
+
+gc_issue["k8s_secure_boot"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_container_node_pool"
+    node_pool := resource.properties.node_config[_]
+    not node_pool.shielded_instance_config[_].enable_secure_boot
+}
+
+k8s_secure_boot {
+    lower(input.resources[i].type) == "google_container_node_pool"
+    not gc_issue["k8s_secure_boot"]
+}
+
+k8s_secure_boot = false {
+    gc_issue["k8s_secure_boot"]
+}
+
+k8s_secure_boot_err = "Ensure GCP Kubernetes cluster shielded GKE node with Secure Boot enabled" {
+    gc_issue["k8s_secure_boot"]
+}
+
+k8s_secure_boot_metadata := {
+    "Policy Code": "PR-GCP-TRF-CLT-032",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure GCP Kubernetes cluster shielded GKE node with Secure Boot enabled",
+    "Policy Description": "This policy identifies GCP Kubernetes cluster shielded GKE nodes with Secure Boot disabled. An attacker may seek to alter boot components to persist malware or rootkits during system initialization. It is recommended to enable Secure Boot for Shielded GKE Nodes to verify the digital signature of node boot components.",
+    "Resource Type": "google_container_node_pool",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/NodeManagement"
+}
+
+
+#
+# PR-GCP-TRF-CLT-033
+#
+
+default k8s_integrity_monitor = null
+
+gc_issue["k8s_integrity_monitor"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_container_node_pool"
+    node_pool := resource.properties.node_config[_]
+    not node_pool.shielded_instance_config[_].enable_integrity_monitoring
+}
+
+k8s_integrity_monitor {
+    lower(input.resources[i].type) == "google_container_node_pool"
+    not gc_issue["k8s_integrity_monitor"]
+}
+
+k8s_integrity_monitor = false {
+    gc_issue["k8s_integrity_monitor"]
+}
+
+k8s_integrity_monitor_err = "Ensure GCP Kubernetes cluster shielded GKE node with integrity monitoring enabled" {
+    gc_issue["k8s_integrity_monitor"]
+}
+
+k8s_integrity_monitor_metadata := {
+    "Policy Code": "PR-GCP-TRF-CLT-033",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure GCP Kubernetes cluster shielded GKE node with integrity monitoring enabled",
+    "Policy Description": "This policy identifies GCP Kubernetes cluster shielded GKE nodes that are not enabled with Integrity Monitoring. Integrity Monitoring provides active alerting for Shielded GKE nodes which allows administrators to respond to integrity failures and prevent compromised nodes from being deployed into the cluster.",
+    "Resource Type": "google_container_node_pool",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/NodeManagement"
 }
