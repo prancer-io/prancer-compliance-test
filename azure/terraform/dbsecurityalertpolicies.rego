@@ -98,12 +98,12 @@ azure_issue["dbsec_threat_retention"] {
     count([c | r := input.resources[_];
               r.type == "azurerm_mssql_server_security_alert_policy";
               contains(r.properties.server_name, resource.properties.compiletime_identity);
-              to_number(r.properties.retention_days) > 90;
+              to_number(r.properties.retention_days) >= 90;
               c := 1]) == 0
     count([c | r := input.resources[_];
               r.type == "azurerm_mssql_server_security_alert_policy";
               contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
-              to_number(r.properties.retention_days) > 90;
+              to_number(r.properties.retention_days) >= 90;
               c := 1]) == 0
 }
 
@@ -129,10 +129,10 @@ dbsec_threat_retention = false {
     azure_issue["dbsec_threat_retention"]
 }
 
-dbsec_threat_retention_err = "azurerm_mssql_server_security_alert_policy resource or its property 'retention_days' need to be exist. Its missing from the resource. Please set the value to '91' after property addition." {
+dbsec_threat_retention_err = "azurerm_mssql_server_security_alert_policy resource or its property 'retention_days' need to be exist. Its missing from the resource. Please set the value to '90' after property addition." {
     lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["dbsec_threat_retention"]
-} else = "Azure SQL Database Server security alert policies thread retention is currently not configured for more than 90 days" {
+} else = "Azure SQL Database Server security alert policies thread retention is currently not configured for 90 days or more" {
     lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["dbsec_threat_retention"]
 }
@@ -142,8 +142,8 @@ dbsec_threat_retention_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure SQL Database Server security alert policies thread retention should be configured for more than 90 days",
-    "Policy Description": "This policy identifies SQL Databases which have Threat Retention less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days.",
+    "Policy Title": "Azure SQL Database Server security alert policies thread retention should be configured for 90 days or more",
+    "Policy Description": "This policy identifies SQL Databases which have Threat Retention configured for less than 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be 90 days or more.",
     "Resource Type": "azurerm_mssql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy"

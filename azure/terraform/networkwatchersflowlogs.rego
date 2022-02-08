@@ -149,7 +149,7 @@ azure_issue["netwatch_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_network_watcher_flow_log"
     retention_policy := resource.properties.retention_policy[_]
-    to_number(retention_policy.days) <= 90
+    to_number(retention_policy.days) < 90
 }
 
 netwatch_log_retention {
@@ -168,7 +168,7 @@ netwatch_log_retention = false {
 
 netwatch_log_retention_err = "azurerm_network_watcher_flow_log property 'retention_policy.enabled' or 'retention_policy.days' or both are missing from the resource." {
     azure_attribute_absence["netwatch_log_retention"]
-} else = "Azure Network Watcher NSG flow logs retention is currently not greater than 90 days" {
+} else = "Azure Network Watcher NSG flow logs retention is currently not equal or greater than 90 days" {
     azure_issue["netwatch_log_retention"]
 }
 
@@ -178,8 +178,8 @@ netwatch_log_retention_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Watcher Network Security Group (NSG) flow logs retention should be greater than 90 days",
-    "Policy Description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs and set the log retention period to at least 90 days.",
+    "Policy Title": "Azure Network Watcher Network Security Group (NSG) flow logs retention should be 90 days or more",
+    "Policy Description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is less than 90 days. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs and set the log retention period to at least 90 days.",
     "Resource Type": "azurerm_network_watcher_flow_log",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher_flow_log"
