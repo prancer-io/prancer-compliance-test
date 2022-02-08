@@ -126,6 +126,45 @@ storage_versioning_metadata := {
     "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
 }
 
+
+#
+# PR-GCP-TRF-BKT-003
+#
+
+default storage_stack_logging = null
+
+gc_issue["storage_stack_logging"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_storage_bucket"
+    not resource.properties.logging
+}
+
+storage_stack_logging {
+    lower(input.resources[i].type) == "google_storage_bucket"
+    not gc_issue["storage_stack_logging"]
+}
+
+storage_stack_logging = false {
+    gc_issue["storage_stack_logging"]
+}
+
+storage_stack_logging_err = "Logging on the Stackdriver exported Bucket is disabled" {
+    gc_issue["storage_stack_logging"]
+}
+
+storage_stack_logging_metadata := {
+    "Policy Code": "PR-GCP-TRF-BKT-003",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "terraform",
+    "Policy Title": "Logging on the Stackdriver exported Bucket is disabled",
+    "Policy Description": "Checks to ensure that logging is enabled on a Stackdriver exported Bucket. Enabled logging provides information about all the requests made on the bucket.",
+    "Resource Type": "google_storage_bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
+
 #
 # PR-GCP-TRF-BKT-004
 #
@@ -159,8 +198,16 @@ storage_logging {
 
 storage_logging = false {
     gc_issue["storage_logging"]
+}
+
+storage_logging = false {
+    gc_attribute_absence["storage_logging"]
+}
+
+storage_logging_err = "Storage Bucket does not have Access and Storage Logging enabled" {
+    gc_issue["storage_stack_logging"]
 } else = "Storage Bucket does not have Access and Storage Logging enabled" {
-    gc_issue["storage_logging"]
+    gc_attribute_absence["storage_logging"]
 }
 
 storage_logging_metadata := {
@@ -330,7 +377,7 @@ gc_attribute_absence["storage_logging_itself"] {
 gc_issue["storage_logging_itself"] {
     resource := input.resources[i]
     lower(resource.type) == "google_storage_bucket"
-    contains(resource.properties.logging.log_bucket, concat_string("google_storage_bucket.", resource.name)
+    contains(resource.properties.logging.log_bucket, concat_string("google_storage_bucket.", resource.name))
 }
 
 gc_issue["storage_logging_itself"] {
@@ -392,6 +439,7 @@ gc_issue["storage_bucket_lock"] {
 storage_bucket_lock {
     lower(input.resources[i].type) == "google_storage_bucket"
     not gc_issue["storage_bucket_lock"]
+    not gc_attribute_absence["storage_bucket_lock"]
 }
 
 storage_bucket_lock = false {
@@ -455,7 +503,7 @@ storage_bucket_retention_enable_metadata := {
     "Policy Code": "PR-GCP-TRF-BKT-010",
     "Type": "IaC",
     "Product": "GCP",
-    "Language": "GCP deployment",
+    "Language": "Terraform",
     "Policy Title": "Ensure GCP Log bucket retention policy is enabled",
     "Policy Description": "This policy identifies GCP log buckets for which retention policy is not enabled. Enabling retention policies on log buckets will protect logs stored in cloud storage buckets from being overwritten or accidentally deleted. It is recommended to configure a data retention policy for these cloud storage buckets to store the activity logs for forensics and security investigations.",
     "Resource Type": "google_storage_bucket",

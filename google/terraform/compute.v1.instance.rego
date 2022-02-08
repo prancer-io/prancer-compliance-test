@@ -1,5 +1,10 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
+
 # https://cloud.google.com/compute/docs/reference/rest/v1/instances
 
 #
@@ -40,7 +45,7 @@ vm_ip_forward_metadata := {
 }
 
 #
-# PR-GCP-0071-TRF
+# PR-GCP-TRF-INST-002
 #
 
 default vm_block_project_ssh_keys = null
@@ -65,7 +70,7 @@ vm_block_project_ssh_keys_err = "GCP VM instances have block project-wide SSH ke
 }
 
 vm_block_project_ssh_keys_metadata := {
-    "Policy Code": "PR-GCP-0071-TRF",
+    "Policy Code": "PR-GCP-TRF-INST-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -77,7 +82,7 @@ vm_block_project_ssh_keys_metadata := {
 }
 
 #
-# PR-GCP-0072-TRF
+# PR-GCP-TRF-INST-003
 #
 
 default vm_serial_port = null
@@ -102,7 +107,7 @@ vm_serial_port_err = "GCP VM instances have serial port access enabled" {
 }
 
 vm_serial_port_metadata := {
-    "Policy Code": "PR-GCP-0072-TRF",
+    "Policy Code": "PR-GCP-TRF-INST-003",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -114,7 +119,7 @@ vm_serial_port_metadata := {
 }
 
 #
-# PR-GCP-0091-TRF
+# PR-GCP-TRF-INST-004
 #
 
 default vm_pre_emptible = null
@@ -157,7 +162,7 @@ vm_pre_emptible_err = "VM Instances enabled with Pre-Emptible termination" {
 }
 
 vm_pre_emptible_metadata := {
-    "Policy Code": "PR-GCP-0091-TRF",
+    "Policy Code": "PR-GCP-TRF-INST-004",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -169,7 +174,7 @@ vm_pre_emptible_metadata := {
 }
 
 #
-# PR-GCP-0092-TRF
+# PR-GCP-TRF-INST-005
 #
 
 default vm_metadata = null
@@ -200,7 +205,7 @@ vm_metadata_err = "VM Instances without any Custom metadata information" {
 }
 
 vm_metadata_metadata := {
-    "Policy Code": "PR-GCP-0092-TRF",
+    "Policy Code": "PR-GCP-TRF-INST-005",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -212,7 +217,7 @@ vm_metadata_metadata := {
 }
 
 #
-# PR-GCP-0093-TRF
+# PR-GCP-TRF-INST-006
 #
 
 default vm_no_labels = null
@@ -243,7 +248,7 @@ vm_no_labels_err = "VM Instances without any Label information" {
 }
 
 vm_no_labels_metadata := {
-    "Policy Code": "PR-GCP-0093-TRF",
+    "Policy Code": "PR-GCP-TRF-INST-006",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -255,7 +260,7 @@ vm_no_labels_metadata := {
 }
 
 #
-# PR-GCP-0094-TRF
+# PR-GCP-TRF-INST-007
 #
 
 default vm_info = null
@@ -304,7 +309,7 @@ vm_info_err = "VM instances without metadata, zone or label information" {
 }
 
 vm_info_metadata := {
-    "Policy Code": "PR-GCP-0094-TRF",
+    "Policy Code": "PR-GCP-TRF-INST-007",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -358,7 +363,7 @@ compute_configure_default_service_metadata := {
 
 
 #
-# PR-GCP-GDF-INST-012
+# PR-GCP-TRF-INST-012
 #
 
 default compute_default_service_full_access = null
@@ -387,10 +392,10 @@ compute_default_service_full_access_err = "Ensure GCP VM instance not using a de
 }
 
 compute_default_service_full_access_metadata := {
-    "Policy Code": "PR-GCP-GDF-INST-012",
+    "Policy Code": "PR-GCP-TRF-INST-012",
     "Type": "IaC",
     "Product": "GCP",
-    "Language": "GCP deployment",
+    "Language": "Terraform",
     "Policy Title": "Ensure GCP VM instance not using a default service account with full access to all Cloud APIs",
     "Policy Description": "This policy identifies the GCP VM instances which are using a default service account with full access to all Cloud APIs. To compliant with the principle of least privileges and prevent potential privilege escalation it is recommended that instances are not assigned to default service account 'Compute Engine default service account' with scope 'Allow full access to all Cloud APIs'.",
     "Resource Type": "google_compute_instance",
@@ -400,7 +405,7 @@ compute_default_service_full_access_metadata := {
 
 
 #
-# PR-GCP-GDF-INST-013
+# PR-GCP-TRF-INST-013
 #
 
 default compute_shielded_vm = null
@@ -411,7 +416,7 @@ gc_issue["compute_shielded_vm"] {
     lower(resource.properties.status) == "running"
     not startswith(lower(resource.properties.name), "gke-")
     shielded_instance_config := resource.properties.shielded_instance_config[_]
-    not shielded_instance_config[_].enable_vtpm
+    not shielded_instance_config.enable_vtpm
 }
 
 gc_issue["compute_shielded_vm"] {
@@ -420,7 +425,7 @@ gc_issue["compute_shielded_vm"] {
     lower(resource.properties.status) == "running"
     not startswith(lower(resource.properties.name), "gke-")
     shielded_instance_config := resource.properties.shielded_instance_config[_]
-    not shielded_instance_config[_].enable_integrity_monitoring
+    not shielded_instance_config.enable_integrity_monitoring
 }
 
 compute_shielded_vm {
@@ -437,10 +442,10 @@ compute_shielded_vm_err = "Ensure GCP VM instance with Shielded VM features enab
 }
 
 compute_shielded_vm_metadata := {
-    "Policy Code": "PR-GCP-GDF-INST-013",
+    "Policy Code": "PR-GCP-TRF-INST-013",
     "Type": "IaC",
     "Product": "GCP",
-    "Language": "GCP deployment",
+    "Language": "Terraform",
     "Policy Title": "Ensure GCP VM instance with Shielded VM features enabled",
     "Policy Description": "This policy identifies VM instances which have Shielded VM features disabled. Shielded VMs are virtual machines (VMs) on Google Cloud Platform hardened by a set of security controls that help defend against rootkits and bootkits. Shielded VM's verifiable integrity is achieved through the use of Secure Boot, virtual trusted platform module (vTPM)-enabled Measured Boot, and integrity monitoring. Shielded VM instances run firmware which is signed and verified using Google's Certificate Authority, ensuring that the instance's firmware is unmodified and establishing the root of trust for Secure Boot.\n\nNOTE: You can only enable Shielded VM options on instances that have Shielded VM support. This policy reports VM instances that have Shielded VM support and are disabled with the Shielded VM features.",
     "Resource Type": "google_compute_instance",
@@ -448,8 +453,9 @@ compute_shielded_vm_metadata := {
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
 }
 
+
 #
-# PR-GCP-GDF-INST-014
+# PR-GCP-TRF-INST-014
 #
 
 default compute_instance_external_ip = null
@@ -477,10 +483,10 @@ compute_instance_external_ip_err = "Ensure GCP VM instance not have the external
 }
 
 compute_instance_external_ip_metadata := {
-    "Policy Code": "PR-GCP-GDF-INST-014",
+    "Policy Code": "PR-GCP-TRF-INST-014",
     "Type": "IaC",
     "Product": "GCP",
-    "Language": "GCP deployment",
+    "Language": "Terraform",
     "Policy Title": "Ensure GCP VM instance not have the external IP address",
     "Policy Description": "This policy identifies the VM instances with the external IP address associated. To reduce your attack surface, VM instances should not have public/external IP addresses. Instead, instances should be configured behind load balancers, to minimize the instance's exposure to the internet.\n\nNOTE: This policy will not report instances created by GKE because some of them have external IP addresses and cannot be changed by editing the instance settings. Instances created by GKE should be excluded. These instances have names that start with 'gke-' and contains 'default-pool'.",
     "Resource Type": "google_compute_instance",

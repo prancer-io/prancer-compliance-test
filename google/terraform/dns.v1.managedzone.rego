@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/dns/docs/reference/v1/managedZones
 
 #
-# PR-GCP-0003-TRF
+# PR-GCP-TRF-MZ-001
 #
 
 default dnssec_state = null
@@ -54,7 +54,7 @@ dnssec_state_err = "GCP Cloud DNS has DNSSEC disabled" {
 }
 
 dnssec_state_metadata := {
-    "Policy Code": "PR-GCP-0003-TRF",
+    "Policy Code": "PR-GCP-TRF-MZ-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -66,7 +66,7 @@ dnssec_state_metadata := {
 }
 
 #
-# PR-GCP-0004-TRF
+# PR-GCP-TRF-MZ-002
 #
 
 default dnssec_key_rsasha1 = null
@@ -118,7 +118,7 @@ dnssec_key_rsasha1_err = "GCP Cloud DNS zones using RSASHA1 algorithm for DNSSEC
 }
 
 dnssec_key_rsasha1_metadata := {
-    "Policy Code": "PR-GCP-0004-TRF",
+    "Policy Code": "PR-GCP-TRF-MZ-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -130,7 +130,7 @@ dnssec_key_rsasha1_metadata := {
 }
 
 #
-# PR-GCP-0005-TRF
+# PR-GCP-TRF-MZ-003
 #
 
 default dnssec_zone_rsasha1 = null
@@ -183,7 +183,7 @@ dnssec_zone_rsasha1_err = "GCP Cloud DNS zones using RSASHA1 algorithm for DNSSE
 }
 
 dnssec_zone_rsasha1_metadata := {
-    "Policy Code": "PR-GCP-0005-TRF",
+    "Policy Code": "PR-GCP-TRF-MZ-003",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",

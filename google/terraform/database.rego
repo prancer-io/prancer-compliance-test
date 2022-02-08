@@ -64,7 +64,7 @@ gc_issue["storage_psql_log_connections"] {
 }
 
 storage_psql_log_connections {
-    lower(input.resources[i].type) == available_types[_]
+    lower(input.resources[i].type) == "google_sql_database_instance"
     not gc_issue["storage_psql_log_connections"]
 }
 
@@ -111,7 +111,7 @@ gc_issue["storage_psql_log_disconnections"] {
 }
 
 storage_psql_log_disconnections {
-    lower(input.resources[i].type) == available_types[_]
+    lower(input.resources[i].type) == "google_sql_database_instance"
     not gc_issue["storage_psql_log_disconnections"]
 }
 
@@ -158,7 +158,7 @@ gc_issue["storage_psql_log_duration"] {
 }
 
 storage_psql_log_duration {
-    lower(input.resources[i].type) == available_types[_]
+    lower(input.resources[i].type) == "google_sql_database_instance"
     not gc_issue["storage_psql_log_duration"]
 }
 
@@ -205,7 +205,7 @@ gc_issue["storage_psql_log_error_verbosity"] {
 }
 
 storage_psql_log_error_verbosity {
-    lower(input.resources[i].type) == available_types[_]
+    lower(input.resources[i].type) == "google_sql_database_instance"
     not gc_issue["storage_psql_log_error_verbosity"]
 }
 
@@ -252,7 +252,7 @@ gc_issue["storage_psql_log_executor_stats"] {
 }
 
 storage_psql_log_executor_stats {
-    lower(input.resources[i].type) == available_types[_]
+    lower(input.resources[i].type) == "google_sql_database_instance"
     not gc_issue["storage_psql_log_executor_stats"]
 }
 
@@ -529,7 +529,7 @@ gc_issue["storage_psql_log_planner_stats"] {
 }
 
 storage_psql_log_planner_stats {
-    lower(input.resources[i].type) == available_types[_]
+    lower(input.resources[i].type) == "google_sql_database_instance"
     not gc_issue["storage_psql_log_planner_stats"]
 }
 
@@ -579,7 +579,7 @@ gc_issue["storage_psql_log_statement"] {
 }
 
 storage_psql_log_statement {
-    lower(input.resources[i].type) == available_types[_]
+    lower(input.resources[i].type) == "google_sql_database_instance"
     not gc_issue["storage_psql_log_statement"]
 }
 
@@ -628,7 +628,7 @@ gc_issue["storage_psql_log_statement_stats"] {
 }
 
 storage_psql_log_statement_stats {
-    lower(input.resources[i].type) == available_types[_]
+    lower(input.resources[i].type) == "google_sql_database_instance"
     not gc_issue["storage_psql_log_statement_stats"]
 }
 
@@ -675,7 +675,7 @@ gc_issue["storage_psql_log_temp_files"] {
 }
 
 storage_psql_log_temp_files {
-    lower(input.resources[i].type) == available_types[_]
+    lower(input.resources[i].type) == "google_sql_database_instance"
     not gc_issue["storage_psql_log_temp_files"]
 }
 
@@ -711,7 +711,6 @@ gc_issue["storage_sql_skip_show_database"] {
     lower(resource.type) == "google_sql_database_instance"
     contains(lower(resource.properties.database_version), "mysql")
     settings := resource.properties.settings[_]
-    settings := resource.properties.settings[_]
     count([c| contains(lower(settings.database_flags[_].name), "skip_show_database"); c:=1 ]) == 0
 }
 
@@ -719,7 +718,6 @@ gc_issue["storage_sql_skip_show_database"] {
     resource := input.resources[i]
     lower(resource.type) == "google_sql_database_instance"
     contains(lower(resource.properties.database_version), "mysql")
-    settings := resource.properties.settings[_]
     settings := resource.properties.settings[_]
     count([c| contains(lower(settings.database_flags[j].name), "skip_show_database"); not contains(lower(settings.database_flags[j].value), "on"); c:=1 ]) != 0
 }
@@ -761,7 +759,6 @@ gc_issue["storage_sql_local_infile"] {
     lower(resource.type) == "google_sql_database_instance"
     contains(lower(resource.properties.database_version), "mysql")
     settings := resource.properties.settings[_]
-    settings := resource.properties.settings[_]
     count([c| contains(lower(settings.database_flags[_].name), "local_infile"); c:=1 ]) == 0
 }
 
@@ -769,7 +766,6 @@ gc_issue["storage_sql_local_infile"] {
     resource := input.resources[i]
     lower(resource.type) == "google_sql_database_instance"
     contains(lower(resource.properties.database_version), "mysql")
-    settings := resource.properties.settings[_]
     settings := resource.properties.settings[_]
     count([c| contains(lower(settings.database_flags[j].name), "local_infile"); contains(lower(settings.database_flags[j].value), "on"); c:=1 ]) != 0
 }
@@ -866,7 +862,6 @@ gc_issue["storage_sql_flag_authentication"] {
     lower(resource.type) == "google_sql_database_instance"
     contains(lower(resource.properties.database_version), "sqlserver")
     settings := resource.properties.settings[_]
-    settings := resource.properties.settings[_]
     count([c| contains(lower(settings.database_flags[j].name), "contained database authentication"); contains(lower(settings.database_flags[j].value), "on"); c:=1 ]) != 0
 }
 
@@ -906,7 +901,6 @@ gc_issue["storage_sql_owner_chaining"] {
     resource := input.resources[i]
     lower(resource.type) == "google_sql_database_instance"
     contains(lower(resource.properties.database_version), "sqlserver")
-    settings := resource.properties.settings[_]
     settings := resource.properties.settings[_]
     count([c| contains(lower(settings.database_flags[j].name), "cross db ownership chaining"); contains(lower(settings.database_flags[j].value), "on"); c:=1 ]) != 0
 }
@@ -1022,7 +1016,7 @@ storage_sql_public_ip_metadata := {
 
 
 #
-# PR-GCP-GDF-SQL-008
+# PR-GCP-TRF-SQL-008
 #
 
 default storage_sql_overly_permissive = null
@@ -1053,7 +1047,7 @@ storage_sql_overly_permissive_err = "Ensure GCP SQL instance is not configured w
 }
 
 storage_sql_overly_permissive_metadata := {
-    "Policy Code": "PR-GCP-GDF-SQL-008",
+    "Policy Code": "PR-GCP-TRF-SQL-008",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "terraform",
@@ -1079,7 +1073,6 @@ gc_issue["storage_sql_external_script"] {
     lower(resource.type) == "google_sql_database_instance"
     lower(resource.properties.database_version) == "sqlserver"
     settings := resource.properties.settings[_]
-    settings := resource.properties.settings[_]
     count([c| contains(lower(settings.database_flags[_].name), "external scripts enabled"); c:=1 ]) == 0
 }
 
@@ -1087,7 +1080,6 @@ gc_issue["storage_sql_external_script"] {
     resource := input.resources[i]
     lower(resource.type) == "google_sql_database_instance"
     lower(resource.properties.database_version) == "sqlserver"
-    settings := resource.properties.settings[_]
     settings := resource.properties.settings[_]
     count([c| contains(lower(settings.database_flags[j].name), "external scripts enabled"); contains(lower(settings.database_flags[j].value), "on"); c:=1 ]) != 0
 }
@@ -1120,7 +1112,7 @@ storage_sql_external_script_metadata := {
 
 
 #
-# PR-GCP-GDF-SQL-010
+# PR-GCP-TRF-SQL-010
 #
 
 default storage_sql_flag_remote = null
@@ -1157,7 +1149,7 @@ storage_sql_flag_remote_err = "Ensure GCP SQL server instance database flag remo
 }
 
 storage_sql_flag_remote_metadata := {
-    "Policy Code": "PR-GCP-GDF-SQL-010",
+    "Policy Code": "PR-GCP-TRF-SQL-010",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "terraform",
@@ -1170,7 +1162,7 @@ storage_sql_flag_remote_metadata := {
 
 
 #
-# PR-GCP-GDF-SQL-011
+# PR-GCP-TRF-SQL-011
 #
 
 default storage_sql_user_connection = null
@@ -1199,7 +1191,7 @@ storage_sql_user_connection_err = "Ensure GCP SQL server instance database flag 
 }
 
 storage_sql_user_connection_metadata := {
-    "Policy Code": "PR-GCP-GDF-SQL-011",
+    "Policy Code": "PR-GCP-TRF-SQL-011",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "terraform",
@@ -1212,7 +1204,7 @@ storage_sql_user_connection_metadata := {
 
 
 #
-# PR-GCP-GDF-SQL-012
+# PR-GCP-TRF-SQL-012
 #
 
 default storage_sql_user_option = null
@@ -1241,7 +1233,7 @@ storage_sql_user_option_err = "Ensure GCP SQL server instance database flag user
 }
 
 storage_sql_user_option_metadata := {
-    "Policy Code": "PR-GCP-GDF-SQL-012",
+    "Policy Code": "PR-GCP-TRF-SQL-012",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "terraform",
@@ -1254,7 +1246,7 @@ storage_sql_user_option_metadata := {
 
 
 #
-# PR-GCP-GDF-PSQL-015
+# PR-GCP-TRF-PSQL-015
 #
 
 default storage_psql_log_checkpoints = null
@@ -1291,7 +1283,7 @@ storage_psql_log_checkpoints_err = "Ensure GCP PostgreSQL instance with log_chec
 }
 
 storage_psql_log_checkpoints_metadata := {
-    "Policy Code": "PR-GCP-GDF-PSQL-015",
+    "Policy Code": "PR-GCP-TRF-PSQL-015",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "terraform",
