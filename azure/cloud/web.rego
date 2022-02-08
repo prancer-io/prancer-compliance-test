@@ -1092,6 +1092,7 @@ default web_service_net_framework_latest = null
 
 #Defaults to v4.0
 latest_dotnet_framework_version := "v6.0"
+default_dotnet_framework_version := "v4.0"
 
 azure_attribute_absence ["web_service_net_framework_latest"] {
     count([c | lower(input.resources[_].type) == "microsoft.web/sites/config"; c := 1]) == 0
@@ -1116,6 +1117,7 @@ azure_issue["web_service_net_framework_latest"] {
               lower(r.type) == "microsoft.web/sites/config";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.netFrameworkVersion) != latest_dotnet_framework_version;
+              lower(r.properties.netFrameworkVersion) != default_dotnet_framework_version;
               c := 1]) > 0
 }
 
@@ -1135,6 +1137,7 @@ azure_inner_issue["web_service_net_framework_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     lower(resource.properties.siteConfig.netFrameworkVersion) != latest_dotnet_framework_version
+    lower(resource.properties.siteConfig.netFrameworkVersion) != default_dotnet_framework_version
 }
 
 # we need to make it pass if property is missing, as microsoft.web/sites may not need dot net framework
