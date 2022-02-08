@@ -1599,10 +1599,6 @@ k8s_channel_err = "Ensure GCP Kubernetes Engine cluster using Release Channel fo
     gc_issue["k8s_channel"]
 }
 
-k8s_channel_miss_err = "GCP Kubernetes cluster not in redundant zones" {
-    gc_attribute_absence["k8s_channel"]
-}
-
 k8s_channel_metadata := {
     "Policy Code": "PR-GCP-GDF-CLT-027",
     "Type": "IaC",

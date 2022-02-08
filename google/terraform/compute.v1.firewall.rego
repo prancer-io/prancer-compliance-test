@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/compute/docs/reference/rest/v1/firewalls
 
 #
-# PR-GCP-0002-TRF
+# PR-GCP-TRF-FW-001
 #
 
 default firewall_default = null
@@ -94,7 +94,7 @@ firewall_default_miss_err = "GCP vm firewall attribute name missing in the resou
 }
 
 firewall_default_metadata := {
-    "Policy Code": "PR-GCP-0002-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -106,7 +106,7 @@ firewall_default_metadata := {
 }
 
 #
-# PR-GCP-0006-TRF
+# PR-GCP-TRF-FW-002
 #
 
 default firewall_port_53 = null
@@ -207,7 +207,7 @@ firewall_port_53_err = "GCP Firewall rule allows internet traffic to DNS port (5
 }
 
 firewall_port_53_metadata := {
-    "Policy Code": "PR-GCP-0006-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -219,7 +219,7 @@ firewall_port_53_metadata := {
 }
 
 #
-# PR-GCP-0007-TRF
+# PR-GCP-TRF-FW-003
 #
 
 default firewall_port_21 = null
@@ -320,7 +320,7 @@ firewall_port_21_err = "GCP Firewall rule allows internet traffic to FTP port (2
 }
 
 firewall_port_21_metadata := {
-    "Policy Code": "PR-GCP-0007-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-003",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -332,7 +332,7 @@ firewall_port_21_metadata := {
 }
 
 #
-# PR-GCP-0008-TRF
+# PR-GCP-TRF-FW-004
 #
 
 default firewall_port_80 = null
@@ -433,7 +433,7 @@ firewall_port_80_err = "GCP Firewall rule allows internet traffic to HTTP port (
 }
 
 firewall_port_80_metadata := {
-    "Policy Code": "PR-GCP-0008-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-004",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -445,7 +445,7 @@ firewall_port_80_metadata := {
 }
 
 #
-# PR-GCP-0009-TRF
+# PR-GCP-TRF-FW-005
 #
 
 default firewall_port_445 = null
@@ -546,7 +546,7 @@ firewall_port_445_err = "GCP Firewall rule allows internet traffic to Microsoft-
 }
 
 firewall_port_445_metadata := {
-    "Policy Code": "PR-GCP-0009-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-005",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -558,7 +558,7 @@ firewall_port_445_metadata := {
 }
 
 #
-# PR-GCP-0010-TRF
+# PR-GCP-TRF-FW-006
 #
 
 default firewall_port_27017 = null
@@ -659,7 +659,7 @@ firewall_port_27017_err = "GCP Firewall rule allows internet traffic to MongoDB 
 }
 
 firewall_port_27017_metadata := {
-    "Policy Code": "PR-GCP-0010-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-006",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -671,7 +671,7 @@ firewall_port_27017_metadata := {
 }
 
 #
-# PR-GCP-0011-TRF
+# PR-GCP-TRF-FW-007
 #
 
 default firewall_port_3306 = null
@@ -772,7 +772,7 @@ firewall_port_3306_err = "GCP Firewall rule allows internet traffic to MySQL DB 
 }
 
 firewall_port_3306_metadata := {
-    "Policy Code": "PR-GCP-0011-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-007",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -784,7 +784,7 @@ firewall_port_3306_metadata := {
 }
 
 #
-# PR-GCP-0012-TRF
+# PR-GCP-TRF-FW-008
 #
 
 default firewall_port_139 = null
@@ -885,7 +885,7 @@ firewall_port_139_err = "GCP Firewall rule allows internet traffic to NetBIOS-SS
 }
 
 firewall_port_139_metadata := {
-    "Policy Code": "PR-GCP-0012-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-008",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -897,7 +897,7 @@ firewall_port_139_metadata := {
 }
 
 #
-# PR-GCP-0013-TRF
+# PR-GCP-TRF-FW-009
 #
 
 default firewall_port_1521 = null
@@ -998,7 +998,7 @@ firewall_port_1521_err = "GCP Firewall rule allows internet traffic to Oracle DB
 }
 
 firewall_port_1521_metadata := {
-    "Policy Code": "PR-GCP-0013-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-009",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1010,7 +1010,7 @@ firewall_port_1521_metadata := {
 }
 
 #
-# PR-GCP-0014-TRF
+# PR-GCP-TRF-FW-010
 #
 
 default firewall_port_110 = null
@@ -1111,7 +1111,7 @@ firewall_port_110_err = "GCP Firewall rule allows internet traffic to POP3 port 
 }
 
 firewall_port_110_metadata := {
-    "Policy Code": "PR-GCP-0014-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-010",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1123,7 +1123,7 @@ firewall_port_110_metadata := {
 }
 
 #
-# PR-GCP-0015-TRF
+# PR-GCP-TRF-FW-011
 #
 
 default firewall_port_5432 = null
@@ -1224,7 +1224,7 @@ firewall_port_5432_err = "GCP Firewall rule allows internet traffic to PostgreSQ
 }
 
 firewall_port_5432_metadata := {
-    "Policy Code": "PR-GCP-0015-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-011",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1236,7 +1236,7 @@ firewall_port_5432_metadata := {
 }
 
 #
-# PR-GCP-0016-TRF
+# PR-GCP-TRF-FW-012
 #
 
 default firewall_port_3389 = null
@@ -1337,7 +1337,7 @@ firewall_port_3389_err = "GCP Firewall rule allows internet traffic to RDP port 
 }
 
 firewall_port_3389_metadata := {
-    "Policy Code": "PR-GCP-0016-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-012",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1349,7 +1349,7 @@ firewall_port_3389_metadata := {
 }
 
 #
-# PR-GCP-0017-TRF
+# PR-GCP-TRF-FW-013
 #
 
 default firewall_port_25 = null
@@ -1450,7 +1450,7 @@ firewall_port_25_err = "GCP Firewall rule allows internet traffic to SMTP port (
 }
 
 firewall_port_25_metadata := {
-    "Policy Code": "PR-GCP-0017-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-013",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1462,7 +1462,7 @@ firewall_port_25_metadata := {
 }
 
 #
-# PR-GCP-0018-TRF
+# PR-GCP-TRF-FW-014
 #
 
 default firewall_port_22 = null
@@ -1563,7 +1563,7 @@ firewall_port_22_err = "GCP Firewall rule allows internet traffic to SSH port (2
 }
 
 firewall_port_22_metadata := {
-    "Policy Code": "PR-GCP-0018-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-014",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1575,7 +1575,7 @@ firewall_port_22_metadata := {
 }
 
 #
-# PR-GCP-0019-TRF
+# PR-GCP-TRF-FW-015
 #
 
 default firewall_port_23 = null
@@ -1676,7 +1676,7 @@ firewall_port_23_err = "GCP Firewall rule allows internet traffic to Telnet port
 }
 
 firewall_port_23_metadata := {
-    "Policy Code": "PR-GCP-0019-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-015",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1688,7 +1688,7 @@ firewall_port_23_metadata := {
 }
 
 #
-# PR-GCP-0020-TRF
+# PR-GCP-TRF-FW-016
 #
 
 default firewall_inbound = null
@@ -1758,7 +1758,7 @@ firewall_inbound_all_err = "GCP Firewall with Inbound rule overly permissive to 
 }
 
 firewall_inbound_all_metadata := {
-    "Policy Code": "PR-GCP-0020-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-016",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1770,12 +1770,51 @@ firewall_inbound_all_metadata := {
 }
 
 firewall_inbound_metadata := {
-    "Policy Code": "PR-GCP-0021-TRF",
+    "Policy Code": "PR-GCP-TRF-FW-017",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
     "Policy Title": "GCP Firewall with Inbound rule overly permissive to All Traffic",
     "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on all protocols from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
+}
+
+
+
+#
+# PR-GCP-TRF-FW-018
+#
+
+default firewall_logging = null
+
+gc_issue["firewall_logging"] {
+    resource := input.resources[i]
+    lower(resource.type) == "google_compute_firewall"
+    not resource.properties.log_config
+}
+
+firewall_logging {
+    lower(input.resources[i].type) == "google_compute_firewall"
+    not gc_issue["firewall_logging"]
+}
+
+firewall_logging = false {
+    gc_issue["firewall_logging"]
+}
+
+firewall_logging_err = "Ensure GCP Firewall rule logging is enabled" {
+    gc_issue["firewall_logging"]
+}
+
+firewall_logging_metadata := {
+    "Policy Code": "PR-GCP-TRF-FW-018",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure GCP Firewall rule logging is enabled",
+    "Policy Description": "This policy identifies GCP firewall rules that are not configured with firewall rule logging.  Firewall Rules Logging lets you audit, verify, and analyze the effects of your firewall rules. When you enable logging for a firewall rule, Google Cloud creates an entry called a connection record each time the rule allows or denies traffic. \n\nReference: https://cloud.google.com/vpc/docs/firewall-rules-logging",
     "Resource Type": "google_compute_firewall",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
