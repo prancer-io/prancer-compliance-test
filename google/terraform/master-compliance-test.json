@@ -778,7 +778,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "Terraform"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1089,12 +1089,12 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Terraform"
+                                "terraform"
                             ]
                         }
                     ],
                     "resourceTypes": [
-                        "google_compute_instance"
+                        "google_compute_disk"
                     ]
                 },
                 {
@@ -1128,7 +1128,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Terraform"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1167,12 +1167,172 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Terraform"
+                                "terraform"
                             ]
                         }
                     ],
                     "resourceTypes": [
                         "google_compute_ssl_policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-INST-011",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.v1.instance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-INST-011",
+                            "eval": "data.rule.compute_configure_default_service",
+                            "message": "data.rule.compute_configure_default_service_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_INST_INST_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP VM instance not configured with default service account",
+                    "description": "This policy identifies GCP VM instances configured with the default service account. To defend against privilege escalations if your VM is compromised and prevent an attacker from gaining access to all of your project, it is recommended to not use the default Compute Engine service account because it has the Editor role on the project.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_compute_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-INST-012",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.v1.instance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-INST-012",
+                            "eval": "data.rule.compute_default_service_full_access",
+                            "message": "data.rule.compute_default_service_full_access_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_INST_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP VM instance not using a default service account with full access to all Cloud APIs",
+                    "description": "This policy identifies the GCP VM instances which are using a default service account with full access to all Cloud APIs. To compliant with the principle of least privileges and prevent potential privilege escalation it is recommended that instances are not assigned to default service account 'Compute Engine default service account' with scope 'Allow full access to all Cloud APIs'.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_compute_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-INST-013",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.v1.instance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-INST-013",
+                            "eval": "data.rule.compute_shielded_vm",
+                            "message": "data.rule.compute_shielded_vm_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_INST_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP VM instance with Shielded VM features enabled",
+                    "description": "This policy identifies VM instances which have Shielded VM features disabled. Shielded VMs are virtual machines (VMs) on Google Cloud Platform hardened by a set of security controls that help defend against rootkits and bootkits. Shielded VM's verifiable integrity is achieved through the use of Secure Boot, virtual trusted platform module (vTPM)-enabled Measured Boot, and integrity monitoring. Shielded VM instances run firmware which is signed and verified using Google's Certificate Authority, ensuring that the instance's firmware is unmodified and establishing the root of trust for Secure Boot.\n\nNOTE: You can only enable Shielded VM options on instances that have Shielded VM support. This policy reports VM instances that have Shielded VM support and are disabled with the Shielded VM features.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_compute_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-INST-014",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.v1.instance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-INST-014",
+                            "eval": "data.rule.compute_instance_external_ip",
+                            "message": "data.rule.compute_instance_external_ip_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_INST_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP VM instance not have the external IP address",
+                    "description": "This policy identifies the VM instances with the external IP address associated. To reduce your attack surface, VM instances should not have public/external IP addresses. Instead, instances should be configured behind load balancers, to minimize the instance's exposure to the internet.\n\nNOTE: This policy will not report instances created by GKE because some of them have external IP addresses and cannot be changed by editing the instance settings. Instances created by GKE should be excluded. These instances have names that start with 'gke-' and contains 'default-pool'.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_compute_instance"
                     ]
                 },
                 {
@@ -1252,7 +1412,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "google_compute_network"
+                        "google_project"
                     ]
                 },
                 {
@@ -1333,6 +1493,84 @@
                     ],
                     "resourceTypes": [
                         "google_compute_subnetwork"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-THP-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.v1.sslpolicy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-THP-001",
+                            "eval": "data.rule.lbs_ssl_policy",
+                            "message": "data.rule.lbs_ssl_policy_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_THP_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "GCP Load balancer HTTPS target proxy configured with default SSL policy instead of custom SSL policy",
+                    "description": "This policy identifies Load balancer HTTPS target proxies which are configured with default SSL Policy instead of custom SSL policy. It is a best practice to use custom SSL policy to access load balancers. It gives you closer control over SSL/TLS versions and ciphers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
+                                "HITRUST"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_compute_target_https_proxy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-THP-002",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.v1.sslpolicy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-THP-002",
+                            "eval": "data.rule.lbs_quic",
+                            "message": "data.rule.lbs_quic_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_THP_002.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "GCP Load balancer HTTPS target proxy is not configured with QUIC protocol",
+                    "description": "This policy identifies Load Balancer HTTPS target proxies which are not configured with QUIC protocol. Enabling QUIC protocol in load balancer target https proxies adds advantage by establishing connections faster, stream-based multiplexing, improved loss recovery, and eliminates head-of-line blocking.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "CSA-CCM",
+                                "HITRUST"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_compute_target_https_proxy"
                     ]
                 },
                 {
@@ -2359,7 +2597,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Terraform"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2399,7 +2637,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Terraform"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2440,7 +2678,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "deploymentmanager"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2478,7 +2716,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Terraform"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2516,7 +2754,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Terraform"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2556,7 +2794,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "deploymentmanager"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2596,7 +2834,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "deploymentmanager"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2724,45 +2962,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-GCP-TRF-SQLI-001",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(sqladmin.v1beta4.instance.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-TRF-SQLI-001",
-                            "eval": "data.rule.sql_labels",
-                            "message": "data.rule.sql_labels_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Low",
-                    "title": "GCP SQL Instances without any Label information",
-                    "description": "This policy identifies the SQL DB instance which does not have any Labels. Labels can be used for easy identification and searches.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CSA-CCM",
-                                "HITRUST",
-                                "ISO 27001",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "google_sql_database_instance"
-                    ]
-                },
-                {
                     "masterTestId": "PR-GCP-TRF-BKT-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -2798,8 +2997,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "google_storage_bucket",
-                        "google_storage_bucket_acl"
+                        "google_storage_bucket"
                     ]
                 },
                 {
@@ -2839,8 +3037,47 @@
                         }
                     ],
                     "resourceTypes": [
-                        "google_storage_bucket",
-                        "google_storage_bucket_acl"
+                        "google_storage_bucket"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-BKT-003",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.v1.bucket.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-BKT-003",
+                            "eval": "data.rule.storage_stack_logging",
+                            "message": "data.rule.storage_stack_logging_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_BKT_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Logging on the Stackdriver exported Bucket is disabled",
+                    "description": "Checks to ensure that logging is enabled on a Stackdriver exported Bucket. Enabled logging provides information about all the requests made on the bucket.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_storage_bucket"
                     ]
                 },
                 {
@@ -2882,8 +3119,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "google_storage_bucket",
-                        "google_storage_bucket_acl"
+                        "google_storage_bucket"
                     ]
                 },
                 {
@@ -2924,7 +3160,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "google_storage_bucket",
                         "google_storage_bucket_acl"
                     ]
                 },
@@ -2964,8 +3199,40 @@
                         }
                     ],
                     "resourceTypes": [
-                        "google_storage_bucket",
-                        "google_storage_bucket_acl"
+                        "google_storage_bucket"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-BKT-007",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.v1.bucket.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-BKT-007",
+                            "eval": "data.rule.storage_event_based_hold",
+                            "message": "data.rule.storage_event_based_hold_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_BKT_007.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure GCP storage bucket is configured with default Event-Based hold",
+                    "description": "This policy identifies GCP storage buckets that are not configured with default Event-Based Hold. An event-based hold resets the object's time in the bucket for the purposes of the retention period. This behavior is useful when you want an object to persist in your bucket for a certain length of time after a certain event occurs. It is recommended to enable this feature to protect individual objects from deletion.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_storage_bucket"
                     ]
                 },
                 {
@@ -2998,8 +3265,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "google_storage_bucket",
-                        "google_storage_bucket_acl"
+                        "google_storage_bucket"
                     ]
                 },
                 {
@@ -3031,8 +3297,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "google_storage_bucket",
-                        "google_storage_bucket_acl"
+                        "google_storage_bucket"
                     ]
                 },
                 {
@@ -3064,8 +3329,39 @@
                         }
                     ],
                     "resourceTypes": [
-                        "google_storage_bucket",
-                        "google_storage_bucket_acl"
+                        "google_storage_bucket"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-PUB-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-PUB-001",
+                            "eval": "data.rule.pub_sub_kms",
+                            "message": "data.rule.pub_sub_kms_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.metrics' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_PUB_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP Pub/Sub topic is encrypted using a customer-managed encryption key",
+                    "description": "This policy identifies GCP Pub/Sub topics that are not encrypted using a customer-managed encryption key. It is a best practice to use customer-managed KMS Keys to encrypt your Pub/Sub topic. Customer-managed CMKs give you more flexibility, including the ability to create, rotate, disable, define access control for, and audit the encryption keys used to help protect your data.\n\nReference: https://cloud.google.com/pubsub/docs/encryption",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_pubsub_topic"
                     ]
                 },
                 {
@@ -3202,7 +3498,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "Terraform"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3234,7 +3530,84 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "Terraform"
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_sql_database_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-SQL-003",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-SQL-003",
+                            "eval": "data.rule.storage_sql_label_info",
+                            "message": "data.rule.storage_sql_label_info_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_SQL_003.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure GCP SQL Instances contains Label information",
+                    "description": "This policy identifies the SQL DB instance which does not have any Labels. Labels can be used for easy identification and searches.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_sql_database_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-SQL-004",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-SQL-004",
+                            "eval": "data.rule.storage_sql_flag_authentication",
+                            "message": "data.rule.storage_sql_flag_authentication_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_SQL_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SQL Server instance database flag 'contained database authentication' is disabled",
+                    "description": "This policy identifies SQL Server instance database flag 'contained database authentication' is enabled. Most of the threats associated with contained database are related to authentication process. So it is recommended to disable this flag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
                             ]
                         }
                     ],
@@ -3274,7 +3647,261 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Terraform"
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_sql_database_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-SQL-006",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-SQL-006",
+                            "eval": "data.rule.storage_sql_automated_backup",
+                            "message": "data.rule.storage_sql_automated_backup_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_SQL_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP SQL database instance is configured with automated backups",
+                    "description": "This policy identifies GCP SQL Server instance database flag 'cross db ownership chaining' is enabled. Enabling cross db ownership is not recommended unless all of the databases hosted by the instance of SQL Server must participate in cross-database ownership chaining and you are aware of the security implications of this setting.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_sql_database_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-SQL-007",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-SQL-007",
+                            "eval": "data.rule.storage_sql_public_ip",
+                            "message": "data.rule.storage_sql_public_ip_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_SQL_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP SQL database is not assigned with public IP",
+                    "description": "This policy identifies GCP SQL databases which are assigned with public IP.  To lower the organisation's attack surface, Cloud SQL databases should not have public IPs. Private IPs provide improved network security and lower latency for your application. It is recommended to configure Second Generation Sql instance to use private IPs instead of public IPs.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_sql_database_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-SQL-008",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-SQL-008",
+                            "eval": "data.rule.storage_sql_overly_permissive",
+                            "message": "data.rule.storage_sql_overly_permissive_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_SQL_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP SQL instance is not configured with overly permissive authorized networks",
+                    "description": "This policy identifies GCP Cloud SQL instances that are configured with overly permissive authorized networks. You can connect to the SQL instance securely by using the Cloud SQL Proxy or adding your client's public address as an authorized network. If your client application is connecting directly to a Cloud SQL instance on its public IP address, you have to add your client's external address as an Authorized network for securing the connection. It is recommended to add specific IPs instead of public IPs as authorized networks as per the requirement.\n\nReference: https://cloud.google.com/sql/docs/mysql/authorize-networks",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_sql_database_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-SQL-009",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-SQL-009",
+                            "eval": "data.rule.storage_sql_external_script",
+                            "message": "data.rule.storage_sql_external_script_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_SQL_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP SQL server instance database flag external scripts enabled is set to off",
+                    "description": "This policy identifies GCP SQL server instances for which database flag 'external scripts enabled' is not set to off. Feature 'external scripts enabled' enables the execution of scripts with certain remote language extensions. When Advanced Analytics Services is installed, setup can optionally set this property to true. As the External Scripts Enabled feature allows scripts external to SQL such as files located in an R library to be executed, which could adversely affect the security of the system. It is recommended to set external scripts enabled database flag for Cloud SQL SQL Server instance to off.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_sql_database_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-SQL-010",
+                    "masterSnapshotId": [
+                        "INST_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-SQL-010",
+                            "eval": "data.rule.storage_sql_flag_remote",
+                            "message": "data.rule.storage_sql_flag_remote_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_INST_SQL_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP SQL server instance database flag remote access is set to off",
+                    "description": "This policy identifies GCP SQL server instances for which database flag remote access is not set to off. The remote access option controls the execution of stored procedures from local or remote servers on which instances of SQL Server are running. 'Remote access' functionality can be abused to launch a Denial-of-Service (DoS) attack on remote servers by off-loading query processing to a target. It is recommended to set the remote access database flag for SQL Server instance to off.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_sql_database_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-SQL-011",
+                    "masterSnapshotId": [
+                        "INST_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-SQL-011",
+                            "eval": "data.rule.storage_sql_user_connection",
+                            "message": "data.rule.storage_sql_user_connection_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_INST_SQL_011.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure GCP SQL server instance database flag user connections is set",
+                    "description": "This policy identifies GCP SQL server instances where the database flag 'user connections' is not set. The user connections option specifies the maximum number of simultaneous user connections (value varies in range 10-32,767) that are allowed on an instance of SQL Server. The default is 0, which means that the maximum (32,767) user connections are allowed. It is recommended to set database flag user connections for SQL Server instance according to organization-defined value.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_sql_database_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-SQL-012",
+                    "masterSnapshotId": [
+                        "INST_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-SQL-012",
+                            "eval": "data.rule.storage_sql_user_option",
+                            "message": "data.rule.storage_sql_user_option_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_INST_SQL_012.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure GCP SQL server instance database flag user options is not set",
+                    "description": "This policy identifies GCP SQL server instances fo which database flag user options is set. The user options option specifies global defaults for all users. A list of default query processing options is established for the duration of a user's work session. A user can override these defaults by using the SET statement. It is recommended that, user options database flag for SQL Server instance should not be configured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "terraform"
                             ]
                         }
                     ],
@@ -3518,7 +4145,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "Terraform"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3550,7 +4177,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "Terraform"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3957,7 +4584,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "kms.v1.projects.locations.keyRings.cryptoKeys"
+                        "aws_kms_key"
                     ]
                 },
                 {
@@ -4009,8 +4636,8 @@
                     "evals": [
                         {
                             "id": "PR-GCP-TRF-LOG-002",
-                            "eval": "data.rule.logging_audit_config",
-                            "message": "data.rule.logging_audit_config_err",
+                            "eval": "data.rule.logging_iam_permission_change",
+                            "message": "data.rule.logging_iam_permission_change_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }

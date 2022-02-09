@@ -7,7 +7,7 @@ has_property(parent_object, target_property) {
 # https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters
 
 #
-# PR-GCP-0030-TRF
+# PR-GCP-TRF-CLT-001
 #
 
 default k8s_svc_account = null
@@ -35,7 +35,7 @@ gc_issue["k8s_svc_account"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_node_pool"
     node_config := resource.properties.node_config[_]
-    is_null(node_config.service_account)
+    node_config.service_account == null
 }
 
 k8s_svc_account {
@@ -57,7 +57,7 @@ k8s_svc_account_err = "GCP Kubernetes Engine Cluster Nodes have default Service 
 }
 
 k8s_svc_account_metadata := {
-    "Policy Code": "PR-GCP-0030-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -69,7 +69,7 @@ k8s_svc_account_metadata := {
 }
 
 #
-# PR-GCP-0031-TRF
+# PR-GCP-TRF-CLT-002
 #
 
 default k8s_basicauth = null
@@ -119,7 +119,7 @@ k8s_basicauth_err = "GCP Kubernetes Engine Clusters Basic Authentication is set 
 }
 
 k8s_basicauth_metadata := {
-    "Policy Code": "PR-GCP-0031-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -131,7 +131,7 @@ k8s_basicauth_metadata := {
 }
 
 #
-# PR-GCP-0032-TRF
+# PR-GCP-TRF-CLT-003
 #
 
 default k8s_client_cert = null
@@ -189,7 +189,7 @@ k8s_client_cert_err = "GCP Kubernetes Engine Clusters Client Certificate is set 
 }
 
 k8s_client_cert_metadata := {
-    "Policy Code": "PR-GCP-0032-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-003",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -201,7 +201,7 @@ k8s_client_cert_metadata := {
 }
 
 #
-# PR-GCP-0033-TRF
+# PR-GCP-TRF-CLT-004
 #
 
 default k8s_alias_ip = null
@@ -226,7 +226,7 @@ k8s_alias_ip_err = "GCP Kubernetes Engine Clusters have Alias IP disabled" {
 }
 
 k8s_alias_ip_metadata := {
-    "Policy Code": "PR-GCP-0033-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-004",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -238,7 +238,7 @@ k8s_alias_ip_metadata := {
 }
 
 #
-# PR-GCP-0034-TRF
+# PR-GCP-TRF-CLT-005
 #
 
 default k8s_alpha = null
@@ -263,7 +263,7 @@ k8s_alpha_err = "GCP Kubernetes Engine Clusters have Alpha cluster feature enabl
 }
 
 k8s_alpha_metadata := {
-    "Policy Code": "PR-GCP-0034-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-005",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -275,7 +275,7 @@ k8s_alpha_metadata := {
 }
 
 #
-# PR-GCP-0035-TRF
+# PR-GCP-TRF-CLT-006
 #
 
 default k8s_http_lbs = null
@@ -314,7 +314,7 @@ k8s_http_lbs_err = "GCP Kubernetes Engine Clusters have HTTP load balancing disa
 }
 
 k8s_http_lbs_metadata := {
-    "Policy Code": "PR-GCP-0035-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-006",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -326,7 +326,7 @@ k8s_http_lbs_metadata := {
 }
 
 #
-# PR-GCP-0036-TRF
+# PR-GCP-TRF-CLT-007
 #
 
 default k8s_legacy_abac = null
@@ -351,7 +351,7 @@ k8s_legacy_abac_err = "GCP Kubernetes Engine Clusters have Legacy Authorization 
 }
 
 k8s_legacy_abac_metadata := {
-    "Policy Code": "PR-GCP-0036-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-007",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -363,7 +363,7 @@ k8s_legacy_abac_metadata := {
 }
 
 #
-# PR-GCP-0037-TRF
+# PR-GCP-TRF-CLT-008
 #
 
 default k8s_master_auth_net = null
@@ -400,7 +400,7 @@ k8s_master_auth_net_err = "GCP Kubernetes Engine Clusters have Master authorized
 }
 
 k8s_master_auth_net_metadata := {
-    "Policy Code": "PR-GCP-0037-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-008",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -412,7 +412,7 @@ k8s_master_auth_net_metadata := {
 }
 
 #
-# PR-GCP-0038-TRF
+# PR-GCP-TRF-CLT-009
 #
 
 default k8s_net_policy = null
@@ -455,7 +455,7 @@ k8s_net_policy_err = "GCP Kubernetes Engine Clusters have Network policy disable
 }
 
 k8s_net_policy_metadata := {
-    "Policy Code": "PR-GCP-0038-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-009",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -467,7 +467,7 @@ k8s_net_policy_metadata := {
 }
 
 #
-# PR-GCP-0039-TRF
+# PR-GCP-TRF-CLT-010
 #
 
 default k8s_logging = null
@@ -507,7 +507,7 @@ k8s_logging_miss_err = "Kubernetes Engine Cluster attribute logging_service conf
 }
 
 k8s_logging_metadata := {
-    "Policy Code": "PR-GCP-0039-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-010",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -519,7 +519,7 @@ k8s_logging_metadata := {
 }
 
 #
-# PR-GCP-0040-TRF
+# PR-GCP-TRF-CLT-011
 #
 
 default k8s_monitor = null
@@ -559,7 +559,7 @@ k8s_monitor_miss_err = "Kubernetes Engine Cluster attribute monitoring_service c
 }
 
 k8s_monitor_metadata := {
-    "Policy Code": "PR-GCP-0040-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-011",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -571,7 +571,7 @@ k8s_monitor_metadata := {
 }
 
 #
-# PR-GCP-0041-TRF
+# PR-GCP-TRF-CLT-012
 #
 
 default k8s_binary_auth = null
@@ -596,7 +596,7 @@ k8s_binary_auth_err = "GCP Kubernetes Engine Clusters have binary authorization 
 }
 
 k8s_binary_auth_metadata := {
-    "Policy Code": "PR-GCP-0041-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-012",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -608,7 +608,7 @@ k8s_binary_auth_metadata := {
 }
 
 #
-# PR-GCP-0042-TRF
+# PR-GCP-TRF-CLT-013
 #
 
 default k8s_legacy_endpoint = null
@@ -665,7 +665,7 @@ k8s_legacy_endpoint_err = "GCP Kubernetes Engine Clusters have legacy compute en
 }
 
 k8s_legacy_endpoint_metadata := {
-    "Policy Code": "PR-GCP-0042-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-013",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -677,7 +677,7 @@ k8s_legacy_endpoint_metadata := {
 }
 
 #
-# PR-GCP-0043-TRF
+# PR-GCP-TRF-CLT-014
 #
 
 default k8s_pod_security = null
@@ -720,7 +720,7 @@ k8s_pod_security_err = "GCP Kubernetes Engine Clusters have pod security policy 
 }
 
 k8s_pod_security_metadata := {
-    "Policy Code": "PR-GCP-0043-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-014",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -732,7 +732,7 @@ k8s_pod_security_metadata := {
 }
 
 #
-# PR-GCP-0045-TRF
+# PR-GCP-TRF-CLT-015
 #
 
 default k8s_egress_metering = null
@@ -775,7 +775,7 @@ k8s_egress_metering_err = "GCP Kubernetes Engine Clusters not configured with ne
 }
 
 k8s_egress_metering_metadata := {
-    "Policy Code": "PR-GCP-0045-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-015",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -787,7 +787,7 @@ k8s_egress_metering_metadata := {
 }
 
 #
-# PR-GCP-0046-TRF
+# PR-GCP-TRF-CLT-016
 #
 
 default k8s_private = null
@@ -823,8 +823,21 @@ k8s_private_err = "GCP Kubernetes Engine Clusters not configured with private cl
     gc_issue["k8s_private"]
 }
 
+k8s_private_metadata := {
+    "Policy Code": "PR-GCP-TRF-CLT-016",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Kubernetes Engine Clusters not configured with private cluster",
+    "Policy Description": "This policy identifies Kubernetes Engine Clusters which are not configured with the Private cluster. Private cluster makes your master inaccessible from the public internet and nodes do not have public IP addresses, so your workloads run in an environment that is isolated from the internet.",
+    "Resource Type": "google_container_cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
+}
+
+
 #
-# PR-GCP-0047-TRF
+# PR-GCP-TRF-CLT-017
 #
 
 default k8s_private_node = null
@@ -873,19 +886,7 @@ k8s_private_node_err = "GCP Kubernetes Engine Clusters not configured with priva
 }
 
 k8s_private_node_metadata := {
-    "Policy Code": "PR-GCP-0046-TRF",
-    "Type": "IaC",
-    "Product": "GCP",
-    "Language": "Terraform",
-    "Policy Title": "GCP Kubernetes Engine Clusters not configured with private cluster",
-    "Policy Description": "This policy identifies Kubernetes Engine Clusters which are not configured with the Private cluster. Private cluster makes your master inaccessible from the public internet and nodes do not have public IP addresses, so your workloads run in an environment that is isolated from the internet.",
-    "Resource Type": "google_container_cluster",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
-}
-
-k8s_private_metadata := {
-    "Policy Code": "PR-GCP-0047-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-017",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -897,7 +898,7 @@ k8s_private_metadata := {
 }
 
 #
-# PR-GCP-0048-TRF
+# PR-GCP-TRF-CLT-018
 #
 
 default k8s_node_image = null
@@ -954,7 +955,7 @@ k8s_node_image_err = "GCP Kubernetes Engine Clusters not using Container-Optimiz
 }
 
 k8s_node_image_metadata := {
-    "Policy Code": "PR-GCP-0048-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-018",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -966,7 +967,7 @@ k8s_node_image_metadata := {
 }
 
 #
-# PR-GCP-0049-TRF
+# PR-GCP-TRF-CLT-019
 #
 
 default k8s_network = null
@@ -1005,7 +1006,7 @@ k8s_network_err = "GCP Kubernetes Engine Clusters using the default network" {
 }
 
 k8s_network_metadata := {
-    "Policy Code": "PR-GCP-0049-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-019",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1017,7 +1018,7 @@ k8s_network_metadata := {
 }
 
 #
-# PR-GCP-0051-TRF
+# PR-GCP-TRF-CLT-021
 #
 
 default k8s_labels = null
@@ -1048,7 +1049,7 @@ k8s_labels_err = "GCP Kubernetes Engine Clusters without any label information" 
 }
 
 k8s_labels_metadata := {
-    "Policy Code": "PR-GCP-0051-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-021",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1060,7 +1061,7 @@ k8s_labels_metadata := {
 }
 
 #
-# PR-GCP-0052-TRF
+# PR-GCP-TRF-CLT-022
 #
 
 default k8s_db_encrypt = null
@@ -1106,7 +1107,7 @@ k8s_db_encrypt_miss_err = "Kubernetes Engine Cluster attribute database_encrypti
 }
 
 k8s_db_encrypt_metadata := {
-    "Policy Code": "PR-GCP-0052-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-022",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1118,7 +1119,7 @@ k8s_db_encrypt_metadata := {
 }
 
 #
-# PR-GCP-0053-TRF
+# PR-GCP-TRF-CLT-023
 #
 
 default k8s_intra_node = null
@@ -1143,7 +1144,7 @@ k8s_intra_node_err = "GCP Kubernetes cluster intra-node visibility disabled" {
 }
 
 k8s_intra_node_metadata := {
-    "Policy Code": "PR-GCP-0053-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-023",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1155,7 +1156,7 @@ k8s_intra_node_metadata := {
 }
 
 #
-# PR-GCP-0054-TRF
+# PR-GCP-TRF-CLT-024
 #
 
 default k8s_istio = null
@@ -1213,7 +1214,7 @@ k8s_istio_err = "GCP Kubernetes cluster istio_config not enabled" {
 }
 
 k8s_istio_metadata := {
-    "Policy Code": "PR-GCP-0054-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-024",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1225,7 +1226,7 @@ k8s_istio_metadata := {
 }
 
 #
-# PR-GCP-0055-TRF
+# PR-GCP-TRF-CLT-025
 #
 
 default k8s_zones = null
@@ -1255,7 +1256,7 @@ k8s_zones_miss_err = "GCP Kubernetes cluster not in redundant zones" {
 }
 
 k8s_zones_metadata := {
-    "Policy Code": "PR-GCP-0055-TRF",
+    "Policy Code": "PR-GCP-TRF-CLT-025",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1480,7 +1481,8 @@ gc_issue["k8s_secure_boot"] {
     resource := input.resources[i]
     lower(resource.type) == "google_container_node_pool"
     node_pool := resource.properties.node_config[_]
-    not node_pool.shielded_instance_config[_].enable_secure_boot
+    shielded_instance_config := node_pool.shielded_instance_config[_]
+    not shielded_instance_config.enable_secure_boot
 }
 
 k8s_secure_boot {
@@ -1519,7 +1521,8 @@ gc_issue["k8s_integrity_monitor"] {
     resource := input.resources[i]
     lower(resource.type) == "google_container_node_pool"
     node_pool := resource.properties.node_config[_]
-    not node_pool.shielded_instance_config[_].enable_integrity_monitoring
+    shielded_instance_config := node_pool.shielded_instance_config[_]
+    not shielded_instance_config.enable_integrity_monitoring
 }
 
 k8s_integrity_monitor {

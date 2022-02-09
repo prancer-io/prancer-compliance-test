@@ -1725,7 +1725,7 @@ firewall_inbound_err = "GCP Firewall rules allow inbound traffic from anywhere w
 }
 
 #
-# PR-GCP-0021-TRF
+# PR-GCP-TRF-FW-017
 #
 
 default firewall_inbound_all = null
@@ -1758,7 +1758,7 @@ firewall_inbound_all_err = "GCP Firewall with Inbound rule overly permissive to 
 }
 
 firewall_inbound_all_metadata := {
-    "Policy Code": "PR-GCP-TRF-FW-016",
+    "Policy Code": "PR-GCP-TRF-FW-017",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -1812,7 +1812,7 @@ firewall_logging_metadata := {
     "Policy Code": "PR-GCP-TRF-FW-018",
     "Type": "IaC",
     "Product": "GCP",
-    "Language": "GCP deployment",
+    "Language": "Terraform",
     "Policy Title": "Ensure GCP Firewall rule logging is enabled",
     "Policy Description": "This policy identifies GCP firewall rules that are not configured with firewall rule logging.  Firewall Rules Logging lets you audit, verify, and analyze the effects of your firewall rules. When you enable logging for a firewall rule, Google Cloud creates an entry called a connection record each time the rule allows or denies traffic. \n\nReference: https://cloud.google.com/vpc/docs/firewall-rules-logging",
     "Resource Type": "google_compute_firewall",
