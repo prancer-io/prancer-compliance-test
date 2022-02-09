@@ -20,28 +20,11 @@ azure_attribute_absence ["https_only"] {
     not resource.properties.httpsOnly
 }
 
-source_path[{"https_only":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.httpsOnly
-    metadata:= {
-        "resource_path": [["resources",i,"properties","httpsOnly"]]
-    }
-}
 
 azure_issue ["https_only"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.httpsOnly != true
-}
-
-source_path[{"https_only":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    resource.properties.httpsOnly != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","httpsOnly"]]
-    }
 }
 
 
@@ -204,30 +187,11 @@ azure_attribute_absence ["client_cert_enabled"] {
     not resource.properties.clientCertEnabled
 }
 
-source_path[{"client_cert_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.clientCertEnabled
-    metadata:= {
-        "resource_path": [["resources",i,"properties","clientCertEnabled"]]
-    }
-}
-
 azure_issue ["client_cert_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.clientCertEnabled != true
 }
-
-source_path[{"client_cert_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    resource.properties.clientCertEnabled != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","clientCertEnabled"]]
-    }
-}
-
 
 client_cert_enabled {
     lower(input.resources[_].type) == "microsoft.web/sites"
@@ -1128,6 +1092,7 @@ default web_service_net_framework_latest = null
 
 #Defaults to v4.0
 latest_dotnet_framework_version := "v6.0"
+default_dotnet_framework_version := "v4.0"
 
 azure_attribute_absence ["web_service_net_framework_latest"] {
     count([c | lower(input.resources[_].type) == "microsoft.web/sites/config"; c := 1]) == 0
@@ -1151,8 +1116,9 @@ azure_issue["web_service_net_framework_latest"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.web/sites/config";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              lower(r.properties.netFrameworkVersion) == latest_dotnet_framework_version;
-              c := 1]) == 0
+              lower(r.properties.netFrameworkVersion) != latest_dotnet_framework_version;
+              lower(r.properties.netFrameworkVersion) != default_dotnet_framework_version;
+              c := 1]) > 0
 }
 
 azure_inner_attribute_absence["web_service_net_framework_latest"] {
@@ -1171,6 +1137,7 @@ azure_inner_issue["web_service_net_framework_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     lower(resource.properties.siteConfig.netFrameworkVersion) != latest_dotnet_framework_version
+    lower(resource.properties.siteConfig.netFrameworkVersion) != default_dotnet_framework_version
 }
 
 # we need to make it pass if property is missing, as microsoft.web/sites may not need dot net framework
@@ -1268,8 +1235,8 @@ azure_issue["web_service_php_version_latest"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.web/sites/config";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(r.properties.phpVersion) == latest_php_version;
-              c := 1]) == 0
+              to_number(r.properties.phpVersion) != latest_php_version;
+              c := 1]) > 0
 }
 
 azure_inner_attribute_absence["web_service_php_version_latest"] {
@@ -1483,6 +1450,32 @@ default web_service_java_version_latest = null
 
 # valid values are 1.7.0_80, 1.8.0_181, 11
 latest_java_version := "11"
+
+azure_attribute_absence ["web_service_java_version_latest"] {
+    count([c | lower(input.resources[_].type) == "microsoft.web/sites/config"; c := 1]) == 0
+}
+
+azure_attribute_absence["web_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites/config"
+    not resource.dependsOn
+}
+
+azure_attribute_absence["web_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites/config"
+    not resource.properties.javaVersion
+}
+
+azure_issue["web_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.web/sites/config";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              r.properties.javaVersion != latest_java_version;
+              c := 1]) > 0
+}
 
 azure_inner_attribute_absence["web_service_java_version_latest"] {
     resource := input.resources[_]

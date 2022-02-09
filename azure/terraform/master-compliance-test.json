@@ -1740,13 +1740,13 @@
                             "id": "PR-AZR-TRF-SQL-018",
                             "eval": "data.rule.dbsec_threat_retention",
                             "message": "data.rule.dbsec_threat_retention_err",
-                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set 'retention_days = 91' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#retention_days' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set 'retention_days = 90' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#retention_days' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_SQL_018.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Database Server security alert policies thread retention should be configured for more than 90 days",
-                    "description": "This policy identifies SQL Databases which have Threat Retention less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days.",
+                    "title": "Azure SQL Database Server security alert policies thread retention should be configured for 90 days or more",
+                    "description": "This policy identifies SQL Databases which have Threat Retention configured for less than 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be 90 days or more.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1893,13 +1893,13 @@
                             "id": "PR-AZR-TRF-SQL-044",
                             "eval": "data.rule.mssql_log_retention",
                             "message": "data.rule.mssql_log_retention_err",
-                            "remediationDescription": "In 'azurerm_mssql_server_extended_auditing_policy' resource, set the 'retention_in_days = 91' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy#retention_in_days' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_mssql_server_extended_auditing_policy' resource, set the 'retention_in_days = 90' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy#retention_in_days' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_SQL_044.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure MSSQL Server audit log retention should be greater then 90 days",
-                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.<br><br>This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
+                    "title": "Azure MSSQL Server audit log retention should be equal or greater then 90 days",
+                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.<br><br>This policy identifies SQL servers which do not retain audit logs for 90 days or more. As a best practice, configure the audit logs retention time period to be equal or greater than 90 days.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1927,13 +1927,13 @@
                             "id": "PR-AZR-TRF-SQL-045",
                             "eval": "data.rule.sql_log_retention",
                             "message": "data.rule.sql_log_retention_err",
-                            "remediationDescription": "In 'azurerm_sql_server' resource, set the 'retention_in_days = 91' under 'extended_auditing_policy' block to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server#retention_in_days' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_sql_server' resource, set the 'retention_in_days = 90' under 'extended_auditing_policy' block to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server#retention_in_days' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_SQL_045.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Server audit log retention should be greater then 90 days",
-                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.<br><br>This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
+                    "title": "Azure SQL Server audit log retention should be 90 days or more",
+                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.<br><br>This policy identifies SQL servers which do not retain audit logs for 90 days or more. As a best practice, configure the audit logs retention time period to be equal or greater than 90 days.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3426,13 +3426,13 @@
                             "id": "PR-AZR-TRF-NTW-003",
                             "eval": "data.rule.netwatch_log_retention",
                             "message": "data.rule.netwatch_log_retention_err",
-                            "remediationDescription": "In 'azurerm_network_watcher_flow_log' resource, set 'enabled = true' and 'days = 91' under 'retention_policy' block to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher_flow_log#enabled' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_network_watcher_flow_log' resource, set 'enabled = true' and 'days = 90' under 'retention_policy' block to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher_flow_log#enabled' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_NTW_003.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Azure Network Watcher Network Security Group (NSG) flow logs retention should be greater than 90 days",
-                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs and set the log retention period to at least 91 days.",
+                    "title": "Azure Network Watcher Network Security Group (NSG) flow logs retention should be 90 days or more",
+                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is less than 90 days. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs and set the log retention period to at least 90 days.",
                     "tags": [
                         {
                             "cloud": "git",

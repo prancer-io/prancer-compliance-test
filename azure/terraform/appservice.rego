@@ -739,6 +739,7 @@ app_service_ftp_deployment_disabled_metadata := {
 default app_service_dot_net_framework_latest = null
 
 latest_dotnet_framework_version := "v6.0"
+default_dotnet_framework_version := "v4.0"
 
 azure_attribute_absence["app_service_dot_net_framework_latest"] {
     resource := input.resources[_]
@@ -759,6 +760,7 @@ azure_issue["app_service_dot_net_framework_latest"] {
     lower(resource.type) == "azurerm_app_service"
     site_config := resource.properties.site_config[_]
     lower(site_config.dotnet_framework_version) != latest_dotnet_framework_version
+    lower(site_config.dotnet_framework_version) != default_dotnet_framework_version
 }
 
 # we need to make it pass if property is missing, as azurerm_app_service may not need dot net framework

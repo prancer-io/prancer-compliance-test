@@ -1380,7 +1380,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_264"
+                        "AZRSNP_400"
                     ],
                     "severity": "Medium",
                     "title": "Auditing for SQL database should be enabled",
@@ -1416,7 +1416,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_264"
+                        "AZRSNP_400"
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Database Auditing Retention should be 90 days or more",
@@ -1452,7 +1452,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_264"
+                        "AZRSNP_400"
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL databases should have transparent data encryption enabled",
@@ -1516,7 +1516,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_408"
+                        "AZRSNP_409"
                     ],
                     "severity": "High",
                     "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
@@ -1545,7 +1545,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_410"
+                        "AZRSNP_411"
                     ],
                     "severity": "High",
                     "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
@@ -1610,7 +1610,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_264"
+                        "AZRSNP_400"
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
@@ -1639,7 +1639,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_264"
+                        "AZRSNP_400"
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
@@ -1668,7 +1668,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_264"
+                        "AZRSNP_400"
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
