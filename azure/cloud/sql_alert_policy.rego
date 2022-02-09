@@ -713,7 +713,9 @@ azure_issue["sql_server_disabled_alerts"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              # default export came up with a blank entries: "disabledAlerts": [""]
               count(r.properties.disabledAlerts) > 0;
+              not array_contains(r.properties.disabledAlerts, "");
               c := 1]) > 0
 }
 
