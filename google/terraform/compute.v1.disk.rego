@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/compute/docs/reference/rest/v1/disks
 
 #
-# PR-GCP-0069-TRF
+# PR-GCP-TRF-DISK-001
 #
 
 gc_issue["disk_encrypt"] {
@@ -38,7 +38,7 @@ disk_encrypt_err = "GCP VM disks not encrypted with Customer-Supplied Encryption
 }
 
 disk_encrypt_metadata := {
-    "Policy Code": "PR-GCP-0069-TRF",
+    "Policy Code": "PR-GCP-TRF-DISK-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -91,7 +91,7 @@ compute_disk_csek_metadata := {
     "Policy Code": "PR-GCP-TRF-INST-008",
     "Type": "IaC",
     "Product": "GCP",
-    "Language": "GCP deployment",
+    "Language": "Terraform",
     "Policy Title": "Ensure GCP GCE Disk snapshot is encrypted with CSEK",
     "Policy Description": "This policy identifies GCP GCE Disk snapshots that are not encrypted with CSEK. It is recommended that to avoid data leakage provide your own encryption keys, Compute Engine uses your key to protect the Google-generated keys used to encrypt and decrypt your data. Only users who can provide the correct key can use resources protected by a customer-supplied encryption key",
     "Resource Type": "google_compute_disk",

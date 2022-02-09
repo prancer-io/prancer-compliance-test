@@ -4809,6 +4809,42 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-0001-RGX",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "python",
+                    "rule": "file(secret_tf.py)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0001-RGX",
+                            "eval": "entropy_password",
+                            "message": "entropy_password_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that secure password is exposed",
+                    "description": "There is a possibility that secure password is exposed",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-GCP-GDF-PSQL-006",
                     "masterSnapshotId": [
                         "GDF_TEMPLATE_SNAPSHOT"

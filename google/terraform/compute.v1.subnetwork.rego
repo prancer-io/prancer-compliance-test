@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/compute/docs/reference/rest/v1/subnetworks
 
 #
-# PR-GCP-0074-TRF
+# PR-GCP-TRF-SUBN-001
 #
 
 default vpc_flow_logs = null
@@ -28,7 +28,7 @@ vpc_flow_logs_err = "GCP VPC Flow logs for the subnet is set to Off" {
 }
 
 vpc_flow_logs_metadata := {
-    "Policy Code": "PR-GCP-0074-TRF",
+    "Policy Code": "PR-GCP-TRF-SUBN-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
@@ -40,7 +40,7 @@ vpc_flow_logs_metadata := {
 }
 
 #
-# PR-GCP-0075-TRF
+# PR-GCP-TRF-SUBN-002
 #
 
 default vpc_private_ip_google = null
@@ -65,7 +65,7 @@ vpc_private_ip_google_err = "GCP VPC Network subnets have Private Google access 
 }
 
 vpc_private_ip_google_metadata := {
-    "Policy Code": "PR-GCP-0075-TRF",
+    "Policy Code": "PR-GCP-TRF-SUBN-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "Terraform",
