@@ -16,6 +16,19 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_FIREWALL",
+                    "type": "compute/firewalls.list",
+                    "collection": "firewalls",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
                 }
             ]
         }

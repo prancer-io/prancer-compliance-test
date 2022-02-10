@@ -1225,6 +1225,695 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-001",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-001",
+                            "eval": "data.rule.firewall_default",
+                            "message": "data.rule.firewall_default_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Default Firewall rule should not have any rules (except http and https)",
+                    "description": "Checks to ensure that the default Firewall rule should not have any (non http, https) rules. The default Firewall rules will apply all instances by default in the absence of specific custom rules with higher priority. It is a safe practice to not have these rules in the default Firewall.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-002",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-002",
+                            "eval": "data.rule.firewall_port_53",
+                            "message": "data.rule.firewall_port_53_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "GCP Firewall rule allows internet traffic to DNS port (53)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on DNS port (53) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-003",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-003",
+                            "eval": "data.rule.firewall_port_21",
+                            "message": "data.rule.firewall_port_21_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_003.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "GCP Firewall rule allows internet traffic to FTP port (21)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on FTP port (21) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-004",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-004",
+                            "eval": "data.rule.firewall_port_80",
+                            "message": "data.rule.firewall_port_80_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_004.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "GCP Firewall rule allows internet traffic to HTTP port (80)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on HTTP port (80) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-005",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-005",
+                            "eval": "data.rule.firewall_port_445",
+                            "message": "data.rule.firewall_port_445_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "GCP Firewall rule allows internet traffic to Microsoft-DS port (445)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on Microsoft-DS port (445) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-006",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-006",
+                            "eval": "data.rule.firewall_port_27017",
+                            "message": "data.rule.firewall_port_27017_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "GCP Firewall rule allows internet traffic to MongoDB port (27017)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on MongoDB port (27017) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-007",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-007",
+                            "eval": "data.rule.firewall_port_3306",
+                            "message": "data.rule.firewall_port_3306_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_007.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "GCP Firewall rule allows internet traffic to MySQL DB port (3306)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on MySQL DB port (3306) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-008",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-008",
+                            "eval": "data.rule.firewall_port_139",
+                            "message": "data.rule.firewall_port_139_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "GCP Firewall rule allows internet traffic to NetBIOS-SSN port (139)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on NetBIOS-SSN port (139) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-009",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-009",
+                            "eval": "data.rule.firewall_port_1521",
+                            "message": "data.rule.firewall_port_1521_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_009.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "GCP Firewall rule allows internet traffic to Oracle DB port (1521)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on Oracle DB port (1521) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-010",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-010",
+                            "eval": "data.rule.firewall_port_110",
+                            "message": "data.rule.firewall_port_110_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "GCP Firewall rule allows internet traffic to POP3 port (110)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on POP3 port (110) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-011",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-011",
+                            "eval": "data.rule.firewall_port_5432",
+                            "message": "data.rule.firewall_port_5432_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_011.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "GCP Firewall rule allows internet traffic to PostgreSQL port (5432)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on PostgreSQL port (5432) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-012",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-012",
+                            "eval": "data.rule.firewall_port_3389",
+                            "message": "data.rule.firewall_port_3389_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_012.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "GCP Firewall rule allows internet traffic to RDP port (3389)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on RDP port (3389) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-013",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-013",
+                            "eval": "data.rule.firewall_port_25",
+                            "message": "data.rule.firewall_port_25_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "GCP Firewall rule allows internet traffic to SMTP port (25)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on SMTP port (25) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-014",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-014",
+                            "eval": "data.rule.firewall_port_22",
+                            "message": "data.rule.firewall_port_22_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_014.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "GCP Firewall rule allows internet traffic to SSH port (22)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on SSH port (22) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-015",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-015",
+                            "eval": "data.rule.firewall_port_23",
+                            "message": "data.rule.firewall_port_23_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_015.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "GCP Firewall rule allows internet traffic to Telnet port (23)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on Telnet port (23) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-016",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-016",
+                            "eval": "data.rule.firewall_inbound",
+                            "message": "data.rule.firewall_inbound_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_016.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "GCP Firewall rules allow inbound traffic from anywhere with no target tags set",
+                    "description": "This policy identifies GCP Firewall rules which allow inbound traffic from anywhere with no target filtering. _x005F_x000D_ _x005F_x000D_ The default target is all instances in the network. The use of target tags or target service accounts allows the rule to apply to select instances. Not using any firewall rule filtering may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-017",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-017",
+                            "eval": "data.rule.firewall_inbound_all",
+                            "message": "data.rule.firewall_inbound_all_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_017.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "GCP Firewall with Inbound rule overly permissive to All Traffic",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on all protocols from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "GDPR",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-FW-018",
+                    "masterSnapshotId": [
+                        "GOOGLE_FIREWALL"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-FW-018",
+                            "eval": "data.rule.firewall_logging",
+                            "message": "data.rule.firewall_logging_err",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_FW_018.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP Firewall rule logging is enabled",
+                    "description": "This policy identifies GCP firewall rules that are not configured with firewall rule logging.  Firewall Rules Logging lets you audit, verify, and analyze the effects of your firewall rules. When you enable logging for a firewall rule, Google Cloud creates an entry called a connection record each time the rule allows or denies traffic. \n\nReference: https://cloud.google.com/vpc/docs/firewall-rules-logging",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
