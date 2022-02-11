@@ -1,5 +1,13 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines
 
 #
@@ -12,15 +20,6 @@ azure_issue["vm_aset"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/virtualmachines"
     not resource.properties.availabilitySet
-}
-
-source_path[{"vm_aset":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.compute/virtualmachines"
-    not resource.properties.availabilitySet
-    metadata:= {
-        "resource_path": [["resources",i,"properties","availabilitySet"]]
-    }
 }
 
 vm_aset {
