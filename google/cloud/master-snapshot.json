@@ -124,12 +124,38 @@
                 {
                     "masterSnapshotId": "GOOGLE_CLOUDFUNCTIONS",
                     "type": "cloudfunctions/functions.list",
-                    "collection": "targetHttpProxies",
+                    "collection": "cloudfunction",
                     "tags": [
                         {
                             "cloud": "GCP",
                             "service": [
                                 "cloudfunctions"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_BIGQUERY",
+                    "type": "bigquery/datasets.list",
+                    "collection": "bigquery",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "bigquery"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_SQLINSTANCE",
+                    "type": "sqladmin/instances.list",
+                    "collection": "sqladmin",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "sqladmin"
                             ]
                         }
                     ]
