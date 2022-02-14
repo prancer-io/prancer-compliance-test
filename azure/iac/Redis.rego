@@ -23,7 +23,7 @@ azure_attribute_absence ["enableSslPort"] {
 azure_issue ["enableSslPort"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
-    resource.properties.enableNonSslPort != false
+    resource.properties.enableNonSslPort == true
 }
 
 enableSslPort {
@@ -33,7 +33,9 @@ enableSslPort {
 }
 
 enableSslPort {
+	lower(input.resources[_].type) == "microsoft.cache/redis"
     azure_attribute_absence["enableSslPort"]
+    not azure_issue["enableSslPort"]
 }
 
 enableSslPort = false {

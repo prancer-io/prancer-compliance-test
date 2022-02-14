@@ -1,5 +1,8 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies
 
 
@@ -282,6 +285,7 @@ azure_issue["dbsec_threat_alert"] {
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     count(sql_resources.properties.disabledAlerts) > 0
+    not array_contains(sql_resources.properties.disabledAlerts, "")
 }
 
 source_path[{"dbsec_threat_email":metadata}] {
@@ -290,6 +294,7 @@ source_path[{"dbsec_threat_email":metadata}] {
     sql_resources := resource.resources[j]
     lower(sql_resources.type) == "securityalertpolicies"
     count(sql_resources.properties.disabledAlerts) > 0
+    not array_contains(sql_resources.properties.disabledAlerts, "")
     metadata:= {
         "resource_path": [["resources",i,"resources",j,"properties","disabledAlerts"]]
     }

@@ -150,8 +150,19 @@ azure_issue["sql_db_log_retention"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/databases/auditingsettings";
               #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(r.properties.retentionDays) >= 90;
-              c := 1]) == 0
+              to_number(r.properties.retentionDays) > 0;
+              to_number(r.properties.retentionDays) < 90;
+              c := 1]) > 0
+}
+
+azure_issue["sql_db_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/databases/auditingsettings";
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              to_number(r.properties.retentionDays) < 0;
+              c := 1]) > 0
 }
 
 sql_db_log_retention {

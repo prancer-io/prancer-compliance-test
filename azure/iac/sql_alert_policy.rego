@@ -711,6 +711,7 @@ azure_issue["sql_logical_server_disabled_alerts"] {
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     count(sql_resources.properties.disabledAlerts) > 0
+    not array_contains(sql_resources.properties.disabledAlerts, "")
 }
 
 source_path[{"sql_logical_server_disabled_alerts":metadata}] {
@@ -719,6 +720,7 @@ source_path[{"sql_logical_server_disabled_alerts":metadata}] {
     sql_resources := resource.resources[j]
     lower(sql_resources.type) == "securityalertpolicies"
     count(sql_resources.properties.disabledAlerts) > 0
+    not array_contains(sql_resources.properties.disabledAlerts, "")
     metadata:= {
         "resource_path": [["resources",i,"resources",j,"properties","disabledAlerts"]]
     }
@@ -787,7 +789,9 @@ azure_issue["sql_server_disabled_alerts"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              # default came up with a blank entries: "disabledAlerts": [""]
               count(r.properties.disabledAlerts) > 0;
+              not array_contains(r.properties.disabledAlerts, "");
               c := 1]) > 0
 }
 
