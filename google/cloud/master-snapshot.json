@@ -29,6 +29,136 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_PUBSUB",
+                    "type": "pubsub/topics.list",
+                    "collection": "pubsub",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "pubsub"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_securityPolicies",
+                    "type": "compute/securityPolicies.list",
+                    "collection": "securityPolicies",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_DISKS",
+                    "type": "compute/disks.aggregatedList",
+                    "collection": "disks",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_INSTANCE",
+                    "type": "compute/instances.aggregatedList",
+                    "collection": "instances",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_NETWORK",
+                    "type": "compute/networks.list",
+                    "collection": "networks",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_SUBNETWORKS",
+                    "type": "compute/subnetworks.aggregatedList",
+                    "collection": "subnetworks",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_TARGETHTTPPROXY",
+                    "type": "compute/targetHttpProxies.aggregatedList",
+                    "collection": "targetHttpProxies",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_CLOUDFUNCTIONS",
+                    "type": "cloudfunctions/functions.list",
+                    "collection": "cloudfunction",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "cloudfunctions"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_BIGQUERY",
+                    "type": "bigquery/datasets.list",
+                    "collection": "bigquery",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "bigquery"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_SQLINSTANCE",
+                    "type": "sqladmin/instances.list",
+                    "collection": "sqladmin",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "sqladmin"
+                            ]
+                        }
+                    ]
                 }
             ]
         }

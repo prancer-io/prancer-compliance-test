@@ -34,10 +34,6 @@ pub_sub_kms = false {
     gc_issue["pub_sub_kms"]
 }
 
-pub_sub_kms = false {
-    gc_attribute_absence["pub_sub_kms"]
-}
-
 pub_sub_kms_err = "Ensure GCP Pub/Sub topic is encrypted using a customer-managed encryption key" {
     gc_issue["pub_sub_kms"]
 }
