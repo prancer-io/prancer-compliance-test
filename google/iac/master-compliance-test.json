@@ -4746,7 +4746,7 @@
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(logging.rego)",
+                    "rule": "file(all.rego)",
                     "evals": [
                         {
                             "id": "PR-GCP-GDF-PUB-001",

@@ -159,6 +159,45 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_DNS",
+                    "type": "dns/managedZones.list",
+                    "collection": "dns",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "dns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_LOGGING",
+                    "type": "logging/metrics.list",
+                    "collection": "logging",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "logging"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_STORAGE",
+                    "type": "storage/storage/b.list",
+                    "collection": "storage",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "storage"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
