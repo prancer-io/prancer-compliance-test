@@ -98,13 +98,30 @@ azure_issue["dbsec_threat_retention"] {
     count([c | r := input.resources[_];
               r.type == "azurerm_mssql_server_security_alert_policy";
               contains(r.properties.server_name, resource.properties.compiletime_identity);
-              to_number(r.properties.retention_days) >= 90;
-              c := 1]) == 0
+              to_number(r.properties.retention_days) > 0;
+              to_number(r.properties.retention_days) < 90;
+              c := 1]) > 0
     count([c | r := input.resources[_];
               r.type == "azurerm_mssql_server_security_alert_policy";
               contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
-              to_number(r.properties.retention_days) >= 90;
-              c := 1]) == 0
+              to_number(r.properties.retention_days) > 0;
+              to_number(r.properties.retention_days) < 90;
+              c := 1]) > 0
+}
+
+azure_issue["dbsec_threat_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_security_alert_policy";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              to_number(r.properties.retention_days) < 0;
+              c := 1]) > 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_security_alert_policy";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              to_number(r.properties.retention_days) < 0;
+              c := 1]) > 0
 }
 
 # azure_issue["dbsec_threat_retention"] {

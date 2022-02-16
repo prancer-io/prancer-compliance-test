@@ -149,7 +149,15 @@ azure_issue["netwatch_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_network_watcher_flow_log"
     retention_policy := resource.properties.retention_policy[_]
+    to_number(retention_policy.days) > 0
     to_number(retention_policy.days) < 90
+}
+
+azure_issue["netwatch_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_watcher_flow_log"
+    retention_policy := resource.properties.retention_policy[_]
+    to_number(retention_policy.days) < 0
 }
 
 netwatch_log_retention {
