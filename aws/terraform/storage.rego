@@ -275,6 +275,7 @@ efs_encrypt_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html"
 }
 
+
 #
 # PR-AWS-TRF-S3-001
 #
@@ -379,6 +380,50 @@ s3_accesslog_err = "AWS Access logging not enabled on S3 buckets" {
 
 s3_accesslog_metadata := {
     "Policy Code": "PR-AWS-TRF-S3-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Access logging not enabled on S3 buckets",
+    "Policy Description": "Checks for S3 buckets without access logging turned on. Access logging allows customers to view complete audit trail on sensitive workloads such as S3 buckets. It is recommended that Access logging is turned on for all S3 buckets to meet audit PR-AWS-TRF-S3-001-DESC compliance requirement",
+    "Resource Type": "aws_s3_bucket_policy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
+}
+
+
+#
+# PR-AWS-TRF-V4-S3-001
+#
+
+default s3_accesslog_v4 = null
+
+aws_issue["s3_accesslog_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_logging"
+    not resource.properties.target_prefix
+}
+
+aws_issue["s3_accesslog_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_logging"
+    count(resource.properties.target_bucket) == 0
+}
+
+s3_accesslog_v4 {
+    lower(input.resources[i].type) == "aws_s3_bucket_logging"
+    not aws_issue["s3_accesslog_v4"]
+}
+
+s3_accesslog_v4 = false {
+    aws_issue["s3_accesslog_v4"]
+}
+
+s3_accesslog_v4_err = "AWS Access logging not enabled on S3 buckets" {
+    aws_issue["s3_accesslog_v4"]
+}
+
+s3_accesslog_v4_metadata := {
+    "Policy Code": "PR-AWS-TRF-V4-S3-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -999,10 +1044,64 @@ s3_versioning_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS S3 Object Versioning is disabled",
     "Policy Description": "This policy identifies the S3 buckets which have Object Versioning disabled. S3 Object Versioning is an important capability in protecting your data within a bucket. Once you enable Object Versioning, you cannot remove it; you can suspend Object Versioning at any time on a bucket if you do not wish for it to persist. It is recommended to enable Object Versioning on S3.",
-    "Resource Type": "aws_s3_bucket_policy",
+    "Resource Type": "aws_s3_bucket",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
 }
+
+
+#
+# PR-AWS-TRF-V4-S3-007
+#
+
+default s3_versioning_v4 = null
+
+aws_issue["s3_versioning_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_versioning"
+    versioning_configuration := resource.properties.versioning_configuration[j]
+    not versioning_configuration.status
+}
+
+aws_bool_issue["s3_versioning_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_versioning"
+    versioning_configuration := resource.properties.versioning_configuration[j]
+    lower(versioning_configuration.status) != "enabled"
+}
+
+s3_versioning_v4 {
+    lower(input.resources[i].type) == "aws_s3_bucket_versioning"
+    not aws_issue["s3_versioning_v4"]
+    not aws_bool_issue["s3_versioning_v4"]
+}
+
+s3_versioning_v4 = false {
+    aws_issue["s3_versioning_v4"]
+}
+
+s3_versioning_v4 = false {
+    aws_bool_issue["s3_versioning_v4"]
+}
+
+s3_versioning_v4_err = "AWS S3 Object Versioning is disabled" {
+    aws_issue["s3_versioning_v4"]
+} else = "AWS S3 Object Versioning is disabled" {
+    aws_bool_issue["s3_versioning_v4"]
+}
+
+s3_versioning_v4_metadata := {
+    "Policy Code": "PR-AWS-TRF-V4-S3-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS S3 Object Versioning is disabled",
+    "Policy Description": "This policy identifies the S3 buckets which have Object Versioning disabled. S3 Object Versioning is an important capability in protecting your data within a bucket. Once you enable Object Versioning, you cannot remove it; you can suspend Object Versioning at any time on a bucket if you do not wish for it to persist. It is recommended to enable Object Versioning on S3.",
+    "Resource Type": "aws_s3_bucket_versioning",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
+}
+
 
 #
 # PR-AWS-TRF-S3-009
@@ -1210,6 +1309,45 @@ s3_website_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
 }
 
+
+#
+# PR-AWS-TRF-V4-S3-013
+#
+
+default s3_website_v4 = null
+
+aws_issue["s3_website_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_website_configuration"
+    resource.properties.bucket
+}
+
+s3_website_v4 {
+    lower(input.resources[i].type) == "aws_s3_bucket_website_configuration"
+    not aws_issue["s3_website_v4"]
+}
+
+s3_website_v4 = false {
+    aws_issue["s3_website_v4"]
+}
+
+s3_website_v4_err = "S3 buckets with configurations set to host websites" {
+    aws_issue["s3_website_v4"]
+}
+
+s3_website_v4_metadata := {
+    "Policy Code": "PR-AWS-TRF-V4-S3-013",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "S3 buckets with configurations set to host websites",
+    "Policy Description": "To host a website on AWS S3 you should configure a bucket as a website. This policy identifies all the S3 buckets that are configured to host websites. By frequently surveying these S3 buckets you can ensure that only authorized buckets are enabled to host websites. Make sure to disable static website hosting for unauthorized S3 buckets.",
+    "Resource Type": "aws_s3_bucket_website_configuration",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
+}
+
+
 #
 # PR-AWS-TRF-S3-006
 #
@@ -1323,6 +1461,44 @@ s3_public_acl_err = "AWS S3 bucket has global view ACL permissions enabled." {
 
 s3_public_acl_metadata := {
     "Policy Code": "PR-AWS-TRF-S3-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS S3 bucket has global view ACL permissions enabled.",
+    "Policy Description": "This policy determines if any S3 bucket(s) has Global View ACL permissions enabled for the All Users group. These permissions allow external resources to see the permission settings associated to the object.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
+}
+
+
+#
+# PR-AWS-TRF-V4-S3-008
+#
+
+default s3_public_acl_v4 = null
+
+aws_issue["s3_public_acl_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_acl"
+    resource.properties.acl == "public-read"
+}
+
+s3_public_acl_v4 {
+    lower(input.resources[i].type) == "aws_s3_bucket_acl"
+    not aws_issue["s3_public_acl_v4"]
+}
+
+s3_public_acl_v4 = false {
+    aws_issue["s3_public_acl_v4"]
+}
+
+s3_public_acl_v4_err = "AWS S3 bucket has global view ACL permissions enabled." {
+    aws_issue["s3_public_acl_v4"]
+}
+
+s3_public_acl_v4_metadata := {
+    "Policy Code": "PR-AWS-TRF-V4-S3-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -1480,6 +1656,8 @@ s3_encryption_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
 }
 
+# PR-AWS-TRF-V4-S3-012 will be deprecated in 5.0 release
+
 #
 # PR-AWS-TRF-S3-014
 #
@@ -1524,6 +1702,61 @@ s3_cors_err = "Ensure S3 hosted sites supported hardened CORS" {
 
 s3_cors_metadata := {
     "Policy Code": "PR-AWS-TRF-S3-014",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure S3 hosted sites supported hardened CORS",
+    "Policy Description": "Ensure that AllowedOrigins, AllowedMethods should not be set to *. this allows all cross site users to access s3 bucket and they have permission to manipulate data",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--seealso"
+}
+
+
+#
+# PR-AWS-TRF-V4-S3-014
+#
+
+default s3_cors_v4 = null
+
+aws_issue["s3_cors_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_cors_configuration"
+    cors_rule := resource.properties.cors_rule[j]
+    cors_rule.allowed_headers[k] == "*"
+    cors_rule.allowed_methods[l] == "*"
+}
+
+source_path[{"s3_cors_v4": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_cors_configuration"
+    cors_rule := resource.properties.cors_rule[j]
+    cors_rule.allowed_headers[k] == "*"
+    cors_rule.allowed_methods[l] == "*"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cors_rule", j, "allowed_headers", k],
+            ["resources", i, "properties", "cors_rule", j, "allowed_methods", l]
+        ],
+    }
+}
+
+s3_cors_v4 {
+    lower(input.resources[i].type) == "aws_s3_bucket_cors_configuration"
+    not aws_issue["s3_cors_v4"]
+}
+
+s3_cors_v4 = false {
+    aws_issue["s3_cors_v4"]
+}
+
+s3_cors_v4_err = "Ensure S3 hosted sites supported hardened CORS" {
+    aws_issue["s3_cors_v4"]
+}
+
+s3_cors_v4_metadata := {
+    "Policy Code": "PR-AWS-TRF-V4-S3-014",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -1815,6 +2048,79 @@ bucket_kms_encryption_metadata := {
 
 
 #
+# PR-AWS-TRF-V4-S3-015
+#
+
+default bucket_kms_encryption_v4 = null
+
+
+aws_issue["bucket_kms_encryption_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_server_side_encryption_configuration"
+    rule = resource.properties.rule[k]
+    not rule.bucket_key_enabled
+}
+
+aws_issue["bucket_kms_encryption_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_server_side_encryption_configuration"
+    rule = resource.properties.rule[k]
+    lower(rule.bucket_key_enabled) == "false"
+}
+
+aws_issue["bucket_kms_encryption_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_server_side_encryption_configuration"
+    rule := resource.properties.rule[k]
+    apply_server_side_encryption_by_default := rule.apply_server_side_encryption_by_default[l]
+    lower(apply_server_side_encryption_by_default.sse_algorithm) != "aws:kms"
+}
+
+aws_issue["bucket_kms_encryption_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_server_side_encryption_configuration"
+    rule := resource.properties.rule[k]
+    apply_server_side_encryption_by_default := rule.apply_server_side_encryption_by_default[l]
+    lower(apply_server_side_encryption_by_default.sse_algorithm) == "aws:kms"
+    not apply_server_side_encryption_by_default.kms_master_key_id
+}
+
+aws_issue["bucket_kms_encryption_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_server_side_encryption_configuration"
+    rule := resource.properties.rule[k]
+    apply_server_side_encryption_by_default := rule.apply_server_side_encryption_by_default[l]
+    lower(apply_server_side_encryption_by_default.sse_algorithm) == "aws:kms"
+    count(apply_server_side_encryption_by_default.kms_master_key_id) == 0
+}
+
+bucket_kms_encryption_v4 {
+    lower(input.resources[i].type) == "aws_s3_bucket_server_side_encryption_configuration"
+    not aws_issue["bucket_kms_encryption_v4"]
+}
+
+bucket_kms_encryption_v4 = false {
+    aws_issue["bucket_kms_encryption_v4"]
+}
+
+bucket_kms_encryption_v4_err = "Ensure S3 bucket is encrypted using KMS" {
+    aws_issue["bucket_kms_encryption_v4"]
+}
+
+bucket_kms_encryption_v4_metadata := {
+    "Policy Code": "PR-AWS-TRF-V4-S3-015",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure S3 bucket is encrypted using KMS",
+    "Policy Description": "Ensure that your AWS S3 buckets are configured to use Server-Side Encryption with customer managed CMKs instead of S3-Managed Keys (SSE-S3) in order to obtain a fine-grained control over Amazon S3 data-at-rest encryption and decryption process",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionbydefault.html#cfn-s3-bucket-serversideencryptionbydefault-ssealgorithm"
+}
+
+
+#
 # PR-AWS-TRF-S3-016
 #
 
@@ -1910,6 +2216,51 @@ s3_object_lock_enable_metadata := {
 
 
 #
+# PR-AWS-TRF-V4-S3-016
+#
+
+default s3_object_lock_enable_v4 = null
+
+
+aws_issue["s3_object_lock_enable_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_object_lock_configuration"
+    not resource.properties.object_lock_enabled
+}
+
+aws_issue["s3_object_lock_enable_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_object_lock_configuration"
+    lower(resource.properties.object_lock_enabled) != "true"
+}
+
+s3_object_lock_enable_v4 {
+    lower(input.resources[i].type) == "aws_s3_bucket_object_lock_configuration"
+    not aws_issue["s3_object_lock_enable_v4"]
+}
+
+s3_object_lock_enable_v4 = false {
+    aws_issue["s3_object_lock_enable_v4"]
+}
+
+s3_object_lock_enable_v4_err = "Ensure S3 bucket has enabled lock configuration" {
+    aws_issue["s3_object_lock_enable_v4"]
+}
+
+s3_object_lock_enable_v4_metadata := {
+    "Policy Code": "PR-AWS-TRF-V4-S3-016",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure S3 bucket has enabled lock configuration",
+    "Policy Description": "Indicates whether this bucket has an Object Lock configuration enabled. Enable object_lock_enabled when you apply ObjectLockConfiguration to a bucket.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#object_lock_configuration"
+}
+
+
+#
 # PR-AWS-TRF-S3-017
 #
 
@@ -1968,6 +2319,45 @@ s3_cross_region_replica_err = "Ensure S3 bucket cross-region replication is enab
 
 s3_cross_region_replica_metadata := {
     "Policy Code": "PR-AWS-TRF-S3-017",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure S3 bucket cross-region replication is enabled",
+    "Policy Description": "Cross-region replication enables automatic, asynchronous copying of objects across S3 buckets. By default, replication supports copying new S3 objects after it is enabled",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration-rules.html#cfn-s3-bucket-replicationconfiguration-rules-destination"
+}
+
+
+#
+# PR-AWS-TRF-V4-S3-017
+#
+
+default s3_cross_region_replica_v4 = null
+
+aws_issue["s3_cross_region_replica_v4"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_replication_configuration"
+    rules := resource.properties.rules[_]
+    not rules.destination
+}
+
+s3_cross_region_replica_v4 {
+    lower(input.resources[i].type) == "aws_s3_bucket_replication_configuration"
+    not aws_issue["s3_cross_region_replica_v4"]
+}
+
+s3_cross_region_replica_v4 = false {
+    aws_issue["s3_cross_region_replica_v4"]
+}
+
+s3_cross_region_replica_v4_err = "Ensure S3 bucket cross-region replication is enabled" {
+    aws_issue["s3_cross_region_replica_v4"]
+}
+
+s3_cross_region_replica_v4_metadata := {
+    "Policy Code": "PR-AWS-TRF-V4-S3-017",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

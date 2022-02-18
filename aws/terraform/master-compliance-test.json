@@ -2929,7 +2929,7 @@
                         {
                             "id": "PR-AWS-TRF-S3-001",
                             "eval": "data.rule.s3_accesslog",
-                            "PR-AWS-TRF-S3-001-DESC compliance requirement": "data.rule.s3_accesslog_err",
+                            "message": "data.rule.s3_accesslog_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_TRF_S3_001.py"
                         }
@@ -2955,6 +2955,45 @@
                     ],
                     "resourceTypes": [
                         "aws_s3_bucket"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-V4-S3-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-V4-S3-001",
+                            "eval": "data.rule.s3_accesslog_v4",
+                            "message": "data.rule.s3_accesslog_v4_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_S3_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Access logging not enabled on S3 buckets",
+                    "description": "Checks for S3 buckets without access logging turned on. Access logging allows customers to view complete audit trail on sensitive workloads such as S3 buckets. It is recommended that Access logging is turned on for all S3 buckets to meet audit PR-AWS-TRF-S3-001-DESC compliance requirement",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_s3_bucket_logging"
                     ]
                 },
                 {
@@ -3121,6 +3160,41 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-V4-S3-007",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-V4-S3-007",
+                            "eval": "data.rule.s3_versioning_v4",
+                            "message": "data.rule.s3_versioning_v4_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_V4_S3_007.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "AWS S3 Object Versioning is disabled",
+                    "description": "This policy identifies the S3 buckets which have Object Versioning disabled. S3 Object Versioning is an important capability in protecting your data within a bucket. Once you enable Object Versioning, you cannot remove it; you can suspend Object Versioning at any time on a bucket if you do not wish for it to persist. It is recommended to enable Object Versioning on S3.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "PCI-DSS",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_s3_bucket_versioning"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-S3-009",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -3185,6 +3259,41 @@
                     ],
                     "resourceTypes": [
                         "aws_s3_bucket"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-V4-S3-013",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-V4-S3-013",
+                            "eval": "data.rule.s3_website_v4",
+                            "message": "data.rule.s3_website_v4_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_V4_S3_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "S3 buckets with configurations set to host websites",
+                    "description": "To host a website on AWS S3 you should configure a bucket as a website. This policy identifies all the S3 buckets that are configured to host websites. By frequently surveying these S3 buckets you can ensure that only authorized buckets are enabled to host websites. Make sure to disable static website hosting for unauthorized S3 buckets.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "ISO 27001",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_s3_bucket_website_configuration"
                     ]
                 },
                 {
@@ -3256,6 +3365,40 @@
                     ],
                     "resourceTypes": [
                         "aws_s3_bucket"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-V4-S3-008",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-S3-V4-008",
+                            "eval": "data.rule.s3_public_acl_v4",
+                            "message": "data.rule.s3_public_acl_v4_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_V4_S3_008.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "AWS S3 bucket has global view ACL permissions enabled.",
+                    "description": "This policy determines if any S3 bucket(s) has Global View ACL permissions enabled for the All Users group. These permissions allow external resources to see the permission settings associated to the object.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_s3_bucket_acl"
                     ]
                 },
                 {
@@ -3400,6 +3543,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-V4-S3-014",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-V4-S3-014",
+                            "eval": "data.rule.s3_cors_v4",
+                            "message": "data.rule.s3_cors_v4_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_V4_S3_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure S3 hosted sites supported hardened CORS",
+                    "description": "Ensure that AllowedOrigins, AllowedMethods should not be set to *. this allows all cross site users to access s3 bucket and they have permission to manipulate data",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_s3_bucket_cors_configuration"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-BKP-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -3467,6 +3644,41 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-V4-S3-015",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-V4-S3-015",
+                            "eval": "data.rule.bucket_kms_encryption_v4",
+                            "message": "data.rule.bucket_kms_encryption_v4_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_V4_S3_015.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure S3 bucket is encrypted using KMS",
+                    "description": "Ensure that your AWS S3 buckets are configured to use Server-Side Encryption with customer managed CMKs instead of S3-Managed Keys (SSE-S3) in order to obtain a fine-grained control over Amazon S3 data-at-rest encryption and decryption process",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_s3_bucket_server_side_encryption_configuration"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-S3-016",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -3501,6 +3713,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-V4-S3-016",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-V4-S3-016",
+                            "eval": "data.rule.s3_object_lock_enable_v4",
+                            "message": "data.rule.s3_object_lock_enable_v4_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_v4_S3_016.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure S3 bucket has enabled lock configuration",
+                    "description": "Indicates whether this bucket has an Object Lock configuration enabled. Enable object_lock_enabled when you apply ObjectLockConfiguration to a bucket.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_s3_bucket_object_lock_configuration"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-S3-017",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -3532,6 +3778,40 @@
                     ],
                     "resourceTypes": [
                         "aws_s3_bucket"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-V4-S3-017",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-V4-S3-017",
+                            "eval": "data.rule.s3_cross_region_replica_v4",
+                            "message": "data.rule.s3_cross_region_replica_v4_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_V4_S3_017.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure S3 bucket cross-region replication is enabled",
+                    "description": "Cross-region replication enables automatic, asynchronous copying of objects across S3 buckets. By default, replication supports copying new S3 objects after it is enabled",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_s3_bucket_replication_configuration"
                     ]
                 },
                 {
