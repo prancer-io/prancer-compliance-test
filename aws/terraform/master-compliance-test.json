@@ -2958,7 +2958,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-TRF-V4-S3-001",
+                    "masterTestId": "PR-AWS-TRF-S3-001V4",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2966,11 +2966,11 @@
                     "rule": "file(storage.rego)",
                     "evals": [
                         {
-                            "id": "PR-AWS-TRF-V4-S3-001",
+                            "id": "PR-AWS-TRF-S3-001V4",
                             "eval": "data.rule.s3_accesslog_v4",
                             "message": "data.rule.s3_accesslog_v4_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_TRF_S3_001.py"
+                            "remediationFunction": "PR_AWS_TRF_S3_001V4.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3160,7 +3160,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-TRF-V4-S3-007",
+                    "masterTestId": "PR-AWS-TRF-S3-007V4",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3168,11 +3168,11 @@
                     "rule": "file(storage.rego)",
                     "evals": [
                         {
-                            "id": "PR-AWS-TRF-V4-S3-007",
+                            "id": "PR-AWS-TRF-S3-007V4",
                             "eval": "data.rule.s3_versioning_v4",
                             "message": "data.rule.s3_versioning_v4_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_TRF_V4_S3_007.py"
+                            "remediationFunction": "PR_AWS_TRF_S3_007V4.py"
                         }
                     ],
                     "severity": "Low",
@@ -3262,7 +3262,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-TRF-V4-S3-013",
+                    "masterTestId": "PR-AWS-TRF-S3-013V4",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3270,11 +3270,11 @@
                     "rule": "file(storage.rego)",
                     "evals": [
                         {
-                            "id": "PR-AWS-TRF-V4-S3-013",
+                            "id": "PR-AWS-TRF-S3-013V4",
                             "eval": "data.rule.s3_website_v4",
                             "message": "data.rule.s3_website_v4_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_TRF_V4_S3_013.py"
+                            "remediationFunction": "PR_AWS_TRF_S3_013V4.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3368,7 +3368,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-TRF-V4-S3-008",
+                    "masterTestId": "PR-AWS-TRF-S3-008V4",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3380,7 +3380,7 @@
                             "eval": "data.rule.s3_public_acl_v4",
                             "message": "data.rule.s3_public_acl_v4_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_TRF_V4_S3_008.py"
+                            "remediationFunction": "PR_AWS_TRF_S3_008V4.py"
                         }
                     ],
                     "severity": "High",
@@ -3543,7 +3543,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-TRF-V4-S3-014",
+                    "masterTestId": "PR-AWS-TRF-S3-014V4",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3551,11 +3551,11 @@
                     "rule": "file(storage.rego)",
                     "evals": [
                         {
-                            "id": "PR-AWS-TRF-V4-S3-014",
+                            "id": "PR-AWS-TRF-S3-014V4",
                             "eval": "data.rule.s3_cors_v4",
                             "message": "data.rule.s3_cors_v4_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_TRF_V4_S3_014.py"
+                            "remediationFunction": "PR_AWS_TRF_S3_014V4.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3644,7 +3644,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-TRF-V4-S3-015",
+                    "masterTestId": "PR-AWS-TRF-S3-015V4",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3652,11 +3652,11 @@
                     "rule": "file(storage.rego)",
                     "evals": [
                         {
-                            "id": "PR-AWS-TRF-V4-S3-015",
+                            "id": "PR-AWS-TRF-S3-015V4",
                             "eval": "data.rule.bucket_kms_encryption_v4",
                             "message": "data.rule.bucket_kms_encryption_v4_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_TRF_V4_S3_015.py"
+                            "remediationFunction": "PR_AWS_TRF_S3_015V4.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3713,7 +3713,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-TRF-V4-S3-016",
+                    "masterTestId": "PR-AWS-TRF-S3-016V4",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3721,11 +3721,11 @@
                     "rule": "file(storage.rego)",
                     "evals": [
                         {
-                            "id": "PR-AWS-TRF-V4-S3-016",
+                            "id": "PR-AWS-TRF-S3-016V4",
                             "eval": "data.rule.s3_object_lock_enable_v4",
                             "message": "data.rule.s3_object_lock_enable_v4_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_TRF_v4_S3_016.py"
+                            "remediationFunction": "PR_AWS_TRF_S3_016v4.py"
                         }
                     ],
                     "severity": "Low",
@@ -3781,7 +3781,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-TRF-V4-S3-017",
+                    "masterTestId": "PR-AWS-TRF-S3-017V4",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3789,11 +3789,11 @@
                     "rule": "file(storage.rego)",
                     "evals": [
                         {
-                            "id": "PR-AWS-TRF-V4-S3-017",
+                            "id": "PR-AWS-TRF-S3-017V4",
                             "eval": "data.rule.s3_cross_region_replica_v4",
                             "message": "data.rule.s3_cross_region_replica_v4_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_TRF_V4_S3_017.py"
+                            "remediationFunction": "PR_AWS_TRF_S3_017V4.py"
                         }
                     ],
                     "severity": "Medium",

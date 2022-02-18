@@ -392,7 +392,7 @@ s3_accesslog_metadata := {
 
 
 #
-# PR-AWS-TRF-V4-S3-001
+# PR-AWS-TRF-S3-001V4
 #
 
 default s3_accesslog_v4 = null
@@ -423,7 +423,7 @@ s3_accesslog_v4_err = "AWS Access logging not enabled on S3 buckets" {
 }
 
 s3_accesslog_v4_metadata := {
-    "Policy Code": "PR-AWS-TRF-V4-S3-001",
+    "Policy Code": "PR-AWS-TRF-S3-001V4",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -1051,7 +1051,7 @@ s3_versioning_metadata := {
 
 
 #
-# PR-AWS-TRF-V4-S3-007
+# PR-AWS-TRF-S3-007V4
 #
 
 default s3_versioning_v4 = null
@@ -1091,7 +1091,7 @@ s3_versioning_v4_err = "AWS S3 Object Versioning is disabled" {
 }
 
 s3_versioning_v4_metadata := {
-    "Policy Code": "PR-AWS-TRF-V4-S3-007",
+    "Policy Code": "PR-AWS-TRF-S3-007V4",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -1311,7 +1311,7 @@ s3_website_metadata := {
 
 
 #
-# PR-AWS-TRF-V4-S3-013
+# PR-AWS-TRF-S3-013V4
 #
 
 default s3_website_v4 = null
@@ -1336,7 +1336,7 @@ s3_website_v4_err = "S3 buckets with configurations set to host websites" {
 }
 
 s3_website_v4_metadata := {
-    "Policy Code": "PR-AWS-TRF-V4-S3-013",
+    "Policy Code": "PR-AWS-TRF-S3-013V4",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -1473,7 +1473,7 @@ s3_public_acl_metadata := {
 
 
 #
-# PR-AWS-TRF-V4-S3-008
+# PR-AWS-TRF-S3-008V4
 #
 
 default s3_public_acl_v4 = null
@@ -1498,7 +1498,7 @@ s3_public_acl_v4_err = "AWS S3 bucket has global view ACL permissions enabled." 
 }
 
 s3_public_acl_v4_metadata := {
-    "Policy Code": "PR-AWS-TRF-V4-S3-008",
+    "Policy Code": "PR-AWS-TRF-S3-008V4",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -1656,7 +1656,7 @@ s3_encryption_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
 }
 
-# PR-AWS-TRF-V4-S3-012 will be deprecated in 5.0 release
+# PR-AWS-TRF-S3-012V4 will be deprecated in 5.0 release
 
 #
 # PR-AWS-TRF-S3-014
@@ -1714,7 +1714,7 @@ s3_cors_metadata := {
 
 
 #
-# PR-AWS-TRF-V4-S3-014
+# PR-AWS-TRF-S3-014V4
 #
 
 default s3_cors_v4 = null
@@ -1756,7 +1756,7 @@ s3_cors_v4_err = "Ensure S3 hosted sites supported hardened CORS" {
 }
 
 s3_cors_v4_metadata := {
-    "Policy Code": "PR-AWS-TRF-V4-S3-014",
+    "Policy Code": "PR-AWS-TRF-S3-014V4",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -2048,7 +2048,7 @@ bucket_kms_encryption_metadata := {
 
 
 #
-# PR-AWS-TRF-V4-S3-015
+# PR-AWS-TRF-S3-015V4
 #
 
 default bucket_kms_encryption_v4 = null
@@ -2108,7 +2108,7 @@ bucket_kms_encryption_v4_err = "Ensure S3 bucket is encrypted using KMS" {
 }
 
 bucket_kms_encryption_v4_metadata := {
-    "Policy Code": "PR-AWS-TRF-V4-S3-015",
+    "Policy Code": "PR-AWS-TRF-S3-015V4",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -2216,7 +2216,7 @@ s3_object_lock_enable_metadata := {
 
 
 #
-# PR-AWS-TRF-V4-S3-016
+# PR-AWS-TRF-S3-016V4
 #
 
 default s3_object_lock_enable_v4 = null
@@ -2248,7 +2248,7 @@ s3_object_lock_enable_v4_err = "Ensure S3 bucket has enabled lock configuration"
 }
 
 s3_object_lock_enable_v4_metadata := {
-    "Policy Code": "PR-AWS-TRF-V4-S3-016",
+    "Policy Code": "PR-AWS-TRF-S3-016V4",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -2331,7 +2331,7 @@ s3_cross_region_replica_metadata := {
 
 
 #
-# PR-AWS-TRF-V4-S3-017
+# PR-AWS-TRF-S3-017V4
 #
 
 default s3_cross_region_replica_v4 = null
@@ -2357,7 +2357,7 @@ s3_cross_region_replica_v4_err = "Ensure S3 bucket cross-region replication is e
 }
 
 s3_cross_region_replica_v4_metadata := {
-    "Policy Code": "PR-AWS-TRF-V4-S3-017",
+    "Policy Code": "PR-AWS-TRF-S3-017V4",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
