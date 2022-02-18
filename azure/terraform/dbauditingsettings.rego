@@ -101,13 +101,30 @@ azure_issue["mssql_db_log_retention"] {
     count([c | r := input.resources[_];
               r.type == "azurerm_mssql_database_extended_auditing_policy";
               contains(r.properties.database_id, resource.properties.compiletime_identity);
-              to_number(resource.properties.retention_in_days) >= 90
-              c := 1]) == 0
+              to_number(r.properties.retention_in_days) > 0
+              to_number(r.properties.retention_in_days) < 90
+              c := 1]) > 0
     count([c | r := input.resources[_];
               r.type == "azurerm_mssql_database_extended_auditing_policy";
               contains(r.properties.database_id, concat(".", [resource.type, resource.name]));
-              to_number(resource.properties.retention_in_days) >= 90
-              c := 1]) == 0
+              to_number(r.properties.retention_in_days) > 0
+              to_number(r.properties.retention_in_days) < 90
+              c := 1]) > 0
+}
+
+azure_issue["mssql_db_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_database"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_database_extended_auditing_policy";
+              contains(r.properties.database_id, resource.properties.compiletime_identity);
+              to_number(r.properties.retention_in_days) < 0
+              c := 1]) > 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_database_extended_auditing_policy";
+              contains(r.properties.database_id, concat(".", [resource.type, resource.name]));
+              to_number(r.properties.retention_in_days) < 0
+              c := 1]) > 0
 }
 
 # azure_issue["mssql_db_log_retention"] {

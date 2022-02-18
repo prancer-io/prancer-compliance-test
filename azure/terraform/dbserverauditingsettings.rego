@@ -24,13 +24,30 @@ azure_issue["mssql_log_retention"] {
     count([c | r := input.resources[_];
               r.type == "azurerm_mssql_server_extended_auditing_policy";
               contains(r.properties.server_id, resource.properties.compiletime_identity);
-              to_number(r.properties.retention_in_days) >= 90;
-              c := 1]) == 0
+              to_number(r.properties.retention_in_days) > 0;
+              to_number(r.properties.retention_in_days) < 90;
+              c := 1]) > 0
     count([c | r := input.resources[_];
               r.type == "azurerm_mssql_server_extended_auditing_policy";
               contains(r.properties.server_id, concat(".", [resource.type, resource.name]));
-              to_number(r.properties.retention_in_days) >= 90;
-              c := 1]) == 0
+              to_number(r.properties.retention_in_days) > 0;
+              to_number(r.properties.retention_in_days) < 90;
+              c := 1]) > 0
+}
+
+azure_issue["mssql_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_extended_auditing_policy";
+              contains(r.properties.server_id, resource.properties.compiletime_identity);
+              to_number(r.properties.retention_in_days) < 0;
+              c := 1]) > 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_extended_auditing_policy";
+              contains(r.properties.server_id, concat(".", [resource.type, resource.name]));
+              to_number(r.properties.retention_in_days) < 0;
+              c := 1]) > 0
 }
 
 # azure_issue["mssql_log_retention"] {
@@ -99,7 +116,15 @@ azure_issue["mssql_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_sql_server"
     extended_auditing_policy := resource.properties.extended_auditing_policy[_]
+    to_number(extended_auditing_policy.retention_in_days) > 0
     to_number(extended_auditing_policy.retention_in_days) < 90
+}
+
+azure_issue["mssql_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_sql_server"
+    extended_auditing_policy := resource.properties.extended_auditing_policy[_]
+    to_number(extended_auditing_policy.retention_in_days) < 0
 }
 
 sql_log_retention {
