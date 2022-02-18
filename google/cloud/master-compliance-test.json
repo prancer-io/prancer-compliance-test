@@ -4356,7 +4356,7 @@
                     "description": "This policy identifies Storage buckets that are encrypted with the default Google-managed keys. As a best practice, use Customer-managed key to encrypt the data in your storage bucket and ensure full control over your data.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "cloud",
                             "compliance": [
                                 "CSA-CCM",
                                 "HITRUST",
@@ -4392,7 +4392,7 @@
                     "description": "This policy identifies Storage log buckets which have object versioning disabled. Enabling object versioning on storage log buckets will protect your cloud storage data from being overwritten or accidentally deleted. It is recommended to enable object versioning feature on all storage buckets where sinks are configured.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "cloud",
                             "compliance": [
                                 "CIS",
                                 "CSA-CCM",
@@ -4429,7 +4429,7 @@
                     "description": "Checks to ensure that logging is enabled on a Stackdriver exported Bucket. Enabled logging provides information about all the requests made on the bucket.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "cloud",
                             "compliance": [
                                 "CIS",
                                 "CSA-CCM",
@@ -4466,7 +4466,7 @@
                     "description": "Checks to verify that the configuration on the Storage Buckets is enabled for access logs and storage logs.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "cloud",
                             "compliance": [
                                 "GDPR",
                                 "CIS",
@@ -4505,7 +4505,7 @@
                     "description": "Checks to ensure that Stackdriver logs on Storage Buckets are not public. Giving public access to Stackdriver logs will enable anyone with a web association to retrieve sensitive information that is critical to business. Stackdriver Logging enables to store, search, investigate, monitor and alert on log information/events from Google Cloud Platform. The permission needs to be set only for authorized users.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "cloud",
                             "compliance": [
                                 "CIS",
                                 "CSA-CCM",
@@ -4543,7 +4543,7 @@
                     "description": "Checks to ensure that Stackdriver logs on Storage Buckets are not public. Giving public access to Stackdriver logs will enable anyone with a web association to retrieve sensitive information that is critical to business. Stackdriver Logging enables to store, search, investigate, monitor and alert on log information/events from Google Cloud Platform. The permission needs to be set only for authorized users.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "cloud",
                             "compliance": [
                                 "CIS",
                                 "CSA-CCM",
@@ -4579,7 +4579,7 @@
                     "description": "This policy identifies GCP storage buckets that are not configured with default Event-Based Hold. An event-based hold resets the object's time in the bucket for the purposes of the retention period. This behavior is useful when you want an object to persist in your bucket for a certain length of time after a certain event occurs. It is recommended to enable this feature to protect individual objects from deletion.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "cloud",
                             "compliance": [
                             ],
                             "service": [
@@ -4609,7 +4609,7 @@
                     "description": "This policy identifies GCP storage buckets that are sending logs to themselves. When storage buckets use the same bucket to send their access logs, a loop of logs will be created, which is not a security best practice. It is recommended to spin up new and different log buckets for storage bucket logging.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "cloud",
                             "compliance": [
                             ],
                             "service": [
@@ -4639,7 +4639,7 @@
                     "description": "This policy identifies GCP log buckets for which retention policy is not configured using bucket lock. It is recommended to configure the data retention policy for cloud storage buckets using bucket lock to permanently prevent the policy from being reduced or removed in case the system is compromised by an attacker or a malicious insider.\n\nNote: Locking a bucket is an irreversible action. Once you lock a bucket, you cannot remove the retention policy from the bucket or decrease the retention period for the policy.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "cloud",
                             "compliance": [],
                             "service": [
                                 "storage"
@@ -4668,7 +4668,7 @@
                     "description": "This policy identifies GCP log buckets for which retention policy is not enabled. Enabling retention policies on log buckets will protect logs stored in cloud storage buckets from being overwritten or accidentally deleted. It is recommended to configure a data retention policy for these cloud storage buckets to store the activity logs for forensics and security investigations.",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "cloud",
                             "compliance": [],
                             "service": [
                                 "storage"
