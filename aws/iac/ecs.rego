@@ -1194,3 +1194,70 @@ ecs_network_mode_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-networkmode"
 }
+
+
+# #
+# # PR-AWS-CFR-ECS-015
+# #
+
+# default ecs_network_mode = null
+
+# allowed_regions = ["us-east-1"]
+
+# image_location_regex = sprintf("^(\\${AWS::AccountId}|[0-9]{12})\\.dkr\\.ecr\\.(\\${AWS::Region}|%s)\\.\\${AWS::URLSuffix}/.*", [concat("|", allowed_regions)])
+
+# valid_image_region_param(image){
+# 	image["Fn::Join"][0] == ""
+# 	array := image["Fn::Join"][1]
+# 	array[0] == {"Ref": "AWS::AccountId"}
+# 	array[1] == ".dkr.ecr."
+# 	array[2] == {"Ref": "AWS::Region"}
+# 	array[3] == "."
+# 	array[4] == {"Ref": "AWS::URLSuffix"}
+# 	regex.match("^/.*", array[5])
+# }
+
+# valid_image_region_string(image){
+#     image["Fn::Join"][0] == ""
+# 	array := image["Fn::Join"][1]
+# 	array[0] == {"Ref": "AWS::AccountId"}
+# 	startswith(array[1], ".dkr.ecr.")
+# 	region := trim_suffix(trim_prefix(array[1], ".dkr.ecr."), ".")
+# 	region == allowed_regions[_]
+# 	array[2] == {"Ref": "AWS::URLSuffix"}
+# 	regex.match("^/.*", array[3])
+# }
+
+# aws_issue["ecs_network_mode"] {
+#     resource := input.Resources[i]
+#     lower(resource.Type) == "aws::ecs::taskdefinition"
+#     image := resource.Properties.ContainerDefinitions[j].Image
+#     not regex.match(image_location_regex, image["Fn::Sub"])
+#     not valid_image_region_param(image)
+# 	not valid_image_region_string(image)
+# }
+
+# ecs_network_mode {
+#     lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
+#     not aws_issue["ecs_network_mode"]
+# }
+
+# ecs_network_mode = false {
+#     aws_issue["ecs_network_mode"]
+# }
+
+# ecs_network_mode_err = "Ensure container images are deployed from ECR repository is in the service account's bootstrap stack." {
+#     aws_issue["ecs_network_mode"]
+# }
+
+# ecs_network_mode_metadata := {
+#     "Policy Code": "PR-AWS-CFR-ECS-015",
+#     "Type": "IaC",
+#     "Product": "AWS",
+#     "Language": "AWS Cloud formation",
+#     "Policy Title": "Ensure container images are deployed from ECR repository is in the service account's bootstrap stack.",
+#     "Policy Description": "Ensure container images are deployed from ECR repository is in the service account's bootstrap stack.",
+#     "Resource Type": "",
+#     "Policy Help URL": "",
+#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-networkmode"
+# }

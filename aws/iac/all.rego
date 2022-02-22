@@ -89,6 +89,51 @@ secret_manager_kms_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html"
 }
 
+
+#
+# PR-AWS-CFR-SM-002
+#
+
+default secret_manager_vpc_subnet_id = null
+
+aws_issue["secret_manager_vpc_subnet_id"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::secretsmanager::rotationschedule"
+    not resource.Properties.HostedRotationLambda.VpcSubnetIds
+}
+
+aws_issue["secret_manager_vpc_subnet_id"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::secretsmanager::rotationschedule"
+    count(resource.Properties.HostedRotationLambda.VpcSubnetIds) == 0
+}
+
+secret_manager_vpc_subnet_id {
+    lower(input.Resources[i].Type) == "aws::secretsmanager::rotationschedule"
+    not aws_issue["secret_manager_vpc_subnet_id"]
+}
+
+secret_manager_vpc_subnet_id = false {
+    aws_issue["secret_manager_vpc_subnet_id"]
+}
+
+secret_manager_vpc_subnet_id_err = "Ensure that SecretsManager RotationSchedule HostedRotationLambda attaches to a VPC Subnet IDs" {
+    aws_issue["secret_manager_vpc_subnet_id"]
+}
+
+secret_manager_vpc_subnet_id_metadata := {
+    "Policy Code": "PR-AWS-CFR-SM-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that SecretsManager RotationSchedule HostedRotationLambda attaches to a VPC Subnet IDs",
+    "Policy Description": "SecretsManager RotationSchedules should use Subnet IDs",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html"
+}
+
+
 #
 # PR-AWS-CFR-LG-001
 #
@@ -1383,6 +1428,49 @@ route_healthcheck_disable_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
 
+
+#
+# PR-AWS-CFR-R53-002
+#
+
+default route_recordset_approved_type = null
+
+approved_record_types := [
+	"a",
+	"cname",
+]
+
+aws_issue["route_recordset_approved_type"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::route53::recordset"
+    count([c | lower(resource.Properties.Type) == approved_record_types[_]; c:=1 ]) == 0
+}
+
+route_recordset_approved_type {
+    lower(input.Resources[i].Type) == "aws::route53::recordset"
+    not aws_issue["route_recordset_approved_type"]
+}
+
+route_recordset_approved_type = false {
+    aws_issue["route_recordset_approved_type"]
+}
+
+route_recordset_approved_type_err = "Ensure that the Route53 RecordSet Type is A or CNAME." {
+    aws_issue["route_recordset_approved_type"]
+}
+
+route_recordset_approved_type_metadata := {
+    "Policy Code": "PR-AWS-CFR-R53-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that the Route53 RecordSet Type is A or CNAME.",
+    "Policy Description": "Ensure that the Route53 RecordSet Type is A or CNAME.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
 #
 # PR-AWS-CFR-WAF-001
 #
@@ -1480,4 +1568,190 @@ ins_package_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-inspector-assessmenttemplate.html"
+}
+
+
+
+#
+# PR-AWS-CFR-CW-001
+#
+
+default cw_alarm_account_id = null
+
+aws_issue["cw_alarm_account_id"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudwatch::alarm"
+    Metrics := resource.Properties.Metrics[_]
+    not Metrics.AccountId
+}
+
+aws_issue["cw_alarm_account_id"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudwatch::alarm"
+    Metrics := resource.Properties.Metrics[_]
+    to_number(Metrics.AccountId) > 999999999999
+}
+
+aws_issue["cw_alarm_account_id"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudwatch::alarm"
+    Metrics := resource.Properties.Metrics[_]
+    to_number(Metrics.AccountId) <= 99999999999
+}
+
+cw_alarm_account_id {
+    lower(input.Resources[i].Type) == "aws::cloudwatch::alarm"
+    not aws_issue["cw_alarm_account_id"]
+}
+
+cw_alarm_account_id = false {
+    aws_issue["cw_alarm_account_id"]
+}
+
+cw_alarm_account_id_err = "Ensure CloudWatch Alarm Metrics AccountId is valid" {
+    aws_issue["cw_alarm_account_id"]
+}
+
+cw_alarm_account_id_metadata := {
+    "Policy Code": "PR-AWS-CFR-CW-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud Formation",
+    "Policy Title": "Ensure CloudWatch Alarm Metrics AccountId is valid",
+    "Policy Description": "Ensure CloudWatch Alarm Metrics AccountId is valid",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricdataquery.html"
+}
+
+
+#
+# PR-AWS-CFR-SC-001
+#
+
+default synthetics_artifact_s3 = null
+
+aws_issue["synthetics_artifact_s3"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::synthetics::canary"
+    not resource.Properties.ArtifactS3Location
+}
+
+aws_issue["synthetics_artifact_s3"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::synthetics::canary"
+    count(resource.Properties.ArtifactS3Location) == 0
+}
+
+synthetics_artifact_s3 {
+    lower(input.Resources[i].Type) == "aws::synthetics::canary"
+    not aws_issue["synthetics_artifact_s3"]
+}
+
+synthetics_artifact_s3 = false {
+    aws_issue["synthetics_artifact_s3"]
+}
+
+synthetics_artifact_s3_err = "Ensure Synthetic canary has defined ArtifactS3Locaton" {
+    aws_issue["synthetics_artifact_s3"]
+}
+
+synthetics_artifact_s3_metadata := {
+    "Policy Code": "PR-AWS-CFR-SC-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Synthetic canary has defined ArtifactS3Locaton",
+    "Policy Description": "Ensure Synthetic canary has defined ArtifactS3Locaton",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html"
+}
+
+
+#
+# PR-AWS-CFR-SC-002
+#
+
+default synthetics_vpc_config = null
+
+aws_issue["synthetics_vpc_config"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::synthetics::canary"
+    not resource.Properties.VPCConfig.VpcId
+}
+
+aws_issue["synthetics_vpc_config"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::synthetics::canary"
+    count(resource.Properties.VPCConfig.VpcId) == 0
+}
+
+synthetics_vpc_config {
+    lower(input.Resources[i].Type) == "aws::synthetics::canary"
+    not aws_issue["synthetics_vpc_config"]
+}
+
+synthetics_vpc_config = false {
+    aws_issue["synthetics_vpc_config"]
+}
+
+synthetics_vpc_config_err = "Ensure Synthetics Canary is attached to the Shared VPC." {
+    aws_issue["synthetics_vpc_config"]
+}
+
+synthetics_vpc_config_metadata := {
+    "Policy Code": "PR-AWS-CFR-SC-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Synthetics Canary is attached to the Shared VPC.",
+    "Policy Description": "Ensure Synthetics Canary is attached to the Shared VPC.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html"
+}
+
+
+#
+# PR-AWS-CFR-SC-003
+#
+
+default synthetics_security_group = null
+
+aws_issue["synthetics_security_group"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::synthetics::canary"
+    not resource.Properties.VPCConfig.SecurityGroupIds
+}
+
+aws_issue["synthetics_security_group"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::synthetics::canary"
+    count(resource.Properties.VPCConfig.SecurityGroupIds) == 0
+}
+
+synthetics_security_group {
+    lower(input.Resources[i].Type) == "aws::synthetics::canary"
+    not aws_issue["synthetics_security_group"]
+}
+
+synthetics_security_group = false {
+    aws_issue["synthetics_security_group"]
+}
+
+synthetics_security_group_err = "Ensure Synthetics Canary VPCConfig Security Groups are attached to VPC Config" {
+    aws_issue["synthetics_security_group"]
+}
+
+synthetics_security_group_metadata := {
+    "Policy Code": "PR-AWS-CFR-SC-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Synthetics Canary VPCConfig Security Groups are attached to VPC Config",
+    "Policy Description": "Ensure Synthetics Canary VPCConfig Security Groups are attached to VPC Config",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html"
 }

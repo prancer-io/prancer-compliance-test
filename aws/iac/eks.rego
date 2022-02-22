@@ -300,3 +300,47 @@ eks_encryption_kms_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-encryptionconfig.html#cfn-eks-cluster-encryptionconfig-provider"
 }
+
+
+#
+# PR-AWS-CFR-EKS-005
+#
+
+default eks_pblic_endpoint = null
+
+aws_issue["eks_pblic_endpoint"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    resource.Properties.ResourcesVpcConfig.EndpointPrivateAccess == false
+}
+
+aws_issue["eks_pblic_endpoint"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    resource.Properties.ResourcesVpcConfig.EndpointPublicAccess == true
+}
+
+eks_pblic_endpoint {
+    lower(input.Resources[i].Type) == "aws::eks::cluster"
+    not aws_issue["eks_pblic_endpoint"]
+}
+
+eks_pblic_endpoint = false {
+    aws_issue["eks_pblic_endpoint"]
+}
+
+eks_pblic_endpoint_err = "Ensure communication to and from EKS remains private." {
+    aws_issue["eks_pblic_endpoint"]
+}
+
+eks_pblic_endpoint_metadata := {
+    "Policy Code": "PR-AWS-CFR-EKS-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure communication to and from EKS remains private.",
+    "Policy Description": "Ensure communication to and from EKS remains private.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-encryptionconfig.html#cfn-eks-cluster-encryptionconfig-provider"
+}

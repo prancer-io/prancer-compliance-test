@@ -1,5 +1,10 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
 
 #
@@ -356,6 +361,129 @@ lambda_dlq_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure AWS Lambda function is configured for a DLQ",
     "Policy Description": "A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. it is required to get all items which is been not processed for some reason",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig"
+}
+
+
+#
+# PR-AWS-CFR-LMD-006
+#
+
+default lambda_eventsourcemapping_unsupported_properties = null
+
+not_allowed_properties = [
+	"SourceAccessConfigurations",
+	"SelfManagedEventSource",
+	"Topics",
+	"Queues",
+]
+
+aws_issue["lambda_eventsourcemapping_unsupported_properties"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::eventsourcemapping"
+    has_property(resource, not_allowed_properties[_])
+}
+
+lambda_eventsourcemapping_unsupported_properties {
+    lower(input.Resources[i].Type) == "aws::lambda::eventsourcemapping"
+    not aws_issue["lambda_eventsourcemapping_unsupported_properties"]
+}
+
+lambda_eventsourcemapping_unsupported_properties = false {
+    aws_issue["lambda_eventsourcemapping_unsupported_properties"]
+}
+
+lambda_eventsourcemapping_unsupported_properties_err = "Ensure unsupported properties on Lambda EventSourceMapping are not set." {
+    aws_issue["lambda_eventsourcemapping_unsupported_properties"]
+}
+
+lambda_eventsourcemapping_unsupported_properties_metadata := {
+    "Policy Code": "PR-AWS-CFR-LMD-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure unsupported properties on Lambda EventSourceMapping are not set.",
+    "Policy Description": "Ensure that unsupported properties on AWS::Lambda::EventSourceMapping are not set",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig"
+}
+
+
+#
+# PR-AWS-CFR-LMD-007
+#
+
+default lambda_require_zip_package = null
+
+aws_issue["lambda_require_zip_package"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    lower(resource.Properties.PackageType) != "zip"
+}
+
+lambda_require_zip_package {
+    lower(input.Resources[i].Type) == "aws::lambda::function"
+    not aws_issue["lambda_require_zip_package"]
+}
+
+lambda_require_zip_package = false {
+    aws_issue["lambda_require_zip_package"]
+}
+
+lambda_require_zip_package_err = "Lambda Function PackageType value is limited to Zip" {
+    aws_issue["lambda_require_zip_package"]
+}
+
+lambda_require_zip_package_metadata := {
+    "Policy Code": "PR-AWS-CFR-LMD-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Lambda Function PackageType value is limited to Zip",
+    "Policy Description": "Ensure that the AWS::Lambda::Function PackageType value is limited to Zip.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig"
+}
+
+
+#
+# PR-AWS-CFR-LMD-008
+#
+
+default lambda_runtime = null
+
+ALLOWED_RUNTIMES = {"java11", "python3.6", "python3.7", "python3.8", "python3.9", "nodejs12.", "nodejs14.", "go1."}
+
+aws_issue["lambda_runtime"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    count([c | contains(lower(resource.Properties.Runtime), ALLOWED_RUNTIMES[_]); c:=1 ]) == 0
+}
+
+lambda_runtime {
+    lower(input.Resources[i].Type) == "aws::lambda::function"
+    not aws_issue["lambda_runtime"]
+}
+
+lambda_runtime = false {
+    aws_issue["lambda_runtime"]
+}
+
+lambda_runtime_err = "Limit lambda runtimes to allowed list" {
+    aws_issue["lambda_runtime"]
+}
+
+lambda_runtime_metadata := {
+    "Policy Code": "PR-AWS-CFR-LMD-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Limit lambda runtimes to allowed list",
+    "Policy Description": "Ensure that AWS::Lambda::Function Runtime values are limited to a vetted list of allowed runtimes",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig"
