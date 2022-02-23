@@ -69,7 +69,7 @@ waf_log4j_vulnerability = false {
     gc_issue["waf_log4j_vulnerability"]
 }
 
-waf_log4j_vulnerability_err = "Ensure GCP Pub/Sub topic is encrypted using a customer-managed encryption key" {
+waf_log4j_vulnerability_err = "JMSAppender in Log4j 1.2 is vulnerable to deserialization of untrusted data when the attacker has write access to the Log4j configuration" {
     gc_issue["waf_log4j_vulnerability"]
 }
 
@@ -78,9 +78,9 @@ waf_log4j_vulnerability_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP cloud",
-    "Policy Title": "Ensure GCP Pub/Sub topic is encrypted using a customer-managed encryption key",
-    "Policy Description": "This policy identifies GCP Pub/Sub topics that are not encrypted using a customer-managed encryption key. It is a best practice to use customer-managed KMS Keys to encrypt your Pub/Sub topic. Customer-managed CMKs give you more flexibility, including the ability to create, rotate, disable, define access control for, and audit the encryption keys used to help protect your data.\n\nReference: https://cloud.google.com/pubsub/docs/encryption",
-    "Resource Type": "google_compute_security_policy",
+    "Policy Title": "JMSAppender in Log4j 1.2 is vulnerable to deserialization of untrusted data when the attacker has write access to the Log4j configuration",
+    "Policy Description": "Apache Log4j2 2.0-beta9 through 2.12.1 and 2.13.0 through 2.15.0 JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints",
+    "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics"
 }
