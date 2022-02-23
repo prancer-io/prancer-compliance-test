@@ -1802,6 +1802,45 @@
                         }
                     ],
                     "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_server_security_alert_policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-008",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-008",
+                            "eval": "data.rule.sql_dbsec_threat_off",
+                            "message": "data.rule.sql_dbsec_threat_off_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "SQL Database Server should have security alert policies enabled",
+                    "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
                         "azurerm_mssql_server_security_alert_policy"
                     ]
                 },
@@ -1841,6 +1880,47 @@
                         }
                     ],
                     "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_server_security_alert_policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-009",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-009",
+                            "eval": "data.rule.sql_dbsec_threat_retention",
+                            "message": "data.rule.sql_dbsec_threat_retention_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set 'retention_days = 90' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#retention_days' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Database Server security alert policies thread retention should be configured for 90 days or more",
+                    "description": "This policy identifies SQL Databases which have Threat Retention configured for less than 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be 90 days or more.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
                         "azurerm_mssql_server_security_alert_policy"
                     ]
                 },
@@ -1879,6 +1959,46 @@
                         }
                     ],
                     "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_server_security_alert_policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-010",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-010",
+                            "eval": "data.rule.sql_dbsec_threat_email",
+                            "message": "data.rule.sql_dbsec_threat_email_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, add some email address who need to get notified about potential thread detection under 'email_addresses' array to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#email_addresses' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Database Server Security Alert Policy should be configured to send alert to the configured email addresses",
+                    "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
                         "azurerm_mssql_server_security_alert_policy"
                     ]
                 },
@@ -1917,6 +2037,46 @@
                         }
                     ],
                     "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_server_security_alert_policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-013",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-013",
+                            "eval": "data.rule.dbsec_threat_alert",
+                            "message": "data.rule.dbsec_threat_alert_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, remove 'disabled_alerts' property or remove all the alerts element out of it to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#disabled_alerts' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
                         "azurerm_mssql_server_security_alert_policy"
                     ]
                 },
@@ -1930,8 +2090,8 @@
                     "evals": [
                         {
                             "id": "PR-AZR-TRF-SQL-021",
-                            "eval": "data.rule.sql_alert",
-                            "message": "data.rule.sql_alert_err",
+                            "eval": "data.rule.mssql_alert",
+                            "message": "data.rule.mssql_alert_err",
                             "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set 'email_account_admins = true' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#email_account_admins' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_SQL_021.py"
                         }
@@ -1955,6 +2115,46 @@
                         }
                     ],
                     "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_server_security_alert_policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-015",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-015",
+                            "eval": "data.rule.sql_alert",
+                            "message": "data.rule.sql_alert_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set 'email_account_admins = true' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#email_account_admins' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_015.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Threat Detection alert should be configured to sent notification to the sql server account administrators",
+                    "description": "Ensure that threat detection alert is configured to sent notification to the sql server account administrators",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
                         "azurerm_mssql_server_security_alert_policy"
                     ]
                 },
