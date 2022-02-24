@@ -77,3 +77,42 @@ db_ad_admin_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_active_directory_administrator"
 }
+
+
+#
+# PR-AZR-TRF-SQL-006
+#
+
+default db_mssql_ad_admin_configured = null
+
+
+azure_attribute_absence["db_mssql_ad_admin_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server"
+    not resource.properties.azuread_administrator
+}
+
+db_mssql_ad_admin_configured = false {
+    azure_attribute_absence["db_mssql_ad_admin_configured"]
+} 
+
+db_mssql_ad_admin_configured {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    not azure_attribute_absence["db_mssql_ad_admin_configured"]
+}
+
+db_mssql_ad_admin_configured_err = "SQL servers does not have Azure Active Directory admin configured" {
+    azure_attribute_absence["db_mssql_ad_admin_configured"]
+}
+
+db_mssql_ad_admin_configured_metadata := {
+    "Policy Code": "PR-AZR-TRF-SQL-006",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "SQL servers should be integrated with Azure Active Directory for administration",
+    "Policy Description": "Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory authentication is a mechanism of connecting to Microsoft Azure SQL Database and SQL Data Warehouse by using identities in Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location.",
+    "Resource Type": "azurerm_mssql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server"
+}
