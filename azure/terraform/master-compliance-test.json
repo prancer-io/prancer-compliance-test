@@ -2295,6 +2295,39 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AZR-TRF-SQL-023",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-023",
+                            "eval": "data.rule.sql_db_ads_mail",
+                            "message": "data.rule.sql_db_ads_mail_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_vulnerability_assessment' resource, specify recipient email addresses into 'emails' array under 'recurring_scans' block to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_vulnerability_assessment#emails' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_023.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
+                        "azurerm_mssql_server_vulnerability_assessment"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AZR-TRF-SQL-024",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -2323,6 +2356,40 @@
                         }
                     ],
                     "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_server_vulnerability_assessment"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-025",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-025",
+                            "eval": "data.rule.sql_db_ads_alert",
+                            "message": "data.rule.sql_db_ads_alert_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_vulnerability_assessment' resource, set 'email_subscription_admins = true' under 'recurring_scans' block to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_vulnerability_assessment#email_subscription_admins' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_025.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the administrators service and co-administrator can receive email alerts when anomalous activities are detected on the SQL Servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
                         "azurerm_mssql_server_vulnerability_assessment"
                     ]
                 },
@@ -2355,6 +2422,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "azurerm_mssql_server",
                         "azurerm_mssql_server_vulnerability_assessment"
                     ]
                 },
@@ -2387,6 +2455,40 @@
                         }
                     ],
                     "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_server_vulnerability_assessment"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-027",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-027",
+                            "eval": "data.rule.sql_db_ads_scan",
+                            "message": "data.rule.sql_db_ads_scan_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_vulnerability_assessment' resource, set 'enabled = true' under 'recurring_scans' block to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_vulnerability_assessment#enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_027.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server advanced data security should be enabled",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
                         "azurerm_mssql_server_vulnerability_assessment"
                     ]
                 },
@@ -5779,6 +5881,45 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AZR-TRF-SQL-030",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_alert_policy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-030",
+                            "eval": "data.rule.sql_server_alert",
+                            "message": "data.rule.sql_server_alert_err",
+                            "remediationDescription": "Make sure resource 'azurerm_sql_server' and 'azurerm_mssql_server_security_alert_policy' both exist and in 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_030.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Security Alert is enabled on Azure SQL Server",
+                    "description": "Advanced data security should be enabled on your SQL servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
+                        "azurerm_mssql_server_security_alert_policy"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AZR-TRF-SQL-031",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -5788,8 +5929,8 @@
                     "evals": [
                         {
                             "id": "PR-AZR-TRF-SQL-031",
-                            "eval": "data.rule.sql_server_alert",
-                            "message": "data.rule.sql_server_alert_err",
+                            "eval": "data.rule.mssql_server_alert",
+                            "message": "data.rule.mssql_server_alert_err",
                             "remediationDescription": "Make sure resource 'azurerm_mssql_server' and 'azurerm_mssql_server_security_alert_policy' both exist and in 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_SQL_031.py"
                         }
@@ -5813,7 +5954,48 @@
                         }
                     ],
                     "resourceTypes": [
+                        "azurerm_mssql_server",
                         "azurerm_mssql_server_security_alert_policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-032",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers_encryption.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-032",
+                            "eval": "data.rule.sql_serverKeyType",
+                            "message": "data.rule.sql_serverKeyType_err",
+                            "remediationDescription": "Make sure resource 'azurerm_sql_server' and 'azurerm_mssql_server_transparent_data_encryption' both exist and in 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'key_vault_key_id' property has id of associated 'azurerm_key_vault_key' resource to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#key_vault_key_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_032.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SQL server's TDE protector is encrypted with Customer-managed key",
+                    "description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
+                        "azurerm_mssql_server_transparent_data_encryption"
                     ]
                 },
                 {
@@ -5866,8 +6048,8 @@
                     "evals": [
                         {
                             "id": "PR-AZR-TRF-SQL-047",
-                            "eval": "data.rule.sql_public_access_disabled",
-                            "message": "data.rule.sql_public_access_disabled_err",
+                            "eval": "data.rule.mssql_public_access_disabled",
+                            "message": "data.rule.mssql_public_access_disabled_err",
                             "remediationDescription": "In 'azurerm_mssql_server' resource, set 'public_network_access_enabled = false' to fix the issue. If 'public_network_access_enabled' property does not exist please add it. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#public_network_access_enabled' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_SQL_047.py"
                         }
@@ -5893,7 +6075,85 @@
                     ],
                     "resourceTypes": [
                         "azurerm_mssql_server",
-                        "azurerm_mssql_firewall_rule",
+                        "azurerm_private_endpoint"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-033",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-033",
+                            "eval": "data.rule.sql_public_access_disabled",
+                            "message": "data.rule.sql_public_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_sql_server' resource, set 'public_network_access_enabled = false' to fix the issue. If 'public_network_access_enabled' property does not exist please add it. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#public_network_access_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_033.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure SQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for Azure SQL Database Server and SQL Managed Instance",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
+                        "azurerm_private_endpoint"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-034",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-034",
+                            "eval": "data.rule.sql_server_login",
+                            "message": "data.rule.sql_server_login_err",
+                            "remediationDescription": "In 'azurerm_sql_server' resource, make sure 'administrator_login' does not contains name like 'Admin/Administrator' to fix the issue. If 'administrator_login' property does not exist please add it. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#administrator_login' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_034.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SQL Server administrator login does not contains 'Admin/Administrator' as name",
+                    "description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "PCI-DSS",
+                                "GDPR",
+                                "ISO 27001",
+                                "NIST CSF",
+                                "HIPAA",
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
                         "azurerm_sql_server"
                     ]
                 },
@@ -5907,8 +6167,8 @@
                     "evals": [
                         {
                             "id": "PR-AZR-TRF-SQL-048",
-                            "eval": "data.rule.sql_server_login",
-                            "message": "data.rule.sql_server_login_err",
+                            "eval": "data.rule.mssql_server_login",
+                            "message": "data.rule.mssql_server_login_err",
                             "remediationDescription": "In 'azurerm_mssql_server' resource, make sure 'administrator_login' does not contains name like 'Admin/Administrator' to fix the issue. If 'administrator_login' property does not exist please add it. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#administrator_login' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_SQL_048.py"
                         }
@@ -5933,9 +6193,42 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_mssql_server",
-                        "azurerm_mssql_firewall_rule",
-                        "azurerm_sql_server"
+                        "azurerm_mssql_server"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-035",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-035",
+                            "eval": "data.rule.sql_ingress_from_any_ip_disabled",
+                            "message": "data.rule.sql_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "Make sure resource 'azurerm_sql_server' and 'azurerm_mssql_firewall_rule' exist and in 'azurerm_mssql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule#start_ip_address' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_035.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "MSSQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MSSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
+                        "azurerm_mssql_firewall_rule"
                     ]
                 },
                 {
@@ -5970,8 +6263,7 @@
                     ],
                     "resourceTypes": [
                         "azurerm_mssql_server",
-                        "azurerm_mssql_firewall_rule",
-                        "azurerm_sql_server"
+                        "azurerm_mssql_firewall_rule"
                     ]
                 },
                 {
@@ -5986,7 +6278,7 @@
                             "id": "PR-AZR-TRF-SQL-069",
                             "eval": "data.rule.mssql_server_latest_tls_configured",
                             "message": "data.rule.mssql_server_latest_tls_configured_err",
-                            "remediationDescription": "In 'azurerm_mssql_server' resource, set 'min_tls_version = 1.2' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#minimum_tls_version' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_mssql_server' resource, set 'minimum_tls_version = 1.2' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#minimum_tls_version' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_SQL_069.py"
                         }
                     ],
