@@ -1251,7 +1251,7 @@ elb_over_https = false {
     aws_attribute_absence["elb_over_https"]
 }
 
-elb_over_https_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
+elb_over_https_err = "AWS Application Load Balancer (ALB) listener that allow connection requests over HTTP" {
     aws_issue["elb_over_https"]
 }
 
@@ -2024,4 +2024,100 @@ elb_protocol_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-protocol"
+}
+
+
+#
+# PR-AWS-CFR-ELB-020
+#
+
+default elb_default_action = null
+
+allowed_action_types = ["fixed-response", "forward", "redirect"]
+
+aws_issue["elb_default_action"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    not resource.Properties.DefaultActions
+}
+
+aws_issue["elb_default_action"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    DefaultActions := resource.Properties.DefaultActions[_]
+    count([c | lower(DefaultActions.Type) == allowed_action_types[_]; c:=1 ]) == 0
+}
+
+elb_default_action {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::listener"
+    not aws_issue["elb_default_action"]
+}
+
+elb_default_action = false {
+    aws_issue["elb_default_action"]
+}
+
+elb_default_action_err = "Ensure that ELB Listener is limited to approved actions." {
+    aws_issue["elb_default_action"]
+}
+
+elb_default_action_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-020",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that ELB Listener is limited to approved actions.",
+    "Policy Description": "Ensure the AWS::ElasticLoadBalancingV2::Listener Action Type is limited to: 'fixed-response', 'forward', 'redirect'",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
+
+#
+# PR-AWS-CFR-ELB-021
+#
+
+default elb_listner_redirect_protocol = null
+
+allowed_action_types = ["fixed-response", "forward", "redirect"]
+
+aws_issue["elb_listner_redirect_protocol"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    not resource.Properties.DefaultActions
+}
+
+aws_issue["elb_listner_redirect_protocol"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    DefaultActions := resource.Properties.DefaultActions[_]
+    lower(DefaultActions.Type) == "redirect"
+    lower(DefaultActions.RedirectConfig.Protocol) != "https"
+
+}
+
+elb_listner_redirect_protocol {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::listener"
+    not aws_issue["elb_listner_redirect_protocol"]
+}
+
+elb_listner_redirect_protocol = false {
+    aws_issue["elb_listner_redirect_protocol"]
+}
+
+elb_listner_redirect_protocol_err = "Ensure that Listeners redirect using only the HTTPS protocol." {
+    aws_issue["elb_listner_redirect_protocol"]
+}
+
+elb_listner_redirect_protocol_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-021",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that Listeners redirect using only the HTTPS protocol.",
+    "Policy Description": "Listeners that use default actions including RedirectConfigs must set the protocol to HTTPS on those RedirectConfigs.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
 }

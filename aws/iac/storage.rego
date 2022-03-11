@@ -1,6 +1,11 @@
 package rule
 default metadata = {}
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
 
@@ -1747,6 +1752,45 @@ s3_block_public_policy_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-blockpublicpolicy"
 }
+
+
+#
+# PR-AWS-CFR-S3-022
+#
+
+default s3_notification_config = null
+
+aws_issue["s3_notification_config"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    has_property(resource.Properties, "NotificationConfiguration")
+}
+
+s3_notification_config {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_notification_config"]
+}
+
+s3_notification_config = false {
+    aws_issue["s3_notification_config"]
+}
+
+s3_notification_config_err = "Ensure S3 Bucket NotificationConfiguration Property is not set." {
+    aws_issue["s3_notification_config"]
+}
+
+s3_notification_config_metadata := {
+    "Policy Code": "PR-AWS-CFR-S3-022",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 Bucket NotificationConfiguration Property is not set.",
+    "Policy Description": "Prevent S3 Bucket NotificationConfiguration from being set denying notifications from being sent to any SNS Topics, SQS Queues or Lambda functions.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-blockpublicpolicy"
+}
+
 
 #
 # PR-AWS-CFR-EFS-001

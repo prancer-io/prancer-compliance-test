@@ -3,6 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html
 
+
 #
 # PR-AWS-CFR-RDS-001
 #
@@ -1351,6 +1352,48 @@ db_instance_monitor_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "Enhanced monitoring for Amazon RDS instances is enabled",
     "Policy Description": "This New Relic integration allows you to monitor and alert on RDS Enhanced Monitoring. You can use integration data and alerts to monitor the DB processes and identify potential trouble spots as well as to profile the DB allowing you to improve and optimize their response and cost",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-monitoringinterval"
+}
+
+
+#
+# PR-AWS-CFR-RDS-020
+#
+
+default db_instance_secretmanager = null
+
+aws_issue["db_instance_secretmanager"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    MasterUserPassword := resource.Properties.MasterUserPassword
+    secret_resloved := {return_val |
+		item = MasterUserPassword["Fn::Sub"]
+	    return_val := regex.match("{{resolve:secretsmanager.*", item)
+	}
+	count([c | secret_resloved[_] == false; c:=1]) > 0
+}
+db_instance_secretmanager {
+    lower(input.Resources[i].Type) == "aws::rds::dbinstance"
+    not aws_issue["db_instance_secretmanager"]
+}
+
+db_instance_secretmanager = false {
+    aws_issue["db_instance_secretmanager"]
+}
+
+db_instance_secretmanager_err = "Ensure RDS instances uses AWS Secrets Manager for credentials." {
+    aws_issue["db_instance_secretmanager"]
+}
+
+db_instance_secretmanager_metadata := {
+    "Policy Code": "PR-AWS-CFR-RDS-020",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure RDS instances uses AWS Secrets Manager for credentials.",
+    "Policy Description": "RDS instances must use AWS Secrets Manager for credentials. Passwords must be rotated every 90 days.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-monitoringinterval"

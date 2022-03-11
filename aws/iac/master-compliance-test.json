@@ -531,6 +531,41 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CFR-SM-002",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-SM-002",
+                            "eval": "data.rule.secret_manager_vpc_subnet_id",
+                            "message": "data.rule.secret_manager_vpc_subnet_id_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_SM_002.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that SecretsManager RotationSchedule HostedRotationLambda attaches to a VPC Subnet IDs",
+                    "description": "SecretsManager RotationSchedules should use Subnet IDs",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::secretsmanager::rotationschedule"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CFR-LG-001",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1057,6 +1092,38 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CFR-R53-002",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-R53-002",
+                            "eval": "data.rule.route_recordset_approved_type",
+                            "message": "data.rule.route_recordset_approved_type_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_R53_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that the Route53 RecordSet Type is A or CNAME.",
+                    "description": "Ensure that the Route53 RecordSet Type is A or CNAME.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::route53::recordset"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CFR-WAF-001",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1118,6 +1185,143 @@
                     ],
                     "resourceTypes": [
                         "aws::inspector::assessmenttemplate"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-CW-001",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-CW-001",
+                            "eval": "data.rule.cw_alarm_account_id",
+                            "message": "data.rule.cw_alarm_account_id_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricdataquery.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_CW_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure CloudWatch Alarm Metrics AccountId is valid",
+                    "description": "Ensure CloudWatch Alarm Metrics AccountId is valid",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudwatch"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::cloudwatch::alarm"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-SC-001",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-SC-001",
+                            "eval": "data.rule.synthetics_artifact_s3",
+                            "message": "data.rule.synthetics_artifact_s3_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_SC_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Synthetic canary has defined ArtifactS3Locaton",
+                    "description": "Ensure Synthetic canary has defined ArtifactS3Locaton",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::synthetics::canary"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-SC-002",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-SC-002",
+                            "eval": "data.rule.synthetics_vpc_config",
+                            "message": "data.rule.synthetics_vpc_config_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_SC_002.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Synthetics Canary is attached to the Shared VPC.",
+                    "description": "Ensure Synthetics Canary is attached to the Shared VPC.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::synthetics::canary"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-SC-003",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-SC-003",
+                            "eval": "data.rule.synthetics_security_group",
+                            "message": "data.rule.synthetics_security_group_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_SC_003.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Synthetics Canary VPCConfig Security Groups are attached to VPC Config",
+                    "description": "Ensure Synthetics Canary VPCConfig Security Groups are attached to VPC Config",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::synthetics::canary"
                     ]
                 },
                 {
@@ -1347,6 +1551,40 @@
                     "severity": "Low",
                     "title": "Ensure Kubernetes secrets are encrypted using CMKs managed in AWS KMS",
                     "description": "Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as user defined Secrets and Secrets required for the operation of the cluster, such as service account keys, which are all stored in etcd. Using this functionality, you can use a key, that you manage in AWS KMS, to encrypt data at the application layer",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::eks::cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-EKS-005",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-EKS-005",
+                            "eval": "data.rule.eks_pblic_endpoint",
+                            "message": "data.rule.eks_pblic_endpoint_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-encryptionconfig.html#cfn-eks-cluster-encryptionconfig-provider' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_EKS_005.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure communication to and from EKS remains private.",
+                    "description": "Ensure communication to and from EKS remains private.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2872,6 +3110,74 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CFR-ELB-020",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ELB-020",
+                            "eval": "data.rule.elb_default_action",
+                            "message": "data.rule.elb_default_action_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_ELB_020.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that ELB Listener is limited to approved actions.",
+                    "description": "Ensure the AWS::ElasticLoadBalancingV2::Listener Action Type is limited to: 'fixed-response', 'forward', 'redirect'",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::elasticloadbalancingv2::listener"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-ELB-021",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ELB-021",
+                            "eval": "data.rule.elb_listner_redirect_protocol",
+                            "message": "data.rule.elb_listner_redirect_protocol_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_ELB_021.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that Listeners redirect using only the HTTPS protocol.",
+                    "description": "Listeners that use default actions including RedirectConfigs must set the protocol to HTTPS on those RedirectConfigs.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::elasticloadbalancingv2::listener"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CFR-S3-001",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -3576,6 +3882,40 @@
                     "severity": "Medium",
                     "title": "Ensure S3 Bucket BlockPublicPolicy is enabled",
                     "description": "If an AWS account is used to host a data lake or another business application, blocking public access will serve as an account-level guard against accidental public exposure.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::s3::bucket"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-S3-022",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-S3-022",
+                            "eval": "data.rule.s3_notification_config",
+                            "message": "data.rule.s3_notification_config_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-blockpublicpolicy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_S3_022.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure S3 Bucket NotificationConfiguration Property is not set.",
+                    "description": "Prevent S3 Bucket NotificationConfiguration from being set denying notifications from being sent to any SNS Topics, SQS Queues or Lambda functions.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4619,6 +4959,76 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CFR-IAM-009",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-IAM-009",
+                            "eval": "data.rule.iam_managed_policy_wildcard_resource",
+                            "message": "data.rule.iam_managed_policy_wildcard_resource_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_IAM_009.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure no wildcards are specified in IAM Managed policy with 'Resource' section",
+                    "description": "Using a wildcard in the Resource element in a role's trust policy would allow any IAM user in an account to access all Resources. This is a significant security gap and can be used to gain access to sensitive data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::iam::managedpolicy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-IAM-010",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-IAM-010",
+                            "eval": "data.rule.iam_role_name_check",
+                            "message": "data.rule.iam_role_name_check_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_IAM_010.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM Roles should not have names that start with \"cdk\" or \"cft\".",
+                    "description": "IAM Roles should not have RoleNames that match protected namespaces \"cdk\" or \"cft\".",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::iam::role"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CFR-RSH-001",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -5123,6 +5533,38 @@
                         "aws::certificatemanager::certificate",
                         "aws::acmpca::certificate",
                         "aws::acmpca::certificateauthorityactivation"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-ACM-004",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(acm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ACM-004",
+                            "eval": "data.rule.acm_certificate_validation",
+                            "message": "data.rule.acm_certificate_validation_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html#cfn-certificatemanager-certificate-certificateauthorityarn' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_ACM_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ACM Certification Validation Method set to DNS",
+                    "description": "Ensure that the AWS::ACM::Certificate ValidationMethod is set to DNS. This will restrict the developers ability to use email for domain validation.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::certificatemanager::certificate"
                     ]
                 },
                 {
@@ -6068,6 +6510,102 @@
                     "severity": "Low",
                     "title": "Ensure AWS Lambda function is configured for a DLQ",
                     "description": "A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. it is required to get all items which is been not processed for some reason",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::lambda::function"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-LMD-006",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-LMD-006",
+                            "eval": "data.rule.lambda_eventsourcemapping_unsupported_properties",
+                            "message": "data.rule.lambda_eventsourcemapping_unsupported_properties_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_LMD_006.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure unsupported properties on Lambda EventSourceMapping are not set.",
+                    "description": "Ensure that unsupported properties on AWS::Lambda::EventSourceMapping are not set",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::lambda::eventsourcemapping"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-LMD-007",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-LMD-007",
+                            "eval": "data.rule.lambda_require_zip_package",
+                            "message": "data.rule.lambda_require_zip_package_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_LMD_007.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Lambda Function PackageType value is limited to Zip",
+                    "description": "Ensure that the AWS::Lambda::Function PackageType value is limited to Zip.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::lambda::function"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-LMD-008",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-LMD-008",
+                            "eval": "data.rule.lambda_runtime",
+                            "message": "data.rule.lambda_runtime_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_LMD_008.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Limit lambda runtimes to allowed list",
+                    "description": "Ensure that AWS::Lambda::Function Runtime values are limited to a vetted list of allowed runtimes",
                     "tags": [
                         {
                             "cloud": "git",
@@ -7075,6 +7613,40 @@
                                 "NIST 800",
                                 "NIST CSF",
                                 "SOC 2"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::rds::dbinstance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-RDS-020",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-RDS-020",
+                            "eval": "data.rule.db_instance_secretmanager",
+                            "message": "data.rule.db_instance_secretmanager_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-monitoringinterval' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_RDS_020.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure RDS instances uses AWS Secrets Manager for credentials.",
+                    "description": "RDS instances must use AWS Secrets Manager for credentials. Passwords must be rotated every 90 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800"
                             ],
                             "service": [
                                 "cloudformation"

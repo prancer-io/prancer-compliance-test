@@ -219,3 +219,47 @@ acm_certificate_arn_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html#cfn-certificatemanager-certificate-certificateauthorityarn"
 }
+
+
+#
+# PR-AWS-CFR-ACM-004
+#
+
+default acm_certificate_validation = null
+
+aws_issue["acm_certificate_validation"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::certificatemanager::certificate"
+    lower(resource.Properties.ValidationMethod) != "dns"
+}
+
+aws_issue["acm_certificate_validation"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::certificatemanager::certificate"
+    not resource.Properties.ValidationMethod
+}
+
+acm_certificate_validation {
+    type = "aws::certificatemanager::certificate"
+    not aws_issue["acm_certificate_validation"]
+}
+
+acm_certificate_validation = false {
+    aws_issue["acm_certificate_validation"]
+}
+
+acm_certificate_validation_err = "Ensure ACM Certification Validation Method set to DNS" {
+    aws_issue["acm_certificate_validation"]
+}
+
+acm_certificate_validation_metadata := {
+    "Policy Code": "PR-AWS-CFR-ACM-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure ACM Certification Validation Method set to DNS",
+    "Policy Description": "Ensure that the AWS::ACM::Certificate ValidationMethod is set to DNS. This will restrict the developers ability to use email for domain validation.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html"
+}

@@ -260,7 +260,6 @@ iam_resource_format_metadata := {
 }
 
 
-
 #
 # PR-AWS-CFR-IAM-005
 #
@@ -552,6 +551,46 @@ iam_managed_policy_wildcard_resource_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure no wildcards are specified in IAM Managed policy with 'Resource' section",
     "Policy Description": "Using a wildcard in the Resource element in a role's trust policy would allow any IAM user in an account to access all Resources. This is a significant security gap and can be used to gain access to sensitive data.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
+}
+
+
+#
+# PR-AWS-CFR-IAM-010
+#
+
+default iam_role_name_check = null
+
+invalid_name_prefixes = ["cdk", "cft"]
+
+aws_issue["iam_role_name_check"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::role"
+    startswith(resource.Properties.RoleName, invalid_name_prefixes[_])
+}
+
+iam_role_name_check {
+    lower(input.Resources[i].Type) == "aws::iam::role"
+    not aws_issue["iam_role_name_check"]
+}
+
+iam_role_name_check = false {
+    aws_issue["iam_role_name_check"]
+}
+
+iam_role_name_check_err = "IAM Roles should not have names that start with \"cdk\" or \"cft\"." {
+    aws_issue["iam_role_name_check"]
+}
+
+iam_role_name_check_metadata := {
+    "Policy Code": "PR-AWS-CFR-IAM-010",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "IAM Roles should not have names that start with \"cdk\" or \"cft\".",
+    "Policy Description": "IAM Roles should not have RoleNames that match protected namespaces \"cdk\" or \"cft\".",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
