@@ -344,7 +344,7 @@
                     "type": "rego",
                     "rule": "file(api_gateway.rego)",
                     "masterSnapshotId": [
-                        "TEST_API_GATEWAY_02"
+                        "TEST_API_GATEWAY_01"
                     ],
                     "evals": [
                         {
