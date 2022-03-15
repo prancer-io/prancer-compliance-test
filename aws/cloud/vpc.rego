@@ -11,7 +11,7 @@ default vpc_subnet_autoip = true
 vpc_subnet_autoip = false {
     # lower(resource.Type) == "aws::ec2::subnet"
     subnets := input.Subnets[_]
-    subnets.MapPublicIpOnLaunch == false
+    subnets.MapPublicIpOnLaunch == true
 }
 
 vpc_subnet_autoip_err = "AWS VPC subnets should not allow automatic public IP assignment" {
