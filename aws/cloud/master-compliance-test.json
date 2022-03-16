@@ -945,6 +945,148 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-S3-002",
+                    "masterSnapshotId": [
+                        "TEST_S3"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-S3-002",
+                            "eval": "data.rule.s3_acl_delete",
+                            "message": "data.rule.s3_acl_delete_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_S3_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS S3 Bucket has Global DELETE Permissions enabled via bucket policy",
+                    "description": "This policy identifies the S3 Bucket(s) which will allow any unauthenticated user to DELETE objects from a bucket. These permissions permit anyone, malicious or not, to DELETE objects from your S3 bucket if they can guess the namespace. Since the S3 service does not protect the namespace other than with ACLs and Bucket Policy, you risk loss or compromise of critical data by leaving this open.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA-CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-S3-003",
+                    "masterSnapshotId": [
+                        "TEST_S3"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-S3-003",
+                            "eval": "data.rule.s3_acl_get",
+                            "message": "data.rule.s3_acl_get_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_S3_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS S3 Bucket has Global get Permissions enabled via bucket policy",
+                    "description": "This policy identifies the S3 Bucket(s) which will allow any unauthenticated user to GET objects from a bucket. These permissions permit anyone, malicious or not, to GET objects from your S3 bucket if they can guess the namespace. Since the S3 service does not protect the namespace other than with ACLs and Bucket Policy, you risk loss or compromise of critical data by leaving this open.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA-CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-S3-004",
+                    "masterSnapshotId": [
+                        "TEST_S3"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-S3-004",
+                            "eval": "data.rule.s3_acl_get",
+                            "message": "data.rule.s3_acl_get_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_S3_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS S3 Bucket has Global list Permissions enabled via bucket policy",
+                    "description": "This policy identifies the S3 Bucket(s) which will allow any unauthenticated user to LIST objects from a bucket. These permissions permit anyone, malicious or not, to LIST objects from your S3 bucket if they can guess the namespace. Since the S3 service does not protect the namespace other than with ACLs and Bucket Policy, you risk loss or compromise of critical data by leaving this open.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA-CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "NIST 800",
+                                "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-S3-005",
+                    "masterSnapshotId": [
+                        "TEST_CT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-S3-005",
+                            "eval": "data.rule.s3_cloudtrail",
+                            "message": "data.rule.s3_cloudtrail_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_S3_005.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "AWS S3 Bucket has Global put Permissions enabled via bucket policy",
+                    "description": "This policy identifies the S3 Bucket(s) which will allow any unauthenticated user to PUT objects into a bucket. These permissions permit anyone, malicious or not, to PUT objects into your S3 bucket if they can guess the namespace. Since the S3 service does not protect the namespace other than with ACLs and Bucket Policy, you risk compromise of critical data by leaving this open.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA-CCM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-S3-006",
                     "masterSnapshotId": [
                         "TEST_CT"
@@ -1003,6 +1145,40 @@
                             "compliance": [
                                 "PCI-DSS",
                                 "NIST 800"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-S3-009",
+                    "masterSnapshotId": [
+                        "TEST_CT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-S3-009",
+                            "eval": "data.rule.s3_transport",
+                            "message": "data.rule.s3_transport_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_S3_009.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "AWS S3 bucket not configured with secure data transport policy",
+                    "description": "This policy identifies S3 buckets which are not configured with secure data transport policy. AWS S3 buckets should enforce encryption of data over the network using Secure Sockets Layer (SSL). It is recommended to add a bucket policy that explicitly denies (Effect: Deny) all access (Action: s3:*) from anybody who browses (Principal: *) to Amazon S3 objects within an Amazon S3 bucket if they are not accessed through HTTPS (aws:SecureTransport: false).",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA-CCM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
                             ],
                             "service": [
                                 "cloud"

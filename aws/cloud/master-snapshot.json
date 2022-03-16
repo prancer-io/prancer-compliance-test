@@ -70,6 +70,7 @@
 					"collection": "aws_api_gateway_03",
 					"listMethod": "get_rest_apis",
 					"detailMethods": [
+						"get_rest_api",
 						"get_resources"
 					]
 				},
