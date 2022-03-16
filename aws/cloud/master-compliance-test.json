@@ -1026,8 +1026,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-S3-004",
-                            "eval": "data.rule.s3_acl_get",
-                            "message": "data.rule.s3_acl_get_err",
+                            "eval": "data.rule.s3_acl_list",
+                            "message": "data.rule.s3_acl_list_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_S3_004.py"
                         }
@@ -1062,8 +1062,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-S3-005",
-                            "eval": "data.rule.s3_cloudtrail",
-                            "message": "data.rule.s3_cloudtrail_err",
+                            "eval": "data.rule.s3_acl_put",
+                            "message": "data.rule.s3_acl_put_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_S3_005.py"
                         }
