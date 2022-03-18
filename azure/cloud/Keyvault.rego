@@ -77,8 +77,8 @@ KeyVault {
 
 KeyVault = false {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    azure_attribute_absence["min_tls_version"]
-    azure_inner_attribute_absence["min_tls_version"]
+    azure_attribute_absence["KeyVault"]
+    azure_inner_attribute_absence["KeyVault"]
 }
 
 KeyVault = false {
