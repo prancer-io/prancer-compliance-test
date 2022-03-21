@@ -375,8 +375,24 @@ s3_transport = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
+    statement.Condition.StringLike
+    lower(statement.Condition.StringLike["aws:SecureTransport"]) == "false"
+}
+
+s3_transport = false {
+    # lower(resource.Type) == "aws::s3::bucketpolicy"
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[_]
     statement.Condition.Bool
     not statement.Condition.Bool["aws:SecureTransport"]
+}
+
+s3_transport = false {
+    # lower(resource.Type) == "aws::s3::bucketpolicy"
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[_]
+    statement.Condition.Bool
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
 s3_transport_err = "AWS S3 bucket not configured with secure data transport policy" {

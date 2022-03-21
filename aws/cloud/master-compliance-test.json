@@ -1155,7 +1155,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-S3-009",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_S3"
                     ],
                     "type": "rego",
                     "rule": "file(storage.rego)",
