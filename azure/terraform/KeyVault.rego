@@ -8,17 +8,57 @@ package rule
 
 default KeyVault = null
 
+azure_attribute_absence ["KeyVault"] {
+    count([c | input.resources[_].type == "azurerm_key_vault_access_policy"; c := 1]) == 0
+}
+
 azure_attribute_absence["KeyVault"] {
     resource := input.resources[_]
+    lower(resource.type) == "azurerm_key_vault_access_policy"
+    not resource.properties.key_permissions
+    not resource.properties.secret_permissions
+    not resource.properties.certificate_permissions
+    not resource.properties.storage_permissions
+}
+
+azure_issue["KeyVault"] {
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_key_vault"
-    access_policy := resource.properties.access_policy[_]
+    count([c | r := input.resources[_];
+              r.type == "azurerm_key_vault_access_policy";
+              contains(r.properties.key_vault_id, resource.properties.compiletime_identity);
+              count(r.properties.key_permissions) == 0;
+              count(r.properties.secret_permissions) == 0;
+              count(r.properties.certificate_permissions) == 0;
+              count(r.properties.storage_permissions) == 0;
+              c := 1]) > 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_account_network_rules";
+              contains(r.properties.key_vault_id, concat(".", [resource.type, resource.name]));
+              count(r.properties.key_permissions) == 0;
+              count(r.properties.secret_permissions) == 0;
+              count(r.properties.certificate_permissions) == 0;
+              count(r.properties.storage_permissions) == 0;
+              c := 1]) > 0
+}
+
+azure_inner_attribute_absence["KeyVault"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_key_vault"
+    not resource.properties.access_policy
+}
+
+azure_inner_attribute_absence["KeyVault"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_key_vault"
+    access_policy = resource.properties.access_policy[_]
     not access_policy.key_permissions
     not access_policy.secret_permissions
     not access_policy.certificate_permissions
     not access_policy.storage_permissions
 }
 
-azure_issue["KeyVault"] {
+azure_inner_issue["KeyVault"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_key_vault"
     access_policy := resource.properties.access_policy[_]
@@ -28,24 +68,38 @@ azure_issue["KeyVault"] {
     count(access_policy.storage_permissions) == 0
 }
 
-KeyVault = false {
-    azure_attribute_absence["KeyVault"]
-}
-
 KeyVault {
     lower(input.resources[_].type) == "azurerm_key_vault"
     not azure_attribute_absence["KeyVault"]
     not azure_issue["KeyVault"]
 }
 
+KeyVault {
+    lower(input.resources[_].type) == "azurerm_key_vault"
+    not azure_inner_attribute_absence["KeyVault"]
+    not azure_inner_issue["KeyVault"]
+}
+
 KeyVault = false {
+ 	lower(input.resources[_].type) == "azurerm_key_vault"
+    azure_attribute_absence["KeyVault"]
+    azure_inner_attribute_absence["KeyVault"]
+}
+
+KeyVault = false {
+	lower(input.resources[_].type) == "azurerm_key_vault"
     azure_issue["KeyVault"]
+    azure_inner_issue["KeyVault"]
 }
 
 KeyVault_err = "access_policy block property 'key_permissions' or 'secret_permissions' or 'certificate_permissions' or 'storage_permissions' is missing from the azurerm_key_vault resource." {
+    lower(input.resources[_].type) == "azurerm_key_vault"
     azure_attribute_absence["KeyVault"]
+    azure_inner_attribute_absence["KeyVault"]
 } else = "Currently no principal has access to Keyvault" {
+	lower(input.resources[_].type) == "azurerm_key_vault"
     azure_issue["KeyVault"]
+    azure_inner_issue["KeyVault"]
 }
 
 KeyVault_metadata := {
@@ -59,7 +113,6 @@ KeyVault_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault"
 }
-
 
 
 # PR-AZR-TRF-KV-002
