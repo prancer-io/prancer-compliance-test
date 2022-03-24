@@ -366,6 +366,7 @@ source_path[{"lambda_concurrent_execution": metadata}] {
 
 lambda_concurrent_execution {
     lower(input.resources[i].type) == "aws_lambda_function"
+    input.resources[i].properties.reserved_concurrent_executions >= -1
     not aws_issue["lambda_concurrent_execution"]
 }
 
@@ -402,6 +403,18 @@ aws_issue["lambda_dlq"] {
     lower(resource.type) == "aws_lambda_function"
     dead_letter_config := resource.properties.dead_letter_config[j]
     not dead_letter_config.target_arn
+}
+
+aws_issue["lambda_dlq"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    count(resource.properties.dead_letter_config) == 0
+}
+
+aws_issue["lambda_dlq"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    resource.properties.dead_letter_config == null
 }
 
 source_path[{"lambda_dlq": metadata}] {

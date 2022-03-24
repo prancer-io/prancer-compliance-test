@@ -333,21 +333,7 @@ source_path[{"redshift_require_ssl": metadata}] {
 aws_issue["redshift_require_ssl"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_redshift_parameter_group"
-    parameter := resource.properties.parameter[j]
-    count([c | lower(parameter.name) == "require_ssl"; c := 1]) == 0
-}
-
-source_path[{"redshift_require_ssl": metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_redshift_parameter_group"
-    parameter := resource.properties.parameter[j]
-    count([c | lower(parameter.name) == "require_ssl"; c := 1]) == 0
-
-    metadata := {
-        "resource_path": [
-            ["resources", i, "properties", "parameter", j]
-        ],
-    }
+    count([c | lower(resource.properties.parameter[_].name) == "require_ssl"; c := 1]) == 0
 }
 
 aws_issue["redshift_require_ssl"] {
