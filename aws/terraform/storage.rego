@@ -1269,13 +1269,13 @@ default s3_website = null
 aws_issue["s3_website"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
-    resource.properties.website
+    count(resource.properties.website) > 0
 }
 
 source_path[{"s3_website": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
-    resource.properties.website
+    count(resource.properties.website) > 0
 
     metadata := {
         "resource_path": [

@@ -695,6 +695,12 @@ aws_attribute_absence["cf_firewall"] {
     not resource.properties.web_acl_id
 }
 
+aws_attribute_absence["cf_firewall"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    resource.properties.web_acl_id == null
+}
+
 source_path[{"cf_firewall": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_cloudfront_distribution"

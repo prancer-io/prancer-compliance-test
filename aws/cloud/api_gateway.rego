@@ -179,6 +179,14 @@ gateway_method_public_access = false {
     not items.resourceMethods[string].apiKeyRequired
 }
 
+gateway_method_public_access = false {
+    # lower(resource.Type) == "aws::apigateway::method"
+    some string
+    items := input.items[_]
+    not items.resourceMethods[string].authorizationType
+    not items.resourceMethods[string].apiKeyRequired
+}
+
 gateway_method_public_access_err = "Ensure API gateway methods are not publicly accessible" {
     not gateway_method_public_access
 }

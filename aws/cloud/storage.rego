@@ -45,12 +45,14 @@ default s3_acl_delete = true
 
 s3_acl_delete = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    not input.Policy.Statement
+    policy := json.unmarshal(input.Policy)
+    not policy.Statement
 }
 
 s3_acl_delete = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    stat := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action),"s3:delete")
@@ -58,7 +60,8 @@ s3_acl_delete = false {
 
 s3_acl_delete = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    stat := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action[_]),"s3:delete")
@@ -88,12 +91,14 @@ default s3_acl_get = true
 
 s3_acl_get = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    not input.Policy.Statement
+    policy := json.unmarshal(input.Policy)
+    not policy.Statement
 }
 
 s3_acl_get = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    stat := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     lower(stat.Action[_]) == "s3:*"
@@ -101,7 +106,8 @@ s3_acl_get = false {
 
 s3_acl_get = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    stat := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action),"s3:get")
@@ -109,7 +115,8 @@ s3_acl_get = false {
 
 s3_acl_get = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    stat := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action[_]),"s3:get")
@@ -137,14 +144,16 @@ s3_acl_get_metadata := {
 
 default s3_acl_list = true
 
-s3_acl_list {
+s3_acl_list = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    not input.Policy.Statement
+    policy := json.unmarshal(input.Policy)
+    not policy.Statement
 }
 
 s3_acl_list = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    stat := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     lower(stat.Action[_]) == "s3:*"
@@ -152,7 +161,8 @@ s3_acl_list = false {
 
 s3_acl_list = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    stat := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action),"s3:list")
@@ -161,7 +171,8 @@ s3_acl_list = false {
 
 s3_acl_list = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    stat := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action[_]),"s3:list")
@@ -190,14 +201,16 @@ s3_acl_list_metadata := {
 
 default s3_acl_put = true
 
-aws_attribute_absence["s3_acl_put"] {
+s3_acl_put = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    not input.Policy.Statement
+    policy := json.unmarshal(input.Policy)
+    not policy.Statement
 }
 
 s3_acl_put = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    stat := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     lower(stat.Action[_]) == "s3:*"
@@ -205,7 +218,8 @@ s3_acl_put = false {
 
 s3_acl_put = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    stat := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action),"s3:put")
@@ -214,7 +228,8 @@ s3_acl_put = false {
 
 s3_acl_put = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    stat := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action[_]),"s3:put")
@@ -342,23 +357,42 @@ default s3_transport = true
 
 s3_transport = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    statement := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[_]
     not statement.Condition.StringLike
     not statement.Condition.Bool
 }
 
 s3_transport = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    statement := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[_]
     statement.Condition.StringLike
     not statement.Condition.StringLike["aws:SecureTransport"]
 }
 
 s3_transport = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
-    statement := input.Policy.Statement[_]
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[_]
+    statement.Condition.StringLike
+    lower(statement.Condition.StringLike["aws:SecureTransport"]) == "false"
+}
+
+s3_transport = false {
+    # lower(resource.Type) == "aws::s3::bucketpolicy"
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[_]
     statement.Condition.Bool
     not statement.Condition.Bool["aws:SecureTransport"]
+}
+
+s3_transport = false {
+    # lower(resource.Type) == "aws::s3::bucketpolicy"
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[_]
+    statement.Condition.Bool
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
 s3_transport_err = "AWS S3 bucket not configured with secure data transport policy" {
@@ -900,24 +934,24 @@ default backup_public_access_disable = true
 
 backup_public_access_disable = false {
     # lower(resource.Type) == "aws::backup::backupvault"
-    input.policy
-    statement := input.policy.Statement[j]
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
 }
 
 backup_public_access_disable = false {
     # lower(resource.Type) == "aws::backup::backupvault"
-    input.policy
-    statement := input.policy.Statement[j]
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
 }
 
 backup_public_access_disable = false {
     # lower(resource.Type) == "aws::backup::backupvault"
-    input.policy
-    statement := input.policy.Statement[j]
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
 }

@@ -41,7 +41,7 @@ ct_log_validation = false {
     input.trailList[_].LogFileValidationEnabled == false
 }
 
-ct_log_validation_err = "AWS CloudTrail is not enabled in all regions" {
+ct_log_validation_err = "AWS CloudTrail log validation is not enabled in all regions" {
     not ct_log_validation
 }
 
