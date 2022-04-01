@@ -85,6 +85,16 @@ azure_issue["nsg_in_tcp_all_src"] {
     resource.properties.destination_port_range == "*"
 }
 
+azure_issue["nsg_in_tcp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "*"
+    resource.properties.destination_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
 nsg_in_tcp_all_src {
     lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["nsg_in_tcp_all_src"]
@@ -122,6 +132,16 @@ azure_issue["nsg_in_udp_all_src"] {
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
     lower(resource.properties.protocol) == "UDP"
+    resource.properties.destination_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_udp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "*"
     resource.properties.destination_address_prefix == "*"
     resource.properties.destination_port_range == "*"
 }
@@ -168,6 +188,17 @@ azure_issue["nsg_in_tcp_all"] {
     resource.properties.destination_port_range == "*"
 }
 
+azure_issue["nsg_in_tcp_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "*"
+    resource.properties.source_address_prefix == "*"
+    resource.properties.destination_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
 nsg_in_tcp_all {
     lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["nsg_in_tcp_all"]
@@ -205,6 +236,17 @@ azure_issue["nsg_in_udp_all"] {
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
     lower(resource.properties.protocol) == "udp"
+    lower(resource.properties.source_address_prefix) == "internet"
+    resource.properties.destination_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_udp_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "*"
     lower(resource.properties.source_address_prefix) == "internet"
     resource.properties.destination_address_prefix == "*"
     resource.properties.destination_port_range == "*"
@@ -363,6 +405,15 @@ azure_issue["nsg_allow_icmp"] {
     resource.properties.source_address_prefix == "*"
 }
 
+azure_issue["nsg_allow_icmp"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "*"
+    resource.properties.source_address_prefix == "*"
+}
+
 nsg_allow_icmp {
     lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["nsg_allow_icmp"]
@@ -372,7 +423,7 @@ nsg_allow_icmp = false {
     azure_issue["nsg_allow_icmp"]
 }
 
-nsg_allow_icmp_err = "Azure NSG having inbound rule overly permissive to allow all traffic from any source to any destination" {
+nsg_allow_icmp_err = "Azure NSG Inbound rule overly permissive currently allowing ICMP (Ping)" {
     azure_issue["nsg_allow_icmp"]
 }
 
