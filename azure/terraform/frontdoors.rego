@@ -25,7 +25,7 @@ azure_attribute_absence["frontdoors_has_drs_configured"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_frontdoor"
     frontend_endpoint := resource.properties.frontend_endpoint[_]
-    not frontendEndpoints.web_application_firewall_policy_link_id
+    not frontend_endpoint.web_application_firewall_policy_link_id
 }
 
 azure_attribute_absence ["frontdoors_has_drs_configured"] {
