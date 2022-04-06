@@ -126,7 +126,79 @@ serverKeyType_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure SQL server's TDE protector is encrypted with Customer-managed key",
     "Policy Description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure’s cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server.",
-    "Resource Type": "azurerm_mssql_server_transparent_data_encryption",
+    "Resource Type": "azurerm_mssql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption"
+}
+
+
+# PR-AZR-TRF-SQL-032
+
+default sql_serverKeyType = null
+
+azure_attribute_absence["sql_serverKeyType"] {
+    count([c | input.resources[_].type == "azurerm_mssql_server_transparent_data_encryption"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_serverKeyType"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server_transparent_data_encryption"
+    not resource.properties.key_vault_key_id
+}
+
+azure_issue["sql_serverKeyType"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_sql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_transparent_data_encryption";
+              contains(r.properties.server_id, resource.properties.compiletime_identity);
+              count(r.properties.key_vault_key_id) > 0;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_transparent_data_encryption";
+              contains(r.properties.server_id, concat(".", [resource.type, resource.name]));
+              count(r.properties.key_vault_key_id) > 0;
+              c := 1]) == 0
+}
+
+# azure_issue["sql_serverKeyType"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_mssql_server_transparent_data_encryption"
+#     count(resource.properties.key_vault_key_id) == 0
+# }
+
+sql_serverKeyType {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    not azure_attribute_absence["sql_serverKeyType"]
+    not azure_issue["sql_serverKeyType"]
+}
+
+sql_serverKeyType = false {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    azure_attribute_absence["sql_serverKeyType"]
+}
+
+sql_serverKeyType = false {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    azure_issue["sql_serverKeyType"]
+}
+
+sql_serverKeyType_err = "Make sure resource azurerm_sql_server and azurerm_mssql_server_transparent_data_encryption both exist and property 'key_vault_key_id' exist under azurerm_mssql_server_transparent_data_encryption as well." {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    azure_attribute_absence["sql_serverKeyType"]
+} else = "SQL server's TDE protector is currently not encrypted with Customer-managed key." {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    azure_issue["sql_serverKeyType"]
+}
+
+sql_serverKeyType_metadata := {
+    "Policy Code": "PR-AZR-TRF-SQL-032",
+    "Type": "IaC",
+    "Product": "",
+    "Language": "Terraform",
+    "Policy Title": "Ensure SQL server's TDE protector is encrypted with Customer-managed key",
+    "Policy Description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure’s cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server.",
+    "Resource Type": "azurerm_sql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption"
 }

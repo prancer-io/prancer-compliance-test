@@ -90,6 +90,17 @@ azure_issue["nsg_in_tcp_all_src"] {
     rules.properties.destinationPortRange == "*"
 }
 
+azure_issue["nsg_in_tcp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
+    rules.properties.access == "Allow"
+    rules.properties.direction == "Inbound"
+    rules.properties.protocol == "*"
+    rules.properties.destinationAddressPrefix == "*"
+    rules.properties.destinationPortRange == "*"
+}
+
 nsg_in_tcp_all_src {
     lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["nsg_in_tcp_all_src"]
@@ -128,6 +139,17 @@ azure_issue["nsg_in_udp_all_src"] {
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "UDP"
+    rules.properties.destinationAddressPrefix == "*"
+    rules.properties.destinationPortRange == "*"
+}
+
+azure_issue["nsg_in_udp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
+    rules.properties.access == "Allow"
+    rules.properties.direction == "Inbound"
+    rules.properties.protocol == "*"
     rules.properties.destinationAddressPrefix == "*"
     rules.properties.destinationPortRange == "*"
 }
@@ -175,6 +197,18 @@ azure_issue["nsg_in_tcp_all"] {
     rules.properties.destinationPortRange == "*"
 }
 
+azure_issue["nsg_in_tcp_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
+    rules.properties.access == "Allow"
+    rules.properties.direction == "Inbound"
+    rules.properties.protocol == "*"
+    rules.properties.sourceAddressPrefix == "*"
+    rules.properties.destinationAddressPrefix == "*"
+    rules.properties.destinationPortRange == "*"
+}
+
 nsg_in_tcp_all {
     lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["nsg_in_tcp_all"]
@@ -213,6 +247,18 @@ azure_issue["nsg_in_udp_all"] {
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "UDP"
+    rules.properties.sourceAddressPrefix == "Internet"
+    rules.properties.destinationAddressPrefix == "*"
+    rules.properties.destinationPortRange == "*"
+}
+
+azure_issue["nsg_in_udp_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
+    rules.properties.access == "Allow"
+    rules.properties.direction == "Inbound"
+    rules.properties.protocol == "*"
     rules.properties.sourceAddressPrefix == "Internet"
     rules.properties.destinationAddressPrefix == "*"
     rules.properties.destinationPortRange == "*"
@@ -364,7 +410,7 @@ nsg_in_all_dst_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group (NSG) has an Inbound rule overly permissive to allow all traffic from any source on any protocol",
+    "Policy Title": "Azure Network Security Group (NSG) has an Inbound rule overly permissive to allow all traffic from any source on any destination",
     "Policy Description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
@@ -388,6 +434,16 @@ azure_issue["nsg_allow_icmp"] {
     rules.properties.sourceAddressPrefix == "*"
 }
 
+azure_issue["nsg_allow_icmp"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
+    rules.properties.access == "Allow"
+    rules.properties.direction == "Inbound"
+    rules.properties.protocol == "*"
+    rules.properties.sourceAddressPrefix == "*"
+}
+
 nsg_allow_icmp {
     lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["nsg_allow_icmp"]
@@ -397,7 +453,7 @@ nsg_allow_icmp = false {
     azure_issue["nsg_allow_icmp"]
 }
 
-nsg_allow_icmp_err = "Azure NSG having Inbound rule overly permissive to allow all traffic from any source to any destination" {
+nsg_allow_icmp_err = "Azure NSG Inbound rule overly permissive currently allowing ICMP (Ping)" {
     azure_issue["nsg_allow_icmp"]
 }
 
@@ -757,8 +813,6 @@ inbound_port_445_metadata := {
 
 #
 # PR-AZR-ARM-NSG-017
-
-
 #
  
 default inbound_omi_port_blocked = null
