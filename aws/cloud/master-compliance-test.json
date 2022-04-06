@@ -1698,37 +1698,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-CLD-EMR-003",
-                    "masterSnapshotId": [
-                        "TEST_EMR"
-                    ],
-                    "type": "rego",
-                    "rule": "file(emr.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-EMR-003",
-                            "eval": "data.rule.emr_s3_encryption",
-                            "message": "data.rule.emr_s3_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_EMR_003.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "AWS EMR cluster is not configured with CSE CMK for data at rest encryption (Amazon S3 with EMRFS)",
-                    "description": "This policy identifies EMR clusters which are not configured with Client Side Encryption with Customer Master Keys(CSE CMK) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your EMR cluster and ensure full control over your data.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [
-                                "Best Practice"
-                            ],
-                            "service": [
-                                "emr"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "PR-AWS-CLD-EMR-004",
                     "masterSnapshotId": [
                         "TEST_EMR"
@@ -1826,6 +1795,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-SQS-001",
+                    "masterSnapshotId": [
+                        "TEST_SQS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sqs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SQS-001",
+                            "eval": "data.rule.sqs_deadletter",
+                            "message": "data.rule.sqs_deadletter_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SQS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SQS does not have a dead letter queue configured",
+                    "description": "This policy identifies AWS Simple Queue Services (SQS) which does not have dead letter queue configured. Dead letter queues are useful for debugging your application or messaging system because they let you isolate problematic messages to determine why their processing doesn't succeed.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "sqs"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-SQS-002",
                     "masterSnapshotId": [
                         "TEST_SQS"
@@ -1885,6 +1888,69 @@
                                 "NIST 800",
                                 "GDPR"
                             ],
+                            "service": [
+                                "sqs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-SQS-004",
+                    "masterSnapshotId": [
+                        "TEST_SQS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sqs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SQS-004",
+                            "eval": "data.rule.sqs_policy_public",
+                            "message": "data.rule.sqs_policy_public_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SQS_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SQS queue policy is not publicly accessible",
+                    "description": "Public SQS queues potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "sqs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-SQS-005",
+                    "masterSnapshotId": [
+                        "CLD_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sqs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SQS-005",
+                            "eval": "data.rule.sqs_policy_action",
+                            "message": "data.rule.sqs_policy_action_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policydocument' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SQS_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SQS policy documents do not allow all actions",
+                    "description": "This level of access could potentially grant unwanted and unregulated access to anyone given this policy document setting. We recommend you to write a refined policy describing the specific action allowed or required by the specific policy holder",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
                             "service": [
                                 "sqs"
                             ]
@@ -2595,7 +2661,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-RSH-001",
                     "masterSnapshotId": [
-                        "TEST_REDSHIFT"
+                        "TEST_REDSHIFT_1"
                     ],
                     "type": "rego",
                     "rule": "file(redshift.rego)",
@@ -2627,7 +2693,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-RSH-002",
                     "masterSnapshotId": [
-                        "TEST_REDSHIFT"
+                        "TEST_REDSHIFT_1"
                     ],
                     "type": "rego",
                     "rule": "file(redshift.rego)",
@@ -2663,7 +2729,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-RSH-003",
                     "masterSnapshotId": [
-                        "TEST_REDSHIFT"
+                        "TEST_REDSHIFT_2"
                     ],
                     "type": "rego",
                     "rule": "file(redshift.rego)",
@@ -2698,7 +2764,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-RSH-004",
                     "masterSnapshotId": [
-                        "TEST_REDSHIFT"
+                        "TEST_REDSHIFT_1"
                     ],
                     "type": "rego",
                     "rule": "file(redshift.rego)",
@@ -2735,7 +2801,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-RSH-005",
                     "masterSnapshotId": [
-                        "TEST_REDSHIFT"
+                        "TEST_REDSHIFT_1"
                     ],
                     "type": "rego",
                     "rule": "file(redshift.rego)",
@@ -2767,7 +2833,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-RSH-006",
                     "masterSnapshotId": [
-                        "TEST_REDSHIFT"
+                        "TEST_REDSHIFT_1"
                     ],
                     "type": "rego",
                     "rule": "file(redshift.rego)",
@@ -2800,7 +2866,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-RSH-007",
                     "masterSnapshotId": [
-                        "TEST_REDSHIFT"
+                        "TEST_REDSHIFT_1"
                     ],
                     "type": "rego",
                     "rule": "file(redshift.rego)",
@@ -3943,7 +4009,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "sagemaker"
                             ]
                         }
                     ]
@@ -3977,7 +4043,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "sagemaker"
                             ]
                         }
                     ]
@@ -4011,7 +4077,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "sagemaker"
                             ]
                         }
                     ]
@@ -4042,7 +4108,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloudformation"
+                                "sqs"
                             ]
                         }
                     ]
@@ -4415,7 +4481,7 @@
                     "description": "Enable Enhanced scan type for AWS ECR registry to detect vulnerability",
                     "tags": [
                         {
-                            "cloud": "git",
+                            "cloud": "AWS",
                             "compliance": [
                                 "PCI-DSS",
                                 "GDPR"

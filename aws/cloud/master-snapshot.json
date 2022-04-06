@@ -236,13 +236,22 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_REDSHIFT",
+					"masterSnapshotId": "TEST_REDSHIFT_1",
 					"arn": "arn:aws:redshift:::",
 					"type": "redshift",
 					"collection": "aws_redshift",
 					"listMethod": "describe_clusters",
 					"detailMethods": [
-						"describe_clusters",
+						"describe_clusters"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_REDSHIFT_2",
+					"arn": "arn:aws:redshift:::",
+					"type": "redshift",
+					"collection": "aws_redshift",
+					"listMethod": "describe_cluster_parameter_groups",
+					"detailMethods": [
 						"describe_cluster_parameters"
 					]
 				},

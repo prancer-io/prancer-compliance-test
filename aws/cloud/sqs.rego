@@ -10,7 +10,8 @@ default sqs_deadletter = true
 
 sqs_deadletter = false {
     # lower(resource.Type) == "aws::sqs::queue"
-    not input.RedrivePolicy.deadLetterTargetArn
+    RedrivePolicy := json.unmarshal(input.RedrivePolicy)
+    not RedrivePolicy.deadLetterTargetArn
 }
 
 sqs_deadletter_err = "AWS SQS does not have a dead letter queue configured" {
@@ -99,21 +100,24 @@ default sqs_policy_public = true
 
 sqs_policy_public = false {
     # lower(resource.Type) == "aws::sqs::queuepolicy"
-    statement := input.policy.Statement[j]
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
 }
 
 sqs_policy_public = false {
     # lower(resource.Type) == "aws::sqs::queuepolicy"
-    statement := input.policy.Statement[j]
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
 }
 
 sqs_policy_public = false {
     # lower(resource.Type) == "aws::sqs::queuepolicy"
-    statement := input.policy.Statement[j]
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[k] = "*"
 }
@@ -143,14 +147,16 @@ default sqs_policy_action = null
 
 sqs_policy_action = false {
     # lower(resource.Type) == "aws::sqs::queuepolicy"
-    statement := input.policy.Statement[j]
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Action == "*"
 }
 
 sqs_policy_action = false {
     # lower(resource.Type) == "aws::sqs::queuepolicy"
-    statement := input.policy.Statement[j]
+    policy := json.unmarshal(input.Policy)
+    statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Action[k] == "*"
 }
