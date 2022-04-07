@@ -1667,13 +1667,13 @@
                             "id": "PR-AZR-ARM-MNT-004",
                             "eval": "data.rule.log_storage_retention",
                             "message": "data.rule.log_storage_retention_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings' target='_blank'>here</a>. retentionPolicy should be enabled and more than 90 days",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings' target='_blank'>here</a>. Make sure to enable diagnostics settings for load balancers",
                             "remediationFunction": "PR_AZR_ARM_MNT_004.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Storage Account auditing retention should be 90 days or more",
-                    "description": "This policy identifies Storage Accounts which have Auditing Retentions less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure Storage Account Audit Log Retention to be greater than or equal to 90 days.",
+                    "title": "Azure Storage Account diagnostic logs should be enabled",
+                    "description": "Azure Storage Account provide different types of logs alert events, health probe, metrics to help you manage and troubleshoot issues. This policy identifies Azure Storage Account that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
                     "tags": [
                         {
                             "cloud": "git",

@@ -55,7 +55,6 @@ enableSslPort_metadata := {
 }
 
 
-
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_linked_server
 
 # PR-AZR-TRF-ARC-002
@@ -312,6 +311,114 @@ redis_cache_uses_privatelink_metadata := {
     "Language": "Terraform",
     "Policy Title": "Azure Cache for Redis should use private link",
     "Policy Description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure Cache for Redis instances, data leakage risks are reduced.",
+    "Resource Type": "azurerm_redis_cache",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache
+
+# PR-AZR-TRF-ARC-006
+
+default redis_persistence_enabled = null
+
+azure_attribute_absence["redis_persistence_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_redis_cache"
+    not resource.properties.redis_configuration
+}
+
+azure_attribute_absence["redis_persistence_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_redis_cache"
+    redis_configuration := resource.properties.redis_configuration[_]
+    not redis_configuration.aof_backup_enabled
+}
+
+azure_issue["redis_persistence_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_redis_cache"
+    redis_configuration := resource.properties.redis_configuration[_]
+    redis_configuration.aof_backup_enabled != true
+}
+
+redis_persistence_enabled {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    not azure_attribute_absence["redis_persistence_enabled"]
+    not azure_issue["redis_persistence_enabled"]
+}
+
+redis_persistence_enabled = false {
+    azure_attribute_absence["redis_persistence_enabled"]
+}
+
+redis_persistence_enabled = false {
+    azure_issue["redis_persistence_enabled"]
+}
+
+redis_persistence_enabled_err = "azurerm_redis_cache property 'redis_configuration.aof_backup_enabled' need to be exist. Currently its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["redis_persistence_enabled"]
+} else = "Redis Cache Persistence is currently not enabled." {
+    azure_issue["redis_persistence_enabled"]
+}
+
+redis_persistence_enabled_metadata := {
+    "Policy Code": "PR-AZR-TRF-ARC-006",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Persistence is enabled on Redis Cache to Perform complete system backups",
+    "Policy Description": "Enable Redis persistence. Redis persistence allows you to persist data stored in Redis. You can also take snapshots and back up the data, which you can load in case of a hardware failure. This is a huge advantage over Basic or Standard tier where all the data is stored in memory and there can be potential data loss in case of a failure where Cache nodes are down.",
+    "Resource Type": "azurerm_redis_cache",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache"
+}
+
+
+# PR-AZR-TRF-ARC-007
+
+default redis_tls_has_latest_version = null
+# default is 1.0
+azure_attribute_absence ["redis_tls_has_latest_version"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_redis_cache"
+    not resource.properties.minimum_tls_version
+}
+
+azure_issue ["redis_tls_has_latest_version"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_redis_cache"
+    to_number(resource.properties.minimum_tls_version) != 1.2
+}
+
+redis_tls_has_latest_version {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    not azure_attribute_absence["redis_tls_has_latest_version"]
+    not azure_issue["redis_tls_has_latest_version"]
+}
+
+redis_tls_has_latest_version = false {
+    azure_attribute_absence["redis_tls_has_latest_version"]
+}
+
+redis_tls_has_latest_version = false {
+    azure_issue["redis_tls_has_latest_version"]
+}
+
+redis_tls_has_latest_version_err = "azurerm_redis_cache property 'minimum_tls_version' need to be exist. Currently its missing from the resource. Please set the value to '1.2' after property addition." {
+    azure_attribute_absence["redis_persistence_enabled"]
+} else = "Redis Cache currently does not have latest version of tls configured." {
+    azure_issue["redis_persistence_enabled"]
+}
+
+redis_tls_has_latest_version_metadata := {
+    "Policy Code": "PR-AZR-TRF-ARC-007",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Redis Cache has latest version of tls configured",
+    "Policy Description": "This policy will identify the Redis Cache which doesn't have the latest version of tls configured and give alert.",
     "Resource Type": "azurerm_redis_cache",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache"

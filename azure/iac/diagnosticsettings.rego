@@ -193,7 +193,7 @@ log_storage_retention_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Storage Account audit logging should be enabled",
+    "Policy Title": "Azure Storage Account diagnostic logs should be enabled",
     "Policy Description": "Azure Storage Account provide different types of logs alert events, health probe, metrics to help you manage and troubleshoot issues. This policy identifies Azure Storage Account that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
     "Resource Type": "microsoft.insights/diagnosticsettings",
     "Policy Help URL": "",
