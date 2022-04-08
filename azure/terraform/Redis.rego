@@ -119,27 +119,15 @@ serverRole_metadata := {
 default public_network_access_disabled = null
 
 redis_dont_have_private_endpoint ["public_network_access_disabled"] {
-    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+    count([c | input.resources[_].type == "azurerm_private_link_service"; c := 1]) == 0
 }
 
 redis_dont_have_private_endpoint ["public_network_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_redis_cache"
     count([c | r := input.resources[_];
-              r.type == "azurerm_private_endpoint";
-              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
-              c := 1]) == 0
-    count([c | r := input.resources[_];
-              r.type == "azurerm_private_endpoint";
-              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
-              c := 1]) == 0
-    count([c | r := input.resources[_];
-              r.type == "azurerm_private_endpoint";
-              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
-              c := 1]) == 0
-    count([c | r := input.resources[_];
-              r.type == "azurerm_private_endpoint";
-              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              r.type == "azurerm_private_link_service";
+              contains(r.properties.nat_ip_configuration[_].subnet_id, resource.properties.subnet_id);
               c := 1]) == 0
 }
 
@@ -179,7 +167,7 @@ public_network_access_disabled = false {
     redis_dont_have_private_endpoint["public_network_access_disabled"]
 }
 
-public_network_access_disabled_err = "azurerm_redis_cache and azurerm_private_endpoint or property 'public_network_access_enabled' need to be exist. Its missing from the resource. Please set the value to false after property addition." {
+public_network_access_disabled_err = "azurerm_redis_cache and azurerm_private_link_service or azurerm_redis_cache's property 'public_network_access_enabled' need to be exist. Its missing from the resource. Please set the value to false after property addition." {
     lower(input.resources[_].type) == "azurerm_redis_cache"
     azure_attribute_absence["public_network_access_disabled"]
     redis_dont_have_private_endpoint["public_network_access_disabled"]
@@ -255,28 +243,41 @@ redis_cache_inside_vnet_metadata := {
 
 default redis_cache_uses_privatelink = null
 
+# azure_attribute_absence ["redis_cache_uses_privatelink"] {
+#     count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+# }
+
 azure_attribute_absence ["redis_cache_uses_privatelink"] {
-    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+    count([c | input.resources[_].type == "azurerm_private_link_service"; c := 1]) == 0
 }
+
+# azure_issue ["redis_cache_uses_privatelink"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_redis_cache"
+#     count([c | r := input.resources[_];
+#               r.type == "azurerm_private_endpoint";
+#               contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+#               c := 1]) == 0
+#     count([c | r := input.resources[_];
+#               r.type == "azurerm_private_endpoint";
+#               contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+#               c := 1]) == 0
+#     count([c | r := input.resources[_];
+#               r.type == "azurerm_private_endpoint";
+#               contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+#               c := 1]) == 0
+#     count([c | r := input.resources[_];
+#               r.type == "azurerm_private_endpoint";
+#               contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+#               c := 1]) == 0
+# }
 
 azure_issue ["redis_cache_uses_privatelink"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_redis_cache"
     count([c | r := input.resources[_];
-              r.type == "azurerm_private_endpoint";
-              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
-              c := 1]) == 0
-    count([c | r := input.resources[_];
-              r.type == "azurerm_private_endpoint";
-              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
-              c := 1]) == 0
-    count([c | r := input.resources[_];
-              r.type == "azurerm_private_endpoint";
-              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
-              c := 1]) == 0
-    count([c | r := input.resources[_];
-              r.type == "azurerm_private_endpoint";
-              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              r.type == "azurerm_private_link_service";
+              contains(r.properties.nat_ip_configuration[_].subnet_id, resource.properties.subnet_id);
               c := 1]) == 0
 }
 
@@ -296,7 +297,7 @@ redis_cache_uses_privatelink = false {
     azure_issue["redis_cache_uses_privatelink"]
 }
 
-redis_cache_uses_privatelink_err = "azurerm_redis_cache should have link with azurerm_private_endpoint and azurerm_private_endpoint's private_service_connection either need to have 'private_connection_resource_id' or 'private_connection_resource_alias' property. Seems there is no link established or mentioed properties are missing." {
+redis_cache_uses_privatelink_err = "azurerm_redis_cache subnet should have ip configured with azurerm_private_link_service and this need to have a link with azurerm_private_endpoint and azurerm_private_endpoint's private_service_connection either need to have 'private_connection_resource_id' or 'private_connection_resource_alias' of azurerm_private_link_service. Seems there is no link established or mentioed properties are missing." {
     lower(input.resources[_].type) == "azurerm_redis_cache"
     azure_attribute_absence["redis_cache_uses_privatelink"]
 } else = "Redis cache currently not using private link" {
@@ -310,7 +311,7 @@ redis_cache_uses_privatelink_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Cache for Redis should use private link",
-    "Policy Description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure Cache for Redis instances, data leakage risks are reduced.",
+    "Policy Description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure Cache for Redis instances via private link service, data leakage risks are reduced.",
     "Resource Type": "azurerm_redis_cache",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache"
