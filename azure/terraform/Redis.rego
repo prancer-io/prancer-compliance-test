@@ -424,3 +424,80 @@ redis_tls_has_latest_version_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache"
 }
+
+
+#
+# PR-AZR-TRF-ARC-008
+#
+
+default redis_cache_firewall_not_allowing_full_inbound_access = null
+
+
+azure_attribute_absence ["redis_cache_firewall_not_allowing_full_inbound_access"] {
+    count([c | input.resources[_].type == "azurerm_redis_firewall_rule"; c := 1]) == 0
+}
+
+azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_redis_firewall_rule"
+    not resource.properties.start_ip
+}
+
+azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_redis_firewall_rule"
+    not resource.properties.end_ip
+}
+
+azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_redis_cache"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_redis_firewall_rule";
+              contains(r.properties.redis_cache_name, resource.properties.compiletime_identity);
+              not contains(r.properties.start_ip, "0.0.0.0");
+              not contains(r.properties.end_ip, "0.0.0.0");
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_redis_firewall_rule";
+              contains(r.properties.redis_cache_name, concat(".", [resource.type, resource.name]));
+              not contains(r.properties.start_ip, "0.0.0.0");
+              not contains(r.properties.end_ip, "0.0.0.0");
+              c := 1]) == 0
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    not azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"]
+    not azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"]
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access = false {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"]
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access = false {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"]
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access_err = "azurerm_redis_firewall_rule resoruce or its property 'start_ip' or 'end_ip' is missing from the resource" {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"]
+} else = "Redis Cache firewall rule configuration currently allowing full inbound access to everyone" {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"]
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access_metadata := {
+    "Policy Code": "PR-AZR-TRF-ARC-008",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Redis Cache Firewall rules should not configure to allow full inbound access to everyone",
+    "Policy Description": "Firewalls grant access to redis cache based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with 0.0.0.0 represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
+    "Resource Type": "azurerm_redis_cache",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_firewall_rule"
+}
