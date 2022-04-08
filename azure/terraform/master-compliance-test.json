@@ -5656,7 +5656,13 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_redis_cache"
+                        "azurerm_redis_cache",
+                        "azurerm_subnet",
+                        "azurerm_virtual_network",
+                        "azurerm_lb",
+                        "azurerm_private_link_service",
+                        "azurerm_public_ip",
+                        "azurerm_private_endpoint"
                     ]
                 },
                 {
@@ -5725,6 +5731,11 @@
                     ],
                     "resourceTypes": [
                         "azurerm_redis_cache",
+                        "azurerm_subnet",
+                        "azurerm_virtual_network",
+                        "azurerm_lb",
+                        "azurerm_private_link_service",
+                        "azurerm_public_ip",
                         "azurerm_private_endpoint"
                     ]
                 },
