@@ -1931,7 +1931,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-SQS-005",
                     "masterSnapshotId": [
-                        "CLD_TEMPLATE_SNAPSHOT"
+                        "TEST_SQS"
                     ],
                     "type": "rego",
                     "rule": "file(sqs.rego)",

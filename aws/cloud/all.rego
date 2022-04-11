@@ -282,28 +282,28 @@ default as_elb_health_check = true
 as_elb_health_check = false {
     # lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
     AutoScalingGroups := input.AutoScalingGroups[_]
-    AutoScalingGroups.LoadBalancerNames
+    count(AutoScalingGroups.LoadBalancerNames) != 0
     not AutoScalingGroups.HealthCheckType
 }
 
 as_elb_health_check = false {
     # lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
     AutoScalingGroups := input.AutoScalingGroups[_]
-    AutoScalingGroups.LoadBalancerNames
+    count(AutoScalingGroups.LoadBalancerNames) != 0
     lower(AutoScalingGroups.HealthCheckType) != "elb"
 }
 
 as_elb_health_check = false {
     # lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
     AutoScalingGroups := input.AutoScalingGroups[_]
-    AutoScalingGroups.TargetGroupARNs
+    count(AutoScalingGroups.TargetGroupARNs) != 0
     not AutoScalingGroups.HealthCheckType
 }
 
 as_elb_health_check = false {
     # lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
     AutoScalingGroups := input.AutoScalingGroups[_]
-    AutoScalingGroups.TargetGroupARNs
+    count(AutoScalingGroups.TargetGroupARNs) != 0
     lower(AutoScalingGroups.HealthCheckType) != "elb"
 }
 
@@ -542,11 +542,6 @@ mq_publicly_accessible_metadata := {
 # PR-AWS-CLD-MQ-002
 #
 default mq_logging_enable = true
-
-mq_logging_enable = false {
-    # lower(resource.Type) == "aws::amazonmq::broker"
-    not input.Logs
-}
 
 mq_logging_enable = false {
     # lower(resource.Type) == "aws::amazonmq::broker"

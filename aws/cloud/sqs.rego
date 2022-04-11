@@ -100,7 +100,7 @@ default sqs_policy_public = true
 
 sqs_policy_public = false {
     # lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(input.Policy)
+    policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
@@ -108,7 +108,7 @@ sqs_policy_public = false {
 
 sqs_policy_public = false {
     # lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(input.Policy)
+    policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
@@ -116,7 +116,7 @@ sqs_policy_public = false {
 
 sqs_policy_public = false {
     # lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(input.Policy)
+    policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[k] = "*"
@@ -143,22 +143,22 @@ sqs_policy_public_metadata := {
 # PR-AWS-CLD-SQS-005
 #
 
-default sqs_policy_action = null
+default sqs_policy_action = true
 
 sqs_policy_action = false {
     # lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(input.Policy)
+    policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
-    statement.Action == "*"
+    statement.Action == "sqs:*"
 }
 
 sqs_policy_action = false {
     # lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(input.Policy)
+    policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
-    statement.Action[k] == "*"
+    statement.Action[k] == "sqs:*"
 }
 
 sqs_policy_action_err = "Ensure SQS policy documents do not allow all actions" {
