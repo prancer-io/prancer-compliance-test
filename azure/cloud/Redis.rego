@@ -286,3 +286,136 @@ arc_private_endpoint_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
 }
+
+
+#
+# PR-AZR-CLD-ARC-007
+
+default min_tls_version_redis = null
+
+azure_attribute_absence["min_tls_version_redis"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    not resource.properties.minimumTlsVersion
+}
+
+azure_issue["min_tls_version_redis"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    to_number(resource.properties.minimumTlsVersion) != 1.2
+}
+
+min_tls_version_redis {
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    not azure_attribute_absence["min_tls_version_redis"]
+    not azure_issue["min_tls_version_redis"]
+}
+
+
+min_tls_version_redis = false {
+    azure_issue["min_tls_version_redis"]
+}
+
+min_tls_version_redis = false {
+    azure_attribute_absence["min_tls_version_redis"]
+}
+
+min_tls_version_redis_err = "Azure Redis Cache currently doesn't have latest version of tls configured" {
+    azure_issue["min_tls_version_redis"]
+} else = "Microsoft.Cache/redis property 'minimumTlsVersion' need to be exist. Its missing from the resource. Please set the value to '1.2' after property addition." {
+    azure_attribute_absence["min_tls_version_redis"]
+}
+
+min_tls_version_redis_metadata := {
+    "Policy Code": "PR-AZR-CLD-ARC-007",
+    "Type": "Cloud",  
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Ensure Azure Redis Cache has latest version of tls configured",
+    "Policy Description": "This policy will identify the Azure Redis Cache which doesn't have the latest version of tls configured and give the alert",
+    "Resource Type": "microsoft.cache/redis",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
+}
+
+
+
+#
+# PR-AZR-CLD-ARC-008
+#
+
+default redis_cache_firewall_not_allowing_full_inbound_access = null
+
+
+azure_attribute_absence ["redis_cache_firewall_not_allowing_full_inbound_access"] {
+    count([c | lower(input.resources[_].type) == "microsoft.cache/redis/firewallrules"; c := 1]) == 0
+}
+
+
+azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis/firewallrules"
+    not resource.properties.startIP
+}
+
+
+azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis/firewallrules"
+    not resource.properties.endIP
+}
+
+
+azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    count([c | r := input.resources[_];
+              r.type == "microsoft.cache/redis/firewallrules";
+              contains(r.properties.redis_cache_name, resource.properties.compiletime_identity);
+              not contains(r.properties.startIP, "0.0.0.0");
+              not contains(r.properties.endIP, "0.0.0.0");
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "microsoft.cache/redis/firewallrules";
+              contains(r.properties.redis_cache_name, concat(".", [resource.type, resource.name]));
+              not contains(r.properties.startIP, "0.0.0.0");
+              not contains(r.properties.endIP, "0.0.0.0");
+              c := 1]) == 0
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    not azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"]
+    not azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"]
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access = false {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"]
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access = false {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"]
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access_err = "microsoft.cache/redis/firewallrules resoruce or its property 'startIP' or 'endIP' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"]
+} else = "Redis Cache firewall rule configuration currently allowing full inbound access to everyone" {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"]
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access_metadata := {
+    "Policy Code": "PR-AZR-CLD-ARC-008",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Redis Cache Firewall rules should not configure to allow full inbound access to everyone",
+    "Policy Description": "Firewalls grant access to redis cache based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with 0.0.0.0 represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
+    "Resource Type": "microsoft.cache/redis",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
+}

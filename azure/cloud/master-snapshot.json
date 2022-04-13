@@ -305,6 +305,12 @@
                     "version": "2020-12-01"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_422",
+                    "type": "Microsoft.Cache/redis/firewallRules",
+                    "collection": "Microsoft.Cache",
+                    "version": "2021-06-01"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_430",
                     "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
                     "collection": "Microsoft.Network",
