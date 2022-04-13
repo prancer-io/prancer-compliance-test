@@ -3441,7 +3441,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-TRF-INS-001",
+                    "masterTestId": "PR-AWS-CLD-INS-001",
                     "masterSnapshotId": [
                         "TEST_ALL_15"
                     ],
