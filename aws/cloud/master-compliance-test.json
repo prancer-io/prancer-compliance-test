@@ -1698,6 +1698,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-EMR-003",
+                    "masterSnapshotId": [
+                        "TEST_EMR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EMR-003",
+                            "eval": "data.rule.emr_s3_encryption",
+                            "message": "data.rule.emr_s3_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EMR_003.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "AWS EMR cluster is not configured with CSE CMK for data at rest encryption (Amazon S3 with EMRFS)",
+                    "description": "This policy identifies EMR clusters which are not configured with Client Side Encryption with Customer Master Keys(CSE CMK) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your EMR cluster and ensure full control over your data.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "emr"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-EMR-004",
                     "masterSnapshotId": [
                         "TEST_EMR"
