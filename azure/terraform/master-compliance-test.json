@@ -5751,7 +5751,7 @@
                             "id": "PR-AZR-TRF-ARC-006",
                             "eval": "data.rule.redis_persistence_enabled",
                             "message": "data.rule.redis_persistence_enabled_err",
-                            "remediationDescription": " In 'azurerm_redis_cache' resource, set 'aof_backup_enabled = true' under 'redis_configuration' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache#aof_backup_enabled' target='_blank'>here</a> for details.",
+                            "remediationDescription": " In 'azurerm_redis_cache' resource, set 'rdb_backup_enabled = true' under 'redis_configuration' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache#rdb_backup_enabled' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_ARC_006.py"
                         }
                     ],

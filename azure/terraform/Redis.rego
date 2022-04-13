@@ -334,14 +334,14 @@ azure_attribute_absence["redis_persistence_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_redis_cache"
     redis_configuration := resource.properties.redis_configuration[_]
-    not redis_configuration.aof_backup_enabled
+    not redis_configuration.rdb_backup_enabled
 }
 
 azure_issue["redis_persistence_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_redis_cache"
     redis_configuration := resource.properties.redis_configuration[_]
-    redis_configuration.aof_backup_enabled != true
+    redis_configuration.rdb_backup_enabled != true
 }
 
 redis_persistence_enabled {
@@ -358,7 +358,7 @@ redis_persistence_enabled = false {
     azure_issue["redis_persistence_enabled"]
 }
 
-redis_persistence_enabled_err = "azurerm_redis_cache property 'redis_configuration.aof_backup_enabled' need to be exist. Currently its missing from the resource. Please set the value to 'true' after property addition." {
+redis_persistence_enabled_err = "azurerm_redis_cache property 'redis_configuration.rdb_backup_enabled' need to be exist. Currently its missing from the resource. Please set the value to 'true' after property addition." {
     azure_attribute_absence["redis_persistence_enabled"]
 } else = "Redis Cache Persistence is currently not enabled." {
     azure_issue["redis_persistence_enabled"]
@@ -500,4 +500,80 @@ redis_cache_firewall_not_allowing_full_inbound_access_metadata := {
     "Resource Type": "azurerm_redis_cache",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_firewall_rule"
+}
+
+
+# PR-AZR-TRF-ARC-009
+# not completed yet
+default redis_cache_uses_private_dns_zone = null
+
+
+azure_attribute_absence ["redis_cache_uses_private_dns_zone"] {
+    count([c | input.resources[_].type == "azurerm_private_dns_zone_virtual_network_link"; c := 1]) == 0
+}
+
+azure_issue["redis_cache_uses_private_dns_zone"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_redis_cache"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_subnet";
+              contains(resource.properties.subnet_id, r.properties.compiletime_identity);
+              count([ci | ri := input.resources[_];
+              ri.type == "azurerm_private_dns_zone_virtual_network_link";
+              contains(ri.properties.virtual_network_id, r.properties.virtual_network_name);
+              ci := 1]) > 0;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_subnet";
+              contains(resource.properties.subnet_id, concat(".", [r.type, r.name]));
+              count([ci | ri := input.resources[_];
+              ri.type == "azurerm_private_dns_zone_virtual_network_link";
+              contains(ri.properties.virtual_network_id, r.properties.virtual_network_name);
+              ci := 1]) > 0;
+              c := 1]) == 0
+}
+
+# azure_issue ["redis_cache_uses_privatelink"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_redis_cache"
+#     count([c | r := input.resources[_];
+#               r.type == "azurerm_private_link_service";
+#               contains(r.properties.nat_ip_configuration[_].subnet_id, resource.properties.subnet_id);
+#               c := 1]) == 0
+# }
+
+redis_cache_uses_private_dns_zone = false {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    azure_attribute_absence["redis_cache_uses_private_dns_zone"]
+}
+
+redis_cache_uses_private_dns_zone {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    not azure_attribute_absence["redis_cache_uses_private_dns_zone"]
+    not azure_issue["redis_cache_uses_private_dns_zone"]
+}
+
+redis_cache_uses_private_dns_zone = false {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    azure_issue["redis_cache_uses_private_dns_zone"]
+}
+
+redis_cache_uses_private_dns_zone_err = "azurerm_redis_cache subnet should have ip configured with azurerm_private_link_service and this need to have a link with azurerm_private_endpoint and azurerm_private_endpoint's private_service_connection either need to have 'private_connection_resource_id' or 'private_connection_resource_alias' of azurerm_private_link_service. Seems there is no link established or mentioed properties are missing." {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    azure_attribute_absence["redis_cache_uses_private_dns_zone"]
+} else = "Redis cache currently not using private link" {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    azure_issue["redis_cache_uses_private_dns_zone"]
+}
+
+redis_cache_uses_private_dns_zone_metadata := {
+    "Policy Code": "PR-AZR-TRF-ARC-009",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Cache for Redis should configure to use private DNS zone",
+    "Policy Description": "Use private DNS zones to override the DNS resolution for a private endpoint. A private DNS zone can be linked to your virtual network to resolve to Azure Cache for Redis.",
+    "Resource Type": "azurerm_redis_cache",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache"
 }
