@@ -283,14 +283,15 @@ default ecs_container_insight_enable = true
 
 ecs_container_insight_enable = false {
     # lower(resource.Type) == "aws::ecs::cluster"
-    settings := input.settings[j]
+    clusters := input.clusters[i]
+    settings := clusters.settings[j]
     lower(settings.name) == "containerinsights" 
     lower(settings.value) != "enabled"
 }
 
 ecs_container_insight_enable = false {
     # lower(resource.Type) == "aws::ecs::cluster"
-    count([c | input.settings[j].name == "containerinsights" ; c:=1]) == 0
+    count([c | input.clusters[i].settings[j].name == "containerinsights" ; c:=1]) == 0
 }
 
 ecs_container_insight_enable = false {

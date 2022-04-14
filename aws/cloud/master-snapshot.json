@@ -304,7 +304,7 @@
 					"listMethod": "describe_repositories",
 					"detailMethods": [
 						"describe_repositories",
-						"get_lifecycle_policy",
+						"get_repository_policy",
 						"get_registry_scanning_configuration"
 					]
 				},

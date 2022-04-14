@@ -4762,7 +4762,7 @@
                             "eval": "data.rule.ecs_container_insight_enable",
                             "message": "data.rule.ecs_container_insight_enable_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-cluster-clustersettings.html#cfn-ecs-cluster-clustersettings-name' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_ECS_009.py"
+                            "remediationFunction": "PR_AWS_CLD_ECS_008.py"
                         }
                     ],
                     "severity": "Low",
@@ -4791,7 +4791,7 @@
                             "eval": "data.rule.ecs_enable_execute_command",
                             "message": "data.rule.ecs_enable_execute_command_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-enableexecutecommand' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_ECS_008.py"
+                            "remediationFunction": "PR_AWS_CLD_ECS_009.py"
                         }
                     ],
                     "severity": "High",
