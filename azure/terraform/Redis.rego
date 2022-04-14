@@ -504,7 +504,6 @@ redis_cache_firewall_not_allowing_full_inbound_access_metadata := {
 
 
 # PR-AZR-TRF-ARC-009
-# not completed yet
 default redis_cache_uses_private_dns_zone = null
 
 
@@ -558,10 +557,10 @@ redis_cache_uses_private_dns_zone = false {
     azure_issue["redis_cache_uses_private_dns_zone"]
 }
 
-redis_cache_uses_private_dns_zone_err = "azurerm_redis_cache subnet should have ip configured with azurerm_private_link_service and this need to have a link with azurerm_private_endpoint and azurerm_private_endpoint's private_service_connection either need to have 'private_connection_resource_id' or 'private_connection_resource_alias' of azurerm_private_link_service. Seems there is no link established or mentioed properties are missing." {
+redis_cache_uses_private_dns_zone_err = "azurerm_redis_cache vnet should have network link configured with private DNS zone via azurerm_private_dns_zone_virtual_network_link. Seems its not configured." {
     lower(input.resources[_].type) == "azurerm_redis_cache"
     azure_attribute_absence["redis_cache_uses_private_dns_zone"]
-} else = "Redis cache currently not using private link" {
+} else = "Redis cache currently not configured to use private DNS zone" {
     lower(input.resources[_].type) == "azurerm_redis_cache"
     azure_issue["redis_cache_uses_private_dns_zone"]
 }
