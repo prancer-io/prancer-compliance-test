@@ -4781,7 +4781,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-ECS-009",
                     "masterSnapshotId": [
-                        "TEST_ECS_02"
+                        "TEST_ECS_01"
                     ],
                     "type": "rego",
                     "rule": "file(ecs.rego)",
@@ -4810,7 +4810,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-ECS-010",
                     "masterSnapshotId": [
-                        "TEST_ECS_02"
+                        "TEST_ECS_01"
                     ],
                     "type": "rego",
                     "rule": "file(ecs.rego)",
@@ -4839,7 +4839,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-ECS-011",
                     "masterSnapshotId": [
-                        "TEST_ECS_02"
+                        "TEST_ECS_01"
                     ],
                     "type": "rego",
                     "rule": "file(ecs.rego)",
@@ -4868,7 +4868,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-ECS-012",
                     "masterSnapshotId": [
-                        "TEST_ECS_02"
+                        "TEST_ECS_01"
                     ],
                     "type": "rego",
                     "rule": "file(ecs.rego)",
@@ -4897,7 +4897,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-ECS-013",
                     "masterSnapshotId": [
-                        "TEST_ECS_02"
+                        "TEST_ECS_01"
                     ],
                     "type": "rego",
                     "rule": "file(ecs.rego)",

@@ -49,8 +49,8 @@ cf_ssl_protocol = false {
 
 cf_ssl_protocol = false {
     # lower(resource.Type) == "aws::cloudfront::distribution"
-    origins := input.Distribution.DistributionConfig.Origins[j]
-    lower(origins.CustomOriginConfig.OriginSSLProtocols[k]) == "sslv3"
+    origin_items := input.Distribution.DistributionConfig.Origins.Items[j]
+    lower(origin_items.CustomOriginConfig.OriginSslProtocols.Items[k]) == "sslv3"
 }
 
 cf_ssl_protocol_err = "AWS CloudFront distribution is using insecure SSL protocols for HTTPS communication" {
@@ -111,7 +111,7 @@ default cf_https_only = true
 cf_https_only = false {
     # lower(resource.Type) == "aws::cloudfront::distribution"
     count(
-        [c | lower(input.Distribution.DistributionConfig.Origins[_].CustomOriginConfig.OriginProtocolPolicy) != "https-only"; c := 1
+        [c | lower(input.Distribution.DistributionConfig.Origins.Items[_].CustomOriginConfig.OriginProtocolPolicy) != "https-only"; c := 1
     ]) > 0
 }
 

@@ -322,10 +322,11 @@ ecs_container_insight_enable_metadata := {
 
 default ecs_enable_execute_command = true
 
-ecs_enable_execute_command {
+ecs_enable_execute_command = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     # lower(resource.Type) == type[_]
-    input.enableExecuteCommand == true
+    services := input.services[_]
+    services.enableExecuteCommand == true
 }
 
 ecs_enable_execute_command_err = "Ensure ECS Services and Task Set enableExecuteCommand property set to False" {
@@ -351,10 +352,11 @@ ecs_enable_execute_command_metadata := {
 
 default ecs_assign_public_ip = true
 
-ecs_assign_public_ip {
+ecs_assign_public_ip = false {
     # type = ["aws::ecs::service", "aws::ecs::taskset"]
     # lower(resource.Type) == type[_]
-    lower(input.networkConfiguration.awsvpcConfiguration.assignPublicIp) == "enabled"
+    services := input.services[_]
+    lower(services.networkConfiguration.awsvpcConfiguration.assignPublicIp) == "enabled"
 }
 
 ecs_assign_public_ip_err = "Ensure that ECS Service and Task Set network configuration disallows the assignment of public IPs" {
@@ -380,13 +382,14 @@ ecs_assign_public_ip_metadata := {
 
 default ecs_launch_type = true
 
-ecs_launch_type {
+ecs_launch_type = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     # lower(resource.Type) == type[_]
-    not input.launchType
+    services := input.services[_]
+    not services.launchType
 }
 
-ecs_launch_type {
+ecs_launch_type = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     # lower(resource.Type) == type[_]
     lower(input.launchType) != "fargate"
@@ -415,16 +418,18 @@ ecs_launch_type_metadata := {
 
 default ecs_subnet = true
 
-ecs_subnet {
+ecs_subnet = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     # lower(resource.Type) == type[_]
-    not input.networkConfiguration.awsvpcConfiguration.subnets
+    services := input.services[_]
+    not services.networkConfiguration.awsvpcConfiguration.subnets
 }
 
-ecs_subnet {
+ecs_subnet = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     # lower(resource.Type) == type[_]
-    count(input.networkConfiguration.awsvpcConfiguration.subnets) == 0
+    services := input.services[_]
+    count(services.networkConfiguration.awsvpcConfiguration.subnets) == 0
 }
 
 ecs_subnet_err = "value(s) of subnets attached to aws ecs service or taskset awsvpcConfiguration resources are vended" {
@@ -450,16 +455,18 @@ ecs_subnet_metadata := {
 
 default ecs_security_group = true
 
-ecs_security_group {
+ecs_security_group = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     # lower(resource.Type) == type[_]
-    not input.networkConfiguration.awsvpcConfiguration.securityGroups
+    services := input.services[_]
+    not services.networkConfiguration.awsvpcConfiguration.securityGroups
 }
 
-ecs_security_group {
+ecs_security_group = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     # lower(resource.Type) == type[_]
-    count(input.networkConfiguration.awsvpcConfiguration.securityGroups) == 0
+    services := input.services[_]
+    count(services.networkConfiguration.awsvpcConfiguration.securityGroups) == 0
 }
 
 ecs_security_group_err = "VPC configurations on ECS Services and TaskSets must use either vended security groups" {
@@ -485,22 +492,22 @@ ecs_security_group_metadata := {
 
 default ecs_network_mode = true
 
-ecs_network_mode {
+ecs_network_mode = false {
     # lower(resource.Type) == "aws::ecs::taskdefinition"
     not input.taskDefinition.networkMode
 }
 
-ecs_network_mode {
+ecs_network_mode = false {
     # lower(resource.Type) == "aws::ecs::taskdefinition"
     count(input.taskDefinition.networkMode) == 0
 }
 
-ecs_network_mode {
+ecs_network_mode = false {
     # lower(resource.Type) == "aws::ecs::taskdefinition"
     input.taskDefinition.networkMode == null
 }
 
-ecs_network_mode {
+ecs_network_mode = false {
     # lower(resource.Type) == "aws::ecs::taskdefinition"
     lower(input.taskDefinition.networkMode) != "awsvpc"
 }
