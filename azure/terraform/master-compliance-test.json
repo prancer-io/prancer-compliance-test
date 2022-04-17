@@ -2845,7 +2845,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Storage Account audit logging should be enabled",
+                    "title": "Azure Storage Account diagnostic logs should be enabled",
                     "description": "Diagnostic settings for storage accounts used to stream resource logs to a Log Analytics workspace. this policy will identify any storage account which has this diagnostic settings missing or misconfigured.",
                     "tags": [
                         {
@@ -2860,6 +2860,41 @@
                     ],
                     "resourceTypes": [
                         "azurerm_storage_account",
+                        "azurerm_monitor_diagnostic_setting"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-MNT-009",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-MNT-009",
+                            "eval": "data.rule.redis_cache_diagonstic_log_enabled",
+                            "message": "data.rule.redis_cache_diagonstic_log_enabled_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, make sure 'log' block exist and 'target_resource_id' contains id of target 'azurerm_redis_cache' resource to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_MNT_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Redis Cache diagnostic logs should be enabled",
+                    "description": "Diagnostic settings for redis cache used to stream resource logs to a Log Analytics workspace. this policy will identify any storage account which has this diagnostic settings missing or misconfigured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_cache",
                         "azurerm_monitor_diagnostic_setting"
                     ]
                 },
@@ -5606,7 +5641,7 @@
                             "remediationFunction": "PR_AZR_TRF_ARC_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Cache for Redis should disable public network access",
                     "description": "Disabling public network access improves security by ensuring that the Azure Cache for Redis isn't exposed on the public internet. You can limit exposure of your Azure Cache for Redis by creating private endpoints instead.",
                     "tags": [
@@ -5621,7 +5656,13 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_redis_cache"
+                        "azurerm_redis_cache",
+                        "azurerm_subnet",
+                        "azurerm_virtual_network",
+                        "azurerm_lb",
+                        "azurerm_private_link_service",
+                        "azurerm_public_ip",
+                        "azurerm_private_endpoint"
                     ]
                 },
                 {
@@ -5640,7 +5681,7 @@
                             "remediationFunction": "PR_AZR_TRF_ARC_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Cache for Redis should reside within a virtual network",
                     "description": "Azure Virtual Network deployment provides enhanced security and isolation for your Azure Cache for Redis, as well as subnets, access control policies, and other features to further restrict access.When an Azure Cache for Redis instance is configured with a virtual network, it is not publicly addressable and can only be accessed from virtual machines and applications within the virtual network.",
                     "tags": [
@@ -5670,11 +5711,11 @@
                             "id": "PR-AZR-TRF-ARC-005",
                             "eval": "data.rule.redis_cache_uses_privatelink",
                             "message": "data.rule.redis_cache_uses_privatelink_err",
-                            "remediationDescription": "'azurerm_redis_cache' resource need to have a link with 'azurerm_private_endpoint', set 'id' of 'azurerm_redis_cache' to property 'private_connection_resource_id' under 'azurerm_private_endpoint' resources 'private_service_connection' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint#private_connection_resource_id' target='_blank'>here</a> for details.",
+                            "remediationDescription": "'azurerm_redis_cache' resource subnet need to have ip configured with with azurerm_private_link_service and this need to have a link with 'azurerm_private_endpoint', set 'id' of 'azurerm_private_link_service' (which has ip configured for redis cache subnet) to property 'private_connection_resource_id' under 'azurerm_private_endpoint' resources 'private_service_connection' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint#private_connection_resource_id' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_ARC_005.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Cache for Redis should use private link",
                     "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure Cache for Redis instances, data leakage risks are reduced.",
                     "tags": [
@@ -5690,7 +5731,153 @@
                     ],
                     "resourceTypes": [
                         "azurerm_redis_cache",
+                        "azurerm_subnet",
+                        "azurerm_virtual_network",
+                        "azurerm_lb",
+                        "azurerm_private_link_service",
+                        "azurerm_public_ip",
                         "azurerm_private_endpoint"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ARC-006",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ARC-006",
+                            "eval": "data.rule.redis_persistence_enabled",
+                            "message": "data.rule.redis_persistence_enabled_err",
+                            "remediationDescription": " In 'azurerm_redis_cache' resource, set 'rdb_backup_enabled = true' under 'redis_configuration' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache#rdb_backup_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ARC_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Persistence is enabled on Redis Cache to Perform complete system backups",
+                    "description": "Enable Redis persistence. Redis persistence allows you to persist data stored in Redis. You can also take snapshots and back up the data, which you can load in case of a hardware failure. This is a huge advantage over Basic or Standard tier where all the data is stored in memory and there can be potential data loss in case of a failure where Cache nodes are down.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_cache"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ARC-007",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ARC-007",
+                            "eval": "data.rule.redis_tls_has_latest_version",
+                            "message": "data.rule.redis_tls_has_latest_version_err",
+                            "remediationDescription": " In 'azurerm_redis_cache' resource, set 'minimum_tls_version' = '1.2' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache#minimum_tls_version' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ARC_007.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Redis Cache has latest version of tls configured",
+                    "description": "This policy will identify the Redis Cache which doesn't have the latest version of tls configured and give alert.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_cache"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ARC-008",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ARC-008",
+                            "eval": "data.rule.redis_cache_firewall_not_allowing_full_inbound_access",
+                            "message": "data.rule.redis_cache_firewall_not_allowing_full_inbound_access_err",
+                            "remediationDescription": "In 'azurerm_redis_firewall_rule' resource, set valid ip range other then '0.0.0.0' between 'start_ip' and 'end_ip' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_firewall_rule' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ARC_008.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Redis Cache Firewall rules should not configure to allow full inbound access to everyone",
+                    "description": "Firewalls grant access to redis cache based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with \"0.0.0.0\" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_cache",
+                        "azurerm_redis_firewall_rule"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ARC-009",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ARC-009",
+                            "eval": "data.rule.redis_cache_uses_private_dns_zone",
+                            "message": "data.rule.redis_cache_uses_private_dns_zone_err",
+                            "remediationDescription": "In 'azurerm_private_dns_zone_virtual_network_link' resource, at property 'virtual_network_id' set id of the azurerm_virtual_network where azurerm_redis_cache exist and at property 'private_dns_zone_name' set target azurerm_private_dns_zone name to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_zone_virtual_network_link' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ARC_009.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Cache for Redis should configure to use private DNS zone",
+                    "description": "Use private DNS zones to override the DNS resolution for a private endpoint. A private DNS zone can be linked to your virtual network to resolve to Azure Cache for Redis.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_cache",
+                        "azurerm_virtual_network",
+                        "azurerm_subnet",
+                        "azurerm_private_dns_zone_virtual_network_link",
+                        "azurerm_private_dns_zone"
                     ]
                 },
                 {
