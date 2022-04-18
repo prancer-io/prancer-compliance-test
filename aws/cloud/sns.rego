@@ -99,21 +99,24 @@ default sns_policy_public = true
 
 sns_policy_public = false {
     # lower(resource.Type) == "aws::sns::topicpolicy"
-    statement := input.Attributes.Policy.Statement[_]
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
 }
 
 sns_policy_public = false {
     # lower(resource.Type) == "aws::sns::topicpolicy"
-    statement := input.Attributes.Policy.Statement[_]
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
 }
 
 sns_policy_public = false {
     # lower(resource.Type) == "aws::sns::topicpolicy"
-    statement := input.Attributes.Policy.Statement[_]
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
 }

@@ -95,14 +95,14 @@ default as_elb_health_check = null
 aws_attribute_absence["as_elb_health_check"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_autoscaling_group"
-    resource.properties.load_balancers
+    count(resource.properties.load_balancers) != 0
     not resource.properties.health_check_type
 }
 
 source_path[{"as_elb_health_check": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_autoscaling_group"
-    resource.properties.load_balancers
+    count(resource.properties.load_balancers) != 0
     not resource.properties.health_check_type
     metadata := {
         "resource_path": [
@@ -114,14 +114,14 @@ source_path[{"as_elb_health_check": metadata}] {
 aws_issue["as_elb_health_check"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_autoscaling_group"
-    resource.properties.load_balancers
+    count(resource.properties.load_balancers) != 0
     lower(resource.properties.health_check_type) != "elb"
 }
 
 source_path[{"as_elb_health_check": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_autoscaling_group"
-    resource.properties.load_balancers
+    count(resource.properties.load_balancers) != 0
     lower(resource.properties.health_check_type) != "elb"
     metadata := {
         "resource_path": [
@@ -133,14 +133,14 @@ source_path[{"as_elb_health_check": metadata}] {
 aws_attribute_absence["as_elb_health_check"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_autoscaling_group"
-    resource.properties.target_group_arns
+    count(resource.properties.target_group_arns) != 0
     not resource.properties.health_check_type
 }
 
 source_path[{"as_elb_health_check": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_autoscaling_group"
-    resource.properties.target_group_arns
+    count(resource.properties.target_group_arns) != 0
     not resource.properties.health_check_type
     metadata := {
         "resource_path": [
@@ -152,14 +152,14 @@ source_path[{"as_elb_health_check": metadata}] {
 aws_issue["as_elb_health_check"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_autoscaling_group"
-    resource.properties.target_group_arns
+    count(resource.properties.target_group_arns) != 0
     lower(resource.properties.health_check_type) != "elb"
 }
 
 source_path[{"as_elb_health_check": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_autoscaling_group"
-    resource.properties.target_group_arns
+    count(resource.properties.target_group_arns) != 0
     lower(resource.properties.health_check_type) != "elb"
     metadata := {
         "resource_path": [

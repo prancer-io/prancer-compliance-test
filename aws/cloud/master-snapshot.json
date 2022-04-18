@@ -236,13 +236,22 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_REDSHIFT",
+					"masterSnapshotId": "TEST_REDSHIFT_1",
 					"arn": "arn:aws:redshift:::",
 					"type": "redshift",
 					"collection": "aws_redshift",
 					"listMethod": "describe_clusters",
 					"detailMethods": [
-						"describe_clusters",
+						"describe_clusters"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_REDSHIFT_2",
+					"arn": "arn:aws:redshift:::",
+					"type": "redshift",
+					"collection": "aws_redshift",
+					"listMethod": "describe_cluster_parameter_groups",
+					"detailMethods": [
 						"describe_cluster_parameters"
 					]
 				},
@@ -295,7 +304,7 @@
 					"listMethod": "describe_repositories",
 					"detailMethods": [
 						"describe_repositories",
-						"get_lifecycle_policy",
+						"get_repository_policy",
 						"get_registry_scanning_configuration"
 					]
 				},
@@ -306,16 +315,8 @@
 					"collection": "aws_ecs_01",
 					"listMethod": "list_clusters",
 					"detailMethods": [
-						"describe_clusters"
-					]
-				},
-				{
-					"masterSnapshotId": "TEST_ECS_02",
-					"arn": "arn:aws:ecs:::",
-					"type": "ecs",
-					"collection": "aws_ecs_02",
-					"listMethod": "list_services",
-					"detailMethods": [
+						"describe_clusters",
+						"list_services",
 						"describe_services"
 					]
 				},

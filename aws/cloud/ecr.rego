@@ -101,21 +101,24 @@ default ecr_public_access_disable = true
 
 ecr_public_access_disable = false {
     # lower(resource.Type) == "aws::ecr::repository"
-    statement := input.lifecyclePolicyText.Statement[j]
+    policyText := json.unmarshal(input.policyText)
+    statement := policyText.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
 }
 
 ecr_public_access_disable = false {
     # lower(resource.Type) == "aws::ecr::repository"
-    statement := input.lifecyclePolicyText.Statement[j]
+    policyText := json.unmarshal(input.policyText)
+    statement := policyText.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
 }
 
 ecr_public_access_disable = false {
     # lower(resource.Type) == "aws::ecr::repository"
-    statement := input.lifecyclePolicyText.Statement[j]
+    policyText := json.unmarshal(input.policyText)
+    statement := policyText.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[k] = "*"
 }

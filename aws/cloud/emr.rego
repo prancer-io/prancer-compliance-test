@@ -75,12 +75,14 @@ default emr_s3_encryption = true
 
 emr_s3_encryption = false {
     # lower(resource.Type) == "aws::emr::securityconfiguration"
-    not input.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode
+    SecurityConfiguration := json.unmarshal(input.SecurityConfiguration)
+    not SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode
 }
 
 emr_s3_encryption = false {
     # lower(resource.Type) == "aws::emr::securityconfiguration"
-    count(input.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) == 0
+    SecurityConfiguration := json.unmarshal(input.SecurityConfiguration)
+    count(SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) == 0
 }
 
 emr_s3_encryption_err = "AWS EMR cluster is not configured with CSE CMK for data at rest encryption (Amazon S3 with EMRFS)" {

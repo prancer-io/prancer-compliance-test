@@ -90,6 +90,14 @@ elb_insecure_cipher = false {
     PolicyAttributeDescriptions.AttributeValue == true
 }
 
+elb_insecure_cipher = false {
+    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    PolicyDescriptions := input.PolicyDescriptions[_]
+    PolicyAttributeDescriptions := PolicyDescriptions.PolicyAttributeDescriptions[k]
+    lower(PolicyAttributeDescriptions.AttributeName) == lower(insecure_ciphers[_])
+    lower(PolicyAttributeDescriptions.AttributeValue) == "true"
+}
+
 elb_insecure_cipher_err = "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with insecure ciphers" {
     not elb_insecure_cipher
 }
@@ -124,6 +132,14 @@ elb_insecure_protocol = false {
     PolicyAttributeDescriptions := PolicyDescriptions.PolicyAttributeDescriptions[k]
     lower(PolicyAttributeDescriptions.AttributeName) == lower(insecure_ssl_protocols[_])
     PolicyAttributeDescriptions.AttributeValue == true
+}
+
+elb_insecure_protocol = false {
+    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    PolicyDescriptions := input.PolicyDescriptions[_]
+    PolicyAttributeDescriptions := PolicyDescriptions.PolicyAttributeDescriptions[k]
+    lower(PolicyAttributeDescriptions.AttributeName) == lower(insecure_ssl_protocols[_])
+    lower(PolicyAttributeDescriptions.AttributeValue) == "true"
 }
 
 elb_insecure_protocol_err = "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol" {
@@ -425,23 +441,9 @@ default elb_drop_invalid_header = true
 
 elb_drop_invalid_header = false {
     # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
-    not input.LoadBalancerAttributes
-}
-
-elb_drop_invalid_header = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
-    LoadBalancerAttributes := input.LoadBalancerAttributes[j]
-    AdditionalAttributes := LoadBalancerAttributes.AdditionalAttributes[_]
-    lower(AdditionalAttributes.Key) == "routing.http.drop_invalid_header_fields.enabled"
-    lower(AdditionalAttributes.Value) != "true"
-}
-
-elb_drop_invalid_header = false {
-        # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
-    LoadBalancerAttributes := input.LoadBalancerAttributes[j]
-    AdditionalAttributes := LoadBalancerAttributes.AdditionalAttributes[_]
-    lower(AdditionalAttributes.Key) == "routing.http.drop_invalid_header_fields.enabled"
-    lower(AdditionalAttributes.Value) != true
+    Attribute := input.Attributes[j]
+    lower(Attribute.Key) == "routing.http.drop_invalid_header_fields.enabled"
+    lower(Attribute.Value) != "true"
 }
 
 elb_drop_invalid_header_err = "Ensure that Application Load Balancer drops HTTP headers" {
