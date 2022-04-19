@@ -1237,13 +1237,13 @@ ethereum_ports_metadata := {
 
 default sg_vpc = true
 
-sg_vpc {
+sg_vpc = false {
     SecurityGroups := input.SecurityGroups[_]
     # lower(resource.Type) == "aws::ec2::securitygroup"
     not SecurityGroups.VpcId
 }
 
-sg_vpc {
+sg_vpc = false {
     SecurityGroups := input.SecurityGroups[_]
     # lower(resource.Type) == "aws::ec2::securitygroup"
     not SecurityGroups.VpcId

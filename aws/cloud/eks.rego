@@ -65,11 +65,11 @@ eks_encryption_resources_metadata := {
 # PR-AWS-CLD-EKS-004
 #
 
-default eks_encryption_kms = null
+default eks_encryption_kms = true
 
-eks_encryption_kms {
+eks_encryption_kms = false {
     resource := input.Resources[i]
-    lower(resource.Type) == "aws::eks::cluster"
+    # lower(resource.Type) == "aws::eks::cluster"
     encryptionConfig := input.cluster.encryptionConfig[j]
     count(encryptionConfig.provider.keyArn) == 0
 }
