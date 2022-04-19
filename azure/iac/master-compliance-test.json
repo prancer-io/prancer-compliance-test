@@ -4005,6 +4005,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AZR-ARM-ARC-006",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ARC-006",
+                            "eval": "data.rule.redis_persistence_enabled",
+                            "message": "data.rule.redis_persistence_enabled_err",
+                            "remediationDescription": "In Resource of type 'Microsoft.Cache/redis' make sure properties.redisConfiguration.rdb-backup-enabled exists and value is set to 'true'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_ARC_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Persistence is enabled on Redis Cache to Perform complete system backups",
+                    "description": "Enable Redis persistence. Redis persistence allows you to persist data stored in Redis. You can also take snapshots and back up the data, which you can load in case of a hardware failure. This is a huge advantage over Basic or Standard tier where all the data is stored in memory and there can be potential data loss in case of a failure where Cache nodes are down.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.cache/redis"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AZR-ARM-ARC-007",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"

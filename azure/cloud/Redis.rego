@@ -287,6 +287,58 @@ arc_private_endpoint_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
 }
 
+#
+# PR-AZR-CLD-ARC-006
+
+default redis_persistence_enabled  = null
+
+azure_attribute_absence["redis_persistence_enabled "] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    not resource.properties.redisConfiguration.rdb-backup-enabled
+}
+
+
+azure_issue["redis_persistence_enabled "] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    to_number(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
+}
+
+redis_persistence_enabled {
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    not azure_attribute_absence["redis_persistence_enabled "]
+    not azure_issue["redis_persistence_enabled "]
+}
+
+
+redis_persistence_enabled = false {
+    azure_issue["redis_persistence_enabled "]
+}
+
+redis_persistence_enabled = false {
+    azure_attribute_absence["redis_persistence_enabled "]
+}
+
+redis_persistence_enabled_err = "Azure Redis Cache Persistence is currently not enabled." {
+    azure_issue["redis_persistence_enabled "]
+} else = "Microsoft.Cache/redis property 'redisConfiguration.rdb-backup-enabled' need to be exist. Currently its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["redis_persistence_enabled "]
+}
+
+redis_persistence_enabled_metadata := {
+    "Policy Code": "PR-AZR-CLD-ARC-006",
+    "Type": "Cloud",  
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Ensure Persistence is enabled on Redis Cache to Perform complete system backups",
+    "Policy Description": "Enable Redis persistence. Redis persistence allows you to persist data stored in Redis. You can also take snapshots and back up the data, which you can load in case of a hardware failure. This is a huge advantage over Basic or Standard tier where all the data is stored in memory and there can be potential data loss in case of a failure where Cache nodes are down.",
+    "Resource Type": "microsoft.cache/redis",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
+}
+
 
 #
 # PR-AZR-CLD-ARC-007
@@ -353,6 +405,13 @@ azure_attribute_absence ["redis_cache_firewall_not_allowing_full_inbound_access"
 }
 
 
+azure_attribute_absence["sql_server_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis/firewallrules"
+    not resource.dependsOn
+}
+
+
 azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis/firewallrules"
@@ -371,14 +430,14 @@ azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
     count([c | r := input.resources[_];
-              r.type == "microsoft.cache/redis/firewallrules";
-              contains(r.properties.redis_cache_name, resource.properties.compiletime_identity);
+              lower(r.type) == "microsoft.cache/redis/firewallrules";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               not contains(r.properties.startIP, "0.0.0.0");
               not contains(r.properties.endIP, "0.0.0.0");
               c := 1]) == 0
     count([c | r := input.resources[_];
-              r.type == "microsoft.cache/redis/firewallrules";
-              contains(r.properties.redis_cache_name, concat(".", [resource.type, resource.name]));
+              lower(r.type) == "microsoft.cache/redis/firewallrules";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               not contains(r.properties.startIP, "0.0.0.0");
               not contains(r.properties.endIP, "0.0.0.0");
               c := 1]) == 0
