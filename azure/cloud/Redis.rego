@@ -435,12 +435,6 @@ azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"] {
               not contains(r.properties.startIP, "0.0.0.0");
               not contains(r.properties.endIP, "0.0.0.0");
               c := 1]) == 0
-    count([c | r := input.resources[_];
-              lower(r.type) == "microsoft.cache/redis/firewallrules";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              not contains(r.properties.startIP, "0.0.0.0");
-              not contains(r.properties.endIP, "0.0.0.0");
-              c := 1]) == 0
 }
 
 redis_cache_firewall_not_allowing_full_inbound_access {
