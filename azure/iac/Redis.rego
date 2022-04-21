@@ -323,3 +323,242 @@ arc_private_endpoint_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
 }
+
+#
+# PR-AZR-ARM-ARC-006
+
+default redis_persistence_enabled  = null
+
+azure_attribute_absence["redis_persistence_enabled "] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    not resource.properties.redisConfiguration.rdb-backup-enabled
+}
+
+source_path[{"redis_persistence_enabled ":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.cache/redis"
+    not resource.properties.redisConfiguration.rdb-backup-enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","redisConfiguration","rdb-backup-enabled"]]
+    }
+}
+
+
+azure_issue["redis_persistence_enabled "] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    to_number(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
+}
+
+source_path[{"redis_persistence_enabled ":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.cache/redis"
+    to_number(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","redisConfiguration","rdb-backup-enabled"]]
+    }
+}
+
+redis_persistence_enabled {
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    not azure_attribute_absence["redis_persistence_enabled "]
+    not azure_issue["redis_persistence_enabled "]
+}
+
+
+redis_persistence_enabled = false {
+    azure_issue["redis_persistence_enabled "]
+}
+
+redis_persistence_enabled = false {
+    azure_attribute_absence["redis_persistence_enabled "]
+}
+
+redis_persistence_enabled_err = "Azure Redis Cache Persistence is currently not enabled." {
+    azure_issue["redis_persistence_enabled "]
+} else = "Microsoft.Cache/redis property 'redisConfiguration.rdb-backup-enabled' need to be exist. Currently its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["redis_persistence_enabled "]
+}
+
+redis_persistence_enabled_metadata := {
+    "Policy Code": "PR-AZR-ARM-ARC-006",
+    "Type": "IaC",  
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Persistence is enabled on Redis Cache to Perform complete system backups",
+    "Policy Description": "Enable Redis persistence. Redis persistence allows you to persist data stored in Redis. You can also take snapshots and back up the data, which you can load in case of a hardware failure. This is a huge advantage over Basic or Standard tier where all the data is stored in memory and there can be potential data loss in case of a failure where Cache nodes are down.",
+    "Resource Type": "microsoft.cache/redis",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
+}
+
+#
+# PR-AZR-ARM-ARC-007
+
+default min_tls_version_redis = null
+
+azure_attribute_absence["min_tls_version_redis"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    not resource.properties.minimumTlsVersion
+}
+
+source_path[{"min_tls_version_redis":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.cache/redis"
+    not resource.properties.minimumTlsVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","minimumTlsVersion"]]
+    }
+}
+
+
+azure_issue["min_tls_version_redis"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    to_number(resource.properties.minimumTlsVersion) != 1.2
+}
+
+source_path[{"min_tls_version_redis":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.cache/redis"
+    to_number(resource.properties.minimumTlsVersion) != 1.2
+    metadata:= {
+        "resource_path": [["resources",i,"properties","minimumTlsVersion"]]
+    }
+}
+
+min_tls_version_redis {
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    not azure_attribute_absence["min_tls_version_redis"]
+    not azure_issue["min_tls_version_redis"]
+}
+
+
+min_tls_version_redis = false {
+    azure_issue["min_tls_version_redis"]
+}
+
+min_tls_version_redis = false {
+    azure_attribute_absence["min_tls_version_redis"]
+}
+
+min_tls_version_redis_err = "Azure Redis Cache currently doesn't have latest version of tls configured" {
+    azure_issue["min_tls_version_redis"]
+} else = "Microsoft.Cache/redis property 'minimumTlsVersion' need to be exist. Its missing from the resource. Please set the value to '1.2' after property addition." {
+    azure_attribute_absence["min_tls_version_redis"]
+}
+
+min_tls_version_redis_metadata := {
+    "Policy Code": "PR-AZR-ARM-ARC-007",
+    "Type": "IaC",  
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Azure Redis Cache has latest version of tls configured",
+    "Policy Description": "This policy will identify the Azure Redis Cache which doesn't have the latest version of tls configured and give the alert",
+    "Resource Type": "microsoft.cache/redis",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
+}
+
+
+
+#
+# PR-AZR-ARM-ARC-008
+#
+
+default redis_cache_firewall_not_allowing_full_inbound_access = null
+
+
+azure_attribute_absence ["redis_cache_firewall_not_allowing_full_inbound_access"] {
+    count([c | lower(input.resources[_].type) == "microsoft.cache/redis/firewallrules"; c := 1]) == 0
+}
+
+
+azure_attribute_absence["sql_server_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis/firewallrules"
+    not resource.dependsOn
+}
+
+
+azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis/firewallrules"
+    not resource.properties.startIP
+}
+
+source_path[{"redis_cache_firewall_not_allowing_full_inbound_access":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.cache/redis/firewallrules"
+    not resource.properties.startIP
+    metadata:= {
+        "resource_path": [["resources",i,"properties","startIP"]]
+    }
+}
+
+azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis/firewallrules"
+    not resource.properties.endIP
+}
+
+
+source_path[{"redis_cache_firewall_not_allowing_full_inbound_access":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.cache/redis/firewallrules"
+    not resource.properties.endIP
+    metadata:= {
+        "resource_path": [["resources",i,"properties","endIP"]]
+    }
+}
+
+azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.cache/redis/firewallrules";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              not contains(r.properties.startIP, "0.0.0.0");
+              not contains(r.properties.endIP, "0.0.0.0");
+              c := 1]) == 0
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    not azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"]
+    not azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"]
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access = false {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"]
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access = false {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"]
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access_err = "microsoft.cache/redis/firewallrules resoruce or its property 'startIP' or 'endIP' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_attribute_absence["redis_cache_firewall_not_allowing_full_inbound_access"]
+} else = "Redis Cache firewall rule configuration currently allowing full inbound access to everyone" {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"]
+}
+
+redis_cache_firewall_not_allowing_full_inbound_access_metadata := {
+    "Policy Code": "PR-AZR-ARM-ARC-008",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Redis Cache Firewall rules should not configure to allow full inbound access to everyone",
+    "Policy Description": "Firewalls grant access to redis cache based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with 0.0.0.0 represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
+    "Resource Type": "microsoft.cache/redis",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
+}
