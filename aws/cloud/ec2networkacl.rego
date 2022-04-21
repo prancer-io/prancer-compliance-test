@@ -28,7 +28,7 @@ acl_all_icmp_ipv4 = false {
     lower(Entries.RuleAction) == "allow"
 }
 
-acl_all_icmp_ipv4_err = "AWS Network ACLs with Outbound rule to allow All ICMP IPv4" {
+acl_all_icmp_ipv4_err = "AWS Network ACLs with Inbound rule to allow All ICMP IPv4" {
     not acl_all_icmp_ipv4
 }
 

@@ -6563,7 +6563,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-DMS-001",
                     "masterSnapshotId": [
-                        "TEST_DMS"
+                        "TEST_DMS_01"
                     ],
                     "type": "rego",
                     "rule": "file(database.rego)",
@@ -6592,7 +6592,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-DMS-002",
                     "masterSnapshotId": [
-                        "TEST_DMS"
+                        "TEST_DMS_02"
                     ],
                     "type": "rego",
                     "rule": "file(database.rego)",
