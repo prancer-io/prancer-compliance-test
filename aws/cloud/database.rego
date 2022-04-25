@@ -1225,8 +1225,8 @@ default dms_public_access = true
 
 dms_public_access = false {
     # lower(resource.Type) == "aws::dms::replicationinstance"
-    Endpoints := input.Endpoints[_]
-    Endpoints.PubliclyAccessible == true
+    replication_instances := input.ReplicationInstances[_]
+    replication_instances.PubliclyAccessible == true
 }
 
 dms_public_access_err = "Ensure DMS replication instance is not publicly accessible" {

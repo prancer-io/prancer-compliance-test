@@ -840,14 +840,26 @@ default sg_description_absent = true
 
 sg_description_absent = false {
     # lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := input.SecurityGroups[_].IpPermissions[_]
-    not ingress.Ipv6Ranges.description
+    ipv6_range := input.SecurityGroups[_].IpPermissions[_].Ipv6Ranges[_]
+    not ipv6_range.description
 }
 
 sg_description_absent = false {
     # lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := input.SecurityGroups[_].IpPermissions[_]
-    count(ingress.description) == 0
+    ipv6_range := input.SecurityGroups[_].IpPermissions[_].Ipv6Ranges[_]
+    count(ipv6_range.description) == 0
+}
+
+sg_description_absent = false {
+    # lower(resource.Type) == "aws::ec2::securitygroup"
+    ip_range := input.SecurityGroups[_].IpPermissions[_].IpRanges[_]
+    not ip_range.description
+}
+
+sg_description_absent = false {
+    # lower(resource.Type) == "aws::ec2::securitygroup"
+    ip_range := input.SecurityGroups[_].IpPermissions[_].IpRanges[_]
+    count(ip_range.description) == 0
 }
 
 sg_description_absent_err = "Ensure every Security Group rule contains a description" {
@@ -1237,13 +1249,13 @@ ethereum_ports_metadata := {
 
 default sg_vpc = true
 
-sg_vpc {
+sg_vpc = false {
     SecurityGroups := input.SecurityGroups[_]
     # lower(resource.Type) == "aws::ec2::securitygroup"
     not SecurityGroups.VpcId
 }
 
-sg_vpc {
+sg_vpc = false {
     SecurityGroups := input.SecurityGroups[_]
     # lower(resource.Type) == "aws::ec2::securitygroup"
     not SecurityGroups.VpcId

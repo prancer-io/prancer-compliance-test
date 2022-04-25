@@ -483,13 +483,23 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_DMS",
+					"masterSnapshotId": "TEST_DMS_01",
 					"arn": "arn:aws:dms:::",
 					"type": "dms",
 					"collection": "aws_dms",
 					"listMethod": "describe_endpoints",
 					"detailMethods": [
 						"describe_endpoints"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_DMS_02",
+					"arn": "arn:aws:dms:::",
+					"type": "dms",
+					"collection": "aws_dms",
+					"listMethod": "describe_replication_instances",
+					"detailMethods": [
+						"describe_replication_instances"
 					]
 				},
 				{
