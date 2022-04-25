@@ -3376,7 +3376,7 @@
                     "rule": "file(storage.rego)",
                     "evals": [
                         {
-                            "id": "PR-AWS-TRF-S3-V4-008",
+                            "id": "PR-AWS-TRF-S3-008V4",
                             "eval": "data.rule.s3_public_acl_v4",
                             "message": "data.rule.s3_public_acl_v4_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket' target='_blank'>here</a>",
