@@ -6614,6 +6614,46 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AZR-ARM-MNT-012",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-MNT-012",
+                            "eval": "data.rule.log_redis_cache",
+                            "message": "data.rule.log_redis_cache_err",
+                            "remediationDescription": "Make sure you are following the diagnostic settings ARM template guidelines by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings' target='_blank'>here</a>. This settings should be enabled for redis cache",
+                            "remediationFunction": "PR_AZR_ARM_MNT_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Redis Cache audit logging should be enabled",
+                    "description": "Diagnostic settings for redis cache used to stream resource logs to a Log Analytics workspace. this policy will identify any redis cache which has this diagnostic settings missing or misconfigured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.insights/diagnosticsettings",
+                        "microsoft.cache/redis"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AZR-ARM-SQL-050",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"

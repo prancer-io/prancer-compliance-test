@@ -2864,7 +2864,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AZR-TRF-MNT-009",
+                    "masterTestId": "PR-AZR-TRF-MNT-012",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2872,11 +2872,11 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-MNT-009",
+                            "id": "PR-AZR-TRF-MNT-012",
                             "eval": "data.rule.redis_cache_diagonstic_log_enabled",
                             "message": "data.rule.redis_cache_diagonstic_log_enabled_err",
                             "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, make sure 'log' block exist and 'target_resource_id' contains id of target 'azurerm_redis_cache' resource to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_TRF_MNT_009.py"
+                            "remediationFunction": "PR_AZR_TRF_MNT_012.py"
                         }
                     ],
                     "severity": "Medium",
