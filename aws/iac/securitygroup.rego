@@ -1398,7 +1398,7 @@ aws_issue["bitcoin_ports"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     ingress := resource.Properties.SecurityGroupIngress[j]
-    port := db_ports[_]
+    port := bc_ports[_]
     ingress.CidrIp == "0.0.0.0/0"
     to_number(ingress.FromPort) <= port
     to_number(ingress.ToPort) >= port
@@ -1408,7 +1408,7 @@ source_path[{"bitcoin_ports": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     ingress := resource.Properties.SecurityGroupIngress[j]
-    port := db_ports[_]
+    port := bc_ports[_]
     ingress.CidrIp == "0.0.0.0/0"
     to_number(ingress.FromPort) <= port
     to_number(ingress.ToPort) >= port
