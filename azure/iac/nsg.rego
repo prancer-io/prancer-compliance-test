@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups
 
 iports := [
-    "20", "21", "22", "23", "25", "53", "80", "135", "137", "138", "445", "1270", "1433", "1434", "1521", 
+    "20", "21", "22", "23", "25", "53", "80", "135", "137", "138", "445", "1270", "1521", 
     "3306", "3389", "4333", "5000", "5432", "5500", "5900", "5984", "5985", "5986", "6379", "6380", "9042", "11211",
     "27017", "28015", "29015", "50000"
 ]
@@ -1105,42 +1105,42 @@ inbound_port_25_metadata := {
 #
 # PR-AZR-ARM-NSG-025
 
-default inbound_port_sqlserver = null
+# default inbound_port_sqlserver = null
 
 
-azure_issue["inbound_port_sqlserver"] {
-    to_number(nsg_inbound[_]) == 1433
-}
+# azure_issue["inbound_port_sqlserver"] {
+#     to_number(nsg_inbound[_]) == 1433
+# }
 
 
-azure_issue["inbound_port_sqlserver"] {
-    to_number(nsg_inbound[_]) == 1434
-}
+# azure_issue["inbound_port_sqlserver"] {
+#     to_number(nsg_inbound[_]) == 1434
+# }
 
-inbound_port_sqlserver {
-    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
-    not azure_issue["inbound_port_sqlserver"]
-}
+# inbound_port_sqlserver {
+#     lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+#     not azure_issue["inbound_port_sqlserver"]
+# }
 
-inbound_port_sqlserver = false {
-    azure_issue["inbound_port_sqlserver"]
-}
+# inbound_port_sqlserver = false {
+#     azure_issue["inbound_port_sqlserver"]
+# }
 
-inbound_port_sqlserver_err = "Azure Network Security Group allows SQLServer" {
-    azure_issue["inbound_port_sqlserver"]
-}
+# inbound_port_sqlserver_err = "Azure Network Security Group allows SQLServer" {
+#     azure_issue["inbound_port_sqlserver"]
+# }
 
-inbound_port_sqlserver_metadata := {
-    "Policy Code": "PR-AZR-ARM-NSG-025",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)",
-    "Policy Description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-    "Resource Type": "microsoft.network/networksecuritygroups",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
-}
+# inbound_port_sqlserver_metadata := {
+#     "Policy Code": "PR-AZR-ARM-NSG-025",
+#     "Type": "IaC",
+#     "Product": "AZR",
+#     "Language": "ARM template",
+#     "Policy Title": "Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)",
+#     "Policy Description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+#     "Resource Type": "microsoft.network/networksecuritygroups",
+#     "Policy Help URL": "",
+#     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
+# }
 
 
 #

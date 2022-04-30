@@ -4547,42 +4547,6 @@
                     "description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-NSG-025",
-                    "type": "rego",
-                    "rule": "file(nsg.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-NSG-025",
-                            "eval": "data.rule.inbound_port_sqlserver",
-                            "message": "data.rule.inbound_port_sqlserver_err",
-                            "remediationDescription": "Follow the guideline mentioned <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AZR_CLD_NSG_025.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HITRUST",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Networking"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_231"
-                    ],
-                    "severity": "High",
-                    "title": "Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)",
-                    "description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP Port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-NSG-026",
                     "type": "rego",
                     "rule": "file(nsg.rego)",

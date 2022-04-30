@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule
 
 iports := [
-    "11211", "1270", "135", "137", "138", "1433", "1434", "1521", 
+    "11211", "1270", "135", "137", "138", "1521", 
     "20", "21", "22", "23", "25", "27017", "28015", "29015", "3306", 
     "3389", "4333", "445", "5000", "50000", "53", "5432", "5500", "5900", 
     "5984", "5985", "5986", "6379", "9042", "80", "6380"
@@ -1074,40 +1074,40 @@ inbound_port_25_metadata := {
 # PR-AZR-TRF-NSG-025
 #
 
-default inbound_port_sqlserver = null
+# default inbound_port_sqlserver = null
 
-azure_issue["inbound_port_sqlserver"] {
-    to_number(nsg_inbound[_]) == 1433
-}
+# azure_issue["inbound_port_sqlserver"] {
+#     to_number(nsg_inbound[_]) == 1433
+# }
 
-azure_issue["inbound_port_sqlserver"] {
-    to_number(nsg_inbound[_]) == 1434
-}
+# azure_issue["inbound_port_sqlserver"] {
+#     to_number(nsg_inbound[_]) == 1434
+# }
 
-inbound_port_sqlserver {
-    lower(input.resources[_].type) == "azurerm_network_security_rule"
-    not azure_issue["inbound_port_sqlserver"]
-}
+# inbound_port_sqlserver {
+#     lower(input.resources[_].type) == "azurerm_network_security_rule"
+#     not azure_issue["inbound_port_sqlserver"]
+# }
 
-inbound_port_sqlserver = false {
-    azure_issue["inbound_port_sqlserver"]
-}
+# inbound_port_sqlserver = false {
+#     azure_issue["inbound_port_sqlserver"]
+# }
 
-inbound_port_sqlserver_err = "Azure Network Security Group allows SQLServer" {
-    azure_issue["inbound_port_sqlserver"]
-}
+# inbound_port_sqlserver_err = "Azure Network Security Group allows SQLServer" {
+#     azure_issue["inbound_port_sqlserver"]
+# }
 
-inbound_port_sqlserver_metadata := {
-    "Policy Code": "PR-AZR-TRF-NSG-025",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows SqlServer (TCP Port 1433)",
-    "Policy Description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-    "Resource Type": "azurerm_network_security_rule",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
-}
+# inbound_port_sqlserver_metadata := {
+#     "Policy Code": "PR-AZR-TRF-NSG-025",
+#     "Type": "IaC",
+#     "Product": "AZR",
+#     "Language": "Terraform",
+#     "Policy Title": "Azure Network Security Group allows SqlServer (TCP Port 1433)",
+#     "Policy Description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+#     "Resource Type": "azurerm_network_security_rule",
+#     "Policy Help URL": "",
+#     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+# }
 
 #
 # PR-AZR-TRF-NSG-026
