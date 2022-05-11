@@ -348,13 +348,13 @@ source_path[{"redis_persistence_enabled ":metadata}] {
 azure_issue["redis_persistence_enabled "] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
-    to_number(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
+    lower(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
 }
 
 source_path[{"redis_persistence_enabled ":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.cache/redis"
-    to_number(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
+    lower(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
     metadata:= {
         "resource_path": [["resources",i,"properties","redisConfiguration","rdb-backup-enabled"]]
     }

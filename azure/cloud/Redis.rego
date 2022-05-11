@@ -302,7 +302,7 @@ azure_attribute_absence["redis_persistence_enabled "] {
 azure_issue["redis_persistence_enabled "] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
-    to_number(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
+    lower(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
 }
 
 redis_persistence_enabled {
