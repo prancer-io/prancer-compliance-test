@@ -3332,6 +3332,45 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AZR-ARM-NSG-025",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-NSG-025",
+                            "eval": "data.rule.inbound_port_sqlserver",
+                            "message": "data.rule.inbound_port_sqlserver_err",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_ARM_NSG_025.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)",
+                    "description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP Port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F<br>As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AZR-ARM-NSG-026",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
