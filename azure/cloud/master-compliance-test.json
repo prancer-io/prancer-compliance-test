@@ -2170,7 +2170,7 @@
                             "id": "PR-AZR-CLD-SQL-049",
                             "eval": "data.rule.sql_logical_server_login",
                             "message": "data.rule.sql_logical_server_login_err",
-                            "remediationDescription": "In Azure Portal<br>1. Go to SQL Servers<br>2. For each SQL Server<br>3. Select Active Directory admin<br>4. Press the Set Admin at the top of the page<br>5. Select the active directory user you want to set as AD Admin for the SQL server.<br>6. Press the Remove admin if not needed.<br><br>Default Value: By default no AD Administrator is set for SQL server<br><br>For more information: <a href='https://docs.microsoft.com/en-us/azure/sql-database/sql-database-manage-logins' target='_blank'>https://docs.microsoft.com/en-us/azure/sql-database/sql-database-manage-logins</a>",
+                            "remediationDescription": "In Azure Portal<br>1. Go to SQL Servers<br>2. For each SQL Server<br>3. Select Active Directory admin<br>4. Press the Set Admin at the top of the page<br>5. Select the active directory user you want to set as AD Admin for the SQL server.<br>6. Press the Remove admin if not needed.<br><br>Default Value: By default no AD Administrator is set for SQL server<br><br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/administrators' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_CLD_SQL_049.py"
                         }
                     ],
@@ -2206,7 +2206,7 @@
                             "id": "PR-AZR-CLD-SQL-069",
                             "eval": "data.rule.sql_server_latest_tls_configured",
                             "message": "data.rule.sql_server_latest_tls_configured_err",
-                            "remediationDescription": "Follow the guideline mentioned <a href='https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/minimal-tls-version-configure' target='_blank'>here</a>",
+                            "remediationDescription": "Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_CLD_SQL_069.py"
                         }
                     ],
@@ -2237,7 +2237,7 @@
                             "id": "PR-AZR-CLD-SQL-047",
                             "eval": "data.rule.sql_public_access",
                             "message": "data.rule.sql_public_access_err",
-                            "remediationDescription": "Follow the guideline mentioned <a href='https://docs.microsoft.com/en-us/azure/azure-sql/database/connectivity-settings' target='_blank'>here</a>",
+                            "remediationDescription": "Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_CLD_SQL_047.py"
                         }
                     ],
