@@ -596,7 +596,7 @@ storage_account_diagonstic_log_enabled_metadata := {
 
 
 #
-# PR-AZR-TRF-MNT-009
+# PR-AZR-TRF-MNT-012
 #
 default redis_cache_diagonstic_log_enabled = null
 
@@ -652,12 +652,12 @@ redis_cache_diagonstic_log_enabled_err = "azurerm_redis_cache's azurerm_monitor_
 }
 
 redis_cache_diagonstic_log_enabled_metadata := {
-    "Policy Code": "PR-AZR-TRF-MNT-009",
+    "Policy Code": "PR-AZR-TRF-MNT-012",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Redis Cache diagnostic logs should be enabled",
-    "Policy Description": "Diagnostic settings for redis cache used to stream resource logs to a Log Analytics workspace. this policy will identify any storage account which has this diagnostic settings missing or misconfigured.",
+    "Policy Description": "Diagnostic settings for redis cache used to stream resource logs to a Log Analytics workspace. this policy will identify any redis cache which has this diagnostic settings missing or misconfigured.",
     "Resource Type": "azurerm_redis_cache",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache"

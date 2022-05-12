@@ -800,7 +800,7 @@ inbound_port_445_err = "Azure Network Security Group allows CIFS" {
 
 
 inbound_port_445_metadata := {
-    "Policy Code": "PR-AZR-CLD-NSG-06",
+    "Policy Code": "PR-AZR-CLD-NSG-016",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -1104,6 +1104,7 @@ inbound_port_25_metadata := {
 
 #
 # PR-AZR-CLD-NSG-025
+#
 
 default inbound_port_sqlserver = null
 

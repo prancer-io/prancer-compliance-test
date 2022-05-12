@@ -396,3 +396,52 @@ log_table_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings"
 }
+
+#
+# PR-AZR-ARM-MNT-012
+#
+
+default log_redis_cache = null
+
+azure_attribute_absence ["log_redis_cache"] {
+    count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1]) == 0
+}
+
+azure_attribute_absence["log_redis_cache"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.cache/redis")
+}
+
+azure_attribute_absence["log_redis_cache"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not resource.properties.logs
+}
+
+log_redis_cache {
+    lower(input.resources[_].type) == "microsoft.cache/redis"
+    not azure_attribute_absence["log_redis_cache"]
+}
+
+log_redis_cache = false {
+	lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_attribute_absence["log_redis_cache"]
+}
+
+log_redis_cache_err = "Redis Cache diagnostics logging is currently not enabled" {
+	lower(input.resources[_].type) == "microsoft.cache/redis"
+	azure_attribute_absence["log_redis_cache"]
+}
+
+log_redis_cache_metadata := {
+    "Policy Code": "PR-AZR-ARM-MNT-012",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Redis Cache audit logging should be enabled",
+    "Policy Description": "Diagnostic settings for redis cache used to stream resource logs to a Log Analytics workspace. this policy will identify any redis cache which has this diagnostic settings missing or misconfigured.",
+    "Resource Type": "microsoft.cache/redis",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings"
+}

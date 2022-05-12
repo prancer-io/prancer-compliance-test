@@ -800,7 +800,7 @@ inbound_port_445_err = "Azure Network Security Group allows CIFS" {
 
 
 inbound_port_445_metadata := {
-    "Policy Code": "PR-AZR-ARM-NSG-06",
+    "Policy Code": "PR-AZR-ARM-NSG-016",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
