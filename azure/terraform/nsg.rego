@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule
 
 iports := [
-    "11211", "1270", "135", "137", "138", "1521", 
+    "11211", "1270", "135", "137", "138", "1433", "1434", "1521", 
     "20", "21", "22", "23", "25", "27017", "28015", "29015", "3306", 
     "3389", "4333", "445", "5000", "50000", "53", "5432", "5500", "5900", 
     "5984", "5985", "5986", "6379", "9042", "80", "6380"
@@ -16,7 +16,27 @@ nsg_inbound[port] {
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
-    resource.properties.destination_address_prefix == "*"
+    resource.properties.source_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
+nsg_inbound[port] {
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.source_address_prefix) == "internet"
+    resource.properties.destination_port_range == "*"
+}
+
+nsg_inbound[port] {
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.source_address_prefix) == "any"
     resource.properties.destination_port_range == "*"
 }
 
@@ -27,7 +47,27 @@ nsg_inbound[port] {
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
-    resource.properties.destination_address_prefix == "*"
+    resource.properties.source_address_prefix == "*"
+    to_number(resource.properties.destination_port_range) == to_number(port)
+}
+
+nsg_inbound[port] {
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.source_address_prefix) == "internet"
+    to_number(resource.properties.destination_port_range) == to_number(port)
+}
+
+nsg_inbound[port] {
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.source_address_prefix) == "any"
     to_number(resource.properties.destination_port_range) == to_number(port)
 }
 
@@ -38,7 +78,33 @@ nsg_inbound[port] {
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
-    resource.properties.destination_address_prefix == "*"
+    resource.properties.source_address_prefix == "*"
+    contains(resource.properties.destination_port_range, "-")
+    port_range := split(resource.properties.destination_port_range, "-")
+    to_number(port_range[0]) <= to_number(port)
+    to_number(port_range[1]) >= to_number(port)
+}
+
+nsg_inbound[port] {
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.source_address_prefix) == "internet"
+    contains(resource.properties.destination_port_range, "-")
+    port_range := split(resource.properties.destination_port_range, "-")
+    to_number(port_range[0]) <= to_number(port)
+    to_number(port_range[1]) >= to_number(port)
+}
+
+nsg_inbound[port] {
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.source_address_prefix) == "any"
     contains(resource.properties.destination_port_range, "-")
     port_range := split(resource.properties.destination_port_range, "-")
     to_number(port_range[0]) <= to_number(port)
@@ -49,10 +115,31 @@ nsg_inbound[port] {
 nsg_inbound[port] {
     resource := input.resources[_]
     port := iports[_]
+    lower(resource.type) == "azurerm_network_sec "*"
+    to_number(resource.properties.destination_pourity_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    resource.properties.source_address_prefix == "*"
+    to_number(resource.properties.destination_port_ranges[_]) == to_number(port)
+}
+
+nsg_inbound[port] {
+    resource := input.resources[_]
+    port := iports[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
-    resource.properties.destination_address_prefix == "*"
+    lower(resource.properties.source_address_prefix) == "internet"
+    to_number(resource.properties.destination_port_ranges[_]) == to_number(port)
+}
+
+nsg_inbound[port] {
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.source_address_prefix) == "any"
     to_number(resource.properties.destination_port_ranges[_]) == to_number(port)
 }
 
@@ -63,7 +150,31 @@ nsg_inbound[port] {
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
-    resource.properties.destination_address_prefix == "*"
+    resource.properties.source_address_prefix == "*"
+    port_range := split(resource.properties.destination_port_ranges[_], "-")
+    to_number(port_range[0]) <= to_number(port)
+    to_number(port_range[1]) >= to_number(port)
+}
+
+nsg_inbound[port] {
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.source_address_prefix) == "internet"
+    port_range := split(resource.properties.destination_port_ranges[_], "-")
+    to_number(port_range[0]) <= to_number(port)
+    to_number(port_range[1]) >= to_number(port)
+}
+
+nsg_inbound[port] {
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.source_address_prefix) == "any"
     port_range := split(resource.properties.destination_port_ranges[_], "-")
     to_number(port_range[0]) <= to_number(port)
     to_number(port_range[1]) >= to_number(port)
@@ -81,7 +192,27 @@ azure_issue["nsg_in_tcp_all_src"] {
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
     lower(resource.properties.protocol) == "tcp"
-    resource.properties.destination_address_prefix == "*"
+    resource.properties.source_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_tcp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "tcp"
+    lower(resource.properties.source_address_prefix) == "internet"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_tcp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "tcp"
+    lower(resource.properties.source_address_prefix) == "any"
     resource.properties.destination_port_range == "*"
 }
 
@@ -91,7 +222,27 @@ azure_issue["nsg_in_tcp_all_src"] {
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
     lower(resource.properties.protocol) == "*"
-    resource.properties.destination_address_prefix == "*"
+    resource.properties.source_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_tcp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "*"
+    lower(resource.properties.source_address_prefix) == "internet"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_tcp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "*"
+    lower(resource.properties.source_address_prefix) == "any"
     resource.properties.destination_port_range == "*"
 }
 
@@ -131,8 +282,28 @@ azure_issue["nsg_in_udp_all_src"] {
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
-    lower(resource.properties.protocol) == "UDP"
-    resource.properties.destination_address_prefix == "*"
+    lower(resource.properties.protocol) == "udp"
+    resource.properties.source_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_udp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "udp"
+    lower(resource.properties.source_address_prefix) == "internet"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_udp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "udp"
+    lower(resource.properties.source_address_prefix) == "any"
     resource.properties.destination_port_range == "*"
 }
 
@@ -142,7 +313,27 @@ azure_issue["nsg_in_udp_all_src"] {
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
     lower(resource.properties.protocol) == "*"
-    resource.properties.destination_address_prefix == "*"
+    resource.properties.source_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_udp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "*"
+    lower(resource.properties.source_address_prefix) == "internet"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_udp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "*"
+    lower(resource.properties.source_address_prefix) == "any"
     resource.properties.destination_port_range == "*"
 }
 
@@ -184,7 +375,16 @@ azure_issue["nsg_in_tcp_all"] {
     lower(resource.properties.direction) == "inbound"
     lower(resource.properties.protocol) == "tcp"
     resource.properties.source_address_prefix == "*"
-    resource.properties.destination_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_tcp_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "tcp"
+    lower(resource.properties.source_address_prefix) == "internet"
     resource.properties.destination_port_range == "*"
 }
 
@@ -195,9 +395,19 @@ azure_issue["nsg_in_tcp_all"] {
     lower(resource.properties.direction) == "inbound"
     lower(resource.properties.protocol) == "*"
     resource.properties.source_address_prefix == "*"
-    resource.properties.destination_address_prefix == "*"
     resource.properties.destination_port_range == "*"
 }
+
+azure_issue["nsg_in_tcp_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "*"
+    lower(resource.properties.source_address_prefix) == "internet"
+    resource.properties.destination_port_range == "*"
+}
+
 
 nsg_in_tcp_all {
     lower(input.resources[_].type) == "azurerm_network_security_rule"
@@ -237,7 +447,6 @@ azure_issue["nsg_in_udp_all"] {
     lower(resource.properties.direction) == "inbound"
     lower(resource.properties.protocol) == "udp"
     lower(resource.properties.source_address_prefix) == "internet"
-    resource.properties.destination_address_prefix == "*"
     resource.properties.destination_port_range == "*"
 }
 
@@ -248,7 +457,6 @@ azure_issue["nsg_in_udp_all"] {
     lower(resource.properties.direction) == "inbound"
     lower(resource.properties.protocol) == "*"
     lower(resource.properties.source_address_prefix) == "internet"
-    resource.properties.destination_address_prefix == "*"
     resource.properties.destination_port_range == "*"
 }
 
@@ -288,8 +496,88 @@ azure_issue["nsg_in_all"] {
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "tcp"
+    resource.properties.source_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "udp"
+    resource.properties.source_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
     lower(resource.properties.protocol) == "*"
-    resource.properties.destination_address_prefix == "*"
+    resource.properties.source_address_prefix == "*"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "tcp"
+    lower(resource.properties.source_address_prefix) == "internet"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "udp"
+    lower(resource.properties.source_address_prefix) == "internet"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "*"
+    lower(resource.properties.source_address_prefix) == "internet"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "tcp"
+    lower(resource.properties.source_address_prefix) == "any"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "udp"
+    lower(resource.properties.source_address_prefix) == "any"
+    resource.properties.destination_port_range == "*"
+}
+
+azure_issue["nsg_in_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "*"
+    lower(resource.properties.source_address_prefix) == "any"
     resource.properties.destination_port_range == "*"
 }
 
@@ -306,38 +594,8 @@ nsg_in_all_err = "Azure NSG having inbound rule overly permissive to all traffic
     azure_issue["nsg_in_all"]
 }
 
-#
-# PR-AZR-TRF-NSG-006
-#
-
-default nsg_in_all_src = null
-
-azure_issue["nsg_in_all_src"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_network_security_rule"
-    lower(resource.properties.access) == "allow"
-    lower(resource.properties.direction) == "inbound"
-    lower(resource.properties.protocol) == "*"
-    resource.properties.source_address_prefix == "*"
-    resource.properties.destination_address_prefix == "*"
-    resource.properties.destination_port_range == "*"
-}
-
-nsg_in_all_src {
-    lower(input.resources[_].type) == "azurerm_network_security_rule"
-    not azure_issue["nsg_in_all_src"]
-}
-
-nsg_in_all_src = false {
-    azure_issue["nsg_in_all_src"]
-}
-
-nsg_in_all_src_err = "Azure NSG having inbound rule overly permissive to allow all traffic from any source on any protocol" {
-    azure_issue["nsg_in_all_src"]
-}
-
-nsg_in_all_src_metadata := {
-    "Policy Code": "PR-AZR-TRF-NSG-006",
+nsg_in_all_metadata := {
+    "Policy Code": "PR-AZR-TRF-NSG-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -347,6 +605,48 @@ nsg_in_all_src_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
 }
+
+# #
+# # PR-AZR-TRF-NSG-006
+# #
+
+# default nsg_in_all_src = null
+
+# azure_issue["nsg_in_all_src"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_network_security_rule"
+#     lower(resource.properties.access) == "allow"
+#     lower(resource.properties.direction) == "inbound"
+#     lower(resource.properties.protocol) == "*"
+#     resource.properties.source_address_prefix == "*"
+#     resource.properties.destination_address_prefix == "*"
+#     resource.properties.destination_port_range == "*"
+# }
+
+# nsg_in_all_src {
+#     lower(input.resources[_].type) == "azurerm_network_security_rule"
+#     not azure_issue["nsg_in_all_src"]
+# }
+
+# nsg_in_all_src = false {
+#     azure_issue["nsg_in_all_src"]
+# }
+
+# nsg_in_all_src_err = "Azure NSG having inbound rule overly permissive to allow all traffic from any source on any protocol" {
+#     azure_issue["nsg_in_all_src"]
+# }
+
+# nsg_in_all_src_metadata := {
+#     "Policy Code": "PR-AZR-TRF-NSG-006",
+#     "Type": "IaC",
+#     "Product": "AZR",
+#     "Language": "Terraform",
+#     "Policy Title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on any protocol",
+#     "Policy Description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on any protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
+#     "Resource Type": "azurerm_network_security_rule",
+#     "Policy Help URL": "",
+#     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+# }
 
 #
 # PR-AZR-TRF-NSG-007
@@ -410,8 +710,44 @@ azure_issue["nsg_allow_icmp"] {
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
-    lower(resource.properties.protocol) == "*"
+    lower(resource.properties.protocol) == "icmp"
+    lower(resource.properties.source_address_prefix) == "internet"
+}
+
+azure_issue["nsg_allow_icmp"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    lower(resource.properties.protocol) == "icmp"
+    lower(resource.properties.source_address_prefix) == "any"
+}
+
+azure_issue["nsg_allow_icmp"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    resource.properties.protocol == "*"
     resource.properties.source_address_prefix == "*"
+}
+
+azure_issue["nsg_allow_icmp"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    resource.properties.protocol == "*"
+    lower(resource.properties.source_address_prefix) == "internet"
+}
+
+azure_issue["nsg_allow_icmp"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "inbound"
+    resource.properties.protocol == "*"
+    lower(resource.properties.source_address_prefix) == "any"
 }
 
 nsg_allow_icmp {
@@ -510,8 +846,8 @@ inbound_insecure_port_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group (NSG) allows SSH traffic from internet on port 22",
-    "Policy Description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
+    "Policy Title": "Internet connectivity via tcp over insecure port should be prevented",
+    "Policy Description": "Identify network traffic coming from internet which is plain text FTP, Telnet or HTTP from Internet.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -702,8 +1038,8 @@ inbound_port_dbs_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows Windows SMB (TCP Port 445)",
-    "Policy Description": "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Publicly should not expose DB Ports",
+    "Policy Description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -812,11 +1148,54 @@ inbound_port_445_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows FTP-Data (TCP Port 20)",
-    "Policy Description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows CIFS (UDP Port 445)",
+    "Policy Description": "This policy detects any NSG rule that allows CIFS traffic on UDP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict CIFS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+}
+
+#
+# PR-AZR-TRF-NSG-017
+#
+
+default inbound_insecure_omi_port = null
+
+azure_issue["inbound_insecure_omi_port"] {
+    to_number(nsg_inbound[_]) == 5985
+}
+
+azure_issue["inbound_insecure_omi_port"] {
+    to_number(nsg_inbound[_]) == 5986
+}
+
+azure_issue["inbound_insecure_omi_port"] {
+    to_number(nsg_inbound[_]) == 1270
+}
+
+inbound_insecure_omi_port {
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
+    not azure_issue["inbound_insecure_omi_port"]
+}
+
+inbound_insecure_omi_port = false {
+    azure_issue["inbound_insecure_omi_port"]
+}
+
+inbound_insecure_omi_port_err = "Azure Network Security Group (NSG) currently not protecting OMIGOD attack from internet" {
+    azure_issue["inbound_insecure_omi_port"]
+}
+
+inbound_insecure_omi_port_metadata := {
+    "Policy Code": "PR-AZR-TRF-NSG-017",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Network Security Group (NSG) should protect OMIGOD attack from internet",
+    "Policy Description": "Blocking OMI port 5985, 5986, 1270 will protect vnet/subnet/vms from OMIGOD attacks from internet.",
+    "Resource Type": "azurerm_network_security_rule",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #
@@ -882,8 +1261,8 @@ inbound_port_20_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows MySQL (TCP Port 3306)",
-    "Policy Description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows FTP-Data (TCP Port 20)",
+    "Policy Description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -952,8 +1331,8 @@ inbound_port_3306_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows NetBIOS (UDP Port 138)",
-    "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows MySQL (TCP Port 3306)",
+    "Policy Description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -992,8 +1371,8 @@ inbound_port_netbios_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows PostgreSQL (TCP Port 5432)",
-    "Policy Description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows NetBIOS (UDP Port 137 and 138)",
+    "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 and 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -1027,8 +1406,8 @@ inbound_port_5432_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows SMTP (TCP Port 25)",
-    "Policy Description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows PostgreSQL (TCP Port 5432)",
+    "Policy Description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -1062,8 +1441,8 @@ inbound_port_25_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows SQLServer (UDP Port 1434)",
-    "Policy Description": "This policy detects any NSG rule that allows SQLServer traffic on UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows SMTP (TCP Port 25)",
+    "Policy Description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -1074,40 +1453,40 @@ inbound_port_25_metadata := {
 # PR-AZR-TRF-NSG-025
 #
 
-# default inbound_port_sqlserver = null
+default inbound_port_sqlserver = null
 
-# azure_issue["inbound_port_sqlserver"] {
-#     to_number(nsg_inbound[_]) == 1433
-# }
+azure_issue["inbound_port_sqlserver"] {
+    to_number(nsg_inbound[_]) == 1433
+}
 
-# azure_issue["inbound_port_sqlserver"] {
-#     to_number(nsg_inbound[_]) == 1434
-# }
+azure_issue["inbound_port_sqlserver"] {
+    to_number(nsg_inbound[_]) == 1434
+}
 
-# inbound_port_sqlserver {
-#     lower(input.resources[_].type) == "azurerm_network_security_rule"
-#     not azure_issue["inbound_port_sqlserver"]
-# }
+inbound_port_sqlserver {
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
+    not azure_issue["inbound_port_sqlserver"]
+}
 
-# inbound_port_sqlserver = false {
-#     azure_issue["inbound_port_sqlserver"]
-# }
+inbound_port_sqlserver = false {
+    azure_issue["inbound_port_sqlserver"]
+}
 
-# inbound_port_sqlserver_err = "Azure Network Security Group allows SQLServer" {
-#     azure_issue["inbound_port_sqlserver"]
-# }
+inbound_port_sqlserver_err = "Azure Network Security Group allows SQLServer" {
+    azure_issue["inbound_port_sqlserver"]
+}
 
-# inbound_port_sqlserver_metadata := {
-#     "Policy Code": "PR-AZR-TRF-NSG-025",
-#     "Type": "IaC",
-#     "Product": "AZR",
-#     "Language": "Terraform",
-#     "Policy Title": "Azure Network Security Group allows SqlServer (TCP Port 1433)",
-#     "Policy Description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-#     "Resource Type": "azurerm_network_security_rule",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
-# }
+inbound_port_sqlserver_metadata := {
+    "Policy Code": "PR-AZR-TRF-NSG-025",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)",
+    "Policy Description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Resource Type": "azurerm_network_security_rule",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+}
 
 #
 # PR-AZR-TRF-NSG-026
@@ -1253,7 +1632,7 @@ inbound_port_135_metadata := {
 
 oports := ["8332", "8333", "8545", "30303"]
 
-# allowed in all
+# allowed out all
 nsg_outbound[port] {
     port := oports[_]
     resource := input.resources[_]
@@ -1264,7 +1643,27 @@ nsg_outbound[port] {
     resource.properties.destination_port_range == "*"
 }
 
-# allowed in port
+nsg_outbound[port] {
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "Outbound"
+    lower(resource.properties.destination_address_prefix) == "internet"
+    resource.properties.destination_port_range == "*"
+}
+
+nsg_outbound[port] {
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "Outbound"
+    lower(resource.properties.destination_address_prefix) == "any"
+    resource.properties.destination_port_range == "*"
+}
+
+# allowed out port
 nsg_outbound[port] {
     port := oports[_]
     resource := input.resources[_]
@@ -1275,7 +1674,27 @@ nsg_outbound[port] {
     to_number(resource.properties.destination_port_range) == to_number(port)
 }
 
-# allowed in range
+nsg_outbound[port] {
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "Outbound"
+    lower(resource.properties.destination_address_prefix) == "internet"
+    to_number(resource.properties.destination_port_range) == to_number(port)
+}
+
+nsg_outbound[port] {
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "Outbound"
+    lower(resource.properties.destination_address_prefix) == "any"
+    to_number(resource.properties.destination_port_range) == to_number(port)
+}
+
+# allowed out range
 nsg_outbound[port] {
     port := oports[_]
     resource := input.resources[_]
@@ -1289,7 +1708,33 @@ nsg_outbound[port] {
     to_number(port_range[1]) >= to_number(port)
 }
 
-# allowed in list
+nsg_outbound[port] {
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "Outbound"
+    lower(resource.properties.destination_address_prefix) == "internet"
+    contains(resource.properties.destination_port_range, "-")
+    port_range := split(resource.properties.destination_port_range, "-")
+    to_number(port_range[0]) <= to_number(port)
+    to_number(port_range[1]) >= to_number(port)
+}
+
+nsg_outbound[port] {
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "Outbound"
+    lower(resource.properties.destination_address_prefix) == "any"
+    contains(resource.properties.destination_port_range, "-")
+    port_range := split(resource.properties.destination_port_range, "-")
+    to_number(port_range[0]) <= to_number(port)
+    to_number(port_range[1]) >= to_number(port)
+}
+
+# allowed out list
 nsg_outbound[port] {
     port := oports[_]
     resource := input.resources[_]
@@ -1301,7 +1746,29 @@ nsg_outbound[port] {
     to_number(resource.properties.destination_port_ranges[_]) == to_number(port)
 }
 
-# allowed in list range
+nsg_outbound[port] {
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    rules := input.properties.securityRules[_]
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "Outbound"
+    lower(resource.properties.destination_address_prefix) == "internet"
+    to_number(resource.properties.destination_port_ranges[_]) == to_number(port)
+}
+
+nsg_outbound[port] {
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    rules := input.properties.securityRules[_]
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "Outbound"
+    lower(resource.properties.destination_address_prefix) == "any"
+    to_number(resource.properties.destination_port_ranges[_]) == to_number(port)
+}
+
+# allowed out list range
 nsg_outbound[port] {
     port := oports[_]
     resource := input.resources[_]
@@ -1309,6 +1776,30 @@ nsg_outbound[port] {
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "Outbound"
     resource.properties.destination_address_prefix == "*"
+    port_range := split(resource.properties.destination_port_ranges[_], "-")
+    to_number(port_range[0]) <= to_number(port)
+    to_number(port_range[1]) >= to_number(port)
+}
+
+nsg_outbound[port] {
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "Outbound"
+    lower(resource.properties.destination_address_prefix) == "internet"
+    port_range := split(resource.properties.destination_port_ranges[_], "-")
+    to_number(port_range[0]) <= to_number(port)
+    to_number(port_range[1]) >= to_number(port)
+}
+
+nsg_outbound[port] {
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
+    lower(resource.properties.access) == "allow"
+    lower(resource.properties.direction) == "Outbound"
+    lower(resource.properties.destination_address_prefix) == "any"
     port_range := split(resource.properties.destination_port_ranges[_], "-")
     to_number(port_range[0]) <= to_number(port)
     to_number(port_range[1]) >= to_number(port)
@@ -1430,48 +1921,4 @@ outbound_port_ethereum_metadata := {
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
-}
-
-
-#
-# PR-AZR-TRF-NSG-017
-#
-
-default inbound_insecure_omi_port = null
-
-azure_issue["inbound_insecure_omi_port"] {
-    to_number(nsg_inbound[_]) == 5985
-}
-
-azure_issue["inbound_insecure_omi_port"] {
-    to_number(nsg_inbound[_]) == 5986
-}
-
-azure_issue["inbound_insecure_omi_port"] {
-    to_number(nsg_inbound[_]) == 1270
-}
-
-inbound_insecure_omi_port {
-    lower(input.resources[_].type) == "azurerm_network_security_rule"
-    not azure_issue["inbound_insecure_omi_port"]
-}
-
-inbound_insecure_omi_port = false {
-    azure_issue["inbound_insecure_omi_port"]
-}
-
-inbound_insecure_omi_port_err = "Azure Network Security Group (NSG) currently not protecting OMIGOD attack from internet" {
-    azure_issue["inbound_insecure_omi_port"]
-}
-
-inbound_insecure_omi_port_metadata := {
-    "Policy Code": "PR-AZR-TRF-NSG-017",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group (NSG) should protect OMIGOD attack from internet",
-    "Policy Description": "Blocking OMI port 5985, 5986, 1270 will protect vnet/subnet/vms from OMIGOD attacks from internet.",
-    "Resource Type": "azurerm_network_security_rule",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }

@@ -4142,45 +4142,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AZR-TRF-NSG-006",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(nsg.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-TRF-NSG-006",
-                            "eval": "data.rule.nsg_in_all_src",
-                            "message": "data.rule.nsg_in_all_src_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_TRF_NSG_006.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source on any protocol",
-                    "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HITRUST",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "azurerm_network_security_rule"
-                    ]
-                },
-                {
                     "masterTestId": "PR-AZR-TRF-NSG-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -4314,7 +4275,7 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "Internet connectivity via tcp over insecure port",
+                    "title": "Internet connectivity via tcp over insecure port should be prevented",
                     "description": "Identify network traffic coming from internet which is plain text FTP, Telnet or HTTP from Internet.",
                     "tags": [
                         {
@@ -4740,8 +4701,8 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "Azure Network Security Group allows NetBIOS (UDP Port 138)",
-                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "title": "Azure Network Security Group allows NetBIOS (UDP Port 137 and 138)",
+                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 and 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4820,6 +4781,45 @@
                     "severity": "High",
                     "title": "Azure Network Security Group allows SMTP (TCP Port 25)",
                     "description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-NSG-025",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-NSG-025",
+                            "eval": "data.rule.inbound_port_sqlserver",
+                            "message": "data.rule.inbound_port_sqlserver_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_TRF_NSG_025.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Network Security Group allows SqlServer (TCP Port 1433)",
+                    "description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
