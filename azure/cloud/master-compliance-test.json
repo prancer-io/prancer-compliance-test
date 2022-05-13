@@ -3902,42 +3902,6 @@
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on any protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-NSG-006",
-                    "type": "rego",
-                    "rule": "file(nsg.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-NSG-006",
-                            "eval": "data.rule.nsg_in_all_src",
-                            "message": "data.rule.nsg_in_all_src_err",
-                            "remediationDescription": "Follow the guideline mentioned <a href='https://docs.microsoft.com/en-us/azure/security/fundamentals/network-overview' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AZR_CLD_NSG_006.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HITRUST",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Networking"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_231"
-                    ],
-                    "severity": "High",
-                    "title": "Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to allow all traffic from any source on any protocol",
-                    "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports."
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-NSG-007",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
