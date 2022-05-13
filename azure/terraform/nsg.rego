@@ -606,47 +606,6 @@ nsg_in_all_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
 }
 
-# #
-# # PR-AZR-TRF-NSG-006
-# #
-
-# default nsg_in_all_src = null
-
-# azure_issue["nsg_in_all_src"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "azurerm_network_security_rule"
-#     lower(resource.properties.access) == "allow"
-#     lower(resource.properties.direction) == "inbound"
-#     lower(resource.properties.protocol) == "*"
-#     resource.properties.source_address_prefix == "*"
-#     resource.properties.destination_address_prefix == "*"
-#     resource.properties.destination_port_range == "*"
-# }
-
-# nsg_in_all_src {
-#     lower(input.resources[_].type) == "azurerm_network_security_rule"
-#     not azure_issue["nsg_in_all_src"]
-# }
-
-# nsg_in_all_src = false {
-#     azure_issue["nsg_in_all_src"]
-# }
-
-# nsg_in_all_src_err = "Azure NSG having inbound rule overly permissive to allow all traffic from any source on any protocol" {
-#     azure_issue["nsg_in_all_src"]
-# }
-
-# nsg_in_all_src_metadata := {
-#     "Policy Code": "PR-AZR-TRF-NSG-006",
-#     "Type": "IaC",
-#     "Product": "AZR",
-#     "Language": "Terraform",
-#     "Policy Title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on any protocol",
-#     "Policy Description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on any protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
-#     "Resource Type": "azurerm_network_security_rule",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
-# }
 
 #
 # PR-AZR-TRF-NSG-007

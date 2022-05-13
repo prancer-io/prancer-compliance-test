@@ -705,55 +705,12 @@ nsg_in_all_metadata := {
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
-    "Policy Title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source to any destination (TJX)",
-    "Policy Description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+    "Policy Title": "Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all traffic from Internet on any protocol",
+    "Policy Description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on any protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
-
-#
-# PR-AZR-CLD-NSG-006
-#
-
-# default nsg_in_all_src = null
-
-# azure_issue["nsg_in_all_src"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "microsoft.network/networksecuritygroups"
-#     rules := resource.properties.securityRules[_]
-#     rules.properties.access == "Allow"
-#     rules.properties.direction == "Inbound"
-#     rules.properties.protocol == "*"
-#     rules.properties.sourceAddressPrefix == "*"
-#     rules.properties.destinationAddressPrefix == "*"
-#     rules.properties.destinationPortRange == "*"
-# }
-
-# nsg_in_all_src {
-#     lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
-#     not azure_issue["nsg_in_all_src"]
-# }
-
-# nsg_in_all_src = false {
-#     azure_issue["nsg_in_all_src"]
-# }
-
-# nsg_in_all_src_err = "Azure NSG having Inbound rule overly permissive to allow all traffic from any source on any protocol" {
-#     azure_issue["nsg_in_all_src"]
-# }
-
-# nsg_in_all_src_metadata := {
-#     "Policy Code": "PR-AZR-CLD-NSG-006",
-#     "Type": "Cloud",
-#     "Product": "AZR",
-#     "Language": "",
-#     "Policy Title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on any protocol",
-#     "Policy Description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on any protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
-#     "Resource Type": "microsoft.network/networksecuritygroups",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
-# }
 
 #
 # PR-AZR-CLD-NSG-007
