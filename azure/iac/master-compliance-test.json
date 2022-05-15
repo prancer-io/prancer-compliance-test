@@ -2633,45 +2633,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AZR-ARM-NSG-006",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(nsg.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-ARM-NSG-006",
-                            "eval": "data.rule.nsg_in_all_src",
-                            "message": "data.rule.nsg_in_all_src_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AZR_ARM_NSG_006.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to allow all traffic from any source on any protocol",
-                    "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HITRUST",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "microsoft.network/networksecuritygroups"
-                    ]
-                },
-                {
                     "masterTestId": "PR-AZR-ARM-NSG-007",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
