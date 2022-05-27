@@ -901,7 +901,7 @@
                             "remediationFunction": "PR_AZR_TRF_AGW_002.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Azure Application Gateway should have Web application firewall (WAF) enabled",
                     "description": "This policy identifies Azure Application Gateways that do not have Web application firewall (WAF) enabled. As a best practice, enable WAF to manage and protect your web applications behind the Application Gateway from common exploits and vulnerabilities.",
                     "tags": [
@@ -994,7 +994,7 @@
                             "remediationFunction": "PR_AZR_TRF_AGW_003.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Ensure Application Gateway is using Https protocol",
                     "description": "Application Gateway allows to set network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
                     "tags": [
@@ -1977,7 +1977,7 @@
                             "remediationFunction": "PR_AZR_TRF_WEB_011.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure App Service remote debugging should be disabled",
                     "description": "This policy will identify the Azure app service which have remote debugging enabled and give alert",
                     "tags": [
@@ -4208,7 +4208,7 @@
                             "remediationFunction": "PR_AZR_TRF_KV_002.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
                     "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user.",
                     "tags": [
@@ -4296,7 +4296,7 @@
                             "remediationFunction": "PR_AZR_TRF_KV_003.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Key vault should have purge protection enabled",
                     "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation",
                     "tags": [
@@ -4332,7 +4332,7 @@
                             "remediationFunction": "PR_AZR_TRF_KV_004.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Azure Key Vault keys should have an expiration date",
                     "description": "This policy identifies Azure Key Vault secrets that do not have an expiry date. As a best practice, set an expiration date for each secret and rotate the secret regularly.<br><br>Before you activate this policy, ensure that you have added the <compliance-software> Service Principal to each Key Vault: https://docs.paloaltonetworks.com/<compliance-software>/<compliance-software>-admin/connect-your-cloud-platform-to-<compliance-software>/onboard-your-azure-account/set-up-your-azure-account.html<br><br>Alternatively, run the following command on the Azure cloud shell:<br>az keyvault list | jq '.[].name' | xargs -I {} az keyvault set-policy --name {} --certificate-permissions list listissuers --key-permissions list --secret-permissions list --spn <<compliance-software>_app_id>",
                     "tags": [
@@ -4425,7 +4425,7 @@
                             "remediationFunction": "PR_AZR_TRF_KV_005.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Azure Key Vault secrets should have an expiration date",
                     "description": "This policy identifies Azure Key Vault secrets that do not have an expiry date. As a best practice, set an expiration date for each secret and rotate the secret regularly.<br><br>Before you activate this policy, ensure that you have added the <compliance-software> Service Principal to each Key Vault: https://docs.paloaltonetworks.com/<compliance-software>/<compliance-software>-admin/connect-your-cloud-platform-to-<compliance-software>/onboard-your-azure-account/set-up-your-azure-account.html<br><br>Alternatively, run the following command on the Azure cloud shell:<br>az keyvault list | jq '.[].name' | xargs -I {} az keyvault set-policy --name {} --certificate-permissions list listissuers --key-permissions list --secret-permissions list --spn <<compliance-software>_app_id>",
                     "tags": [
@@ -4518,7 +4518,7 @@
                             "remediationFunction": "PR_AZR_TRF_KV_006.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Azure Key Vault should disable public network access",
                     "description": "Disable public network access for your key vault so that it's not accessible over the public internet. This can reduce data leakage risks.",
                     "tags": [
@@ -4620,7 +4620,7 @@
                             "remediationFunction": "PR_AZR_TRF_KV_009.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Azure KeyVault should use private link",
                     "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure KeyVault, data leakage risks are reduced.",
                     "tags": [
@@ -7058,7 +7058,7 @@
                             "remediationFunction": "PR_AZR_TRF_ACR_003.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Azure Container Registry should not use the deprecated classic registry",
                     "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry.<br><br>For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade",
                     "tags": [
