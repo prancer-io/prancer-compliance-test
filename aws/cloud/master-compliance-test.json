@@ -6031,6 +6031,130 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-RDS-021",
+                    "masterSnapshotId": [
+                        "TEST_RDS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RDS-021",
+                            "eval": "data.rule.db_instance_engine_version",
+                            "message": "data.rule.db_instance_engine_version_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#aws-properties-rds-database-instance--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RDS_021.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure RDS instances does not uses deprecated version of aurora-postgresql.",
+                    "description": "AWS Aurora PostgreSQL which are exposed to local file read vulnerability. It is highly recommended to upgrade AWS Aurora PostgreSQL to the latest version",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RDS-022",
+                    "masterSnapshotId": [
+                        "TEST_RDS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RDS-022",
+                            "eval": "data.rule.db_cluster_engine_version",
+                            "message": "data.rule.db_cluster_engine_version_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#aws-resource-rds-dbcluster--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RDS_022.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure RDS dbcluster does not uses deprecated version of aurora-postgresql.",
+                    "description": "AWS Aurora PostgreSQL which are exposed to local file read vulnerability. It is highly recommended to upgrade AWS Aurora PostgreSQL to the latest version",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RDS-023",
+                    "masterSnapshotId": [
+                        "TEST_RDS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RDS-023",
+                            "eval": "data.rule.db_instance_approved_postgres_version",
+                            "message": "data.rule.db_instance_approved_postgres_version_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#aws-properties-rds-database-instance--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RDS_023.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure RDS instances does not uses deprecated version of PostgreSQL.",
+                    "description": "AWS RDS PostgreSQL which are exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RDS-024",
+                    "masterSnapshotId": [
+                        "TEST_RDS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RDS-024",
+                            "eval": "data.rule.db_cluster_approved_postgres_version",
+                            "message": "data.rule.db_cluster_approved_postgres_version_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#aws-resource-rds-dbcluster--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RDS_024.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure RDS dbcluster does not uses deprecated version of PostgreSQL.",
+                    "description": "AWS RDS PostgreSQL which are exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-DAX-001",
                     "masterSnapshotId": [
                         "TEST_DAX"
