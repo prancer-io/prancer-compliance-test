@@ -632,7 +632,6 @@ azure_issue["nsg_in_all"] {
     rules.properties.destinationPortRange == "*"
 }
 
-
 azure_issue["nsg_in_all"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networksecuritygroups"
