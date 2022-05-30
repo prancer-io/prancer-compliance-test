@@ -246,3 +246,95 @@ iam_user_group_attach_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html"
 }
+
+#
+# PR-AWS-CLD-IAM-009
+#
+
+default iam_policy_not_overly_permissive_to_all_traffic = true
+
+ip_address = ["0.0.0.0/0", "::/0"]
+
+iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.Versions[_]
+    lower(version.IsAttached) == "true"
+    policy_document := json.unmarshal(version.Document)
+    policy_statement := policy_document.Statement[i]
+    policy_statement.Effect == "Allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    contains(lower(policy_statement.Action[_]), "lambda:")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.Versions[_]
+    lower(version.IsAttached) == "true"
+    policy_document := json.unmarshal(version.Document)
+    policy_statement := policy_document.Statement[i]
+    policy_statement.Effect == "Allow"
+    policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    contains(lower(policy_statement.Action[_]), "lambda:")
+}
+
+
+iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure Lambda IAM policy is not overly permissive to all traffic" {
+    not iam_policy_not_overly_permissive_to_all_traffic
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-009",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Lambda IAM policy is not overly permissive to all traffic",
+    "Policy Description": "Ensure that the Lambda should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/lambda/latest/dg/security-iam.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
+}
+
+#
+# PR-AWS-CLD-IAM-010
+#
+
+default iam_policy_not_overly_permissive_to_lambda_service = true
+
+iam_policy_not_overly_permissive_to_lambda_service = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.Versions[_]
+    lower(version.IsAttached) == "true"
+    policy_document := json.unmarshal(version.Document)
+    policy_statement := policy_document.Statement[i]
+    policy_statement.Action[_] == "lambda:*"
+    policy_statement.Resource[_] == "*"
+    not policy_statement.Condition
+  
+}
+
+iam_policy_not_overly_permissive_to_lambda_service = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.Versions[_]
+    lower(version.IsAttached) == "true"
+    policy_document := json.unmarshal(version.Document)
+    policy_statement := policy_document.Statement[i]
+    policy_statement.Action == "lambda:*"
+    policy_statement.Resource == "*"
+    not policy_statement.Condition
+}
+
+iam_policy_not_overly_permissive_to_lambda_service_err = "Ensure IAM policy is not overly permissive to Lambda service" {
+    not iam_policy_not_overly_permissive_to_lambda_service
+}
+
+iam_policy_not_overly_permissive_to_lambda_service_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-010",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure IAM policy is not overly permissive to Lambda service",
+    "Policy Description": "Ensure the principle of least privileges by ensuring that only restricted Lambda services for restricted resources.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
+}
