@@ -7754,7 +7754,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-001",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -7786,7 +7786,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-002",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -7818,7 +7818,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-003",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -7850,7 +7850,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-004",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -7882,7 +7882,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-005",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -7920,7 +7920,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-006",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -7951,7 +7951,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-007",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -7989,7 +7989,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-008",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -8027,7 +8027,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-009",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -8072,7 +8072,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-010",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -8088,6 +8088,51 @@
                     "severity": "Low",
                     "title": "Ensure IAM policy is not overly permissive to Lambda service",
                     "description": "Ensure the principle of least privileges by ensuring that only restricted Lambda services for restricted resources.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-011",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-011",
+                            "eval": "data.rule.ec2_instance_with_iam_permissions_management_access",
+                            "message": "data.rule.ec2_instance_with_iam_permissions_management_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_011.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that the AWS EC2 instances don't have a risky set of permissions management access to minimize security risks.",
+                    "description": "This policy identifies IAM permissions management access that is defined as risky permissions. Ensure that the AWS EC2 instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks.",
                     "tags": [
                         {
                             "cloud": "AWS",

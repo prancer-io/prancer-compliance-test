@@ -338,3 +338,34 @@ iam_policy_not_overly_permissive_to_lambda_service_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
 }
+#
+# PR-AWS-CLD-IAM-011
+#
+
+default ec2_instance_with_iam_permissions_management_access = true
+
+action := ["iam:AttachGroupPolicy","iam:AttachRolePolicy","iam:AttachUserPolicy","iam:CreatePolicy","iam:CreatePolicyVersion","iam:DeleteAccountPasswordPolicy","iam:DeleteGroupPolicy","iam:DeletePolicy","iam:DeletePolicyVersion","iam:DeleteRolePermissionsBoundary","iam:DeleteRolePolicy","iam:DeleteUserPermissionsBoundary","iam:DeleteUserPolicy","iam:DetachGroupPolicy","iam:DetachRolePolicy","iam:DetachUserPolicy","iam:PutGroupPolicy","iam:PutRolePermissionsBoundary","iam:PutRolePolicy","iam:PutUserPermissionsBoundary","iam:PutUserPolicy","iam:SetDefaultPolicyVersion","iam:UpdateAssumeRolePolicy"]
+
+ec2_instance_with_iam_permissions_management_access = false {
+#     lower(resource.Type) == "aws::iam::roles"
+    role_policy_document := json.unmarshal(input.Role.AssumeRolePolicyDocument)
+    policy_statement := role_policy_document.Statement[i]
+    policy_action := policy_statement.Action[_]
+    policy_action == action[_]
+}
+
+ec2_instance_with_iam_permissions_management_access_err = "Ensure that the AWS EC2 instances don't have a risky set of permissions management access to minimize security risks." {
+    not ec2_instance_with_iam_permissions_management_access
+}
+
+ec2_instance_with_iam_permissions_management_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-011",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that the AWS EC2 instances don't have a risky set of permissions management access to minimize security risks.",
+    "Policy Description": "This policy identifies IAM permissions management access that is defined as risky permissions. Ensure that the AWS EC2 instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
