@@ -8043,7 +8043,21 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
                             ],
                             "service": [
                                 "iam"
@@ -8074,7 +8088,21 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
                             ],
                             "service": [
                                 "iam"
