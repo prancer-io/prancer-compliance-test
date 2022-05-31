@@ -3790,6 +3790,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-EC2-006",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-006",
+                            "eval": "data.rule.ec2_instance_has_restricted_access",
+                            "message": "data.rule.ec2_instance_has_restricted_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_security_group_rules' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure EC2 instance that is not internet reachable with unrestricted access (0.0.0.0/0) other than HTTP/HTTPS port monitoring is enabled for EC2 instances",
+                    "description": "Ensure restrict traffic from unknown IP addresses and limit the access to known hosts, services, or specific entities. NOTE: We are excluding the HTTP-80 and HTTPs-443 web ports as these are Internet-facing ports with legitimate traffic.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-NACL-001",
                     "masterSnapshotId": [
                         "TEST_EC2NETWORKACL"
@@ -7982,6 +8013,68 @@
                                 "NIST CSF",
                                 "PCI-DSS",
                                 "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-009",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-009",
+                            "eval": "data.rule.iam_policy_not_overly_permissive_to_all_traffic",
+                            "message": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Lambda IAM policy is not overly permissive to all traffic",
+                    "description": "Ensure that the Lambda should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/lambda/latest/dg/security-iam.html",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-010",
+                    "masterSnapshotId": [
+                        "TEST_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-010",
+                            "eval": "data.rule.iam_policy_not_overly_permissive_to_lambda_service",
+                            "message": "data.rule.iam_policy_not_overly_permissive_to_lambda_service_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_010.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure IAM policy is not overly permissive to Lambda service",
+                    "description": "Ensure the principle of least privileges by ensuring that only restricted Lambda services for restricted resources.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "Best Practice"
                             ],
                             "service": [
                                 "iam"
