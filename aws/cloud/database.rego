@@ -616,7 +616,7 @@ db_instance_engine_version = false {
     lower(DBInstances.EngineVersion) == deprecated_engine_versions[_]
 }
 
-db_instance_engine_version_err = "Ensure RDS instances does not uses deprecated version of aurora-postgresql." {
+db_instance_engine_version_err = "Ensure RDS instances do not use a deprecated version of Aurora-PostgreSQL." {
     not db_instance_engine_version
 }
 
@@ -625,8 +625,8 @@ db_instance_engine_version_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure RDS instances does not uses deprecated version of aurora-postgresql.",
-    "Policy Description": "AWS Aurora PostgreSQL which are exposed to local file read vulnerability. It is highly recommended to upgrade AWS Aurora PostgreSQL to the latest version",
+    "Policy Title": "Ensure RDS instances do not use a deprecated version of Aurora-PostgreSQL.",
+    "Policy Description": "AWS Aurora PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS Aurora PostgreSQL to the latest version.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#aws-properties-rds-database-instance--examples"
@@ -647,7 +647,7 @@ db_cluster_engine_version = false {
     lower(DBClusters.EngineVersion) == deprecated_engine_versions[_]
 }
 
-db_cluster_engine_version_err = "Ensure RDS dbcluster does not uses deprecated version of aurora-postgresql." {
+db_cluster_engine_version_err = "Ensure RDS cluster do not use a deprecated version of Aurora-PostgreSQL." {
     not db_cluster_engine_version
 }
 
@@ -656,8 +656,8 @@ db_cluster_engine_version_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure RDS dbcluster does not uses deprecated version of aurora-postgresql.",
-    "Policy Description": "AWS Aurora PostgreSQL which are exposed to local file read vulnerability. It is highly recommended to upgrade AWS Aurora PostgreSQL to the latest version",
+    "Policy Title": "Ensure RDS cluster do not use a deprecated version of Aurora-PostgreSQL.",
+    "Policy Description": "AWS Aurora PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS Aurora PostgreSQL to the latest version.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#aws-resource-rds-dbcluster--examples"
@@ -678,7 +678,7 @@ db_instance_approved_postgres_version = false {
     lower(DBInstances.EngineVersion) == deprecated_postgres_versions[_]
 }
 
-db_instance_approved_postgres_version_err = "Ensure RDS instances does not uses deprecated version of PostgreSQL." {
+db_instance_approved_postgres_version_err = "Ensure RDS instances do not use a deprecated version of PostgreSQL." {
     not db_instance_approved_postgres_version
 }
 
@@ -687,8 +687,8 @@ db_instance_approved_postgres_version_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure RDS instances does not uses deprecated version of PostgreSQL.",
-    "Policy Description": "AWS RDS PostgreSQL which are exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version",
+    "Policy Title": "Ensure RDS instances do not use a deprecated version of PostgreSQL.",
+    "Policy Description": "AWS RDS PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#aws-properties-rds-database-instance--examples"
@@ -709,7 +709,7 @@ db_cluster_approved_postgres_version = false {
     lower(DBClusters.EngineVersion) == deprecated_postgres_versions[_]
 }
 
-db_cluster_approved_postgres_version_err = "Ensure RDS dbcluster does not uses deprecated version of PostgreSQL." {
+db_cluster_approved_postgres_version_err = "Ensure RDS dbcluster do not use a deprecated version of PostgreSQL." {
     not db_cluster_approved_postgres_version
 }
 
@@ -718,8 +718,8 @@ db_cluster_approved_postgres_version_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure RDS dbcluster does not uses deprecated version of PostgreSQL.",
-    "Policy Description": "AWS RDS PostgreSQL which are exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version",
+    "Policy Title": "Ensure RDS dbcluster do not use a deprecated version of PostgreSQL.",
+    "Policy Description": "AWS RDS PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#aws-resource-rds-dbcluster--examples"

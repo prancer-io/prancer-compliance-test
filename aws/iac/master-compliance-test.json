@@ -7674,13 +7674,20 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure RDS instances does not uses deprecated version of aurora-postgresql.",
-                    "description": "AWS Aurora PostgreSQL which are exposed to local file read vulnerability. It is highly recommended to upgrade AWS Aurora PostgreSQL to the latest version",
+                    "title": "Ensure RDS instances do not use a deprecated version of Aurora-PostgreSQL.",
+                    "description": "AWS Aurora PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS Aurora PostgreSQL to the latest version.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "PCI-DSS",
+                                "GDPR",
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "HIPAA",
+                                "ISO 27001",
+                                "SOC 2"
                             ],
                             "service": [
                                 "cloudformation"
@@ -7708,13 +7715,20 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure RDS dbcluster does not uses deprecated version of aurora-postgresql.",
-                    "description": "AWS Aurora PostgreSQL which are exposed to local file read vulnerability. It is highly recommended to upgrade AWS Aurora PostgreSQL to the latest version",
+                    "title": "Ensure RDS cluster do not use a deprecated version of Aurora-PostgreSQL.",
+                    "description": "AWS Aurora PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS Aurora PostgreSQL to the latest version.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "PCI-DSS",
+                                "GDPR",
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "HIPAA",
+                                "ISO 27001",
+                                "SOC 2"
                             ],
                             "service": [
                                 "cloudformation"
@@ -7742,13 +7756,20 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure RDS instances does not uses deprecated version of PostgreSQL.",
-                    "description": "AWS RDS PostgreSQL which are exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version",
+                    "title": "Ensure RDS instances do not use a deprecated version of PostgreSQL.",
+                    "description": "AWS RDS PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "PCI-DSS",
+                                "GDPR",
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "HIPAA",
+                                "ISO 27001",
+                                "SOC 2"
                             ],
                             "service": [
                                 "cloudformation"
@@ -7776,13 +7797,20 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure RDS dbcluster does not uses deprecated version of PostgreSQL.",
-                    "description": "AWS RDS PostgreSQL which are exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version",
+                    "title": "Ensure RDS dbcluster do not use a deprecated version of PostgreSQL.",
+                    "description": "AWS RDS PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "PCI-DSS",
+                                "GDPR",
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "HIPAA",
+                                "ISO 27001",
+                                "SOC 2"
                             ],
                             "service": [
                                 "cloudformation"
