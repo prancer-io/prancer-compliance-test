@@ -3812,7 +3812,11 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "Best Practice"
+                                "PCI",
+                                "HIPAA",
+                                "APRA",
+                                "MAS",
+                                "NIST 800"
                             ],
                             "service": [
                                 "ec2"
