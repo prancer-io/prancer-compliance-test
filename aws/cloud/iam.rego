@@ -2,6 +2,9 @@ package rego
 
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_IAM.html
+
+iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount"]
+
 #
 # PR-AWS-CLD-IAM-001
 #
@@ -523,6 +526,276 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access_metadata := {
     "Language": "AWS Cloud",
     "Policy Title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement.",
     "Policy Description": "It identifies AWS IAM permissions that contain '*' in the resource section of the policy statement. The policy will identify those '*' only in case using '*' is not mandatory.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
+
+#
+# PR-AWS-CLD-IAM-017
+#
+
+default ec2_with_iam_wildcard_resource_access = true
+
+ec2_with_iam_wildcard_resource_access = false {
+#     lower(resource.Type) == "aws::iam::roles"
+    role_policy_document := json.unmarshal(input.Role.AssumeRolePolicyDocument)
+    policy_statement := role_policy_document.Statement[i]
+    policy_resource := policy_statement.Resource
+    lower(policy_resource) == "*"
+}
+
+ec2_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement." {
+    not ec2_with_iam_wildcard_resource_access
+}
+
+ec2_with_iam_wildcard_resource_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-017",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement.",
+    "Policy Description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement. The policy will identify those '*' only in case using '*' is not mandatory.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
+
+#
+# PR-AWS-CLD-IAM-018
+#
+
+default lambda_function_with_iam_wildcard_resource_access = true
+
+lambda_function_with_iam_wildcard_resource_access = false {
+#     lower(resource.Type) == "aws::iam::roles"
+    role_policy_document := json.unmarshal(input.Role.AssumeRolePolicyDocument)
+    policy_statement := role_policy_document.Statement[i]
+    policy_resource := policy_statement.Resource
+    lower(policy_resource) == "*"
+}
+
+lambda_function_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement." {
+    not lambda_function_with_iam_wildcard_resource_access
+}
+
+lambda_function_with_iam_wildcard_resource_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-018",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement.",
+    "Policy Description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement. The policy will identify those '*' only in case using '*' is not mandatory.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
+
+#
+# PR-AWS-CLD-IAM-019
+#
+
+default ec2_task_definition_with_iam_wildcard_resource_access = true
+
+ec2_task_definition_with_iam_wildcard_resource_access = false {
+#     lower(resource.Type) == "aws::iam::roles"
+    role_policy_document := json.unmarshal(input.Role.AssumeRolePolicyDocument)
+    policy_statement := role_policy_document.Statement[i]
+    policy_resource := policy_statement.Resource
+    lower(policy_resource) == "*"
+}
+
+ec2_task_definition_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement." {
+    not ec2_task_definition_with_iam_wildcard_resource_access
+}
+
+ec2_task_definition_with_iam_wildcard_resource_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-019",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement.",
+    "Policy Description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement. The policy will identify those '*' only in case using '*' is not mandatory.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
+
+#
+# PR-AWS-CLD-IAM-020
+#
+
+default ecr_repository_is_publicly_accessible_through_iam_policies = false
+
+ecr_repository_is_publicly_accessible_through_iam_policies = true {
+#     lower(resource.Type) == "aws::iam::roles"
+    role_policy_document := json.unmarshal(input.Role.AssumeRolePolicyDocument)
+    policy_statement := role_policy_document.Statement[i]
+    policy_condition := policy_statement.Condition
+    lower(policy_condition) == iam_policies_condition[_]
+}
+
+ecr_repository_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS ECR Repository resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
+    not ecr_repository_is_publicly_accessible_through_iam_policies
+}
+
+ecr_repository_is_publicly_accessible_through_iam_policies_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-020",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that the AWS ECR Repository resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Policy Description": "It identifies the AWS ECR Repository resources which are publicly accessible through IAM policies. Ensure that the AWS ECR Repository resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
+
+#
+# PR-AWS-CLD-IAM-021
+#
+
+default lambda_function_is_publicly_accessible_through_iam_policies = false
+
+lambda_function_is_publicly_accessible_through_iam_policies = true {
+#     lower(resource.Type) == "aws::iam::roles"
+    role_policy_document := json.unmarshal(input.Role.AssumeRolePolicyDocument)
+    policy_statement := role_policy_document.Statement[i]
+    policy_condition := policy_statement.Condition
+    lower(policy_condition) == iam_policies_condition[_]
+}
+
+lambda_function_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
+    not lambda_function_is_publicly_accessible_through_iam_policies
+}
+
+lambda_function_is_publicly_accessible_through_iam_policies_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-021",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Policy Description": "This policy identifies the AWS Lambda Function resources which are publicly accessible through IAM policies. Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
+
+#
+# PR-AWS-CLD-IAM-022
+#
+
+default s3_bucket_is_publicly_accessible_through_iam_policies = false
+
+s3_bucket_is_publicly_accessible_through_iam_policies = true {
+#     lower(resource.Type) == "aws::iam::roles"
+    role_policy_document := json.unmarshal(input.Role.AssumeRolePolicyDocument)
+    policy_statement := role_policy_document.Statement[i]
+    policy_condition := policy_statement.Condition
+    lower(policy_condition) == iam_policies_condition[_]
+}
+
+s3_bucket_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS S3 bucket resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
+    not s3_bucket_is_publicly_accessible_through_iam_policies
+}
+
+s3_bucket_is_publicly_accessible_through_iam_policies_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-022",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that the AWS S3 bucket resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Policy Description": "This policy identifies the AWS S3 bucket resources which are publicly accessible through IAM policies. Ensure that the AWS S3 bucket resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
+
+#
+# PR-AWS-CLD-IAM-023
+#
+
+default sqs_queue_is_publicly_accessible_through_iam_policies = false
+
+sqs_queue_is_publicly_accessible_through_iam_policies = true {
+#     lower(resource.Type) == "aws::iam::roles"
+    role_policy_document := json.unmarshal(input.Role.AssumeRolePolicyDocument)
+    policy_statement := role_policy_document.Statement[i]
+    policy_condition := policy_statement.Condition
+    lower(policy_condition) == iam_policies_condition[_]
+}
+
+sqs_queue_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
+    not sqs_queue_is_publicly_accessible_through_iam_policies
+}
+
+sqs_queue_is_publicly_accessible_through_iam_policies_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-023",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Policy Description": "This policy identifies the AWS SQS Queue resources which are publicly accessible through IAM policies. Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
+
+#
+# PR-AWS-CLD-IAM-024
+#
+
+default secret_manager_secret_is_publicly_accessible_through_iam_policies = false
+
+secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
+#     lower(resource.Type) == "aws::iam::roles"
+    role_policy_document := json.unmarshal(input.Role.AssumeRolePolicyDocument)
+    policy_statement := role_policy_document.Statement[i]
+    policy_condition := policy_statement.Condition
+    lower(policy_condition) == iam_policies_condition[_]
+}
+
+secret_manager_secret_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
+    not secret_manager_secret_is_publicly_accessible_through_iam_policies
+}
+
+secret_manager_secret_is_publicly_accessible_through_iam_policies_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-024",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Policy Description": "This policy identifies the AWS Secret Manager Secret resources which are publicly accessible through IAM policies. Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
+
+#
+# PR-AWS-CLD-IAM-025
+#
+
+default lambda_layer_version_is_publicly_accessible_through_iam_policies = false
+
+lambda_layer_version_is_publicly_accessible_through_iam_policies = true {
+#     lower(resource.Type) == "aws::iam::roles"
+    role_policy_document := json.unmarshal(input.Role.AssumeRolePolicyDocument)
+    policy_statement := role_policy_document.Statement[i]
+    policy_condition := policy_statement.Condition
+    lower(policy_condition) == iam_policies_condition[_]
+}
+
+lambda_layer_version_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS AWS Lambda Layer Version resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
+    not lambda_layer_version_is_publicly_accessible_through_iam_policies
+}
+
+lambda_layer_version_is_publicly_accessible_through_iam_policies_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-025",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that the AWS AWS Lambda Layer Version resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Policy Description": "This policy identifies the AWS Lambda Layer Version resources which are publicly accessible through IAM policies. Ensure that the AWS AWS Lambda Layer Version resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
