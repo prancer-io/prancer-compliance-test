@@ -8356,8 +8356,8 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement.",
-                    "description": "It identifies AWS IAM permissions that contain '*' in the resource section of the policy statement. The policy will identify those '*' only in case using '*' is not mandatory.",
+                    "title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of elastic bean stalk.",
+                    "description": "It identifies AWS IAM permissions that contain '*' in the resource section of the policy statement of elastic bean stalk. The policy will identify those '*' only in case using '*' is not mandatory.",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -8401,8 +8401,8 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement.",
-                    "description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement. The policy will identify those '*' only in case using '*' is not mandatory.",
+                    "title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ec2.",
+                    "description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement of ec2. The policy will identify those '*' only in case using '*' is not mandatory.",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -8446,8 +8446,8 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement.",
-                    "description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement. The policy will identify those '*' only in case using '*' is not mandatory.",
+                    "title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of lambda function.",
+                    "description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement of lambda function. The policy will identify those '*' only in case using '*' is not mandatory.",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -8484,15 +8484,15 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-019",
-                            "eval": "data.rule.ec2_task_definition_with_iam_wildcard_resource_access",
-                            "message": "data.rule.ec2_task_definition_with_iam_wildcard_resource_access_err",
+                            "eval": "data.rule.ecs_task_definition_with_iam_wildcard_resource_access",
+                            "message": "data.rule.ecs_task_definition_with_iam_wildcard_resource_access_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_IAM_019.py"
                         }
                     ],
                     "severity": "Low",
-                    "title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement.",
-                    "description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement. The policy will identify those '*' only in case using '*' is not mandatory.",
+                    "title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ecs task definition.",
+                    "description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement of ecs task definition. The policy will identify those '*' only in case using '*' is not mandatory.",
                     "tags": [
                         {
                             "cloud": "AWS",

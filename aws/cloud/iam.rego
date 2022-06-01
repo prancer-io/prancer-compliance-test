@@ -723,7 +723,7 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
     contains(policy_statement.Principal.Service, "elasticbeanstalk")
 }
 
-elasticbeanstalk_platform_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement." {
+elasticbeanstalk_platform_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of elastic bean stalk." {
     not elasticbeanstalk_platform_with_iam_wildcard_resource_access
 }
 
@@ -732,8 +732,8 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement.",
-    "Policy Description": "It identifies AWS IAM permissions that contain '*' in the resource section of the policy statement. The policy will identify those '*' only in case using '*' is not mandatory.",
+    "Policy Title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of elastic bean stalk.",
+    "Policy Description": "It identifies AWS IAM permissions that contain '*' in the resource section of the policy statement of elastic bean stalk. The policy will identify those '*' only in case using '*' is not mandatory.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
@@ -781,7 +781,7 @@ ec2_with_iam_wildcard_resource_access = false {
     contains(policy_statement.Principal.Service, "ec2")
 }
 
-ec2_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement." {
+ec2_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ec2." {
     not ec2_with_iam_wildcard_resource_access
 }
 
@@ -790,8 +790,8 @@ ec2_with_iam_wildcard_resource_access_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement.",
-    "Policy Description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement. The policy will identify those '*' only in case using '*' is not mandatory.",
+    "Policy Title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ec2.",
+    "Policy Description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement of ec2. The policy will identify those '*' only in case using '*' is not mandatory.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
@@ -840,7 +840,7 @@ lambda_function_with_iam_wildcard_resource_access = false {
     contains(policy_statement.Principal.Service, "lambda")
 }
 
-lambda_function_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement." {
+lambda_function_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of lambda function." {
     not lambda_function_with_iam_wildcard_resource_access
 }
 
@@ -849,8 +849,8 @@ lambda_function_with_iam_wildcard_resource_access_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement.",
-    "Policy Description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement. The policy will identify those '*' only in case using '*' is not mandatory.",
+    "Policy Title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of lambda function.",
+    "Policy Description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement of lambda function. The policy will identify those '*' only in case using '*' is not mandatory.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
@@ -898,7 +898,7 @@ ecs_task_definition_with_iam_wildcard_resource_access = false {
     contains(policy_statement.Principal.Service, "ecs")
 }
 
-ecs_task_definition_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement." {
+ecs_task_definition_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ecs task definition." {
     not ecs_task_definition_with_iam_wildcard_resource_access
 }
 
@@ -907,8 +907,8 @@ ecs_task_definition_with_iam_wildcard_resource_access_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement.",
-    "Policy Description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement. The policy will identify those '*' only in case using '*' is not mandatory.",
+    "Policy Title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ecs task definition.",
+    "Policy Description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement of ecs task definition. The policy will identify those '*' only in case using '*' is not mandatory.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
