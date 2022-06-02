@@ -664,3 +664,30 @@ ins_package_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-inspector-assessmenttemplate.html"
 }
+
+#
+# PR-AWS-CLD-APS-001
+#
+
+default appsync_not_configured_with_firewall_v2 = true
+
+appsync_not_configured_with_firewall_v2 = false {
+    # lower(resource.Type) == "aws::appsync::graphql"
+    not input.graphqlApi.wafWebAclArn
+}
+
+appsync_not_configured_with_firewall_v2_err = "Ensure AppSync is configured with AWS Web Application Firewall v2." {
+    not appsync_not_configured_with_firewall_v2
+}
+
+appsync_not_configured_with_firewall_v2_metadata := {
+    "Policy Code": "PR-AWS-CLD-APS-001",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AppSync is configured with AWS Web Application Firewall v2.",
+    "Policy Description": "Enable the AWS WAF service on AppSync to protect against application layer attacks. To block malicious requests to your AppSync, define the block criteria in the WAF web access control list (web ACL).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/appsync.html#AppSync.Client.get_graphql_api"
+}
