@@ -390,7 +390,7 @@ default ec2_instance_with_iam_permissions_management_access = true
 action := ["iam:AttachGroupPolicy","iam:AttachRolePolicy","iam:AttachUserPolicy","iam:CreatePolicy","iam:CreatePolicyVersion","iam:DeleteAccountPasswordPolicy","iam:DeleteGroupPolicy","iam:DeletePolicy","iam:DeletePolicyVersion","iam:DeleteRolePermissionsBoundary","iam:DeleteRolePolicy","iam:DeleteUserPermissionsBoundary","iam:DeleteUserPolicy","iam:DetachGroupPolicy","iam:DetachRolePolicy","iam:DetachUserPolicy","iam:PutGroupPolicy","iam:PutRolePermissionsBoundary","iam:PutRolePolicy","iam:PutUserPermissionsBoundary","iam:PutUserPolicy","iam:SetDefaultPolicyVersion","iam:UpdateAssumeRolePolicy"]
 
 ec2_instance_with_iam_permissions_management_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -400,7 +400,7 @@ ec2_instance_with_iam_permissions_management_access = false {
 }
 
 ec2_instance_with_iam_permissions_management_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action[_]
@@ -409,7 +409,7 @@ ec2_instance_with_iam_permissions_management_access = false {
 }
 
 ec2_instance_with_iam_permissions_management_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -418,7 +418,7 @@ ec2_instance_with_iam_permissions_management_access = false {
 }
 
 ec2_instance_with_iam_permissions_management_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action[_]
@@ -435,7 +435,7 @@ ec2_instance_with_iam_permissions_management_access_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud",
     "Policy Title": "Ensure that the AWS EC2 instances don't have a risky set of permissions management access to minimize security risks.",
-    "Policy Description": "This policy identifies IAM permissions management access that is defined as risky permissions. Ensure that the AWS EC2 instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks.",
+    "Policy Description": "This policy identifies IAM permissions management access that is defined as risky permissions. Ensure that the AWS EC2 instances don't have a risky set of permissions management access to minimize security risks.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
@@ -450,7 +450,7 @@ default lambda_function_with_iam_write_access = true
 action_lambda_function_with_iam_write_access := ["iam:AddClientIDToOpenIDConnectProvider","iam:AddRoleToInstanceProfile","iam:AddUserToGroup","iam:ChangePassword","iam:CreateAccessKey","iam:CreateAccountAlias","iam:CreateGroup","iam:CreateInstanceProfile","iam:CreateLoginProfile","iam:CreateOpenIDConnectProvider","iam:CreateRole","iam:CreateSAMLProvider","iam:CreateServiceLinkedRole","iam:CreateServiceSpecificCredential","iam:CreateUser","iam:CreateVirtualMFADevice","iam:DeactivateMFADevice","iam:DeleteAccessKey","iam:DeleteAccountAlias","iam:DeleteGroup","iam:DeleteInstanceProfile","iam:DeleteLoginProfile","iam:DeleteOpenIDConnectProvider","iam:DeleteRole","iam:DeleteSAMLProvider","iam:DeleteSSHPublicKey","iam:DeleteServerCertificate","iam:DeleteServiceLinkedRole","iam:DeleteServiceSpecificCredential","iam:DeleteSigningCertificate","iam:DeleteUser","iam:DeleteVirtualMFADevice","iam:EnableMFADevice","iam:PassRole","iam:RemoveClientIDFromOpenIDConnectProvider","iam:RemoveRoleFromInstanceProfile","iam:RemoveUserFromGroup","iam:ResetServiceSpecificCredential","iam:ResyncMFADevice","iam:SetSecurityTokenServicePreferences","iam:UpdateAccessKey","iam:UpdateAccountPasswordPolicy","iam:UpdateGroup","iam:UpdateLoginProfile","iam:UpdateOpenIDConnectProviderThumbprint","iam:UpdateRole","iam:UpdateRoleDescription","iam:UpdateSAMLProvider","iam:UpdateSSHPublicKey","iam:UpdateServerCertificate","iam:UpdateServiceSpecificCredential","iam:UpdateSigningCertificate","iam:UpdateUser","iam:UploadSSHPublicKey","iam:UploadServerCertificate","iam:UploadSigningCertificate"]
 
 lambda_function_with_iam_write_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -460,7 +460,7 @@ lambda_function_with_iam_write_access = false {
 }
 
 lambda_function_with_iam_write_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_iam_write_access[_]
@@ -469,7 +469,7 @@ lambda_function_with_iam_write_access = false {
 }
 
 lambda_function_with_iam_write_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -478,7 +478,7 @@ lambda_function_with_iam_write_access = false {
 }
 
 lambda_function_with_iam_write_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_iam_write_access[_]
@@ -510,7 +510,7 @@ default lambda_function_with_iam_permissions_management_access = true
 action_lambda_function_with_iam_permissions_management_access := ["iam:AttachGroupPolicy","iam:AttachRolePolicy","iam:AttachUserPolicy","iam:CreatePolicy","iam:CreatePolicyVersion","iam:DeleteAccountPasswordPolicy","iam:DeleteGroupPolicy","iam:DeletePolicy","iam:DeletePolicyVersion","iam:DeleteRolePermissionsBoundary","iam:DeleteRolePolicy","iam:DeleteUserPermissionsBoundary","iam:DeleteUserPolicy","iam:DetachGroupPolicy","iam:DetachRolePolicy","iam:DetachUserPolicy","iam:PutGroupPolicy","iam:PutRolePermissionsBoundary","iam:PutRolePolicy","iam:PutUserPermissionsBoundary","iam:PutUserPolicy","iam:SetDefaultPolicyVersion","iam:UpdateAssumeRolePolicy"]
 
 lambda_function_with_iam_permissions_management_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -520,7 +520,7 @@ lambda_function_with_iam_permissions_management_access = false {
 }
 
 lambda_function_with_iam_permissions_management_access = false {
-    # lower(resource.Type) == "aws::iam::policy"
+    # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_iam_permissions_management_access[_]
@@ -529,7 +529,7 @@ lambda_function_with_iam_permissions_management_access = false {
 }
 
 lambda_function_with_iam_permissions_management_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -538,14 +538,14 @@ lambda_function_with_iam_permissions_management_access = false {
 }
 
 lambda_function_with_iam_permissions_management_access = false {
-    # lower(resource.Type) == "aws::iam::policy"
+    # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_iam_permissions_management_access[_]
     contains(policy_statement.Principal.Service, "lambda")
 }
 
-lambda_function_with_iam_permissions_management_access_err = "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks." {
+lambda_function_with_iam_permissions_management_access_err = "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of permissions management access permissions to minimize security risks." {
     not lambda_function_with_iam_permissions_management_access
 }
 
@@ -554,8 +554,8 @@ lambda_function_with_iam_permissions_management_access_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks.",
-    "Policy Description": "This policy identifies IAM write permissions that are defined as risky permissions. Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks.",
+    "Policy Title": "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of permissions management access permissions to minimize security risks.",
+    "Policy Description": "This policy identifies IAM permissions management access permissions that are defined as risky permissions. Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of permissions management access permissions to minimize security risks.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
@@ -570,7 +570,7 @@ default ec2_instance_with_iam_write_access = true
 action_ec2_instance_with_iam_write_access := ["iam:AddClientIDToOpenIDConnectProvider","iam:AddRoleToInstanceProfile","iam:AddUserToGroup","iam:ChangePassword","iam:CreateAccessKey","iam:CreateAccountAlias","iam:CreateGroup","iam:CreateInstanceProfile","iam:CreateLoginProfile","iam:CreateOpenIDConnectProvider","iam:CreateRole","iam:CreateSAMLProvider","iam:CreateServiceLinkedRole","iam:CreateServiceSpecificCredential","iam:CreateUser","iam:CreateVirtualMFADevice","iam:DeactivateMFADevice","iam:DeleteAccessKey","iam:DeleteAccountAlias","iam:DeleteGroup","iam:DeleteInstanceProfile","iam:DeleteLoginProfile","iam:DeleteOpenIDConnectProvider","iam:DeleteRole","iam:DeleteSAMLProvider","iam:DeleteSSHPublicKey","iam:DeleteServerCertificate","iam:DeleteServiceLinkedRole","iam:DeleteServiceSpecificCredential","iam:DeleteSigningCertificate","iam:DeleteUser","iam:DeleteVirtualMFADevice","iam:EnableMFADevice","iam:PassRole","iam:RemoveClientIDFromOpenIDConnectProvider","iam:RemoveRoleFromInstanceProfile","iam:RemoveUserFromGroup","iam:ResetServiceSpecificCredential","iam:ResyncMFADevice","iam:SetSecurityTokenServicePreferences","iam:UpdateAccessKey","iam:UpdateAccountPasswordPolicy","iam:UpdateGroup","iam:UpdateLoginProfile","iam:UpdateOpenIDConnectProviderThumbprint","iam:UpdateRole","iam:UpdateRoleDescription","iam:UpdateSAMLProvider","iam:UpdateSSHPublicKey","iam:UpdateServerCertificate","iam:UpdateServiceSpecificCredential","iam:UpdateSigningCertificate","iam:UpdateUser","iam:UploadSSHPublicKey","iam:UploadServerCertificate","iam:UploadSigningCertificate"]
 
 ec2_instance_with_iam_write_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -580,7 +580,7 @@ ec2_instance_with_iam_write_access = false {
 }
 
 ec2_instance_with_iam_write_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_ec2_instance_with_iam_write_access[_]
@@ -589,7 +589,7 @@ ec2_instance_with_iam_write_access = false {
 }
 
 ec2_instance_with_iam_write_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -598,7 +598,7 @@ ec2_instance_with_iam_write_access = false {
 }
 
 ec2_instance_with_iam_write_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_ec2_instance_with_iam_write_access[_]
@@ -630,7 +630,7 @@ default lambda_function_with_org_write_access = true
 action_lambda_function_with_org_write_access := ["organizations:AcceptHandshake","organizations:AttachPolicy","organizations:CancelHandshake","organizations:CreateAccount","organizations:CreateGovCloudAccount","organizations:CreateOrganization","organizations:CreateOrganizationalUnit","organizations:CreatePolicy","organizations:DeclineHandshake","organizations:DeleteOrganization","organizations:DeleteOrganizationalUnit","organizations:DeletePolicy","organizations:DeregisterDelegatedAdministrator","organizations:DetachPolicy","organizations:DisableAWSServiceAccess","organizations:DisablePolicyType","organizations:EnableAWSServiceAccess","organizations:EnableAllFeatures","organizations:EnablePolicyType","organizations:InviteAccountToOrganization","organizations:LeaveOrganization","organizations:MoveAccount","organizations:RegisterDelegatedAdministrator","organizations:RemoveAccountFromOrganization","organizations:UpdateOrganizationalUnit","organizations:UpdatePolicy"]
 
 lambda_function_with_org_write_access = false {
-    # lower(resource.Type) == "aws::iam::policy"
+    # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -640,7 +640,7 @@ lambda_function_with_org_write_access = false {
 }
 
 lambda_function_with_org_write_access = false {
-    # lower(resource.Type) == "aws::iam::policy"
+    # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_org_write_access[_]
@@ -649,7 +649,7 @@ lambda_function_with_org_write_access = false {
 }
 
 lambda_function_with_org_write_access = false {
-    # lower(resource.Type) == "aws::iam::policy"
+    # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -658,14 +658,14 @@ lambda_function_with_org_write_access = false {
 }
 
 lambda_function_with_org_write_access = false {
-    # lower(resource.Type) == "aws::iam::policy"
+    # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_org_write_access[_]
     contains(policy_statement.Principal.Service, "lambda")
 }
 
-lambda_function_with_org_write_access_err = "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks." {
+lambda_function_with_org_write_access_err = "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of org write permissions to minimize security risks." {
     not lambda_function_with_org_write_access
 }
 
@@ -674,8 +674,8 @@ lambda_function_with_org_write_access_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks.",
-    "Policy Description": "This policy identifies org write access that is defined as risky permissions. Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks.",
+    "Policy Title": "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of org write permissions to minimize security risks.",
+    "Policy Description": "This policy identifies org write access that is defined as risky permissions. Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of org write permissions to minimize security risks.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
@@ -688,7 +688,7 @@ lambda_function_with_org_write_access_metadata := {
 default elasticbeanstalk_platform_with_iam_wildcard_resource_access = true
 
 elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_resource := policy_statement.Resource[_]
@@ -698,7 +698,7 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
 }
 
 elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Resource) == "*"
@@ -707,7 +707,7 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
 }
 
 elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_resource := policy_statement.Resource[_]
@@ -716,7 +716,7 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
 }
 
 elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Resource) == "*"
@@ -746,7 +746,7 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access_metadata := {
 default ec2_with_iam_wildcard_resource_access = true
 
 ec2_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_resource := policy_statement.Resource[_]
@@ -756,7 +756,7 @@ ec2_with_iam_wildcard_resource_access = false {
 }
 
 ec2_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Resource) == "*"
@@ -765,7 +765,7 @@ ec2_with_iam_wildcard_resource_access = false {
 }
 
 ec2_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_resource := policy_statement.Resource[_]
@@ -774,7 +774,7 @@ ec2_with_iam_wildcard_resource_access = false {
 }
 
 ec2_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Resource) == "*"
@@ -804,7 +804,7 @@ ec2_with_iam_wildcard_resource_access_metadata := {
 default lambda_function_with_iam_wildcard_resource_access = true
 
 lambda_function_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_resource := policy_statement.Resource[_]
@@ -815,7 +815,7 @@ lambda_function_with_iam_wildcard_resource_access = false {
 
 
 lambda_function_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Resource) == "*"
@@ -824,7 +824,7 @@ lambda_function_with_iam_wildcard_resource_access = false {
 }
 
 lambda_function_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_resource := policy_statement.Resource[_]
@@ -833,7 +833,7 @@ lambda_function_with_iam_wildcard_resource_access = false {
 }
 
 lambda_function_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Resource) == "*"
@@ -863,7 +863,7 @@ lambda_function_with_iam_wildcard_resource_access_metadata := {
 default ecs_task_definition_with_iam_wildcard_resource_access = true
 
 ecs_task_definition_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_resource := policy_statement.Resource[_]
@@ -873,7 +873,7 @@ ecs_task_definition_with_iam_wildcard_resource_access = false {
 }
 
 ecs_task_definition_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Resource) == "*"
@@ -882,7 +882,7 @@ ecs_task_definition_with_iam_wildcard_resource_access = false {
 }
 
 ecs_task_definition_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_resource := policy_statement.Resource[_]
@@ -891,7 +891,7 @@ ecs_task_definition_with_iam_wildcard_resource_access = false {
 }
 
 ecs_task_definition_with_iam_wildcard_resource_access = false {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Resource) == "*"
@@ -921,7 +921,7 @@ ecs_task_definition_with_iam_wildcard_resource_access_metadata := {
 default ecr_repository_is_publicly_accessible_through_iam_policies = false
 
 ecr_repository_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -930,7 +930,7 @@ ecr_repository_is_publicly_accessible_through_iam_policies = true {
 }
 
 ecr_repository_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -962,7 +962,7 @@ ecr_repository_is_publicly_accessible_through_iam_policies_metadata := {
 default lambda_function_is_publicly_accessible_through_iam_policies = false
 
 lambda_function_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -971,7 +971,7 @@ lambda_function_is_publicly_accessible_through_iam_policies = true {
 }
 
 lambda_function_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1003,7 +1003,7 @@ lambda_function_is_publicly_accessible_through_iam_policies_metadata := {
 default s3_bucket_is_publicly_accessible_through_iam_policies = false
 
 s3_bucket_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1012,7 +1012,7 @@ s3_bucket_is_publicly_accessible_through_iam_policies = true {
 }
 
 s3_bucket_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1044,7 +1044,7 @@ s3_bucket_is_publicly_accessible_through_iam_policies_metadata := {
 default sqs_queue_is_publicly_accessible_through_iam_policies = false
 
 sqs_queue_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1053,7 +1053,7 @@ sqs_queue_is_publicly_accessible_through_iam_policies = true {
 }
 
 sqs_queue_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1085,7 +1085,7 @@ sqs_queue_is_publicly_accessible_through_iam_policies_metadata := {
 default secret_manager_secret_is_publicly_accessible_through_iam_policies = false
 
 secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1094,7 +1094,7 @@ secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
 }
 
 secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::policy"
+#     lower(resource.Type) == "aws::iam::role"
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
