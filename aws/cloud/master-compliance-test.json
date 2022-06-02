@@ -527,6 +527,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-AG-008",
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "masterSnapshotId": [
+                        "TEST_API_GATEWAY_01"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AG-008",
+                            "eval": "data.rule.api_gateway_not_configured_with_firewall_v2",
+                            "message": "data.rule.api_gateway_not_configured_with_firewall_v2_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/apigateway.html#APIGateway.Client.get_stage' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AG_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS API Gateway REST API is not configured with AWS Web Application Firewall v2 (AWS WAFv2)",
+                    "description": "AWS API Gateway REST API which is not configured with AWS Web Application Firewall. As a best practice, enable the AWS WAF service on API Gateway REST API to protect against application layer attacks. To block malicious requests to your API Gateway REST API, define the block criteria in the WAF web access control list (web ACL).",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "api gateway"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-EKS-001",
                     "masterSnapshotId": [
                         "TEST_EKS"
@@ -3496,6 +3527,37 @@
                             "compliance": [],
                             "service": [
                                 "inspector"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-APS-001",
+                    "masterSnapshotId": [
+                        "TEST_ALL_15"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-APS-001",
+                            "eval": "data.rule.appsync_not_configured_with_firewall_v2",
+                            "message": "data.rule.appsync_not_configured_with_firewall_v2_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/appsync.html#AppSync.Client.get_graphql_api' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_APS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AppSync is configured with AWS Web Application Firewall v2.",
+                    "description": "Enable the AWS WAF service on AppSync to protect against application layer attacks. To block malicious requests to your AppSync, define the block criteria in the WAF web access control list (web ACL).",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "appsync"
                             ]
                         }
                     ]

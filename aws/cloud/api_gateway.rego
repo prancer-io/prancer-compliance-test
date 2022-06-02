@@ -241,3 +241,37 @@ api_gw_cert_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
 }
+
+#
+# PR-AWS-CLD-AG-008
+#
+
+default api_gateway_not_configured_with_firewall_v2 = true
+
+api_gateway_not_configured_with_firewall_v2 = false {
+    # lower(resource.Type) == "aws::apigateway::stage"
+    item := input.item[_]
+    not item.webAclArn
+}
+
+api_gateway_not_configured_with_firewall_v2 = false {
+    # lower(resource.Type) == "aws::apigateway::stage"
+    item := input.item[_]
+    lower(item.webAclArn) == "arn:aws:wafv2"
+}
+
+api_gateway_not_configured_with_firewall_v2_err = "AWS API Gateway REST API not configured with AWS Web Application Firewall v2 (AWS WAFv2)" {
+    not api_gateway_not_configured_with_firewall_v2
+}
+
+api_gateway_not_configured_with_firewall_v2_metadata := {
+    "Policy Code": "PR-AWS-CLD-AG-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS API Gateway REST API is not configured with AWS Web Application Firewall v2 (AWS WAFv2)",
+    "Policy Description": "AWS API Gateway REST API which is not configured with AWS Web Application Firewall. As a best practice, enable the AWS WAF service on API Gateway REST API to protect against application layer attacks. To block malicious requests to your API Gateway REST API, define the block criteria in the WAF web access control list (web ACL).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/apigateway.html#APIGateway.Client.get_stage"
+}
