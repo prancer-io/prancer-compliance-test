@@ -183,6 +183,7 @@ gateway_method_public_access = false {
     # lower(resource.Type) == "aws::apigateway::method"
     some string
     items := input.items[_]
+    items.resourceMethods[string]
     not items.resourceMethods[string].authorizationType
     not items.resourceMethods[string].apiKeyRequired
 }
