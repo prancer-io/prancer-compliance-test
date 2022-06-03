@@ -1,74 +1,5 @@
 package rule
 
-
-#
-# PR-AWS-TRF-AG-007
-#
-
-default api_gw_cert = null
-
-aws_issue["api_gw_cert"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_api_gateway_rest_api"
-    not resource.properties.client_certificate_id
-}
-
-
-source_path[{"api_gw_cert": metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_api_gateway_rest_api"
-    not resource.properties.client_certificate_id
-
-    metadata := {
-        "resource_path": [
-            ["resources", i, "properties", "client_certificate_id"]
-        ],
-    }
-}
-
-aws_issue["api_gw_cert"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_api_gateway_rest_api"
-    count(resource.properties.client_certificate_id) == 0
-}
-
-source_path[{"api_gw_cert": metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_api_gateway_rest_api"
-    count(resource.properties.client_certificate_id) == 0
-
-    metadata := {
-        "resource_path": [
-            ["resources", i, "properties", "client_certificate_id"]
-        ],
-    }
-}
-
-api_gw_cert {
-    lower(input.resources[i].type) == "aws_api_gateway_rest_api"
-    not aws_issue["api_gw_cert"]
-}
-
-api_gw_cert = false {
-    aws_issue["api_gw_cert"]
-}
-
-api_gw_cert_err = "AWS API Gateway endpoints without client certificate authentication" {
-    aws_issue["api_gw_cert"]
-}
-
-api_gw_cert_metadata := {
-    "Policy Code": "PR-AWS-TRF-AG-007",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "Terraform",
-    "Policy Title": "AWS API Gateway endpoints without client certificate authentication",
-    "Policy Description": "API Gateway can generate an SSL certificate and use its public key in the backend to verify that HTTP requests to your backend system are from API Gateway. This allows your HTTP backend to control and accept only requests originating from Amazon API Gateway, even if the backend is publicly accessible._x005F_x000D_ _x005F_x000D_ Note: Some backend servers may not support SSL client authentication as API Gateway does and could return an SSL certificate error. For a list of incompatible backend servers, see Known Issues. https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html",
-    "Resource Type": "aws_api_gateway_rest_api",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
-}
-
 #
 # PR-AWS-TRF-AG-001
 #
@@ -690,4 +621,109 @@ gateway_method_public_access_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method#authorization"
+}
+
+#
+# PR-AWS-TRF-AG-007
+#
+
+default api_gw_cert = null
+
+aws_issue["api_gw_cert"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    not resource.properties.client_certificate_id
+}
+
+
+source_path[{"api_gw_cert": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    not resource.properties.client_certificate_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "client_certificate_id"]
+        ],
+    }
+}
+
+aws_issue["api_gw_cert"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    count(resource.properties.client_certificate_id) == 0
+}
+
+source_path[{"api_gw_cert": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    count(resource.properties.client_certificate_id) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "client_certificate_id"]
+        ],
+    }
+}
+
+api_gw_cert {
+    lower(input.resources[i].type) == "aws_api_gateway_rest_api"
+    not aws_issue["api_gw_cert"]
+}
+
+api_gw_cert = false {
+    aws_issue["api_gw_cert"]
+}
+
+api_gw_cert_err = "AWS API Gateway endpoints without client certificate authentication" {
+    aws_issue["api_gw_cert"]
+}
+
+api_gw_cert_metadata := {
+    "Policy Code": "PR-AWS-TRF-AG-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS API Gateway endpoints without client certificate authentication",
+    "Policy Description": "API Gateway can generate an SSL certificate and use its public key in the backend to verify that HTTP requests to your backend system are from API Gateway. This allows your HTTP backend to control and accept only requests originating from Amazon API Gateway, even if the backend is publicly accessible._x005F_x000D_ _x005F_x000D_ Note: Some backend servers may not support SSL client authentication as API Gateway does and could return an SSL certificate error. For a list of incompatible backend servers, see Known Issues. https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html",
+    "Resource Type": "aws_api_gateway_rest_api",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
+}
+
+#
+# PR-AWS-TRF-AG-008
+#
+
+default api_gateway_not_configured_with_firewall_v2 = null
+
+aws_issue["api_gateway_not_configured_with_firewall_v2"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    not resource.properties.web_acl_arn
+}
+
+api_gateway_not_configured_with_firewall_v2 {
+    lower(input.resources[i].type) == "aws_api_gateway_stage"
+    not aws_issue["api_gateway_not_configured_with_firewall_v2"]
+}
+
+api_gateway_not_configured_with_firewall_v2 = false {
+    aws_issue["api_gateway_not_configured_with_firewall_v2"]
+}
+
+api_gateway_not_configured_with_firewall_v2_err = "AWS API Gateway REST API is not configured with AWS Web Application Firewall v2 (AWS WAFv2)" {
+    aws_issue["api_gateway_not_configured_with_firewall_v2"]
+}
+
+api_gateway_not_configured_with_firewall_v2_metadata := {
+    "Policy Code": "PR-AWS-TRF-AG-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS API Gateway REST API is not configured with AWS Web Application Firewall v2 (AWS WAFv2)",
+    "Policy Description": "AWS API Gateway REST API which is not configured with AWS Web Application Firewall. As a best practice, enable the AWS WAF service on API Gateway REST API to protect against application layer attacks. To block malicious requests to your API Gateway REST API, define the block criteria in the WAF web access control list (web ACL).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#web_acl_arn"
 }
