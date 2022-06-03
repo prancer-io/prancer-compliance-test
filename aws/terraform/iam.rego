@@ -1503,3 +1503,52 @@ secret_manager_secret_is_publicly_accessible_through_iam_policies_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role"
 }
+
+#
+# PR-AWS-TRF-IAM-027
+#
+
+default iam_policy_permission_may_cause_privilege_escalation = null
+
+action_iam_policy_permission_may_cause_privilege_escalation := ["iam:CreatePolicyVersion", "iam:SetDefaultPolicyVersion", "iam:PassRole", "iam:CreateAccessKey", "iam:CreateLoginProfile", "iam:UpdateLoginProfile", "iam:AttachUserPolicy", "iam:AttachGroupPolicy", "iam:AttachRolePolicy", "iam:PutUserPolicy", "iam:PutGroupPolicy", "iam:PutRolePolicy", "iam:AddUserToGroup", "iam:UpdateAssumeRolePolicy", "iam:*"]
+
+aws_issue["iam_policy_permission_may_cause_privilege_escalation"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action[_] == action_iam_policy_permission_may_cause_privilege_escalation[_]
+}
+
+aws_issue["iam_policy_permission_may_cause_privilege_escalation"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action[_] == action_iam_policy_permission_may_cause_privilege_escalation[_]
+}
+
+iam_policy_permission_may_cause_privilege_escalation {
+    lower(input.resources[i].type) == "aws_iam_policy"
+    not aws_issue["iam_policy_permission_may_cause_privilege_escalation"]
+}
+
+iam_policy_permission_may_cause_privilege_escalation = false {
+    aws_issue["iam_policy_permission_may_cause_privilege_escalation"]
+}
+
+iam_policy_permission_may_cause_privilege_escalation_err = "Ensure AWS IAM policy do not have permission which may cause privilege escalation." {
+    aws_issue["iam_policy_permission_may_cause_privilege_escalation"]
+}
+
+iam_policy_permission_may_cause_privilege_escalation_metadata := {
+    "Policy Code": "PR-AWS-TRF-IAM-027",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS IAM policy do not have permission which may cause privilege escalation.",
+    "Policy Description": "It identifies AWS IAM Policy which have permission that may cause privilege escalation. AWS IAM policy having weak permissions could be exploited by an attacker to elevate privileges. It is recommended to follow the principle of least privileges ensuring that AWS IAM policy does not have these sensitive permissions.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy"
+}

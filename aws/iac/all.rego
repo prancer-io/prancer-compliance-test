@@ -1784,7 +1784,7 @@ aws_issue["appsync_not_configured_with_firewall_v2"] {
     output := resource.Name
     count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
     lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
-    count(input.Resources[j].Properties.WebACLI) == 0
+    count(input.Resources[j].Properties.WebACLId) == 0
 }
 
 aws_issue["appsync_not_configured_with_firewall_v2"] {
@@ -1805,7 +1805,7 @@ appsync_not_configured_with_firewall_v2 = false {
     aws_issue["appsync_not_configured_with_firewall_v2"]
 }
 
-appsync_not_configured_with_firewall_v2_err = "Enable AWS Inspector to detect Vulnerability" {
+appsync_not_configured_with_firewall_v2_err = "Ensure AppSync is configured with AWS Web Application Firewall v2." {
     aws_issue["appsync_not_configured_with_firewall_v2"]
 }
 

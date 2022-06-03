@@ -1118,3 +1118,44 @@ secret_manager_secret_is_publicly_accessible_through_iam_policies_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
 }
+
+#
+# PR-AWS-CLD-IAM-027
+#
+
+default iam_policy_permission_may_cause_privilege_escalation = false
+
+action_iam_policy_permission_may_cause_privilege_escalation := ["iam:CreatePolicyVersion", "iam:SetDefaultPolicyVersion", "iam:PassRole", "iam:CreateAccessKey", "iam:CreateLoginProfile", "iam:UpdateLoginProfile", "iam:AttachUserPolicy", "iam:AttachGroupPolicy", "iam:AttachRolePolicy", "iam:PutUserPolicy", "iam:PutGroupPolicy", "iam:PutRolePolicy", "iam:AddUserToGroup", "iam:UpdateAssumeRolePolicy", "iam:*"]
+
+iam_policy_permission_may_cause_privilege_escalation = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    role_policy_document := input.Role.AssumeRolePolicyDocument
+    policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_action := policy_statement.Action[_]
+    policy_action == action_iam_policy_permission_may_cause_privilege_escalation[_]
+}
+
+iam_policy_permission_may_cause_privilege_escalation = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    role_policy_document := input.Role.AssumeRolePolicyDocument
+    policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Action == action_iam_policy_permission_may_cause_privilege_escalation[_]
+}
+
+iam_policy_permission_may_cause_privilege_escalation_err = "Ensure AWS IAM policy do not have permission which may cause privilege escalation." {
+    not iam_policy_permission_may_cause_privilege_escalation
+}
+
+iam_policy_permission_may_cause_privilege_escalation_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-027",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM policy do not have permission which may cause privilege escalation.",
+    "Policy Description": "It identifies AWS IAM Policy which have permission that may cause privilege escalation. AWS IAM policy having weak permissions could be exploited by an attacker to elevate privileges. It is recommended to follow the principle of least privileges ensuring that AWS IAM policy does not have these sensitive permissions.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}

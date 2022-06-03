@@ -1610,3 +1610,53 @@ secret_manager_secret_is_publicly_accessible_through_iam_policies_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html"
 }
+
+#
+# PR-AWS-CFR-IAM-027
+#
+
+default iam_policy_permission_may_cause_privilege_escalation = null
+
+action_iam_policy_permission_may_cause_privilege_escalation := ["iam:CreatePolicyVersion", "iam:SetDefaultPolicyVersion", "iam:PassRole", "iam:CreateAccessKey", "iam:CreateLoginProfile", "iam:UpdateLoginProfile", "iam:AttachUserPolicy", "iam:AttachGroupPolicy", "iam:AttachRolePolicy", "iam:PutUserPolicy", "iam:PutGroupPolicy", "iam:PutRolePolicy", "iam:AddUserToGroup", "iam:UpdateAssumeRolePolicy", "iam:*"]
+
+aws_issue["iam_policy_permission_may_cause_privilege_escalation"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    policy_action := statement.Action[_]
+    policy_action == action_iam_policy_permission_may_cause_privilege_escalation[_]
+}
+
+aws_issue["iam_policy_permission_may_cause_privilege_escalation"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action == action_iam_policy_permission_may_cause_privilege_escalation[_]
+}
+
+iam_policy_permission_may_cause_privilege_escalation {
+    lower(input.Resources[i].Type) == "aws::iam::policy"
+    not aws_issue["iam_policy_permission_may_cause_privilege_escalation"]
+}
+
+iam_policy_permission_may_cause_privilege_escalation = false {
+    aws_issue["iam_policy_permission_may_cause_privilege_escalation"]
+}
+
+iam_policy_permission_may_cause_privilege_escalation_err = "Ensure AWS IAM policy do not have permission which may cause privilege escalation." {
+    aws_issue["iam_policy_permission_may_cause_privilege_escalation"]
+}
+
+iam_policy_permission_may_cause_privilege_escalation_metadata := {
+    "Policy Code": "PR-AWS-CFR-IAM-027",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS IAM policy do not have permission which may cause privilege escalation.",
+    "Policy Description": "It identifies AWS IAM Policy which have permission that may cause privilege escalation. AWS IAM policy having weak permissions could be exploited by an attacker to elevate privileges. It is recommended to follow the principle of least privileges ensuring that AWS IAM policy does not have these sensitive permissions.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
+}
