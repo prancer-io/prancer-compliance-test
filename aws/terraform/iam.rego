@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount"]
 
 #
@@ -668,7 +672,7 @@ action := ["iam:AttachGroupPolicy","iam:AttachRolePolicy","iam:AttachUserPolicy"
 aws_issue["ec2_instance_with_iam_permissions_management_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action[_] == action[_]
     services := statement.Principal.Service[_]
     contains(services, "ec2")
@@ -677,7 +681,7 @@ aws_issue["ec2_instance_with_iam_permissions_management_access"] {
 aws_issue["ec2_instance_with_iam_permissions_management_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action == action[_]
     services := statement.Principal.Service[_]
     contains(services, "ec2")
@@ -686,7 +690,7 @@ aws_issue["ec2_instance_with_iam_permissions_management_access"] {
 aws_issue["ec2_instance_with_iam_permissions_management_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action == action[_]
     contains(statement.Principal.Service, "ec2")
 }
@@ -694,7 +698,7 @@ aws_issue["ec2_instance_with_iam_permissions_management_access"] {
 aws_issue["ec2_instance_with_iam_permissions_management_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action[_] == action[_]
     contains(statement.Principal.Service, "ec2")
 }
@@ -735,7 +739,7 @@ action_lambda_function_with_iam_write_access := ["iam:AddClientIDToOpenIDConnect
 aws_issue["lambda_function_with_iam_write_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action[_] == action_lambda_function_with_iam_write_access[_]
     services := statement.Principal.Service[_]
     contains(services, "lambda")
@@ -744,7 +748,7 @@ aws_issue["lambda_function_with_iam_write_access"] {
 aws_issue["lambda_function_with_iam_write_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action == action_lambda_function_with_iam_write_access[_]
     services := statement.Principal.Service[_]
     contains(services, "lambda")
@@ -753,7 +757,7 @@ aws_issue["lambda_function_with_iam_write_access"] {
 aws_issue["lambda_function_with_iam_write_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action == action_lambda_function_with_iam_write_access[_]
     contains(statement.Principal.Service, "lambda")
 }
@@ -761,7 +765,7 @@ aws_issue["lambda_function_with_iam_write_access"] {
 aws_issue["lambda_function_with_iam_write_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action[_] == action_lambda_function_with_iam_write_access[_]
     contains(statement.Principal.Service, "lambda")
 }
@@ -802,7 +806,7 @@ action_lambda_function_with_iam_permissions_management_access := ["iam:AttachGro
 aws_issue["lambda_function_with_iam_permissions_management_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action[_] == action_lambda_function_with_iam_permissions_management_access[_]
     services := statement.Principal.Service[_]
     contains(services, "lambda")
@@ -811,7 +815,7 @@ aws_issue["lambda_function_with_iam_permissions_management_access"] {
 aws_issue["lambda_function_with_iam_permissions_management_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action == action_lambda_function_with_iam_permissions_management_access[_]
     services := statement.Principal.Service[_]
     contains(services, "lambda")
@@ -820,7 +824,7 @@ aws_issue["lambda_function_with_iam_permissions_management_access"] {
 aws_issue["lambda_function_with_iam_permissions_management_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action == action_lambda_function_with_iam_permissions_management_access[_]
     contains(statement.Principal.Service, "lambda")
 }
@@ -828,7 +832,7 @@ aws_issue["lambda_function_with_iam_permissions_management_access"] {
 aws_issue["lambda_function_with_iam_permissions_management_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action[_] == action_lambda_function_with_iam_permissions_management_access[_]
     contains(statement.Principal.Service, "lambda")
 }
@@ -869,7 +873,7 @@ action_ec2_instance_with_iam_write_access := ["iam:AddClientIDToOpenIDConnectPro
 aws_issue["ec2_instance_with_iam_write_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action[_] == action_ec2_instance_with_iam_write_access[_]
     services := statement.Principal.Service[_]
     contains(services, "ec2")
@@ -878,7 +882,7 @@ aws_issue["ec2_instance_with_iam_write_access"] {
 aws_issue["ec2_instance_with_iam_write_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action == action_ec2_instance_with_iam_write_access[_]        
     services := statement.Principal.Service[_]
     contains(services, "ec2")
@@ -887,7 +891,7 @@ aws_issue["ec2_instance_with_iam_write_access"] {
 aws_issue["ec2_instance_with_iam_write_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action == action_ec2_instance_with_iam_write_access[_]
     contains(statement.Principal.Service, "ec2")
 }
@@ -895,7 +899,7 @@ aws_issue["ec2_instance_with_iam_write_access"] {
 aws_issue["ec2_instance_with_iam_write_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action[_] == action_ec2_instance_with_iam_write_access[_]
     contains(statement.Principal.Service, "ec2")
 }
@@ -936,7 +940,7 @@ action_lambda_function_with_org_write_access := ["organizations:AcceptHandshake"
 aws_issue["lambda_function_with_org_write_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action[_] == action_lambda_function_with_org_write_access[_]
     services := statement.Principal.Service[_]
     contains(services, "lambda")
@@ -945,7 +949,7 @@ aws_issue["lambda_function_with_org_write_access"] {
 aws_issue["lambda_function_with_org_write_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action == action_lambda_function_with_org_write_access[_]        
     services := statement.Principal.Service[_]
     contains(services, "lambda")
@@ -954,7 +958,7 @@ aws_issue["lambda_function_with_org_write_access"] {
 aws_issue["lambda_function_with_org_write_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action == action_lambda_function_with_org_write_access[_]
     contains(statement.Principal.Service, "lambda")
 }
@@ -962,7 +966,7 @@ aws_issue["lambda_function_with_org_write_access"] {
 aws_issue["lambda_function_with_org_write_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     statement.Action[_] == action_lambda_function_with_org_write_access[_]
     contains(statement.Principal.Service, "lambda")
 }
@@ -1001,7 +1005,7 @@ default elasticbeanstalk_platform_with_iam_wildcard_resource_access = null
 aws_issue["elasticbeanstalk_platform_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     policy_resource := statement.Resource[_]
     lower(policy_resource) == "*"
     services := statement.Principal.Service[_]
@@ -1011,7 +1015,7 @@ aws_issue["elasticbeanstalk_platform_with_iam_wildcard_resource_access"] {
 aws_issue["elasticbeanstalk_platform_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     lower(statement.Resource) == "*"
     services := statement.Principal.Service[_]
     contains(services, "elasticbeanstalk")
@@ -1021,7 +1025,7 @@ aws_issue["elasticbeanstalk_platform_with_iam_wildcard_resource_access"] {
 aws_issue["elasticbeanstalk_platform_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     policy_resource := statement.Resource[_]
     lower(policy_resource) == "*"
     contains(statement.Principal.Service, "elasticbeanstalk")
@@ -1030,7 +1034,7 @@ aws_issue["elasticbeanstalk_platform_with_iam_wildcard_resource_access"] {
 aws_issue["elasticbeanstalk_platform_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     lower(statement.Resource) == "*"
     contains(statement.Principal.Service, "elasticbeanstalk")
 }
@@ -1069,7 +1073,7 @@ default ec2_with_iam_wildcard_resource_access = null
 aws_issue["ec2_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     policy_resource := statement.Resource[_]
     lower(policy_resource) == "*"
     services := statement.Principal.Service[_]
@@ -1079,7 +1083,7 @@ aws_issue["ec2_with_iam_wildcard_resource_access"] {
 aws_issue["ec2_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     lower(statement.Resource) == "*"
     services := statement.Principal.Service[_]
     contains(services, "ec2")
@@ -1089,7 +1093,7 @@ aws_issue["ec2_with_iam_wildcard_resource_access"] {
 aws_issue["ec2_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     policy_resource := statement.Resource[_]
     lower(policy_resource) == "*"
     contains(statement.Principal.Service, "ec2")
@@ -1098,7 +1102,7 @@ aws_issue["ec2_with_iam_wildcard_resource_access"] {
 aws_issue["ec2_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     lower(statement.Resource) == "*"
     contains(statement.Principal.Service, "ec2")
 }
@@ -1137,7 +1141,7 @@ default lambda_function_with_iam_wildcard_resource_access = null
 aws_issue["lambda_function_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     policy_resource := statement.Resource[_]
     lower(policy_resource) == "*"
     services := statement.Principal.Service[_]
@@ -1147,7 +1151,7 @@ aws_issue["lambda_function_with_iam_wildcard_resource_access"] {
 aws_issue["lambda_function_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     lower(statement.Resource) == "*"
     services := statement.Principal.Service[_]
     contains(services, "lambda")
@@ -1157,7 +1161,7 @@ aws_issue["lambda_function_with_iam_wildcard_resource_access"] {
 aws_issue["lambda_function_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     policy_resource := statement.Resource[_]
     lower(policy_resource) == "*"
     contains(statement.Principal.Service, "lambda")
@@ -1166,7 +1170,7 @@ aws_issue["lambda_function_with_iam_wildcard_resource_access"] {
 aws_issue["lambda_function_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     lower(statement.Resource) == "*"
     contains(statement.Principal.Service, "lambda")
 }
@@ -1205,7 +1209,7 @@ default ecs_task_definition_with_iam_wildcard_resource_access = null
 aws_issue["ecs_task_definition_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     policy_resource := statement.Resource[_]
     lower(policy_resource) == "*"
     services := statement.Principal.Service[_]
@@ -1215,7 +1219,7 @@ aws_issue["ecs_task_definition_with_iam_wildcard_resource_access"] {
 aws_issue["ecs_task_definition_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     lower(statement.Resource) == "*"
     services := statement.Principal.Service[_]
     contains(services, "ecs")
@@ -1225,7 +1229,7 @@ aws_issue["ecs_task_definition_with_iam_wildcard_resource_access"] {
 aws_issue["ecs_task_definition_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     policy_resource := statement.Resource[_]
     lower(policy_resource) == "*"
     contains(statement.Principal.Service, "ecs")
@@ -1234,7 +1238,7 @@ aws_issue["ecs_task_definition_with_iam_wildcard_resource_access"] {
 aws_issue["ecs_task_definition_with_iam_wildcard_resource_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     lower(statement.Resource) == "*"
     contains(statement.Principal.Service, "ecs")
 }
@@ -1273,7 +1277,7 @@ default ecr_repository_is_publicly_accessible_through_iam_policies = null
 aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     contains(lower(statement.Principal.Service), "ecr")
     has_property(statement.Condition[string], iam_policies_condition[_])
 }
@@ -1281,7 +1285,7 @@ aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
 aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     services := statement.Principal.Service[_]
     contains(lower(services), "ecr")
     has_property(statement.Condition[string], iam_policies_condition[_])
@@ -1321,7 +1325,7 @@ default lambda_function_is_publicly_accessible_through_iam_policies = null
 aws_issue["lambda_function_is_publicly_accessible_through_iam_policies"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     contains(lower(statement.Principal.Service), "lambda")
     has_property(statement.Condition[string], iam_policies_condition[_])
 }
@@ -1329,7 +1333,7 @@ aws_issue["lambda_function_is_publicly_accessible_through_iam_policies"] {
 aws_issue["lambda_function_is_publicly_accessible_through_iam_policies"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     services := statement.Principal.Service[_]
     contains(lower(services), "lambda")
     has_property(statement.Condition[string], iam_policies_condition[_])
@@ -1369,7 +1373,7 @@ default s3_bucket_is_publicly_accessible_through_iam_policies = null
 aws_issue["s3_bucket_is_publicly_accessible_through_iam_policies"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     contains(lower(statement.Principal.Service), "s3")
     has_property(statement.Condition[string], iam_policies_condition[_])
 }
@@ -1377,7 +1381,7 @@ aws_issue["s3_bucket_is_publicly_accessible_through_iam_policies"] {
 aws_issue["s3_bucket_is_publicly_accessible_through_iam_policies"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     services := statement.Principal.Service[_]
     contains(lower(services), "s3")
     has_property(statement.Condition[string], iam_policies_condition[_])
@@ -1417,7 +1421,7 @@ default sqs_queue_is_publicly_accessible_through_iam_policies = null
 aws_issue["sqs_queue_is_publicly_accessible_through_iam_policies"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     contains(lower(statement.Principal.Service), "sqs")
     has_property(statement.Condition[string], iam_policies_condition[_])
 }
@@ -1425,7 +1429,7 @@ aws_issue["sqs_queue_is_publicly_accessible_through_iam_policies"] {
 aws_issue["sqs_queue_is_publicly_accessible_through_iam_policies"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     services := statement.Principal.Service[_]
     contains(lower(services), "sqs")
     has_property(statement.Condition[string], iam_policies_condition[_])
@@ -1465,7 +1469,7 @@ default secret_manager_secret_is_publicly_accessible_through_iam_policies = null
 aws_issue["secret_manager_secret_is_publicly_accessible_through_iam_policies"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     contains(lower(statement.Principal.Service), "secretsmanager")
     has_property(statement.Condition[string], iam_policies_condition[_])
 }
@@ -1473,7 +1477,7 @@ aws_issue["secret_manager_secret_is_publicly_accessible_through_iam_policies"] {
 aws_issue["secret_manager_secret_is_publicly_accessible_through_iam_policies"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
-    statement := resource.properties.policy.Statement[j]
+    statement := resource.properties.assume_role_policy.Statement[j]
     services := statement.Principal.Service[_]
     contains(lower(services), "secretsmanager")
     has_property(statement.Condition[string], iam_policies_condition[_])
