@@ -451,7 +451,6 @@
                                 "PCI DSS v3.2.1-6.3", 
                                 "PIPEDA",
                                 "PIPEDA-4.1.4"
-
                             ],
                             "service": [
                                 "terraform"
