@@ -3,6 +3,8 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html
 
+deprecated_engine_versions := ["10.11","10.12","10.13","11.6","11.7","11.8"]
+deprecated_postgres_versions := ["13.2","13.1","12.6","12.5","12.4","12.3","12.2","11.11","11.10","11.9","11.8","11.7","11.6","11.5","11.4","11.3","11.2","11.1","10.16","10.15","10.14","10.13","10.12","10.11","10.10","10.9","10.7","10.6","10.5","10.4","10.3","10.1","9.6.21","9.6.20","9.6.19","9.6.18","9.6.17","9.6.16","9.6.15","9.6.14","9.6.12","9.6.11","9.6.10","9.6.9","9.6.8","9.6.6","9.6.5","9.6.3","9.6.2","9.6.1","9.5","9.4","9.3"]
 
 #
 # PR-AWS-CFR-RDS-001
@@ -1397,6 +1399,162 @@ db_instance_secretmanager_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-monitoringinterval"
+}
+
+
+#
+# PR-AWS-CFR-RDS-021
+#
+
+default db_instance_engine_version = null
+
+aws_issue["db_instance_engine_version"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.Engine) == "aurora-postgresql"
+    lower(resource.Properties.EngineVersion) == deprecated_engine_versions[_]
+}
+
+db_instance_engine_version {
+    lower(input.Resources[i].Type) == "aws::rds::dbinstance"
+    not aws_issue["db_instance_engine_version"]
+}
+
+db_instance_engine_version = false {
+    aws_issue["db_instance_engine_version"]
+}
+
+db_instance_engine_version_err = "Ensure RDS instances do not use a deprecated version of Aurora-PostgreSQL." {
+    aws_issue["db_instance_engine_version"]
+}
+
+db_instance_engine_version_metadata := {
+    "Policy Code": "PR-AWS-CFR-RDS-021",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure RDS instances do not use a deprecated version of Aurora-PostgreSQL.",
+    "Policy Description": "AWS Aurora PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS Aurora PostgreSQL to the latest version.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#aws-properties-rds-database-instance--examples"
+}
+
+
+#
+# PR-AWS-CFR-RDS-022
+#
+
+default db_cluster_engine_version = null
+
+aws_issue["db_cluster_engine_version"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    lower(resource.Properties.Engine) == "aurora-postgresql"
+    lower(resource.Properties.EngineVersion) == deprecated_engine_versions[_]
+}
+
+db_cluster_engine_version {
+    lower(input.Resources[i].Type) == "aws::rds::dbcluster"
+    not aws_issue["db_cluster_engine_version"]
+}
+
+db_cluster_engine_version = false {
+    aws_issue["db_cluster_engine_version"]
+}
+
+db_cluster_engine_version_err = "Ensure RDS cluster do not use a deprecated version of Aurora-PostgreSQL." {
+    aws_issue["db_cluster_engine_version"]
+}
+
+db_cluster_engine_version_metadata := {
+    "Policy Code": "PR-AWS-CFR-RDS-022",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure RDS cluster do not use a deprecated version of Aurora-PostgreSQL.",
+    "Policy Description": "AWS Aurora PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS Aurora PostgreSQL to the latest version.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
+
+#
+# PR-AWS-CFR-RDS-023
+#
+
+default db_instance_approved_postgres_version = null
+
+aws_issue["db_instance_approved_postgres_version"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.Engine) == "postgres"
+    lower(resource.Properties.EngineVersion) == deprecated_postgres_versions[_]
+}
+
+db_instance_approved_postgres_version {
+    lower(input.Resources[i].Type) == "aws::rds::dbinstance"
+    not aws_issue["db_instance_approved_postgres_version"]
+}
+
+db_instance_approved_postgres_version = false {
+    aws_issue["db_instance_approved_postgres_version"]
+}
+
+db_instance_approved_postgres_version_err = "Ensure RDS instances do not use a deprecated version of PostgreSQL." {
+    aws_issue["db_instance_approved_postgres_version"]
+}
+
+db_instance_approved_postgres_version_metadata := {
+    "Policy Code": "PR-AWS-CFR-RDS-023",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure RDS instances do not use a deprecated version of PostgreSQL.",
+    "Policy Description": "AWS RDS PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#aws-properties-rds-database-instance--examples"
+}
+
+
+#
+# PR-AWS-CFR-RDS-024
+#
+
+default db_cluster_approved_postgres_version = null
+
+aws_issue["db_cluster_approved_postgres_version"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    lower(resource.Properties.Engine) == "postgres"
+    lower(resource.Properties.EngineVersion) == deprecated_postgres_versions[_]
+}
+
+db_cluster_approved_postgres_version {
+    lower(input.Resources[i].Type) == "aws::rds::dbcluster"
+    not aws_issue["db_cluster_approved_postgres_version"]
+}
+
+db_cluster_approved_postgres_version = false {
+    aws_issue["db_cluster_approved_postgres_version"]
+}
+
+db_cluster_approved_postgres_version_err = "Ensure RDS dbcluster do not use a deprecated version of PostgreSQL." {
+    aws_issue["db_cluster_approved_postgres_version"]
+}
+
+db_cluster_approved_postgres_version_metadata := {
+    "Policy Code": "PR-AWS-CFR-RDS-024",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure RDS dbcluster do not use a deprecated version of PostgreSQL.",
+    "Policy Description": "AWS RDS PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
 
 

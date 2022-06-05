@@ -113,6 +113,13 @@ aws_issue["iam_wildcard_principal"] {
     lower(statement.Principal) == "*"
 }
 
+aws_issue["iam_wildcard_principal"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_role"
+    statement := resource.properties.assume_role_policy.Statement[j]
+    lower(statement.Principal.AWS) == "*"
+}
+
 source_path[{"iam_wildcard_principal": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
@@ -125,6 +132,20 @@ source_path[{"iam_wildcard_principal": metadata}] {
         ],
     }
 }
+
+source_path[{"iam_wildcard_principal": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_role"
+    statement := resource.properties.assume_role_policy.Statement[j]
+    lower(statement.Principal.AWS) == "*"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "assume_role_policy", "Statement", j, "Principal", "AWS"]
+        ],
+    }
+}
+
 
 iam_wildcard_principal {
     lower(input.resources[i].type) == "aws_iam_role"
