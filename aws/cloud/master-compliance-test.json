@@ -549,7 +549,13 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "NIST 800"
+                                "NIST 800",
+                                "GDPR",
+                                "CIS",
+                                "ISO 27001",
+                                "LGPD",
+                                "HITRUST",
+                                "HIPAA"
                             ],
                             "service": [
                                 "api gateway"
