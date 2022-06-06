@@ -1755,3 +1755,68 @@ synthetics_security_group_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html"
 }
+
+#
+# PR-AWS-CFR-APS-001
+#
+
+default appsync_not_configured_with_firewall_v2 = null
+
+aws_issue["appsync_not_configured_with_firewall_v2"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::appsync::graphqlapi"
+    output := resource.Name
+    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
+}
+
+aws_issue["appsync_not_configured_with_firewall_v2"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::appsync::graphqlapi"
+    output := resource.Name
+    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
+    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
+    not input.Resources[j].Properties.WebACLId
+}
+
+aws_issue["appsync_not_configured_with_firewall_v2"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::appsync::graphqlapi"
+    output := resource.Name
+    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
+    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
+    count(input.Resources[j].Properties.WebACLId) == 0
+}
+
+aws_issue["appsync_not_configured_with_firewall_v2"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::appsync::graphqlapi"
+    output := resource.Name
+    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
+    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
+    input.Resources[j].Properties.WebACLId == null
+}
+
+appsync_not_configured_with_firewall_v2 {
+    lower(input.Resources[i].Type) == "aws::appsync::graphqlapi"
+    not aws_issue["appsync_not_configured_with_firewall_v2"]
+}
+
+appsync_not_configured_with_firewall_v2 = false {
+    aws_issue["appsync_not_configured_with_firewall_v2"]
+}
+
+appsync_not_configured_with_firewall_v2_err = "Ensure AppSync is configured with AWS Web Application Firewall v2." {
+    aws_issue["appsync_not_configured_with_firewall_v2"]
+}
+
+appsync_not_configured_with_firewall_v2_metadata := {
+    "Policy Code": "PR-AWS-CFR-APS-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud Formation",
+    "Policy Title": "Ensure AppSync is configured with AWS Web Application Firewall v2.",
+    "Policy Description": "Enable the AWS WAF service on AppSync to protect against application layer attacks. To block malicious requests to your AppSync, define the block criteria in the WAF web access control list (web ACL).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-graphqlapi.html#aws-resource-appsync-graphqlapi--examples"
+}

@@ -714,7 +714,7 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_IAM",
+					"masterSnapshotId": "TEST_IAM_01",
 					"arn": "arn:aws:iam:::",
 					"type": "iam",
 					"collection": "aws_iam",
@@ -722,6 +722,16 @@
 					"detailMethods": [
 						"get_policy",
 						"get_policy_version"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_IAM_02",
+					"arn": "arn:aws:iam:::",
+					"type": "iam",
+					"collection": "aws_iam",
+					"listMethod": "list_roles",
+					"detailMethods": [
+						"get_role"
 					]
 				}
 			]

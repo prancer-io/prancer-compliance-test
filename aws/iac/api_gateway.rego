@@ -599,3 +599,68 @@ api_gw_cert_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
 }
+
+#
+# PR-AWS-CFR-AG-008
+#
+
+default api_gateway_not_configured_with_firewall_v2 = null
+
+aws_issue["api_gateway_not_configured_with_firewall_v2"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    output := resource.Name
+    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
+}
+
+aws_issue["api_gateway_not_configured_with_firewall_v2"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    output := resource.Name
+    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
+    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
+    not input.Resources[j].Properties.WebACLId
+}
+
+aws_issue["api_gateway_not_configured_with_firewall_v2"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    output := resource.Name
+    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
+    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
+    count(input.Resources[j].Properties.WebACLId) == 0
+}
+
+aws_issue["api_gateway_not_configured_with_firewall_v2"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    output := resource.Name
+    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
+    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
+    input.Resources[j].Properties.WebACLId == null
+}
+
+api_gateway_not_configured_with_firewall_v2 {
+    lower(input.Resources[i].Type) == "aws::apigateway::stage"
+    not aws_issue["api_gateway_not_configured_with_firewall_v2"]
+}
+
+api_gateway_not_configured_with_firewall_v2 = false {
+    aws_issue["api_gateway_not_configured_with_firewall_v2"]
+}
+
+api_gateway_not_configured_with_firewall_v2_err = "AWS API Gateway REST API is not configured with AWS Web Application Firewall v2 (AWS WAFv2)" {
+    aws_issue["api_gateway_not_configured_with_firewall_v2"]
+}
+
+api_gateway_not_configured_with_firewall_v2_metadata := {
+    "Policy Code": "PR-AWS-CFR-AG-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud Formation",
+    "Policy Title": "AWS API Gateway REST API is not configured with AWS Web Application Firewall v2 (AWS WAFv2)",
+    "Policy Description": "AWS API Gateway REST API which is not configured with AWS Web Application Firewall. As a best practice, enable the AWS WAF service on API Gateway REST API to protect against application layer attacks. To block malicious requests to your API Gateway REST API, define the block criteria in the WAF web access control list (web ACL).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
+}
