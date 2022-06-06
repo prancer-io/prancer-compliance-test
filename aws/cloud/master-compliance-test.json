@@ -527,6 +527,43 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-AG-008",
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "masterSnapshotId": [
+                        "TEST_API_GATEWAY_01"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AG-008",
+                            "eval": "data.rule.api_gateway_not_configured_with_firewall_v2",
+                            "message": "data.rule.api_gateway_not_configured_with_firewall_v2_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/apigateway.html#APIGateway.Client.get_stage' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AG_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS API Gateway REST API is not configured with AWS Web Application Firewall v2 (AWS WAFv2)",
+                    "description": "AWS API Gateway REST API which is not configured with AWS Web Application Firewall. As a best practice, enable the AWS WAF service on API Gateway REST API to protect against application layer attacks. To block malicious requests to your API Gateway REST API, define the block criteria in the WAF web access control list (web ACL).",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR",
+                                "CIS",
+                                "ISO 27001",
+                                "LGPD",
+                                "HITRUST",
+                                "HIPAA"
+                            ],
+                            "service": [
+                                "api gateway"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-EKS-001",
                     "masterSnapshotId": [
                         "TEST_EKS"
@@ -3501,6 +3538,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-APS-001",
+                    "masterSnapshotId": [
+                        "TEST_ALL_15"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-APS-001",
+                            "eval": "data.rule.appsync_not_configured_with_firewall_v2",
+                            "message": "data.rule.appsync_not_configured_with_firewall_v2_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/appsync.html#AppSync.Client.get_graphql_api' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_APS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AppSync is configured with AWS Web Application Firewall v2.",
+                    "description": "Enable the AWS WAF service on AppSync to protect against application layer attacks. To block malicious requests to your AppSync, define the block criteria in the WAF web access control list (web ACL).",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "appsync"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-SNS-001",
                     "masterSnapshotId": [
                         "TEST_SNS_01"
@@ -3781,6 +3849,41 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EC2-006",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-006",
+                            "eval": "data.rule.ec2_instance_has_restricted_access",
+                            "message": "data.rule.ec2_instance_has_restricted_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_security_group_rules' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure EC2 instance that is not internet reachable with unrestricted access (0.0.0.0/0) other than HTTP/HTTPS port monitoring is enabled for EC2 instances",
+                    "description": "Ensure restrict traffic from unknown IP addresses and limit the access to known hosts, services, or specific entities. NOTE: We are excluding the HTTP-80 and HTTPs-443 web ports as these are Internet-facing ports with legitimate traffic.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI",
+                                "HIPAA",
+                                "APRA",
+                                "MAS",
                                 "NIST 800"
                             ],
                             "service": [
@@ -7871,7 +7974,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-001",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -7903,7 +8006,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-002",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -7935,7 +8038,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-003",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -7967,7 +8070,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-004",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -7999,7 +8102,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-005",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -8037,7 +8140,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-006",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -8068,7 +8171,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-007",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -8106,7 +8209,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-008",
                     "masterSnapshotId": [
-                        "TEST_IAM"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -8133,6 +8236,771 @@
                                 "NIST 800",
                                 "NIST CSF",
                                 "PCI-DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-011",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-011",
+                            "eval": "data.rule.iam_policy_not_overly_permissive_to_all_traffic",
+                            "message": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Lambda IAM policy is not overly permissive to all traffic",
+                    "description": "Ensure that the Lambda should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/lambda/latest/dg/security-iam.html",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-012",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-012",
+                            "eval": "data.rule.iam_policy_not_overly_permissive_to_lambda_service",
+                            "message": "data.rule.iam_policy_not_overly_permissive_to_lambda_service_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_012.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure IAM policy is not overly permissive to Lambda service",
+                    "description": "Ensure the principle of least privileges by ensuring that only restricted Lambda services for restricted resources.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-013",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-013",
+                            "eval": "data.rule.ec2_instance_with_iam_permissions_management_access",
+                            "message": "data.rule.ec2_instance_with_iam_permissions_management_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_013.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that the AWS EC2 instances don't have a risky set of permissions management access to minimize security risks.",
+                    "description": "This policy identifies IAM permissions management access that is defined as risky permissions. Ensure that the AWS EC2 instances don't have a risky set of permissions management access to minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-014",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-014",
+                            "eval": "data.rule.lambda_function_with_iam_write_access",
+                            "message": "data.rule.lambda_function_with_iam_write_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_014.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks.",
+                    "description": "This policy identifies IAM write permissions that are defined as risky permissions. Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-015",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-015",
+                            "eval": "data.rule.lambda_function_with_iam_permissions_management_access",
+                            "message": "data.rule.lambda_function_with_iam_permissions_management_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_015.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of permissions management access permissions to minimize security risks.",
+                    "description": "This policy identifies IAM permissions management access permissions that are defined as risky permissions. Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of permissions management access permissions to minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-016",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-016",
+                            "eval": "data.rule.ec2_instance_with_iam_write_access",
+                            "message": "data.rule.ec2_instance_with_iam_write_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_016.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that the AWS EC2 instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks.",
+                    "description": "This policy identifies IAM write permissions that are defined as risky permissions. Ensure that the AWS EC2 instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-017",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-017",
+                            "eval": "data.rule.lambda_function_with_org_write_access",
+                            "message": "data.rule.lambda_function_with_org_write_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_017.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of org write permissions to minimize security risks.",
+                    "description": "This policy identifies org write access that is defined as risky permissions. Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of org write permissions to minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-018",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-018",
+                            "eval": "data.rule.elasticbeanstalk_platform_with_iam_wildcard_resource_access",
+                            "message": "data.rule.elasticbeanstalk_platform_with_iam_wildcard_resource_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_018.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of elastic bean stalk.",
+                    "description": "It identifies AWS IAM permissions that contain '*' in the resource section of the policy statement of elastic bean stalk. The policy will identify those '*' only in case using '*' is not mandatory.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-019",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-019",
+                            "eval": "data.rule.ec2_with_iam_wildcard_resource_access",
+                            "message": "data.rule.ec2_with_iam_wildcard_resource_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_019.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ec2.",
+                    "description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement of ec2. The policy will identify those '*' only in case using '*' is not mandatory.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-020",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-020",
+                            "eval": "data.rule.lambda_function_with_iam_wildcard_resource_access",
+                            "message": "data.rule.lambda_function_with_iam_wildcard_resource_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_020.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of lambda function.",
+                    "description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement of lambda function. The policy will identify those '*' only in case using '*' is not mandatory.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-021",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-021",
+                            "eval": "data.rule.ecs_task_definition_with_iam_wildcard_resource_access",
+                            "message": "data.rule.ecs_task_definition_with_iam_wildcard_resource_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_021.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ecs task definition.",
+                    "description": "This policy identifies AWS IAM permissions that contain '*' in the resource section of the policy statement of ecs task definition. The policy will identify those '*' only in case using '*' is not mandatory.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-022",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-022",
+                            "eval": "data.rule.ecr_repository_is_publicly_accessible_through_iam_policies",
+                            "message": "data.rule.ecr_repository_is_publicly_accessible_through_iam_policies_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_022.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that the AWS ECR Repository resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "description": "It identifies the AWS ECR Repository resources which are publicly accessible through IAM policies. Ensure that the AWS ECR Repository resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-023",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-023",
+                            "eval": "data.rule.lambda_function_is_publicly_accessible_through_iam_policies",
+                            "message": "data.rule.lambda_function_is_publicly_accessible_through_iam_policies_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_023.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "description": "This policy identifies the AWS Lambda Function resources which are publicly accessible through IAM policies. Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-024",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-024",
+                            "eval": "data.rule.s3_bucket_is_publicly_accessible_through_iam_policies",
+                            "message": "data.rule.s3_bucket_is_publicly_accessible_through_iam_policies_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_024.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that the AWS S3 bucket resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "description": "This policy identifies the AWS S3 bucket resources which are publicly accessible through IAM policies. Ensure that the AWS S3 bucket resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-025",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-025",
+                            "eval": "data.rule.sqs_queue_is_publicly_accessible_through_iam_policies",
+                            "message": "data.rule.sqs_queue_is_publicly_accessible_through_iam_policies_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_025.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "description": "This policy identifies the AWS SQS Queue resources which are publicly accessible through IAM policies. Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-026",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-026",
+                            "eval": "data.rule.secret_manager_secret_is_publicly_accessible_through_iam_policies",
+                            "message": "data.rule.secret_manager_secret_is_publicly_accessible_through_iam_policies_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_026.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "description": "This policy identifies the AWS Secret Manager Secret resources which are publicly accessible through IAM policies. Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-027",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-027",
+                            "eval": "data.rule.iam_policy_permission_may_cause_privilege_escalation",
+                            "message": "data.rule.iam_policy_permission_may_cause_privilege_escalation_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_027.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS IAM policy do not have permission which may cause privilege escalation.",
+                    "description": "It identifies AWS IAM Policy which have permission that may cause privilege escalation. AWS IAM policy having weak permissions could be exploited by an attacker to elevate privileges. It is recommended to follow the principle of least privileges ensuring that AWS IAM policy does not have these sensitive permissions.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
                                 "SOC 2"
                             ],
                             "service": [

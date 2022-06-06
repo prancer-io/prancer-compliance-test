@@ -327,72 +327,72 @@ arc_private_endpoint_metadata := {
 #
 # PR-AZR-ARM-ARC-006
 
-default redis_persistence_enabled  = null
+# default redis_persistence_enabled  = null
 
-azure_attribute_absence["redis_persistence_enabled "] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.cache/redis"
-    not resource.properties.redisConfiguration.rdb-backup-enabled
-}
+# azure_attribute_absence["redis_persistence_enabled "] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.cache/redis"
+#     not resource.properties.redisConfiguration.rdb-backup-enabled
+# }
 
-source_path[{"redis_persistence_enabled ":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.cache/redis"
-    not resource.properties.redisConfiguration.rdb-backup-enabled
-    metadata:= {
-        "resource_path": [["resources",i,"properties","redisConfiguration","rdb-backup-enabled"]]
-    }
-}
-
-
-azure_issue["redis_persistence_enabled "] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.cache/redis"
-    lower(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
-}
-
-source_path[{"redis_persistence_enabled ":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.cache/redis"
-    lower(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","redisConfiguration","rdb-backup-enabled"]]
-    }
-}
-
-redis_persistence_enabled {
-	resource := input.resources[_]
-    lower(resource.type) == "microsoft.cache/redis"
-    not azure_attribute_absence["redis_persistence_enabled "]
-    not azure_issue["redis_persistence_enabled "]
-}
+# source_path[{"redis_persistence_enabled ":metadata}] {
+#     resource := input.resources[i]
+#     lower(resource.type) == "microsoft.cache/redis"
+#     not resource.properties.redisConfiguration.rdb-backup-enabled
+#     metadata:= {
+#         "resource_path": [["resources",i,"properties","redisConfiguration","rdb-backup-enabled"]]
+#     }
+# }
 
 
-redis_persistence_enabled = false {
-    azure_issue["redis_persistence_enabled "]
-}
+# azure_issue["redis_persistence_enabled "] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.cache/redis"
+#     lower(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
+# }
 
-redis_persistence_enabled = false {
-    azure_attribute_absence["redis_persistence_enabled "]
-}
+# source_path[{"redis_persistence_enabled ":metadata}] {
+#     resource := input.resources[i]
+#     lower(resource.type) == "microsoft.cache/redis"
+#     lower(resource.properties.redisConfiguration.rdb-backup-enabled) != "true"
+#     metadata:= {
+#         "resource_path": [["resources",i,"properties","redisConfiguration","rdb-backup-enabled"]]
+#     }
+# }
 
-redis_persistence_enabled_err = "Azure Redis Cache Persistence is currently not enabled." {
-    azure_issue["redis_persistence_enabled "]
-} else = "Microsoft.Cache/redis property 'redisConfiguration.rdb-backup-enabled' need to be exist. Currently its missing from the resource. Please set the value to 'true' after property addition." {
-    azure_attribute_absence["redis_persistence_enabled "]
-}
+# redis_persistence_enabled {
+# 	resource := input.resources[_]
+#     lower(resource.type) == "microsoft.cache/redis"
+#     not azure_attribute_absence["redis_persistence_enabled "]
+#     not azure_issue["redis_persistence_enabled "]
+# }
 
-redis_persistence_enabled_metadata := {
-    "Policy Code": "PR-AZR-ARM-ARC-006",
-    "Type": "IaC",  
-    "Product": "AZR",
-    "Language": "ARM template",
-    "Policy Title": "Ensure Persistence is enabled on Redis Cache to Perform complete system backups",
-    "Policy Description": "Enable Redis persistence. Redis persistence allows you to persist data stored in Redis. You can also take snapshots and back up the data, which you can load in case of a hardware failure. This is a huge advantage over Basic or Standard tier where all the data is stored in memory and there can be potential data loss in case of a failure where Cache nodes are down.",
-    "Resource Type": "microsoft.cache/redis",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
-}
+
+# redis_persistence_enabled = false {
+#     azure_issue["redis_persistence_enabled "]
+# }
+
+# redis_persistence_enabled = false {
+#     azure_attribute_absence["redis_persistence_enabled "]
+# }
+
+# redis_persistence_enabled_err = "Azure Redis Cache Persistence is currently not enabled." {
+#     azure_issue["redis_persistence_enabled "]
+# } else = "Microsoft.Cache/redis property 'redisConfiguration.rdb-backup-enabled' need to be exist. Currently its missing from the resource. Please set the value to 'true' after property addition." {
+#     azure_attribute_absence["redis_persistence_enabled "]
+# }
+
+# redis_persistence_enabled_metadata := {
+#     "Policy Code": "PR-AZR-ARM-ARC-006",
+#     "Type": "IaC",  
+#     "Product": "AZR",
+#     "Language": "ARM template",
+#     "Policy Title": "Ensure Persistence is enabled on Redis Cache to Perform complete system backups",
+#     "Policy Description": "Enable Redis persistence. Redis persistence allows you to persist data stored in Redis. You can also take snapshots and back up the data, which you can load in case of a hardware failure. This is a huge advantage over Basic or Standard tier where all the data is stored in memory and there can be potential data loss in case of a failure where Cache nodes are down.",
+#     "Resource Type": "microsoft.cache/redis",
+#     "Policy Help URL": "",
+#     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
+# }
 
 #
 # PR-AZR-ARM-ARC-007

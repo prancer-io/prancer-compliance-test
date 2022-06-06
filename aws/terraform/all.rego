@@ -1544,3 +1544,67 @@ ins_package_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/inspector_assessment_template"
 }
+
+#
+# PR-AWS-TRF-APS-001
+#
+
+default appsync_not_configured_with_firewall_v2 = null
+
+aws_issue["appsync_not_configured_with_firewall_v2"] {
+    lower(input.resources[i].type) =="aws_appsync_graphql_api"
+    output := concat(".", [input.resources[i].type, input.resources[i].name, "arn"])
+    count([c | contains(lower(input.resources[j].properties.resource_arn), output); c:=1 ]) == 0
+}
+
+aws_issue["appsync_not_configured_with_firewall_v2"] {
+    lower(input.resources[i].type) =="aws_appsync_graphql_api"
+    output := concat(".", [input.resources[i].type, input.resources[i].name, "arn"])
+    count([c | contains(lower(input.resources[j].properties.resource_arn), output); c:=1 ]) != 0
+    resource := input.resources[j]
+    lower(resource.type) == "aws_wafv2_web_acl_association"
+    not resource.properties.web_acl_arn
+}
+
+aws_issue["appsync_not_configured_with_firewall_v2"] {
+    lower(input.resources[i].type) =="aws_appsync_graphql_api"
+    output := concat(".", [input.resources[i].type, input.resources[i].name, "arn"])
+    count([c | contains(lower(input.resources[j].properties.resource_arn), output); c:=1 ]) != 0
+    resource := input.resources[j]
+    lower(resource.type) == "aws_wafv2_web_acl_association"
+    count(resource.properties.web_acl_arn) == 0
+}
+
+aws_issue["appsync_not_configured_with_firewall_v2"] {
+    lower(input.resources[i].type) =="aws_appsync_graphql_api"
+    output := concat(".", [input.resources[i].type, input.resources[i].name, "arn"])
+    count([c | contains(lower(input.resources[j].properties.resource_arn), output); c:=1 ]) != 0
+    resource := input.resources[j]
+    lower(resource.type) == "aws_wafv2_web_acl_association"
+    resource.properties.web_acl_arn == null
+}
+
+appsync_not_configured_with_firewall_v2 {
+    lower(input.resources[i].type) == "aws_appsync_graphql_api"
+    not aws_issue["appsync_not_configured_with_firewall_v2"]
+}
+
+appsync_not_configured_with_firewall_v2 = false {
+    aws_issue["appsync_not_configured_with_firewall_v2"]
+}
+
+appsync_not_configured_with_firewall_v2_err = "Ensure AppSync is configured with AWS Web Application Firewall v2." {
+    aws_issue["appsync_not_configured_with_firewall_v2"]
+}
+
+appsync_not_configured_with_firewall_v2_metadata := {
+    "Policy Code": "PR-AWS-TRF-APS-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AppSync is configured with AWS Web Application Firewall v2.",
+    "Policy Description": "Enable the AWS WAF service on AppSync to protect against application layer attacks. To block malicious requests to your AppSync, define the block criteria in the WAF web access control list (web ACL).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appsync_graphql_api#associate-web-acl-v2"
+}
