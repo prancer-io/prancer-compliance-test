@@ -121,12 +121,12 @@ acm_certificate_arn_metadata := {
 default acm_do_not_have_unused_certificate = true         
 
 acm_do_not_have_unused_certificate = false {
-    # lower(resource.Type) == "aws::acm::describe_certificate"
+    # lower(resource.Type) == "aws::certificatemanager::certificate"
     not input.Certificate.InUseBy
 }
 
 acm_do_not_have_unused_certificate = false {
-    # lower(resource.Type) == "aws::acm::describe_certificate"
+    # lower(resource.Type) == "aws::certificatemanager::certificate"
     count(input.Certificate.InUseBy) == 0
 }
 
@@ -140,7 +140,65 @@ acm_do_not_have_unused_certificate_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud",
     "Policy Title": "Ensure Certificate Manager (ACM) does not have unused certificates.",
-    "Policy Description": "It checkes if the ACM certificates provisioned are not left unused in ACM.",
+    "Policy Description": "It checks if the ACM certificates provisioned are not left unused in ACM.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm.html#ACM.Client.describe_certificate"
+}
+
+#
+# PR-AWS-CLD-ACM-006
+#
+
+default acm_do_not_have_certificate_pending_validation = true
+
+acm_do_not_have_certificate_pending_validation = false {
+    # lower(resource.Type) == "aws::certificatemanager::certificate"
+    lower(input.Certificate.Status) == "pending_validation"
+}
+
+
+acm_do_not_have_certificate_pending_validation_err = "Ensure AWS Certificate Manager (ACM) does not contain certificate pending validation." {
+    not acm_do_not_have_certificate_pending_validation
+}
+
+acm_do_not_have_certificate_pending_validation_metadata := {
+    "Policy Code": "PR-AWS-CLD-ACM-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Certificate Manager (ACM) does not contain certificate pending validation.",
+    "Policy Description": "It checks if the ACM certificate does not contain a certificate pending validation.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm.html#ACM.Client.describe_certificate"
+}
+
+#
+# PR-AWS-CLD-ACM-007
+#
+
+default acm_do_not_have_invalid_or_failed = true
+
+certificate_invalid_or_failed_status := ["validation_timed_out", "failed"]
+
+acm_do_not_have_invalid_or_failed = false {
+    # lower(resource.Type) == "aws::certificatemanager::certificate"
+    lower(input.Certificate.Status) == certificate_invalid_or_failed_status[_]
+}
+
+
+acm_do_not_have_invalid_or_failed_err = "Ensure AWS Certificate Manager (ACM) does not have invalid or failed certificate." {
+    not acm_do_not_have_invalid_or_failed
+}
+
+acm_do_not_have_invalid_or_failed_metadata := {
+    "Policy Code": "PR-AWS-CLD-ACM-007",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Certificate Manager (ACM) does not have invalid or failed certificate.",
+    "Policy Description": "It checks if the ACM certificate does not contain invalid or failed certificate.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm.html#ACM.Client.describe_certificate"

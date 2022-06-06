@@ -717,7 +717,7 @@ api_gateway_not_configured_with_firewall_v2_err = "AWS API Gateway REST API is n
 }
 
 api_gateway_not_configured_with_firewall_v2_metadata := {
-    "Policy Code": "PR-AWS-TRF-AG-007",
+    "Policy Code": "PR-AWS-TRF-AG-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -726,4 +726,78 @@ api_gateway_not_configured_with_firewall_v2_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#web_acl_arn"
+}
+
+#
+# PR-AWS-TRF-AG-009
+#
+
+default api_gateway_uses_specific_tls_version = null
+
+aws_issue["api_gateway_uses_specific_tls_version"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_domain_name"
+    resource.properties.security_policy != "TLS_1_2"
+}
+
+api_gateway_uses_specific_tls_version = false {
+    aws_issue["api_gateway_uses_specific_tls_version"]
+}
+
+api_gateway_uses_specific_tls_version {
+    lower(input.resources[i].type) == "aws_api_gateway_domain_name"
+    not aws_issue["api_gateway_uses_specific_tls_version"]
+}
+
+api_gateway_uses_specific_tls_version_err = "Ensure AWS API Gateway uses TLS 1.2 in transit" {
+    aws_issue["api_gateway_uses_specific_tls_version"]
+}
+
+api_gateway_uses_specific_tls_version_metadata := {
+    "Policy Code": "PR-AWS-TRF-AG-009",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS API Gateway uses TLS 1.2 in transit",
+    "Policy Description": "Ensure AWS API Gateway uses Transport Layer Security (TLS) version TLS_1_2.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_domain_name#security_policy"
+}
+
+#
+# PR-AWS-TRF-AG-010
+#
+
+default api_gateway_content_encoding_is_enabled = null
+
+aws_issue["api_gateway_content_encoding_is_enabled"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    not resource.properties.minimum_compression_size
+}
+
+api_gateway_content_encoding_is_enabled = false {
+    aws_issue["api_gateway_content_encoding_is_enabled"]
+}
+
+api_gateway_content_encoding_is_enabled {
+    lower(input.resources[i].type) == "aws_api_gateway_rest_api"
+    not aws_issue["api_gateway_content_encoding_is_enabled"]
+}
+
+api_gateway_content_encoding_is_enabled_err = "Ensure content encoding is enabled for API Gateway." {
+    aws_issue["api_gateway_content_encoding_is_enabled"]
+}
+
+api_gateway_content_encoding_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-TRF-AG-010",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure content encoding is enabled for API Gateway.",
+    "Policy Description": "When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Ensure content encoding is enabled for API Gateway.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/api_gateway_rest_api"
 }
