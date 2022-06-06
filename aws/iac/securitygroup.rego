@@ -1736,3 +1736,79 @@ sg_vpc_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-vpcid"
 }
+
+#
+# PR-AWS-CFR-SG-034
+#
+
+default ec2_instance_has_restricted_access = null
+
+ec2_instance_allowed_protocols := ["http", "https"]
+
+ec2_instance_allowed_ports := [443, 80]
+
+is_secure["ipv4"] = true {
+    # lower(resource.Type) == "aws::ec2::securitygroup"
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    SecurityRule := resource.Properties.SecurityGroupIngress[_]
+    lower(SecurityRule.IpProtocol) == ec2_instance_allowed_protocols[_]
+    lower(SecurityRule.CidrIp) == "0.0.0.0/0"
+	SecurityRule.FromPort == ec2_instance_allowed_ports[_]
+	SecurityRule.ToPort == ec2_instance_allowed_ports[_]
+    SecurityRule.FromPort == SecurityRule.ToPort
+}
+
+aws_isuue["ec2_instance_has_restricted_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    SecurityRule := resource.Properties.SecurityGroupIngress[_]
+    lower(SecurityRule.CidrIp) == "0.0.0.0/0"
+    not is_secure["ipv4"]
+}
+
+is_secure["ipv6"] = true {
+    # lower(resource.Type) == "aws::ec2::securitygroup"
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    SecurityRule := resource.Properties.SecurityGroupIngress[_]
+    lower(SecurityRule.IpProtocol) == ec2_instance_allowed_protocols[_]
+    lower(SecurityRule.CidrIpv6) == "::/0"
+	SecurityRule.FromPort == ec2_instance_allowed_ports[_]
+	SecurityRule.ToPort == ec2_instance_allowed_ports[_]
+    SecurityRule.FromPort == SecurityRule.ToPort
+}
+
+aws_isuue["ec2_instance_has_restricted_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    SecurityRule := resource.Properties.SecurityGroupIngress[_]
+    lower(SecurityRule.CidrIp) == "::/0"
+    not is_secure["ipv6"]
+}
+
+ec2_instance_has_restricted_access = false {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    aws_issue["ec2_instance_has_restricted_access"]
+}
+
+ec2_instance_has_restricted_access {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["ec2_instance_has_restricted_access"]
+}
+
+ec2_instance_has_restricted_access_err = "Ensure EC2 instance that is not internet reachable with unrestricted access (0.0.0.0/0) other than HTTP/HTTPS port monitoring is enabled for EC2 instances" {
+    not aws_isuue["ec2_instance_has_restricted_access"]
+}
+
+ec2_instance_has_restricted_access_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-034",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure EC2 instance that is not internet reachable with unrestricted access (0.0.0.0/0) other than HTTP/HTTPS port monitoring is enabled for EC2 instances",
+    "Policy Description": "Ensure restrict traffic from unknown IP addresses and limit the access to known hosts, services, or specific entities. NOTE: We are excluding the HTTP-80 and HTTPs-443 web ports as these are Internet-facing ports with legitimate traffic.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#aws-properties-ec2-security-group--examples"
+}
