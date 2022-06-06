@@ -115,8 +115,7 @@ nsg_inbound[port] {
 nsg_inbound[port] {
     resource := input.resources[_]
     port := iports[_]
-    lower(resource.type) == "azurerm_network_sec "*"
-    to_number(resource.properties.destination_pourity_rule"
+    lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
     resource.properties.source_address_prefix == "*"
