@@ -274,3 +274,32 @@ ami_not_infected_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
 }
+
+#
+# PR-AWS-CLD-EC2-009
+#
+
+# default ami_is_not_publicly_accessible = true
+
+# ami_is_not_publicly_accessible = false {
+#     # lower(resource.Type) == "aws::ec2::instance"
+#     images := input.Images[_]
+#     lower(images.Public) == "true"
+#     not images.ImageOwnerAlias
+# }
+
+# ami_is_not_publicly_accessible_err = "Ensure AWS Amazon Machine Image (AMI) is not publicly accessible." {
+#     not ami_is_not_publicly_accessible
+# }
+
+# ami_is_not_publicly_accessible_metadata := {
+#     "Policy Code": "PR-AWS-CLD-EC2-009",
+#     "Type": "cloud",
+#     "Product": "AWS",
+#     "Language": "AWS Cloud",
+#     "Policy Title": "Ensure AWS Amazon Machine Image (AMI) is not publicly accessible.",
+#     "Policy Description": "Ensure that the ID of the AMI is not infected with mining malware.",
+#     "Resource Type": "",
+#     "Policy Help URL": "",
+#     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
+# }
