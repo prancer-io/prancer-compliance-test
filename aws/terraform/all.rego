@@ -202,6 +202,57 @@ as_elb_health_check_metadata := {
 
 
 #
+# PR-AWS-TRF-AS-003
+#
+
+default as_http_token = null
+
+aws_issue["as_http_token"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_launch_configuration"
+    lower(resource.properties.metadata_options.http_tokens) != "required"
+}
+
+aws_attribute_absence["as_http_token"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_launch_configuration"
+    not resource.properties.metadata_options.http_tokens
+}
+
+as_http_token {
+    lower(input.resources[i].type) == "aws_launch_configuration"
+    not aws_issue["as_http_token"]
+    not aws_attribute_absence["as_http_token"]
+}
+
+as_http_token = false {
+    aws_issue["as_http_token"]
+}
+
+as_http_token = false {
+    aws_attribute_absence["as_http_token"]
+}
+
+as_http_token_err = "Ensure EC2 Auto Scaling Group does not launch IMDSv1" {
+    aws_issue["as_http_token"]
+} else = "Ensure EC2 Auto Scaling Group does not launch IMDSv1" {
+    aws_attribute_absence["as_http_token"]
+}
+
+as_http_token_metadata := {
+    "Policy Code": "PR-AWS-TRF-AS-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure EC2 Auto Scaling Group does not launch IMDSv1",
+    "Policy Description": "This control checks if EC2 instances use IMDSv1 instead of IMDSv2, this also applies to instances created in the ASG.IMDSv1 is vulnerable to Server Side Request Forgery (SSRF) vulnerabilities in web applications running on EC2, open Website Application Firewalls, open reverse proxies, and open layer 3 firewalls and NATs. IMDSv2 uses session-oriented requests every request is now protected by session authentication.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration"
+}
+
+
+#
 # PR-AWS-TRF-LG-001
 #
 

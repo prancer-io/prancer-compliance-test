@@ -323,6 +323,40 @@ as_elb_health_check_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-healthchecktype"
 }
 
+#
+# PR-AWS-CLD-AS-003
+#
+
+default as_http_token = true
+
+as_http_token = false {
+    # lower(resource.Type) == "aws::autoscaling::launchconfiguration"
+    LaunchConfigurations := input.LaunchConfigurations[_]
+    lower(LaunchConfigurations.MetadataOptions.HttpTokens) != "required"
+}
+
+as_http_token = false {
+    # lower(resource.Type) == "aws::autoscaling::launchconfiguration"
+    LaunchConfigurations := input.LaunchConfigurations[_]
+    not LaunchConfigurations.MetadataOptions.HttpTokens
+}
+
+as_http_token_err = "Ensure EC2 Auto Scaling Group does not launch IMDSv1" {
+    not as_http_token
+}
+
+as_http_token_metadata := {
+    "Policy Code": "PR-AWS-CLD-AS-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EC2 Auto Scaling Group does not launch IMDSv1",
+    "Policy Description": "This control checks if EC2 instances use IMDSv1 instead of IMDSv2, this also applies to instances created in the ASG.IMDSv1 is vulnerable to Server Side Request Forgery (SSRF) vulnerabilities in web applications running on EC2, open Website Application Firewalls, open reverse proxies, and open layer 3 firewalls and NATs. IMDSv2 uses session-oriented requests every request is now protected by session authentication.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/autoscaling/describe-launch-configurations.html"
+}
+
 
 #
 # PR-AWS-CLD-CFR-001

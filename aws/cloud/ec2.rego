@@ -175,3 +175,73 @@ ec2_monitoring_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-monitoring"
 }
+
+
+#
+# PR-AWS-CLD-EC2-006
+#
+
+default ec2_deletion_termination = true
+
+available_true_choices := ["true", true]
+
+ec2_deletion_termination = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    BlockDeviceMappings := Instances.BlockDeviceMappings[_]
+    has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    BlockDeviceMappings.Ebs.DeleteOnTermination == available_true_choices[_]
+    NetworkInterfaces := Instances.NetworkInterfaces[_]
+    has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+    NetworkInterfaces.Attachment.DeleteOnTermination == available_true_choices[_]
+}
+
+ec2_deletion_termination = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    BlockDeviceMappings := Instances.BlockDeviceMappings[_]
+    has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    BlockDeviceMappings.Ebs.DeleteOnTermination == available_true_choices[_]
+    NetworkInterfaces := Instances.NetworkInterfaces[_]
+    not has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+}
+
+
+ec2_deletion_termination = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    BlockDeviceMappings := Instances.BlockDeviceMappings[_]
+    not has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    NetworkInterfaces := Instances.NetworkInterfaces[_]
+    has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+    NetworkInterfaces.Attachment.DeleteOnTermination == available_true_choices[_]
+}
+
+ec2_deletion_termination = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    BlockDeviceMappings := Instances.BlockDeviceMappings[_]
+    not has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    NetworkInterfaces := Instances.NetworkInterfaces[_]
+    not has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+}
+
+ec2_deletion_termination_err = "Ensure AWS EC2 EBS and Network components' deletion protection is enabled" {
+    not ec2_deletion_termination
+}
+
+ec2_deletion_termination_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS EC2 EBS and Network components' deletion protection is enabled",
+    "Policy Description": "This checks if the EBS volumes are configured to be terminated along with the EC2 instance",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html"
+}
