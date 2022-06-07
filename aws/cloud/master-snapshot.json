@@ -27,7 +27,7 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_EC2",
+					"masterSnapshotId": "TEST_EC2_01",
 					"arn": "arn:aws:ec2:::",
 					"type": "ec2",
 					"collection": "aws_ec2",
@@ -38,6 +38,16 @@
 						"describe_addresses",
 						"describe_vpc_endpoint_connections",
 						"describe_volumes"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_EC2_02",
+					"arn": "arn:aws:ec2:::",
+					"type": "ec2",
+					"collection": "aws_ec2",
+					"listMethod": "describe_snapshots",
+					"detailMethods": [
+						"describe_snapshot_attribute"
 					]
 				},
 				{
@@ -277,7 +287,7 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_EC2NETWORKACL",
+					"masterSnapshotId": "TEST_EC2_01NETWORKACL",
 					"arn": "arn:aws:ec2:::",
 					"type": "ec2",
 					"collection": "aws_ec2",

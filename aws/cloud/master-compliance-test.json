@@ -215,7 +215,7 @@
                     "type": "rego",
                     "rule": "file(vpc.rego)",
                     "masterSnapshotId": [
-                        "TEST_EC2"
+                        "TEST_EC2_01"
                     ],
                     "evals": [
                         {
@@ -251,7 +251,7 @@
                     "type": "rego",
                     "rule": "file(vpc.rego)",
                     "masterSnapshotId": [
-                        "TEST_EC2"
+                        "TEST_EC2_01"
                     ],
                     "evals": [
                         {
@@ -282,7 +282,7 @@
                     "type": "rego",
                     "rule": "file(vpc.rego)",
                     "masterSnapshotId": [
-                        "TEST_EC2"
+                        "TEST_EC2_01"
                     ],
                     "evals": [
                         {
@@ -1757,7 +1757,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-EBS-001",
                     "masterSnapshotId": [
-                        "TEST_EC2"
+                        "TEST_EC2_01"
                     ],
                     "type": "rego",
                     "rule": "file(storage.rego)",
@@ -3894,7 +3894,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-EC2-001",
                     "masterSnapshotId": [
-                        "TEST_EC2"
+                        "TEST_EC2_01"
                     ],
                     "type": "rego",
                     "rule": "file(ec2.rego)",
@@ -3926,7 +3926,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-EC2-002",
                     "masterSnapshotId": [
-                        "TEST_EC2"
+                        "TEST_EC2_01"
                     ],
                     "type": "rego",
                     "rule": "file(ec2.rego)",
@@ -3959,7 +3959,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-EC2-003",
                     "masterSnapshotId": [
-                        "TEST_EC2"
+                        "TEST_EC2_01"
                     ],
                     "type": "rego",
                     "rule": "file(ec2.rego)",
@@ -3992,7 +3992,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-EC2-004",
                     "masterSnapshotId": [
-                        "TEST_EC2"
+                        "TEST_EC2_01"
                     ],
                     "type": "rego",
                     "rule": "file(ec2.rego)",
@@ -4023,7 +4023,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-EC2-005",
                     "masterSnapshotId": [
-                        "TEST_EC2"
+                        "TEST_EC2_01"
                     ],
                     "type": "rego",
                     "rule": "file(ec2.rego)",
@@ -4054,7 +4054,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-EC2-006",
                     "masterSnapshotId": [
-                        "TEST_EC2"
+                        "TEST_EC2_01"
                     ],
                     "type": "rego",
                     "rule": "file(ec2.rego)",
@@ -4083,7 +4083,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-EC2-007",
                     "masterSnapshotId": [
-                        "TEST_EC2"
+                        "TEST_EC2_01"
                     ],
                     "type": "rego",
                     "rule": "file(ec2.rego)",
@@ -4105,17 +4105,47 @@
                             "compliance": [
                                 "NIST 800"
                             ],
-                            "eval": "data.rule.ec2_deletion_termination",
-                            "message": "data.rule.ec2_deletion_termination_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_EC2_006.py"
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EC2-008",
+                    "masterSnapshotId": [
+                        "TEST_EC2_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-008",
+                            "eval": "data.rule.ebs_snapshot_public_access",
+                            "message": "data.rule.ebs_snapshot_public_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_008.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS EBS snapshots are not accessible to public",
+                    "description": "This policy identifies EC2 EBS snapshots are accessible to the public. Amazon Elastic Block Store (Amazon EBS) provides persistent block storage volumes with Amazon EC2 instances in the AWS Cloud. If EBS snapshots are inadvertently shared to the public, any unauthorized user with AWS console access can gain access to the snapshots and gain access to sensitive data.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "ec2"
+                            ]
                         }
                     ]
                 },
                 {
                     "masterTestId": "PR-AWS-CLD-NACL-001",
                     "masterSnapshotId": [
-                        "TEST_EC2NETWORKACL"
+                        "TEST_EC2_01NETWORKACL"
                     ],
                     "type": "rego",
                     "rule": "file(ec2networkacl.rego)",
@@ -4147,7 +4177,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-NACL-002",
                     "masterSnapshotId": [
-                        "TEST_EC2NETWORKACL"
+                        "TEST_EC2_01NETWORKACL"
                     ],
                     "type": "rego",
                     "rule": "file(ec2networkacl.rego)",
@@ -4179,7 +4209,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-NACL-003",
                     "masterSnapshotId": [
-                        "TEST_EC2NETWORKACL"
+                        "TEST_EC2_01NETWORKACL"
                     ],
                     "type": "rego",
                     "rule": "file(ec2networkacl.rego)",
@@ -4211,7 +4241,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-NACL-004",
                     "masterSnapshotId": [
-                        "TEST_EC2NETWORKACL"
+                        "TEST_EC2_01NETWORKACL"
                     ],
                     "type": "rego",
                     "rule": "file(ec2networkacl.rego)",
@@ -4243,7 +4273,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-NACL-005",
                     "masterSnapshotId": [
-                        "TEST_EC2NETWORKACL"
+                        "TEST_EC2_01NETWORKACL"
                     ],
                     "type": "rego",
                     "rule": "file(ec2networkacl.rego)",
@@ -4275,7 +4305,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-NACL-006",
                     "masterSnapshotId": [
-                        "TEST_EC2NETWORKACL"
+                        "TEST_EC2_01NETWORKACL"
                     ],
                     "type": "rego",
                     "rule": "file(ec2networkacl.rego)",
@@ -4307,7 +4337,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-NACL-007",
                     "masterSnapshotId": [
-                        "TEST_EC2NETWORKACL"
+                        "TEST_EC2_01NETWORKACL"
                     ],
                     "type": "rego",
                     "rule": "file(ec2networkacl.rego)",

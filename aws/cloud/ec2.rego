@@ -274,3 +274,31 @@ ami_not_infected_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
 }
+
+#
+# PR-AWS-CLD-EC2-008
+#
+
+default ebs_snapshot_public_access = true
+
+ebs_snapshot_public_access = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    CreateVolumePermissions := input.CreateVolumePermissions[_]
+    lower(CreateVolumePermissions.Group) == "all"
+}
+
+ebs_snapshot_public_access_err = "Ensure AWS EBS snapshots are not accessible to public" {
+    not ebs_snapshot_public_access
+}
+
+ebs_snapshot_public_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS EBS snapshots are not accessible to the public",
+    "Policy Description": "This policy identifies EC2 EBS snapshots are accessible to the public. Amazon Elastic Block Store (Amazon EBS) provides persistent block storage volumes with Amazon EC2 instances in the AWS Cloud. If EBS snapshots are inadvertently shared to the public, any unauthorized user with AWS console access can gain access to the snapshots and gain access to sensitive data.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
+}
