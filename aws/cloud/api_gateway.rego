@@ -330,3 +330,30 @@ api_gateway_content_encoding_is_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/apigateway.html#APIGateway.Client.get_rest_api"
 }
+
+#
+# PR-AWS-CLD-AG-011
+#
+
+default api_gateway_request_parameter_is_validated = true
+
+api_gateway_request_parameter_is_validated = false {
+    # lower(resource.Type) == "aws::apigateway::method"
+    not input.requestValidatorId
+}
+
+api_gateway_request_parameter_is_validated_err = "Ensure API gateway request parameter is validated." {
+    not api_gateway_request_parameter_is_validated
+}
+
+api_gateway_request_parameter_is_validated_metadata := {
+    "Policy Code": "PR-AWS-CLD-AG-011",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure API gateway request parameter is validated.",
+    "Policy Description": "Ensure that the identifier of a RequestValidator for request validation is present.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/apigateway.html#APIGateway.Client.get_method"
+}

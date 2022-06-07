@@ -738,3 +738,40 @@ api_gateway_content_encoding_is_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html#cfn-apigateway-restapi-minimumcompressionsize"
 }
+
+#
+# PR-AWS-CFR-AG-011
+#
+
+default api_gateway_request_parameter_is_validated = null
+
+aws_issue["api_gateway_request_parameter_is_validated"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    not resource.Properties.RequestValidatorId
+}
+
+api_gateway_request_parameter_is_validated {
+    lower(input.Resources[i].Type) == "aws::apigateway::method"
+    not aws_issue["api_gateway_request_parameter_is_validated"]
+}
+
+api_gateway_request_parameter_is_validated = false {
+    aws_issue["api_gateway_request_parameter_is_validated"]
+}
+
+api_gateway_request_parameter_is_validated_err = "Ensure API gateway request parameter is validated." {
+    aws_issue["api_gateway_request_parameter_is_validated"]
+}
+
+api_gateway_request_parameter_is_validated_metadata := {
+    "Policy Code": "PR-AWS-CFR-AG-011",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud Formation",
+    "Policy Title": "Ensure API gateway request parameter is validated.",
+    "Policy Description": "Ensure that the identifier of a RequestValidator for request validation is present.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html#cfn-apigateway-method-requestvalidatorid"
+}

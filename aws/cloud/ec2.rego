@@ -175,3 +175,32 @@ ec2_monitoring_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-monitoring"
 }
+
+#
+# PR-AWS-CLD-EC2-006
+#
+
+default ami_not_infected = true
+
+ami_not_infected = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    images := input.Images[_]
+    lower(images.Platform) == "windows"
+    contains(lower(images.ImageId), "ami-1e542176")
+}
+
+ami_not_infected_err = "Ensure Amazon Machine Image (AMI) is not infected with mining malware." {
+    not ami_not_infected
+}
+
+ami_not_infected_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Amazon Machine Image (AMI) is not infected with mining malware.",
+    "Policy Description": "Ensure that the ID of the AMI is not infected with mining malware.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
+}

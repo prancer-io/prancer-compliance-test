@@ -573,7 +573,8 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::apigateway::domainname"                    ]
+                        "aws::apigateway::domainname"
+                    ]
                 },
                 {
                     "masterTestId": "PR-AWS-CFR-AG-010",
@@ -612,7 +613,48 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::apigateway::restapi"                    ]
+                        "aws::apigateway::restapi"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-AG-011",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-AG-011",
+                            "eval": "data.rule.api_gateway_request_parameter_is_validated",
+                            "message": "data.rule.api_gateway_request_parameter_is_validated_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html#cfn-apigateway-method-requestvalidatorid' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_AG_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure API gateway request parameter is validated.",
+                    "description": "Ensure that the identifier of a RequestValidator for request validation is present.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR",
+                                "CIS",
+                                "ISO 27001",
+                                "LGPD",
+                                "HITRUST",
+                                "HIPAA"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::apigateway::method"
+                    ]
                 },
                 {
                     "masterTestId": "PR-AWS-CFR-SM-001",
@@ -6828,6 +6870,40 @@
                     "severity": "Low",
                     "title": "Ensure detailed monitoring is enabled for EC2 instances",
                     "description": "Ensure that detailed monitoring is enabled for your Amazon EC2 instances in order to have enough monitoring data to help you make better decisions on architecting and managing compute resources within your AWS account",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::ec2::instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-EC2-006",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-EC2-006",
+                            "eval": "data.rule.ami_not_infected",
+                            "message": "data.rule.ami_not_infected_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#aws-properties-ec2-instance--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_EC2_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Amazon Machine Image (AMI) is not infected with mining malware.",
+                    "description": "Ensure that the ID of the AMI is not infected with mining malware",
                     "tags": [
                         {
                             "cloud": "git",

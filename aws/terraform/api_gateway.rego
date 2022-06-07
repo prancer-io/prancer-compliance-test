@@ -801,3 +801,40 @@ api_gateway_content_encoding_is_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/api_gateway_rest_api"
 }
+
+#
+# PR-AWS-TRF-AG-011
+#
+
+default api_gateway_request_parameter_is_validated = null
+
+aws_issue["api_gateway_request_parameter_is_validated"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    not resource.properties.request_validator_id
+}
+
+api_gateway_request_parameter_is_validated = false {
+    aws_issue["api_gateway_request_parameter_is_validated"]
+}
+
+api_gateway_request_parameter_is_validated {
+    lower(input.resources[i].type) == "aws_api_gateway_method"
+    not aws_issue["api_gateway_request_parameter_is_validated"]
+}
+
+api_gateway_request_parameter_is_validated_err = "Ensure API gateway request parameter is validated." {
+    aws_issue["api_gateway_request_parameter_is_validated"]
+}
+
+api_gateway_request_parameter_is_validated_metadata := {
+    "Policy Code": "PR-AWS-TRF-AG-011",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure API gateway request parameter is validated.",
+    "Policy Description": "Ensure that the identifier of a RequestValidator for request validation is present.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method#request_validator_id"
+}

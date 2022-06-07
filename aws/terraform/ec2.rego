@@ -420,3 +420,40 @@ ec2_monitoring_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance"
 }
+
+#
+# PR-AWS-TRF-EC2-006
+#
+
+default ami_not_infected = null
+
+aws_issue["ami_not_infected"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    contains(lower(resource.properties.ami), "ami-1e542176")
+}
+
+ami_not_infected {
+    lower(input.resources[i].type) == "aws_instance"
+    not aws_issue["ami_not_infected"]
+}
+
+ami_not_infected = false {
+    aws_issue["ami_not_infected"]
+}
+
+ami_not_infected_err = "Ensure Amazon Machine Image (AMI) is not infected with mining malware." {
+    aws_issue["ami_not_infected"]
+}
+
+ami_not_infected_metadata := {
+    "Policy Code": "PR-AWS-TRF-EC2-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Amazon Machine Image (AMI) is not infected with mining malware.",
+    "Policy Description": "Ensure that the ID of the AMI is not infected with mining malware",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance"
+}

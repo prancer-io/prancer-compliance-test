@@ -353,3 +353,40 @@ ec2_monitoring_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-monitoring"
 }
+
+#
+# PR-AWS-CFR-EC2-006
+#
+
+default ami_not_infected = null
+
+aws_issue["ami_not_infected"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    contains(lower(resource.Properties.ImageId), "ami-1e542176")
+}
+
+ami_not_infected {
+    lower(input.Resources[i].Type) == "aws::ec2::instance"
+    not aws_issue["ami_not_infected"]
+}
+
+ami_not_infected = false {
+    aws_issue["ami_not_infected"]
+}
+
+ami_not_infected_err = "Ensure Amazon Machine Image (AMI) is not infected with mining malware." {
+    aws_issue["ami_not_infected"]
+}
+
+ami_not_infected_metadata := {
+    "Policy Code": "PR-AWS-CFR-EC2-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Amazon Machine Image (AMI) is not infected with mining malware.",
+    "Policy Description": "Ensure that the ID of the AMI is not infected with mining malware",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#aws-properties-ec2-instance--examples"
+}
