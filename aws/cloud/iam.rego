@@ -1123,7 +1123,7 @@ secret_manager_secret_is_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-027
 #
 
-default iam_policy_permission_may_cause_privilege_escalation = false
+default iam_policy_permission_may_cause_privilege_escalation = true
 
 action_iam_policy_permission_may_cause_privilege_escalation := ["iam:CreatePolicyVersion", "iam:SetDefaultPolicyVersion", "iam:PassRole", "iam:CreateAccessKey", "iam:CreateLoginProfile", "iam:UpdateLoginProfile", "iam:AttachUserPolicy", "iam:AttachGroupPolicy", "iam:AttachRolePolicy", "iam:PutUserPolicy", "iam:PutGroupPolicy", "iam:PutRolePolicy", "iam:AddUserToGroup", "iam:UpdateAssumeRolePolicy", "iam:*"]
 
@@ -1158,4 +1158,32 @@ iam_policy_permission_may_cause_privilege_escalation_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
+
+#
+# PR-AWS-CLD-IAM-028
+#
+
+default iam_access_key_enabled_on_root_account = true
+
+iam_access_key_enabled_on_root_account = false {
+    # lower(resource.Type) == "aws::iam::policy"
+    input.SummaryMap.AccountAccessKeysPresent == 0
+    
+}
+
+iam_access_key_enabled_on_root_account_err = "Ensure AWS Access key is enabled on root account." {
+    not iam_access_key_enabled_on_root_account
+}
+
+iam_access_key_enabled_on_root_account_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-028",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Access key is enabled on root account.",
+    "Policy Description": "It identifies that account access key is enabled or not from IAM account summary."
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#accountsummary"
 }

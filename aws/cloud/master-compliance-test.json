@@ -9489,6 +9489,35 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-028",
+                    "masterSnapshotId": [
+                        "TEST_IAM_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-028",
+                            "eval": "data.rule.iam_access_key_enabled_on_root_account",
+                            "message": "data.rule.iam_access_key_enabled_on_root_account_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#accountsummary' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_028.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS Access key is enabled on root account.",
+                    "description": "It identifies that account access key is enabled or not from IAM account summary.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
