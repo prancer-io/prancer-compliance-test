@@ -275,3 +275,58 @@ api_gateway_not_configured_with_firewall_v2_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/apigateway.html#APIGateway.Client.get_stage"
 }
+
+#
+# PR-AWS-CLD-AG-009
+#
+
+default api_gateway_uses_specific_tls_version = true
+
+api_gateway_uses_specific_tls_version = false {
+    # lower(resource.Type) == "aws::apigateway::domainname"
+    input.securityPolicy != "TLS_1_2"
+    
+}
+
+api_gateway_uses_specific_tls_version_err = "Ensure AWS API Gateway uses TLS 1.2 in transit" {
+    not api_gateway_uses_specific_tls_version
+}
+
+api_gateway_uses_specific_tls_version_metadata := {
+    "Policy Code": "PR-AWS-CLD-AG-009",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS API Gateway uses TLS 1.2 in transit",
+    "Policy Description": "Ensure AWS API Gateway uses Transport Layer Security (TLS) version TLS_1_2.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/apigateway.html#APIGateway.Client.get_domain_name"
+}
+
+#
+# PR-AWS-CLD-AG-010
+#
+
+default api_gateway_content_encoding_is_enabled = true
+
+api_gateway_content_encoding_is_enabled = false {
+    # lower(resource.Type) == "aws::apigateway::restapi"
+    not input.minimumCompressionSize
+}
+
+api_gateway_content_encoding_is_enabled_err = "Ensure content encoding is enabled for API Gateway." {
+    not api_gateway_content_encoding_is_enabled
+}
+
+api_gateway_content_encoding_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-CLD-AG-010",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure content encoding is enabled for API Gateway.",
+    "Policy Description": "When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Ensure content encoding is enabled for API Gateway.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/apigateway.html#APIGateway.Client.get_rest_api"
+}

@@ -564,6 +564,80 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-AG-009",
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "masterSnapshotId": [
+                        "TEST_API_GATEWAY_01"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AG-009",
+                            "eval": "data.rule.api_gateway_uses_specific_tls_version",
+                            "message": "data.rule.api_gateway_uses_specific_tls_version_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/apigateway.html#APIGateway.Client.get_domain_name' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AG_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS API Gateway uses TLS 1.2 in transit",
+                    "description": "Ensure AWS API Gateway uses Transport Layer Security (TLS) version TLS_1_2.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR",
+                                "CIS",
+                                "ISO 27001",
+                                "LGPD",
+                                "HITRUST",
+                                "HIPAA"
+                            ],
+                            "service": [
+                                "api gateway"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-AG-010",
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "masterSnapshotId": [
+                        "TEST_API_GATEWAY_01"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AG-010",
+                            "eval": "data.rule.api_gateway_content_encoding_is_enabled",
+                            "message": "data.rule.api_gateway_content_encoding_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/apigateway.html#APIGateway.Client.get_rest_api' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AG_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure content encoding is enabled for API Gateway.",
+                    "description": "When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Ensure content encoding is enabled for API Gateway.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR",
+                                "CIS",
+                                "ISO 27001",
+                                "LGPD",
+                                "HITRUST",
+                                "HIPAA"
+                            ],
+                            "service": [
+                                "api gateway"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-EKS-001",
                     "masterSnapshotId": [
                         "TEST_EKS"
@@ -4466,6 +4540,84 @@
                                 "CSA-CCM",
                                 "HITRUST",
                                 "NIST 800"
+                            ],
+                            "service": [
+                                "acm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ACM-006",
+                    "masterSnapshotId": [
+                        "TEST_ACM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(acm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ACM-006",
+                            "eval": "data.rule.acm_do_not_have_certificate_pending_validation",
+                            "message": "data.rule.acm_do_not_have_certificate_pending_validation_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm.html#ACM.Client.describe_certificate' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ACM_006.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS Certificate Manager (ACM) does not contain certificate pending validation.",
+                    "description": "It checks if the ACM certificate does not contain a certificate pending validation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA-CCM",
+                                "APRA",
+                                "HITRUST",
+                                "NIST 800",
+                                "MLPS",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "PCI-DSS",
+                                "SOC 2",
+                                "MAS TRM"
+                            ],
+                            "service": [
+                                "acm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ACM-007",
+                    "masterSnapshotId": [
+                        "TEST_ACM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(acm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ACM-007",
+                            "eval": "data.rule.acm_do_not_have_invalid_or_failed",
+                            "message": "data.rule.acm_do_not_have_invalid_or_failed_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm.html#ACM.Client.describe_certificate' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ACM_007.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS Certificate Manager (ACM) does not have invalid or failed certificate.",
+                    "description": "It checks if the ACM certificate does not contain invalid or failed certificate.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA-CCM",
+                                "APRA",
+                                "HITRUST",
+                                "NIST 800",
+                                "MLPS",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "PCI-DSS",
+                                "SOC 2",
+                                "MAS TRM"
                             ],
                             "service": [
                                 "acm"
