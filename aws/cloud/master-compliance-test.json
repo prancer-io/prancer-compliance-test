@@ -331,7 +331,15 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "Best Practice"
+                                "MAS",
+                                "SOC2",
+                                "ISO 27001",
+                                "NIST",
+                                "CIS",
+                                "GDPR",
+                                "PCI DSS",
+                                "GDPR",
+                                "HIPAA"
                             ],
                             "service": [
                                 "api gateway"
@@ -487,7 +495,15 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "LGPD",
+                                "CSA CCM",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "NIST CSF",
+                                "PCI DSS"
                             ],
                             "service": [
                                 "api gateway"
@@ -518,7 +534,22 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "NIST 800"
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NZISM",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "SOC 2"
                             ],
                             "service": [
                                 "api gateway"
@@ -1079,11 +1110,20 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "CSA-CCM",
+                                "APRA",
+                                "CCPA",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
                                 "GDPR",
                                 "HITRUST",
+                                "MAS TRM",
+                                "MITRE",
+                                "MLPS",
                                 "NIST 800",
-                                "PCI-DSS",
+                                "NIST CSF",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "RMiT",
                                 "SOC 2"
                             ],
                             "service": [
@@ -2703,7 +2743,13 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "PCI-DSS"
+                                "CSA CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "NIST CSF",
+                                "NIST 800",
+                                "PCI DSS"
                             ],
                             "service": [
                                 "elb"
@@ -2765,6 +2811,8 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "HITRUST",
+                                "MAS TRM",
                                 "PCI-DSS",
                                 "NIST 800"
                             ],
@@ -3336,6 +3384,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-AS-003",
+                    "masterSnapshotId": [
+                        "TEST_ALL_07"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AS-003",
+                            "eval": "data.rule.as_http_token",
+                            "message": "data.rule.as_http_token_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/cli/latest/reference/autoscaling/describe-launch-configurations.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AS_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure EC2 Auto Scaling Group does not launch IMDSv1",
+                    "description": "This control checks if EC2 instances use IMDSv1 instead of IMDSv2, this also applies to instances created in the ASG.IMDSv1 is vulnerable to Server Side Request Forgery (SSRF) vulnerabilities in web applications running on EC2, open Website Application Firewalls, open reverse proxies, and open layer 3 firewalls and NATs. IMDSv2 uses session-oriented requests every request is now protected by session authentication.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "auto scaling"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-CFR-001",
                     "masterSnapshotId": [
                         "TEST_ALL_14"
@@ -3671,7 +3748,13 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "NIST 800"
+                                "NIST 800",
+                                "GDPR",
+                                "CIS",
+                                "ISO 27001",
+                                "LGPD",
+                                "HITRUST",
+                                "HIPAA"
                             ],
                             "service": [
                                 "appsync"
@@ -3978,10 +4061,39 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-EC2-006",
+                            "eval": "data.rule.ec2_deletion_termination",
+                            "message": "data.rule.ec2_deletion_termination_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_006.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS EC2 EBS and Network components' deletion protection is enabled",
+                    "description": "This checks if the EBS volumes are configured to be terminated along with the EC2 instance",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EC2-007",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-007",
                             "eval": "data.rule.ami_not_infected",
                             "message": "data.rule.ami_not_infected_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_EC2_006.py"
+                            "remediationFunction": "PR_AWS_CLD_EC2_007.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3993,9 +4105,10 @@
                             "compliance": [
                                 "NIST 800"
                             ],
-                            "service": [
-                                "ec2"
-                            ]
+                            "eval": "data.rule.ec2_deletion_termination",
+                            "message": "data.rule.ec2_deletion_termination_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_006.py"
                         }
                     ]
                 },
@@ -4512,7 +4625,18 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS",
+                                "PIPEDA"
                             ],
                             "service": [
                                 "acm"
@@ -4543,9 +4667,23 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "CSA-CCM",
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
+                                "GDPR",
                                 "HITRUST",
-                                "NIST 800"
+                                "MAS TRM",
+                                "MITRE",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "RMiT",
+                                "SOC 2"
                             ],
                             "service": [
                                 "acm"
@@ -5492,9 +5630,22 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "PCI-DSS",
-                                "HIPAA",
-                                "NIST 800"
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NZISM",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "RMiT"
                             ],
                             "service": [
                                 "cloudfront"
@@ -5525,10 +5676,21 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "PCI-DSS",
-                                "HIPAA",
-                                "GDPR",
-                                "NIST 800"
+                                "APRA",
+                                "LGPD",
+                                "CIS",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "MITRE",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NZISM",
+                                "PCI DSS",
+                                "RMiT"
                             ],
                             "service": [
                                 "cloudfront"
@@ -5559,13 +5721,20 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "APRA",
+                                "LGPD",
                                 "CIS",
-                                "CSA-CCM",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
                                 "HITRUST",
                                 "ISO 27001",
+                                "MAS TRM",
+                                "MLPS",
                                 "NIST 800",
-                                "PCI-DSS",
-                                "GDPR"
+                                "NIST CSF",
+                                "PCI DSS",
+                                "RMiT"
                             ],
                             "service": [
                                 "cloudfront"
@@ -5596,9 +5765,20 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "PCI-DSS",
-                                "HIPAA",
-                                "NIST 800"
+                                "APRA",
+                                "LGPD",
+                                "CIS",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS",
+                                "RMiT"
                             ],
                             "service": [
                                 "cloudfront"
@@ -5629,13 +5809,19 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "CIS",
-                                "CSA-CCM",
+                                "APRA",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
                                 "HITRUST",
                                 "ISO 27001",
+                                "MAS TRM",
+                                "MLPS",
                                 "NIST 800",
-                                "PCI-DSS",
-                                "GDPR"
+                                "NIST CSF",
+                                "PCI DSS",
+                                "RMiT"
                             ],
                             "service": [
                                 "cloudfront"
@@ -5666,8 +5852,22 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "PCI-DSS",
-                                "NIST 800"
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MITRE",
+                                "MAS TRM",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NZISM",
+                                "PCI DSS",
+                                "RMiT"
                             ],
                             "service": [
                                 "cloudfront"

@@ -279,7 +279,15 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "MAS",
+                                "SOC2",
+                                "ISO 27001",
+                                "NIST",
+                                "CIS",
+                                "GDPR",
+                                "PCI DSS",
+                                "GDPR",
+                                "HIPAA"
                             ],
                             "service": [
                                 "cloudformation"
@@ -450,7 +458,15 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "LGPD",
+                                "CSA CCM",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "NIST CSF",
+                                "PCI DSS"
                             ],
                             "service": [
                                 "cloudformation"
@@ -484,7 +500,22 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "NIST 800"
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NZISM",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "SOC 2"
                             ],
                             "service": [
                                 "cloudformation"
@@ -973,6 +1004,38 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CFR-AS-003",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-AS-003",
+                            "eval": "data.rule.as_http_token",
+                            "message": "data.rule.as_http_token_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-launchconfiguration-metadataoptions.html#cfn-autoscaling-launchconfiguration-metadataoptions-httptokens' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_AS_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure EC2 Auto Scaling Group does not launch IMDSv1",
+                    "description": "This control checks if EC2 instances use IMDSv1 instead of IMDSv2, this also applies to instances created in the ASG.IMDSv1 is vulnerable to Server Side Request Forgery (SSRF) vulnerabilities in web applications running on EC2, open Website Application Firewalls, open reverse proxies, and open layer 3 firewalls and NATs. IMDSv2 uses session-oriented requests every request is now protected by session authentication.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::autoscaling::launchconfiguration"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CFR-CFR-001",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1403,7 +1466,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "NIST 800"
+                                "NIST 800",
+                                "GDPR",
+                                "CIS",
+                                "ISO 27001",
+                                "LGPD",
+                                "HITRUST",
+                                "HIPAA"
                             ],
                             "service": [
                                 "cloudformation"
@@ -3156,7 +3225,13 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "PCI-DSS"
+                                "CSA CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "NIST CSF",
+                                "NIST 800",
+                                "PCI DSS"
                             ],
                             "service": [
                                 "cloudformation"
@@ -3224,6 +3299,8 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "HITRUST",
+                                "MAS TRM",
                                 "PCI-DSS",
                                 "NIST 800"
                             ],
@@ -3396,11 +3473,20 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CSA-CCM",
+                                "APRA",
+                                "CCPA",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
                                 "GDPR",
                                 "HITRUST",
+                                "MAS TRM",
+                                "MITRE",
+                                "MLPS",
                                 "NIST 800",
-                                "PCI-DSS",
+                                "NIST CSF",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "RMiT",
                                 "SOC 2"
                             ],
                             "service": [
@@ -6466,7 +6552,18 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS",
+                                "PIPEDA"
                             ],
                             "service": [
                                 "cloudformation"
@@ -6500,9 +6597,23 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CSA-CCM",
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
+                                "GDPR",
                                 "HITRUST",
-                                "NIST 800"
+                                "MAS TRM",
+                                "MITRE",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "RMiT",
+                                "SOC 2"
                             ],
                             "service": [
                                 "cloudformation"
@@ -6895,10 +7006,42 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CFR-EC2-006",
+                            "eval": "data.rule.ec2_deletion_termination",
+                            "message": "data.rule.ec2_deletion_termination_err",
+                            "remediationDescription": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-template.html#cfn-ec2-blockdev-template-deleteontermination' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_EC2_006.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS EC2 EBS and Network components' deletion protection is enabled",
+                    "description": "This checks if the EBS volumes are configured to be terminated along with the EC2 instance",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::ec2::instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-EC2-007",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-EC2-007",
                             "eval": "data.rule.ami_not_infected",
                             "message": "data.rule.ami_not_infected_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#aws-properties-ec2-instance--examples' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CFR_EC2_006.py"
+                            "remediationFunction": "PR_AWS_CFR_EC2_007.py"
                         }
                     ],
                     "severity": "Medium",
@@ -7729,9 +7872,22 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "PCI-DSS",
-                                "HIPAA",
-                                "NIST 800"
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NZISM",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "RMiT"
                             ],
                             "service": [
                                 "cloudformation"
@@ -7765,10 +7921,21 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "PCI-DSS",
-                                "HIPAA",
-                                "GDPR",
-                                "NIST 800"
+                                "APRA",
+                                "LGPD",
+                                "CIS",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "MITRE",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NZISM",
+                                "PCI DSS",
+                                "RMiT"
                             ],
                             "service": [
                                 "cloudformation"
@@ -7802,13 +7969,20 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "APRA",
+                                "LGPD",
                                 "CIS",
-                                "CSA-CCM",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
                                 "HITRUST",
                                 "ISO 27001",
+                                "MAS TRM",
+                                "MLPS",
                                 "NIST 800",
-                                "PCI-DSS",
-                                "GDPR"
+                                "NIST CSF",
+                                "PCI DSS",
+                                "RMiT"
                             ],
                             "service": [
                                 "cloudformation"
@@ -7842,9 +8016,20 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "PCI-DSS",
-                                "HIPAA",
-                                "NIST 800"
+                                "APRA",
+                                "LGPD",
+                                "CIS",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MAS TRM",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS",
+                                "RMiT"
                             ],
                             "service": [
                                 "cloudformation"
@@ -7878,13 +8063,19 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
-                                "CSA-CCM",
+                                "APRA",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
                                 "HITRUST",
                                 "ISO 27001",
+                                "MAS TRM",
+                                "MLPS",
                                 "NIST 800",
-                                "PCI-DSS",
-                                "GDPR"
+                                "NIST CSF",
+                                "PCI DSS",
+                                "RMiT"
                             ],
                             "service": [
                                 "cloudformation"
@@ -7918,8 +8109,22 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "PCI-DSS",
-                                "NIST 800"
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China-Article",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MITRE",
+                                "MAS TRM",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NZISM",
+                                "PCI DSS",
+                                "RMiT"
                             ],
                             "service": [
                                 "cloudformation"

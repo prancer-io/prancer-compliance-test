@@ -740,6 +740,57 @@ as_elb_health_check_metadata := {
 }
 
 #
+# PR-AWS-CFR-AS-003
+#
+
+default as_http_token = null
+
+aws_issue["as_http_token"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::autoscaling::launchconfiguration"
+    lower(resource.Properties.MetadataOptions.HttpTokens) != "required"
+}
+
+aws_attribute_absence["as_http_token"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::autoscaling::launchconfiguration"
+    not resource.Properties.MetadataOptions.HttpTokens
+}
+
+as_http_token {
+    lower(input.Resources[i].Type) == "aws::autoscaling::launchconfiguration"
+    not aws_issue["as_http_token"]
+    not aws_attribute_absence["as_http_token"]
+}
+
+as_http_token = false {
+    aws_issue["as_http_token"]
+}
+
+as_http_token = false {
+    aws_attribute_absence["as_http_token"]
+}
+
+as_http_token_err = "Ensure EC2 Auto Scaling Group does not launch IMDSv1" {
+    aws_issue["as_http_token"]
+} else = "Ensure EC2 Auto Scaling Group does not launch IMDSv1" {
+    aws_attribute_absence["as_http_token"]
+}
+
+as_http_token_metadata := {
+    "Policy Code": "PR-AWS-CFR-AS-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure EC2 Auto Scaling Group does not launch IMDSv1",
+    "Policy Description": "This control checks if EC2 instances use IMDSv1 instead of IMDSv2, this also applies to instances created in the ASG.IMDSv1 is vulnerable to Server Side Request Forgery (SSRF) vulnerabilities in web applications running on EC2, open Website Application Firewalls, open reverse proxies, and open layer 3 firewalls and NATs. IMDSv2 uses session-oriented requests every request is now protected by session authentication.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-launchconfiguration-metadataoptions.html#cfn-autoscaling-launchconfiguration-metadataoptions-httptokens"
+}
+
+
+#
 # PR-AWS-CFR-CFR-001
 #
 

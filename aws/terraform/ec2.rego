@@ -425,6 +425,79 @@ ec2_monitoring_metadata := {
 # PR-AWS-TRF-EC2-006
 #
 
+available_true_choices := ["true", true]
+
+default ec2_deletion_termination = null
+
+aws_issue["ec2_deletion_termination"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    ebs_block_device := resource.properties.ebs_block_device[_]
+    has_property(ebs_block_device, "delete_on_termination")
+    ebs_block_device.delete_on_termination == available_true_choices[_]
+    network_interface := resource.properties.network_interface[_]
+    has_property(network_interface, "delete_on_termination")
+    network_interface.delete_on_termination == available_true_choices[_]
+}
+
+aws_issue["ec2_deletion_termination"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    ebs_block_device := resource.properties.ebs_block_device[_]
+    has_property(ebs_block_device, "delete_on_termination")
+    ebs_block_device.delete_on_termination == available_true_choices[_]
+    network_interface := resource.properties.network_interface[_]
+    not has_property(network_interface, "delete_on_termination")
+}
+
+aws_issue["ec2_deletion_termination"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    ebs_block_device := resource.properties.ebs_block_device[_]
+    not has_property(ebs_block_device, "delete_on_termination")
+    network_interface := resource.properties.network_interface[_]
+    has_property(network_interface, "delete_on_termination")
+    network_interface.delete_on_termination == available_true_choices[_]
+}
+
+aws_issue["ec2_deletion_termination"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    ebs_block_device := resource.properties.ebs_block_device[_]
+    not has_property(ebs_block_device, "delete_on_termination")
+    network_interface := resource.properties.network_interface[_]
+    not has_property(network_interface, "delete_on_termination")
+}
+
+ec2_deletion_termination {
+    lower(input.resources[i].type) == "aws_instance"
+    not aws_issue["ec2_deletion_termination"]
+}
+
+ec2_deletion_termination = false {
+    aws_issue["ec2_deletion_termination"]
+}
+
+ec2_deletion_termination_err = "Ensure AWS EC2 EBS and Network components' deletion protection is enabled" {
+    aws_issue["ec2_deletion_termination"]
+}
+
+ec2_deletion_termination_metadata := {
+    "Policy Code": "PR-AWS-TRF-EC2-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS EC2 EBS and Network components' deletion protection is enabled",
+    "Policy Description": "This checks if the EBS volumes are configured to be terminated along with the EC2 instance",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance"
+}
+
+#
+# PR-AWS-TRF-EC2-007
+#
+
 default ami_not_infected = null
 
 aws_issue["ami_not_infected"] {
@@ -447,7 +520,7 @@ ami_not_infected_err = "Ensure Amazon Machine Image (AMI) is not infected with m
 }
 
 ami_not_infected_metadata := {
-    "Policy Code": "PR-AWS-TRF-EC2-006",
+    "Policy Code": "PR-AWS-TRF-EC2-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

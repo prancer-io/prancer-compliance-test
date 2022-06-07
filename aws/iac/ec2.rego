@@ -358,6 +358,79 @@ ec2_monitoring_metadata := {
 # PR-AWS-CFR-EC2-006
 #
 
+default ec2_deletion_termination = null
+
+available_true_choices := ["true", true]
+
+aws_issue["ec2_deletion_termination"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    BlockDeviceMappings := resource.Properties.BlockDeviceMappings[_]
+    has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    BlockDeviceMappings.Ebs.DeleteOnTermination == available_true_choices[_]
+    NetworkInterfaces := resource.Properties.NetworkInterfaces[_]
+    has_property(NetworkInterfaces, "DeleteOnTermination")
+    NetworkInterfaces.DeleteOnTermination == available_true_choices[_]
+}
+
+aws_issue["ec2_deletion_termination"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    BlockDeviceMappings := resource.Properties.BlockDeviceMappings[_]
+    has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    BlockDeviceMappings.Ebs.DeleteOnTermination == available_true_choices[_]
+    NetworkInterfaces := resource.Properties.NetworkInterfaces[_]
+    not has_property(NetworkInterfaces, "DeleteOnTermination")
+}
+
+aws_issue["ec2_deletion_termination"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    BlockDeviceMappings := resource.Properties.BlockDeviceMappings[_]
+    not has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    NetworkInterfaces := resource.Properties.NetworkInterfaces[_]
+    has_property(NetworkInterfaces, "DeleteOnTermination")
+    NetworkInterfaces.DeleteOnTermination == available_true_choices[_]
+}
+
+aws_issue["ec2_deletion_termination"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    BlockDeviceMappings := resource.Properties.BlockDeviceMappings[_]
+    not has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    NetworkInterfaces := resource.Properties.NetworkInterfaces[_]
+    not has_property(NetworkInterfaces, "DeleteOnTermination")
+}
+
+ec2_deletion_termination {
+    lower(input.Resources[i].Type) == "aws::ec2::instance"
+    not aws_issue["ec2_deletion_termination"]
+}
+
+ec2_deletion_termination = false {
+    aws_issue["ec2_deletion_termination"]
+}
+
+ec2_deletion_termination_err = "Ensure AWS EC2 EBS and Network components' deletion protection is enabled" {
+    aws_issue["ec2_deletion_termination"]
+}
+
+ec2_deletion_termination_metadata := {
+    "Policy Code": "PR-AWS-CFR-EC2-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS EC2 EBS and Network components' deletion protection is enabled",
+    "Policy Description": "This checks if the EBS volumes are configured to be terminated along with the EC2 instance",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-template.html#cfn-ec2-blockdev-template-deleteontermination"
+}
+
+#
+# PR-AWS-CFR-EC2-007
+#
+
 default ami_not_infected = null
 
 aws_issue["ami_not_infected"] {
@@ -380,7 +453,7 @@ ami_not_infected_err = "Ensure Amazon Machine Image (AMI) is not infected with m
 }
 
 ami_not_infected_metadata := {
-    "Policy Code": "PR-AWS-CFR-EC2-006",
+    "Policy Code": "PR-AWS-CFR-EC2-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
