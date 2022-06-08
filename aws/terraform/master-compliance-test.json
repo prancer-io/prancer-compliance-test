@@ -6899,6 +6899,54 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-EC2-010",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-EC2-010",
+                            "eval": "data.rule.ebs_volume_kms",
+                            "message": "data.rule.ebs_volume_kms_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#kms_key_id' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_EC2_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure EBS volumes are encrypted using Customer Managed Key (CMK)",
+                    "description": "This control checks if the default AWS Key is used for encryption. GS mandates CMK to be used for encryption.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_instance"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-ECS-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"

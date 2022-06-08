@@ -530,3 +530,42 @@ ami_not_infected_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance"
 }
+
+
+#
+# PR-AWS-TRF-EC2-010
+#
+
+default ebs_volume_kms = null
+
+aws_issue["ebs_volume_kms"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    ebs_block_device := resource.properties.ebs_block_device[_]
+    not ebs_block_device.kms_key_id
+}
+
+ebs_volume_kms {
+    lower(input.resources[i].type) == "aws_instance"
+    not aws_issue["ebs_volume_kms"]
+}
+
+ebs_volume_kms = false {
+    aws_issue["ebs_volume_kms"]
+}
+
+ebs_volume_kms_err = "Ensure EBS volumes are encrypted using Customer Managed Key (CMK)" {
+    aws_issue["ebs_volume_kms"]
+}
+
+ebs_volume_kms_metadata := {
+    "Policy Code": "PR-AWS-TRF-EC2-010",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure EBS volumes are encrypted using Customer Managed Key (CMK)",
+    "Policy Description": "This control checks if the default AWS Key is used for encryption. GS mandates CMK to be used for encryption.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#kms_key_id"
+}
