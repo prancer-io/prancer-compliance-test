@@ -1,5 +1,7 @@
 package rule
 
+available_true_choices := ["true", true]
+available_false_choices := ["false", false]
 has_property(parent_object, target_property) { 
 	_ = parent_object[target_property]
 }
@@ -392,6 +394,116 @@ cf_sns_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html"
 }
 
+#
+# PR-AWS-CLD-CFR-002
+#
+
+default cloudFormation_template_configured_with_stack_policy = true
+
+cloudFormation_template_configured_with_stack_policy = false {
+    # lower(resource.Type) == "AWS::CloudFormation::Stack"
+    count(input.StackPolicyBody) == 0
+}
+
+cloudFormation_template_configured_with_stack_policy_err = "Ensure CloudFormation template is configured with stack policy." {
+    not cloudFormation_template_configured_with_stack_policy
+}
+
+cloudFormation_template_configured_with_stack_policy_metadata := {
+    "Policy Code": "PR-AWS-CLD-CFR-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure CloudFormation template is configured with stack policy.",
+    "Policy Description": "In AWS IAM policy governs how much access/permission the stack has and if no policy is provided it assumes the permissions of the user running it.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.get_stack_policy"
+}
+
+#
+# PR-AWS-CLD-CFR-003
+#
+
+default cloudFormation_rollback_is_disabled = true
+
+cloudFormation_rollback_is_disabled = false {
+    # lower(resource.Type) == "AWS::CloudFormation::Stack"
+    Stack := input.Stacks[_]
+    Stack.DisableRollback == available_false_choices[_]
+}
+
+cloudFormation_rollback_is_disabled_err = "Ensure Cloudformation rollback is disabled." {
+    not cloudFormation_rollback_is_disabled
+}
+
+cloudFormation_rollback_is_disabled_metadata := {
+    "Policy Code": "PR-AWS-CLD-CFR-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Cloudformation rollback is disabled.",
+    "Policy Description": "It checks the stack rollback setting, in case of a failure do not rollback the entire stack. We can use change sets run the stack again, after fixing the template. Resources which are already provisioned won't be re-created.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.describe_stacks"
+}
+
+#
+# PR-AWS-CLD-CFR-004
+#
+
+default role_arn_exist = true
+
+role_arn_exist = false {
+    # lower(resource.Type) == "AWS::CloudFormation::Stack"
+    Stack := input.Stacks[_]
+    not Stack.RoleARN
+}
+
+role_arn_exist_err = "Ensure an IAM policy is defined with the stack." {
+    not role_arn_exist
+}
+
+role_arn_exist_metadata := {
+    "Policy Code": "PR-AWS-CLD-CFR-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure an IAM policy is defined with the stack.",
+    "Policy Description": "Stack policy protects resources from accidental updates, the policy included resources which shouldn't be updated during the template provisioning process.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.describe_stacks"
+}
+
+#
+# PR-AWS-CLD-CFR-005
+#
+
+default stack_with_not_all_capabilities = true
+
+stack_with_not_all_capabilities = false {
+    # lower(resource.Type) == "AWS::CloudFormation::Stack"
+    Stack := input.Stacks[_]
+    contains(Stack.Capabilities[_], "*")
+}
+
+stack_with_not_all_capabilities_err = "Ensure capabilities in stacks do not have * in it." {
+    not stack_with_not_all_capabilities
+}
+
+stack_with_not_all_capabilities_metadata := {
+    "Policy Code": "PR-AWS-CLD-CFR-005",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure capabilities in stacks do not have * in it.",
+    "Policy Description": "A CloudFormation stack needs certain capability, It is recommended to configure the stack with capabilities not all capabilities (*) should be configured. This will give the stack unlimited access.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.describe_stacks"
+}
 
 
 #

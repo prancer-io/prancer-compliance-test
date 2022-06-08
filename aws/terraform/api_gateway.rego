@@ -759,7 +759,7 @@ api_gateway_uses_specific_tls_version_metadata := {
     "Product": "AWS",
     "Language": "Terraform",
     "Policy Title": "Ensure AWS API Gateway uses TLS 1.2 in transit",
-    "Policy Description": "Ensure AWS API Gateway uses Transport Layer Security (TLS) version TLS_1_2.",
+    "Policy Description": "It identifies if data is encrypted in transit using TLS1.2 for the traffic that API gateway sends.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_domain_name#security_policy"
@@ -796,45 +796,8 @@ api_gateway_content_encoding_is_enabled_metadata := {
     "Product": "AWS",
     "Language": "Terraform",
     "Policy Title": "Ensure content encoding is enabled for API Gateway.",
-    "Policy Description": "When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Ensure content encoding is enabled for API Gateway.",
+    "Policy Description": "It checks if API Gateway allows client to call API with compressed payloads by using one of the supported content codings. This is useful in cases where you need to compress the method response payload.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/api_gateway_rest_api"
-}
-
-#
-# PR-AWS-TRF-AG-011
-#
-
-default api_gateway_request_parameter_is_validated = null
-
-aws_issue["api_gateway_request_parameter_is_validated"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_api_gateway_method"
-    not resource.properties.request_validator_id
-}
-
-api_gateway_request_parameter_is_validated = false {
-    aws_issue["api_gateway_request_parameter_is_validated"]
-}
-
-api_gateway_request_parameter_is_validated {
-    lower(input.resources[i].type) == "aws_api_gateway_method"
-    not aws_issue["api_gateway_request_parameter_is_validated"]
-}
-
-api_gateway_request_parameter_is_validated_err = "Ensure API gateway request parameter is validated." {
-    aws_issue["api_gateway_request_parameter_is_validated"]
-}
-
-api_gateway_request_parameter_is_validated_metadata := {
-    "Policy Code": "PR-AWS-TRF-AG-011",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "Terraform",
-    "Policy Title": "Ensure API gateway request parameter is validated.",
-    "Policy Description": "Ensure that the identifier of a RequestValidator for request validation is present.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method#request_validator_id"
 }
