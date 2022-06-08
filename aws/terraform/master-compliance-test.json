@@ -211,7 +211,7 @@
                             "remediationFunction": "PR_AWS_TRF_CT_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS CloudTrail log validation is not enabled in all regions",
                     "description": "This policy identifies AWS CloudTrails in which log validation is not enabled in all regions. CloudTrail log file validation creates a digitally signed digest file containing a hash of each log that CloudTrail writes to S3. These digest files can be used to determine whether a log file was modified after CloudTrail delivered the log. It is recommended that file validation be enabled on all CloudTrails.",
                     "tags": [
@@ -912,7 +912,7 @@
                             "remediationFunction": "PR_AWS_TRF_AG_006.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Ensure API gateway methods are not publicly accessible",
                     "description": "We recommend you configure a custom authorizer OR an API key for every method in the API Gateway.",
                     "tags": [
@@ -1510,7 +1510,7 @@
                             "remediationFunction": "PR_AWS_TRF_KNS_001.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS Kinesis streams are not encrypted using Server Side Encryption",
                     "description": "This Policy identifies the AWS Kinesis streams which are not encrypted using Server Side Encryption. Server Side Encryption is used to encrypt your sensitive data before it is written to the Kinesis stream storage layer and decrypted after it is retrieved from storage.",
                     "tags": [
@@ -1600,7 +1600,7 @@
                             "remediationFunction": "PR_AWS_TRF_KNS_002.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS Kinesis streams encryption using default KMS keys instead of Customer's Managed Master Keys",
                     "description": "This policy identifies the AWS Kinesis streams which are encrypted with default KMS keys and not with Master Keys managed by Customer. It is a best practice to use customer managed Master Keys to encrypt your Amazon Kinesis streams data. It gives you full control over the encrypted data.",
                     "tags": [
@@ -2417,7 +2417,7 @@
                             "remediationFunction": "PR_AWS_TRF_ES_002.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "AWS Elasticsearch domain Encryption for data at rest is disabled",
                     "description": "This policy identifies Elasticsearch domains for which encryption is disabled. Encryption of data at rest is required to prevent unauthorized users from accessing the sensitive information available on your Elasticsearch domains components. This may include all data of file systems, primary and replica indices, log files, memory swap files and automated snapshots. The Elasticsearch uses AWS KMS service to store and manage the encryption keys. It is highly recommended to implement encryption at rest when you are working with production data that have sensitive information, to protect from unauthorized access.",
                     "tags": [
@@ -2502,7 +2502,7 @@
                             "remediationFunction": "PR_AWS_TRF_ES_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS Elasticsearch domain has Dedicated master set to disabled",
                     "description": "This policy identifies Elasticsearch domains for which Dedicated master is disabled in your AWS account. If dedicated master nodes are provided those handle the management tasks and cluster nodes can easily manage index and search requests from different types of workload and make them more resilient in production. Dedicated master nodes improve environmental stability by freeing all the management tasks from the cluster data nodes.",
                     "tags": [
@@ -2577,7 +2577,7 @@
                             "remediationFunction": "PR_AWS_TRF_ES_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS Elasticsearch domain has Index slow logs set to disabled",
                     "description": "This policy identifies Elasticsearch domains for which Index slow logs is disabled in your AWS account. Enabling support for publishing indexing slow logs to AWS CloudWatch Logs enables you have full insight into the performance of indexing operations performed on your Elasticsearch clusters. This will help you in identifying performance issues caused by specific queries or due to changes in cluster usage, so that you can optimize your index configuration to address the problem.",
                     "tags": [
@@ -2675,7 +2675,7 @@
                             "remediationFunction": "PR_AWS_TRF_ES_005.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS Elasticsearch domain has Search slow logs set to disabled",
                     "description": "This policy identifies Elasticsearch domains for which Search slow logs is disabled in your AWS account. Enabling support for publishing Search slow logs to AWS CloudWatch Logs enables you to have full insight into the performance of search operations performed on your Elasticsearch clusters. This will help you in identifying performance issues caused by specific search queries so that you can optimize your queries to address the problem.",
                     "tags": [
@@ -2773,7 +2773,7 @@
                             "remediationFunction": "PR_AWS_TRF_ES_006.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS Elasticsearch domain has Zone Awareness set to disabled",
                     "description": "This policy identifies Elasticsearch domains for which Zone Awareness is disabled in your AWS account. Enabling Zone Awareness (cross-zone replication) increases the availability by distributing your Elasticsearch data nodes across two availability zones available in the same AWS region. It also prevents data loss and minimizes downtime in the event of node or availability zone failure.",
                     "tags": [
@@ -4069,7 +4069,7 @@
                             "remediationFunction": "PR_AWS_TRF_ELB_008.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS Elastic Load Balancer (ELB) not in use",
                     "description": "This policy identifies unused Elastic Load Balancers (ELBs) in your AWS account. Any Elastic Load Balancer in your AWS account is adding charges to your monthly bill, although it is not used by any resources. As a best practice, it is recommended to remove ELBs that are not associated with any instances, it will also help you avoid unexpected charges on your bill.",
                     "tags": [
@@ -4234,7 +4234,7 @@
                             "remediationFunction": "PR_AWS_TRF_ELB_010.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS Elastic Load Balancer with listener TLS/SSL disabled",
                     "description": "This policy identifies Elastic Load Balancers which have listener TLS/SSL disabled. As Load Balancers will be handling all incoming requests and routing the traffic accordingly; The listeners on the load balancers should always receive traffic over secure channel with a valid SSL certificate configured.",
                     "tags": [
@@ -4324,7 +4324,7 @@
                             "remediationFunction": "PR_AWS_TRF_ELB_011.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS Application Load Balancer (ALB) listener that allow connection requests over HTTP",
                     "description": "This policy identifies Application Load Balancer (ALB) listeners that are configured to accept connection requests over HTTP instead of HTTPS. As a best practice, use the HTTPS protocol to encrypt the communication between the application clients and the application load balancer.",
                     "tags": [
@@ -4417,7 +4417,7 @@
                             "remediationFunction": "PR_AWS_TRF_ELB_012.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS Elastic Load Balancer V2 (ELBV2) with listener TLS/SSL disabled",
                     "description": "This policy identifies Elastic Load Balancer V2 (ELBV2) which have listener TLS/SSL disabled. As Load Balancers will be handling all incoming requests and routing the traffic accordingly; The listeners on the load balancers should always receive traffic over secure channel with a valid SSL certificate configured.",
                     "tags": [
@@ -4573,7 +4573,7 @@
                             "remediationFunction": "PR_AWS_TRF_ELB_015.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure the Load Balancer Listener SSLPolicy is set to at least one value from approved policies",
                     "description": "Ensure the Load Balancer Listener SSLPolicy is set to at least one value from approved policies, else an Actor can gain access to ADATUM information due to misconfigured cryptographic settings",
                     "tags": [
@@ -4674,7 +4674,7 @@
                             "remediationFunction": "PR_AWS_TRF_ELB_017.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "Ensure LoadBalancer scheme is set to internal and not internet-facing",
                     "description": "LoadBalancer scheme must be explicitly set to internal, else an Actor can allow access to ADATUM information through the misconfiguration of an ELB resource",
                     "tags": [
@@ -4787,7 +4787,7 @@
                             "remediationFunction": "PR_AWS_TRF_EBS_001.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS EBS volumes are not encrypted",
                     "description": "This policy identifies the EBS volumes which are not encrypted. The snapshots that you take of an encrypted EBS volume are also encrypted and can be moved between AWS Regions as needed. You cannot share encrypted snapshots with other AWS accounts and you cannot make them public. It is recommended that EBS volume should be encrypted.",
                     "tags": [
@@ -4895,7 +4895,7 @@
                             "remediationFunction": "PR_AWS_TRF_EFS_001.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS Elastic File System (EFS) not encrypted using Customer Managed Key",
                     "description": "This policy identifies Elastic File Systems (EFSs) which are encrypted with default KMS keys and not with Keys managed by Customer. It is a best practice to use customer managed KMS Keys to encrypt your EFS data. It gives you full control over the encrypted data.",
                     "tags": [
@@ -4995,7 +4995,7 @@
                             "remediationFunction": "PR_AWS_TRF_EFS_002.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS Elastic File System (EFS) with encryption for data at rest disabled",
                     "description": "This policy identifies Elastic File Systems (EFSs) for which encryption for data at rest disabled. It is highly recommended to implement at-rest encryption in order to prevent unauthorized users from reading sensitive data saved to EFS.",
                     "tags": [
@@ -5384,7 +5384,7 @@
                             "remediationFunction": "PR_AWS_TRF_S3_007.py"
                         }
                     ],
-                    "severity": "Low",
+                    "severity": "Medium",
                     "title": "AWS S3 Object Versioning is disabled",
                     "description": "This policy identifies the S3 buckets which have Object Versioning disabled. S3 Object Versioning is an important capability in protecting your data within a bucket. Once you enable Object Versioning, you cannot remove it; you can suspend Object Versioning at any time on a bucket if you do not wish for it to persist. It is recommended to enable Object Versioning on S3.",
                     "tags": [
@@ -5464,7 +5464,7 @@
                             "remediationFunction": "PR_AWS_TRF_S3_007V4.py"
                         }
                     ],
-                    "severity": "Low",
+                    "severity": "Medium",
                     "title": "AWS S3 Object Versioning is disabled",
                     "description": "This policy identifies the S3 buckets which have Object Versioning disabled. S3 Object Versioning is an important capability in protecting your data within a bucket. Once you enable Object Versioning, you cannot remove it; you can suspend Object Versioning at any time on a bucket if you do not wish for it to persist. It is recommended to enable Object Versioning on S3.",
                     "tags": [
@@ -5796,7 +5796,7 @@
                             "remediationFunction": "PR_AWS_TRF_S3_008.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "AWS S3 bucket has global view ACL permissions enabled.",
                     "description": "This policy determines if any S3 bucket(s) has Global View ACL permissions enabled for the All Users group. These permissions allow external resources to see the permission settings associated to the object.",
                     "tags": [
@@ -5884,7 +5884,7 @@
                             "remediationFunction": "PR_AWS_TRF_S3_008V4.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "AWS S3 bucket has global view ACL permissions enabled.",
                     "description": "This policy determines if any S3 bucket(s) has Global View ACL permissions enabled for the All Users group. These permissions allow external resources to see the permission settings associated to the object.",
                     "tags": [
@@ -6185,7 +6185,7 @@
                             "remediationFunction": "PR_AWS_TRF_S3_012.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "AWS S3 buckets do not have server side encryption.",
                     "description": "Customers can protect the data in S3 buckets using the AWS server-side encryption. If the server-side encryption is not turned on for S3 buckets with sensitive data, in the event of a data breach, malicious users can gain access to the data.",
                     "tags": [
@@ -6593,7 +6593,7 @@
                             "remediationFunction": "PR_AWS_TRF_S3_018.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure S3 Bucket has public access blocks",
                     "description": "We recommend you ensure S3 bucket has public access blocks. If the public access block is not attached it defaults to False",
                     "tags": [
@@ -6764,7 +6764,7 @@
                             "remediationFunction": "PR_AWS_TRF_EMR_001.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS EMR cluster is not configured with security configuration",
                     "description": "This policy identifies EMR clusters which are not configured with security configuration. With Amazon EMR release version 4.8.0 or later, you can use security configurations to configure data encryption, Kerberos authentication, and Amazon S3 authorization for EMRFS.",
                     "tags": [
@@ -6938,7 +6938,7 @@
                             "remediationFunction": "PR_AWS_TRF_EMR_003.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS EMR cluster is not configured with CSE CMK for data at rest encryption (Amazon S3 with EMRFS)",
                     "description": "This policy identifies EMR clusters which are not configured with Client Side Encryption with Customer Master Keys(CSE CMK) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your EMR cluster and ensure full control over your data.",
                     "tags": [
@@ -7040,7 +7040,7 @@
                             "remediationFunction": "PR_AWS_TRF_EMR_004.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS EMR cluster is not enabled with local disk encryption using CMK",
                     "description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption using CMK(Customer Managed Key). Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
                     "tags": [
@@ -7141,7 +7141,7 @@
                             "remediationFunction": "PR_AWS_TRF_EMR_006.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS EMR cluster is not enabled with data encryption at rest",
                     "description": "This policy identifies AWS EMR clusters for which data encryption at rest is not enabled. Encryption of data at rest is required to prevent unauthorized users from accessing the sensitive information available on your  EMR clusters and associated storage systems.",
                     "tags": [
@@ -7241,7 +7241,7 @@
                             "remediationFunction": "PR_AWS_TRF_EMR_007.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS EMR cluster is not enabled with data encryption in transit",
                     "description": "This policy identifies AWS EMR clusters which are not enabled with data encryption in transit. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and storage server. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your EMR clusters and their associated storage systems.",
                     "tags": [
@@ -7377,7 +7377,7 @@
                             "remediationFunction": "PR_AWS_TRF_SQS_002.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS SQS queue encryption using default KMS key instead of CMK",
                     "description": "This policy identifies CloudFront web distributions which have a default SSL certificate to access CloudFront content. It is a best practice to use custom SSL Certificate to access CloudFront content. It gives you full control over the content data. custom SSL certificates also allow your users to access your content by using an alternate domain name. You can use a certificate stored in AWS Certificate Manager (ACM) or you can use a certificate stored in IAM.",
                     "tags": [
@@ -8989,7 +8989,7 @@
                             "remediationFunction": "PR_AWS_TRF_RSH_001.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS Redshift Cluster not encrypted using Customer Managed Key",
                     "description": "This policy identifies Redshift Clusters which are encrypted with default KMS keys and not with Keys managed by Customer. It is a best practice to use customer managed KMS Keys to encrypt your Redshift databases data. Customer-managed CMKs give you more flexibility, including the ability to create, rotate, disable, define access control for, and audit the encryption keys used to help protect your data.",
                     "tags": [
@@ -10110,7 +10110,7 @@
                             "remediationFunction": "PR_AWS_TRF_EC2_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS EC2 instance is not configured with VPC",
                     "description": "This policy identifies the EC2 instances which are still using EC2 Classic. There are no VPCs deployed any EC2 instances will be running on AWS EC2 Classic. Deploying VPCs will enable you to leverage enhanced infrastructure security controls.",
                     "tags": [
@@ -11156,7 +11156,7 @@
                             "remediationFunction": "PR_AWS_TRF_CF_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS CloudFront distribution is using insecure SSL protocols for HTTPS communication",
                     "description": "CloudFront, a content delivery network (CDN) offered by AWS, is not using a secure cipher for distribution. It is a best security practice to enforce the use of secure ciphers TLSv1.0, TLSv1.1, and/or TLSv1.2 in a CloudFront Distribution's certificate configuration. This policy scans for any deviations from this practice and returns the results.",
                     "tags": [
@@ -11439,7 +11439,7 @@
                             "remediationFunction": "PR_AWS_TRF_CF_005.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "AWS CloudFront viewer protocol policy is not configured with HTTPS",
                     "description": "For web distributions, you can configure CloudFront to require that viewers use HTTPS to request your objects, so connections are encrypted when CloudFront communicates with viewers.",
                     "tags": [
@@ -11945,7 +11945,7 @@
                             "remediationFunction": "PR_AWS_TRF_DD_001.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK",
                     "description": "This policy identifies the DynamoDB tables that use AWS owned CMK (default ) instead of AWS managed CMK (KMS ) to encrypt data. AWS managed CMK provide additional features such as the ability to view the CMK and key policy, and audit the encryption and decryption of DynamoDB tables.",
                     "tags": [
@@ -12242,7 +12242,7 @@
                             "remediationFunction": "PR_AWS_TRF_EC_004.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS ElastiCache Redis cluster with in-transit encryption disabled",
                     "description": "This policy identifies ElastiCache Redis clusters which have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis clusters and their associated cache storage systems.",
                     "tags": [
@@ -12447,7 +12447,7 @@
                             "remediationFunction": "PR_AWS_TRF_RDS_002.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS RDS database instance is publicly accessible",
                     "description": "This policy identifies RDS database instances which are publicly accessible.DB instances should not be publicly accessible to protect the integrety of data.Public accessibility of DB instances can be modified by turning on or off the Public accessibility parameter.",
                     "tags": [
@@ -12842,7 +12842,7 @@
                             "remediationFunction": "PR_AWS_TRF_RDS_009.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "AWS RDS instance without Automatic Backup setting",
                     "description": "This policy identifies RDS instances which are not set with the Automatic Backup setting. If Automatic Backup is set, RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases which provide for point-in-time recovery. The automatic backup will happen during the specified backup window time and keeps the backups for a limited period of time as defined in the retention period. It is recommended to set Automatic backups for your critical RDS servers that will help in the data restoration process.",
                     "tags": [
@@ -12909,7 +12909,7 @@
                             "remediationFunction": "PR_AWS_TRF_RDS_010.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS RDS minor upgrades not enabled",
                     "description": "When Amazon Relational Database Service (Amazon RDS) supports a new version of a database engine, you can upgrade your DB instances to the new version. There are two kinds of upgrades: major version upgrades and minor version upgrades. Minor upgrades helps maintain a secure and stable RDS with minimal impact on the application. For this reason, we recommend that your automatic minor upgrade is enabled. Minor version upgrades only occur automatically if a minor upgrade replaces an unsafe version, such as a minor upgrade that contains bug fixes for a previous version.",
                     "tags": [
@@ -13058,7 +13058,7 @@
                             "remediationFunction": "PR_AWS_TRF_RDS_003.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "AWS RDS database not encrypted using Customer Managed Key",
                     "description": "This policy identifies RDS databases that are encrypted with default KMS keys and not with customer managed keys. As a best practice, use customer managed keys to encrypt the data on your RDS databases and maintain control of your keys and data on sensitive workloads.",
                     "tags": [
@@ -13161,7 +13161,7 @@
                             "remediationFunction": "PR_AWS_TRF_RDS_004.py"
                         }
                     ],
-                    "severity": "Low",
+                    "severity": "Medium",
                     "title": "AWS RDS event subscription disabled for DB instance",
                     "description": "This policy identifies RDS event subscriptions for which DB instance event subscription is disabled. You can create an Amazon RDS event notification subscription so that you can be notified when an event occurs for a given DB instance.",
                     "tags": [
@@ -13246,7 +13246,7 @@
                             "remediationFunction": "PR_AWS_TRF_RDS_005.py"
                         }
                     ],
-                    "severity": "Low",
+                    "severity": "Medium",
                     "title": "AWS RDS event subscription disabled for DB security groups",
                     "description": "This policy identifies RDS event subscriptions for which DB security groups event subscription is disabled. You can create an Amazon RDS event notification subscription so that you can be notified when an event occurs for given DB security groups.",
                     "tags": [
@@ -14691,7 +14691,7 @@
                             "remediationFunction": "PR_AWS_TRF_SG_008.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS Security Groups allow internet traffic to SSH port (22)",
                     "description": "This policy identifies AWS Security Groups which do allow inbound traffic on SSH port (22) from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
                     "tags": [
@@ -14913,7 +14913,7 @@
                             "remediationFunction": "PR_AWS_TRF_SG_012.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS Security Groups allow internet traffic from internet to RDP port (3389)",
                     "description": "This policy identifies the security groups which is exposing RDP port (3389) to the internet. Security Groups do not allow inbound traffic on RDP port (3389) from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
                     "tags": [
@@ -15246,7 +15246,7 @@
                             "remediationFunction": "PR_AWS_TRF_SG_019.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AWS Default Security Group does not restrict all traffic",
                     "description": "This policy identifies the default security group which does not restrict all inbound and outbound traffic. A VPC comes with a default security group whose initial configuration deny all inbound traffic from internet and allow all outbound traffic. If you do not specify a security group when you launch an instance, the instance is automatically assigned to this default security group. As a result, the instance may accidentally send outbound traffic.",
                     "tags": [
