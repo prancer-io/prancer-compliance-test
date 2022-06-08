@@ -585,7 +585,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure AWS API Gateway uses TLS 1.2 in transit",
-                    "description": "Ensure AWS API Gateway uses Transport Layer Security (TLS) version TLS_1_2.",
+                    "description": "It identifies if data is encrypted in transit using TLS1.2 for the traffic that API gateway sends.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -625,7 +625,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure content encoding is enabled for API Gateway.",
-                    "description": "When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Ensure content encoding is enabled for API Gateway.",
+                    "description": "It checks if API Gateway allows client to call API with compressed payloads by using one of the supported content codings. This is useful in cases where you need to compress the method response payload.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -645,46 +645,6 @@
                     ],
                     "resourceTypes": [
                         "aws::apigateway::restapi"
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CFR-AG-011",
-                    "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(api_gateway.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CFR-AG-011",
-                            "eval": "data.rule.api_gateway_request_parameter_is_validated",
-                            "message": "data.rule.api_gateway_request_parameter_is_validated_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html#cfn-apigateway-method-requestvalidatorid' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CFR_AG_011.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure API gateway request parameter is validated.",
-                    "description": "Ensure that the identifier of a RequestValidator for request validation is present.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "NIST 800",
-                                "GDPR",
-                                "CIS",
-                                "ISO 27001",
-                                "LGPD",
-                                "HITRUST",
-                                "HIPAA"
-                            ],
-                            "service": [
-                                "cloudformation"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "aws::apigateway::method"
                     ]
                 },
                 {
@@ -7046,7 +7006,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure Amazon Machine Image (AMI) is not infected with mining malware.",
-                    "description": "Ensure that the ID of the AMI is not infected with mining malware",
+                    "description": "This policy identifies Amazon Machine Images (AMIs) that are infected with mining malware. As per research, AWS Community AMI Windows 2008 hosted by an unverified vendor containing malicious code running an unidentified crypto (Monero) miner. It is recommended to delete such AMIs to protect from malicious activity and attack blast.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -8207,6 +8167,38 @@
                     ],
                     "resourceTypes": [
                         "aws::cloudfront::distribution"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-ATH-002",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ATH-002",
+                            "eval": "data.rule.athena_logging_is_enabled",
+                            "message": "data.rule.athena_logging_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-athena-workgroup.html#aws-resource-athena-workgroup--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_ATH_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Athena logging is enabled for athena workgroup.",
+                    "description": "It checks if logging is enabled for Athena to detect incidents, receive alerts when incidents occur, and respond to them. logs can be configured via CloudTrail, CloudWatch events and Quicksights for visualization.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::athena::workgroup"
                     ]
                 },
                 {

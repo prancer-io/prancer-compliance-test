@@ -51,6 +51,16 @@
 					]
 				},
 				{
+					"masterSnapshotId": "TEST_EC2_03",
+					"arn": "arn:aws:ec2:::",
+					"type": "ec2",
+					"collection": "aws_ec2",
+					"listMethod": "describe_images",
+					"detailMethods": [
+						"describe_images"
+					]
+				},
+				{
 					"masterSnapshotId": "TEST_API_GATEWAY_01",
 					"arn": "arn:aws:apigateway:::",
 					"type": "apigateway",
@@ -82,6 +92,16 @@
 					"detailMethods": [
 						"get_rest_api",
 						"get_resources"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_API_GATEWAY_04",
+					"arn": "arn:aws:apigateway:::",
+					"type": "apigateway",
+					"collection": "aws_api_gateway_04",
+					"listMethod": "get_domain_names",
+					"detailMethods": [
+						"get_domain_name"
 					]
 				},
 				{
@@ -681,6 +701,16 @@
 					"listMethod": "list_rules_packages",
 					"detailMethods": [
 						"list_rules_packages"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_16",
+					"arn": "arn:aws:cloudformation:::",
+					"type": "cloudformation",
+					"collection": "aws_cloudformation",
+					"listMethod": "list_stacks",
+					"detailMethods": [
+						"get_stack_policy"
 					]
 				},
 				{

@@ -696,7 +696,7 @@ api_gateway_uses_specific_tls_version_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud Formation",
     "Policy Title": "Ensure AWS API Gateway uses TLS 1.2 in transit",
-    "Policy Description": "Ensure AWS API Gateway uses Transport Layer Security (TLS) version TLS_1_2.",
+    "Policy Description": "It identifies if data is encrypted in transit using TLS1.2 for the traffic that API gateway sends.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html#cfn-apigateway-domainname-securitypolicy"
@@ -733,45 +733,8 @@ api_gateway_content_encoding_is_enabled_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud Formation",
     "Policy Title": "Ensure content encoding is enabled for API Gateway.",
-    "Policy Description": "When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Ensure content encoding is enabled for API Gateway.",
+    "Policy Description": "It checks if API Gateway allows client to call API with compressed payloads by using one of the supported content codings. This is useful in cases where you need to compress the method response payload.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html#cfn-apigateway-restapi-minimumcompressionsize"
-}
-
-#
-# PR-AWS-CFR-AG-011
-#
-
-default api_gateway_request_parameter_is_validated = null
-
-aws_issue["api_gateway_request_parameter_is_validated"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::apigateway::method"
-    not resource.Properties.RequestValidatorId
-}
-
-api_gateway_request_parameter_is_validated {
-    lower(input.Resources[i].Type) == "aws::apigateway::method"
-    not aws_issue["api_gateway_request_parameter_is_validated"]
-}
-
-api_gateway_request_parameter_is_validated = false {
-    aws_issue["api_gateway_request_parameter_is_validated"]
-}
-
-api_gateway_request_parameter_is_validated_err = "Ensure API gateway request parameter is validated." {
-    aws_issue["api_gateway_request_parameter_is_validated"]
-}
-
-api_gateway_request_parameter_is_validated_metadata := {
-    "Policy Code": "PR-AWS-CFR-AG-011",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "AWS Cloud Formation",
-    "Policy Title": "Ensure API gateway request parameter is validated.",
-    "Policy Description": "Ensure that the identifier of a RequestValidator for request validation is present.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html#cfn-apigateway-method-requestvalidatorid"
 }

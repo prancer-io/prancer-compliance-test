@@ -363,7 +363,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure AWS API Gateway uses TLS 1.2 in transit",
-                    "description": "Ensure AWS API Gateway uses Transport Layer Security (TLS) version TLS_1_2.",
+                    "description": "It identifies if data is encrypted in transit using TLS1.2 for the traffic that API gateway sends.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -403,7 +403,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure content encoding is enabled for API Gateway.",
-                    "description": "When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Ensure content encoding is enabled for API Gateway.",
+                    "description": "It checks if API Gateway allows client to call API with compressed payloads by using one of the supported content codings. This is useful in cases where you need to compress the method response payload.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -423,48 +423,6 @@
                     ],
                     "resourceTypes": [
                         "aws_api_gateway_rest_api"
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-TRF-AG-011",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(api_gateway.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-TRF-AG-011",
-                            "eval": "data.rule.api_gateway_request_parameter_is_validated",
-                            "message": "data.rule.api_gateway_request_parameter_is_validated_err",
-                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method#request_validator_id' target='_blank'>here</a> ",
-                            "remediationFunction": "PR_AWS_TRF_AG_011.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure API gateway request parameter is validated.",
-                    "description": "Ensure that the identifier of a RequestValidator for request validation is present.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "NIST 800",
-                                "APRA",
-                                "GDPR",
-                                "CSA CCM",
-                                "CIS",
-                                "ISO 27001",
-                                "LGPD",
-                                "HITRUST",
-                                "HIPAA"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "aws_api_gateway_method"
                     ]
                 },
                 {
@@ -917,6 +875,108 @@
                     "severity": "Medium",
                     "title": "AWS CloudFormation stack configured without SNS topic",
                     "description": "This policy identifies CloudFormation stacks which are configured without SNS topic. It is recommended to configure Simple Notification Service (SNS) topic to be notified of CloudFormation stack status and changes.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_cloudformation_stack"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-CFR-002",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-CFR-002",
+                            "eval": "data.rule.cloudFormation_template_configured_with_stack_policy",
+                            "message": "data.rule.cloudFormation_template_configured_with_stack_policy_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_CFR_002.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure CloudFormation template is configured with stack policy.",
+                    "description": "In AWS IAM policy governs how much access/permission the stack has and if no policy is provided it assumes the permissions of the user running it.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_cloudformation_stack"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-CFR-003",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-CFR-003",
+                            "eval": "data.rule.cloudFormation_rollback_is_disabled",
+                            "message": "data.rule.cloudFormation_rollback_is_disabled_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_CFR_003.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure Cloudformation rollback is disabled.",
+                    "description": "It checks the stack rollback setting, in case of a failure do not rollback the entire stack. We can use change sets run the stack again, after fixing the template. Resources which are already provisioned won't be re-created.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_cloudformation_stack"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-CFR-004",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-CFR-004",
+                            "eval": "data.rule.role_arn_exist",
+                            "message": "data.rule.role_arn_exist_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_CFR_004.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure an IAM policy is defined with the stack.",
+                    "description": "Stack policy protects resources from accidental updates, the policy included resources which shouldn't be updated during the template provisioning process.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -6822,7 +6882,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure Amazon Machine Image (AMI) is not infected with mining malware.",
-                    "description": "Ensure that the ID of the AMI is not infected with mining malware",
+                    "description": "This policy identifies Amazon Machine Images (AMIs) that are infected with mining malware. As per research, AWS Community AMI Windows 2008 hosted by an unverified vendor containing malicious code running an unidentified crypto (Monero) miner. It is recommended to delete such AMIs to protect from malicious activity and attack blast.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -8099,6 +8159,38 @@
                     ],
                     "resourceTypes": [
                         "aws_elasticache_replication_group"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ATH-002",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ATH-002",
+                            "eval": "data.rule.athena_logging_is_enabled",
+                            "message": "data.rule.athena_logging_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/athena_workgroup' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ATH_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Athena logging is enabled for athena workgroup.",
+                    "description": "It checks if logging is enabled for Athena to detect incidents, receive alerts when incidents occur, and respond to them. logs can be configured via CloudTrail, CloudWatch events and Quicksights for visualization.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_athena_workgroup"
                     ]
                 },
                 {

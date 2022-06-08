@@ -458,7 +458,7 @@ ami_not_infected_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure Amazon Machine Image (AMI) is not infected with mining malware.",
-    "Policy Description": "Ensure that the ID of the AMI is not infected with mining malware",
+    "Policy Description": "This policy identifies Amazon Machine Images (AMIs) that are infected with mining malware. As per research, AWS Community AMI Windows 2008 hosted by an unverified vendor containing malicious code running an unidentified crypto (Monero) miner. It is recommended to delete such AMIs to protect from malicious activity and attack blast.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#aws-properties-ec2-instance--examples"
