@@ -463,3 +463,42 @@ ami_not_infected_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#aws-properties-ec2-instance--examples"
 }
+
+
+#
+# PR-AWS-CFR-EC2-010
+#
+
+default ebs_volume_kms = null
+
+aws_issue["ebs_volume_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    BlockDeviceMapping := resource.BlockDeviceMapping[_]
+    not BlockDeviceMapping.Ebs.KmsKeyId
+}
+
+ebs_volume_kms {
+    lower(input.Resources[i].Type) == "aws::ec2::instance"
+    not aws_issue["ebs_volume_kms"]
+}
+
+ebs_volume_kms = false {
+    aws_issue["ebs_volume_kms"]
+}
+
+ebs_volume_kms_err = "Ensure EBS volumes are encrypted using Customer Managed Key (CMK)" {
+    aws_issue["ebs_volume_kms"]
+}
+
+ebs_volume_kms_metadata := {
+    "Policy Code": "PR-AWS-CFR-EC2-010",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure EBS volumes are encrypted using Customer Managed Key (CMK)",
+    "Policy Description": "This control checks if the default AWS Key is used for encryption. GS mandates CMK to be used for encryption.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-template.html#cfn-ec2-instance-ebs-kmskeyid"
+}
