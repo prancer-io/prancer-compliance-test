@@ -1806,34 +1806,12 @@ default appsync_not_configured_with_firewall_v2 = null
 aws_issue["appsync_not_configured_with_firewall_v2"] {
     lower(input.resources[i].type) =="aws_appsync_graphql_api"
     output := concat(".", [input.resources[i].type, input.resources[i].name, "arn"])
-    count([c | contains(lower(input.resources[j].properties.resource_arn), output); c:=1 ]) == 0
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    lower(input.resources[i].type) =="aws_appsync_graphql_api"
-    output := concat(".", [input.resources[i].type, input.resources[i].name, "arn"])
-    count([c | contains(lower(input.resources[j].properties.resource_arn), output); c:=1 ]) != 0
-    resource := input.resources[j]
-    lower(resource.type) == "aws_wafv2_web_acl_association"
-    not resource.properties.web_acl_arn
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    lower(input.resources[i].type) =="aws_appsync_graphql_api"
-    output := concat(".", [input.resources[i].type, input.resources[i].name, "arn"])
-    count([c | contains(lower(input.resources[j].properties.resource_arn), output); c:=1 ]) != 0
-    resource := input.resources[j]
-    lower(resource.type) == "aws_wafv2_web_acl_association"
-    count(resource.properties.web_acl_arn) == 0
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    lower(input.resources[i].type) =="aws_appsync_graphql_api"
-    output := concat(".", [input.resources[i].type, input.resources[i].name, "arn"])
-    count([c | contains(lower(input.resources[j].properties.resource_arn), output); c:=1 ]) != 0
-    resource := input.resources[j]
-    lower(resource.type) == "aws_wafv2_web_acl_association"
-    resource.properties.web_acl_arn == null
+    count([c | 
+        contains(lower(input.resources[j].properties.resource_arn), lower(output)); 
+        lower(input.resources[j].type) == "aws_wafv2_web_acl_association";
+        input.resources[j].properties.web_acl_arn;
+        c:=1 
+    ]) == 0
 }
 
 appsync_not_configured_with_firewall_v2 {
