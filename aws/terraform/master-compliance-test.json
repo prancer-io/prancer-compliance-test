@@ -419,6 +419,43 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-CT-005",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(cloudtrail.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-CT-005",
+                            "eval": "data.rule.logging_data_events_for_s3_and_lambda",
+                            "message": "data.rule.logging_data_events_for_s3_and_lambda_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudtrail' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_CT_005.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS CloudTrail is logging data events for S3 and Lambda.",
+                    "description": "It checks that CloudTrail data event is enabled for S3 and Lambda.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_cloudtrail"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-AG-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1252,6 +1289,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-CFR-005",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-CFR-005",
+                            "eval": "data.rule.stack_with_not_all_capabilities",
+                            "message": "data.rule.stack_with_not_all_capabilities_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_CFR_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure capabilities in stacks do not have * in it.",
+                    "description": "A CloudFormation stack needs certain capability, It is recommended to configure the stack with capabilities not all capabilities (*) should be configured. This will give the stack unlimited access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_cloudformation_stack"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-CFG-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1524,6 +1595,38 @@
                     ],
                     "resourceTypes": [
                         "aws_config_configuration_aggregator"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-CFG-004",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-CFG-004",
+                            "eval": "data.rule.config_includes_global_resources",
+                            "message": "data.rule.config_includes_global_resources_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_configuration_recorder#include_global_resource_types' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_CFG_004.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS Config includes global resources types (IAM).",
+                    "description": "It checks that global resource types are included in AWS Config.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_config_configuration_recorder"
                     ]
                 },
                 {

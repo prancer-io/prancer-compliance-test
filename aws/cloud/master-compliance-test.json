@@ -128,7 +128,7 @@
                     "type": "rego",
                     "rule": "file(cloudtrail.rego)",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_CT_01"
                     ],
                     "evals": [
                         {
@@ -163,7 +163,7 @@
                     "type": "rego",
                     "rule": "file(cloudtrail.rego)",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_CT_01"
                     ],
                     "evals": [
                         {
@@ -250,7 +250,7 @@
                     "type": "rego",
                     "rule": "file(cloudtrail.rego)",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_CT_01"
                     ],
                     "evals": [
                         {
@@ -343,7 +343,7 @@
                     "type": "rego",
                     "rule": "file(cloudtrail.rego)",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_CT_01"
                     ],
                     "evals": [
                         {
@@ -357,6 +357,74 @@
                     "severity": "Medium",
                     "title": "CloudTrail trail is not integrated with CloudWatch Log",
                     "description": "Enabling the CloudTrail trail logs integrated with CloudWatch Logs will enable the real-time as well as historic activity logging. This will further effective monitoring and alarm capability.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "PCI DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "cloudtrail"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-CT-005",
+                    "type": "rego",
+                    "rule": "file(cloudtrail.rego)",
+                    "masterSnapshotId": [
+                        "TEST_CT_02"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CT-005",
+                            "eval": "data.rule.logging_data_events_for_s3_and_lambda",
+                            "message": "data.rule.logging_data_events_for_s3_and_lambda_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudtrail.html#CloudTrail.Client.get_event_selectors' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CT_005.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS CloudTrail is logging data events for S3 and Lambda.",
+                    "description": "It checks that CloudTrail data event is enabled for S3 and Lambda.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "PCI DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "cloudtrail"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-CT-006",
+                    "type": "rego",
+                    "rule": "file(cloudtrail.rego)",
+                    "masterSnapshotId": [
+                        "TEST_CT_02"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CT-006",
+                            "eval": "data.rule.cloudtrail_is_enabled",
+                            "message": "data.rule.cloudtrail_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudtrail.html#CloudTrail.Client.describe_trails' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CT_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS CloudTrail is enabled on the account.",
+                    "description": "AWS CloudTrail is a service that enables governance, compliance, operational & risk auditing of the AWS account. It is a compliance and security best practice to turn on CloudTrail to get a complete audit trail of activities across various services.",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -1917,7 +1985,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-S3-005",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_CT_01"
                     ],
                     "type": "rego",
                     "rule": "file(storage.rego)",
@@ -1951,7 +2019,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-S3-006",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_CT_01"
                     ],
                     "type": "rego",
                     "rule": "file(storage.rego)",
@@ -5966,6 +6034,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-CFR-006",
+                    "masterSnapshotId": [
+                        "TEST_ALL_14"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CFR-006",
+                            "eval": "data.rule.termination_protection_in_stacks_is_enabled",
+                            "message": "data.rule.termination_protection_in_stacks_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.describe_stacks' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CFR_006.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure termination protection in stacks is enabled.",
+                    "description": "It checks if the stack is protected against accidental termination which may lead to deletion of critical resources.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-CFG-001",
                     "masterSnapshotId": [
                         "TEST_ALL_09"
@@ -6253,6 +6352,35 @@
                     "severity": "Medium",
                     "title": "Ensure AWS Config does not fail to deliver log files",
                     "description": "This policy identifies AWS Configs failing to deliver its log files to the specified S3 bucket. It happens when it doesn't have sufficient permissions to complete the operation. To deliver information to S3 bucket, AWS Config needs to assume an IAM role that manages the permissions required to access the designated S3 bucket.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "config"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-CFG-004",
+                    "masterSnapshotId": [
+                        "TEST_ALL_09"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CFG-004",
+                            "eval": "data.rule.config_includes_global_resources",
+                            "message": "data.rule.config_includes_global_resources_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CFG_004.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS Config includes global resources types (IAM).",
+                    "description": "It checks that global resource types are included in AWS Config.",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -10093,6 +10221,35 @@
                         }
                     ]
                 },
+                {
+                    "masterTestId": "PR-AWS-CLD-CF-010",
+                    "masterSnapshotId": [
+                        "TEST_CF"
+                    ],
+                    "type": "rego",
+                    "rule": "file(cloudfront.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CF-010",
+                            "eval": "data.rule.cf_s3_origin",
+                            "message": "data.rule.cf_s3_origin_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudfront.html#CloudFront.Client.get_distribution' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CF_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Cloudfront Distribution with S3 have Origin Access set to disabled",
+                    "description": "This policy identifies the AWS CloudFront distributions which are utilizing S3 bucket and have Origin Access Disabled. The origin access identity feature should be enabled for all your AWS CloudFront CDN distributions in order to restrict any direct access to your objects through Amazon S3 URLs.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "cloudfront"
+                            ]
+                        }
+                    ]
+                },  
                 {
                     "masterTestId": "PR-AWS-CLD-RDS-001",
                     "masterSnapshotId": [

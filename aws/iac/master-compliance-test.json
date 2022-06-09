@@ -419,6 +419,43 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CFR-CT-005",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(cloudtrail.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-CT-005",
+                            "eval": "data.rule.logging_data_events_for_s3_and_lambda",
+                            "message": "data.rule.logging_data_events_for_s3_and_lambda_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_CT_005.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS CloudTrail is logging data events for S3 and Lambda.",
+                    "description": "It checks that CloudTrail data event is enabled for S3 and Lambda.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::cloudtrail::trail"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CFR-AG-001",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1561,6 +1598,38 @@
                     ],
                     "resourceTypes": [
                         "aws::config::configurationaggregator"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-CFG-004",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-CFG-004",
+                            "eval": "data.rule.config_includes_global_resources",
+                            "message": "data.rule.config_includes_global_resources_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html#aws-resource-config-configurationrecorder--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_CFG_004.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS Config includes global resources types (IAM).",
+                    "description": "It checks that global resource types are included in AWS Config.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::config::configurationrecorder"
                     ]
                 },
                 {
@@ -12326,6 +12395,38 @@
                                 "PCI DSS v3.2.1-6.3",
                                 "PCI-DSS"
                             ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::cloudfront::distribution"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-CF-010",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(cloudfront.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-CF-010",
+                            "eval": "data.rule.cf_s3_origin",
+                            "message": "data.rule.cf_s3_origin_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_CF_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Cloudfront Distribution with S3 have Origin Access set to disabled",
+                    "description": "This policy identifies the AWS CloudFront distributions which are utilizing S3 bucket and have Origin Access Disabled. The origin access identity feature should be enabled for all your AWS CloudFront CDN distributions in order to restrict any direct access to your objects through Amazon S3 URLs.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
                             "service": [
                                 "cloudformation"
                             ]

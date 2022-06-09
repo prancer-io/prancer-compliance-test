@@ -505,6 +505,34 @@ stack_with_not_all_capabilities_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.describe_stacks"
 }
 
+#
+# PR-AWS-CLD-CFR-006
+#
+
+default termination_protection_in_stacks_is_enabled = true
+
+termination_protection_in_stacks_is_enabled = false {
+    # lower(resource.Type) == "AWS::CloudFormation::Stack"
+    Stack := input.Stacks[_]
+    Stack.EnableTerminationProtection == available_false_choices[_]
+}
+
+termination_protection_in_stacks_is_enabled_err = "Ensure termination protection in stacks is enabled." {
+    not termination_protection_in_stacks_is_enabled
+}
+
+termination_protection_in_stacks_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-CLD-CFR-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure termination protection in stacks is enabled.",
+    "Policy Description": "It checks if the stack is protected against accidental termination which may lead to deletion of critical resources.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.describe_stacks"
+}
+
 
 #
 # PR-AWS-CLD-CFG-001
@@ -608,6 +636,33 @@ aws_config_recorder_status_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.describe_configuration_recorders"
 }
 
+#
+# PR-AWS-CLD-CFG-004
+#
+
+default config_includes_global_resources = true
+
+config_includes_global_resources = false {
+    # lower(resource.Type) == "aws::config::configurationrecorder".
+    ConfigurationRecorders := input.ConfigurationRecorders[_]
+    ConfigurationRecorders.recordingGroup.includeGlobalResourceTypes == available_false_choices[_]
+}
+
+config_includes_global_resources_err = "Ensure AWS Config includes global resources types (IAM)." {
+    not config_includes_global_resources
+}
+
+config_includes_global_resources_metadata := {
+    "Policy Code": "PR-AWS-CLD-CFG-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Config includes global resources types (IAM).",
+    "Policy Description": "It checks that global resource types are included in AWS Config.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.describe_configuration_recorders"
+}
 
 #
 # PR-AWS-CLD-KNS-001

@@ -636,6 +636,43 @@ role_arn_exist_metadata := {
 }
 
 #
+# PR-AWS-TRF-CFR-005
+#
+
+default stack_with_not_all_capabilities = null
+
+aws_issue["stack_with_not_all_capabilities"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudformation_stack"
+    contains(resource.properties.capabilities[_], "*")
+}
+
+stack_with_not_all_capabilities {
+    lower(input.resources[i].type) == "aws_cloudformation_stack"
+    not aws_issue["stack_with_not_all_capabilities"]
+}
+
+stack_with_not_all_capabilities = false {
+    aws_issue["stack_with_not_all_capabilities"]
+}
+
+stack_with_not_all_capabilities_err = "Ensure capabilities in stacks do not have * in it." {
+    aws_issue["stack_with_not_all_capabilities"]
+}
+
+stack_with_not_all_capabilities_metadata := {
+    "Policy Code": "PR-AWS-TRF-CFR-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure capabilities in stacks do not have * in it.",
+    "Policy Description": "A CloudFormation stack needs certain capability, It is recommended to configure the stack with capabilities not all capabilities (*) should be configured. This will give the stack unlimited access.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack"
+}
+
+#
 # PR-AWS-TRF-CFG-001
 #
 
@@ -839,6 +876,51 @@ aws_config_configuration_aggregator_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_configuration_aggregator"
+}
+
+#
+# PR-AWS-TRF-CFG-004
+#
+
+default config_includes_global_resources = null
+
+aws_issue["config_includes_global_resources"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_config_configuration_recorder"
+    recording_group := resource.properties.recording_group[j]
+    recording_group.include_global_resource_types == available_false_choices[_]
+}
+
+aws_issue["config_includes_global_resources"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_config_configuration_recorder"
+    recording_group := resource.properties.recording_group[j]
+    not recording_group.include_global_resource_types
+}
+
+config_includes_global_resources {
+    lower(input.resources[i].type) == "aws_config_configuration_recorder"
+    not aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources = false {
+    aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources_err = "Ensure AWS Config includes global resources types (IAM)." {
+    aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources_metadata := {
+    "Policy Code": "PR-AWS-TRF-CFG-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS Config includes global resources types (IAM).",
+    "Policy Description": "It checks that global resource types are included in AWS Config.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_configuration_recorder#include_global_resource_types"
 }
 
 

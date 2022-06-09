@@ -1,5 +1,7 @@
 package rule
 
+available_false_choices := ["false", false]
+
 has_property(parent_object, target_property) { 
 	_ = parent_object[target_property]
 }
@@ -1051,6 +1053,49 @@ aws_config_configuration_aggregator_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html#cfn-config-configurationaggregator-accountaggregationsource-allawsregions"
+}
+
+#
+# PR-AWS-CFR-CFG-004
+#
+
+default config_includes_global_resources = null
+
+aws_issue["config_includes_global_resources"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::config::configurationrecorder"
+    resource.Properties.RecordingGroup.IncludeGlobalResourceTypes == available_false_choices[_]
+}
+
+aws_issue["config_includes_global_resources"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::config::configurationrecorder"
+    not resource.Properties.RecordingGroup.IncludeGlobalResourceTypes
+}
+
+config_includes_global_resources {
+    lower(input.Resources[i].Type) == "aws::config::configurationrecorder"
+    not aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources = false {
+    aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources_err = "Ensure AWS Config includes global resources types (IAM)." {
+    aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources_metadata := {
+    "Policy Code": "PR-AWS-CFR-CFG-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS Config includes global resources types (IAM).",
+    "Policy Description": "It checks that global resource types are included in AWS Config.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html#aws-resource-config-configurationrecorder--examples"
 }
 
 

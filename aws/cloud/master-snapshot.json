@@ -16,7 +16,7 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_CT",
+					"masterSnapshotId": "TEST_CT_01",
 					"arn": "arn:aws:cloudtrail:::",
 					"type": "cloudtrail",
 					"collection": "aws_cloudtrail",
@@ -24,6 +24,16 @@
 					"detailMethods": [
 						"describe_trails",
 						"get_trail_status"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_CT_02",
+					"arn": "arn:aws:cloudtrail:::",
+					"type": "cloudtrail",
+					"collection": "aws_cloudtrail",
+					"listMethod": "list_trails",
+					"detailMethods": [
+						"get_event_selectors"
 					]
 				},
 				{
