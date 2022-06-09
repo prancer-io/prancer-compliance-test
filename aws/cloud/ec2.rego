@@ -366,3 +366,33 @@ ebs_volume_attached_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html"
 }
+
+
+#
+# PR-AWS-CLD-EC2-012
+#
+
+default ebs_deletion_protection = true
+
+ebs_deletion_protection = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Volumes := input.Volumes[_]
+    Attachment := Volumes.Attachments[_]
+    Attachment.DeleteOnTermination == false
+}
+
+ebs_deletion_protection_err = "Ensure EBS deletion protection is enabled" {
+    not ebs_deletion_protection
+}
+
+ebs_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-012",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EBS deletion protection is enabled",
+    "Policy Description": "This control checks if the EBS volumes provisioned is configured with deletion protection which protects from accidental deletions",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html"
+}
