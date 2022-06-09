@@ -580,6 +580,36 @@ aws_config_configuration_aggregator_metadata := {
 
 
 #
+# PR-AWS-CLD-CFG-003
+#
+
+default aws_config_recorder_status = true
+
+aws_config_recorder_status = false {
+    # lower(resource.Type) == "aws::config::configurationrecorder".
+    ConfigurationRecordersStatus := input.ConfigurationRecordersStatus[_]
+    ConfigurationRecordersStatus.recording == true
+    lower(ConfigurationRecordersStatus.lastStatus) == "failure"
+}
+
+aws_config_recorder_status_err = "Ensure AWS Config do not fails to deliver log files" {
+    not aws_config_recorder_status
+}
+
+aws_config_recorder_status_metadata := {
+    "Policy Code": "PR-AWS-CLD-CFG-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Config does not fail to deliver log files",
+    "Policy Description": "This policy identifies AWS Configs failing to deliver its log files to the specified S3 bucket. It happens when it doesn't have sufficient permissions to complete the operation. To deliver information to S3 bucket, AWS Config needs to assume an IAM role that manages the permissions required to access the designated S3 bucket.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.describe_configuration_recorders"
+}
+
+
+#
 # PR-AWS-CLD-KNS-001
 #
 default kinesis_encryption = true

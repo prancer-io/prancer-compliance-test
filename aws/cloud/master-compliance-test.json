@@ -6235,6 +6235,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-CFG-003",
+                    "masterSnapshotId": [
+                        "TEST_ALL_17"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CFG-003",
+                            "eval": "data.rule.aws_config_recorder_status",
+                            "message": "data.rule.aws_config_recorder_status_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.describe_configuration_recorders' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CFG_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS Config does not fail to deliver log files",
+                    "description": "This policy identifies AWS Configs failing to deliver its log files to the specified S3 bucket. It happens when it doesn't have sufficient permissions to complete the operation. To deliver information to S3 bucket, AWS Config needs to assume an IAM role that manages the permissions required to access the designated S3 bucket.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "config"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-KNS-001",
                     "masterSnapshotId": [
                         "TEST_ALL_11"
@@ -11465,6 +11494,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-DAX-002",
+                    "masterSnapshotId": [
+                        "TEST_DAX"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DAX-002",
+                            "eval": "data.rule.dax_cluster_endpoint_encrypt_at_rest",
+                            "message": "data.rule.dax_cluster_endpoint_encrypt_at_rest_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/cli/latest/reference/dax/describe-clusters.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DAX_002.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS DAX data is encrypted in transit",
+                    "description": "This control is to check that the communication between the application and DAX is always encrypted",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "dax"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-QLDB-001",
                     "masterSnapshotId": [
                         "TEST_QLDB"
@@ -12323,6 +12381,35 @@
                                 "GDPR",
                                 "NIST 800"
                             ],
+                            "service": [
+                                "dms"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-DMS-003",
+                    "masterSnapshotId": [
+                        "TEST_DMS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DMS-003",
+                            "eval": "data.rule.dms_certificate_expiry",
+                            "message": "data.rule.dms_certificate_expiry_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/cli/latest/reference/dms/describe-certificates.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DMS_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Database Migration Service (DMS) has not expired certificates",
+                    "description": "This policy identifies expired certificates that are in AWS Database Migration Service (DMS). AWS Database Migration Service (DMS) Certificate service is the preferred tool to provision, manage, and deploy your DMS endpoint certificates. As a best practice, it is recommended to delete expired certificates.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
                             "service": [
                                 "dms"
                             ]

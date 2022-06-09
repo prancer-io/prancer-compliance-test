@@ -755,6 +755,40 @@ dax_encrypt_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html"
 }
 
+#
+# PR-AWS-CLD-DAX-002
+#
+
+default dax_cluster_endpoint_encrypt_at_rest = true
+
+dax_cluster_endpoint_encrypt_at_rest = false {
+    # lower(resource.Type) == "aws::dax::cluster"
+    Clusters := input.Clusters[_]
+    lower(Clusters.ClusterEndpointEncryptionType) != "tls"
+}
+
+dax_cluster_endpoint_encrypt_at_rest = false {
+    # lower(resource.Type) == "aws::dax::cluster"
+    Clusters := input.Clusters[_]
+    not Clusters.ClusterEndpointEncryptionType
+}
+
+dax_cluster_endpoint_encrypt_at_rest_err = "Ensure AWS DAX data is encrypted in transit" {
+    not dax_cluster_endpoint_encrypt_at_rest
+}
+
+dax_cluster_endpoint_encrypt_at_rest_metadata := {
+    "Policy Code": "PR-AWS-CLD-DAX-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS DAX data is encrypted in transit",
+    "Policy Description": "This control is to check that the communication between the application and DAX is always encrypted",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/dax/describe-clusters.html"
+}
+
 
 #
 # PR-AWS-CLD-QLDB-001
@@ -1388,4 +1422,36 @@ dms_public_access_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html#cfn-dms-replicationinstance-publiclyaccessible"
+}
+
+
+#
+# PR-AWS-CLD-DMS-003
+#
+
+default dms_certificate_expiry = true
+
+dms_certificate_expiry = false {
+    # lower(resource.Type) == "aws::dms::replicationinstance"
+    Certificate := input.Certificates[_]
+    current_date_timestamp := time.now_ns()
+	expiry_timestamp := round(Certificate.ValidToDate)
+    expiry_timestamp_nanosecond := expiry_timestamp * 1000000000
+    expiry_timestamp_nanosecond < current_date_timestamp
+}
+
+dms_certificate_expiry_err = "Ensure Database Migration Service (DMS) has not expired certificates" {
+    not dms_certificate_expiry
+}
+
+dms_certificate_expiry_metadata := {
+    "Policy Code": "PR-AWS-CLD-DMS-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Database Migration Service (DMS) has not expired certificates",
+    "Policy Description": "This policy identifies expired certificates that are in AWS Database Migration Service (DMS). AWS Database Migration Service (DMS) Certificate service is the preferred tool to provision, manage, and deploy your DMS endpoint certificates. As a best practice, it is recommended to delete expired certificates.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/dms/describe-certificates.html"
 }

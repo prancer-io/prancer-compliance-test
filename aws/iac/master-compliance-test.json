@@ -13874,6 +13874,38 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CFR-DAX-002",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-DAX-002",
+                            "eval": "data.rule.dax_cluster_endpoint_encrypt_at_rest",
+                            "message": "data.rule.dax_cluster_endpoint_encrypt_at_rest_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-cluster.html#cfn-dax-cluster-clusterendpointencryptiontype' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_DAX_002.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS DAX data is encrypted in transit",
+                    "description": "This control is to check that the communication between the application and DAX is always encrypted",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::dax::cluster"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CFR-QLDB-001",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"

@@ -1671,6 +1671,49 @@ dax_encrypt_metadata := {
 
 
 #
+# PR-AWS-CFR-DAX-002
+#
+
+default dax_cluster_endpoint_encrypt_at_rest = null
+
+aws_issue["dax_cluster_endpoint_encrypt_at_rest"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dax::cluster"
+    lower(resource.Properties.ClusterEndpointEncryptionType) != "tls"
+}
+
+aws_issue["dax_cluster_endpoint_encrypt_at_rest"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dax::cluster"
+    not resource.Properties.ClusterEndpointEncryptionType
+}
+
+dax_cluster_endpoint_encrypt_at_rest {
+    lower(input.Resources[i].Type) == "aws::dax::cluster"
+    not aws_issue["dax_cluster_endpoint_encrypt_at_rest"]
+}
+
+dax_cluster_endpoint_encrypt_at_rest = false {
+    aws_issue["dax_cluster_endpoint_encrypt_at_rest"]
+}
+
+dax_cluster_endpoint_encrypt_at_rest_err = "Ensure AWS DAX data is encrypted in transit" {
+    aws_issue["dax_cluster_endpoint_encrypt_at_rest"]
+}
+
+dax_cluster_endpoint_encrypt_at_rest_metadata := {
+    "Policy Code": "PR-AWS-CFR-DAX-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS DAX data is encrypted in transit",
+    "Policy Description": "This control is to check that the communication between the application and DAX is always encrypted",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-cluster.html#cfn-dax-cluster-clusterendpointencryptiontype"
+}
+
+#
 # PR-AWS-CFR-QLDB-001
 #
 
