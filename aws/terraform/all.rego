@@ -212,13 +212,15 @@ default as_http_token = null
 aws_issue["as_http_token"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_launch_configuration"
-    lower(resource.properties.metadata_options.http_tokens) != "required"
+    metadata_option := resource.properties.metadata_options[_]
+    lower(metadata_option.http_tokens) != "required"
 }
 
 aws_attribute_absence["as_http_token"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_launch_configuration"
-    not resource.properties.metadata_options.http_tokens
+    metadata_option := resource.properties.metadata_options[_]
+    not metadata_option.http_tokens
 }
 
 as_http_token {
