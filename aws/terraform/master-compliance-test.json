@@ -13646,6 +13646,38 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-DAX-002",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-DAX-002",
+                            "eval": "data.rule.dax_cluster_endpoint_encrypt_at_rest",
+                            "message": "data.rule.dax_cluster_endpoint_encrypt_at_rest_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dax_cluster#cluster_endpoint_encryption_type' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_DAX_002.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS DAX data is encrypted in transit",
+                    "description": "This control is to check that the communication between the application and DAX is always encrypted",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_dax_cluster"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-DD-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"

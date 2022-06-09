@@ -533,6 +533,16 @@
 					]
 				},
 				{
+					"masterSnapshotId": "TEST_DMS_03",
+					"arn": "arn:aws:dms:::",
+					"type": "dms",
+					"collection": "aws_dms",
+					"listMethod": "describe_certificates",
+					"detailMethods": [
+						"describe_certificates"
+					]
+				},
+				{
 					"masterSnapshotId": "TEST_SG",
 					"arn": "arn:aws:ec2:::",
 					"type": "ec2",
@@ -711,6 +721,16 @@
 					"listMethod": "list_stacks",
 					"detailMethods": [
 						"get_stack_policy"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_17",
+					"arn": "arn:aws:config:::",
+					"type": "config",
+					"collection": "aws_config",
+					"listMethod": "describe_configuration_recorder_status",
+					"detailMethods": [
+						"describe_configuration_recorder_status"
 					]
 				},
 				{
