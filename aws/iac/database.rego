@@ -6,6 +6,7 @@ package rule
 deprecated_engine_versions := ["10.11","10.12","10.13","11.6","11.7","11.8"]
 deprecated_postgres_versions := ["13.2","13.1","12.6","12.5","12.4","12.3","12.2","11.11","11.10","11.9","11.8","11.7","11.6","11.5","11.4","11.3","11.2","11.1","10.16","10.15","10.14","10.13","10.12","10.11","10.10","10.9","10.7","10.6","10.5","10.4","10.3","10.1","9.6.21","9.6.20","9.6.19","9.6.18","9.6.17","9.6.16","9.6.15","9.6.14","9.6.12","9.6.11","9.6.10","9.6.9","9.6.8","9.6.6","9.6.5","9.6.3","9.6.2","9.6.1","9.5","9.4","9.3"]
 available_true_choices := ["true", true]
+available_false_choices := ["false", false]
 
 #
 # PR-AWS-CFR-ATH-002
@@ -16,7 +17,7 @@ default athena_logging_is_enabled = null
 aws_issue["athena_logging_is_enabled"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::athena::workgroup"
-    lower(resource.Properties.WorkGroupConfiguration.PublishCloudWatchMetricsEnabled) == available_true_choices[_]
+    resource.Properties.WorkGroupConfiguration.PublishCloudWatchMetricsEnabled == available_false_choices[_]
 }
 
 athena_logging_is_enabled {
