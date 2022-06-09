@@ -353,3 +353,152 @@ ec2_monitoring_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-monitoring"
 }
+
+#
+# PR-AWS-CFR-EC2-006
+#
+
+default ec2_deletion_termination = null
+
+available_true_choices := ["true", true]
+
+aws_issue["ec2_deletion_termination"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    BlockDeviceMappings := resource.Properties.BlockDeviceMappings[_]
+    has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    BlockDeviceMappings.Ebs.DeleteOnTermination == available_true_choices[_]
+    NetworkInterfaces := resource.Properties.NetworkInterfaces[_]
+    has_property(NetworkInterfaces, "DeleteOnTermination")
+    NetworkInterfaces.DeleteOnTermination == available_true_choices[_]
+}
+
+aws_issue["ec2_deletion_termination"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    BlockDeviceMappings := resource.Properties.BlockDeviceMappings[_]
+    has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    BlockDeviceMappings.Ebs.DeleteOnTermination == available_true_choices[_]
+    NetworkInterfaces := resource.Properties.NetworkInterfaces[_]
+    not has_property(NetworkInterfaces, "DeleteOnTermination")
+}
+
+aws_issue["ec2_deletion_termination"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    BlockDeviceMappings := resource.Properties.BlockDeviceMappings[_]
+    not has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    NetworkInterfaces := resource.Properties.NetworkInterfaces[_]
+    has_property(NetworkInterfaces, "DeleteOnTermination")
+    NetworkInterfaces.DeleteOnTermination == available_true_choices[_]
+}
+
+aws_issue["ec2_deletion_termination"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    BlockDeviceMappings := resource.Properties.BlockDeviceMappings[_]
+    not has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    NetworkInterfaces := resource.Properties.NetworkInterfaces[_]
+    not has_property(NetworkInterfaces, "DeleteOnTermination")
+}
+
+ec2_deletion_termination {
+    lower(input.Resources[i].Type) == "aws::ec2::instance"
+    not aws_issue["ec2_deletion_termination"]
+}
+
+ec2_deletion_termination = false {
+    aws_issue["ec2_deletion_termination"]
+}
+
+ec2_deletion_termination_err = "Ensure AWS EC2 EBS and Network components' deletion protection is enabled" {
+    aws_issue["ec2_deletion_termination"]
+}
+
+ec2_deletion_termination_metadata := {
+    "Policy Code": "PR-AWS-CFR-EC2-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS EC2 EBS and Network components' deletion protection is enabled",
+    "Policy Description": "This checks if the EBS volumes are configured to be terminated along with the EC2 instance",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-template.html#cfn-ec2-blockdev-template-deleteontermination"
+}
+
+#
+# PR-AWS-CFR-EC2-007
+#
+
+default ami_not_infected = null
+
+aws_issue["ami_not_infected"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    contains(lower(resource.Properties.ImageId), "ami-1e542176")
+}
+
+ami_not_infected {
+    lower(input.Resources[i].Type) == "aws::ec2::instance"
+    not aws_issue["ami_not_infected"]
+}
+
+ami_not_infected = false {
+    aws_issue["ami_not_infected"]
+}
+
+ami_not_infected_err = "Ensure Amazon Machine Image (AMI) is not infected with mining malware." {
+    aws_issue["ami_not_infected"]
+}
+
+ami_not_infected_metadata := {
+    "Policy Code": "PR-AWS-CFR-EC2-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Amazon Machine Image (AMI) is not infected with mining malware.",
+    "Policy Description": "This policy identifies Amazon Machine Images (AMIs) that are infected with mining malware. As per research, AWS Community AMI Windows 2008 hosted by an unverified vendor containing malicious code running an unidentified crypto (Monero) miner. It is recommended to delete such AMIs to protect from malicious activity and attack blast.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#aws-properties-ec2-instance--examples"
+}
+
+
+#
+# PR-AWS-CFR-EC2-010
+#
+
+default ebs_volume_kms = null
+
+aws_issue["ebs_volume_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    BlockDeviceMapping := resource.BlockDeviceMapping[_]
+    not BlockDeviceMapping.Ebs.KmsKeyId
+}
+
+ebs_volume_kms {
+    lower(input.Resources[i].Type) == "aws::ec2::instance"
+    not aws_issue["ebs_volume_kms"]
+}
+
+ebs_volume_kms = false {
+    aws_issue["ebs_volume_kms"]
+}
+
+ebs_volume_kms_err = "Ensure EBS volumes are encrypted using Customer Managed Key (CMK)" {
+    aws_issue["ebs_volume_kms"]
+}
+
+ebs_volume_kms_metadata := {
+    "Policy Code": "PR-AWS-CFR-EC2-010",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure EBS volumes are encrypted using Customer Managed Key (CMK)",
+    "Policy Description": "This control checks if the default AWS Key is used for encryption. GS mandates CMK to be used for encryption.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-template.html#cfn-ec2-instance-ebs-kmskeyid"
+}

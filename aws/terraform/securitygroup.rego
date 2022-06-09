@@ -1901,3 +1901,76 @@ port_1270_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group"
 }
+
+#
+# PR-AWS-TRF-SG-034
+#
+
+default ec2_instance_has_restricted_access = null
+
+ec2_instance_allowed_protocols := ["http", "https"]
+
+ec2_instance_allowed_ports := [443, 80]
+
+is_secure["ipv4"] = true {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    SecurityRule := resource.properties.ingress[_]
+    lower(SecurityRule.protocol) == ec2_instance_allowed_protocols[_]
+    lower(SecurityRule.cidr_blocks[_]) == "0.0.0.0/0"
+	SecurityRule.from_port == ec2_instance_allowed_ports[_]
+	SecurityRule.to_port == ec2_instance_allowed_ports[_]
+    SecurityRule.from_port == SecurityRule.to_port
+}
+
+aws_issue["ec2_instance_has_restricted_access"]{
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    SecurityRule := resource.properties.ingress[_]
+    lower(SecurityRule.cidr_blocks[_]) == "0.0.0.0/0"
+    not is_secure["ipv4"]
+}
+
+is_secure["ipv6"] = true {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    SecurityRule := resource.properties.ingress[_]
+    lower(SecurityRule.protocol) == ec2_instance_allowed_protocols[_]
+    lower(SecurityRule.ipv6_cidr_blocks[_]) == "::/0"
+	SecurityRule.from_port == ec2_instance_allowed_ports[_]
+	SecurityRule.to_port == ec2_instance_allowed_ports[_]
+    SecurityRule.from_port == SecurityRule.to_port
+}
+
+aws_issue["ec2_instance_has_restricted_access"]{
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    SecurityRule := resource.properties.ingress[_]
+    lower(SecurityRule.ipv6_cidr_blocks[_]) == "::/0"
+    not is_secure["ipv6"]
+}
+
+ec2_instance_has_restricted_access_err = "Ensure EC2 instance that is not internet reachable with unrestricted access (0.0.0.0/0) other than HTTP/HTTPS port monitoring is enabled for EC2 instances" {
+    aws_issue["ec2_instance_has_restricted_access"]
+}
+
+ec2_instance_has_restricted_access {
+    lower(input.resources[i].type) == "aws_security_group"
+    not aws_issue["ec2_instance_has_restricted_access"]
+}
+
+ec2_instance_has_restricted_access = false {
+    aws_issue["ec2_instance_has_restricted_access"]
+}
+
+ec2_instance_has_restricted_access_metadata := {
+    "Policy Code": "PR-AWS-TRF-SG-029",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure EC2 instance that is not internet reachable with unrestricted access (0.0.0.0/0) other than HTTP/HTTPS port monitoring is enabled for EC2 instances",
+    "Policy Description": "Ensure restrict traffic from unknown IP addresses and limit the access to known hosts, services, or specific entities. NOTE: We are excluding the HTTP-80 and HTTPs-443 web ports as these are Internet-facing ports with legitimate traffic.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group"
+}

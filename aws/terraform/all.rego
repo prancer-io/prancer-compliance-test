@@ -1,5 +1,7 @@
 package rule
 
+available_false_choices := ["false", false]
+
 has_property(parent_object, target_property) { 
 	_ = parent_object[target_property]
 }
@@ -198,6 +200,57 @@ as_elb_health_check_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group"
+}
+
+
+#
+# PR-AWS-TRF-AS-003
+#
+
+default as_http_token = null
+
+aws_issue["as_http_token"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_launch_configuration"
+    lower(resource.properties.metadata_options.http_tokens) != "required"
+}
+
+aws_attribute_absence["as_http_token"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_launch_configuration"
+    not resource.properties.metadata_options.http_tokens
+}
+
+as_http_token {
+    lower(input.resources[i].type) == "aws_launch_configuration"
+    not aws_issue["as_http_token"]
+    not aws_attribute_absence["as_http_token"]
+}
+
+as_http_token = false {
+    aws_issue["as_http_token"]
+}
+
+as_http_token = false {
+    aws_attribute_absence["as_http_token"]
+}
+
+as_http_token_err = "Ensure EC2 Auto Scaling Group does not launch IMDSv1" {
+    aws_issue["as_http_token"]
+} else = "Ensure EC2 Auto Scaling Group does not launch IMDSv1" {
+    aws_attribute_absence["as_http_token"]
+}
+
+as_http_token_metadata := {
+    "Policy Code": "PR-AWS-TRF-AS-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure EC2 Auto Scaling Group does not launch IMDSv1",
+    "Policy Description": "This control checks if EC2 instances use IMDSv1 instead of IMDSv2, this also applies to instances created in the ASG.IMDSv1 is vulnerable to Server Side Request Forgery (SSRF) vulnerabilities in web applications running on EC2, open Website Application Firewalls, open reverse proxies, and open layer 3 firewalls and NATs. IMDSv2 uses session-oriented requests every request is now protected by session authentication.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration"
 }
 
 
@@ -463,6 +516,123 @@ cf_sns_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html"
+}
+
+#
+# PR-AWS-TRF-CFR-002
+#
+
+default cloudFormation_template_configured_with_stack_policy = null
+
+aws_issue["cloudFormation_template_configured_with_stack_policy"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudformation_stack"
+    not resource.properties.policy_body
+}
+
+aws_issue["cloudFormation_template_configured_with_stack_policy"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudformation_stack"
+    not resource.properties.policy_url
+}
+
+cloudFormation_template_configured_with_stack_policy {
+    lower(input.resources[i].type) == "aws_cloudformation_stack"
+    not aws_issue["cloudFormation_template_configured_with_stack_policy"]
+}
+
+cloudFormation_template_configured_with_stack_policy = false {
+    aws_issue["cloudFormation_template_configured_with_stack_policy"]
+}
+
+cloudFormation_template_configured_with_stack_policy_err = "Ensure CloudFormation template is configured with stack policy." {
+    aws_issue["cloudFormation_template_configured_with_stack_policy"]
+}
+
+cloudFormation_template_configured_with_stack_policy_metadata := {
+    "Policy Code": "PR-AWS-TRF-CFR-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure CloudFormation template is configured with stack policy.",
+    "Policy Description": "In AWS IAM policy governs how much access/permission the stack has and if no policy is provided it assumes the permissions of the user running it.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack"
+}
+
+#
+# PR-AWS-TRF-CFR-003
+#
+
+default cloudFormation_rollback_is_disabled = null
+
+aws_issue["cloudFormation_rollback_is_disabled"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudformation_stack"
+    resource.properties.disable_rollback == available_false_choices[_]
+}
+
+cloudFormation_rollback_is_disabled {
+    lower(input.resources[i].type) == "aws_cloudformation_stack"
+    not aws_issue["cloudFormation_rollback_is_disabled"]
+}
+
+cloudFormation_rollback_is_disabled = false {
+    aws_issue["cloudFormation_rollback_is_disabled"]
+}
+
+cloudFormation_rollback_is_disabled_err = "Ensure Cloudformation rollback is disabled." {
+    aws_issue["cloudFormation_rollback_is_disabled"]
+}
+
+cloudFormation_rollback_is_disabled_metadata := {
+    "Policy Code": "PR-AWS-TRF-CFR-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Cloudformation rollback is disabled.",
+    "Policy Description": "It checks the stack rollback setting, in case of a failure do not rollback the entire stack. We can use change sets run the stack again, after fixing the template. Resources which are already provisioned won't be re-created.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack"
+}
+
+#
+# PR-AWS-TRF-CFR-004
+#
+
+default role_arn_exist = null
+
+aws_issue["role_arn_exist"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudformation_stack"
+    not resource.properties.iam_role_arn
+}
+
+role_arn_exist {
+    lower(input.resources[i].type) == "aws_cloudformation_stack"
+    not aws_issue["role_arn_exist"]
+}
+
+role_arn_exist = false {
+    aws_issue["role_arn_exist"]
+}
+
+role_arn_exist_err = "Ensure an IAM policy is defined with the stack." {
+    aws_issue["role_arn_exist"]
+}
+
+role_arn_exist_metadata := {
+    "Policy Code": "PR-AWS-TRF-CFR-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure an IAM policy is defined with the stack.",
+    "Policy Description": "Stack policy protects resources from accidental updates, the policy included resources which shouldn't be updated during the template provisioning process.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack"
 }
 
 #

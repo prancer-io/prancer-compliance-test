@@ -664,3 +664,77 @@ api_gateway_not_configured_with_firewall_v2_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
 }
+
+#
+# PR-AWS-CFR-AG-009
+#
+
+default api_gateway_uses_specific_tls_version = null
+
+aws_issue["api_gateway_uses_specific_tls_version"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::domainname"
+    resource.Properties.SecurityPolicy != "TLS_1_2"
+}
+
+api_gateway_uses_specific_tls_version {
+    lower(input.Resources[i].Type) == "aws::apigateway::domainname"
+    not aws_issue["api_gateway_uses_specific_tls_version"]
+}
+
+api_gateway_uses_specific_tls_version = false {
+    aws_issue["api_gateway_uses_specific_tls_version"]
+}
+
+api_gateway_uses_specific_tls_version_err = "Ensure AWS API Gateway uses TLS 1.2 in transit" {
+    aws_issue["api_gateway_uses_specific_tls_version"]
+}
+
+api_gateway_uses_specific_tls_version_metadata := {
+    "Policy Code": "PR-AWS-CFR-AG-009",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud Formation",
+    "Policy Title": "Ensure AWS API Gateway uses TLS 1.2 in transit",
+    "Policy Description": "It identifies if data is encrypted in transit using TLS1.2 for the traffic that API gateway sends.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html#cfn-apigateway-domainname-securitypolicy"
+}
+
+#
+# PR-AWS-CFR-AG-010
+#
+
+default api_gateway_content_encoding_is_enabled = null
+
+aws_issue["api_gateway_content_encoding_is_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::restapi"
+    not resource.Properties.MinimumCompressionSize
+}
+
+api_gateway_content_encoding_is_enabled {
+    lower(input.Resources[i].Type) == "aws::apigateway::restapi"
+    not aws_issue["api_gateway_content_encoding_is_enabled"]
+}
+
+api_gateway_content_encoding_is_enabled = false {
+    aws_issue["api_gateway_content_encoding_is_enabled"]
+}
+
+api_gateway_content_encoding_is_enabled_err = "Ensure content encoding is enabled for API Gateway." {
+    aws_issue["api_gateway_content_encoding_is_enabled"]
+}
+
+api_gateway_content_encoding_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-CFR-AG-010",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud Formation",
+    "Policy Title": "Ensure content encoding is enabled for API Gateway.",
+    "Policy Description": "It checks if API Gateway allows client to call API with compressed payloads by using one of the supported content codings. This is useful in cases where you need to compress the method response payload.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html#cfn-apigateway-restapi-minimumcompressionsize"
+}
