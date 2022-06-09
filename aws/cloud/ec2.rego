@@ -331,3 +331,68 @@ ami_is_not_publicly_accessible_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
 }
+
+#
+# PR-AWS-CLD-EC2-011
+#
+
+default ebs_volume_attached = true
+
+ebs_volume_attached = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Volumes := input.Volumes[_]
+    count(Volumes.Attachments) == 0
+}
+
+ebs_volume_attached = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Volumes := input.Volumes[_]
+    Attachment := Volumes.Attachments[_]
+    lower(Attachment.State) != "attached"
+}
+
+ebs_volume_attached_err = "Ensure EBS volume is attached" {
+    not ebs_volume_attached
+}
+
+ebs_volume_attached_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-011",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EBS volume is attached",
+    "Policy Description": "This control check if EBS snapshots are encrypted at-rest. Snapshots of EBS volumes should be encrypted to avoid misuse. Encryption can be enabled at the account level for EBS volumes and snapshots",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html"
+}
+
+
+#
+# PR-AWS-CLD-EC2-012
+#
+
+default ebs_deletion_protection = true
+
+ebs_deletion_protection = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Volumes := input.Volumes[_]
+    Attachment := Volumes.Attachments[_]
+    Attachment.DeleteOnTermination == false
+}
+
+ebs_deletion_protection_err = "Ensure EBS deletion protection is enabled" {
+    not ebs_deletion_protection
+}
+
+ebs_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-012",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EBS deletion protection is enabled",
+    "Policy Description": "This control checks if the EBS volumes provisioned is configured with deletion protection which protects from accidental deletions",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html"
+}
