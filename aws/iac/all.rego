@@ -1861,35 +1861,12 @@ default appsync_not_configured_with_firewall_v2 = null
 aws_issue["appsync_not_configured_with_firewall_v2"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::appsync::graphqlapi"
-    output := resource.Name
-    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::appsync::graphqlapi"
-    output := resource.Name
-    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
-    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
-    not input.Resources[j].Properties.WebACLId
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::appsync::graphqlapi"
-    output := resource.Name
-    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
-    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
-    count(input.Resources[j].Properties.WebACLId) == 0
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::appsync::graphqlapi"
-    output := resource.Name
-    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
-    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
-    input.Resources[j].Properties.WebACLId == null
+    count([c | 
+    	contains(lower(input.Resources[a].Properties.ResourceArn.Ref), lower(resource.Name)); 
+        lower(input.Resources[a].Type) == "aws::wafregional::webaclassociation";
+		input.Resources[a].Properties.WebACLId;
+        c:=1 
+    ]) == 0
 }
 
 appsync_not_configured_with_firewall_v2 {
