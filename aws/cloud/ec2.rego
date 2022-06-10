@@ -1,5 +1,7 @@
 package rule
 
+available_true_choices := ["true", true]
+
 has_property(parent_object, target_property) { 
 	_ = parent_object[target_property]
 }
@@ -176,61 +178,221 @@ ec2_monitoring_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-monitoring"
 }
 
+
 #
 # PR-AWS-CLD-EC2-006
 #
 
-default ec2_instance_has_restricted_access = true
+default ec2_deletion_termination = true
 
-ec2_instance_allowed_protocols := ["http", "https"]
-
-ec2_instance_allowed_ports := [443, 80]
-
-ec2_instance_has_restricted_access = false {
-	SecurityRule := input.SecurityGroupRules[_]
-	lower(SecurityRule.CidrIpv6) == "::/0"
-    not is_secure["ipv6"]
-}
-
-is_secure["ipv6"] = true {
+ec2_deletion_termination = false {
     # lower(resource.Type) == "aws::ec2::instance"
-    SecurityRule := input.SecurityGroupRules[_]
-    lower(SecurityRule.IpProtocol) == ec2_instance_allowed_protocols[_]
-    lower(SecurityRule.CidrIpv6) == "::/0"
-	SecurityRule.FromPort == ec2_instance_allowed_ports[_]
-	SecurityRule.ToPort == ec2_instance_allowed_ports[_]
-    SecurityRule.FromPort == SecurityRule.ToPort
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    BlockDeviceMappings := Instances.BlockDeviceMappings[_]
+    has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    BlockDeviceMappings.Ebs.DeleteOnTermination == available_true_choices[_]
+    NetworkInterfaces := Instances.NetworkInterfaces[_]
+    has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+    NetworkInterfaces.Attachment.DeleteOnTermination == available_true_choices[_]
 }
 
-ec2_instance_has_restricted_access = false {
-	SecurityRule := input.SecurityGroupRules[_]
-	lower(SecurityRule.CidrIpv4) == "0.0.0.0/0"
-    not is_secure["ipv4"]
-}
-
-is_secure["ipv4"] = true {
+ec2_deletion_termination = false {
     # lower(resource.Type) == "aws::ec2::instance"
-    SecurityRule := input.SecurityGroupRules[_]
-    lower(SecurityRule.IpProtocol) == ec2_instance_allowed_protocols[_]
-    lower(SecurityRule.CidrIpv4) == "0.0.0.0/0"
-	SecurityRule.FromPort == ec2_instance_allowed_ports[_]
-	SecurityRule.ToPort == ec2_instance_allowed_ports[_]
-    SecurityRule.FromPort == SecurityRule.ToPort
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    BlockDeviceMappings := Instances.BlockDeviceMappings[_]
+    has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    BlockDeviceMappings.Ebs.DeleteOnTermination == available_true_choices[_]
+    NetworkInterfaces := Instances.NetworkInterfaces[_]
+    not has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
 }
 
 
-ec2_instance_has_restricted_access_err = "Ensure EC2 instance that is not internet reachable with unrestricted access (0.0.0.0/0) other than HTTP/HTTPS port monitoring is enabled for EC2 instances" {
-    not ec2_instance_has_restricted_access
+ec2_deletion_termination = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    BlockDeviceMappings := Instances.BlockDeviceMappings[_]
+    not has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    NetworkInterfaces := Instances.NetworkInterfaces[_]
+    has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+    NetworkInterfaces.Attachment.DeleteOnTermination == available_true_choices[_]
 }
 
-ec2_instance_has_restricted_access_metadata := {
+ec2_deletion_termination = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    BlockDeviceMappings := Instances.BlockDeviceMappings[_]
+    not has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    NetworkInterfaces := Instances.NetworkInterfaces[_]
+    not has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+}
+
+ec2_deletion_termination_err = "Ensure AWS EC2 EBS and Network components' deletion protection is enabled" {
+    not ec2_deletion_termination
+}
+
+ec2_deletion_termination_metadata := {
     "Policy Code": "PR-AWS-CLD-EC2-006",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure EC2 instance that is not internet reachable with unrestricted access (0.0.0.0/0) other than HTTP/HTTPS port monitoring is enabled for EC2 instances",
-    "Policy Description": "Ensure restrict traffic from unknown IP addresses and limit the access to known hosts, services, or specific entities. NOTE: We are excluding the HTTP-80 and HTTPs-443 web ports as these are Internet-facing ports with legitimate traffic.",
+    "Policy Title": "Ensure AWS EC2 EBS and Network components' deletion protection is enabled",
+    "Policy Description": "This checks if the EBS volumes are configured to be terminated along with the EC2 instance",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_security_group_rules"
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html"
+}
+
+#
+# PR-AWS-CLD-EC2-007
+#
+
+default ami_not_infected = true
+
+ami_not_infected = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    images := input.Images[_]
+    lower(images.Platform) == "windows"
+    contains(lower(images.ImageId), "ami-1e542176")
+}
+
+ami_not_infected_err = "Ensure Amazon Machine Image (AMI) is not infected with mining malware." {
+    not ami_not_infected
+}
+
+ami_not_infected_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-007",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Amazon Machine Image (AMI) is not infected with mining malware.",
+    "Policy Description": "This policy identifies Amazon Machine Images (AMIs) that are infected with mining malware. As per research, AWS Community AMI Windows 2008 hosted by an unverified vendor containing malicious code running an unidentified crypto (Monero) miner. It is recommended to delete such AMIs to protect from malicious activity and attack blast.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
+}
+
+#
+# PR-AWS-CLD-EC2-008
+#
+
+default ebs_snapshot_public_access = true
+
+ebs_snapshot_public_access = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    CreateVolumePermissions := input.CreateVolumePermissions[_]
+    lower(CreateVolumePermissions.Group) == "all"
+}
+
+ebs_snapshot_public_access_err = "Ensure AWS EBS snapshots are not accessible to public" {
+    not ebs_snapshot_public_access
+}
+
+ebs_snapshot_public_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS EBS snapshots are not accessible to the public",
+    "Policy Description": "This policy identifies EC2 EBS snapshots are accessible to the public. Amazon Elastic Block Store (Amazon EBS) provides persistent block storage volumes with Amazon EC2 instances in the AWS Cloud. If EBS snapshots are inadvertently shared to the public, any unauthorized user with AWS console access can gain access to the snapshots and gain access to sensitive data.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
+}
+
+#
+# PR-AWS-CLD-EC2-009
+#
+
+default ami_is_not_publicly_accessible = true
+
+ami_is_not_publicly_accessible = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    images := input.Images[_]
+    lower(images.Public) == available_true_choices[_]
+    not images.ImageOwnerAlias
+}
+
+ami_is_not_publicly_accessible_err = "Ensure AWS Amazon Machine Image (AMI) is not publicly accessible." {
+    not ami_is_not_publicly_accessible
+}
+
+ami_is_not_publicly_accessible_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-009",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Amazon Machine Image (AMI) is not publicly accessible.",
+    "Policy Description": "It identifies AWS AMIs which are owned by the AWS account and are accessible to the public. Amazon Machine Image (AMI) provides information to launch an instance in the cloud. The AMIs may contain proprietary customer information and should be accessible only to authorized internal users.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
+}
+
+#
+# PR-AWS-CLD-EC2-011
+#
+
+default ebs_volume_attached = true
+
+ebs_volume_attached = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Volumes := input.Volumes[_]
+    count(Volumes.Attachments) == 0
+}
+
+ebs_volume_attached = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Volumes := input.Volumes[_]
+    Attachment := Volumes.Attachments[_]
+    lower(Attachment.State) != "attached"
+}
+
+ebs_volume_attached_err = "Ensure EBS volume is attached" {
+    not ebs_volume_attached
+}
+
+ebs_volume_attached_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-011",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EBS volume is attached",
+    "Policy Description": "This control check if EBS snapshots are encrypted at-rest. Snapshots of EBS volumes should be encrypted to avoid misuse. Encryption can be enabled at the account level for EBS volumes and snapshots",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html"
+}
+
+
+#
+# PR-AWS-CLD-EC2-012
+#
+
+default ebs_deletion_protection = true
+
+ebs_deletion_protection = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Volumes := input.Volumes[_]
+    Attachment := Volumes.Attachments[_]
+    Attachment.DeleteOnTermination == false
+}
+
+ebs_deletion_protection_err = "Ensure EBS deletion protection is enabled" {
+    not ebs_deletion_protection
+}
+
+ebs_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-012",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EBS deletion protection is enabled",
+    "Policy Description": "This control checks if the EBS volumes provisioned is configured with deletion protection which protects from accidental deletions",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html"
 }
