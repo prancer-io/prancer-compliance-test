@@ -575,6 +575,12 @@ aws_issue["cloudFormation_rollback_is_disabled"] {
     resource.properties.disable_rollback == available_false_choices[_]
 }
 
+aws_issue["cloudFormation_rollback_is_disabled"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudformation_stack"
+    not resource.properties.disable_rollback
+}
+
 cloudFormation_rollback_is_disabled {
     lower(input.resources[i].type) == "aws_cloudformation_stack"
     not aws_issue["cloudFormation_rollback_is_disabled"]

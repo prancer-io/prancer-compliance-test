@@ -1182,7 +1182,7 @@ iam_access_key_enabled_on_root_account_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud",
     "Policy Title": "Ensure AWS Access key is enabled on root account.",
-    "Policy Description": "It identifies that account access key is enabled or not from IAM account summary."
+    "Policy Description": "It identifies that account access key is enabled or not from IAM account summary.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#accountsummary"
