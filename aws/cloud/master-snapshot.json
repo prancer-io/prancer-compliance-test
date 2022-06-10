@@ -41,26 +41,6 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_EC2_02",
-					"arn": "arn:aws:ec2:::",
-					"type": "ec2",
-					"collection": "aws_ec2",
-					"listMethod": "describe_snapshots",
-					"detailMethods": [
-						"describe_snapshot_attribute"
-					]
-				},
-				{
-					"masterSnapshotId": "TEST_EC2_03",
-					"arn": "arn:aws:ec2:::",
-					"type": "ec2",
-					"collection": "aws_ec2",
-					"listMethod": "describe_images",
-					"detailMethods": [
-						"describe_images"
-					]
-				},
-				{
 					"masterSnapshotId": "TEST_API_GATEWAY_01",
 					"arn": "arn:aws:apigateway:::",
 					"type": "apigateway",
