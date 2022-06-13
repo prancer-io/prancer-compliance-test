@@ -277,8 +277,8 @@ default logging_data_events_for_s3_and_lambda = null
 aws_issue["logging_data_events_for_s3_and_lambda"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudtrail::trail"
-    event := resource.Properties.EventSelectors[i]
-    dataresource := event.DataResources[j]
+    event := resource.Properties.EventSelectors[_]
+    dataresource := event.DataResources[_]
     not contains(lower(dataresource.Type), "aws::s3::object")
     not contains(lower(dataresource.Type), "aws::lambda::function")
 }

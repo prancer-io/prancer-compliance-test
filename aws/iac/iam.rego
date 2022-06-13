@@ -681,8 +681,6 @@ iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 
 default iam_policy_not_overly_permissive_to_lambda_service = null
 
-ip_address = ["0.0.0.0/0", "::/0"]
-
 aws_issue["iam_policy_not_overly_permissive_to_lambda_service"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
@@ -1622,7 +1620,7 @@ action_iam_policy_permission_may_cause_privilege_escalation := ["iam:CreatePolic
 aws_issue["iam_policy_permission_may_cause_privilege_escalation"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
-    statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     policy_action := statement.Action[_]
     policy_action == action_iam_policy_permission_may_cause_privilege_escalation[_]
@@ -1631,7 +1629,7 @@ aws_issue["iam_policy_permission_may_cause_privilege_escalation"] {
 aws_issue["iam_policy_permission_may_cause_privilege_escalation"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
-    statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Action == action_iam_policy_permission_may_cause_privilege_escalation[_]
 }
