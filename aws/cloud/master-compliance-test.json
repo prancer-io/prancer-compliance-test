@@ -7473,6 +7473,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-EC2-013",
+                    "masterSnapshotId": [
+                        "TEST_EC2_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-013",
+                            "eval": "data.rule.ec2_instance_configured_with_instance_metadata_service_v2",
+                            "message": "data.rule.ec2_instance_configured_with_instance_metadata_service_v2_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS EC2 instance is configured with Instance Metadata Service v2 (IMDSv2).",
+                    "description": "It identifies AWS instances that are not configured with Instance Metadata Service v2 (IMDSv2). With IMDSv2, every request is now protected by session authentication. IMDSv2 protects against misconfigured-open website application firewalls, misconfigured-open reverse proxies, unpatched SSRF vulnerabilities, and misconfigured-open layer-3 firewalls and network address translation. It is recommended to use only IMDSv2 for all your EC2 instances. For more details:https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-NACL-004",
                     "masterSnapshotId": [
                         "TEST_EC2_01NETWORKACL"
@@ -9121,6 +9150,93 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-ECS-015",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-015",
+                            "eval": "data.rule.ecs_fargate_task_definition_logging_is_enabled",
+                            "message": "data.rule.ecs_fargate_task_definition_logging_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_task_definition' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_015.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS - Ensure Fargate task definition logging is enabled.",
+                    "description": "It checks if the Fargate task definition created has an execution IAM role associated, the role defines the extent of access to other AWS Services.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ECS-016",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-016",
+                            "eval": "data.rule.no_ecs_task_definition_empty_roles",
+                            "message": "data.rule.no_ecs_task_definition_empty_roles_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_task_definition' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_016.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure there are no undefined ECS task definition empty roles for ECS.",
+                    "description": "It checks if the ECS container has a role attached. The task execution role grants the Amazon ECS container and Fargate agents permission to make AWS API calls on your behalf. The task execution IAM role is required depending on the requirements of your task.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ECS-017",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-017",
+                            "eval": "data.rule.ecs_fargate_task_definition_logging_is_enabled",
+                            "message": "data.rule.ecs_fargate_task_definition_logging_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_task_definition' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_017.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure that a log driver has been configured for each ECS task definition.",
+                    "description": "It checks if log information from the containers running on ECS are send out to CloudWatch logs for monitoring.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-LMD-001",
                     "masterSnapshotId": [
                         "TEST_LAMBDA"
@@ -9268,6 +9384,35 @@
                     "severity": "Low",
                     "title": "Ensure AWS Lambda function is configured for a DLQ",
                     "description": "A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. it is required to get all items which is been not processed for some reason",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "lambda"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-LMD-009",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-009",
+                            "eval": "data.rule.lambda_encryption",
+                            "message": "data.rule.lambda_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Lambda not encrypted at-rest using CMK",
+                    "description": "When you create or update Lambda functions that use Environment variables, AWS Lambda encrypts them using the AWS Key Management Service. When your Lambda function is invoked, those values are decrypted and made available to the Lambda code.<br><br>This policy verifies that Lambda function uses the AMS Key Management Service to encrypt variables at-rest with CMK.",
                     "tags": [
                         {
                             "cloud": "AWS",

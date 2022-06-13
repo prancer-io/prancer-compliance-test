@@ -4,28 +4,17 @@ package rule
 
 #
 # PR-AWS-CFR-LMD-001
+# aws::lambda::function
 #
 
 default lambda_env = true
 
 lambda_env = false {
-    # lower(resource.Type) == "aws::lambda::function"
-    not input.Configuration.KMSKeyArn
-}
-
-lambda_env = false {
-    # lower(resource.Type) == "aws::lambda::function"
-    not input.Configuration.Environment
-}
-
-lambda_env = false {
-    # lower(resource.Type) == "aws::lambda::function"
     input.Configuration.Environment
     not input.Configuration.KMSKeyArn
 }
 
 lambda_env = false {
-    # lower(resource.Type) == "aws::lambda::function"
     input.Configuration.Environment
     not startswith(lower(input.Configuration.KMSKeyArn), "arn:")
 }
@@ -48,17 +37,16 @@ lambda_env_metadata := {
 
 #
 # PR-AWS-CFR-LMD-002
+# aws::lambda::function
 #
 
 default lambda_vpc = true
 
 lambda_vpc = false {
-    # lower(resource.Type) == "aws::lambda::function"
     not input.Configuration.VpcConfig.SubnetIds
 }
 
 lambda_vpc = false {
-    # lower(resource.Type) == "aws::lambda::function"
     count(input.Configuration.VpcConfig.SubnetIds) == 0
 }
 
@@ -80,17 +68,16 @@ lambda_vpc_metadata := {
 
 #
 # PR-AWS-CFR-LMD-003
+# aws::lambda::function
 #
 
 default lambda_tracing = true
 
 lambda_tracing = false {
-    # lower(resource.Type) == "aws::lambda::function"
     not input.Configuration.TracingConfig.Mode
 }
 
 lambda_tracing = false {
-    # lower(resource.Type) == "aws::lambda::function"
     lower(input.Configuration.TracingConfig.Mode) == "passthrough"
 }
 
@@ -113,12 +100,12 @@ lambda_tracing_metadata := {
 
 #
 # PR-AWS-CFR-LMD-004
+# aws::lambda::function
 #
 
 default lambda_concurrent_execution = true
 
 lambda_concurrent_execution = false {
-    # lower(resource.Type) == "aws::lambda::function"
     not input.Concurrency.ReservedConcurrentExecutions
 }
 
@@ -142,12 +129,12 @@ lambda_concurrent_execution_metadata := {
 
 #
 # PR-AWS-CFR-LMD-005
+# aws::lambda::function
 #
 
 default lambda_dlq = true
 
 lambda_dlq = false {
-    # lower(resource.Type) == "aws::lambda::function"
     not input.Configuration.DeadLetterConfig.TargetArn
 }
 
@@ -165,4 +152,60 @@ lambda_dlq_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig"
+}
+
+
+#
+# PR-AWS-CFR-LMD-006
+# aws::lambda::function
+#
+
+default lambda_default_vpc = true
+
+lambda_default_vpc = false {
+    not input.Functions.VpcConfig.VpcId
+}
+
+lambda_default_vpc_err = "Ensure AWS Lambda function is not launched in default VPC" {
+    not lambda_default_vpc
+}
+
+lambda_default_vpc_metadata := {
+    "Policy Code": "PR-AWS-CFR-LMD-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS Lambda function is not launched in default VPC",
+    "Policy Description": "This policy checks that Lambda which launched within VPC is only using GS managed VPC instead of default VPC",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig"
+}
+
+
+#
+# PR-AWS-CFR-LMD-009
+# aws::lambda::function
+#
+
+default lambda_encryption = true
+
+lambda_encryption = false {
+    not input.Configuration.KMSKeyArn
+}
+
+lambda_encryption_err = "AWS Lambda not encrypted at-rest using CMK" {
+    not lambda_encryption
+}
+
+lambda_encryption_metadata := {
+    "Policy Code": "PR-AWS-CFR-LMD-009",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Lambda not encrypted at-rest using CMK",
+    "Policy Description": "When you create or update Lambda functions that use Environment variables, AWS Lambda encrypts them using the AWS Key Management Service. When your Lambda function is invoked, those values are decrypted and made available to the Lambda code.<br><br>This policy verifies that Lambda function uses the AMS Key Management Service to encrypt variables at-rest with CMK.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html"
 }
