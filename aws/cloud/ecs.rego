@@ -527,3 +527,32 @@ ecs_network_mode_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-networkMode"
 }
+
+
+#
+# PR-AWS-CLD-ECS-018
+#
+
+default ecs_configured_with_active_services = true
+
+ecs_configured_with_active_services = false {
+    # lower(resource.Type) == "aws::ecs::cluster"
+    cluster := input.clusters[_]
+    cluster.activeServicesCount == 0
+}
+
+ecs_configured_with_active_services_err = "Ensure AWS ECS cluster is configured with active services." {
+    not ecs_configured_with_active_services
+}
+
+ecs_configured_with_active_services_metadata := {
+    "Policy Code": "PR-AWS-CLD-ECS-018",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS ECS cluster is configured with active services.",
+    "Policy Description": "This policy identifies ECS clusters that are not configured with active services. ECS service enables you to run and maintain a specified number of instances of a task definition simultaneously in an Amazon ECS cluster. It is recommended to remove Idle ECS clusters to reduce the container attack surface or create new services for the reported ECS cluster. For details:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_clusters"
+}

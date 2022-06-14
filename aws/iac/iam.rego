@@ -1375,7 +1375,7 @@ aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
-    contains(lower(statement.Principal.Service), "ecr")
+    startswith(lower(statement.Principal.Service), "ecr")
     has_property(statement.Condition[string], iam_policies_condition[_])
 }
 
@@ -1384,7 +1384,7 @@ aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
     services := statement.Principal.Service[_]
-    contains(lower(services), "ecr")
+    startswith(lower(services), "ecr")
     has_property(statement.Condition[string], iam_policies_condition[_])
 }
 

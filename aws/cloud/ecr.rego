@@ -1,6 +1,12 @@
 package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imageTagMutability
+
+
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 #
 # PR-AWS-CLD-ECR-001
 #
@@ -176,4 +182,64 @@ ecr_vulnerability_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_registry_scanning_configuration"
+}
+
+#
+# PR-AWS-CLD-ECR-006
+#
+
+default ecr_accessible_only_via_private_endpoint = true
+
+ecr_accessible_only_via_private_endpoint = false {
+    # lower(resource.Type) == "aws::ecr::repository"
+    policy := json.unmarshal(input.policyText)
+    policy_statement := policy.Statement[j]
+    policy_statement.Condition
+    lower(policy_statement.Effect) == "allow"
+    not has_property(policy_statement.Condition.StringEquals, "aws:SourceVpce")
+}
+
+ecr_accessible_only_via_private_endpoint_err = "Ensure ECR resources are accessible only via private endpoint." {
+    not ecr_accessible_only_via_private_endpoint
+}
+
+ecr_accessible_only_via_private_endpoint_metadata := {
+    "Policy Code": "PR-AWS-TRF-ECR-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "Aws Cloud",
+    "Policy Title": "Ensure ECR resources are accessible only via private endpoint.",
+    "Policy Description": "It checks if the container registry is accessible over the internet, GS mandates to keep the container repository private from GS network only",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecr.html#ECR.Client.get_repository_policy"
+}
+
+#
+# PR-AWS-CLD-ECR-007
+#
+
+default lifecycle_policy_is_enabled = true
+
+lifecycle_policy_is_enabled = false {
+    # lower(resource.Type) == "aws::ecr::repository"
+    lifecyclePolicy := json.unmarshal(input.lifecyclePolicyText)
+    rule := lifecyclePolicy.rules[j]
+    lower(rule.selection.tagStatus) == "tagged"
+}
+
+lifecycle_policy_is_enabled_err = "Ensure lifecycle policy is enabled for ECR image repositories." {
+    not lifecycle_policy_is_enabled
+}
+
+lifecycle_policy_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-TRF-ECR-007",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "Aws Cloud",
+    "Policy Title": "Ensure lifecycle policy is enabled for ECR image repositories.",
+    "Policy Description": "It checks if a lifecycle policy is created for ECR. ECR lifecycle policies provide more control over the lifecycle management of images in a private repository.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecr.html#ECR.Client.get_lifecycle_policy"
 }

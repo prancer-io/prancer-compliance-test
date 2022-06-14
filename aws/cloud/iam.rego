@@ -1187,3 +1187,68 @@ iam_access_key_enabled_on_root_account_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#accountsummary"
 }
+
+#
+# PR-AWS-CLD-IAM-029
+#
+
+default iam_policy_not_overly_permissive_to_all_traffic_for_ecs= true
+
+ip_address = ["0.0.0.0/0", "::/0"]
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    contains(lower(policy_statement.Action[_]), "ecs:")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    contains(lower(policy_statement.Action), "ecs:")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    contains(lower(policy_statement.Action[_]), "ecs:")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    contains(lower(policy_statement.Action), "ecs:")
+}
+
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs_err = "Ensure Lambda IAM policy is not overly permissive to all traffic for ecs." {
+    not iam_policy_not_overly_permissive_to_all_traffic_for_ecs
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-029",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Lambda IAM policy is not overly permissive to all traffic for ecs.",
+    "Policy Description": "This policy identifies ECS IAM policies that are overly permissive to all traffic. It is recommended that the ECS should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/AmazonECS/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_service-with-iam-policy-best-practices",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
+}

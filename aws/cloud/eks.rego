@@ -2,6 +2,9 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html
 
+available_true_choices := ["true", true]
+available_false_choices := ["false", false]
+
 #
 # PR-AWS-CLD-EKS-001
 #
@@ -88,4 +91,144 @@ eks_encryption_kms_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-encryptionconfig.html#cfn-eks-cluster-encryptionconfig-provider"
+}
+
+#
+# PR-AWS-CLD-EKS-006
+#
+
+default eks_approved_kubernetes_version = true
+
+platform_version := ["1.20", "1.19", "1.18"]
+
+eks_approved_kubernetes_version = false {
+    # lower(resource.Type) == "aws::eks::cluster"
+    count([c | input.cluster.platformVersion == platform_version[_]; c:=1]) == 0
+}
+
+eks_approved_kubernetes_version_err = "Ensure AWS EKS only uses latest versions of Kubernetes." {
+    not eks_approved_kubernetes_version
+}
+
+eks_approved_kubernetes_version_metadata := {
+    "Policy Code": "PR-AWS-CLD-EKS-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS EKS only uses latest versions of Kubernetes.",
+    "Policy Description": "It checks if an approved version of Kubernetes is used for EKS cluster or not.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster"
+}
+
+#
+# PR-AWS-CLD-EKS-007
+#
+
+default eks_with_security_group_attached = true
+
+eks_with_security_group_attached = false {
+    # lower(resource.Type) == "aws::eks::cluster"
+    not input.cluster.resourcesVpcConfig.securityGroupIds
+}
+
+eks_with_security_group_attached_err = "Ensure EKS cluster is configured with control plane security group attached to it." {
+    not eks_with_security_group_attached
+}
+
+eks_with_security_group_attached_metadata := {
+    "Policy Code": "PR-AWS-CLD-EKS-007",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EKS cluster is configured with control plane security group attached to it.",
+    "Policy Description": "It checks if the cluster node security groups is configured or not.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster"
+}
+
+#
+# PR-AWS-CLD-EKS-008
+#
+
+default eks_with_private_access = true
+
+eks_with_private_access = false {
+    # lower(resource.Type) == "aws::eks::cluster"
+    lower(input.cluster.resourcesVpcConfig.endpointPrivateAccess) == available_false_choices[_]
+}
+
+eks_with_private_access = false {
+    # lower(resource.Type) == "aws::eks::cluster"
+    lower(input.cluster.resourcesVpcConfig.endpointPublicAccess) == available_true_choices[_]
+}
+
+eks_with_private_access_err = "Ensure only private access for Amazon EKS cluster's Kubernetes API is enabled." {
+    not eks_with_private_access
+}
+
+eks_with_private_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-EKS-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure only private access for Amazon EKS cluster's Kubernetes API is enabled.",
+    "Policy Description": "This policy checks if the EKS cluster has public access which can be accessed over the internet.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster"
+}
+
+#
+# PR-AWS-CLD-EKS-009
+#
+
+default eks_logging_enabled = true
+
+eks_logging_enabled = false {
+    # lower(resource.Type) == "aws::eks::cluster"
+    cluster_logging := input.cluster.logging.clusterLogging[_]
+    cluster_logging.types == null
+}
+
+eks_logging_enabled = false {
+    # lower(resource.Type) == "aws::eks::cluster"
+    cluster_logging := input.cluster.logging.clusterLogging[_]
+    count(cluster_logging.types) == 0
+}
+
+eks_logging_enabled = false {
+    # lower(resource.Type) == "aws::eks::cluster"
+    cluster_logging := input.cluster.logging.clusterLogging[_]
+    cluster_logging.types == ""
+}
+
+eks_logging_enabled = false {
+    # lower(resource.Type) == "aws::eks::cluster"
+    cluster_logging := input.cluster.logging.clusterLogging[_]
+    not cluster_logging.types
+}
+
+eks_logging_enabled = false {
+    # lower(resource.Type) == "aws::eks::cluster"
+    cluster_logging := input.cluster.logging.clusterLogging[_]
+    lower(cluster_logging.enabled) == available_false_choices[_]
+}
+
+eks_logging_enabled_err = "Ensure AWS EKS control plane logging is enabled." {
+    not eks_logging_enabled
+}
+
+eks_logging_enabled_metadata := {
+    "Policy Code": "PR-AWS-CLD-EKS-009",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS EKS control plane logging is enabled.",
+    "Policy Description": "This policy checks if the EKS cluster has public access which can be accessed over the internet.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster"
 }
