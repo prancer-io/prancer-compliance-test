@@ -206,16 +206,6 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_ELB_06",
-					"arn": "arn:aws:elbv2:::",
-					"type": "elbv2",
-					"collection": "aws_elbv2_06",
-					"listMethod": "describe_load_balancers",
-					"detailMethods": [
-						"describe_load_balancers"
-					]
-				},
-				{
 					"masterSnapshotId": "TEST_ELB_03",
 					"arn": "arn:aws:elbv2:::",
 					"type": "elbv2",
@@ -243,6 +233,16 @@
 					"listMethod": "describe_load_balancers",
 					"detailMethods": [
 						"describe_load_balancer_attributes"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ELB_06",
+					"arn": "arn:aws:elbv2:::",
+					"type": "elbv2",
+					"collection": "aws_elbv2_06",
+					"listMethod": "describe_load_balancers",
+					"detailMethods": [
+						"describe_load_balancers"
 					]
 				},
 				{

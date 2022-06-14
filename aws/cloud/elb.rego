@@ -695,3 +695,120 @@ elb_protocol_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-protocol"
 }
+
+#
+# PR-AWS-CLD-ELB-020
+# aws::elasticloadbalancingv2::loadbalancer
+#
+
+default elb_deletion_protection = true
+
+elb_deletion_protection = false {
+    Attribute := input.Attributes[j]
+    lower(Attribute.Key) == "deletion_protection.enabled"
+    lower(Attribute.Value) == "false"
+}
+
+elb_deletion_protection_err = "Ensure that AWS Ensure Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled" {
+    not elb_deletion_protection
+}
+
+elb_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-020",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that AWS Ensure Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled",
+    "Policy Description": "This policy checks if the ELB is protected against accidental deletion by enabling deletion protection.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-loadbalancerattributes.html"
+}
+
+
+#
+# PR-AWS-CLD-ELB-021
+# aws::elasticloadbalancingv2::loadbalancer
+#
+
+default elb_gateway_load_balancer = true
+
+elb_gateway_load_balancer = false {
+    LoadBalancer := input.LoadBalancers[_]
+    lower(LoadBalancer.Type) == "gateway"
+}
+
+elb_gateway_load_balancer_err = "Ensure that AWS ensure Gateway Load Balancer (GWLB) is not being used" {
+    not elb_gateway_load_balancer
+}
+
+elb_gateway_load_balancer_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-021",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that AWS ensure Gateway Load Balancer (GWLB) is not being used",
+    "Policy Description": "This policy checks if Gateway LB is being used or not",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html"
+}
+
+
+#
+# PR-AWS-CLD-ELB-022
+# aws::elasticloadbalancing::loadbalancer
+#
+
+default elb_internet_facing_load_balancer = true
+
+elb_internet_facing_load_balancer = false {
+    LoadBalancer := input.LoadBalancers[_]
+    contains(lower(LoadBalancer.Scheme), "internet-facing")
+}
+
+elb_internet_facing_load_balancer_err = "Ensure Internet facing Classic ELB is not in use" {
+    not elb_internet_facing_load_balancer
+}
+
+elb_internet_facing_load_balancer_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-022",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Internet facing Classic ELB is not in use",
+    "Policy Description": "This policy checks if classic LB is being used in the environment for internet facing applications",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
+
+
+#
+# PR-AWS-CLD-ELB-023
+# aws::elasticloadbalancingv2::loadbalancer
+#
+
+default elb2_internet_facing_load_balancer = true
+
+elb2_internet_facing_load_balancer = false {
+    LoadBalancer := input.LoadBalancers[_]
+    contains(lower(LoadBalancer.Scheme), "internet-facing")
+}
+
+elb2_internet_facing_load_balancer_err = "Ensure Internet facing Classic ELBV2 is not in use" {
+    not elb2_internet_facing_load_balancer
+}
+
+elb2_internet_facing_load_balancer_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-023",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Internet facing Classic ELBV2 is not in use",
+    "Policy Description": "This policy checks if ELB v2 is being used in the environment",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html"
+}
