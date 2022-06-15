@@ -1731,6 +1731,151 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-ES-010",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-010",
+                            "eval": "data.rule.esearch_custom_endpoint_configured",
+                            "message": "data.rule.esearch_custom_endpoint_configured_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ElasticSearch has a custom endpoint configured.",
+                    "description": "It checks if a default endpoint is configured for ES domain.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticsearch"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ES-011",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-011",
+                            "eval": "data.rule.esearch_slow_logs_is_enabled",
+                            "message": "data.rule.esearch_slow_logs_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_011.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure Slow Logs feature is enabled for ElasticSearch cluster.",
+                    "description": "It checks of slow logs is enabled for the ES cluster. Slow logs provide valuable information for optimizing and troubleshooting your search and indexing operations.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticsearch"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ES-012",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-012",
+                            "eval": "data.rule.authentication_is_saml_based",
+                            "message": "data.rule.authentication_is_saml_based_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure authentication to Kibana is SAML based in ElasticSearch.",
+                    "description": "It checks if basic authentication is used to login to Kibana dashboard.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticsearch"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ES-013",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-013",
+                            "eval": "data.rule.fine_grained_encryption_for_elasticsearch",
+                            "message": "data.rule.fine_grained_encryption_for_elasticsearch_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure fine-grained access control is enabled during domain creation in ElasticSearch.",
+                    "description": "It checks if fine grained access controls is enabled for the ElasticSearch cluster and node to node encryption is enabled with it.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticsearch"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ES-014",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-014",
+                            "eval": "data.rule.custom_endpoint_has_certificate",
+                            "message": "data.rule.custom_endpoint_has_certificate_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure custom endpoint has GS-managed ACM certificate associated in ElasticSearch.",
+                    "description": "It checks the custom endpoint is hooked to a SSL certificate from AWS ACM.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticsearch"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-S3-001",
                     "masterSnapshotId": [
                         "TEST_S3"
