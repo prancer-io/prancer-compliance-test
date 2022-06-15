@@ -174,6 +174,16 @@
 					]
 				},
 				{
+					"masterSnapshotId": "TEST_EMR_02",
+					"arn": "arn:aws:emr:::",
+					"type": "emr",
+					"collection": "aws_emr",
+					"listMethod": "get_block_public_access_configuration",
+					"detailMethods": [
+						"get_block_public_access_configuration"
+					]
+				},
+				{
 					"masterSnapshotId": "TEST_SQS",
 					"arn": "arn:aws:sqs:::",
 					"type": "sqs",
@@ -501,6 +511,16 @@
 					"listMethod": "describe_replication_groups",
 					"detailMethods": [
 						"describe_replication_groups"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_EC_01",
+					"arn": "arn:aws:elasticache:::",
+					"type": "elasticache",
+					"collection": "aws_ec",
+					"listMethod": "describe_cache_clusters",
+					"detailMethods": [
+						"describe_cache_clusters"
 					]
 				},
 				{

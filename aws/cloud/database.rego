@@ -1358,6 +1358,108 @@ cache_ksm_key_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-kmskeyid"
 }
 
+#
+# PR-AWS-CLD-EC-006
+#
+
+default cache_replication_group_id = true
+
+cache_replication_group_id = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    not ReplicationGroups.ReplicationGroupId
+}
+
+cache_replication_group_id = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    ReplicationGroups.ReplicationGroupId == ""
+}
+
+cache_replication_group_id = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    ReplicationGroups.ReplicationGroupId == null
+}
+
+cache_replication_group_id = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    contains(lower(ReplicationGroups.ReplicationGroupId), "*")
+}
+
+cache_replication_group_id_err = "Ensure ElastiCache (Redis) replicationGroupId is not empty or contains wildcards (*)." {
+    not cache_replication_group_id
+}
+
+cache_replication_group_id_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure ElastiCache (Redis) replicationGroupId is not empty or contains wildcards (*).",
+    "Policy Description": "This checks if the replication group ID for Redis is set to empty or a * to allow all.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_replication_groups"
+}
+
+#
+# PR-AWS-CLD-EC-007
+#
+
+default automatic_backups_for_redis_cluster = true
+
+automatic_backups_for_redis_cluster = false {
+    # lower(resource.Type) == "aws::elasticache::cachecluster"
+    CacheCluster := input.CacheClusters[_]
+    CacheCluster.SnapshotRetentionLimit == 0
+}
+
+automatic_backups_for_redis_cluster_err = "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster." {
+    not automatic_backups_for_redis_cluster
+}
+
+automatic_backups_for_redis_cluster_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-007",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster.",
+    "Policy Description": "It checks if automatic backups are enabled for the Redis cluster.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_cache_clusters"
+}
+
+#
+# PR-AWS-CLD-EC-008
+#
+
+default redis_with_intransit_encryption = true
+
+redis_with_intransit_encryption = false {
+    # lower(resource.Type) == "aws::elasticache::cachecluster"
+    CacheCluster := input.CacheClusters[_]
+    lower(CacheCluster.TransitEncryptionEnabled) == available_false_choices[_]
+    not CacheCluster.ReplicationGroupId
+}
+
+redis_with_intransit_encryption_err = "Ensure ElastiCache Redis with in-transit encryption is disabled (Non-replication group)." {
+    not redis_with_intransit_encryption
+}
+
+redis_with_intransit_encryption_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure ElastiCache Redis with in-transit encryption is disabled (Non-replication group).",
+    "Policy Description": "It identifies ElastiCache Redis that are in non-replication groups or individual ElastiCache Redis and have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis and their associated cache storage systems.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_cache_clusters"
+}
 
 #
 # PR-AWS-CLD-DMS-001

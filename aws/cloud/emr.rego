@@ -1,6 +1,10 @@
 package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration
+
+available_true_choices := ["true", true]
+available_false_choices := ["false", false]
+
 #
 # PR-AWS-CLD-EMR-001
 #
@@ -193,4 +197,112 @@ emr_transit_encryption_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
+}
+
+#
+# PR-AWS-CLD-EMR-008
+#
+
+default emr_cluster_level_logging = true
+
+emr_cluster_level_logging = false {
+    # lower(resource.Type) == "aws::emr::cluster"
+    not input.Cluster.LogUri
+}
+
+emr_cluster_level_logging_err = "Ensure Cluster level logging is enabled for EMR." {
+    not emr_cluster_level_logging
+}
+
+emr_cluster_level_logging_metadata := {
+    "Policy Code": "PR-AWS-CLD-EMR-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Cluster level logging is enabled for EMR.",
+    "Policy Description": "It checks if cluster level logging is enabled for EMR cluster created. This determines whether Amazon EMR captures detailed log data to Amazon S3.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/emr.html#EMR.Client.describe_cluster"
+}
+
+#
+# PR-AWS-CLD-EMR-009
+#
+
+default emr_cluster_not_visible_to_all_iam_users = true
+
+emr_cluster_not_visible_to_all_iam_users = false {
+    # lower(resource.Type) == "aws::emr::cluster"
+    lower(input.Cluster.VisibleToAllUsers) == available_true_choices[_]
+}
+
+emr_cluster_not_visible_to_all_iam_users_err = "Ensure EMR cluster is not visible to all IAM users." {
+    not emr_cluster_not_visible_to_all_iam_users
+}
+
+emr_cluster_not_visible_to_all_iam_users_metadata := {
+    "Policy Code": "PR-AWS-CLD-EMR-009",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EMR cluster is not visible to all IAM users.",
+    "Policy Description": "It checks if the EMR cluster created has a wide visibility to all IAM users. When true, IAM principals in the AWS account can perform EMR cluster actions that their IAM policies allow.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/emr.html#EMR.Client.describe_cluster"
+}
+
+#
+# PR-AWS-CLD-EMR-010
+#
+
+default emr_termination_protection_is_enabled = true
+
+emr_termination_protection_is_enabled = false {
+    # lower(resource.Type) == "aws::emr::cluster"
+    lower(input.Cluster.TerminationProtected) == available_false_choices[_]
+}
+
+emr_termination_protection_is_enabled_err = "Ensure Termination protection is enabled for instances in the cluster for EMR." {
+    not emr_termination_protection_is_enabled
+}
+
+emr_termination_protection_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-CLD-EMR-010",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Termination protection is enabled for instances in the cluster for EMR.",
+    "Policy Description": "It checks if the EC2 instances created in EMR cluster are protected against accidental termination.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/emr.html#EMR.Client.describe_cluster"
+}
+
+#
+# PR-AWS-CLD-EMR-011
+#
+
+default emr_block_public_access = true
+
+emr_block_public_access = false {
+    # lower(resource.Type) == "aws::emr::cluster"
+    lower(input.BlockPublicAccessConfiguration.BlockPublicSecurityGroupRules) == available_false_choices[_]
+}
+
+emr_block_public_access_err = "Ensure AWS EMR block public access setting is not disabled." {
+    not emr_block_public_access
+}
+
+emr_block_public_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-EMR-011",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS EMR block public access setting is not disabled.",
+    "Policy Description": "This policy identifies AWS EMR which has a disabled block public access setting. AWS EMR block public access prevents a cluster in a public subnet from launching when any security group associated with the cluster has a rule that allows inbound traffic from the internet, unless the port has been specified as an exception. It is recommended to enable AWS EMR Block public access in each AWS Region for your AWS account.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/emr.html#EMR.Client.get_block_public_access_configuration"
 }

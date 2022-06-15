@@ -695,3 +695,31 @@ elb_protocol_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-protocol"
 }
+
+#
+# PR-AWS-CLD-ELB-024
+#
+
+default elbv2_ssl_negotiation_policy = true
+
+elbv2_ssl_negotiation_policy = false {
+    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    Listener := input.Listeners[_]
+    contains(Listener.SslPolicy, "ELBSecurityPolicy-TLS-1-0-2015-04")
+}
+
+elbv2_ssl_negotiation_policy_err = "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers." {
+    not elbv2_ssl_negotiation_policy
+}
+
+elbv2_ssl_negotiation_policy_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-024",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers.",
+    "Policy Description": "This policy identifies Elastic Load Balancers v2 (ELBv2) which are configured with SSL negotiation policy containing weak ciphers. An SSL cipher is an encryption algorithm that uses encryption keys to create a coded message. SSL protocols use several SSL ciphers to encrypt data over the Internet. As many of the other ciphers are not secure/weak, it is recommended to use only the ciphers recommended in the following AWS link: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-protocol"
+}
