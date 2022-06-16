@@ -18,28 +18,10 @@ azure_attribute_absence["log_keyvault"] {
     not contains(lower(resource.scope), "microsoft.keyvault/vaults")
 }
 
-source_path[{"log_keyvault":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    not contains(lower(resource.scope), "microsoft.keyvault/vaults")
-    metadata:= {
-        "resource_path": [["resources",i,"scope"]]
-    }
-}
-
 azure_attribute_absence["log_keyvault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     not resource.properties.logs
-}
-
-source_path[{"log_keyvault":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    not resource.properties.logs
-    metadata:= {
-        "resource_path": [["resources",i,"properties","logs"]]
-    }
 }
 
 log_keyvault {
@@ -62,8 +44,8 @@ log_keyvault_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Key Vault audit logging should be enabled",
-    "Policy Description": "This policy identifies Azure Key Vault instances for which audit logging is disabled. As a best practice, enable audit event logging for Key Vault instances to monitor how and when your key vaults are accessed, and by whom.",
+    "Policy Title": "Azure Key Vault diagnostics logs should be enabled",
+    "Policy Description": "Azure Key Vault provide different types of logs alert events, health probe, metrics to help you manage and troubleshoot issues. This policy identifies Azure Key Vault that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
     "Resource Type": "microsoft.keyvault/vaults",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings"
