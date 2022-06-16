@@ -422,6 +422,17 @@
 					]
 				},
 				{
+					"masterSnapshotId": "TEST_RDS_06",
+					"arn": "arn:aws:rds:::",
+					"type": "rds",
+					"collection": "aws_rds_06",
+					"listMethod": "describe_db_snapshots",
+					"detailMethods": [
+						"describe_db_snapshots",
+						"describe_db_snapshot_attributes"
+					]
+				},
+				{
 					"masterSnapshotId": "TEST_DAX",
 					"arn": "arn:aws:dax:::",
 					"type": "dax",
@@ -803,6 +814,16 @@
 					"listMethod": "list_roles",
 					"detailMethods": [
 						"get_role"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_IAM_03",
+					"arn": "arn:aws:iam:::",
+					"type": "iam",
+					"collection": "aws_iam",
+					"listMethod": "get_account_password_policy",
+					"detailMethods": [
+						"get_account_password_policy"
 					]
 				}
 			]

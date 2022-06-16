@@ -7,6 +7,9 @@ has_property(parent_object, target_property) {
 }
 
 iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount"]
+ip_address = ["0.0.0.0/0", "::/0"]
+available_true_choices := ["true", true]
+available_false_choices := ["false", false]
 
 #
 # PR-AWS-CLD-IAM-001
@@ -258,8 +261,6 @@ iam_user_group_attach_metadata := {
 #
 
 default iam_policy_not_overly_permissive_to_all_traffic = true
-
-ip_address = ["0.0.0.0/0", "::/0"]
 
 iam_policy_not_overly_permissive_to_all_traffic = false {
     # lower(resource.Type) == "aws::iam::policyversion"
@@ -1194,8 +1195,6 @@ iam_access_key_enabled_on_root_account_metadata := {
 
 default iam_policy_not_overly_permissive_to_all_traffic_for_ecs= true
 
-ip_address = ["0.0.0.0/0", "::/0"]
-
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
     # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
@@ -1203,7 +1202,7 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
-    contains(lower(policy_statement.Action[_]), "ecs:")
+    startswith(lower(policy_statement.Action[_]), "ecs:")
 }
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
@@ -1213,7 +1212,7 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
-    contains(lower(policy_statement.Action), "ecs:")
+    startswith(lower(policy_statement.Action), "ecs:")
 }
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
@@ -1223,7 +1222,7 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
-    contains(lower(policy_statement.Action[_]), "ecs:")
+    startswith(lower(policy_statement.Action[_]), "ecs:")
 }
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
@@ -1233,11 +1232,11 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
-    contains(lower(policy_statement.Action), "ecs:")
+    startswith(lower(policy_statement.Action), "ecs:")
 }
 
 
-iam_policy_not_overly_permissive_to_all_traffic_for_ecs_err = "Ensure Lambda IAM policy is not overly permissive to all traffic for ecs." {
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs_err = "Ensure IAM policy is not overly permissive to all traffic for ecs." {
     not iam_policy_not_overly_permissive_to_all_traffic_for_ecs
 }
 
@@ -1246,9 +1245,382 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure Lambda IAM policy is not overly permissive to all traffic for ecs.",
+    "Policy Title": "Ensure IAM policy is not overly permissive to all traffic for ecs.",
     "Policy Description": "This policy identifies ECS IAM policies that are overly permissive to all traffic. It is recommended that the ECS should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/AmazonECS/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_service-with-iam-policy-best-practices",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
+}
+
+#
+# PR-AWS-CLD-IAM-030
+#
+
+default elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = true
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action[_]), "es:")
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action), "es:")
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action[_]), "es:")
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action), "es:")
+}
+
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure IAM policy is not overly permissive to all traffic for elasticsearch." {
+    not elasticsearch_iam_policy_not_overly_permissive_to_all_traffic
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-030",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure IAM policy is not overly permissive to all traffic for elasticsearch.",
+    "Policy Description": "It identifies Elasticsearch IAM policies that are overly permissive to all traffic. Amazon Elasticsearch service makes it easy to deploy and manage Elasticsearch. Customers can create a domain where the service is accessible. The domain should be granted access restrictions so that only authorized users and applications have access to the service.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
+}
+
+#
+# PR-AWS-CLD-IAM-031
+#
+
+default iam_password_policy_secure = true
+
+iam_password_policy_secure = false {
+    lower(input.PasswordPolicy.RequireSymbols) == available_false_choices[_]
+}
+
+iam_password_policy_secure = false {
+    lower(input.PasswordPolicy.RequireNumbers) == available_false_choices[_]
+}
+
+iam_password_policy_secure = false {
+    lower(input.PasswordPolicy.ExpirePasswords) == available_false_choices[_]
+}
+
+iam_password_policy_secure = false {
+    lower(input.PasswordPolicy.RequireUppercaseCharacters) == available_false_choices[_]
+}
+
+iam_password_policy_secure = false {
+    lower(input.PasswordPolicy.AllowUsersToChangePassword) == available_false_choices[_]
+}
+
+iam_password_policy_secure = false {
+    lower(input.PasswordPolicy.RequireUppercaseCharacters) == available_false_choices[_]
+}
+
+iam_password_policy_secure = false {
+    lower(input.PasswordPolicy.RequireLowercaseCharacters) == available_false_choices[_]
+}
+
+iam_password_policy_secure = false {
+    not input.PasswordPolicy.MaxPasswordAge
+}
+
+iam_password_policy_secure = false {
+    not input.PasswordPolicy.PasswordReusePrevention
+}
+
+iam_password_policy_secure = false {
+    to_number(input.PasswordPolicy.MinimumPasswordLength) <= 6
+}
+
+iam_password_policy_secure_err = "Ensure AWS IAM Password policy is secure." {
+    not iam_password_policy_secure
+}
+
+iam_password_policy_secure_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-031",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM Password policy is secure.",
+    "Policy Description": "It checks to ensure that IAM password policy is in place for the cloud accounts. As a security best practice, customers must have strong password policies in place. This policy ensures password policies are set with all following options: Minimum Password Length, At least one Uppercase letter, At least one Lowercase letter, At least one Number, At least one Symbol/non-alphanumeric character, Users have permission to change their own password, Password expiration period, Password reuse and Password expiration requires administrator reset.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy"
+}
+
+#
+# PR-AWS-CLD-IAM-032
+#
+
+default not_reusing_password = true
+
+not_reusing_password = false {
+    input.PasswordPolicy.PasswordReusePrevention == null
+}
+
+not_reusing_password = false {
+    input.PasswordPolicy.PasswordReusePrevention == ""
+}
+
+not_reusing_password = false {
+    not input.PasswordPolicy.PasswordReusePrevention
+}
+
+not_reusing_password = false {
+    to_number(input.PasswordPolicy.PasswordReusePrevention) < 12
+}
+
+not_reusing_password_err = "Ensure IAM Password Policy does not allow reusing atleast last 12 passwords." {
+    not not_reusing_password
+}
+
+not_reusing_password_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-032",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure IAM Password Policy does not allow reusing atleast last 12 passwords.",
+    "Policy Description": "It checks to ensure that IAM password policy is in place for the cloud accounts. As a security best practice, customers must have strong password policies in place. This policy ensures password policies are set with all following options: Minimum Password Length, At least one Uppercase letter, At least one Lowercase letter, At least one Number, At least one Symbol/non-alphanumeric character, Users have permission to change their own password, Password expiration period, Password reuse and Password expiration requires administrator reset.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy"
+}
+
+#
+# PR-AWS-CLD-IAM-033
+#
+
+default no_lowercase_character_password = true
+
+no_lowercase_character_password = false {
+    lower(input.PasswordPolicy.RequireLowercaseCharacters) == available_false_choices[_]
+}
+
+no_lowercase_character_password = false {
+    not input.PasswordPolicy.RequireLowercaseCharacters
+}
+
+no_lowercase_character_password_err = "Ensure AWS IAM password policy have a lowercase character." {
+    not no_lowercase_character_password
+}
+
+no_lowercase_character_password_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-033",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM password policy have a lowercase character.",
+    "Policy Description": "Checks to ensure that IAM password policy requires a lowercase character. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy"
+}
+
+#
+# PR-AWS-CLD-IAM-034
+#
+
+default minimum_fourteen_character_password = true
+
+minimum_fourteen_character_password = false {
+    to_number(input.PasswordPolicy.MinimumPasswordLength) < 14
+}
+
+minimum_fourteen_character_password = false {
+    not input.PasswordPolicy.MinimumPasswordLength
+}
+
+minimum_fourteen_character_password_err = "Ensure AWS IAM password policy have a minimum of 14 characters." {
+    not minimum_fourteen_character_password
+}
+
+minimum_fourteen_character_password_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-034",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM password policy have a minimum of 14 characters.",
+    "Policy Description": "Checks to ensure that IAM password policy requires minimum of 14 characters. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy"
+}
+
+#
+# PR-AWS-CLD-IAM-035
+#
+
+default password_expire_in_ninty_days = true
+
+password_expire_in_ninty_days = false {
+    to_number(input.PasswordPolicy.MaxPasswordAge) > 90
+}
+
+password_expire_in_ninty_days = false {
+    input.PasswordPolicy.MaxPasswordAge == 0
+}
+
+password_expire_in_ninty_days_err = "Ensure AWS IAM password policy have password expiration set to 90 days." {
+    not password_expire_in_ninty_days
+}
+
+password_expire_in_ninty_days_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-035",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM password policy have password expiration set to 90 days.",
+    "Policy Description": "It identifies the IAM policies which does not have password expiration set to 90 days. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy"
+}
+
+#
+# PR-AWS-CLD-IAM-036
+#
+
+default password_expire_period_defined = true
+
+password_expire_period_defined = false {
+    to_number(input.PasswordPolicy.MaxPasswordAge) < 1
+}
+
+password_expire_period_defined = false {
+    not input.PasswordPolicy.MaxPasswordAge
+}
+
+password_expire_period_defined_err = "Ensure AWS IAM password policy have password expiration period defined." {
+    not password_expire_period_defined
+}
+
+password_expire_period_defined_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-036",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM password policy have password expiration period defined.",
+    "Policy Description": "It checks to ensure that IAM password policy has an expiration period. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy"
+}
+
+#
+# PR-AWS-CLD-IAM-037
+#
+
+default password_have_numbers = true
+
+password_have_numbers = false {
+    lower(input.PasswordPolicy.RequireNumbers) == available_false_choices[_]
+}
+
+password_have_numbers = false {
+    not input.PasswordPolicy.RequireNumbers
+}
+
+password_have_numbers_err = "Ensure AWS IAM password policy have require number equals true." {
+    not password_have_numbers
+}
+
+password_have_numbers_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-037",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM password policy have require number equals true.",
+    "Policy Description": "It checks to ensure that IAM password policy requires a number. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy"
+}
+
+#
+# PR-AWS-CLD-IAM-038
+#
+
+default password_have_symbols = true
+
+password_have_symbols = false {
+    lower(input.PasswordPolicy.RequireSymbols) == available_false_choices[_]
+}
+
+password_have_symbols = false {
+    not input.PasswordPolicy.RequireSymbols
+}
+
+password_have_symbols_err = "Ensure AWS IAM password policy have require symbols equals true." {
+    not password_have_symbols
+}
+
+password_have_symbols_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-038",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM password policy have require symbols equals true.",
+    "Policy Description": "It checks to ensure that IAM password policy requires a symbol. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy"
+}
+
+#
+# PR-AWS-CLD-IAM-039
+#
+
+default password_have_upper_case_char = true
+
+password_have_upper_case_char = false {
+    lower(input.PasswordPolicy.RequireUppercaseCharacters) == available_false_choices[_]
+}
+
+password_have_upper_case_char = false {
+    not input.PasswordPolicy.RequireUppercaseCharacters
+}
+
+password_have_upper_case_char_err = "Ensure AWS IAM password policy have require upper case characters equals true." {
+    not password_have_upper_case_char
+}
+
+password_have_upper_case_char_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-039",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM password policy have require upper case characters equals true.",
+    "Policy Description": "It identifies AWS accounts in which IAM password policy does not have an uppercase character. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy"
 }

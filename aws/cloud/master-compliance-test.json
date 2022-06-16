@@ -15615,8 +15615,298 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Lambda IAM policy is not overly permissive to all traffic for ecs.",
+                    "title": "Ensure IAM policy is not overly permissive to all traffic for ecs.",
                     "description": "This policy identifies ECS IAM policies that are overly permissive to all traffic. It is recommended that the ECS should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/AmazonECS/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_service-with-iam-policy-best-practices",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-030",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-030",
+                            "eval": "data.rule.elasticsearch_iam_policy_not_overly_permissive_to_all_traffic",
+                            "message": "data.rule.elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_030.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure IAM policy is not overly permissive to all traffic for elasticsearch.",
+                    "description": "It identifies Elasticsearch IAM policies that are overly permissive to all traffic. Amazon Elasticsearch service makes it easy to deploy and manage Elasticsearch. Customers can create a domain where the service is accessible. The domain should be granted access restrictions so that only authorized users and applications have access to the service.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-031",
+                    "masterSnapshotId": [
+                        "TEST_IAM_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-031",
+                            "eval": "data.rule.iam_password_policy_secure",
+                            "message": "data.rule.iam_password_policy_secure_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_031.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM Password policy is secure.",
+                    "description": "It checks to ensure that IAM password policy is in place for the cloud accounts. As a security best practice, customers must have strong password policies in place. This policy ensures password policies are set with all following options: Minimum Password Length, At least one Uppercase letter, At least one Lowercase letter, At least one Number, At least one Symbol/non-alphanumeric character, Users have permission to change their own password, Password expiration period, Password reuse and Password expiration requires administrator reset.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-032",
+                    "masterSnapshotId": [
+                        "TEST_IAM_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-032",
+                            "eval": "data.rule.not_reusing_password",
+                            "message": "data.rule.not_reusing_password_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_032.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure IAM Password Policy does not allow reusing atleast last 12 passwords.",
+                    "description": "It checks to ensure that IAM password policy is in place for the cloud accounts. As a security best practice, customers must have strong password policies in place. This policy ensures password policies are set with all following options: Minimum Password Length, At least one Uppercase letter, At least one Lowercase letter, At least one Number, At least one Symbol/non-alphanumeric character, Users have permission to change their own password, Password expiration period, Password reuse and Password expiration requires administrator reset.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-033",
+                    "masterSnapshotId": [
+                        "TEST_IAM_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-033",
+                            "eval": "data.rule.no_lowercase_character_password",
+                            "message": "data.rule.no_lowercase_character_password_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_033.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM password policy have a lowercase character.",
+                    "description": "Checks to ensure that IAM password policy requires a lowercase character. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-034",
+                    "masterSnapshotId": [
+                        "TEST_IAM_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-034",
+                            "eval": "data.rule.minimum_fourteen_character_password",
+                            "message": "data.rule.minimum_fourteen_character_password_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_034.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM password policy have a minimum of 14 characters.",
+                    "description": "Checks to ensure that IAM password policy requires minimum of 14 characters. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-035",
+                    "masterSnapshotId": [
+                        "TEST_IAM_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-035",
+                            "eval": "data.rule.password_expire_in_ninty_days",
+                            "message": "data.rule.password_expire_in_ninty_days_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_035.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM password policy have password expiration set to 90 days.",
+                    "description": "It identifies the IAM policies which does not have password expiration set to 90 days. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-036",
+                    "masterSnapshotId": [
+                        "TEST_IAM_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-036",
+                            "eval": "data.rule.password_expire_period_defined",
+                            "message": "data.rule.password_expire_period_defined_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_036.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM password policy have password expiration set to 90 days.",
+                    "description": "It checks to ensure that IAM password policy has an expiration period. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-037",
+                    "masterSnapshotId": [
+                        "TEST_IAM_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-037",
+                            "eval": "data.rule.password_have_numbers",
+                            "message": "data.rule.password_have_numbers_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_037.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM password policy have require number equals true.",
+                    "description": "It checks to ensure that IAM password policy requires a number. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-038",
+                    "masterSnapshotId": [
+                        "TEST_IAM_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-038",
+                            "eval": "data.rule.password_have_symbols",
+                            "message": "data.rule.password_have_symbols_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_038.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM password policy have require symbols equals true.",
+                    "description": "It checks to ensure that IAM password policy requires a symbol. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-039",
+                    "masterSnapshotId": [
+                        "TEST_IAM_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-039",
+                            "eval": "data.rule.password_have_upper_case_char",
+                            "message": "data.rule.password_have_upper_case_char_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_039.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM password policy have require upper case characters equals true.",
+                    "description": "It identifies AWS accounts in which IAM password policy does not have an uppercase character. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
                     "tags": [
                         {
                             "cloud": "AWS",
