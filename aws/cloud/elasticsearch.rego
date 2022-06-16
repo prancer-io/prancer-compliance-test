@@ -404,3 +404,46 @@ custom_endpoint_has_certificate_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain"
 }
+
+#
+# PR-AWS-CLD-ES-015
+# aws::elasticsearch::domain
+#
+
+default elasticsearch_domain_not_publicly_accessible = false
+
+elasticsearch_domain_not_publicly_accessible = true {
+    lower(input.DomainStatus.Processing) == available_false_choices[_]
+    not input.DomainStatus.Endpoints
+}
+
+elasticsearch_domain_not_publicly_accessible = true {
+    lower(input.DomainStatus.Processing) == available_false_choices[_]
+    not input.DomainStatus.Endpoints.vpc
+}
+
+elasticsearch_domain_not_publicly_accessible = true {
+    lower(input.DomainStatus.Processing) == available_false_choices[_]
+    input.DomainStatus.Endpoints.vpc == ""
+}
+
+elasticsearch_domain_not_publicly_accessible = true {
+    lower(input.DomainStatus.Processing) == available_false_choices[_]
+    input.DomainStatus.Endpoints.vpc == null
+}
+
+elasticsearch_domain_not_publicly_accessible_err = "Ensure Elasticsearch domain is not publicly accessible." {
+    not elasticsearch_domain_not_publicly_accessible
+}
+
+elasticsearch_domain_not_publicly_accessible_metadata := {
+    "Policy Code": "PR-AWS-CLD-ES-015",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Elasticsearch domain is not publicly accessible.",
+    "Policy Description": "It identifies Elasticsearch domains which are publicly accessible. Enabling VPCs for Elasticsearch domains provides flexibility and control over the clusters access with an extra layer of security than Elasticsearch domains that use public endpoints. It also keeps all traffic between your VPC and Elasticsearch domains within the AWS network instead of going over the public Internet.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain"
+}
