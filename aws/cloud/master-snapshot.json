@@ -129,7 +129,8 @@
 						"get_object_lock_configuration",
 						"get_bucket_replication",
 						"get_public_access_block",
-						"get_bucket_website"
+						"get_bucket_website",
+						"get_bucket_acl"
 					]
 				},
 				{
@@ -824,6 +825,16 @@
 					"listMethod": "get_account_password_policy",
 					"detailMethods": [
 						"get_account_password_policy"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_IAM_04",
+					"arn": "arn:aws:iam:::",
+					"type": "iam",
+					"collection": "aws_iam",
+					"listMethod": "list_access_keys",
+					"detailMethods": [
+						"list_attached_user_policies"
 					]
 				}
 			]

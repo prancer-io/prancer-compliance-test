@@ -14843,8 +14843,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-011",
-                            "eval": "data.rule.iam_policy_not_overly_permissive_to_all_traffic",
-                            "message": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_err",
+                            "eval": "data.rule.lambda_iam_policy_not_overly_permissive_to_all_traffic",
+                            "message": "data.rule.lambda_iam_policy_not_overly_permissive_to_all_traffic_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_IAM_011.py"
                         }
@@ -15907,6 +15907,151 @@
                     "severity": "Medium",
                     "title": "Ensure AWS IAM password policy have require upper case characters equals true.",
                     "description": "It identifies AWS accounts in which IAM password policy does not have an uppercase character. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-040",
+                    "masterSnapshotId": [
+                        "TEST_IAM_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-040",
+                            "eval": "data.rule.not_password_reuse",
+                            "message": "data.rule.not_password_reuse_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_040.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM password policy does not allow password reuse.",
+                    "description": "It identifies IAM policies which allow password reuse. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-041",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-041",
+                            "eval": "data.rule.not_allow_decryption_actions_on_all_kms_keys",
+                            "message": "data.rule.not_allow_decryption_actions_on_all_kms_keys_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_041.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM policy does not allows decryption actions on all KMS keys.",
+                    "description": "It identifies IAM policies that allow decryption actions on all KMS keys. Instead of granting permissions for all keys, determine the minimum set of keys that users need to access encrypted data. You should grant to identities only the kms:Decrypt or kms:ReEncryptFrom permissions and only for the keys that are required to perform a task. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-042",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-042",
+                            "eval": "data.rule.iam_policy_attached_to_user",
+                            "message": "data.rule.iam_policy_attached_to_user_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_attached_user_policies' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_042.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure IAM policy is attached to user.",
+                    "description": "It identifies IAM policies attached to user. By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups but not users.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-043",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-043",
+                            "eval": "data.rule.iam_policy_not_overly_permissive_to_all_traffic",
+                            "message": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_043.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure IAM policy is not overly permissive to all traffic via condition clause.",
+                    "description": "It identifies IAM policies that have a policy that is overly permissive to all traffic via condition clause. If any IAM policy statement with a condition containing 0.0.0.0/0 or ::/0, it allows all traffic to resources attached to that IAM policy. It is highly recommended to have the least privileged IAM policy to protect the data leakage and unauthorized access.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-044",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-044",
+                            "eval": "data.rule.iam_policy_not_overly_permissive_to_sts_service",
+                            "message": "data.rule.iam_policy_not_overly_permissive_to_sts_service_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_044.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS IAM policy is not overly permissive to STS services.",
+                    "description": "It identifies the IAM policies that are overly permissive to STS services. AWS Security Token Service (AWS STS) is a web service that enables you to request temporary credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users). It is recommended to follow the principle of least privileges ensuring that only restricted STS services for restricted resources.",
                     "tags": [
                         {
                             "cloud": "AWS",
