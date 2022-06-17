@@ -2857,6 +2857,64 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-S3-025",
+                    "masterSnapshotId": [
+                        "TEST_S3"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-S3-025",
+                            "eval": "data.rule.policy_is_not_overly_permissive_to_vpc_endpoints",
+                            "message": "data.rule.policy_is_not_overly_permissive_to_vpc_endpoints_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.get_bucket_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_S3_025.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS S3 bucket do not have policy that is overly permissive to VPC endpoints.",
+                    "description": "It identifies S3 buckets that have the bucket policy overly permissive to VPC endpoints. It is recommended to follow the principle of least privileges ensuring that the VPC endpoints have only necessary permissions instead of full permission on S3 operations.\n\nNOTE: When applying the Amazon S3 bucket policies for VPC endpoints described in this section, you might block your access to the bucket without intending to do so. Bucket permissions that are intended to specifically limit bucket access to connections originating from your VPC endpoint can block all connections to the bucket. The policy might disable console access to the specified bucket because console requests don't originate from the specified VPC endpoint. So remediation should be done very carefully.\n\nFor details refer https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-S3-026",
+                    "masterSnapshotId": [
+                        "TEST_S3"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-S3-026",
+                            "eval": "data.rule.s3_only_owner_access",
+                            "message": "data.rule.s3_only_owner_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.get_bucket_acl' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_S3_026.py"
+                        }
+                    ],
+                    "severity": "low",
+                    "title": "Ensure S3 bucket ACL is in use and any user other than the owner does not have any access on it.",
+                    "description": "It ensure the S3 access control list only allowed owner permissions. It checks if other AWs accounts are granted Read/Write access to the S3 bucket.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-EFS-001",
                     "masterSnapshotId": [
                         "TEST_EFS"
@@ -12040,6 +12098,82 @@
                             "cloud": "AWS",
                             "compliance": [
                                 
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RDS-029",
+                    "masterSnapshotId": [
+                        "TEST_RDS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RDS-029",
+                            "eval": "data.rule.db_instance_deletion_protection",
+                            "message": "data.rule.db_instance_deletion_protection_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RDS_029.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS RDS DB instance has deletion protection enabled.",
+                    "description": "It is to check that deletion protection in enabled at RDS DB level in order to protect the DB instance from accidental deletion.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI DSS",
+                                "GDPR",
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "HIPAA",
+                                "ISO 27001",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RDS-030",
+                    "masterSnapshotId": [
+                        "TEST_RDS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RDS-030",
+                            "eval": "data.rule.db_instance_backup_retention_period",
+                            "message": "data.rule.db_instance_backup_retention_period_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RDS_030.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure RDS DB instance has setup backup retention period of at least 30 days.",
+                    "description": "This is to check that backup retention period for RDS DB is firm approved.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI DSS",
+                                "GDPR",
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "HIPAA",
+                                "ISO 27001",
+                                "SOC 2"
                             ],
                             "service": [
                                 "rds"

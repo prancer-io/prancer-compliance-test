@@ -838,7 +838,100 @@ rds_cluster_retention_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
 
+#
+# PR-AWS-CLD-RDS-029
+# aws::rds::dbinstance
 
+default db_instance_deletion_protection = true
+
+available_false_choices := ["false", false]
+
+db_instance_deletion_protection = false {
+    DBInstance := input.DBInstances[_]
+    lower(DBInstance.DeletionProtection) == available_false_choices[_]
+}
+
+db_instance_deletion_protection_err = "Ensure AWS RDS DB instance has deletion protection enabled." {
+    not db_instance_deletion_protection
+}
+
+db_instance_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-029",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS DB instance has deletion protection enabled.",
+    "Policy Description": "It is to check that deletion protection in enabled at RDS DB level in order to protect the DB instance from accidental deletion.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_instances"
+}
+
+#
+# PR-AWS-CLD-RDS-030
+# aws::rds::dbinstance
+
+default db_instance_backup_retention_period = true
+
+db_instance_backup_retention_period = false {
+    DBInstance := input.DBInstances[_]
+    to_number(DBInstance.BackupRetentionPeriod) < 30
+}
+
+db_instance_backup_retention_period = false {
+    DBInstance := input.DBInstances[_]
+    not DBInstance.BackupRetentionPeriod
+}
+
+
+db_instance_backup_retention_period_err = "Ensure RDS DB instance has setup backup retention period of at least 30 days." {
+    not db_instance_backup_retention_period
+}
+
+db_instance_backup_retention_period_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-030",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure RDS DB instance has setup backup retention period of at least 30 days.",
+    "Policy Description": "This is to check that backup retention period for RDS DB is firm approved.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_instances"
+}
+
+#
+# PR-AWS-CLD-RDS-031
+# aws::rds::dbcluster
+#
+
+default rds_cluster_retention = true
+
+rds_cluster_retention = false {
+    DBClusters := input.DBClusters[_]
+    not DBClusters.BackupRetentionPeriod
+}
+
+rds_cluster_retention = false {
+    DBClusters := input.DBClusters[_]
+    to_number(DBClusters.BackupRetentionPeriod) < 30
+}
+
+rds_cluster_retention_err = "Ensure AWS RDS Option groups are enabled for both VPC and non-VPC instanaces" {
+    not rds_cluster_retention
+}
+
+rds_cluster_retention_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-028",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS Option groups are enabled for both VPC and non-VPC instanaces",
+    "Policy Description": "This policy checks that RDS Option groups are enabled in order to offer additional features that make it easier to manage data and databases, and to provide additional security for your database.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
 
 #
 # PR-AWS-CLD-DAX-001

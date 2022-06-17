@@ -401,6 +401,16 @@
 					]
 				},
 				{
+					"masterSnapshotId": "TEST_RDS_07",
+					"arn": "arn:aws:rds:::",
+					"type": "rds",
+					"collection": "aws_rds_07",
+					"listMethod": "describe_option_groups",
+					"detailMethods": [
+						"describe_option_groups"
+					]
+				},
+				{
 					"masterSnapshotId": "TEST_DAX",
 					"arn": "arn:aws:dax:::",
 					"type": "dax",
