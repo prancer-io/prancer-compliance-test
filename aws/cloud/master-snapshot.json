@@ -401,13 +401,14 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_RDS_07",
+					"masterSnapshotId": "TEST_RDS_06",
 					"arn": "arn:aws:rds:::",
 					"type": "rds",
-					"collection": "aws_rds_07",
-					"listMethod": "describe_option_groups",
+					"collection": "aws_rds_06",
+					"listMethod": "describe_db_snapshots",
 					"detailMethods": [
-						"describe_option_groups"
+						"describe_db_snapshots",
+						"describe_db_snapshot_attributes"
 					]
 				},
 				{
