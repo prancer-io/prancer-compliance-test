@@ -2054,6 +2054,220 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-ES-010",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-010",
+                            "eval": "data.rule.esearch_custom_endpoint_configured",
+                            "message": "data.rule.esearch_custom_endpoint_configured_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ElasticSearch has a custom endpoint configured.",
+                    "description": "It checks if a default endpoint is configured for ES domain.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticsearch"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ES-011",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-011",
+                            "eval": "data.rule.esearch_slow_logs_is_enabled",
+                            "message": "data.rule.esearch_slow_logs_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_011.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure Slow Logs feature is enabled for ElasticSearch cluster.",
+                    "description": "It checks of slow logs is enabled for the ES cluster. Slow logs provide valuable information for optimizing and troubleshooting your search and indexing operations.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticsearch"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ES-012",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-012",
+                            "eval": "data.rule.authentication_is_saml_based",
+                            "message": "data.rule.authentication_is_saml_based_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure authentication to Kibana is SAML based in ElasticSearch.",
+                    "description": "It checks if basic authentication is used to login to Kibana dashboard.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticsearch"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ES-013",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-013",
+                            "eval": "data.rule.fine_grained_encryption_for_elasticsearch",
+                            "message": "data.rule.fine_grained_encryption_for_elasticsearch_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure fine-grained access control is enabled during domain creation in ElasticSearch.",
+                    "description": "It checks if fine grained access controls is enabled for the ElasticSearch cluster and node to node encryption is enabled with it.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticsearch"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ES-014",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-014",
+                            "eval": "data.rule.custom_endpoint_has_certificate",
+                            "message": "data.rule.custom_endpoint_has_certificate_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure custom endpoint has GS-managed ACM certificate associated in ElasticSearch.",
+                    "description": "It checks the custom endpoint is hooked to a SSL certificate from AWS ACM.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticsearch"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ES-015",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-015",
+                            "eval": "data.rule.elasticsearch_domain_not_publicly_accessible",
+                            "message": "data.rule.elasticsearch_domain_not_publicly_accessible_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_015.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Elasticsearch domain is not publicly accessible.",
+                    "description": "It identifies Elasticsearch domains which are publicly accessible. Enabling VPCs for Elasticsearch domains provides flexibility and control over the clusters access with an extra layer of security than Elasticsearch domains that use public endpoints. It also keeps all traffic between your VPC and Elasticsearch domains within the AWS network instead of going over the public Internet.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 26",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CMMC",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 30",
+                                "CyberSecurity Law of the People's Republic of China-Article 31",
+                                "CyberSecurity Law of the People's Republic of China-Article 45",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.1.004",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "HITRUST v.9.4.2-Control Reference:09.m",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-11.1.5",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application",
+                                "MITRE ATT&CK v6.3-T1190",
+                                "MITRE ATT&CK v6.3-T1213",
+                                "MITRE ATT&CK v8.2-T1190",
+                                "MLPS",
+                                "MLPS 2.0-8.1.3.2",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Boundary Protection",
+                                "NIST 800-53 Rev4-SC-7",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.1.22",
+                                "NIST SP 800-172-3.14.3e",
+                                "PCI DSS v3.2.1-1.3",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.1.4",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55"
+                            ],
+                            "service": [
+                                "elasticsearch"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-S3-001",
                     "masterSnapshotId": [
                         "TEST_S3"
@@ -2937,6 +3151,165 @@
                             "compliance": [
                                 "Best Practice"
                             ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-S3-023",
+                    "masterSnapshotId": [
+                        "TEST_S3"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-S3-023",
+                            "eval": "data.rule.s3_overly_permissive_to_any_principal",
+                            "message": "data.rule.s3_overly_permissive_to_any_principal_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.get_bucket_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_S3_023.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS S3 bucket policy is not overly permissive to any principal.",
+                    "description": "It identifies the S3 buckets that have a bucket policy overly permissive to any principal. It is recommended to follow the principle of least privileges ensuring that the only restricted entities have permission on S3 operations instead of any anonymous. For more details: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Data Protection"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-S3-024",
+                    "masterSnapshotId": [
+                        "TEST_S3"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-S3-024",
+                            "eval": "data.rule.s3_has_a_policy_attached",
+                            "message": "data.rule.s3_has_a_policy_attached_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.get_bucket_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_S3_024.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS S3 bucket has a policy attached.",
+                    "description": "S3 access can be defined at IAM and Bucket policy levels. It is recommended to leverage bucket policies as it provide much more granularity. This controls check if a bucket has a custom policy attached to it.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-S3-025",
+                    "masterSnapshotId": [
+                        "TEST_S3"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-S3-025",
+                            "eval": "data.rule.policy_is_not_overly_permissive_to_vpc_endpoints",
+                            "message": "data.rule.policy_is_not_overly_permissive_to_vpc_endpoints_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.get_bucket_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_S3_025.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS S3 bucket do not have policy that is overly permissive to VPC endpoints.",
+                    "description": "It identifies S3 buckets that have the bucket policy overly permissive to VPC endpoints. It is recommended to follow the principle of least privileges ensuring that the VPC endpoints have only necessary permissions instead of full permission on S3 operations.\n\nNOTE: When applying the Amazon S3 bucket policies for VPC endpoints described in this section, you might block your access to the bucket without intending to do so. Bucket permissions that are intended to specifically limit bucket access to connections originating from your VPC endpoint can block all connections to the bucket. The policy might disable console access to the specified bucket because console requests don't originate from the specified VPC endpoint. So remediation should be done very carefully.\n\nFor details refer https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IAM-04",
+                                "CSA CCM v.4.0.1-IAM-05",
+                                "CSA CCM v.4.0.1-IAM-09",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-6.1.2",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.1.2",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27018",
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.1",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1530 - Data from Cloud Storage Object",
+                                "MITRE ATT&CK v8.2-T1530",
+                                "NIST CSF",
+                                "NIST CSF-PR.AC-4",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.1.5",
+                                "NIST SP 800-172-3.13.4e",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI DSS v3.2.1-7.1.2",
+                                "PCI-DSS",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-S3-026",
+                    "masterSnapshotId": [
+                        "TEST_S3"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-S3-026",
+                            "eval": "data.rule.s3_only_owner_access",
+                            "message": "data.rule.s3_only_owner_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.get_bucket_acl' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_S3_026.py"
+                        }
+                    ],
+                    "severity": "low",
+                    "title": "Ensure S3 bucket ACL is in use and any user other than the owner does not have any access on it.",
+                    "description": "It ensure the S3 access control list only allowed owner permissions. It checks if other AWs accounts are granted Read/Write access to the S3 bucket.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
                             "service": [
                                 "cloud"
                             ]
@@ -5272,7 +5645,7 @@
                             "id": "PR-AWS-CLD-ELB-014",
                             "eval": "data.rule.elb_certificate_listner_arn",
                             "message": "data.rule.elb_certificate_listner_arn_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_ELB_014.py"
                         }
                     ],
@@ -5303,7 +5676,7 @@
                             "id": "PR-AWS-CLD-ELB-015",
                             "eval": "data.rule.elb_listener_sslpolicy",
                             "message": "data.rule.elb_listener_sslpolicy_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_ELB_015.py"
                         }
                     ],
@@ -5369,7 +5742,7 @@
                             "id": "PR-AWS-CLD-ELB-016",
                             "eval": "data.rule.elb_subnet",
                             "message": "data.rule.elb_subnet_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-subnetmapping.html#cfn-elasticloadbalancingv2-loadbalancer-subnetmapping-subnetid",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-subnetmapping.html#cfn-elasticloadbalancingv2-loadbalancer-subnetmapping-subnetid' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_ELB_016.py"
                         }
                     ],
@@ -5400,7 +5773,7 @@
                             "id": "PR-AWS-CLD-ELB-017",
                             "eval": "data.rule.elb_scheme",
                             "message": "data.rule.elb_scheme_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_ELB_017.py"
                         }
                     ],
@@ -5441,7 +5814,7 @@
                             "id": "PR-AWS-CLD-ELB-018",
                             "eval": "data.rule.elb_type",
                             "message": "data.rule.elb_type_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html#cfn-elasticloadbalancingv2-loadbalancer-type",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html#cfn-elasticloadbalancingv2-loadbalancer-type' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_ELB_018.py"
                         }
                     ],
@@ -5472,7 +5845,7 @@
                             "id": "PR-AWS-CLD-ELB-019",
                             "eval": "data.rule.elb_protocol",
                             "message": "data.rule.elb_protocol_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-protocol",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-loadbalancerattributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_ELB_019.py"
                         }
                     ],
@@ -5493,70 +5866,115 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-CLD-ELB-024",
+                    "masterTestId": "PR-AWS-CLD-ELB-020",
                     "masterSnapshotId": [
-                        "TEST_ELB_02"
+                        "TEST_ELB_07"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
                     "evals": [
                         {
-                            "id": "PR-AWS-CLD-ELB-024",
-                            "eval": "data.rule.elbv2_ssl_negotiation_policy",
-                            "message": "data.rule.elbv2_ssl_negotiation_policy_err",
+                            "id": "PR-AWS-CLD-ELB-020",
+                            "eval": "data.rule.elb_deletion_protection",
+                            "message": "data.rule.elb_deletion_protection_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-protocol' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_ELB_024.py"
+                            "remediationFunction": "PR_AWS_CLD_ELB_020.py"
                         }
                     ],
-                    "severity": "Medium",
-                    "title": "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers.",
-                    "description": "his policy identifies Elastic Load Balancers v2 (ELBv2) which are configured with SSL negotiation policy containing weak ciphers. An SSL cipher is an encryption algorithm that uses encryption keys to create a coded message. SSL protocols use several SSL ciphers to encrypt data over the Internet. As many of the other ciphers are not secure/weak, it is recommended to use only the ciphers recommended in the following AWS link: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html",
+                    "severity": "Low",
+                    "title": "Ensure that AWS Ensure Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled",
+                    "description": "This policy checks if the ELB is protected against accidental deletion by enabling deletion protection.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [
-                                "CSA CCM",
-                                "CSA CCM v.4.0.1-CEK-03",
-                                "CSA CCM v.4.0.1-DSP-10",
-                                "CSA CCM v.4.0.1-IVS-03",
-                                "CSA CCM v.4.0.1-UEM-11",
-                                "HITRUST",
-                                "HITRUST v.9.4.2-Control Reference:09.s",
-                                "ISO/IEC 27002",
-                                "ISO/IEC 27002:2013-10.1.1",
-                                "ISO/IEC 27002:2013-12.2.1",
-                                "ISO/IEC 27002:2013-12.3.1",
-                                "ISO/IEC 27002:2013-13.1.1",
-                                "ISO/IEC 27002:2013-13.1.2",
-                                "ISO/IEC 27002:2013-13.1.3",
-                                "ISO/IEC 27002:2013-13.2.1",
-                                "ISO/IEC 27002:2013-13.2.3",
-                                "ISO/IEC 27002:2013-14.1.2",
-                                "ISO/IEC 27002:2013-14.1.3",
-                                "ISO/IEC 27002:2013-18.1.3",
-                                "ISO/IEC 27002:2013-8.3.1",
-                                "ISO/IEC 27002:2013-8.3.3",
-                                "ISO/IEC 27017",
-                                "ISO/IEC 27017:2015-10.1.1",
-                                "ISO/IEC 27017:2015-10.1.2",
-                                "ISO/IEC 27017:2015-6.1.1",
-                                "ISO/IEC 27018",
-                                "ISO/IEC 27018:2019-10.1.2",
-                                "ISO/IEC 27018:2019-12.3.1",
-                                "MAS TRM",
-                                "MAS TRM 2021-10.1.2",
-                                "NIST CSF",
-                                "NIST CSF-PR.DS-2",
-                                "NIST CSF-PR.DS-5",
-                                "NIST SP",
-                                "NIST SP 800-171 Revision 2-3.13.8",
-                                "NIST SP 800-172-3.1.3e",
-                                "PCI DSS v3.2.1-2.3",
-                                "PCI DSS v3.2.1-4.1",
-                                "PCI-DSS",
-                                "RMiT",
-                                "Risk Management in Technology (RMiT)-10.68"
-                            ],
+                            "compliance": [],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ELB-021",
+                    "masterSnapshotId": [
+                        "TEST_ELB_06"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ELB-021",
+                            "eval": "data.rule.elb_gateway_load_balancer",
+                            "message": "data.rule.elb_gateway_load_balancer_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ELB_021.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that AWS ensure Gateway Load Balancer (GWLB) is not being used",
+                    "description": "This policy checks if Gateway LB is being used or not.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ELB-022",
+                    "masterSnapshotId": [
+                        "TEST_ELB_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ELB-022",
+                            "eval": "data.rule.elb_internet_facing_load_balancer",
+                            "message": "data.rule.elb_internet_facing_load_balancer_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ELB_022.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Internet facing Classic ELB is not in use",
+                    "description": "This policy checks if classic LB is being used in the environment for internet facing applications.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ELB-023",
+                    "masterSnapshotId": [
+                        "TEST_ELB_06"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ELB-023",
+                            "eval": "data.rule.elb2_internet_facing_load_balancer",
+                            "message": "data.rule.elb2_internet_facing_load_balancer_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-protocol' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ELB_023.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Internet facing Classic ELBV2 is not in use",
+                    "description": "This policy checks if ELB v2 is being used in the environment.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
                             "service": [
                                 "elb"
                             ]
@@ -8206,6 +8624,45 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-EC2-013",
+                    "masterSnapshotId": [
+                        "TEST_EC2_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-013",
+                            "eval": "data.rule.ec2_instance_configured_with_instance_metadata_service_v2",
+                            "message": "data.rule.ec2_instance_configured_with_instance_metadata_service_v2_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS EC2 instance is configured with Instance Metadata Service v2 (IMDSv2).",
+                    "description": "It identifies AWS instances that are not configured with Instance Metadata Service v2 (IMDSv2). With IMDSv2, every request is now protected by session authentication. IMDSv2 protects against misconfigured-open website application firewalls, misconfigured-open reverse proxies, unpatched SSRF vulnerabilities, and misconfigured-open layer-3 firewalls and network address translation. It is recommended to use only IMDSv2 for all your EC2 instances. For more details:https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Secure network configuration",
+                                "MAS TRM",
+                                "MAS TRM 2021-7.2.1",
+                                "MAS TRM 2021-7.2.2",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1580 - Cloud Infrastructure Discovery",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-19.1"
+                            ],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-NACL-004",
                     "masterSnapshotId": [
                         "TEST_EC2_01NETWORKACL"
@@ -9912,6 +10369,93 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-ECS-015",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-015",
+                            "eval": "data.rule.ecs_fargate_task_definition_logging_is_enabled",
+                            "message": "data.rule.ecs_fargate_task_definition_logging_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_task_definition' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_015.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS - Ensure Fargate task definition logging is enabled.",
+                    "description": "It checks if the Fargate task definition created has an execution IAM role associated, the role defines the extent of access to other AWS Services.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ECS-016",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-016",
+                            "eval": "data.rule.no_ecs_task_definition_empty_roles",
+                            "message": "data.rule.no_ecs_task_definition_empty_roles_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_task_definition' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_016.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure there are no undefined ECS task definition empty roles for ECS.",
+                    "description": "It checks if the ECS container has a role attached. The task execution role grants the Amazon ECS container and Fargate agents permission to make AWS API calls on your behalf. The task execution IAM role is required depending on the requirements of your task.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ECS-017",
+                    "masterSnapshotId": [
+                        "TEST_ECS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-017",
+                            "eval": "data.rule.ecs_log_driver",
+                            "message": "data.rule.ecs_log_driver_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_task_definition' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_017.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure that a log driver has been configured for each ECS task definition.",
+                    "description": "It checks if log information from the containers running on ECS are send out to CloudWatch logs for monitoring.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-ECS-018",
                     "masterSnapshotId": [
                         "TEST_ECS_01"
@@ -10092,6 +10636,35 @@
                     "severity": "Low",
                     "title": "Ensure AWS Lambda function is configured for a DLQ",
                     "description": "A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. it is required to get all items which is been not processed for some reason",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "lambda"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-LMD-009",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-009",
+                            "eval": "data.rule.lambda_encryption",
+                            "message": "data.rule.lambda_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Lambda not encrypted at-rest using CMK",
+                    "description": "When you create or update Lambda functions that use Environment variables, AWS Lambda encrypts them using the AWS Key Management Service. When your Lambda function is invoked, those values are decrypted and made available to the Lambda code.<br><br>This policy verifies that Lambda function uses the AMS Key Management Service to encrypt variables at-rest with CMK.",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -12319,6 +12892,266 @@
                     "severity": "Medium",
                     "title": "Ensure RDS dbcluster do not use a deprecated version of PostgreSQL.",
                     "description": "AWS RDS PostgreSQL which is exposed to local file read vulnerability. It is highly recommended to upgrade AWS RDS PostgreSQL to the latest version.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI DSS",
+                                "GDPR",
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "HIPAA",
+                                "ISO 27001",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RDS-025",
+                    "masterSnapshotId": [
+                        "TEST_RDS_06"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RDS-025",
+                            "eval": "data.rule.db_snapshot_is_encrypted",
+                            "message": "data.rule.db_snapshot_is_encrypted_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#aws-resource-rds-dbcluster--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RDS_025.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS RDS DB snapshot is encrypted.",
+                    "description": "It identifies AWS RDS DB (Relational Database Service Database) cluster snapshots which are not encrypted. It is highly recommended to implement encryption at rest when you are working with production data that have sensitive information, to protect from unauthorized access.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-15",
+                                "APRA (CPS 234) Information Security-CPS234-16",
+                                "APRA (CPS 234) Information Security-CPS234-17",
+                                "APRA (CPS 234) Information Security-CPS234-21",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Data protection",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CIS",
+                                "CIS AWS 3 Tier Web Architecture Benchmark v.1.0.0-1.4",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-CEK-03",
+                                "CSA CCM v.4.0.1-DSP-10",
+                                "CSA CCM v.4.0.1-UEM-11",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.177",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.185",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:06.d",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-10.1.1",
+                                "ISO/IEC 27002:2013-12.2.1",
+                                "ISO/IEC 27002:2013-12.3.1",
+                                "ISO/IEC 27002:2013-13.2.1",
+                                "ISO/IEC 27002:2013-13.2.3",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.1.3",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-8.3.1",
+                                "ISO/IEC 27002:2013-8.3.3",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-10.1.1",
+                                "ISO/IEC 27017:2015-10.1.2",
+                                "ISO/IEC 27017:2015-6.1.1",
+                                "ISO/IEC 27018",
+                                "ISO/IEC 27018:2019-10.1.2",
+                                "ISO/IEC 27018:2019-12.3.1",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-11.1.1",
+                                "MAS TRM 2021-11.1.3",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Protection of Information at Rest | Cryptographic Protection",
+                                "NIST 800-53 Rev 5-Remote Access | Protection of Confidentiality and Integrity Using Encryption",
+                                "NIST 800-53 Rev4-AC-17 (2)",
+                                "NIST 800-53 Rev4-SC-28 (1)",
+                                "NIST CSF",
+                                "NIST CSF-PR.DS-1",
+                                "NIST CSF-PR.DS-5",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.13.16",
+                                "NIST SP 800-172-3.1.3e",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-17.1",
+                                "New Zealand Information Security Manual (NZISM v3.4)-20.4",
+                                "New Zealand Information Security Manual (NZISM v3.4)-22.1",
+                                "PCI DSS v3.2.1-3.4.1",
+                                "PCI-DSS",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.51",
+                                "Risk Management in Technology (RMiT)-10.68"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RDS-026",
+                    "masterSnapshotId": [
+                        "TEST_RDS_06"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RDS-026",
+                            "eval": "data.rule.rds_snapshot_with_access",
+                            "message": "data.rule.rds_snapshot_with_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_snapshot_attributes' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RDS_026.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS RDS Snapshot with access for only monitored cloud accounts.",
+                    "description": "It identifies RDS snapshots with access for unmonitored cloud accounts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RDS-027",
+                    "masterSnapshotId": [
+                        "TEST_RDS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RDS-027",
+                            "eval": "data.rule.rds_iam_database_auth",
+                            "message": "data.rule.rds_iam_database_auth_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RDS_027.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS RDS DB authentication is only enabled via IAM",
+                    "description": "This policy checks RDS DB instances which are not configured with IAM based authentication and using any hardcoded credentials.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Secure access management",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-16.1"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RDS-028",
+                    "masterSnapshotId": [
+                        "TEST_RDS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RDS-028",
+                            "eval": "data.rule.rds_cluster_backup_retention",
+                            "message": "data.rule.rds_cluster_backup_retention_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RDS_028.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS RDS Cluster has setup backup retention period of at least 30 days",
+                    "description": "This policy checks that backup retention period for RDS DB is firm approved.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RDS-029",
+                    "masterSnapshotId": [
+                        "TEST_RDS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RDS-029",
+                            "eval": "data.rule.db_instance_deletion_protection",
+                            "message": "data.rule.db_instance_deletion_protection_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RDS_029.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS RDS DB instance has deletion protection enabled.",
+                    "description": "It is to check that deletion protection in enabled at RDS DB level in order to protect the DB instance from accidental deletion.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Data protection",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1485 - Data Destruction",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-22.1"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RDS-030",
+                    "masterSnapshotId": [
+                        "TEST_RDS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RDS-030",
+                            "eval": "data.rule.db_instance_backup_retention_period",
+                            "message": "data.rule.db_instance_backup_retention_period_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RDS_030.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure RDS DB instance has setup backup retention period of at least 30 days.",
+                    "description": "This is to check that backup retention period for RDS DB is firm approved.",
                     "tags": [
                         {
                             "cloud": "AWS",

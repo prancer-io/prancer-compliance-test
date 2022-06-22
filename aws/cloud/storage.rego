@@ -842,6 +842,167 @@ s3_block_public_policy_metadata := {
 }
 
 #
+# PR-AWS-CLD-S3-023
+# aws::s3::bucketpolicy
+#
+
+default s3_overly_permissive_to_any_principal = true
+
+s3_overly_permissive_to_any_principal = false {
+    policy := json.unmarshal(input.Policy)
+    not policy.Statement
+}
+
+s3_overly_permissive_to_any_principal = false {
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action),"s3:")
+    not stat.Condition
+}
+
+s3_overly_permissive_to_any_principal = false {
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
+    lower(stat.Effect) == "allow"
+    contains(stat.Principal, "*")
+    startswith(lower(stat.Action[_]),"s3:")
+    not stat.Condition
+}
+
+s3_overly_permissive_to_any_principal_err = "Ensure AWS S3 bucket policy is not overly permissive to any principal." {
+    not s3_overly_permissive_to_any_principal
+}
+
+s3_overly_permissive_to_any_principal_metadata := {
+    "Policy Code": "PR-AWS-CLD-S3-023",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS S3 bucket policy is not overly permissive to any principal.",
+    "Policy Description": "It identifies the S3 buckets that have a bucket policy overly permissive to any principal. It is recommended to follow the principle of least privileges ensuring that the only restricted entities have permission on S3 operations instead of any anonymous. For more details: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.get_bucket_policy"
+}
+
+#
+# PR-AWS-CLD-S3-024
+# aws::s3::bucketpolicy
+#
+
+default s3_has_a_policy_attached = true
+
+s3_has_a_policy_attached = false {
+    policy := json.unmarshal(input.Policy)
+    not policy.Statement
+}
+
+s3_has_a_policy_attached_err = "Ensure AWS S3 bucket has a policy attached." {
+    not s3_has_a_policy_attached
+}
+
+s3_has_a_policy_attached_metadata := {
+    "Policy Code": "PR-AWS-CLD-S3-024",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS S3 bucket has a policy attached.",
+    "Policy Description": "S3 access can be defined at IAM and Bucket policy levels. It is recommended to leverage bucket policies as it provide much more granularity. This controls check if a bucket has a custom policy attached to it.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.get_bucket_policy"
+}
+
+#
+# PR-AWS-CLD-S3-025
+# aws::s3::bucketpolicy
+
+default policy_is_not_overly_permissive_to_vpc_endpoints = true
+
+policy_is_not_overly_permissive_to_vpc_endpoints = false {
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
+    contains(stat.Condition.StringNotEquals, "aws:SourceVpce")
+    lower(stat.Effect) == "deny"
+    startswith(lower(stat.Action),"s3:*")
+}
+
+policy_is_not_overly_permissive_to_vpc_endpoints = false {
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
+    contains(stat.Condition.StringNotEquals, "aws:SourceVpce")
+    lower(stat.Effect) == "deny"
+    startswith(lower(stat.Action[_]),"s3:*")
+}
+
+policy_is_not_overly_permissive_to_vpc_endpoints = false {
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
+    contains(stat.Condition.StringEquals, "aws:SourceVpce")
+    lower(stat.Effect) == "allow"
+    startswith(lower(stat.Action),"s3:*")
+}
+
+policy_is_not_overly_permissive_to_vpc_endpoints = false {
+    policy := json.unmarshal(input.Policy)
+    stat := policy.Statement[_]
+    contains(stat.Condition.StringEquals, "aws:SourceVpce")
+    lower(stat.Effect) == "allow"
+    startswith(lower(stat.Action[_]),"s3:*")
+}
+
+policy_is_not_overly_permissive_to_vpc_endpoints_err = "Ensure AWS S3 bucket do not have policy that is overly permissive to VPC endpoints." {
+    not policy_is_not_overly_permissive_to_vpc_endpoints
+}
+
+policy_is_not_overly_permissive_to_vpc_endpoints_metadata := {
+    "Policy Code": "PR-AWS-CLD-S3-025",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS S3 bucket do not have policy that is overly permissive to VPC endpoints.",
+    "Policy Description": "It identifies S3 buckets that have the bucket policy overly permissive to VPC endpoints. It is recommended to follow the principle of least privileges ensuring that the VPC endpoints have only necessary permissions instead of full permission on S3 operations.\n\nNOTE: When applying the Amazon S3 bucket policies for VPC endpoints described in this section, you might block your access to the bucket without intending to do so. Bucket permissions that are intended to specifically limit bucket access to connections originating from your VPC endpoint can block all connections to the bucket. The policy might disable console access to the specified bucket because console requests don't originate from the specified VPC endpoint. So remediation should be done very carefully.\n\nFor details refer https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.get_bucket_policy"
+}
+
+#
+# PR-AWS-CLD-S3-026
+#
+
+default s3_only_owner_access = true
+
+s3_only_owner_access = false {
+    owner_id := input.Owner.ID
+    not owner_id
+}
+
+s3_only_owner_access = false {
+    owner_id := input.Owner.ID
+    count(input.Grants) >= 1
+    count([c | (input.Grants[_].Grantee.ID == owner_id); c:=1]) == 0    
+}
+    
+s3_only_owner_access_err = "Ensure S3 bucket ACL is in use and any user other than the owner does not have any access on it." {
+    not s3_only_owner_access
+}
+
+s3_only_owner_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-S3-026",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure S3 bucket ACL is in use and any user other than the owner does not have any access on it.",
+    "Policy Description": "It ensure the S3 access control list only allowed owner permissions. It checks if other AWs accounts are granted Read/Write access to the S3 bucket.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.get_bucket_acl"
+}
+
+#
 # PR-AWS-CLD-EFS-001
 #
 

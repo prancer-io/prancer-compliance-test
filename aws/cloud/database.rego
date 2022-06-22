@@ -722,6 +722,183 @@ db_cluster_approved_postgres_version_metadata := {
 }
 
 #
+# PR-AWS-CLD-RDS-025
+#
+
+default db_snapshot_is_encrypted = true
+
+db_snapshot_is_encrypted = false {
+    DBSnapshot := input.DBSnapshots[_]
+    lower(DBSnapshot.Status) == "available"
+    lower(DBSnapshot.Encrypted) == available_false_choices[_]
+}
+
+db_snapshot_is_encrypted_err = "Ensure AWS RDS DB snapshot is encrypted." {
+    not db_snapshot_is_encrypted
+}
+
+db_snapshot_is_encrypted_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-025",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS DB snapshot is encrypted.",
+    "Policy Description": "It identifies AWS RDS DB (Relational Database Service Database) cluster snapshots which are not encrypted. It is highly recommended to implement encryption at rest when you are working with production data that have sensitive information, to protect from unauthorized access.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_snapshots"
+}
+
+#
+# PR-AWS-CLD-RDS-026
+#
+
+default rds_snapshot_with_access = true
+
+rds_snapshot_with_access = false {
+    DBSnapshotAttribute := input.DBSnapshotAttributesResult.DBSnapshotAttributes[_]
+    lower(DBSnapshotAttribute.AttributeName) == "restore"
+    count(DBSnapshotAttribute.AttributeValues[_]) != 0
+}
+
+rds_snapshot_with_access_err = "Ensure AWS RDS Snapshot with access for only monitored cloud accounts." {
+    not rds_snapshot_with_access
+}
+
+rds_snapshot_with_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-026",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS Snapshot with access for only monitored cloud accounts.",
+    "Policy Description": "It identifies RDS snapshots with access for unmonitored cloud accounts.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_snapshot_attributes"
+}
+
+#
+# PR-AWS-CLD-RDS-027
+# aws::rds::dbinstance
+#
+
+default rds_iam_database_auth = true
+
+rds_iam_database_auth = false {
+    DBInstance := input.DBInstances[_]
+    not DBInstance.IAMDatabaseAuthenticationEnabled
+}
+
+rds_iam_database_auth_err = "Ensure AWS RDS DB authentication is only enabled via IAM" {
+    not rds_iam_database_auth
+}
+
+rds_iam_database_auth_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-027",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS DB authentication is only enabled via IAM",
+    "Policy Description": "This policy checks RDS DB instances which are not configured with IAM based authentication and using any hardcoded credentials.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html"
+}
+
+#
+# PR-AWS-CLD-RDS-028
+# aws::rds::dbcluster
+#
+
+default rds_cluster_backup_retention = true
+
+rds_cluster_backup_retention = false {
+    DBClusters := input.DBClusters[_]
+    not DBClusters.BackupRetentionPeriod
+}
+
+rds_cluster_backup_retention = false {
+    DBClusters := input.DBClusters[_]
+    to_number(DBClusters.BackupRetentionPeriod) < 30
+}
+
+rds_cluster_backup_retention_err = "Ensure AWS RDS Cluster has setup backup retention period of at least 30 days" {
+    not rds_cluster_backup_retention
+}
+
+rds_cluster_backup_retention_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-028",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS Cluster has setup backup retention period of at least 30 days",
+    "Policy Description": "This policy checks that backup retention period for RDS DB is firm approved.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
+#
+# PR-AWS-CLD-RDS-029
+# aws::rds::dbinstance
+
+default db_instance_deletion_protection = true
+
+db_instance_deletion_protection = false {
+    DBInstance := input.DBInstances[_]
+    lower(DBInstance.DeletionProtection) == available_false_choices[_]
+}
+
+db_instance_deletion_protection_err = "Ensure AWS RDS DB instance has deletion protection enabled." {
+    not db_instance_deletion_protection
+}
+
+db_instance_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-029",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS DB instance has deletion protection enabled.",
+    "Policy Description": "It is to check that deletion protection in enabled at RDS DB level in order to protect the DB instance from accidental deletion.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_instances"
+}
+
+#
+# PR-AWS-CLD-RDS-030
+# aws::rds::dbinstance
+
+default db_instance_backup_retention_period = true
+
+db_instance_backup_retention_period = false {
+    DBInstance := input.DBInstances[_]
+    to_number(DBInstance.BackupRetentionPeriod) < 30
+}
+
+db_instance_backup_retention_period = false {
+    DBInstance := input.DBInstances[_]
+    not DBInstance.BackupRetentionPeriod
+}
+
+
+db_instance_backup_retention_period_err = "Ensure RDS DB instance has setup backup retention period of at least 30 days." {
+    not db_instance_backup_retention_period
+}
+
+db_instance_backup_retention_period_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-030",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure RDS DB instance has setup backup retention period of at least 30 days.",
+    "Policy Description": "This is to check that backup retention period for RDS DB is firm approved.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_instances"
+}
+
+#
 # PR-AWS-CLD-DAX-001
 #
 
