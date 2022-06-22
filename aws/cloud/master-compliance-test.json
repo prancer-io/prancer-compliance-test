@@ -1897,7 +1897,47 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 26",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CMMC",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 30",
+                                "CyberSecurity Law of the People's Republic of China-Article 31",
+                                "CyberSecurity Law of the People's Republic of China-Article 45",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.1.004",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "HITRUST v.9.4.2-Control Reference:09.m",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-11.1.5",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application",
+                                "MITRE ATT&CK v6.3-T1190",
+                                "MITRE ATT&CK v6.3-T1213",
+                                "MITRE ATT&CK v8.2-T1190",
+                                "MLPS",
+                                "MLPS 2.0-8.1.3.2",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Boundary Protection",
+                                "NIST 800-53 Rev4-SC-7",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.1.22",
+                                "NIST SP 800-172-3.14.3e",
+                                "PCI DSS v3.2.1-1.3",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.1.4",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55"
+                            ],
                             "service": [
                                 "elasticsearch"
                             ]
@@ -2817,7 +2857,8 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "Best Practice"
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Data Protection"
                             ],
                             "service": [
                                 "cloud"
@@ -2878,7 +2919,45 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IAM-04",
+                                "CSA CCM v.4.0.1-IAM-05",
+                                "CSA CCM v.4.0.1-IAM-09",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-6.1.2",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.1.2",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27018",
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.1",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1530 - Data from Cloud Storage Object",
+                                "MITRE ATT&CK v8.2-T1530",
+                                "NIST CSF",
+                                "NIST CSF-PR.AC-4",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.1.5",
+                                "NIST SP 800-172-3.13.4e",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI DSS v3.2.1-7.1.2",
+                                "PCI-DSS",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55"
+                            ],
                             "service": [
                                 "cloud"
                             ]
@@ -3495,12 +3574,10 @@
                                 "MLPS",
                                 "MLPS 2.0-8.1.4.8",
                                 "NIST 800",
-                                "NIST 800-53 Rev 5-Cryptographic Key Establishment and Management",
+                                "NIST 800-53 Rev 5-Protection of Information at Rest",
                                 "NIST 800-53 Rev 5-Remote Access | Protection of Confidentiality and Integrity Using Encryption",
-                                "NIST 800-53 Rev 5-Transmission Confidentiality and Integrity | Cryptographic Protection",
                                 "NIST 800-53 Rev4-AC-17 (2)",
-                                "NIST 800-53 Rev4-SC-12",
-                                "NIST 800-53 Rev4-SC-8 (1)",
+                                "NIST 800-53 Rev4-SC-28",
                                 "NIST CSF",
                                 "NIST CSF-PR.DS-1",
                                 "NIST CSF-PR.DS-5",
@@ -7904,7 +7981,17 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Secure network configuration",
+                                "MAS TRM",
+                                "MAS TRM 2021-7.2.1",
+                                "MAS TRM 2021-7.2.2",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1580 - Cloud Infrastructure Discovery",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-19.1"
+                            ],
                             "service": [
                                 "ec2"
                             ]
@@ -11631,14 +11718,19 @@
                             "remediationFunction": "PR_AWS_CLD_RDS_013.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure RDS clusters and instances have deletion protection enabled",
                     "description": "This rule Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled",
                     "tags": [
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "NIST 800"
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Data protection",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1485 - Data Destruction",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-22.1"
                             ],
                             "service": [
                                 "rds"
@@ -12007,7 +12099,72 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-15",
+                                "APRA (CPS 234) Information Security-CPS234-16",
+                                "APRA (CPS 234) Information Security-CPS234-17",
+                                "APRA (CPS 234) Information Security-CPS234-21",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Data protection",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CIS",
+                                "CIS AWS 3 Tier Web Architecture Benchmark v.1.0.0-1.4",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-CEK-03",
+                                "CSA CCM v.4.0.1-DSP-10",
+                                "CSA CCM v.4.0.1-UEM-11",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.177",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.185",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:06.d",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-10.1.1",
+                                "ISO/IEC 27002:2013-12.2.1",
+                                "ISO/IEC 27002:2013-12.3.1",
+                                "ISO/IEC 27002:2013-13.2.1",
+                                "ISO/IEC 27002:2013-13.2.3",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.1.3",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-8.3.1",
+                                "ISO/IEC 27002:2013-8.3.3",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-10.1.1",
+                                "ISO/IEC 27017:2015-10.1.2",
+                                "ISO/IEC 27017:2015-6.1.1",
+                                "ISO/IEC 27018",
+                                "ISO/IEC 27018:2019-10.1.2",
+                                "ISO/IEC 27018:2019-12.3.1",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-11.1.1",
+                                "MAS TRM 2021-11.1.3",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Protection of Information at Rest | Cryptographic Protection",
+                                "NIST 800-53 Rev 5-Remote Access | Protection of Confidentiality and Integrity Using Encryption",
+                                "NIST 800-53 Rev4-AC-17 (2)",
+                                "NIST 800-53 Rev4-SC-28 (1)",
+                                "NIST CSF",
+                                "NIST CSF-PR.DS-1",
+                                "NIST CSF-PR.DS-5",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.13.16",
+                                "NIST SP 800-172-3.1.3e",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-17.1",
+                                "New Zealand Information Security Manual (NZISM v3.4)-20.4",
+                                "New Zealand Information Security Manual (NZISM v3.4)-22.1",
+                                "PCI DSS v3.2.1-3.4.1",
+                                "PCI-DSS",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.51",
+                                "Risk Management in Technology (RMiT)-10.68"
+                            ],
                             "service": [
                                 "rds"
                             ]
@@ -12066,7 +12223,10 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Secure access management",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-16.1"
                             ],
                             "service": [
                                 "rds"
@@ -12096,9 +12256,7 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [
-                                
-                            ],
+                            "compliance": [],
                             "service": [
                                 "rds"
                             ]
@@ -12128,14 +12286,12 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "PCI DSS",
-                                "GDPR",
-                                "CIS",
-                                "HITRUST",
-                                "NIST 800",
-                                "HIPAA",
-                                "ISO 27001",
-                                "SOC 2"
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Data protection",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1485 - Data Destruction",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-22.1"
                             ],
                             "service": [
                                 "rds"
@@ -12955,7 +13111,14 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "MAS TRM",
+                                "MAS TRM 2021-11.1.1",
+                                "MAS TRM 2021-11.1.3",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.51",
+                                "Risk Management in Technology (RMiT)-10.68"
+                            ],
                             "service": [
                                 "elasticache"
                             ]
