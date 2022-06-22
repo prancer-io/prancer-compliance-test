@@ -1488,33 +1488,11 @@ azure_attribute_absence["storage_account_allow_shared_key_access"] {
     not has_property(resource.properties,"allowSharedKeyAccess")
 }
 
-source_path[{"storage_account_allow_shared_key_access":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not storage_account_need_to_skip(resource)
-    not has_property(resource.properties,"allowSharedKeyAccess")
-    metadata:= {
-        "resource_path": [["resources",i,"properties","allowSharedKeyAccess"]]
-    }
-}
-
-
 azure_issue["storage_account_allow_shared_key_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     not storage_account_need_to_skip(resource)
     resource.properties.allowSharedKeyAccess != false
-}
-
-
-source_path[{"storage_account_allow_shared_key_access":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
-    not storage_account_need_to_skip(resource)
-    resource.properties.allowSharedKeyAccess != false
-    metadata:= {
-        "resource_path": [["resources",i,"properties","allowSharedKeyAccess"]]
-    }
 }
 
 storage_account_allow_shared_key_access {
@@ -1561,4 +1539,54 @@ storage_account_allow_shared_key_access_metadata := {
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
+
+
+#
+# PR-AZR-ARM-STR-025
+#
+
+default storage_account_file_share_usage_smb_protocol = null
+
+azure_attribute_absence["storage_account_file_share_usage_smb_protocol"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/fileservices/shares"
+    not has_property(resource.properties, "enabledProtocols")
+}
+
+azure_issue["storage_account_file_share_usage_smb_protocol"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/fileservices/shares"
+    lower(resource.properties.enabledProtocols) != "smb"
+}
+
+storage_account_file_share_usage_smb_protocol {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts/fileservices/shares"
+    not azure_attribute_absence["storage_account_file_share_usage_smb_protocol"]
+    not azure_issue["storage_account_file_share_usage_smb_protocol"]
+}
+
+storage_account_file_share_usage_smb_protocol = false {
+    azure_issue["storage_account_file_share_usage_smb_protocol"]
+}
+
+storage_account_file_share_usage_smb_protocol {
+    azure_attribute_absence["storage_account_file_share_usage_smb_protocol"]
+    not azure_issue["storage_account_file_share_usage_smb_protocol"]
+}
+
+storage_account_file_share_usage_smb_protocol_err = "Storage accounts File Share currently not using SMB protocol" {
+    azure_issue["storage_account_file_share_usage_smb_protocol"]
+}
+
+storage_account_file_share_usage_smb_protocol_metadata := {
+    "Policy Code": "PR-AZR-ARM-STR-025",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Storage Account File Share should use SMB protocol",
+    "Policy Description": "The Server Message Block (SMB) protocol is a network file sharing protocol that allows applications on a computer to read and write to files and to request services from server programs in a computer network. The SMB protocol can be used on top of its TCP/IP protocol or other network protocols.",
+    "Resource Type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/fileservices/shares?tabs=json"
 }

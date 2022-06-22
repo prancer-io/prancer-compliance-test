@@ -1012,3 +1012,53 @@ storage_acl_usage_vnet_metadata := {
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules"
 }
 
+
+#
+# PR-AZR-TRF-STR-025
+#
+
+default storage_account_file_share_usage_smb_protocol = null
+
+azure_attribute_absence["storage_account_file_share_usage_smb_protocol"] {
+    resource := input.resources[_]
+    resource.type == "azurerm_storage_share"
+    not has_property(resource.properties, "enabled_protocol")
+}
+
+azure_issue["storage_account_file_share_usage_smb_protocol"] {
+    resource := input.resources[_]
+    resource.type == "azurerm_storage_share"
+    lower(resource.properties.enabled_protocol) != "smb"
+}
+
+storage_account_file_share_usage_smb_protocol {
+    input.resources[_].type == "azurerm_storage_share"
+    not azure_attribute_absence["storage_account_file_share_usage_smb_protocol"]
+    not azure_issue["storage_account_file_share_usage_smb_protocol"]
+}
+
+storage_account_file_share_usage_smb_protocol = false {
+    azure_issue["storage_account_file_share_usage_smb_protocol"]
+}
+
+storage_account_file_share_usage_smb_protocol {
+    azure_attribute_absence["storage_account_file_share_usage_smb_protocol"]
+    not azure_issue["storage_account_file_share_usage_smb_protocol"]
+}
+
+storage_account_file_share_usage_smb_protocol_err = "Storage accounts File Share currently not using SMB protocol" {
+    azure_issue["storage_account_file_share_usage_smb_protocol"]
+}
+
+storage_shared_access_key_disabled_metadata := {
+    "Policy Code": "PR-AZR-TRF-STR-025",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Storage Account File Share should use SMB protocol",
+    "Policy Description": "The Server Message Block (SMB) protocol is a network file sharing protocol that allows applications on a computer to read and write to files and to request services from server programs in a computer network. The SMB protocol can be used on top of its TCP/IP protocol or other network protocols.",
+    "Resource Type": "azurerm_storage_share",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_share"
+}
+
