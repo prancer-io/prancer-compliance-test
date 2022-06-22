@@ -4270,6 +4270,64 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-MSK-006",
+                    "masterSnapshotId": [
+                        "TEST_MSK"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MSK-006",
+                            "eval": "data.rule.msk_cluster_enhanced_monitoring_enable",
+                            "message": "data.rule.msk_cluster_enhanced_monitoring_enable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kafka.html#Kafka.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MSK_006.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure enhanaced monitoring for AWS MSK is set to default.",
+                    "description": "It is used to check that enhanced monitoring is configured to gather Apache Kafka metrics and sends them to Amazon CloudWatch.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "msk"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-MSK-007",
+                    "masterSnapshotId": [
+                        "TEST_MSK"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MSK-007",
+                            "eval": "data.rule.msk_public_access",
+                            "message": "data.rule.msk_public_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kafka.html#Kafka.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MSK_007.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure public access is disabled for AWS MSK.",
+                    "description": "It check whether public access is turned on to the brokers of MSK clusters.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "msk"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-ELB-001",
                     "masterSnapshotId": [
                         "TEST_ELB_04"
@@ -7002,6 +7060,99 @@
                     "severity": "Low",
                     "title": "Ensure Amazon MQ Broker logging is enabled",
                     "description": "Amazon MQ is integrated with CloudTrail and provides a record of the Amazon MQ calls made by a user, role, or AWS service. It supports logging both the request parameters and the responses for APIs as events in CloudTrail",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "mq"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-MQ-003",
+                    "masterSnapshotId": [
+                        "TEST_ALL_12"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MQ-003",
+                            "eval": "data.rule.mq_activemq_approved_engine_version",
+                            "message": "data.rule.mq_activemq_approved_engine_version_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MQ_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ActiveMQ engine version is approved by GS.",
+                    "description": "It is used to check only firm approved version of ActiveMQ is being used.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "mq"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-MQ-004",
+                    "masterSnapshotId": [
+                        "TEST_ALL_12"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MQ-004",
+                            "eval": "data.rule.mq_rabbitmq_approved_engine_version",
+                            "message": "data.rule.mq_rabbitmq_approved_engine_version_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MQ_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure RabbitMQ engine version is approved by GS.",
+                    "description": "It is used to check only firm approved version of RabbitMQ is being used.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "mq"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-MQ-005",
+                    "masterSnapshotId": [
+                        "TEST_ALL_12"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MQ-005",
+                            "eval": "data.rule.audit_logs_published_to_cloudWatch",
+                            "message": "data.rule.audit_logs_published_to_cloudWatch_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MQ_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure General and Audit logs are published to CloudWatch.",
+                    "description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues.",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -15978,7 +16129,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-042",
                     "masterSnapshotId": [
-                        "TEST_IAM_01"
+                        "TEST_IAM_04"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -15992,7 +16143,7 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "Ensure IAM policy is attached to user.",
+                    "title": "Ensure IAM policy is attached to group rather than user.",
                     "description": "It identifies IAM policies attached to user. By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups but not users.",
                     "tags": [
                         {

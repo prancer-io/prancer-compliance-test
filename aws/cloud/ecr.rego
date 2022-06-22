@@ -223,6 +223,11 @@ default lifecycle_policy_is_enabled = true
 
 lifecycle_policy_is_enabled = false {
     # lower(resource.Type) == "aws::ecr::repository"
+    not input.lifecyclePolicyText
+}
+
+lifecycle_policy_is_enabled = false {
+    # lower(resource.Type) == "aws::ecr::repository"
     lifecyclePolicy := json.unmarshal(input.lifecyclePolicyText)
     rule := lifecyclePolicy.rules[j]
     lower(rule.selection.tagStatus) == "tagged"

@@ -157,12 +157,12 @@ default eks_with_private_access = true
 
 eks_with_private_access = false {
     # lower(resource.Type) == "aws::eks::cluster"
-    lower(input.cluster.resourcesVpcConfig.endpointPrivateAccess) == available_false_choices[_]
+    input.cluster.resourcesVpcConfig.endpointPrivateAccess == available_false_choices[_]
 }
 
 eks_with_private_access = false {
     # lower(resource.Type) == "aws::eks::cluster"
-    lower(input.cluster.resourcesVpcConfig.endpointPublicAccess) == available_true_choices[_]
+    input.cluster.resourcesVpcConfig.endpointPublicAccess == available_true_choices[_]
 }
 
 eks_with_private_access_err = "Ensure only private access for Amazon EKS cluster's Kubernetes API is enabled." {
@@ -214,7 +214,7 @@ eks_logging_enabled = false {
 eks_logging_enabled = false {
     # lower(resource.Type) == "aws::eks::cluster"
     cluster_logging := input.cluster.logging.clusterLogging[_]
-    lower(cluster_logging.enabled) == available_false_choices[_]
+    cluster_logging.enabled == available_false_choices[_]
 }
 
 eks_logging_enabled_err = "Ensure AWS EKS control plane logging is enabled." {

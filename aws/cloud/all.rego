@@ -795,6 +795,93 @@ mq_logging_enable_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-publiclyaccessible"
 }
 
+#
+# PR-AWS-CLD-MQ-003
+#
+
+default mq_activemq_approved_engine_version = true
+
+mq_activemq_approved_engine_version = false {
+    # lower(resource.Type) == "aws::amazonmq::broker"
+    lower(input.EngineType) == "activemq"
+    not startswith(input.EngineVersion, "5.16")
+}
+
+mq_activemq_approved_engine_version_err = "Ensure ActiveMQ engine version is approved by GS." {
+    not mq_activemq_approved_engine_version
+}
+
+mq_activemq_approved_engine_version_metadata := {
+    "Policy Code": "PR-AWS-CLD-MQ-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure ActiveMQ engine version is approved by GS.",
+    "Policy Description": "It is used to check only firm approved version of ActiveMQ is being used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker"
+}
+
+#
+# PR-AWS-CLD-MQ-004
+#
+
+default mq_rabbitmq_approved_engine_version = true
+
+mq_rabbitmq_approved_engine_version = false {
+    # lower(resource.Type) == "aws::amazonmq::broker"
+    lower(input.EngineType) == "rabbitmq"
+    not startswith(input.EngineVersion, "3.8")
+}
+
+mq_rabbitmq_approved_engine_version_err = "Ensure RabbitMQ engine version is approved by GS." {
+    not mq_rabbitmq_approved_engine_version
+}
+
+mq_rabbitmq_approved_engine_version_metadata := {
+    "Policy Code": "PR-AWS-CLD-MQ-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure RabbitMQ engine version is approved by GS.",
+    "Policy Description": "It is used to check only firm approved version of RabbitMQ is being used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker"
+}
+
+#
+# PR-AWS-CLD-MQ-005
+#
+
+default audit_logs_published_to_cloudWatch = true
+
+audit_logs_published_to_cloudWatch = false {
+    # lower(resource.Type) == "aws::amazonmq::broker"
+    lower(input.Logs.Audit) == available_false_choices[_]
+}
+
+audit_logs_published_to_cloudWatch = false {
+    # lower(resource.Type) == "aws::amazonmq::broker"
+    not input.Logs.Audit
+}
+
+audit_logs_published_to_cloudWatch_err = "Ensure General and Audit logs are published to CloudWatch." {
+    not audit_logs_published_to_cloudWatch
+}
+
+audit_logs_published_to_cloudWatch_metadata := {
+    "Policy Code": "PR-AWS-CLD-MQ-005",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure General and Audit logs are published to CloudWatch.",
+    "Policy Description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker"
+}
 
 #
 # PR-AWS-CLD-R53-001

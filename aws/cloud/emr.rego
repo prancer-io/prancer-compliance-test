@@ -234,7 +234,7 @@ default emr_cluster_not_visible_to_all_iam_users = true
 
 emr_cluster_not_visible_to_all_iam_users = false {
     # lower(resource.Type) == "aws::emr::cluster"
-    lower(input.Cluster.VisibleToAllUsers) == available_true_choices[_]
+    input.Cluster.VisibleToAllUsers == available_true_choices[_]
 }
 
 emr_cluster_not_visible_to_all_iam_users_err = "Ensure EMR cluster is not visible to all IAM users." {
@@ -261,7 +261,7 @@ default emr_termination_protection_is_enabled = true
 
 emr_termination_protection_is_enabled = false {
     # lower(resource.Type) == "aws::emr::cluster"
-    lower(input.Cluster.TerminationProtected) == available_false_choices[_]
+    input.Cluster.TerminationProtected == available_false_choices[_]
 }
 
 emr_termination_protection_is_enabled_err = "Ensure Termination protection is enabled for instances in the cluster for EMR." {
@@ -288,7 +288,7 @@ default emr_block_public_access = true
 
 emr_block_public_access = false {
     # lower(resource.Type) == "aws::emr::cluster"
-    lower(input.BlockPublicAccessConfiguration.BlockPublicSecurityGroupRules) == available_false_choices[_]
+    input.BlockPublicAccessConfiguration.BlockPublicSecurityGroupRules == available_false_choices[_]
 }
 
 emr_block_public_access_err = "Ensure AWS EMR block public access setting is not disabled." {

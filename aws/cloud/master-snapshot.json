@@ -230,6 +230,7 @@
 					"masterSnapshotId": "TEST_ELB_06",
 					"arn": "arn:aws:elbv2:::",
 					"type": "elbv2",
+					"boto_type": "elbv2",
 					"collection": "aws_elbv2_06",
 					"listMethod": "describe_load_balancers",
 					"detailMethods": [
@@ -240,6 +241,7 @@
 					"masterSnapshotId": "TEST_ELB_03",
 					"arn": "arn:aws:elbv2:::",
 					"type": "elbv2",
+					"boto_type": "elbv2",
 					"collection": "aws_elbv2_03",
 					"listMethod": "describe_target_groups",
 					"detailMethods": [
@@ -250,6 +252,7 @@
 					"masterSnapshotId": "TEST_ELB_04",
 					"arn": "arn:aws:elb:::",
 					"type": "elb",
+					"boto_type": "elb",
 					"collection": "aws_elb_04",
 					"listMethod": "describe_load_balancers",
 					"detailMethods": [
@@ -260,7 +263,19 @@
 					"masterSnapshotId": "TEST_ELB_05",
 					"arn": "arn:aws:elb:::",
 					"type": "elb",
+					"boto_type": "elb",
 					"collection": "aws_elb_05",
+					"listMethod": "describe_load_balancers",
+					"detailMethods": [
+						"describe_load_balancer_attributes"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ELB_07",
+					"arn": "arn:aws:elbv2:::",
+					"type": "elbv2",
+					"boto_type": "elbv2",
+					"collection": "aws_elbv2_06",
 					"listMethod": "describe_load_balancers",
 					"detailMethods": [
 						"describe_load_balancer_attributes"
@@ -822,7 +837,7 @@
 					"arn": "arn:aws:iam:::",
 					"type": "iam",
 					"collection": "aws_iam",
-					"listMethod": "get_account_password_policy",
+					"listMethod": "list_policies",
 					"detailMethods": [
 						"get_account_password_policy"
 					]
@@ -832,9 +847,9 @@
 					"arn": "arn:aws:iam:::",
 					"type": "iam",
 					"collection": "aws_iam",
-					"listMethod": "list_access_keys",
+					"listMethod": "get_account_authorization_details",
 					"detailMethods": [
-						"list_attached_user_policies"
+						"get_account_authorization_details"
 					]
 				}
 			]

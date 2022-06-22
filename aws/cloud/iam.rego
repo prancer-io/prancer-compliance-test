@@ -1824,10 +1824,11 @@ not_allow_decryption_actions_on_all_kms_keys_metadata := {
 default iam_policy_attached_to_user = true
 
 iam_policy_attached_to_user = false {
-    count(input.AttachedPolicies) != 0
+    UserDetail := input.UserDetailList[_]
+    count(UserDetail.AttachedManagedPolicies) != 0
 }
 
-iam_policy_attached_to_user_err = "Ensure IAM policy is attached to user." {
+iam_policy_attached_to_user_err = "Ensure IAM policy is attached to group rather than user." {
     not iam_policy_attached_to_user
 }
 
@@ -1836,7 +1837,7 @@ iam_policy_attached_to_user_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure IAM policy is attached to user.",
+    "Policy Title": "Ensure IAM policy is attached to group rather than user.",
     "Policy Description": "It identifies IAM policies attached to user. By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups but not users.",
     "Resource Type": "",
     "Policy Help URL": "",
