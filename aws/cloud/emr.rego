@@ -279,30 +279,3 @@ emr_termination_protection_is_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/emr.html#EMR.Client.describe_cluster"
 }
-
-#
-# PR-AWS-CLD-EMR-011
-#
-
-default emr_block_public_access = true
-
-emr_block_public_access = false {
-    # lower(resource.Type) == "aws::emr::cluster"
-    input.BlockPublicAccessConfiguration.BlockPublicSecurityGroupRules == available_false_choices[_]
-}
-
-emr_block_public_access_err = "Ensure AWS EMR block public access setting is not disabled." {
-    not emr_block_public_access
-}
-
-emr_block_public_access_metadata := {
-    "Policy Code": "PR-AWS-CLD-EMR-011",
-    "Type": "cloud",
-    "Product": "AWS",
-    "Language": "AWS Cloud",
-    "Policy Title": "Ensure AWS EMR block public access setting is not disabled.",
-    "Policy Description": "This policy identifies AWS EMR which has a disabled block public access setting. AWS EMR block public access prevents a cluster in a public subnet from launching when any security group associated with the cluster has a rule that allows inbound traffic from the internet, unless the port has been specified as an exception. It is recommended to enable AWS EMR Block public access in each AWS Region for your AWS account.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/emr.html#EMR.Client.get_block_public_access_configuration"
-}

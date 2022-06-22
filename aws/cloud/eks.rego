@@ -103,7 +103,7 @@ platform_version := ["1.20", "1.19", "1.18"]
 
 eks_approved_kubernetes_version = false {
     # lower(resource.Type) == "aws::eks::cluster"
-    count([c | input.cluster.platformVersion == platform_version[_]; c:=1]) == 0
+    count([c | input.cluster.platformVersion == platform_version[_]; c:=1]) != 0
 }
 
 eks_approved_kubernetes_version_err = "Ensure AWS EKS only uses latest versions of Kubernetes." {

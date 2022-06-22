@@ -1350,13 +1350,52 @@
                             "remediationFunction": "PR_AWS_CLD_EKS_008.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Ensure only private access for Amazon EKS cluster's Kubernetes API is enabled.",
                     "description": "This policy checks if the EKS cluster has public access which can be accessed over the internet.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 26",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CMMC",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 30",
+                                "CyberSecurity Law of the People's Republic of China-Article 31",
+                                "CyberSecurity Law of the People's Republic of China-Article 45",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.1.004",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "HITRUST v.9.4.2-Control Reference:09.m",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-11.1.5",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application",
+                                "MITRE ATT&CK v6.3-T1190",
+                                "MITRE ATT&CK v8.2-T1190",
+                                "MLPS",
+                                "MLPS 2.0-8.1.3.2",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Boundary Protection",
+                                "NIST 800-53 Rev4-SC-7",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.1.22",
+                                "NIST SP 800-172-3.14.3e",
+                                "PCI DSS v3.2.1-1.3",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.1.4",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55"
+                            ],
                             "service": [
                                 "eks"
                             ]
@@ -1385,7 +1424,64 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "APRA (CPS 234) Information Security-CPS234-35",
+                                "APRA (CPS 234) Information Security-CPS234-36",
+                                "Brazilian Data Protection Law (LGPD)-Article 31",
+                                "Brazilian Data Protection Law (LGPD)-Article 48",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-LOG-05",
+                                "CSA CCM v.4.0.1-LOG-06",
+                                "CSA CCM v.4.0.1-LOG-08",
+                                "CSA CCM v.4.0.1-LOG-13",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 55",
+                                "CyberSecurity Law of the People's Republic of China-Article 56",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AU.3.046",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:09.ab",
+                                "HITRUST v.9.4.2-Control Reference:09.ac",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-12.4.1",
+                                "ISO/IEC 27002:2013-12.4.3",
+                                "ISO/IEC 27002:2013-12.4.4",
+                                "ISO/IEC 27002:2013-16.1.1",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-12.4.1",
+                                "ISO/IEC 27017:2015-12.4.4",
+                                "ISO/IEC 27017:2015-16.1.2",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-7.5.7",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1562.008 - Impair Defenses:Disable Cloud Logs",
+                                "MLPS",
+                                "MLPS 2.0-8.1.5.4",
+                                "MLPS 2.0-8.2.3.3",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Vulnerability Monitoring and Scanning | Review Historic Audit Logs",
+                                "NIST 800-53 Rev4-RA-5 (8)",
+                                "NIST CSF",
+                                "NIST CSF-PR.PT-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.3.4",
+                                "NIST SP 800-172-3.14.2e",
+                                "PCI DSS v3.2.1-10.2.3",
+                                "PCI DSS v3.2.1-10.6",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.1.4",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.61",
+                                "Risk Management in Technology (RMiT)-10.66"
+                            ],
                             "service": [
                                 "eks"
                             ]
@@ -3428,12 +3524,10 @@
                                 "MLPS",
                                 "MLPS 2.0-8.1.4.8",
                                 "NIST 800",
-                                "NIST 800-53 Rev 5-Cryptographic Key Establishment and Management",
+                                "NIST 800-53 Rev 5-Protection of Information at Rest",
                                 "NIST 800-53 Rev 5-Remote Access | Protection of Confidentiality and Integrity Using Encryption",
-                                "NIST 800-53 Rev 5-Transmission Confidentiality and Integrity | Cryptographic Protection",
                                 "NIST 800-53 Rev4-AC-17 (2)",
-                                "NIST 800-53 Rev4-SC-12",
-                                "NIST 800-53 Rev4-SC-8 (1)",
+                                "NIST 800-53 Rev4-SC-28",
                                 "NIST CSF",
                                 "NIST CSF-PR.DS-1",
                                 "NIST CSF-PR.DS-5",
@@ -3834,35 +3928,6 @@
                     "severity": "Low",
                     "title": "Ensure Termination protection is enabled for instances in the cluster for EMR.",
                     "description": "It checks if the EC2 instances created in EMR cluster are protected against accidental termination.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [],
-                            "service": [
-                                "emr"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-EMR-011",
-                    "masterSnapshotId": [
-                        "TEST_EMR_02"
-                    ],
-                    "type": "rego",
-                    "rule": "file(emr.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-EMR-011",
-                            "eval": "data.rule.emr_block_public_access",
-                            "message": "data.rule.emr_block_public_access_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/emr.html#EMR.Client.get_block_public_access_configuration' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_EMR_011.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS EMR block public access setting is not disabled.",
-                    "description": "This policy identifies AWS EMR which has a disabled block public access setting. AWS EMR block public access prevents a cluster in a public subnet from launching when any security group associated with the cluster has a rule that allows inbound traffic from the internet, unless the port has been specified as an exception. It is recommended to enable AWS EMR Block public access in each AWS Region for your AWS account.",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -5449,7 +5514,49 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-CEK-03",
+                                "CSA CCM v.4.0.1-DSP-10",
+                                "CSA CCM v.4.0.1-IVS-03",
+                                "CSA CCM v.4.0.1-UEM-11",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:09.s",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-10.1.1",
+                                "ISO/IEC 27002:2013-12.2.1",
+                                "ISO/IEC 27002:2013-12.3.1",
+                                "ISO/IEC 27002:2013-13.1.1",
+                                "ISO/IEC 27002:2013-13.1.2",
+                                "ISO/IEC 27002:2013-13.1.3",
+                                "ISO/IEC 27002:2013-13.2.1",
+                                "ISO/IEC 27002:2013-13.2.3",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.1.3",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-8.3.1",
+                                "ISO/IEC 27002:2013-8.3.3",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-10.1.1",
+                                "ISO/IEC 27017:2015-10.1.2",
+                                "ISO/IEC 27017:2015-6.1.1",
+                                "ISO/IEC 27018",
+                                "ISO/IEC 27018:2019-10.1.2",
+                                "ISO/IEC 27018:2019-12.3.1",
+                                "MAS TRM",
+                                "MAS TRM 2021-10.1.2",
+                                "NIST CSF",
+                                "NIST CSF-PR.DS-2",
+                                "NIST CSF-PR.DS-5",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.13.8",
+                                "NIST SP 800-172-3.1.3e",
+                                "PCI DSS v3.2.1-2.3",
+                                "PCI DSS v3.2.1-4.1",
+                                "PCI-DSS",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.68"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -9826,7 +9933,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "MAS TRM",
+                                "MAS TRM 2021-7.2.1",
+                                "MAS TRM 2021-7.2.2"
+                            ],
                             "service": [
                                 "ecs"
                             ]
@@ -11868,14 +11979,19 @@
                             "remediationFunction": "PR_AWS_CLD_RDS_013.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure RDS clusters and instances have deletion protection enabled",
                     "description": "This rule Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled",
                     "tags": [
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "NIST 800"
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Data protection",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1485 - Data Destruction",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-22.1"
                             ],
                             "service": [
                                 "rds"
@@ -13025,7 +13141,14 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "MAS TRM",
+                                "MAS TRM 2021-11.1.1",
+                                "MAS TRM 2021-11.1.3",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.51",
+                                "Risk Management in Technology (RMiT)-10.68"
+                            ],
                             "service": [
                                 "elasticache"
                             ]
@@ -15771,7 +15894,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management"
+                            ],
                             "service": [
                                 "iam"
                             ]
@@ -15800,268 +15926,65 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
-                            "service": [
-                                "iam"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-IAM-031",
-                    "masterSnapshotId": [
-                        "TEST_IAM_03"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-IAM-031",
-                            "eval": "data.rule.iam_password_policy_secure",
-                            "message": "data.rule.iam_password_policy_secure_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_IAM_031.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS IAM Password policy is secure.",
-                    "description": "It checks to ensure that IAM password policy is in place for the cloud accounts. As a security best practice, customers must have strong password policies in place. This policy ensures password policies are set with all following options: Minimum Password Length, At least one Uppercase letter, At least one Lowercase letter, At least one Number, At least one Symbol/non-alphanumeric character, Users have permission to change their own password, Password expiration period, Password reuse and Password expiration requires administrator reset.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [],
-                            "service": [
-                                "iam"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-IAM-032",
-                    "masterSnapshotId": [
-                        "TEST_IAM_03"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-IAM-032",
-                            "eval": "data.rule.not_reusing_password",
-                            "message": "data.rule.not_reusing_password_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_IAM_032.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure IAM Password Policy does not allow reusing atleast last 12 passwords.",
-                    "description": "It checks to ensure that IAM password policy is in place for the cloud accounts. As a security best practice, customers must have strong password policies in place. This policy ensures password policies are set with all following options: Minimum Password Length, At least one Uppercase letter, At least one Lowercase letter, At least one Number, At least one Symbol/non-alphanumeric character, Users have permission to change their own password, Password expiration period, Password reuse and Password expiration requires administrator reset.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [],
-                            "service": [
-                                "iam"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-IAM-033",
-                    "masterSnapshotId": [
-                        "TEST_IAM_03"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-IAM-033",
-                            "eval": "data.rule.no_lowercase_character_password",
-                            "message": "data.rule.no_lowercase_character_password_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_IAM_033.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS IAM password policy have a lowercase character.",
-                    "description": "Checks to ensure that IAM password policy requires a lowercase character. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [],
-                            "service": [
-                                "iam"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-IAM-034",
-                    "masterSnapshotId": [
-                        "TEST_IAM_03"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-IAM-034",
-                            "eval": "data.rule.minimum_fourteen_character_password",
-                            "message": "data.rule.minimum_fourteen_character_password_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_IAM_034.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS IAM password policy have a minimum of 14 characters.",
-                    "description": "Checks to ensure that IAM password policy requires minimum of 14 characters. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [],
-                            "service": [
-                                "iam"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-IAM-035",
-                    "masterSnapshotId": [
-                        "TEST_IAM_03"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-IAM-035",
-                            "eval": "data.rule.password_expire_in_ninty_days",
-                            "message": "data.rule.password_expire_in_ninty_days_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_IAM_035.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS IAM password policy have password expiration set to 90 days.",
-                    "description": "It identifies the IAM policies which does not have password expiration set to 90 days. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [],
-                            "service": [
-                                "iam"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-IAM-036",
-                    "masterSnapshotId": [
-                        "TEST_IAM_03"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-IAM-036",
-                            "eval": "data.rule.password_expire_period_defined",
-                            "message": "data.rule.password_expire_period_defined_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_IAM_036.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS IAM password policy have password expiration set to 90 days.",
-                    "description": "It checks to ensure that IAM password policy has an expiration period. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [],
-                            "service": [
-                                "iam"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-IAM-037",
-                    "masterSnapshotId": [
-                        "TEST_IAM_03"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-IAM-037",
-                            "eval": "data.rule.password_have_numbers",
-                            "message": "data.rule.password_have_numbers_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_IAM_037.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS IAM password policy have require number equals true.",
-                    "description": "It checks to ensure that IAM password policy requires a number. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [],
-                            "service": [
-                                "iam"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-IAM-038",
-                    "masterSnapshotId": [
-                        "TEST_IAM_03"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-IAM-038",
-                            "eval": "data.rule.password_have_symbols",
-                            "message": "data.rule.password_have_symbols_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_IAM_038.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS IAM password policy have require symbols equals true.",
-                    "description": "It checks to ensure that IAM password policy requires a symbol. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [],
-                            "service": [
-                                "iam"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-IAM-039",
-                    "masterSnapshotId": [
-                        "TEST_IAM_03"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-IAM-039",
-                            "eval": "data.rule.password_have_upper_case_char",
-                            "message": "data.rule.password_have_upper_case_char_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_IAM_039.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS IAM password policy have require upper case characters equals true.",
-                    "description": "It identifies AWS accounts in which IAM password policy does not have an uppercase character. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v3.0.1-DSI-02",
+                                "CSA CCM v3.0.1-IAM-07",
+                                "CSA CCM v3.0.1-IVS-06",
+                                "CSA CCM v3.0.1-IVS-08",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 21",
+                                "CyberSecurity Law of the People's Republic of China-Article 25",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.183",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SI.2.216",
+                                "GDPR",
+                                "GDPR-Article 32",
+                                "GDPR-Article 46",
+                                "HITRUST",
+                                "HITRUST CSF v9.3-Control Reference:09.ab",
+                                "HITRUST v.9.4.2-Control Reference:01.n",
+                                "HITRUST v.9.4.2-Control Reference:01.o",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.1",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MLPS",
+                                "MLPS 2.0-8.1.3.2",
+                                "NIST 800",
+                                "NIST 800-171 Rev1-3.13.1",
+                                "NIST 800-171 Rev1-3.13.2",
+                                "NIST 800-171 Rev1-3.13.5",
+                                "NIST 800-171 Rev1-3.14.6",
+                                "NIST 800-53 Rev 5-Boundary Protection | Block Communication from Non-organizationally Configured Hosts",
+                                "NIST 800-53 Rev 5-System Monitoring | Inbound and Outbound Communications Traffic",
+                                "NIST 800-53 Rev4-SC-7 (19)",
+                                "NIST 800-53 Rev4-SI-4 (4)",
+                                "NIST CSF",
+                                "NIST CSF-DE.AE-1",
+                                "NIST CSF-PR.AC-5",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.13.6",
+                                "NIST SP 800-171 Revision 2-3.14.6",
+                                "NIST SP 800-172-3.14.2e",
+                                "PCI DSS v3.2.1-1.2.1",
+                                "PCI-DSS",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55",
+                                "Risk Management in Technology (RMiT)-10.68",
+                                "SOC 2",
+                                "SOC 2-CC6.1",
+                                "SOC 2-CC6.6",
+                                "SOC 2-CC6.7"
+                            ],
                             "service": [
                                 "iam"
                             ]
@@ -16090,7 +16013,109 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-15",
+                                "APRA (CPS 234) Information Security-CPS234-16",
+                                "APRA (CPS 234) Information Security-CPS234-17",
+                                "APRA (CPS 234) Information Security-CPS234-21",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Secure access management",
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "Brazilian Data Protection Law (LGPD)-Article 46",
+                                "Brazilian Data Protection Law (LGPD)-Article 6",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS",
+                                "CIS v1.2.0 (AWS)-1.10",
+                                "CIS v1.3.0 (AWS)-1.9",
+                                "CIS v1.4.0 (AWS)-1.9",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-HRS-06",
+                                "CSA CCM v.4.0.1-IAM-01",
+                                "CSA CCM v.4.0.1-IAM-03",
+                                "CSA CCM v.4.0.1-IAM-06",
+                                "CSA CCM v.4.0.1-IAM-07",
+                                "CSA CCM v.4.0.1-IAM-08",
+                                "CSA CCM v.4.0.1-IAM-10",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "CSA CCM v.4.0.1-IVS-03",
+                                "CSA CCM v3.0.1-EKM-01",
+                                "CSA CCM v3.0.1-IAM-02",
+                                "CSA CCM v3.0.1-IAM-04",
+                                "CSA CCM v3.0.1-IAM-08",
+                                "CSA CCM v3.0.1-IAM-12",
+                                "CSA CCM v3.0.1-IVS-11",
+                                "CSA CCM v3.0.1-MOS-16",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 24",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-IA.2.078",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-IA.2.079",
+                                "GDPR",
+                                "GDPR-Article 25",
+                                "HIPAA",
+                                "HIPAA-164.312(d)",
+                                "HITRUST",
+                                "HITRUST CSF v9.3-Control Reference:01.d",
+                                "HITRUST CSF v9.3-Control Reference:01.r",
+                                "HITRUST v.9.4.2-Control Reference:01.d",
+                                "HITRUST v.9.4.2-Control Reference:01.f",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-13.1.1",
+                                "ISO/IEC 27002:2013-13.1.2",
+                                "ISO/IEC 27002:2013-13.1.3",
+                                "ISO/IEC 27002:2013-5.1.2",
+                                "ISO/IEC 27002:2013-8.1.1",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27002:2013-9.4.1",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27017:2015-9.4.1",
+                                "ISO/IEC 27018",
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.4",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1098",
+                                "MLPS",
+                                "MLPS 2.0-8.1.4.1",
+                                "MPAA Content Protection Best Practices",
+                                "MPAA Content Protection Best Practices-DS-8.1",
+                                "NIST 800",
+                                "NIST 800-171 Rev1-3.5.10",
+                                "NIST 800-171 Rev1-3.5.7",
+                                "NIST 800-171 Rev1-3.5.8",
+                                "NIST 800-171 Rev1-3.5.9",
+                                "NIST 800-53 Rev 5-Authenticator Management | Password-based Authentication",
+                                "NIST 800-53 Rev4-IA-5 (1)(e)",
+                                "NIST CSF",
+                                "NIST CSF-PR.AC-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.5.8",
+                                "NIST SP 800-172-3.5.2e",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-16.1",
+                                "PCI DSS v3.2.1-8.2.5",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.7.3",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.57",
+                                "SOC 2",
+                                "SOC 2-CC6.1"
+                            ],
                             "service": [
                                 "iam"
                             ]
@@ -16119,7 +16144,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management"
+                            ],
                             "service": [
                                 "iam"
                             ]
@@ -16148,7 +16176,84 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Secure access management",
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "Brazilian Data Protection Law (LGPD)-Article 46",
+                                "Brazilian Data Protection Law (LGPD)-Article 6",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS",
+                                "CIS v1.2.0 (AWS)-1.16",
+                                "CIS v1.3.0 (AWS)-1.15",
+                                "CIS v1.4.0 (AWS)-1.15",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v3.0.1-DSI-06",
+                                "CSA CCM v3.0.1-IAM-01",
+                                "CSA CCM v3.0.1-IAM-02",
+                                "CSA CCM v3.0.1-IAM-06",
+                                "CSA CCM v3.0.1-IAM-09",
+                                "CSA CCM v3.0.1-IAM-10",
+                                "CSA CCM v3.0.1-IVS-11",
+                                "CSA CCM v3.0.1-STA-01",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 24",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.2.007",
+                                "GDPR",
+                                "GDPR-Article 25",
+                                "GDPR-Article 32",
+                                "HIPAA",
+                                "HIPAA-164.312(a)(1)",
+                                "HITRUST",
+                                "HITRUST CSF v9.3-Control Reference:01.c",
+                                "HITRUST CSF v9.3-Control Reference:01.s",
+                                "HITRUST CSF v9.3-Control Reference:01.v",
+                                "HITRUST CSF v9.3-Control Reference:01.y",
+                                "HITRUST CSF v9.3-Control Reference:05.i",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "ISO 27001",
+                                "ISO 27001:2013-A.9.2.5",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.1",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v6.3-T1078",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1078",
+                                "MLPS",
+                                "MLPS 2.0-8.1.5.4",
+                                "NIST 800",
+                                "NIST 800-171 Rev1-3.1.5",
+                                "NIST 800-171 Rev1-3.1.6",
+                                "NIST 800-171 Rev1-3.1.7",
+                                "NIST 800-53 Rev 5-Least Privilege",
+                                "NIST 800-53 Rev 5-Least Privilege | Privileged Access by Non-organizational Users",
+                                "NIST 800-53 Rev4-AC-6",
+                                "NIST 800-53 Rev4-AC-6 (6)",
+                                "NIST CSF",
+                                "NIST CSF-DE.CM-3",
+                                "NIST CSF-PR.AC-4",
+                                "NIST CSF-PR.DS-5",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.1.5",
+                                "NIST SP 800-172-3.1.2e",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI DSS v3.2.1-7.1.2",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.7.3",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55",
+                                "SOC 2",
+                                "SOC 2-CC6.3"
+                            ],
                             "service": [
                                 "iam"
                             ]
@@ -16177,7 +16282,15 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.1",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55",
+                                "Risk Management in Technology (RMiT)-10.68"
+                            ],
                             "service": [
                                 "iam"
                             ]
@@ -16206,7 +16319,14 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.1",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55"
+                            ],
                             "service": [
                                 "iam"
                             ]
