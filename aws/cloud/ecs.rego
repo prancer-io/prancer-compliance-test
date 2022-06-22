@@ -584,7 +584,7 @@ no_ecs_task_definition_empty_roles = false {
 
 no_ecs_task_definition_empty_roles = false {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
-    contains(lower(containerDefinition.user), "*") == null
+    contains(lower(containerDefinition.user), "*")
 }
 
 no_ecs_task_definition_empty_roles_err = "Ensure there are no undefined ECS task definition empty roles for ECS." {
@@ -608,28 +608,28 @@ no_ecs_task_definition_empty_roles_metadata := {
 # aws::ecs::taskdefinition
 #
 
-default ecs_fargate_task_definition_logging_is_enabled= true
+default ecs_log_driver = true
 
-ecs_fargate_task_definition_logging_is_enabled = false {
+ecs_log_driver = false {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
     not containerDefinition.logConfiguration.logDriver
 }
 
-ecs_fargate_task_definition_logging_is_enabled = false {
+ecs_log_driver = false {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
     lower(containerDefinition.logConfiguration.logDriver) == ""
 }
 
-ecs_fargate_task_definition_logging_is_enabled = false {
+ecs_log_driver = false {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
-    lower(containerDefinition.logConfiguration.logDriver) == null
+    containerDefinition.logConfiguration.logDriver == null
 }
 
-ecs_fargate_task_definition_logging_is_enabled_err = "Ensure that a log driver has been configured for each ECS task definition." {
-    not ecs_fargate_task_definition_logging_is_enabled
+ecs_log_driver_err = "Ensure that a log driver has been configured for each ECS task definition." {
+    not ecs_log_driver
 }
 
-ecs_fargate_task_definition_logging_is_enabled_metadata := {
+ecs_log_driver_metadata := {
     "Policy Code": "PR-AWS-CLD-ECS-017",
     "Type": "IaC",
     "Product": "AWS",

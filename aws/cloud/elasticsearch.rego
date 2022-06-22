@@ -262,7 +262,7 @@ esearch_encrypt_kms_metadata := {
 default esearch_custom_endpoint_configured = true
 
 esearch_custom_endpoint_configured = false {
-    lower(input.DomainStatus.DomainEndpointOptions.CustomEndpointEnabled) == available_false_choices[_]
+    input.DomainStatus.DomainEndpointOptions.CustomEndpointEnabled == available_false_choices[_]
 }
 
 esearch_custom_endpoint_configured_err = "Ensure ElasticSearch has a custom endpoint configured." {
@@ -290,11 +290,15 @@ esearch_custom_endpoint_configured_metadata := {
 default esearch_slow_logs_is_enabled  = true
 
 esearch_slow_logs_is_enabled = false {
-    lower(input.DomainStatus.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled) == available_false_choices[_]
+    not input.DomainStatus.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled
 }
 
 esearch_slow_logs_is_enabled = false {
-    lower(input.DomainStatus.LogPublishingOptions.SEARCH_SLOW_LOGS.Enabled) == available_false_choices[_]
+    input.DomainStatus.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled == available_false_choices[_]
+}
+
+esearch_slow_logs_is_enabled = false {
+    input.DomainStatus.LogPublishingOptions.SEARCH_SLOW_LOGS.Enabled == available_false_choices[_]
 }
 
 esearch_slow_logs_is_enabled_err = "Ensure Slow Logs feature is enabled for ElasticSearch cluster." {
@@ -350,15 +354,15 @@ authentication_is_saml_based_metadata := {
 default fine_grained_encryption_for_elasticsearch  = true
 
 fine_grained_encryption_for_elasticsearch = false {
-    lower(input.DomainStatus.EncryptionAtRestOptions.Enabled) == available_false_choices[_]
+    input.DomainStatus.EncryptionAtRestOptions.Enabled == available_false_choices[_]
 }
 
 fine_grained_encryption_for_elasticsearch = false {
-    lower(input.DomainStatus.DomainEndpointOptions.EnforceHTTPS) == available_false_choices[_]
+    input.DomainStatus.DomainEndpointOptions.EnforceHTTPS == available_false_choices[_]
 }
 
 fine_grained_encryption_for_elasticsearch = false {
-    lower(input.DomainStatus.NodeToNodeEncryptionOptions.Enabled) == available_false_choices[_]
+    input.DomainStatus.NodeToNodeEncryptionOptions.Enabled == available_false_choices[_]
 }
 
 fine_grained_encryption_for_elasticsearch_err = "Ensure fine-grained access control is enabled during domain creation in ElasticSearch." {
@@ -386,7 +390,7 @@ fine_grained_encryption_for_elasticsearch_metadata := {
 default custom_endpoint_has_certificate  = true
 
 custom_endpoint_has_certificate = false {
-    lower(input.DomainStatus.DomainEndpointOptions.CustomEndpointEnabled) == available_false_choices[_]
+    input.DomainStatus.DomainEndpointOptions.CustomEndpointEnabled == available_false_choices[_]
 }
 
 custom_endpoint_has_certificate_err = "Ensure custom endpoint has GS-managed ACM certificate associated in ElasticSearch." {
@@ -413,22 +417,22 @@ custom_endpoint_has_certificate_metadata := {
 default elasticsearch_domain_not_publicly_accessible = false
 
 elasticsearch_domain_not_publicly_accessible = true {
-    lower(input.DomainStatus.Processing) == available_false_choices[_]
+    input.DomainStatus.Processing == available_false_choices[_]
     not input.DomainStatus.Endpoints
 }
 
 elasticsearch_domain_not_publicly_accessible = true {
-    lower(input.DomainStatus.Processing) == available_false_choices[_]
+    input.DomainStatus.Processing == available_false_choices[_]
     not input.DomainStatus.Endpoints.vpc
 }
 
 elasticsearch_domain_not_publicly_accessible = true {
-    lower(input.DomainStatus.Processing) == available_false_choices[_]
+    input.DomainStatus.Processing == available_false_choices[_]
     input.DomainStatus.Endpoints.vpc == ""
 }
 
 elasticsearch_domain_not_publicly_accessible = true {
-    lower(input.DomainStatus.Processing) == available_false_choices[_]
+    input.DomainStatus.Processing == available_false_choices[_]
     input.DomainStatus.Endpoints.vpc == null
 }
 

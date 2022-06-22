@@ -1885,8 +1885,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-ES-015",
-                            "eval": "data.rule.esearch_encrypt_kms",
-                            "message": "data.rule.esearch_encrypt_kms_err",
+                            "eval": "data.rule.elasticsearch_domain_not_publicly_accessible",
+                            "message": "data.rule.elasticsearch_domain_not_publicly_accessible_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_ES_015.py"
                         }
@@ -5323,7 +5323,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-ELB-020",
                     "masterSnapshotId": [
-                        "TEST_ELB_05"
+                        "TEST_ELB_07"
                     ],
                     "type": "rego",
                     "rule": "file(elb.rego)",
@@ -9627,8 +9627,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-ECS-017",
-                            "eval": "data.rule.ecs_fargate_task_definition_logging_is_enabled",
-                            "message": "data.rule.ecs_fargate_task_definition_logging_is_enabled_err",
+                            "eval": "data.rule.ecs_log_driver",
+                            "message": "data.rule.ecs_log_driver_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_task_definition' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_ECS_017.py"
                         }

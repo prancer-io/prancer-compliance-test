@@ -156,34 +156,6 @@ lambda_dlq_metadata := {
 
 
 #
-# PR-AWS-CFR-LMD-006
-# aws::lambda::function
-#
-
-default lambda_default_vpc = true
-
-lambda_default_vpc = false {
-    not input.Functions.VpcConfig.VpcId
-}
-
-lambda_default_vpc_err = "Ensure AWS Lambda function is not launched in default VPC" {
-    not lambda_default_vpc
-}
-
-lambda_default_vpc_metadata := {
-    "Policy Code": "PR-AWS-CFR-LMD-006",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "AWS Cloud formation",
-    "Policy Title": "Ensure AWS Lambda function is not launched in default VPC",
-    "Policy Description": "This policy checks that Lambda which launched within VPC is only using GS managed VPC instead of default VPC",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig"
-}
-
-
-#
 # PR-AWS-CFR-LMD-009
 # aws::lambda::function
 #
