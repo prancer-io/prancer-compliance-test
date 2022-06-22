@@ -1,5 +1,7 @@
 package rule
 
+available_false_choices := ["false", false]
+
 has_property(parent_object, target_property) { 
 	_ = parent_object[target_property]
 }
@@ -1053,6 +1055,49 @@ aws_config_configuration_aggregator_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html#cfn-config-configurationaggregator-accountaggregationsource-allawsregions"
 }
 
+#
+# PR-AWS-CFR-CFG-004
+#
+
+default config_includes_global_resources = null
+
+aws_issue["config_includes_global_resources"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::config::configurationrecorder"
+    resource.Properties.RecordingGroup.IncludeGlobalResourceTypes == available_false_choices[_]
+}
+
+aws_issue["config_includes_global_resources"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::config::configurationrecorder"
+    not resource.Properties.RecordingGroup.IncludeGlobalResourceTypes
+}
+
+config_includes_global_resources {
+    lower(input.Resources[i].Type) == "aws::config::configurationrecorder"
+    not aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources = false {
+    aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources_err = "Ensure AWS Config includes global resources types (IAM)." {
+    aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources_metadata := {
+    "Policy Code": "PR-AWS-CFR-CFG-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS Config includes global resources types (IAM).",
+    "Policy Description": "It checks that global resource types are included in AWS Config.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html#aws-resource-config-configurationrecorder--examples"
+}
+
 
 #
 # PR-AWS-CFR-KNS-001
@@ -1816,35 +1861,12 @@ default appsync_not_configured_with_firewall_v2 = null
 aws_issue["appsync_not_configured_with_firewall_v2"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::appsync::graphqlapi"
-    output := resource.Name
-    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::appsync::graphqlapi"
-    output := resource.Name
-    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
-    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
-    not input.Resources[j].Properties.WebACLId
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::appsync::graphqlapi"
-    output := resource.Name
-    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
-    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
-    count(input.Resources[j].Properties.WebACLId) == 0
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::appsync::graphqlapi"
-    output := resource.Name
-    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
-    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
-    input.Resources[j].Properties.WebACLId == null
+    count([c | 
+    	contains(lower(input.Resources[a].Properties.ResourceArn.Ref), lower(resource.Name)); 
+        lower(input.Resources[a].Type) == "aws::wafregional::webaclassociation";
+		input.Resources[a].Properties.WebACLId;
+        c:=1 
+    ]) == 0
 }
 
 appsync_not_configured_with_firewall_v2 {

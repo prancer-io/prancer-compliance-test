@@ -601,3 +601,59 @@ cf_geo_restriction_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
 }
+
+#
+# PR-AWS-CFR-CF-010
+#
+
+default cf_s3_origin = null
+
+aws_issue["cf_s3_origin"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    origin := resource.Properties.DistributionConfig.Origins[_]
+    origin.S3OriginConfig
+    origin.S3OriginConfig.OriginAccessIdentity == ""
+}
+
+aws_issue["cf_s3_origin"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    origin := resource.Properties.DistributionConfig.Origins[_]
+    origin.S3OriginConfig
+    origin.S3OriginConfig.OriginAccessIdentity == null
+}
+
+aws_issue["cf_s3_origin"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    origin := resource.Properties.DistributionConfig.Origins[_]
+    origin.S3OriginConfig
+    not origin.S3OriginConfig.OriginAccessIdentity
+}
+
+cf_s3_origin {
+    lower(input.Resources[i].Type) == "aws::cloudfront::distribution"
+    not aws_issue["cf_s3_origin"]
+}
+
+cf_s3_origin = false {
+    aws_issue["cf_s3_origin"]
+}
+
+cf_s3_origin_err = "AWS Cloudfront Distribution with S3 have Origin Access set to disabled" {
+    aws_issue["cf_s3_origin"]
+}
+
+cf_s3_origin_metadata := {
+    "Policy Code": "PR-AWS-CFR-CF-010",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Cloudfront Distribution with S3 have Origin Access set to disabled",
+    "Policy Description": "This policy identifies the AWS CloudFront distributions which are utilizing S3 bucket and have Origin Access Disabled. The origin access identity feature should be enabled for all your AWS CloudFront CDN distributions in order to restrict any direct access to your objects through Amazon S3 URLs.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
+}
+

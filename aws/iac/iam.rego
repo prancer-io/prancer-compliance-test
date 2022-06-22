@@ -681,8 +681,6 @@ iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 
 default iam_policy_not_overly_permissive_to_lambda_service = null
 
-ip_address = ["0.0.0.0/0", "::/0"]
-
 aws_issue["iam_policy_not_overly_permissive_to_lambda_service"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
@@ -1377,7 +1375,7 @@ aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
-    contains(lower(statement.Principal.Service), "ecr")
+    startswith(lower(statement.Principal.Service), "ecr")
     has_property(statement.Condition[string], iam_policies_condition[_])
 }
 
@@ -1386,7 +1384,7 @@ aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
     services := statement.Principal.Service[_]
-    contains(lower(services), "ecr")
+    startswith(lower(services), "ecr")
     has_property(statement.Condition[string], iam_policies_condition[_])
 }
 
@@ -1622,7 +1620,7 @@ action_iam_policy_permission_may_cause_privilege_escalation := ["iam:CreatePolic
 aws_issue["iam_policy_permission_may_cause_privilege_escalation"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
-    statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     policy_action := statement.Action[_]
     policy_action == action_iam_policy_permission_may_cause_privilege_escalation[_]
@@ -1631,7 +1629,7 @@ aws_issue["iam_policy_permission_may_cause_privilege_escalation"] {
 aws_issue["iam_policy_permission_may_cause_privilege_escalation"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
-    statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Action == action_iam_policy_permission_may_cause_privilege_escalation[_]
 }

@@ -212,13 +212,15 @@ default as_http_token = null
 aws_issue["as_http_token"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_launch_configuration"
-    lower(resource.properties.metadata_options.http_tokens) != "required"
+    metadata_option := resource.properties.metadata_options[_]
+    lower(metadata_option.http_tokens) != "required"
 }
 
 aws_attribute_absence["as_http_token"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_launch_configuration"
-    not resource.properties.metadata_options.http_tokens
+    metadata_option := resource.properties.metadata_options[_]
+    not metadata_option.http_tokens
 }
 
 as_http_token {
@@ -573,6 +575,12 @@ aws_issue["cloudFormation_rollback_is_disabled"] {
     resource.properties.disable_rollback == available_false_choices[_]
 }
 
+aws_issue["cloudFormation_rollback_is_disabled"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudformation_stack"
+    not resource.properties.disable_rollback
+}
+
 cloudFormation_rollback_is_disabled {
     lower(input.resources[i].type) == "aws_cloudformation_stack"
     not aws_issue["cloudFormation_rollback_is_disabled"]
@@ -630,6 +638,43 @@ role_arn_exist_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure an IAM policy is defined with the stack.",
     "Policy Description": "Stack policy protects resources from accidental updates, the policy included resources which shouldn't be updated during the template provisioning process.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack"
+}
+
+#
+# PR-AWS-TRF-CFR-005
+#
+
+default stack_with_not_all_capabilities = null
+
+aws_issue["stack_with_not_all_capabilities"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudformation_stack"
+    contains(resource.properties.capabilities[_], "*")
+}
+
+stack_with_not_all_capabilities {
+    lower(input.resources[i].type) == "aws_cloudformation_stack"
+    not aws_issue["stack_with_not_all_capabilities"]
+}
+
+stack_with_not_all_capabilities = false {
+    aws_issue["stack_with_not_all_capabilities"]
+}
+
+stack_with_not_all_capabilities_err = "Ensure capabilities in stacks do not have * in it." {
+    aws_issue["stack_with_not_all_capabilities"]
+}
+
+stack_with_not_all_capabilities_metadata := {
+    "Policy Code": "PR-AWS-TRF-CFR-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure capabilities in stacks do not have * in it.",
+    "Policy Description": "A CloudFormation stack needs certain capability, It is recommended to configure the stack with capabilities not all capabilities (*) should be configured. This will give the stack unlimited access.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack"
@@ -839,6 +884,51 @@ aws_config_configuration_aggregator_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_configuration_aggregator"
+}
+
+#
+# PR-AWS-TRF-CFG-004
+#
+
+default config_includes_global_resources = null
+
+aws_issue["config_includes_global_resources"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_config_configuration_recorder"
+    recording_group := resource.properties.recording_group[j]
+    recording_group.include_global_resource_types == available_false_choices[_]
+}
+
+aws_issue["config_includes_global_resources"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_config_configuration_recorder"
+    recording_group := resource.properties.recording_group[j]
+    not recording_group.include_global_resource_types
+}
+
+config_includes_global_resources {
+    lower(input.resources[i].type) == "aws_config_configuration_recorder"
+    not aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources = false {
+    aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources_err = "Ensure AWS Config includes global resources types (IAM)." {
+    aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources_metadata := {
+    "Policy Code": "PR-AWS-TRF-CFG-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS Config includes global resources types (IAM).",
+    "Policy Description": "It checks that global resource types are included in AWS Config.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_configuration_recorder#include_global_resource_types"
 }
 
 
@@ -1724,34 +1814,12 @@ default appsync_not_configured_with_firewall_v2 = null
 aws_issue["appsync_not_configured_with_firewall_v2"] {
     lower(input.resources[i].type) =="aws_appsync_graphql_api"
     output := concat(".", [input.resources[i].type, input.resources[i].name, "arn"])
-    count([c | contains(lower(input.resources[j].properties.resource_arn), output); c:=1 ]) == 0
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    lower(input.resources[i].type) =="aws_appsync_graphql_api"
-    output := concat(".", [input.resources[i].type, input.resources[i].name, "arn"])
-    count([c | contains(lower(input.resources[j].properties.resource_arn), output); c:=1 ]) != 0
-    resource := input.resources[j]
-    lower(resource.type) == "aws_wafv2_web_acl_association"
-    not resource.properties.web_acl_arn
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    lower(input.resources[i].type) =="aws_appsync_graphql_api"
-    output := concat(".", [input.resources[i].type, input.resources[i].name, "arn"])
-    count([c | contains(lower(input.resources[j].properties.resource_arn), output); c:=1 ]) != 0
-    resource := input.resources[j]
-    lower(resource.type) == "aws_wafv2_web_acl_association"
-    count(resource.properties.web_acl_arn) == 0
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    lower(input.resources[i].type) =="aws_appsync_graphql_api"
-    output := concat(".", [input.resources[i].type, input.resources[i].name, "arn"])
-    count([c | contains(lower(input.resources[j].properties.resource_arn), output); c:=1 ]) != 0
-    resource := input.resources[j]
-    lower(resource.type) == "aws_wafv2_web_acl_association"
-    resource.properties.web_acl_arn == null
+    count([c | 
+        contains(lower(input.resources[j].properties.resource_arn), lower(output)); 
+        lower(input.resources[j].type) == "aws_wafv2_web_acl_association";
+        input.resources[j].properties.web_acl_arn;
+        c:=1 
+    ]) == 0
 }
 
 appsync_not_configured_with_firewall_v2 {

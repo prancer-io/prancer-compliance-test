@@ -933,6 +933,40 @@ dax_encrypt_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html"
 }
 
+#
+# PR-AWS-CLD-DAX-002
+#
+
+default dax_cluster_endpoint_encrypt_at_rest = true
+
+dax_cluster_endpoint_encrypt_at_rest = false {
+    # lower(resource.Type) == "aws::dax::cluster"
+    Clusters := input.Clusters[_]
+    lower(Clusters.ClusterEndpointEncryptionType) != "tls"
+}
+
+dax_cluster_endpoint_encrypt_at_rest = false {
+    # lower(resource.Type) == "aws::dax::cluster"
+    Clusters := input.Clusters[_]
+    not Clusters.ClusterEndpointEncryptionType
+}
+
+dax_cluster_endpoint_encrypt_at_rest_err = "Ensure AWS DAX data is encrypted in transit" {
+    not dax_cluster_endpoint_encrypt_at_rest
+}
+
+dax_cluster_endpoint_encrypt_at_rest_metadata := {
+    "Policy Code": "PR-AWS-CLD-DAX-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS DAX data is encrypted in transit",
+    "Policy Description": "This control is to check that the communication between the application and DAX is always encrypted",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/dax/describe-clusters.html"
+}
+
 
 #
 # PR-AWS-CLD-QLDB-001
@@ -1502,6 +1536,108 @@ cache_ksm_key_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-kmskeyid"
 }
 
+#
+# PR-AWS-CLD-EC-006
+#
+
+default cache_replication_group_id = true
+
+cache_replication_group_id = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    not ReplicationGroups.ReplicationGroupId
+}
+
+cache_replication_group_id = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    ReplicationGroups.ReplicationGroupId == ""
+}
+
+cache_replication_group_id = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    ReplicationGroups.ReplicationGroupId == null
+}
+
+cache_replication_group_id = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    contains(lower(ReplicationGroups.ReplicationGroupId), "*")
+}
+
+cache_replication_group_id_err = "Ensure ElastiCache (Redis) replicationGroupId is not empty or contains wildcards (*)." {
+    not cache_replication_group_id
+}
+
+cache_replication_group_id_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure ElastiCache (Redis) replicationGroupId is not empty or contains wildcards (*).",
+    "Policy Description": "This checks if the replication group ID for Redis is set to empty or a * to allow all.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_replication_groups"
+}
+
+#
+# PR-AWS-CLD-EC-007
+#
+
+default automatic_backups_for_redis_cluster = true
+
+automatic_backups_for_redis_cluster = false {
+    # lower(resource.Type) == "aws::elasticache::cachecluster"
+    CacheCluster := input.CacheClusters[_]
+    CacheCluster.SnapshotRetentionLimit == 0
+}
+
+automatic_backups_for_redis_cluster_err = "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster." {
+    not automatic_backups_for_redis_cluster
+}
+
+automatic_backups_for_redis_cluster_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-007",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster.",
+    "Policy Description": "It checks if automatic backups are enabled for the Redis cluster.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_cache_clusters"
+}
+
+#
+# PR-AWS-CLD-EC-008
+#
+
+default redis_with_intransit_encryption = true
+
+redis_with_intransit_encryption = false {
+    # lower(resource.Type) == "aws::elasticache::cachecluster"
+    CacheCluster := input.CacheClusters[_]
+    CacheCluster.TransitEncryptionEnabled == available_false_choices[_]
+    not CacheCluster.ReplicationGroupId
+}
+
+redis_with_intransit_encryption_err = "Ensure ElastiCache Redis with in-transit encryption is disabled (Non-replication group)." {
+    not redis_with_intransit_encryption
+}
+
+redis_with_intransit_encryption_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure ElastiCache Redis with in-transit encryption is disabled (Non-replication group).",
+    "Policy Description": "It identifies ElastiCache Redis that are in non-replication groups or individual ElastiCache Redis and have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis and their associated cache storage systems.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_cache_clusters"
+}
 
 #
 # PR-AWS-CLD-DMS-001
@@ -1566,4 +1702,36 @@ dms_public_access_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html#cfn-dms-replicationinstance-publiclyaccessible"
+}
+
+
+#
+# PR-AWS-CLD-DMS-003
+#
+
+default dms_certificate_expiry = true
+
+dms_certificate_expiry = false {
+    # lower(resource.Type) == "aws::dms::replicationinstance"
+    Certificate := input.Certificates[_]
+    current_date_timestamp := time.now_ns()
+	expiry_timestamp := round(Certificate.ValidToDate)
+    expiry_timestamp_nanosecond := expiry_timestamp * 1000000000
+    expiry_timestamp_nanosecond < current_date_timestamp
+}
+
+dms_certificate_expiry_err = "Ensure Database Migration Service (DMS) has not expired certificates" {
+    not dms_certificate_expiry
+}
+
+dms_certificate_expiry_metadata := {
+    "Policy Code": "PR-AWS-CLD-DMS-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Database Migration Service (DMS) has not expired certificates",
+    "Policy Description": "This policy identifies expired certificates that are in AWS Database Migration Service (DMS). AWS Database Migration Service (DMS) Certificate service is the preferred tool to provision, manage, and deploy your DMS endpoint certificates. As a best practice, it is recommended to delete expired certificates.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/dms/describe-certificates.html"
 }

@@ -113,3 +113,66 @@ ct_cloudwatch_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetTrail.html"
 }
+
+#
+# PR-AWS-CLD-CT-005
+#
+
+default logging_data_events_for_s3_and_lambda = false
+
+logging_data_events_for_s3_and_lambda = true {
+    # lower(resource.Type) == "aws::cloudtrail::trail"
+    event := input.EventSelectors[i]
+    resource := event.DataResources[j]
+    contains(lower(resource.Type), "aws::s3::object")
+}
+
+logging_data_events_for_s3_and_lambda = true {
+    # lower(resource.Type) == "aws::cloudtrail::trail"
+    event := input.EventSelectors[i]
+    resource := event.DataResources[j]
+    contains(lower(resource.Type), "aws::lambda::function")
+}
+
+logging_data_events_for_s3_and_lambda_err = "Ensure AWS CloudTrail is logging data events for S3 and Lambda." {
+    not logging_data_events_for_s3_and_lambda
+}
+
+logging_data_events_for_s3_and_lambda_metadata := {
+    "Policy Code": "PR-AWS-CLD-CT-005",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS CloudTrail is logging data events for S3 and Lambda.",
+    "Policy Description": "It checks that CloudTrail data event is enabled for S3 and Lambda.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudtrail.html#CloudTrail.Client.get_event_selectors"
+}
+
+#
+# PR-AWS-CLD-CT-006
+#
+
+default cloudtrail_is_enabled= false
+
+cloudtrail_is_enabled = true {
+    # lower(resource.Type) == "aws::cloudtrail::trail"
+    count(input.trailList[_]) == 0
+}
+
+cloudtrail_is_enabled_err = "Ensure AWS CloudTrail is enabled on the account." {
+    not cloudtrail_is_enabled
+}
+
+cloudtrail_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-CLD-CT-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS CloudTrail is enabled on the account.",
+    "Policy Description": "AWS CloudTrail is a service that enables governance, compliance, operational & risk auditing of the AWS account. It is a compliance and security best practice to turn on CloudTrail to get a complete audit trail of activities across various services.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudtrail.html#CloudTrail.Client.describe_trails"
+}

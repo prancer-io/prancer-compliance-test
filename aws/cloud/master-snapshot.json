@@ -16,7 +16,7 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_CT",
+					"masterSnapshotId": "TEST_CT_01",
 					"arn": "arn:aws:cloudtrail:::",
 					"type": "cloudtrail",
 					"collection": "aws_cloudtrail",

@@ -267,3 +267,43 @@ ct_cloudwatch_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html"
 }
+
+#
+# PR-AWS-CFR-CT-005
+#
+
+default logging_data_events_for_s3_and_lambda = null
+
+aws_issue["logging_data_events_for_s3_and_lambda"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    event := resource.Properties.EventSelectors[_]
+    dataresource := event.DataResources[_]
+    not contains(lower(dataresource.Type), "aws::s3::object")
+    not contains(lower(dataresource.Type), "aws::lambda::function")
+}
+
+logging_data_events_for_s3_and_lambda {
+    lower(input.Resources[i].Type) == "aws::cloudtrail::trail"
+    not aws_issue["logging_data_events_for_s3_and_lambda"]
+}
+
+logging_data_events_for_s3_and_lambda = false {
+    aws_issue["logging_data_events_for_s3_and_lambda"]
+}
+
+logging_data_events_for_s3_and_lambda_err = "Ensure AWS CloudTrail is logging data events for S3 and Lambda." {
+    aws_issue["logging_data_events_for_s3_and_lambda"]
+}
+
+logging_data_events_for_s3_and_lambda_metadata := {
+    "Policy Code": "PR-AWS-CFR-CT-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS CloudTrail is logging data events for S3 and Lambda.",
+    "Policy Description": "It checks that CloudTrail data event is enabled for S3 and Lambda.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html"
+}

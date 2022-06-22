@@ -419,6 +419,43 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-CT-005",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(cloudtrail.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-CT-005",
+                            "eval": "data.rule.logging_data_events_for_s3_and_lambda",
+                            "message": "data.rule.logging_data_events_for_s3_and_lambda_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudtrail' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_CT_005.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS CloudTrail is logging data events for S3 and Lambda.",
+                    "description": "It checks that CloudTrail data event is enabled for S3 and Lambda.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_cloudtrail"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-AG-007",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1252,6 +1289,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-CFR-005",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-CFR-005",
+                            "eval": "data.rule.stack_with_not_all_capabilities",
+                            "message": "data.rule.stack_with_not_all_capabilities_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_CFR_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure capabilities in stacks do not have * in it.",
+                    "description": "A CloudFormation stack needs certain capability, It is recommended to configure the stack with capabilities not all capabilities (*) should be configured. This will give the stack unlimited access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_cloudformation_stack"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-CFG-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1524,6 +1595,38 @@
                     ],
                     "resourceTypes": [
                         "aws_config_configuration_aggregator"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-CFG-004",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-CFG-004",
+                            "eval": "data.rule.config_includes_global_resources",
+                            "message": "data.rule.config_includes_global_resources_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_configuration_recorder#include_global_resource_types' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_CFG_004.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS Config includes global resources types (IAM).",
+                    "description": "It checks that global resource types are included in AWS Config.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_config_configuration_recorder"
                     ]
                 },
                 {
@@ -12082,7 +12185,57 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Secure access management",
+                                "Brazilian Data Protection Law (LGPD)-Article 34",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-CM.2.062",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:10.a",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-7.2.1",
+                                "MAS TRM 2021-7.2.2",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Boundary Protection | Connections to Public Networks",
+                                "NIST 800-53 Rev4-CA-3 (4)",
+                                "NIST CSF",
+                                "NIST CSF-PR.IP-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.4.2",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS v3.2.1-6.3",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -13742,6 +13895,38 @@
                                 "GDPR",
                                 "NIST 800"
                             ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_dax_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-DAX-002",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-DAX-002",
+                            "eval": "data.rule.dax_cluster_endpoint_encrypt_at_rest",
+                            "message": "data.rule.dax_cluster_endpoint_encrypt_at_rest_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dax_cluster#cluster_endpoint_encryption_type' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_DAX_002.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS DAX data is encrypted in transit",
+                    "description": "This control is to check that the communication between the application and DAX is always encrypted",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
                             "service": [
                                 "terraform"
                             ]

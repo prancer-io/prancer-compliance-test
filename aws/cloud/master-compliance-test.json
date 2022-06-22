@@ -128,7 +128,7 @@
                     "type": "rego",
                     "rule": "file(cloudtrail.rego)",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_CT_01"
                     ],
                     "evals": [
                         {
@@ -163,7 +163,7 @@
                     "type": "rego",
                     "rule": "file(cloudtrail.rego)",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_CT_01"
                     ],
                     "evals": [
                         {
@@ -250,7 +250,7 @@
                     "type": "rego",
                     "rule": "file(cloudtrail.rego)",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_CT_01"
                     ],
                     "evals": [
                         {
@@ -343,7 +343,7 @@
                     "type": "rego",
                     "rule": "file(cloudtrail.rego)",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_CT_01"
                     ],
                     "evals": [
                         {
@@ -365,6 +365,117 @@
                                 "PCI DSS",
                                 "NIST 800",
                                 "GDPR"
+                            ],
+                            "service": [
+                                "cloudtrail"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-CT-005",
+                    "type": "rego",
+                    "rule": "file(cloudtrail.rego)",
+                    "masterSnapshotId": [
+                        "TEST_CT_02"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CT-005",
+                            "eval": "data.rule.logging_data_events_for_s3_and_lambda",
+                            "message": "data.rule.logging_data_events_for_s3_and_lambda_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudtrail.html#CloudTrail.Client.get_event_selectors' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CT_005.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS CloudTrail is logging data events for S3 and Lambda.",
+                    "description": "It checks that CloudTrail data event is enabled for S3 and Lambda.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "PCI DSS",
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "cloudtrail"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-CT-006",
+                    "type": "rego",
+                    "rule": "file(cloudtrail.rego)",
+                    "masterSnapshotId": [
+                        "TEST_CT_02"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CT-006",
+                            "eval": "data.rule.cloudtrail_is_enabled",
+                            "message": "data.rule.cloudtrail_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudtrail.html#CloudTrail.Client.describe_trails' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CT_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS CloudTrail is enabled on the account.",
+                    "description": "AWS CloudTrail is a service that enables governance, compliance, operational & risk auditing of the AWS account. It is a compliance and security best practice to turn on CloudTrail to get a complete audit trail of activities across various services.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 31",
+                                "Brazilian Data Protection Law (LGPD)-Article 48",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CMMC",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AU.3.046",
+                                "GDPR",
+                                "GDPR-Article 30",
+                                "HITRUST",
+                                "HITRUST CSF v9.3-Control Reference:01.p",
+                                "HITRUST CSF v9.3-Control Reference:09.ad",
+                                "HITRUST CSF v9.3-Control Reference:09.ae",
+                                "ISO 27001",
+                                "ISO 27001:2013-A.14.1.3",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-7.5.7",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1562.008 - Impair Defenses:Disable Cloud Logs",
+                                "MITRE ATT&CK v6.3-T1078",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1078",
+                                "NIST 800",
+                                "NIST 800-171 Rev1-3.3.1",
+                                "NIST 800-171 Rev1-3.3.2",
+                                "NIST 800-53 Rev 5-Audit Record Generation | System-wide and Time-correlated Audit Trail",
+                                "NIST 800-53 Rev4-AU-12 (1)",
+                                "NIST CSF",
+                                "NIST CSF-DE.AE-1",
+                                "NIST CSF-DE.CM-7",
+                                "NIST CSF-PR.PT-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.3.4",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS v3.2.1-10.1",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.1.4",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.61",
+                                "Risk Management in Technology (RMiT)-10.66",
+                                "SOC 2",
+                                "SOC 2-CC8.1"
                             ],
                             "service": [
                                 "cloudtrail"
@@ -1158,6 +1269,218 @@
                             "cloud": "AWS",
                             "compliance": [
                                 "Best Practice"
+                            ],
+                            "service": [
+                                "eks"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EKS-006",
+                    "masterSnapshotId": [
+                        "TEST_EKS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EKS-006",
+                            "eval": "data.rule.eks_approved_kubernetes_version",
+                            "message": "data.rule.eks_approved_kubernetes_version_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EKS_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS EKS only uses latest versions of Kubernetes.",
+                    "description": "It checks if an approved version of Kubernetes is used for EKS cluster or not.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "eks"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EKS-007",
+                    "masterSnapshotId": [
+                        "TEST_EKS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EKS-007",
+                            "eval": "data.rule.eks_with_security_group_attached",
+                            "message": "data.rule.eks_with_security_group_attached_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EKS_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure EKS cluster is configured with control plane security group attached to it.",
+                    "description": "It checks if the cluster node security groups is configured or not.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "eks"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EKS-008",
+                    "masterSnapshotId": [
+                        "TEST_EKS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EKS-008",
+                            "eval": "data.rule.eks_with_private_access",
+                            "message": "data.rule.eks_with_private_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EKS_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure only private access for Amazon EKS cluster's Kubernetes API is enabled.",
+                    "description": "This policy checks if the EKS cluster has public access which can be accessed over the internet.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 26",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CMMC",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 30",
+                                "CyberSecurity Law of the People's Republic of China-Article 31",
+                                "CyberSecurity Law of the People's Republic of China-Article 45",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.1.004",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "HITRUST v.9.4.2-Control Reference:09.m",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-11.1.5",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application",
+                                "MITRE ATT&CK v6.3-T1190",
+                                "MITRE ATT&CK v8.2-T1190",
+                                "MLPS",
+                                "MLPS 2.0-8.1.3.2",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Boundary Protection",
+                                "NIST 800-53 Rev4-SC-7",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.1.22",
+                                "NIST SP 800-172-3.14.3e",
+                                "PCI DSS v3.2.1-1.3",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.1.4",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55"
+                            ],
+                            "service": [
+                                "eks"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EKS-009",
+                    "masterSnapshotId": [
+                        "TEST_EKS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EKS-009",
+                            "eval": "data.rule.eks_logging_enabled",
+                            "message": "data.rule.eks_logging_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EKS_009.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS EKS control plane logging is enabled.",
+                    "description": "This policy checks if the EKS cluster has public access which can be accessed over the internet.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "APRA (CPS 234) Information Security-CPS234-35",
+                                "APRA (CPS 234) Information Security-CPS234-36",
+                                "Brazilian Data Protection Law (LGPD)-Article 31",
+                                "Brazilian Data Protection Law (LGPD)-Article 48",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-LOG-05",
+                                "CSA CCM v.4.0.1-LOG-06",
+                                "CSA CCM v.4.0.1-LOG-08",
+                                "CSA CCM v.4.0.1-LOG-13",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 55",
+                                "CyberSecurity Law of the People's Republic of China-Article 56",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AU.3.046",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:09.ab",
+                                "HITRUST v.9.4.2-Control Reference:09.ac",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-12.4.1",
+                                "ISO/IEC 27002:2013-12.4.3",
+                                "ISO/IEC 27002:2013-12.4.4",
+                                "ISO/IEC 27002:2013-16.1.1",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-12.4.1",
+                                "ISO/IEC 27017:2015-12.4.4",
+                                "ISO/IEC 27017:2015-16.1.2",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-7.5.7",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1562.008 - Impair Defenses:Disable Cloud Logs",
+                                "MLPS",
+                                "MLPS 2.0-8.1.5.4",
+                                "MLPS 2.0-8.2.3.3",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Vulnerability Monitoring and Scanning | Review Historic Audit Logs",
+                                "NIST 800-53 Rev4-RA-5 (8)",
+                                "NIST CSF",
+                                "NIST CSF-PR.PT-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.3.4",
+                                "NIST SP 800-172-3.14.2e",
+                                "PCI DSS v3.2.1-10.2.3",
+                                "PCI DSS v3.2.1-10.6",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.1.4",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.61",
+                                "Risk Management in Technology (RMiT)-10.66"
                             ],
                             "service": [
                                 "eks"
@@ -2131,7 +2454,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-S3-005",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_CT_01"
                     ],
                     "type": "rego",
                     "rule": "file(storage.rego)",
@@ -2165,7 +2488,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-S3-006",
                     "masterSnapshotId": [
-                        "TEST_CT"
+                        "TEST_CT_01"
                     ],
                     "type": "rego",
                     "rule": "file(storage.rego)",
@@ -3902,6 +4225,93 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-EMR-008",
+                    "masterSnapshotId": [
+                        "TEST_EMR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EMR-008",
+                            "eval": "data.rule.emr_cluster_level_logging",
+                            "message": "data.rule.emr_cluster_level_logging_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/emr.html#EMR.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EMR_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Cluster level logging is enabled for EMR.",
+                    "description": "It checks if cluster level logging is enabled for EMR cluster created. This determines whether Amazon EMR captures detailed log data to Amazon S3.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "emr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EMR-009",
+                    "masterSnapshotId": [
+                        "TEST_EMR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EMR-009",
+                            "eval": "data.rule.emr_cluster_not_visible_to_all_iam_users",
+                            "message": "data.rule.emr_cluster_not_visible_to_all_iam_users_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/emr.html#EMR.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EMR_009.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure EMR cluster is not visible to all IAM users.",
+                    "description": "It checks if the EMR cluster created has a wide visibility to all IAM users. When true, IAM principals in the AWS account can perform EMR cluster actions that their IAM policies allow.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "emr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EMR-010",
+                    "masterSnapshotId": [
+                        "TEST_EMR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EMR-010",
+                            "eval": "data.rule.emr_termination_protection_is_enabled",
+                            "message": "data.rule.emr_termination_protection_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/emr.html#EMR.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EMR_010.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure Termination protection is enabled for instances in the cluster for EMR.",
+                    "description": "It checks if the EC2 instances created in EMR cluster are protected against accidental termination.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "emr"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-SQS-001",
                     "masterSnapshotId": [
                         "TEST_SQS"
@@ -4291,6 +4701,64 @@
                             "compliance": [
                                 "Best Practice"
                             ],
+                            "service": [
+                                "msk"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-MSK-006",
+                    "masterSnapshotId": [
+                        "TEST_MSK"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MSK-006",
+                            "eval": "data.rule.msk_cluster_enhanced_monitoring_enable",
+                            "message": "data.rule.msk_cluster_enhanced_monitoring_enable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kafka.html#Kafka.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MSK_006.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure enhanaced monitoring for AWS MSK is set to default.",
+                    "description": "It is used to check that enhanced monitoring is configured to gather Apache Kafka metrics and sends them to Amazon CloudWatch.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "msk"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-MSK-007",
+                    "masterSnapshotId": [
+                        "TEST_MSK"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MSK-007",
+                            "eval": "data.rule.msk_public_access",
+                            "message": "data.rule.msk_public_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kafka.html#Kafka.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MSK_007.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure public access is disabled for AWS MSK.",
+                    "description": "It check whether public access is turned on to the brokers of MSK clusters.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
                             "service": [
                                 "msk"
                             ]
@@ -6453,6 +6921,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-CFR-006",
+                    "masterSnapshotId": [
+                        "TEST_ALL_14"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CFR-006",
+                            "eval": "data.rule.termination_protection_in_stacks_is_enabled",
+                            "message": "data.rule.termination_protection_in_stacks_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.describe_stacks' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CFR_006.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure termination protection in stacks is enabled.",
+                    "description": "It checks if the stack is protected against accidental termination which may lead to deletion of critical resources.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-CFG-001",
                     "masterSnapshotId": [
                         "TEST_ALL_09"
@@ -6715,6 +7214,115 @@
                                 "SOC 2-CC7.5",
                                 "SOC 2-CC8.1"
                             ],
+                            "service": [
+                                "config"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-CFG-003",
+                    "masterSnapshotId": [
+                        "TEST_ALL_17"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CFG-003",
+                            "eval": "data.rule.aws_config_recorder_status",
+                            "message": "data.rule.aws_config_recorder_status_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.describe_configuration_recorders' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CFG_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS Config does not fail to deliver log files",
+                    "description": "This policy identifies AWS Configs failing to deliver its log files to the specified S3 bucket. It happens when it doesn't have sufficient permissions to complete the operation. To deliver information to S3 bucket, AWS Config needs to assume an IAM role that manages the permissions required to access the designated S3 bucket.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 31",
+                                "Brazilian Data Protection Law (LGPD)-Article 48",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-LOG-05",
+                                "CSA CCM v.4.0.1-LOG-06",
+                                "CSA CCM v.4.0.1-LOG-08",
+                                "CSA CCM v.4.0.1-LOG-13",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 55",
+                                "CyberSecurity Law of the People's Republic of China-Article 56",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AU.3.046",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:09.ab",
+                                "HITRUST v.9.4.2-Control Reference:09.ac",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-12.4.1",
+                                "ISO/IEC 27002:2013-12.4.3",
+                                "ISO/IEC 27002:2013-12.4.4",
+                                "ISO/IEC 27002:2013-16.1.1",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-12.4.1",
+                                "ISO/IEC 27017:2015-12.4.4",
+                                "ISO/IEC 27017:2015-16.1.2",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-7.5.7",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1562.008 - Impair Defenses:Disable Cloud Logs",
+                                "MLPS",
+                                "MLPS 2.0-8.1.5.4",
+                                "NIST CSF",
+                                "NIST CSF-PR.PT-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.3.4",
+                                "NIST SP 800-172-3.14.2e",
+                                "PCI DSS v3.2.1-10.2.3",
+                                "PCI DSS v3.2.1-10.6",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.1.4",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.61",
+                                "Risk Management in Technology (RMiT)-10.66"
+                            ],
+                            "service": [
+                                "config"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-CFG-004",
+                    "masterSnapshotId": [
+                        "TEST_ALL_09"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CFG-004",
+                            "eval": "data.rule.config_includes_global_resources",
+                            "message": "data.rule.config_includes_global_resources_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CFG_004.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS Config includes global resources types (IAM).",
+                    "description": "It checks that global resource types are included in AWS Config.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
                             "service": [
                                 "config"
                             ]
@@ -6990,6 +7598,99 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-MQ-003",
+                    "masterSnapshotId": [
+                        "TEST_ALL_12"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MQ-003",
+                            "eval": "data.rule.mq_activemq_approved_engine_version",
+                            "message": "data.rule.mq_activemq_approved_engine_version_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MQ_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ActiveMQ engine version is approved by GS.",
+                    "description": "It is used to check only firm approved version of ActiveMQ is being used.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "mq"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-MQ-004",
+                    "masterSnapshotId": [
+                        "TEST_ALL_12"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MQ-004",
+                            "eval": "data.rule.mq_rabbitmq_approved_engine_version",
+                            "message": "data.rule.mq_rabbitmq_approved_engine_version_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MQ_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure RabbitMQ engine version is approved by GS.",
+                    "description": "It is used to check only firm approved version of RabbitMQ is being used.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "mq"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-MQ-005",
+                    "masterSnapshotId": [
+                        "TEST_ALL_12"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MQ-005",
+                            "eval": "data.rule.audit_logs_published_to_cloudWatch",
+                            "message": "data.rule.audit_logs_published_to_cloudWatch_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MQ_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure General and Audit logs are published to CloudWatch.",
+                    "description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "mq"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-R53-001",
                     "masterSnapshotId": [
                         "TEST_ALL_13"
@@ -7072,43 +7773,6 @@
                             "compliance": [],
                             "service": [
                                 "inspector"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-APS-001",
-                    "masterSnapshotId": [
-                        "TEST_ALL_15"
-                    ],
-                    "type": "rego",
-                    "rule": "file(all.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-APS-001",
-                            "eval": "data.rule.appsync_not_configured_with_firewall_v2",
-                            "message": "data.rule.appsync_not_configured_with_firewall_v2_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/appsync.html#AppSync.Client.get_graphql_api' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_APS_001.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AppSync is configured with AWS Web Application Firewall v2.",
-                    "description": "Enable the AWS WAF service on AppSync to protect against application layer attacks. To block malicious requests to your AppSync, define the block criteria in the WAF web access control list (web ACL).",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [
-                                "NIST 800",
-                                "GDPR",
-                                "CIS",
-                                "ISO 27001",
-                                "LGPD",
-                                "HITRUST",
-                                "HIPAA"
-                            ],
-                            "service": [
-                                "appsync"
                             ]
                         }
                     ]
@@ -9098,7 +9762,7 @@
                             "eval": "data.rule.ecr_vulnerability",
                             "message": "data.rule.ecr_vulnerability_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_ECR_004.py"
+                            "remediationFunction": "PR_AWS_CLD_ECR_005.py"
                         }
                     ],
                     "severity": "High",
@@ -9111,6 +9775,64 @@
                                 "PCI DSS",
                                 "GDPR"
                             ],
+                            "service": [
+                                "ecr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ECR-006",
+                    "masterSnapshotId": [
+                        "TEST_ECR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECR-006",
+                            "eval": "data.rule.ecr_accessible_only_via_private_endpoint",
+                            "message": "data.rule.ecr_accessible_only_via_private_endpoint_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecr.html#ECR.Client.get_repository_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECR_006.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure ECR resources are accessible only via private endpoint.",
+                    "description": "It checks if the container registry is accessible over the internet, GS mandates to keep the container repository private from GS network only",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "ecr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ECR-007",
+                    "masterSnapshotId": [
+                        "TEST_ECR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECR-007",
+                            "eval": "data.rule.lifecycle_policy_is_enabled",
+                            "message": "data.rule.lifecycle_policy_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecr.html#ECR.Client.get_repository_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECR_007.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure lifecycle policy is enabled for ECR image repositories.",
+                    "description": "It checks if a lifecycle policy is created for ECR. ECR lifecycle policies provide more control over the lifecycle management of images in a private repository.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
                             "service": [
                                 "ecr"
                             ]
@@ -9727,6 +10449,39 @@
                         {
                             "cloud": "AWS",
                             "compliance": [],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ECS-018",
+                    "masterSnapshotId": [
+                        "TEST_ECS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-018",
+                            "eval": "data.rule.ecs_configured_with_active_services",
+                            "message": "data.rule.ecs_configured_with_active_services_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_clusters' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_018.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS ECS cluster is configured with active services.",
+                    "description": "This policy identifies ECS clusters that are not configured with active services. ECS service enables you to run and maintain a specified number of instances of a task definition simultaneously in an Amazon ECS cluster. It is recommended to remove Idle ECS clusters to reduce the container attack surface or create new services for the reported ECS cluster. For details:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "MAS TRM",
+                                "MAS TRM 2021-7.2.1",
+                                "MAS TRM 2021-7.2.2"
+                            ],
                             "service": [
                                 "ecs"
                             ]
@@ -10691,6 +11446,85 @@
                                 "NIST 800",
                                 "NIST 800-53 Rev 5-Boundary Protection",
                                 "NIST 800-53 Rev4-SC-7",
+                                "NIST CSF",
+                                "NIST CSF-PR.IP-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.4.2",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS v3.2.1-6.3",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "cloudfront"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-CF-010",
+                    "masterSnapshotId": [
+                        "TEST_CF"
+                    ],
+                    "type": "rego",
+                    "rule": "file(cloudfront.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CF-010",
+                            "eval": "data.rule.cf_s3_origin",
+                            "message": "data.rule.cf_s3_origin_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudfront.html#CloudFront.Client.get_distribution' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CF_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Cloudfront Distribution with S3 have Origin Access set to disabled",
+                    "description": "This policy identifies the AWS CloudFront distributions which are utilizing S3 bucket and have Origin Access Disabled. The origin access identity feature should be enabled for all your AWS CloudFront CDN distributions in order to restrict any direct access to your objects through Amazon S3 URLs.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Secure access management",
+                                "Brazilian Data Protection Law (LGPD)-Article 34",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-CM.2.062",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:10.a",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-7.2.1",
+                                "MAS TRM 2021-7.2.2",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Boundary Protection | Connections to Public Networks",
+                                "NIST 800-53 Rev4-CA-3 (4)",
                                 "NIST CSF",
                                 "NIST CSF-PR.IP-1",
                                 "NIST SP",
@@ -12372,6 +13206,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-DAX-002",
+                    "masterSnapshotId": [
+                        "TEST_DAX"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DAX-002",
+                            "eval": "data.rule.dax_cluster_endpoint_encrypt_at_rest",
+                            "message": "data.rule.dax_cluster_endpoint_encrypt_at_rest_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/cli/latest/reference/dax/describe-clusters.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DAX_002.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS DAX data is encrypted in transit",
+                    "description": "This control is to check that the communication between the application and DAX is always encrypted",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "dax"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-QLDB-001",
                     "masterSnapshotId": [
                         "TEST_QLDB"
@@ -13126,6 +13989,93 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-EC-006",
+                    "masterSnapshotId": [
+                        "TEST_EC"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC-006",
+                            "eval": "data.rule.cache_replication_group_id",
+                            "message": "data.rule.cache_replication_group_id_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_replication_groups' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ElastiCache (Redis) replicationGroupId is not empty or contains wildcards (*).",
+                    "description": "This checks if the replication group ID for Redis is set to empty or a * to allow all.This checks if the replication group ID for Redis is set to empty or a * to allow all.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticache"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EC-007",
+                    "masterSnapshotId": [
+                        "TEST_EC_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC-007",
+                            "eval": "data.rule.automatic_backups_for_redis_cluster",
+                            "message": "data.rule.automatic_backups_for_redis_cluster_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_cache_clusters' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster.",
+                    "description": "It checks if automatic backups are enabled for the Redis cluster.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticache"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EC-008",
+                    "masterSnapshotId": [
+                        "TEST_EC_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC-008",
+                            "eval": "data.rule.redis_with_intransit_encryption",
+                            "message": "data.rule.redis_with_intransit_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_cache_clusters' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ElastiCache Redis with in-transit encryption is disabled (Non-replication group).",
+                    "description": "It identifies ElastiCache Redis that are in non-replication groups or individual ElastiCache Redis and have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis and their associated cache storage systems.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "elasticache"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-DMS-001",
                     "masterSnapshotId": [
                         "TEST_DMS_01"
@@ -13236,6 +14186,73 @@
                                 "HIPAA",
                                 "GDPR",
                                 "NIST 800"
+                            ],
+                            "service": [
+                                "dms"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-DMS-003",
+                    "masterSnapshotId": [
+                        "TEST_DMS_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DMS-003",
+                            "eval": "data.rule.dms_certificate_expiry",
+                            "message": "data.rule.dms_certificate_expiry_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/cli/latest/reference/dms/describe-certificates.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DMS_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Database Migration Service (DMS) has not expired certificates",
+                    "description": "This policy identifies expired certificates that are in AWS Database Migration Service (DMS). AWS Database Migration Service (DMS) Certificate service is the preferred tool to provision, manage, and deploy your DMS endpoint certificates. As a best practice, it is recommended to delete expired certificates.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:10.g",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "MAS TRM",
+                                "MAS TRM 2021-10.2.1",
+                                "MAS TRM 2021-10.2.8",
+                                "MAS TRM 2021-10.2.9",
+                                "NIST CSF",
+                                "NIST CSF-PR.IP-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.4.2",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS v3.2.1-3.6.4",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "dms"
@@ -14536,39 +15553,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-CLD-SG-034",
-                    "masterSnapshotId": [
-                        "TEST_SG"
-                    ],
-                    "type": "rego",
-                    "rule": "file(securitygroup.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-SG-034",
-                            "eval": "data.rule.ec2_instance_has_restricted_access",
-                            "message": "data.rule.ec2_instance_has_restricted_access_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#aws-properties-ec2-security-group--examples' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_SG_034.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "Ensure EC2 instance that is not internet reachable with unrestricted access (0.0.0.0/0) other than HTTP/HTTPS port monitoring is enabled for EC2 instances",
-                    "description": "Ensure restrict traffic from unknown IP addresses and limit the access to known hosts, services, or specific entities. NOTE: We are excluding the HTTP-80 and HTTPs-443 web ports as these are Internet-facing ports with legitimate traffic.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [
-                                "PCI DSS",
-                                "HIPAA",
-                                "NIST 800"
-                            ],
-                            "service": [
-                                "security group"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "PR-AWS-CLD-IAM-001",
                     "masterSnapshotId": [
                         "TEST_IAM_01"
@@ -14966,8 +15950,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-011",
-                            "eval": "data.rule.iam_policy_not_overly_permissive_to_all_traffic",
-                            "message": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_err",
+                            "eval": "data.rule.lambda_iam_policy_not_overly_permissive_to_all_traffic",
+                            "message": "data.rule.lambda_iam_policy_not_overly_permissive_to_all_traffic_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_IAM_011.py"
                         }
@@ -15722,24 +16706,306 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-CLD-IAM-028",
+                    "masterTestId": "PR-AWS-CLD-IAM-029",
                     "masterSnapshotId": [
-                        "TEST_IAM_02"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
                     "evals": [
                         {
-                            "id": "PR-AWS-CLD-IAM-028",
-                            "eval": "data.rule.iam_access_key_enabled_on_root_account",
-                            "message": "data.rule.iam_access_key_enabled_on_root_account_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#accountsummary' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_IAM_028.py"
+                            "id": "PR-AWS-CLD-IAM-029",
+                            "eval": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_for_ecs",
+                            "message": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_for_ecs_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_029.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure IAM policy is not overly permissive to all traffic for ecs.",
+                    "description": "This policy identifies ECS IAM policies that are overly permissive to all traffic. It is recommended that the ECS should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/AmazonECS/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_service-with-iam-policy-best-practices",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-030",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-030",
+                            "eval": "data.rule.elasticsearch_iam_policy_not_overly_permissive_to_all_traffic",
+                            "message": "data.rule.elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_030.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure IAM policy is not overly permissive to all traffic for elasticsearch.",
+                    "description": "It identifies Elasticsearch IAM policies that are overly permissive to all traffic. Amazon Elasticsearch service makes it easy to deploy and manage Elasticsearch. Customers can create a domain where the service is accessible. The domain should be granted access restrictions so that only authorized users and applications have access to the service.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v3.0.1-DSI-02",
+                                "CSA CCM v3.0.1-IAM-07",
+                                "CSA CCM v3.0.1-IVS-06",
+                                "CSA CCM v3.0.1-IVS-08",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 21",
+                                "CyberSecurity Law of the People's Republic of China-Article 25",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.183",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SI.2.216",
+                                "GDPR",
+                                "GDPR-Article 32",
+                                "GDPR-Article 46",
+                                "HITRUST",
+                                "HITRUST CSF v9.3-Control Reference:09.ab",
+                                "HITRUST v.9.4.2-Control Reference:01.n",
+                                "HITRUST v.9.4.2-Control Reference:01.o",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.1",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MLPS",
+                                "MLPS 2.0-8.1.3.2",
+                                "NIST 800",
+                                "NIST 800-171 Rev1-3.13.1",
+                                "NIST 800-171 Rev1-3.13.2",
+                                "NIST 800-171 Rev1-3.13.5",
+                                "NIST 800-171 Rev1-3.14.6",
+                                "NIST 800-53 Rev 5-Boundary Protection | Block Communication from Non-organizationally Configured Hosts",
+                                "NIST 800-53 Rev 5-System Monitoring | Inbound and Outbound Communications Traffic",
+                                "NIST 800-53 Rev4-SC-7 (19)",
+                                "NIST 800-53 Rev4-SI-4 (4)",
+                                "NIST CSF",
+                                "NIST CSF-DE.AE-1",
+                                "NIST CSF-PR.AC-5",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.13.6",
+                                "NIST SP 800-171 Revision 2-3.14.6",
+                                "NIST SP 800-172-3.14.2e",
+                                "PCI DSS v3.2.1-1.2.1",
+                                "PCI-DSS",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55",
+                                "Risk Management in Technology (RMiT)-10.68",
+                                "SOC 2",
+                                "SOC 2-CC6.1",
+                                "SOC 2-CC6.6",
+                                "SOC 2-CC6.7"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-040",
+                    "masterSnapshotId": [
+                        "TEST_IAM_03"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-040",
+                            "eval": "data.rule.not_password_reuse",
+                            "message": "data.rule.not_password_reuse_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_040.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM password policy does not allow password reuse.",
+                    "description": "It identifies IAM policies which allow password reuse. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-15",
+                                "APRA (CPS 234) Information Security-CPS234-16",
+                                "APRA (CPS 234) Information Security-CPS234-17",
+                                "APRA (CPS 234) Information Security-CPS234-21",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Secure access management",
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "Brazilian Data Protection Law (LGPD)-Article 46",
+                                "Brazilian Data Protection Law (LGPD)-Article 6",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS",
+                                "CIS v1.2.0 (AWS)-1.10",
+                                "CIS v1.3.0 (AWS)-1.9",
+                                "CIS v1.4.0 (AWS)-1.9",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-HRS-06",
+                                "CSA CCM v.4.0.1-IAM-01",
+                                "CSA CCM v.4.0.1-IAM-03",
+                                "CSA CCM v.4.0.1-IAM-06",
+                                "CSA CCM v.4.0.1-IAM-07",
+                                "CSA CCM v.4.0.1-IAM-08",
+                                "CSA CCM v.4.0.1-IAM-10",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "CSA CCM v.4.0.1-IVS-03",
+                                "CSA CCM v3.0.1-EKM-01",
+                                "CSA CCM v3.0.1-IAM-02",
+                                "CSA CCM v3.0.1-IAM-04",
+                                "CSA CCM v3.0.1-IAM-08",
+                                "CSA CCM v3.0.1-IAM-12",
+                                "CSA CCM v3.0.1-IVS-11",
+                                "CSA CCM v3.0.1-MOS-16",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 24",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-IA.2.078",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-IA.2.079",
+                                "GDPR",
+                                "GDPR-Article 25",
+                                "HIPAA",
+                                "HIPAA-164.312(d)",
+                                "HITRUST",
+                                "HITRUST CSF v9.3-Control Reference:01.d",
+                                "HITRUST CSF v9.3-Control Reference:01.r",
+                                "HITRUST v.9.4.2-Control Reference:01.d",
+                                "HITRUST v.9.4.2-Control Reference:01.f",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-13.1.1",
+                                "ISO/IEC 27002:2013-13.1.2",
+                                "ISO/IEC 27002:2013-13.1.3",
+                                "ISO/IEC 27002:2013-5.1.2",
+                                "ISO/IEC 27002:2013-8.1.1",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27002:2013-9.4.1",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27017:2015-9.4.1",
+                                "ISO/IEC 27018",
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.4",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1098",
+                                "MLPS",
+                                "MLPS 2.0-8.1.4.1",
+                                "MPAA Content Protection Best Practices",
+                                "MPAA Content Protection Best Practices-DS-8.1",
+                                "NIST 800",
+                                "NIST 800-171 Rev1-3.5.10",
+                                "NIST 800-171 Rev1-3.5.7",
+                                "NIST 800-171 Rev1-3.5.8",
+                                "NIST 800-171 Rev1-3.5.9",
+                                "NIST 800-53 Rev 5-Authenticator Management | Password-based Authentication",
+                                "NIST 800-53 Rev4-IA-5 (1)(e)",
+                                "NIST CSF",
+                                "NIST CSF-PR.AC-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.5.8",
+                                "NIST SP 800-172-3.5.2e",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-16.1",
+                                "PCI DSS v3.2.1-8.2.5",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.7.3",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.57",
+                                "SOC 2",
+                                "SOC 2-CC6.1"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-041",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-041",
+                            "eval": "data.rule.not_allow_decryption_actions_on_all_kms_keys",
+                            "message": "data.rule.not_allow_decryption_actions_on_all_kms_keys_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_041.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM policy does not allows decryption actions on all KMS keys.",
+                    "description": "It identifies IAM policies that allow decryption actions on all KMS keys. Instead of granting permissions for all keys, determine the minimum set of keys that users need to access encrypted data. You should grant to identities only the kms:Decrypt or kms:ReEncryptFrom permissions and only for the keys that are required to perform a task. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-042",
+                    "masterSnapshotId": [
+                        "TEST_IAM_04"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-042",
+                            "eval": "data.rule.iam_policy_attached_to_user",
+                            "message": "data.rule.iam_policy_attached_to_user_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_attached_user_policies' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_042.py"
                         }
                     ],
                     "severity": "Low",
-                    "title": "Ensure AWS Access key is enabled on root account.",
-                    "description": "It identifies that account access key is enabled or not from IAM account summary.",
+                    "title": "Ensure IAM policy is attached to group rather than user.",
+                    "description": "It identifies IAM policies attached to user. By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups but not users.",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -15752,13 +17018,14 @@
                                 "AWS Foundational Security Best Practices standard-Secure access management",
                                 "AWS Well-Architected Framework",
                                 "AWS Well-Architected Framework-Identity and Access Management",
-                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "Brazilian Data Protection Law (LGPD)-Article 46",
+                                "Brazilian Data Protection Law (LGPD)-Article 6",
                                 "CCPA",
                                 "CCPA 2018-1798.150(a)(1)",
                                 "CIS",
-                                "CIS v1.2.0 (AWS)-1.12",
-                                "CIS v1.3.0 (AWS)-1.4",
-                                "CIS v1.4.0 (AWS)-1.4",
+                                "CIS v1.2.0 (AWS)-1.16",
+                                "CIS v1.3.0 (AWS)-1.15",
+                                "CIS v1.4.0 (AWS)-1.15",
                                 "CMMC",
                                 "CSA CCM",
                                 "CSA CCM v3.0.1-DSI-06",
@@ -15770,9 +17037,7 @@
                                 "CSA CCM v3.0.1-IVS-11",
                                 "CSA CCM v3.0.1-STA-01",
                                 "CyberSecurity Law of the People's Republic of China",
-                                "CyberSecurity Law of the People's Republic of China-Article 41",
-                                "CyberSecurity Law of the People's Republic of China-Article 43",
-                                "CyberSecurity Law of the People's Republic of China-Article 44",
+                                "CyberSecurity Law of the People's Republic of China-Article 24",
                                 "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.2.007",
                                 "GDPR",
                                 "GDPR-Article 25",
@@ -15785,24 +17050,26 @@
                                 "HITRUST CSF v9.3-Control Reference:01.v",
                                 "HITRUST CSF v9.3-Control Reference:01.y",
                                 "HITRUST CSF v9.3-Control Reference:05.i",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
                                 "ISO 27001",
-                                "ISO 27001:2013-A.18.1.3",
-                                "ISO 27001:2013-A.9.2.4",
+                                "ISO 27001:2013-A.9.2.5",
                                 "LGPD",
                                 "MAS TRM",
                                 "MAS TRM 2021-9.1.1",
                                 "MITRE ATT&CK",
-                                "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
                                 "MITRE ATT&CK v6.3-T1078",
                                 "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v8.2-T1078",
-                                "MITRE ATT&CK v8.2-T1098",
                                 "MLPS",
-                                "MLPS 2.0-8.1.5.2",
+                                "MLPS 2.0-8.1.5.4",
                                 "NIST 800",
                                 "NIST 800-171 Rev1-3.1.5",
+                                "NIST 800-171 Rev1-3.1.6",
+                                "NIST 800-171 Rev1-3.1.7",
                                 "NIST 800-53 Rev 5-Least Privilege",
+                                "NIST 800-53 Rev 5-Least Privilege | Privileged Access by Non-organizational Users",
                                 "NIST 800-53 Rev4-AC-6",
+                                "NIST 800-53 Rev4-AC-6 (6)",
                                 "NIST CSF",
                                 "NIST CSF-DE.CM-3",
                                 "NIST CSF-PR.AC-4",
@@ -15810,7 +17077,8 @@
                                 "NIST SP",
                                 "NIST SP 800-171 Revision 2-3.1.5",
                                 "NIST SP 800-172-3.1.2e",
-                                "PCI DSS v3.2.1-8.3",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI DSS v3.2.1-7.1.2",
                                 "PCI-DSS",
                                 "PIPEDA",
                                 "PIPEDA-4.7.3",
@@ -15818,6 +17086,79 @@
                                 "Risk Management in Technology (RMiT)-10.55",
                                 "SOC 2",
                                 "SOC 2-CC6.3"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-043",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-043",
+                            "eval": "data.rule.iam_policy_not_overly_permissive_to_all_traffic",
+                            "message": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_043.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure IAM policy is not overly permissive to all traffic via condition clause.",
+                    "description": "It identifies IAM policies that have a policy that is overly permissive to all traffic via condition clause. If any IAM policy statement with a condition containing 0.0.0.0/0 or ::/0, it allows all traffic to resources attached to that IAM policy. It is highly recommended to have the least privileged IAM policy to protect the data leakage and unauthorized access.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.1",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55",
+                                "Risk Management in Technology (RMiT)-10.68"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-044",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-044",
+                            "eval": "data.rule.iam_policy_not_overly_permissive_to_sts_service",
+                            "message": "data.rule.iam_policy_not_overly_permissive_to_sts_service_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_044.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS IAM policy is not overly permissive to STS services.",
+                    "description": "It identifies the IAM policies that are overly permissive to STS services. AWS Security Token Service (AWS STS) is a web service that enables you to request temporary credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users). It is recommended to follow the principle of least privileges ensuring that only restricted STS services for restricted resources.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.1",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55"
                             ],
                             "service": [
                                 "iam"
