@@ -2,6 +2,9 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html
 
+available_true_choices := ["true", true]
+available_false_choices := ["false", false]
+
 #
 # PR-AWS-CLD-ES-001
 #
@@ -248,4 +251,203 @@ esearch_encrypt_kms_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
+}
+
+
+#
+# PR-AWS-CLD-ES-010
+# aws::elasticsearch::domain
+#
+
+default esearch_custom_endpoint_configured = true
+
+esearch_custom_endpoint_configured = false {
+    input.DomainStatus.DomainEndpointOptions.CustomEndpointEnabled == available_false_choices[_]
+}
+
+esearch_custom_endpoint_configured_err = "Ensure ElasticSearch has a custom endpoint configured." {
+    not esearch_custom_endpoint_configured
+}
+
+esearch_custom_endpoint_configured_metadata := {
+    "Policy Code": "PR-AWS-CLD-ES-010",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure ElasticSearch has a custom endpoint configured.",
+    "Policy Description": "It checks if a default endpoint is configured for ES domain.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain"
+}
+
+
+#
+# PR-AWS-CLD-ES-011
+# aws::elasticsearch::domain
+#
+
+default esearch_slow_logs_is_enabled  = true
+
+esearch_slow_logs_is_enabled = false {
+    not input.DomainStatus.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled
+}
+
+esearch_slow_logs_is_enabled = false {
+    input.DomainStatus.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled == available_false_choices[_]
+}
+
+esearch_slow_logs_is_enabled = false {
+    input.DomainStatus.LogPublishingOptions.SEARCH_SLOW_LOGS.Enabled == available_false_choices[_]
+}
+
+esearch_slow_logs_is_enabled_err = "Ensure Slow Logs feature is enabled for ElasticSearch cluster." {
+    not esearch_slow_logs_is_enabled
+}
+
+esearch_slow_logs_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-CLD-ES-011",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Slow Logs feature is enabled for ElasticSearch cluster.",
+    "Policy Description": "It checks of slow logs is enabled for the ES cluster. Slow logs provide valuable information for optimizing and troubleshooting your search and indexing operations.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain"
+}
+
+
+#
+# PR-AWS-CLD-ES-012
+# aws::elasticsearch::domain
+#
+
+default authentication_is_saml_based  = true
+
+authentication_is_saml_based = false {
+    not input.DomainStatus.AdvancedSecurityOptions.SAMLOptions.Idp.EntityId
+}
+
+authentication_is_saml_based_err = "Ensure authentication to Kibana is SAML based in ElasticSearch." {
+    not authentication_is_saml_based
+}
+
+authentication_is_saml_based_metadata := {
+    "Policy Code": "PR-AWS-CLD-ES-012",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure authentication to Kibana is SAML based in ElasticSearch.",
+    "Policy Description": "It checks if basic authentication is used to login to Kibana dashboard.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain"
+}
+
+
+#
+# PR-AWS-CLD-ES-013
+# aws::elasticsearch::domain
+#
+
+default fine_grained_encryption_for_elasticsearch  = true
+
+fine_grained_encryption_for_elasticsearch = false {
+    input.DomainStatus.EncryptionAtRestOptions.Enabled == available_false_choices[_]
+}
+
+fine_grained_encryption_for_elasticsearch = false {
+    input.DomainStatus.DomainEndpointOptions.EnforceHTTPS == available_false_choices[_]
+}
+
+fine_grained_encryption_for_elasticsearch = false {
+    input.DomainStatus.NodeToNodeEncryptionOptions.Enabled == available_false_choices[_]
+}
+
+fine_grained_encryption_for_elasticsearch_err = "Ensure fine-grained access control is enabled during domain creation in ElasticSearch." {
+    not fine_grained_encryption_for_elasticsearch
+}
+
+fine_grained_encryption_for_elasticsearch_metadata := {
+    "Policy Code": "PR-AWS-CLD-ES-013",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure fine-grained access control is enabled during domain creation in ElasticSearch.",
+    "Policy Description": "It checks if fine grained access controls is enabled for the ElasticSearch cluster and node to node encryption is enabled with it.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain"
+}
+
+
+#
+# PR-AWS-CLD-ES-014
+# aws::elasticsearch::domain
+#
+
+default custom_endpoint_has_certificate  = true
+
+custom_endpoint_has_certificate = false {
+    input.DomainStatus.DomainEndpointOptions.CustomEndpointEnabled == available_false_choices[_]
+}
+
+custom_endpoint_has_certificate_err = "Ensure custom endpoint has GS-managed ACM certificate associated in ElasticSearch." {
+    not custom_endpoint_has_certificate
+}
+
+custom_endpoint_has_certificate_metadata := {
+    "Policy Code": "PR-AWS-CLD-ES-014",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure custom endpoint has GS-managed ACM certificate associated in ElasticSearch.",
+    "Policy Description": "It checks the custom endpoint is hooked to a SSL certificate from AWS ACM.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain"
+}
+
+#
+# PR-AWS-CLD-ES-015
+# aws::elasticsearch::domain
+#
+
+default elasticsearch_domain_not_publicly_accessible = false
+
+elasticsearch_domain_not_publicly_accessible = true {
+    input.DomainStatus.Processing == available_false_choices[_]
+    not input.DomainStatus.Endpoints
+}
+
+elasticsearch_domain_not_publicly_accessible = true {
+    input.DomainStatus.Processing == available_false_choices[_]
+    not input.DomainStatus.Endpoints.vpc
+}
+
+elasticsearch_domain_not_publicly_accessible = true {
+    input.DomainStatus.Processing == available_false_choices[_]
+    input.DomainStatus.Endpoints.vpc == ""
+}
+
+elasticsearch_domain_not_publicly_accessible = true {
+    input.DomainStatus.Processing == available_false_choices[_]
+    input.DomainStatus.Endpoints.vpc == null
+}
+
+elasticsearch_domain_not_publicly_accessible_err = "Ensure Elasticsearch domain is not publicly accessible." {
+    not elasticsearch_domain_not_publicly_accessible
+}
+
+elasticsearch_domain_not_publicly_accessible_metadata := {
+    "Policy Code": "PR-AWS-CLD-ES-015",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Elasticsearch domain is not publicly accessible.",
+    "Policy Description": "It identifies Elasticsearch domains which are publicly accessible. Enabling VPCs for Elasticsearch domains provides flexibility and control over the clusters access with an extra layer of security than Elasticsearch domains that use public endpoints. It also keeps all traffic between your VPC and Elasticsearch domains within the AWS network instead of going over the public Internet.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain"
 }
