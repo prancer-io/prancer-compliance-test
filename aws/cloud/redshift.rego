@@ -3,6 +3,8 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html
 
+available_false_choices := ["false", false]
+
 #
 # PR-AWS-CLD-RSH-001
 #
@@ -247,4 +249,70 @@ redshift_audit_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
+}
+
+
+#
+# PR-AWS-CLD-RSH-008
+# aws::redshift::cluster
+
+default redshift_enhanced_vpc_routing = true
+
+redshift_enhanced_vpc_routing = false {
+    Clusters := input.Clusters[_]
+    Clusters.EnhancedVpcRouting == available_false_choices[_]
+}
+
+redshift_enhanced_vpc_routing_err = "Ensure AWS Redshift - Enhanced VPC routing must be enabled." {
+    not redshift_enhanced_vpc_routing
+}
+
+redshift_enhanced_vpc_routing_metadata := {
+    "Policy Code": "PR-AWS-CLD-RSH-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Redshift - Enhanced VPC routing must be enabled.",
+    "Policy Description": "It is to check enhanced VPC routing is enabled or not forces all COPY and UNLOAD traffic between your cluster and your data repositories through your virtual private cloud (VPC) based on the Amazon VPC service.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters"
+}
+
+
+#
+# PR-AWS-CLD-RSH-009
+# aws::redshift::cluster
+
+default redshift_not_provisioned_with_ec2_classic = true
+
+redshift_not_provisioned_with_ec2_classic = false {
+    Clusters := input.Clusters[_]
+    not Clusters.VpcId
+}
+
+redshift_not_provisioned_with_ec2_classic = false {
+    Clusters := input.Clusters[_]
+    Clusters.VpcId == ""
+}
+
+redshift_not_provisioned_with_ec2_classic = false {
+    Clusters := input.Clusters[_]
+    Clusters.VpcId == null
+}
+
+redshift_not_provisioned_with_ec2_classic_err = "Ensure Redshift cluster is not provisioned using EC2-classic (deprecated) platform." {
+    not redshift_not_provisioned_with_ec2_classic
+}
+
+redshift_not_provisioned_with_ec2_classic_metadata := {
+    "Policy Code": "PR-AWS-CLD-RSH-009",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Redshift cluster is not provisioned using EC2-classic (deprecated) platform.",
+    "Policy Description": "It is to check that the Redshift cluster is not provisioned using the deprecated EC2-classic instance to reduce the risk level associated with deprecated resources.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters"
 }

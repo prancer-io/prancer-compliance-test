@@ -814,30 +814,28 @@ elb2_internet_facing_load_balancer_metadata := {
 }
 
 #
-# PR-AWS-CLD-ELB-024
-# aws::elasticloadbalancingv2::loadbalancer
-#
+# PR-AWS-CLD-ELB-025
+# aws::elasticloadbalancingv2::listener
 
-default elb_waf_enabled = true
+default elbv2_ssl_negotiation_policy = true
 
-elb_waf_enabled = false {
-    Attribute := input.Attributes[j]
-    lower(Attribute.Key) == "waf.fail_open.enabled"
-    lower(Attribute.Value) == "false"
+elbv2_ssl_negotiation_policy = false {
+    Listener := input.Listeners[_]
+    contains(Listener.SslPolicy, "ELBSecurityPolicy-TLS-1-0-2015-04")
 }
 
-elb_waf_enabled_err = "Ensure that public facing ELB has WAF attached" {
-    not elb_waf_enabled
+elbv2_ssl_negotiation_policy_err = "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers." {
+    not elbv2_ssl_negotiation_policy
 }
 
-elb_waf_enabled_metadata := {
-    "Policy Code": "PR-AWS-CLD-ELB-024",
+elbv2_ssl_negotiation_policy_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-025",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that public facing ELB has WAF attached",
-    "Policy Description": "This policy checks the usage of a WAF with Internet facing ELB. AWS WAF is a web application firewall service that lets you monitor web requests and protect your web applications from malicious requests.",
+    "Policy Title": "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers.",
+    "Policy Description": "This policy identifies Elastic Load Balancers v2 (ELBv2) which are configured with SSL negotiation policy containing weak ciphers. An SSL cipher is an encryption algorithm that uses encryption keys to create a coded message. SSL protocols use several SSL ciphers to encrypt data over the Internet. As many of the other ciphers are not secure/weak, it is recommended to use only the ciphers recommended in the following AWS link: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-loadbalancerattributes.html"
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners"
 }
