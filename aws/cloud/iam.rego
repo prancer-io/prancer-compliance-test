@@ -1316,44 +1316,6 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 }
 
 #
-# PR-AWS-CLD-IAM-040
-#
-
-default not_password_reuse = true
-
-not_password_reuse = false {
-    not input.PasswordPolicy.RequireUppercaseCharacters
-}
-
-not_password_reuse = false {
-    to_number(input.PasswordPolicy.PasswordReusePrevention) < 1
-}
-
-not_password_reuse = false {
-    input.PasswordPolicy.PasswordReusePrevention = null
-}
-
-not_password_reuse = false {
-    input.PasswordPolicy.PasswordReusePrevention = ""
-}
-
-not_password_reuse_err = "Ensure AWS IAM password policy does not allow password reuse." {
-    not not_password_reuse
-}
-
-not_password_reuse_metadata := {
-    "Policy Code": "PR-AWS-CLD-IAM-040",
-    "Type": "cloud",
-    "Product": "AWS",
-    "Language": "AWS Cloud",
-    "Policy Title": "Ensure AWS IAM password policy does not allow password reuse.",
-    "Policy Description": "It identifies IAM policies which allow password reuse. AWS IAM (Identity & Access Management) allows customers to secure AWS console access. As a security best practice, customers must have strong password policies in place.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_account_password_policy"
-}
-
-#
 # PR-AWS-CLD-IAM-041
 #
 
