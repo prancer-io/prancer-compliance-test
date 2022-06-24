@@ -1230,3 +1230,54 @@ storage_account_allow_shared_key_access_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
 }
+
+
+#
+# PR-AZR-CLD-STR-025
+# https://docs.microsoft.com/en-us/rest/api/storagerp/file-shares/list (Snapshot AZRSNP_303, i dont think we have function setup to retrieve this resourcce via this API endpoint)
+# though this resource (microsoft.storage/storageaccounts/fileservices/shares) get available in Microsoft.Storage/storageAccounts, if we export the template from Azure (the way we are exporting right now via API). In this case we can refer Snapshot AZRSNP_301 for this rego rule for now. 
+
+default storage_account_file_share_usage_smb_protocol = null
+
+azure_attribute_absence["storage_account_file_share_usage_smb_protocol"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/fileservices/shares"
+    not has_property(resource.properties, "enabledProtocols")
+}
+
+azure_issue["storage_account_file_share_usage_smb_protocol"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/fileservices/shares"
+    lower(resource.properties.enabledProtocols) != "smb"
+}
+
+storage_account_file_share_usage_smb_protocol {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts/fileservices/shares"
+    not azure_attribute_absence["storage_account_file_share_usage_smb_protocol"]
+    not azure_issue["storage_account_file_share_usage_smb_protocol"]
+}
+
+storage_account_file_share_usage_smb_protocol = false {
+    azure_issue["storage_account_file_share_usage_smb_protocol"]
+}
+
+storage_account_file_share_usage_smb_protocol {
+    azure_attribute_absence["storage_account_file_share_usage_smb_protocol"]
+    not azure_issue["storage_account_file_share_usage_smb_protocol"]
+}
+
+storage_account_file_share_usage_smb_protocol_err = "Storage accounts File Share currently not using SMB protocol" {
+    azure_issue["storage_account_file_share_usage_smb_protocol"]
+}
+
+storage_account_file_share_usage_smb_protocol_metadata := {
+    "Policy Code": "PR-AZR-CLD-STR-025",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Azure Storage Account File Share should use SMB protocol",
+    "Policy Description": "The Server Message Block (SMB) protocol is a network file sharing protocol that allows applications on a computer to read and write to files and to request services from server programs in a computer network. The SMB protocol can be used on top of its TCP/IP protocol or other network protocols.",
+    "Resource Type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/fileservices/shares?tabs=json"
+}
