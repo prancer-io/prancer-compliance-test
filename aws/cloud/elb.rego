@@ -813,6 +813,37 @@ elb2_internet_facing_load_balancer_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html"
 }
 
+
+#
+# PR-AWS-CLD-ELB-024
+# aws::elasticloadbalancingv2::loadbalancer
+#
+
+default elb_waf_enabled = true
+
+elb_waf_enabled = false {
+    Attribute := input.Attributes[j]
+    lower(Attribute.Key) == "waf.fail_open.enabled"
+    lower(Attribute.Value) == "false"
+}
+
+elb_waf_enabled_err = "Ensure that public facing ELB has WAF attached" {
+    not elb_waf_enabled
+}
+
+elb_waf_enabled_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-024",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that public facing ELB has WAF attached",
+    "Policy Description": "This policy checks the usage of a WAF with Internet facing ELB. AWS WAF is a web application firewall service that lets you monitor web requests and protect your web applications from malicious requests.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancer_attributes"
+}
+
+
 #
 # PR-AWS-CLD-ELB-025
 # aws::elasticloadbalancingv2::listener

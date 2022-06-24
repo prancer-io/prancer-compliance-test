@@ -5916,7 +5916,12 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HITRUST",
+                                "PCI DSS",
+                                "NIST 800",
+                                "MAS TRM"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -5945,7 +5950,12 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HITRUST",
+                                "PCI DSS",
+                                "NIST 800",
+                                "MAS TRM"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -5974,7 +5984,12 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HITRUST",
+                                "PCI DSS",
+                                "NIST 800",
+                                "MAS TRM"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -6003,7 +6018,46 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "HITRUST",
+                                "PCI DSS",
+                                "NIST 800",
+                                "MAS TRM"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ELB-024",
+                    "masterSnapshotId": [
+                        "TEST_ELB_07"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ELB-024",
+                            "eval": "data.rule.elb_waf_enabled",
+                            "message": "data.rule.elb_waf_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancer_attributes' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ELB_024.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that public facing ELB has WAF attached",
+                    "description": "This policy checks the usage of a WAF with Internet facing ELB. AWS WAF is a web application firewall service that lets you monitor web requests and protect your web applications from malicious requests.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HITRUST",
+                                "PCI DSS",
+                                "NIST 800",
+                                "MAS TRM"
+                            ],
                             "service": [
                                 "elb"
                             ]
@@ -6589,8 +6643,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-RSH-008",
-                            "eval": "data.rule.redshift_deploy_vpc",
-                            "message": "data.rule.redshift_deploy_vpc_err",
+                            "eval": "data.rule.redshift_enhanced_vpc_routing",
+                            "message": "data.rule.redshift_enhanced_vpc_routing_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_RSH_008.py"
                         }
