@@ -65,6 +65,12 @@
                     "version": "2021-06-01"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_303",
+                    "type": "Microsoft.Storage storageAccounts/fileServices/shares",
+                    "collection": "Microsoft.Storage",
+                    "version": "2021-09-01"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_221",
                     "type": "Microsoft.Network/applicationGateways",
                     "collection": "Microsoft.Network",
