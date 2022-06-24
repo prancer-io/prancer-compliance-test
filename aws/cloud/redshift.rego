@@ -4,6 +4,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html
 
 available_false_choices := ["false", false]
+available_true_choices := ["true", true]
 
 #
 # PR-AWS-CLD-RSH-001
@@ -312,6 +313,62 @@ redshift_not_provisioned_with_ec2_classic_metadata := {
     "Language": "AWS Cloud",
     "Policy Title": "Ensure Redshift cluster is not provisioned using EC2-classic (deprecated) platform.",
     "Policy Description": "It is to check that the Redshift cluster is not provisioned using the deprecated EC2-classic instance to reduce the risk level associated with deprecated resources.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters"
+}
+
+
+#
+# PR-AWS-CLD-RSH-010
+# aws::redshift::cluster
+
+default redshift_not_publicly_accessible = true
+
+redshift_not_publicly_accessible = false {
+    Clusters := input.Clusters[_]
+    Clusters.PubliclyAccessible == available_true_choices[_]
+}
+
+redshift_not_publicly_accessible_err = "Ensure Redshift cluster is not publicly accessible." {
+    not redshift_not_publicly_accessible
+}
+
+redshift_not_publicly_accessible_metadata := {
+    "Policy Code": "PR-AWS-CLD-RSH-010",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Redshift cluster is not publicly accessible.",
+    "Policy Description": "It is to check that Redshift cluster is configured within firm-managed VPC and not publicly accessible.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters"
+}
+
+
+#
+# PR-AWS-CLD-RSH-011
+# aws::redshift::cluster
+
+default redshift_not_default_master_username = true
+
+redshift_not_default_master_username = false {
+    Clusters := input.Clusters[_]
+    lower(Clusters.MasterUsername) == "awsuser"
+}
+
+redshift_not_default_master_username_err = "Ensure Redshift database clusters are not using default master username." {
+    not redshift_not_default_master_username
+}
+
+redshift_not_default_master_username_metadata := {
+    "Policy Code": "PR-AWS-CLD-RSH-011",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Redshift database clusters are not using default master username.",
+    "Policy Description": "It is to check that Redshift clusters are not using default master username in order to reduce security risk.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters"

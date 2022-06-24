@@ -709,7 +709,7 @@ elb_deletion_protection = false {
     lower(Attribute.Value) == "false"
 }
 
-elb_deletion_protection_err = "Ensure that AWS Ensure Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled" {
+elb_deletion_protection_err = "Ensure that AWS Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled" {
     not elb_deletion_protection
 }
 
@@ -718,7 +718,7 @@ elb_deletion_protection_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that AWS Ensure Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled",
+    "Policy Title": "Ensure that AWS Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled",
     "Policy Description": "This policy checks if the ELB is protected against accidental deletion by enabling deletion protection.",
     "Resource Type": "",
     "Policy Help URL": "",

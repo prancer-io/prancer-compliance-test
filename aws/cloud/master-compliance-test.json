@@ -5911,7 +5911,7 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "Ensure that AWS Ensure Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled",
+                    "title": "Ensure that AWS Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled",
                     "description": "This policy checks if the ELB is protected against accidental deletion by enabling deletion protection.",
                     "tags": [
                         {
@@ -6591,7 +6591,7 @@
                             "id": "PR-AWS-CLD-RSH-008",
                             "eval": "data.rule.redshift_deploy_vpc",
                             "message": "data.rule.redshift_deploy_vpc_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='PostmanCollectionRepo' target='_blank'>here</a>",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_RSH_008.py"
                         }
                     ],
@@ -6624,13 +6624,79 @@
                             "id": "PR-AWS-CLD-RSH-009",
                             "eval": "data.rule.redshift_not_provisioned_with_ec2_classic",
                             "message": "data.rule.redshift_not_provisioned_with_ec2_classic_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='PostmanCollectionRepo' target='_blank'>here</a>",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_RSH_009.py"
                         }
                     ],
                     "severity": "Low",
                     "title": "Ensure Redshift cluster is not provisioned using EC2-classic (deprecated) platform.",
                     "description": "It is to check that the Redshift cluster is not provisioned using the deprecated EC2-classic instance to reduce the risk level associated with deprecated resources.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "redshift"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RSH-010",
+                    "masterSnapshotId": [
+                        "TEST_REDSHIFT_1"
+                    ],
+                    "type": "rego",
+                    "rule": "file(redshift.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RSH-010",
+                            "eval": "data.rule.redshift_not_publicly_accessible",
+                            "message": "data.rule.redshift_not_publicly_accessible_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RSH_010.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Redshift cluster is not publicly accessible.",
+                    "description": "It is to check that Redshift cluster is configured within firm-managed VPC and not publicly accessible.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "PCI DSS",
+                                "HIPAA",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "redshift"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-RSH-011",
+                    "masterSnapshotId": [
+                        "TEST_REDSHIFT_1"
+                    ],
+                    "type": "rego",
+                    "rule": "file(redshift.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-RSH-011",
+                            "eval": "data.rule.redshift_not_default_master_username",
+                            "message": "data.rule.redshift_not_default_master_username_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_RSH_011.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Redshift database clusters are not using default master username.",
+                    "description": "It is to check that Redshift clusters are not using default master username in order to reduce security risk.",
                     "tags": [
                         {
                             "cloud": "AWS",
