@@ -167,6 +167,7 @@
 					"masterSnapshotId": "TEST_EMR",
 					"arn": "arn:aws:emr:::",
 					"type": "emr",
+					"boto_type": "emr",
 					"collection": "aws_emr",
 					"listMethod": "list_clusters",
 					"detailMethods": [
