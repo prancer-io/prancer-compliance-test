@@ -164,8 +164,8 @@
                     "evals": [
                         {
                             "id": "PR-AZR-CLD-KV-004",
-                            "eval": "data.rule.kv_expire",
-                            "message": "data.rule.kv_expire_err",
+                            "eval": "data.rule.kv_keys_expire",
+                            "message": "data.rule.kv_keys_expire_err",
                             "remediationDescription": "1. Go to 'Key vaults' and choose your Key Vault<br>2. Select 'Keys' under 'Settings' in the navigation menu<br>3. Select the relevant key and reselect its current version<br>4. Check 'Set expiration date'<br>4. Save.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_CLD_KV_004.py"
                         }
