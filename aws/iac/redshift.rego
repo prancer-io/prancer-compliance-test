@@ -609,3 +609,166 @@ redshift_audit_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
 }
+
+
+#
+# PR-AWS-CFR-RSH-008
+#
+
+default redshift_enhanced_vpc_routing = null
+
+aws_issue["redshift_enhanced_vpc_routing"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    resource.Properties.EnhancedVpcRouting == false
+}
+
+aws_issue["redshift_enhanced_vpc_routing"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not resource.Properties.EnhancedVpcRouting
+}
+
+redshift_enhanced_vpc_routing {
+    lower(input.Resources[i].Type) == "aws::redshift::cluster"
+    not aws_issue["redshift_enhanced_vpc_routing"]
+}
+
+redshift_enhanced_vpc_routing = false {
+    aws_issue["redshift_enhanced_vpc_routing"]
+}
+
+redshift_enhanced_vpc_routing_err = "Ensure AWS Redshift - Enhanced VPC routing must be enabled." {
+    aws_issue["redshift_enhanced_vpc_routing"]
+}
+
+redshift_enhanced_vpc_routing_metadata := {
+    "Policy Code": "PR-AWS-CFR-RSH-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS Redshift - Enhanced VPC routing must be enabled.",
+    "Policy Description": "It is to check enhanced VPC routing is enabled or not forces all COPY and UNLOAD traffic between your cluster and your data repositories through your virtual private cloud (VPC) based on the Amazon VPC service.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
+}
+
+
+#
+# PR-AWS-CFR-RSH-011
+#
+
+default redshift_not_default_master_username = null
+
+aws_issue["redshift_not_default_master_username"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    lower(resource.Properties.MasterUsername) == "awsuser"
+}
+
+redshift_not_default_master_username {
+    lower(input.Resources[i].Type) == "aws::redshift::cluster"
+    not aws_issue["redshift_not_default_master_username"]
+}
+
+redshift_not_default_master_username = false {
+    aws_issue["redshift_not_default_master_username"]
+}
+
+redshift_not_default_master_username_err = "Ensure Redshift database clusters are not using default master username." {
+    aws_issue["redshift_not_default_master_username"]
+}
+
+redshift_not_default_master_username_metadata := {
+    "Policy Code": "PR-AWS-CFR-RSH-011",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Redshift database clusters are not using default master username.",
+    "Policy Description": "It is to check that Redshift clusters are not using default master username in order to reduce security risk.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
+}
+
+#
+# PR-AWS-CFR-RSH-012
+#
+
+default redshift_not_default_port = null
+
+aws_issue["redshift_not_default_port"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    resource.Properties.Port == 5439
+}
+
+aws_issue["redshift_not_default_port"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not resource.Properties.Port
+}
+
+redshift_not_default_port {
+    lower(input.Resources[i].Type) == "aws::redshift::cluster"
+    not aws_issue["redshift_not_default_port"]
+}
+
+redshift_not_default_port = false {
+    aws_issue["redshift_not_default_port"]
+}
+
+redshift_not_default_port_err = "Ensure Redshift database clusters are not using default port(5439) for database connection." {
+    aws_issue["redshift_not_default_port"]
+}
+
+redshift_not_default_port_metadata := {
+    "Policy Code": "PR-AWS-CFR-RSH-012",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Redshift database clusters are not using default port(5439) for database connection.",
+    "Policy Description": "It is to check that Redshift cluster is not configured using default port to reduce security risks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
+}
+
+
+#
+# PR-AWS-CFR-RSH-013
+#
+
+default redshift_automated_backup = null
+
+aws_issue["redshift_automated_backup"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    resource.Properties.AutomatedSnapshotRetentionPeriod == 0
+}
+
+redshift_automated_backup {
+    lower(input.Resources[i].Type) == "aws::redshift::cluster"
+    not aws_issue["redshift_automated_backup"]
+}
+
+redshift_automated_backup = false {
+    aws_issue["redshift_automated_backup"]
+}
+
+redshift_automated_backup_err = "Ensure automated backups are enabled for Redshift cluster." {
+    aws_issue["redshift_automated_backup"]
+}
+
+redshift_automated_backup_metadata := {
+    "Policy Code": "PR-AWS-CFR-RSH-013",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure automated backups are enabled for Redshift cluster.",
+    "Policy Description": "It is to check automated backup is turned on in order to recover data in the event of failures.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
+}

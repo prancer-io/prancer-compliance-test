@@ -56,7 +56,7 @@ kms_key_state_metadata := {
 }
 
 #
-# PR-AWS-CLD-KMS-003
+# PR-AWS-CLD-KMS-004
 # aws::kms::key
 
 default kms_key_not_schedule_deletion = true
@@ -70,7 +70,7 @@ kms_key_not_schedule_deletion_err = "Ensure AWS KMS Key is not scheduled for del
 }
 
 kms_key_not_schedule_deletion_metadata := {
-    "Policy Code": "PR-AWS-CLD-KMS-003",
+    "Policy Code": "PR-AWS-CLD-KMS-004",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",

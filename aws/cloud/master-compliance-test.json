@@ -124,7 +124,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-CLD-KMS-003",
+                    "masterTestId": "PR-AWS-CLD-KMS-004",
                     "type": "rego",
                     "rule": "file(kms.rego)",
                     "masterSnapshotId": [
@@ -132,11 +132,11 @@
                     ],
                     "evals": [
                         {
-                            "id": "PR-AWS-CLD-KMS-003",
+                            "id": "PR-AWS-CLD-KMS-004",
                             "eval": "data.rule.kms_key_not_schedule_deletion",
                             "message": "data.rule.kms_key_not_schedule_deletion_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms.html#KMS.Client.describe_key' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_KMS_003.py"
+                            "remediationFunction": "PR_AWS_CLD_KMS_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4753,12 +4753,15 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "Ensure enhanaced monitoring for AWS MSK is set to default.",
+                    "title": "Ensure enhanaced monitoring for AWS MSK is not set to default.",
                     "description": "It is used to check that enhanced monitoring is configured to gather Apache Kafka metrics and sends them to Amazon CloudWatch.",
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "msk"
                             ]
@@ -4787,7 +4790,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
                             "service": [
                                 "msk"
                             ]
