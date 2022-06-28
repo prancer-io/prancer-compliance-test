@@ -910,6 +910,7 @@ default audit_logs_published_to_cloudWatch = true
 
 audit_logs_published_to_cloudWatch = false {
     # lower(resource.Type) == "aws::amazonmq::broker"
+    lower(input.EngineType) == "activemq"
     lower(input.Logs.Audit) == available_false_choices[_]
 }
 
@@ -928,7 +929,7 @@ audit_logs_published_to_cloudWatch_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud",
     "Policy Title": "Ensure General and Audit logs are published to CloudWatch.",
-    "Policy Description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues.",
+    "Policy Description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues. It does not apply to RabbitMQ brokers.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker"

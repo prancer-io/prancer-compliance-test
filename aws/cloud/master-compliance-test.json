@@ -8067,7 +8067,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure General and Audit logs are published to CloudWatch.",
-                    "description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues.",
+                    "description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues. It does not apply to RabbitMQ brokers.",
                     "tags": [
                         {
                             "cloud": "AWS",

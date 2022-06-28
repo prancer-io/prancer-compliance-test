@@ -1567,13 +1567,24 @@ default audit_logs_published_to_cloudWatch = null
 aws_issue["audit_logs_published_to_cloudWatch"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::amazonmq::broker"
-    resource.Properties.Logs.Audit == false
+    lower(resource.Properties.EngineType) == "activemq"
+    not resource.Properties.Logs
 }
 
 aws_issue["audit_logs_published_to_cloudWatch"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::amazonmq::broker"
-    not resource.Properties.Logs.Audit
+    lower(resource.Properties.EngineType) == "activemq"
+    log := resource.Properties.Logs[_]
+    log.Audit == false
+}
+
+aws_issue["audit_logs_published_to_cloudWatch"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::amazonmq::broker"
+    lower(resource.Properties.EngineType) == "activemq"
+    log := resource.Properties.Logs[_]
+    not log.Audit
 }
 
 audit_logs_published_to_cloudWatch {
@@ -1597,7 +1608,7 @@ audit_logs_published_to_cloudWatch_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure General and Audit logs are published to CloudWatch.",
-    "Policy Description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues.",
+    "Policy Description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues. It does not apply to RabbitMQ brokers.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#aws-resource-amazonmq-broker--examples"

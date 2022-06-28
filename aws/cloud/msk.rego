@@ -158,7 +158,7 @@ default msk_cluster_enhanced_monitoring_enable = true
 
 msk_cluster_enhanced_monitoring_enable = false {
     # lower(resource.Type) == "aws::msk::cluster"
-    lower(input.ClusterInfo.EnhancedMonitoring) != "default"
+    lower(input.ClusterInfo.EnhancedMonitoring) == "default"
 }
 
 msk_cluster_enhanced_monitoring_enable = false {

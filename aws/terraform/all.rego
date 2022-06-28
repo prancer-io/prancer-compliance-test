@@ -1367,6 +1367,14 @@ default audit_logs_published_to_cloudWatch = null
 aws_issue["audit_logs_published_to_cloudWatch"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_mq_broker"
+    lower(resource.properties.engine_type) == "activemq"
+    not resource.properties.logs
+}
+
+aws_issue["audit_logs_published_to_cloudWatch"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_mq_broker"
+    lower(resource.properties.engine_type) == "activemq"
     log := resource.properties.logs[j]
     not log.audit
 }
@@ -1374,6 +1382,7 @@ aws_issue["audit_logs_published_to_cloudWatch"] {
 aws_issue["audit_logs_published_to_cloudWatch"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_mq_broker"
+    lower(resource.properties.engine_type) == "activemq"
     log := resource.properties.logs[j]
     lower(log.audit) == "false"
 }
@@ -1397,7 +1406,7 @@ audit_logs_published_to_cloudWatch_metadata := {
     "Product": "AWS",
     "Language": "Terraform",
     "Policy Title": "Ensure General and Audit logs are published to CloudWatch.",
-    "Policy Description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues.",
+    "Policy Description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues. It does not apply to RabbitMQ brokers.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/mq_broker"
