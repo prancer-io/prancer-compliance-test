@@ -2133,7 +2133,7 @@ aws_issue["elb_waf_enabled"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     LoadBalancerAttribute := resource.Properties.LoadBalancerAttributes[_]
-    lower(LoadBalancerAttribute.Key) == "waf.fail_open.enabled")
+    lower(LoadBalancerAttribute.Key) == "waf.fail_open.enabled"
     not LoadBalancerAttribute.Value
 }
 
