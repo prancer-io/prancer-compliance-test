@@ -136,3 +136,224 @@ sns_policy_public_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html"
 }
+
+
+#
+# PR-AWS-CLD-SNS-005
+# aws::sns::topicpolicy
+
+default sns_not_unauthorized_access = true
+
+sns_not_unauthorized_access = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    not statement.Condition
+}
+
+sns_not_unauthorized_access = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    not statement.Condition
+}
+
+sns_not_unauthorized_access = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    not statement.Condition
+}
+
+sns_not_unauthorized_access_err = "Ensure AWS SNS topic is not exposed to unauthorized access." {
+    not sns_not_unauthorized_access
+}
+
+sns_not_unauthorized_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-SNS-005",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS SNS topic is not exposed to unauthorized access.",
+    "Policy Description": "It identifies AWS SNS topics that are exposed to unauthorized access. Amazon Simple Notification Service (Amazon SNS) is a web service that coordinates and manages the delivery or sending of messages to subscribing endpoints or clients. To protect these messages from attackers and unauthorized accesses, permissions should be given to only authorized users. For more details: https://docs.aws.amazon.com/sns/latest/dg/sns-security-best-practices.html#ensure-topics-not-publicly-accessible",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.get_topic_attributes"
+}
+
+
+#
+# PR-AWS-CLD-SNS-006
+# aws::sns::topicpolicy
+
+default sns_permissive_for_publishing = true
+
+sns_permissive_for_publishing = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action[_]), "sns:publish")
+    not statement.Condition
+}
+
+sns_permissive_for_publishing = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action[_]), "sns:publish")
+    not statement.Condition
+}
+
+sns_permissive_for_publishing = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action[_]), "sns:publish")
+    not statement.Condition
+}
+
+sns_permissive_for_publishing_err = "Ensure AWS SNS topic policy is not overly permissive for publishing." {
+    not sns_permissive_for_publishing
+}
+
+sns_permissive_for_publishing_metadata := {
+    "Policy Code": "PR-AWS-CLD-SNS-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS SNS topic policy is not overly permissive for publishing.",
+    "Policy Description": "It identifies AWS SNS topics that have SNS policy overly permissive for publishing. When a message is published, Amazon SNS attempts to deliver the message to the subscribed endpoints. To protect these messages from attackers and unauthorized accesses, permissions should be given to only authorized users. For more details: https://docs.aws.amazon.com/sns/latest/dg/sns-security-best-practices.html#implement-least-privilege-access",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.get_topic_attributes"
+}
+
+
+#
+# PR-AWS-CLD-SNS-007
+# aws::sns::topicpolicy
+
+default sns_permissive_for_subscription = true
+
+action_for_subscription := ["sns:subscribe", "sns:receive"]
+
+sns_permissive_for_subscription = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action[i]), action_for_subscription[j])
+    not statement.Condition
+}
+
+sns_permissive_for_subscription = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action[_]), action_for_subscription[j])
+    not statement.Condition
+}
+
+sns_permissive_for_subscription = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action[_]), action_for_subscription[j])
+    not statement.Condition
+}
+
+sns_permissive_for_subscription_err = "Ensure AWS SNS topic policy is not overly permissive for subscription." {
+    not sns_permissive_for_subscription
+}
+
+sns_permissive_for_subscription_metadata := {
+    "Policy Code": "PR-AWS-CLD-SNS-007",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS SNS topic policy is not overly permissive for subscription.",
+    "Policy Description": "It identifies AWS SNS topics that have SNS policy overly permissive for the subscription. When you subscribe an endpoint to a topic, the endpoint begins to receive messages published to the associated topic. To protect these messages from attackers and unauthorized accesses, permissions should be given to only authorized users. For more details: https://docs.aws.amazon.com/sns/latest/dg/sns-security-best-practices.html#implement-least-privilege-access",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.get_topic_attributes"
+}
+
+
+#
+# PR-AWS-CLD-SNS-008
+# aws::sns::topicpolicy
+
+default sns_cross_account_access = true
+
+sns_cross_account_access = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal != "*"
+}
+
+sns_cross_account_access = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS != "*"
+}
+
+sns_cross_account_access = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] != "*"
+}
+
+sns_cross_account_access = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    contains(statement.Principal.AWS, "arn")
+}
+
+sns_cross_account_access = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    contains(statement.Principal.AWS[_], "arn")
+}
+
+sns_cross_account_access = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    not contains(statement.Principal.AWS, "$.Owner")
+}
+
+sns_cross_account_access = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    not contains(statement.Principal.AWS[_], "$.Owner")
+}
+
+sns_cross_account_access_err = "Ensure AWS SNS topic do not have cross-account access." {
+    not sns_cross_account_access
+}
+
+sns_cross_account_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-SNS-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS SNS topic do not have cross-account access.",
+    "Policy Description": "It identifies AWS SNS topics that are configured with cross-account access. Allowing unknown cross-account access to your SNS topics will enable other accounts and gain control over your AWS SNS topics. To prevent unknown cross-account access, allow only trusted entities to access your Amazon SNS topics by implementing the appropriate SNS policies.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.get_topic_attributes"
+}

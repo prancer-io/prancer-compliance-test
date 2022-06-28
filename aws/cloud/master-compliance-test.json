@@ -7907,6 +7907,146 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-SNS-005",
+                    "masterSnapshotId": [
+                        "TEST_SNS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-005",
+                            "eval": "data.rule.sns_not_unauthorized_access",
+                            "message": "data.rule.sns_not_unauthorized_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.get_topic_attributes' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_005.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS SNS topic is not exposed to unauthorized access.",
+                    "description": "It identifies AWS SNS topics that are exposed to unauthorized access. Amazon Simple Notification Service (Amazon SNS) is a web service that coordinates and manages the delivery or sending of messages to subscribing endpoints or clients. To protect these messages from attackers and unauthorized accesses, permissions should be given to only authorized users. For more details: https://docs.aws.amazon.com/sns/latest/dg/sns-security-best-practices.html#ensure-topics-not-publicly-accessible",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "MAS TRM 2021",
+                                "MAS TRM",
+                                "Risk Management in Technology (RMiT)-10.55",
+                                "RMiT"
+                            ],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-SNS-006",
+                    "masterSnapshotId": [
+                        "TEST_SNS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-006",
+                            "eval": "data.rule.sns_permissive_for_publishing",
+                            "message": "data.rule.sns_permissive_for_publishing_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.get_topic_attributes' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS SNS topic policy is not overly permissive for publishing.",
+                    "description": "It identifies AWS SNS topics that have SNS policy overly permissive for publishing. When a message is published, Amazon SNS attempts to deliver the message to the subscribed endpoints. To protect these messages from attackers and unauthorized accesses, permissions should be given to only authorized users. For more details: https://docs.aws.amazon.com/sns/latest/dg/sns-security-best-practices.html#implement-least-privilege-access",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS AWS 3 Tier Web Architecture Benchmark v.1.0.0-2.9",
+                                "CIS",
+                                "MAS TRM 2021-9.1.1",
+                                "MAS TRM",
+                                "Risk Management in Technology (RMiT)-10.55",
+                                "RMiT"
+                            ],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-SNS-007",
+                    "masterSnapshotId": [
+                        "TEST_SNS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-007",
+                            "eval": "data.rule.sns_permissive_for_subscription",
+                            "message": "data.rule.sns_permissive_for_subscription_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.get_topic_attributes' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS SNS topic policy is not overly permissive for subscription.",
+                    "description": "It identifies the AWS Secret Manager Secret resources which are publicly accessible through IAM policies. Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS AWS 3 Tier Web Architecture Benchmark v.1.0.0-2.9",
+                                "CIS",
+                                "MAS TRM 2021-9.1.1",
+                                "MAS TRM",
+                                "Risk Management in Technology (RMiT)-10.55",
+                                "RMiT"
+                            ],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-SNS-008",
+                    "masterSnapshotId": [
+                        "TEST_SNS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-008",
+                            "eval": "data.rule.sns_cross_account_access",
+                            "message": "data.rule.sns_cross_account_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.get_topic_attributes' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_008.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS SNS topic do not have cross-account access.",
+                    "description": "It identifies AWS SNS topics that are configured with cross-account access. Allowing unknown cross-account access to your SNS topics will enable other accounts and gain control over your AWS SNS topics. To prevent unknown cross-account access, allow only trusted entities to access your Amazon SNS topics by implementing the appropriate SNS policies.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "MAS TRM 2021",
+                                "MAS TRM",
+                                "Risk Management in Technology (RMiT)-10.55",
+                                "RMiT"
+                            ],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-EC2-001",
                     "masterSnapshotId": [
                         "TEST_EC2_01"
@@ -17159,6 +17299,51 @@
                                 "MAS TRM 2021-9.1.1",
                                 "RMiT",
                                 "Risk Management in Technology (RMiT)-10.55"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-045",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-045",
+                            "eval": "data.rule.sns_publicly_accessible_through_iam_policies",
+                            "message": "data.rule.sns_publicly_accessible_through_iam_policies_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_045.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS SNS Topic is not publicly accessible through IAM policies.",
+                    "description": "It identifies the AWS SNS Topic resources which are publicly accessible through IAM policies. Ensure that the AWS SNS Topic resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "LGPD",
+                                "CSA CCM",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CMMC",
+                                "GDPR",
+                                "HITRUST",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "RMiT",
+                                "SOC 2"
                             ],
                             "service": [
                                 "iam"
