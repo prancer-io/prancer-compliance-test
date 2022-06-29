@@ -4551,6 +4551,136 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-SQS-006",
+                    "masterSnapshotId": [
+                        "TEST_SQS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sqs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SQS-006",
+                            "eval": "data.rule.sqs_not_overly_permissive",
+                            "message": "data.rule.sqs_not_overly_permissive_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policydocument' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SQS_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS SQS queue access policy is not overly permissive.",
+                    "description": "It identifies Simple Queue Service (SQS) queues that have an overly permissive access policy. It is highly recommended to have the least privileged access policy to protect the SQS queue from data leakage and unauthorized access. For more details: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-sqs-policies.html",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1",
+                                "HITRUST",
+                                "HITRUST v.9.4.2",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "ISO/IEC 27002:2013",
+                                "ISO/IEC 27017:2015",
+                                "ISO/IEC 27018:2019",
+                                "MAS TRM",
+                                "MAS TRM 2021",
+                                "NIST CSF",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2",
+                                "NIST SP 800-172",
+                                "PCI-DSS",
+                                "PCI DSS v3.2.1",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)"
+                            ],
+                            "service": [
+                                "sqs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-SQS-007",
+                    "masterSnapshotId": [
+                        "TEST_SQS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sqs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SQS-007",
+                            "eval": "data.rule.sqs_accessible_via_specific_vpc",
+                            "message": "data.rule.sqs_accessible_via_specific_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policydocument' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SQS_007.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure SQS is only accessible via specific VPCe service.",
+                    "description": "It checks if SQS to other AWS services communication is managed by VPC endpoint and polcicies attached to it",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MAS TRM",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI-DSS",
+                                "RMiT"
+                            ],
+                            "service": [
+                                "sqs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-SQS-008",
+                    "masterSnapshotId": [
+                        "TEST_SQS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sqs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SQS-008",
+                            "eval": "data.rule.sqs_encrypted_in_transit",
+                            "message": "data.rule.sqs_encrypted_in_transit_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policydocument' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SQS_008.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure SQS data is encrypted in Transit using SSL/TLS.",
+                    "description": "It checks if data in transit is encrypted for SQS service.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MAS TRM",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI-DSS",
+                                "RMiT"
+                            ],
+                            "service": [
+                                "sqs"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-MSK-001",
                     "masterSnapshotId": [
                         "TEST_MSK"
@@ -7994,7 +8124,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure AWS SNS topic policy is not overly permissive for subscription.",
-                    "description": "It identifies the AWS Secret Manager Secret resources which are publicly accessible through IAM policies. Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "description": "It identifies AWS SNS topics that have SNS policy overly permissive for the subscription. When you subscribe an endpoint to a topic, the endpoint begins to receive messages published to the associated topic. To protect these messages from attackers and unauthorized accesses, permissions should be given to only authorized users. For more details: https://docs.aws.amazon.com/sns/latest/dg/sns-security-best-practices.html#implement-least-privilege-access",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -8038,6 +8168,70 @@
                                 "MAS TRM 2021",
                                 "MAS TRM",
                                 "Risk Management in Technology (RMiT)-10.55",
+                                "RMiT"
+                            ],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-SNS-009",
+                    "masterSnapshotId": [
+                        "TEST_SNS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-009",
+                            "eval": "data.rule.sns_accessible_via_specific_vpc",
+                            "message": "data.rule.sns_accessible_via_specific_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.get_topic_attributes' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_009.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure SNS is only accessible via specific VPCe service.",
+                    "description": "It checks if SNS to other AWS services communication is over the internet.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "MAS TRM",
+                                "RMiT"
+                            ],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-SNS-010",
+                    "masterSnapshotId": [
+                        "TEST_SNS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-010",
+                            "eval": "data.rule.sns_secure_data_transport",
+                            "message": "data.rule.sns_secure_data_transport_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sns.html#SNS.Client.get_topic_attributes' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_010.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure SNS topic is configured with secure data transport policy.",
+                    "description": "It check if the SNs topics are configured with secure data transport policy via SSL.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "MAS TRM",
                                 "RMiT"
                             ],
                             "service": [

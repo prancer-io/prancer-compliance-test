@@ -176,3 +176,165 @@ sqs_policy_action_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policy"
 }
+
+
+#
+# PR-AWS-CLD-SQS-006
+# aws::sqs::queuepolicy
+
+default sqs_not_overly_permissive = true
+
+sqs_not_overly_permissive = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    startswith(lower(statement.Action), "sqs:")
+    not statement.Condition
+}
+
+sqs_not_overly_permissive = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    startswith(lower(statement.Action[k]), "sqs:")
+    not statement.Condition
+}
+
+sqs_not_overly_permissive_err = "Ensure AWS SQS queue access policy is not overly permissive." {
+    not sqs_not_overly_permissive
+}
+
+sqs_not_overly_permissive_metadata := {
+    "Policy Code": "PR-AWS-CLD-SQS-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS SQS queue access policy is not overly permissive.",
+    "Policy Description": "It identifies Simple Queue Service (SQS) queues that have an overly permissive access policy. It is highly recommended to have the least privileged access policy to protect the SQS queue from data leakage and unauthorized access. For more details: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-sqs-policies.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policy"
+}
+
+#
+# PR-AWS-CLD-SQS-007
+# aws::sqs::queuepolicy
+
+default sqs_accessible_via_specific_vpc = true
+
+sqs_accessible_via_specific_vpc = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    not contains(lower(statement.Condition.StringEquals), "aws:sourcevpce")
+}
+
+sqs_accessible_via_specific_vpc_err = "Ensure SQS is only accessible via specific VPCe service." {
+    not sqs_accessible_via_specific_vpc
+}
+
+sqs_accessible_via_specific_vpc_metadata := {
+    "Policy Code": "PR-AWS-CLD-SQS-007",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure SQS is only accessible via specific VPCe service.",
+    "Policy Description": "It checks if SQS to other AWS services communication is managed by VPC endpoint and polcicies attached to it",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policy"
+}
+
+
+#
+# PR-AWS-CLD-SQS-008
+# aws::sqs::queuepolicy
+
+default sqs_encrypted_in_transit = true
+
+sqs_encrypted_in_transit = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    not statement.Condition.Bool["aws:SecureTransport"]
+}
+
+sqs_encrypted_in_transit = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    not statement.Condition.Bool["aws:SecureTransport"]
+}
+
+sqs_encrypted_in_transit = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    not statement.Condition.Bool["aws:SecureTransport"]
+}
+
+sqs_encrypted_in_transit = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+sqs_encrypted_in_transit = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+sqs_encrypted_in_transit = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+sqs_encrypted_in_transit = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    lower(statement.Effect) == "deny"
+    statement.Principal == "*"
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+sqs_encrypted_in_transit = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    lower(statement.Effect) == "deny"
+    statement.Principal.AWS == "*"
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+sqs_encrypted_in_transit = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    lower(statement.Effect) == "deny"
+    statement.Principal.AWS[_] = "*"
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+sqs_encrypted_in_transit_err = "Ensure SQS data is encrypted in Transit using SSL/TLS." {
+    not sqs_encrypted_in_transit
+}
+
+sqs_encrypted_in_transit_metadata := {
+    "Policy Code": "PR-AWS-CLD-SQS-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure SQS data is encrypted in Transit using SSL/TLS.",
+    "Policy Description": "It checks if data in transit is encrypted for SQS service.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policy"
+}

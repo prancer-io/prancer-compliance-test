@@ -1044,13 +1044,15 @@ s3_bucket_is_publicly_accessible_through_iam_policies_metadata := {
 
 default sqs_queue_is_publicly_accessible_through_iam_policies = false
 
+condition_for_sqs := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
+
 sqs_queue_is_publicly_accessible_through_iam_policies = true {
 #     lower(resource.Type) == "aws::iam::role"
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "sqs")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    has_property(policy_statement.Condition[string], condition_for_sqs[_])
 }
 
 sqs_queue_is_publicly_accessible_through_iam_policies = true {
@@ -1060,7 +1062,7 @@ sqs_queue_is_publicly_accessible_through_iam_policies = true {
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "sqs")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    has_property(policy_statement.Condition[string], condition_for_sqs[_])
 }
 
 sqs_queue_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
