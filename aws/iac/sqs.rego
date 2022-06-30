@@ -416,7 +416,7 @@ sqs_accessible_via_specific_vpc = false {
     aws_issue["sqs_accessible_via_specific_vpc"]
 }
 
-sqs_accessible_via_specific_vpc_err = "Ensure AWS SQS queue access policy is not overly permissive." {
+sqs_accessible_via_specific_vpc_err = "Ensure SQS is only accessible via specific VPCe service." {
     aws_issue["sqs_accessible_via_specific_vpc"]
 }
 
@@ -425,8 +425,8 @@ sqs_accessible_via_specific_vpc_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "Ensure AWS SQS queue access policy is not overly permissive.",
-    "Policy Description": "It identifies Simple Queue Service (SQS) queues that have an overly permissive access policy. It is highly recommended to have the least privileged access policy to protect the SQS queue from data leakage and unauthorized access. For more details: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-sqs-policies.html",
+    "Policy Title": "Ensure SQS is only accessible via specific VPCe service.",
+    "Policy Description": "It checks if SQS to other AWS services communication is managed by VPC endpoint and polcicies attached to it",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policydocument"

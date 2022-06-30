@@ -7902,8 +7902,8 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "Ensure AWS SQS queue access policy is not overly permissive.",
-                    "description": "It identifies Simple Queue Service (SQS) queues that have an overly permissive access policy. It is highly recommended to have the least privileged access policy to protect the SQS queue from data leakage and unauthorized access. For more details: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-sqs-policies.html",
+                    "title": "Ensure SQS is only accessible via specific VPCe service.",
+                    "description": "It checks if SQS to other AWS services communication is managed by VPC endpoint and polcicies attached to it",
                     "tags": [
                         {
                             "cloud": "git",

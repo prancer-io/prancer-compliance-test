@@ -457,50 +457,8 @@ aws_issue["sns_cross_account_access"] {
     statement:= policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal != "*"
-}
-
-aws_issue["sns_cross_account_access"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
-    lower(statement.Effect) == "allow"
     statement.Principal.AWS != "*"
-}
-
-aws_issue["sns_cross_account_access"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
-    lower(statement.Effect) == "allow"
-    statement.Principal.AWS[_] != "*"
-}
-
-aws_issue["sns_cross_account_access"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
-    lower(statement.Effect) == "allow"
     contains(statement.Principal.AWS, "arn")
-}
-
-aws_issue["sns_cross_account_access"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
-    lower(statement.Effect) == "allow"
-    contains(statement.Principal.AWS[_], "arn")
-}
-
-aws_issue["sns_cross_account_access"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
-    lower(statement.Effect) == "allow"
     not contains(statement.Principal.AWS, "$.Owner")
 }
 
@@ -510,7 +468,10 @@ aws_issue["sns_cross_account_access"] {
     policy := json.unmarshal(resource.Properties.PolicyDocument)
     statement:= policy.Statement[_]
     lower(statement.Effect) == "allow"
-    not contains(statement.Principal.AWS[_], "$.Owner")
+    statement.Principal != "*"
+    principal := statement.Principal.AWS[_]
+    contains(principal, "arn")
+    not contains(principal, "$.Owner")
 }
 
 sns_cross_account_access {
