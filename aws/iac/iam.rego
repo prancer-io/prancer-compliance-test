@@ -1372,6 +1372,7 @@ ecs_task_definition_with_iam_wildcard_resource_access_metadata := {
 default ecr_repository_is_publicly_accessible_through_iam_policies = null
 
 aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1380,6 +1381,7 @@ aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1421,6 +1423,7 @@ ecr_repository_is_publicly_accessible_through_iam_policies_metadata := {
 default lambda_function_is_publicly_accessible_through_iam_policies = null
 
 aws_issue["lambda_function_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1429,6 +1432,7 @@ aws_issue["lambda_function_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["lambda_function_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1470,6 +1474,7 @@ lambda_function_is_publicly_accessible_through_iam_policies_metadata := {
 default s3_bucket_is_publicly_accessible_through_iam_policies = null
 
 aws_issue["s3_bucket_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1478,6 +1483,7 @@ aws_issue["s3_bucket_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["s3_bucket_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1521,6 +1527,7 @@ default sqs_queue_is_publicly_accessible_through_iam_policies = null
 condition_for_sqs := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
 
 aws_issue["sqs_queue_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1529,6 +1536,7 @@ aws_issue["sqs_queue_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["sqs_queue_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1570,6 +1578,7 @@ sqs_queue_is_publicly_accessible_through_iam_policies_metadata := {
 default secret_manager_secret_is_publicly_accessible_through_iam_policies = null
 
 aws_issue["secret_manager_secret_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1578,6 +1587,7 @@ aws_issue["secret_manager_secret_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["secret_manager_secret_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1671,6 +1681,7 @@ default sns_publicly_accessible_through_iam_policies = null
 sns_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
 
 aws_issue["sns_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1679,6 +1690,7 @@ aws_issue["sns_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["sns_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]

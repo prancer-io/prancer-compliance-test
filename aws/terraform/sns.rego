@@ -1,5 +1,8 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
 
 #
 # PR-AWS-TRF-SNS-001

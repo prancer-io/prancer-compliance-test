@@ -2,6 +2,10 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 #
 # PR-AWS-CFR-SQS-001
 #
@@ -458,8 +462,7 @@ default sqs_encrypted_in_transit = null
 aws_issue["sqs_encrypted_in_transit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
     not statement.Condition.Bool["aws:SecureTransport"]
@@ -468,8 +471,7 @@ aws_issue["sqs_encrypted_in_transit"] {
 aws_issue["sqs_encrypted_in_transit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
     not statement.Condition.Bool["aws:SecureTransport"]
@@ -478,8 +480,7 @@ aws_issue["sqs_encrypted_in_transit"] {
 aws_issue["sqs_encrypted_in_transit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     not statement.Condition.Bool["aws:SecureTransport"]
@@ -488,8 +489,7 @@ aws_issue["sqs_encrypted_in_transit"] {
 aws_issue["sqs_encrypted_in_transit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
@@ -498,8 +498,7 @@ aws_issue["sqs_encrypted_in_transit"] {
 aws_issue["sqs_encrypted_in_transit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
@@ -508,8 +507,7 @@ aws_issue["sqs_encrypted_in_transit"] {
 aws_issue["sqs_encrypted_in_transit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
@@ -518,8 +516,7 @@ aws_issue["sqs_encrypted_in_transit"] {
 aws_issue["sqs_encrypted_in_transit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "deny"
     statement.Principal == "*"
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
@@ -528,8 +525,7 @@ aws_issue["sqs_encrypted_in_transit"] {
 aws_issue["sqs_encrypted_in_transit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "deny"
     statement.Principal.AWS == "*"
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
@@ -538,8 +534,7 @@ aws_issue["sqs_encrypted_in_transit"] {
 aws_issue["sqs_encrypted_in_transit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[j]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "deny"
     statement.Principal.AWS[_] = "*"
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
