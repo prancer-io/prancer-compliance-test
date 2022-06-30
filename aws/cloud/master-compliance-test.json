@@ -17503,7 +17503,7 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-045",
                     "masterSnapshotId": [
-                        "TEST_IAM_01"
+                        "TEST_IAM_02"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",

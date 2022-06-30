@@ -372,13 +372,6 @@ sns_cross_account_access = false {
     not contains(principal_aws, "$.Owner")
 }
 
-sns_cross_account_access = false {
-    policy := json.unmarshal(input.Attributes.Policy)
-    statement := policy.Statement[_]
-    lower(statement.Effect) == "allow"
-    not contains(statement.Principal.AWS[_], "$.Owner")
-}
-
 sns_cross_account_access_err = "Ensure AWS SNS topic do not have cross-account access." {
     not sns_cross_account_access
 }

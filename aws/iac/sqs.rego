@@ -410,6 +410,7 @@ aws_issue["sqs_accessible_via_specific_vpc"] {
     statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     not has_property(statement, "Condition")
+}
 
 aws_issue["sqs_accessible_via_specific_vpc"] {
     resource := input.Resources[i]

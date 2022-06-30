@@ -491,7 +491,7 @@ sns_permissive_for_subscription = false {
     aws_issue["sns_permissive_for_subscription"]
 }
 
-sns_permissive_for_subscription_err = "Ensure AWS SNS topic policy is not overly permissive for publishing." {
+sns_permissive_for_subscription_err = "Ensure AWS SNS topic policy is not overly permissive for subscription." {
     aws_issue["sns_permissive_for_subscription"]
 }
 
@@ -500,8 +500,8 @@ sns_permissive_for_subscription_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
-    "Policy Title": "Ensure AWS SNS topic policy is not overly permissive for publishing.",
-    "Policy Description": "It identifies AWS SNS topics that have SNS policy overly permissive for publishing. When a message is published, Amazon SNS attempts to deliver the message to the subscribed endpoints. To protect these messages from attackers and unauthorized accesses, permissions should be given to only authorized users. For more details: https://docs.aws.amazon.com/sns/latest/dg/sns-security-best-practices.html#implement-least-privilege-access",
+    "Policy Title": "Ensure AWS SNS topic policy is not overly permissive for subscription.",
+    "Policy Description": "It identifies AWS SNS topics that have SNS policy overly permissive for the subscription. When you subscribe an endpoint to a topic, the endpoint begins to receive messages published to the associated topic. To protect these messages from attackers and unauthorized accesses, permissions should be given to only authorized users. For more details: https://docs.aws.amazon.com/sns/latest/dg/sns-security-best-practices.html#implement-least-privilege-access",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_policy"
