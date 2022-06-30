@@ -432,7 +432,24 @@ aws_issue["sqs_accessible_via_specific_vpc"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_sqs_queue_policy"
     statement := resource.properties.policy.Statement[j]
-    not contains(lower(statement.Condition.StringEquals), "aws:sourcevpce")
+    lower(statement.Effect) == "allow"
+    not has_property(statement,"Condition")
+}
+
+aws_issue["sqs_accessible_via_specific_vpc"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition, "StringEquals")
+}
+
+aws_issue["sqs_accessible_via_specific_vpc"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition.StringEquals, "aws:SourceVpce")
 }
 
 sqs_accessible_via_specific_vpc {

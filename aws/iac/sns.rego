@@ -4,6 +4,10 @@ default metadata = {}
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 #
 # PR-AWS-CFR-SNS-001
 #
@@ -257,8 +261,7 @@ default sns_not_unauthorized_access = null
 aws_issue["sns_not_unauthorized_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
     not statement.Condition
@@ -267,8 +270,7 @@ aws_issue["sns_not_unauthorized_access"] {
 aws_issue["sns_not_unauthorized_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
     not statement.Condition
@@ -277,8 +279,7 @@ aws_issue["sns_not_unauthorized_access"] {
 aws_issue["sns_not_unauthorized_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     not statement.Condition
@@ -320,8 +321,7 @@ default sns_permissive_for_publishing = null
 aws_issue["sns_permissive_for_publishing"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
     contains(lower(statement.Action[_]), "sns:publish")
@@ -331,8 +331,17 @@ aws_issue["sns_permissive_for_publishing"] {
 aws_issue["sns_permissive_for_publishing"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action), "sns:publish")
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_publishing"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
     contains(lower(statement.Action[_]), "sns:publish")
@@ -342,14 +351,32 @@ aws_issue["sns_permissive_for_publishing"] {
 aws_issue["sns_permissive_for_publishing"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "sns:publish")
+    not statement.Condition
+}
+	
+aws_issue["sns_permissive_for_publishing"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action[_]), "sns:publish")
     not statement.Condition
 }
 
+aws_issue["sns_permissive_for_publishing"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), "sns:publish")
+    not statement.Condition
+}
 
 sns_permissive_for_publishing {
     lower(input.Resources[i].Type) == "aws::sns::topicpolicy"
@@ -388,8 +415,7 @@ action_for_subscription := ["sns:subscribe", "sns:receive"]
 aws_issue["sns_permissive_for_subscription"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
     contains(lower(statement.Action[i]), action_for_subscription[j])
@@ -399,8 +425,17 @@ aws_issue["sns_permissive_for_subscription"] {
 aws_issue["sns_permissive_for_subscription"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action), action_for_subscription[j])
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_subscription"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
     contains(lower(statement.Action[i]), action_for_subscription[j])
@@ -410,14 +445,32 @@ aws_issue["sns_permissive_for_subscription"] {
 aws_issue["sns_permissive_for_subscription"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), action_for_subscription[j])
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_subscription"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action[i]), action_for_subscription[j])
     not statement.Condition
 }
 
+aws_issue["sns_permissive_for_subscription"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), action_for_subscription[j])
+    not statement.Condition
+}
 
 sns_permissive_for_subscription {
     lower(input.Resources[i].Type) == "aws::sns::topicpolicy"
@@ -444,6 +497,7 @@ sns_permissive_for_subscription_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html"
 }
 
+
 #
 # PR-AWS-CFR-SNS-008
 #
@@ -453,8 +507,7 @@ default sns_cross_account_access = null
 aws_issue["sns_cross_account_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal != "*"
     statement.Principal.AWS != "*"
@@ -465,13 +518,13 @@ aws_issue["sns_cross_account_access"] {
 aws_issue["sns_cross_account_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal != "*"
-    principal := statement.Principal.AWS[_]
-    contains(principal, "arn")
-    not contains(principal, "$.Owner")
+    principal_aws:= statement.Principal.AWS[_]
+    principal_aws != "*"
+    contains(principal_aws, "arn")
+    not contains(principal_aws, "$.Owner")
 }
 
 sns_cross_account_access {
@@ -509,9 +562,25 @@ default sns_accessible_via_specific_vpc = null
 aws_issue["sns_accessible_via_specific_vpc"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
-    not contains(lower(statement.Condition.StringEquals), "aws:sourcevpce")
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement, "Condition")
+}
+
+aws_issue["sns_accessible_via_specific_vpc"]{
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition, "StringEquals")
+}
+
+aws_issue["sns_accessible_via_specific_vpc"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition.StringEquals, "aws:SourceVpce")
 }
 
 sns_accessible_via_specific_vpc {
@@ -549,16 +618,14 @@ default sns_secure_data_transport = null
 aws_issue["sns_secure_data_transport"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
     not statement.Condition.Bool["aws:SecureTransport"]
 }
 
 aws_issue["sns_secure_data_transport"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
     contains(lower(statement.Action[_]), "publish")
@@ -568,8 +635,17 @@ aws_issue["sns_secure_data_transport"] {
 aws_issue["sns_secure_data_transport"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action[_]), "publish")
@@ -579,8 +655,17 @@ aws_issue["sns_secure_data_transport"] {
 aws_issue["sns_secure_data_transport"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "deny"
     statement.Principal.AWS == "*"
     contains(lower(statement.Action[_]), "publish")
@@ -590,11 +675,30 @@ aws_issue["sns_secure_data_transport"] {
 aws_issue["sns_secure_data_transport"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topicpolicy"
-    policy := json.unmarshal(resource.Properties.PolicyDocument)
-    statement:= policy.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "deny"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "deny"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action[_]), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "deny"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), "publish")
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
 }
 

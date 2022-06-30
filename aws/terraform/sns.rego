@@ -340,8 +340,28 @@ aws_issue["sns_permissive_for_publishing"] {
     lower(resource.type) == "aws_sns_topic_policy"
     statement := resource.properties.policy.Statement[_]
     lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action), "sns:publish")
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_publishing"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
     contains(lower(statement.Action[_]), "sns:publish")
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_publishing"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "sns:publish")
     not statement.Condition
 }
 
@@ -355,6 +375,15 @@ aws_issue["sns_permissive_for_publishing"] {
     not statement.Condition
 }
 
+aws_issue["sns_permissive_for_publishing"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), "sns:publish")
+    not statement.Condition
+}
 
 sns_permissive_for_publishing {
     lower(input.resources[i].type) == "aws_sns_topic_policy"
@@ -405,8 +434,28 @@ aws_issue["sns_permissive_for_subscription"] {
     lower(resource.type) == "aws_sns_topic_policy"
     statement := resource.properties.policy.Statement[_]
     lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action), action_for_subscription[j])
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_subscription"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
     contains(lower(statement.Action[_]), action_for_subscription[j])
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_subscription"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), action_for_subscription[j])
     not statement.Condition
 }
 
@@ -420,6 +469,15 @@ aws_issue["sns_permissive_for_subscription"] {
     not statement.Condition
 }
 
+aws_issue["sns_permissive_for_subscription"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), action_for_subscription[j])
+    not statement.Condition
+}
 
 sns_permissive_for_subscription {
     lower(input.resources[i].type) == "aws_sns_topic_policy"
@@ -459,45 +517,8 @@ aws_issue["sns_cross_account_access"] {
     statement := resource.properties.policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal != "*"
-}
-
-aws_issue["sns_cross_account_access"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_sns_topic_policy"
-    statement := resource.properties.policy.Statement[_]
-    lower(statement.Effect) == "allow"
     statement.Principal.AWS != "*"
-}
-
-aws_issue["sns_cross_account_access"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_sns_topic_policy"
-    statement := resource.properties.policy.Statement[_]
-    lower(statement.Effect) == "allow"
-    statement.Principal.AWS[_] != "*"
-}
-
-aws_issue["sns_cross_account_access"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_sns_topic_policy"
-    statement := resource.properties.policy.Statement[_]
-    lower(statement.Effect) == "allow"
     contains(statement.Principal.AWS, "arn")
-}
-
-aws_issue["sns_cross_account_access"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_sns_topic_policy"
-    statement := resource.properties.policy.Statement[_]
-    lower(statement.Effect) == "allow"
-    contains(statement.Principal.AWS[_], "arn")
-}
-
-aws_issue["sns_cross_account_access"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_sns_topic_policy"
-    statement := resource.properties.policy.Statement[_]
-    lower(statement.Effect) == "allow"
     not contains(statement.Principal.AWS, "$.Owner")
 }
 
@@ -506,7 +527,11 @@ aws_issue["sns_cross_account_access"] {
     lower(resource.type) == "aws_sns_topic_policy"
     statement := resource.properties.policy.Statement[_]
     lower(statement.Effect) == "allow"
-    not contains(statement.Principal.AWS[_], "$.Owner")
+    statement.Principal != "*"
+    principal_aws := statement.Principal.AWS[_]
+    principal_aws != "*"
+    contains(principal_aws, "arn")
+    not contains(principal_aws, "$.Owner")
 }
 
 sns_cross_account_access {
@@ -545,7 +570,24 @@ aws_issue["sns_accessible_via_specific_vpc"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_sns_topic_policy"
     statement := resource.properties.policy.Statement[_]
-    not contains(lower(statement.Condition.StringEquals), "aws:sourcevpce")
+    lower(statement.Effect) == "allow"
+    not has_property(statement,"Condition")
+}
+
+aws_issue["sns_accessible_via_specific_vpc"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition, "StringEquals")
+}
+
+aws_issue["sns_accessible_via_specific_vpc"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition.StringEquals, "aws:SourceVpce")
 }
 
 sns_accessible_via_specific_vpc {
@@ -602,8 +644,28 @@ aws_issue["sns_secure_data_transport"] {
     lower(resource.type) == "aws_sns_topic_policy"
     statement := resource.properties.policy.Statement[_]
     lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] == "*"
     contains(lower(statement.Action[_]), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] == "*"
+    contains(lower(statement.Action), "publish")
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
@@ -622,8 +684,28 @@ aws_issue["sns_secure_data_transport"] {
     lower(resource.type) == "aws_sns_topic_policy"
     statement := resource.properties.policy.Statement[_]
     lower(statement.Effect) == "deny"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "deny"
     statement.Principal.AWS[_] == "*"
     contains(lower(statement.Action[_]), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "deny"
+    statement.Principal.AWS[_] == "*"
+    contains(lower(statement.Action), "publish")
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
 }
 

@@ -2,6 +2,10 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 #
 # PR-AWS-CLD-SQS-001
 #
@@ -225,7 +229,25 @@ default sqs_accessible_via_specific_vpc = true
 sqs_accessible_via_specific_vpc = false {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
-    not contains(lower(statement.Condition.StringEquals), "aws:sourcevpce")
+    statement.Condition
+    lower(statement.Effect) == "allow"
+    not has_property(statement, "Condition")
+}
+
+sqs_accessible_via_specific_vpc = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    statement.Condition
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition, "StringEquals")
+}
+
+sqs_accessible_via_specific_vpc = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[j]
+    statement.Condition
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition.StringEquals, "aws:SourceVpce")
 }
 
 sqs_accessible_via_specific_vpc_err = "Ensure SQS is only accessible via specific VPCe service." {

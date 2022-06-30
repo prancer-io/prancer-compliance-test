@@ -204,6 +204,15 @@ sns_permissive_for_publishing = false {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action), "sns:publish")
+    not statement.Condition
+}
+
+sns_permissive_for_publishing = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
     contains(lower(statement.Action[_]), "sns:publish")
     not statement.Condition
@@ -213,8 +222,26 @@ sns_permissive_for_publishing = false {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "sns:publish")
+    not statement.Condition
+}
+
+sns_permissive_for_publishing = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action[_]), "sns:publish")
+    not statement.Condition
+}
+
+sns_permissive_for_publishing = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement), "sns:publish")
     not statement.Condition
 }
 
@@ -256,6 +283,15 @@ sns_permissive_for_subscription = false {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action), action_for_subscription[j])
+    not statement.Condition
+}
+
+sns_permissive_for_subscription = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
     contains(lower(statement.Action[i]), action_for_subscription[j])
     not statement.Condition
@@ -265,8 +301,26 @@ sns_permissive_for_subscription = false {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), action_for_subscription[j])
+    not statement.Condition
+}
+
+sns_permissive_for_subscription = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action[i]), action_for_subscription[j])
+    not statement.Condition
+}
+
+sns_permissive_for_subscription = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), action_for_subscription[j])
     not statement.Condition
 }
 
@@ -298,41 +352,20 @@ sns_cross_account_access = false {
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal != "*"
-}
-
-sns_cross_account_access = false {
-    policy := json.unmarshal(input.Attributes.Policy)
-    statement := policy.Statement[_]
-    lower(statement.Effect) == "allow"
     statement.Principal.AWS != "*"
-}
-
-sns_cross_account_access = false {
-    policy := json.unmarshal(input.Attributes.Policy)
-    statement := policy.Statement[_]
-    lower(statement.Effect) == "allow"
-    statement.Principal.AWS[_] != "*"
-}
-
-sns_cross_account_access = false {
-    policy := json.unmarshal(input.Attributes.Policy)
-    statement := policy.Statement[_]
-    lower(statement.Effect) == "allow"
     contains(statement.Principal.AWS, "arn")
-}
-
-sns_cross_account_access = false {
-    policy := json.unmarshal(input.Attributes.Policy)
-    statement := policy.Statement[_]
-    lower(statement.Effect) == "allow"
-    contains(statement.Principal.AWS[_], "arn")
-}
-
-sns_cross_account_access = false {
-    policy := json.unmarshal(input.Attributes.Policy)
-    statement := policy.Statement[_]
-    lower(statement.Effect) == "allow"
     not contains(statement.Principal.AWS, "$.Owner")
+}
+
+sns_cross_account_access = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal != "*"
+    principal_aws := statement.Principal.AWS[_] 
+    principal_aws != "*"
+    contains(principal_aws, "arn")
+    not contains(principal_aws, "$.Owner")
 }
 
 sns_cross_account_access = false {
@@ -368,7 +401,22 @@ default sns_accessible_via_specific_vpc = true
 sns_accessible_via_specific_vpc = false {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
-    not contains(lower(statement.Condition.StringEquals), "aws:sourcevpce")
+    lower(statement.Effect) == "allow"
+    not has_property(statement, "Condition")
+}
+
+sns_accessible_via_specific_vpc = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition, "StringEquals")
+}
+
+sns_accessible_via_specific_vpc = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition.StringEquals, "aws:SourceVpce")
 }
 
 sns_accessible_via_specific_vpc_err = "Ensure SNS is only accessible via specific VPCe service." {
@@ -413,8 +461,27 @@ sns_secure_data_transport = false {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+
+sns_secure_data_transport = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action[_]), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+sns_secure_data_transport = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), "publish")
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
@@ -431,8 +498,26 @@ sns_secure_data_transport = false {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "deny"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+sns_secure_data_transport = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "deny"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action[_]), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+sns_secure_data_transport = false {
+    policy := json.unmarshal(input.Attributes.Policy)
+    statement := policy.Statement[_]
+    lower(statement.Effect) == "deny"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), "publish")
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
 }
 
