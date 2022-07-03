@@ -4766,7 +4766,7 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "Azure SQL Server advanced data security should be enabled",
+                    "title": "Azure SQL Server advanced data security recurring scans should be enabled",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
                     "tags": [
                         {
@@ -4870,7 +4870,7 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "Azure SQL Server advanced data security should be enabled",
+                    "title": "Azure SQL Server advanced data security recurring scans should be enabled",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
                     "tags": [
                         {
@@ -4946,6 +4946,74 @@
                                 "PCI DSS",
                                 "PCI DSS v3.2.1-6.1",
                                 "PCI DSS v3.2.1-6.2"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
+                        "azurerm_mssql_server_vulnerability_assessment"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-051",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-051",
+                            "eval": "data.rule.mssql_ads_scan_configured",
+                            "message": "data.rule.mssql_ads_scan_configured_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_vulnerability_assessment' resource, make sure 'storage_container_path' exist to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_vulnerability_assessment#storage_container_path' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_051.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Azure SQL Server advanced data security should be enabled",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_server_vulnerability_assessment"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-052",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-052",
+                            "eval": "data.rule.sql_ads_scan_configured",
+                            "message": "data.rule.sql_ads_scan_configured_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_vulnerability_assessment' resource, make sure 'storage_container_path' exist to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_vulnerability_assessment#storage_container_path' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_052.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Azure SQL Server advanced data security should be enabled",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
                             ],
                             "service": [
                                 "terraform"

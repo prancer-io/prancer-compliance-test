@@ -94,34 +94,12 @@ azure_attribute_absence["sql_logical_server_log_audit"] {
     not sql_resources.properties.state
 }
 
-source_path[{"sql_logical_server_log_audit":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "auditingsettings"
-    not sql_resources.properties.state
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","state"]]
-    }
-}
-
 azure_issue["sql_logical_server_log_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "auditingsettings"
     lower(sql_resources.properties.state) != "enabled"
-}
-
-source_path[{"sql_logical_server_log_audit":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "auditingsettings"
-    lower(sql_resources.properties.state) != "enabled"
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","state"]]
-    }
 }
 
 sql_logical_server_log_audit {
