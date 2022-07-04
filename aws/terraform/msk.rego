@@ -491,3 +491,101 @@ msk_cluster_logging_enable_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/msk_cluster"
 }
+
+#
+# PR-AWS-TRF-MSK-006
+#
+
+default msk_cluster_enhanced_monitoring_enable = null
+
+aws_issue["msk_cluster_enhanced_monitoring_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    not resource.properties.enhanced_monitoring
+}
+
+aws_issue["msk_cluster_enhanced_monitoring_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    resource.properties.enhanced_monitoring == ""
+}
+
+aws_issue["msk_cluster_enhanced_monitoring_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    resource.properties.enhanced_monitoring == null
+}
+
+aws_issue["msk_cluster_enhanced_monitoring_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    resource.properties.enhanced_monitoring == "default"
+}
+
+msk_cluster_enhanced_monitoring_enable {
+    lower(input.resources[i].type) == "aws_msk_cluster"
+    not aws_issue["msk_cluster_enhanced_monitoring_enable"]
+}
+
+msk_cluster_enhanced_monitoring_enable = false {
+    aws_issue["msk_cluster_enhanced_monitoring_enable"]
+}
+
+msk_cluster_enhanced_monitoring_enable_err = "Ensure enhanaced monitoring for AWS MSK is not set to default." {
+    aws_issue["msk_cluster_enhanced_monitoring_enable"]
+}
+
+
+msk_cluster_enhanced_monitoring_enable_metadata := {
+    "Policy Code": "PR-AWS-TRF-MSK-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure enhanaced monitoring for AWS MSK is not set to default.",
+    "Policy Description": "It is used to check that enhanced monitoring is configured to gather Apache Kafka metrics and sends them to Amazon CloudWatch.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/msk_cluster#example-usage"
+}
+
+
+#
+# PR-AWS-TRF-MSK-007
+#
+
+default msk_public_access = null
+
+aws_issue["msk_public_access"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    broker_node_group_info := resource.properties.broker_node_group_info[j]
+    connectivity_info := broker_node_group_info.connectivity_info[k]
+    public_access := connectivity_info.public_access[l]
+    lower(public_access.type) != "disabled"
+}
+
+msk_public_access {
+    lower(input.resources[i].type) == "aws_msk_cluster"
+    not aws_issue["msk_public_access"]
+}
+
+msk_public_access = false {
+    aws_issue["msk_public_access"]
+}
+
+msk_public_access_err = "Ensure public access is disabled for AWS MSK." {
+    aws_issue["msk_public_access"]
+}
+
+
+msk_public_access_metadata := {
+    "Policy Code": "PR-AWS-TRF-MSK-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure public access is disabled for AWS MSK.",
+    "Policy Description": "It check whether public access is turned on to the brokers of MSK clusters.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/msk_cluster#example-usage"
+}
