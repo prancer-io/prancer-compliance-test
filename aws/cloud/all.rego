@@ -63,6 +63,65 @@ secret_manager_kms_metadata := {
 }
 
 #
+# PR-AWS-CLD-SM-003
+# aws::secretsmanager::secret
+
+default secret_manager_automatic_rotation = true
+
+secret_manager_automatic_rotation = false {
+    SecretList := input.SecretList[_]
+    not SecretList.RotationEnabled
+}
+
+secret_manager_automatic_rotation = false {
+    SecretList := input.SecretList[_]
+    SecretList.RotationEnabled == available_false_choices[_]
+}
+
+secret_manager_automatic_rotation_err = "Ensure AWS Secrets Manager automatic rotation is enabled." {
+    not secret_manager_automatic_rotation
+}
+
+secret_manager_automatic_rotation_metadata := {
+    "Policy Code": "PR-AWS-CLD-SM-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Secrets Manager automatic rotation is enabled.",
+    "Policy Description": "Rotation is the process of periodically updating a secret. When you rotate a secret, you update the credentials in both the secret and the database or service. This control checks if automatic rotation for secrets is enabled in the secrets manager configuration.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/secretsmanager.html#SecretsManager.Client.list_secrets"
+}
+
+#
+# PR-AWS-CLD-SM-004
+# aws::secretsmanager::secret
+
+default secret_manager_rotation_period = true
+
+secret_manager_rotation_period = false {
+    SecretList := input.SecretList[_]
+    to_number(SecretList.RotationRules.AutomaticallyAfterDays) > 30
+}
+
+secret_manager_rotation_period_err = "Ensure AWS secret rotation period is per the GS standard (Ex: 30 days)." {
+    not secret_manager_rotation_period
+}
+
+secret_manager_rotation_period_metadata := {
+    "Policy Code": "PR-AWS-CLD-SM-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS secret rotation period is per the GS standard (Ex: 30 days).",
+    "Policy Description": "It checks if the rotation policy follow GS standards. Secret rotation period should be less than 30 days.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/secretsmanager.html#SecretsManager.Client.list_secrets"
+}
+
+#
 # PR-AWS-CLD-LG-001
 #
 
@@ -157,6 +216,64 @@ workspace_volume_encrypt_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html"
+}
+
+
+#
+# PR-AWS-CLD-WS-002
+#
+
+default workspace_root_volume_encrypt = true
+
+workspace_root_volume_encrypt = false {
+    # lower(resource.Type) == "aws::workspaces::workspace"
+    Workspaces := input.Workspaces[_]
+    not Workspaces.RootVolumeEncryptionEnabled
+}
+
+workspace_root_volume_encrypt_err = "Ensure that Workspace root volumes is encrypted." {
+    not workspace_root_volume_encrypt
+}
+
+workspace_root_volume_encrypt_metadata := {
+    "Policy Code": "PR-AWS-CLD-WS-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that Workspace root volumes is encrypted.",
+    "Policy Description": "It checks if encryption is enabled for workspace root volumes.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/workspaces.html#WorkSpaces.Client.describe_workspaces"
+}
+
+
+#
+# PR-AWS-CLD-WS-003
+#
+
+default workspace_directory_type = true
+
+workspace_directory_type = false {
+    # lower(resource.Type) == "aws::workspaces::workspace"
+    directory := input.Directories[_]
+    lower(directory.DirectoryType) == "simple_ad"
+}
+
+workspace_directory_type_err = "Ensure AWS WorkSpaces do not use directory type Simple AD." {
+    not workspace_directory_type
+}
+
+workspace_directory_type_metadata := {
+    "Policy Code": "PR-AWS-CLD-WS-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS WorkSpaces do not use directory type Simple AD.",
+    "Policy Description": "It checks if Simple AD is used for workspace users. MS Active Directory is approved by GS to be used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/workspaces.html#WorkSpaces.Client.describe_workspace_directories"
 }
 
 

@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html
 
 #
-# PR-AWS-CFR-NACL-001
+# PR-AWS-CLD-NACL-001
 #
 
 default acl_all_icmp_ipv4 = true
@@ -33,7 +33,7 @@ acl_all_icmp_ipv4_err = "AWS Network ACLs with Inbound rule to allow All ICMP IP
 }
 
 acl_all_icmp_ipv4_metadata := {
-    "Policy Code": "PR-AWS-CFR-NACL-001",
+    "Policy Code": "PR-AWS-CLD-NACL-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -45,7 +45,7 @@ acl_all_icmp_ipv4_metadata := {
 }
 
 #
-# PR-AWS-CFR-NACL-002
+# PR-AWS-CLD-NACL-002
 #
 
 default acl_all_icmp_ipv6 = true
@@ -75,7 +75,7 @@ acl_all_icmp_ipv6_err = "AWS Network ACLs with Inbound rule to allow All ICMP IP
 }
 
 acl_all_icmp_ipv6_metadata := {
-    "Policy Code": "PR-AWS-CFR-NACL-002",
+    "Policy Code": "PR-AWS-CLD-NACL-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -87,7 +87,7 @@ acl_all_icmp_ipv6_metadata := {
 }
 
 #
-# PR-AWS-CFR-NACL-003
+# PR-AWS-CLD-NACL-003
 #
 
 default acl_all_traffic = true
@@ -107,7 +107,7 @@ acl_all_traffic_err = "AWS Network ACLs with Inbound rule to allow All Traffic" 
 }
 
 acl_all_traffic_metadata := {
-    "Policy Code": "PR-AWS-CFR-NACL-003",
+    "Policy Code": "PR-AWS-CLD-NACL-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -119,7 +119,7 @@ acl_all_traffic_metadata := {
 }
 
 #
-# PR-AWS-CFR-NACL-004
+# PR-AWS-CLD-NACL-004
 #
 
 default acl_all_icmp_ipv4_out = true
@@ -148,7 +148,7 @@ acl_all_icmp_ipv4_out_err = "AWS Network ACLs with Outbound rule to allow All IC
     not acl_all_icmp_ipv4_out
 }
 acl_all_icmp_ipv4_out_metadata := {
-    "Policy Code": "PR-AWS-CFR-NACL-004",
+    "Policy Code": "PR-AWS-CLD-NACL-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -160,7 +160,7 @@ acl_all_icmp_ipv4_out_metadata := {
 }
 
 #
-# PR-AWS-CFR-NACL-005
+# PR-AWS-CLD-NACL-005
 #
 
 default acl_all_icmp_ipv6_out = true
@@ -190,7 +190,7 @@ acl_all_icmp_ipv6_out_err = "AWS Network ACLs with Outbound rule to allow All IC
 }
 
 acl_all_icmp_ipv6_out_metadata := {
-    "Policy Code": "PR-AWS-CFR-NACL-005",
+    "Policy Code": "PR-AWS-CLD-NACL-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -202,7 +202,7 @@ acl_all_icmp_ipv6_out_metadata := {
 }
 
 #
-# PR-AWS-CFR-NACL-006
+# PR-AWS-CLD-NACL-006
 #
 
 default acl_all_traffic_out = true
@@ -222,7 +222,7 @@ acl_all_traffic_out_err = "AWS Network ACLs with Outbound rule to allow All Traf
 }
 
 acl_all_traffic_out_metadata := {
-    "Policy Code": "PR-AWS-CFR-NACL-006",
+    "Policy Code": "PR-AWS-CLD-NACL-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -235,7 +235,7 @@ acl_all_traffic_out_metadata := {
 
 
 #
-# PR-AWS-CFR-NACL-007
+# PR-AWS-CLD-NACL-007
 #
 
 default acl_unrestricted_admin_port = true
@@ -289,7 +289,7 @@ acl_unrestricted_admin_port_err = "Unrestricted Inbound Traffic on Remote Server
 }
 
 acl_unrestricted_admin_port_metadata := {
-    "Policy Code": "PR-AWS-CFR-NACL-007",
+    "Policy Code": "PR-AWS-CLD-NACL-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -298,4 +298,33 @@ acl_unrestricted_admin_port_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html"
+}
+
+
+#
+# PR-AWS-CLD-NACL-008
+# aws::ec2::networkaclentry
+
+default acl_no_rules_in_default_vpc = true
+
+acl_no_rules_in_default_vpc = false {
+    NetworkAcls := input.NetworkAcls[_]
+    NetworkAcls.IsDefault == true
+    count(NetworkAcls.Entries) == 0
+}
+
+acl_no_rules_in_default_vpc_err = "Ensure there are no rules in the Default VPC NACL." {
+    not acl_no_rules_in_default_vpc
+}
+
+acl_no_rules_in_default_vpc_metadata := {
+    "Policy Code": "PR-AWS-CLD-NACL-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure there are no rules in the Default VPC NACL.",
+    "Policy Description": "It checks if the default NACL is used for subnets, default NACL should not have any rules and not be attached to any subnets.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_network_acls"
 }

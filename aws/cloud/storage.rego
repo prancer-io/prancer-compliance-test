@@ -1160,3 +1160,31 @@ transer_server_public_expose_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-server.html#cfn-transfer-server-endpointdetails"
 }
+
+
+#
+# PR-AWS-CLD-TRF-002
+# aws::transfer::server
+
+default transfer_server_protocol = false
+
+transfer_server_protocol = true {
+    protocol := input.Server.Protocols[_]
+    protocol == "FTP"
+}
+
+transfer_server_protocol_err = "Ensure Transfer Server is not use FTP protocol." {
+    not transfer_server_protocol
+}
+
+transfer_server_protocol_metadata := {
+    "Policy Code": "PR-AWS-CLD-TRF-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Transfer Server is not use FTP protocol.",
+    "Policy Description": "It checks if FTP protocol is not used for AWS Transfer Family server.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/transfer.html#Transfer.Client.describe_server"
+}

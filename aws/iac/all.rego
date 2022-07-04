@@ -137,6 +137,101 @@ secret_manager_vpc_subnet_id_metadata := {
 
 
 #
+# PR-AWS-CFR-SM-003
+#
+
+default secret_manager_automatic_rotation = null
+
+aws_issue["secret_manager_automatic_rotation"] {
+    resource_1 := input.Resources[i]
+    lower(resource_1.Type) == "aws::secretsmanager::secret"
+    secret_id := resource_1.Properties.Name
+    resource_2 := input.Resources[j]
+    lower(resource_2.Type) == "aws::secretsmanager::rotationschedule"
+    resource_2.Properties.SecretId.Ref != secret_id
+}
+
+aws_issue["secret_manager_automatic_rotation"] {
+    resource_1 := input.Resources[i]
+    lower(resource_1.Type) == "aws::secretsmanager::secret"
+    secret_id := resource_1.Name
+    resource_2 := input.Resources[j]
+    lower(resource_2.Type) == "aws::secretsmanager::rotationschedule"
+    resource_2.Properties.SecretId.Ref != secret_id
+}
+
+secret_manager_automatic_rotation {
+    lower(input.Resources[i].Type) == "aws::secretsmanager::rotationschedule"
+    not aws_issue["secret_manager_automatic_rotation"]
+}
+
+secret_manager_automatic_rotation = false {
+    aws_issue["secret_manager_automatic_rotation"]
+}
+
+secret_manager_automatic_rotation_err = "Ensure AWS Secrets Manager automatic rotation is enabled." {
+    aws_issue["secret_manager_automatic_rotation"]
+}
+
+secret_manager_automatic_rotation_metadata := {
+    "Policy Code": "PR-AWS-CFR-SM-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS Secrets Manager automatic rotation is enabled.",
+    "Policy Description": "Rotation is the process of periodically updating a secret. When you rotate a secret, you update the credentials in both the secret and the database or service. This control checks if automatic rotation for secrets is enabled in the secrets manager configuration.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-rotationschedule.html"
+}
+
+
+#
+# PR-AWS-CFR-SM-004
+#
+
+default secret_manager_rotation_period = null
+
+aws_issue["secret_manager_rotation_period"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::secretsmanager::rotationschedule"
+    not resource.Properties.RotationRules.AutomaticallyAfterDays
+}
+
+
+aws_issue["secret_manager_rotation_period"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::secretsmanager::rotationschedule"
+    to_number(resource.Properties.RotationRules.AutomaticallyAfterDays) > 30
+}
+
+secret_manager_rotation_period {
+    lower(input.Resources[i].Type) == "aws::secretsmanager::rotationschedule"
+    not aws_issue["secret_manager_rotation_period"]
+}
+
+secret_manager_rotation_period = false {
+    aws_issue["secret_manager_rotation_period"]
+}
+
+secret_manager_rotation_period_err = "Ensure AWS secret rotation period is per the GS standard (Ex: 30 days)." {
+    aws_issue["secret_manager_rotation_period"]
+}
+
+secret_manager_rotation_period_metadata := {
+    "Policy Code": "PR-AWS-CFR-SM-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS secret rotation period is per the GS standard (Ex: 30 days).",
+    "Policy Description": "It checks if the rotation policy follow GS standards. Secret rotation period should be less than 30 days.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-secretsmanager-rotationschedule-rotationrules.html#cfn-secretsmanager-rotationschedule-rotationrules-automaticallyafterdays"
+}
+
+
+#
 # PR-AWS-CFR-LG-001
 #
 
@@ -332,6 +427,99 @@ workspace_volume_encrypt_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html"
 }
 
+
+#
+# PR-AWS-CFR-WS-002
+#
+
+default workspace_root_volume_encrypt = null
+
+aws_issue["workspace_root_volume_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::workspaces::workspace"
+    not resource.Properties.RootVolumeEncryptionEnabled
+}
+
+aws_issue["workspace_root_volume_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::workspaces::workspace"
+    lower(resource.Properties.RootVolumeEncryptionEnabled) == "false"
+}
+
+workspace_root_volume_encrypt {
+    lower(input.Resources[i].Type) == "aws::workspaces::workspace"
+    not aws_issue["workspace_root_volume_encrypt"]
+}
+
+workspace_root_volume_encrypt = false {
+    aws_issue["workspace_root_volume_encrypt"]
+}
+
+workspace_root_volume_encrypt_err = "Ensure that Workspace root volumes is encrypted." {
+    aws_issue["workspace_root_volume_encrypt"]
+}
+
+workspace_root_volume_encrypt_metadata := {
+    "Policy Code": "PR-AWS-CFR-WS-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that Workspace root volumes is encrypted.",
+    "Policy Description": "It checks if encryption is enabled for workspace root volumes.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html#cfn-workspaces-workspace-rootvolumeencryptionenabled"
+}
+
+
+#
+# PR-AWS-CFR-WS-003
+#
+
+default workspace_directory_type = null
+
+aws_issue["workspace_directory_type"] {
+    resource_1 := input.Resources[i]
+    lower(resource.Type) == "aws::directoryservice::simplead"
+    directory_id := resource_1.Properties.Name
+    resource_2 := input.Resources[j]
+    lower(resource.Type) == "aws::workspaces::workspace"
+    resource_2.Properties.DirectoryId.Ref == directory_id
+}
+
+aws_issue["workspace_directory_type"] {
+    resource_1 := input.Resources[i]
+    lower(resource.Type) == "aws::directoryservice::simplead"
+    directory_id := resource_1.Name
+    resource_2 := input.Resources[j]
+    lower(resource.Type) == "aws::workspaces::workspace"
+    resource_2.Properties.DirectoryId.Ref == directory_id
+}
+
+workspace_directory_type {
+    lower(input.Resources[i].Type) == "aws::workspaces::workspace"
+    not aws_issue["workspace_directory_type"]
+}
+
+workspace_directory_type = false {
+    aws_issue["workspace_directory_type"]
+}
+
+workspace_directory_type_err = "Ensure AWS WorkSpaces do not use directory type Simple AD." {
+    aws_issue["workspace_directory_type"]
+}
+
+workspace_directory_type_metadata := {
+    "Policy Code": "PR-AWS-CFR-WS-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS WorkSpaces do not use directory type Simple AD.",
+    "Policy Description": "It checks if Simple AD is used for workspace users. MS Active Directory is approved by GS to be used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html#cfn-workspaces-workspace-directoryid"
+}
 
 
 #

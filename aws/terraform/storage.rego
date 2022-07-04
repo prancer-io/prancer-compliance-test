@@ -277,6 +277,45 @@ efs_encrypt_metadata := {
 
 
 #
+# PR-AWS-TRF-TRF-002
+#
+
+default transfer_server_protocol = null
+
+aws_issue["transfer_server_protocol"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_transfer_server"
+    protocol := resource.properties.protocols[_]
+    protocol == "FTP"
+}
+
+transfer_server_protocol {
+    lower(input.resources[i].type) == "aws_transfer_server"
+    not aws_issue["transfer_server_protocol"]
+}
+
+transfer_server_protocol = false {
+    aws_issue["transfer_server_protocol"]
+}
+
+transfer_server_protocol_err = "Ensure Transfer Server is not use FTP protocol." {
+    aws_issue["transfer_server_protocol"]
+}
+
+transfer_server_protocol_metadata := {
+    "Policy Code": "PR-AWS-TRF-EFS-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Transfer Server is not use FTP protocol.",
+    "Policy Description": "It checks if FTP protocol is not used for AWS Transfer Family server.",
+    "Resource Type": "aws_transfer_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/transfer_server"
+}
+
+
+#
 # PR-AWS-TRF-S3-001
 #
 
