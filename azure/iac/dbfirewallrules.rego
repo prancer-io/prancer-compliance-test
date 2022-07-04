@@ -15,87 +15,40 @@ default db_logical_firewall = null
 azure_attribute_absence["db_logical_firewall"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[_]
-    lower(sql_db.type) == "firewallrules"
-    not sql_db.properties.startIpAddress
-}
-
-source_path[{"db_logical_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[j]
-    lower(sql_db.type) == "firewallrules"
-    not sql_db.properties.startIpAddress
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","startIpAddress"]]
-    }
+    sql := resource.resources[_]
+    lower(sql.type) == "firewallrules"
+    not sql.properties.startIpAddress
 }
 
 azure_attribute_absence["db_logical_firewall"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[_]
-    lower(sql_db.type) == "firewallrules"
-    not sql_db.properties.endIpAddress
-}
-
-source_path[{"db_logical_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[j]
-    lower(sql_db.type) == "firewallrules"
-    not sql_db.properties.endIpAddress
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","endIpAddress"]]
-    }
+    sql := resource.resources[_]
+    lower(sql.type) == "firewallrules"
+    not sql.properties.endIpAddress
 }
 
 azure_issue["db_logical_firewall"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[_]
-    lower(sql_db.type) == "firewallrules"
-    sql_db.properties.startIpAddress == "0.0.0.0"
+    sql := resource.resources[_]
+    lower(sql.type) == "firewallrules"
+    contains(sql.properties.startIpAddress, "0.0.0.0")
 }
-
-source_path[{"db_logical_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[j]
-    lower(sql_db.type) == "firewallrules"
-    sql_db.properties.startIpAddress == "0.0.0.0"
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","startIpAddress"]]
-   
-    }
-}
-
 
 azure_issue["db_logical_firewall"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[_]
-    lower(sql_db.type) == "firewallrules"
-    sql_db.properties.endIpAddress == "0.0.0.0"
+    sql := resource.resources[_]
+    lower(sql.type) == "firewallrules"
+    contains(sql.properties.endIpAddress, "0.0.0.0")
 }
-
-source_path[{"db_logical_firewall":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[j]
-    lower(sql_db.type) == "firewallrules"
-    sql_db.properties.endIpAddress == "0.0.0.0"
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","endIpAddress"]]
-    }
-}
-
 
 db_logical_firewall {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
-    sql_db := resource.resources[_]
-    lower(sql_db.type) == "firewallrules"
+    sql := resource.resources[_]
+    lower(sql.type) == "firewallrules"
     not azure_attribute_absence["db_logical_firewall"]
     not azure_issue["db_logical_firewall"]
 }
@@ -114,7 +67,6 @@ db_logical_firewall_err = "Firewall rule attribute startIpAddress/endIpAddress i
     azure_issue["db_logical_firewall"]
 }
 
-
 db_logical_firewall_metadata := {
     "Policy Code": "PR-AZR-ARM-SQL-010",
     "Type": "IaC",
@@ -126,6 +78,7 @@ db_logical_firewall_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules"
 }
+
 
 # PR-AZR-ARM-SQL-011
 #
@@ -192,5 +145,5 @@ db_firewall_metadata := {
     "Policy Description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with 0.0.0.0 represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
     "Resource Type": "microsoft.sql/servers/firewallrules",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules"
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/firewallrules?tabs=json"
 }
