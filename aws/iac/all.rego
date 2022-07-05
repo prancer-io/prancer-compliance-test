@@ -480,19 +480,19 @@ default workspace_directory_type = null
 
 aws_issue["workspace_directory_type"] {
     resource_1 := input.Resources[i]
-    lower(resource.Type) == "aws::directoryservice::simplead"
+    lower(resource_1.Type) == "aws::directoryservice::simplead"
     directory_id := resource_1.Properties.Name
     resource_2 := input.Resources[j]
-    lower(resource.Type) == "aws::workspaces::workspace"
+    lower(resource_2.Type) == "aws::workspaces::workspace"
     resource_2.Properties.DirectoryId.Ref == directory_id
 }
 
 aws_issue["workspace_directory_type"] {
     resource_1 := input.Resources[i]
-    lower(resource.Type) == "aws::directoryservice::simplead"
+    lower(resource_1.Type) == "aws::directoryservice::simplead"
     directory_id := resource_1.Name
     resource_2 := input.Resources[j]
-    lower(resource.Type) == "aws::workspaces::workspace"
+    lower(resource_2.Type) == "aws::workspaces::workspace"
     resource_2.Properties.DirectoryId.Ref == directory_id
 }
 

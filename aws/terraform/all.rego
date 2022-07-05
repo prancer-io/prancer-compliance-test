@@ -608,7 +608,7 @@ aws_issue["workspace_directory_type"] {
     directoryid := resource_1.properties.name
     resource_2 := input.resources[j]
     lower(resource_2.type) == "aws_workspaces_workspace"
-    resource.properties.directory_id == directoryid
+    resource_2.properties.directory_id == directoryid
 }
 
 aws_issue["workspace_directory_type"] {
@@ -618,7 +618,7 @@ aws_issue["workspace_directory_type"] {
     directoryid := resource_1.name
     resource_2 := input.resources[j]
     lower(resource_2.type) == "aws_workspaces_workspace"
-    resource.properties.directory_id == directoryid
+    resource_2.properties.directory_id == directoryid
 }
 
 aws_issue["workspace_directory_type"] {
@@ -628,7 +628,7 @@ aws_issue["workspace_directory_type"] {
     directoryid := resource_1.properties.name
     resource_2 := input.resources[j]
     lower(resource_2.type) == "aws_workspaces_workspace"
-    resource.properties.directory_id == directoryid
+    resource_2.properties.directory_id == directoryid
 }
 
 aws_issue["workspace_directory_type"] {
@@ -638,7 +638,7 @@ aws_issue["workspace_directory_type"] {
     directoryid := resource_1.name
     resource_2 := input.resources[j]
     lower(resource_2.type) == "aws_workspaces_workspace"
-    resource.properties.directory_id == directoryid
+    resource_2.properties.directory_id == directoryid
 }
 
 workspace_directory_type {
