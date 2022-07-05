@@ -220,7 +220,6 @@ dbmaria_ingress_from_any_ip_disabled_metadata := {
 }
 
 
-
 # PR-AZR-ARM-SQL-056
 
 default mairadb_ssl_enforcement_enabled = null
@@ -230,28 +229,10 @@ azure_attribute_absence ["mairadb_ssl_enforcement_enabled"] {
     not resource.properties.sslEnforcement
 }
 
-source_path[{"mairadb_ssl_enforcement_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers"
-    not resource.properties.sslEnforcement
-    metadata:= {
-        "resource_path": [["resources",i,"properties","sslEnforcement"]]
-    }
-}
-
 azure_issue ["mairadb_ssl_enforcement_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers"
     lower(resource.properties.sslEnforcement) != "enabled"
-}
-
-source_path[{"mairadb_ssl_enforcement_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.dbformariadb/servers"
-    lower(resource.properties.sslEnforcement) != "enabled"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","sslEnforcement"]]
-    }
 }
 
 mairadb_ssl_enforcement_enabled {
@@ -267,7 +248,6 @@ mairadb_ssl_enforcement_enabled = false {
 mairadb_ssl_enforcement_enabled = false {
     azure_attribute_absence["mairadb_ssl_enforcement_enabled"]
 }
-
 
 mairadb_ssl_enforcement_enabled_err = "ssl enforcement is currently not enabled on MariaDB server." {
     azure_issue["mairadb_ssl_enforcement_enabled"]
@@ -419,6 +399,55 @@ mariadb_geo_redundant_backup_enabled_metadata := {
     "Language": "ARM template",
     "Policy Title": "Ensure Geo-redundant backup is enabled on MariaDB server.",
     "Policy Description": "Azure Database for MariaDB provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
+    "Resource Type": "microsoft.dbformariadb/servers",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/servers"
+}
+
+
+# PR-AZR-ARM-SQL-064
+
+default mairadb_usage_latest_tls = null
+
+azure_attribute_absence ["mairadb_usage_latest_tls"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    not resource.properties.minimalTlsVersion
+}
+
+azure_issue ["mairadb_usage_latest_tls"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    lower(resource.properties.minimalTlsVersion) != "tls1_2"
+}
+
+mairadb_usage_latest_tls {
+    lower(input.resources[_].type) == "microsoft.dbformariadb/servers"
+    not azure_attribute_absence["mairadb_usage_latest_tls"]
+    not azure_issue["mairadb_usage_latest_tls"]
+}
+
+mairadb_usage_latest_tls = false {
+    azure_issue["mairadb_usage_latest_tls"]
+}
+
+mairadb_usage_latest_tls = false {
+    azure_attribute_absence["mairadb_usage_latest_tls"]
+}
+
+mairadb_usage_latest_tls_err = "MariaDB server currently not using latest TLS version." {
+    azure_issue["mairadb_usage_latest_tls"]
+} else = "microsoft.dbformariadb/servers property 'minimalTlsVersion' need to be exist. Its missing from the resource. Please set the value to 'TLS1_2' after property addition." {
+    azure_attribute_absence["mairadb_usage_latest_tls"]
+}
+
+mairadb_usage_latest_tls_metadata := {
+    "Policy Code": "PR-AZR-ARM-SQL-064",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure MariaDB Server is using latest TLS version.",
+    "Policy Description": "This policy identifies Azure MariaDB database servers that are not using the latest TLS version for SSL enforcement. Azure Database for MariaDB uses Transport Layer Security (TLS) from communication with client applications. As a best security practice, use the newer TLS version as the minimum TLS version for the MariaDB database server. Currently, Azure MariaDB supports TLS 1.2 version which resolves the security gap from its preceding versions.",
     "Resource Type": "microsoft.dbformariadb/servers",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/servers"

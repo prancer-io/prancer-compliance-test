@@ -3256,6 +3256,37 @@
                     "description": "Azure Database for MariaDB provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage."
                 },
                 {
+                    "masterTestId": "PR-AZR-CLD-SQL-064",
+                    "type": "rego",
+                    "rule": "file(dbforMariaDB.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-064",
+                            "eval": "data.rule.mairadb_usage_latest_tls",
+                            "message": "data.rule.mairadb_usage_latest_tls_err",
+                            "remediationDescription": "Using the Azure portal, visit your Azure Database for MariaDB server, and then click Connection security. In Minimum TLS version, select 1.2 to deny connections with TLS version less than TLS 1.2 for your MariaDB server, and then click Save.",
+                            "remediationFunction": "PR_AZR_CLD_SQL_064.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_409"
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure MariaDB Server is using latest TLS version.",
+                    "description": "This policy identifies Azure MariaDB database servers that are not using the latest TLS version for SSL enforcement. Azure Database for MariaDB uses Transport Layer Security (TLS) from communication with client applications. As a best security practice, use the newer TLS version as the minimum TLS version for the MariaDB database server. Currently, Azure MariaDB supports TLS 1.2 version which resolves the security gap from its preceding versions."
+                },
+                {
                     "masterTestId": "PR-AZR-CLD-SQL-031",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",

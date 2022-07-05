@@ -11611,6 +11611,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AZR-ARM-SQL-064",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbforMariaDB.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-064",
+                            "eval": "data.rule.mairadb_usage_latest_tls",
+                            "message": "data.rule.mairadb_usage_latest_tls_err",
+                            "remediationDescription": "In 'microsoft.dbformariadb/servers' resource, set 'minimalTlsVersion = TLS1_2' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/servers' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_064.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure MariaDB Server is using latest TLS version.",
+                    "description": "This policy identifies Azure MariaDB database servers that are not using the latest TLS version for SSL enforcement. Azure Database for MariaDB uses Transport Layer Security (TLS) from communication with client applications. As a best security practice, use the newer TLS version as the minimum TLS version for the MariaDB database server. Currently, Azure MariaDB supports TLS 1.2 version which resolves the security gap from its preceding versions.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformariadb/servers"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AZR-ARM-SQL-014",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
