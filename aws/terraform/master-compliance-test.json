@@ -2615,7 +2615,7 @@
                             "id": "PR-AWS-TRF-VPC-006",
                             "eval": "data.rule.vpc_policy_not_overly_permissive",
                             "message": "data.rule.vpc_policy_not_overly_permissive_err",
-                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint_service' target='_blank'>here</a>",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint#policy' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_TRF_VPC_006.py"
                         }
                     ],

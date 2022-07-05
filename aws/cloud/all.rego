@@ -105,6 +105,11 @@ secret_manager_rotation_period = false {
     to_number(SecretList.RotationRules.AutomaticallyAfterDays) > 30
 }
 
+secret_manager_rotation_period = false {
+    SecretList := input.SecretList[_]
+    not SecretList.RotationRules.AutomaticallyAfterDays
+}
+
 secret_manager_rotation_period_err = "Ensure AWS secret rotation period is per the GS standard (Ex: 30 days)." {
     not secret_manager_rotation_period
 }
@@ -221,12 +226,11 @@ workspace_volume_encrypt_metadata := {
 
 #
 # PR-AWS-CLD-WS-002
-#
+# aws::workspaces::workspace
 
 default workspace_root_volume_encrypt = true
 
 workspace_root_volume_encrypt = false {
-    # lower(resource.Type) == "aws::workspaces::workspace"
     Workspaces := input.Workspaces[_]
     not Workspaces.RootVolumeEncryptionEnabled
 }
@@ -250,12 +254,11 @@ workspace_root_volume_encrypt_metadata := {
 
 #
 # PR-AWS-CLD-WS-003
-#
+# aws::workspaces::workspace
 
 default workspace_directory_type = true
 
 workspace_directory_type = false {
-    # lower(resource.Type) == "aws::workspaces::workspace"
     directory := input.Directories[_]
     lower(directory.DirectoryType) == "simple_ad"
 }

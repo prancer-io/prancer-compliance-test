@@ -645,8 +645,26 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     lower(resource.Type) == "aws::iam::policy"
     statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    contains(lower(statement.Action), "lambda:")
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
     statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
     contains(lower(statement.Action[_]), "lambda:")
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    contains(lower(statement.Action), "lambda:")
 }
 
 iam_policy_not_overly_permissive_to_all_traffic {

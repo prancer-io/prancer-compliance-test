@@ -1166,9 +1166,9 @@ transer_server_public_expose_metadata := {
 # PR-AWS-CLD-TRF-002
 # aws::transfer::server
 
-default transfer_server_protocol = false
+default transfer_server_protocol = true
 
-transfer_server_protocol = true {
+transfer_server_protocol = false {
     protocol := input.Server.Protocols[_]
     protocol == "FTP"
 }

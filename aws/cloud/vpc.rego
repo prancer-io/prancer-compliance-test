@@ -126,7 +126,7 @@ default vpc_peering_connection_inactive = true
 
 vpc_peering_connection_inactive = false {
     VpcPeeringConnection := input.VpcPeeringConnections[_]
-    lower(VpcPeeringConnections.Status.Code) == "active"
+    lower(VpcPeeringConnection.Status.Code) == "active"
 }
 
 vpc_peering_connection_inactive_err = "Ensure VPC peering connection is not active." {
