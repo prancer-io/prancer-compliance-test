@@ -3,6 +3,9 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html
 
+available_false_choices := ["false", false]
+available_true_choices := ["true", true]
+
 #
 # PR-AWS-CLD-RSH-001
 #
@@ -247,4 +250,197 @@ redshift_audit_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
+}
+
+
+#
+# PR-AWS-CLD-RSH-008
+# aws::redshift::cluster
+
+default redshift_enhanced_vpc_routing = true
+
+redshift_enhanced_vpc_routing = false {
+    Clusters := input.Clusters[_]
+    Clusters.EnhancedVpcRouting == available_false_choices[_]
+}
+
+redshift_enhanced_vpc_routing_err = "Ensure AWS Redshift - Enhanced VPC routing must be enabled." {
+    not redshift_enhanced_vpc_routing
+}
+
+redshift_enhanced_vpc_routing_metadata := {
+    "Policy Code": "PR-AWS-CLD-RSH-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Redshift - Enhanced VPC routing must be enabled.",
+    "Policy Description": "It is to check enhanced VPC routing is enabled or not forces all COPY and UNLOAD traffic between your cluster and your data repositories through your virtual private cloud (VPC) based on the Amazon VPC service.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters"
+}
+
+
+#
+# PR-AWS-CLD-RSH-009
+# aws::redshift::cluster
+
+default redshift_not_provisioned_with_ec2_classic = true
+
+redshift_not_provisioned_with_ec2_classic = false {
+    Clusters := input.Clusters[_]
+    not Clusters.VpcId
+}
+
+redshift_not_provisioned_with_ec2_classic = false {
+    Clusters := input.Clusters[_]
+    Clusters.VpcId == ""
+}
+
+redshift_not_provisioned_with_ec2_classic = false {
+    Clusters := input.Clusters[_]
+    Clusters.VpcId == null
+}
+
+redshift_not_provisioned_with_ec2_classic_err = "Ensure Redshift cluster is not provisioned using EC2-classic (deprecated) platform." {
+    not redshift_not_provisioned_with_ec2_classic
+}
+
+redshift_not_provisioned_with_ec2_classic_metadata := {
+    "Policy Code": "PR-AWS-CLD-RSH-009",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Redshift cluster is not provisioned using EC2-classic (deprecated) platform.",
+    "Policy Description": "It is to check that the Redshift cluster is not provisioned using the deprecated EC2-classic instance to reduce the risk level associated with deprecated resources.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters"
+}
+
+
+#
+# PR-AWS-CLD-RSH-010
+# aws::redshift::cluster
+
+default redshift_deferred_maintenance_window = true
+
+redshift_deferred_maintenance_window = false {
+    Clusters := input.Clusters[_]
+    Clusters.DeferredMaintenanceWindows == null
+}
+
+redshift_deferred_maintenance_window = false {
+    Clusters := input.Clusters[_]
+    Clusters.DeferredMaintenanceWindows == ""
+}
+
+redshift_deferred_maintenance_window = false {
+    Clusters := input.Clusters[_]
+    not Clusters.DeferredMaintenanceWindows
+}
+
+redshift_deferred_maintenance_window = false {
+    Clusters := input.Clusters[_]
+    count(Clusters.DeferredMaintenanceWindows) == 0
+}
+
+redshift_deferred_maintenance_window_err = "Ensure deferred maintenance window is enabled for Redshift cluster." {
+    not redshift_deferred_maintenance_window
+}
+
+redshift_deferred_maintenance_window_metadata := {
+    "Policy Code": "PR-AWS-CLD-RSH-010",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure deferred maintenance window is enabled for Redshift cluster.",
+    "Policy Description": "It is to check that deferred maintenance window is enabled in order to keep Redshift cluster running without interruption during critical business periods.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters"
+}
+
+
+#
+# PR-AWS-CLD-RSH-011
+# aws::redshift::cluster
+
+default redshift_not_default_master_username = true
+
+redshift_not_default_master_username = false {
+    Clusters := input.Clusters[_]
+    lower(Clusters.MasterUsername) == "awsuser"
+}
+
+redshift_not_default_master_username_err = "Ensure Redshift database clusters are not using default master username." {
+    not redshift_not_default_master_username
+}
+
+redshift_not_default_master_username_metadata := {
+    "Policy Code": "PR-AWS-CLD-RSH-011",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Redshift database clusters are not using default master username.",
+    "Policy Description": "It is to check that Redshift clusters are not using default master username in order to reduce security risk.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters"
+}
+
+
+#
+# PR-AWS-CLD-RSH-012
+# aws::redshift::cluster
+
+default redshift_not_default_port = true
+
+redshift_not_default_port = false {
+    Clusters := input.Clusters[_]
+    Clusters.Endpoint.Port == 5439
+}
+
+redshift_not_default_port_err = "Ensure Redshift database clusters are not using default port(5439) for database connection." {
+    not redshift_not_default_port
+}
+
+redshift_not_default_port_metadata := {
+    "Policy Code": "PR-AWS-CLD-RSH-012",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Redshift database clusters are not using default port(5439) for database connection.",
+    "Policy Description": "It is to check that Redshift cluster is not configured using default port to reduce security risks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters"
+}
+
+
+#
+# PR-AWS-CLD-RSH-013
+# aws::redshift::cluster
+
+default redshift_automated_backup = true
+
+redshift_automated_backup = false {
+    Clusters := input.Clusters[_]
+    Clusters.AutomatedSnapshotRetentionPeriod == 0
+}
+
+redshift_automated_backup_err = "Ensure automated backups are enabled for Redshift cluster." {
+    not redshift_automated_backup
+}
+
+redshift_automated_backup_metadata := {
+    "Policy Code": "PR-AWS-CLD-RSH-013",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure automated backups are enabled for Redshift cluster.",
+    "Policy Description": "It is to check automated backup is turned on in order to recover data in the event of failures.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/redshift.html#Redshift.Client.describe_clusters"
 }

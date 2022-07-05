@@ -1,8 +1,8 @@
 package rule
 
-deprecated_engine_versions := ["10.11","10.12","10.13","11.6","11.7","11.8"]
-deprecated_postgres_versions := ["13.2","13.1","12.6","12.5","12.4","12.3","12.2","11.11","11.10","11.9","11.8","11.7","11.6","11.5","11.4","11.3","11.2","11.1","10.16","10.15","10.14","10.13","10.12","10.11","10.10","10.9","10.7","10.6","10.5","10.4","10.3","10.1","9.6.21","9.6.20","9.6.19","9.6.18","9.6.17","9.6.16","9.6.15","9.6.14","9.6.12","9.6.11","9.6.10","9.6.9","9.6.8","9.6.6","9.6.5","9.6.3","9.6.2","9.6.1","9.5","9.4","9.3"]
-available_true_choices := ["true", true]
+deprecated_engine_versions := [10.11, 10.12, 10.13, 11.6, 11.7, 11.8]
+deprecated_postgres_versions_float :=  [13.2, 13.1, 12.6, 12.5, 12.4, 12.3, 12.2, 11.11, 11.10, 11.9, 11.8, 11.7, 11.6, 11.5, 11.4, 11.3, 11.2, 11.1, 10.16, 10.15, 10.14, 10.13, 10.12, 10.11, 10.10, 10.9, 10.7, 10.6, 10.5, 10.4, 10.3, 10.1, 9.5, 9.4, 9.3]
+deprecated_postgres_versions_str := ["9.6.21","9.6.20","9.6.19","9.6.18","9.6.17","9.6.16","9.6.15","9.6.14","9.6.12","9.6.11","9.6.10","9.6.9","9.6.8","9.6.6","9.6.5","9.6.3","9.6.2","9.6.1"]
 
 #
 # PR-AWS-TRF-ATH-002
@@ -14,7 +14,14 @@ aws_issue["athena_logging_is_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_athena_workgroup"
     Configuration := resource.properties.configuration[_]
-    lower(Configuration.publish_cloudwatch_metrics_enabled) == available_true_choices[_]
+    not Configuration.publish_cloudwatch_metrics_enabled
+}
+
+aws_issue["athena_logging_is_enabled"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_athena_workgroup"
+    Configuration := resource.properties.configuration[_]
+    lower(Configuration.publish_cloudwatch_metrics_enabled) == "false"
 }
 
 athena_logging_is_enabled {
@@ -1752,6 +1759,50 @@ dax_encrypt_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html"
 }
 
+
+#
+# PR-AWS-TRF-DAX-002
+#
+
+default dax_cluster_endpoint_encrypt_at_rest = null
+
+aws_attribute_absence["dax_cluster_endpoint_encrypt_at_rest"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dax_cluster"
+    not resource.properties.cluster_endpoint_encryption_type
+}
+
+aws_issue["dax_cluster_endpoint_encrypt_at_rest"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dax_cluster"
+    lower(resource.properties.cluster_endpoint_encryption_type) != "tls"
+}
+
+dax_cluster_endpoint_encrypt_at_rest {
+    lower(input.resources[i].type) == "aws_dax_cluster"
+    not aws_issue["dax_cluster_endpoint_encrypt_at_rest"]
+}
+
+dax_cluster_endpoint_encrypt_at_rest = false {
+    aws_issue["dax_cluster_endpoint_encrypt_at_rest"]
+}
+
+dax_cluster_endpoint_encrypt_at_rest_err = "Ensure AWS DAX data is encrypted in transit" {
+    aws_issue["dax_cluster_endpoint_encrypt_at_rest"]
+}
+
+dax_cluster_endpoint_encrypt_at_rest_metadata := {
+    "Policy Code": "PR-AWS-TRF-DAX-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS DAX data is encrypted in transit",
+    "Policy Description": "This control is to check that the communication between the application and DAX is always encrypted",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dax_cluster#cluster_endpoint_encryption_type"
+}
+
 #
 # PR-AWS-TRF-DD-002
 #
@@ -3135,7 +3186,7 @@ aws_issue["db_instance_engine_version"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_db_instance"
     lower(resource.properties.engine) == "aurora-postgresql"
-    lower(resource.properties.engine_version) == deprecated_engine_versions[_]
+    resource.properties.engine_version == deprecated_engine_versions[_]
 }
 
 db_instance_engine_version {
@@ -3173,7 +3224,7 @@ aws_issue["db_cluster_engine_version"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_rds_cluster"
     lower(resource.properties.engine) == "aurora-postgresql"
-    lower(resource.properties.engine_version) == deprecated_engine_versions[_]
+    resource.properties.engine_version == deprecated_engine_versions[_]
 }
 
 db_cluster_engine_version {
@@ -3211,7 +3262,14 @@ aws_issue["db_instance_approved_postgres_version"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_db_instance"
     lower(resource.properties.engine) == "postgres"
-    lower(resource.properties.engine_version) == deprecated_postgres_versions[_]
+    resource.properties.engine_version == deprecated_postgres_versions_float[_]
+}
+
+aws_issue["db_instance_approved_postgres_version"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_instance"
+    lower(resource.properties.engine) == "postgres"
+    resource.properties.engine_version == deprecated_postgres_versions_str[_]
 }
 
 db_instance_approved_postgres_version {
@@ -3249,7 +3307,14 @@ aws_issue["db_cluster_approved_postgres_version"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_rds_cluster"
     lower(resource.properties.engine) == "postgres"
-    lower(resource.properties.engine_version) == deprecated_postgres_versions[_]
+    resource.properties.engine_version == deprecated_postgres_versions_float[_]
+}
+
+aws_issue["db_cluster_approved_postgres_version"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_rds_cluster"
+    lower(resource.properties.engine) == "postgres"
+    resource.properties.engine_version == deprecated_postgres_versions_str[_]
 }
 
 db_cluster_approved_postgres_version {

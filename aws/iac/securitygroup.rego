@@ -1759,7 +1759,7 @@ is_secure["ipv4"] = true {
     SecurityRule.FromPort == SecurityRule.ToPort
 }
 
-aws_isuue["ec2_instance_has_restricted_access"] {
+aws_issue["ec2_instance_has_restricted_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     SecurityRule := resource.Properties.SecurityGroupIngress[_]
@@ -1779,7 +1779,7 @@ is_secure["ipv6"] = true {
     SecurityRule.FromPort == SecurityRule.ToPort
 }
 
-aws_isuue["ec2_instance_has_restricted_access"] {
+aws_issue["ec2_instance_has_restricted_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     SecurityRule := resource.Properties.SecurityGroupIngress[_]
@@ -1798,7 +1798,7 @@ ec2_instance_has_restricted_access {
 }
 
 ec2_instance_has_restricted_access_err = "Ensure EC2 instance that is not internet reachable with unrestricted access (0.0.0.0/0) other than HTTP/HTTPS port monitoring is enabled for EC2 instances" {
-    not aws_isuue["ec2_instance_has_restricted_access"]
+    not aws_issue["ec2_instance_has_restricted_access"]
 }
 
 ec2_instance_has_restricted_access_metadata := {

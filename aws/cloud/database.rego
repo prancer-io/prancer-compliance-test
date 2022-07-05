@@ -6,6 +6,7 @@ package rule
 deprecated_engine_versions := ["10.11","10.12","10.13","11.6","11.7","11.8"]
 deprecated_postgres_versions := ["13.2","13.1","12.6","12.5","12.4","12.3","12.2","11.11","11.10","11.9","11.8","11.7","11.6","11.5","11.4","11.3","11.2","11.1","10.16","10.15","10.14","10.13","10.12","10.11","10.10","10.9","10.7","10.6","10.5","10.4","10.3","10.1","9.6.21","9.6.20","9.6.19","9.6.18","9.6.17","9.6.16","9.6.15","9.6.14","9.6.12","9.6.11","9.6.10","9.6.9","9.6.8","9.6.6","9.6.5","9.6.3","9.6.2","9.6.1","9.5","9.4","9.3"]
 available_true_choices := ["true", true]
+available_false_choices := ["false", false]
 
 #
 # PR-AWS-CLD-RDS-001
@@ -721,6 +722,183 @@ db_cluster_approved_postgres_version_metadata := {
 }
 
 #
+# PR-AWS-CLD-RDS-025
+#
+
+default db_snapshot_is_encrypted = true
+
+db_snapshot_is_encrypted = false {
+    DBSnapshot := input.DBSnapshots[_]
+    lower(DBSnapshot.Status) == "available"
+    lower(DBSnapshot.Encrypted) == available_false_choices[_]
+}
+
+db_snapshot_is_encrypted_err = "Ensure AWS RDS DB snapshot is encrypted." {
+    not db_snapshot_is_encrypted
+}
+
+db_snapshot_is_encrypted_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-025",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS DB snapshot is encrypted.",
+    "Policy Description": "It identifies AWS RDS DB (Relational Database Service Database) cluster snapshots which are not encrypted. It is highly recommended to implement encryption at rest when you are working with production data that have sensitive information, to protect from unauthorized access.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_snapshots"
+}
+
+#
+# PR-AWS-CLD-RDS-026
+#
+
+default rds_snapshot_with_access = true
+
+rds_snapshot_with_access = false {
+    DBSnapshotAttribute := input.DBSnapshotAttributesResult.DBSnapshotAttributes[_]
+    lower(DBSnapshotAttribute.AttributeName) == "restore"
+    count(DBSnapshotAttribute.AttributeValues[_]) != 0
+}
+
+rds_snapshot_with_access_err = "Ensure AWS RDS Snapshot with access for only monitored cloud accounts." {
+    not rds_snapshot_with_access
+}
+
+rds_snapshot_with_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-026",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS Snapshot with access for only monitored cloud accounts.",
+    "Policy Description": "It identifies RDS snapshots with access for unmonitored cloud accounts.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_snapshot_attributes"
+}
+
+#
+# PR-AWS-CLD-RDS-027
+# aws::rds::dbinstance
+#
+
+default rds_iam_database_auth = true
+
+rds_iam_database_auth = false {
+    DBInstance := input.DBInstances[_]
+    not DBInstance.IAMDatabaseAuthenticationEnabled
+}
+
+rds_iam_database_auth_err = "Ensure AWS RDS DB authentication is only enabled via IAM" {
+    not rds_iam_database_auth
+}
+
+rds_iam_database_auth_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-027",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS DB authentication is only enabled via IAM",
+    "Policy Description": "This policy checks RDS DB instances which are not configured with IAM based authentication and using any hardcoded credentials.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html"
+}
+
+#
+# PR-AWS-CLD-RDS-028
+# aws::rds::dbcluster
+#
+
+default rds_cluster_backup_retention = true
+
+rds_cluster_backup_retention = false {
+    DBClusters := input.DBClusters[_]
+    not DBClusters.BackupRetentionPeriod
+}
+
+rds_cluster_backup_retention = false {
+    DBClusters := input.DBClusters[_]
+    to_number(DBClusters.BackupRetentionPeriod) < 30
+}
+
+rds_cluster_backup_retention_err = "Ensure AWS RDS Cluster has setup backup retention period of at least 30 days" {
+    not rds_cluster_backup_retention
+}
+
+rds_cluster_backup_retention_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-028",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS Cluster has setup backup retention period of at least 30 days",
+    "Policy Description": "This policy checks that backup retention period for RDS DB is firm approved.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
+#
+# PR-AWS-CLD-RDS-029
+# aws::rds::dbinstance
+
+default db_instance_deletion_protection = true
+
+db_instance_deletion_protection = false {
+    DBInstance := input.DBInstances[_]
+    lower(DBInstance.DeletionProtection) == available_false_choices[_]
+}
+
+db_instance_deletion_protection_err = "Ensure AWS RDS DB instance has deletion protection enabled." {
+    not db_instance_deletion_protection
+}
+
+db_instance_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-029",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS DB instance has deletion protection enabled.",
+    "Policy Description": "It is to check that deletion protection in enabled at RDS DB level in order to protect the DB instance from accidental deletion.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_instances"
+}
+
+#
+# PR-AWS-CLD-RDS-030
+# aws::rds::dbinstance
+
+default db_instance_backup_retention_period = true
+
+db_instance_backup_retention_period = false {
+    DBInstance := input.DBInstances[_]
+    to_number(DBInstance.BackupRetentionPeriod) < 30
+}
+
+db_instance_backup_retention_period = false {
+    DBInstance := input.DBInstances[_]
+    not DBInstance.BackupRetentionPeriod
+}
+
+
+db_instance_backup_retention_period_err = "Ensure RDS DB instance has setup backup retention period of at least 30 days." {
+    not db_instance_backup_retention_period
+}
+
+db_instance_backup_retention_period_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-030",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure RDS DB instance has setup backup retention period of at least 30 days.",
+    "Policy Description": "This is to check that backup retention period for RDS DB is firm approved.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_instances"
+}
+
+#
 # PR-AWS-CLD-DAX-001
 #
 
@@ -753,6 +931,40 @@ dax_encrypt_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html"
+}
+
+#
+# PR-AWS-CLD-DAX-002
+#
+
+default dax_cluster_endpoint_encrypt_at_rest = true
+
+dax_cluster_endpoint_encrypt_at_rest = false {
+    # lower(resource.Type) == "aws::dax::cluster"
+    Clusters := input.Clusters[_]
+    lower(Clusters.ClusterEndpointEncryptionType) != "tls"
+}
+
+dax_cluster_endpoint_encrypt_at_rest = false {
+    # lower(resource.Type) == "aws::dax::cluster"
+    Clusters := input.Clusters[_]
+    not Clusters.ClusterEndpointEncryptionType
+}
+
+dax_cluster_endpoint_encrypt_at_rest_err = "Ensure AWS DAX data is encrypted in transit" {
+    not dax_cluster_endpoint_encrypt_at_rest
+}
+
+dax_cluster_endpoint_encrypt_at_rest_metadata := {
+    "Policy Code": "PR-AWS-CLD-DAX-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS DAX data is encrypted in transit",
+    "Policy Description": "This control is to check that the communication between the application and DAX is always encrypted",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/dax/describe-clusters.html"
 }
 
 
@@ -1324,6 +1536,108 @@ cache_ksm_key_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-kmskeyid"
 }
 
+#
+# PR-AWS-CLD-EC-006
+#
+
+default cache_replication_group_id = true
+
+cache_replication_group_id = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    not ReplicationGroups.ReplicationGroupId
+}
+
+cache_replication_group_id = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    ReplicationGroups.ReplicationGroupId == ""
+}
+
+cache_replication_group_id = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    ReplicationGroups.ReplicationGroupId == null
+}
+
+cache_replication_group_id = false {
+    # lower(resource.Type) == "aws::elasticache::replicationgroup"
+    ReplicationGroups := input.ReplicationGroups[_]
+    contains(lower(ReplicationGroups.ReplicationGroupId), "*")
+}
+
+cache_replication_group_id_err = "Ensure ElastiCache (Redis) replicationGroupId is not empty or contains wildcards (*)." {
+    not cache_replication_group_id
+}
+
+cache_replication_group_id_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure ElastiCache (Redis) replicationGroupId is not empty or contains wildcards (*).",
+    "Policy Description": "This checks if the replication group ID for Redis is set to empty or a * to allow all.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_replication_groups"
+}
+
+#
+# PR-AWS-CLD-EC-007
+#
+
+default automatic_backups_for_redis_cluster = true
+
+automatic_backups_for_redis_cluster = false {
+    # lower(resource.Type) == "aws::elasticache::cachecluster"
+    CacheCluster := input.CacheClusters[_]
+    CacheCluster.SnapshotRetentionLimit == 0
+}
+
+automatic_backups_for_redis_cluster_err = "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster." {
+    not automatic_backups_for_redis_cluster
+}
+
+automatic_backups_for_redis_cluster_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-007",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster.",
+    "Policy Description": "It checks if automatic backups are enabled for the Redis cluster.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_cache_clusters"
+}
+
+#
+# PR-AWS-CLD-EC-008
+#
+
+default redis_with_intransit_encryption = true
+
+redis_with_intransit_encryption = false {
+    # lower(resource.Type) == "aws::elasticache::cachecluster"
+    CacheCluster := input.CacheClusters[_]
+    CacheCluster.TransitEncryptionEnabled == available_false_choices[_]
+    not CacheCluster.ReplicationGroupId
+}
+
+redis_with_intransit_encryption_err = "Ensure ElastiCache Redis with in-transit encryption is disabled (Non-replication group)." {
+    not redis_with_intransit_encryption
+}
+
+redis_with_intransit_encryption_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure ElastiCache Redis with in-transit encryption is disabled (Non-replication group).",
+    "Policy Description": "It identifies ElastiCache Redis that are in non-replication groups or individual ElastiCache Redis and have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis and their associated cache storage systems.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_cache_clusters"
+}
 
 #
 # PR-AWS-CLD-DMS-001
@@ -1388,4 +1702,36 @@ dms_public_access_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html#cfn-dms-replicationinstance-publiclyaccessible"
+}
+
+
+#
+# PR-AWS-CLD-DMS-003
+#
+
+default dms_certificate_expiry = true
+
+dms_certificate_expiry = false {
+    # lower(resource.Type) == "aws::dms::replicationinstance"
+    Certificate := input.Certificates[_]
+    current_date_timestamp := time.now_ns()
+	expiry_timestamp := round(Certificate.ValidToDate)
+    expiry_timestamp_nanosecond := expiry_timestamp * 1000000000
+    expiry_timestamp_nanosecond < current_date_timestamp
+}
+
+dms_certificate_expiry_err = "Ensure Database Migration Service (DMS) has not expired certificates" {
+    not dms_certificate_expiry
+}
+
+dms_certificate_expiry_metadata := {
+    "Policy Code": "PR-AWS-CLD-DMS-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Database Migration Service (DMS) has not expired certificates",
+    "Policy Description": "This policy identifies expired certificates that are in AWS Database Migration Service (DMS). AWS Database Migration Service (DMS) Certificate service is the preferred tool to provision, manage, and deploy your DMS endpoint certificates. As a best practice, it is recommended to delete expired certificates.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/dms/describe-certificates.html"
 }

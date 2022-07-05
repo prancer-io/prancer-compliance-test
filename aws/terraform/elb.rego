@@ -1569,3 +1569,73 @@ elb_protocol_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group"
 }
+
+
+#
+# PR-AWS-TRF-ELB-024
+#
+
+default elb_waf_enabled = null
+
+aws_issue["elb_waf_enabled"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    not resource.properties.enable_waf_fail_open
+}
+
+elb_waf_enabled = false {
+    aws_issue["elb_waf_enabled"]
+}
+
+elb_waf_enabled_err = "Ensure that public facing ELB has WAF attached" {
+    aws_issue["elb_waf_enabled"]
+}
+
+elb_waf_enabled_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-024",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that public facing ELB has WAF attached",
+    "Policy Description": "This policy checks the usage of a WAF with Internet facing ELB. AWS WAF is a web application firewall service that lets you monitor web requests and protect your web applications from malicious requests.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#enable_waf_fail_open"
+}
+
+#
+# PR-AWS-TRF-ELB-025
+#
+
+default elbv2_ssl_negotiation_policy = null
+
+aws_issue["elbv2_ssl_negotiation_policy"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener"
+    contains(resource.properties.ssl_policy, "ELBSecurityPolicy-TLS-1-0-2015-04")
+}
+
+elbv2_ssl_negotiation_policy {
+    lower(input.resources[i].type) == "aws_lb_listener"
+    not aws_issue["elbv2_ssl_negotiation_policy"]
+}
+
+elbv2_ssl_negotiation_policy = false {
+    aws_issue["elbv2_ssl_negotiation_policy"]
+}
+
+elbv2_ssl_negotiation_policy_err = "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers." {
+    aws_issue["elbv2_ssl_negotiation_policy"]
+}
+
+elbv2_ssl_negotiation_policy_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-025",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers.",
+    "Policy Description": "This policy identifies Elastic Load Balancers v2 (ELBv2) which are configured with SSL negotiation policy containing weak ciphers. An SSL cipher is an encryption algorithm that uses encryption keys to create a coded message. SSL protocols use several SSL ciphers to encrypt data over the Internet. As many of the other ciphers are not secure/weak, it is recommended to use only the ciphers recommended in the following AWS link: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener"
+}

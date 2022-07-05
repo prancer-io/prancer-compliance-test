@@ -1,5 +1,7 @@
 package rule
 
+available_false_choices := ["false", false]
+
 has_property(parent_object, target_property) { 
 	_ = parent_object[target_property]
 }
@@ -532,6 +534,75 @@ glue_security_config_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-encryptionconfiguration.html#cfn-glue-securityconfiguration-encryptionconfiguration-s3encryptions"
 }
 
+
+#
+# PR-AWS-CFR-GLUE-003
+#
+
+default glue_encrypt_data_at_rest = null
+
+aws_issue["glue_encrypt_data_at_rest"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::securityconfiguration"
+    lower(resource.Properties.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) == "disabled"
+}
+
+aws_issue["glue_encrypt_data_at_rest"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::securityconfiguration"
+    not resource.Properties.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode
+}
+
+aws_issue["glue_encrypt_data_at_rest"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::securityconfiguration"
+    lower(resource.Properties.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) == "disabled"
+}
+
+aws_issue["glue_encrypt_data_at_rest"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::securityconfiguration"
+    not resource.Properties.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode
+}
+
+aws_issue["glue_encrypt_data_at_rest"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::securityconfiguration"
+    lower(resource.Properties.EncryptionConfiguration.S3Encryptions.S3EncryptionMode) == "disabled"
+}
+
+aws_issue["glue_encrypt_data_at_rest"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::securityconfiguration"
+    not resource.Properties.EncryptionConfiguration.S3Encryptions.S3EncryptionMode
+}
+
+glue_encrypt_data_at_rest {
+    lower(input.Resources[i].Type) == "aws::glue::securityconfiguration"
+    not aws_issue["glue_encrypt_data_at_rest"]
+}
+
+glue_encrypt_data_at_rest = false {
+    aws_issue["glue_encrypt_data_at_rest"]
+}
+
+glue_encrypt_data_at_rest_err = "Ensure AWS Glue encrypt data at rest" {
+    aws_issue["glue_encrypt_data_at_rest"]
+}
+
+glue_encrypt_data_at_rest_metadata := {
+    "Policy Code": "PR-AWS-CFR-GLUE-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS Glue encrypt data at rest",
+    "Policy Description": "It is to check that AWS Glue encryption at rest is enabled.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-encryptionconfiguration.html#cfn-glue-securityconfiguration-encryptionconfiguration-s3encryptions"
+}
+
+
 #
 # PR-AWS-CFR-AS-001
 #
@@ -1053,6 +1124,49 @@ aws_config_configuration_aggregator_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html#cfn-config-configurationaggregator-accountaggregationsource-allawsregions"
 }
 
+#
+# PR-AWS-CFR-CFG-004
+#
+
+default config_includes_global_resources = null
+
+aws_issue["config_includes_global_resources"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::config::configurationrecorder"
+    resource.Properties.RecordingGroup.IncludeGlobalResourceTypes == available_false_choices[_]
+}
+
+aws_issue["config_includes_global_resources"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::config::configurationrecorder"
+    not resource.Properties.RecordingGroup.IncludeGlobalResourceTypes
+}
+
+config_includes_global_resources {
+    lower(input.Resources[i].Type) == "aws::config::configurationrecorder"
+    not aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources = false {
+    aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources_err = "Ensure AWS Config includes global resources types (IAM)." {
+    aws_issue["config_includes_global_resources"]
+}
+
+config_includes_global_resources_metadata := {
+    "Policy Code": "PR-AWS-CFR-CFG-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS Config includes global resources types (IAM).",
+    "Policy Description": "It checks that global resource types are included in AWS Config.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html#aws-resource-config-configurationrecorder--examples"
+}
+
 
 #
 # PR-AWS-CFR-KNS-001
@@ -1360,6 +1474,146 @@ mq_logging_enable_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-publiclyaccessible"
 }
+
+
+#
+# PR-AWS-CFR-MQ-003
+#
+
+default mq_activemq_approved_engine_version = null
+
+aws_issue["mq_activemq_approved_engine_version"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::amazonmq::broker"
+    lower(resource.Properties.EngineType) == "activemq"
+    not startswith(resource.Properties.EngineVersion, "5.16")
+}
+
+mq_activemq_approved_engine_version {
+    lower(input.Resources[i].Type) == "aws::amazonmq::broker"
+    not aws_issue["mq_activemq_approved_engine_version"]
+}
+
+mq_activemq_approved_engine_version = false {
+    aws_issue["mq_activemq_approved_engine_version"]
+}
+
+
+mq_activemq_approved_engine_version_err = "Ensure ActiveMQ engine version is approved by GS." {
+    aws_issue["mq_activemq_approved_engine_version"]
+}
+
+
+mq_activemq_approved_engine_version_metadata := {
+    "Policy Code": "PR-AWS-CFR-MQ-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure ActiveMQ engine version is approved by GS.",
+    "Policy Description": "It is used to check only firm approved version of ActiveMQ is being used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#aws-resource-amazonmq-broker--examples"
+}
+
+
+#
+# PR-AWS-CFR-MQ-004
+#
+
+default mq_rabbitmq_approved_engine_version = null
+
+aws_issue["mq_rabbitmq_approved_engine_version"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::amazonmq::broker"
+    lower(resource.Properties.EngineType) == "rabbitmq"
+    not startswith(resource.Properties.EngineVersion, "3.8")
+}
+
+mq_rabbitmq_approved_engine_version {
+    lower(input.Resources[i].Type) == "aws::amazonmq::broker"
+    not aws_issue["mq_rabbitmq_approved_engine_version"]
+}
+
+mq_rabbitmq_approved_engine_version = false {
+    aws_issue["mq_rabbitmq_approved_engine_version"]
+}
+
+
+mq_rabbitmq_approved_engine_version_err = "Ensure RabbitMQ engine version is approved by GS." {
+    aws_issue["mq_rabbitmq_approved_engine_version"]
+}
+
+
+mq_rabbitmq_approved_engine_version_metadata := {
+    "Policy Code": "PR-AWS-CFR-MQ-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure RabbitMQ engine version is approved by GS.",
+    "Policy Description": "It is used to check only firm approved version of RabbitMQ is being used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#aws-resource-amazonmq-broker--examples"
+}
+
+
+#
+# PR-AWS-CFR-MQ-005
+#
+
+default audit_logs_published_to_cloudWatch = null
+
+aws_issue["audit_logs_published_to_cloudWatch"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::amazonmq::broker"
+    lower(resource.Properties.EngineType) == "activemq"
+    not resource.Properties.Logs
+}
+
+aws_issue["audit_logs_published_to_cloudWatch"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::amazonmq::broker"
+    lower(resource.Properties.EngineType) == "activemq"
+    log := resource.Properties.Logs[_]
+    log.Audit == false
+}
+
+aws_issue["audit_logs_published_to_cloudWatch"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::amazonmq::broker"
+    lower(resource.Properties.EngineType) == "activemq"
+    log := resource.Properties.Logs[_]
+    not log.Audit
+}
+
+audit_logs_published_to_cloudWatch {
+    lower(input.Resources[i].Type) == "aws::amazonmq::broker"
+    not aws_issue["audit_logs_published_to_cloudWatch"]
+}
+
+audit_logs_published_to_cloudWatch = false {
+    aws_issue["audit_logs_published_to_cloudWatch"]
+}
+
+
+audit_logs_published_to_cloudWatch_err = "Ensure General and Audit logs are published to CloudWatch." {
+    aws_issue["audit_logs_published_to_cloudWatch"]
+}
+
+
+audit_logs_published_to_cloudWatch_metadata := {
+    "Policy Code": "PR-AWS-CFR-MQ-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure General and Audit logs are published to CloudWatch.",
+    "Policy Description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues. It does not apply to RabbitMQ brokers.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#aws-resource-amazonmq-broker--examples"
+}
+
 
 
 #
@@ -1816,35 +2070,12 @@ default appsync_not_configured_with_firewall_v2 = null
 aws_issue["appsync_not_configured_with_firewall_v2"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::appsync::graphqlapi"
-    output := resource.Name
-    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::appsync::graphqlapi"
-    output := resource.Name
-    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
-    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
-    not input.Resources[j].Properties.WebACLId
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::appsync::graphqlapi"
-    output := resource.Name
-    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
-    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
-    count(input.Resources[j].Properties.WebACLId) == 0
-}
-
-aws_issue["appsync_not_configured_with_firewall_v2"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::appsync::graphqlapi"
-    output := resource.Name
-    count([c | contains(lower(input.Resources[j].Properties.ResourceArn.Ref), output); c:=1 ]) == 0
-    lower(input.Resources[j].Type) == "aws::wafregional::webaclassociation" 
-    input.Resources[j].Properties.WebACLId == null
+    count([c | 
+    	contains(lower(input.Resources[a].Properties.ResourceArn.Ref), lower(resource.Name)); 
+        lower(input.Resources[a].Type) == "aws::wafregional::webaclassociation";
+		input.Resources[a].Properties.WebACLId;
+        c:=1 
+    ]) == 0
 }
 
 appsync_not_configured_with_firewall_v2 {

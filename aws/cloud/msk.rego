@@ -149,3 +149,67 @@ msk_cluster_logging_enable_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-brokerlogs.html#cfn-msk-cluster-brokerlogs-cloudwatchlogs"
 }
+
+#
+# PR-AWS-CLD-MSK-006
+#
+
+default msk_cluster_enhanced_monitoring_enable = true
+
+msk_cluster_enhanced_monitoring_enable = false {
+    # lower(resource.Type) == "aws::msk::cluster"
+    lower(input.ClusterInfo.EnhancedMonitoring) == "default"
+}
+
+msk_cluster_enhanced_monitoring_enable = false {
+    # lower(resource.Type) == "aws::msk::cluster"
+    input.ClusterInfo.EnhancedMonitoring == ""
+}
+
+msk_cluster_enhanced_monitoring_enable = false {
+    # lower(resource.Type) == "aws::msk::cluster"
+    input.ClusterInfo.EnhancedMonitoring == null
+}
+
+msk_cluster_enhanced_monitoring_enable_err = "Ensure enhanaced monitoring for AWS MSK is not set to default." {
+    not msk_cluster_enhanced_monitoring_enable
+}
+
+msk_cluster_enhanced_monitoring_enable_metadata := {
+    "Policy Code": "PR-AWS-CLD-MSK-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure enhanaced monitoring for AWS MSK is not set to default.",
+    "Policy Description": "It is used to check that enhanced monitoring is configured to gather Apache Kafka metrics and sends them to Amazon CloudWatch.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kafka.html#Kafka.Client.describe_cluster"
+}
+
+#
+# PR-AWS-CLD-MSK-007
+#
+
+default msk_public_access = true
+
+msk_public_access = false {
+    # lower(resource.Type) == "aws::msk::cluster"
+    lower(input.ClusterInfo.BrokerNodeGroupInfo.ConnectivityInfo.PublicAccess.Type) != "disabled"
+}
+
+msk_public_access_err = "Ensure public access is disabled for AWS MSK." {
+    not msk_public_access
+}
+
+msk_public_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-MSK-007",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure public access is disabled for AWS MSK.",
+    "Policy Description": "It check whether public access is turned on to the brokers of MSK clusters.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kafka.html#Kafka.Client.describe_cluster"
+}

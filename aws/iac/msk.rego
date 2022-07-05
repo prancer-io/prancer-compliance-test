@@ -328,3 +328,99 @@ msk_cluster_logging_enable_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-brokerlogs.html#cfn-msk-cluster-brokerlogs-cloudwatchlogs"
 }
+
+
+#
+# PR-AWS-CFR-MSK-006
+#
+
+default msk_cluster_enhanced_monitoring_enable = null
+
+aws_issue["msk_cluster_enhanced_monitoring_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    not resource.Properties.EnhancedMonitoring
+}
+
+aws_issue["msk_cluster_enhanced_monitoring_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    resource.Properties.EnhancedMonitoring == ""
+}
+
+aws_issue["msk_cluster_enhanced_monitoring_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    resource.Properties.EnhancedMonitoring == null
+}
+
+aws_issue["msk_cluster_enhanced_monitoring_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    lower(resource.Properties.EnhancedMonitoring) == "default"
+}
+
+msk_cluster_enhanced_monitoring_enable {
+    lower(input.Resources[i].Type) == "aws::msk::cluster"
+    not aws_issue["msk_cluster_enhanced_monitoring_enable"]
+}
+
+msk_cluster_enhanced_monitoring_enable = false {
+    aws_issue["msk_cluster_enhanced_monitoring_enable"]
+}
+
+msk_cluster_enhanced_monitoring_enable_err = "Ensure enhanaced monitoring for AWS MSK is not set to default." {
+    aws_issue["msk_cluster_enhanced_monitoring_enable"]
+}
+
+
+msk_cluster_enhanced_monitoring_enable_metadata := {
+    "Policy Code": "PR-AWS-CFR-MSK-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure enhanaced monitoring for AWS MSK is not set to default.",
+    "Policy Description": "It is used to check that enhanced monitoring is configured to gather Apache Kafka metrics and sends them to Amazon CloudWatch.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#aws-resource-msk-cluster--examples"
+}
+
+
+#
+# PR-AWS-CFR-MSK-007
+#
+
+default msk_public_access = null
+
+aws_issue["msk_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    lower(resource.Properties.BrokerNodeGroupInfo.ConnectivityInfo.PublicAccess.Type) != "disabled"
+}
+
+msk_public_access {
+    lower(input.Resources[i].Type) == "aws::msk::cluster"
+    not aws_issue["msk_public_access"]
+}
+
+msk_public_access = false {
+    aws_issue["msk_public_access"]
+}
+
+msk_public_access_err = "Ensure public access is disabled for AWS MSK." {
+    aws_issue["msk_public_access"]
+}
+
+
+msk_public_access_metadata := {
+    "Policy Code": "PR-AWS-CFR-MSK-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure public access is disabled for AWS MSK.",
+    "Policy Description": "It check whether public access is turned on to the brokers of MSK clusters.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#aws-resource-msk-cluster--examples"
+}

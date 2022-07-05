@@ -1964,7 +1964,7 @@ ec2_instance_has_restricted_access = false {
 }
 
 ec2_instance_has_restricted_access_metadata := {
-    "Policy Code": "PR-AWS-TRF-SG-029",
+    "Policy Code": "PR-AWS-TRF-SG-034",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

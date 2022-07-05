@@ -7,6 +7,9 @@ has_property(parent_object, target_property) {
 }
 
 iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount"]
+ip_address = ["0.0.0.0/0", "::/0"]
+available_true_choices := ["true", true]
+available_false_choices := ["false", false]
 
 #
 # PR-AWS-CLD-IAM-001
@@ -257,11 +260,9 @@ iam_user_group_attach_metadata := {
 # PR-AWS-CLD-IAM-011
 #
 
-default iam_policy_not_overly_permissive_to_all_traffic = true
+default lambda_iam_policy_not_overly_permissive_to_all_traffic = true
 
-ip_address = ["0.0.0.0/0", "::/0"]
-
-iam_policy_not_overly_permissive_to_all_traffic = false {
+lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
     # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
@@ -271,7 +272,7 @@ iam_policy_not_overly_permissive_to_all_traffic = false {
     contains(lower(policy_statement.Action[_]), "lambda:")
 }
 
-iam_policy_not_overly_permissive_to_all_traffic = false {
+lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
     # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
@@ -281,7 +282,7 @@ iam_policy_not_overly_permissive_to_all_traffic = false {
     contains(lower(policy_statement.Action), "lambda:")
 }
 
-iam_policy_not_overly_permissive_to_all_traffic = false {
+lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
     # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
@@ -291,7 +292,7 @@ iam_policy_not_overly_permissive_to_all_traffic = false {
     contains(lower(policy_statement.Action[_]), "lambda:")
 }
 
-iam_policy_not_overly_permissive_to_all_traffic = false {
+lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
     # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
@@ -302,11 +303,11 @@ iam_policy_not_overly_permissive_to_all_traffic = false {
 }
 
 
-iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure Lambda IAM policy is not overly permissive to all traffic" {
-    not iam_policy_not_overly_permissive_to_all_traffic
+lambda_iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure Lambda IAM policy is not overly permissive to all traffic" {
+    not lambda_iam_policy_not_overly_permissive_to_all_traffic
 }
 
-iam_policy_not_overly_permissive_to_all_traffic_metadata := {
+lambda_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-011",
     "Type": "cloud",
     "Product": "AWS",
@@ -1182,8 +1183,444 @@ iam_access_key_enabled_on_root_account_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud",
     "Policy Title": "Ensure AWS Access key is enabled on root account.",
-    "Policy Description": "It identifies that account access key is enabled or not from IAM account summary."
+    "Policy Description": "It identifies that account access key is enabled or not from IAM account summary.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#accountsummary"
+}
+
+#
+# PR-AWS-CLD-IAM-029
+#
+
+default iam_policy_not_overly_permissive_to_all_traffic_for_ecs= true
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action[_]), "ecs:")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action), "ecs:")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action[_]), "ecs:")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action), "ecs:")
+}
+
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs_err = "Ensure IAM policy is not overly permissive to all traffic for ecs." {
+    not iam_policy_not_overly_permissive_to_all_traffic_for_ecs
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-029",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure IAM policy is not overly permissive to all traffic for ecs.",
+    "Policy Description": "This policy identifies ECS IAM policies that are overly permissive to all traffic. It is recommended that the ECS should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/AmazonECS/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_service-with-iam-policy-best-practices",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
+}
+
+#
+# PR-AWS-CLD-IAM-030
+#
+
+default elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = true
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action[_]), "es:")
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action), "es:")
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action[_]), "es:")
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action), "es:")
+}
+
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure IAM policy is not overly permissive to all traffic for elasticsearch." {
+    not elasticsearch_iam_policy_not_overly_permissive_to_all_traffic
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-030",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure IAM policy is not overly permissive to all traffic for elasticsearch.",
+    "Policy Description": "It identifies Elasticsearch IAM policies that are overly permissive to all traffic. Amazon Elasticsearch service makes it easy to deploy and manage Elasticsearch. Customers can create a domain where the service is accessible. The domain should be granted access restrictions so that only authorized users and applications have access to the service.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
+}
+
+#
+# PR-AWS-CLD-IAM-041
+#
+
+default not_allow_decryption_actions_on_all_kms_keys = true
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource == "*"
+    contains(lower(policy_statement.Action[_]), "kms:*")
+    not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource == "*"
+    contains(lower(policy_statement.Action), "kms:*")
+    not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource[_]== "*"
+    contains(lower(policy_statement.Action), "kms:*")
+    not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource[_] == "*"
+    contains(lower(policy_statement.Action[_]), "kms:*")
+    not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource == "*"
+    contains(lower(policy_statement.Action[_]), "kms:Decrypt")
+    not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource == "*"
+    contains(lower(policy_statement.Action), "kms:Decrypt")
+    not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource[_]== "*"
+    contains(lower(policy_statement.Action), "kms:Decrypt")
+    not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource[_] == "*"
+    contains(lower(policy_statement.Action[_]), "kms:Decrypt")
+    not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource == "*"
+    contains(lower(policy_statement.Action[_]), "kms:ReEncryptFrom")
+    not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource == "*"
+    contains(lower(policy_statement.Action), "kms:ReEncryptFrom")
+    not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource[_]== "*"
+    contains(lower(policy_statement.Action), "kms:ReEncryptFrom")
+    not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource[_] == "*"
+    contains(lower(policy_statement.Action[_]), "kms:ReEncryptFrom")
+    not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys_err = "Ensure AWS IAM policy does not allows decryption actions on all KMS keys." {
+    not not_allow_decryption_actions_on_all_kms_keys
+}
+
+not_allow_decryption_actions_on_all_kms_keys_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-041",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM policy does not allows decryption actions on all KMS keys.",
+    "Policy Description": "It identifies IAM policies that allow decryption actions on all KMS keys. Instead of granting permissions for all keys, determine the minimum set of keys that users need to access encrypted data. You should grant to identities only the kms:Decrypt or kms:ReEncryptFrom permissions and only for the keys that are required to perform a task. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
+}
+
+#
+# PR-AWS-CLD-IAM-042
+#
+
+default iam_policy_attached_to_user = true
+
+iam_policy_attached_to_user = false {
+    UserDetail := input.UserDetailList[_]
+    count(UserDetail.AttachedManagedPolicies) != 0
+}
+
+iam_policy_attached_to_user_err = "Ensure IAM policy is attached to group rather than user." {
+    not iam_policy_attached_to_user
+}
+
+iam_policy_attached_to_user_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-042",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure IAM policy is attached to group rather than user.",
+    "Policy Description": "It identifies IAM policies attached to user. By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups but not users.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_attached_user_policies"
+}
+
+#
+# PR-AWS-CLD-IAM-043
+#
+
+default iam_policy_not_overly_permissive_to_all_traffic = true
+
+iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    contains(lower(policy_statement.Action[_]), "*")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    contains(lower(policy_statement.Action), "*")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    contains(lower(policy_statement.Action[_]), "*")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    contains(lower(policy_statement.Action), "*")
+}
+
+
+iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure IAM policy is not overly permissive to all traffic via condition clause." {
+    not iam_policy_not_overly_permissive_to_all_traffic
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-043",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure IAM policy is not overly permissive to all traffic via condition clause.",
+    "Policy Description": "It identifies IAM policies that have a policy that is overly permissive to all traffic via condition clause. If any IAM policy statement with a condition containing 0.0.0.0/0 or ::/0, it allows all traffic to resources attached to that IAM policy. It is highly recommended to have the least privileged IAM policy to protect the data leakage and unauthorized access.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
+}
+
+#
+# PR-AWS-CLD-IAM-044
+#
+
+default iam_policy_not_overly_permissive_to_sts_service = true
+
+iam_policy_not_overly_permissive_to_sts_service = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource == "*"
+    contains(lower(policy_statement.Action[_]), "sts:*")
+    not policy_statement.Condition
+}
+
+iam_policy_not_overly_permissive_to_sts_service = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource == "*"
+    contains(lower(policy_statement.Action), "sts:*")
+    not policy_statement.Condition
+}
+
+iam_policy_not_overly_permissive_to_sts_service = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource[_]== "*"
+    contains(lower(policy_statement.Action), "sts:*")
+    not policy_statement.Condition
+}
+
+iam_policy_not_overly_permissive_to_sts_service = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource[_] == "*"
+    contains(lower(policy_statement.Action[_]), "sts:*")
+    not policy_statement.Condition
+}
+
+iam_policy_not_overly_permissive_to_sts_service_err = "Ensure AWS IAM policy is not overly permissive to STS services." {
+    not iam_policy_not_overly_permissive_to_sts_service
+}
+
+iam_policy_not_overly_permissive_to_sts_service_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-044",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM policy is not overly permissive to STS services.",
+    "Policy Description": "It identifies the IAM policies that are overly permissive to STS services. AWS Security Token Service (AWS STS) is a web service that enables you to request temporary credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users). It is recommended to follow the principle of least privileges ensuring that only restricted STS services for restricted resources.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
 }

@@ -396,3 +396,34 @@ ebs_deletion_protection_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html"
 }
+
+#
+# PR-AWS-CLD-EC2-013
+# aws::ec2::instance
+#
+
+default ec2_instance_configured_with_instance_metadata_service_v2 = true
+
+ec2_instance_configured_with_instance_metadata_service_v2 = false {
+    Reservation := input.Reservations[_]
+    Instance := Reservation.Instances[_]
+    lower(Instance.State.Name) == "running"
+    lower(Instance.MetadataOptions.HttpEndpoint) == "enabled"
+    lower(Instance.MetadataOptions.HttpTokens) == "required"
+}
+
+ec2_instance_configured_with_instance_metadata_service_v2_err = "Ensure AWS EC2 instance is configured with Instance Metadata Service v2 (IMDSv2)." {
+    not ec2_instance_configured_with_instance_metadata_service_v2
+}
+
+ec2_instance_configured_with_instance_metadata_service_v2_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-013",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS EC2 instance is configured with Instance Metadata Service v2 (IMDSv2).",
+    "Policy Description": "It identifies AWS instances that are not configured with Instance Metadata Service v2 (IMDSv2). With IMDSv2, every request is now protected by session authentication. IMDSv2 protects against misconfigured-open website application firewalls, misconfigured-open reverse proxies, unpatched SSRF vulnerabilities, and misconfigured-open layer-3 firewalls and network address translation. It is recommended to use only IMDSv2 for all your EC2 instances. For more details:https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_instances"
+}

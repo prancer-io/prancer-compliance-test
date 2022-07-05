@@ -291,3 +291,47 @@ cf_geo_restriction_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
 }
+
+
+#
+# PR-AWS-CLD-CF-010
+#
+
+default cf_s3_origin = true
+
+cf_s3_origin = false {
+    # lower(resource.Type) == "aws::cloudfront::distribution"
+    item := input.Distribution.DistributionConfig.Origins.Items[_]
+    item.S3OriginConfig
+    item.S3OriginConfig.OriginAccessIdentity == ""
+}
+
+cf_s3_origin = false {
+    # lower(resource.Type) == "aws::cloudfront::distribution"
+    item := input.Distribution.DistributionConfig.Origins.Items[_]
+    item.S3OriginConfig
+    item.S3OriginConfig.OriginAccessIdentity == null
+}
+
+cf_s3_origin = false {
+    # lower(resource.Type) == "aws::cloudfront::distribution"
+    item := input.Distribution.DistributionConfig.Origins.Items[_]
+    item.S3OriginConfig
+    not item.S3OriginConfig.OriginAccessIdentity
+}
+
+cf_s3_origin_err = "AWS Cloudfront Distribution with S3 have Origin Access set to disabled" {
+    not cf_s3_origin
+}
+
+cf_s3_origin_metadata := {
+    "Policy Code": "PR-AWS-CLD-CF-010",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS Cloudfront Distribution with S3 have Origin Access set to disabled",
+    "Policy Description": "This policy identifies the AWS CloudFront distributions which are utilizing S3 bucket and have Origin Access Disabled. The origin access identity feature should be enabled for all your AWS CloudFront CDN distributions in order to restrict any direct access to your objects through Amazon S3 URLs.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudfront.html#CloudFront.Client.get_distribution"
+}

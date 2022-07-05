@@ -527,3 +527,144 @@ ecs_network_mode_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-networkMode"
 }
+
+#
+# PR-AWS-CLD-ECS-015
+# aws::ecs::taskdefinition
+#
+
+default ecs_fargate_task_definition_logging_is_enabled= true
+
+ecs_fargate_task_definition_logging_is_enabled = false {
+    containerDefinition := input.taskDefinition.containerDefinitions[_]
+    not containerDefinition.logConfiguration.logDriver
+}
+
+ecs_fargate_task_definition_logging_is_enabled = false {
+    containerDefinition := input.taskDefinition.containerDefinitions[_]
+    contains(lower(containerDefinition.logConfiguration.logDriver), "false")
+}
+
+ecs_fargate_task_definition_logging_is_enabled_err = "AWS ECS - Ensure Fargate task definition logging is enabled." {
+    not ecs_fargate_task_definition_logging_is_enabled
+}
+
+ecs_fargate_task_definition_logging_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-CLD-ECS-015",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS ECS - Ensure Fargate task definition logging is enabled.",
+    "Policy Description": "It checks if the Fargate task definition created has an execution IAM role associated, the role defines the extent of access to other AWS Services.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_task_definition"
+}
+
+#
+# PR-AWS-CLD-ECS-016
+#
+
+default no_ecs_task_definition_empty_roles = true
+
+no_ecs_task_definition_empty_roles = false {
+    containerDefinition := input.taskDefinition.containerDefinitions[_]
+    not containerDefinition.user
+}
+
+no_ecs_task_definition_empty_roles = false {
+    containerDefinition := input.taskDefinition.containerDefinitions[_]
+    containerDefinition.user == ""
+}
+
+no_ecs_task_definition_empty_roles = false {
+    containerDefinition := input.taskDefinition.containerDefinitions[_]
+    containerDefinition.user == null
+}
+
+no_ecs_task_definition_empty_roles = false {
+    containerDefinition := input.taskDefinition.containerDefinitions[_]
+    contains(lower(containerDefinition.user), "*")
+}
+
+no_ecs_task_definition_empty_roles_err = "Ensure there are no undefined ECS task definition empty roles for ECS." {
+    not no_ecs_task_definition_empty_roles
+}
+
+no_ecs_task_definition_empty_roles_metadata := {
+    "Policy Code": "PR-AWS-CLD-ECS-016",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure there are no undefined ECS task definition empty roles for ECS.",
+    "Policy Description": "It checks if the ECS container has a role attached. The task execution role grants the Amazon ECS container and Fargate agents permission to make AWS API calls on your behalf. The task execution IAM role is required depending on the requirements of your task.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_task_definition"
+}
+
+#
+# PR-AWS-CLD-ECS-017
+# aws::ecs::taskdefinition
+#
+
+default ecs_log_driver = true
+
+ecs_log_driver = false {
+    containerDefinition := input.taskDefinition.containerDefinitions[_]
+    not containerDefinition.logConfiguration.logDriver
+}
+
+ecs_log_driver = false {
+    containerDefinition := input.taskDefinition.containerDefinitions[_]
+    lower(containerDefinition.logConfiguration.logDriver) == ""
+}
+
+ecs_log_driver = false {
+    containerDefinition := input.taskDefinition.containerDefinitions[_]
+    containerDefinition.logConfiguration.logDriver == null
+}
+
+ecs_log_driver_err = "Ensure that a log driver has been configured for each ECS task definition." {
+    not ecs_log_driver
+}
+
+ecs_log_driver_metadata := {
+    "Policy Code": "PR-AWS-CLD-ECS-017",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that a log driver has been configured for each ECS task definition.",
+    "Policy Description": "It checks if log information from the containers running on ECS are send out to CloudWatch logs for monitoring.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_task_definition"
+}
+
+#
+# PR-AWS-CLD-ECS-018
+#
+
+default ecs_configured_with_active_services = true
+
+ecs_configured_with_active_services = false {
+    # lower(resource.Type) == "aws::ecs::cluster"
+    cluster := input.clusters[_]
+    cluster.activeServicesCount == 0
+}
+
+ecs_configured_with_active_services_err = "Ensure AWS ECS cluster is configured with active services." {
+    not ecs_configured_with_active_services
+}
+
+ecs_configured_with_active_services_metadata := {
+    "Policy Code": "PR-AWS-CLD-ECS-018",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS ECS cluster is configured with active services.",
+    "Policy Description": "This policy identifies ECS clusters that are not configured with active services. ECS service enables you to run and maintain a specified number of instances of a task definition simultaneously in an Amazon ECS cluster. It is recommended to remove Idle ECS clusters to reduce the container attack surface or create new services for the reported ECS cluster. For details:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_clusters"
+}

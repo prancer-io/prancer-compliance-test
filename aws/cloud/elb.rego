@@ -695,3 +695,178 @@ elb_protocol_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-protocol"
 }
+
+#
+# PR-AWS-CLD-ELB-020
+# aws::elasticloadbalancingv2::loadbalancer
+#
+
+default elb_deletion_protection = true
+
+elb_deletion_protection = false {
+    Attribute := input.Attributes[j]
+    lower(Attribute.Key) == "deletion_protection.enabled"
+    lower(Attribute.Value) == "false"
+}
+
+elb_deletion_protection_err = "Ensure that AWS Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled" {
+    not elb_deletion_protection
+}
+
+elb_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-020",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that AWS Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled",
+    "Policy Description": "This policy checks if the ELB is protected against accidental deletion by enabling deletion protection.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-loadbalancerattributes.html"
+}
+
+
+#
+# PR-AWS-CLD-ELB-021
+# aws::elasticloadbalancingv2::loadbalancer
+#
+
+default elb_gateway_load_balancer = true
+
+elb_gateway_load_balancer = false {
+    LoadBalancer := input.LoadBalancers[_]
+    lower(LoadBalancer.Type) == "gateway"
+}
+
+elb_gateway_load_balancer_err = "Ensure that AWS ensure Gateway Load Balancer (GWLB) is not being used" {
+    not elb_gateway_load_balancer
+}
+
+elb_gateway_load_balancer_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-021",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that AWS ensure Gateway Load Balancer (GWLB) is not being used",
+    "Policy Description": "This policy checks if Gateway LB is being used or not",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html"
+}
+
+
+#
+# PR-AWS-CLD-ELB-022
+# aws::elasticloadbalancing::loadbalancer
+#
+
+default elb_internet_facing_load_balancer = true
+
+elb_internet_facing_load_balancer = false {
+    LoadBalancer := input.LoadBalancers[_]
+    contains(lower(LoadBalancer.Scheme), "internet-facing")
+}
+
+elb_internet_facing_load_balancer_err = "Ensure Internet facing Classic ELB is not in use" {
+    not elb_internet_facing_load_balancer
+}
+
+elb_internet_facing_load_balancer_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-022",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Internet facing Classic ELB is not in use",
+    "Policy Description": "This policy checks if classic LB is being used in the environment for internet facing applications",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
+
+
+#
+# PR-AWS-CLD-ELB-023
+# aws::elasticloadbalancingv2::loadbalancer
+#
+
+default elb2_internet_facing_load_balancer = true
+
+elb2_internet_facing_load_balancer = false {
+    LoadBalancer := input.LoadBalancers[_]
+    contains(lower(LoadBalancer.Scheme), "internet-facing")
+}
+
+elb2_internet_facing_load_balancer_err = "Ensure Internet facing Classic ELBV2 is not in use" {
+    not elb2_internet_facing_load_balancer
+}
+
+elb2_internet_facing_load_balancer_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-023",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Internet facing Classic ELBV2 is not in use",
+    "Policy Description": "This policy checks if ELB v2 is being used in the environment",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html"
+}
+
+
+#
+# PR-AWS-CLD-ELB-024
+# aws::elasticloadbalancingv2::loadbalancer
+#
+
+default elb_waf_enabled = true
+
+elb_waf_enabled = false {
+    Attribute := input.Attributes[j]
+    lower(Attribute.Key) == "waf.fail_open.enabled"
+    lower(Attribute.Value) == "false"
+}
+
+elb_waf_enabled_err = "Ensure that public facing ELB has WAF attached" {
+    not elb_waf_enabled
+}
+
+elb_waf_enabled_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-024",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that public facing ELB has WAF attached",
+    "Policy Description": "This policy checks the usage of a WAF with Internet facing ELB. AWS WAF is a web application firewall service that lets you monitor web requests and protect your web applications from malicious requests.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancer_attributes"
+}
+
+
+#
+# PR-AWS-CLD-ELB-025
+# aws::elasticloadbalancingv2::listener
+
+default elbv2_ssl_negotiation_policy = true
+
+elbv2_ssl_negotiation_policy = false {
+    Listener := input.Listeners[_]
+    contains(Listener.SslPolicy, "ELBSecurityPolicy-TLS-1-0-2015-04")
+}
+
+elbv2_ssl_negotiation_policy_err = "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers." {
+    not elbv2_ssl_negotiation_policy
+}
+
+elbv2_ssl_negotiation_policy_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-025",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers.",
+    "Policy Description": "This policy identifies Elastic Load Balancers v2 (ELBv2) which are configured with SSL negotiation policy containing weak ciphers. An SSL cipher is an encryption algorithm that uses encryption keys to create a coded message. SSL protocols use several SSL ciphers to encrypt data over the Internet. As many of the other ciphers are not secure/weak, it is recommended to use only the ciphers recommended in the following AWS link: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners"
+}

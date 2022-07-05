@@ -240,6 +240,57 @@ glue_security_config_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-EncryptionConfiguration.html#cfn-glue-securityconfiguration-EncryptionConfiguration-s3encryptions"
 }
 
+
+#
+# PR-AWS-CLD-GLUE-003
+# aws::glue::securityconfiguration
+
+default glue_encrypt_data_at_rest = true
+
+glue_encrypt_data_at_rest = false {
+    not input.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode
+}
+
+glue_encrypt_data_at_rest = false {
+    lower(input.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) == "disabled"
+}
+
+glue_encrypt_data_at_rest = false {
+    not input.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode
+}
+
+glue_encrypt_data_at_rest = false {
+    lower(input.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) == "disabled"
+}
+
+glue_encrypt_data_at_rest = false {
+    S3_Encryption := input.SecurityConfiguration.EncryptionConfiguration.S3Encryption[_]
+    lower(S3_Encryption.S3EncryptionMode) == "disabled"
+}
+
+glue_encrypt_data_at_rest = false {
+    
+    S3_Encryption := input.SecurityConfiguration.EncryptionConfiguration.S3Encryption[_]
+    not S3_Encryption.S3EncryptionMode
+}
+
+glue_encrypt_data_at_rest_err = "Ensure AWS Glue encrypt data at rest" {
+    not glue_encrypt_data_at_rest
+}
+
+glue_encrypt_data_at_rest_metadata := {
+    "Policy Code": "PR-AWS-CLD-GLUE-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Glue encrypt data at rest.",
+    "Policy Description": "It is to check that AWS Glue encryption at rest is enabled.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue.html#Glue.Client.get_security_configuration"
+}
+
+
 #
 # PR-AWS-CLD-AS-001
 #
@@ -505,6 +556,34 @@ stack_with_not_all_capabilities_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.describe_stacks"
 }
 
+#
+# PR-AWS-CLD-CFR-006
+#
+
+default termination_protection_in_stacks_is_enabled = true
+
+termination_protection_in_stacks_is_enabled = false {
+    # lower(resource.Type) == "AWS::CloudFormation::Stack"
+    Stack := input.Stacks[_]
+    Stack.EnableTerminationProtection == available_false_choices[_]
+}
+
+termination_protection_in_stacks_is_enabled_err = "Ensure termination protection in stacks is enabled." {
+    not termination_protection_in_stacks_is_enabled
+}
+
+termination_protection_in_stacks_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-CLD-CFR-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure termination protection in stacks is enabled.",
+    "Policy Description": "It checks if the stack is protected against accidental termination which may lead to deletion of critical resources.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudformation.html#CloudFormation.Client.describe_stacks"
+}
+
 
 #
 # PR-AWS-CLD-CFG-001
@@ -578,6 +657,63 @@ aws_config_configuration_aggregator_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html#cfn-config-configurationaggregator-accountaggregationsource-allawsregions"
 }
 
+
+#
+# PR-AWS-CLD-CFG-003
+#
+
+default aws_config_recorder_status = true
+
+aws_config_recorder_status = false {
+    # lower(resource.Type) == "aws::config::configurationrecorder".
+    ConfigurationRecordersStatus := input.ConfigurationRecordersStatus[_]
+    ConfigurationRecordersStatus.recording == true
+    lower(ConfigurationRecordersStatus.lastStatus) == "failure"
+}
+
+aws_config_recorder_status_err = "Ensure AWS Config do not fails to deliver log files" {
+    not aws_config_recorder_status
+}
+
+aws_config_recorder_status_metadata := {
+    "Policy Code": "PR-AWS-CLD-CFG-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Config does not fail to deliver log files",
+    "Policy Description": "This policy identifies AWS Configs failing to deliver its log files to the specified S3 bucket. It happens when it doesn't have sufficient permissions to complete the operation. To deliver information to S3 bucket, AWS Config needs to assume an IAM role that manages the permissions required to access the designated S3 bucket.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.describe_configuration_recorders"
+}
+
+#
+# PR-AWS-CLD-CFG-004
+#
+
+default config_includes_global_resources = true
+
+config_includes_global_resources = false {
+    # lower(resource.Type) == "aws::config::configurationrecorder".
+    ConfigurationRecorders := input.ConfigurationRecorders[_]
+    ConfigurationRecorders.recordingGroup.includeGlobalResourceTypes == available_false_choices[_]
+}
+
+config_includes_global_resources_err = "Ensure AWS Config includes global resources types (IAM)." {
+    not config_includes_global_resources
+}
+
+config_includes_global_resources_metadata := {
+    "Policy Code": "PR-AWS-CLD-CFG-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Config includes global resources types (IAM).",
+    "Policy Description": "It checks that global resource types are included in AWS Config.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/config.html#ConfigService.Client.describe_configuration_recorders"
+}
 
 #
 # PR-AWS-CLD-KNS-001
@@ -710,6 +846,94 @@ mq_logging_enable_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-publiclyaccessible"
 }
 
+#
+# PR-AWS-CLD-MQ-003
+#
+
+default mq_activemq_approved_engine_version = true
+
+mq_activemq_approved_engine_version = false {
+    # lower(resource.Type) == "aws::amazonmq::broker"
+    lower(input.EngineType) == "activemq"
+    not startswith(input.EngineVersion, "5.16")
+}
+
+mq_activemq_approved_engine_version_err = "Ensure ActiveMQ engine version is approved by GS." {
+    not mq_activemq_approved_engine_version
+}
+
+mq_activemq_approved_engine_version_metadata := {
+    "Policy Code": "PR-AWS-CLD-MQ-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure ActiveMQ engine version is approved by GS.",
+    "Policy Description": "It is used to check only firm approved version of ActiveMQ is being used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker"
+}
+
+#
+# PR-AWS-CLD-MQ-004
+#
+
+default mq_rabbitmq_approved_engine_version = true
+
+mq_rabbitmq_approved_engine_version = false {
+    # lower(resource.Type) == "aws::amazonmq::broker"
+    lower(input.EngineType) == "rabbitmq"
+    not startswith(input.EngineVersion, "3.8")
+}
+
+mq_rabbitmq_approved_engine_version_err = "Ensure RabbitMQ engine version is approved by GS." {
+    not mq_rabbitmq_approved_engine_version
+}
+
+mq_rabbitmq_approved_engine_version_metadata := {
+    "Policy Code": "PR-AWS-CLD-MQ-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure RabbitMQ engine version is approved by GS.",
+    "Policy Description": "It is used to check only firm approved version of RabbitMQ is being used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker"
+}
+
+#
+# PR-AWS-CLD-MQ-005
+#
+
+default audit_logs_published_to_cloudWatch = true
+
+audit_logs_published_to_cloudWatch = false {
+    # lower(resource.Type) == "aws::amazonmq::broker"
+    lower(input.EngineType) == "activemq"
+    lower(input.Logs.Audit) == available_false_choices[_]
+}
+
+audit_logs_published_to_cloudWatch = false {
+    # lower(resource.Type) == "aws::amazonmq::broker"
+    not input.Logs.Audit
+}
+
+audit_logs_published_to_cloudWatch_err = "Ensure General and Audit logs are published to CloudWatch." {
+    not audit_logs_published_to_cloudWatch
+}
+
+audit_logs_published_to_cloudWatch_metadata := {
+    "Policy Code": "PR-AWS-CLD-MQ-005",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure General and Audit logs are published to CloudWatch.",
+    "Policy Description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues. It does not apply to RabbitMQ brokers.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker"
+}
 
 #
 # PR-AWS-CLD-R53-001
