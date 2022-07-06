@@ -154,7 +154,8 @@ default vpc_policy_not_overly_permissive = true
 
 vpc_policy_not_overly_permissive = false {
     VpcEndpoint := input.VpcEndpoints[_]
-    statement := VpcEndpoint.PolicyDocument.Statement[i]
+    policy := json.unmarshal(VpcEndpoint.PolicyDocument)
+    statement := policy.Statement[i]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
     contains(lower(statement.Action), "*")
@@ -163,7 +164,8 @@ vpc_policy_not_overly_permissive = false {
 
 vpc_policy_not_overly_permissive = false {
     VpcEndpoint := input.VpcEndpoints[_]
-    statement := VpcEndpoint.PolicyDocument.Statement[i]
+    policy := json.unmarshal(VpcEndpoint.PolicyDocument)
+    statement := policy.Statement[i]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
     contains(lower(statement.Action[_]), "*")
@@ -172,7 +174,8 @@ vpc_policy_not_overly_permissive = false {
 
 vpc_policy_not_overly_permissive = false {
     VpcEndpoint := input.VpcEndpoints[_]
-    statement := VpcEndpoint.PolicyDocument.Statement[i]
+    policy := json.unmarshal(VpcEndpoint.PolicyDocument)
+    statement := policy.Statement[i]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
     contains(lower(statement.Action), "*")
@@ -181,7 +184,8 @@ vpc_policy_not_overly_permissive = false {
 
 vpc_policy_not_overly_permissive = false {
     VpcEndpoint := input.VpcEndpoints[_]
-    statement := VpcEndpoint.PolicyDocument.Statement[i]
+    policy := json.unmarshal(VpcEndpoint.PolicyDocument)
+    statement := policy.Statement[i]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
     contains(lower(statement.Action[_]), "*")
@@ -190,7 +194,8 @@ vpc_policy_not_overly_permissive = false {
 
 vpc_policy_not_overly_permissive = false {
     VpcEndpoint := input.VpcEndpoints[_]
-    statement := VpcEndpoint.PolicyDocument.Statement[i]
+    policy := json.unmarshal(VpcEndpoint.PolicyDocument)
+    statement := policy.Statement[i]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action), "*")
@@ -199,7 +204,8 @@ vpc_policy_not_overly_permissive = false {
 
 vpc_policy_not_overly_permissive = false {
     VpcEndpoint := input.VpcEndpoints[_]
-    statement := VpcEndpoint.PolicyDocument.Statement[i]
+    policy := json.unmarshal(VpcEndpoint.PolicyDocument)
+    statement := policy.Statement[i]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action[_]), "*")
