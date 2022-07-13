@@ -1281,6 +1281,139 @@ mq_logging_enable_metadata := {
 
 
 #
+# PR-AWS-TRF-MQ-003
+#
+
+default mq_activemq_approved_engine_version = null
+
+aws_issue["mq_activemq_approved_engine_version"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_mq_broker"
+    lower(resource.properties.engine_type) == "activemq"
+    not startswith(resource.properties.engine_version, "5.16")
+}
+
+mq_activemq_approved_engine_version {
+    lower(input.resources[i].type) == "aws_mq_broker"
+    not aws_issue["mq_activemq_approved_engine_version"]
+}
+
+mq_activemq_approved_engine_version = false {
+    aws_issue["mq_activemq_approved_engine_version"]
+}
+
+mq_activemq_approved_engine_version_err = "Ensure ActiveMQ engine version is approved by GS." {
+    aws_issue["mq_activemq_approved_engine_version"]
+}
+
+mq_activemq_approved_engine_version_metadata := {
+    "Policy Code": "PR-AWS-TRF-MQ-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure ActiveMQ engine version is approved by GS.",
+    "Policy Description": "It is used to check only firm approved version of ActiveMQ is being used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/mq_broker"
+}
+
+
+#
+# PR-AWS-TRF-MQ-004
+#
+
+default mq_rabbitmq_approved_engine_version = null
+
+aws_issue["mq_rabbitmq_approved_engine_version"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_mq_broker"
+    lower(resource.properties.engine_type) == "rabbitmq"
+    not startswith(resource.properties.engine_version, "3.8")
+}
+
+mq_rabbitmq_approved_engine_version {
+    lower(input.resources[i].type) == "aws_mq_broker"
+    not aws_issue["mq_rabbitmq_approved_engine_version"]
+}
+
+mq_rabbitmq_approved_engine_version = false {
+    aws_issue["mq_rabbitmq_approved_engine_version"]
+}
+
+mq_rabbitmq_approved_engine_version_err = "Ensure RabbitMQ engine version is approved by GS." {
+    aws_issue["mq_rabbitmq_approved_engine_version"]
+}
+
+mq_rabbitmq_approved_engine_version_metadata := {
+    "Policy Code": "PR-AWS-TRF-MQ-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure RabbitMQ engine version is approved by GS.",
+    "Policy Description": "It is used to check only firm approved version of RabbitMQ is being used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/mq_broker"
+}
+
+
+#
+# PR-AWS-TRF-MQ-005
+#
+
+default audit_logs_published_to_cloudWatch = null
+
+aws_issue["audit_logs_published_to_cloudWatch"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_mq_broker"
+    lower(resource.properties.engine_type) == "activemq"
+    not resource.properties.logs
+}
+
+aws_issue["audit_logs_published_to_cloudWatch"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_mq_broker"
+    lower(resource.properties.engine_type) == "activemq"
+    log := resource.properties.logs[j]
+    not log.audit
+}
+
+aws_issue["audit_logs_published_to_cloudWatch"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_mq_broker"
+    lower(resource.properties.engine_type) == "activemq"
+    log := resource.properties.logs[j]
+    lower(log.audit) == "false"
+}
+
+audit_logs_published_to_cloudWatch {
+    lower(input.resources[i].type) == "aws_mq_broker"
+    not aws_issue["audit_logs_published_to_cloudWatch"]
+}
+
+audit_logs_published_to_cloudWatch = false {
+    aws_issue["audit_logs_published_to_cloudWatch"]
+}
+
+audit_logs_published_to_cloudWatch_err = "Ensure General and Audit logs are published to CloudWatch." {
+    aws_issue["audit_logs_published_to_cloudWatch"]
+}
+
+audit_logs_published_to_cloudWatch_metadata := {
+    "Policy Code": "PR-AWS-TRF-MQ-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure General and Audit logs are published to CloudWatch.",
+    "Policy Description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues. It does not apply to RabbitMQ brokers.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/mq_broker"
+}
+
+
+#
 # PR-AWS-TRF-R53-001
 #
 
@@ -1608,6 +1741,87 @@ glue_security_config_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_security_configuration"
 }
+
+
+#
+# PR-AWS-TRF-GLUE-003
+#
+
+default glue_encrypt_data_at_rest = null
+
+aws_issue["glue_encrypt_data_at_rest"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_glue_security_configuration"
+    encryption_configuration := resource.properties.encryption_configuration[j]
+    cloudwatch_encryption := encryption_configuration.cloudwatch_encryption[k]
+    lower(cloudwatch_encryption.cloudwatch_encryption_mode) == "disabled"
+}
+
+aws_issue["glue_encrypt_data_at_rest"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_glue_security_configuration"
+    encryption_configuration := resource.properties.encryption_configuration[j]
+    cloudwatch_encryption := encryption_configuration.cloudwatch_encryption[k]
+    not cloudwatch_encryption.cloudwatch_encryption_mode
+}
+
+aws_issue["glue_encrypt_data_at_rest"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_glue_security_configuration"
+    encryption_configuration := resource.properties.encryption_configuration[j]
+    job_bookmarks_encryption := encryption_configuration.job_bookmarks_encryption[k]
+    lower(job_bookmarks_encryption.job_bookmarks_encryption_mode) == "disabled"
+}
+
+aws_issue["glue_encrypt_data_at_rest"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_glue_security_configuration"
+    encryption_configuration := resource.properties.encryption_configuration[j]
+    job_bookmarks_encryption := encryption_configuration.job_bookmarks_encryption[k]
+    not job_bookmarks_encryption.job_bookmarks_encryption_mode
+}
+
+aws_issue["glue_encrypt_data_at_rest"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_glue_security_configuration"
+    encryption_configuration := resource.properties.encryption_configuration[j]
+    s3_encryption := encryption_configuration.s3_encryption[k]
+    lower(s3_encryption.s3_encryption_mode) == "disabled"
+}
+
+aws_issue["glue_encrypt_data_at_rest"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_glue_security_configuration"
+    encryption_configuration := resource.properties.encryption_configuration[j]
+    s3_encryption := encryption_configuration.s3_encryption[k]
+    not s3_encryption.s3_encryption_mode
+}
+
+glue_encrypt_data_at_rest {
+    lower(input.resources[i].type) == "aws_glue_security_configuration"
+    not aws_issue["glue_encrypt_data_at_rest"]
+}
+
+glue_encrypt_data_at_rest = false {
+    aws_issue["glue_encrypt_data_at_rest"]
+}
+
+glue_encrypt_data_at_rest_err = "Ensure AWS Glue encrypt data at rest" {
+    aws_issue["glue_encrypt_data_at_rest"]
+}
+
+glue_encrypt_data_at_rest_metadata := {
+    "Policy Code": "PR-AWS-TRF-GLUE-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS Glue encrypt data at rest",
+    "Policy Description": "It is to check that AWS Glue encryption at rest is enabled.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_security_configuration"
+}
+
 
 #
 # PR-AWS-TRF-AS-001

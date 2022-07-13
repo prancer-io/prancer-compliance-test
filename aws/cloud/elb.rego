@@ -709,7 +709,7 @@ elb_deletion_protection = false {
     lower(Attribute.Value) == "false"
 }
 
-elb_deletion_protection_err = "Ensure that AWS Ensure Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled" {
+elb_deletion_protection_err = "Ensure that AWS Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled" {
     not elb_deletion_protection
 }
 
@@ -718,7 +718,7 @@ elb_deletion_protection_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that AWS Ensure Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled",
+    "Policy Title": "Ensure that AWS Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled",
     "Policy Description": "This policy checks if the ELB is protected against accidental deletion by enabling deletion protection.",
     "Resource Type": "",
     "Policy Help URL": "",
@@ -813,6 +813,7 @@ elb2_internet_facing_load_balancer_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html"
 }
 
+
 #
 # PR-AWS-CLD-ELB-024
 # aws::elasticloadbalancingv2::loadbalancer
@@ -839,5 +840,33 @@ elb_waf_enabled_metadata := {
     "Policy Description": "This policy checks the usage of a WAF with Internet facing ELB. AWS WAF is a web application firewall service that lets you monitor web requests and protect your web applications from malicious requests.",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-loadbalancerattributes.html"
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancer_attributes"
+}
+
+
+#
+# PR-AWS-CLD-ELB-025
+# aws::elasticloadbalancingv2::listener
+
+default elbv2_ssl_negotiation_policy = true
+
+elbv2_ssl_negotiation_policy = false {
+    Listener := input.Listeners[_]
+    contains(Listener.SslPolicy, "ELBSecurityPolicy-TLS-1-0-2015-04")
+}
+
+elbv2_ssl_negotiation_policy_err = "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers." {
+    not elbv2_ssl_negotiation_policy
+}
+
+elbv2_ssl_negotiation_policy_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-025",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers.",
+    "Policy Description": "This policy identifies Elastic Load Balancers v2 (ELBv2) which are configured with SSL negotiation policy containing weak ciphers. An SSL cipher is an encryption algorithm that uses encryption keys to create a coded message. SSL protocols use several SSL ciphers to encrypt data over the Internet. As many of the other ciphers are not secure/weak, it is recommended to use only the ciphers recommended in the following AWS link: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners"
 }

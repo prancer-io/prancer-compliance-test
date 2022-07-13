@@ -240,6 +240,57 @@ glue_security_config_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-EncryptionConfiguration.html#cfn-glue-securityconfiguration-EncryptionConfiguration-s3encryptions"
 }
 
+
+#
+# PR-AWS-CLD-GLUE-003
+# aws::glue::securityconfiguration
+
+default glue_encrypt_data_at_rest = true
+
+glue_encrypt_data_at_rest = false {
+    not input.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode
+}
+
+glue_encrypt_data_at_rest = false {
+    lower(input.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) == "disabled"
+}
+
+glue_encrypt_data_at_rest = false {
+    not input.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode
+}
+
+glue_encrypt_data_at_rest = false {
+    lower(input.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) == "disabled"
+}
+
+glue_encrypt_data_at_rest = false {
+    S3_Encryption := input.SecurityConfiguration.EncryptionConfiguration.S3Encryption[_]
+    lower(S3_Encryption.S3EncryptionMode) == "disabled"
+}
+
+glue_encrypt_data_at_rest = false {
+    
+    S3_Encryption := input.SecurityConfiguration.EncryptionConfiguration.S3Encryption[_]
+    not S3_Encryption.S3EncryptionMode
+}
+
+glue_encrypt_data_at_rest_err = "Ensure AWS Glue encrypt data at rest" {
+    not glue_encrypt_data_at_rest
+}
+
+glue_encrypt_data_at_rest_metadata := {
+    "Policy Code": "PR-AWS-CLD-GLUE-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Glue encrypt data at rest.",
+    "Policy Description": "It is to check that AWS Glue encryption at rest is enabled.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue.html#Glue.Client.get_security_configuration"
+}
+
+
 #
 # PR-AWS-CLD-AS-001
 #
@@ -859,6 +910,7 @@ default audit_logs_published_to_cloudWatch = true
 
 audit_logs_published_to_cloudWatch = false {
     # lower(resource.Type) == "aws::amazonmq::broker"
+    lower(input.EngineType) == "activemq"
     lower(input.Logs.Audit) == available_false_choices[_]
 }
 
@@ -877,7 +929,7 @@ audit_logs_published_to_cloudWatch_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud",
     "Policy Title": "Ensure General and Audit logs are published to CloudWatch.",
-    "Policy Description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues.",
+    "Policy Description": "It is used to check that Amazon MQ is configured to push logs to CloudWatch in order to enhance troubleshooting in case of issues. It does not apply to RabbitMQ brokers.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker"

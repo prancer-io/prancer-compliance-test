@@ -158,7 +158,7 @@ default msk_cluster_enhanced_monitoring_enable = true
 
 msk_cluster_enhanced_monitoring_enable = false {
     # lower(resource.Type) == "aws::msk::cluster"
-    lower(input.ClusterInfo.EnhancedMonitoring) != "default"
+    lower(input.ClusterInfo.EnhancedMonitoring) == "default"
 }
 
 msk_cluster_enhanced_monitoring_enable = false {
@@ -171,7 +171,7 @@ msk_cluster_enhanced_monitoring_enable = false {
     input.ClusterInfo.EnhancedMonitoring == null
 }
 
-msk_cluster_enhanced_monitoring_enable_err = "Ensure enhanaced monitoring for AWS MSK is set to default." {
+msk_cluster_enhanced_monitoring_enable_err = "Ensure enhanaced monitoring for AWS MSK is not set to default." {
     not msk_cluster_enhanced_monitoring_enable
 }
 
@@ -180,7 +180,7 @@ msk_cluster_enhanced_monitoring_enable_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure enhanaced monitoring for AWS MSK is set to default.",
+    "Policy Title": "Ensure enhanaced monitoring for AWS MSK is not set to default.",
     "Policy Description": "It is used to check that enhanced monitoring is configured to gather Apache Kafka metrics and sends them to Amazon CloudWatch.",
     "Resource Type": "",
     "Policy Help URL": "",

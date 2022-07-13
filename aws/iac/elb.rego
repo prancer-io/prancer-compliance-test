@@ -2121,3 +2121,81 @@ elb_listner_redirect_protocol_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
 }
+
+
+#
+# PR-AWS-CFR-ELB-024
+#
+
+default elb_waf_enabled = null
+
+aws_issue["elb_waf_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    LoadBalancerAttribute := resource.Properties.LoadBalancerAttributes[_]
+    lower(LoadBalancerAttribute.Key) == "waf.fail_open.enabled"
+    not LoadBalancerAttribute.Value
+}
+
+elb_waf_enabled {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not aws_issue["elb_waf_enabled"]
+}
+
+elb_waf_enabled = false {
+    aws_issue["elb_waf_enabled"]
+}
+
+elb_waf_enabled_err = "Ensure that public facing ELB has WAF attached" {
+    aws_issue["elb_waf_enabled"]
+}
+
+elb_waf_enabled_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-024",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that public facing ELB has WAF attached",
+    "Policy Description": "This policy checks the usage of a WAF with Internet facing ELB. AWS WAF is a web application firewall service that lets you monitor web requests and protect your web applications from malicious requests.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html#aws-resource-elasticloadbalancingv2-loadbalancer-syntax"
+}
+
+
+#
+# PR-AWS-CFR-ELB-025
+#
+
+default elbv2_ssl_negotiation_policy = null
+
+aws_issue["elbv2_ssl_negotiation_policy"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    contains(resource.Properties.SslPolicy, "ELBSecurityPolicy-TLS-1-0-2015-04")
+}
+
+elbv2_ssl_negotiation_policy {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::listener"
+    not aws_issue["elbv2_ssl_negotiation_policy"]
+}
+
+elbv2_ssl_negotiation_policy = false {
+    aws_issue["elbv2_ssl_negotiation_policy"]
+}
+
+elbv2_ssl_negotiation_policy_err = "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers." {
+    aws_issue["elbv2_ssl_negotiation_policy"]
+}
+
+elbv2_ssl_negotiation_policy_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-025",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers.",
+    "Policy Description": "This policy identifies Elastic Load Balancers v2 (ELBv2) which are configured with SSL negotiation policy containing weak ciphers. An SSL cipher is an encryption algorithm that uses encryption keys to create a coded message. SSL protocols use several SSL ciphers to encrypt data over the Internet. As many of the other ciphers are not secure/weak, it is recommended to use only the ciphers recommended in the following AWS link: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html#aws-resource-elasticloadbalancingv2-listener-syntax"
+}
