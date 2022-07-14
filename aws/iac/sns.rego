@@ -4,6 +4,10 @@ default metadata = {}
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 #
 # PR-AWS-CFR-SNS-001
 #
@@ -242,6 +246,482 @@ sns_policy_public_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure SNS Topic policy is not publicly accessible",
     "Policy Description": "Public SNS Topic potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html"
+}
+
+
+#
+# PR-AWS-CFR-SNS-005
+#
+
+default sns_not_unauthorized_access = null
+
+aws_issue["sns_not_unauthorized_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    not statement.Condition
+}
+
+aws_issue["sns_not_unauthorized_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    not statement.Condition
+}
+
+aws_issue["sns_not_unauthorized_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    not statement.Condition
+}
+
+
+sns_not_unauthorized_access {
+    lower(input.Resources[i].Type) == "aws::sns::topicpolicy"
+    not aws_issue["sns_not_unauthorized_access"]
+}
+
+sns_not_unauthorized_access = false {
+    aws_issue["sns_not_unauthorized_access"]
+}
+
+sns_not_unauthorized_access_err = "Ensure AWS SNS topic is not exposed to unauthorized access." {
+    aws_issue["sns_not_unauthorized_access"]
+}
+
+sns_not_unauthorized_access_metadata := {
+    "Policy Code": "PR-AWS-CFR-SNS-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS SNS topic is not exposed to unauthorized access.",
+    "Policy Description": "It identifies AWS SNS topics that are exposed to unauthorized access. Amazon Simple Notification Service (Amazon SNS) is a web service that coordinates and manages the delivery or sending of messages to subscribing endpoints or clients. To protect these messages from attackers and unauthorized accesses, permissions should be given to only authorized users. For more details: https://docs.aws.amazon.com/sns/latest/dg/sns-security-best-practices.html#ensure-topics-not-publicly-accessible",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html"
+}
+
+
+#
+# PR-AWS-CFR-SNS-006
+#
+
+default sns_permissive_for_publishing = null
+
+aws_issue["sns_permissive_for_publishing"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action[_]), "sns:publish")
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_publishing"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action), "sns:publish")
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_publishing"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action[_]), "sns:publish")
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_publishing"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "sns:publish")
+    not statement.Condition
+}
+	
+aws_issue["sns_permissive_for_publishing"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action[_]), "sns:publish")
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_publishing"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), "sns:publish")
+    not statement.Condition
+}
+
+sns_permissive_for_publishing {
+    lower(input.Resources[i].Type) == "aws::sns::topicpolicy"
+    not aws_issue["sns_permissive_for_publishing"]
+}
+
+sns_permissive_for_publishing = false {
+    aws_issue["sns_permissive_for_publishing"]
+}
+
+sns_permissive_for_publishing_err = "Ensure AWS SNS topic policy is not overly permissive for publishing." {
+    aws_issue["sns_permissive_for_publishing"]
+}
+
+sns_permissive_for_publishing_metadata := {
+    "Policy Code": "PR-AWS-CFR-SNS-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS SNS topic policy is not overly permissive for publishing.",
+    "Policy Description": "It identifies AWS SNS topics that have SNS policy overly permissive for publishing. When a message is published, Amazon SNS attempts to deliver the message to the subscribed endpoints. To protect these messages from attackers and unauthorized accesses, permissions should be given to only authorized users. For more details: https://docs.aws.amazon.com/sns/latest/dg/sns-security-best-practices.html#implement-least-privilege-access",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html"
+}
+
+
+#
+# PR-AWS-CFR-SNS-007
+#
+
+default sns_permissive_for_subscription = null
+
+action_for_subscription := ["sns:subscribe", "sns:receive"]
+
+aws_issue["sns_permissive_for_subscription"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action[i]), action_for_subscription[j])
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_subscription"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action), action_for_subscription[j])
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_subscription"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action[i]), action_for_subscription[j])
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_subscription"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), action_for_subscription[j])
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_subscription"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action[i]), action_for_subscription[j])
+    not statement.Condition
+}
+
+aws_issue["sns_permissive_for_subscription"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), action_for_subscription[j])
+    not statement.Condition
+}
+
+sns_permissive_for_subscription {
+    lower(input.Resources[i].Type) == "aws::sns::topicpolicy"
+    not aws_issue["sns_permissive_for_subscription"]
+}
+
+sns_permissive_for_subscription = false {
+    aws_issue["sns_permissive_for_subscription"]
+}
+
+sns_permissive_for_subscription_err = "Ensure AWS SNS topic policy is not overly permissive for subscription." {
+    aws_issue["sns_permissive_for_subscription"]
+}
+
+sns_permissive_for_subscription_metadata := {
+    "Policy Code": "PR-AWS-CFR-SNS-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS SNS topic policy is not overly permissive for subscription.",
+    "Policy Description": "It identifies AWS SNS topics that have SNS policy overly permissive for the subscription. When you subscribe an endpoint to a topic, the endpoint begins to receive messages published to the associated topic. To protect these messages from attackers and unauthorized accesses, permissions should be given to only authorized users. For more details: https://docs.aws.amazon.com/sns/latest/dg/sns-security-best-practices.html#implement-least-privilege-access",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html"
+}
+
+
+#
+# PR-AWS-CFR-SNS-008
+#
+
+default sns_cross_account_access = null
+
+aws_issue["sns_cross_account_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal != "*"
+    statement.Principal.AWS != "*"
+    contains(statement.Principal.AWS, "arn")
+    not contains(statement.Principal.AWS, "$.Owner")
+}
+
+aws_issue["sns_cross_account_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal != "*"
+    principal_aws:= statement.Principal.AWS[_]
+    principal_aws != "*"
+    contains(principal_aws, "arn")
+    not contains(principal_aws, "$.Owner")
+}
+
+sns_cross_account_access {
+    lower(input.Resources[i].Type) == "aws::sns::topicpolicy"
+    not aws_issue["sns_cross_account_access"]
+}
+
+sns_cross_account_access = false {
+    aws_issue["sns_cross_account_access"]
+}
+
+sns_cross_account_access_err = "Ensure AWS SNS topic do not have cross-account access." {
+    aws_issue["sns_cross_account_access"]
+}
+
+sns_cross_account_access_metadata := {
+    "Policy Code": "PR-AWS-CFR-SNS-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS SNS topic do not have cross-account access.",
+    "Policy Description": "It identifies AWS SNS topics that are configured with cross-account access. Allowing unknown cross-account access to your SNS topics will enable other accounts and gain control over your AWS SNS topics. To prevent unknown cross-account access, allow only trusted entities to access your Amazon SNS topics by implementing the appropriate SNS policies.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html"
+}
+
+
+#
+# PR-AWS-CFR-SNS-009
+#
+
+default sns_accessible_via_specific_vpc = null
+
+aws_issue["sns_accessible_via_specific_vpc"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement, "Condition")
+}
+
+aws_issue["sns_accessible_via_specific_vpc"]{
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition, "StringEquals")
+}
+
+aws_issue["sns_accessible_via_specific_vpc"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition.StringEquals, "aws:SourceVpce")
+}
+
+sns_accessible_via_specific_vpc {
+    lower(input.Resources[i].Type) == "aws::sns::topicpolicy"
+    not aws_issue["sns_accessible_via_specific_vpc"]
+}
+
+sns_accessible_via_specific_vpc = false {
+    aws_issue["sns_accessible_via_specific_vpc"]
+}
+
+sns_accessible_via_specific_vpc_err = "Ensure SNS is only accessible via specific VPCe service." {
+    aws_issue["sns_accessible_via_specific_vpc"]
+}
+
+sns_accessible_via_specific_vpc_metadata := {
+    "Policy Code": "PR-AWS-CFR-SNS-009",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure SNS is only accessible via specific VPCe service.",
+    "Policy Description": "It checks if SNS to other AWS services communication is over the internet.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html"
+}
+
+
+#
+# PR-AWS-CFR-SNS-010
+#
+
+default sns_secure_data_transport = null
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    not statement.Condition.Bool["aws:SecureTransport"]
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action[_]), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action[_]), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "deny"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action[_]), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "deny"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "deny"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action[_]), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+aws_issue["sns_secure_data_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "deny"
+    statement.Principal.AWS[_] = "*"
+    contains(lower(statement.Action), "publish")
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+sns_secure_data_transport {
+    lower(input.Resources[i].Type) == "aws::sns::topicpolicy"
+    not aws_issue["sns_secure_data_transport"]
+}
+
+sns_secure_data_transport = false {
+    aws_issue["sns_secure_data_transport"]
+}
+
+sns_secure_data_transport_err = "Ensure SNS topic is configured with secure data transport policy." {
+    aws_issue["sns_secure_data_transport"]
+}
+
+sns_secure_data_transport_metadata := {
+    "Policy Code": "PR-AWS-CFR-SNS-010",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure SNS topic is configured with secure data transport policy.",
+    "Policy Description": "It check if the SNs topics are configured with secure data transport policy via SSL.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html"

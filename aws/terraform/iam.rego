@@ -1275,6 +1275,7 @@ ecs_task_definition_with_iam_wildcard_resource_access_metadata := {
 default ecr_repository_is_publicly_accessible_through_iam_policies = null
 
 aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
     statement := resource.properties.assume_role_policy.Statement[j]
@@ -1283,6 +1284,7 @@ aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
     statement := resource.properties.assume_role_policy.Statement[j]
@@ -1323,6 +1325,7 @@ ecr_repository_is_publicly_accessible_through_iam_policies_metadata := {
 default lambda_function_is_publicly_accessible_through_iam_policies = null
 
 aws_issue["lambda_function_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
     statement := resource.properties.assume_role_policy.Statement[j]
@@ -1331,6 +1334,7 @@ aws_issue["lambda_function_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["lambda_function_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
     statement := resource.properties.assume_role_policy.Statement[j]
@@ -1371,6 +1375,7 @@ lambda_function_is_publicly_accessible_through_iam_policies_metadata := {
 default s3_bucket_is_publicly_accessible_through_iam_policies = null
 
 aws_issue["s3_bucket_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
     statement := resource.properties.assume_role_policy.Statement[j]
@@ -1379,6 +1384,7 @@ aws_issue["s3_bucket_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["s3_bucket_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
     statement := resource.properties.assume_role_policy.Statement[j]
@@ -1418,21 +1424,25 @@ s3_bucket_is_publicly_accessible_through_iam_policies_metadata := {
 
 default sqs_queue_is_publicly_accessible_through_iam_policies = null
 
+condition_for_sqs := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
+
 aws_issue["sqs_queue_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
     statement := resource.properties.assume_role_policy.Statement[j]
     contains(lower(statement.Principal.Service), "sqs")
-    has_property(statement.Condition[string], iam_policies_condition[_])
+    has_property(statement.Condition[string], condition_for_sqs[_])
 }
 
 aws_issue["sqs_queue_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
     statement := resource.properties.assume_role_policy.Statement[j]
     services := statement.Principal.Service[_]
     contains(lower(services), "sqs")
-    has_property(statement.Condition[string], iam_policies_condition[_])
+    has_property(statement.Condition[string], condition_for_sqs[_])
 }
 
 sqs_queue_is_publicly_accessible_through_iam_policies {
@@ -1467,6 +1477,7 @@ sqs_queue_is_publicly_accessible_through_iam_policies_metadata := {
 default secret_manager_secret_is_publicly_accessible_through_iam_policies = null
 
 aws_issue["secret_manager_secret_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
     statement := resource.properties.assume_role_policy.Statement[j]
@@ -1475,6 +1486,7 @@ aws_issue["secret_manager_secret_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["secret_manager_secret_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_role"
     statement := resource.properties.assume_role_policy.Statement[j]
@@ -1555,6 +1567,59 @@ iam_policy_permission_may_cause_privilege_escalation_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy"
+}
+
+
+#
+# PR-AWS-TRF-IAM-045
+#
+
+default sns_publicly_accessible_through_iam_policies = null
+
+sns_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
+
+aws_issue["sns_publicly_accessible_through_iam_policies"] {
+    some string
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_role"
+    statement := resource.properties.assume_role_policy.Statement[j]
+    contains(lower(statement.Principal.Service), "sns")
+    has_property(statement.Condition[string], sns_condition[_])
+}
+
+aws_issue["sns_publicly_accessible_through_iam_policies"] {
+    some string
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_role"
+    statement := resource.properties.assume_role_policy.Statement[j]
+    services := statement.Principal.Service[_]
+    contains(lower(services), "sns")
+    has_property(statement.Condition[string], sns_condition[_])
+}
+
+sns_publicly_accessible_through_iam_policies {
+    lower(input.resources[i].type) == "aws_iam_role"
+    not aws_issue["sns_publicly_accessible_through_iam_policies"]
+}
+
+sns_publicly_accessible_through_iam_policies = false {
+    aws_issue["sns_publicly_accessible_through_iam_policies"]
+}
+
+sns_publicly_accessible_through_iam_policies_err = "Ensure AWS SNS Topic is not publicly accessible through IAM policies." {
+    aws_issue["sns_publicly_accessible_through_iam_policies"]
+}
+
+sns_publicly_accessible_through_iam_policies_metadata := {
+    "Policy Code": "PR-AWS-TRF-IAM-045",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS SNS Topic is not publicly accessible through IAM policies.",
+    "Policy Description": "It identifies the AWS SNS Topic resources which are publicly accessible through IAM policies. Ensure that the AWS SNS Topic resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role"
 }
 
 
