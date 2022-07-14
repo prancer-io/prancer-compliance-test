@@ -1627,6 +1627,7 @@ iam_policy_not_overly_permissive_to_sts_service_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
 }
 
+
 #
 # PR-AWS-CLD-IAM-045
 # aws::iam::role
@@ -1666,4 +1667,45 @@ sns_publicly_accessible_through_iam_policies_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
+
+
+#
+# PR-AWS-CLD-IAM-046
+# aws::iam::policyversion
+
+default sagemaker_not_overly_permissive_to_all_traffic = true
+
+sagemaker_not_overly_permissive_to_all_traffic = false {
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action[_]), "sagemaker:")
+}
+
+sagemaker_not_overly_permissive_to_all_traffic = false {
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action), "sagemaker:")
+}
+
+sagemaker_not_overly_permissive_to_all_traffic_err = "Ensure AWS SageMaker notebook instance IAM policy is not overly permissive to all traffic." {
+    not sagemaker_not_overly_permissive_to_all_traffic
+}
+
+sagemaker_not_overly_permissive_to_all_traffic_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-046",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS SageMaker notebook instance IAM policy is not overly permissive to all traffic.",
+    "Policy Description": "It identifies SageMaker notebook instances IAM policies that are overly permissive to all traffic. It is recommended that the SageMaker notebook instances should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_id-based-policy-examples.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
 }

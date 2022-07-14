@@ -228,3 +228,95 @@ vpc_endpoint_manual_acceptance_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint_service"
 }
+
+
+#
+# PR-AWS-TRF-VPC-006
+#
+
+default vpc_policy_not_overly_permissive = null
+
+aws_issue["vpc_policy_not_overly_permissive"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_vpc_endpoint"
+    statement := resource.properties.policy.Statement[i]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action), "*")
+    not statement.Condition
+}
+
+aws_issue["vpc_policy_not_overly_permissive"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_vpc_endpoint"
+    statement := resource.properties.policy.Statement[i]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    contains(lower(statement.Action[_]), "*")
+    not statement.Condition
+}
+
+aws_issue["vpc_policy_not_overly_permissive"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_vpc_endpoint"
+    statement := resource.properties.policy.Statement[i]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action), "*")
+    not statement.Condition
+}
+
+aws_issue["vpc_policy_not_overly_permissive"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_vpc_endpoint"
+    statement := resource.properties.policy.Statement[i]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    contains(lower(statement.Action[_]), "*")
+    not statement.Condition
+}
+
+aws_issue["vpc_policy_not_overly_permissive"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_vpc_endpoint"
+    statement := resource.properties.policy.Statement[i]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] == "*"
+    contains(lower(statement.Action), "*")
+    not statement.Condition
+}
+
+aws_issue["vpc_policy_not_overly_permissive"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_vpc_endpoint"
+    statement := resource.properties.policy.Statement[i]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] == "*"
+    contains(lower(statement.Action[_]), "*")
+    not statement.Condition
+}
+
+vpc_policy_not_overly_permissive {
+    lower(input.resources[i].type) == "aws_vpc_endpoint"
+    not aws_issue["vpc_policy_not_overly_permissive"]
+}
+
+vpc_policy_not_overly_permissive = false {
+    aws_issue["vpc_policy_not_overly_permissive"]
+}
+
+vpc_policy_not_overly_permissive_err = "Ensure AWS VPC endpoint policy is not overly permissive." {
+    aws_issue["vpc_policy_not_overly_permissive"]
+}
+
+vpc_policy_not_overly_permissive_metadata := {
+    "Policy Code": "PR-AWS-TRF-VPC-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS VPC endpoint policy is not overly permissive.",
+    "Policy Description": "It identifies VPC endpoints that have a VPC endpoint (VPCE) policy that is overly permissive. When the Principal element value is set to '*' within the access policy, the VPC endpoint allows full access to any IAM user or service within the VPC using credentials from any AWS accounts. It is highly recommended to have the least privileged VPCE policy to protect the data leakage and unauthorized access. For more details: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint#policy"
+}
