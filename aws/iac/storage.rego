@@ -2162,3 +2162,42 @@ transer_server_public_expose_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-server.html#cfn-transfer-server-endpointdetails"
 }
+
+
+#
+# PR-AWS-CFR-TRF-002
+#
+
+default transfer_server_protocol = null
+
+aws_issue["transfer_server_protocol"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::transfer::server"
+    protocol := resource.Properties.Protocols[_]
+    protocol == "FTP"
+}
+
+transfer_server_protocol {
+    lower(input.Resources[i].Type) == "aws::transfer::server"
+    not aws_issue["transfer_server_protocol"]
+}
+
+transfer_server_protocol = false {
+    aws_issue["transfer_server_protocol"]
+}
+
+transfer_server_protocol_err = "Ensure Transfer Server is not use FTP protocol." {
+    aws_issue["transfer_server_protocol"]
+}
+
+transfer_server_protocol_metadata := {
+    "Policy Code": "PR-AWS-CFR-TRF-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Transfer Server is not use FTP protocol.",
+    "Policy Description": "It checks if FTP protocol is not used for AWS Transfer Family server.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-server.html#cfn-transfer-server-protocols"
+}

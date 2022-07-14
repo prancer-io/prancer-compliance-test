@@ -51,6 +51,36 @@
 					]
 				},
 				{
+					"masterSnapshotId": "TEST_EC2_04",
+					"arn": "arn:aws:ec2:::",
+					"type": "ec2",
+					"collection": "aws_ec2",
+					"listMethod": "describe_vpcs",
+					"detailMethods": [
+						"describe_vpcs"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_EC2_05",
+					"arn": "arn:aws:ec2:::",
+					"type": "ec2",
+					"collection": "aws_ec2",
+					"listMethod": "describe_vpc_peering_connections",
+					"detailMethods": [
+						"describe_vpc_peering_connections"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_EC2_06",
+					"arn": "arn:aws:ec2:::",
+					"type": "ec2",
+					"collection": "aws_ec2",
+					"listMethod": "describe_vpc_endpoints",
+					"detailMethods": [
+						"describe_vpc_endpoints"
+					]
+				},
+				{
 					"masterSnapshotId": "TEST_API_GATEWAY_01",
 					"arn": "arn:aws:apigateway:::",
 					"type": "apigateway",
@@ -770,6 +800,16 @@
 					"listMethod": "describe_configuration_recorder_status",
 					"detailMethods": [
 						"describe_configuration_recorder_status"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ALL_18",
+					"arn": "arn:aws:config:::",
+					"type": "config",
+					"collection": "aws_config",
+					"listMethod": "describe_workspace_directories",
+					"detailMethods": [
+						"describe_workspace_directories"
 					]
 				},
 				{
