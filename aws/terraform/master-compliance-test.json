@@ -2642,6 +2642,234 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-EKS-006",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-EKS-006",
+                            "eval": "data.rule.eks_approved_kubernetes_version",
+                            "message": "data.rule.eks_approved_kubernetes_version_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_EKS_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS EKS only uses latest versions of Kubernetes.",
+                    "description": "It checks if an approved version of Kubernetes is used for EKS cluster or not.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_eks_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-EKS-007",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-EKS-007",
+                            "eval": "data.rule.eks_with_security_group_attached",
+                            "message": "data.rule.eks_with_security_group_attached_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_EKS_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure EKS cluster is configured with control plane security group attached to it.",
+                    "description": "It checks if the cluster node security groups is configured or not.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_eks_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-EKS-008",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-EKS-008",
+                            "eval": "data.rule.eks_with_security_group_attached",
+                            "message": "data.rule.eks_with_security_group_attached_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_EKS_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure only private access for Amazon EKS cluster's Kubernetes API is enabled.",
+                    "description": "This policy checks if the EKS cluster has public access which can be accessed over the internet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 26",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CMMC",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 30",
+                                "CyberSecurity Law of the People's Republic of China-Article 31",
+                                "CyberSecurity Law of the People's Republic of China-Article 45",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.1.004",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "HITRUST v.9.4.2-Control Reference:09.m",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-11.1.5",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application",
+                                "MITRE ATT&CK v6.3-T1190",
+                                "MITRE ATT&CK v8.2-T1190",
+                                "MLPS",
+                                "MLPS 2.0-8.1.3.2",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Boundary Protection",
+                                "NIST 800-53 Rev4-SC-7",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.1.22",
+                                "NIST SP 800-172-3.14.3e",
+                                "PCI DSS v3.2.1-1.3",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.1.4",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_eks_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-EKS-009",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-EKS-009",
+                            "eval": "data.rule.eks_logging_enabled",
+                            "message": "data.rule.eks_logging_enabled_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_EKS_009.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS EKS control plane logging is enabled.",
+                    "description": "Amazon EKS control plane logging provides audit and diagnostic logs directly from the Amazon EKS control plane to CloudWatch Logs in your account. These logs make it easy for you to secure and run your clusters. You can select the exact log types you need, and logs are sent as log streams to a group for each Amazon EKS cluster in CloudWatch. This policy generates an alert if control plane logging is disabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "APRA (CPS 234) Information Security-CPS234-35",
+                                "APRA (CPS 234) Information Security-CPS234-36",
+                                "Brazilian Data Protection Law (LGPD)-Article 31",
+                                "Brazilian Data Protection Law (LGPD)-Article 48",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-LOG-05",
+                                "CSA CCM v.4.0.1-LOG-06",
+                                "CSA CCM v.4.0.1-LOG-08",
+                                "CSA CCM v.4.0.1-LOG-13",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 55",
+                                "CyberSecurity Law of the People's Republic of China-Article 56",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AU.3.046",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:09.ab",
+                                "HITRUST v.9.4.2-Control Reference:09.ac",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-12.4.1",
+                                "ISO/IEC 27002:2013-12.4.3",
+                                "ISO/IEC 27002:2013-12.4.4",
+                                "ISO/IEC 27002:2013-16.1.1",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-12.4.1",
+                                "ISO/IEC 27017:2015-12.4.4",
+                                "ISO/IEC 27017:2015-16.1.2",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-7.5.7",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1562.008 - Impair Defenses:Disable Cloud Logs",
+                                "MLPS",
+                                "MLPS 2.0-8.1.5.4",
+                                "MLPS 2.0-8.2.3.3",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Vulnerability Monitoring and Scanning | Review Historic Audit Logs",
+                                "NIST 800-53 Rev4-RA-5 (8)",
+                                "NIST CSF",
+                                "NIST CSF-PR.PT-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.3.4",
+                                "NIST SP 800-172-3.14.2e",
+                                "PCI DSS v3.2.1-10.2.3",
+                                "PCI DSS v3.2.1-10.6",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.1.4",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.61",
+                                "Risk Management in Technology (RMiT)-10.66"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_eks_cluster"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-ES-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -3217,6 +3445,111 @@
                     "severity": "High",
                     "title": "Elasticsearch Domain should not have Encrytion using AWS Managed Keys",
                     "description": "Ensure that your Amazon ElasticSearch (ES) domains are encrypted with KMS Customer Master Keys (CMKs) instead of AWS managed-keys (default keys used by the ES service when there are no customer keys defined) in order to have more granular control over the data-at-rest encryption/decryption process and to meet compliance requirements.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_elasticsearch_domain"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ES-010",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ES-010",
+                            "eval": "data.rule.esearch_custom_endpoint_configured",
+                            "message": "data.rule.esearch_custom_endpoint_configured_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ES_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ElasticSearch has a custom endpoint configured.",
+                    "description": "It checks if a default endpoint is configured for ES domain.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_elasticsearch_domain"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ES-011",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ES-011",
+                            "eval": "data.rule.esearch_slow_logs_is_enabled",
+                            "message": "data.rule.esearch_slow_logs_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ES_011.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure Slow Logs feature is enabled for ElasticSearch cluster.",
+                    "description": "It checks of slow logs is enabled for the ES cluster. Slow logs provide valuable information for optimizing and troubleshooting your search and indexing operations.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_elasticsearch_domain"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ES-013",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ES-013",
+                            "eval": "data.rule.fine_grained_encryption_for_elasticsearch",
+                            "message": "data.rule.fine_grained_encryption_for_elasticsearch_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ES_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure fine-grained access control is enabled during domain creation in ElasticSearch.",
+                    "description": "It checks if fine grained access controls is enabled for the ElasticSearch cluster and node to node encryption is enabled with it.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5072,6 +5405,154 @@
                     ],
                     "resourceTypes": [
                         "aws_lb_target_group"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ELB-020",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ELB-020",
+                            "eval": "data.rule.elb_deletion_protection",
+                            "message": "data.rule.elb_deletion_protection_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ELB_020.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure that AWS Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled.",
+                    "description": "This policy checks if the ELB is protected against accidental deletion by enabling deletion protection.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "HITRUST",
+                                "PCI DSS",
+                                "NIST 800",
+                                "MAS TRM"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_lb"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ELB-021",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ELB-021",
+                            "eval": "data.rule.elb_gateway_load_balancer",
+                            "message": "data.rule.elb_gateway_load_balancer_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ELB_021.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that AWS ensure Gateway Load Balancer (GWLB) is not being used.",
+                    "description": "This policy checks if Gateway LB is being used or not.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "HITRUST",
+                                "PCI DSS",
+                                "NIST 800",
+                                "MAS TRM"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_lb"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ELB-022",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ELB-022",
+                            "eval": "data.rule.elb_internet_facing_load_balancer",
+                            "message": "data.rule.elb_internet_facing_load_balancer_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ELB_022.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Internet facing Classic ELB is not in use.",
+                    "description": "This policy checks if classic LB is being used in the environment for internet facing applications.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "HITRUST",
+                                "PCI DSS",
+                                "NIST 800",
+                                "MAS TRM"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_lb"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ELB-023",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ELB-023",
+                            "eval": "data.rule.elb2_internet_facing_load_balancer",
+                            "message": "data.rule.elb2_internet_facing_load_balancer_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ELB_023.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Internet facing ELBV2 is not in use.",
+                    "description": "This policy checks if ELB v2 is being used in the environment.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "HITRUST",
+                                "PCI DSS",
+                                "NIST 800",
+                                "MAS TRM"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_lb"
                     ]
                 },
                 {
@@ -7765,6 +8246,108 @@
                     ],
                     "resourceTypes": [
                         "aws_emr_security_configuration"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-EMR-008",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-EMR-008",
+                            "eval": "data.rule.emr_cluster_level_logging",
+                            "message": "data.rule.emr_cluster_level_logging_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_EMR_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Cluster level logging is enabled for EMR.",
+                    "description": "It checks if cluster level logging is enabled for EMR cluster created. This determines whether Amazon EMR captures detailed log data to Amazon S3.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_emr_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-EMR-009",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-EMR-009",
+                            "eval": "data.rule.emr_cluster_not_visible_to_all_iam_users",
+                            "message": "data.rule.emr_cluster_not_visible_to_all_iam_users_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_EMR_009.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure EMR cluster is not visible to all IAM users.",
+                    "description": "It checks if the EMR cluster created has a wide visibility to all IAM users. When true, IAM principals in the AWS account can perform EMR cluster actions that their IAM policies allow.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_emr_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-EMR-010",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-EMR-010",
+                            "eval": "data.rule.emr_termination_protection_is_enabled",
+                            "message": "data.rule.emr_termination_protection_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_EMR_010.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure Termination protection is enabled for instances in the cluster for EMR.",
+                    "description": "It checks if the EC2 instances created in EMR cluster are protected against accidental termination.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_emr_cluster"
                     ]
                 },
                 {
@@ -12049,6 +12632,108 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-ECS-015",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ECS-015",
+                            "eval": "data.rule.ecs_fargate_task_definition_logging_is_enabled",
+                            "message": "data.rule.ecs_fargate_task_definition_logging_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#container_definitions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ECS_015.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS - Ensure Fargate task definition logging is enabled.",
+                    "description": "It checks if the Fargate task definition created has an execution IAM role associated, the role defines the extent of access to other AWS Services.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_ecs_task_definition"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ECS-016",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ECS-016",
+                            "eval": "data.rule.no_ecs_task_definition_empty_roles",
+                            "message": "data.rule.no_ecs_task_definition_empty_roles_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#container_definitions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ECS_016.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure there are no undefined ECS task definition empty roles for ECS.",
+                    "description": "It checks if the ECS container has a role attached. The task execution role grants the Amazon ECS container and Fargate agents permission to make AWS API calls on your behalf. The task execution IAM role is required depending on the requirements of your task.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_ecs_task_definition"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ECS-017",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ECS-017",
+                            "eval": "data.rule.ecs_log_driver",
+                            "message": "data.rule.ecs_log_driver_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#container_definitions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ECS_017.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure that a log driver has been configured for each ECS task definition.",
+                    "description": "It checks if log information from the containers running on ECS are send out to CloudWatch logs for monitoring.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_ecs_task_definition"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-LMD-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -13521,6 +14206,40 @@
                     ],
                     "resourceTypes": [
                         "aws_elasticache_replication_group"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-EC-007",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-EC-007",
+                            "eval": "data.rule.automatic_backups_for_redis_cluster",
+                            "message": "data.rule.automatic_backups_for_redis_cluster_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_EC_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster.",
+                    "description": "It checks if automatic backups are enabled for the Redis cluster.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_elasticache_cluster"
                     ]
                 },
                 {

@@ -2028,7 +2028,7 @@ elb_protocol_metadata := {
 
 
 #
-# PR-AWS-CFR-ELB-020
+# PR-AWS-CFR-ELB-026
 #
 
 default elb_default_action = null
@@ -2062,7 +2062,7 @@ elb_default_action_err = "Ensure that ELB Listener is limited to approved action
 }
 
 elb_default_action_metadata := {
-    "Policy Code": "PR-AWS-CFR-ELB-020",
+    "Policy Code": "PR-AWS-CFR-ELB-026",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -2075,7 +2075,7 @@ elb_default_action_metadata := {
 
 
 #
-# PR-AWS-CFR-ELB-021
+# PR-AWS-CFR-ELB-027
 #
 
 default elb_listner_redirect_protocol = null
@@ -2111,7 +2111,7 @@ elb_listner_redirect_protocol_err = "Ensure that Listeners redirect using only t
 }
 
 elb_listner_redirect_protocol_metadata := {
-    "Policy Code": "PR-AWS-CFR-ELB-021",
+    "Policy Code": "PR-AWS-CFR-ELB-027",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -2124,6 +2124,186 @@ elb_listner_redirect_protocol_metadata := {
 
 
 #
+# PR-AWS-CFR-ELB-020
+#
+
+default elb_deletion_protection = null
+
+aws_issue["elb_deletion_protection"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    count([c| resource.Properties.LoadBalancerAttributes[j].Key == "deletion_protection.enabled"; c:=1]) == 0
+}
+
+aws_issue["elb_deletion_protection"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    Attribute := resource.Properties.LoadBalancerAttributes[j]
+    lower(Attribute.Key) == "deletion_protection.enabled"
+    lower(Attribute.Value) == "false"
+}
+
+aws_issue["elb_deletion_protection"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    Attribute := resource.Properties.LoadBalancerAttributes[j]
+    lower(Attribute.Key) == "deletion_protection.enabled"
+    not Attribute.Value
+}
+
+elb_deletion_protection {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not aws_issue["elb_deletion_protection"]
+}
+
+elb_deletion_protection = false {
+    aws_issue["elb_deletion_protection"]
+}
+
+elb_deletion_protection_err = "Ensure that AWS Ensure Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled." {
+    aws_issue["elb_deletion_protection"]
+}
+
+elb_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-020",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that AWS Ensure Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled.",
+    "Policy Description": "This policy checks if the ELB is protected against accidental deletion by enabling deletion protection.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html"
+}
+
+
+#
+# PR-AWS-CFR-ELB-021
+#
+
+default elb_gateway_load_balancer = null
+
+aws_issue["elb_gateway_load_balancer"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    lower(resource.Properties.Type) == "gateway"
+}
+
+elb_gateway_load_balancer {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not aws_issue["elb_gateway_load_balancer"]
+}
+
+elb_gateway_load_balancer = false {
+    aws_issue["elb_gateway_load_balancer"]
+}
+
+elb_gateway_load_balancer_err = "Ensure that AWS ensure Gateway Load Balancer (GWLB) is not being used." {
+    aws_issue["elb_gateway_load_balancer"]
+}
+
+elb_gateway_load_balancer_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-021",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that AWS ensure Gateway Load Balancer (GWLB) is not being used.",
+    "Policy Description": "This policy checks if Gateway LB is being used or not",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html"
+}
+
+
+#
+# PR-AWS-CFR-ELB-022
+#
+
+default elb_internet_facing_load_balancer = null
+
+aws_issue["elb_internet_facing_load_balancer"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    lower(resource.Properties.Scheme) == "internet-facing"
+}
+
+aws_issue["elb_internet_facing_load_balancer"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.Scheme
+}
+
+elb_internet_facing_load_balancer {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancing::loadbalancer"
+    not aws_issue["elb_internet_facing_load_balancer"]
+}
+
+elb_internet_facing_load_balancer = false {
+    aws_issue["elb_internet_facing_load_balancer"]
+}
+
+elb_internet_facing_load_balancer_err = "Ensure Internet facing Classic ELB is not in use." {
+    aws_issue["elb_gateway_load_balancer"]
+}
+
+elb_internet_facing_load_balancer_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-022",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Internet facing Classic ELB is not in use.",
+    "Policy Description": "This policy checks if classic LB is being used in the environment for internet facing applications.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
+
+#
+# PR-AWS-CFR-ELB-023
+#
+
+default elb2_internet_facing_load_balancer = null
+
+aws_issue["elb2_internet_facing_load_balancer"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    lower(resource.Properties.Scheme) == "internet-facing"
+}
+
+aws_issue["elb2_internet_facing_load_balancer"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not resource.Properties.Scheme
+}
+
+elb2_internet_facing_load_balancer {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not aws_issue["elb2_internet_facing_load_balancer"]
+}
+
+elb2_internet_facing_load_balancer = false {
+    aws_issue["elb2_internet_facing_load_balancer"]
+}
+
+elb2_internet_facing_load_balancer_err = "Ensure Internet facing ELBV2 is not in use." {
+    aws_issue["elb_gateway_load_balancer"]
+}
+
+elb2_internet_facing_load_balancer_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-023",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Internet facing ELBV2 is not in use.",
+    "Policy Description": "This policy checks if ELB v2 is being used in the environment.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html"
+}
+
+
+#
 # PR-AWS-CFR-ELB-024
 #
 
@@ -2132,9 +2312,51 @@ default elb_waf_enabled = null
 aws_issue["elb_waf_enabled"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
-    LoadBalancerAttribute := resource.Properties.LoadBalancerAttributes[_]
-    lower(LoadBalancerAttribute.Key) == "waf.fail_open.enabled"
-    not LoadBalancerAttribute.Value
+    lower(resource.Properties.Type) == "application"
+    count([c| resource.Properties.LoadBalancerAttributes[j].Key == "waf.fail_open.enabled"; c:=1]) == 0
+}
+
+aws_issue["elb_waf_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not resource.Properties.Type
+    count([c| resource.Properties.LoadBalancerAttributes[j].Key == "waf.fail_open.enabled"; c:=1]) == 0
+}
+
+aws_issue["elb_waf_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    lower(resource.Properties.Type) == "application"
+    Attribute := resource.Properties.LoadBalancerAttributes[j]
+    lower(Attribute.Key) == "waf.fail_open.enabled"
+    lower(Attribute.Value) == "false"
+}
+
+aws_issue["elb_waf_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not resource.Properties.Type
+    Attribute := resource.Properties.LoadBalancerAttributes[j]
+    lower(Attribute.Key) == "waf.fail_open.enabled"
+    lower(Attribute.Value) == "false"
+}
+
+aws_issue["elb_waf_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    lower(resource.Properties.Type) == "application"
+    Attribute := resource.Properties.LoadBalancerAttributes[j]
+    lower(Attribute.Key) == "waf.fail_open.enabled"
+    not Attribute.Value
+}
+
+aws_issue["elb_waf_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not resource.Properties.Type
+    Attribute := resource.Properties.LoadBalancerAttributes[j]
+    lower(Attribute.Key) == "waf.fail_open.enabled"
+    not Attribute.Value
 }
 
 elb_waf_enabled {
@@ -2146,8 +2368,8 @@ elb_waf_enabled = false {
     aws_issue["elb_waf_enabled"]
 }
 
-elb_waf_enabled_err = "Ensure that public facing ELB has WAF attached" {
-    aws_issue["elb_waf_enabled"]
+elb_waf_enabled_err = "Ensure that public facing ELB has WAF attached." {
+    aws_issue["elb_gateway_load_balancer"]
 }
 
 elb_waf_enabled_metadata := {
@@ -2155,11 +2377,11 @@ elb_waf_enabled_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "Ensure that public facing ELB has WAF attached",
+    "Policy Title": "Ensure that public facing ELB has WAF attached.",
     "Policy Description": "This policy checks the usage of a WAF with Internet facing ELB. AWS WAF is a web application firewall service that lets you monitor web requests and protect your web applications from malicious requests.",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html#aws-resource-elasticloadbalancingv2-loadbalancer-syntax"
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html"
 }
 
 

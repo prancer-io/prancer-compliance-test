@@ -1,5 +1,8 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
 
 #
 # PR-AWS-TRF-EMR-001
@@ -533,4 +536,124 @@ emr_transit_encryption_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
+}
+
+
+#
+# PR-AWS-TRF-EMR-008
+#
+
+default emr_cluster_level_logging = null
+
+aws_issue["emr_cluster_level_logging"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_emr_cluster"
+    not resource.properties.log_uri
+}
+
+emr_cluster_level_logging {
+    lower(input.resources[i].type) == "aws_emr_cluster"
+    not aws_issue["emr_cluster_level_logging"]
+}
+
+emr_cluster_level_logging = false {
+    aws_issue["emr_cluster_level_logging"]
+}
+
+emr_cluster_level_logging_err = "Ensure Cluster level logging is enabled for EMR." {
+    aws_issue["emr_cluster_level_logging"]
+}
+
+emr_cluster_level_logging_metadata := {
+    "Policy Code": "PR-AWS-TRF-EMR-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Cluster level logging is enabled for EMR.",
+    "Policy Description": "It checks if cluster level logging is enabled for EMR cluster created. This determines whether Amazon EMR captures detailed log data to Amazon S3.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_cluster"
+}
+
+
+#
+# PR-AWS-TRF-EMR-009
+#
+
+default emr_cluster_not_visible_to_all_iam_users = null
+
+aws_issue["emr_cluster_not_visible_to_all_iam_users"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_emr_cluster"
+    not has_property(resource.properties, "visible_to_all_users")
+}
+
+aws_issue["emr_cluster_not_visible_to_all_iam_users"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_emr_cluster"
+    resource.properties.visible_to_all_users == true
+}
+
+emr_cluster_not_visible_to_all_iam_users {
+    lower(input.resources[i].type) == "aws_emr_cluster"
+    not aws_issue["emr_cluster_not_visible_to_all_iam_users"]
+}
+
+emr_cluster_not_visible_to_all_iam_users = false {
+    aws_issue["emr_cluster_not_visible_to_all_iam_users"]
+}
+
+emr_cluster_not_visible_to_all_iam_users_err = "Ensure EMR cluster is not visible to all IAM users." {
+    aws_issue["emr_cluster_not_visible_to_all_iam_users"]
+}
+
+emr_cluster_not_visible_to_all_iam_users_metadata := {
+    "Policy Code": "PR-AWS-TRF-EMR-009",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure EMR cluster is not visible to all IAM users.",
+    "Policy Description": "It checks if the EMR cluster created has a wide visibility to all IAM users. When true, IAM principals in the AWS account can perform EMR cluster actions that their IAM policies allow.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_cluster"
+}
+
+
+#
+# PR-AWS-TRF-EMR-010
+#
+
+default emr_termination_protection_is_enabled = null
+
+aws_issue["emr_termination_protection_is_enabled"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_emr_cluster"
+    not resource.properties.termination_protection
+}
+
+emr_termination_protection_is_enabled {
+    lower(input.resources[i].type) == "aws_emr_cluster"
+    not aws_issue["emr_termination_protection_is_enabled"]
+}
+
+emr_termination_protection_is_enabled = false {
+    aws_issue["emr_termination_protection_is_enabled"]
+}
+
+emr_termination_protection_is_enabled_err = "Ensure Termination protection is enabled for instances in the cluster for EMR." {
+    aws_issue["emr_termination_protection_is_enabled"]
+}
+
+emr_termination_protection_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-TRF-EMR-009",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Termination protection is enabled for instances in the cluster for EMR.",
+    "Policy Description": "It checks if the EC2 instances created in EMR cluster are protected against accidental termination.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_cluster"
 }
