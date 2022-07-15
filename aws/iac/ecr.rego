@@ -264,3 +264,89 @@ ecr_public_access_disable_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-imagescanningconfiguration.html#cfn-ecr-repository-imagescanningconfiguration-scanonpush"
 }
+
+
+#
+# PR-AWS-CFR-ECR-006
+#
+
+default ecr_accessible_only_via_private_endpoint = null
+
+aws_issue["ecr_accessible_only_via_private_endpoint"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    statement := resource.Properties.RepositoryPolicyText.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition
+    not has_property(statement.Condition.StringEquals, "aws:SourceVpce")
+}
+
+ecr_accessible_only_via_private_endpoint {
+    lower(input.Resources[i].Type) == "aws::ecr::repository"
+    not aws_issue["ecr_accessible_only_via_private_endpoint"]
+}
+
+ecr_accessible_only_via_private_endpoint = false {
+    aws_issue["ecr_accessible_only_via_private_endpoint"]
+}
+
+ecr_accessible_only_via_private_endpoint_err = "Ensure ECR resources are accessible only via private endpoint." {
+    aws_issue["ecr_accessible_only_via_private_endpoint"]
+}
+
+ecr_accessible_only_via_private_endpoint_metadata := {
+    "Policy Code": "PR-AWS-CFR-ECR-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure ECR resources are accessible only via private endpoint.",
+    "Policy Description": "It checks if the container registry is accessible over the internet, GS mandates to keep the container repository private from GS network only",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html"
+}
+
+
+#
+# PR-AWS-CFR-ECR-007
+#
+
+default lifecycle_policy_is_enabled = null
+
+aws_issue["lifecycle_policy_is_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    rule := resource.Properties.LifecyclePolicy.LifecyclePolicyText.rules[_]
+    lower(rules.selection.tagStatus) == "tagged"
+}
+
+aws_issue["lifecycle_policy_is_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    not resource.Properties.LifecyclePolicy.LifecyclePolicyText
+}
+
+lifecycle_policy_is_enabled {
+    lower(input.Resources[i].Type) == "aws::ecr::repository"
+    not aws_issue["lifecycle_policy_is_enabled"]
+}
+
+lifecycle_policy_is_enabled = false {
+    aws_issue["lifecycle_policy_is_enabled"]
+}
+
+lifecycle_policy_is_enabled_err = "Ensure lifecycle policy is enabled for ECR image repositories." {
+    aws_issue["lifecycle_policy_is_enabled"]
+}
+
+lifecycle_policy_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-CFR-ECR-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure lifecycle policy is enabled for ECR image repositories.",
+    "Policy Description": "It checks if a lifecycle policy is created for ECR. ECR lifecycle policies provide more control over the lifecycle management of images in a private repository.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html"
+}

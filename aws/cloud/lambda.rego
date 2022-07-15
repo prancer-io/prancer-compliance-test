@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
 
 #
-# PR-AWS-CFR-LMD-001
+# PR-AWS-CLD-LMD-001
 # aws::lambda::function
 #
 
@@ -24,7 +24,7 @@ lambda_env_err = "AWS Lambda Environment Variables not encrypted at-rest using C
 }
 
 lambda_env_metadata := {
-    "Policy Code": "PR-AWS-CFR-LMD-001",
+    "Policy Code": "PR-AWS-CLD-LMD-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -36,7 +36,7 @@ lambda_env_metadata := {
 }
 
 #
-# PR-AWS-CFR-LMD-002
+# PR-AWS-CLD-LMD-002
 # aws::lambda::function
 #
 
@@ -55,7 +55,7 @@ lambda_vpc_err = "AWS Lambda Function is not assigned to access within VPC" {
 }
 
 lambda_vpc_metadata := {
-    "Policy Code": "PR-AWS-CFR-LMD-002",
+    "Policy Code": "PR-AWS-CLD-LMD-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -67,7 +67,7 @@ lambda_vpc_metadata := {
 }
 
 #
-# PR-AWS-CFR-LMD-003
+# PR-AWS-CLD-LMD-003
 # aws::lambda::function
 #
 
@@ -86,7 +86,7 @@ lambda_tracing_err = "AWS Lambda functions with tracing not enabled" {
 }
 
 lambda_tracing_metadata := {
-    "Policy Code": "PR-AWS-CFR-LMD-003",
+    "Policy Code": "PR-AWS-CLD-LMD-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -99,7 +99,7 @@ lambda_tracing_metadata := {
 
 
 #
-# PR-AWS-CFR-LMD-004
+# PR-AWS-CLD-LMD-004
 # aws::lambda::function
 #
 
@@ -114,7 +114,7 @@ lambda_concurrent_execution_err = "Ensure AWS Lambda function is configured for 
 }
 
 lambda_concurrent_execution_metadata := {
-    "Policy Code": "PR-AWS-CFR-LMD-004",
+    "Policy Code": "PR-AWS-CLD-LMD-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -128,7 +128,7 @@ lambda_concurrent_execution_metadata := {
 
 
 #
-# PR-AWS-CFR-LMD-005
+# PR-AWS-CLD-LMD-005
 # aws::lambda::function
 #
 
@@ -143,7 +143,7 @@ lambda_dlq_err = "Ensure AWS Lambda function is configured for a DLQ" {
 }
 
 lambda_dlq_metadata := {
-    "Policy Code": "PR-AWS-CFR-LMD-005",
+    "Policy Code": "PR-AWS-CLD-LMD-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -152,32 +152,4 @@ lambda_dlq_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig"
-}
-
-
-#
-# PR-AWS-CFR-LMD-009
-# aws::lambda::function
-#
-
-default lambda_encryption = true
-
-lambda_encryption = false {
-    not input.Configuration.KMSKeyArn
-}
-
-lambda_encryption_err = "AWS Lambda not encrypted at-rest using CMK" {
-    not lambda_encryption
-}
-
-lambda_encryption_metadata := {
-    "Policy Code": "PR-AWS-CFR-LMD-009",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "AWS Cloud formation",
-    "Policy Title": "AWS Lambda not encrypted at-rest using CMK",
-    "Policy Description": "When you create or update Lambda functions that use Environment variables, AWS Lambda encrypts them using the AWS Key Management Service. When your Lambda function is invoked, those values are decrypted and made available to the Lambda code.<br><br>This policy verifies that Lambda function uses the AMS Key Management Service to encrypt variables at-rest with CMK.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html"
 }

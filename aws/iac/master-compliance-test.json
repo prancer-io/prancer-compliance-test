@@ -9978,6 +9978,245 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CFR-IAM-029",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-IAM-029",
+                            "eval": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_for_ecs",
+                            "message": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_for_ecs_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_IAM_029.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure IAM policy is not overly permissive to all traffic for ecs.",
+                    "description": "This policy identifies ECS IAM policies that are overly permissive to all traffic. It is recommended that the ECS should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/AmazonECS/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_service-with-iam-policy-best-practices",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::iam::policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-IAM-030",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-IAM-030",
+                            "eval": "data.rule.elasticsearch_iam_policy_not_overly_permissive_to_all_traffic",
+                            "message": "data.rule.elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_IAM_030.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure IAM policy is not overly permissive to all traffic for elasticsearch.",
+                    "description": "It identifies Elasticsearch IAM policies that are overly permissive to all traffic. Amazon Elasticsearch service makes it easy to deploy and manage Elasticsearch. Customers can create a domain where the service is accessible. The domain should be granted access restrictions so that only authorized users and applications have access to the service.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v3.0.1-DSI-02",
+                                "CSA CCM v3.0.1-IAM-07",
+                                "CSA CCM v3.0.1-IVS-06",
+                                "CSA CCM v3.0.1-IVS-08",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 21",
+                                "CyberSecurity Law of the People's Republic of China-Article 25",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.183",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SI.2.216",
+                                "GDPR",
+                                "GDPR-Article 32",
+                                "GDPR-Article 46",
+                                "HITRUST",
+                                "HITRUST CSF v9.3-Control Reference:09.ab",
+                                "HITRUST v.9.4.2-Control Reference:01.n",
+                                "HITRUST v.9.4.2-Control Reference:01.o",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.1",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MLPS",
+                                "MLPS 2.0-8.1.3.2",
+                                "NIST 800",
+                                "NIST 800-171 Rev1-3.13.1",
+                                "NIST 800-171 Rev1-3.13.2",
+                                "NIST 800-171 Rev1-3.13.5",
+                                "NIST 800-171 Rev1-3.14.6",
+                                "NIST 800-53 Rev 5-Boundary Protection | Block Communication from Non-organizationally Configured Hosts",
+                                "NIST 800-53 Rev 5-System Monitoring | Inbound and Outbound Communications Traffic",
+                                "NIST 800-53 Rev4-SC-7 (19)",
+                                "NIST 800-53 Rev4-SI-4 (4)",
+                                "NIST CSF",
+                                "NIST CSF-DE.AE-1",
+                                "NIST CSF-PR.AC-5",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.13.6",
+                                "NIST SP 800-171 Revision 2-3.14.6",
+                                "NIST SP 800-172-3.14.2e",
+                                "PCI DSS v3.2.1-1.2.1",
+                                "PCI-DSS",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55",
+                                "Risk Management in Technology (RMiT)-10.68",
+                                "SOC 2",
+                                "SOC 2-CC6.1",
+                                "SOC 2-CC6.6",
+                                "SOC 2-CC6.7"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::iam::policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-IAM-041",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-IAM-041",
+                            "eval": "data.rule.not_allow_decryption_actions_on_all_kms_keys",
+                            "message": "data.rule.not_allow_decryption_actions_on_all_kms_keys_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_IAM_041.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM policy does not allows decryption actions on all KMS keys.",
+                    "description": "It identifies IAM policies that allow decryption actions on all KMS keys. Instead of granting permissions for all keys, determine the minimum set of keys that users need to access encrypted data. You should grant to identities only the kms:Decrypt or kms:ReEncryptFrom permissions and only for the keys that are required to perform a task. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::iam::policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-IAM-043",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-IAM-043",
+                            "eval": "data.rule.iam_policy_not_overly_permissive_to_all_traffic",
+                            "message": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_IAM_043.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure IAM policy is not overly permissive to all traffic via condition clause.",
+                    "description": "It identifies IAM policies that have a policy that is overly permissive to all traffic via condition clause. If any IAM policy statement with a condition containing 0.0.0.0/0 or ::/0, it allows all traffic to resources attached to that IAM policy. It is highly recommended to have the least privileged IAM policy to protect the data leakage and unauthorized access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.1",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55",
+                                "Risk Management in Technology (RMiT)-10.68"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::iam::policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-IAM-044",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-IAM-044",
+                            "eval": "data.rule.iam_policy_not_overly_permissive_to_sts_service",
+                            "message": "data.rule.iam_policy_not_overly_permissive_to_sts_service_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_IAM_044.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS IAM policy is not overly permissive to STS services.",
+                    "description": "It identifies the IAM policies that are overly permissive to STS services. AWS Security Token Service (AWS STS) is a web service that enables you to request temporary credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users). It is recommended to follow the principle of least privileges ensuring that only restricted STS services for restricted resources.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "MAS TRM",
+                                "MAS TRM 2021-9.1.1",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.55"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::iam::policy"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CFR-IAM-045",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -11521,6 +11760,74 @@
                             "compliance": [
                                 "PCI-DSS",
                                 "GDPR"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::ecr::repository"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-ECR-006",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ECR-006",
+                            "eval": "data.rule.ecr_accessible_only_via_private_endpoint",
+                            "message": "data.rule.ecr_accessible_only_via_private_endpoint_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_ECR_006.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure ECR resources are accessible only via private endpoint.",
+                    "description": "It checks if the container registry is accessible over the internet, GS mandates to keep the container repository private from GS network only",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::ecr::repository"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-ECR-007",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ECR-007",
+                            "eval": "data.rule.lifecycle_policy_is_enabled",
+                            "message": "data.rule.lifecycle_policy_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_ECR_007.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure lifecycle policy is enabled for ECR image repositories.",
+                    "description": "It checks if a lifecycle policy is created for ECR. ECR lifecycle policies provide more control over the lifecycle management of images in a private repository.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
                             ],
                             "service": [
                                 "cloudformation"

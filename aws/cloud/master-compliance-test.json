@@ -11659,35 +11659,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-CLD-LMD-009",
-                    "masterSnapshotId": [
-                        "TEST_LAMBDA"
-                    ],
-                    "type": "rego",
-                    "rule": "file(lambda.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-LMD-009",
-                            "eval": "data.rule.lambda_encryption",
-                            "message": "data.rule.lambda_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_LMD_009.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS Lambda not encrypted at-rest using CMK",
-                    "description": "When you create or update Lambda functions that use Environment variables, AWS Lambda encrypts them using the AWS Key Management Service. When your Lambda function is invoked, those values are decrypted and made available to the Lambda code.<br><br>This policy verifies that Lambda function uses the AMS Key Management Service to encrypt variables at-rest with CMK.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [],
-                            "service": [
-                                "lambda"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "PR-AWS-CLD-CF-001",
                     "masterSnapshotId": [
                         "TEST_CF"
