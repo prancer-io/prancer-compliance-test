@@ -8,10 +8,7 @@ package rule
 
 default mssql_log_retention = null
 
-azure_attribute_absence["mssql_log_retention"] {
-    count([c | input.resources[_].type == "azurerm_mssql_server_extended_auditing_policy"; c := 1]) == 0
-}
-
+# The default value for retention period is 0 (unlimited retention)
 azure_attribute_absence["mssql_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server_extended_auditing_policy"
@@ -20,64 +17,37 @@ azure_attribute_absence["mssql_log_retention"] {
 
 azure_issue["mssql_log_retention"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server"
-    count([c | r := input.resources[_];
-              r.type == "azurerm_mssql_server_extended_auditing_policy";
-              contains(r.properties.server_id, resource.properties.compiletime_identity);
-              to_number(r.properties.retention_in_days) > 0;
-              to_number(r.properties.retention_in_days) < 90;
-              c := 1]) > 0
-    count([c | r := input.resources[_];
-              r.type == "azurerm_mssql_server_extended_auditing_policy";
-              contains(r.properties.server_id, concat(".", [resource.type, resource.name]));
-              to_number(r.properties.retention_in_days) > 0;
-              to_number(r.properties.retention_in_days) < 90;
-              c := 1]) > 0
+    lower(resource.type) == "azurerm_mssql_server_extended_auditing_policy"
+    to_number(resource.properties.retention_in_days) > 0
+    to_number(resource.properties.retention_in_days) < 90
 }
 
 azure_issue["mssql_log_retention"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server"
-    count([c | r := input.resources[_];
-              r.type == "azurerm_mssql_server_extended_auditing_policy";
-              contains(r.properties.server_id, resource.properties.compiletime_identity);
-              to_number(r.properties.retention_in_days) < 0;
-              c := 1]) > 0
-    count([c | r := input.resources[_];
-              r.type == "azurerm_mssql_server_extended_auditing_policy";
-              contains(r.properties.server_id, concat(".", [resource.type, resource.name]));
-              to_number(r.properties.retention_in_days) < 0;
-              c := 1]) > 0
+    lower(resource.type) == "azurerm_mssql_server_extended_auditing_policy"
+    to_number(resource.properties.retention_in_days) < 0
 }
 
-# azure_issue["mssql_log_retention"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "azurerm_mssql_server_extended_auditing_policy"
-#     to_number(resource.properties.retention_in_days) < 91
-# }
-
 mssql_log_retention {
-    lower(input.resources[_].type) == "azurerm_mssql_server"
+    lower(input.resources[_].type) == "azurerm_mssql_server_extended_auditing_policy"
     not azure_attribute_absence["mssql_log_retention"]
     not azure_issue["mssql_log_retention"]
 }
 
-mssql_log_retention = false {
-    lower(input.resources[_].type) == "azurerm_mssql_server"
+mssql_log_retention {
     azure_attribute_absence["mssql_log_retention"]
 }
 
 mssql_log_retention = false {
-    lower(input.resources[_].type) == "azurerm_mssql_server"
+    lower(input.resources[_].type) == "azurerm_mssql_server_extended_auditing_policy"
+    not azure_attribute_absence["mssql_log_retention"]
     azure_issue["mssql_log_retention"]
 }
 
-mssql_log_retention_err = "azurerm_mssql_server_extended_auditing_policy resource is missing or its property 'retention_in_days' is missing" {
-    lower(input.resources[_].type) == "azurerm_mssql_server"
-    azure_attribute_absence["mssql_log_retention"]
-} else = "Azure MSSQL Server audit log retention is not equal or greater then 90 days" {
-    lower(input.resources[_].type) == "azurerm_mssql_server"
-    azure_attribute_absence["mssql_log_retention"]
+mssql_log_retention_err = "Azure MSSQL Server audit log retention is not equal or greater then 90 days" {
+    lower(input.resources[_].type) == "azurerm_mssql_server_extended_auditing_policy"
+    not azure_attribute_absence["mssql_log_retention"]
+    azure_issue["mssql_log_retention"]
 }
 
 mssql_log_retention_metadata := {
@@ -133,18 +103,20 @@ sql_log_retention {
     not azure_issue["sql_log_retention"]
 }
 
-sql_log_retention = false {
+sql_log_retention {
     azure_attribute_absence["sql_log_retention"]
 }
 
 sql_log_retention = false {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    not azure_attribute_absence["sql_log_retention"]
     azure_issue["sql_log_retention"]
 }
 
-sql_log_retention_err = "azurerm_sql_server's resource block 'extended_auditing_policy' is missing or its property 'retention_in_days' is missing" {
-    azure_attribute_absence["sql_log_retention"]
-} else = "Azure SQL Server audit log retention is not equal or greater then 90 days" {
-    azure_attribute_absence["sql_log_retention"]
+sql_log_retention_err = "Azure SQL Server audit log retention is not equal or greater then 90 days" {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    not azure_attribute_absence["sql_log_retention"]
+    azure_issue["sql_log_retention"]
 }
 
 sql_log_retention_metadata := {
@@ -168,12 +140,11 @@ sql_log_retention_metadata := {
 default mssql_auditing_enabled = null
 
 azure_attribute_absence["mssql_auditing_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server"
-    not resource.properties.extended_auditing_policy
+    count([c | input.resources[_].type == "azurerm_mssql_server_extended_auditing_policy"; c := 1]) == 0
 }
 
 mssql_auditing_enabled = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["mssql_auditing_enabled"]
 } 
 
@@ -183,6 +154,7 @@ mssql_auditing_enabled {
 }
 
 mssql_auditing_enabled_err = "Azure MSSQL Server audit log is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["mssql_auditing_enabled"]
 }
 

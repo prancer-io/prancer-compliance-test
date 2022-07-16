@@ -94,17 +94,6 @@ azure_attribute_absence["sql_logical_server_log_audit"] {
     not sql_resources.properties.state
 }
 
-source_path[{"sql_logical_server_log_audit":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "auditingsettings"
-    not sql_resources.properties.state
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","state"]]
-    }
-}
-
 azure_issue["sql_logical_server_log_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
@@ -113,22 +102,8 @@ azure_issue["sql_logical_server_log_audit"] {
     lower(sql_resources.properties.state) != "enabled"
 }
 
-source_path[{"sql_logical_server_log_audit":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "auditingsettings"
-    lower(sql_resources.properties.state) != "enabled"
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","state"]]
-    }
-}
-
 sql_logical_server_log_audit {
     lower(input.resources[_].type) == "microsoft.sql/servers"
-    resource := input.resources[_]
-    sql_resources := resource.resources[_]
-    lower(sql_resources.type) == "auditingsettings"
     not azure_attribute_absence["sql_logical_server_log_audit"]
     not azure_issue["sql_logical_server_log_audit"]
 }
@@ -143,9 +118,7 @@ sql_logical_server_log_audit = false {
 
 sql_logical_server_log_audit_err = "Azure SQL Server auditing is currently not enabled" {
     azure_issue["sql_logical_server_log_audit"]
-}
-
-sql_logical_server_log_audit_miss_err = "Azure SQL Server Auditing settings attribute 'state' is missing" {
+} else = "Azure SQL Server Auditing settings attribute 'state' is missing" {
     azure_attribute_absence["sql_logical_server_log_audit"]
 }
 
@@ -169,16 +142,7 @@ sql_logical_server_log_audit_metadata := {
 
 default sql_server_audit_log_retention = null
 
-azure_attribute_absence["sql_server_audit_log_retention"] {
-    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"; c := 1]) == 0
-}
-
-azure_attribute_absence["sql_server_audit_log_retention"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
-    not resource.dependsOn
-}
-
+# The default value for retention period is 0 (unlimited retention)
 azure_attribute_absence["sql_server_audit_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/auditingsettings"
@@ -187,53 +151,37 @@ azure_attribute_absence["sql_server_audit_log_retention"] {
 
 azure_issue["sql_server_audit_log_retention"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers"
-    count([c | r := input.resources[_];
-              lower(r.type) == "microsoft.sql/servers/auditingsettings";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(r.properties.retentionDays) > 0;
-              to_number(r.properties.retentionDays) < 90;
-              c := 1]) > 0
+    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
+    to_number(resource.properties.retentionDays) > 0
+    to_number(resource.properties.retentionDays) < 90
 }
 
 azure_issue["sql_server_audit_log_retention"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers"
-    count([c | r := input.resources[_];
-              lower(r.type) == "microsoft.sql/servers/auditingsettings";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              to_number(r.properties.retentionDays) < 0;
-              c := 1]) > 0
+    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
+    to_number(resource.properties.retentionDays) < 0
 }
 
-# azure_issue["sql_server_audit_log_retention"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "microsoft.sql/servers/auditingsettings"
-#     to_number(resource.properties.retentionDays) < 91
-# }
-
 sql_server_audit_log_retention {
-    lower(input.resources[_].type) == "microsoft.sql/servers"
+    lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
     not azure_attribute_absence["sql_server_audit_log_retention"]
     not azure_issue["sql_server_audit_log_retention"]
 }
 
-sql_server_audit_log_retention = false {
-    lower(input.resources[_].type) == "microsoft.sql/servers"
-    azure_issue["sql_server_audit_log_retention"]
-}
-
-sql_server_audit_log_retention = false {
-    lower(input.resources[_].type) == "microsoft.sql/servers"
+sql_server_audit_log_retention {
     azure_attribute_absence["sql_server_audit_log_retention"]
 }
 
-sql_server_audit_log_retention_err = "Azure SQL server audit log retention is less than 91 days" {
-    lower(input.resources[_].type) == "microsoft.sql/servers"
+sql_server_audit_log_retention = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
+    not azure_attribute_absence["sql_server_audit_log_retention"]
     azure_issue["sql_server_audit_log_retention"]
-} else = "microsoft.sql/servers/auditingsettings resource property retentionDays missing in the resource" {
-    lower(input.resources[_].type) == "microsoft.sql/servers"
-    azure_attribute_absence["sql_server_audit_log_retention"]
+}
+
+sql_server_audit_log_retention_err = "Azure MSSQL Server audit log retention is not equal or greater then 90 days" {
+    lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
+    not azure_attribute_absence["sql_server_audit_log_retention"]
+    azure_issue["sql_server_audit_log_retention"]
 }
 
 sql_server_audit_log_retention_metadata := {
@@ -264,17 +212,6 @@ azure_attribute_absence["sql_logial_server_audit_log_retention"] {
     not sql_resources.properties.retentionDays
 }
 
-source_path[{"sql_logial_server_audit_log_retention":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "auditingsettings"
-    not sql_resources.properties.retentionDays
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
-    }
-}
-
 azure_issue["sql_logial_server_audit_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
@@ -292,37 +229,25 @@ azure_issue["sql_logial_server_audit_log_retention"] {
     to_number(sql_resources.properties.retentionDays) < 0
 }
 
-source_path[{"sql_logial_server_audit_log_retention":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "auditingsettings"
-    not sql_resources.properties.retentionDays
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
-    }
-}
-
 sql_logial_server_audit_log_retention {
     lower(input.resources[_].type) == "microsoft.sql/servers"
-    resource := input.resources[_]
-    sql_resources := resource.resources[_]
-    lower(sql_resources.type) == "auditingsettings"
     not azure_attribute_absence["sql_logial_server_audit_log_retention"]
     not azure_issue["sql_logial_server_audit_log_retention"]
 }
 
+sql_logial_server_audit_log_retention {
+    azure_attribute_absence["sql_logial_server_audit_log_retention"]
+}
+
 sql_logial_server_audit_log_retention = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    not azure_attribute_absence["sql_logial_server_audit_log_retention"]
     azure_issue["sql_logial_server_audit_log_retention"]
 }
 
-sql_logial_server_audit_log_retention = false {
-    azure_attribute_absence["sql_logial_server_audit_log_retention"]
-}
-
-sql_logial_server_audit_log_retention_err = "microsoft.sql/servers/auditingsettings resource property retentionDays missing in the resource" {
-    azure_attribute_absence["sql_logial_server_audit_log_retention"]
-} else = "Azure SQL server audit log retention is less than 90 days" {
+sql_logial_server_audit_log_retention_err = "Azure SQL server audit log retention is less than 90 days" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    not azure_attribute_absence["sql_logial_server_audit_log_retention"]
     azure_issue["sql_logial_server_audit_log_retention"]
 }
 
