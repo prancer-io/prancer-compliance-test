@@ -1050,7 +1050,7 @@ storage_account_file_share_usage_smb_protocol_err = "Storage accounts File Share
     azure_issue["storage_account_file_share_usage_smb_protocol"]
 }
 
-storage_shared_access_key_disabled_metadata := {
+storage_account_file_share_usage_smb_protocol_metadata := {
     "Policy Code": "PR-AZR-TRF-STR-025",
     "Type": "IaC",
     "Product": "AZR",
