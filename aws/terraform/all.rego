@@ -88,6 +88,103 @@ secret_manager_kms_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html"
 }
 
+
+#
+# PR-AWS-TRF-SM-003
+#
+
+default secret_manager_automatic_rotation = null
+
+aws_issue["secret_manager_automatic_rotation"] {
+    resource_1 := input.resources[i]
+    lower(resource_1.type) == "aws_secretsmanager_secret"
+    secretid := resource_1.properties.name
+    resource_2 := input.resources[j]
+    lower(resource_2.type) == "aws_secretsmanager_secret_rotation"
+    resource_2.properties.secret_id != secretid
+}
+
+aws_issue["secret_manager_automatic_rotation"] {
+    resource_1 := input.resources[i]
+    lower(resource_1.type) == "aws_secretsmanager_secret"
+    secretid := resource_1.name
+    resource_2 := input.resources[j]
+    lower(resource_2.type) == "aws_secretsmanager_secret_rotation"
+    resource_2.properties.secret_id != secretid
+}
+
+secret_manager_automatic_rotation {
+    lower(input.resources[i].type) == "aws_secretsmanager_secret_rotation"
+    not aws_issue["secret_manager_automatic_rotation"]
+}
+
+secret_manager_automatic_rotation = false {
+    aws_issue["secret_manager_automatic_rotation"]
+}
+
+secret_manager_automatic_rotation_err = "Ensure AWS Secrets Manager automatic rotation is enabled." {
+    aws_issue["secret_manager_automatic_rotation"]
+}
+
+secret_manager_automatic_rotation_metadata := {
+    "Policy Code": "PR-AWS-TRF-SM-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS Secrets Manager automatic rotation is enabled.",
+    "Policy Description": "Rotation is the process of periodically updating a secret. When you rotate a secret, you update the credentials in both the secret and the database or service. This control checks if automatic rotation for secrets is enabled in the secrets manager configuration.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_rotation"
+}
+
+
+#
+# PR-AWS-TRF-SM-004
+#
+
+default secret_manager_rotation_period = null
+
+aws_issue["secret_manager_rotation_period"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_secretsmanager_secret_rotation"
+    rotation_rule := resource.properties.rotation_rules[_]
+    not rotation_rule.automatically_after_days
+}
+
+aws_issue["secret_manager_rotation_period"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_secretsmanager_secret_rotation"
+    rotation_rule := resource.properties.rotation_rules[_]
+    to_number(rotation_rule.automatically_after_days) > 30
+}
+
+secret_manager_rotation_period {
+    lower(input.resources[i].type) == "aws_secretsmanager_secret_rotation"
+    not aws_issue["secret_manager_rotation_period"]
+}
+
+secret_manager_rotation_period = false {
+    aws_issue["secret_manager_rotation_period"]
+}
+
+secret_manager_rotation_period_err = "Ensure AWS secret rotation period is per the GS standard (Ex: 30 days)." {
+    aws_issue["secret_manager_rotation_period"]
+}
+
+secret_manager_rotation_period_metadata := {
+    "Policy Code": "PR-AWS-TRF-SM-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS secret rotation period is per the GS standard (Ex: 30 days).",
+    "Policy Description": "It checks if the rotation policy follow GS standards. Secret rotation period should be less than 30 days.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_rotation#automatically_after_days"
+}
+
+
 #
 # PR-AWS-TRF-AS-002
 #
@@ -452,6 +549,123 @@ workspace_volume_encrypt_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/workspaces_workspace"
 }
+
+
+#
+# PR-AWS-TRF-WS-002
+#
+
+default workspace_root_volume_encrypt = null
+
+aws_issue["workspace_root_volume_encrypt"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_workspaces_workspace"
+    not resource.properties.root_volume_encryption_enabled
+}
+
+aws_issue["workspace_root_volume_encrypt"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_workspaces_workspace"
+    lower(resource.properties.root_volume_encryption_enabled) == "false"
+}
+
+workspace_root_volume_encrypt {
+    lower(input.resources[i].type) == "aws_workspaces_workspace"
+    not aws_issue["workspace_root_volume_encrypt"]
+}
+
+workspace_root_volume_encrypt = false {
+    aws_issue["workspace_root_volume_encrypt"]
+}
+
+workspace_root_volume_encrypt_err = "Ensure that Workspace root volumes is encrypted." {
+    aws_issue["workspace_root_volume_encrypt"]
+}
+
+workspace_root_volume_encrypt_metadata := {
+    "Policy Code": "PR-AWS-TRF-WS-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that Workspace root volumes is encrypted.",
+    "Policy Description": "It checks if encryption is enabled for workspace root volumes.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/workspaces_workspace"
+}
+
+
+#
+# PR-AWS-TRF-WS-003
+#
+
+default workspace_directory_type = null
+
+aws_issue["workspace_directory_type"] {
+    resource_1 := input.resources[i]
+    lower(resource_1.type) == "aws_directory_service_directory"
+    resource_1.properties.type == "SimpleAD"
+    directoryid := resource_1.properties.name
+    resource_2 := input.resources[j]
+    lower(resource_2.type) == "aws_workspaces_workspace"
+    resource_2.properties.directory_id == directoryid
+}
+
+aws_issue["workspace_directory_type"] {
+    resource_1 := input.resources[i]
+    lower(resource_1.type) == "aws_directory_service_directory"
+    resource_1.properties.type == "SimpleAD"
+    directoryid := resource_1.name
+    resource_2 := input.resources[j]
+    lower(resource_2.type) == "aws_workspaces_workspace"
+    resource_2.properties.directory_id == directoryid
+}
+
+aws_issue["workspace_directory_type"] {
+    resource_1 := input.resources[i]
+    lower(resource_1.type) == "aws_directory_service_directory"
+    not resource_1.properties.type
+    directoryid := resource_1.properties.name
+    resource_2 := input.resources[j]
+    lower(resource_2.type) == "aws_workspaces_workspace"
+    resource_2.properties.directory_id == directoryid
+}
+
+aws_issue["workspace_directory_type"] {
+    resource_1 := input.resources[i]
+    lower(resource_1.type) == "aws_directory_service_directory"
+    not resource_1.properties.type
+    directoryid := resource_1.name
+    resource_2 := input.resources[j]
+    lower(resource_2.type) == "aws_workspaces_workspace"
+    resource_2.properties.directory_id == directoryid
+}
+
+workspace_directory_type {
+    lower(input.resources[i].type) == "aws_workspaces_workspace"
+    not aws_issue["workspace_directory_type"]
+}
+
+workspace_directory_type = false {
+    aws_issue["workspace_directory_type"]
+}
+
+workspace_directory_type_err = "Ensure AWS WorkSpaces do not use directory type Simple AD." {
+    aws_issue["workspace_directory_type"]
+}
+
+workspace_directory_type_metadata := {
+    "Policy Code": "PR-AWS-TRF-WS-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS WorkSpaces do not use directory type Simple AD.",
+    "Policy Description": "It checks if Simple AD is used for workspace users. MS Active Directory is approved by GS to be used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/workspaces_workspace"
+}
+
 
 #
 # PR-AWS-TRF-CFR-001

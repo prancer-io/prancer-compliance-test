@@ -1044,13 +1044,15 @@ s3_bucket_is_publicly_accessible_through_iam_policies_metadata := {
 
 default sqs_queue_is_publicly_accessible_through_iam_policies = false
 
+condition_for_sqs := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
+
 sqs_queue_is_publicly_accessible_through_iam_policies = true {
 #     lower(resource.Type) == "aws::iam::role"
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "sqs")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    has_property(policy_statement.Condition[string], condition_for_sqs[_])
 }
 
 sqs_queue_is_publicly_accessible_through_iam_policies = true {
@@ -1060,7 +1062,7 @@ sqs_queue_is_publicly_accessible_through_iam_policies = true {
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "sqs")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    has_property(policy_statement.Condition[string], condition_for_sqs[_])
 }
 
 sqs_queue_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1620,6 +1622,89 @@ iam_policy_not_overly_permissive_to_sts_service_metadata := {
     "Language": "AWS Cloud",
     "Policy Title": "Ensure AWS IAM policy is not overly permissive to STS services.",
     "Policy Description": "It identifies the IAM policies that are overly permissive to STS services. AWS Security Token Service (AWS STS) is a web service that enables you to request temporary credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users). It is recommended to follow the principle of least privileges ensuring that only restricted STS services for restricted resources.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
+}
+
+
+#
+# PR-AWS-CLD-IAM-045
+# aws::iam::role
+
+default sns_publicly_accessible_through_iam_policies = false
+
+sns_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
+
+sns_publicly_accessible_through_iam_policies = true {
+    some string
+    role_policy_document := input.Role.AssumeRolePolicyDocument
+    policy_statement := role_policy_document.Statement[i]
+    contains(lower(policy_statement.Principal.Service), "sns")
+    has_property(policy_statement.Condition[string], sns_condition[_])
+}
+
+sns_publicly_accessible_through_iam_policies = true {
+    some string
+    role_policy_document := input.Role.AssumeRolePolicyDocument
+    policy_statement := role_policy_document.Statement[i]
+    services := policy_statement.Principal.Service[_]
+    contains(lower(services), "sns")
+    has_property(policy_statement.Condition[string], sns_condition[_])
+}
+
+sns_publicly_accessible_through_iam_policies_err = "Ensure AWS SNS Topic is not publicly accessible through IAM policies." {
+    not sns_publicly_accessible_through_iam_policies
+}
+
+sns_publicly_accessible_through_iam_policies_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-045",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS SNS Topic is not publicly accessible through IAM policies.",
+    "Policy Description": "It identifies the AWS SNS Topic resources which are publicly accessible through IAM policies. Ensure that the AWS SNS Topic resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+}
+
+
+#
+# PR-AWS-CLD-IAM-046
+# aws::iam::policyversion
+
+default sagemaker_not_overly_permissive_to_all_traffic = true
+
+sagemaker_not_overly_permissive_to_all_traffic = false {
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action[_]), "sagemaker:")
+}
+
+sagemaker_not_overly_permissive_to_all_traffic = false {
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(policy_statement.Action), "sagemaker:")
+}
+
+sagemaker_not_overly_permissive_to_all_traffic_err = "Ensure AWS SageMaker notebook instance IAM policy is not overly permissive to all traffic." {
+    not sagemaker_not_overly_permissive_to_all_traffic
+}
+
+sagemaker_not_overly_permissive_to_all_traffic_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-046",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS SageMaker notebook instance IAM policy is not overly permissive to all traffic.",
+    "Policy Description": "It identifies SageMaker notebook instances IAM policies that are overly permissive to all traffic. It is recommended that the SageMaker notebook instances should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_id-based-policy-examples.html",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"

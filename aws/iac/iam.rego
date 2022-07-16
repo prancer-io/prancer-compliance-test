@@ -8,6 +8,8 @@ has_property(parent_object, target_property) {
 
 iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount"]
 
+ip_address = ["0.0.0.0/0", "::/0"]
+
 #
 # PR-AWS-CFR-IAM-001
 #
@@ -629,8 +631,6 @@ iam_role_name_check_metadata := {
 
 default iam_policy_not_overly_permissive_to_all_traffic = null
 
-ip_address = ["0.0.0.0/0", "::/0"]
-
 aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
@@ -645,8 +645,26 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     lower(resource.Type) == "aws::iam::policy"
     statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    contains(lower(statement.Action), "lambda:")
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
     statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
     contains(lower(statement.Action[_]), "lambda:")
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    contains(lower(statement.Action), "lambda:")
 }
 
 iam_policy_not_overly_permissive_to_all_traffic {
@@ -1372,6 +1390,7 @@ ecs_task_definition_with_iam_wildcard_resource_access_metadata := {
 default ecr_repository_is_publicly_accessible_through_iam_policies = null
 
 aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1380,6 +1399,7 @@ aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["ecr_repository_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1421,6 +1441,7 @@ ecr_repository_is_publicly_accessible_through_iam_policies_metadata := {
 default lambda_function_is_publicly_accessible_through_iam_policies = null
 
 aws_issue["lambda_function_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1429,6 +1450,7 @@ aws_issue["lambda_function_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["lambda_function_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1470,6 +1492,7 @@ lambda_function_is_publicly_accessible_through_iam_policies_metadata := {
 default s3_bucket_is_publicly_accessible_through_iam_policies = null
 
 aws_issue["s3_bucket_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1478,6 +1501,7 @@ aws_issue["s3_bucket_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["s3_bucket_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1518,21 +1542,25 @@ s3_bucket_is_publicly_accessible_through_iam_policies_metadata := {
 
 default sqs_queue_is_publicly_accessible_through_iam_policies = null
 
+condition_for_sqs := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
+
 aws_issue["sqs_queue_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
     contains(lower(statement.Principal.Service), "sqs")
-    has_property(statement.Condition[string], iam_policies_condition[_])
+    has_property(statement.Condition[string], condition_for_sqs[_])
 }
 
 aws_issue["sqs_queue_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
     services := statement.Principal.Service[_]
     contains(lower(services), "sqs")
-    has_property(statement.Condition[string], iam_policies_condition[_])
+    has_property(statement.Condition[string], condition_for_sqs[_])
 }
 
 sqs_queue_is_publicly_accessible_through_iam_policies {
@@ -1568,6 +1596,7 @@ sqs_queue_is_publicly_accessible_through_iam_policies_metadata := {
 default secret_manager_secret_is_publicly_accessible_through_iam_policies = null
 
 aws_issue["secret_manager_secret_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1576,6 +1605,7 @@ aws_issue["secret_manager_secret_is_publicly_accessible_through_iam_policies"] {
 }
 
 aws_issue["secret_manager_secret_is_publicly_accessible_through_iam_policies"] {
+    some string
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
     statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
@@ -1654,6 +1684,109 @@ iam_policy_permission_may_cause_privilege_escalation_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure AWS IAM policy do not have permission which may cause privilege escalation.",
     "Policy Description": "It identifies AWS IAM Policy which have permission that may cause privilege escalation. AWS IAM policy having weak permissions could be exploited by an attacker to elevate privileges. It is recommended to follow the principle of least privileges ensuring that AWS IAM policy does not have these sensitive permissions.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
+}
+
+#
+# PR-AWS-CFR-IAM-045
+#
+
+default sns_publicly_accessible_through_iam_policies = null
+
+sns_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
+
+aws_issue["sns_publicly_accessible_through_iam_policies"] {
+    some string
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::role"
+    statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
+    contains(lower(statement.Principal.Service), "sns")
+    has_property(statement.Condition[string], sns_condition[_])
+}
+
+aws_issue["sns_publicly_accessible_through_iam_policies"] {
+    some string
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::role"
+    statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
+    services := statement.Principal.Service[_]
+    contains(lower(services), "sns")
+    has_property(statement.Condition[string], sns_condition[_])
+}
+
+sns_publicly_accessible_through_iam_policies {
+    lower(input.Resources[i].Type) == "aws::iam::role"
+    not aws_issue["sns_publicly_accessible_through_iam_policies"]
+}
+
+sns_publicly_accessible_through_iam_policies = false {
+    aws_issue["sns_publicly_accessible_through_iam_policies"]
+}
+
+sns_publicly_accessible_through_iam_policies_err = "Ensure AWS SNS Topic is not publicly accessible through IAM policies." {
+    aws_issue["sns_publicly_accessible_through_iam_policies"]
+}
+
+sns_publicly_accessible_through_iam_policies_metadata := {
+    "Policy Code": "PR-AWS-CFR-IAM-045",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS SNS Topic is not publicly accessible through IAM policies.",
+    "Policy Description": "It identifies the AWS SNS Topic resources which are publicly accessible through IAM policies. Ensure that the AWS SNS Topic resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html"
+}
+
+
+#
+# PR-AWS-CFR-IAM-046
+#
+
+default sagemaker_not_overly_permissive_to_all_traffic = null
+
+aws_issue["sagemaker_not_overly_permissive_to_all_traffic"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(statement.Action[_]), "sagemaker:")
+}
+
+aws_issue["sagemaker_not_overly_permissive_to_all_traffic"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(statement.Action), "sagemaker:")
+}
+
+
+sagemaker_not_overly_permissive_to_all_traffic {
+    lower(input.Resources[i].Type) == "aws::iam::policy"
+    not aws_issue["sagemaker_not_overly_permissive_to_all_traffic"]
+}
+
+sagemaker_not_overly_permissive_to_all_traffic = false {
+    aws_issue["sagemaker_not_overly_permissive_to_all_traffic"]
+}
+
+sagemaker_not_overly_permissive_to_all_traffic_err = "Ensure AWS SageMaker notebook instance IAM policy is not overly permissive to all traffic." {
+    aws_issue["sagemaker_not_overly_permissive_to_all_traffic"]
+}
+
+sagemaker_not_overly_permissive_to_all_traffic_metadata := {
+    "Policy Code": "PR-AWS-CFR-IAM-046",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS SageMaker notebook instance IAM policy is not overly permissive to all traffic.",
+    "Policy Description": "It identifies SageMaker notebook instances IAM policies that are overly permissive to all traffic. It is recommended that the SageMaker notebook instances should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_id-based-policy-examples.html",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
