@@ -7390,6 +7390,76 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-TRF-S3-023",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-S3-023",
+                            "eval": "data.rule.s3_overly_permissive_to_any_principal",
+                            "message": "data.rule.s3_overly_permissive_to_any_principal_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_S3_023.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS S3 bucket policy is not overly permissive to any principal.",
+                    "description": "It identifies the S3 buckets that have a bucket policy overly permissive to any principal. It is recommended to follow the principle of least privileges ensuring that the only restricted entities have permission on S3 operations instead of any anonymous. For more details: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Data Protection"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_s3_bucket_policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-S3-024",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-S3-024",
+                            "eval": "data.rule.s3_has_a_policy_attached",
+                            "message": "data.rule.s3_has_a_policy_attached_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_S3_024.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS S3 bucket policy is not overly permissive to any principal.",
+                    "description": "It identifies the S3 buckets that have a bucket policy overly permissive to any principal. It is recommended to follow the principle of least privileges ensuring that the only restricted entities have permission on S3 operations instead of any anonymous. For more details: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_s3_bucket",
+                        "aws_s3_bucket_policy"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-TRF-EMR-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -11609,7 +11679,7 @@
                             "eval": "data.rule.ecr_vulnerability",
                             "message": "data.rule.ecr_vulnerability_err",
                             "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_TRF_ECR_004.py"
+                            "remediationFunction": "PR_AWS_TRF_ECR_005.py"
                         }
                     ],
                     "severity": "High",
@@ -11629,6 +11699,74 @@
                     ],
                     "resourceTypes": [
                         "aws_ecr_registry_scanning_configuration"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ECR-006",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ECR-006",
+                            "eval": "data.rule.ecr_accessible_only_via_private_endpoint",
+                            "message": "data.rule.ecr_accessible_only_via_private_endpoint_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ECR_006.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure ECR resources are accessible only via private endpoint.",
+                    "description": "It checks if the container registry is accessible over the internet, GS mandates to keep the container repository private from GS network only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_ecr_repository_policy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-ECR-007",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-ECR-007",
+                            "eval": "data.rule.lifecycle_policy_is_enabled",
+                            "message": "data.rule.lifecycle_policy_is_enabled_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_lifecycle_policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_ECR_007.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure lifecycle policy is enabled for ECR image repositories.",
+                    "description": "It checks if a lifecycle policy is created for ECR. ECR lifecycle policies provide more control over the lifecycle management of images in a private repository.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_ecr_lifecycle_policy"
                     ]
                 },
                 {
@@ -16141,6 +16279,157 @@
                     ],
                     "resourceTypes": [
                         "aws_rds_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-RDS-027",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-RDS-027",
+                            "eval": "data.rule.rds_iam_database_auth",
+                            "message": "data.rule.rds_iam_database_auth_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_RDS_027.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS RDS DB authentication is only enabled via IAM.",
+                    "description": "This policy checks RDS DB instances which are not configured with IAM based authentication and using any hardcoded credentials.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Secure access management",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-16.1"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_db_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-RDS-028",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-RDS-028",
+                            "eval": "data.rule.rds_cluster_backup_retention",
+                            "message": "data.rule.rds_cluster_backup_retention_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_RDS_028.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS RDS Cluster has setup backup retention period of at least 30 days.",
+                    "description": "This policy checks that backup retention period for RDS DB is firm approved.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_rds_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-RDS-029",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-RDS-029",
+                            "eval": "data.rule.db_instance_deletion_protection",
+                            "message": "data.rule.db_instance_deletion_protection_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_RDS_029.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS RDS DB instance has deletion protection enabled.",
+                    "description": "It is to check that deletion protection in enabled at RDS DB level in order to protect the DB instance from accidental deletion.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Data protection",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1485 - Data Destruction",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-22.1"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_db_instance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-TRF-RDS-030",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-TRF-RDS-030",
+                            "eval": "data.rule.db_instance_backup_retention_period",
+                            "message": "data.rule.db_instance_backup_retention_period_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_TRF_RDS_030.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure RDS DB instance has setup backup retention period of at least 30 days.",
+                    "description": "This is to check that backup retention period for RDS DB is firm approved.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "PCI DSS",
+                                "GDPR",
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "HIPAA",
+                                "ISO 27001",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws_db_instance"
                     ]
                 },
                 {

@@ -353,3 +353,104 @@ ecr_vulnerability_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_registry_scanning_configuration"
 }
+
+
+#
+# PR-AWS-TRF-ECR-006
+#
+
+default ecr_accessible_only_via_private_endpoint = null
+
+aws_issue["ecr_accessible_only_via_private_endpoint"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement,"Condition")
+}
+
+aws_issue["ecr_accessible_only_via_private_endpoint"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition, "StringEquals")
+}
+
+aws_issue["ecr_accessible_only_via_private_endpoint"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition.StringEquals, "aws:SourceVpce")
+}
+
+ecr_accessible_only_via_private_endpoint {
+    lower(input.resources[i].type) == "aws_ecr_repository_policy"
+    not aws_issue["ecr_accessible_only_via_private_endpoint"]
+}
+
+ecr_accessible_only_via_private_endpoint = false {
+    aws_issue["ecr_accessible_only_via_private_endpoint"]
+}
+
+ecr_accessible_only_via_private_endpoint_err = "Ensure ECR resources are accessible only via private endpoint." {
+    aws_issue["ecr_accessible_only_via_private_endpoint"]
+}
+
+ecr_accessible_only_via_private_endpoint_metadata := {
+    "Policy Code": "PR-AWS-TRF-ECR-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure ECR resources are accessible only via private endpoint.",
+    "Policy Description": "It checks if the container registry is accessible over the internet, GS mandates to keep the container repository private from GS network only.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy"
+}
+
+
+#
+# PR-AWS-TRF-ECR-007
+#
+
+default lifecycle_policy_is_enabled = null
+
+aws_issue["lifecycle_policy_is_enabled"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_lifecycle_policy"
+    rule := resource.properties.policy.rules[_]
+    lower(rule.selection.tagStatus) == "tagged"
+}
+
+aws_issue["lifecycle_policy_is_enabled"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_lifecycle_policy"
+    not resource.properties.policy
+}
+
+lifecycle_policy_is_enabled {
+    lower(input.resources[i].type) == "aws_ecr_lifecycle_policy"
+    not aws_issue["lifecycle_policy_is_enabled"]
+}
+
+lifecycle_policy_is_enabled = false {
+    aws_issue["lifecycle_policy_is_enabled"]
+}
+
+lifecycle_policy_is_enabled_err = "Ensure lifecycle policy is enabled for ECR image repositories." {
+    aws_issue["lifecycle_policy_is_enabled"]
+}
+
+lifecycle_policy_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-TRF-ECR-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure lifecycle policy is enabled for ECR image repositories.",
+    "Policy Description": "It checks if a lifecycle policy is created for ECR. ECR lifecycle policies provide more control over the lifecycle management of images in a private repository.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_lifecycle_policy"
+}

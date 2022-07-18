@@ -1,6 +1,11 @@
 package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability
+
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 #
 # PR-AWS-CFR-ECR-001
 #
@@ -277,7 +282,22 @@ aws_issue["ecr_accessible_only_via_private_endpoint"] {
     lower(resource.Type) == "aws::ecr::repository"
     statement := resource.Properties.RepositoryPolicyText.Statement[j]
     lower(statement.Effect) == "allow"
-    statement.Condition
+    not has_property(statement, "Condition")
+}
+
+aws_issue["ecr_accessible_only_via_private_endpoint"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    statement := resource.Properties.RepositoryPolicyText.Statement[j]
+    lower(statement.Effect) == "allow"
+    not has_property(statement.Condition, "StringEquals")
+}
+
+aws_issue["ecr_accessible_only_via_private_endpoint"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    statement := resource.Properties.RepositoryPolicyText.Statement[j]
+    lower(statement.Effect) == "allow"
     not has_property(statement.Condition.StringEquals, "aws:SourceVpce")
 }
 
@@ -300,7 +320,7 @@ ecr_accessible_only_via_private_endpoint_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure ECR resources are accessible only via private endpoint.",
-    "Policy Description": "It checks if the container registry is accessible over the internet, GS mandates to keep the container repository private from GS network only",
+    "Policy Description": "It checks if the container registry is accessible over the internet, GS mandates to keep the container repository private from GS network only.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html"

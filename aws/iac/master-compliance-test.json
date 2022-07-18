@@ -7045,6 +7045,76 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CFR-S3-023",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-S3-023",
+                            "eval": "data.rule.s3_overly_permissive_to_any_principal",
+                            "message": "data.rule.s3_overly_permissive_to_any_principal_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_S3_023.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS S3 bucket policy is not overly permissive to any principal.",
+                    "description": "It identifies the S3 buckets that have a bucket policy overly permissive to any principal. It is recommended to follow the principle of least privileges ensuring that the only restricted entities have permission on S3 operations instead of any anonymous. For more details: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "AWS Well-Architected Framework",
+                                "AWS Well-Architected Framework-Data Protection"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::s3::bucketpolicy"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-S3-024",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-S3-024",
+                            "eval": "data.rule.s3_has_a_policy_attached",
+                            "message": "data.rule.s3_has_a_policy_attached_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_S3_024.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS S3 bucket has a policy attached.",
+                    "description": "S3 access can be defined at IAM and Bucket policy levels. It is recommended to leverage bucket policies as it provide much more granularity. This controls check if a bucket has a custom policy attached to it.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::s3::bucket",
+                        "aws::s3::bucketpolicy"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CFR-EFS-001",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -15478,6 +15548,157 @@
                             "cloud": "git",
                             "compliance": [
                                 "PCI-DSS",
+                                "GDPR",
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "HIPAA",
+                                "ISO 27001",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::rds::dbcluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-RDS-027",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-RDS-027",
+                            "eval": "data.rule.rds_iam_database_auth",
+                            "message": "data.rule.rds_iam_database_auth_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_RDS_027.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS RDS DB authentication is only enabled via IAM.",
+                    "description": "This policy checks RDS DB instances which are not configured with IAM based authentication and using any hardcoded credentials.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Secure access management",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-16.1"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::rds::dbinstance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-RDS-028",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-RDS-028",
+                            "eval": "data.rule.rds_cluster_backup_retention",
+                            "message": "data.rule.rds_cluster_backup_retention_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_RDS_028.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS RDS Cluster has setup backup retention period of at least 30 days.",
+                    "description": "This policy checks that backup retention period for RDS DB is firm approved.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::rds::dbcluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-RDS-029",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-RDS-029",
+                            "eval": "data.rule.db_instance_deletion_protection",
+                            "message": "data.rule.db_instance_deletion_protection_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_RDS_029.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS RDS DB instance has deletion protection enabled.",
+                    "description": "It is to check that deletion protection in enabled at RDS DB level in order to protect the DB instance from accidental deletion.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "AWS Foundational Security Best Practices standard",
+                                "AWS Foundational Security Best Practices standard-Data protection",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1485 - Data Destruction",
+                                "NZISM",
+                                "New Zealand Information Security Manual (NZISM v3.4)-22.1"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::rds::dbinstance"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-RDS-030",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-RDS-030",
+                            "eval": "data.rule.rds_cluster_backup_retention",
+                            "message": "data.rule.rds_cluster_backup_retention_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_RDS_030.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure RDS DB instance has setup backup retention period of at least 30 days.",
+                    "description": "This is to check that backup retention period for RDS DB is firm approved.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "PCI DSS",
                                 "GDPR",
                                 "CIS",
                                 "HITRUST",

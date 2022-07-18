@@ -2671,3 +2671,102 @@ s3_block_public_policy_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block"
 }
+
+
+#
+# PR-AWS-TRF-S3-023
+#
+
+default s3_overly_permissive_to_any_principal = null
+
+aws_issue["s3_overly_permissive_to_any_principal"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_policy"
+    stat := resource.properties.policy.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action),"s3:")
+    not stat.Condition
+}
+
+aws_issue["s3_overly_permissive_to_any_principal"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket_policy"
+    stat := resource.properties.policy.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action[_]),"s3:")
+    not stat.Condition
+}
+
+s3_overly_permissive_to_any_principal {
+    lower(input.resources[i].type) == "aws_s3_bucket_policy"
+    not aws_issue["s3_overly_permissive_to_any_principal"]
+}
+
+s3_overly_permissive_to_any_principal = false {
+    aws_issue["s3_overly_permissive_to_any_principal"]
+}
+
+s3_overly_permissive_to_any_principal_err = "Ensure AWS S3 bucket policy is not overly permissive to any principal." {
+    aws_issue["s3_overly_permissive_to_any_principal"]
+}
+
+s3_overly_permissive_to_any_principal_metadata := {
+    "Policy Code": "PR-AWS-TRF-S3-023",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS S3 bucket policy is not overly permissive to any principal.",
+    "Policy Description": "It identifies the S3 buckets that have a bucket policy overly permissive to any principal. It is recommended to follow the principle of least privileges ensuring that the only restricted entities have permission on S3 operations instead of any anonymous. For more details: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html",
+    "Resource Type": "aws_s3_bucket_policy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy"
+}
+
+
+#
+# PR-AWS-TRF-S3-024
+#
+
+default s3_has_a_policy_attached = null
+
+aws_issue["s3_has_a_policy_attached"] {
+    primary_resource := input.resources[i]
+    lower(primary_resource.type) == "aws_s3_bucket"
+    resource := input.resources[j]
+    count([c | lower(resource.type) == "aws_s3_bucket_policy"; c:=1]) == 0
+}
+
+aws_issue["s3_has_a_policy_attached"] {
+    primary_resource := input.resources[i]
+    lower(primary_resource.type) == "aws_s3_bucket"
+    resource := input.resources[j]
+    count([c | lower(resource.type) == "aws_s3_bucket_policy"; c:=1]) != 0
+    count(resource.properties.policy.Statement[_]) == 0
+}
+
+s3_has_a_policy_attached {
+    lower(input.resources[i].type) == "aws_s3_bucket_policy"
+    not aws_issue["s3_has_a_policy_attached"]
+}
+
+s3_has_a_policy_attached = false {
+    aws_issue["s3_has_a_policy_attached"]
+}
+
+s3_has_a_policy_attached_err = "Ensure AWS S3 bucket policy is not overly permissive to any principal." {
+    aws_issue["s3_has_a_policy_attached"]
+}
+
+s3_has_a_policy_attached_metadata := {
+    "Policy Code": "PR-AWS-TRF-S3-024",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS S3 bucket policy is not overly permissive to any principal.",
+    "Policy Description": "It identifies the S3 buckets that have a bucket policy overly permissive to any principal. It is recommended to follow the principle of least privileges ensuring that the only restricted entities have permission on S3 operations instead of any anonymous. For more details: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html",
+    "Resource Type": "aws_s3_bucket_policy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy"
+}
