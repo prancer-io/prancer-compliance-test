@@ -1859,6 +1859,48 @@ not_allow_decryption_actions_on_all_kms_keys_metadata := {
 
 
 #
+# PR-AWS-TRF-IAM-042
+#
+
+default iam_policy_attached_to_user = null
+
+resources_user_policy := ["aws_iam_user_policy", "aws_iam_user_policy_attachment"]
+
+aws_issue["iam_policy_attached_to_user"] {
+    count([c | input.resources[_].type == "aws_iam_user_policy"; c:=1]) != 0
+}
+
+aws_issue["iam_policy_attached_to_user"] {
+    count([c | input.resources[_].type == "aws_iam_user_policy_attachment"; c:=1]) != 0
+}
+
+iam_policy_attached_to_user {
+    lower(input.resources[i].type) == resources_user_policy[_]
+    not aws_issue["iam_policy_attached_to_user"]
+}
+
+iam_policy_attached_to_user = false {
+    aws_issue["iam_policy_attached_to_user"]
+}
+
+iam_policy_attached_to_user_err = "Ensure IAM policy is attached to group rather than user." {
+    aws_issue["iam_policy_attached_to_user"]
+}
+
+iam_policy_attached_to_user_metadata := {
+    "Policy Code": "PR-AWS-TRF-IAM-042",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure IAM policy is attached to group rather than user.",
+    "Policy Description": "It identifies IAM policies attached to user. By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups but not users.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment"
+}
+
+
+#
 # PR-AWS-TRF-IAM-043
 #
 

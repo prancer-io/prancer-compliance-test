@@ -1979,6 +1979,50 @@ not_allow_decryption_actions_on_all_kms_keys_metadata := {
 
 
 #
+# PR-AWS-CFR-IAM-042
+#
+
+default iam_policy_attached_to_user = null
+
+aws_issue["iam_policy_attached_to_user"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::user"
+    count(resource.Properties.Policies) != 0
+}
+
+aws_issue["iam_policy_attached_to_user"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::user"
+    count(resource.Properties.Policies) != 0
+}
+
+iam_policy_attached_to_user {
+    lower(input.Resources[i].Type) == "aws::iam::user"
+    not aws_issue["iam_policy_attached_to_user"]
+}
+
+iam_policy_attached_to_user = false {
+    aws_issue["iam_policy_attached_to_user"]
+}
+
+iam_policy_attached_to_user_err = "Ensure IAM policy is attached to group rather than user." {
+    aws_issue["iam_policy_attached_to_user"]
+}
+
+iam_policy_attached_to_user_metadata := {
+    "Policy Code": "PR-AWS-CFR-IAM-042",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure IAM policy is attached to group rather than user.",
+    "Policy Description": "It identifies IAM policies attached to user. By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups but not users.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html"
+}
+
+
+#
 # PR-AWS-CFR-IAM-043
 #
 

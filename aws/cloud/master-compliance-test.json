@@ -3360,7 +3360,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure AWS S3 bucket do not have policy that is overly permissive to VPC endpoints.",
-                    "description": "It identifies S3 buckets that have the bucket policy overly permissive to VPC endpoints. It is recommended to follow the principle of least privileges ensuring that the VPC endpoints have only necessary permissions instead of full permission on S3 operations.\n\nNOTE: When applying the Amazon S3 bucket policies for VPC endpoints described in this section, you might block your access to the bucket without intending to do so. Bucket permissions that are intended to specifically limit bucket access to connections originating from your VPC endpoint can block all connections to the bucket. The policy might disable console access to the specified bucket because console requests don't originate from the specified VPC endpoint. So remediation should be done very carefully.\n\nFor details refer https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html",
+                    "description": "It identifies S3 buckets that have the bucket policy overly permissive to VPC endpoints. It is recommended to follow the principle of least privileges ensuring that the VPC endpoints have only necessary permissions instead of full permission on S3 operations. NOTE: When applying the Amazon S3 bucket policies for VPC endpoints described in this section, you might block your access to the bucket without intending to do so. Bucket permissions that are intended to specifically limit bucket access to connections originating from your VPC endpoint can block all connections to the bucket. The policy might disable console access to the specified bucket because console requests don't originate from the specified VPC endpoint. So remediation should be done very carefully. For details refer https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -10815,7 +10815,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI DSS",
+                                "GDPR"
+                            ],
                             "service": [
                                 "ecr"
                             ]
@@ -10844,7 +10847,10 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI DSS",
+                                "GDPR"
+                            ],
                             "service": [
                                 "ecr"
                             ]
@@ -14073,7 +14079,16 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI DSS",
+                                "GDPR",
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "HIPAA",
+                                "ISO 27001",
+                                "SOC 2"
+                            ],
                             "service": [
                                 "rds"
                             ]
