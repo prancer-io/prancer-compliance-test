@@ -9316,8 +9316,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CFR-IAM-011",
-                            "eval": "data.rule.iam_policy_not_overly_permissive_to_all_traffic",
-                            "message": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_err",
+                            "eval": "data.rule.lambda_iam_policy_not_overly_permissive_to_all_traffic",
+                            "message": "data.rule.lambda_iam_policy_not_overly_permissive_to_all_traffic_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_IAM_011.py"
                         }

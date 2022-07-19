@@ -629,9 +629,9 @@ iam_role_name_check_metadata := {
 # PR-AWS-CFR-IAM-011
 #
 
-default iam_policy_not_overly_permissive_to_all_traffic = null
+default lambda_iam_policy_not_overly_permissive_to_all_traffic = null
 
-aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
     statement := resource.Properties.PolicyDocument.Statement[j]
@@ -640,7 +640,7 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     contains(lower(statement.Action[_]), "lambda:")
 }
 
-aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
     statement := resource.Properties.PolicyDocument.Statement[j]
@@ -649,7 +649,7 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     contains(lower(statement.Action), "lambda:")
 }
 
-aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
     statement := resource.Properties.PolicyDocument.Statement[j]
@@ -658,7 +658,7 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     contains(lower(statement.Action[_]), "lambda:")
 }
 
-aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
     statement := resource.Properties.PolicyDocument.Statement[j]
@@ -667,20 +667,20 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     contains(lower(statement.Action), "lambda:")
 }
 
-iam_policy_not_overly_permissive_to_all_traffic {
+lambda_iam_policy_not_overly_permissive_to_all_traffic {
     lower(input.Resources[i].Type) == "aws::iam::policy"
-    not aws_issue["iam_policy_not_overly_permissive_to_all_traffic"]
+    not aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"]
 }
 
-iam_policy_not_overly_permissive_to_all_traffic = false {
-    aws_issue["iam_policy_not_overly_permissive_to_all_traffic"]
+lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
+    aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"]
 }
 
-iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure Lambda IAM policy is not overly permissive to all traffic" {
-    aws_issue["iam_policy_not_overly_permissive_to_all_traffic"]
+lambda_iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure Lambda IAM policy is not overly permissive to all traffic" {
+    aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"]
 }
 
-iam_policy_not_overly_permissive_to_all_traffic_metadata := {
+lambda_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
     "Policy Code": "PR-AWS-CFR-IAM-011",
     "Type": "IaC",
     "Product": "AWS",
@@ -1993,7 +1993,7 @@ aws_issue["iam_policy_attached_to_user"] {
 aws_issue["iam_policy_attached_to_user"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::user"
-    count(resource.Properties.Policies) != 0
+    count(resource.Properties.ManagedPolicyArns) != 0
 }
 
 iam_policy_attached_to_user {

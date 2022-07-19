@@ -1853,16 +1853,19 @@ default s3_has_a_policy_attached = null
 aws_issue["s3_has_a_policy_attached"] {
     primary_resource := input.Resources[i]
     lower(primary_resource.Type) == "aws::s3::bucket"
-    resource := input.Resources[j]
-    count([c | lower(resource.Type) == "aws::s3::bucketpolicy"; c:=1]) == 0
+    count([c | lower(input.Resources[j].Type) == "aws::s3::bucketpolicy"; c:=1]) == 0
 }
 
 aws_issue["s3_has_a_policy_attached"] {
     primary_resource := input.Resources[i]
     lower(primary_resource.Type) == "aws::s3::bucket"
-    resource := input.Resources[j]
-    count([c | lower(resource.Type) == "aws::s3::bucketpolicy"; c:=1]) != 0
-    count(resource.Properties.PolicyDocument.Statement[_]) == 0
+    count([c | 
+        resource := input.Resources[_];
+        lower(resource.Type) == "aws::s3::bucketpolicy";
+    	resource.Properties.Bucket.Ref == primary_resource.Properties.BucketName;
+        resource.Properties.PolicyDocument.Statement
+    	c:=1]
+    ) == 0
 }
 
 s3_has_a_policy_attached {

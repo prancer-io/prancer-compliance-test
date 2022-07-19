@@ -337,7 +337,7 @@ aws_issue["lifecycle_policy_is_enabled"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecr::repository"
     rule := resource.Properties.LifecyclePolicy.LifecyclePolicyText.rules[_]
-    lower(rules.selection.tagStatus) == "tagged"
+    lower(rule.selection.tagStatus) == "tagged"
 }
 
 aws_issue["lifecycle_policy_is_enabled"] {
