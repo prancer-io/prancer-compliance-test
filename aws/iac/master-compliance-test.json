@@ -2944,7 +2944,10 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "HITRUST",
+                                "PCI-DSS",
+                                "MAS TRM"
                             ],
                             "service": [
                                 "cloudformation"
@@ -2978,7 +2981,10 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "HITRUST",
+                                "PCI-DSS",
+                                "MAS TRM"
                             ],
                             "service": [
                                 "cloudformation"
@@ -3765,7 +3771,8 @@
                             "cloud": "git",
                             "compliance": [
                                 "NIST 800",
-                                "GDPR"
+                                "GDPR",
+                                "CSA CCM"
                             ],
                             "service": [
                                 "cloudformation"
@@ -3800,7 +3807,8 @@
                             "cloud": "git",
                             "compliance": [
                                 "NIST 800",
-                                "GDPR"
+                                "GDPR",
+                                "CSA CCM"
                             ],
                             "service": [
                                 "cloudformation"
@@ -3835,7 +3843,8 @@
                             "cloud": "git",
                             "compliance": [
                                 "NIST 800",
-                                "GDPR"
+                                "GDPR",
+                                "CSA CCM"
                             ],
                             "service": [
                                 "cloudformation"
@@ -8554,7 +8563,15 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "CCPA",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP",
+                                "NIST CSF"
                             ],
                             "service": [
                                 "cloudformation"
@@ -8588,7 +8605,15 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "CCPA",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP",
+                                "NIST CSF"
                             ],
                             "service": [
                                 "cloudformation"
@@ -13095,7 +13120,14 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "CMMC",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP"
                             ],
                             "service": [
                                 "cloudformation"
@@ -13129,7 +13161,14 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "CMMC",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP"
                             ],
                             "service": [
                                 "cloudformation"
@@ -13163,7 +13202,14 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "CMMC",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP"
                             ],
                             "service": [
                                 "cloudformation"
@@ -16729,7 +16775,14 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practice"
+                                "APRA",
+                                "CCPA",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP"
                             ],
                             "service": [
                                 "cloudformation"
