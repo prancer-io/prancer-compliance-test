@@ -1,6 +1,6 @@
 package rule
 
-contains(target_list, element) = true {
+array_contains(target_list, element) = true {
   lower(target_list[_]) == element
 } else = false { true }
 
@@ -93,7 +93,7 @@ azure_issue ["functionapp_not_accessible_from_all_region"] {
     lower(resource.type) == "azurerm_function_app"
     site_config := resource.properties.site_config[_]
     cors := site_config.cors[_]
-    contains(cors.allowed_origins, "*")
+    array_contains(cors.allowed_origins, "*")
 }
 
 functionapp_not_accessible_from_all_region {
