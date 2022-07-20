@@ -82,6 +82,7 @@ array_contains(target_array, element) = true {
 #     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules"
 # }
 
+
 # PR-AZR-CLD-SQL-011
 #
 

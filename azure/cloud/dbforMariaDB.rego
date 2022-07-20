@@ -292,3 +292,52 @@ mariadb_geo_redundant_backup_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/servers"
 }
+
+
+# PR-AZR-CLD-SQL-064
+
+default mairadb_usage_latest_tls = null
+
+azure_attribute_absence ["mairadb_usage_latest_tls"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    not resource.properties.minimalTlsVersion
+}
+
+azure_issue ["mairadb_usage_latest_tls"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    lower(resource.properties.minimalTlsVersion) != "tls1_2"
+}
+
+mairadb_usage_latest_tls {
+    lower(input.resources[_].type) == "microsoft.dbformariadb/servers"
+    not azure_attribute_absence["mairadb_usage_latest_tls"]
+    not azure_issue["mairadb_usage_latest_tls"]
+}
+
+mairadb_usage_latest_tls = false {
+    azure_issue["mairadb_usage_latest_tls"]
+}
+
+mairadb_usage_latest_tls = false {
+    azure_attribute_absence["mairadb_usage_latest_tls"]
+}
+
+mairadb_usage_latest_tls_err = "MariaDB server currently not using latest TLS version." {
+    azure_issue["mairadb_usage_latest_tls"]
+} else = "microsoft.dbformariadb/servers property 'minimalTlsVersion' need to be exist. Its missing from the resource. Please set the value to 'TLS1_2' after property addition." {
+    azure_attribute_absence["mairadb_usage_latest_tls"]
+}
+
+mairadb_usage_latest_tls_metadata := {
+    "Policy Code": "PR-AZR-CLD-SQL-064",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Ensure MariaDB Server is using latest TLS version.",
+    "Policy Description": "This policy identifies Azure MariaDB database servers that are not using the latest TLS version for SSL enforcement. Azure Database for MariaDB uses Transport Layer Security (TLS) from communication with client applications. As a best security practice, use the newer TLS version as the minimum TLS version for the MariaDB database server. Currently, Azure MariaDB supports TLS 1.2 version which resolves the security gap from its preceding versions.",
+    "Resource Type": "microsoft.dbformariadb/servers",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/servers"
+}

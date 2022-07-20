@@ -19,18 +19,6 @@ azure_attribute_absence["sql_logical_server_alert"] {
     not sql_resources.properties.state
 }
 
-source_path[{"sql_logical_server_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    not sql_resources.properties.state
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","state"]]
-    }
-}
-
-
 azure_sql_security_alert_disabled["sql_logical_server_alert"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
@@ -38,18 +26,6 @@ azure_sql_security_alert_disabled["sql_logical_server_alert"] {
     lower(sql_resources.type) == "securityalertpolicies"
     lower(sql_resources.properties.state) == "disabled"
 }
-
-source_path[{"sql_logical_server_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    lower(sql_resources.properties.state) == "disabled"
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","state"]]
-    }
-}
-
 
 sql_logical_server_alert {
     lower(input.resources[_].type) == "microsoft.sql/servers"
@@ -239,17 +215,6 @@ azure_issue["sql_logical_server_email_account"] {
     not sql_resources.properties.emailAccountAdmins
 }
 
-source_path[{"sql_logical_server_email_account":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    not sql_resources.properties.emailAccountAdmins
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","emailAccountAdmins"]]
-    }
-}
-
 azure_issue["sql_logical_server_email_account"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
@@ -257,18 +222,6 @@ azure_issue["sql_logical_server_email_account"] {
     lower(sql_resources.type) == "securityalertpolicies"
     sql_resources.properties.emailAccountAdmins != true
 }
-
-source_path[{"sql_logical_server_email_account":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    sql_resources.properties.emailAccountAdmins != true
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","emailAccountAdmins"]]
-    }
-}
-
 
 sql_logical_server_email_account {
     resource := input.resources[_]
@@ -279,11 +232,9 @@ sql_logical_server_email_account {
     not azure_issue["sql_logical_server_email_account"]
 }
 
-
 sql_logical_server_email_account = false {
     azure_attribute_absence["sql_logical_server_email_account"]
 }
-
 
 sql_logical_server_email_account = false {
     azure_issue["sql_logical_server_email_account"]
