@@ -4,7 +4,7 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
-contains(array_property, element) = true {
+array_contains(array_property, element) = true {
   lower(array_property[_]) == element
 } else = false { true }
 
@@ -529,12 +529,12 @@ azure_issue["storage_nr_allow_trusted_azure_services"] {
     count([c | r := input.resources[_];
               r.type == "azurerm_storage_account_network_rules";
               contains(r.properties.storage_account_name, resource.properties.compiletime_identity);
-              contains(r.properties.bypass, "azureservices");
+              array_contains(r.properties.bypass, "azureservices");
               c := 1]) == 0
     count([c | r := input.resources[_];
               r.type == "azurerm_storage_account_network_rules";
               contains(r.properties.storage_account_name, concat(".", [resource.type, resource.name]));
-              contains(r.properties.bypass, "azureservices");
+              array_contains(r.properties.bypass, "azureservices");
               c := 1]) == 0
 }
 
@@ -561,7 +561,7 @@ azure_inner_attribute_absence["storage_nr_allow_trusted_azure_services"] {
 azure_inner_issue["storage_nr_allow_trusted_azure_services"] {
     count([c | r := input.resources[_];
               r.type == "azurerm_storage_account";
-              contains(r.properties.network_rules[_].bypass, "azureservices");
+              array_contains(r.properties.network_rules[_].bypass, "azureservices");
               #count([ci | lower(r.properties.network_rules[_].bypass[_]) == "azureservices"; c := 1]) > 0;
               c := 1]) == 0
 }
