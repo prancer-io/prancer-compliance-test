@@ -532,9 +532,9 @@ iam_user_group_attach_metadata := {
 # PR-AWS-TRF-IAM-011
 #
 
-default iam_policy_not_overly_permissive_to_all_traffic = null
+default lambda_iam_policy_not_overly_permissive_to_all_traffic = null
 
-aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_policy"
     statement := resource.properties.policy.Statement[j]
@@ -543,7 +543,7 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     contains(lower(statement.Action), "lambda:")
 }
 
-aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_policy"
     statement := resource.properties.policy.Statement[j]
@@ -552,7 +552,7 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     contains(lower(statement.Action[_]), "lambda:")
 }
 
-aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_policy"
     statement := resource.properties.policy.Statement[j]
@@ -561,7 +561,7 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     contains(lower(statement.Action[_]), "lambda:")
 }
 
-aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_policy"
     statement := resource.properties.policy.Statement[j]
@@ -570,20 +570,20 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     contains(lower(statement.Action), "lambda:")
 }
 
-iam_policy_not_overly_permissive_to_all_traffic {
+lambda_iam_policy_not_overly_permissive_to_all_traffic {
     lower(input.resources[i].type) == "aws_iam_policy"
-    not aws_issue["iam_policy_not_overly_permissive_to_all_traffic"]
+    not aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"]
 }
 
-iam_policy_not_overly_permissive_to_all_traffic = false {
-    aws_issue["iam_policy_not_overly_permissive_to_all_traffic"]
+lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
+    aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"]
 }
 
-iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure Lambda IAM policy is not overly permissive to all traffic" {
-    aws_issue["iam_policy_not_overly_permissive_to_all_traffic"]
+lambda_iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure Lambda IAM policy is not overly permissive to all traffic" {
+    aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"]
 }
 
-iam_policy_not_overly_permissive_to_all_traffic_metadata := {
+lambda_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
     "Policy Code": "PR-AWS-TRF-IAM-011",
     "Type": "IaC",
     "Product": "AWS",

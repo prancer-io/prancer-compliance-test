@@ -1,6 +1,10 @@
 package rule
 
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 #
 # PR-AWS-TRF-EBS-001
 #
@@ -2734,16 +2738,19 @@ default s3_has_a_policy_attached = null
 aws_issue["s3_has_a_policy_attached"] {
     primary_resource := input.resources[i]
     lower(primary_resource.type) == "aws_s3_bucket"
-    resource := input.resources[j]
-    count([c | lower(resource.type) == "aws_s3_bucket_policy"; c:=1]) == 0
+    count([c | lower(input.resources[j].type) == "aws_s3_bucket_policy"; c:=1]) == 0
 }
 
 aws_issue["s3_has_a_policy_attached"] {
     primary_resource := input.resources[i]
     lower(primary_resource.type) == "aws_s3_bucket"
-    resource := input.resources[j]
-    count([c | lower(resource.type) == "aws_s3_bucket_policy"; c:=1]) != 0
-    count(resource.properties.policy.Statement[_]) == 0
+    count([c | 
+        resource := input.resources[j];
+        lower(resource.type) == "aws_s3_bucket_policy";
+    	resource.properties.bucket == primary_resource.properties.bucket;
+        resource.properties.policy.Statement[_]
+    	c:=1]
+    ) == 0
 }
 
 s3_has_a_policy_attached {

@@ -9175,8 +9175,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-TRF-IAM-011",
-                            "eval": "data.rule.iam_policy_not_overly_permissive_to_all_traffic",
-                            "message": "data.rule.iam_policy_not_overly_permissive_to_all_traffic_err",
+                            "eval": "data.rule.lambda_iam_policy_not_overly_permissive_to_all_traffic",
+                            "message": "data.rule.lambda_iam_policy_not_overly_permissive_to_all_traffic_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_TRF_IAM_011.py"
                         }
