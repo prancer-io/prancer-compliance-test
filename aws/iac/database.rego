@@ -3082,6 +3082,50 @@ cache_default_sg_metadata := {
 
 
 #
+# PR-AWS-CFR-EC-007
+#
+
+default automatic_backups_for_redis_cluster = null
+
+aws_issue["automatic_backups_for_redis_cluster"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::cachecluster"
+    not resource.Properties.SnapshotRetentionLimit
+}
+
+aws_issue["automatic_backups_for_redis_cluster"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::cachecluster"
+    resource.Properties.SnapshotRetentionLimit == 0
+}
+
+automatic_backups_for_redis_cluster {
+    lower(input.Resources[i].Type) == "aws::elasticache::cachecluster"
+    not aws_issue["automatic_backups_for_redis_cluster"]
+}
+
+automatic_backups_for_redis_cluster = false {
+    aws_issue["automatic_backups_for_redis_cluster"]
+}
+
+automatic_backups_for_redis_cluster_err = "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster." {
+    aws_issue["automatic_backups_for_redis_cluster"]
+}
+
+automatic_backups_for_redis_cluster_metadata := {
+    "Policy Code": "PR-AWS-CFR-EC-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster.",
+    "Policy Description": "It checks if automatic backups are enabled for the Redis cluster.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-cache-cluster.html"
+}
+
+
+#
 # PR-AWS-CFR-DMS-001
 #
 

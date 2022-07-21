@@ -794,3 +794,135 @@ esearch_encrypt_kms_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
 }
+
+
+#
+# PR-AWS-CFR-ES-010
+#
+
+default esearch_custom_endpoint_configured = null
+
+aws_issue["esearch_custom_endpoint_configured"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.DomainEndpointOptions.CustomEndpointEnabled
+}
+
+esearch_custom_endpoint_configured {
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
+    not aws_issue["esearch_custom_endpoint_configured"]
+}
+
+esearch_custom_endpoint_configured = false {
+    aws_issue["esearch_custom_endpoint_configured"]
+}
+
+esearch_custom_endpoint_configured_err = "Ensure ElasticSearch has a custom endpoint configured." {
+    aws_issue["esearch_custom_endpoint_configured"]
+}
+
+esearch_custom_endpoint_configured_metadata := {
+    "Policy Code": "PR-AWS-CFR-ES-010",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure ElasticSearch has a custom endpoint configured.",
+    "Policy Description": "It checks if a default endpoint is configured for ES domain.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
+}
+
+
+#
+# PR-AWS-CFR-ES-011
+#
+
+default esearch_slow_logs_is_enabled = null
+
+aws_issue["esearch_slow_logs_is_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled
+}
+
+aws_issue["authentication_is_saml_based"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.LogPublishingOptions.SEARCH_SLOW_LOGS.Enabled
+}
+
+esearch_slow_logs_is_enabled {
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
+    not aws_issue["esearch_slow_logs_is_enabled"]
+}
+
+esearch_slow_logs_is_enabled = false {
+    aws_issue["esearch_slow_logs_is_enabled"]
+}
+
+esearch_slow_logs_is_enabled_err = "Ensure Slow Logs feature is enabled for ElasticSearch cluster." {
+    aws_issue["esearch_slow_logs_is_enabled"]
+}
+
+esearch_slow_logs_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-CFR-ES-011",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Slow Logs feature is enabled for ElasticSearch cluster.",
+    "Policy Description": "It checks of slow logs is enabled for the ES cluster. Slow logs provide valuable information for optimizing and troubleshooting your search and indexing operations.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
+}
+
+
+#
+# PR-AWS-CFR-ES-013
+#
+
+default fine_grained_encryption_for_elasticsearch = null
+
+aws_issue["fine_grained_encryption_for_elasticsearch"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.EncryptionAtRestOptions.Enabled
+}
+
+aws_issue["fine_grained_encryption_for_elasticsearch"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.DomainEndpointOptions.EnforceHTTPS
+}
+
+aws_issue["fine_grained_encryption_for_elasticsearch"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.NodeToNodeEncryptionOptions.Enabled
+}
+
+fine_grained_encryption_for_elasticsearch {
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
+    not aws_issue["fine_grained_encryption_for_elasticsearch"]
+}
+
+fine_grained_encryption_for_elasticsearch = false {
+    aws_issue["fine_grained_encryption_for_elasticsearch"]
+}
+
+fine_grained_encryption_for_elasticsearch_err = "Ensure fine-grained access control is enabled during domain creation in ElasticSearch." {
+    aws_issue["fine_grained_encryption_for_elasticsearch"]
+}
+
+fine_grained_encryption_for_elasticsearch_metadata := {
+    "Policy Code": "PR-AWS-CFR-ES-013",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure fine-grained access control is enabled during domain creation in ElasticSearch.",
+    "Policy Description": "It checks if fine grained access controls is enabled for the ElasticSearch cluster and node to node encryption is enabled with it.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
+}

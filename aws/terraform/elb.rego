@@ -1572,6 +1572,158 @@ elb_protocol_metadata := {
 
 
 #
+# PR-AWS-TRF-ELB-020
+#
+
+default elb_deletion_protection = null
+
+aws_issue["elb_deletion_protection"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    not resource.properties.enable_deletion_protection
+}
+
+elb_deletion_protection = false {
+    aws_issue["elb_deletion_protection"]
+}
+
+elb_deletion_protection {
+    lower(input.resources[i].type) == "aws_lb"
+    not aws_issue["elb_deletion_protection"]
+}
+
+elb_deletion_protection_err = "Ensure that AWS Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled." {
+    aws_issue["elb_deletion_protection"]
+}
+
+elb_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-020",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that AWS Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled.",
+    "Policy Description": "This policy checks if the ELB is protected against accidental deletion by enabling deletion protection.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb"
+}
+
+
+#
+# PR-AWS-TRF-ELB-021
+#
+
+default elb_gateway_load_balancer = null
+
+aws_issue["elb_gateway_load_balancer"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    resource.properties.load_balancer_type == "gateway"
+}
+
+elb_gateway_load_balancer = false {
+    aws_issue["elb_gateway_load_balancer"]
+}
+
+elb_gateway_load_balancer {
+    lower(input.resources[i].type) == "aws_lb"
+    not aws_issue["elb_gateway_load_balancer"]
+}
+
+elb_gateway_load_balancer_err = "Ensure that AWS ensure Gateway Load Balancer (GWLB) is not being used." {
+    aws_issue["elb_gateway_load_balancer"]
+}
+
+elb_gateway_load_balancer_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-021",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that AWS ensure Gateway Load Balancer (GWLB) is not being used.",
+    "Policy Description": "This policy checks if Gateway LB is being used or not.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb"
+}
+
+
+#
+# PR-AWS-TRF-ELB-022
+#
+
+default elb_internet_facing_load_balancer = null
+
+aws_issue["elb_internet_facing_load_balancer"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    not resource.properties.internal
+}
+
+elb_internet_facing_load_balancer = false {
+    aws_issue["elb_internet_facing_load_balancer"]
+}
+
+elb_internet_facing_load_balancer {
+    lower(input.resources[i].type) == "aws_elb"
+    not aws_issue["elb_internet_facing_load_balancer"]
+}
+
+elb_internet_facing_load_balancer_err = "Ensure Internet facing Classic ELB is not in use." {
+    aws_issue["elb_internet_facing_load_balancer"]
+}
+
+elb_internet_facing_load_balancer_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-022",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Internet facing Classic ELB is not in use.",
+    "Policy Description": "This policy checks if classic LB is being used in the environment for internet facing applications.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb"
+}
+
+
+#
+# PR-AWS-TRF-ELB-023
+#
+
+default elb2_internet_facing_load_balancer = null
+
+aws_issue["elb2_internet_facing_load_balancer"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    not resource.properties.internal
+}
+
+elb2_internet_facing_load_balancer = false {
+    aws_issue["elb2_internet_facing_load_balancer"]
+}
+
+elb2_internet_facing_load_balancer {
+    lower(input.resources[i].type) == "aws_lb"
+    not aws_issue["elb2_internet_facing_load_balancer"]
+}
+
+elb2_internet_facing_load_balancer_err = "Ensure Internet facing ELBV2 is not in use." {
+    aws_issue["elb2_internet_facing_load_balancer"]
+}
+
+elb2_internet_facing_load_balancer_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-023",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Internet facing ELBV2 is not in use.",
+    "Policy Description": "This policy checks if ELB v2 is being used in the environment.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb"
+}
+
+
+#
 # PR-AWS-TRF-ELB-024
 #
 

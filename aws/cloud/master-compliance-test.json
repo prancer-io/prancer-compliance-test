@@ -1420,7 +1420,12 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "HITRUST",
+                                "PCI-DSS",
+                                "MAS TRM"
+                            ],
                             "service": [
                                 "eks"
                             ]
@@ -1449,7 +1454,12 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "HITRUST",
+                                "PCI-DSS",
+                                "MAS TRM"
+                            ],
                             "service": [
                                 "eks"
                             ]
@@ -2197,7 +2207,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR",
+                                "CSA CCM"
+                            ],
                             "service": [
                                 "elasticsearch"
                             ]
@@ -2226,7 +2240,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR",
+                                "CSA CCM"
+                            ],
                             "service": [
                                 "elasticsearch"
                             ]
@@ -2284,7 +2302,11 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR",
+                                "CSA CCM"
+                            ],
                             "service": [
                                 "elasticsearch"
                             ]
@@ -4399,7 +4421,17 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "CCPA",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP",
+                                "NIST CSF"
+                            ],
                             "service": [
                                 "emr"
                             ]
@@ -4428,7 +4460,17 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "CCPA",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP",
+                                "NIST CSF"
+                            ],
                             "service": [
                                 "emr"
                             ]
@@ -4457,7 +4499,17 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "CCPA",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP",
+                                "NIST CSF"
+                            ],
                             "service": [
                                 "emr"
                             ]
@@ -11408,7 +11460,16 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "CMMC",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP"
+                            ],
                             "service": [
                                 "ecs"
                             ]
@@ -11437,7 +11498,16 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "CMMC",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP"
+                            ],
                             "service": [
                                 "ecs"
                             ]
@@ -11466,7 +11536,16 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "CMMC",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP"
+                            ],
                             "service": [
                                 "ecs"
                             ]
@@ -14987,7 +15066,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-CLD-EC-006",
+                    "masterTestId": "PR-AWS-CLD-EC-009",
                     "masterSnapshotId": [
                         "TEST_EC"
                     ],
@@ -14995,11 +15074,11 @@
                     "rule": "file(database.rego)",
                     "evals": [
                         {
-                            "id": "PR-AWS-CLD-EC-006",
+                            "id": "PR-AWS-CLD-EC-009",
                             "eval": "data.rule.cache_replication_group_id",
                             "message": "data.rule.cache_replication_group_id_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_replication_groups' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_EC_006.py"
+                            "remediationFunction": "PR_AWS_CLD_EC_009.py"
                         }
                     ],
                     "severity": "Medium",
@@ -15037,7 +15116,16 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": [],
+                            "compliance": [
+                                "APRA",
+                                "CCPA",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP"
+                            ],
                             "service": [
                                 "elasticache"
                             ]
