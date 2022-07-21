@@ -1587,6 +1587,51 @@ cache_default_sg_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-cachesubnetgroupname"
 }
 
+
+#
+# PR-AWS-TRF-EC-007
+#
+
+default automatic_backups_for_redis_cluster = null
+
+aws_issue["automatic_backups_for_redis_cluster"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticache_cluster"
+    not resource.properties.snapshot_retention_limit
+}
+
+aws_issue["automatic_backups_for_redis_cluster"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticache_cluster"
+    resource.properties.snapshot_retention_limit == 0
+}
+
+automatic_backups_for_redis_cluster {
+    lower(input.resources[i].type) == "aws_elasticache_cluster"
+    not aws_issue["automatic_backups_for_redis_cluster"]
+}
+
+automatic_backups_for_redis_cluster = false {
+    aws_issue["automatic_backups_for_redis_cluster"]
+}
+
+automatic_backups_for_redis_cluster_err = "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster." {
+    aws_issue["automatic_backups_for_redis_cluster"]
+}
+
+automatic_backups_for_redis_cluster_metadata := {
+    "Policy Code": "PR-AWS-TRF-EC-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster.",
+    "Policy Description": "It checks if automatic backups are enabled for the Redis cluster.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_cluster"
+}
+
+
 #
 # PR-AWS-TRF-RDS-012
 #

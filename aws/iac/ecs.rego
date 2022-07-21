@@ -1261,3 +1261,162 @@ ecs_network_mode_metadata := {
 #     "Policy Help URL": "",
 #     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-networkmode"
 # }
+
+
+#
+# PR-AWS-CFR-ECS-015
+#
+
+default ecs_fargate_task_definition_logging_is_enabled = null
+
+aws_issue["ecs_fargate_task_definition_logging_is_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    ContainerDefinition := resource.Properties.ContainerDefinitions[j]
+    not ContainerDefinition.LogConfiguration.LogDriver
+}
+
+aws_issue["ecs_fargate_task_definition_logging_is_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    ContainerDefinition := resource.Properties.ContainerDefinitions[j]
+    contains(lower(ContainerDefinition.LogConfiguration.LogDriver), "false")
+}
+
+ecs_fargate_task_definition_logging_is_enabled {
+    lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
+    not aws_issue["ecs_fargate_task_definition_logging_is_enabled"]
+}
+
+ecs_fargate_task_definition_logging_is_enabled = false {
+    aws_issue["ecs_fargate_task_definition_logging_is_enabled"]
+}
+
+ecs_fargate_task_definition_logging_is_enabled_err = "AWS ECS - Ensure Fargate task definition logging is enabled." {
+    aws_issue["ecs_fargate_task_definition_logging_is_enabled"]
+}
+
+ecs_fargate_task_definition_logging_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-CFR-ECS-015",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS ECS - Ensure Fargate task definition logging is enabled.",
+    "Policy Description": "It checks if the Fargate task definition created has an execution IAM role associated, the role defines the extent of access to other AWS Services.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#aws-resource-ecs-taskdefinition--examples"
+}
+
+
+#
+# PR-AWS-CFR-ECS-016
+#
+
+default no_ecs_task_definition_empty_roles = null
+
+aws_issue["no_ecs_task_definition_empty_roles"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    ContainerDefinition := resource.Properties.ContainerDefinitions[j]
+    not ContainerDefinition.User
+}
+
+aws_issue["no_ecs_task_definition_empty_roles"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    ContainerDefinition := resource.Properties.ContainerDefinitions[j]
+    ContainerDefinition.User == ""
+}
+
+aws_issue["no_ecs_task_definition_empty_roles"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    ContainerDefinition := resource.Properties.ContainerDefinitions[j]
+    ContainerDefinition.User == null
+}
+
+aws_issue["no_ecs_task_definition_empty_roles"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    ContainerDefinition := resource.Properties.ContainerDefinitions[j]
+    contains(ContainerDefinition.User, "*")
+}
+
+no_ecs_task_definition_empty_roles {
+    lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
+    not aws_issue["no_ecs_task_definition_empty_roles"]
+}
+
+no_ecs_task_definition_empty_roles = false {
+    aws_issue["no_ecs_task_definition_empty_roles"]
+}
+
+no_ecs_task_definition_empty_roles_err = "Ensure there are no undefined ECS task definition empty roles for ECS." {
+    aws_issue["no_ecs_task_definition_empty_roles"]
+}
+
+no_ecs_task_definition_empty_roles_metadata := {
+    "Policy Code": "PR-AWS-CFR-ECS-016",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure there are no undefined ECS task definition empty roles for ECS.",
+    "Policy Description": "It checks if the ECS container has a role attached. The task execution role grants the Amazon ECS container and Fargate agents permission to make AWS API calls on your behalf. The task execution IAM role is required depending on the requirements of your task.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#aws-resource-ecs-taskdefinition--examples"
+}
+
+
+#
+# PR-AWS-CFR-ECS-017
+#
+
+default ecs_log_driver = null
+
+aws_issue["ecs_log_driver"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    ContainerDefinition := resource.Properties.ContainerDefinitions[j]
+    not ContainerDefinition.LogConfiguration.LogDriver
+}
+
+aws_issue["ecs_log_driver"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    ContainerDefinition := resource.Properties.ContainerDefinitions[j]
+    ContainerDefinition.LogConfiguration.LogDriver == ""
+}
+
+aws_issue["ecs_log_driver"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    ContainerDefinition := resource.Properties.ContainerDefinitions[j]
+    ContainerDefinition.LogConfiguration.LogDriver == null
+}
+
+ecs_log_driver {
+    lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
+    not aws_issue["ecs_log_driver"]
+}
+
+ecs_log_driver = false {
+    aws_issue["ecs_log_driver"]
+}
+
+ecs_log_driver_err = "Ensure that a log driver has been configured for each ECS task definition." {
+    aws_issue["ecs_log_driver"]
+}
+
+ecs_log_driver_metadata := {
+    "Policy Code": "PR-AWS-CFR-ECS-017",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that a log driver has been configured for each ECS task definition.",
+    "Policy Description": "It checks if log information from the containers running on ECS are send out to CloudWatch logs for monitoring.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#aws-resource-ecs-taskdefinition--examples"
+}

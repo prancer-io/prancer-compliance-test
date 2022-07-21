@@ -344,3 +344,178 @@ eks_pblic_endpoint_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-encryptionconfig.html#cfn-eks-cluster-encryptionconfig-provider"
 }
+
+
+#
+# PR-AWS-CFR-EKS-006
+#
+
+default eks_approved_kubernetes_version = null
+
+kubernetes_platform_version := ["1.20", "1.19", "1.18"]
+
+aws_issue["eks_approved_kubernetes_version"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    count([c | resource.Properties.Version == kubernetes_platform_version[_]; c:=1]) != 0
+}
+
+eks_approved_kubernetes_version {
+    lower(input.Resources[i].Type) == "aws::eks::cluster"
+    not aws_issue["eks_approved_kubernetes_version"]
+}
+
+eks_approved_kubernetes_version = false {
+    aws_issue["eks_approved_kubernetes_version"]
+}
+
+eks_approved_kubernetes_version_err = "Ensure AWS EKS only uses latest versions of Kubernetes." {
+    aws_issue["eks_approved_kubernetes_version"]
+}
+
+eks_approved_kubernetes_version_metadata := {
+    "Policy Code": "PR-AWS-CFR-EKS-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS EKS only uses latest versions of Kubernetes.",
+    "Policy Description": "It checks if an approved version of Kubernetes is used for EKS cluster or not.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html"
+}
+
+
+#
+# PR-AWS-CFR-EKS-007
+#
+
+default eks_with_security_group_attached = null
+
+aws_issue["eks_with_security_group_attached"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    not resource.Properties.ResourcesVpcConfig.SecurityGroupIds
+}
+
+eks_with_security_group_attached {
+    lower(input.Resources[i].Type) == "aws::eks::cluster"
+    not aws_issue["eks_with_security_group_attached"]
+}
+
+eks_with_security_group_attached = false {
+    aws_issue["eks_with_security_group_attached"]
+}
+
+eks_with_security_group_attached_err = "Ensure EKS cluster is configured with control plane security group attached to it." {
+    aws_issue["eks_with_security_group_attached"]
+}
+
+eks_with_security_group_attached_metadata := {
+    "Policy Code": "PR-AWS-CFR-EKS-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure EKS cluster is configured with control plane security group attached to it.",
+    "Policy Description": "It checks if the cluster node security groups is configured or not.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html"
+}
+
+
+#
+# PR-AWS-CFR-EKS-008
+#
+
+default eks_with_private_access = null
+
+aws_issue["eks_with_private_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    not resource.Properties.ResourcesVpcConfig.EndpointPrivateAccess
+}
+
+eks_with_private_access {
+    lower(input.Resources[i].Type) == "aws::eks::cluster"
+    not aws_issue["eks_with_private_access"]
+}
+
+eks_with_private_access = false {
+    aws_issue["eks_with_private_access"]
+}
+
+eks_with_private_access_err = "Ensure only private access for Amazon EKS cluster's Kubernetes API is enabled." {
+    aws_issue["eks_with_private_access"]
+}
+
+eks_with_private_access_metadata := {
+    "Policy Code": "PR-AWS-CFR-EKS-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure only private access for Amazon EKS cluster's Kubernetes API is enabled.",
+    "Policy Description": "This policy checks if the EKS cluster has public access which can be accessed over the internet.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html"
+}
+
+
+#
+# PR-AWS-CFR-EKS-009
+#
+
+default eks_logging_enabled = null
+
+aws_issue["eks_logging_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EnabledType := resource.Properties.Logging.ClusterLogging.EnabledTypes[_]
+    not EnabledType.Type
+}
+
+aws_issue["eks_logging_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    not resource.Properties.Logging.ClusterLogging
+}
+
+aws_issue["eks_logging_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EnabledType := resource.Properties.Logging.ClusterLogging.EnabledTypes[_]
+    EnabledType.Type == ""
+}
+
+aws_issue["eks_logging_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EnabledType := resource.Properties.Logging.ClusterLogging.EnabledTypes[_]
+    EnabledType.Type == null
+}
+
+eks_logging_enabled {
+    lower(input.Resources[i].Type) == "aws::eks::cluster"
+    not aws_issue["eks_logging_enabled"]
+}
+
+eks_logging_enabled = false {
+    aws_issue["eks_logging_enabled"]
+}
+
+eks_logging_enabled_err = "Ensure AWS EKS control plane logging is enabled." {
+    aws_issue["eks_logging_enabled"]
+}
+
+eks_logging_enabled_metadata := {
+    "Policy Code": "PR-AWS-CFR-EKS-009",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS EKS control plane logging is enabled.",
+    "Policy Description": "Amazon EKS control plane logging provides audit and diagnostic logs directly from the Amazon EKS control plane to CloudWatch Logs in your account. These logs make it easy for you to secure and run your clusters. You can select the exact log types you need, and logs are sent as log streams to a group for each Amazon EKS cluster in CloudWatch. This policy generates an alert if control plane logging is disabled.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html#cfn-eks-cluster-logging"
+}

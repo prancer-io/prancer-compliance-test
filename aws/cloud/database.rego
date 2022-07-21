@@ -1537,7 +1537,7 @@ cache_ksm_key_metadata := {
 }
 
 #
-# PR-AWS-CLD-EC-006
+# PR-AWS-CLD-EC-009
 #
 
 default cache_replication_group_id = true
@@ -1571,7 +1571,7 @@ cache_replication_group_id_err = "Ensure ElastiCache (Redis) replicationGroupId 
 }
 
 cache_replication_group_id_metadata := {
-    "Policy Code": "PR-AWS-CLD-EC-006",
+    "Policy Code": "PR-AWS-CLD-EC-009",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
