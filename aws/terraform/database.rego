@@ -3386,3 +3386,167 @@ db_cluster_approved_postgres_version_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster"
 }
+
+
+#
+# PR-AWS-TRF-RDS-027
+#
+
+default rds_iam_database_auth = null
+
+aws_issue["rds_iam_database_auth"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_instance"
+    not resource.properties.iam_database_authentication_enabled
+}
+
+rds_iam_database_auth {
+    lower(input.resources[i].type) == "aws_db_instance"
+    not aws_issue["rds_iam_database_auth"]
+}
+
+rds_iam_database_auth = false {
+    aws_issue["rds_iam_database_auth"]
+}
+
+rds_iam_database_auth_err = "Ensure AWS RDS DB authentication is only enabled via IAM." {
+    aws_issue["rds_iam_database_auth"]
+}
+
+rds_iam_database_auth_metadata := {
+    "Policy Code": "PR-AWS-TRF-RDS-027",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS RDS DB authentication is only enabled via IAM.",
+    "Policy Description": "This policy checks RDS DB instances which are not configured with IAM based authentication and using any hardcoded credentials.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance"
+}
+
+
+#
+# PR-AWS-TRF-RDS-028
+#
+
+default rds_cluster_backup_retention = null
+
+aws_issue["rds_cluster_backup_retention"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_rds_cluster"
+    not resource.properties.backup_retention_period
+}
+
+aws_issue["rds_cluster_backup_retention"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_rds_cluster"
+    to_number(resource.properties.backup_retention_period) < 30
+}
+
+rds_cluster_backup_retention {
+    lower(input.resources[i].type) == "aws_rds_cluster"
+    not aws_issue["rds_cluster_backup_retention"]
+}
+
+rds_cluster_backup_retention = false {
+    aws_issue["rds_cluster_backup_retention"]
+}
+
+rds_cluster_backup_retention_err = "Ensure AWS RDS Cluster has setup backup retention period of at least 30 days." {
+    aws_issue["rds_cluster_backup_retention"]
+}
+
+rds_cluster_backup_retention_metadata := {
+    "Policy Code": "PR-AWS-TRF-RDS-028",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS RDS Cluster has setup backup retention period of at least 30 days.",
+    "Policy Description": "This policy checks that backup retention period for RDS DB is firm approved.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster"
+}
+
+
+#
+# PR-AWS-TRF-RDS-029
+#
+
+default db_instance_deletion_protection = null
+
+aws_issue["db_instance_deletion_protection"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_instance"
+    not resource.properties.deletion_protection
+}
+
+db_instance_deletion_protection {
+    lower(input.resources[i].type) == "aws_db_instance"
+    not aws_issue["db_instance_deletion_protection"]
+}
+
+db_instance_deletion_protection = false {
+    aws_issue["db_instance_deletion_protection"]
+}
+
+db_instance_deletion_protection_err = "Ensure AWS RDS DB instance has deletion protection enabled." {
+    aws_issue["db_instance_deletion_protection"]
+}
+
+db_instance_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-TRF-RDS-029",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS RDS DB instance has deletion protection enabled.",
+    "Policy Description": "It is to check that deletion protection in enabled at RDS DB level in order to protect the DB instance from accidental deletion.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance"
+}
+
+
+#
+# PR-AWS-TRF-RDS-030
+#
+
+default db_instance_backup_retention_period = null
+
+aws_issue["db_instance_backup_retention_period"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_instance"
+    not resource.properties.backup_retention_period
+}
+
+aws_issue["db_instance_backup_retention_period"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_instance"
+    to_number(resource.properties.backup_retention_period) < 30
+}
+
+db_instance_backup_retention_period {
+    lower(input.resources[i].type) == "aws_db_instance"
+    not aws_issue["db_instance_backup_retention_period"]
+}
+
+db_instance_backup_retention_period = false {
+    aws_issue["db_instance_backup_retention_period"]
+}
+
+db_instance_backup_retention_period_err = "Ensure RDS DB instance has setup backup retention period of at least 30 days." {
+    aws_issue["db_instance_backup_retention_period"]
+}
+
+db_instance_backup_retention_period_metadata := {
+    "Policy Code": "PR-AWS-TRF-RDS-030",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure RDS DB instance has setup backup retention period of at least 30 days.",
+    "Policy Description": "This is to check that backup retention period for RDS DB is firm approved.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance"
+}

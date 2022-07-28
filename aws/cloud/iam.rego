@@ -1330,7 +1330,7 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Resource == "*"
-    contains(lower(policy_statement.Action[_]), "kms:*")
+    contains(policy_statement.Action[_], "kms:*")
     not policy_statement.Condition
 }
 
@@ -1341,7 +1341,7 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Resource == "*"
-    contains(lower(policy_statement.Action), "kms:*")
+    contains(policy_statement.Action, "kms:*")
     not policy_statement.Condition
 }
 
@@ -1352,7 +1352,7 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Resource[_]== "*"
-    contains(lower(policy_statement.Action), "kms:*")
+    contains(policy_statement.Action, "kms:*")
     not policy_statement.Condition
 }
 
@@ -1363,7 +1363,7 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Resource[_] == "*"
-    contains(lower(policy_statement.Action[_]), "kms:*")
+    contains(policy_statement.Action[_], "kms:*")
     not policy_statement.Condition
 }
 
@@ -1374,7 +1374,7 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Resource == "*"
-    contains(lower(policy_statement.Action[_]), "kms:Decrypt")
+    contains(policy_statement.Action[_], "kms:Decrypt")
     not policy_statement.Condition
 }
 
@@ -1385,7 +1385,7 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Resource == "*"
-    contains(lower(policy_statement.Action), "kms:Decrypt")
+    contains(policy_statement.Action, "kms:Decrypt")
     not policy_statement.Condition
 }
 
@@ -1396,7 +1396,7 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Resource[_]== "*"
-    contains(lower(policy_statement.Action), "kms:Decrypt")
+    contains(policy_statement.Action, "kms:Decrypt")
     not policy_statement.Condition
 }
 
@@ -1407,7 +1407,7 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Resource[_] == "*"
-    contains(lower(policy_statement.Action[_]), "kms:Decrypt")
+    contains(policy_statement.Action[_], "kms:Decrypt")
     not policy_statement.Condition
 }
 
@@ -1418,7 +1418,7 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Resource == "*"
-    contains(lower(policy_statement.Action[_]), "kms:ReEncryptFrom")
+    contains(policy_statement.Action[_], "kms:ReEncryptFrom")
     not policy_statement.Condition
 }
 
@@ -1429,7 +1429,7 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Resource == "*"
-    contains(lower(policy_statement.Action), "kms:ReEncryptFrom")
+    contains(policy_statement.Action, "kms:ReEncryptFrom")
     not policy_statement.Condition
 }
 
@@ -1440,7 +1440,7 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Resource[_]== "*"
-    contains(lower(policy_statement.Action), "kms:ReEncryptFrom")
+    contains(policy_statement.Action, "kms:ReEncryptFrom")
     not policy_statement.Condition
 }
 
@@ -1451,7 +1451,7 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Resource[_] == "*"
-    contains(lower(policy_statement.Action[_]), "kms:ReEncryptFrom")
+    contains(policy_statement.Action[_], "kms:ReEncryptFrom")
     not policy_statement.Condition
 }
 

@@ -1793,6 +1793,176 @@ s3_notification_config_metadata := {
 
 
 #
+# PR-AWS-CFR-S3-023
+#
+
+default s3_overly_permissive_to_any_principal = null
+
+aws_issue["s3_overly_permissive_to_any_principal"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[_]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action),"s3:")
+    not stat.Condition
+}
+
+aws_issue["s3_overly_permissive_to_any_principal"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[_]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action[_]),"s3:")
+    not stat.Condition
+}
+
+s3_overly_permissive_to_any_principal {
+    lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
+    not aws_issue["s3_overly_permissive_to_any_principal"]
+}
+
+s3_overly_permissive_to_any_principal = false {
+    aws_issue["s3_overly_permissive_to_any_principal"]
+}
+
+s3_overly_permissive_to_any_principal_err = "Ensure AWS S3 bucket policy is not overly permissive to any principal." {
+    aws_issue["s3_overly_permissive_to_any_principal"]
+}
+
+s3_overly_permissive_to_any_principal_metadata := {
+    "Policy Code": "PR-AWS-CFR-S3-023",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS S3 bucket policy is not overly permissive to any principal.",
+    "Policy Description": "It identifies the S3 buckets that have a bucket policy overly permissive to any principal. It is recommended to follow the principle of least privileges ensuring that the only restricted entities have permission on S3 operations instead of any anonymous. For more details: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html"
+}
+
+
+#
+# PR-AWS-CFR-S3-024
+#
+
+default s3_has_a_policy_attached = null
+
+aws_issue["s3_has_a_policy_attached"] {
+    primary_resource := input.Resources[i]
+    lower(primary_resource.Type) == "aws::s3::bucket"
+    count([c | lower(input.Resources[j].Type) == "aws::s3::bucketpolicy"; c:=1]) == 0
+}
+
+aws_issue["s3_has_a_policy_attached"] {
+    primary_resource := input.Resources[i]
+    lower(primary_resource.Type) == "aws::s3::bucket"
+    count([c | 
+        resource := input.Resources[_];
+        lower(resource.Type) == "aws::s3::bucketpolicy";
+    	resource.Properties.Bucket.Ref == primary_resource.Properties.BucketName;
+        resource.Properties.PolicyDocument.Statement
+    	c:=1]
+    ) == 0
+}
+
+s3_has_a_policy_attached {
+    lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
+    not aws_issue["s3_has_a_policy_attached"]
+}
+
+s3_has_a_policy_attached = false {
+    aws_issue["s3_has_a_policy_attached"]
+}
+
+s3_has_a_policy_attached_err = "Ensure AWS S3 bucket has a policy attached." {
+    aws_issue["s3_has_a_policy_attached"]
+}
+
+s3_has_a_policy_attached_metadata := {
+    "Policy Code": "PR-AWS-CFR-S3-024",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS S3 bucket has a policy attached.",
+    "Policy Description": "S3 access can be defined at IAM and Bucket policy levels. It is recommended to leverage bucket policies as it provide much more granularity. This controls check if a bucket has a custom policy attached to it.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html"
+}
+
+
+#
+# PR-AWS-CFR-S3-025
+#
+
+default policy_is_not_overly_permissive_to_vpc_endpoints = null
+
+aws_issue["policy_is_not_overly_permissive_to_vpc_endpoints"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[_]
+    lower(stat.Effect) == "allow"
+    has_property(stat.Condition.StringEquals, "aws:SourceVpce")
+    startswith(lower(stat.Action),"s3:*")
+}
+
+aws_issue["policy_is_not_overly_permissive_to_vpc_endpoints"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[_]
+    lower(stat.Effect) == "allow"
+    has_property(stat.Condition.StringEquals, "aws:SourceVpce")
+    startswith(lower(stat.Action[_]),"s3:*")
+}
+
+aws_issue["policy_is_not_overly_permissive_to_vpc_endpoints"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[_]
+    lower(stat.Effect) == "deny"
+    has_property(stat.Condition.StringNotEquals, "aws:SourceVpce")
+    startswith(lower(stat.Action),"s3:*")
+}
+
+aws_issue["policy_is_not_overly_permissive_to_vpc_endpoints"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[_]
+    lower(stat.Effect) == "deny"
+    contains(stat.Condition.StringNotEquals, "aws:SourceVpce")
+    startswith(lower(stat.Action[_]),"s3:*")
+}
+
+policy_is_not_overly_permissive_to_vpc_endpoints {
+    lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
+    not aws_issue["policy_is_not_overly_permissive_to_vpc_endpoints"]
+}
+
+policy_is_not_overly_permissive_to_vpc_endpoints = false {
+    aws_issue["policy_is_not_overly_permissive_to_vpc_endpoints"]
+}
+
+policy_is_not_overly_permissive_to_vpc_endpoints_err = "Ensure AWS S3 bucket do not have policy that is overly permissive to VPC endpoints." {
+    aws_issue["policy_is_not_overly_permissive_to_vpc_endpoints"]
+}
+
+policy_is_not_overly_permissive_to_vpc_endpoints_metadata := {
+    "Policy Code": "PR-AWS-CFR-S3-025",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS S3 bucket do not have policy that is overly permissive to VPC endpoints.",
+    "Policy Description": "It identifies S3 buckets that have the bucket policy overly permissive to VPC endpoints. It is recommended to follow the principle of least privileges ensuring that the VPC endpoints have only necessary permissions instead of full permission on S3 operations. NOTE: When applying the Amazon S3 bucket policies for VPC endpoints described in this section, you might block your access to the bucket without intending to do so. Bucket permissions that are intended to specifically limit bucket access to connections originating from your VPC endpoint can block all connections to the bucket. The policy might disable console access to the specified bucket because console requests don't originate from the specified VPC endpoint. So remediation should be done very carefully. For details refer https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies-vpc-endpoint.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html"
+}
+
+
+#
 # PR-AWS-CFR-EFS-001
 #
 
