@@ -248,3 +248,48 @@ lifecycle_policy_is_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecr.html#ECR.Client.get_lifecycle_policy"
 }
+
+
+#
+# PR-AWS-CLD-ECR-008
+#
+# AWS::KMS::Key
+# AWS::ECR::Repository
+
+default ecr_encrypted_using_key = true
+
+ecr_encrypted_using_key = false {
+	ecr := input.TEST_ECR[_]
+    X := ecr.repositories[i]
+	lower(X.encryptionConfiguration.encryptionType) == "kms"
+	X.encryptionConfiguration.kmsKey
+	Y := input.TEST_KMS[_]
+	X.encryptionConfiguration.kmsKey == Y.KeyMetadata.Arn
+	Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+ecr_encrypted_using_key = false {
+	ecr := input.TEST_ECR[_]
+    X := ecr.repositories[i]
+	lower(X.encryptionConfiguration.encryptionType) == "kms"
+	X.encryptionConfiguration.kmsKey
+	Y := input.TEST_KMS[_]
+	X.encryptionConfiguration.kmsKey == Y.KeyMetadata.KeyId
+	Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+ecr_encrypted_using_key_err = "Ensure ECR is encrypted using dedicated GS managed KMS key." {
+	not ecr_encrypted_using_key
+}
+
+ecr_encrypted_using_key_metadata := {
+	"Policy Code": "PR-AWS-TRF-ECR-008",
+	"Type": "cloud",
+	"Product": "AWS",
+	"Language": "Aws Cloud",
+	"Policy Title": "Ensure ECR is encrypted using dedicated GS managed KMS key.",
+	"Policy Description": "It checks if a GS managed KMS key (CMK) is used for ECR encryption instead of AWS provided keys.",
+	"Resource Type": "",
+	"Policy Help URL": "",
+	"Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecr.html#ECR.Client.describe_repositories",
+}

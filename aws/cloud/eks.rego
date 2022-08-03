@@ -232,3 +232,35 @@ eks_logging_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster"
 }
+
+
+#
+# PR-AWS-CLD-EKS-010
+# aws::eks::cluster
+# AWS::KMS::Key
+
+default eks_gs_managed_key = true
+
+eks_gs_managed_key = false {
+    X := input.TEST_EKS[_]
+    Y := input.TEST_KMS[_]
+    encryption_config := X.cluster.encryptionConfig[_]
+    encryption_config.provider.keyArn == Y.KeyMetadata.Arn
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+eks_gs_managed_key_err = "Ensure GS-managed encryption key is used for AWS EKS." {
+    not eks_gs_managed_key
+}
+
+eks_gs_managed_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-EKS-010",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure GS-managed encryption key is used for AWS EKS.",
+    "Policy Description": "It checks if encryption is enabled with a GS managed KMS CMK during the EKS cluster setup.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster"
+}

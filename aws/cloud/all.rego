@@ -908,6 +908,37 @@ kinesis_encryption_kms_metadata := {
 
 
 #
+# PR-AWS-CLD-KNS-003
+# aws::kinesis::stream
+
+default kinesis_gs_kms_key = true
+
+kinesis_gs_kms_key = false {
+    X := input.TEST_ALL_11[_]
+    X.EncryptionType == "KMS"
+    Y := input.TEST_KMS[_]
+    X.KeyId == Y.KeyMetadata.KeyId
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+kinesis_gs_kms_key_err = "Ensure Kinesis streams are encrypted using dedicated GS managed KMS key." {
+    not kinesis_gs_kms_key
+}
+
+kinesis_gs_kms_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-KNS-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Kinesis streams are encrypted using dedicated GS managed KMS key.",
+    "Policy Description": "It is to check only GS managed CMKs are used to encrypt Kinesis Data Streams.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kinesis.html#Kinesis.Client.describe_stream"
+}
+
+
+#
 # PR-AWS-CLD-MQ-001
 #
 default mq_publicly_accessible = true

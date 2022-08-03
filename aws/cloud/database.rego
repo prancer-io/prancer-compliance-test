@@ -898,6 +898,40 @@ db_instance_backup_retention_period_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_instances"
 }
 
+
+#
+# PR-AWS-CLD-RDS-031
+# aws::rds::dbcluster
+# AWS::KMS::Key
+
+default rds_cluster_encrypt_cmk = true
+
+rds_cluster_encrypt_cmk = false {
+    X := input.TEST_RDS_02[_]
+    DBCluster := X.DBClusters[_]
+    DBCluster.StorageEncrypted == true
+    Y := input.TEST_KMS[_]
+    X.KmsKeyId == Y.KeyMetadata.KeyId
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+rds_cluster_encrypt_cmk_err = "Ensure AWS RDS DB cluster is not encrypted using default KMS key instead of CMK." {
+    not rds_cluster_encrypt_cmk
+}
+
+rds_cluster_encrypt_cmk_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-031",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS DB cluster is not encrypted using default KMS key instead of CMK.",
+    "Policy Description": "It identifies RDS DB(Relational Database Service Database) clusters which are encrypted using default KMS key instead of CMK (Customer Master Key). As a security best practice CMK should be used instead of default KMS key for encryption to gain the ability to rotate the key according to your own policies, delete the key, and control access to the key via KMS policies and IAM policies.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_clusters"
+}
+
+
 #
 # PR-AWS-CLD-DAX-001
 #
@@ -965,6 +999,38 @@ dax_cluster_endpoint_encrypt_at_rest_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/dax/describe-clusters.html"
+}
+
+
+#
+# PR-AWS-CLD-DAX-003
+# aws::dax::cluster
+# AWS::KMS::Key
+
+default dax_gs_managed_key = true
+
+dax_gs_managed_key = false {
+    X := input.TEST_DAX[_]
+    Cluster := X.Clusters[_]
+    Y := input.TEST_KMS[_]
+    Cluster.SSEDescription.KMSMasterKeyArn == Y.KeyMetadata.Arn
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+dax_gs_managed_key_err = "Ensure for AWS DAX GS-managed key is used in encryption." {
+    not dax_gs_managed_key
+}
+
+dax_gs_managed_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-DAX-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure for AWS DAX GS-managed key is used in encryption.",
+    "Policy Description": "It is to check that data at rest encryption has used firm managed CMK.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dax.html#DAX.Client.describe_clusters"
 }
 
 
@@ -1386,6 +1452,40 @@ dynamodb_kinesis_stream_metadata := {
 
 
 #
+# PR-AWS-CLD-DD-004
+# aws::dynamodb::table
+# AWS::KMS::Key
+
+default dynamodb_not_customer_managed_key = true
+
+dynamodb_not_customer_managed_key = false {
+    X := input.TEST_DD[_]
+    Y := input.TEST_KMS[_]
+    X.Table.SSEDescription.Status == "ENABLED"
+    X.Table.SSEDescription.SSEType == "KMS"
+    X.Table.SSEDescription.KMSMasterKeyArn
+	X.Table.SSEDescription.KMSMasterKeyArn == Y.KeyMetadata.Arn
+	Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+dynamodb_not_customer_managed_key_err = "Ensure AWS DynamoDB does not uses customer managed CMK key to ensure encryption at rest." {
+    not dynamodb_not_customer_managed_key
+}
+
+dynamodb_not_customer_managed_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-DD-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS DynamoDB does not uses customer managed CMK key to ensure encryption at rest.",
+    "Policy Description": "It checks if the default AWS Key is used for encryption. GS mandates CMK to be used for encryption.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Client.describe_table"
+}
+
+
+#
 # PR-AWS-CLD-EC-001
 #
 
@@ -1734,4 +1834,35 @@ dms_certificate_expiry_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/dms/describe-certificates.html"
+}
+
+
+#
+# PR-AWS-CLD-DMS-004
+# aws::dms::replicationinstance
+
+default dms_gs_managed_key = true
+
+dms_gs_managed_key = false {
+    X := input.TEST_DMS_02[_]
+    ReplicationInstance := X.ReplicationInstances[_]
+    Y := input.TEST_KMS[_]
+	ReplicationInstance.KmsKeyId == Y.KeyMetadata.KeyId
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+dms_gs_managed_key_err = "Ensure DMS replication instance in encrypted by GS provided CMK." {
+    not dms_gs_managed_key
+}
+
+dms_gs_managed_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-DMS-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure DMS replication instance in encrypted by GS provided CMK.",
+    "Policy Description": "It checks if the default AWS Key is used for encryption. GS mandates CMK to be used for encryption.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dms.html#DatabaseMigrationService.Client.describe_replication_instances"
 }

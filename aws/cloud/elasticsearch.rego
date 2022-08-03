@@ -451,3 +451,34 @@ elasticsearch_domain_not_publicly_accessible_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain"
 }
+
+
+#
+# PR-AWS-CLD-ES-016
+# aws::elasticsearch::domain
+# AWS::KMS::Key
+
+default elasticsearch_gs_managed_key = true
+
+elasticsearch_gs_managed_key = false {
+    X := input.TEST_ELASTICSEARCH[_]
+    Y := input.TEST_KMS[_]
+    X.DomainStatus.EncryptionAtRestOptions.KmsKeyId == Y.KeyMetadata.KeyId
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+elasticsearch_gs_managed_key_err = "Ensure ElasticSearch is encrypted at rest with GS managed KMS." {
+    not elasticsearch_gs_managed_key
+}
+
+elasticsearch_gs_managed_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-ES-016",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure ElasticSearch is encrypted at rest with GS managed KMS.",
+    "Policy Description": "It checks if the encryption at rest is enabled using a GS managed KMS CMK.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain"
+}

@@ -130,3 +130,39 @@ sagemaker_vpc_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html"
 }
+
+
+#
+# PR-AWS-CLD-SGM-005
+# aws::sagemaker::notebookinstance
+# AWS::KMS::Key
+
+default sagemaker_customer_managed_key = true
+
+sagemaker_customer_managed_key = false {
+    X := input.TEST_SAGEMAKER[_]
+    X.NotebookInstanceStatus == "InService"
+    Y := input.TEST_KMS[_]
+    X.KmsKeyId == Y.KeyMetadata.KeyId
+    Y.KeyMetadata.KeyManager == "AWS"
+}
+
+sagemaker_customer_managed_key = false {
+    not input.SubnetId
+}
+
+sagemaker_customer_managed_key_err = "Ensure AWS SageMaker notebook instance is encrypted using Customer Managed Key." {
+    not sagemaker_customer_managed_key
+}
+
+sagemaker_customer_managed_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-SGM-005",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS SageMaker notebook instance is encrypted using Customer Managed Key.",
+    "Policy Description": "It identifies SageMaker notebook instances that are not encrypted using Customer Managed Key. SageMaker notebook instances should be encrypted with Amazon KMS Customer Master Keys (CMKs) instead of AWS managed-keys in order to have more granular control over the data-at-rest encryption/decryption process and meet compliance requirements. For more details: https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sagemaker.html#SageMaker.Client.describe_notebook_instance"
+}
