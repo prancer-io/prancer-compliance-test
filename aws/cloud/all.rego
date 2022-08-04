@@ -412,6 +412,70 @@ glue_encrypt_data_at_rest_metadata := {
 
 
 #
+# PR-AWS-CLD-GLUE-004
+# aws::glue::securityconfiguration
+# AWS::KMS::Key
+
+default glue_cmk_key = true
+
+glue_cmk_key = false {
+    X := input.TEST_ALL_06[_]
+    Y := input.TEST_KMS[_]
+    has_property(X.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption, "KmsKeyArn")
+    X.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption.KmsKeyArn == Y.KeyMetadata.Arn
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+glue_cmk_key_err = "Ensure AWS Glue encrypt data at rest with GS managed Customer Master Key (CMK)." {
+    not glue_cmk_key
+}
+
+glue_cmk_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-GLUE-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Glue encrypt data at rest with GS managed Customer Master Key (CMK).",
+    "Policy Description": "It is to check that GS managed CMK is used for AWS Glue encryption at rest.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue.html#Glue.Client.get_security_configuration"
+}
+
+
+#
+# PR-AWS-CLD-GLUE-005
+# aws::glue::securityconfiguration
+# AWS::KMS::Key
+
+default glue_cloudwatch_cmk_key = true
+
+glue_cloudwatch_cmk_key = false {
+    X := input.TEST_ALL_06[_]
+    Y := input.TEST_KMS[_]
+    has_property(X.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption, "KmsKeyArn")
+    X.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption.KmsKeyArn == Y.KeyMetadata.Arn
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+glue_cloudwatch_cmk_key_err = "Ensure AWS Glue encrypt data at rest with GS managed Customer Master Key (CMK)." {
+    not glue_cloudwatch_cmk_key
+}
+
+glue_cloudwatch_cmk_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-GLUE-005",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure CloudWatch encryption in AWS Glue is encrypted using GS-managed key.",
+    "Policy Description": "It is to check that GS managed CMK is used while cloudwatch encryption instead of AWS provided keys.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue.html#Glue.Client.get_security_configuration"
+}
+
+
+#
 # PR-AWS-CLD-AS-001
 #
 

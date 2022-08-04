@@ -1739,6 +1739,64 @@ redis_with_intransit_encryption_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_cache_clusters"
 }
 
+
+#
+# PR-AWS-CLD-EC-010
+# aws::elasticache::cachecluster
+# aws::elasticache::replicationgroup
+
+default cache_cluster_vpc = true
+
+cache_cluster_vpc = false {
+    X := input.TEST_EC_01[_]
+    CacheCluster := input.CacheClusters[_]
+    Y := input.TEST_EC[_]
+    ReplicationGroup := Y.ReplicationGroups[_]
+    MemberCluster := ReplicationGroup.MemberClusters[_]
+    contains(MemberCluster, CacheCluster.CacheClusterId)
+    CacheCluster.CacheClusterStatus == "available"
+    not CacheCluster.CacheSubnetGroupName
+}
+
+cache_cluster_vpc = false {
+    X := input.TEST_EC_01[_]
+    CacheCluster := input.CacheClusters[_]
+    Y := input.TEST_EC[_]
+    ReplicationGroup := Y.ReplicationGroups[_]
+    MemberCluster := ReplicationGroup.MemberClusters[_]
+    contains(MemberCluster, CacheCluster.CacheClusterId)
+    CacheCluster.CacheClusterStatus == "available"
+    CacheCluster.CacheSubnetGroupName == ""
+}
+
+cache_cluster_vpc = false {
+    X := input.TEST_EC_01[_]
+    CacheCluster := input.CacheClusters[_]
+    Y := input.TEST_EC[_]
+    ReplicationGroup := Y.ReplicationGroups[_]
+    MemberCluster := ReplicationGroup.MemberClusters[_]
+    contains(MemberCluster, CacheCluster.CacheClusterId)
+    CacheCluster.CacheClusterStatus == "available"
+    CacheCluster.CacheSubnetGroupName == null
+}
+
+cache_cluster_vpc_err = "Ensure AWS ElastiCache cluster is associated with VPC." {
+    not cache_cluster_vpc
+}
+
+cache_cluster_vpc_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-010",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS ElastiCache cluster is associated with VPC.",
+    "Policy Description": "It identifies ElastiCache Clusters which are not associated with VPC. It is highly recommended to associate ElastiCache with VPC, as provides virtual network in your own logically isolated area and features such as selecting IP address range, creating subnets, and configuring route tables, network gateways, and security settings. NOTE: If you created your AWS account before 2013-12-04, you might have support for the EC2-Classic platform in some regions. AWS has deprecated the use of Amazon EC2-Classic for launching ElastiCache clusters. All current generation nodes are launched in Amazon Virtual Private Cloud only. So this policy only applies legacy ElastiCache clusters which are created using EC2-Classic.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_cache_clusters"
+}
+
+
 #
 # PR-AWS-CLD-DMS-001
 #

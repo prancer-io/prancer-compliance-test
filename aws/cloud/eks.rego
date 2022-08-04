@@ -264,3 +264,35 @@ eks_gs_managed_key_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster"
 }
+
+
+#
+# PR-AWS-CLD-EKS-011
+# aws::eks::cluster
+# aws::ec2::vpcendpoint
+
+default eks_not_default_vpc = true
+
+eks_not_default_vpc = false {
+    X := input.TEST_EKS[_]
+    Y := input.TEST_EC2_04[_]
+    Vpc := Y.Vpcs[_]
+    X.cluster.resourcesVpcConfig.vpcId == Vpc.VpcId
+    Vpc.IsDefault == true
+}
+
+eks_not_default_vpc_err = "Ensure EKS cluster is not using the default VPC." {
+    not eks_not_default_vpc
+}
+
+eks_not_default_vpc_metadata := {
+    "Policy Code": "PR-AWS-CLD-EKS-011",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EKS cluster is not using the default VPC.",
+    "Policy Description": "It identifies AWS EKS clusters which are configured with the default VPC. It is recommended to use a VPC configuration based on your security and networking requirements. You should create your own EKS VPC instead of using the default, so that you can have full control over the cluster network.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster"
+}
