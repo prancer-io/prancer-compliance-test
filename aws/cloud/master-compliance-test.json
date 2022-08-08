@@ -13282,51 +13282,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-CLD-CF-011",
-                    "masterSnapshotId": [
-                        "TEST_CF",
-                        "TEST_WAF"
-                    ],
-                    "type": "rego",
-                    "rule": "file(cloudfront.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-CF-011",
-                            "eval": "data.rule.cf_not_wafv2",
-                            "message": "data.rule.cf_not_wafv2_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudfront.html#CloudFront.Client.get_distribution' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_CF_011.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS CloudFront is configured with AWS Web Application Firewall v2 (AWS WAFv2).",
-                    "description": "It identifies AWS CloudFront which is not configured with AWS Web Application Firewall v2 (AWS WAFv2). As a best practice, configure the AWS WAFv2 service on the CloudFront to protect against application-layer attacks. To block malicious requests to your CloudFront, define the block criteria in the WAFv2 web access control list (web ACL).",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [
-                                "APRA",
-                                "CMMC",
-                                "CSA CCM",
-                                "HITRUST",
-                                "ISO/IEC 27002",
-                                "ISO/IEC 27017",
-                                "ISO/IEC 27018",
-                                "LGPD",
-                                "MAS TRM",
-                                "NIST 800",
-                                "NIST CSF",
-                                "NIST SP",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "cloudfront",
-                                "waf"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "PR-AWS-CLD-RDS-001",
                     "masterSnapshotId": [
                         "TEST_RDS_02"

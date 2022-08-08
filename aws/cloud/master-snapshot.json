@@ -813,16 +813,6 @@
 					]
 				},
 				{
-					"masterSnapshotId": "TEST_WAF",
-					"arn": "arn:aws:waf:::",
-					"type": "waf",
-					"collection": "aws_waf",
-					"listMethod": "list_web_acls",
-					"detailMethods": [
-						"list_web_acls"
-					]
-				},
-				{
 					"masterSnapshotId": "TEST_SAGEMAKER",
 					"arn": "arn:aws:sagemaker:::",
 					"type": "sagemaker",
