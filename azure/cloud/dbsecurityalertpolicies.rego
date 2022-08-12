@@ -17,7 +17,7 @@ azure_attribute_absence["dbsec_threat_off"] {
 
 azure_issue["dbsec_threat_off"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/databases"
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
     lower(resource.properties.state) != "enabled"
 }
 
