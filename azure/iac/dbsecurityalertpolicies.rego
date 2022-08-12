@@ -231,7 +231,7 @@ dbsec_threat_alert_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
+    "Policy Title": "Azure SQL databse threat detection alerts should be enabled for all threat types",
     "Policy Description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
     "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
     "Policy Help URL": "",

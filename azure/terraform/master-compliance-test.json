@@ -3391,7 +3391,7 @@
                             "remediationFunction": "PR_AZR_TRF_SQL_017.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "SQL Database Server should have security alert policies enabled",
                     "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat.",
                     "tags": [
@@ -11994,7 +11994,7 @@
                             "remediationFunction": "PR_AZR_TRF_SQL_046.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure SQL server's TDE protector is encrypted with Customer-managed key",
                     "description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server.",
                     "tags": [

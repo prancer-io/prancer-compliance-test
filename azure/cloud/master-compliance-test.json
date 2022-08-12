@@ -2771,7 +2771,7 @@
                         {
                             "cloud": "azure",
                             "compliance": [],
-                            "service": [
+                             "service": [
                                 "Databases"
                             ]
                         }
@@ -2871,6 +2871,126 @@
                     "severity": "Medium",
                     "title": "Ensure ssl enforcement is enabled on MySQL server Database Server.",
                     "description": "Enable SSL connection on MySQL Servers databases. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-SQL-017",
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-017",
+                            "eval": "data.rule.dbsec_threat_off",
+                            "message": "data.rule.dbsec_threat_off_err",
+                            "remediationDescription": "If Azure Defender is enabled at server level it will also be applied to all the database, regardless of the database Azure Defender settings. It is recommended that you enable only server-level Azure Defender settings. To enable auditing at server level: Log in to the Azure Portal. Note down the reported SQL database and SQL server. Select 'SQL servers', Click on the SQL server instance you wanted to modify. Click on 'Security Center' under 'Security'. Click on 'Enable Azure Defender for SQL'. It is recommended to avoid enabling Azure Defender in both server and database. If you want to enable different storage account, email addresses for scan and alert notifications or 'Advanced Threat Protection types' for a specific database that differ from the rest of the databases on the server. Then to enable auditing at database level by: Log in to the Azure Portal. Note down the reported SQL database. Select 'SQL databases', Click on the SQL database instance you wanted to modify. Click on 'Security Center' under 'Security'. Click on 'Enable Azure Defender for SQL'",
+                            "remediationFunction": "PR_AZR_CLD_SQL_017.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_263"
+                    ],
+                    "severity": "High",
+                    "title": "SQL Databases should have security alert policies enabled",
+                    "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-SQL-019",
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-019",
+                            "eval": "data.rule.dbsec_threat_email",
+                            "message": "data.rule.dbsec_threat_email_err",
+                            "remediationDescription": "Login to Azure Portal. Go to SQL Databases (Left Panel). Choose the reported each DB instance. Click on Auditing & Threat Detection (under 'SETTINGS'). Set Auditing to 'ON'. Set Threat Detection to 'ON'. Set 'Send alerts to' field with a valid email address. Click on save",
+                            "remediationFunction": "PR_AZR_CLD_SQL_019.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_263"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators and configured email addresses",
+                    "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-SQL-020",
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-020",
+                            "eval": "data.rule.dbsec_threat_alert",
+                            "message": "data.rule.dbsec_threat_alert_err",
+                            "remediationDescription": "Login to Azure Portal. Go to SQL databases. For each DB instance. Click on Auditing & Threat Detection. Set Threat Detection types to All. Note: In order to Set Threat Detection types to All, Make sure Auditing is set to On.",
+                            "remediationFunction": "PR_AZR_CLD_SQL_020.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_263"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL database threat detection alerts should be enabled for all threat types",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-SQL-021",
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-021",
+                            "eval": "data.rule.sql_alert",
+                            "message": "data.rule.sql_alert_err",
+                            "remediationDescription": "Log in to Azure Portal. Go to SQL databases (Left Panel). Choose the reported each DB instance. Under Security section, Click on 'Advanced Threat Protection'. Click on Settings. Select 'Enable Advanced Threat Protection at the database level'. Click on 'Threat Detection settings for this database'. On 'Send alerts to' textbox provide email ID on which you would like to receive alert notifications and Click on the checkbox of 'Email service and co-administrators'. Click on 'Ok' for Threat Detection database settings. Click on 'Save'",
+                            "remediationFunction": "PR_AZR_CLD_SQL_021.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_263"
+                    ],
+                    "severity": "Medium",
+                    "title": "Threat Detection alert should be configured to send notifications to the SQL server account administrators",
+                    "description": "Ensure that threat detection alert is configured to send notifications to the sql server account administrators"
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-022",
@@ -3925,7 +4045,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_400"
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure SQL server's TDE protector is encrypted with Customer-managed key",
                     "description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure’s cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server."
                 },
