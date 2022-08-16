@@ -1,6 +1,11 @@
 package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html
+
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 #
 # PR-AWS-CLD-SGM-001
 #
@@ -142,13 +147,10 @@ default sagemaker_customer_managed_key = true
 sagemaker_customer_managed_key = false {
     X := input.TEST_SAGEMAKER[_]
     X.NotebookInstanceStatus == "InService"
+    has_property(X, "KmsKeyId")
     Y := input.TEST_KMS[_]
     X.KmsKeyId == Y.KeyMetadata.KeyId
     Y.KeyMetadata.KeyManager == "AWS"
-}
-
-sagemaker_customer_managed_key = false {
-    not input.SubnetId
 }
 
 sagemaker_customer_managed_key_err = "Ensure AWS SageMaker notebook instance is encrypted using Customer Managed Key." {

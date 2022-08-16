@@ -262,7 +262,7 @@ ecr_encrypted_using_key = false {
 	ecr := input.TEST_ECR[_]
     X := ecr.repositories[i]
 	lower(X.encryptionConfiguration.encryptionType) == "kms"
-	X.encryptionConfiguration.kmsKey
+	has_property(X.encryptionConfiguration, "kmsKey")
 	Y := input.TEST_KMS[_]
 	X.encryptionConfiguration.kmsKey == Y.KeyMetadata.Arn
 	Y.KeyMetadata.KeyManager != "CUSTOMER"
@@ -272,7 +272,7 @@ ecr_encrypted_using_key = false {
 	ecr := input.TEST_ECR[_]
     X := ecr.repositories[i]
 	lower(X.encryptionConfiguration.encryptionType) == "kms"
-	X.encryptionConfiguration.kmsKey
+	has_property(X.encryptionConfiguration, "kmsKey")
 	Y := input.TEST_KMS[_]
 	X.encryptionConfiguration.kmsKey == Y.KeyMetadata.KeyId
 	Y.KeyMetadata.KeyManager != "CUSTOMER"

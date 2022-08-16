@@ -220,10 +220,10 @@ cloudtrail_logging_is_enabled_metadata := {
 default cloudtrail_with_cloudwatch = true
 
 cloudtrail_with_cloudwatch = false {
-    has_property(input, CloudWatchLogsLogGroupArn)
+    has_property(input, "CloudWatchLogsLogGroupArn")
     input.CloudWatchLogsLogGroupArn != ""
     input.IsMultiRegionTrail == false
-    has_property(input, LatestCloudWatchLogsDeliveryTime)
+    has_property(input, "LatestCloudWatchLogsDeliveryTime")
 }
 
 cloudtrail_with_cloudwatch = false {
