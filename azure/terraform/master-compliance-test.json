@@ -6381,7 +6381,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Key Vault should disable public network access",
+                    "title": "Azure Key Vault Network Access default action should be 'deny'",
                     "description": "Disable public network access for your key vault so that it's not accessible over the public internet. This can reduce data leakage risks.",
                     "tags": [
                         {
