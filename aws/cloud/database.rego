@@ -1753,7 +1753,7 @@ default cache_cluster_vpc = true
 
 cache_cluster_vpc = false {
     X := input.TEST_EC_01[_]
-    CacheCluster := input.CacheClusters[_]
+    CacheCluster := X.CacheClusters[_]
     Y := input.TEST_EC[_]
     ReplicationGroup := Y.ReplicationGroups[_]
     MemberCluster := ReplicationGroup.MemberClusters[_]
@@ -1764,7 +1764,7 @@ cache_cluster_vpc = false {
 
 cache_cluster_vpc = false {
     X := input.TEST_EC_01[_]
-    CacheCluster := input.CacheClusters[_]
+    CacheCluster := X.CacheClusters[_]
     Y := input.TEST_EC[_]
     ReplicationGroup := Y.ReplicationGroups[_]
     MemberCluster := ReplicationGroup.MemberClusters[_]
@@ -1775,7 +1775,7 @@ cache_cluster_vpc = false {
 
 cache_cluster_vpc = false {
     X := input.TEST_EC_01[_]
-    CacheCluster := input.CacheClusters[_]
+    CacheCluster := X.CacheClusters[_]
     Y := input.TEST_EC[_]
     ReplicationGroup := Y.ReplicationGroups[_]
     MemberCluster := ReplicationGroup.MemberClusters[_]
@@ -1910,6 +1910,14 @@ dms_gs_managed_key = false {
     ReplicationInstance := X.ReplicationInstances[_]
     Y := input.TEST_KMS[_]
 	ReplicationInstance.KmsKeyId == Y.KeyMetadata.KeyId
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+dms_gs_managed_key = false {
+    X := input.TEST_DMS_02[_]
+    ReplicationInstance := X.ReplicationInstances[_]
+    Y := input.TEST_KMS[_]
+	ReplicationInstance.KmsKeyId == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
 }
 

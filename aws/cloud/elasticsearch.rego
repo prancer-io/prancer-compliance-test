@@ -467,6 +467,13 @@ elasticsearch_gs_managed_key = false {
     Y.KeyMetadata.KeyManager != "CUSTOMER"
 }
 
+elasticsearch_gs_managed_key = false {
+    X := input.TEST_ELASTICSEARCH[_]
+    Y := input.TEST_KMS[_]
+    X.DomainStatus.EncryptionAtRestOptions.KmsKeyId == Y.KeyMetadata.Arn
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
 elasticsearch_gs_managed_key_err = "Ensure ElasticSearch is encrypted at rest with GS managed KMS." {
     not elasticsearch_gs_managed_key
 }

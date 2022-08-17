@@ -341,7 +341,7 @@ default api_gateway_gs_managed_acm = true
 api_gateway_gs_managed_acm = false {
     X := input.TEST_API_GATEWAY_04[_]
     Y := input.TEST_ACM[_]
-    X.regionalCertificateArn == Y.Certificate.CertificateArn
+    X.regionalCertificateArn != Y.Certificate.CertificateArn
 }
 
 api_gateway_gs_managed_acm_err = "Ensure custom domain in AWS API Gateway has GS-managed ACM certificate associated." {

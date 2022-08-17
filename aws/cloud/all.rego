@@ -979,9 +979,17 @@ default kinesis_gs_kms_key = true
 
 kinesis_gs_kms_key = false {
     X := input.TEST_ALL_11[_]
-    X.EncryptionType == "KMS"
+    X.StreamDescription.EncryptionType == "KMS"
     Y := input.TEST_KMS[_]
-    X.KeyId == Y.KeyMetadata.KeyId
+    X.StreamDescription.KeyId == Y.KeyMetadata.KeyId
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+kinesis_gs_kms_key = false {
+    X := input.TEST_ALL_11[_]
+    X.StreamDescription.EncryptionType == "KMS"
+    Y := input.TEST_KMS[_]
+    X.StreamDescription.KeyId == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
 }
 
