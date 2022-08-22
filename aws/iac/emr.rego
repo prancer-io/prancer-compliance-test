@@ -425,3 +425,79 @@ emr_transit_encryption_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
 }
+
+
+#
+# PR-AWS-CFR-EMR-008
+#
+
+default emr_cluster_level_logging = null
+
+aws_issue["emr_cluster_level_logging"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::cluster"
+    not resource.Properties.LogUri
+}
+
+emr_cluster_level_logging {
+    lower(input.Resources[i].Type) == "aws::emr::cluster"
+    not aws_issue["emr_cluster_level_logging"]
+}
+
+emr_cluster_level_logging = false {
+    aws_issue["emr_cluster_level_logging"]
+}
+
+emr_cluster_level_logging_err = "Ensure Cluster level logging is enabled for EMR." {
+    aws_issue["emr_cluster_level_logging"]
+}
+
+emr_cluster_level_logging_metadata := {
+    "Policy Code": "PR-AWS-CFR-EMR-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Cluster level logging is enabled for EMR.",
+    "Policy Description": "It checks if cluster level logging is enabled for EMR cluster created. This determines whether Amazon EMR captures detailed log data to Amazon S3.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html"
+}
+
+
+#
+# PR-AWS-CFR-EMR-009
+#
+
+default emr_cluster_not_visible_to_all_iam_users = null
+
+aws_issue["emr_cluster_not_visible_to_all_iam_users"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::cluster"
+    resource.Properties.VisibleToAllUsers == true
+}
+
+emr_cluster_not_visible_to_all_iam_users {
+    lower(input.Resources[i].Type) == "aws::emr::cluster"
+    not aws_issue["emr_cluster_not_visible_to_all_iam_users"]
+}
+
+emr_cluster_not_visible_to_all_iam_users = false {
+    aws_issue["emr_cluster_not_visible_to_all_iam_users"]
+}
+
+emr_cluster_not_visible_to_all_iam_users_err = "Ensure EMR cluster is not visible to all IAM users." {
+    aws_issue["emr_cluster_not_visible_to_all_iam_users"]
+}
+
+emr_cluster_not_visible_to_all_iam_users_metadata := {
+    "Policy Code": "PR-AWS-CFR-EMR-009",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure EMR cluster is not visible to all IAM users.",
+    "Policy Description": "It checks if the EMR cluster created has a wide visibility to all IAM users. When true, IAM principals in the AWS account can perform EMR cluster actions that their IAM policies allow.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html"
+}

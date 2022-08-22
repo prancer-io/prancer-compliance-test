@@ -1283,3 +1283,162 @@ ecs_network_mode_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#network_mode"
 }
+
+
+#
+# PR-AWS-TRF-ECS-015
+#
+
+default ecs_fargate_task_definition_logging_is_enabled = null
+
+aws_issue["ecs_fargate_task_definition_logging_is_enabled"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    not container_definition.logConfiguration.logDriver
+}
+
+aws_issue["ecs_fargate_task_definition_logging_is_enabled"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    contains(lower(container_definition.logConfiguration.logDriver), "false")
+}
+
+ecs_fargate_task_definition_logging_is_enabled {
+    lower(input.resources[i].type) == "aws_ecs_task_definition"
+    not aws_issue["ecs_fargate_task_definition_logging_is_enabled"]
+}
+
+ecs_fargate_task_definition_logging_is_enabled = false {
+    aws_issue["ecs_fargate_task_definition_logging_is_enabled"]
+}
+
+ecs_fargate_task_definition_logging_is_enabled_err = "AWS ECS - Ensure Fargate task definition logging is enabled." {
+    aws_issue["ecs_fargate_task_definition_logging_is_enabled"]
+}
+
+ecs_fargate_task_definition_logging_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-TRF-ECS-015",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS ECS - Ensure Fargate task definition logging is enabled.",
+    "Policy Description": "It checks if the Fargate task definition created has an execution IAM role associated, the role defines the extent of access to other AWS Services.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#container_definitions"
+}
+
+
+#
+# PR-AWS-TRF-ECS-016
+#
+
+default no_ecs_task_definition_empty_roles = null
+
+aws_issue["no_ecs_task_definition_empty_roles"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    not container_definition.user
+}
+
+aws_issue["no_ecs_task_definition_empty_roles"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    container_definition.user == ""
+}
+
+aws_issue["no_ecs_task_definition_empty_roles"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    container_definition.user == null
+}
+
+aws_issue["no_ecs_task_definition_empty_roles"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    contains(container_definition.user, "*")
+}
+
+no_ecs_task_definition_empty_roles {
+    lower(input.resources[i].type) == "aws_ecs_task_definition"
+    not aws_issue["no_ecs_task_definition_empty_roles"]
+}
+
+no_ecs_task_definition_empty_roles = false {
+    aws_issue["no_ecs_task_definition_empty_roles"]
+}
+
+no_ecs_task_definition_empty_roles_err = "Ensure there are no undefined ECS task definition empty roles for ECS." {
+    aws_issue["no_ecs_task_definition_empty_roles"]
+}
+
+no_ecs_task_definition_empty_roles_metadata := {
+    "Policy Code": "PR-AWS-TRF-ECS-016",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure there are no undefined ECS task definition empty roles for ECS.",
+    "Policy Description": "It checks if the ECS container has a role attached. The task execution role grants the Amazon ECS container and Fargate agents permission to make AWS API calls on your behalf. The task execution IAM role is required depending on the requirements of your task.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#container_definitions"
+}
+
+
+#
+# PR-AWS-TRF-ECS-017
+#
+
+default ecs_log_driver = null
+
+aws_issue["ecs_log_driver"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    not container_definition.logConfiguration.logDriver
+}
+
+aws_issue["ecs_log_driver"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    container_definition.logConfiguration.logDriver == ""
+}
+
+aws_issue["ecs_log_driver"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    container_definition.logConfiguration.logDriver == null
+}
+
+ecs_log_driver {
+    lower(input.resources[i].type) == "aws_ecs_task_definition"
+    not aws_issue["ecs_log_driver"]
+}
+
+ecs_log_driver = false {
+    aws_issue["ecs_log_driver"]
+}
+
+ecs_log_driver_err = "Ensure that a log driver has been configured for each ECS task definition." {
+    aws_issue["ecs_log_driver"]
+}
+
+ecs_log_driver_metadata := {
+    "Policy Code": "PR-AWS-TRF-ECS-017",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that a log driver has been configured for each ECS task definition.",
+    "Policy Description": "It checks if log information from the containers running on ECS are send out to CloudWatch logs for monitoring.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#container_definitions"
+}

@@ -532,9 +532,9 @@ iam_user_group_attach_metadata := {
 # PR-AWS-TRF-IAM-011
 #
 
-default iam_policy_not_overly_permissive_to_all_traffic = null
+default lambda_iam_policy_not_overly_permissive_to_all_traffic = null
 
-aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_policy"
     statement := resource.properties.policy.Statement[j]
@@ -543,7 +543,7 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     contains(lower(statement.Action), "lambda:")
 }
 
-aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_policy"
     statement := resource.properties.policy.Statement[j]
@@ -552,7 +552,7 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     contains(lower(statement.Action[_]), "lambda:")
 }
 
-aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_policy"
     statement := resource.properties.policy.Statement[j]
@@ -561,7 +561,7 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     contains(lower(statement.Action[_]), "lambda:")
 }
 
-aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_iam_policy"
     statement := resource.properties.policy.Statement[j]
@@ -570,20 +570,20 @@ aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
     contains(lower(statement.Action), "lambda:")
 }
 
-iam_policy_not_overly_permissive_to_all_traffic {
+lambda_iam_policy_not_overly_permissive_to_all_traffic {
     lower(input.resources[i].type) == "aws_iam_policy"
-    not aws_issue["iam_policy_not_overly_permissive_to_all_traffic"]
+    not aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"]
 }
 
-iam_policy_not_overly_permissive_to_all_traffic = false {
-    aws_issue["iam_policy_not_overly_permissive_to_all_traffic"]
+lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
+    aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"]
 }
 
-iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure Lambda IAM policy is not overly permissive to all traffic" {
-    aws_issue["iam_policy_not_overly_permissive_to_all_traffic"]
+lambda_iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure Lambda IAM policy is not overly permissive to all traffic" {
+    aws_issue["lambda_iam_policy_not_overly_permissive_to_all_traffic"]
 }
 
-iam_policy_not_overly_permissive_to_all_traffic_metadata := {
+lambda_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
     "Policy Code": "PR-AWS-TRF-IAM-011",
     "Type": "IaC",
     "Product": "AWS",
@@ -1564,6 +1564,476 @@ iam_policy_permission_may_cause_privilege_escalation_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure AWS IAM policy do not have permission which may cause privilege escalation.",
     "Policy Description": "It identifies AWS IAM Policy which have permission that may cause privilege escalation. AWS IAM policy having weak permissions could be exploited by an attacker to elevate privileges. It is recommended to follow the principle of least privileges ensuring that AWS IAM policy does not have these sensitive permissions.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy"
+}
+
+
+#
+# PR-AWS-TRF-IAM-029
+#
+
+default iam_policy_not_overly_permissive_to_all_traffic_for_ecs = null
+
+aws_issue["iam_policy_not_overly_permissive_to_all_traffic_for_ecs"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(statement.Action), "ecs:")
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_all_traffic_for_ecs"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(statement.Action[_]), "ecs:")
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_all_traffic_for_ecs"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    startswith(lower(statement.Action[_]), "ecs:")
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_all_traffic_for_ecs"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    startswith(lower(statement.Action), "ecs:")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs {
+    lower(input.resources[i].type) == "aws_iam_policy"
+    not aws_issue["iam_policy_not_overly_permissive_to_all_traffic_for_ecs"]
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
+    aws_issue["iam_policy_not_overly_permissive_to_all_traffic_for_ecs"]
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs_err = "Ensure IAM policy is not overly permissive to all traffic for ecs." {
+    aws_issue["iam_policy_not_overly_permissive_to_all_traffic_for_ecs"]
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs_metadata := {
+    "Policy Code": "PR-AWS-TRF-IAM-029",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure IAM policy is not overly permissive to all traffic for ecs.",
+    "Policy Description": "This policy identifies ECS IAM policies that are overly permissive to all traffic. It is recommended that the ECS should be granted access restrictions so that only authorized users and applications have access to the service. For more details: https://docs.aws.amazon.com/AmazonECS/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_service-with-iam-policy-best-practices",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy"
+}
+
+
+#
+# PR-AWS-TRF-IAM-030
+#
+
+default elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = null
+
+aws_issue["elasticsearch_iam_policy_not_overly_permissive_to_all_traffic"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(statement.Action), "es:")
+}
+
+aws_issue["elasticsearch_iam_policy_not_overly_permissive_to_all_traffic"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    startswith(lower(statement.Action[_]), "es:")
+}
+
+aws_issue["elasticsearch_iam_policy_not_overly_permissive_to_all_traffic"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    startswith(lower(statement.Action[_]), "es:")
+}
+
+aws_issue["elasticsearch_iam_policy_not_overly_permissive_to_all_traffic"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    startswith(lower(statement.Action), "es:")
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic {
+    lower(input.resources[i].type) == "aws_iam_policy"
+    not aws_issue["elasticsearch_iam_policy_not_overly_permissive_to_all_traffic"]
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
+    aws_issue["elasticsearch_iam_policy_not_overly_permissive_to_all_traffic"]
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure IAM policy is not overly permissive to all traffic for elasticsearch." {
+    aws_issue["elasticsearch_iam_policy_not_overly_permissive_to_all_traffic"]
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
+    "Policy Code": "PR-AWS-TRF-IAM-030",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure IAM policy is not overly permissive to all traffic for elasticsearch.",
+    "Policy Description": "It identifies Elasticsearch IAM policies that are overly permissive to all traffic. Amazon Elasticsearch service makes it easy to deploy and manage Elasticsearch. Customers can create a domain where the service is accessible. The domain should be granted access restrictions so that only authorized users and applications have access to the service.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy"
+}
+
+
+#
+# PR-AWS-TRF-IAM-041
+#
+
+default not_allow_decryption_actions_on_all_kms_keys = null
+
+aws_issue["not_allow_decryption_actions_on_all_kms_keys"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource[_] == "*"
+    contains(statement.Action[_], "kms:*")
+    not statement.Condition
+}
+
+aws_issue["not_allow_decryption_actions_on_all_kms_keys"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource[_] == "*"
+    contains(statement.Action, "kms:*")
+    not statement.Condition
+}
+
+aws_issue["not_allow_decryption_actions_on_all_kms_keys"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource == "*"
+    contains(statement.Action[_], "kms:*")
+    not statement.Condition
+}
+
+aws_issue["not_allow_decryption_actions_on_all_kms_keys"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource == "*"
+    contains(statement.Action, "kms:*")
+    not statement.Condition
+}
+
+aws_issue["not_allow_decryption_actions_on_all_kms_keys"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource[_] == "*"
+    contains(statement.Action[_], "kms:Decrypt")
+    not statement.Condition
+}
+
+aws_issue["not_allow_decryption_actions_on_all_kms_keys"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource[_] == "*"
+    contains(statement.Action, "kms:Decrypt")
+    not statement.Condition
+}
+
+aws_issue["not_allow_decryption_actions_on_all_kms_keys"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource == "*"
+    contains(statement.Action[_], "kms:Decrypt")
+    not statement.Condition
+}
+
+aws_issue["not_allow_decryption_actions_on_all_kms_keys"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource == "*"
+    contains(statement.Action, "kms:Decrypt")
+    not statement.Condition
+}
+
+aws_issue["not_allow_decryption_actions_on_all_kms_keys"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource[_] == "*"
+    contains(statement.Action[_], "kms:ReEncryptFrom")
+    not statement.Condition
+}
+
+aws_issue["not_allow_decryption_actions_on_all_kms_keys"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource[_] == "*"
+    contains(statement.Action, "kms:ReEncryptFrom")
+    not statement.Condition
+}
+
+aws_issue["not_allow_decryption_actions_on_all_kms_keys"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource == "*"
+    contains(statement.Action[_], "kms:ReEncryptFrom")
+    not statement.Condition
+}
+
+aws_issue["not_allow_decryption_actions_on_all_kms_keys"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource == "*"
+    contains(statement.Action, "kms:ReEncryptFrom")
+    not statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys {
+    lower(input.resources[i].type) == "aws_iam_policy"
+    not aws_issue["not_allow_decryption_actions_on_all_kms_keys"]
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    aws_issue["not_allow_decryption_actions_on_all_kms_keys"]
+}
+
+not_allow_decryption_actions_on_all_kms_keys_err = "Ensure AWS IAM policy does not allows decryption actions on all KMS keys." {
+    aws_issue["not_allow_decryption_actions_on_all_kms_keys"]
+}
+
+not_allow_decryption_actions_on_all_kms_keys_metadata := {
+    "Policy Code": "PR-AWS-TRF-IAM-041",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS IAM policy does not allows decryption actions on all KMS keys.",
+    "Policy Description": "It identifies IAM policies that allow decryption actions on all KMS keys. Instead of granting permissions for all keys, determine the minimum set of keys that users need to access encrypted data. You should grant to identities only the kms:Decrypt or kms:ReEncryptFrom permissions and only for the keys that are required to perform a task. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy"
+}
+
+
+#
+# PR-AWS-TRF-IAM-042
+#
+
+default iam_policy_attached_to_user = null
+
+resources_user_policy := ["aws_iam_user_policy", "aws_iam_user_policy_attachment"]
+
+aws_issue["iam_policy_attached_to_user"] {
+    count([c | input.resources[_].type == "aws_iam_user_policy"; c:=1]) != 0
+}
+
+aws_issue["iam_policy_attached_to_user"] {
+    count([c | input.resources[_].type == "aws_iam_user_policy_attachment"; c:=1]) != 0
+}
+
+iam_policy_attached_to_user {
+    lower(input.resources[i].type) == resources_user_policy[_]
+    not aws_issue["iam_policy_attached_to_user"]
+}
+
+iam_policy_attached_to_user = false {
+    aws_issue["iam_policy_attached_to_user"]
+}
+
+iam_policy_attached_to_user_err = "Ensure IAM policy is attached to group rather than user." {
+    aws_issue["iam_policy_attached_to_user"]
+}
+
+iam_policy_attached_to_user_metadata := {
+    "Policy Code": "PR-AWS-TRF-IAM-042",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure IAM policy is attached to group rather than user.",
+    "Policy Description": "It identifies IAM policies attached to user. By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups but not users.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment"
+}
+
+
+#
+# PR-AWS-TRF-IAM-043
+#
+
+default iam_policy_not_overly_permissive_to_all_traffic = null
+
+aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    contains(lower(statement.Action), "*")
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
+    contains(lower(statement.Action[_]), "*")
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    contains(lower(statement.Action[_]), "*")
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_all_traffic"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Condition.IpAddress["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
+    contains(lower(statement.Action), "*")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic {
+    lower(input.resources[i].type) == "aws_iam_policy"
+    not aws_issue["iam_policy_not_overly_permissive_to_all_traffic"]
+}
+
+iam_policy_not_overly_permissive_to_all_traffic = false {
+    aws_issue["iam_policy_not_overly_permissive_to_all_traffic"]
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_err = "Ensure IAM policy is not overly permissive to all traffic via condition clause." {
+    aws_issue["iam_policy_not_overly_permissive_to_all_traffic"]
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_metadata := {
+    "Policy Code": "PR-AWS-TRF-IAM-043",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure IAM policy is not overly permissive to all traffic via condition clause.",
+    "Policy Description": "It identifies IAM policies that have a policy that is overly permissive to all traffic via condition clause. If any IAM policy statement with a condition containing 0.0.0.0/0 or ::/0, it allows all traffic to resources attached to that IAM policy. It is highly recommended to have the least privileged IAM policy to protect the data leakage and unauthorized access.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy"
+}
+
+
+#
+# PR-AWS-TRF-IAM-044
+#
+
+default iam_policy_not_overly_permissive_to_sts_service = null
+
+aws_issue["iam_policy_not_overly_permissive_to_sts_service"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource[_] == "*"
+    contains(statement.Action[_], "sts:*")
+    not statement.Condition
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_sts_service"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource[_] == "*"
+    contains(statement.Action, "sts:*")
+    not statement.Condition
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_sts_service"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource == "*"
+    contains(statement.Action[_], "sts:*")
+    not statement.Condition
+}
+
+aws_issue["iam_policy_not_overly_permissive_to_sts_service"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Resource == "*"
+    contains(statement.Action, "sts:*")
+    not statement.Condition
+}
+
+iam_policy_not_overly_permissive_to_sts_service {
+    lower(input.resources[i].type) == "aws_iam_policy"
+    not aws_issue["iam_policy_not_overly_permissive_to_sts_service"]
+}
+
+iam_policy_not_overly_permissive_to_sts_service = false {
+    aws_issue["iam_policy_not_overly_permissive_to_sts_service"]
+}
+
+iam_policy_not_overly_permissive_to_sts_service_err = "Ensure AWS IAM policy is not overly permissive to STS services." {
+    aws_issue["iam_policy_not_overly_permissive_to_sts_service"]
+}
+
+iam_policy_not_overly_permissive_to_sts_service_metadata := {
+    "Policy Code": "PR-AWS-TRF-IAM-044",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS IAM policy is not overly permissive to STS services.",
+    "Policy Description": "It identifies the IAM policies that are overly permissive to STS services. AWS Security Token Service (AWS STS) is a web service that enables you to request temporary credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users). It is recommended to follow the principle of least privileges ensuring that only restricted STS services for restricted resources.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy"
