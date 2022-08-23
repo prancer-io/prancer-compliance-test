@@ -119,21 +119,19 @@ app_service_https_only_metadata := {
 
 default app_service_latest_tls_configured = null
 
-# cannot check existance of property if there is a default value and same terraform resoruce appear in the same snapshot file multiple time with different configuration
-# it will work well for valid values, but if we provide invalid value for one resoruce will produce multiple output, which is not exceptable.
-#azure_attribute_absence["app_service_latest_tls_configured"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_app_service"
-#    not resource.properties.site_config
-#}
+azure_attribute_absence["app_service_latest_tls_configured"] {
+   resource := input.resources[_]
+   lower(resource.type) == "azurerm_app_service"
+   not resource.properties.site_config
+}
 
 #default to 1.2
-#azure_attribute_absence["app_service_latest_tls_configured"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_app_service"
-#    site_config := resource.properties.site_config[_]
-#    not site_config.min_tls_version
-#}
+azure_attribute_absence["app_service_latest_tls_configured"] {
+   resource := input.resources[_]
+   lower(resource.type) == "azurerm_app_service"
+   site_config := resource.properties.site_config[_]
+   not site_config.min_tls_version
+}
 
 azure_issue["app_service_latest_tls_configured"] {
     resource := input.resources[_]
@@ -144,23 +142,19 @@ azure_issue["app_service_latest_tls_configured"] {
 
 app_service_latest_tls_configured {
     lower(input.resources[_].type) == "azurerm_app_service"
-    #not azure_attribute_absence["app_service_latest_tls_configured"]
+    not azure_attribute_absence["app_service_latest_tls_configured"]
     not azure_issue["app_service_latest_tls_configured"]
 }
 
-#app_service_latest_tls_configured {
-#    azure_attribute_absence["app_service_latest_tls_configured"]
-#}
+app_service_latest_tls_configured {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    azure_attribute_absence["app_service_latest_tls_configured"]
+    not azure_issue["app_service_latest_tls_configured"]
+}
 
 app_service_latest_tls_configured = false {
     azure_issue["app_service_latest_tls_configured"]
 }
-
-#app_service_latest_tls_configured_err = "azurerm_app_service property 'auth_settings.enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
-#    azure_attribute_absence["app_service_latest_tls_configured"]
-#} else = "Azure App Service currently dont have latest version of tls configured" {
-#    azure_issue["app_service_latest_tls_configured"]
-#}
 
 app_service_latest_tls_configured_err = "Azure App Service currently dont have latest version of tls configured" {
     azure_issue["app_service_latest_tls_configured"]
