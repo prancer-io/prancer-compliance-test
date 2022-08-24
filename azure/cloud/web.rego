@@ -154,12 +154,12 @@ min_tls_version_err = "Web App currently not configured with latest version TLS"
     not azure_inner_attribute_absence["min_tls_version"]
     azure_issue["min_tls_version"]
     azure_inner_issue["min_tls_version"]
-} else = "microsoft.web/sites resource property config.minTlsVersion is missing from the resource" {
+} else = "Web App currently not configured with latest version TLS" {
     lower(input.resources[_].type) == "microsoft.web/sites"
     azure_inner_attribute_absence["min_tls_version"]
     not azure_attribute_absence["min_tls_version"]
     azure_issue["min_tls_version"]
-} else = "microsoft.web/sites resource property config.minTlsVersion is missing from the resource" {
+} else = "Web App currently not configured with latest version TLS" {
     lower(input.resources[_].type) == "microsoft.web/sites"
     azure_attribute_absence["min_tls_version"]
     not azure_inner_attribute_absence["min_tls_version"]
