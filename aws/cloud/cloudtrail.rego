@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://docs.aws.amazon.com/awscloudtrail/latest/APIReference
 
 #
@@ -154,9 +158,9 @@ logging_data_events_for_s3_and_lambda_metadata := {
 # PR-AWS-CLD-CT-006
 #
 
-default cloudtrail_is_enabled= false
+default cloudtrail_is_enabled = true
 
-cloudtrail_is_enabled = true {
+cloudtrail_is_enabled = false {
     # lower(resource.Type) == "aws::cloudtrail::trail"
     count(input.trailList[_]) == 0
 }
@@ -172,6 +176,71 @@ cloudtrail_is_enabled_metadata := {
     "Language": "AWS Cloud",
     "Policy Title": "Ensure AWS CloudTrail is enabled on the account.",
     "Policy Description": "AWS CloudTrail is a service that enables governance, compliance, operational & risk auditing of the AWS account. It is a compliance and security best practice to turn on CloudTrail to get a complete audit trail of activities across various services.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudtrail.html#CloudTrail.Client.describe_trails"
+}
+
+
+#
+# PR-AWS-CLD-CT-007
+# aws::cloudtrail::trail
+
+default cloudtrail_logging_is_enabled = true
+
+cloudtrail_logging_is_enabled = false {
+    not input.IsLogging
+}
+
+cloudtrail_logging_is_enabled = false {
+    input.IsLogging == "false"
+}
+
+cloudtrail_logging_is_enabled_err = "Ensure AWS CloudTrail logging is enabled." {
+    not cloudtrail_logging_is_enabled
+}
+
+cloudtrail_logging_is_enabled_metadata := {
+    "Policy Code": "PR-AWS-CLD-CT-007",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS CloudTrail logging is enabled.",
+    "Policy Description": "It identifies the CloudTrails in which logging is disabled. AWS CloudTrail is a service that enables governance, compliance, operational & risk auditing of the AWS account. It is a compliance and security best practice to turn on logging for CloudTrail across different regions to get a complete audit trail of activities across various services. NOTE: This policy will be triggered only when you have CloudTrail configured in your AWS account and logging is disabled.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudtrail.html#CloudTrail.Client.describe_trails"
+}
+
+
+#
+# PR-AWS-CLD-CT-008
+# aws::cloudtrail::trail
+
+default cloudtrail_with_cloudwatch = true
+
+cloudtrail_with_cloudwatch = false {
+    has_property(input, "CloudWatchLogsLogGroupArn")
+    input.CloudWatchLogsLogGroupArn != ""
+    input.IsMultiRegionTrail == false
+    has_property(input, "LatestCloudWatchLogsDeliveryTime")
+}
+
+cloudtrail_with_cloudwatch = false {
+    input.IsLogging == "false"
+}
+
+cloudtrail_with_cloudwatch_err = "Ensure AWS CloudTrail logs is integrated with CloudWatch for all regions." {
+    not cloudtrail_with_cloudwatch
+}
+
+cloudtrail_with_cloudwatch_metadata := {
+    "Policy Code": "PR-AWS-CLD-CT-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS CloudTrail logs is integrated with CloudWatch for all regions.",
+    "Policy Description": "It identifies the Cloudtrails which is not integrated with cloudwatch for all regions. CloudTrail uses Amazon S3 for log file storage and delivery, so log files are stored durably. In addition to capturing CloudTrail logs within a specified S3 bucket for long term analysis, realtime analysis can be performed by configuring CloudTrail to send logs to CloudWatch Logs. For a trail that is enabled in all regions in an account, CloudTrail sends log files from all those regions to a CloudWatch Logs log group. It is recommended that CloudTrail logs be sent to CloudWatch Logs.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudtrail.html#CloudTrail.Client.describe_trails"

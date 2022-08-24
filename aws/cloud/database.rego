@@ -7,6 +7,10 @@ deprecated_engine_versions := ["10.11","10.12","10.13","11.6","11.7","11.8"]
 deprecated_postgres_versions := ["13.2","13.1","12.6","12.5","12.4","12.3","12.2","11.11","11.10","11.9","11.8","11.7","11.6","11.5","11.4","11.3","11.2","11.1","10.16","10.15","10.14","10.13","10.12","10.11","10.10","10.9","10.7","10.6","10.5","10.4","10.3","10.1","9.6.21","9.6.20","9.6.19","9.6.18","9.6.17","9.6.16","9.6.15","9.6.14","9.6.12","9.6.11","9.6.10","9.6.9","9.6.8","9.6.6","9.6.5","9.6.3","9.6.2","9.6.1","9.5","9.4","9.3"]
 available_true_choices := ["true", true]
 available_false_choices := ["false", false]
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 
 #
 # PR-AWS-CLD-RDS-001
@@ -898,6 +902,40 @@ db_instance_backup_retention_period_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_instances"
 }
 
+
+#
+# PR-AWS-CLD-RDS-031
+# aws::rds::dbcluster
+# AWS::KMS::Key
+
+default rds_cluster_encrypt_cmk = true
+
+rds_cluster_encrypt_cmk = false {
+    X := input.TEST_RDS_02[_]
+    DBCluster := X.DBClusters[_]
+    DBCluster.StorageEncrypted == true
+    Y := input.TEST_KMS[_]
+    DBCluster.KmsKeyId == Y.KeyMetadata.Arn
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+rds_cluster_encrypt_cmk_err = "Ensure AWS RDS DB cluster is not encrypted using default KMS key instead of CMK." {
+    not rds_cluster_encrypt_cmk
+}
+
+rds_cluster_encrypt_cmk_metadata := {
+    "Policy Code": "PR-AWS-CLD-RDS-031",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS RDS DB cluster is not encrypted using default KMS key instead of CMK.",
+    "Policy Description": "It identifies RDS DB(Relational Database Service Database) clusters which are encrypted using default KMS key instead of CMK (Customer Master Key). As a security best practice CMK should be used instead of default KMS key for encryption to gain the ability to rotate the key according to your own policies, delete the key, and control access to the key via KMS policies and IAM policies.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/rds.html#RDS.Client.describe_db_clusters"
+}
+
+
 #
 # PR-AWS-CLD-DAX-001
 #
@@ -965,6 +1003,38 @@ dax_cluster_endpoint_encrypt_at_rest_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/dax/describe-clusters.html"
+}
+
+
+#
+# PR-AWS-CLD-DAX-003
+# aws::dax::cluster
+# AWS::KMS::Key
+
+default dax_gs_managed_key = true
+
+dax_gs_managed_key = false {
+    X := input.TEST_DAX[_]
+    Cluster := X.Clusters[_]
+    Y := input.TEST_KMS[_]
+    Cluster.SSEDescription.KMSMasterKeyArn == Y.KeyMetadata.Arn
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+dax_gs_managed_key_err = "Ensure for AWS DAX GS-managed key is used in encryption." {
+    not dax_gs_managed_key
+}
+
+dax_gs_managed_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-DAX-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure for AWS DAX GS-managed key is used in encryption.",
+    "Policy Description": "It is to check that data at rest encryption has used firm managed CMK.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dax.html#DAX.Client.describe_clusters"
 }
 
 
@@ -1386,6 +1456,40 @@ dynamodb_kinesis_stream_metadata := {
 
 
 #
+# PR-AWS-CLD-DD-004
+# aws::dynamodb::table
+# AWS::KMS::Key
+
+default dynamodb_not_customer_managed_key = true
+
+dynamodb_not_customer_managed_key = false {
+    X := input.TEST_DD[_]
+    Y := input.TEST_KMS[_]
+    X.Table.SSEDescription.Status == "ENABLED"
+    X.Table.SSEDescription.SSEType == "KMS"
+    has_property(X.Table.SSEDescription, "KMSMasterKeyArn")
+	X.Table.SSEDescription.KMSMasterKeyArn == Y.KeyMetadata.Arn
+	Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+dynamodb_not_customer_managed_key_err = "Ensure AWS DynamoDB does not uses customer managed CMK key to ensure encryption at rest." {
+    not dynamodb_not_customer_managed_key
+}
+
+dynamodb_not_customer_managed_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-DD-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS DynamoDB does not uses customer managed CMK key to ensure encryption at rest.",
+    "Policy Description": "It checks if the default AWS Key is used for encryption. GS mandates CMK to be used for encryption.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Client.describe_table"
+}
+
+
+#
 # PR-AWS-CLD-EC-001
 #
 
@@ -1639,6 +1743,64 @@ redis_with_intransit_encryption_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_cache_clusters"
 }
 
+
+#
+# PR-AWS-CLD-EC-010
+# aws::elasticache::cachecluster
+# aws::elasticache::replicationgroup
+
+default cache_cluster_vpc = true
+
+cache_cluster_vpc = false {
+    X := input.TEST_EC_01[_]
+    CacheCluster := X.CacheClusters[_]
+    Y := input.TEST_EC[_]
+    ReplicationGroup := Y.ReplicationGroups[_]
+    MemberCluster := ReplicationGroup.MemberClusters[_]
+    contains(MemberCluster, CacheCluster.CacheClusterId)
+    CacheCluster.CacheClusterStatus == "available"
+    not CacheCluster.CacheSubnetGroupName
+}
+
+cache_cluster_vpc = false {
+    X := input.TEST_EC_01[_]
+    CacheCluster := X.CacheClusters[_]
+    Y := input.TEST_EC[_]
+    ReplicationGroup := Y.ReplicationGroups[_]
+    MemberCluster := ReplicationGroup.MemberClusters[_]
+    contains(MemberCluster, CacheCluster.CacheClusterId)
+    CacheCluster.CacheClusterStatus == "available"
+    CacheCluster.CacheSubnetGroupName == ""
+}
+
+cache_cluster_vpc = false {
+    X := input.TEST_EC_01[_]
+    CacheCluster := X.CacheClusters[_]
+    Y := input.TEST_EC[_]
+    ReplicationGroup := Y.ReplicationGroups[_]
+    MemberCluster := ReplicationGroup.MemberClusters[_]
+    contains(MemberCluster, CacheCluster.CacheClusterId)
+    CacheCluster.CacheClusterStatus == "available"
+    CacheCluster.CacheSubnetGroupName == null
+}
+
+cache_cluster_vpc_err = "Ensure AWS ElastiCache cluster is associated with VPC." {
+    not cache_cluster_vpc
+}
+
+cache_cluster_vpc_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC-010",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS ElastiCache cluster is associated with VPC.",
+    "Policy Description": "It identifies ElastiCache Clusters which are not associated with VPC. It is highly recommended to associate ElastiCache with VPC, as provides virtual network in your own logically isolated area and features such as selecting IP address range, creating subnets, and configuring route tables, network gateways, and security settings. NOTE: If you created your AWS account before 2013-12-04, you might have support for the EC2-Classic platform in some regions. AWS has deprecated the use of Amazon EC2-Classic for launching ElastiCache clusters. All current generation nodes are launched in Amazon Virtual Private Cloud only. So this policy only applies legacy ElastiCache clusters which are created using EC2-Classic.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elasticache.html#ElastiCache.Client.describe_cache_clusters"
+}
+
+
 #
 # PR-AWS-CLD-DMS-001
 #
@@ -1734,4 +1896,43 @@ dms_certificate_expiry_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/dms/describe-certificates.html"
+}
+
+
+#
+# PR-AWS-CLD-DMS-004
+# aws::dms::replicationinstance
+
+default dms_gs_managed_key = true
+
+dms_gs_managed_key = false {
+    X := input.TEST_DMS_02[_]
+    ReplicationInstance := X.ReplicationInstances[_]
+    Y := input.TEST_KMS[_]
+	ReplicationInstance.KmsKeyId == Y.KeyMetadata.KeyId
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+dms_gs_managed_key = false {
+    X := input.TEST_DMS_02[_]
+    ReplicationInstance := X.ReplicationInstances[_]
+    Y := input.TEST_KMS[_]
+	ReplicationInstance.KmsKeyId == Y.KeyMetadata.Arn
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+dms_gs_managed_key_err = "Ensure DMS replication instance in encrypted by GS provided CMK." {
+    not dms_gs_managed_key
+}
+
+dms_gs_managed_key_metadata := {
+    "Policy Code": "PR-AWS-CLD-DMS-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure DMS replication instance in encrypted by GS provided CMK.",
+    "Policy Description": "It checks if the default AWS Key is used for encryption. GS mandates CMK to be used for encryption.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dms.html#DatabaseMigrationService.Client.describe_replication_instances"
 }

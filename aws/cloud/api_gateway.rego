@@ -330,3 +330,32 @@ api_gateway_content_encoding_is_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/apigateway.html#APIGateway.Client.get_rest_api"
 }
+
+
+#
+# PR-AWS-CLD-AG-011
+# aws::apigateway::domainname
+
+default api_gateway_gs_managed_acm = true
+
+api_gateway_gs_managed_acm = false {
+    X := input.TEST_API_GATEWAY_04[_]
+    Y := input.TEST_ACM[_]
+    X.regionalCertificateArn != Y.Certificate.CertificateArn
+}
+
+api_gateway_gs_managed_acm_err = "Ensure custom domain in AWS API Gateway has GS-managed ACM certificate associated." {
+    not api_gateway_gs_managed_acm
+}
+
+api_gateway_gs_managed_acm_metadata := {
+    "Policy Code": "PR-AWS-CLD-AG-011",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure custom domain in AWS API Gateway has GS-managed ACM certificate associated.",
+    "Policy Description": "It checks for certificate details for the custom domain created for API gateway. Certificate are created in AWS ACM and can be selected for AWS Services for data in transit encryption.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/apigateway.html#APIGateway.Client.get_domain_name"
+}

@@ -427,3 +427,36 @@ ec2_instance_configured_with_instance_metadata_service_v2_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_instances"
 }
+
+
+#
+# PR-AWS-CLD-EC2-014
+# aws::ec2::instance
+# aws::ec2::vpcendpoint
+
+default ec2_vpcendpoint = true
+
+ec2_vpcendpoint = false {
+    X := input.TEST_EC2_01[_]
+    Reservation := X.Reservations[_]
+    Instance := Reservation.Instances[_]
+    Y := input.TEST_EC2_06[_]
+    VpcEndpoint := Y.VpcEndpoints[_]
+    Instance.VpcId != VpcEndpoint.VpcId
+}
+
+ec2_vpcendpoint_err = "Ensure EC2 is communicating with other services outside VPC using VPC-endpoint." {
+    not ec2_vpcendpoint
+}
+
+ec2_vpcendpoint_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-014",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EC2 is communicating with other services outside VPC using VPC-endpoint.",
+    "Policy Description": "It checks if a VPC endpoint is configured for EC2 to communicate to other AWs Services. Communication between AWS services by default traverses the internet to the service endpoints. This can be routed via the VPC by the usage of VPC endpoints.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_instances"
+}
