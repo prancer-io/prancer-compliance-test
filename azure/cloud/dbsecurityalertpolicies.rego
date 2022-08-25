@@ -223,7 +223,7 @@ dbsec_threat_alert_metadata := {
 
 default sql_alert = null
 
-azure_issue["sql_alert"] {
+azure_attribute_absence["sql_alert"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
     not resource.properties.emailAccountAdmins
