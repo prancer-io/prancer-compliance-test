@@ -296,3 +296,121 @@ eks_not_default_vpc_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster"
 }
+
+
+#
+# PR-AWS-CLD-EKS-012
+# aws::eks::cluster
+# aws::ec2::securitygroup
+
+default eks_security_groups = true
+
+eks_security_groups = false {
+    X := input.TEST_EKS[_]
+    Y := input.TEST_SG[_]
+    SecurityGroup := Y.SecurityGroups[_]
+    IpPermission := SecurityGroup.IpPermissions[_]
+    IpPermission.FromPort != 443
+    IpPermission.IpProtocol == "tcp"
+    X.cluster.resourcesVpcConfig.securityGroupIds == SecurityGroup.GroupId
+}
+
+eks_security_groups = false {
+    X := input.TEST_EKS[_]
+    Y := input.TEST_SG[_]
+    SecurityGroup := Y.SecurityGroups[_]
+    IpPermission := SecurityGroup.IpPermissions[_]
+    IpPermission.ToPort != 443
+    IpPermission.IpProtocol == "tcp"
+    X.cluster.resourcesVpcConfig.securityGroupIds == SecurityGroup.GroupId
+}
+
+eks_security_groups_err = "Ensure security groups configured with EKS cluster only allows inbound on TCP port 443 (HTTPS)." {
+    not eks_security_groups
+}
+
+eks_security_groups_metadata := {
+    "Policy Code": "PR-AWS-CLD-EKS-012",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure security groups configured with EKS cluster only allows inbound on TCP port 443 (HTTPS).",
+    "Policy Description": "It checks for a security group rule for a specific port i.e. 443.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_security_groups"
+}
+
+
+#
+# PR-AWS-CLD-EKS-013
+# aws::eks::cluster
+
+default eks_creation = true
+
+eks_creation = false {
+    created_timestamp := round(input.cluster.createdAt)
+    current_date_timestamp := time.now_ns()
+    created_timestamp_nanosecond := created_timestamp * 1000000000
+    (current_date_timestamp - created_timestamp_nanosecond) > 7776000000000000
+}
+
+eks_creation_err = "Ensure AWS EKS images are not older than 90 days." {
+    not eks_creation
+}
+
+eks_creation_metadata := {
+    "Policy Code": "PR-AWS-CLD-EKS-013",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS EKS images are not older than 90 days.",
+    "Policy Description": "It checks AWS EKS images are not older than 90 days.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster",
+}
+
+
+#
+# PR-AWS-CLD-EKS-014
+# aws::eks::cluster
+# aws::ec2::securitygroup
+
+default eks_overly_permissive_security_groups = true
+
+eks_overly_permissive_security_groups = false {
+    X := input.TEST_EKS[_]
+    Y := input.TEST_SG[_]
+    SecurityGroup := Y.SecurityGroups[_]
+    IpPermission := SecurityGroup.IpPermissions[_]
+    IpPermission.IpRanges.CidrIp == "0.0.0.0/0"
+    X.cluster.resourcesVpcConfig.securityGroupIds == SecurityGroup.GroupId
+}
+
+eks_overly_permissive_security_groups = false {
+    X := input.TEST_EKS[_]
+    Y := input.TEST_SG[_]
+    SecurityGroup := Y.SecurityGroups[_]
+    IpPermission := SecurityGroup.IpPermissions[_]
+    IpPermission.Ipv6Ranges.CidrIpv6 == "::/0"
+    X.cluster.resourcesVpcConfig.securityGroupIds == SecurityGroup.GroupId
+}
+
+eks_overly_permissive_security_groups_err = "Ensure AWS EKS cluster security group is not overly permissive to all traffic." {
+    not eks_overly_permissive_security_groups
+}
+
+eks_overly_permissive_security_groups_metadata := {
+    "Policy Code": "PR-AWS-CLD-EKS-014",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS EKS cluster security group is not overly permissive to all traffic.",
+    "Policy Description": "It identifies EKS cluster Security groups that are overly permissive to all traffic. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network. Review your list of security group rules to ensure that your resources are not exposed. As a best practice, restrict traffic solely from known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_security_groups"
+}

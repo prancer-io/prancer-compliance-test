@@ -874,3 +874,107 @@ elbv2_ssl_negotiation_policy_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners"
 }
+
+
+#
+# PR-AWS-CLD-ELB-028
+# aws::elasticloadbalancingv2::listener
+# aws::certificatemanager::certificate
+
+default elbv2_tls_certificate = true
+
+elbv2_tls_certificate = false {
+    X := input.TEST_ELB_02[_]
+    Listener := X.Listeners[_]
+    elb_Certificate := Listener.Certificates[_]
+    Y := input.TEST_ACM[_]
+    elb_Certificate.CertificateArn == Y.Certificate.CertificateArn
+}
+
+elbv2_tls_certificate_err = "Ensure AWS ELB has GS created TLS certificate attached to it via ACM." {
+    not elbv2_tls_certificate
+}
+
+elbv2_tls_certificate_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-028",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS ELB has GS created TLS certificate attached to it via ACM.",
+    "Policy Description": "It checks if the the ELB handles the data in transit encryption via a GS managed ACM certificate.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners"
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm.html#ACM.Client.describe_certificate"
+}
+
+
+#
+# PR-AWS-CLD-ELB-029
+# aws::elasticloadbalancingv2::listener
+# aws::elasticloadbalancingv2::loadbalancer
+
+default elbv2_tls_certificate = true
+
+elbv2_tls_certificate = false {
+    X := input.TEST_ELB_06[_]
+    LoadBalancer := X.LoadBalancers[_]
+    LoadBalancer.Type == "network"
+    Y := input.TEST_ELB_02[_]
+    Listener := Y.Listeners[_]
+    LoadBalancer.LoadBalancerArn := Listener.LoadBalancerArn
+    Listener.Protocol != "TLS"
+}
+
+elbv2_tls_certificate_err = "Ensure Network ELB is using TLS listeners." {
+    not elbv2_tls_certificate
+}
+
+elbv2_tls_certificate_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-029",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure Network ELB is using TLS listeners.",
+    "Policy Description": "It checks for encryption in transit configured for Network ELB.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners"
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers"
+}
+
+
+#
+# PR-AWS-CLD-ELB-030
+# aws::elasticloadbalancingv2::listener
+# aws::elasticloadbalancingv2::loadbalancer
+
+default elbv2_check_certificate = true
+
+elbv2_check_certificate = false {
+    X := input.TEST_ELB_06[_]
+    LoadBalancer := X.LoadBalancers[_]
+    LoadBalancer.Type == "application"
+    Y := input.TEST_ELB_02[_]
+    Listener := Y.Listeners[_]
+    LoadBalancer.LoadBalancerArn := Listener.LoadBalancerArn
+    Certificate := Listener.Certificates[_]
+    not has_property(Certificate, "CertificateArn")
+}
+
+elbv2_check_certificate_err = "Ensure AWS application ELB has TLS certificate attached to it." {
+    not elbv2_check_certificate
+}
+
+elbv2_check_certificate_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-030",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS application ELB has TLS certificate attached to it.",
+    "Policy Description": "It checks if the the ALB handles the data in transit encryption via a GS managed ACM certificate.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners"
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers"
+}
