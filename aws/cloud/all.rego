@@ -476,6 +476,33 @@ glue_cloudwatch_cmk_key_metadata := {
 
 
 #
+# PR-AWS-CLD-GLUE-006
+# aws::glue::datacatalogencryptionsettings
+
+default glue_catalog_password = true
+
+glue_catalog_password = false {
+    not input.DataCatalogEncryptionSettings.ConnectionPasswordEncryption
+}
+
+glue_catalog_password_err = "Ensure connection passwords for AWS Glue are encrypted." {
+    not glue_catalog_password
+}
+
+glue_catalog_password_metadata := {
+    "Policy Code": "PR-AWS-CLD-GLUE-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure connection passwords for AWS Glue are encrypted.",
+    "Policy Description": "It control is to check that the passwords which are stored in the Data Catalog connection and are used when AWS Glue connects to a Java Database Connectivity (JDBC) data store, are encrypted.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue.html#Glue.Client.get_data_catalog_encryption_settings"
+}
+
+
+#
 # PR-AWS-CLD-AS-001
 #
 
@@ -906,12 +933,12 @@ default kinesis_encryption = true
 
 kinesis_encryption = false {
     # lower(resource.Type) == "aws::kinesis::stream"
-    not input.StreamDescription.StreamDescription.EncryptionType
+    not input.StreamDescription.EncryptionType
 }
 
 kinesis_encryption = false {
     # lower(resource.Type) == "aws::kinesis::stream"
-    lower(input.StreamDescription.StreamDescription.EncryptionType) == "none"
+    lower(input.StreamDescription.EncryptionType) == "none"
 }
 
 kinesis_encryption_err = "AWS Kinesis streams are not encrypted using Server Side Encryption" {
@@ -1004,6 +1031,34 @@ kinesis_gs_kms_key_metadata := {
     "Language": "AWS Cloud",
     "Policy Title": "Ensure Kinesis streams are encrypted using dedicated GS managed KMS key.",
     "Policy Description": "It is to check only GS managed CMKs are used to encrypt Kinesis Data Streams.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kinesis.html#Kinesis.Client.describe_stream"
+}
+
+
+#
+# PR-AWS-CLD-KNS-004
+# aws::kinesis::stream
+
+default kinesis_shard_level_metrics = true
+
+kinesis_shard_level_metrics = false {
+    Enhanced_Monitoring := input.StreamDescription.EnhancedMonitoring[_]
+    not has_property(Enhanced_Monitoring, "ShardLevelMetrics")
+}
+
+kinesis_shard_level_metrics_err = "Ensure AWS Kinesis has shard-level metrics enabled (for critical applications)." {
+    not kinesis_shard_level_metrics
+}
+
+kinesis_shard_level_metrics_metadata := {
+    "Policy Code": "PR-AWS-CLD-KNS-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Kinesis has shard-level metrics enabled (for critical applications).",
+    "Policy Description": "It is to ensure enhanced Kinesis stream monitoring for shard-level metrics is enabled in order to increase visibility into kinesis streams performance.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kinesis.html#Kinesis.Client.describe_stream"

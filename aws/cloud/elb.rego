@@ -904,7 +904,7 @@ elbv2_tls_certificate_metadata := {
     "Policy Description": "It checks if the the ELB handles the data in transit encryption via a GS managed ACM certificate.",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners"
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm.html#ACM.Client.describe_certificate"
 }
 
@@ -939,7 +939,7 @@ elbv2_tls_certificate_metadata := {
     "Policy Description": "It checks for encryption in transit configured for Network ELB.",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners"
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers"
 }
 
@@ -975,6 +975,88 @@ elbv2_check_certificate_metadata := {
     "Policy Description": "It checks if the the ALB handles the data in transit encryption via a GS managed ACM certificate.",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners"
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers"
+}
+
+
+#
+# PR-AWS-CLD-ELB-031
+# aws::ec2::securitygroup
+# aws::elasticloadbalancingv2::loadbalancer
+
+default elbv2_egress_rule = true
+
+elbv2_egress_rule = false {
+    X := input.TEST_ELB_06[_]
+    LoadBalancer := X.LoadBalancers[_]
+    elb_security_group := LoadBalancer.SecurityGroups[_]
+    Y := input.TEST_SG[_]
+    SecurityGroup := Y.SecurityGroups[_]
+    IpPermissions_Egress := SecurityGroup.IpPermissionsEgress[_]
+    IpRange := IpPermissions_Egress.IpRanges[_]
+    IpRange.CidrIp == "0.0.0.0/0"
+    elb_security_group == SecurityGroup.GroupId
+}
+
+elbv2_egress_rule_err = "Ensure egress rule for AWS ELB security group is not set to '0.0.0.0/0'." {
+    not elbv2_egress_rule
+}
+
+elbv2_egress_rule_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-031",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure egress rule for AWS ELB security group is not set to '0.0.0.0/0'.",
+    "Policy Description": "It checks for inappropriate usage i.e. 0.0.0.0/0 rule egress rule in the security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_security_groups",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers"
+}
+
+
+#
+# PR-AWS-CLD-ELB-032
+# aws::ec2::securitygroup
+# aws::elasticloadbalancingv2::loadbalancer
+
+default elbv2_invalid_security_group = true
+
+elbv2_invalid_security_group = false {
+    X := input.TEST_ELB_06[_]
+    LoadBalancer := X.LoadBalancers[_]
+    elb_security_group := LoadBalancer.SecurityGroups[_]
+    Y := input.TEST_SG[_]
+    SecurityGroup := Y.SecurityGroups[_]
+    count(SecurityGroup.IpPermissions) == 0
+    elb_security_group == SecurityGroup.GroupId
+}
+
+elbv2_invalid_security_group = false {
+    X := input.TEST_ELB_06[_]
+    LoadBalancer := X.LoadBalancers[_]
+    elb_security_group := LoadBalancer.SecurityGroups[_]
+    Y := input.TEST_SG[_]
+    SecurityGroup := Y.SecurityGroups[_]
+    count(SecurityGroup.IpPermissionsEgress) == 0
+    elb_security_group == SecurityGroup.GroupId
+}
+
+elbv2_invalid_security_group_err = "Ensure AWS Elastic Load Balancer v2 (ELBv2) is not configured with invalid security groups." {
+    not elbv2_invalid_security_group
+}
+
+elbv2_invalid_security_group_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-032",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Elastic Load Balancer v2 (ELBv2) is not configured with invalid security groups.",
+    "Policy Description": "It identifies Elastic Load Balancer v2 (ELBv2) that do not have security groups with a valid inbound or outbound rule. A security group with no inbound/outbound rule will deny all incoming/outgoing requests. ELBv2 security groups should have at least one inbound and outbound rule, ELBv2 with no inbound/outbound permissions will deny all traffic incoming/outgoing to/from any resources configured behind that ELBv2; in other words, the ELBv2 is useless without inbound and outbound permissions.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_security_groups",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers"
 }

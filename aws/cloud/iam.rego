@@ -1709,3 +1709,32 @@ sagemaker_not_overly_permissive_to_all_traffic_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
 }
+
+#
+# PR-AWS-CLD-IAM-047
+# aws::iam::policy
+# aws::iam::user
+
+default iam_deprecated_policies = true
+
+iam_deprecated_policies = false {
+    policy := input.AttachedPolicies[_]
+    policy.PolicyArn == "arn:aws:iam::aws:policy/AmazonElasticTranscoderFullAccess"
+
+}
+
+iam_deprecated_policies_err = "Ensure AWS IAM deprecated managed policies is not in use by User." {
+    not iam_deprecated_policies
+}
+
+iam_deprecated_policies_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-047",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM deprecated managed policies is not in use by User.",
+    "Policy Description": "It checks for any usage of deprecated AWS IAM managed policies and returns an alert if it finds one in your cloud resources. When AWS deprecate an IAM managed policy, a new alternative is released with improved access restrictions. Existing IAM users and roles can continue to use the previous policy without interruption, however new IAM users and roles will use the new replacement policy. Before you migrate any user or role to the new replacement policy, we recommend you review their differences in the Policy section of AWS IAM console. If you require one or more of the removed permissions, please add them separately to any user or role. List of deprecated AWS IAM managed policies:AmazonElasticTranscoderFullAccess (replaced by AmazonElasticTranscoder_FullAccess).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_attached_user_policies"
+}

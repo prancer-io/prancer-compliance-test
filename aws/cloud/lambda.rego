@@ -153,3 +153,67 @@ lambda_dlq_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig"
 }
+
+
+#
+# PR-AWS-CLD-LMD-009
+# aws::lambda::function
+# aws::ec2::vpc
+
+default lambda_default_vpc = true
+
+lambda_default_vpc = false {
+    X := input.TEST_EC2_04[_]
+    Vpc_ec2 := X.Vpcs[_]
+    Vpc_ec2.IsDefault == true
+    Y := input.TEST_LAMBDA[_]
+    Y.Configuration.VpcConfig.VpcId == Vpc_ec2.VpcId
+}
+
+lambda_default_vpc_err = "Ensure AWS Lambda function is not launched in default VPC." {
+    not lambda_default_vpc
+}
+
+lambda_default_vpc_metadata := {
+    "Policy Code": "PR-AWS-CLD-LMD-009",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS Lambda function is not launched in default VPC.",
+    "Policy Description": "It is to ensure that Lambda which launched within VPC is only using GS managed VPC instead of default VPC.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda.html#Lambda.Client.get_function"
+}
+
+
+#
+# PR-AWS-CLD-LMD-010
+# aws::lambda::function
+# aws::ec2::vpcendpoint
+
+default lambda_vpc_endpoint = true
+
+lambda_vpc_endpoint = false {
+    X := input.TEST_LAMBDA[_]
+    Y := input.TEST_EC2_06[_]
+    VpcEndpoint := Y.VpcEndpoints[_]
+    X.Configuration.VpcConfig.VpcId != VpcEndpoint.VpcId
+}
+
+lambda_vpc_endpoint_err = "Ensure AWS Lambda is using vpc endpoint." {
+    not lambda_vpc_endpoint
+}
+
+lambda_vpc_endpoint_metadata := {
+    "Policy Code": "PR-AWS-CLD-LMD-010",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS Lambda is using vpc endpoint.",
+    "Policy Description": "It is to check that lambda is using VPC endpoint to interact with services which belong to VPC. Thus ensuring traffic is only traversing to secured network.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda.html#Lambda.Client.get_function",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_vpc_endpoints"
+}
