@@ -1060,3 +1060,48 @@ elbv2_invalid_security_group_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_security_groups",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers"
 }
+
+
+#
+# PR-AWS-CLD-ELB-033
+# aws::elasticloadbalancingv2::listener
+# aws::elasticloadbalancingv2::loadbalancer
+
+default nlb_v2_security_policy = true
+
+nlb_v2_security_policy = false {
+    X := input.TEST_ELB_06[_]
+    LoadBalancer := X.LoadBalancers[_]
+    LoadBalancer.Type == "network"
+    Y := input.TEST_ELB_02[_]
+    Listener := Y.Listeners[_]
+    Listener.Protocol == "TLS"
+    Listener.SslPolicy != "ELBSecurityPolicy-TLS-1-2-Ext-2018-06" 
+}
+
+nlb_v2_security_policy = false {
+    X := input.TEST_ELB_06[_]
+    LoadBalancer := X.LoadBalancers[_]
+    LoadBalancer.Type == "network"
+    Y := input.TEST_ELB_02[_]
+    Listener := Y.Listeners[_]
+    Listener.Protocol == "TLS"
+    Listener.SslPolicy != "ELBSecurityPolicy-FS-1-2-Res-2020-10" 
+}
+
+nlb_v2_security_policy_err = "Ensure AWS Network Load Balancer (NLB) is using the latest predefined security policy." {
+    not nlb_v2_security_policy
+}
+
+nlb_v2_security_policy_metadata := {
+    "Policy Code": "PR-AWS-CLD-ELB-033",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Network Load Balancer (NLB) is using the latest predefined security policy.",
+    "Policy Description": "It identifies Network Load Balancers (NLBs) are not using the latest predefined security policy. A security policy is a combination of protocols and ciphers. The protocol establishes a secure connection between a client and a server and ensures that all data passed between the client and your load balancer is private. A cipher is an encryption algorithm that uses encryption keys to create a coded message. So it is recommended to use the latest predefined security policy which uses only secured protocol and ciphers. We recommend using ELBSecurityPolicy-FS-1-2-Res-2020-10 policy if you require Forward Secrecy (FS) and use ELBSecurityPolicy-TLS-1-2-Ext-2018-06 policy to meet compliance and security standards that require disabling certain TLS protocol versions or to support legacy clients that require deprecated ciphers. For more details: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers"
+}

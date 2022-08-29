@@ -3037,6 +3037,44 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-ES-017",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-017",
+                            "eval": "data.rule.es_advanced_security",
+                            "message": "data.rule.es_advanced_security_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_017.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS OpenSearch Fine-grained access control is enabled.",
+                    "description": "It identifies AWS OpenSearch which has Fine-grained access control disabled. Fine-grained access control offers additional ways of controlling access to your data on AWS OpenSearch Service. It is highly recommended enabling fine-grained access control to protect the data on your domain. For more information, please follow the URL given below,https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "CMMC",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "NIST 800",
+                                "NIST SP",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "elasticsearch"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-S3-001",
                     "masterSnapshotId": [
                         "TEST_S3"
@@ -5773,6 +5811,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-MSK-008",
+                    "masterSnapshotId": [
+                        "TEST_MSK",
+                        "TEST_KMS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MSK-008",
+                            "eval": "data.rule.msk_data_is_encrypted",
+                            "message": "data.rule.msk_data_is_encrypted_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kafka.html#Kafka.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MSK_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS MSK data is encrypted using GS managed key.",
+                    "description": "It is to check that MSK data is enabled with data at rest encryption using firm-managed CMK only.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "msk",
+                                "kms"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-ELB-001",
                     "masterSnapshotId": [
                         "TEST_ELB_04"
@@ -7328,6 +7400,73 @@
                             "service": [
                                 "elb",
                                 "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ELB-033",
+                    "masterSnapshotId": [
+                        "TEST_ELB_06",
+                        "TEST_ELB_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ELB-033",
+                            "eval": "data.rule.nlb_v2_security_policy",
+                            "message": "data.rule.nlb_v2_security_policy_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ELB_033.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS Network Load Balancer (NLB) is using the latest predefined security policy.",
+                    "description": "It identifies Network Load Balancers (NLBs) are not using the latest predefined security policy. A security policy is a combination of protocols and ciphers. The protocol establishes a secure connection between a client and a server and ensures that all data passed between the client and your load balancer is private. A cipher is an encryption algorithm that uses encryption keys to create a coded message. So it is recommended to use the latest predefined security policy which uses only secured protocol and ciphers. We recommend using ELBSecurityPolicy-FS-1-2-Res-2020-10 policy if you require Forward Secrecy (FS) and use ELBSecurityPolicy-TLS-1-2-Ext-2018-06 policy to meet compliance and security standards that require disabling certain TLS protocol versions or to support legacy clients that require deprecated ciphers. For more details: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "CSA CCM",
+                                "HITRUST v.9.4.2-Control Reference:10.a",
+                                "HITRUST",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MAS TRM 2021-7.2.1",
+                                "MAS TRM 2021-7.2.2",
+                                "MAS TRM",
+                                "NIST CSF-PR.IP-1",
+                                "NIST SP 800-171 Revision 2-3.4.2",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS v3.2.1-6.3",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "elb"
                             ]
                         }
                     ]
@@ -13092,6 +13231,74 @@
                     "severity": "Medium",
                     "title": "Ensure AWS Lambda is using vpc endpoint.",
                     "description": "It is to check that lambda is using VPC endpoint to interact with services which belong to VPC. Thus ensuring traffic is only traversing to secured network.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HITRUST",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "lambda",
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-LMD-011",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA",
+                        "TEST_EC2_04"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-011",
+                            "eval": "data.rule.lambda_runs_in_vpc",
+                            "message": "data.rule.lambda_runs_in_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda.html#Lambda.Client.get_function' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_011.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS lambda runs in GS managed VPC.",
+                    "description": "It is to ensure that Lambda which launched within VPC is only using GS managed VPC instead of default VPC.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HITRUST",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "lambda",
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-LMD-012",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA",
+                        "TEST_EC2_04"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-012",
+                            "eval": "data.rule.lambda_outbound_rule",
+                            "message": "data.rule.lambda_outbound_rule_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda.html#Lambda.Client.get_function' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS lambda outbound rule does not allow '0.0.0.0/0'.",
+                    "description": "It is to check that egress rule allowing traffic to everyone in in the internet.",
                     "tags": [
                         {
                             "cloud": "AWS",

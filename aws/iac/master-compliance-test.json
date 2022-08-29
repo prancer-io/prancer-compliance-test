@@ -3856,6 +3856,47 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CFR-ES-017",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ES-017",
+                            "eval": "data.rule.es_advanced_security",
+                            "message": "data.rule.es_advanced_security_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_ES_017.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS OpenSearch Fine-grained access control is enabled.",
+                    "description": "It identifies AWS OpenSearch which has Fine-grained access control disabled. Fine-grained access control offers additional ways of controlling access to your data on AWS OpenSearch Service. It is highly recommended enabling fine-grained access control to protect the data on your domain. For more information, please follow the URL given below,https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "APRA",
+                                "CMMC",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "NIST 800",
+                                "NIST SP",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::elasticsearch::domain"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CFR-NACL-001",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"

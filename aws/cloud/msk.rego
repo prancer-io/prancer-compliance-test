@@ -213,3 +213,36 @@ msk_public_access_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kafka.html#Kafka.Client.describe_cluster"
 }
+
+
+#
+# PR-AWS-CLD-MSK-008
+# aws::msk::cluster
+# aws::kms::key
+
+
+default msk_data_is_encrypted = true
+
+msk_data_is_encrypted = false {
+    X := input.TEST_MSK[_]
+    Y := input.TEST_KMS[_]
+    X.ClusterInfo.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId == Y.KeyMetadata.KeyId
+    Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+msk_data_is_encrypted_err = "Ensure AWS MSK data is encrypted using GS managed key." {
+    not msk_data_is_encrypted
+}
+
+msk_data_is_encrypted_metadata := {
+    "Policy Code": "PR-AWS-CLD-MSK-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS MSK data is encrypted using GS managed key.",
+    "Policy Description": "It is to check that MSK data is enabled with data at rest encryption using firm-managed CMK only.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kafka.html#Kafka.Client.describe_cluster",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kms.html#KMS.Client.describe_key"
+}
