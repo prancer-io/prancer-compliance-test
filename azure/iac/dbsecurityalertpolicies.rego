@@ -231,7 +231,7 @@ dbsec_threat_alert_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
+    "Policy Title": "Azure SQL database threat detection alerts should be enabled for all threat types",
     "Policy Description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
     "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
     "Policy Help URL": "",
@@ -244,23 +244,12 @@ dbsec_threat_alert_metadata := {
 
 default sql_alert = null
 
-azure_issue["sql_alert"] {
+azure_attribute_absence["sql_alert"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     not sql_resources.properties.emailAccountAdmins
-}
-
-source_path[{"sql_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/databases"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    not sql_resources.properties.emailAccountAdmins
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","emailAccountAdmins"]]
-    }
 }
 
 azure_issue["sql_alert"] {
@@ -269,18 +258,6 @@ azure_issue["sql_alert"] {
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     sql_resources.properties.emailAccountAdmins != true
-}
-
-
-source_path[{"sql_alert":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/databases"
-    sql_resources := resource.resources[j]
-    lower(sql_resources.type) == "securityalertpolicies"
-    not sql_resources.properties.emailAccountAdmins
-    metadata:= {
-        "resource_path": [["resources",i,"resources",j,"properties","emailAccountAdmins"]]
-    }
 }
 
 sql_alert {
@@ -292,11 +269,9 @@ sql_alert {
     not azure_issue["sql_alert"]
 }
 
-
 sql_alert = false {
     azure_attribute_absence["sql_alert"]
 }
-
 
 sql_alert = false {
     azure_issue["sql_alert"]

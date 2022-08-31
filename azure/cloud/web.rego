@@ -21,20 +21,17 @@ azure_attribute_absence ["https_only"] {
     not resource.properties.httpsOnly
 }
 
-
 azure_issue ["https_only"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.httpsOnly != true
 }
 
-
 https_only {
     lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["https_only"]
     not azure_issue["https_only"]
 }
-
 
 https_only = false {
     azure_attribute_absence["https_only"]
@@ -123,7 +120,7 @@ min_tls_version {
     not azure_inner_issue["min_tls_version"]
 }
 
-min_tls_version = false {
+min_tls_version {
     lower(input.resources[_].type) == "microsoft.web/sites"
     azure_attribute_absence["min_tls_version"]
     azure_inner_attribute_absence["min_tls_version"]
@@ -131,6 +128,8 @@ min_tls_version = false {
 
 min_tls_version = false {
     lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["min_tls_version"]
+    not azure_inner_attribute_absence["min_tls_version"]
     azure_issue["min_tls_version"]
     azure_inner_issue["min_tls_version"]
 }
@@ -138,30 +137,32 @@ min_tls_version = false {
 min_tls_version = false {
     lower(input.resources[_].type) == "microsoft.web/sites"
     azure_inner_attribute_absence["min_tls_version"]
+    not azure_attribute_absence["min_tls_version"]
     azure_issue["min_tls_version"]
 }
 
 min_tls_version = false {
     lower(input.resources[_].type) == "microsoft.web/sites"
     azure_attribute_absence["min_tls_version"]
+    not azure_inner_attribute_absence["min_tls_version"]
     azure_inner_issue["min_tls_version"]
 }
 
 min_tls_version_err = "Web App currently not configured with latest version TLS" {
     lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["min_tls_version"]
+    not azure_inner_attribute_absence["min_tls_version"]
     azure_issue["min_tls_version"]
     azure_inner_issue["min_tls_version"]
-} else = "microsoft.web/sites resource property config.minTlsVersion is missing from the resource" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
-    azure_attribute_absence["min_tls_version"]
-    azure_inner_attribute_absence["min_tls_version"]
-} else = "microsoft.web/sites resource property config.minTlsVersion is missing from the resource" {
+} else = "Web App currently not configured with latest version TLS" {
     lower(input.resources[_].type) == "microsoft.web/sites"
     azure_inner_attribute_absence["min_tls_version"]
+    not azure_attribute_absence["min_tls_version"]
     azure_issue["min_tls_version"]
-} else = "microsoft.web/sites resource property config.minTlsVersion is missing from the resource" {
+} else = "Web App currently not configured with latest version TLS" {
     lower(input.resources[_].type) == "microsoft.web/sites"
     azure_attribute_absence["min_tls_version"]
+    not azure_inner_attribute_absence["min_tls_version"]
     azure_inner_issue["min_tls_version"]
 }
 
@@ -423,6 +424,8 @@ web_service_cors_not_allowing_all {
 
 web_service_cors_not_allowing_all = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_cors_not_allowing_all"]
+    not azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
     azure_issue["web_service_cors_not_allowing_all"]
     azure_inner_issue["web_service_cors_not_allowing_all"]
 }
@@ -430,26 +433,32 @@ web_service_cors_not_allowing_all = false {
 web_service_cors_not_allowing_all = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
+    not azure_attribute_absence["web_service_cors_not_allowing_all"]
     azure_issue["web_service_cors_not_allowing_all"]
 }
 
 web_service_cors_not_allowing_all = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_attribute_absence["web_service_cors_not_allowing_all"]
+    not azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
     azure_inner_issue["web_service_cors_not_allowing_all"]
 }
 
 web_service_cors_not_allowing_all_err = "CORS configuration is currently allowing every resources to access Azure Web Service" {
     lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_cors_not_allowing_all"]
+    not azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
     azure_issue["web_service_cors_not_allowing_all"]
     azure_inner_issue["web_service_cors_not_allowing_all"]
 } else = "CORS configuration is currently allowing every resources to access Azure Web Service" {
     lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
+    not azure_attribute_absence["web_service_cors_not_allowing_all"]
     azure_issue["web_service_cors_not_allowing_all"]
 } else = "CORS configuration is currently allowing every resources to access Azure Web Service" {
     lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_attribute_absence["web_service_cors_not_allowing_all"]
+    not azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
     azure_inner_issue["web_service_cors_not_allowing_all"]
 }
 
@@ -924,6 +933,8 @@ web_service_remote_debugging_disabled {
 
 web_service_remote_debugging_disabled = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_remote_debugging_disabled"]
+    not azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
     azure_issue["web_service_remote_debugging_disabled"]
     azure_inner_issue["web_service_remote_debugging_disabled"]
 }
@@ -931,26 +942,32 @@ web_service_remote_debugging_disabled = false {
 web_service_remote_debugging_disabled = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
+    not azure_attribute_absence["web_service_remote_debugging_disabled"]
     azure_issue["web_service_remote_debugging_disabled"]
 }
 
 web_service_remote_debugging_disabled = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_attribute_absence["web_service_remote_debugging_disabled"]
+    not azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
     azure_inner_issue["web_service_remote_debugging_disabled"]
 }
 
 web_service_remote_debugging_disabled_err = "Azure Web Service remote debugging currently not disabled" {
     lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_remote_debugging_disabled"]
+    not azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
     azure_issue["web_service_remote_debugging_disabled"]
     azure_inner_issue["web_service_remote_debugging_disabled"]
 } else = "Azure Web Service remote debugging currently not disabled" {
     lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
+    not azure_attribute_absence["web_service_remote_debugging_disabled"]
     azure_issue["web_service_remote_debugging_disabled"]
 } else = "Azure Web Service remote debugging currently not disabled" {
     lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_attribute_absence["web_service_remote_debugging_disabled"]
+    not azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
     azure_inner_issue["web_service_remote_debugging_disabled"]
 }
 
@@ -1162,6 +1179,8 @@ web_service_net_framework_latest {
 
 web_service_net_framework_latest = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_net_framework_latest"]
+    not azure_inner_attribute_absence["web_service_net_framework_latest"]
     azure_issue["web_service_net_framework_latest"]
     azure_inner_issue["web_service_net_framework_latest"]
 }
@@ -1169,26 +1188,32 @@ web_service_net_framework_latest = false {
 web_service_net_framework_latest = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_inner_attribute_absence["web_service_net_framework_latest"]
+    not azure_attribute_absence["web_service_net_framework_latest"]
     azure_issue["web_service_net_framework_latest"]
 }
 
 web_service_net_framework_latest = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_attribute_absence["web_service_net_framework_latest"]
+    not azure_inner_attribute_absence["web_service_net_framework_latest"]
     azure_inner_issue["web_service_net_framework_latest"]
 }
 
 web_service_net_framework_latest_err = "Azure web Service currently dont have latest version of Dot Net Framework" {
     lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_net_framework_latest"]
+    not azure_inner_attribute_absence["web_service_net_framework_latest"]
     azure_issue["web_service_net_framework_latest"]
     azure_inner_issue["web_service_net_framework_latest"]
 } else = "Azure web Service currently dont have latest version of Dot Net Framework" {
     lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_inner_attribute_absence["web_service_net_framework_latest"]
+    not azure_attribute_absence["web_service_net_framework_latest"]
     azure_issue["web_service_net_framework_latest"]
 } else = "Azure web Service currently dont have latest version of Dot Net Framework" {
     lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_attribute_absence["web_service_net_framework_latest"]
+    not azure_inner_attribute_absence["web_service_net_framework_latest"]
     azure_inner_issue["web_service_net_framework_latest"]
 }
 
@@ -1279,6 +1304,8 @@ web_service_php_version_latest {
 
 web_service_php_version_latest = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_php_version_latest"]
+    not azure_inner_attribute_absence["web_service_php_version_latest"]
     azure_issue["web_service_php_version_latest"]
     azure_inner_issue["web_service_php_version_latest"]
 }
@@ -1286,26 +1313,32 @@ web_service_php_version_latest = false {
 web_service_php_version_latest = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_inner_attribute_absence["web_service_php_version_latest"]
+    not azure_attribute_absence["web_service_php_version_latest"]
     azure_issue["web_service_php_version_latest"]
 }
 
 web_service_php_version_latest = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_attribute_absence["web_service_php_version_latest"]
+    not azure_inner_attribute_absence["web_service_php_version_latest"]
     azure_inner_issue["web_service_php_version_latest"]
 }
 
 web_service_php_version_latest_err = "Azure Web Service currently dont have latest version of PHP" {
     lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_php_version_latest"]
+    not azure_inner_attribute_absence["web_service_php_version_latest"]
     azure_issue["web_service_php_version_latest"]
     azure_inner_issue["web_service_php_version_latest"]
 } else = "Azure Web Service currently dont have latest version of PHP" {
     lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_inner_attribute_absence["web_service_php_version_latest"]
+    not azure_attribute_absence["web_service_php_version_latest"]
     azure_issue["web_service_php_version_latest"]
 } else = "Azure Web Service currently dont have latest version of PHP" {
     lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_attribute_absence["web_service_php_version_latest"]
+    not azure_inner_attribute_absence["web_service_php_version_latest"]
     azure_inner_issue["web_service_php_version_latest"]
 }
 
@@ -1399,6 +1432,8 @@ web_service_python_version_latest {
 
 web_service_python_version_latest = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_python_version_latest"]
+    not azure_inner_attribute_absence["web_service_python_version_latest"]
     azure_issue["web_service_python_version_latest"]
     azure_inner_issue["web_service_python_version_latest"]
 }
@@ -1406,26 +1441,32 @@ web_service_python_version_latest = false {
 web_service_python_version_latest = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_inner_attribute_absence["web_service_python_version_latest"]
+    not azure_attribute_absence["web_service_python_version_latest"]
     azure_issue["web_service_python_version_latest"]
 }
 
 web_service_python_version_latest = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_attribute_absence["web_service_python_version_latest"]
+    not azure_inner_attribute_absence["web_service_python_version_latest"]
     azure_inner_issue["web_service_python_version_latest"]
 }
 
 web_service_python_version_latest_err = "Azure Web Service currently dont have latest version of Python" {
     lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_python_version_latest"]
+    not azure_inner_attribute_absence["web_service_python_version_latest"]
     azure_issue["web_service_python_version_latest"]
     azure_inner_issue["web_service_python_version_latest"]
 } else = "Azure Web Service currently dont have latest version of Python" {
     lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_inner_attribute_absence["web_service_python_version_latest"]
+    not azure_attribute_absence["web_service_python_version_latest"]
     azure_issue["web_service_python_version_latest"]
 } else = "Azure Web Service currently dont have latest version of Python" {
     lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_attribute_absence["web_service_python_version_latest"]
+    not azure_inner_attribute_absence["web_service_python_version_latest"]
     azure_inner_issue["web_service_python_version_latest"]
 }
 
@@ -1516,6 +1557,8 @@ web_service_java_version_latest {
 
 web_service_java_version_latest = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_java_version_latest"]
+    not azure_inner_attribute_absence["web_service_java_version_latest"]
     azure_issue["web_service_java_version_latest"]
     azure_inner_issue["web_service_java_version_latest"]
 }
@@ -1523,26 +1566,32 @@ web_service_java_version_latest = false {
 web_service_java_version_latest = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_inner_attribute_absence["web_service_java_version_latest"]
+    not azure_attribute_absence["web_service_java_version_latest"]
     azure_issue["web_service_java_version_latest"]
 }
 
 web_service_java_version_latest = false {
 	lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_attribute_absence["web_service_java_version_latest"]
+    not azure_inner_attribute_absence["web_service_java_version_latest"]
     azure_inner_issue["web_service_java_version_latest"]
 }
 
 web_service_java_version_latest_err = "Azure Web Service currently dont have latest version of Java" {
     lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_java_version_latest"]
+    not azure_inner_attribute_absence["web_service_java_version_latest"]
     azure_issue["web_service_java_version_latest"]
     azure_inner_issue["web_service_java_version_latest"]
 } else = "Azure Web Service currently dont have latest version of Java" {
     lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_inner_attribute_absence["web_service_java_version_latest"]
+    not azure_attribute_absence["web_service_java_version_latest"]
     azure_issue["web_service_java_version_latest"]
 } else = "Azure Web Service currently dont have latest version of Java" {
     lower(input.resources[_].type) == "microsoft.web/sites"
  	azure_attribute_absence["web_service_java_version_latest"]
+    not azure_inner_attribute_absence["web_service_java_version_latest"]
     azure_inner_issue["web_service_java_version_latest"]
 }
 
