@@ -202,6 +202,17 @@ default lambda_vpc_endpoint = true
 
 lambda_vpc_endpoint = false {
     X := input.TEST_LAMBDA[_]
+    has_property(X.Configuration, "VpcConfig")
+    X.Configuration.VpcConfig.VpcId != ""
+    Y := input.TEST_EC2_06[_]
+    VpcEndpoint := Y.VpcEndpoints[_]
+    X.Configuration.VpcConfig.VpcId != VpcEndpoint.VpcId
+}
+
+lambda_vpc_endpoint = false {
+    X := input.TEST_LAMBDA[_]
+    has_property(X.Configuration, "VpcConfig")
+    X.Configuration.VpcConfig.VpcId != null
     Y := input.TEST_EC2_06[_]
     VpcEndpoint := Y.VpcEndpoints[_]
     X.Configuration.VpcConfig.VpcId != VpcEndpoint.VpcId
@@ -238,7 +249,7 @@ lambda_runs_in_vpc = false {
     X.Configuration.VpcConfig.VpcId != ""
     Y := input.TEST_EC2_04[_]
     Vpc_ec2 := Y.Vpcs[_]
-    X.Configuration.VpcConfig.VpcId == Vpc_ec2.VpcId
+    X.Configuration.VpcConfig.VpcId != Vpc_ec2.VpcId
 }
 
 lambda_runs_in_vpc = false {
@@ -247,7 +258,7 @@ lambda_runs_in_vpc = false {
     X.Configuration.VpcConfig.VpcId != null
     Y := input.TEST_EC2_04[_]
     Vpc_ec2 := Y.Vpcs[_]
-    X.Configuration.VpcConfig.VpcId == Vpc_ec2.VpcId
+    X.Configuration.VpcConfig.VpcId != Vpc_ec2.VpcId
 }
 
 lambda_runs_in_vpc_err = "Ensure AWS lambda runs in GS managed VPC." {
@@ -283,7 +294,8 @@ lambda_outbound_rule = false {
     IpPermissions_Egress := SecurityGroup.IpPermissionsEgress[_]
     IpRange := IpPermissions_Egress.IpRanges[_]
     IpRange.CidrIp == "0.0.0.0/0"
-    X.Configuration.VpcConfig.SecurityGroupIds == SecurityGroup.GroupId
+    lambda_sg := X.Configuration.VpcConfig.SecurityGroupIds[_] 
+    lambda_sg == SecurityGroup.GroupId
 }
 
 lambda_outbound_rule_err = "Ensure AWS lambda outbound rule does not allow '0.0.0.0/0'." {

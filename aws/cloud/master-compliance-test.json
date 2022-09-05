@@ -7234,8 +7234,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-ELB-029",
-                            "eval": "data.rule.elbv2_tls_certificate",
-                            "message": "data.rule.elbv2_tls_certificate_err",
+                            "eval": "data.rule.elbv2_tls_listener",
+                            "message": "data.rule.elbv2_tls_listener_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_ELB_029.py"
                         }
@@ -13283,7 +13283,7 @@
                     "masterTestId": "PR-AWS-CLD-LMD-012",
                     "masterSnapshotId": [
                         "TEST_LAMBDA",
-                        "TEST_EC2_04"
+                        "TEST_SG"
                     ],
                     "type": "rego",
                     "rule": "file(lambda.rego)",

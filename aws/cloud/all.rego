@@ -1048,6 +1048,12 @@ kinesis_shard_level_metrics = false {
     not has_property(Enhanced_Monitoring, "ShardLevelMetrics")
 }
 
+kinesis_shard_level_metrics = false {
+    Enhanced_Monitoring := input.StreamDescription.EnhancedMonitoring[_]
+    has_property(Enhanced_Monitoring, "ShardLevelMetrics")
+    count(Enhanced_Monitoring.ShardLevelMetrics) == 0
+}
+
 kinesis_shard_level_metrics_err = "Ensure AWS Kinesis has shard-level metrics enabled (for critical applications)." {
     not kinesis_shard_level_metrics
 }

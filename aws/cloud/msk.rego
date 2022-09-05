@@ -220,13 +220,12 @@ msk_public_access_metadata := {
 # aws::msk::cluster
 # aws::kms::key
 
-
 default msk_data_is_encrypted = true
 
 msk_data_is_encrypted = false {
     X := input.TEST_MSK[_]
     Y := input.TEST_KMS[_]
-    X.ClusterInfo.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId == Y.KeyMetadata.KeyId
+    X.ClusterInfo.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
 }
 

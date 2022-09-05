@@ -412,8 +412,8 @@
 					"masterSnapshotId": "TEST_ECS_04",
 					"arn": "arn:aws:ecs:::",
 					"type": "ecs",
-					"collection": "aws_ecs_03",
-					"listMethod": "describe_container_instances",
+					"collection": "aws_ecs_04",
+					"listMethod": "list_container_instances",
 					"detailMethods": [
 						"describe_container_instances"
 					]

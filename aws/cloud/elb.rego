@@ -887,8 +887,9 @@ elbv2_tls_certificate = false {
     X := input.TEST_ELB_02[_]
     Listener := X.Listeners[_]
     elb_Certificate := Listener.Certificates[_]
+    has_property(elb_Certificate, "CertificateArn")
     Y := input.TEST_ACM[_]
-    elb_Certificate.CertificateArn == Y.Certificate.CertificateArn
+    elb_Certificate.CertificateArn != Y.Certificate.CertificateArn
 }
 
 elbv2_tls_certificate_err = "Ensure AWS ELB has GS created TLS certificate attached to it via ACM." {
@@ -914,23 +915,23 @@ elbv2_tls_certificate_metadata := {
 # aws::elasticloadbalancingv2::listener
 # aws::elasticloadbalancingv2::loadbalancer
 
-default elbv2_tls_certificate = true
+default elbv2_tls_listener = true
 
-elbv2_tls_certificate = false {
+elbv2_tls_listener = false {
     X := input.TEST_ELB_06[_]
     LoadBalancer := X.LoadBalancers[_]
     LoadBalancer.Type == "network"
     Y := input.TEST_ELB_02[_]
     Listener := Y.Listeners[_]
-    LoadBalancer.LoadBalancerArn := Listener.LoadBalancerArn
+    LoadBalancer.LoadBalancerArn == Listener.LoadBalancerArn
     Listener.Protocol != "TLS"
 }
 
-elbv2_tls_certificate_err = "Ensure Network ELB is using TLS listeners." {
-    not elbv2_tls_certificate
+elbv2_tls_listener_err = "Ensure Network ELB is using TLS listeners." {
+    not elbv2_tls_listener
 }
 
-elbv2_tls_certificate_metadata := {
+elbv2_tls_listener_metadata := {
     "Policy Code": "PR-AWS-CLD-ELB-029",
     "Type": "cloud",
     "Product": "AWS",
@@ -957,9 +958,19 @@ elbv2_check_certificate = false {
     LoadBalancer.Type == "application"
     Y := input.TEST_ELB_02[_]
     Listener := Y.Listeners[_]
-    LoadBalancer.LoadBalancerArn := Listener.LoadBalancerArn
+    LoadBalancer.LoadBalancerArn == Listener.LoadBalancerArn
     Certificate := Listener.Certificates[_]
     not has_property(Certificate, "CertificateArn")
+}
+
+elbv2_check_certificate = false {
+    X := input.TEST_ELB_06[_]
+    LoadBalancer := X.LoadBalancers[_]
+    LoadBalancer.Type == "application"
+    Y := input.TEST_ELB_02[_]
+    Listener := Y.Listeners[_]
+    LoadBalancer.LoadBalancerArn == Listener.LoadBalancerArn
+    not has_property(Listener, "Certificates")
 }
 
 elbv2_check_certificate_err = "Ensure AWS application ELB has TLS certificate attached to it." {

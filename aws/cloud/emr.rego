@@ -294,8 +294,8 @@ emr_security_group_port = false {
     IpPermission := SecurityGroup.IpPermissions[_]
     IpRange := IpPermission.IpRanges[_]
     IpRange.CidrIp == "0.0.0.0/0"
-    IpPermission.ToPort >= 8088
-    IpPermission.FromPort <= 8088
+    to_number(IpPermission.ToPort) >= 8088
+    to_number(IpPermission.FromPort) <= 8088
     X := input.TEST_EMR[_]
     X.Cluster.Status.State != "TERMINATING"
     X.Cluster.Ec2InstanceAttributes.EmrManagedMasterSecurityGroup == SecurityGroup.GroupId
@@ -307,8 +307,8 @@ emr_security_group_port = false {
     IpPermission := SecurityGroup.IpPermissions[_]
     IpRange := IpPermission.IpRanges[_]
     IpRange.CidrIp == "0.0.0.0/0"
-    IpPermission.ToPort >= 8088
-    IpPermission.FromPort <= 8088
+    to_number(IpPermission.ToPort) >= 8088
+    to_number(IpPermission.FromPort) <= 8088
     X := input.TEST_EMR[_]
     X.Cluster.Status.State != "TERMINATING"
     X.Cluster.Ec2InstanceAttributes.AdditionalMasterSecurityGroups == SecurityGroup.GroupId
@@ -320,8 +320,8 @@ emr_security_group_port = false {
     IpPermission := SecurityGroup.IpPermissions[_]
     Ipv6Range := IpPermission.Ipv6Ranges[_]
     Ipv6Range.CidrIpv6 == "::/0"
-    IpPermission.ToPort >= 8088
-    IpPermission.FromPort <= 8088
+    to_number(IpPermission.ToPort) >= 8088
+    to_number(IpPermission.FromPort) <= 8088
     X := input.TEST_EMR[_]
     X.Cluster.Status.State != "TERMINATING"
     X.Cluster.Ec2InstanceAttributes.EmrManagedMasterSecurityGroup == SecurityGroup.GroupId
@@ -333,8 +333,8 @@ emr_security_group_port = false {
     IpPermission := SecurityGroup.IpPermissions[_]
     Ipv6Range := IpPermission.Ipv6Ranges[_]
     Ipv6Range.CidrIpv6 == "::/0"
-    IpPermission.ToPort >= 8088
-    IpPermission.FromPort <= 8088
+    to_number(IpPermission.ToPort) >= 8088
+    to_number(IpPermission.FromPort) <= 8088
     X := input.TEST_EMR[_]
     X.Cluster.Status.State != "TERMINATING"
     X.Cluster.Ec2InstanceAttributes.AdditionalMasterSecurityGroups == SecurityGroup.GroupId
