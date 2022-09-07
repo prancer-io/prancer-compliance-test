@@ -1,0 +1,102 @@
+{
+    "masterTestName": "AZURE_aso_TEST",
+    "version": "0.1",
+    "cases": [
+        {
+            "masterTestId": "TEST_DB_Administrators",
+            "masterSnapshotId": [
+                "ASO_TEMPLATE_SNAPSHOT"
+            ],
+            "type": "rego",
+            "rule": "file(dbadministrators.rego)",
+            "evals": [
+                {
+                    "id": "PR-AZR-0085-ASO",
+                    "eval": "data.rule.db_ad_admin",
+                    "message": "data.rule.db_ad_admin_err",
+                    "remediationDescription": "",
+                    "remediationFunction": ""
+                }
+            ],
+            "severity": "Medium",
+            "title": "SQL servers which do not have Azure Active Directory admin configured",
+            "description": "Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory authentication is a mechanism of connecting to Microsoft Azure SQL Database and SQL Data Warehouse by using identities in Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location.",
+            "tags": [
+                {
+                    "cloud": "git",
+                    "compliance": [],
+                    "service": [
+                        "aso"
+                    ]
+                }
+            ],
+            "resourceTypes": [
+                "mysqlserveradministrator"
+            ]
+        },
+        {
+            "masterTestId": "TEST_DB_Firewallrules",
+            "masterSnapshotId": [
+                "ASO_TEMPLATE_SNAPSHOT"
+            ],
+            "type": "rego",
+            "rule": "file(dbfirewallrules.rego)",
+            "evals": [
+                {
+                    "id": "PR-AZR-0082-ASO",
+                    "eval": "data.rule.db_firewall",
+                    "message": "data.rule.db_firewall_err",
+                    "remediationDescription": "",
+                    "remediationFunction": ""
+                }
+            ],
+            "severity": "Medium",
+            "title": "SQL Server Firewall rules allow access to any Azure internal resources",
+            "description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with 0.0.0.0 represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
+            "tags": [
+                {
+                    "cloud": "git",
+                    "compliance": [],
+                    "service": [
+                        "aso"
+                    ]
+                }
+            ],
+            "resourceTypes": [
+                "azuresqlfirewallrule"
+            ]
+        },
+        {
+            "masterTestId": "TEST_Storage_Accounts",
+            "masterSnapshotId": [
+                "ASO_TEMPLATE_SNAPSHOT"
+            ],
+            "type": "rego",
+            "rule": "file(storageaccounts.rego)",
+            "evals": [
+                {
+                    "id": "PR-AZR-0092-ASO",
+                    "eval": "data.rule.storage_secure",
+                    "message": "data.rule.storage_secure_err",
+                    "remediationDescription": "",
+                    "remediationFunction": ""
+                }
+            ],
+            "severity": "Medium",
+            "title": "Storage Accounts without Secure transfer enabled",
+            "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage does not support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
+            "tags": [
+                {
+                    "cloud": "git",
+                    "compliance": [],
+                    "service": [
+                        "aso"
+                    ]
+                }
+            ],
+            "resourceTypes": [
+                "storageaccount"
+            ]
+        }
+    ]
+}
