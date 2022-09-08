@@ -938,7 +938,7 @@ aws_issue["es_advanced_security"] {
     resource := input.Resources[_]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.AdvancedSecurityOptions.Enabled
-    not resource.Properties.AdvancedSecurityOptions.Enabled
+    not resource.Properties.AdvancedSecurityOptions.InternalUserDatabaseEnabled
 }
 
 es_advanced_security = false {
