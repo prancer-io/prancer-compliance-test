@@ -671,40 +671,6 @@ ecs_configured_with_active_services_metadata := {
 
 
 #
-# PR-AWS-CLD-ECS-019
-# aws::ecs::cluster
-
-default ecs_volume_encryption = true
-
-ecs_volume_encryption = false {
-    X := input.TEST_ECS_04[_]
-    containerInstance := X.containerInstances[_]
-    containerInstance.status == "ACTIVE"
-    Y := input.TEST_EC2_01[_]
-    Volume := Y.Volumes[_]
-    Attachment := Volume.Attachments[_]
-    Attachment.InstanceId== containerInstance.ec2InstanceId
-}
-
-ecs_volume_encryption_err = "Ensure AWS ECS Cluster instance volume encryption for data at rest is not disabled." {
-    not ecs_volume_encryption
-}
-
-ecs_volume_encryption_metadata := {
-    "Policy Code": "PR-AWS-CLD-ECS-019",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "AWS Cloud",
-    "Policy Title": "Ensure AWS ECS Cluster instance volume encryption for data at rest is not disabled.",
-    "Policy Description": "It identifies the ECS Cluster instance volumes for which encryption for data at rest is disabled. Encrypting data at rest reduces unintentional exposure of data and prevents unauthorized users from accessing sensitive data on your AWS ECS clusters. It is recommended to configure encryption for your ECS cluster instance volumes using an encryption key. NOTE: ECS can be launched using ECS Fargate launch type or EC2 Instance. ECS Fargate launch type pulls images from the Elastic Container Registry, which are transmitted over HTTPS and are automatically encrypted at rest using S3 server-side encryption. So this policy is only applicable to ECS launched using EC2 Instances.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_container_instances",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_volumes"
-}
-
-
-#
 # PR-AWS-CLD-ECS-020
 # aws::ecs::cluster
 # aws::ecs::service
@@ -713,6 +679,7 @@ default ecs_registered_instance = true
 
 ecs_registered_instance = false {
     service := input.services[_]
+    service.launchType == "EC2"
     cluster := input.clusters[_]
     cluster.status == "ACTIVE"
     cluster.registeredContainerInstancesCount == 0

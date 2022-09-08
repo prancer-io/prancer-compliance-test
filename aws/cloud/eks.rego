@@ -350,10 +350,10 @@ eks_security_groups_metadata := {
 default eks_creation = true
 
 eks_creation = false {
-    created_timestamp := round(input.cluster.createdAt)
+    created_timestamp := input.cluster.createdAt["$date"]
+    created_timestamp_nanosecond := created_timestamp * 1000000
     current_date_timestamp := time.now_ns()
-    created_timestamp_nanosecond := created_timestamp * 1000000000
-    (current_date_timestamp - created_timestamp_nanosecond) > 7776000000000000
+	(current_date_timestamp - created_timestamp_nanosecond) > 7776000000000000
 }
 
 eks_creation_err = "Ensure AWS EKS images are not older than 90 days." {

@@ -12954,39 +12954,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-CLD-ECS-019",
-                    "masterSnapshotId": [
-                        "TEST_ECS_04",
-                        "TEST_EC2_01"
-                    ],
-                    "type": "rego",
-                    "rule": "file(ecs.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-ECS-019",
-                            "eval": "data.rule.ecs_volume_encryption",
-                            "message": "data.rule.ecs_volume_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_container_instances' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_ECS_019.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS ECS Cluster instance volume encryption for data at rest is not disabled.",
-                    "description": "It identifies the ECS Cluster instance volumes for which encryption for data at rest is disabled. Encrypting data at rest reduces unintentional exposure of data and prevents unauthorized users from accessing sensitive data on your AWS ECS clusters. It is recommended to configure encryption for your ECS cluster instance volumes using an encryption key. NOTE: ECS can be launched using ECS Fargate launch type or EC2 Instance. ECS Fargate launch type pulls images from the Elastic Container Registry, which are transmitted over HTTPS and are automatically encrypted at rest using S3 server-side encryption. So this policy is only applicable to ECS launched using EC2 Instances.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [
-                                "MAS TRM"
-                            ],
-                            "service": [
-                                "ecs",
-                                "ec2"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "PR-AWS-CLD-ECS-020",
                     "masterSnapshotId": [
                         "TEST_ECS_01"
@@ -14174,51 +14141,6 @@
                             ],
                             "service": [
                                 "cloudfront"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-CF-011",
-                    "masterSnapshotId": [
-                        "TEST_CF",
-                        "TEST_WAF"
-                    ],
-                    "type": "rego",
-                    "rule": "file(cloudfront.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-CF-011",
-                            "eval": "data.rule.cf_not_wafv2",
-                            "message": "data.rule.cf_not_wafv2_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudfront.html#CloudFront.Client.get_distribution' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_CF_011.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS CloudFront is configured with AWS Web Application Firewall v2 (AWS WAFv2).",
-                    "description": "It identifies AWS CloudFront which is not configured with AWS Web Application Firewall v2 (AWS WAFv2). As a best practice, configure the AWS WAFv2 service on the CloudFront to protect against application-layer attacks. To block malicious requests to your CloudFront, define the block criteria in the WAFv2 web access control list (web ACL).",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [
-                                "APRA",
-                                "CMMC",
-                                "CSA CCM",
-                                "HITRUST",
-                                "ISO/IEC 27002",
-                                "ISO/IEC 27017",
-                                "ISO/IEC 27018",
-                                "LGPD",
-                                "MAS TRM",
-                                "NIST 800",
-                                "NIST CSF",
-                                "NIST SP",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "cloudfront",
-                                "waf"
                             ]
                         }
                     ]
