@@ -66,28 +66,10 @@ azure_attribute_absence["log_lbs"] {
     not contains(lower(resource.scope), "microsoft.network/loadbalancers")
 }
 
-source_path[{"log_lbs":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    not contains(lower(resource.scope), "microsoft.network/loadbalancers")
-    metadata:= {
-        "resource_path": [["resources",i,"scope"]]
-    }
-}
-
 azure_attribute_absence["log_lbs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     not resource.properties.logs
-}
-
-source_path[{"log_lbs":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    not resource.properties.logs
-    metadata:= {
-        "resource_path": [["resources",i,"properties","logs"]]
-    }
 }
 
 log_lbs {
@@ -131,28 +113,10 @@ azure_attribute_absence["log_storage_retention"] {
     not contains(lower(resource.scope), "microsoft.storage/storageaccounts")
 }
 
-source_path[{"log_storage_retention":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    not contains(lower(resource.scope), "microsoft.storage/storageaccounts")
-    metadata:= {
-        "resource_path": [["resources",i,"scope"]]
-    }
-}
-
 azure_attribute_absence["log_storage_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     not resource.properties.logs
-}
-
-source_path[{"log_storage_retention":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    not resource.properties.logs
-    metadata:= {
-        "resource_path": [["resources",i,"properties","logs"]]
-    }
 }
 
 log_storage_retention {
@@ -196,28 +160,10 @@ azure_attribute_absence["log_blob"] {
     not contains(lower(resource.scope), "microsoft.storage/storageaccounts/blobservices")
 }
 
-source_path[{"log_blob":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    not contains(lower(resource.scope), "microsoft.storage/storageaccounts/blobservices")
-    metadata:= {
-        "resource_path": [["resources",i,"scope"]]
-    }
-}
-
 azure_attribute_absence["log_blob"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     not resource.properties.logs
-}
-
-source_path[{"log_blob":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    not resource.properties.logs
-    metadata:= {
-        "resource_path": [["resources",i,"properties","logs"]]
-    }
 }
 
 log_blob {
@@ -262,28 +208,10 @@ azure_attribute_absence["log_queue"] {
     not contains(lower(resource.scope), "microsoft.storage/storageaccounts/queueservices")
 }
 
-source_path[{"log_queue":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    not contains(lower(resource.scope), "microsoft.storage/storageaccounts/queueservices")
-    metadata:= {
-        "resource_path": [["resources",i,"scope"]]
-    }
-}
-
 azure_attribute_absence["log_queue"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     not resource.properties.logs
-}
-
-source_path[{"log_queue":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    not resource.properties.logs
-    metadata:= {
-        "resource_path": [["resources",i,"properties","logs"]]
-    }
 }
 
 log_queue {
@@ -328,28 +256,10 @@ azure_attribute_absence["log_table"] {
     not contains(lower(resource.scope), "microsoft.storage/storageaccounts/tableservices")
 }
 
-source_path[{"log_table":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    not contains(lower(resource.scope), "microsoft.storage/storageaccounts/tableservices")
-    metadata:= {
-        "resource_path": [["resources",i,"scope"]]
-    }
-}
-
 azure_attribute_absence["log_table"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     not resource.properties.logs
-}
-
-source_path[{"log_table":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    not resource.properties.logs
-    metadata:= {
-        "resource_path": [["resources",i,"properties","logs"]]
-    }
 }
 
 log_table {
