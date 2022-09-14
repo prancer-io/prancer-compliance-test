@@ -1,0 +1,43 @@
+
+
+
+
+# Master Test ID: PR-AWS-CLD-SM-003
+
+
+Master Snapshot Id: ['TEST_ALL_02']
+
+type: rego
+
+rule: [file(all.rego)]  
+  
+  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|id: |PR-AWS-CLD-SM-003|
+|eval: |data.rule.secret_manager_automatic_rotation|
+|message: |data.rule.secret_manager_automatic_rotation_err|
+|remediationDescription: |Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/secretsmanager.html#SecretsManager.Client.list_secrets' target='_blank'>here</a>|
+|remediationFunction: |PR_AWS_CLD_SM_003.py|
+
+
+severity: Low
+
+title: Ensure AWS Secrets Manager automatic rotation is enabled.
+
+description: Rotation is the process of periodically updating a secret. When you rotate a secret, you update the credentials in both the secret and the database or service. This control checks if automatic rotation for secrets is enabled in the secrets manager configuration.  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|cloud: |AWS|
+|compliance: |['GDPR', 'NIST 800']|
+|service: |['secret manager']|
+
+
+
+[file(all.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/all.rego

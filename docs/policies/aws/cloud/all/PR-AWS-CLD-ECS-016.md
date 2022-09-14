@@ -1,0 +1,43 @@
+
+
+
+
+# Master Test ID: PR-AWS-CLD-ECS-016
+
+
+Master Snapshot Id: ['TEST_ECS_03']
+
+type: rego
+
+rule: [file(ecs.rego)]  
+  
+  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|id: |PR-AWS-CLD-ECS-016|
+|eval: |data.rule.no_ecs_task_definition_empty_roles|
+|message: |data.rule.no_ecs_task_definition_empty_roles_err|
+|remediationDescription: |Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_task_definition' target='_blank'>here</a>|
+|remediationFunction: |PR_AWS_CLD_ECS_016.py|
+
+
+severity: Medium
+
+title: Ensure there are no undefined ECS task definition empty roles for ECS.
+
+description: It checks if the ECS container has a role attached. The task execution role grants the Amazon ECS container and Fargate agents permission to make AWS API calls on your behalf. The task execution IAM role is required depending on the requirements of your task.  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|cloud: |AWS|
+|compliance: |['APRA', 'CMMC', 'HITRUST', 'LGPD', 'MAS TRM', 'PCI-DSS', 'NIST 800', 'NIST SP']|
+|service: |['ecs']|
+
+
+
+[file(ecs.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/ecs.rego

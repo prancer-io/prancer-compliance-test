@@ -1,0 +1,43 @@
+
+
+
+
+# Master Test ID: PR-AWS-CLD-AS-001
+
+
+Master Snapshot Id: ['TEST_ALL_07']
+
+type: rego
+
+rule: [file(all.rego)]  
+  
+  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|id: |PR-AWS-CLD-AS-001|
+|eval: |data.rule.as_volume_encrypted|
+|message: |data.rule.as_volume_encrypted_err|
+|remediationDescription: |Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-template.html#cfn-as-launchconfig-blockdev-template-encrypted' target='_blank'>here</a>|
+|remediationFunction: |PR_AWS_CLD_AS_001.py|
+
+
+severity: Medium
+
+title: Ensure EBS volumes have encrypted launch configurations
+
+description: Amazon Elastic Block Store (EBS) volumes allow you to create encrypted launch configurations when creating EC2 instances and auto scaling. When the entire EBS volume is encrypted, data stored at rest on the volume, disk I/O, snapshots created from the volume, and data in-transit between EBS and EC2 are all encrypted.  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|cloud: |AWS|
+|compliance: |['PCI DSS', 'NIST 800', 'GDPR']|
+|service: |['auto scaling']|
+
+
+
+[file(all.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/all.rego
