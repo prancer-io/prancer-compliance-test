@@ -1,0 +1,45 @@
+
+
+
+
+# Master Test ID: PR-AZR-TRF-ACR-003
+
+
+Master Snapshot Id: ['TRF_TEMPLATE_SNAPSHOT']
+
+type: rego
+
+rule: [file(registrieslist.rego)]  
+  
+  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|id: |PR-AZR-TRF-ACR-003|
+|eval: |data.rule.acr_classic|
+|message: |data.rule.acr_classic_err|
+|remediationDescription: |In 'azurerm_container_registry' resource, set the value to 'Basic'/'Standard'/'Premimu' other then 'classic' at property 'sku' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#sku' target='_blank'>here</a> for details.|
+|remediationFunction: |PR_AZR_TRF_ACR_003.py|
+
+
+severity: Medium
+
+title: Azure Container Registry should not use the deprecated classic registry
+
+description: This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry.<br><br>For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|cloud: |git|
+|compliance: |['APRA', 'APRA (CPS 234) Information Security-CPS234-23', 'APRA (CPS 234) Information Security-CPS234-27', 'APRA (CPS 234) Information Security-CPS234-34', 'Brazilian Data Protection Law (LGPD)-Article 46', 'Brazilian Data Protection Law (LGPD)-Article 6', 'CSA CCM', 'CSA CCM v.4.0.1-AIS-01', 'CSA CCM v.4.0.1-AIS-02', 'CSA CCM v.4.0.1-AIS-04', 'CSA CCM v.4.0.1-CCC-01', 'CSA CCM v.4.0.1-GRC-03', 'CSA CCM v.4.0.1-IVS-04', 'CSA CCM v.4.0.1-UEM-06', 'CMMC', 'Cybersecurity Maturity Model Certification (CMMC) v.1.02-IA.2.078', 'HITRUST', 'HITRUST v.9.4.2-Control Reference:10.a', 'ISO/IEC 27002:2013', 'ISO/IEC 27002:2013-12.1.2, ISO/IEC 27002:2013-14.1.1', 'ISO/IEC 27002:2013-14.1.2', 'ISO/IEC 27002:2013-14.2.1', 'ISO/IEC 27002:2013-14.2.2', 'ISO/IEC 27017:2015', 'ISO/IEC 27017:2015-12.1.2', 'ISO/IEC 27017:2015-14.1.1', 'ISO/IEC 27017:2015-14.1.2', 'ISO/IEC 27017:2015-14.2.1', 'ISO/IEC 27017:2015-14.2.5', 'ISO/IEC 27017:2015-5.1.1', 'ISO/IEC 27018:2019', 'ISO/IEC 27018:2019-12.1.2', 'MITRE ATT&CK', 'MITRE ATT&CK v10.0-T1525 - Implant Internal Image', 'MITRE ATT&CK v6.3-T1525', 'MITRE ATT&CK v8.2-T1525', 'NIST CSF', 'NIST CSF-PR.IP-1', 'NIST SP', 'NIST SP 800-171 Revision 2-3.4.2', 'NIST SP 800-172-3.4.1e', 'NIST SP 800-172-3.4.2e', 'PCI DSS', 'PCI DSS v3.2.1-6.3']|
+|service: |['terraform']|
+
+
+resourceTypes: ['azurerm_container_registry']
+
+
+[file(registrieslist.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/terraform/registrieslist.rego
