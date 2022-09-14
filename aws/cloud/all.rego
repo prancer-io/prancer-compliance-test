@@ -1284,3 +1284,145 @@ appsync_not_configured_with_firewall_v2_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/appsync.html#AppSync.Client.get_graphql_api"
 }
+
+
+#
+# PR-AWS-CLD-DS-001
+# AWS::DirectoryService::MicrosoftAD
+# AWS::DirectoryService::SimpleAD
+# aws::ec2::vpc
+
+default directory_dhcp_option = true
+
+directory_dhcp_option = false {
+    X := input.TEST_DIRECTORYSERVICE[_]
+    directory := X.DirectoryDescriptions[_]
+    Y := input.TEST_EC2_04[_]
+    vpc := Y.Vpcs[_]
+    not vpc.DhcpOptionsId
+    directory.VpcSettings.VpcId == vpc.VpcId
+}
+
+directory_dhcp_option_err = "Ensure AWS Directory Service DHCP options is set for the VPC hosting managed AD." {
+    not directory_dhcp_option
+}
+
+directory_dhcp_option_metadata := {
+    "Policy Code": "PR-AWS-CLD-AD-001",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Directory Service DHCP options is set for the VPC hosting managed AD.",
+    "Policy Description": "It checks if the VPC hosting the managed AD has DHCP options created. DHCP options allow any instances in that VPC to point to the specified domain and DNS servers to resolve their domain names.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ds.html#DirectoryService.Client.describe_directories",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_vpcs"
+}
+
+
+#
+# PR-AWS-CLD-DS-002
+# AWS::DirectoryService::MicrosoftAD
+# AWS::DirectoryService::SimpleAD
+# aws::ec2::vpc
+
+default directory_default_vpc = true
+
+directory_default_vpc = false {
+    X := input.TEST_DIRECTORYSERVICE[_]
+    directory := X.DirectoryDescriptions[_]
+    Y := input.TEST_EC2_04[_]
+    vpc := Y.Vpcs[_]
+    vpc.IsDefault == true
+    directory.VpcSettings.VpcId == vpc.VpcId
+}
+
+directory_default_vpc_err = "Ensure AWS Directory Service is not launched using default VPC." {
+    not directory_default_vpc
+}
+
+directory_default_vpc_metadata := {
+    "Policy Code": "PR-AWS-CLD-AD-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Directory Service is not launched using default VPC.",
+    "Policy Description": "It checks if default VPC is being used. Default VPC are provided by AWS and not hardened hence shouldn't be used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ds.html#DirectoryService.Client.describe_directories",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_vpcs"
+}
+
+
+#
+# PR-AWS-CLD-DS-003
+# AWS::DirectoryService::MicrosoftAD
+# AWS::DirectoryService::SimpleAD
+# aws::ec2::instance
+
+default directory_security_group = true
+
+directory_security_group = false {
+    X := input.TEST_DIRECTORYSERVICE[_]
+    directory := X.DirectoryDescriptions[_]
+    Y := input.TEST_EC2_01[_]
+    Reservation := Y.Reservations[_]
+    Instance := Reservation.Instances[_]
+    security_grp := Instance.SecurityGroups[_]
+    directory.VpcSettings.SecurityGroupId == security_grp.GroupId
+}
+
+directory_security_group_err = "Ensure the Security groups attached to domain controllers for AWS Directory Service are not used by other instances." {
+    not directory_security_group
+}
+
+directory_security_group_metadata := {
+    "Policy Code": "PR-AWS-CLD-AD-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure the Security groups attached to domain controllers for AWS Directory Service are not used by other instances.",
+    "Policy Description": "It checks if the security groups used by Domain controllers for AD are not shared with other resource interfaces. This is the best practice for setting up Domain controllers.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ds.html#DirectoryService.Client.describe_directories",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_instances"
+}
+
+
+#
+# PR-AWS-CLD-DS-004
+# AWS::DirectoryService::MicrosoftAD
+# AWS::DirectoryService::SimpleAD
+# aws::ec2::instance
+
+default directory_subnet = true
+
+directory_subnet = false {
+    X := input.TEST_DIRECTORYSERVICE[_]
+    directory := X.DirectoryDescriptions[_]
+    Y := input.TEST_EC2_01[_]
+    Reservation := Y.Reservations[_]
+    Instance := Reservation.Instances[_]
+    Subnet := directory.VpcSettings.SubnetIds[_]
+    Subnet == Instance.SubnetId
+}
+
+directory_subnet_err = "Ensure the subnets used by the domain controllers for AWS Directory Service are not used by other instances." {
+    not directory_subnet
+}
+
+directory_subnet_metadata := {
+    "Policy Code": "PR-AWS-CLD-AD-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure the subnets used by the domain controllers for AWS Directory Service are not used by other instances.",
+    "Policy Description": "It checks if subnets used by Domain controllers for AD are segregated from the user network. This is the best practice for setting up Domain controllers.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ds.html#DirectoryService.Client.describe_directories",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_instances"
+}

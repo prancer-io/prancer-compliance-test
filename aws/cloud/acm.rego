@@ -203,3 +203,65 @@ acm_do_not_have_invalid_or_failed_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm.html#ACM.Client.describe_certificate"
 }
+
+
+#
+# PR-AWS-CLD-ACM-008
+# aws::certificatemanager::certificate"
+
+default acm_expiring_certificate = true
+
+acm_expiring_certificate = false {
+    lower(input.Certificate.Status) == "issued"
+    exp_timestamp := input.Certificate.NotAfter["$date"]
+    exp_timestamp_nanosecond := exp_timestamp * 1000000
+    current_date_timestamp := time.now_ns()
+	(exp_timestamp_nanosecond - current_date_timestamp) < 2678400000000000
+}
+
+acm_expiring_certificate_err = "Ensure AWS Certificate Manager (ACM) does not have certificates expiring in 30 days or less." {
+    not acm_expiring_certificate
+}
+
+acm_expiring_certificate_metadata := {
+    "Policy Code": "PR-AWS-CLD-ACM-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Certificate Manager (ACM) does not have certificates expiring in 30 days or less.",
+    "Policy Description": "It identifies ACM certificates expiring in 30 days or less, which are in the AWS Certificate Manager. If SSL/TLS certificates are not renewed prior to their expiration date, they will become invalid and the communication between the client and the AWS resource that implements the certificates is no longer secure. As a best practice, it is recommended to renew certificates before their validity period ends. AWS Certificate Manager automatically renews certificates issued by the service that is used with other AWS resources. However, the ACM service does not renew automatically certificates that are not in use or not associated anymore with other AWS resources. So the renewal process must be done manually before these certificates become invalid. NOTE: If you wanted to be notified other than before or less than 30 days; you can clone this policy and replace '30' in RQL with your desired days value. For example, 15 days OR 7 days which will alert certificates expiring in 15 days or less OR 7 days or less respectively.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm.html#ACM.Client.describe_certificate"
+}
+
+
+#
+# PR-AWS-CLD-ACM-009
+# aws::certificatemanager::certificate"
+
+default acm_expired_certificates = true
+
+acm_expired_certificates = false {
+    lower(input.Certificate.Status) == "expired"
+    exp_timestamp := input.Certificate.NotAfter["$date"]
+    exp_timestamp_nanosecond := exp_timestamp * 1000000
+    current_date_timestamp := time.now_ns()
+	(exp_timestamp_nanosecond - current_date_timestamp) < -1
+}
+
+acm_expired_certificates_err = "Ensure AWS Certificate Manager (ACM) does not have expired certificates." {
+    not acm_expired_certificates
+}
+
+acm_expired_certificates_metadata := {
+    "Policy Code": "PR-AWS-CLD-ACM-009",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Certificate Manager (ACM) does not have expired certificates.",
+    "Policy Description": "It identifies expired certificates which are in AWS Certificate Manager. AWS Certificate Manager (ACM) is the preferred tool to provision, manage, and deploy your server certificates. With ACM you can request a certificate or deploy an existing ACM or external certificate to AWS resources. This policy generates alerts if there are any expired ACM managed certificates. As a best practice, it is recommended to delete expired certificates.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm.html#ACM.Client.describe_certificate"
+}
