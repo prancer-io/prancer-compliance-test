@@ -668,3 +668,37 @@ ecs_configured_with_active_services_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_clusters"
 }
+
+
+#
+# PR-AWS-CLD-ECS-020
+# aws::ecs::cluster
+# aws::ecs::service
+
+default ecs_registered_instance = true
+
+ecs_registered_instance = false {
+    service := input.services[_]
+    service.launchType == "EC2"
+    cluster := input.clusters[_]
+    cluster.status == "ACTIVE"
+    cluster.registeredContainerInstancesCount == 0
+    service.clusterArn == cluster.clusterArn
+}
+
+ecs_registered_instance_err = "Ensure AWS ECS cluster is configured with a registered instance." {
+    not ecs_registered_instance
+}
+
+ecs_registered_instance_metadata := {
+    "Policy Code": "PR-AWS-CLD-ECS-020",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS ECS cluster is configured with a registered instance.",
+    "Policy Description": "It identifies ECS clusters that are not configured with a registered instance. ECS container instance is an Amazon EC2 instance that is running the Amazon ECS container agent and has been registered into an Amazon ECS cluster. It is recommended to remove Idle ECS clusters to reduce the container attack surface or register a new instance for the reported ECS cluster. For details: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_instances.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_services",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_clusters"
+}

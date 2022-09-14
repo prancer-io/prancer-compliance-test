@@ -1984,6 +1984,223 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-EKS-012",
+                    "masterSnapshotId": [
+                        "TEST_EKS",
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EKS-012",
+                            "eval": "data.rule.eks_security_groups",
+                            "message": "data.rule.eks_security_groups_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EKS_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure security groups configured with EKS cluster only allows inbound on TCP port 443 (HTTPS).",
+                    "description": "It checks for a security group rule for a specific port i.e. 443.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CSA CCM",
+                                "CIS",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MAS TRM",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "eks",
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EKS-013",
+                    "masterSnapshotId": [
+                        "TEST_EKS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EKS-013",
+                            "eval": "data.rule.eks_creation",
+                            "message": "data.rule.eks_creation_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EKS_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS EKS images are not older than 90 days.",
+                    "description": "It checks AWS EKS images are not older than 90 days.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CSA CCM"
+                            ],
+                            "service": [
+                                "eks"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EKS-014",
+                    "masterSnapshotId": [
+                        "TEST_EKS",
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EKS-014",
+                            "eval": "data.rule.eks_overly_permissive_security_groups",
+                            "message": "data.rule.eks_overly_permissive_security_groups_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EKS_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS EKS cluster security group is not overly permissive to all traffic.",
+                    "description": "It identifies EKS cluster Security groups that are overly permissive to all traffic. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network. Review your list of security group rules to ensure that your resources are not exposed. As a best practice, restrict traffic solely from known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CSA CCM",
+                                "CMMC",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "RMiT",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CSA CCM v.4.0.1-A&A-03",
+                                "CSA CCM v.4.0.1-DSP-07",
+                                "CSA CCM v.4.0.1-DSP-10",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-HRS-04",
+                                "CSA CCM v.4.0.1-IVS-03",
+                                "CSA CCM v.4.0.1-LOG-05",
+                                "CSA CCM v.4.0.1-LOG-13",
+                                "CSA CCM v.4.0.1-STA-14",
+                                "CSA CCM v.4.0.1-TVM-01",
+                                "CSA CCM v.4.0.1-TVM-07",
+                                "CSA CCM v.4.0.1-TVM-08",
+                                "CSA CCM v.4.0.1-TVM-09",
+                                "CSA CCM v.4.0.1-TVM-10",
+                                "CSA CCM v.4.0.1-UEM-03",
+                                "CSA CCM v.4.0.1-UEM-05",
+                                "CSA CCM v.4.0.1-UEM-11",
+                                "CyberSecurity Law of the People's Republic of China-Article 21",
+                                "CyberSecurity Law of the People's Republic of China-Article 25",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.183",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SI.2.216",
+                                "HITRUST v.9.4.2-Control Reference:01.n",
+                                "HITRUST v.9.4.2-Control Reference:01.o",
+                                "ISO/IEC 27002:2013-12.2.1",
+                                "ISO/IEC 27002:2013-12.3.1",
+                                "ISO/IEC 27002:2013-12.4.3",
+                                "ISO/IEC 27002:2013-12.6.1",
+                                "ISO/IEC 27002:2013-12.6.2",
+                                "ISO/IEC 27002:2013-13.1.1",
+                                "ISO/IEC 27002:2013-13.1.2",
+                                "ISO/IEC 27002:2013-13.1.3",
+                                "ISO/IEC 27002:2013-13.2.1",
+                                "ISO/IEC 27002:2013-13.2.3",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.2.4",
+                                "ISO/IEC 27002:2013-14.2.5",
+                                "ISO/IEC 27002:2013-16.1.1",
+                                "ISO/IEC 27002:2013-16.1.2",
+                                "ISO/IEC 27002:2013-16.1.3",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-18.2.1",
+                                "ISO/IEC 27002:2013-5.1.1",
+                                "ISO/IEC 27002:2013-6.2.2",
+                                "ISO/IEC 27002:2013-8.3.1",
+                                "ISO/IEC 27002:2013-8.3.3",
+                                "ISO/IEC 27017:2015-16.1.2",
+                                "ISO/IEC 27017:2015-6.1.1",
+                                "ISO/IEC 27018:2019-10.1.2",
+                                "ISO/IEC 27018:2019-12.3.1",
+                                "ISO/IEC 27018:2019-18.2.1",
+                                "MAS TRM 2021-11.2.4 ",
+                                "MAS TRM 2021-11.2.5",
+                                "MITRE ATT&CK v8.2-T1190",
+                                "MLPS 2.0-8.1.3.2",
+                                "MPAA Content Protection Best Practices-DS-1.2",
+                                "MPAA Content Protection Best Practices-DS-3.0",
+                                "NIST 800-53 Rev 5-Boundary Protection | Block Communication from Non-organizationally Configured Hosts",
+                                "NIST 800-53 Rev 5-Boundary Protection | Deny by Default â Allow by Exception",
+                                "NIST 800-53 Rev 5-Boundary Protection | Restrict Incoming Communications Traffic",
+                                "NIST 800-53 Rev 5-Remote Access | Protection of Confidentiality and Integrity Using Encryption",
+                                "NIST 800-53 Rev 5-System Monitoring | Inbound and Outbound Communications Traffic",
+                                "NIST 800-53 Rev4-AC-17 (2)",
+                                "NIST 800-53 Rev4-SC-7 (11)",
+                                "NIST 800-53 Rev4-SC-7 (19)",
+                                "NIST 800-53 Rev4-SC-7 (5)",
+                                "NIST 800-53 Rev4-SI-4 (4)",
+                                "NIST CSF-DE.AE-2",
+                                "NIST CSF-DE.CM-6",
+                                "NIST CSF-DE.CM-7",
+                                "NIST CSF-DE.DP-2",
+                                "NIST CSF-ID.RA-1",
+                                "NIST CSF-PR.AC-5",
+                                "NIST CSF-PR.DS-5",
+                                "NIST CSF-PR.PT-4",
+                                "NIST SP 800-171 Revision 2-3.13.6",
+                                "NIST SP 800-171 Revision 2-3.14.6",
+                                "NIST SP 800-172-3.14.2e",
+                                "PCI DSS v3.2.1-1.2.1",
+                                "PIPEDA-4.7.3",
+                                "Risk Management in Technology (RMiT)-10.55",
+                                "Risk Management in Technology (RMiT)-10.68"
+                            ],
+                            "service": [
+                                "eks",
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-ES-001",
                     "masterSnapshotId": [
                         "TEST_ELASTICSEARCH"
@@ -2815,6 +3032,44 @@
                             "service": [
                                 "elasticsearch",
                                 "kms"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ES-017",
+                    "masterSnapshotId": [
+                        "TEST_ELASTICSEARCH"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ES-017",
+                            "eval": "data.rule.es_advanced_security",
+                            "message": "data.rule.es_advanced_security_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ES_017.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS OpenSearch Fine-grained access control is enabled.",
+                    "description": "It identifies AWS OpenSearch which has Fine-grained access control disabled. Fine-grained access control offers additional ways of controlling access to your data on AWS OpenSearch Service. It is highly recommended enabling fine-grained access control to protect the data on your domain. For more information, please follow the URL given below,https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "CMMC",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "NIST 800",
+                                "NIST SP",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "elasticsearch"
                             ]
                         }
                     ]
@@ -4925,6 +5180,47 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-EMR-011",
+                    "masterSnapshotId": [
+                        "TEST_EMR",
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EMR-011",
+                            "eval": "data.rule.emr_security_group_port",
+                            "message": "data.rule.emr_security_group_port_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/emr.html#EMR.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EMR_011.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS EMR cluster Master Security Group do not allows all traffic to port 8088.",
+                    "description": "It identifies AWS EMR cluster which has Master Security Group which allows all traffic to port 8088. Exposing port 8088 to all traffic exposes web interfaces of the master node of an EMR Cluster. This configuration is highly susceptible to EMR cluster hijacking attacks. It is highly recommended limiting the access for the EMR cluster attached Master Security Group to your IP only or configure SSH Tunnel.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "CCPA",
+                                "HITRUST",
+                                "LGPD",
+                                "MAS TRM",
+                                "PCI-DSS",
+                                "NIST 800",
+                                "NIST SP",
+                                "NIST CSF"
+                            ],
+                            "service": [
+                                "emr",
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-SQS-001",
                     "masterSnapshotId": [
                         "TEST_SQS"
@@ -5510,6 +5806,40 @@
                             ],
                             "service": [
                                 "msk"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-MSK-008",
+                    "masterSnapshotId": [
+                        "TEST_MSK",
+                        "TEST_KMS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MSK-008",
+                            "eval": "data.rule.msk_data_is_encrypted",
+                            "message": "data.rule.msk_data_is_encrypted_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kafka.html#Kafka.Client.describe_cluster' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MSK_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS MSK data is encrypted using GS managed key.",
+                    "description": "It is to check that MSK data is enabled with data at rest encryption using firm-managed CMK only.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "GDPR",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "msk",
+                                "kms"
                             ]
                         }
                     ]
@@ -6856,6 +7186,292 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-ELB-028",
+                    "masterSnapshotId": [
+                        "TEST_ELB_02",
+                        "TEST_ACM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ELB-028",
+                            "eval": "data.rule.elbv2_tls_certificate",
+                            "message": "data.rule.elbv2_tls_certificate_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_listeners' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ELB_028.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS ELB has GS created TLS certificate attached to it via ACM.",
+                    "description": "It checks if the the ELB handles the data in transit encryption via a GS managed ACM certificate.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "MAS TRM",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "elb",
+                                "acm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ELB-029",
+                    "masterSnapshotId": [
+                        "TEST_ELB_06",
+                        "TEST_ELB_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ELB-029",
+                            "eval": "data.rule.elbv2_tls_listener",
+                            "message": "data.rule.elbv2_tls_listener_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ELB_029.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Network ELB is using TLS listeners.",
+                    "description": "It checks for encryption in transit configured for Network ELB.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "MAS TRM",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ELB-030",
+                    "masterSnapshotId": [
+                        "TEST_ELB_06",
+                        "TEST_ELB_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ELB-030",
+                            "eval": "data.rule.elbv2_check_certificate",
+                            "message": "data.rule.elbv2_check_certificate_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ELB_030.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS application ELB has TLS certificate attached to it.",
+                    "description": "It checks if the the ALB handles the data in transit encryption via a GS managed ACM certificate.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "MAS TRM",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ELB-031",
+                    "masterSnapshotId": [
+                        "TEST_ELB_06",
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ELB-031",
+                            "eval": "data.rule.elbv2_egress_rule",
+                            "message": "data.rule.elbv2_egress_rule_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ELB_031.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure egress rule for AWS ELB security group is not set to '0.0.0.0/0'.",
+                    "description": "It checks for inappropriate usage i.e. 0.0.0.0/0 rule egress rule in the security group.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "MAS TRM",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "elb",
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ELB-032",
+                    "masterSnapshotId": [
+                        "TEST_ELB_06",
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ELB-032",
+                            "eval": "data.rule.elbv2_invalid_security_group",
+                            "message": "data.rule.elbv2_invalid_security_group_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ELB_032.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS Elastic Load Balancer v2 (ELBv2) is not configured with invalid security groups.",
+                    "description": "It identifies Elastic Load Balancer v2 (ELBv2) that do not have security groups with a valid inbound or outbound rule. A security group with no inbound/outbound rule will deny all incoming/outgoing requests. ELBv2 security groups should have at least one inbound and outbound rule, ELBv2 with no inbound/outbound permissions will deny all traffic incoming/outgoing to/from any resources configured behind that ELBv2; in other words, the ELBv2 is useless without inbound and outbound permissions.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MAS TRM",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "HITRUST v.9.4.2-Control Reference:01.n",
+                                "HITRUST v.9.4.2-Control Reference:01.o",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "MAS TRM 2021-7.2.1",
+                                "MAS TRM 2021-7.2.2",
+                                "NIST CSF-PR.IP-1",
+                                "NIST SP 800-171 Revision 2-3.4.2",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS v3.2.1-1.2.1"
+                            ],
+                            "service": [
+                                "elb",
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ELB-033",
+                    "masterSnapshotId": [
+                        "TEST_ELB_06",
+                        "TEST_ELB_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ELB-033",
+                            "eval": "data.rule.nlb_v2_security_policy",
+                            "message": "data.rule.nlb_v2_security_policy_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.describe_load_balancers' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ELB_033.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS Network Load Balancer (NLB) is using the latest predefined security policy.",
+                    "description": "It identifies Network Load Balancers (NLBs) are not using the latest predefined security policy. A security policy is a combination of protocols and ciphers. The protocol establishes a secure connection between a client and a server and ensures that all data passed between the client and your load balancer is private. A cipher is an encryption algorithm that uses encryption keys to create a coded message. So it is recommended to use the latest predefined security policy which uses only secured protocol and ciphers. We recommend using ELBSecurityPolicy-FS-1-2-Res-2020-10 policy if you require Forward Secrecy (FS) and use ELBSecurityPolicy-TLS-1-2-Ext-2018-06 policy to meet compliance and security standards that require disabling certain TLS protocol versions or to support legacy clients that require deprecated ciphers. For more details: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "CSA CCM",
+                                "HITRUST v.9.4.2-Control Reference:10.a",
+                                "HITRUST",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MAS TRM 2021-7.2.1",
+                                "MAS TRM 2021-7.2.2",
+                                "MAS TRM",
+                                "NIST CSF-PR.IP-1",
+                                "NIST SP 800-171 Revision 2-3.4.2",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS v3.2.1-6.3",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-RSH-001",
                     "masterSnapshotId": [
                         "TEST_REDSHIFT_1"
@@ -7975,6 +8591,39 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-GLUE-006",
+                    "masterSnapshotId": [
+                        "TEST_ALL_05"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-GLUE-006",
+                            "eval": "data.rule.glue_catalog_password",
+                            "message": "data.rule.glue_catalog_password_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue.html#Glue.Client.get_data_catalog_encryption_settings' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_GLUE_006.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure connection passwords for AWS Glue are encrypted.",
+                    "description": "It control is to check that the passwords which are stored in the Data Catalog connection and are used when AWS Glue connects to a Java Database Connectivity (JDBC) data store, are encrypted.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "glue"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-AS-001",
                     "masterSnapshotId": [
                         "TEST_ALL_07"
@@ -8860,6 +9509,52 @@
                             "service": [
                                 "kinesis",
                                 "kms"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-KNS-004",
+                    "masterSnapshotId": [
+                        "TEST_ALL_11"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-KNS-004",
+                            "eval": "data.rule.kinesis_shard_level_metrics",
+                            "message": "data.rule.kinesis_shard_level_metrics_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kinesis.html#Kinesis.Client.describe_stream' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_KNS_004.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS Kinesis has shard-level metrics enabled (for critical applications).",
+                    "description": "It is to ensure enhanced Kinesis stream monitoring for shard-level metrics is enabled in order to increase visibility into kinesis streams performance.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "CCPA",
+                                "CMMC",
+                                "CSA CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "LGPD",
+                                "MAS TRM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "RMiT",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "kinesis"
                             ]
                         }
                     ]
@@ -12571,6 +13266,39 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-ECS-020",
+                    "masterSnapshotId": [
+                        "TEST_ECS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECS-020",
+                            "eval": "data.rule.ecs_registered_instance",
+                            "message": "data.rule.ecs_registered_instance_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.describe_container_instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECS_020.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS ECS cluster is configured with a registered instance.",
+                    "description": "It identifies ECS clusters that are not configured with a registered instance. ECS container instance is an Amazon EC2 instance that is running the Amazon ECS container agent and has been registered into an Amazon ECS cluster. It is recommended to remove Idle ECS clusters to reduce the container attack surface or register a new instance for the reported ECS cluster. For details: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_instances.html",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "MAS TRM",
+                                "MAS TRM 2021-7.2.1",
+                                "MAS TRM 2021-7.2.2"
+                            ],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-LMD-001",
                     "masterSnapshotId": [
                         "TEST_LAMBDA"
@@ -12724,6 +13452,142 @@
                             "compliance": [],
                             "service": [
                                 "lambda"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-LMD-009",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA",
+                        "TEST_EC2_04"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-009",
+                            "eval": "data.rule.lambda_default_vpc",
+                            "message": "data.rule.lambda_default_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda.html#Lambda.Client.get_function' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS Lambda function is not launched in default VPC.",
+                    "description": "It is to ensure that Lambda which launched within VPC is only using GS managed VPC instead of default VPC.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HITRUST",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "lambda",
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-LMD-010",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA",
+                        "TEST_EC2_06"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-010",
+                            "eval": "data.rule.lambda_vpc_endpoint",
+                            "message": "data.rule.lambda_vpc_endpoint_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda.html#Lambda.Client.get_function' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS Lambda is using vpc endpoint.",
+                    "description": "It is to check that lambda is using VPC endpoint to interact with services which belong to VPC. Thus ensuring traffic is only traversing to secured network.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HITRUST",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "lambda",
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-LMD-011",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA",
+                        "TEST_EC2_04"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-011",
+                            "eval": "data.rule.lambda_runs_in_vpc",
+                            "message": "data.rule.lambda_runs_in_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda.html#Lambda.Client.get_function' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_011.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS lambda runs in GS managed VPC.",
+                    "description": "It is to ensure that Lambda which launched within VPC is only using GS managed VPC instead of default VPC.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HITRUST",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "lambda",
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-LMD-012",
+                    "masterSnapshotId": [
+                        "TEST_LAMBDA",
+                        "TEST_SG"
+                    ],
+                    "type": "rego",
+                    "rule": "file(lambda.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-LMD-012",
+                            "eval": "data.rule.lambda_outbound_rule",
+                            "message": "data.rule.lambda_outbound_rule_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda.html#Lambda.Client.get_function' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_LMD_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS lambda outbound rule does not allow '0.0.0.0/0'.",
+                    "description": "It is to check that egress rule allowing traffic to everyone in in the internet.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HITRUST",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "lambda",
+                                "ec2"
                             ]
                         }
                     ]
@@ -19562,6 +20426,90 @@
                                 "RMiT",
                                 "Risk Management in Technology (RMiT)-10.55",
                                 "Risk Management in Technology (RMiT)-10.68"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-047",
+                    "masterSnapshotId": [
+                        "TEST_IAM_05"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-047",
+                            "eval": "data.rule.iam_deprecated_policies",
+                            "message": "data.rule.iam_deprecated_policies_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_047.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS IAM deprecated managed policies is not in use by User.",
+                    "description": "It checks for any usage of deprecated AWS IAM managed policies and returns an alert if it finds one in your cloud resources. When AWS deprecate an IAM managed policy, a new alternative is released with improved access restrictions. Existing IAM users and roles can continue to use the previous policy without interruption, however new IAM users and roles will use the new replacement policy. Before you migrate any user or role to the new replacement policy, we recommend you review their differences in the Policy section of AWS IAM console. If you require one or more of the removed permissions, please add them separately to any user or role. List of deprecated AWS IAM managed policies:AmazonElasticTranscoderFullAccess (replaced by AmazonElasticTranscoder_FullAccess).",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CSA CCM",
+                                "CMMC",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "RMiT",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IAM-04",
+                                "CSA CCM v.4.0.1-IAM-05",
+                                "CSA CCM v.4.0.1-IAM-09",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "CyberSecurity Law of the People's Republic of China-Article 24",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.2.007",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-6.1.2",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.1.2",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "MAS TRM 2021-9.1.1",
+                                "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1098",
+                                "MLPS 2.0-8.1.4.8",
+                                "NIST CSF-PR.AC-4",
+                                "NIST SP 800-171 Revision 2-3.1.5",
+                                "NIST SP 800-172-3.1.2e",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI DSS v3.2.1-7.1.2",
+                                "Risk Management in Technology (RMiT)-10.55"
                             ],
                             "service": [
                                 "iam"

@@ -926,3 +926,42 @@ fine_grained_encryption_for_elasticsearch_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
 }
+
+
+#
+# PR-AWS-CFR-ES-017
+#
+
+default es_advanced_security = null
+
+aws_issue["es_advanced_security"] {
+    resource := input.Resources[_]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.AdvancedSecurityOptions.Enabled
+    not resource.Properties.AdvancedSecurityOptions.InternalUserDatabaseEnabled
+}
+
+es_advanced_security = false {
+    aws_issue["es_advanced_security"]
+}
+
+es_advanced_security {
+    lower(input.Resources[_].Type) == "aws::elasticsearch::domain"
+    not aws_issue["es_advanced_security"]
+}
+
+es_advanced_security_err = "Ensure AWS OpenSearch Fine-grained access control is enabled." {
+    aws_issue["es_advanced_security"]
+}
+
+es_advanced_security_metadata := {
+    "Policy Code": "PR-AWS-CFR-ES-017",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS OpenSearch Fine-grained access control is enabled.",
+    "Policy Description": "It identifies AWS OpenSearch which has Fine-grained access control disabled. Fine-grained access control offers additional ways of controlling access to your data on AWS OpenSearch Service. It is highly recommended enabling fine-grained access control to protect the data on your domain. For more information, please follow the URL given below,https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
+}

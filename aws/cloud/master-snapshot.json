@@ -902,6 +902,16 @@
 					"detailMethods": [
 						"get_account_authorization_details"
 					]
+				},
+				{
+					"masterSnapshotId": "TEST_IAM_05",
+					"arn": "arn:aws:iam:::",
+					"type": "iam",
+					"collection": "aws_iam",
+					"listMethod": "list_users",
+					"detailMethods": [
+						"list_attached_user_policies"
+					]
 				}
 			]
 		}

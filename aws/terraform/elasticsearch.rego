@@ -1128,3 +1128,43 @@ fine_grained_encryption_for_elasticsearch_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain"
 }
+
+
+#
+# PR-AWS-TRF-ES-017
+#
+
+default es_advanced_security = null
+
+aws_issue["es_advanced_security"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    advanced_security_option := resource.properties.advanced_security_options[_]
+    not advanced_security_option.enabled
+    not advanced_security_option.internal_user_database_enabled
+}
+
+es_advanced_security {
+    lower(input.resources[i].type) == "aws_elasticsearch_domain"
+    not aws_issue["es_advanced_security"]
+}
+
+es_advanced_security = false {
+    aws_issue["es_advanced_security"]
+}
+
+es_advanced_security_err = "Ensure AWS OpenSearch Fine-grained access control is enabled." {
+    aws_issue["es_advanced_security"]
+}
+
+es_advanced_security_metadata := {
+    "Policy Code": "PR-AWS-TRF-ES-017",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS OpenSearch Fine-grained access control is enabled.",
+    "Policy Description": "It identifies AWS OpenSearch which has Fine-grained access control disabled. Fine-grained access control offers additional ways of controlling access to your data on AWS OpenSearch Service. It is highly recommended enabling fine-grained access control to protect the data on your domain. For more information, please follow the URL given below,https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain"
+}
