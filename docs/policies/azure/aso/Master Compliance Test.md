@@ -3,25 +3,25 @@
 
 
 
-***<font color="white">``Master Test ID:``</font>*** TEST_DB_Administrators
+***<font color="white">Master Test ID:</font>*** TEST_DB_Administrators
 
-***<font color="white">``ID:``</font>*** PR-AZR-0085-ASO
+***<font color="white">ID:</font>*** PR-AZR-0085-ASO
 
 ***Title: [SQL servers which do not have Azure Active Directory admin configured]***
 
 ----------------------------------------------------
 
-***<font color="white">``Master Test ID:``</font>*** TEST_DB_Firewallrules
+***<font color="white">Master Test ID:</font>*** TEST_DB_Firewallrules
 
-***<font color="white">``ID:``</font>*** PR-AZR-0082-ASO
+***<font color="white">ID:</font>*** PR-AZR-0082-ASO
 
 ***Title: [SQL Server Firewall rules allow access to any Azure internal resources]***
 
 ----------------------------------------------------
 
-***<font color="white">``Master Test ID:``</font>*** TEST_Storage_Accounts
+***<font color="white">Master Test ID:</font>*** TEST_Storage_Accounts
 
-***<font color="white">``ID:``</font>*** PR-AZR-0092-ASO
+***<font color="white">ID:</font>*** PR-AZR-0092-ASO
 
 ***Title: [Storage Accounts without Secure transfer enabled]***
 

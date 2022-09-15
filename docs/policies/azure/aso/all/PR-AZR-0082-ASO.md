@@ -5,11 +5,11 @@
 # Master Test ID: TEST_DB_Firewallrules
 
 
-***<font color="white">``Master Snapshot Id:``</font>*** ['ASO_TEMPLATE_SNAPSHOT']
+***<font color="white">Master Snapshot Id:</font>*** ['ASO_TEMPLATE_SNAPSHOT']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: file([dbfirewallrules.rego])  
+***<font color="white">rule:</font>*** file([dbfirewallrules.rego])  
   
   
   
@@ -24,11 +24,11 @@ rule: file([dbfirewallrules.rego])
 |remediationFunction||
 
 
-severity: Medium
+***<font color="white">Severity:</font>*** Medium
 
-title: SQL Server Firewall rules allow access to any Azure internal resources
+***<font color="white">Title:</font>*** SQL Server Firewall rules allow access to any Azure internal resources
 
-description: Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with 0.0.0.0 represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.  
+***<font color="white">Description:</font>*** Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with 0.0.0.0 represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.  
   
   
 
@@ -39,7 +39,7 @@ description: Firewalls grant access to databases based on the originating IP add
 |service|['aso']|
 
 
-resourceTypes: ['azuresqlfirewallrule']
+***<font color="white">Resource Types:</font>*** ['azuresqlfirewallrule']
 
 
 [dbfirewallrules.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/aso/dbfirewallrules.rego

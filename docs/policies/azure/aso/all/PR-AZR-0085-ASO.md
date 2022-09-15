@@ -5,11 +5,11 @@
 # Master Test ID: TEST_DB_Administrators
 
 
-***<font color="white">``Master Snapshot Id:``</font>*** ['ASO_TEMPLATE_SNAPSHOT']
+***<font color="white">Master Snapshot Id:</font>*** ['ASO_TEMPLATE_SNAPSHOT']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: file([dbadministrators.rego])  
+***<font color="white">rule:</font>*** file([dbadministrators.rego])  
   
   
   
@@ -24,11 +24,11 @@ rule: file([dbadministrators.rego])
 |remediationFunction||
 
 
-severity: Medium
+***<font color="white">Severity:</font>*** Medium
 
-title: SQL servers which do not have Azure Active Directory admin configured
+***<font color="white">Title:</font>*** SQL servers which do not have Azure Active Directory admin configured
 
-description: Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory authentication is a mechanism of connecting to Microsoft Azure SQL Database and SQL Data Warehouse by using identities in Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location.  
+***<font color="white">Description:</font>*** Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory authentication is a mechanism of connecting to Microsoft Azure SQL Database and SQL Data Warehouse by using identities in Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location.  
   
   
 
@@ -39,7 +39,7 @@ description: Checks to ensure that SQL servers are configured with Active Direct
 |service|['aso']|
 
 
-resourceTypes: ['mysqlserveradministrator']
+***<font color="white">Resource Types:</font>*** ['mysqlserveradministrator']
 
 
 [dbadministrators.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/aso/dbadministrators.rego
