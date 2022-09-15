@@ -5,11 +5,11 @@
 # Master Test ID: PR-AWS-CLD-SG-028
 
 
-Master Snapshot Id: ['TEST_SG']
+***<font color="white">Master Snapshot Id:</font>*** ['TEST_SG']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(securitygroup.rego)]  
+***<font color="white">rule:</font>*** file([securitygroup.rego])  
   
   
   
@@ -17,27 +17,27 @@ rule: [file(securitygroup.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AWS-CLD-SG-028|
-|eval: |data.rule.port_5985|
-|message: |data.rule.port_5985_err|
-|remediationDescription: |Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a> |
-|remediationFunction: |PR_AWS_CLD_SG_028.py|
+|id|PR-AWS-CLD-SG-028|
+|eval|data.rule.port_5985|
+|message|data.rule.port_5985_err|
+|remediationDescription|Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html' target='_blank'>here</a> |
+|remediationFunction|PR_AWS_CLD_SG_028.py|
 
 
-severity: Medium
+***<font color="white">Severity:</font>*** Medium
 
-title: AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985)
+***<font color="white">Title:</font>*** AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985)
 
-description: This policy identifies the security groups which are exposing WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985) to the internet. It is recommended that Global permission to access the well known services WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985) should not be allowed in a security group.  
+***<font color="white">Description:</font>*** This policy identifies the security groups which are exposing WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985) to the internet. It is recommended that Global permission to access the well known services WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985) should not be allowed in a security group.  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |AWS|
-|compliance: |['PCI DSS', 'HIPAA', 'NIST 800']|
-|service: |['security group']|
+|cloud|AWS|
+|compliance|['PCI DSS', 'HIPAA', 'NIST 800']|
+|service|['security group']|
 
 
 
-[file(securitygroup.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/securitygroup.rego
+[securitygroup.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/securitygroup.rego

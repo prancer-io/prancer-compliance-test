@@ -5,11 +5,11 @@
 # Master Test ID: PR-AWS-CLD-MQ-003
 
 
-Master Snapshot Id: ['TEST_ALL_12']
+***<font color="white">Master Snapshot Id:</font>*** ['TEST_ALL_12']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(all.rego)]  
+***<font color="white">rule:</font>*** file([all.rego])  
   
   
   
@@ -17,27 +17,27 @@ rule: [file(all.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AWS-CLD-MQ-003|
-|eval: |data.rule.mq_activemq_approved_engine_version|
-|message: |data.rule.mq_activemq_approved_engine_version_err|
-|remediationDescription: |Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker' target='_blank'>here</a>|
-|remediationFunction: |PR_AWS_CLD_MQ_003.py|
+|id|PR-AWS-CLD-MQ-003|
+|eval|data.rule.mq_activemq_approved_engine_version|
+|message|data.rule.mq_activemq_approved_engine_version_err|
+|remediationDescription|Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mq.html#MQ.Client.describe_broker' target='_blank'>here</a>|
+|remediationFunction|PR_AWS_CLD_MQ_003.py|
 
 
-severity: Medium
+***<font color="white">Severity:</font>*** Medium
 
-title: Ensure ActiveMQ engine version is approved by GS.
+***<font color="white">Title:</font>*** Ensure ActiveMQ engine version is approved by GS.
 
-description: It is used to check only firm approved version of ActiveMQ is being used.  
+***<font color="white">Description:</font>*** It is used to check only firm approved version of ActiveMQ is being used.  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |AWS|
-|compliance: |['PCI DSS']|
-|service: |['mq']|
+|cloud|AWS|
+|compliance|['PCI DSS']|
+|service|['mq']|
 
 
 
-[file(all.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/all.rego
+[all.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/all.rego

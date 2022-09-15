@@ -5,11 +5,11 @@
 # Master Test ID: PR-AWS-CLD-ECR-006
 
 
-Master Snapshot Id: ['TEST_ECR']
+***<font color="white">Master Snapshot Id:</font>*** ['TEST_ECR']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(ecr.rego)]  
+***<font color="white">rule:</font>*** file([ecr.rego])  
   
   
   
@@ -17,27 +17,27 @@ rule: [file(ecr.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AWS-CLD-ECR-006|
-|eval: |data.rule.ecr_accessible_only_via_private_endpoint|
-|message: |data.rule.ecr_accessible_only_via_private_endpoint_err|
-|remediationDescription: |Make sure you are following the Terraform template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecr.html#ECR.Client.get_repository_policy' target='_blank'>here</a>|
-|remediationFunction: |PR_AWS_CLD_ECR_006.py|
+|id|PR-AWS-CLD-ECR-006|
+|eval|data.rule.ecr_accessible_only_via_private_endpoint|
+|message|data.rule.ecr_accessible_only_via_private_endpoint_err|
+|remediationDescription|Make sure you are following the Terraform template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecr.html#ECR.Client.get_repository_policy' target='_blank'>here</a>|
+|remediationFunction|PR_AWS_CLD_ECR_006.py|
 
 
-severity: Low
+***<font color="white">Severity:</font>*** Low
 
-title: Ensure ECR resources are accessible only via private endpoint.
+***<font color="white">Title:</font>*** Ensure ECR resources are accessible only via private endpoint.
 
-description: It checks if the container registry is accessible over the internet, GS mandates to keep the container repository private from GS network only  
+***<font color="white">Description:</font>*** It checks if the container registry is accessible over the internet, GS mandates to keep the container repository private from GS network only  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |AWS|
-|compliance: |['PCI DSS', 'GDPR']|
-|service: |['ecr']|
+|cloud|AWS|
+|compliance|['PCI DSS', 'GDPR']|
+|service|['ecr']|
 
 
 
-[file(ecr.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/ecr.rego
+[ecr.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/ecr.rego

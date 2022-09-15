@@ -5,11 +5,11 @@
 # Master Test ID: PR-AZR-TRF-SQL-031
 
 
-Master Snapshot Id: ['TRF_TEMPLATE_SNAPSHOT']
+***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(sql_alert_policy.rego)]  
+***<font color="white">rule:</font>*** file([sql_alert_policy.rego])  
   
   
   
@@ -17,29 +17,29 @@ rule: [file(sql_alert_policy.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AZR-TRF-SQL-031|
-|eval: |data.rule.mssql_server_alert|
-|message: |data.rule.mssql_server_alert_err|
-|remediationDescription: |Make sure resource 'azurerm_mssql_server' and 'azurerm_mssql_server_security_alert_policy' both exist and in 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state' target='_blank'>here</a> for details.|
-|remediationFunction: |PR_AZR_TRF_SQL_031.py|
+|id|PR-AZR-TRF-SQL-031|
+|eval|data.rule.mssql_server_alert|
+|message|data.rule.mssql_server_alert_err|
+|remediationDescription|Make sure resource 'azurerm_mssql_server' and 'azurerm_mssql_server_security_alert_policy' both exist and in 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state' target='_blank'>here</a> for details.|
+|remediationFunction|PR_AZR_TRF_SQL_031.py|
 
 
-severity: Medium
+***<font color="white">Severity:</font>*** Medium
 
-title: Ensure Security Alert is enabled on Azure SQL Server
+***<font color="white">Title:</font>*** Ensure Security Alert is enabled on Azure SQL Server
 
-description: Advanced data security should be enabled on your SQL servers.  
+***<font color="white">Description:</font>*** Advanced data security should be enabled on your SQL servers.  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |git|
-|compliance: |['CIS', 'CSA-CCM', 'NIST 800', 'NIST CSF', 'PCI-DSS']|
-|service: |['terraform']|
+|cloud|git|
+|compliance|['CIS', 'CSA-CCM', 'NIST 800', 'NIST CSF', 'PCI-DSS']|
+|service|['terraform']|
 
 
-resourceTypes: ['azurerm_mssql_server', 'azurerm_mssql_server_security_alert_policy']
+***<font color="white">Resource Types:</font>*** ['azurerm_mssql_server', 'azurerm_mssql_server_security_alert_policy']
 
 
-[file(sql_alert_policy.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/terraform/sql_alert_policy.rego
+[sql_alert_policy.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/terraform/sql_alert_policy.rego

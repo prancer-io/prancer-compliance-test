@@ -5,11 +5,11 @@
 # Master Test ID: PR-AZR-TRF-STR-009
 
 
-Master Snapshot Id: ['TRF_TEMPLATE_SNAPSHOT']
+***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(storageaccounts.rego)]  
+***<font color="white">rule:</font>*** file([storageaccounts.rego])  
   
   
   
@@ -17,29 +17,29 @@ rule: [file(storageaccounts.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AZR-TRF-STR-009|
-|eval: |data.rule.region|
-|message: |data.rule.region_err|
-|remediationDescription: |In 'azurerm_storage_account' resource, set value as 'northeurope' or 'westeurope' in property 'location' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#location' target='_blank'>here</a> for details.|
-|remediationFunction: |PR_AZR_TRF_STR_009.py|
+|id|PR-AZR-TRF-STR-009|
+|eval|data.rule.region|
+|message|data.rule.region_err|
+|remediationDescription|In 'azurerm_storage_account' resource, set value as 'northeurope' or 'westeurope' in property 'location' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#location' target='_blank'>here</a> for details.|
+|remediationFunction|PR_AZR_TRF_STR_009.py|
 
 
-severity: High
+***<font color="white">Severity:</font>*** High
 
-title: Storage Accounts location configuration should be inside of Europe
+***<font color="white">Title:</font>*** Storage Accounts location configuration should be inside of Europe
 
-description: Identify Storage Accounts outside of the following regions: northeurope, westeurope  
+***<font color="white">Description:</font>*** Identify Storage Accounts outside of the following regions: northeurope, westeurope  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |git|
-|compliance: |['GDPR']|
-|service: |['terraform']|
+|cloud|git|
+|compliance|['GDPR']|
+|service|['terraform']|
 
 
-resourceTypes: ['azurerm_storage_account']
+***<font color="white">Resource Types:</font>*** ['azurerm_storage_account']
 
 
-[file(storageaccounts.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/terraform/storageaccounts.rego
+[storageaccounts.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/terraform/storageaccounts.rego

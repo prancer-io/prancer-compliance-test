@@ -5,11 +5,11 @@
 # Master Test ID: PR-AWS-CLD-SM-001
 
 
-Master Snapshot Id: ['TEST_ALL_02']
+***<font color="white">Master Snapshot Id:</font>*** ['TEST_ALL_02']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(all.rego)]  
+***<font color="white">rule:</font>*** file([all.rego])  
   
   
   
@@ -17,27 +17,27 @@ rule: [file(all.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AWS-CLD-SM-001|
-|eval: |data.rule.secret_manager_kms|
-|message: |data.rule.secret_manager_kms_err|
-|remediationDescription: |Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html' target='_blank'>here</a>|
-|remediationFunction: |PR_AWS_CLD_SM_001.py|
+|id|PR-AWS-CLD-SM-001|
+|eval|data.rule.secret_manager_kms|
+|message|data.rule.secret_manager_kms_err|
+|remediationDescription|Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html' target='_blank'>here</a>|
+|remediationFunction|PR_AWS_CLD_SM_001.py|
 
 
-severity: High
+***<font color="white">Severity:</font>*** High
 
-title: Ensure that Secrets Manager secret is encrypted using KMS
+***<font color="white">Title:</font>*** Ensure that Secrets Manager secret is encrypted using KMS
 
-description: Ensure that your Amazon Secrets Manager secrets (i.e. database credentials, API keys, OAuth tokens, etc) are encrypted with Amazon KMS Customer Master Keys instead of default encryption keys that Secrets Manager service creates for you, in order to have a more control over secret data encryption and decryption process  
+***<font color="white">Description:</font>*** Ensure that your Amazon Secrets Manager secrets (i.e. database credentials, API keys, OAuth tokens, etc) are encrypted with Amazon KMS Customer Master Keys instead of default encryption keys that Secrets Manager service creates for you, in order to have a more control over secret data encryption and decryption process  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |AWS|
-|compliance: |['GDPR', 'NIST 800']|
-|service: |['secret manager']|
+|cloud|AWS|
+|compliance|['GDPR', 'NIST 800']|
+|service|['secret manager']|
 
 
 
-[file(all.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/all.rego
+[all.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/all.rego

@@ -5,11 +5,11 @@
 # Master Test ID: PR-AZR-TRF-STR-018
 
 
-Master Snapshot Id: ['TRF_TEMPLATE_SNAPSHOT']
+***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(storageaccounts.rego)]  
+***<font color="white">rule:</font>*** file([storageaccounts.rego])  
   
   
   
@@ -17,29 +17,29 @@ rule: [file(storageaccounts.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AZR-TRF-STR-018|
-|eval: |data.rule.storage_account_latest_tls_configured|
-|message: |data.rule.storage_account_latest_tls_configured_err|
-|remediationDescription: |In 'azurerm_storage_account' resource, set min_tls_version = 'TLS1_2' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#min_tls_version' target='_blank'>here</a> for details.|
-|remediationFunction: |PR_AZR_TRF_STR_018.py|
+|id|PR-AZR-TRF-STR-018|
+|eval|data.rule.storage_account_latest_tls_configured|
+|message|data.rule.storage_account_latest_tls_configured_err|
+|remediationDescription|In 'azurerm_storage_account' resource, set min_tls_version = 'TLS1_2' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#min_tls_version' target='_blank'>here</a> for details.|
+|remediationFunction|PR_AZR_TRF_STR_018.py|
 
 
-severity: Medium
+***<font color="white">Severity:</font>*** Medium
 
-title: Ensure Azure Storage Account has latest version of tls configured
+***<font color="white">Title:</font>*** Ensure Azure Storage Account has latest version of tls configured
 
-description: This policy will identify the Azure Storage Account which dont have latest version of tls configured and give alert  
+***<font color="white">Description:</font>*** This policy will identify the Azure Storage Account which dont have latest version of tls configured and give alert  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |git|
-|compliance: |['CIS', 'CIS v1.4.0 (Azure)-3.12']|
-|service: |['terraform']|
+|cloud|git|
+|compliance|['CIS', 'CIS v1.4.0 (Azure)-3.12']|
+|service|['terraform']|
 
 
-resourceTypes: ['azurerm_storage_account']
+***<font color="white">Resource Types:</font>*** ['azurerm_storage_account']
 
 
-[file(storageaccounts.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/terraform/storageaccounts.rego
+[storageaccounts.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/terraform/storageaccounts.rego

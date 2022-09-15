@@ -5,11 +5,11 @@
 # Master Test ID: PR-AWS-CLD-GLUE-005
 
 
-Master Snapshot Id: ['TEST_ALL_06', 'TEST_KMS']
+***<font color="white">Master Snapshot Id:</font>*** ['TEST_ALL_06', 'TEST_KMS']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(all.rego)]  
+***<font color="white">rule:</font>*** file([all.rego])  
   
   
   
@@ -17,27 +17,27 @@ rule: [file(all.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AWS-CLD-GLUE-005|
-|eval: |data.rule.glue_cloudwatch_cmk_key|
-|message: |data.rule.glue_cloudwatch_cmk_key_err|
-|remediationDescription: |Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue.html#Glue.Client.get_security_configuration' target='_blank'>here</a>|
-|remediationFunction: |PR_AWS_CLD_GLUE_005.py|
+|id|PR-AWS-CLD-GLUE-005|
+|eval|data.rule.glue_cloudwatch_cmk_key|
+|message|data.rule.glue_cloudwatch_cmk_key_err|
+|remediationDescription|Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue.html#Glue.Client.get_security_configuration' target='_blank'>here</a>|
+|remediationFunction|PR_AWS_CLD_GLUE_005.py|
 
 
-severity: Medium
+***<font color="white">Severity:</font>*** Medium
 
-title: Ensure AWS Glue encrypt data at rest with GS managed Customer Master Key (CMK).
+***<font color="white">Title:</font>*** Ensure AWS Glue encrypt data at rest with GS managed Customer Master Key (CMK).
 
-description: It is to check that GS managed CMK is used while cloudwatch encryption instead of AWS provided keys.  
+***<font color="white">Description:</font>*** It is to check that GS managed CMK is used while cloudwatch encryption instead of AWS provided keys.  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |AWS|
-|compliance: |['GDPR', 'NIST 800']|
-|service: |['glue']|
+|cloud|AWS|
+|compliance|['GDPR', 'NIST 800']|
+|service|['glue']|
 
 
 
-[file(all.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/all.rego
+[all.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/all.rego

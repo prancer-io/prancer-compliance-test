@@ -5,11 +5,11 @@
 # Master Test ID: PR-AZR-TRF-SQL-014
 
 
-Master Snapshot Id: ['TRF_TEMPLATE_SNAPSHOT']
+***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(mysql_server.rego)]  
+***<font color="white">rule:</font>*** file([mysql_server.rego])  
   
   
   
@@ -17,29 +17,29 @@ rule: [file(mysql_server.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AZR-TRF-SQL-014|
-|eval: |data.rule.mysql_ingress_from_any_ip_disabled|
-|message: |data.rule.mysql_ingress_from_any_ip_disabled_err|
-|remediationDescription: |Make sure resource 'azurerm_mysql_server' and 'azurerm_private_endpoint' or 'azurerm_mysql_firewall_rule' exist and in 'azurerm_mysql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_firewall_rule#start_ip_address' target='_blank'>here</a> for details.|
-|remediationFunction: |PR_AZR_TRF_SQL_014.py|
+|id|PR-AZR-TRF-SQL-014|
+|eval|data.rule.mysql_ingress_from_any_ip_disabled|
+|message|data.rule.mysql_ingress_from_any_ip_disabled_err|
+|remediationDescription|Make sure resource 'azurerm_mysql_server' and 'azurerm_private_endpoint' or 'azurerm_mysql_firewall_rule' exist and in 'azurerm_mysql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_firewall_rule#start_ip_address' target='_blank'>here</a> for details.|
+|remediationFunction|PR_AZR_TRF_SQL_014.py|
 
 
-severity: High
+***<font color="white">Severity:</font>*** High
 
-title: MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)
+***<font color="white">Title:</font>*** MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)
 
-description: This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses  
+***<font color="white">Description:</font>*** This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |git|
-|compliance: |['Best Practice']|
-|service: |['terraform']|
+|cloud|git|
+|compliance|['Best Practice']|
+|service|['terraform']|
 
 
-resourceTypes: ['azurerm_mysql_firewall_rule', 'azurerm_mysql_server']
+***<font color="white">Resource Types:</font>*** ['azurerm_mysql_firewall_rule', 'azurerm_mysql_server']
 
 
-[file(mysql_server.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/terraform/mysql_server.rego
+[mysql_server.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/terraform/mysql_server.rego

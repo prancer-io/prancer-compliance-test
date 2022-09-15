@@ -5,11 +5,11 @@
 # Master Test ID: PR-AWS-CLD-IAM-045
 
 
-Master Snapshot Id: ['TEST_IAM_02']
+***<font color="white">Master Snapshot Id:</font>*** ['TEST_IAM_02']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(iam.rego)]  
+***<font color="white">rule:</font>*** file([iam.rego])  
   
   
   
@@ -17,27 +17,27 @@ rule: [file(iam.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AWS-CLD-IAM-045|
-|eval: |data.rule.sns_publicly_accessible_through_iam_policies|
-|message: |data.rule.sns_publicly_accessible_through_iam_policies_err|
-|remediationDescription: |Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>|
-|remediationFunction: |PR_AWS_CLD_IAM_045.py|
+|id|PR-AWS-CLD-IAM-045|
+|eval|data.rule.sns_publicly_accessible_through_iam_policies|
+|message|data.rule.sns_publicly_accessible_through_iam_policies_err|
+|remediationDescription|Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>|
+|remediationFunction|PR_AWS_CLD_IAM_045.py|
 
 
-severity: High
+***<font color="white">Severity:</font>*** High
 
-title: Ensure AWS SNS Topic is not publicly accessible through IAM policies.
+***<font color="white">Title:</font>*** Ensure AWS SNS Topic is not publicly accessible through IAM policies.
 
-description: It identifies the AWS SNS Topic resources which are publicly accessible through IAM policies. Ensure that the AWS SNS Topic resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.  
+***<font color="white">Description:</font>*** It identifies the AWS SNS Topic resources which are publicly accessible through IAM policies. Ensure that the AWS SNS Topic resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |AWS|
-|compliance: |['APRA', 'AWS Well-Architected Framework-Identity and Access Management', 'LGPD', 'CSA CCM', "CyberSecurity Law of the People's Republic of China", 'CMMC', 'GDPR', 'HITRUST', 'MAS TRM', 'MITRE ATT&CK', 'MLPS', 'NIST 800', 'NIST CSF', 'RMiT', 'SOC 2']|
-|service: |['iam']|
+|cloud|AWS|
+|compliance|['APRA', 'AWS Well-Architected Framework-Identity and Access Management', 'LGPD', 'CSA CCM', "CyberSecurity Law of the People's Republic of China", 'CMMC', 'GDPR', 'HITRUST', 'MAS TRM', 'MITRE ATT&CK', 'MLPS', 'NIST 800', 'NIST CSF', 'RMiT', 'SOC 2']|
+|service|['iam']|
 
 
 
-[file(iam.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/iam.rego
+[iam.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/iam.rego

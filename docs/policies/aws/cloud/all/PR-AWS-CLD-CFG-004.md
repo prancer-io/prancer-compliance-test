@@ -5,11 +5,11 @@
 # Master Test ID: PR-AWS-CLD-CFG-004
 
 
-Master Snapshot Id: ['TEST_ALL_09']
+***<font color="white">Master Snapshot Id:</font>*** ['TEST_ALL_09']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(all.rego)]  
+***<font color="white">rule:</font>*** file([all.rego])  
   
   
   
@@ -17,27 +17,27 @@ rule: [file(all.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AWS-CLD-CFG-004|
-|eval: |data.rule.config_includes_global_resources|
-|message: |data.rule.config_includes_global_resources_err|
-|remediationDescription: |Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html' target='_blank'>here</a>|
-|remediationFunction: |PR_AWS_CLD_CFG_004.py|
+|id|PR-AWS-CLD-CFG-004|
+|eval|data.rule.config_includes_global_resources|
+|message|data.rule.config_includes_global_resources_err|
+|remediationDescription|Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html' target='_blank'>here</a>|
+|remediationFunction|PR_AWS_CLD_CFG_004.py|
 
 
-severity: Low
+***<font color="white">Severity:</font>*** Low
 
-title: Ensure AWS Config includes global resources types (IAM).
+***<font color="white">Title:</font>*** Ensure AWS Config includes global resources types (IAM).
 
-description: It checks that global resource types are included in AWS Config.  
+***<font color="white">Description:</font>*** It checks that global resource types are included in AWS Config.  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |AWS|
-|compliance: |[]|
-|service: |['config']|
+|cloud|AWS|
+|compliance|[]|
+|service|['config']|
 
 
 
-[file(all.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/all.rego
+[all.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/all.rego

@@ -5,11 +5,11 @@
 # Master Test ID: PR-AWS-CLD-EKS-004
 
 
-Master Snapshot Id: ['TEST_EKS']
+***<font color="white">Master Snapshot Id:</font>*** ['TEST_EKS']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(eks.rego)]  
+***<font color="white">rule:</font>*** file([eks.rego])  
   
   
   
@@ -17,27 +17,27 @@ rule: [file(eks.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AWS-CLD-EKS-004|
-|eval: |data.rule.eks_encryption_kms|
-|message: |data.rule.eks_encryption_kms_err|
-|remediationDescription: |Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-encryptionconfig.html#cfn-eks-cluster-encryptionconfig-provider' target='_blank'>here</a>|
-|remediationFunction: |PR_AWS_CLD_EKS_004.py|
+|id|PR-AWS-CLD-EKS-004|
+|eval|data.rule.eks_encryption_kms|
+|message|data.rule.eks_encryption_kms_err|
+|remediationDescription|Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-encryptionconfig.html#cfn-eks-cluster-encryptionconfig-provider' target='_blank'>here</a>|
+|remediationFunction|PR_AWS_CLD_EKS_004.py|
 
 
-severity: Low
+***<font color="white">Severity:</font>*** Low
 
-title: Ensure Kubernetes secrets are encrypted using CMKs managed in AWS KMS
+***<font color="white">Title:</font>*** Ensure Kubernetes secrets are encrypted using CMKs managed in AWS KMS
 
-description: Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as user defined Secrets and Secrets required for the operation of the cluster, such as service account keys, which are all stored in etcd. Using this functionality, you can use a key, that you manage in AWS KMS, to encrypt data at the application layer  
+***<font color="white">Description:</font>*** Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as user defined Secrets and Secrets required for the operation of the cluster, such as service account keys, which are all stored in etcd. Using this functionality, you can use a key, that you manage in AWS KMS, to encrypt data at the application layer  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |AWS|
-|compliance: |['Best Practice']|
-|service: |['eks']|
+|cloud|AWS|
+|compliance|['Best Practice']|
+|service|['eks']|
 
 
 
-[file(eks.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/eks.rego
+[eks.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/eks.rego

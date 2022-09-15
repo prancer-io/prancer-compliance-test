@@ -5,11 +5,11 @@
 # Master Test ID: PR-AWS-CLD-DDB-002
 
 
-Master Snapshot Id: ['TEST_DDB_01']
+***<font color="white">Master Snapshot Id:</font>*** ['TEST_DDB_01']
 
-type: rego
+***<font color="white">type:</font>*** rego
 
-rule: [file(database.rego)]  
+***<font color="white">rule:</font>*** file([database.rego])  
   
   
   
@@ -17,27 +17,27 @@ rule: [file(database.rego)]
 
 |Title|Description|
 | :---: | :---: |
-|id: |PR-AWS-CLD-DDB-002|
-|eval: |data.rule.docdb_cluster_logs|
-|message: |data.rule.docdb_cluster_logs_err|
-|remediationDescription: |Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-enablecloudwatchlogsexports' target='_blank'>here</a>|
-|remediationFunction: |PR_AWS_CLD_DDB_002.py|
+|id|PR-AWS-CLD-DDB-002|
+|eval|data.rule.docdb_cluster_logs|
+|message|data.rule.docdb_cluster_logs_err|
+|remediationDescription|Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-enablecloudwatchlogsexports' target='_blank'>here</a>|
+|remediationFunction|PR_AWS_CLD_DDB_002.py|
 
 
-severity: Low
+***<font color="white">Severity:</font>*** Low
 
-title: Ensure AWS DocumentDB logging is enabled
+***<font color="white">Title:</font>*** Ensure AWS DocumentDB logging is enabled
 
-description: The events recorded by the AWS DocumentDB audit logs include: successful and failed authentication attempts, creating indexes or dropping a collection in a database within the DocumentDB cluster.  
+***<font color="white">Description:</font>*** The events recorded by the AWS DocumentDB audit logs include: successful and failed authentication attempts, creating indexes or dropping a collection in a database within the DocumentDB cluster.  
   
   
 
 |Title|Description|
 | :---: | :---: |
-|cloud: |AWS|
-|compliance: |[]|
-|service: |['docdb']|
+|cloud|AWS|
+|compliance|[]|
+|service|['docdb']|
 
 
 
-[file(database.rego)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/database.rego
+[database.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/cloud/database.rego
