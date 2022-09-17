@@ -381,6 +381,12 @@
                     "type": "microsoft.keyvault/vaults/accessPolicies",
                     "collection": "Microsoft.KeyVault",
                     "version": "2021-06-01-preview"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_507",
+                    "type": "Microsoft.Compute/virtualMachineScaleSets",
+                    "collection": "Microsoft.Compute",
+                    "version": "2022-03-01"
                 }
             ]
         }
