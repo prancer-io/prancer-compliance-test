@@ -489,3 +489,32 @@ elasticsearch_gs_managed_key_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain"
 }
+
+
+#
+# PR-AWS-CLD-ES-017
+# aws::elasticsearch::domain
+#
+
+default es_advanced_security  = true
+
+es_advanced_security = false {
+    not input.DomainStatus.AdvancedSecurityOptions.Enabled
+    not input.DomainStatus.AdvancedSecurityOptions.InternalUserDatabaseEnabled
+}
+
+es_advanced_security_err = "Ensure AWS OpenSearch Fine-grained access control is enabled." {
+    not es_advanced_security
+}
+
+es_advanced_security_metadata := {
+    "Policy Code": "PR-AWS-CLD-ES-017",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS OpenSearch Fine-grained access control is enabled.",
+    "Policy Description": "It identifies AWS OpenSearch which has Fine-grained access control disabled. Fine-grained access control offers additional ways of controlling access to your data on AWS OpenSearch Service. It is highly recommended enabling fine-grained access control to protect the data on your domain. For more information, please follow the URL given below,https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/es.html#ElasticsearchService.Client.describe_elasticsearch_domain"
+}
