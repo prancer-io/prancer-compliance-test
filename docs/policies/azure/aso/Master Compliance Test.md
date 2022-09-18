@@ -12,7 +12,7 @@
 ----------------------------------------------------
 
 
-#### These are list of policies related to Azure Service Operator (ASO) helps you provision Azure resources and connect your applications to them from within Kubernetes
+#### These are list of policies related to Azure Service Operator. ASO helps you provision Azure resources and connect your applications to them from within Kubernetes
 
 
 ----------------------------------------------------
