@@ -12,7 +12,7 @@
 ----------------------------------------------------
 
 
-#### These are list of policies related to to post deployment tests. These tests contribute to have continuous compliance in the cloud.
+#### These are list of policies related to post deployment tests. These tests contribute to have continuous compliance in the cloud.
 
 
 ----------------------------------------------------
