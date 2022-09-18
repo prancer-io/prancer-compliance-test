@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-MNT-012
+# Title: Redis Cache diagnostic logs should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-MNT-012
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Redis Cache diagnostic logs should be enabled
 
 ***<font color="white">Description:</font>*** Diagnostic settings for redis cache used to stream resource logs to a Log Analytics workspace. this policy will identify any storage account which has this diagnostic settings missing or misconfigured.  
   

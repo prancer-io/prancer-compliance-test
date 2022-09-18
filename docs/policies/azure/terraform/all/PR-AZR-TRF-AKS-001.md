@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AKS-001
+# Title: Azure AKS cluster CNI networking should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AKS-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure AKS cluster CNI networking should be enabled
 
 ***<font color="white">Description:</font>*** Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.  
   

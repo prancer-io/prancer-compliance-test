@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-013
+# Title: Azure SQL Server threat detection alerts should be enabled for all threat types
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-013
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure SQL Server threat detection alerts should be enabled for all threat types
 
 ***<font color="white">Description:</font>*** Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.  
   

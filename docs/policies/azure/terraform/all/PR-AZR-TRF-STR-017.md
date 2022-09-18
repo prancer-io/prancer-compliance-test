@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-STR-017
+# Title: Ensure Storage Account naming rules are correct
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-STR-017
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Ensure Storage Account naming rules are correct
 
 ***<font color="white">Description:</font>*** Storage account names must be between 3 and 24 characters in length and may contain numbers and lowercase letters only.  
   

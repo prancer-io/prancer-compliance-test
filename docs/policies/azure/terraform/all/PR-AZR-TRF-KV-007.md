@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-KV-007
+# Title: Azure Key Vault Trusted Microsoft Services access should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-KV-007
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Key Vault Trusted Microsoft Services access should be enabled
 
 ***<font color="white">Description:</font>*** When you enable the Key Vault Firewall, you will be given an option to 'Allow Trusted Microsoft Services to bypass this firewall'. The trusted services list encompasses services where Microsoft controls all of the code that runs on the service.  
   

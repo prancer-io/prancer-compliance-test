@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-ARC-004
+# Title: Azure Cache for Redis should reside within a virtual network
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-ARC-004
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Cache for Redis should reside within a virtual network
 
 ***<font color="white">Description:</font>*** Azure Virtual Network deployment provides enhanced security and isolation for your Azure Cache for Redis, as well as subnets, access control policies, and other features to further restrict access.When an Azure Cache for Redis instance is configured with a virtual network, it is not publicly addressable and can only be accessed from virtual machines and applications within the virtual network.  
   

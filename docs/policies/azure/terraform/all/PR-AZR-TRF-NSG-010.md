@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NSG-010
+# Title: Internet connectivity via tcp over insecure port should be prevented
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NSG-010
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Internet connectivity via tcp over insecure port should be prevented
 
 ***<font color="white">Description:</font>*** Identify network traffic coming from internet which is plain text FTP, Telnet or HTTP from Internet.  
   

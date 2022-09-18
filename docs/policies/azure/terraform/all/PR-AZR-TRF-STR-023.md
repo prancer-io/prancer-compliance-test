@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-STR-023
+# Title: Storage Accounts should use a virtual network service endpoint
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-STR-023
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Storage Accounts should use a virtual network service endpoint
 
 ***<font color="white">Description:</font>*** This policy audits any Storage Account not configured to use a virtual network service endpoint.  
   

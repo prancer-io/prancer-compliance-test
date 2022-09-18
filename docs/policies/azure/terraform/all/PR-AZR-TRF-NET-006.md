@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NET-006
+# Title: Ensure VPN gateways is configured with cryptographic algorithm
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NET-006
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Ensure VPN gateways is configured with cryptographic algorithm
 
 ***<font color="white">Description:</font>*** Azure VPN gateways to use a custom IPsec/IKE policy with specific cryptographic algorithms and key strengths, rather than the Azure default policy sets. IPsec and IKE protocol standard supports a wide range of cryptographic algorithms in various combinations. If customers do not request a specific combination of cryptographic algorithms and parameters, Azure VPN gateways use a set of default proposals. Typically due to compliance or security requirements, you can now configure your Azure VPN gateways to use a custom IPsec/IKE policy with specific cryptographic algorithms and key strengths, rather than the Azure default policy sets. It is thus recommended to use custom policy sets and choose strong cryptography.  
   

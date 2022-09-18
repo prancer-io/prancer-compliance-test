@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NSG-008
+# Title: Azure Network Security Group allows ICMP (Ping)
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NSG-008
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Network Security Group allows ICMP (Ping)
 
 ***<font color="white">Description:</font>*** ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.<br><br>This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.  
   

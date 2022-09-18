@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-MNT-010
+# Title: Activity log profile retention should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-MNT-010
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Activity log profile retention should be enabled
 
 ***<font color="white">Description:</font>*** This policy identifies azurerm_monitor_log_profile which dont have log retention enabled. Activity Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access.  
   

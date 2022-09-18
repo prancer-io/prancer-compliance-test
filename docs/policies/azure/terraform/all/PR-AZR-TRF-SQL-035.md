@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-035
+# Title: MSSQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-035
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** MSSQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)
 
 ***<font color="white">Description:</font>*** This policy will identify MSSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses  
   

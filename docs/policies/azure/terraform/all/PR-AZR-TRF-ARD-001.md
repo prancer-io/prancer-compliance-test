@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-ARD-001
+# Title: Custom Role Definition should not create subscription owner role
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-ARD-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Custom Role Definition should not create subscription owner role
 
 ***<font color="white">Description:</font>*** Manages a custom Role Definition, used to assign Roles to Users/Principals. This policy will identify custom role definition which has action permission set to subscription owner and alert if exist.  
   

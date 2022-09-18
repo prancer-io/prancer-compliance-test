@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-STR-012
+# Title: Azure storage blob container should not have public access enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-STR-012
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure storage blob container should not have public access enabled
 
 ***<font color="white">Description:</font>*** 'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature.<br><br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB') that also have Audit Log Retention set to less than 180 days.<br><br>As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers.  
   

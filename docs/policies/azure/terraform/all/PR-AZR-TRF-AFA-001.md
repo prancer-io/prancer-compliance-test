@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AFA-001
+# Title: Azure Function apps Authentication should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AFA-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Function apps Authentication should be enabled
 
 ***<font color="white">Description:</font>*** Azure Function app provides built-in authentication and authorization capabilities (sometimes referred to as 'Easy Auth'), so you can sign in users and access data by writing minimal or no code in your web app, RESTful API, and mobile back end, and also Azure Functions  
   

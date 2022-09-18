@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SWM-001
+# Title: Managed workspace virtual network on Azure Synapse workspaces should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SWM-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Managed workspace virtual network on Azure Synapse workspaces should be enabled
 
 ***<font color="white">Description:</font>*** Enabling a managed workspace virtual network ensures that your workspace is network isolated from other workspaces. Data integration and Spark resources deployed in this virtual network also provides user level isolation for Spark activities.  
   

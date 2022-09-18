@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AKS-009
+# Title: Kubernetes Dashboard shoud be disabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AKS-009
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Kubernetes Dashboard shoud be disabled
 
 ***<font color="white">Description:</font>*** Disable the Kubernetes dashboard on Azure Kubernetes Service  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-STR-010
+# Title: Ensure that Storage Account should not allow public access to all blobs or containers
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-STR-010
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Ensure that Storage Account should not allow public access to all blobs or containers
 
 ***<font color="white">Description:</font>*** This policy will identify which Storage Account has public access not disabled for all blobs or containers and alert  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NSG-020
+# Title: Azure Network Security Group should not allow mSQL (TCP Port 4333)
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NSG-020
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Network Security Group should not allow mSQL (TCP Port 4333)
 
 ***<font color="white">Description:</font>*** This policy detects any NSG rule that allows mSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-ARC-008
+# Title: Redis Cache Firewall rules should not configure to allow full inbound access to everyone
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-ARC-008
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Redis Cache Firewall rules should not configure to allow full inbound access to everyone
 
 ***<font color="white">Description:</font>*** Firewalls grant access to redis cache based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with "0.0.0.0" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.  
   

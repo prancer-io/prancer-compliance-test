@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-DBK-001
+# Title: Azure Databricks shoud not use public IP address
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-DBK-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Databricks shoud not use public IP address
 
 ***<font color="white">Description:</font>*** Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have public ip disabled and warn.  
   

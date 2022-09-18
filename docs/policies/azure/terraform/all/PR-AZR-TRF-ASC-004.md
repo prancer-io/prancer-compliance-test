@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-ASC-004
+# Title: Security Center shoud have security contact phone number configured to get notifications
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-ASC-004
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Low
-
-***<font color="white">Title:</font>*** Security Center shoud have security contact phone number configured to get notifications
 
 ***<font color="white">Description:</font>*** Setting a valid phone number in Security contact phone will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.  
   

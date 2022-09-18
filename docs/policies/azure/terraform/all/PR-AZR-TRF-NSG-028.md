@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NSG-028
+# Title: Azure Network Security Group allows VNC Server (TCP Port 5900)
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NSG-028
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Network Security Group allows VNC Server (TCP Port 5900)
 
 ***<font color="white">Description:</font>*** This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.  
   

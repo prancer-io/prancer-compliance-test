@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-KV-009
+# Title: Azure KeyVault should use private link
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-KV-009
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure KeyVault should use private link
 
 ***<font color="white">Description:</font>*** Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure KeyVault, data leakage risks are reduced.  
   

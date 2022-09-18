@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-STR-014
+# Title: Storage Accounts queue service logging should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-STR-014
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Storage Accounts queue service logging should be enabled
 
 ***<font color="white">Description:</font>*** The Azure Storage Queue service logging records details for both successful and failed requests made to the queues, as well as end-to-end latency, server latency, and authentication information.  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-057
+# Title: Ensure MariaDB servers don't have public network access enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-057
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Ensure MariaDB servers don't have public network access enabled
 
 ***<font color="white">Description:</font>*** Always use Private Endpoint for MariaDB Server  
   

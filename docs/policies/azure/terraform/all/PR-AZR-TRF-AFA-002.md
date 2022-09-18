@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AFA-002
+# Title: Azure Function apps should not be accessible from all regions
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AFA-002
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Function apps should not be accessible from all regions
 
 ***<font color="white">Description:</font>*** This policy will identify Azure Function Apps which allows accessibility from all region and give alert if found.  
   

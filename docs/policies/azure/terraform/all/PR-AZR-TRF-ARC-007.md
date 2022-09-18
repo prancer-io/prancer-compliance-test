@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-ARC-007
+# Title: Ensure Redis Cache has latest version of tls configured
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-ARC-007
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Ensure Redis Cache has latest version of tls configured
 
 ***<font color="white">Description:</font>*** This policy will identify the Redis Cache which doesn't have the latest version of tls configured and give alert.  
   

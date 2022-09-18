@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-036
+# Title: Auditing for SQL database should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-036
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Auditing for SQL database should be enabled
 
 ***<font color="white">Description:</font>*** Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations.  
   

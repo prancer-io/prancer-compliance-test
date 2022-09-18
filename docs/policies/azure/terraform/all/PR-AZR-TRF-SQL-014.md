@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-014
+# Title: MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-014
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)
 
 ***<font color="white">Description:</font>*** This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses  
   

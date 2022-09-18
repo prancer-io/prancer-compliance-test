@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-030
+# Title: Ensure Security Alert is enabled on Azure SQL Server
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-030
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Ensure Security Alert is enabled on Azure SQL Server
 
 ***<font color="white">Description:</font>*** Advanced data security should be enabled on your SQL servers.  
   

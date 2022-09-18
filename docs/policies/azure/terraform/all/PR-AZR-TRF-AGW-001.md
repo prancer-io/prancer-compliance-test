@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AGW-001
+# Title: Azure Application Gateway should use TLSv1.2 as minimum version or higher
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AGW-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Application Gateway should use TLSv1.2 as minimum version or higher
 
 ***<font color="white">Description:</font>*** The Application Gateway supports end-to-end SSL encryption using multiple TLS versions and by default, it supports TLS version 1.0 as the minimum version.<br><br>This policy identifies the Application Gateway instances that are configured to use TLS versions 1.1 or lower as the minimum protocol version. As a best practice set the MinProtocolVersion to TLSv1.2 (if you use custom SSL policy) or use the predefined AppGwSslPolicy20170401S policy.  
   

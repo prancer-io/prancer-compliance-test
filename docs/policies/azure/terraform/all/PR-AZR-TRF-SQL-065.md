@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-065
+# Title: PostgreSQL Database Server should have connection_throttling enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-065
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** PostgreSQL Database Server should have connection_throttling enabled
 
 ***<font color="white">Description:</font>*** Enabling connection_throttling allows the PostgreSQL Database to set the verbosity of logged messages which in turn generates query and error logs with respect to concurrent connections, that could lead to a successful Denial of Service (DoS) attack by exhausting connection resources.  
   

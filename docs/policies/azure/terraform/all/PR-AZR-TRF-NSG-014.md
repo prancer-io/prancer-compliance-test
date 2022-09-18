@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NSG-014
+# Title: Azure Network Security Group should not allow SSH traffic from internet on port 22
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NSG-014
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Network Security Group should not allow SSH traffic from internet on port 22
 
 ***<font color="white">Description:</font>*** Blocking SSH port 22 will protect users from attacks like Account compromise.  
   

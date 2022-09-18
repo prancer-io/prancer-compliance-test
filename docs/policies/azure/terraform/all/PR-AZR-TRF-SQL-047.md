@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-047
+# Title: Ensure SQL servers don't have public network access enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-047
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Ensure SQL servers don't have public network access enabled
 
 ***<font color="white">Description:</font>*** Always use Private Endpoint for Azure SQL Database Server and SQL Managed Instance  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-STR-011
+# Title: Storage Accounts access should be allowed for trusted Microsoft services
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-STR-011
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Storage Accounts access should be allowed for trusted Microsoft services
 
 ***<font color="white">Description:</font>*** Ensure that 'Allow trusted Microsoft services to access this storage account' exception is enabled within your Azure Storage account configuration settings to grant access to trusted cloud services.  
   

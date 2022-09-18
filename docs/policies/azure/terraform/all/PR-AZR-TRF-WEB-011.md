@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-WEB-011
+# Title: Azure App Service remote debugging should be disabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-WEB-011
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Low
-
-***<font color="white">Title:</font>*** Azure App Service remote debugging should be disabled
 
 ***<font color="white">Description:</font>*** This policy will identify the Azure app service which have remote debugging enabled and give alert  
   

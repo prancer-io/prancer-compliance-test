@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AGW-006
+# Title: Ensure Application Gateway secret certificates stores in keyvault
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AGW-006
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Ensure Application Gateway secret certificates stores in keyvault
 
 ***<font color="white">Description:</font>*** This policy will identify application gateways which dont have ssl certificates stored in keyvalut and alert  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-KV-001
+# Title: Ensure at least one principal has access to Keyvault
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-KV-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Low
-
-***<font color="white">Title:</font>*** Ensure at least one principal has access to Keyvault
 
 ***<font color="white">Description:</font>*** Use the Azure Key Vault to store secrets within the Microsoft Azure environment. Secrets in Azure Key Vault are octet sequences with a maximum size of 25k bytes each.  
   

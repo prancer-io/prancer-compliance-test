@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AGW-005
+# Title: Ensure Application Gateway Backend is using Https protocol
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AGW-005
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Ensure Application Gateway Backend is using Https protocol
 
 ***<font color="white">Description:</font>*** Application Gateway allows to set backend network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-KV-006
+# Title: Azure Key Vault Network Access default action should be 'deny'
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-KV-006
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Key Vault Network Access default action should be 'deny'
 
 ***<font color="white">Description:</font>*** Disable public network access for your key vault so that it's not accessible over the public internet. This can reduce data leakage risks.  
   

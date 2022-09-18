@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-MNT-006
+# Title: Azure storage account queue services diagnostic logs should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-MNT-006
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure storage account queue services diagnostic logs should be enabled
 
 ***<font color="white">Description:</font>*** Queue logging cannot be enabled for Storage Accounts with 'kind' of BlobStorage **<br><br>Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:<br>- Timing and server latency.<br>- Success or failure, and HTTP status code.<br>- Authentication details<br><br>This policy identifies Azure storage accounts that do not have logging enabled for queues. As a best practice, enable logging for read, write, and delete request types on queues.  
   

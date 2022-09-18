@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-ASC-001
+# Title: Azure Security Center should have pricing tier configured to 'standard'
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-ASC-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Security Center should have pricing tier configured to 'standard'
 
 ***<font color="white">Description:</font>*** Selecting the standard pricing tier will enable threat detection for networks and virtual systems by providing threat intelligence, anomaly detection, and behavior analytics in Azure Security Center.  
   

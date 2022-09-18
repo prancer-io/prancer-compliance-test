@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-WEB-004
+# Title: Ensure Azure App Service has latest http2 protocol enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-WEB-004
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Ensure Azure App Service has latest http2 protocol enabled
 
 ***<font color="white">Description:</font>*** This policy will identify the Azure app service which dont have latest http2 protocol enabled and give alert  
   

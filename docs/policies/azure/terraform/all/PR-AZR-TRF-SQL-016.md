@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-016
+# Title: Ensure MySQL Database Server accepts only SSL connections
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-016
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Ensure MySQL Database Server accepts only SSL connections
 
 ***<font color="white">Description:</font>*** This policy will identify MySQL Database Server which are not enforcing all the incoming connection over SSL and alert if found.  
   

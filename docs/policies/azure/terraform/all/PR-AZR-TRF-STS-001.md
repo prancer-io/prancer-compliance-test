@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-STS-001
+# Title: Public network access should be disabled for Azure File Sync
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-STS-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Public network access should be disabled for Azure File Sync
 
 ***<font color="white">Description:</font>*** Disabling the public endpoint allows you to restrict access to your Storage Sync Service resource to requests destined to approved private endpoints on your organization's network. There is nothing inherently insecure about allowing requests to the public endpoint, however, you may wish to disable it to meet regulatory, legal, or organizational policy requirements. You can disable the public endpoint for a Storage Sync Service by setting the incomingTrafficPolicy of the resource to AllowVirtualNetworksOnly.  
   

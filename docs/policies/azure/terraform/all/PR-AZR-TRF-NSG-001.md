@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NSG-001
+# Title: Azure Network Security Group (NSG) having Inbound rule overly permissive to all TCP traffic from any source
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NSG-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Network Security Group (NSG) having Inbound rule overly permissive to all TCP traffic from any source
 
 ***<font color="white">Description:</font>*** This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to open TCP traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.  
   

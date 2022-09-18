@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-KV-003
+# Title: Key vault should have purge protection enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-KV-003
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Key vault should have purge protection enabled
 
 ***<font color="white">Description:</font>*** The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation  
   

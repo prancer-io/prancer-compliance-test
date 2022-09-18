@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-MNT-009
+# Title: Ensure Activity log profile retention is set to 365 days or greater
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-MNT-009
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Ensure Activity log profile retention is set to 365 days or greater
 
 ***<font color="white">Description:</font>*** This policy identifies azurerm_monitor_log_profile which have log retention less than 365 days. Activity Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access.  
   

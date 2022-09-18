@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AKS-010
+# Title: Azure Kubernetes Service Clusters should have local authentication methods disabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AKS-010
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Kubernetes Service Clusters should have local authentication methods disabled
 
 ***<font color="white">Description:</font>*** Disabling local authentication methods improves security by ensuring that Azure Kubernetes Service Clusters should exclusively require Azure Active Directory identities for authentication.  
   

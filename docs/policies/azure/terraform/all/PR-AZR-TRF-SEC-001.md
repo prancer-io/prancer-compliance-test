@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SEC-001
+# Title: Ensure Secrets are not hardcoded in the template
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SEC-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Ensure Secrets are not hardcoded in the template
 
 ***<font color="white">Description:</font>*** Secrets should not be hardcoded in the Template. Make sure to put those secrets in a vault and access from there.  
   

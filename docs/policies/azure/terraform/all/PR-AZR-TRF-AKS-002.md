@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AKS-002
+# Title: Azure AKS cluster HTTP application routing should be disabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AKS-002
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Low
-
-***<font color="white">Title:</font>*** Azure AKS cluster HTTP application routing should be disabled
 
 ***<font color="white">Description:</font>*** HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use.<br><br>This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled.  
   

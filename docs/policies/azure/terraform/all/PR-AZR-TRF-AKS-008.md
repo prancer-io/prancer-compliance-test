@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AKS-008
+# Title: AKS cluster should have Network Policy configured
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AKS-008
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Low
-
-***<font color="white">Title:</font>*** AKS cluster should have Network Policy configured
 
 ***<font color="white">Description:</font>*** Network policy used for building Kubernetes network. - calico or azure.  
   

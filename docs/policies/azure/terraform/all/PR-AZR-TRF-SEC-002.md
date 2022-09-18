@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SEC-002
+# Title: There is a possibility that secure password is exposed
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SEC-002
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** There is a possibility that secure password is exposed
 
 ***<font color="white">Description:</font>*** There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.  
   

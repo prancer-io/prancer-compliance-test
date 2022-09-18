@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-STR-009
+# Title: Storage Accounts location configuration should be inside of Europe
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-STR-009
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Storage Accounts location configuration should be inside of Europe
 
 ***<font color="white">Description:</font>*** Identify Storage Accounts outside of the following regions: northeurope, westeurope  
   

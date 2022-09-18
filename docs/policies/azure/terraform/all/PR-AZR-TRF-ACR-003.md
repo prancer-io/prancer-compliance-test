@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-ACR-003
+# Title: Azure Container Registry should not use the deprecated classic registry
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-ACR-003
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Container Registry should not use the deprecated classic registry
 
 ***<font color="white">Description:</font>*** This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry.<br><br>For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-037
+# Title: Ensure Azure SQL Database Auditing Retention is minimum 90 days or more
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-037
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Ensure Azure SQL Database Auditing Retention is minimum 90 days or more
 
 ***<font color="white">Description:</font>*** This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-VM-002
+# Title: Azure Linux Instance should not use basic authentication(Use SSH Key Instead)
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-VM-002
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Linux Instance should not use basic authentication(Use SSH Key Instead)
 
 ***<font color="white">Description:</font>*** For security purpose, linux vm password authentication should be disabled. Use SSH Key Instead.  
   

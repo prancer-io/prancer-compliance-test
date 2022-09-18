@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-ARC-001
+# Title: Ensure that the Redis Cache accepts only SSL connections
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-ARC-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Ensure that the Redis Cache accepts only SSL connections
 
 ***<font color="white">Description:</font>*** It is recommended that Redis Cache should allow only SSL connections. Note: some Redis tools (like redis-cli) do not support SSL. When using such tools plain connection ports should be enabled.  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-MNT-002
+# Title: Azure Key Vault diagnostics logs should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-MNT-002
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Key Vault diagnostics logs should be enabled
 
 ***<font color="white">Description:</font>*** Azure Key Vault provide different types of logs alert events, health probe, metrics to help you manage and troubleshoot issues. This policy identifies Azure Key Vault that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-055
+# Title: Azure SQL Server audit log should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-055
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure SQL Server audit log should be enabled
 
 ***<font color="white">Description:</font>*** Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.<br><br>This policy identifies SQL servers which do not have audit log enabled.  
   

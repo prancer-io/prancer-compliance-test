@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AKS-004
+# Title: Azure AKS cluster pool profile should have minimum 3 or more nodes
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AKS-004
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Low
-
-***<font color="white">Title:</font>*** Azure AKS cluster pool profile should have minimum 3 or more nodes
 
 ***<font color="white">Description:</font>*** Ensure your AKS cluster pool profile contains minimum 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.  
   

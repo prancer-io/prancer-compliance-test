@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NSG-032
+# Title: Instance is communicating with ports known to mine Ethereum
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NSG-032
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Instance is communicating with ports known to mine Ethereum
 
 ***<font color="white">Description:</font>*** Identifies traffic from internal workloads to internet IPs on ports 8545,30303 that are known to mine Ethereum. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.  
   

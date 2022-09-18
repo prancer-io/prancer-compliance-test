@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-STR-020
+# Title: Storage account encryption scopes should use double encryption for data at rest
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-STR-020
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Storage account encryption scopes should use double encryption for data at rest
 
 ***<font color="white">Description:</font>*** Enable infrastructure encryption for encryption at rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.  
   

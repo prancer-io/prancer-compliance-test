@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AKS-003
+# Title: Azure AKS cluster monitoring should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AKS-003
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure AKS cluster monitoring should be enabled
 
 ***<font color="white">Description:</font>*** Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications.<br><br>This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled.  
   

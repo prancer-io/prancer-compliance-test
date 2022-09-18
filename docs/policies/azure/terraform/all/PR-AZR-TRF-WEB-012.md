@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-WEB-012
+# Title: Azure App Service FTP deployments should be disabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-WEB-012
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure App Service FTP deployments should be disabled
 
 ***<font color="white">Description:</font>*** This policy will identify the Azure app service which have FTP deployment enabled and give alert  
   

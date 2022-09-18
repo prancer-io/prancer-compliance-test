@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-VM-005
+# Title: Azure Linux scale set should not use basic authentication(Use SSH Key Instead)
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-VM-005
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Linux scale set should not use basic authentication(Use SSH Key Instead)
 
 ***<font color="white">Description:</font>*** For security purpose, linux scale set password authentication should be disabled. Use SSH Key Instead.  
   

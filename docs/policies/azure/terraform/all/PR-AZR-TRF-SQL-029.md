@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-029
+# Title: Ensure ssl enforcement is enabled on PostgreSQL Database Server.
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-029
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Ensure ssl enforcement is enabled on PostgreSQL Database Server.
 
 ***<font color="white">Description:</font>*** Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.  
   

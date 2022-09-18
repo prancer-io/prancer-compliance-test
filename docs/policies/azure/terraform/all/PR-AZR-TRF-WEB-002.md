@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-WEB-002
+# Title: Ensure Azure App Service has latest version of tls configured
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-WEB-002
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Ensure Azure App Service has latest version of tls configured
 
 ***<font color="white">Description:</font>*** This policy will identify the Azure app service which dont have latest version of tls configured and give alert  
   

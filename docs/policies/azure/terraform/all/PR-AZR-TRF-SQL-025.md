@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-025
+# Title: Azure SQL Server advanced data security should send alerts to subscription administrators
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-025
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure SQL Server advanced data security should send alerts to subscription administrators
 
 ***<font color="white">Description:</font>*** Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the administrators service and co-administrator can receive email alerts when anomalous activities are detected on the SQL Servers.  
   

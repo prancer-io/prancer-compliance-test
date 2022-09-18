@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NET-004
+# Title: Azure virtual network peering state should be connected
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NET-004
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure virtual network peering state should be connected
 
 ***<font color="white">Description:</font>*** Virtual network peering enables you to connect two Azure virtual networks so that the resources in these networks are directly connected.<br><br>This policy identifies Azure virtual network peers that are disconnected. Typically, the disconnection happens when a peering configuration is deleted on one virtual network, and the other virtual network reports the peering status as disconnected.  
   

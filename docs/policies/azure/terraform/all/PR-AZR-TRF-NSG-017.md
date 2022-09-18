@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NSG-017
+# Title: Azure Network Security Group (NSG) should protect OMIGOD attack from internet
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NSG-017
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Network Security Group (NSG) should protect OMIGOD attack from internet
 
 ***<font color="white">Description:</font>*** Blocking OMI port 5985, 5986, 1270 will protect vnet/subnet/vms from OMIGOD attacks from internet.  
   

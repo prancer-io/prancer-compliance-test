@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-018
+# Title: Azure SQL Database Server security alert policies thread retention should be configured for 90 days or more
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-018
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure SQL Database Server security alert policies thread retention should be configured for 90 days or more
 
 ***<font color="white">Description:</font>*** This policy identifies SQL Databases which have Threat Retention configured for less than 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be 90 days or more.  
   

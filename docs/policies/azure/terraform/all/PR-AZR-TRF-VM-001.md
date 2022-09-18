@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-VM-001
+# Title: Azure Virtual Machine should be assigned to an availability set
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-VM-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Virtual Machine should be assigned to an availability set
 
 ***<font color="white">Description:</font>*** To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure.<br><br>This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set.  
   

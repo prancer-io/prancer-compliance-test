@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-KV-004
+# Title: Azure Key Vault keys should have an expiration date
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-KV-004
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Key Vault keys should have an expiration date
 
 ***<font color="white">Description:</font>*** This policy identifies Azure Key Vault secrets that do not have an expiry date. As a best practice, set an expiration date for each secret and rotate the secret regularly.<br><br>Before you activate this policy, ensure that you have added the <compliance-software> Service Principal to each Key Vault: https://docs.paloaltonetworks.com/<compliance-software>/<compliance-software>-admin/connect-your-cloud-platform-to-<compliance-software>/onboard-your-azure-account/set-up-your-azure-account.html<br><br>Alternatively, run the following command on the Azure cloud shell:<br>az keyvault list | jq '.[].name' | xargs -I {} az keyvault set-policy --name {} --certificate-permissions list listissuers --key-permissions list --secret-permissions list --spn <<compliance-software>_app_id>  
   

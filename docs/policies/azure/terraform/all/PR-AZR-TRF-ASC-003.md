@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-ASC-003
+# Title: Security Center shoud send security alerts notifications to the security contact
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-ASC-003
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Security Center shoud send security alerts notifications to the security contact
 
 ***<font color="white">Description:</font>*** This policy will identify security centers which dont have configuration enabled to send security alerts notifications to the security contact and alert if missing.  
   

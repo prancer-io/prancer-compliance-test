@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-ARC-009
+# Title: Azure Cache for Redis should configure to use private DNS zone
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-ARC-009
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Cache for Redis should configure to use private DNS zone
 
 ***<font color="white">Description:</font>*** Use private DNS zones to override the DNS resolution for a private endpoint. A private DNS zone can be linked to your virtual network to resolve to Azure Cache for Redis.  
   

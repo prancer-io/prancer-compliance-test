@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-VM-006
+# Title: Azure Linux Instance should not allow extension operation
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-VM-006
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Linux Instance should not allow extension operation
 
 ***<font color="white">Description:</font>*** For security purpose, linux vm extension operation should be disabled.  
   

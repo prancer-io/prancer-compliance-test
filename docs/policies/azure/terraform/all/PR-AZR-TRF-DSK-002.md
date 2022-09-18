@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-DSK-002
+# Title: Azure disk should have CMK disk encryption enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-DSK-002
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure disk should have CMK disk encryption enabled
 
 ***<font color="white">Description:</font>*** SSE with CMK is integrated with Azure Key Vault, which provides highly available and scalable secure storage for your keys backed by Hardware Security Modules. You can either bring your own keys (BYOK) to your Key Vault or generate new keys in the Key Vault. For more information, see https://azure.microsoft.com/en-in/blog/announcing-serverside-encryption-with-customermanaged-keys-for-azure-managed-disks/  
   

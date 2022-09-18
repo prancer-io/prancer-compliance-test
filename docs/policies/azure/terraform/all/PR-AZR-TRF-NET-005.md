@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NET-005
+# Title: Azure Virtual Network subnet should be configured with Network Security Group
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NET-005
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Virtual Network subnet should be configured with Network Security Group
 
 ***<font color="white">Description:</font>*** This policy identifies Azure Virtual Network (VNet) subnets that are not associated with a Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level.<br><br>For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/  
   

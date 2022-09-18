@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-064
+# Title: PostgreSQL Database Server should have log_connections enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-064
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** PostgreSQL Database Server should have log_connections enabled
 
 ***<font color="white">Description:</font>*** Causes each attempted connection to the server to be logged, as well as successful completion of client authentication. Only superusers can change this parameter at session start, and it cannot be changed at all within a session. this policy will identify Postgresql DB Server which dont have log_connections enabled and alert.  
   

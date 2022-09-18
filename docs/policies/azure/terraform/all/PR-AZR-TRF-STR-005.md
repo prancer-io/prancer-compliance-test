@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-STR-005
+# Title: Advanced Threat Protection should be enabled for storage account
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-STR-005
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Advanced Threat Protection should be enabled for storage account
 
 ***<font color="white">Description:</font>*** Advanced Threat Protection should be enabled for all the storage accounts  
   

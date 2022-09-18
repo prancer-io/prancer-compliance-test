@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-010
+# Title: Azure SQL Database Server Security Alert Policy should be configured to send alert to the configured email addresses
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-010
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure SQL Database Server Security Alert Policy should be configured to send alert to the configured email addresses
 
 ***<font color="white">Description:</font>*** Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.  
   

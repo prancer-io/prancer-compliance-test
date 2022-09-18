@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-KV-008
+# Title: Azure KeyVault should allow access from virtual network service endpoint
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-KV-008
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure KeyVault should allow access from virtual network service endpoint
 
 ***<font color="white">Description:</font>*** This policy will identify if One or more Subnet ID's have access to this Key Vault. Will warn if not found.  
   

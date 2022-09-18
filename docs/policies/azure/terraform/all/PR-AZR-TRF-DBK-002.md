@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-DBK-002
+# Title: Azure Databricks should have vnet integration
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-DBK-002
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Databricks should have vnet integration
 
 ***<font color="white">Description:</font>*** Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have vnet integration and warn.  
   

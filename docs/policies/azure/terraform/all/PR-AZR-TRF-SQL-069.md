@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-069
+# Title: Ensure Azure MSSQL Server has latest version of tls configured
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-069
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Ensure Azure MSSQL Server has latest version of tls configured
 
 ***<font color="white">Description:</font>*** This policy will identify the Azure MSSQL Server which dont have latest version of tls configured and give alert  
   

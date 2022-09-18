@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-STR-025
+# Title: Azure Storage Account File Share should use SMB protocol
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-STR-025
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Storage Account File Share should use SMB protocol
 
 ***<font color="white">Description:</font>*** The Server Message Block (SMB) protocol is a network file sharing protocol that allows applications on a computer to read and write to files and to request services from server programs in a computer network. The SMB protocol can be used on top of its TCP/IP protocol or other network protocols.  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-DSK-001
+# Title: Azure disk should have Azure Disk Encryption (ADE) enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-DSK-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure disk should have Azure Disk Encryption (ADE) enabled
 
 ***<font color="white">Description:</font>*** To meet your organizational security or compliance requirement, Azure provides disk encryption at rest using Azure Storage Service Encryption (SSE) and Azure Disk Encryption (ADE). Starting February 2017, SSE is enabled by default for all managed disks. ADE is integrated with Azure Key Vault to help you control, manage, and audit the disk encryption keys and secrets.<br><br>This policy detects Virtual Machine (VM) OS disks that are not encrypted at rest using ADE. As a best practice, enable ADE for provide volume encryption for the OS disk. For more information, see https://docs.microsoft.com/en-us/azure/security/azure-security-disk-encryption-overview.  
   

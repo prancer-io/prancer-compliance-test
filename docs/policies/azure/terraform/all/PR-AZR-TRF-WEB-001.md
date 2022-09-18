@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-WEB-001
+# Title: Ensure Azure App Service only be accessed via HTTPS
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-WEB-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Ensure Azure App Service only be accessed via HTTPS
 
 ***<font color="white">Description:</font>*** This policy will identify the Azure app service which dont have a configuration to allow access only over HTTPS protocol and give alert  
   

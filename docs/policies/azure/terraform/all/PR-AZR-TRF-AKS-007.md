@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AKS-007
+# Title: AKS shoud have an API Server Authorized IP Ranges enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AKS-007
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Low
-
-***<font color="white">Title:</font>*** AKS shoud have an API Server Authorized IP Ranges enabled
 
 ***<font color="white">Description:</font>*** Authorized IP Ranges to kubernetes API server  
   

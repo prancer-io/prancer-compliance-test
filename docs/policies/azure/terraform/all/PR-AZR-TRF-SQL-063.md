@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-063
+# Title: PostgreSQL Database Server should have log_checkpoints enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-063
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** PostgreSQL Database Server should have log_checkpoints enabled
 
 ***<font color="white">Description:</font>*** A checkpoint is a point in the transaction log sequence at which all data files have been updated to reflect the information in the log. All data files will be flushed to disk. Refer to Section 29.4 for more details about what happens during a checkpoint. this policy will identify Postgresql DB Server which dont have checkpoint log enabled and alert.  
   

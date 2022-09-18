@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-VM-003
+# Title: Azure Virtual Machine should have endpoint protection installed
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-VM-003
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Virtual Machine should have endpoint protection installed
 
 ***<font color="white">Description:</font>*** This policy identifies Azure Virtual Machines (VMs) that do not have endpoint protection installed. Installing endpoint protection systems (like Antimalware for Azure) provides for real-time protection capability that helps identify and remove viruses, spyware, and other malicious software. As a best practice, install endpoint protection on all VMs and computers to help identify and remove viruses, spyware, and other malicious software.  
   

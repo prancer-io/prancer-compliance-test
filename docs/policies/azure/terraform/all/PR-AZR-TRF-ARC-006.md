@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-ARC-006
+# Title: Ensure Persistence is enabled on Redis Cache to Perform complete system backups
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-ARC-006
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Ensure Persistence is enabled on Redis Cache to Perform complete system backups
 
 ***<font color="white">Description:</font>*** Enable Redis persistence. Redis persistence allows you to persist data stored in Redis. You can also take snapshots and back up the data, which you can load in case of a hardware failure. This is a huge advantage over Basic or Standard tier where all the data is stored in memory and there can be potential data loss in case of a failure where Cache nodes are down.  
   

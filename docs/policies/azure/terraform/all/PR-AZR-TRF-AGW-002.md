@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AGW-002
+# Title: Azure Application Gateway should have Web application firewall (WAF) enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AGW-002
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure Application Gateway should have Web application firewall (WAF) enabled
 
 ***<font color="white">Description:</font>*** This policy identifies Azure Application Gateways that do not have Web application firewall (WAF) enabled. As a best practice, enable WAF to manage and protect your web applications behind the Application Gateway from common exploits and vulnerabilities.  
   

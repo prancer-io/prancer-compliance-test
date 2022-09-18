@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-ACR-001
+# Title: Azure ACR should have HTTPS protocol enabled for webhook
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-ACR-001
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure ACR should have HTTPS protocol enabled for webhook
 
 ***<font color="white">Description:</font>*** Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP.  
   

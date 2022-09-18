@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AML-008
+# Title: Azure Deployment Scope Resource Group should have a remove protection resource lock configured
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AML-008
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Low
-
-***<font color="white">Title:</font>*** Azure Deployment Scope Resource Group should have a remove protection resource lock configured
 
 ***<font color="white">Description:</font>*** Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence.<br><br>This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users.  
   

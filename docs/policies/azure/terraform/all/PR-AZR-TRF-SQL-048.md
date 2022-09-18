@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-SQL-048
+# Title: Ensure SQL Server administrator login does not contains 'Admin/Administrator' as name
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-SQL-048
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Ensure SQL Server administrator login does not contains 'Admin/Administrator' as name
 
 ***<font color="white">Description:</font>*** You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks.  
   

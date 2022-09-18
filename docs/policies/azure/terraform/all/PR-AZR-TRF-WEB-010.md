@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-WEB-010
+# Title: Azure App Service Managed Identity provider should be enabled
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-WEB-010
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Azure App Service Managed Identity provider should be enabled
 
 ***<font color="white">Description:</font>*** This policy will identify the Azure app service which dont have Managed Identity provider enabled and give alert  
   

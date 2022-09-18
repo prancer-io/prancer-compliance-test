@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NSG-031
+# Title: Instance is communicating with ports known to mine Bitcoin
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NSG-031
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** Instance is communicating with ports known to mine Bitcoin
 
 ***<font color="white">Description:</font>*** Identifies traffic from internal workloads to internet IPs on ports 8332,8333 that are known to mine Bitcoins. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.  
   

@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AGW-004
+# Title: Ensure Application Gateway frontendIPConfigurations does not have public ip configured
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AGW-004
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Ensure Application Gateway frontendIPConfigurations does not have public ip configured
 
 ***<font color="white">Description:</font>*** Application Gateway allows to set public or private ip in frontendIPConfigurations. It is highly recommended to only configure private ip in frontendIPConfigurations.  
   

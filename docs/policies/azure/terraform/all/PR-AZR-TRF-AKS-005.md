@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-AKS-005
+# Title: Azure AKS role-based access control (RBAC) should be enforced
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-AKS-005
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure AKS role-based access control (RBAC) should be enforced
 
 ***<font color="white">Description:</font>*** To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.  
   

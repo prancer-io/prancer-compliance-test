@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: PR-AZR-TRF-NSG-015
+# Title: Azure Network Security Group (NSG) should not allows traffic from internet on port 3389
 
+
+***<font color="white">Master Test Id:</font>*** PR-AZR-TRF-NSG-015
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** High
-
-***<font color="white">Title:</font>*** Azure Network Security Group (NSG) should not allows traffic from internet on port 3389
 
 ***<font color="white">Description:</font>*** Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.  
   
