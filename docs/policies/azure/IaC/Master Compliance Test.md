@@ -1635,180 +1635,180 @@
 ----------------------------------------------------
 
 
-[Activity log alerts settings should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-MNT-001.md
-[Activity log profile retention should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-MNT-010.md
-[Advanced Threat Protection should be enabled for storage account]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-005.md
-[Auditing for SQL database should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-004.md
-[Azure ACR should have HTTPS protocol enabled for webhook]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ACR-001.md
-[Azure AKS cluster HTTP application routing should be disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AKS-002.md
-[Azure AKS cluster monitoring should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AKS-003.md
-[Azure AKS cluster pool profile count should contain 3 nodes or more]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AKS-004.md
-[Azure AKS enable role-based access control (RBAC) should be enforced]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AKS-005.md
-[Azure Application Gateway V2 should have the Web application firewall (WAF) enabled with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 for proactive protection against CVE-2021-44228 exploit]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AGW-007.md
-[Azure Application Gateway should have the Web application firewall (WAF) enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AGW-002.md
-[Azure Application Gateway should not allow TLSv1.1 or lower]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AGW-001.md
-[Azure CNI networking should be enabled in Azure AKS cluster]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AKS-001.md
-[Azure Cache for Redis should disable public network access]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ARC-003.md
-[Azure Cache for Redis should reside within a virtual network]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ARC-004.md
-[Azure Container Registry should not use the deprecated classic registry]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ACR-003.md
-[Azure Databricks should have vnet integration]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-DBK-002.md
-[Azure Databricks should not use public IP address]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-DBK-001.md
-[Azure Deployment Scope Resource Group should have a remove protection resource lock configured]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AML-008.md
-[Azure Firewall Premium should be configured with both IDPS Alert & Deny mode and TLS inspection enabled for proactive protection against CVE-2021-44228 exploit]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AFW-001.md
-[Azure Key Vault Network Access default action should be 'deny']: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-KV-006.md
-[Azure Key Vault Trusted Microsoft Services access should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-KV-007.md
-[Azure Key Vault diagnostics logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-MNT-002.md
-[Azure Key Vault keys should have an expiration date]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-KV-004.md
-[Azure Key Vault secrets should have an expiration date]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-KV-005.md
-[Azure KeyVault Public Network Access should be 'disabled']: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-KV-010.md
-[Azure Kubernetes Service Clusters should have local authentication methods disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AKS-010.md
-[Azure Linux Instance should not use basic authentication(Use SSH Key Instead)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-VM-002.md
-[Azure Load Balancer diagnostics logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-MNT-003.md
-[Azure Network Security Group (NSG) has an Inbound rule overly permissive to allow all traffic from any source to any destination]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-007.md
-[Azure Network Security Group (NSG) should not allow SSH traffic from internet on port 22]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-014.md
-[Azure Network Security Group (NSG) should not allow traffic from internet on port 3389]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-015.md
-[Azure Network Security Group (NSG) should protect OMIGOD attack from internet]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-017.md
-[Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all TCP traffic from any source]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-001.md
-[Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all UDP traffic from any source]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-002.md
-[Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all traffic from Internet on TCP protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-003.md
-[Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all traffic from Internet on UDP protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-004.md
-[Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all traffic from Internet on any protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-005.md
-[Azure Network Security Group allows NetBIOS (UDP Port 137 and 138)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-022.md
-[Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-025.md
-[Azure Network Security Group should not allow DNS (UDP Port 53)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-018.md
-[Azure Network Security Group should not allow FTP-Data (TCP Port 20)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-019.md
-[Azure Network Security Group should not allow MS SQL (TCP Port 4333)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-020.md
-[Azure Network Security Group should not allow MySQL (TCP Port 3306)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-021.md
-[Azure Network Security Group should not allow PostgreSQL (TCP Port 5432)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-023.md
-[Azure Network Security Group should not allow SMTP (TCP Port 25)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-024.md
-[Azure Network Security Group should not allow Telnet (TCP Port 23)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-026.md
-[Azure Network Security Group should not allow VNC Listener (TCP Port 5500)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-027.md
-[Azure Network Security Group should not allow VNC Server (TCP Port 5900)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-028.md
-[Azure Network Security Group should not allow Windows RPC (TCP Port 135)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-029.md
-[Azure Network Security Group should not allow Windows SMB (TCP Port 445)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-016.md
-[Azure Network Security Group shouldn't allow FTP (TCP Port 21)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-009.md
-[Azure Network Security Group shouldn't allow ICMP (Ping)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-008.md
-[Azure Network Security Group with Outbound rule to should not allow all traffic to any source]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-030.md
-[Azure Network Watcher Network Security Group (NSG) flow logs retention should be greater than 90 days]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NTW-003.md
-[Azure Network Watcher Network Security Group (NSG) flow logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NTW-001.md
-[Azure Network Watcher Network Security Group (NSG) traffic analytics should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NTW-002.md
-[Azure SQL Database Auditing Retention should be 90 days or more]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-006.md
-[Azure SQL Database security alert policies thread retention should be configured for more than 90 days]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-018.md
-[Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators and configured email addresses]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-019.md
-[Azure SQL Security Alert Policy should be configured to send alerts to the account administrators and configured email addresses]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-035.md
-[Azure SQL Server advanced data security recurring scans should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-022.md
-[Azure SQL Server advanced data security should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-062.md
-[Azure SQL Server advanced data security should have email alert recipient to get scan notification]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-024.md
-[Azure SQL Server advanced data security should send alerts to subscription administrators]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-026.md
-[Azure SQL Server threat detection alerts should be enabled for all threat types]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-039.md
-[Azure SQL database threat detection alerts should be enabled for all threat types]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-020.md
-[Azure SQL databases should have transparent data encryption enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-009.md
-[Azure SQL server audit log retention should be 90 days or higher]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-044.md
-[Azure Security Center should have pricing tier configured to 'standard']: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ASC-001.md
-[Azure Storage Account File Share should use SMB protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-025.md
-[Azure Storage Account Trusted Microsoft Services access should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-011.md
-[Azure Storage Account diagnostic logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-MNT-004.md
-[Azure Virtual Machine should be assigned to an availability set]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-VM-001.md
-[Azure Virtual Machine should have endpoint protection installed]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-VM-003.md
-[Azure Virtual Network subnet should be configured with Network Security Group]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NET-005.md
-[Azure Web Service Dot Net Framework should be latest]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-013.md
-[Azure Web Service FTP deployments should be disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-012.md
-[Azure Web Service Java version should be latest]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-016.md
-[Azure Web Service Managed Identity provider should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-010.md
-[Azure Web Service PHP version should be latest]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-014.md
-[Azure Web Service Python version should be latest]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-015.md
-[Azure Web Service detailed error message should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-008.md
-[Azure Web Service http logging should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-007.md
-[Azure Web Service remote debugging should be disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-011.md
-[Azure Web Service request tracing should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-009.md
-[Azure disk should have Azure Disk Encryption (ADE) enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-DSK-001.md
-[Azure frontDoors should have configured with WAF policy with Default Rule Set 1.0/1.1 for proactive protection against CVE-2021-44228 exploit]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-FRD-001.md
-[Azure storage account blob services diagnostic logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-MNT-005.md
-[Azure storage account queue services diagnostic logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-MNT-006.md
-[Azure storage account table services diagnostic logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-MNT-007.md
-[Azure virtual network peering state should be connected]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NET-004.md
-[Configure Azure Cache for redis with private endpoints]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ARC-005.md
-[Configure Azure Key Vaults with private endpoints]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-KV-009.md
-[Enable server-side encryption with customer-managed keys for managed disks]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-DSK-002.md
-[Ensure AKS API server defines authorized IP ranges]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AKS-007.md
-[Ensure AKS cluster network policies are enforced]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AKS-008.md
-[Ensure Application Gateway Backend is using Https protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AGW-005.md
-[Ensure Application Gateway frontendIPConfigurations does not have public ip configured]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AGW-004.md
-[Ensure Application Gateway is using Https protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AGW-003.md
-[Ensure Application Gateway secret certificates stores in keyvault]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AGW-006.md
-[Ensure Azure App Service Web App enforce https connection]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-001.md
-[Ensure Azure MySQL Server has latest version of tls configured]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-061.md
-[Ensure Azure Redis Cache has latest version of tls configured]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ARC-007.md
-[Ensure Azure SQL Server data replication with Fail Over groups]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-050.md
-[Ensure Azure SQL Server has latest version of tls configured]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-069.md
-[Ensure Azure Storage Account has latest version of tls configured]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-018.md
-[Ensure CORS configuration is not allowing every resource to access Azure Web Service]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-006.md
-[Ensure Geo-redundant backup is enabled on MariaDB server.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-058.md
-[Ensure Geo-redundant backup is enabled on PostgreSQL database server.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-028.md
-[Ensure Kubernetes Dashboard is disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AKS-009.md
-[Ensure MariaDB Server is using latest TLS version.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-064.md
-[Ensure MariaDB servers don't have public network access enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-057.md
-[Ensure MySQL servers don't have public network access enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-060.md
-[Ensure PostgreSQL servers don't have public network access enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-066.md
-[Ensure SQL Server Threat Detection is Enabled and Retention Logs are equal or greater than 90 days]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-037.md
-[Ensure SQL Server administrator login does not contain 'Admin/Administrator' as name]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-048.md
-[Ensure SQL server's TDE protector is encrypted with Customer-managed key]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-046.md
-[Ensure SQL servers don't have public network access enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-047.md
-[Ensure Secrets are not hardcoded in the ARM template]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SEC-001.md
-[Ensure Security Alert is enabled on Azure SQL Logical Server]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-030.md
-[Ensure Security Alert is enabled on Azure SQL Managed Instance]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-032.md
-[Ensure Security Alert is enabled on Azure SQL Server]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-031.md
-[Ensure VPN gateways is configured with cryptographic algorithm]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NET-006.md
-[Ensure at least one principal has access to Keyvault]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-KV-001.md
-[Ensure critical data storage in Storage Account is encrypted with Customer Managed Key]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-008.md
-[Ensure ssl enforcement is enabled on MariaDB Server.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-056.md
-[Ensure ssl enforcement is enabled on MySQL server Database Server.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-016.md
-[Ensure ssl enforcement is enabled on PostgreSQL Database Server.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-029.md
-[Ensure that 'Storage service encryption' is enabled for the Blob Service]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-006.md
-[Ensure that 'Storage service encryption' is enabled for the File Service]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-007.md
-[Ensure that SQL Server Auditing is Enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-042.md
-[Ensure that Storage Account should not allow public access to all blobs or containers]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-010.md
-[Ensure that VA setting 'Also send email notifications to admins and subscription owners' is set for a SQL server]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-033.md
-[Ensure that admin user is disabled for Container Registry]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ACR-002.md
-[Ensure that the Redis Cache accepts only SSL connections]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ARC-001.md
-[Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-KV-002.md
-[Instance should not be allowed communicating with ports known to mine Ethereum]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-032.md
-[Instance should not be allowed with ports known to mine Bitcoin]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-031.md
-[Internet connectivity via tcp over insecure port should be prevented]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-010.md
-[Key Vault should use a virtual network service endpoint]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-KV-008.md
-[Key vault should have purge protection enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-KV-003.md
-[Managed Azure AD RBAC for AKS cluster should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-AKS-006.md
-[MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-012.md
-[Memcached DDoS attack attempt should be prevented]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-011.md
-[MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-014.md
-[Publicly should not expose DB Ports]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-013.md
-[Redis Cache Firewall rules should not configure to allow full inbound access to everyone]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ARC-008.md
-[Redis Cache audit logging should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-MNT-012.md
-[Redis cache should have a backup]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ARC-002.md
-[RedisWannaMine vulnerable instances with active network traffic should be locked down]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-NSG-012.md
-[SQL Databases should have security alert policies enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-017.md
-[SQL Managed Instance should have public endpoint access disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-041.md
-[SQL Server Firewall rules should not configure to allow full inbound access to everyone]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-010.md
-[SQL managedInstances should be integrated with Azure Active Directory for administration]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-003.md
-[SQL servers should be integrated with Azure Active Directory for administration]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-001.md
-[Security Center should have security contact emails configured to get notifications]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ASC-002.md
-[Security Center should send security alerts notifications to subscription admins]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ASC-005.md
-[Send email notification should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-ASC-003.md
-[Soft delete on blob service container should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-002.md
-[Soft delete on blob service should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-001.md
-[Storage Accounts https based secure transfer should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-003.md
-[Storage Accounts location configuration should be inside of Europe]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-009.md
-[Storage Accounts should have firewall rules enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-004.md
-[Storage Accounts should use a virtual network service endpoint]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-023.md
-[Storage account encryption scopes should have infrastructure encryption]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-021.md
-[Storage account encryption scopes should use customer-managed keys to encrypt data at rest]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-022.md
-[Storage accounts should have infrastructure encryption]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-020.md
-[Storage accounts should prevent shared key access]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-024.md
-[Storage accounts should use private link]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-STR-019.md
-[There is a possibility that secure password is exposed]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SEC-002.md
-[Threat Detection alert should be configured to send notifications to the SQL server account administrators]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-SQL-021.md
-[Web App should have incoming client certificates enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-003.md
-[Web App should use the latest version of HTTP]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-004.md
-[Web App should use the latest version of TLS encryption]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-WEB-002.md
-[activity log retention should be set to 365 days or greater]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-MNT-009.md
-[log profile should be configured to capture all activities]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/iac/all/PR-AZR-ARM-MNT-011.md
+[Activity log alerts settings should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-MNT-001.md
+[Activity log profile retention should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-MNT-010.md
+[Advanced Threat Protection should be enabled for storage account]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-005.md
+[Auditing for SQL database should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-004.md
+[Azure ACR should have HTTPS protocol enabled for webhook]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ACR-001.md
+[Azure AKS cluster HTTP application routing should be disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AKS-002.md
+[Azure AKS cluster monitoring should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AKS-003.md
+[Azure AKS cluster pool profile count should contain 3 nodes or more]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AKS-004.md
+[Azure AKS enable role-based access control (RBAC) should be enforced]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AKS-005.md
+[Azure Application Gateway V2 should have the Web application firewall (WAF) enabled with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 for proactive protection against CVE-2021-44228 exploit]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AGW-007.md
+[Azure Application Gateway should have the Web application firewall (WAF) enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AGW-002.md
+[Azure Application Gateway should not allow TLSv1.1 or lower]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AGW-001.md
+[Azure CNI networking should be enabled in Azure AKS cluster]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AKS-001.md
+[Azure Cache for Redis should disable public network access]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ARC-003.md
+[Azure Cache for Redis should reside within a virtual network]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ARC-004.md
+[Azure Container Registry should not use the deprecated classic registry]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ACR-003.md
+[Azure Databricks should have vnet integration]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-DBK-002.md
+[Azure Databricks should not use public IP address]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-DBK-001.md
+[Azure Deployment Scope Resource Group should have a remove protection resource lock configured]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AML-008.md
+[Azure Firewall Premium should be configured with both IDPS Alert & Deny mode and TLS inspection enabled for proactive protection against CVE-2021-44228 exploit]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AFW-001.md
+[Azure Key Vault Network Access default action should be 'deny']: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-KV-006.md
+[Azure Key Vault Trusted Microsoft Services access should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-KV-007.md
+[Azure Key Vault diagnostics logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-MNT-002.md
+[Azure Key Vault keys should have an expiration date]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-KV-004.md
+[Azure Key Vault secrets should have an expiration date]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-KV-005.md
+[Azure KeyVault Public Network Access should be 'disabled']: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-KV-010.md
+[Azure Kubernetes Service Clusters should have local authentication methods disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AKS-010.md
+[Azure Linux Instance should not use basic authentication(Use SSH Key Instead)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-VM-002.md
+[Azure Load Balancer diagnostics logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-MNT-003.md
+[Azure Network Security Group (NSG) has an Inbound rule overly permissive to allow all traffic from any source to any destination]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-007.md
+[Azure Network Security Group (NSG) should not allow SSH traffic from internet on port 22]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-014.md
+[Azure Network Security Group (NSG) should not allow traffic from internet on port 3389]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-015.md
+[Azure Network Security Group (NSG) should protect OMIGOD attack from internet]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-017.md
+[Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all TCP traffic from any source]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-001.md
+[Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all UDP traffic from any source]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-002.md
+[Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all traffic from Internet on TCP protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-003.md
+[Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all traffic from Internet on UDP protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-004.md
+[Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all traffic from Internet on any protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-005.md
+[Azure Network Security Group allows NetBIOS (UDP Port 137 and 138)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-022.md
+[Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-025.md
+[Azure Network Security Group should not allow DNS (UDP Port 53)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-018.md
+[Azure Network Security Group should not allow FTP-Data (TCP Port 20)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-019.md
+[Azure Network Security Group should not allow MS SQL (TCP Port 4333)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-020.md
+[Azure Network Security Group should not allow MySQL (TCP Port 3306)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-021.md
+[Azure Network Security Group should not allow PostgreSQL (TCP Port 5432)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-023.md
+[Azure Network Security Group should not allow SMTP (TCP Port 25)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-024.md
+[Azure Network Security Group should not allow Telnet (TCP Port 23)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-026.md
+[Azure Network Security Group should not allow VNC Listener (TCP Port 5500)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-027.md
+[Azure Network Security Group should not allow VNC Server (TCP Port 5900)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-028.md
+[Azure Network Security Group should not allow Windows RPC (TCP Port 135)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-029.md
+[Azure Network Security Group should not allow Windows SMB (TCP Port 445)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-016.md
+[Azure Network Security Group shouldn't allow FTP (TCP Port 21)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-009.md
+[Azure Network Security Group shouldn't allow ICMP (Ping)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-008.md
+[Azure Network Security Group with Outbound rule to should not allow all traffic to any source]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-030.md
+[Azure Network Watcher Network Security Group (NSG) flow logs retention should be greater than 90 days]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NTW-003.md
+[Azure Network Watcher Network Security Group (NSG) flow logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NTW-001.md
+[Azure Network Watcher Network Security Group (NSG) traffic analytics should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NTW-002.md
+[Azure SQL Database Auditing Retention should be 90 days or more]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-006.md
+[Azure SQL Database security alert policies thread retention should be configured for more than 90 days]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-018.md
+[Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators and configured email addresses]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-019.md
+[Azure SQL Security Alert Policy should be configured to send alerts to the account administrators and configured email addresses]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-035.md
+[Azure SQL Server advanced data security recurring scans should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-022.md
+[Azure SQL Server advanced data security should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-062.md
+[Azure SQL Server advanced data security should have email alert recipient to get scan notification]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-024.md
+[Azure SQL Server advanced data security should send alerts to subscription administrators]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-026.md
+[Azure SQL Server threat detection alerts should be enabled for all threat types]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-039.md
+[Azure SQL database threat detection alerts should be enabled for all threat types]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-020.md
+[Azure SQL databases should have transparent data encryption enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-009.md
+[Azure SQL server audit log retention should be 90 days or higher]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-044.md
+[Azure Security Center should have pricing tier configured to 'standard']: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ASC-001.md
+[Azure Storage Account File Share should use SMB protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-025.md
+[Azure Storage Account Trusted Microsoft Services access should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-011.md
+[Azure Storage Account diagnostic logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-MNT-004.md
+[Azure Virtual Machine should be assigned to an availability set]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-VM-001.md
+[Azure Virtual Machine should have endpoint protection installed]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-VM-003.md
+[Azure Virtual Network subnet should be configured with Network Security Group]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NET-005.md
+[Azure Web Service Dot Net Framework should be latest]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-013.md
+[Azure Web Service FTP deployments should be disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-012.md
+[Azure Web Service Java version should be latest]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-016.md
+[Azure Web Service Managed Identity provider should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-010.md
+[Azure Web Service PHP version should be latest]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-014.md
+[Azure Web Service Python version should be latest]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-015.md
+[Azure Web Service detailed error message should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-008.md
+[Azure Web Service http logging should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-007.md
+[Azure Web Service remote debugging should be disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-011.md
+[Azure Web Service request tracing should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-009.md
+[Azure disk should have Azure Disk Encryption (ADE) enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-DSK-001.md
+[Azure frontDoors should have configured with WAF policy with Default Rule Set 1.0/1.1 for proactive protection against CVE-2021-44228 exploit]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-FRD-001.md
+[Azure storage account blob services diagnostic logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-MNT-005.md
+[Azure storage account queue services diagnostic logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-MNT-006.md
+[Azure storage account table services diagnostic logs should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-MNT-007.md
+[Azure virtual network peering state should be connected]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NET-004.md
+[Configure Azure Cache for redis with private endpoints]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ARC-005.md
+[Configure Azure Key Vaults with private endpoints]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-KV-009.md
+[Enable server-side encryption with customer-managed keys for managed disks]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-DSK-002.md
+[Ensure AKS API server defines authorized IP ranges]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AKS-007.md
+[Ensure AKS cluster network policies are enforced]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AKS-008.md
+[Ensure Application Gateway Backend is using Https protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AGW-005.md
+[Ensure Application Gateway frontendIPConfigurations does not have public ip configured]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AGW-004.md
+[Ensure Application Gateway is using Https protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AGW-003.md
+[Ensure Application Gateway secret certificates stores in keyvault]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AGW-006.md
+[Ensure Azure App Service Web App enforce https connection]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-001.md
+[Ensure Azure MySQL Server has latest version of tls configured]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-061.md
+[Ensure Azure Redis Cache has latest version of tls configured]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ARC-007.md
+[Ensure Azure SQL Server data replication with Fail Over groups]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-050.md
+[Ensure Azure SQL Server has latest version of tls configured]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-069.md
+[Ensure Azure Storage Account has latest version of tls configured]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-018.md
+[Ensure CORS configuration is not allowing every resource to access Azure Web Service]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-006.md
+[Ensure Geo-redundant backup is enabled on MariaDB server.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-058.md
+[Ensure Geo-redundant backup is enabled on PostgreSQL database server.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-028.md
+[Ensure Kubernetes Dashboard is disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AKS-009.md
+[Ensure MariaDB Server is using latest TLS version.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-064.md
+[Ensure MariaDB servers don't have public network access enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-057.md
+[Ensure MySQL servers don't have public network access enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-060.md
+[Ensure PostgreSQL servers don't have public network access enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-066.md
+[Ensure SQL Server Threat Detection is Enabled and Retention Logs are equal or greater than 90 days]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-037.md
+[Ensure SQL Server administrator login does not contain 'Admin/Administrator' as name]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-048.md
+[Ensure SQL server's TDE protector is encrypted with Customer-managed key]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-046.md
+[Ensure SQL servers don't have public network access enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-047.md
+[Ensure Secrets are not hardcoded in the ARM template]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SEC-001.md
+[Ensure Security Alert is enabled on Azure SQL Logical Server]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-030.md
+[Ensure Security Alert is enabled on Azure SQL Managed Instance]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-032.md
+[Ensure Security Alert is enabled on Azure SQL Server]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-031.md
+[Ensure VPN gateways is configured with cryptographic algorithm]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NET-006.md
+[Ensure at least one principal has access to Keyvault]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-KV-001.md
+[Ensure critical data storage in Storage Account is encrypted with Customer Managed Key]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-008.md
+[Ensure ssl enforcement is enabled on MariaDB Server.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-056.md
+[Ensure ssl enforcement is enabled on MySQL server Database Server.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-016.md
+[Ensure ssl enforcement is enabled on PostgreSQL Database Server.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-029.md
+[Ensure that 'Storage service encryption' is enabled for the Blob Service]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-006.md
+[Ensure that 'Storage service encryption' is enabled for the File Service]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-007.md
+[Ensure that SQL Server Auditing is Enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-042.md
+[Ensure that Storage Account should not allow public access to all blobs or containers]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-010.md
+[Ensure that VA setting 'Also send email notifications to admins and subscription owners' is set for a SQL server]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-033.md
+[Ensure that admin user is disabled for Container Registry]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ACR-002.md
+[Ensure that the Redis Cache accepts only SSL connections]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ARC-001.md
+[Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-KV-002.md
+[Instance should not be allowed communicating with ports known to mine Ethereum]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-032.md
+[Instance should not be allowed with ports known to mine Bitcoin]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-031.md
+[Internet connectivity via tcp over insecure port should be prevented]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-010.md
+[Key Vault should use a virtual network service endpoint]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-KV-008.md
+[Key vault should have purge protection enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-KV-003.md
+[Managed Azure AD RBAC for AKS cluster should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-AKS-006.md
+[MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-012.md
+[Memcached DDoS attack attempt should be prevented]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-011.md
+[MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-014.md
+[Publicly should not expose DB Ports]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-013.md
+[Redis Cache Firewall rules should not configure to allow full inbound access to everyone]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ARC-008.md
+[Redis Cache audit logging should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-MNT-012.md
+[Redis cache should have a backup]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ARC-002.md
+[RedisWannaMine vulnerable instances with active network traffic should be locked down]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-NSG-012.md
+[SQL Databases should have security alert policies enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-017.md
+[SQL Managed Instance should have public endpoint access disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-041.md
+[SQL Server Firewall rules should not configure to allow full inbound access to everyone]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-010.md
+[SQL managedInstances should be integrated with Azure Active Directory for administration]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-003.md
+[SQL servers should be integrated with Azure Active Directory for administration]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-001.md
+[Security Center should have security contact emails configured to get notifications]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ASC-002.md
+[Security Center should send security alerts notifications to subscription admins]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ASC-005.md
+[Send email notification should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-ASC-003.md
+[Soft delete on blob service container should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-002.md
+[Soft delete on blob service should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-001.md
+[Storage Accounts https based secure transfer should be enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-003.md
+[Storage Accounts location configuration should be inside of Europe]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-009.md
+[Storage Accounts should have firewall rules enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-004.md
+[Storage Accounts should use a virtual network service endpoint]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-023.md
+[Storage account encryption scopes should have infrastructure encryption]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-021.md
+[Storage account encryption scopes should use customer-managed keys to encrypt data at rest]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-022.md
+[Storage accounts should have infrastructure encryption]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-020.md
+[Storage accounts should prevent shared key access]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-024.md
+[Storage accounts should use private link]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-STR-019.md
+[There is a possibility that secure password is exposed]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SEC-002.md
+[Threat Detection alert should be configured to send notifications to the SQL server account administrators]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-SQL-021.md
+[Web App should have incoming client certificates enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-003.md
+[Web App should use the latest version of HTTP]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-004.md
+[Web App should use the latest version of TLS encryption]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-WEB-002.md
+[activity log retention should be set to 365 days or greater]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-MNT-009.md
+[log profile should be configured to capture all activities]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all/PR-AZR-ARM-MNT-011.md
