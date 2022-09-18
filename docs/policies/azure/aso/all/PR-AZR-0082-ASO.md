@@ -2,8 +2,10 @@
 
 
 
-# Master Test ID: TEST_DB_Firewallrules
+# Title: SQL Server Firewall rules allow access to any Azure internal resources
 
+
+***<font color="white">Master Test Id:</font>*** TEST_DB_Firewallrules
 
 ***<font color="white">Master Snapshot Id:</font>*** ['ASO_TEMPLATE_SNAPSHOT']
 
@@ -25,8 +27,6 @@
 
 
 ***<font color="white">Severity:</font>*** Medium
-
-***<font color="white">Title:</font>*** SQL Server Firewall rules allow access to any Azure internal resources
 
 ***<font color="white">Description:</font>*** Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with 0.0.0.0 represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.  
   
