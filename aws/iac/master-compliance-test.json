@@ -19255,6 +19255,74 @@
                         }
                     ],
                     "resourceTypes": []
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-AMF-001",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(amplify.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-AMF-001",
+                            "eval": "data.rule.amplify_basic_auth",
+                            "message": "data.rule.amplify_basic_auth_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/amplify.html#Amplify.Client.get_app' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_AMF_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS amplify has basic auth enabled.",
+                    "description": "To enhance the security enable basic auth for Amplify. It Enables basic authorization for the autocreated branch. So for this, user requires to enter base64-encode authorization credentials.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "amplify"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::amplify::app"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CFR-AMF-002",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(amplify.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-AMF-002",
+                            "eval": "data.rule.amplify_pr_preview",
+                            "message": "data.rule.amplify_pr_preview_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/amplify.html#Amplify.Client.get_app' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CFR_AMF_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS amplify has Pull Request Preview enabled.",
+                    "description": "Pull request previews are enabled for each branch that Amplify Console automatically creates for your app. Amplify Console creates previews by deploying your app to a unique URL whenever a pull request is opened for the branch. Development and QA teams can use this preview to test the pull request before it's merged into a production or integration branch.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "amplify"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::amplify::app"
+                    ]
                 }
             ]
         }

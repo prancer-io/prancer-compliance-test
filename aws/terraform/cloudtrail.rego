@@ -304,7 +304,7 @@ ct_cloudwatch_metadata := {
 
 default logging_data_events_for_s3_and_lambda = null
 
-aws_attribute_absence["logging_data_events_for_s3_and_lambda"] {
+aws_issue["logging_data_events_for_s3_and_lambda"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_cloudtrail"
     event := resource.properties.event_selector[i]
