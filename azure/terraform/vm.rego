@@ -327,3 +327,135 @@ vm_type_windows_disabled_extension_operation_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_virtual_machine"
 }
+
+
+#
+# PR-AZR-TRF-VM-008
+#
+
+default vm_usage_managed_disks = null
+
+azure_attribute_absence["vm_usage_managed_disks"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_virtual_machine"
+    not resource.properties.storage_os_disk
+}
+
+azure_attribute_absence["vm_usage_managed_disks"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_virtual_machine"
+    storage_os_disk := resource.properties.storage_os_disk[_]
+    not storage_os_disk.managed_disk_type
+}
+
+azure_issue["vm_usage_managed_disks"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_virtual_machine"
+    storage_os_disk := resource.properties.storage_os_disk[_]
+    count(storage_os_disk.managed_disk_type) == 0
+}
+
+vm_usage_managed_disks {
+    lower(input.resources[_].type) == "azurerm_virtual_machine"
+    not azure_attribute_absence["vm_usage_managed_disks"]
+    not azure_issue["vm_usage_managed_disks"]
+}
+
+vm_usage_managed_disks = false {
+    azure_attribute_absence["vm_usage_managed_disks"]
+}
+
+vm_usage_managed_disks = false {
+    azure_issue["vm_usage_managed_disks"]
+}
+
+vm_usage_managed_disks_err = "azurerm_virtual_machine property 'storage_os_disk.managed_disk_type' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["vm_usage_managed_disks"]
+} else = "Azure Virtual Machine is not assigned to an availability set" {
+    azure_issue["vm_usage_managed_disks"]
+}
+
+vm_usage_managed_disks_metadata := {
+    "Policy Code": "PR-AZR-TRF-VM-008",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Virtual Machine should utilize managed disks",
+    "Policy Description": "This policy identifies Azure Virtual Machines which are not utilising Managed Disks. Using Azure Managed disk over traditional BLOB based VHD's has more advantage features like Managed disks are by default encrypted, reduces cost over storage accounts and more resilient as Microsoft will manage the disk storage and move around if underlying hardware goes faulty. It is recommended to move BLOB based VHD's to Managed Disks.",
+    "Resource Type": "azurerm_virtual_machine",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine"
+}
+
+
+
+#
+# PR-AZR-TRF-VM-009
+#
+
+default vm_ip_forwarding_disabled = null
+
+azure_attribute_absence["vm_ip_forwarding_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_virtual_machine"
+    not resource.properties.network_interface_ids
+}
+
+azure_attribute_absence["vm_ip_forwarding_disabled"] {
+    count([c | lower(input.resources[_].type) == "azurerm_network_interface"; c := 1]) == 0
+}
+
+# azure_attribute_absence["vm_ip_forwarding_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_network_interface"
+#     not resource.properties.enable_ip_forwarding
+# }
+
+azure_issue["vm_ip_forwarding_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_virtual_machine"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_network_interface";
+              #contains(resource.properties.network_interface_ids, r.properties.compiletime_identity); # network_interface_ids is an array, contains will not work here and we can safely ignore this line as the azurerm_network_interface and azurerm_virtual_machine will exist in the same tf file and we can assume those are related
+              not r.properties.enable_ip_forwarding;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_network_interface";
+              #contains(resource.properties.network_interface_ids, concat(".", [r.type, r.name])); # network_interface_ids is an array, contains will not work here and we can safely ignore this line as the azurerm_network_interface and azurerm_virtual_machine will exist in the same tf file and we can assume those are related
+              not r.properties.enable_ip_forwarding;
+              c := 1]) == 0
+}
+
+vm_ip_forwarding_disabled {
+    lower(input.resources[_].type) == "azurerm_virtual_machine"
+    not azure_attribute_absence["vm_ip_forwarding_disabled"]
+    not azure_issue["vm_ip_forwarding_disabled"]
+}
+
+vm_ip_forwarding_disabled = false {
+    lower(input.resources[_].type) == "azurerm_virtual_machine"
+    azure_issue["vm_ip_forwarding_disabled"]
+}
+
+vm_ip_forwarding_disabled {
+    lower(input.resources[_].type) == "azurerm_virtual_machine"
+    azure_attribute_absence["vm_ip_forwarding_disabled"]
+    not azure_issue["vm_ip_forwarding_disabled"]
+}
+
+vm_ip_forwarding_disabled_err = "Azure Virtual Machine NIC currently not configured to have IP forwarding disabled" {
+    lower(input.resources[_].type) == "azurerm_virtual_machine"
+    azure_issue["vm_ip_forwarding_disabled"]
+}
+
+vm_ip_forwarding_disabled_metadata := {
+    "Policy Code": "PR-AZR-TRF-VM-009",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Virtual Machine NIC should have IP forwarding disabled",
+    "Policy Description": "This policy identifies Azure Virtual machine NIC which have IP forwarding enabled. IP forwarding on a virtual machine's NIC allows the machine to receive and forward traffic addressed to other destinations. As a best practice, before you enable IP forwarding in a Virtual Machine NIC, review the configuration with your network security team to ensure that it does not allow an attacker to exploit the set up to route packets through the host and compromise your network.",
+    "Resource Type": "azurerm_virtual_machine",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine"
+}
