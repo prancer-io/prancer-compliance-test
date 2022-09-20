@@ -19268,7 +19268,7 @@
                             "id": "PR-AWS-CFR-AMF-001",
                             "eval": "data.rule.amplify_basic_auth",
                             "message": "data.rule.amplify_basic_auth_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/amplify.html#Amplify.Client.get_app' target='_blank'>here</a>",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-app.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_AMF_001.py"
                         }
                     ],
@@ -19302,7 +19302,7 @@
                             "id": "PR-AWS-CFR-AMF-002",
                             "eval": "data.rule.amplify_pr_preview",
                             "message": "data.rule.amplify_pr_preview_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/amplify.html#Amplify.Client.get_app' target='_blank'>here</a>",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-app.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_AMF_002.py"
                         }
                     ],
