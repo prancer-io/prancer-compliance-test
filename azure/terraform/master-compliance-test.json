@@ -13715,6 +13715,157 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AZR-TRF-VM-008",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-VM-008",
+                            "eval": "data.rule.vm_usage_managed_disks",
+                            "message": "data.rule.vm_usage_managed_disks_err",
+                            "remediationDescription": "In 'azurerm_virtual_machine' resource, make sure 'storage_os_disk.managed_disk_type' exist and has value either 'Standard_LRS', 'StandardSSD_LRS' or 'Premium_LRS' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine#storage_os_disk' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_VM_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Virtual Machine should utilize managed disks",
+                    "description": "This policy identifies Azure Virtual Machines which are not utilising Managed Disks. Using Azure Managed disk over traditional BLOB based VHD's has more advantage features like Managed disks are by default encrypted, reduces cost over storage accounts and more resilient as Microsoft will manage the disk storage and move around if underlying hardware goes faulty. It is recommended to move BLOB based VHD's to Managed Disks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Azure Security Benchmark",
+                                "Azure Security Benchmark (v2)-NS-1",
+                                "Azure Security Benchmark (v3)-GS-3",
+                                "CIS",
+                                "CIS v1.2.0 (Azure)-7.1",
+                                "CIS v1.3.0 (Azure)-7.1",
+                                "CIS v1.3.1 (Azure)-7.1",
+                                "CIS v1.4.0 (Azure)-7.1",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:10.a",
+                                "ISO/IEC 27002:2013",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27017:2015",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018:2019",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "NIST CSF",
+                                "NIST CSF-PR.IP-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.4.2",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS",
+                                "PCI DSS v3.2.1-6.3"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_machine"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-VM-009",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-VM-009",
+                            "eval": "data.rule.vm_ip_forwarding_disabled",
+                            "message": "data.rule.vm_ip_forwarding_disabled_err",
+                            "remediationDescription": "In 'azurerm_network_interface' resource, make sure 'enable_ip_forwarding' has value 'false' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface#enable_ip_forwarding' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_VM_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Virtual Machine NIC should have IP forwarding disabled",
+                    "description": "This policy identifies Azure Virtual machine NIC which have IP forwarding enabled. IP forwarding on a virtual machine's NIC allows the machine to receive and forward traffic addressed to other destinations. As a best practice, before you enable IP forwarding in a Virtual Machine NIC, review the configuration with your network security team to ensure that it does not allow an attacker to exploit the set up to route packets through the host and compromise your network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-DSP-07",
+                                "CSA CCM v.4.0.1-DSP-10",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IVS-03",
+                                "CSA CCM v.4.0.1-UEM-11",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "HITRUST v.9.4.2-Control Reference:09.m",
+                                "ISO/IEC 27002:2013",
+                                "ISO/IEC 27002:2013-12.2.1",
+                                "ISO/IEC 27002:2013-12.3.1",
+                                "ISO/IEC 27002:2013-13.1.1",
+                                "ISO/IEC 27002:2013-13.1.2",
+                                "ISO/IEC 27002:2013-13.1.3",
+                                "ISO/IEC 27002:2013-13.2.1",
+                                "ISO/IEC 27002:2013-13.2.3",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.2.5",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-8.3.1",
+                                "ISO/IEC 27002:2013-8.3.3",
+                                "ISO/IEC 27017:2015",
+                                "ISO/IEC 27017:2015-6.1.1",
+                                "ISO/IEC 27018:2019",
+                                "ISO/IEC 27018:2019-10.1.2",
+                                "ISO/IEC 27018:2019-12.3.1",
+                                "NIST CSF",
+                                "NIST CSF-PR.AC-5",
+                                "NIST CSF-PR.DS-5",
+                                "NIST CSF-PR.PT-4",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.13.5",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS",
+                                "PCI DSS v3.2.1-1.3",
+                                "PCI DSS v3.2.1-7.1"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_machine",
+                        "azurerm_network_interface"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AZR-TRF-VM-003",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -14136,6 +14287,147 @@
                                 "terraform"
                             ]
                         }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-VMSS-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm_scale_sets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-VMSS-001",
+                            "eval": "data.rule.vmss_bootdiagonstics_enabled",
+                            "message": "data.rule.vmss_bootdiagonstics_enabled_err",
+                            "remediationDescription": "In 'azurerm_virtual_machine' resource, make sure 'boot_diagnostics.enabled' has value 'true' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_scale_set#boot_diagnostics' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_VMSS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Virtual Machine scale sets should have Boot Diagnostics enabled",
+                    "description": "This policy identifies Azure Virtual Machines scale sets which has Boot Diagnostics setting Disabled. Boot Diagnostics when enabled for virtual machine, captures Screenshot and Console Output during virtual machine startup. This would help in troubleshooting virtual machine when it enters a non-bootable state.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-LOG-05",
+                                "CSA CCM v.4.0.1-LOG-06",
+                                "CSA CCM v.4.0.1-LOG-08",
+                                "CSA CCM v.4.0.1-LOG-13",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:09.ab",
+                                "HITRUST v.9.4.2-Control Reference:09.ac",
+                                "ISO/IEC 27002:2013",
+                                "ISO/IEC 27002:2013-12.4.1",
+                                "ISO/IEC 27002:2013-12.4.3",
+                                "ISO/IEC 27002:2013-12.4.4",
+                                "ISO/IEC 27002:2013-16.1.1",
+                                "ISO/IEC 27017:2015",
+                                "ISO/IEC 27017:2015-12.4.1",
+                                "ISO/IEC 27017:2015-12.4.4",
+                                "ISO/IEC 27017:2015-16.1.2",
+                                "NIST CSF",
+                                "NIST CSF-PR.PT-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.3.4",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS",
+                                "PCI DSS v3.2.1-10.2.3",
+                                "PCI DSS v3.2.1-10.6"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_machine_scale_set"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-VMSS-002",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm_scale_sets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-VMSS-002",
+                            "eval": "data.rule.vmss_usage_managed_disks",
+                            "message": "data.rule.vmss_usage_managed_disks_err",
+                            "remediationDescription": "In 'azurerm_virtual_machine_scale_set' resource, make sure 'storage_profile_os_disk.managed_disk_type' exist and has value either 'Standard_LRS', 'StandardSSD_LRS' or 'Premium_LRS' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_scale_set#storage_profile_os_disk' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_VMSS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Virtual Machine scale sets should utilize managed disks",
+                    "description": "This policy identifies Azure Virtual machine scale sets which are not utilising Managed Disks. Using Azure Managed disk over traditional BLOB storage based VHD's has more advantage features like Managed disks are by default encrypted, reduces cost over storage accounts and more resilient as Microsoft will manage the disk storage and move around if underlying hardware goes faulty. It is recommended to move BLOB based VHD's to Managed Disks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Azure Security Benchmark",
+                                "Azure Security Benchmark (v2)-NS-1",
+                                "Azure Security Benchmark (v3)-GS-3",
+                                "CIS",
+                                "CIS v1.2.0 (Azure)-7.1",
+                                "CIS v1.3.0 (Azure)-7.1",
+                                "CIS v1.3.1 (Azure)-7.1",
+                                "CIS v1.4.0 (Azure)-7.1",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:10.a",
+                                "ISO/IEC 27002:2013",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27017:2015",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018:2019",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "NIST CSF",
+                                "NIST CSF-PR.IP-1",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.4.2",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS",
+                                "PCI DSS v3.2.1-6.3"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_machine_scale_set"
                     ]
                 }
             ]
