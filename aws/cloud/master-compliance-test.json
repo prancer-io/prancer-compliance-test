@@ -20228,7 +20228,8 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "CIS"
+                                "CIS",
+                                "Best Practice"
                             ],
                             "service": [
                                 "amplify"
@@ -20259,7 +20260,8 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "CIS"
+                                "CIS",
+                                "Best Practice"
                             ],
                             "service": [
                                 "amplify"

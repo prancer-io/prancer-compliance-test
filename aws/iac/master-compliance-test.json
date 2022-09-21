@@ -19279,7 +19279,8 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS"
+                                "CIS",
+                                "Best Practice"
                             ],
                             "service": [
                                 "amplify"
@@ -19313,7 +19314,8 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS"
+                                "CIS",
+                                "Best Practice"
                             ],
                             "service": [
                                 "amplify"
