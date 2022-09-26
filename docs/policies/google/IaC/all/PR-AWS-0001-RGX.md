@@ -1,0 +1,43 @@
+
+
+
+
+# Title: There is a possibility that secure password is exposed
+
+
+***<font color="white">Master Test Id:</font>*** PR-AWS-0001-RGX
+
+***<font color="white">Master Snapshot Id:</font>*** ['GDF_TEMPLATE_SNAPSHOT']
+
+***<font color="white">type:</font>*** python
+
+***<font color="white">rule:</font>*** file([secret_tf.py])  
+  
+  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|id|PR-AWS-0001-RGX|
+|eval|entropy_password|
+|message|entropy_password_err|
+|remediationDescription||
+|remediationFunction||
+
+
+***<font color="white">Severity:</font>*** High
+
+***<font color="white">Description:</font>*** There is a possibility that secure password is exposed  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|cloud|git|
+|compliance|['CSA-CCM', 'HITRUST', 'ISO 27001', 'NIST 800', 'NIST CSF', 'PCI-DSS']|
+|service|['deploymentmanager']|
+
+
+
+[secret_tf.py]: https://github.com/prancer-io/prancer-compliance-test/tree/master/google/iac/secret_tf.py
