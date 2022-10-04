@@ -1890,3 +1890,80 @@ k8s_integrity_monitor_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/NodeManagement"
 }
+
+
+#
+# PR-GCP-GDF-CLT-034 
+#
+
+default secret_encrypted = null
+
+
+gc_issue["secret_encrypted"] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    upper(resource.properties.databaseEncryption.state) == "DECRYPTED"
+}
+
+secret_encrypted{
+    lower(input.resources[i].type) == "container.v1.cluster"
+    not gc_issue["secret_encrypted"]
+}
+secret_encrypted = false{
+    gc_issue["secret_encrypted"]
+}
+
+secret_encrypted_err = "Make certain GCP Kubernetes cluster Application-layer Secrets are decrypted"{
+    gc_issue["secret_encrypted"]
+}
+
+secret_encrypted_metadata := {
+    "Policy Code": "PR-GCP-GDF-CLT-034",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Make sure GCP Kubernetes cluster Application-layer Secrets not encrypted",
+    "Policy Description": "The policy examine Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers who gain access to an offline copy of etc. This policy checks your cluster for the Application-layer Secrets Encryption security feature and alerts if it is not enabled.",
+    "Resource Type": "container.v1.cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
+}
+
+#
+# PR-GCP-GDF-CLT-035
+#
+
+default private_endpoint_disabled = true
+
+
+gc_issue["private_endpoint_disabled"] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    resource.properties.privateClusterConfig
+    not esource.properties.privateClusterConfig.enablePrivateEndpoint
+ 
+}
+
+private_endpoint_disabled {
+    lower(input.resources[i].type) == "container.v1.cluster"
+    not gc_issue["private_endpoint_disabled"]
+}
+private_endpoint_disabled = false{
+    gc_issue["private_endpoint_disabled"]
+}
+
+private_endpoint_disabled_err = "Ensure GCP Kubernetes Engine private cluster has private endpoint disabled"{
+    gc_issue["private_endpoint_disabled"]
+}
+
+private_endpoint_disabled_metadata := {
+    "Policy Code": "PR-GCP-GDF-CLT-035",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Make sure GCP Kubernetes Engine private cluster has private endpoint disabled",
+    "Policy Description": "This policy identifies GCP Kubernetes Engine private clusters with private endpoint disabled. A public endpoint might expose the current cluster and Kubernetes API version and an attacker may be able to determine whether it is vulnerable to an attack. Unless required, disabling the public endpoint will help prevent such threats, and require the attacker to be on the master's VPC network to perform any attack on the Kubernetes API. It is recommended to enable the private endpoint and disable public access on Kubernetes clusters.",
+    "Resource Type": "container.v1.cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
+}
