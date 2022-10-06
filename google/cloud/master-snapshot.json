@@ -198,7 +198,20 @@
                             ]
                         }
                     ]
-                }
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_PROJECT_INFO",
+                    "type": "compute/projects.get",
+                    "collection": "project_info",
+                    "tags": [
+                      {
+                        "cloud": "GCP",
+                        "service": [
+                          "compute"
+                        ]
+                      }
+                    ]
+                  }
             ]
         }
     ]
