@@ -1352,7 +1352,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure GCP VM instances have IP Forwarding enabled",
+                    "title": "Ensure GCP VM instances have IP Forwarding enabled.",
                     "description": "This policy checks VM instances that have IP Forwarding enabled. IP Forwarding could open unintended and undesirable communication paths and allows VM instances to send and receive packets with the non-matching destination or source IPs. To enable the source and destination IP match check, disable IP Forwarding.",
                     "tags": [
                         {

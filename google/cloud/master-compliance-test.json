@@ -2103,7 +2103,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure GCP Kubernetes Engine Clusters network firewall inbound rule overly permissive to all traffic",
+                    "title": "Ensure GCP Kubernetes Engine Clusters network firewall inbound rule overly permissive to all traffic.",
                     "description": "This policy checks Firewall rules attached to the cluster network which allows inbound traffic on all protocols from the public internet. Doing so may allow a bad actor to brute force their way into the system and potentially get access to the entire cluster network. \n\nReference: https://cloud.google.com/vpc/docs/firewall-rules-logging",
                     "tags": [
                         {
@@ -2866,7 +2866,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Make sure GCP VM instances have IP Forwarding enabled",
+                    "title": "Ensure GCP VM instances have IP Forwarding enabled.",
                     "description": "This policy checks VM instances that have IP Forwarding enabled. IP Forwarding could open unintended and undesirable communication paths and allows VM instances to send and receive packets with the non-matching destination or source IPs. To enable the source and destination IP match check, disable IP Forwarding.",
                     "tags": [
                         {

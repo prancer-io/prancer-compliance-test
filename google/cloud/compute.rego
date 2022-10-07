@@ -1127,7 +1127,7 @@ gc_issue["overlly_permissive_traffic"]{
     Y := input.GOOGLE_FIREWALL[i]
     X := input.GOOGLE_CLUSTER[j]
     contains(Y.network, X.network)
-    contains(Y.sourceRanges, "0.0.0.0/0")
+    contains(Y.sourceRanges[_], "0.0.0.0/0")
     contains(Y.direction, "INGRESS")
     count(input.GOOGLE_FIREWALL[_].allowed[i]) > 0 
 
@@ -1141,7 +1141,7 @@ overlly_permissive_traffic = false {
 }
 
 
-overlly_permissive_traffic_err = "Ensure GCP Kubernetes Engine Clusters network firewall inbound rule overly permissive to all traffic" {
+overlly_permissive_traffic_err = "Ensure GCP Kubernetes Engine Clusters network firewall inbound rule overly permissive to all traffic." {
     gc_issue["overlly_permissive_traffic"]
 }
 
@@ -1150,7 +1150,7 @@ overlly_permissive_traffic_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP cloud",
-    "Policy Title": "Ensure GCP Kubernetes Engine Clusters network firewall inbound rule overly permissive to all traffic",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters network firewall inbound rule overly permissive to all traffic.",
     "Policy Description": "This policy checks Firewall rules attached to the cluster network which allows inbound traffic on all protocols from the public internet. Doing so may allow a bad actor to brute force their way into the system and potentially get access to the entire cluster network.",
     "Resource Type": "compute.v1.firewall",
     "Policy Help URL": "",
