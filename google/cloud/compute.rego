@@ -1852,7 +1852,7 @@ compute_ip_forwarding_enable = false {
     gc_issue["compute_ip_forwarding_enable"]
 }
 
-compute_ip_forwarding_enable_err = "Ensure GCP VM instances have IP Forwarding enabled" {
+compute_ip_forwarding_enable_err = "Ensure GCP VM instances have IP Forwarding enabled." {
     gc_issue["compute_ip_forwarding_enable"]
 }
 
@@ -1861,7 +1861,7 @@ compute_ip_forwarding_enable_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP cloud",
-    "Policy Title": "Ensure GCP VM instances have IP Forwarding enabled",
+    "Policy Title": "Ensure GCP VM instances have IP Forwarding enabled.",
     "Policy Description": "This policy checks VM instances that have IP Forwarding enabled. IP Forwarding could open unintended and undesirable communication paths and allows VM instances to send and receive packets with the non-matching destination or source IPs. To enable the source and destination IP match check, disable IP Forwarding.",
     "Resource Type": "compute.v1.instance",
     "Policy Help URL": "",

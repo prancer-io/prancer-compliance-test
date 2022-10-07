@@ -3001,8 +3001,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure GCP Kubernetes cluster Application-layer Secrets not encrypted",
-                    "description": "This policy checks Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers who gain access to an offline copy of etc. This policy checks your cluster for the Application-layer Secrets Encryption security feature and alerts if it is not enabled.",
+                    "title": "Ensure GCP Kubernetes cluster Application-layer Secrets are decrypted.",
+                    "description": "This policy established Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers who gain access to an offline copy of etc. This policy checks your cluster for the Application-layer Secrets Encryption security feature and alerts if it is not enabled.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3092,8 +3092,8 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "Ensure GCP Kubernetes Engine private cluster has private endpoint disabled",
-                    "description": "This policy identifies GCP Kubernetes Engine private clusters with private endpoint disabled. A public endpoint might expose the current cluster and Kubernetes API version and an attacker may be able to determine whether it is vulnerable to an attack. Unless required, disabling the public endpoint will help prevent such threats, and require the attacker to be on the master's VPC network to perform any attack on the Kubernetes API. It is recommended to enable the private endpoint and disable public access on Kubernetes clusters.",
+                    "title": "Ensure GCP Kubernetes Engine private cluster has private endpoint disabled.",
+                    "description": "This policy finds GCP Kubernetes Engine private clusters with private endpoint disabled. A public endpoint might expose the current cluster and Kubernetes API version and an attacker may be able to determine whether it is vulnerable to an attack. Unless required, disabling the public endpoint will help prevent such threats, and require the attacker to be on the master's VPC network to perform any attack on the Kubernetes API. It is recommended to enable the private endpoint and disable public access on Kubernetes clusters.",
                     "tags": [
                         {
                             "cloud": "git",
