@@ -2281,7 +2281,7 @@
                             "remediationFunction": "PR_AZR_ARM_SQL_023.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure SQL Server advanced data security recurring scans should be enabled",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
                     "tags": [
@@ -7327,6 +7327,279 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AZR-ARM-SQL-067",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-067",
+                            "eval": "data.rule.pg_ingress_from_any_ip_disabled",
+                            "message": "data.rule.pg_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "In 'microsoft.dbforpostgresql/servers/firewallrules' resource, make sure startIpAddress and endIpAddress dont have ip configured to '0.0.0.0' and '255.255.255.255' respectively to fix the issue.<br>Please Visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers/firewallrules?pivots=deployment-language-arm-template' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_067.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "PostgreSQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify PostgreSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbforpostgresql/servers",
+                        "microsoft.dbforpostgresql/servers/firewallrules"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-SQL-068",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-068",
+                            "eval": "data.rule.postgresql_infrastructure_encryption_enabled",
+                            "message": "data.rule.postgresql_infrastructure_encryption_enabled_err",
+                            "remediationDescription": "In 'microsoft.dbforpostgresql/servers' resource, make sure property infrastructureEncryption has value 'Enabled' to fix the issue.<br>Please Visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers?pivots=deployment-language-arm-template' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_068.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure PostgreSQL database server Infrastructure double encryption is enabled",
+                    "description": "This policy identifies PostgreSQL database servers in which Infrastructure double encryption is disabled. Infrastructure double encryption adds a second layer of encryption using service-managed keys. It is recommended to enable infrastructure double encryption on PostgreSQL database servers so that encryption can be implemented at the layer closest to the storage device or network wires. For more details: https://docs.microsoft.com/en-us/azure/postgresql/concepts-infrastructure-double-encryption",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbforpostgresql/servers"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-SQL-070",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-070",
+                            "eval": "data.rule.postgresql_log_retention_is_greater_than_three_days",
+                            "message": "data.rule.postgresql_log_retention_is_greater_than_three_days_err",
+                            "remediationDescription": "In 'microsoft.dbforpostgresql/servers/configurations' resource with name 'log_retention_days', make sure property value has at least '4' as value to fix the issue.<br>Please Visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers/configurations?tabs=json&pivots=deployment-language-arm-template' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_070.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure PostgreSQL database server log retention days is greater than 3 days",
+                    "description": "This policy identifies PostgreSQL database servers which have log retention days less than or equals to 3 days. Enabling log_retention_days helps PostgreSQL database server to Sets number of days a log file is retained which in turn generates query and error logs. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.DBforPostgreSQL/servers/configurations"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-SQL-071",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-071",
+                            "eval": "data.rule.azurerm_postgresql_configuration_connection_throttling",
+                            "message": "data.rule.azurerm_postgresql_configuration_connection_throttling_err",
+                            "remediationDescription": "In 'microsoft.dbforpostgresql/servers/configurations' resource with name 'connection_throttling', make sure property value has 'on' as value to fix the issue.<br>Please Visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers/configurations?tabs=json&pivots=deployment-language-arm-template' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_071.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have connection_throttling enable",
+                    "description": "This policy identifies PostgreSQL database servers for which server parameter is not set for connection throttling. Enabling connection_throttling helps the PostgreSQL Database to Set the verbosity of logged messages which in turn generates query and error logs with respect to concurrent connections, that could lead to a successful Denial of Service (DoS) attack by exhausting connection resources. A system can also fail or be degraded by an overload of legitimate users. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.DBforPostgreSQL/servers/configurations"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-SQL-072",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-072",
+                            "eval": "data.rule.azurerm_postgresql_configuration_log_checkpoints",
+                            "message": "data.rule.azurerm_postgresql_configuration_log_checkpoints_err",
+                            "remediationDescription": "In 'microsoft.dbforpostgresql/servers/configurations' resource with name 'log_checkpoints', make sure property value has 'on' as value to fix the issue.<br>Please Visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers/configurations?tabs=json&pivots=deployment-language-arm-template' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_072.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have log_checkpoints enabled",
+                    "description": "This policy identifies PostgreSQL database servers for which server parameter is not set for log checkpoints. Enabling log_checkpoints helps the PostgreSQL Database to Log each checkpoint in turn generates query and error logs. However, access to transaction logs is not supported. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.DBforPostgreSQL/servers/configurations"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-SQL-073",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-073",
+                            "eval": "data.rule.azurerm_postgresql_configuration_log_connections",
+                            "message": "data.rule.azurerm_postgresql_configuration_log_connections_err",
+                            "remediationDescription": "In 'microsoft.dbforpostgresql/servers/configurations' resource with name 'log_connections', make sure property value has 'on' as value to fix the issue.<br>Please Visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers/configurations?tabs=json&pivots=deployment-language-arm-template' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_073.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have log_connections parameter enabled",
+                    "description": "This policy identifies PostgreSQL database servers for which server parameter is not set for log connections. Enabling log_connections helps PostgreSQL Database to log attempted connection to the server, as well as successful completion of client authentication. Log data can be used to identify, troubleshoot, and repair configuration errors and suboptimal performance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.DBforPostgreSQL/servers/configurations"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-SQL-074",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-074",
+                            "eval": "data.rule.azurerm_postgresql_configuration_log_disconnections",
+                            "message": "data.rule.azurerm_postgresql_configuration_log_disconnections_err",
+                            "remediationDescription": "In 'microsoft.dbforpostgresql/servers/configurations' resource with name 'log_disconnections', make sure property value has 'on' as value to fix the issue.<br>Please Visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers/configurations?tabs=json&pivots=deployment-language-arm-template' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_074.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have log_disconnections parameter enabled",
+                    "description": "This policy identifies PostgreSQL database servers for which server parameter is not set for log disconnections. Enabling log_disconnections helps PostgreSQL Database to Logs end of a session, including duration, which in turn generates query and error logs. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.DBforPostgreSQL/servers/configurations"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-SQL-075",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-075",
+                            "eval": "data.rule.azurerm_postgresql_configuration_log_duration",
+                            "message": "data.rule.azurerm_postgresql_configuration_log_duration_err",
+                            "remediationDescription": "In 'microsoft.dbforpostgresql/servers/configurations' resource with name 'log_duration', make sure property value has 'on' as value to fix the issue.<br>Please Visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers/configurations?tabs=json&pivots=deployment-language-arm-template' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_075.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have log_duration parameter enabled",
+                    "description": "This policy identifies PostgreSQL database servers for which server parameter is not set for log duration. Enabling log_duration helps the PostgreSQL Database to Logs the duration of each completed SQL statement which in turn generates query and error logs. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.DBforPostgreSQL/servers/configurations"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AZR-ARM-ASC-001",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -12161,7 +12434,7 @@
                             "remediationFunction": "PR_AZR_ARM_SQL_038.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are equal or greater than 90 days",
                     "description": "Azure SQL Database Threat Detection is a security intelligence feature built into the Azure SQL Database service. Working around the clock to learn, profile and detect anomalous database activities, Azure SQL Database Threat Detection identifies potential threats to the database. Security officers or other designated administrators can get an immediate notification about suspicious database activities as they occur. Each notification provides details of the suspicious activity and recommends how to further investigate and mitigate the threat.",
                     "tags": [
@@ -12462,7 +12735,7 @@
                             "remediationFunction": "PR_AZR_ARM_SQL_052.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure SQL Server advanced data security recurring scans should be enabled",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
                     "tags": [

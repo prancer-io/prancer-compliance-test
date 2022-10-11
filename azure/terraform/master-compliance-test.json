@@ -10925,8 +10925,7 @@
                     ],
                     "resourceTypes": [
                         "azurerm_postgresql_configuration",
-                        "azurerm_postgresql_server",
-                        "azurerm_postgresql_firewall_rule"
+                        "azurerm_postgresql_server"
                     ]
                 },
                 {
@@ -10998,6 +10997,74 @@
                     "resourceTypes": [
                         "azurerm_postgresql_server",
                         "azurerm_private_endpoint"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-074",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-074",
+                            "eval": "data.rule.azurerm_postgresql_configuration_log_disconnections",
+                            "message": "data.rule.azurerm_postgresql_configuration_log_disconnections_err",
+                            "remediationDescription": "In 'azurerm_postgresql_configuration' resource, set name = 'log_disconnections' and value = 'on' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_074.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have log_disconnections parameter enabled",
+                    "description": "This policy identifies PostgreSQL database servers for which server parameter is not set for log disconnections. Enabling log_disconnections helps PostgreSQL Database to Logs end of a session, including duration, which in turn generates query and error logs. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_postgresql_configuration",
+                        "azurerm_postgresql_server"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-075",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-075",
+                            "eval": "data.rule.azurerm_postgresql_configuration_log_duration",
+                            "message": "data.rule.azurerm_postgresql_configuration_log_duration_err",
+                            "remediationDescription": "In 'azurerm_postgresql_configuration' resource, set name = 'log_duration' and value = 'on' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_075.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have log_duration parameter enabled",
+                    "description": "This policy identifies PostgreSQL database servers for which server parameter is not set for log duration. Enabling log_duration helps the PostgreSQL Database to Logs the duration of each completed SQL statement which in turn generates query and error logs. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_postgresql_configuration",
+                        "azurerm_postgresql_server"
                     ]
                 },
                 {

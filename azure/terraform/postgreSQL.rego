@@ -608,3 +608,143 @@ pgsql_server_uses_privatelink_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server"
 }
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
+# PR-AZR-TRF-SQL-074
+
+default azurerm_postgresql_configuration_log_disconnections = null
+
+azure_attribute_absence ["azurerm_postgresql_configuration_log_disconnections"] {
+    count([c | input.resources[_].type == "azurerm_postgresql_configuration"; c := 1]) == 0
+}
+
+azure_issue ["azurerm_postgresql_configuration_log_disconnections"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_configuration";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              lower(r.properties.name) == "log_disconnections";
+              lower(r.properties.value) == "on";
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_configuration";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              lower(r.properties.name) == "log_disconnections";
+              lower(r.properties.value) == "on";
+              c := 1]) == 0
+}
+
+# azure_issue ["azurerm_postgresql_configuration_log_disconnections"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_postgresql_configuration"
+#     lower(resource.properties.name) == "log_disconnections"
+#     lower(resource.properties.value) == "off"
+# }
+
+azurerm_postgresql_configuration_log_disconnections {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    not azure_attribute_absence["azurerm_postgresql_configuration_log_disconnections"]
+    not azure_issue["azurerm_postgresql_configuration_log_disconnections"]
+}
+
+azurerm_postgresql_configuration_log_disconnections = false {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_attribute_absence["azurerm_postgresql_configuration_log_disconnections"]
+}
+
+azurerm_postgresql_configuration_log_disconnections = false {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_issue["azurerm_postgresql_configuration_log_disconnections"]
+}
+
+azurerm_postgresql_configuration_log_disconnections_err = "Either Resource azurerm_postgresql_configuration or log_disconnections parameter from this resource is missing" {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_attribute_absence["azurerm_postgresql_configuration_log_disconnections"]
+} else = "PostgreSQL database server log disconnections parameter is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_issue["azurerm_postgresql_configuration_log_disconnections"]
+}
+
+azurerm_postgresql_configuration_log_disconnections_metadata := {
+    "Policy Code": "PR-AZR-TRF-SQL-074",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "PostgreSQL Database Server should have log_disconnections parameter enabled",
+    "Policy Description": "This policy identifies PostgreSQL database servers for which server parameter is not set for log disconnections. Enabling log_disconnections helps PostgreSQL Database to Logs end of a session, including duration, which in turn generates query and error logs. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.",
+    "Resource Type": "azurerm_postgresql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
+# PR-AZR-TRF-SQL-075
+
+default azurerm_postgresql_configuration_log_duration = null
+
+azure_attribute_absence ["azurerm_postgresql_configuration_log_duration"] {
+    count([c | input.resources[_].type == "azurerm_postgresql_configuration"; c := 1]) == 0
+}
+
+azure_issue ["azurerm_postgresql_configuration_log_duration"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_configuration";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              lower(r.properties.name) == "log_duration";
+              lower(r.properties.value) == "on";
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_configuration";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              lower(r.properties.name) == "log_duration";
+              lower(r.properties.value) == "on";
+              c := 1]) == 0
+}
+
+# azure_issue ["azurerm_postgresql_configuration_log_duration"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_postgresql_configuration"
+#     lower(resource.properties.name) == "log_duration"
+#     lower(resource.properties.value) == "off"
+# }
+
+azurerm_postgresql_configuration_log_duration {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    not azure_attribute_absence["azurerm_postgresql_configuration_log_duration"]
+    not azure_issue["azurerm_postgresql_configuration_log_duration"]
+}
+
+azurerm_postgresql_configuration_log_duration = false {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_attribute_absence["azurerm_postgresql_configuration_log_duration"]
+}
+
+azurerm_postgresql_configuration_log_duration = false {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_issue["azurerm_postgresql_configuration_log_duration"]
+}
+
+azurerm_postgresql_configuration_log_duration_err = "Either Resource azurerm_postgresql_configuration or log_duration parameter from this resource is missing" {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_attribute_absence["azurerm_postgresql_configuration_log_duration"]
+} else = "PostgreSQL database server log duration parameter is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_issue["azurerm_postgresql_configuration_log_duration"]
+}
+
+azurerm_postgresql_configuration_log_duration_metadata := {
+    "Policy Code": "PR-AZR-TRF-SQL-075",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "PostgreSQL Database Server should have log_duration parameter enabled",
+    "Policy Description": "This policy identifies PostgreSQL database servers for which server parameter is not set for log duration. Enabling log_duration helps the PostgreSQL Database to Logs the duration of each completed SQL statement which in turn generates query and error logs. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.",
+    "Resource Type": "azurerm_postgresql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
+}
