@@ -275,7 +275,7 @@ azure_issue["postgresql_log_retention_is_greater_than_three_days"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbforpostgresql/servers/configurations"
     lower(resource.name) == "log_retention_days"
-    to_number((resource.properties.value) < 4
+    to_number(resource.properties.value) < 4
 }
 
 postgresql_log_retention_is_greater_than_three_days {
@@ -348,7 +348,7 @@ azurerm_postgresql_configuration_connection_throttling_metadata := {
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
-    "Policy Title": "PostgreSQL Database Server should have connection_throttling enable",
+    "Policy Title": "PostgreSQL Database Server should have connection_throttling enabled",
     "Policy Description": "This policy identifies PostgreSQL database servers for which server parameter is not set for connection throttling. Enabling connection_throttling helps the PostgreSQL Database to Set the verbosity of logged messages which in turn generates query and error logs with respect to concurrent connections, that could lead to a successful Denial of Service (DoS) attack by exhausting connection resources. A system can also fail or be degraded by an overload of legitimate users. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.",
     "Resource Type": "Microsoft.DBforPostgreSQL/servers/configurations",
     "Policy Help URL": "",

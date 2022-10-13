@@ -11000,6 +11000,73 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AZR-TRF-SQL-067",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-067",
+                            "eval": "data.rule.postgresql_infrastructure_encryption_enabled",
+                            "message": "data.rule.postgresql_infrastructure_encryption_enabled_err",
+                            "remediationDescription": "In 'azurerm_postgresql_server' resource, set infrastructure_encryption_enabled = 'true' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server#infrastructure_encryption_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_067.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure PostgreSQL database server Infrastructure double encryption is enabled",
+                    "description": "This policy identifies PostgreSQL database servers in which Infrastructure double encryption is disabled. Infrastructure double encryption adds a second layer of encryption using service-managed keys. It is recommended to enable infrastructure double encryption on PostgreSQL database servers so that encryption can be implemented at the layer closest to the storage device or network wires.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_postgresql_server"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-070",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-070",
+                            "eval": "data.rule.postgresql_log_retention_is_greater_than_three_days",
+                            "message": "data.rule.postgresql_log_retention_is_greater_than_three_days_err",
+                            "remediationDescription": "In 'azurerm_postgresql_configuration' resource, set name = 'log_disconnections' and value = '4' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_070.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure PostgreSQL database server log retention days is greater than 3 days",
+                    "description": "This policy identifies PostgreSQL database servers which have log retention days less than or equals to 3 days. Enabling log_retention_days helps PostgreSQL database server to Sets number of days a log file is retained which in turn generates query and error logs. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_postgresql_configuration",
+                        "azurerm_postgresql_server"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AZR-TRF-SQL-074",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"

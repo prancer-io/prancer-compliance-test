@@ -610,6 +610,125 @@ pgsql_server_uses_privatelink_metadata := {
 }
 
 
+# PR-AZR-TRF-SQL-067
+
+default postgresql_infrastructure_encryption_enabled = null
+
+azure_attribute_absence["postgresql_infrastructure_encryption_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_server"
+    not resource.properties.infrastructure_encryption_enabled
+}
+
+azure_issue["postgresql_infrastructure_encryption_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_server"
+    resource.properties.infrastructure_encryption_enabled != true
+}
+
+postgresql_infrastructure_encryption_enabled {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    not azure_attribute_absence["postgresql_infrastructure_encryption_enabled"]
+    not azure_issue["postgresql_infrastructure_encryption_enabled"]
+}
+
+postgresql_infrastructure_encryption_enabled = false {
+    azure_attribute_absence["postgresql_infrastructure_encryption_enabled"]
+}
+
+postgresql_infrastructure_encryption_enabled = false {
+    azure_issue["postgresql_infrastructure_encryption_enabled"]
+}
+
+postgresql_infrastructure_encryption_enabled_err = "azurerm_postgresql_server property 'infrastructure_encryption_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["postgresql_infrastructure_encryption_enabled"]
+} else = "Infrastructure double encryption is currently not enabled on PostgreSQL database Server." {
+    azure_issue["postgresql_infrastructure_encryption_enabled"]
+}
+
+postgresql_infrastructure_encryption_enabled_metadata := {
+    "Policy Code": "PR-AZR-TRF-SQL-067",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure PostgreSQL database server Infrastructure double encryption is enabled",
+    "Policy Description": "This policy identifies PostgreSQL database servers in which Infrastructure double encryption is disabled. Infrastructure double encryption adds a second layer of encryption using service-managed keys. It is recommended to enable infrastructure double encryption on PostgreSQL database servers so that encryption can be implemented at the layer closest to the storage device or network wires.",
+    "Resource Type": "azurerm_postgresql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
+# PR-AZR-TRF-SQL-070
+
+default postgresql_log_retention_is_greater_than_three_days = null
+
+azure_attribute_absence ["postgresql_log_retention_is_greater_than_three_days"] {
+    count([c | input.resources[_].type == "azurerm_postgresql_configuration"; c := 1]) == 0
+}
+
+azure_issue ["postgresql_log_retention_is_greater_than_three_days"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_configuration";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              lower(r.properties.name) == "log_retention_days";
+              to_number(r.properties.value) > 3;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_configuration";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              lower(r.properties.name) == "log_retention_days";
+              to_number(r.properties.value) > 3;
+              c := 1]) == 0
+}
+
+# azure_issue ["postgresql_log_retention_is_greater_than_three_days"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_postgresql_configuration"
+#     lower(resource.properties.name) == "log_retention_days"
+#     to_number(r.properties.value) < 4;
+# }
+
+postgresql_log_retention_is_greater_than_three_days {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    not azure_attribute_absence["postgresql_log_retention_is_greater_than_three_days"]
+    not azure_issue["postgresql_log_retention_is_greater_than_three_days"]
+}
+
+postgresql_log_retention_is_greater_than_three_days = false {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_attribute_absence["postgresql_log_retention_is_greater_than_three_days"]
+}
+
+postgresql_log_retention_is_greater_than_three_days = false {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_issue["postgresql_log_retention_is_greater_than_three_days"]
+}
+
+postgresql_log_retention_is_greater_than_three_days_err = "Either Resource azurerm_postgresql_configuration or log_retention_days parameter from this resource is missing" {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_attribute_absence["postgresql_log_retention_is_greater_than_three_days"]
+} else = "PostgreSQL database server log retention days is currently not greater than 3 days" {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_issue["postgresql_log_retention_is_greater_than_three_days"]
+}
+
+postgresql_log_retention_is_greater_than_three_days_metadata := {
+    "Policy Code": "PR-AZR-TRF-SQL-065",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure PostgreSQL database server log retention days is greater than 3 days",
+    "Policy Description": "This policy identifies PostgreSQL database servers which have log retention days less than or equals to 3 days. Enabling log_retention_days helps PostgreSQL database server to Sets number of days a log file is retained which in turn generates query and error logs. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.",
+    "Resource Type": "azurerm_postgresql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
+}
+
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
 # PR-AZR-TRF-SQL-074
 
