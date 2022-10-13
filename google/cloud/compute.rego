@@ -1158,50 +1158,6 @@ overlly_permissive_traffic_metadata := {
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
 }
 
-#
-# PR-GCP-CLD-PRIF-001
-#
-
-default os_login_disable = null
-
-gc_issue["os_login_disable"] {
-    # lower(resource.type) == "compute.v1.disk"
-    project_info := input.commonInstanceMetadata.items[_]
-    not contains(project_info.key, "enable-oslogin")
-}
-
-gc_issue["os_login_disable"] {
-    # lower(resource.type) == "compute.v1.disk"
-    project_info := input.commonInstanceMetadata.items[_]
-    contains(project_info.key, "enable-oslogin")
-    lower(project_info.value) == "false"
-}
-
-os_login_disable {
-    # lower(input.resources[i].type) == "compute.v1.disk"
-    not gc_issue["os_login_disable"]
-}
-
-os_login_disable = false {
-    gc_issue["os_login_disable"]
-}
-
-disk_encrypt_err = "Make sure that GCP Projects have OS Login disabled" {
-    gc_issue["os_login_disable"]
-}
-
-disk_encrypt_metadata := {
-    "Policy Code": "PR-GCP-CLD-PRIF-001",
-    "Type": "IaC",
-    "Product": "GCP",
-    "Language": "GCP cloud",
-    "Policy Title": "Make sure that GCP Projects have OS Login disabled",
-    "Policy Description": "This policy checks GCP Projects which have OS Login disabled. Enabling OS Login ensures that SSH keys used to connect to instances are mapped with IAM users. Revoking access to IAM user will revoke all the SSH keys associated with that particular user. It facilitates centralized and automated SSH key pair management which is useful in handling cases like a response to compromised SSH key pairs.",
-    "Resource Type": "compute.v1.projects",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/projects"
-}
-
 
 #
 # PR-GCP-CLD-DISK-001
