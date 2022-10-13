@@ -1,5 +1,9 @@
 package rule
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers
 
 # PR-AZR-ARM-SQL-028
@@ -210,10 +214,28 @@ azure_issue["pg_ingress_from_any_ip_disabled"] {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.dbforpostgresql/servers/firewallrules";
               array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
-              not contains(r.properties.startIpAddress, "0.0.0.0");
-              not contains(r.properties.endIpAddress, "0.0.0.0");
-              not contains(r.properties.endIpAddress, "255.255.255.255");
-              c := 1]) == 0
+              r.properties.startIpAddress == "0.0.0.0";
+              c := 1]) > 0
+}
+
+azure_issue["pg_ingress_from_any_ip_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.dbforpostgresql/servers/firewallrules";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              r.properties.endIpAddress == "0.0.0.0";
+              c := 1]) > 0
+}
+
+azure_issue["pg_ingress_from_any_ip_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.dbforpostgresql/servers/firewallrules";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              r.properties.endIpAddress == "255.255.255.255";
+              c := 1]) > 0
 }
 
 pg_ingress_from_any_ip_disabled {
@@ -305,24 +327,50 @@ postgresql_infrastructure_encryption_enabled_metadata := {
 
 default postgresql_log_retention_is_greater_than_three_days = null
 
-azure_issue["postgresql_log_retention_is_greater_than_three_days"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.dbforpostgresql/servers/configurations"
-    lower(resource.name) == "log_retention_days"
-    to_number(resource.properties.value) < 4
+azure_attribute_absence["postgresql_log_retention_is_greater_than_three_days"] {
+    count([c | lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers/configurations"; c := 1]) == 0
 }
 
+azure_issue["postgresql_log_retention_is_greater_than_three_days"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.dbforpostgresql/servers/configurations";
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              lower(r.name) == "log_retention_days";
+              to_number(r.properties.value) > 3;
+              c := 1]) == 0
+}
+
+# azure_issue["postgresql_log_retention_is_greater_than_three_days"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.dbforpostgresql/servers/configurations"
+#     lower(resource.name) == "log_retention_days"
+#     to_number(resource.properties.value) < 4
+# }
+
 postgresql_log_retention_is_greater_than_three_days {
-    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers/configurations"
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
+    not azure_attribute_absence["azurerm_postgresql_configuration_connection_throttling"]
     not azure_issue["postgresql_log_retention_is_greater_than_three_days"]
 }
 
 postgresql_log_retention_is_greater_than_three_days = false {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
+    azure_attribute_absence["postgresql_log_retention_is_greater_than_three_days"]
+}
+
+postgresql_log_retention_is_greater_than_three_days = false {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_issue["postgresql_log_retention_is_greater_than_three_days"]
 }
 
 postgresql_log_retention_is_greater_than_three_days_err = "PostgreSQL database server log retention days is currently not greater than 3 days" {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_issue["postgresql_log_retention_is_greater_than_three_days"]
+} else = "Either resource of type 'microsoft.dbforpostgresql/servers/configurations' or log_retention_days configuration from this resource is missing" {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
+    azure_attribute_absence["postgresql_log_retention_is_greater_than_three_days"]
 }
 
 postgresql_log_retention_is_greater_than_three_days_metadata := {
@@ -358,22 +406,26 @@ azure_issue["azurerm_postgresql_configuration_connection_throttling"] {
 }
 
 azurerm_postgresql_configuration_connection_throttling {
-    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers/configurations"
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     not azure_attribute_absence["azurerm_postgresql_configuration_connection_throttling"]
     not azure_issue["azurerm_postgresql_configuration_connection_throttling"]
 }
 
 azurerm_postgresql_configuration_connection_throttling = false {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_attribute_absence["azurerm_postgresql_configuration_connection_throttling"]
 }
 
 azurerm_postgresql_configuration_connection_throttling = false {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_issue["azurerm_postgresql_configuration_connection_throttling"]
 }
 
 azurerm_postgresql_configuration_connection_throttling_err = "PostgreSQL database server connection throttling is currently not enabled" {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_issue["azurerm_postgresql_configuration_connection_throttling"]
 } else = "Either resource of type 'microsoft.dbforpostgresql/servers/configurations' or connection_throttling configuration from this resource is missing" {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_attribute_absence["azurerm_postgresql_configuration_connection_throttling"]
 }
 
@@ -410,22 +462,26 @@ azure_issue["azurerm_postgresql_configuration_log_checkpoints"] {
 }
 
 azurerm_postgresql_configuration_log_checkpoints {
-    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers/configurations"
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     not azure_attribute_absence["azurerm_postgresql_configuration_log_checkpoints"]
     not azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
 }
 
 azurerm_postgresql_configuration_log_checkpoints = false {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_attribute_absence["azurerm_postgresql_configuration_log_checkpoints"]
 }
 
 azurerm_postgresql_configuration_log_checkpoints = false {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
 }
 
 azurerm_postgresql_configuration_log_checkpoints_err = "PostgreSQL database server log checkpoints is currently not enabled" {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
 } else = "Either resource of type 'microsoft.dbforpostgresql/servers/configurations' or log_checkpoints parameter from this resource is missing" {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_attribute_absence["azurerm_postgresql_configuration_log_checkpoints"]
 }
 
@@ -462,22 +518,26 @@ azure_issue["azurerm_postgresql_configuration_log_connections"] {
 }
 
 azurerm_postgresql_configuration_log_connections {
-    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers/configurations"
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     not azure_attribute_absence["azurerm_postgresql_configuration_log_connections"]
     not azure_issue["azurerm_postgresql_configuration_log_connections"]
 }
 
 azurerm_postgresql_configuration_log_connections = false {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_attribute_absence["azurerm_postgresql_configuration_log_connections"]
 }
 
 azurerm_postgresql_configuration_log_connections = false {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_issue["azurerm_postgresql_configuration_log_connections"]
 }
 
 azurerm_postgresql_configuration_log_connections_err = "PostgreSQL database server log connections parameter is currently not enabled" {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_issue["azurerm_postgresql_configuration_log_connections"]
 } else = "Either resource of type 'microsoft.dbforpostgresql/servers/configurations' or log_connections parameter from this resource is missing" {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_attribute_absence["azurerm_postgresql_configuration_log_connections"]
 }
 
@@ -514,22 +574,26 @@ azure_issue["azurerm_postgresql_configuration_log_disconnections"] {
 }
 
 azurerm_postgresql_configuration_log_disconnections {
-    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers/configurations"
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     not azure_attribute_absence["azurerm_postgresql_configuration_log_disconnections"]
     not azure_issue["azurerm_postgresql_configuration_log_disconnections"]
 }
 
 azurerm_postgresql_configuration_log_disconnections = false {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_attribute_absence["azurerm_postgresql_configuration_log_disconnections"]
 }
 
 azurerm_postgresql_configuration_log_disconnections = false {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_issue["azurerm_postgresql_configuration_log_disconnections"]
 }
 
 azurerm_postgresql_configuration_log_disconnections_err = "PostgreSQL database server log disconnections parameter is currently not enabled" {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_issue["azurerm_postgresql_configuration_log_disconnections"]
 } else = "Either resource of type 'microsoft.dbforpostgresql/servers/configurations' or log_disconnections parameter from this resource is missing" {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_attribute_absence["azurerm_postgresql_configuration_log_disconnections"]
 }
 
@@ -566,22 +630,26 @@ azure_issue["azurerm_postgresql_configuration_log_duration"] {
 }
 
 azurerm_postgresql_configuration_log_duration {
-    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers/configurations"
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     not azure_attribute_absence["azurerm_postgresql_configuration_log_duration"]
     not azure_issue["azurerm_postgresql_configuration_log_duration"]
 }
 
 azurerm_postgresql_configuration_log_duration = false {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_attribute_absence["azurerm_postgresql_configuration_log_duration"]
 }
 
 azurerm_postgresql_configuration_log_duration = false {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_issue["azurerm_postgresql_configuration_log_duration"]
 }
 
 azurerm_postgresql_configuration_log_duration_err = "PostgreSQL database server log duration parameter is currently not enabled" {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_issue["azurerm_postgresql_configuration_log_duration"]
 } else = "Either resource of type 'microsoft.dbforpostgresql/servers/configurations' or log_duration parameter from this resource is missing" {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     azure_attribute_absence["azurerm_postgresql_configuration_log_duration"]
 }
 
