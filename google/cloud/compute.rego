@@ -1130,7 +1130,6 @@ gc_issue["overlly_permissive_traffic"]{
     contains(Y.sourceRanges[_], "0.0.0.0/0")
     contains(Y.direction, "INGRESS")
     count(input.GOOGLE_FIREWALL[_].allowed[i]) > 0 
-
 }
 
 overlly_permissive_traffic {
@@ -1140,14 +1139,13 @@ overlly_permissive_traffic = false {
     gc_issue["overlly_permissive_traffic"]
 }
 
-
 overlly_permissive_traffic_err = "Ensure GCP Kubernetes Engine Clusters network firewall inbound rule overly permissive to all traffic." {
     gc_issue["overlly_permissive_traffic"]
 }
 
 overlly_permissive_traffic_metadata := {
     "Policy Code": "PR-GCP-CLD-FW-019",
-    "Type": "IaC",
+    "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
     "Policy Title": "Ensure GCP Kubernetes Engine Clusters network firewall inbound rule overly permissive to all traffic.",
@@ -1814,7 +1812,7 @@ compute_ip_forwarding_enable_err = "Ensure GCP VM instances have IP Forwarding e
 
 compute_ip_forwarding_enable_metadata := {
     "Policy Code": "PR-GCP-CLD-INST-015",
-    "Type": "IaC",
+    "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
     "Policy Title": "Ensure GCP VM instances have IP Forwarding enabled.",

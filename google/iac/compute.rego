@@ -1956,6 +1956,7 @@ compute_instance_external_ip_metadata := {
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
 }
 
+
 #
 # PR-GCP-GDF-INST-015
 #

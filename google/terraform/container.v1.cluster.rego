@@ -1557,7 +1557,6 @@ k8s_integrity_monitor_metadata := {
 
 default secret_encrypted = null
 
-
 gc_issue["secret_encrypted"] {
     resource := input.resources[i]
     lower(resource.type) == "google_container_cluster"
@@ -1608,6 +1607,7 @@ gc_issue["private_endpoint_disabled"] {
 private_endpoint_disabled {
     not gc_issue["private_endpoint_disabled"]
 }
+
 private_endpoint_disabled = false{
     gc_issue["private_endpoint_disabled"]
 }

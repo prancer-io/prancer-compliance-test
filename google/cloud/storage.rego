@@ -486,6 +486,3 @@ storage_bucket_retention_enable_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
 }
-
-
-

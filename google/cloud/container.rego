@@ -1382,10 +1382,10 @@ k8s_integrity_monitor_metadata := {
 
 #
 # PR-GCP-CLD-CLT-034 
+# 
 # "container.v1.cluster"
 
 default secret_encrypted = null
-
 
 gc_issue["secret_encrypted"] {
     upper(input.databaseEncryption.state) == "DECRYPTED"
@@ -1394,6 +1394,7 @@ gc_issue["secret_encrypted"] {
 secret_encrypted{
     not gc_issue["secret_encrypted"]
 }
+
 secret_encrypted = false{
     gc_issue["secret_encrypted"]
 }
@@ -1418,9 +1419,9 @@ secret_encrypted_metadata := {
 #
 # PR-GCP-CLD-CLT-035
 #
+# "container.v1.cluster"
 
 default private_endpoint_disabled = true
-
 
 gc_issue["private_endpoint_disabled"] {
     upper(input.status) == "RUNNING"
@@ -1431,6 +1432,7 @@ gc_issue["private_endpoint_disabled"] {
 private_endpoint_disabled {
     not gc_issue["private_endpoint_disabled"]
 }
+
 private_endpoint_disabled = false{
     gc_issue["private_endpoint_disabled"]
 }

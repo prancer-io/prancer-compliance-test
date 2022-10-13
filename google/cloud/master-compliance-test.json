@@ -2089,7 +2089,8 @@
                 {
                     "masterTestId": "PR-GCP-CLD-FW-019",
                     "masterSnapshotId": [
-                        "GOOGLE_FIREWALL", "GOOGLE_CLUSTER"
+                        "GOOGLE_FIREWALL",
+                        "GOOGLE_CLUSTER"
                     ],
                     "type": "rego",
                     "rule": "file(compute.rego)",
@@ -2216,7 +2217,8 @@
                                 "PIPEDA-4.7.3"
                             ],
                             "service": [
-                                "compute", "container"
+                                "compute", 
+                                "container"
                             ]
                         }
                     ]
@@ -2788,7 +2790,6 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                
                                         "APRA",
                                         "LGPD",
                                         "CCPA",
@@ -4975,7 +4976,8 @@
                     "tags": [
                         {
                             "cloud": "cloud",
-                            "compliance": [],
+                            "compliance": [
+                            ],
                             "service": [
                                 "storage"
                             ]
@@ -5004,7 +5006,8 @@
                     "tags": [
                         {
                             "cloud": "cloud",
-                            "compliance": [],
+                            "compliance": [
+                            ],
                             "service": [
                                 "storage"
                             ]
@@ -5069,7 +5072,6 @@
                         }
                     ]
                 }
-                
             ]
         }
     ]

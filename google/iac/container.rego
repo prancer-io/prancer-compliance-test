@@ -1903,7 +1903,6 @@ k8s_integrity_monitor_metadata := {
 
 default secret_encrypted = null
 
-
 gc_issue["secret_encrypted"] {
     resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
@@ -1914,6 +1913,7 @@ secret_encrypted{
     lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["secret_encrypted"]
 }
+
 secret_encrypted = false{
     gc_issue["secret_encrypted"]
 }
@@ -1934,12 +1934,12 @@ secret_encrypted_metadata := {
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
 }
 
+
 #
 # PR-GCP-GDF-CLT-035
 #
 
 default private_endpoint_disabled = true
-
 
 gc_issue["private_endpoint_disabled"] {
     resource := input.resources[i]
@@ -1952,6 +1952,7 @@ private_endpoint_disabled {
     lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["private_endpoint_disabled"]
 }
+
 private_endpoint_disabled = false{
     gc_issue["private_endpoint_disabled"]
 }

@@ -79,5 +79,3 @@ svc_account_key_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys"
 }
-
-
