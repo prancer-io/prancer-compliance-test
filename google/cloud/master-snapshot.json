@@ -198,7 +198,35 @@
                             ]
                         }
                     ]
-                }
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_PROJECT_INFO",
+                    "type": "compute/projects.list",
+                    "get_method" : "compute/projects.get",
+                    "collection": "project_info",
+                    "tags": [
+                      {
+                        "cloud": "GCP",
+                        "service": [
+                          "compute"
+                        ]
+                      }
+                    ]
+                },
+                {
+                "masterSnapshotId": "GOOGLE_PROJECTS_IAM",
+                "type": "compute/projects.list",
+                "get_method" : "cloudresourcemanager/projects.getIamPolicy",
+                "collection": "project_iam_user",
+                "tags": [
+                    {
+                    "cloud": "GCP",
+                    "service": [
+                        "compute"
+                    ]
+                    }
+                ]
+}
             ]
         }
     ]

@@ -1999,3 +1999,55 @@ lbs_quic_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies"
 }
+
+#
+# PR-GCP-CLD-PRIF-001
+# 
+default os_login_disable = null
+
+
+gc_attribute_absence["os_login_disable"]{
+    not input.commonInstanceMetadata.items
+}
+
+gc_issue["os_login_disable"] {
+    project_info := input.commonInstanceMetadata.items[_]
+    not contains(project_info.key, "enable-oslogin")
+}
+
+gc_issue["os_login_disable"] {
+    project_info := input.commonInstanceMetadata.items[_]
+    contains(project_info.key, "enable-oslogin")
+    lower(project_info.value) == "false"
+}
+
+os_login_disable {
+    not gc_issue["os_login_disable"]
+    not gc_attribute_absence["os_login_disable"]
+}
+
+os_login_disable = false {
+    gc_issue["os_login_disable"]
+}
+
+os_login_disable = false {
+    gc_attribute_absence["os_login_disable"]
+}
+
+os_login_disable_err = "Make sure that GCP Projects have OS Login disabled." {
+    gc_issue["os_login_disable"]
+}else ="Make sure that GCP Projects have OS Login disabled."{
+    gc_attribute_absence["os_login_disable"]
+}
+
+os_login_disable_metadata := {
+    "Policy Code": "PR-GCP-CLD-PRIF-001",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP cloud",
+    "Policy Title": "Make sure that GCP Projects have OS Login disabled",
+    "Policy Description": "This policy checks GCP Projects which have OS Login disabled. Enabling OS Login ensures that SSH keys used to connect to instances are mapped with IAM users. Revoking access to IAM user will revoke all the SSH keys associated with that particular user. It facilitates centralized and automated SSH key pair management which is useful in handling cases like a response to compromised SSH key pairs.",
+    "Resource Type": "compute.v1.projects",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/projects"
+}
