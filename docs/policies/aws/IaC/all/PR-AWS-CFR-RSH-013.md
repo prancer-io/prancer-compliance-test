@@ -1,0 +1,45 @@
+
+
+
+
+# Title: Ensure automated backups are enabled for Redshift cluster.
+
+
+***<font color="white">Master Test Id:</font>*** PR-AWS-CFR-RSH-013
+
+***<font color="white">Master Snapshot Id:</font>*** ['CFR_TEMPLATE_SNAPSHOT']
+
+***<font color="white">type:</font>*** rego
+
+***<font color="white">rule:</font>*** file([redshift.rego])  
+  
+  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|id|PR-AWS-CFR-RSH-013|
+|eval|data.rule.redshift_automated_backup|
+|message|data.rule.redshift_automated_backup_err|
+|remediationDescription|Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html' target='_blank'>here</a>|
+|remediationFunction|PR_AWS_CFR_RSH_013.py|
+
+
+***<font color="white">Severity:</font>*** Medium
+
+***<font color="white">Description:</font>*** It is to check automated backup is turned on in order to recover data in the event of failures.  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|cloud|git|
+|compliance|['PCI DSS', 'HIPAA', 'NIST 800']|
+|service|['cloudformation']|
+
+
+***<font color="white">Resource Types:</font>*** ['aws::redshift::cluster']
+
+
+[redshift.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/redshift.rego

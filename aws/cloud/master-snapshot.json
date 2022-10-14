@@ -902,6 +902,16 @@
 					"detailMethods": [
 						"list_attached_user_policies"
 					]
+				},
+				{
+					"masterSnapshotId": "TEST_AMPLIFY",
+					"arn": "arn:aws:amplify:::",
+					"type": "amplify",
+					"collection": "aws_amplify",
+					"listMethod": "list_apps",
+					"detailMethods": [
+						"get_app"
+					]
 				}
 			]
 		}

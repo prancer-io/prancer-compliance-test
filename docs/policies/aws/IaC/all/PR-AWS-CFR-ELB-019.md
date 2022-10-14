@@ -1,0 +1,45 @@
+
+
+
+
+# Title: Ensure LoadBalancer TargetGroup Protocol values are limited to HTTPS
+
+
+***<font color="white">Master Test Id:</font>*** PR-AWS-CFR-ELB-019
+
+***<font color="white">Master Snapshot Id:</font>*** ['CFR_TEMPLATE_SNAPSHOT']
+
+***<font color="white">type:</font>*** rego
+
+***<font color="white">rule:</font>*** file([elb.rego])  
+  
+  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|id|PR-AWS-CFR-ELB-019|
+|eval|data.rule.elb_protocol|
+|message|data.rule.elb_protocol_err|
+|remediationDescription|Make sure you are following the Cloudformation template format presented https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-protocol|
+|remediationFunction|PR_AWS_CFR_ELB_019.py|
+
+
+***<font color="white">Severity:</font>*** Medium
+
+***<font color="white">Description:</font>*** The only allowed Protocol value for LoadBalancer TargetGroups is HTTPS, though the property is ignored if the target type is lambda.  
+  
+  
+
+|Title|Description|
+| :---: | :---: |
+|cloud|git|
+|compliance|['PCI-DSS', 'NIST 800']|
+|service|['cloudformation']|
+
+
+***<font color="white">Resource Types:</font>*** ['aws::elasticloadbalancingv2::targetgroup']
+
+
+[elb.rego]: https://github.com/prancer-io/prancer-compliance-test/tree/master/aws/iac/elb.rego

@@ -1,7 +1,7 @@
 package rego
 
 #
-# PR-GCP-GDF-CF-001
+# PR-GCP-CLD-CF-001
 #
 
 default function_security = null
@@ -26,7 +26,7 @@ function_security_err = "Ensure GCP Cloud Function HTTP trigger is secured" {
 }
 
 function_security_metadata := {
-    "Policy Code": "PR-GCP-GDF-CF-001",
+    "Policy Code": "PR-GCP-CLD-CF-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -39,7 +39,7 @@ function_security_metadata := {
 
 
 #
-# PR-GCP-GDF-CF-002
+# PR-GCP-CLD-CF-002
 #
 
 default function_ingress_allow_all = null
@@ -64,7 +64,7 @@ function_ingress_allow_all_err = "Ensure GCP Cloud Function is not configured wi
 }
 
 function_ingress_allow_all_metadata := {
-    "Policy Code": "PR-GCP-GDF-CF-002",
+    "Policy Code": "PR-GCP-CLD-CF-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -77,7 +77,7 @@ function_ingress_allow_all_metadata := {
 
 
 #
-# PR-GCP-GDF-CF-003
+# PR-GCP-CLD-CF-003
 #
 
 default function_vpc_connector = null
@@ -108,7 +108,7 @@ function_vpc_connector_err = "Ensure GCP Cloud Function is enabled with VPC conn
 }
 
 function_vpc_connector_metadata := {
-    "Policy Code": "PR-GCP-GDF-CF-003",
+    "Policy Code": "PR-GCP-CLD-CF-003",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
