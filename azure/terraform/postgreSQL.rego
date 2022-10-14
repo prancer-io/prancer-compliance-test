@@ -4,6 +4,10 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server
 
 # PR-AZR-TRF-SQL-028
@@ -164,12 +168,14 @@ firewall_rule_issue["pg_ingress_from_any_ip_disabled"] {
               contains(r.properties.server_name, resource.properties.compiletime_identity);
               not contains(r.properties.start_ip_address, "0.0.0.0");
               not contains(r.properties.end_ip_address, "0.0.0.0");
+              not contains(r.properties.end_ip_address, "255.255.255.255");
               c := 1]) == 0
     count([c | r := input.resources[_];
               r.type == "azurerm_postgresql_firewall_rule";
               contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
               not contains(r.properties.start_ip_address, "0.0.0.0");
               not contains(r.properties.end_ip_address, "0.0.0.0");
+              not contains(r.properties.end_ip_address, "255.255.255.255");
               c := 1]) == 0
 }
 
