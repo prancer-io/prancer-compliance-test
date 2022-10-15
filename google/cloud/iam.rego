@@ -163,3 +163,118 @@ admin_privileges_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
 }
+
+
+#
+# PR-GCP-CLD-SAK-004
+# 
+#  "iam.v1.projects"
+
+default overly_permissive_ac_privileges = null
+
+gc_issue["overly_permissive_ac_privileges"] {
+    contains(lower(input.bindings[_].role), "roles/iam.serviceaccountadmin")
+    contains(lower(input.bindings[_].role), "roles/iam.serviceaccountuser")
+}
+
+overly_permissive_ac_privileges {
+    not gc_issue["overly_permissive_ac_privileges"]
+}
+
+overly_permissive_ac_privileges = false {
+    gc_issue["overly_permissive_ac_privileges"]
+}
+
+overly_permissive_ac_privileges_err = "Ensure, GCP IAM Users have overly permissive service account privileges." {
+    gc_issue["overly_permissive_ac_privileges"]
+}
+
+overly_permissive_ac_privileges_metadata := {
+    "Policy Code": "PR-GCP-CLD-SAK-004",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure, GCP IAM Users have overly permissive service account privileges.",
+    "Policy Description": "Ensure, IAM users which have overly permissive service account privileges. Any user should not have Service Account Admin and Service Account User, both roles assigned at a time. Built-in/Predefined IAM role Service Account admin allows the user to create, delete, manage service accounts. Built-in/Predefined IAM role Service Account User allows the user to assign service accounts to Apps/Compute Instances. It is recommended to follow the principle of 'Separation of Duties' ensuring that one individual does not have all the necessary permissions to be able to complete a malicious action or meant to help avoid security or privacy incidents and errors.",
+    "Resource Type": "iam.v1.projects",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
+
+
+#
+# PR-GCP-CLD-SAK-005
+# 
+#  "iam.v1.projects"
+
+default overly_permissive_kms_privileges = null
+
+gc_issue["overly_permissive_kms_privileges"] {
+    contains(lower(input.bindings[_].role), "roles/cloudkms.admin")
+    contains(lower(input.bindings[_].role), "roles/cloudkms.crypto")
+}
+
+overly_permissive_kms_privileges {
+    not gc_issue["overly_permissive_kms_privileges"]
+}
+
+overly_permissive_kms_privileges = false {
+    gc_issue["overly_permissive_kms_privileges"]
+}
+
+overly_permissive_kms_privileges_err = "Ensure, GCP IAM user have overly permissive Cloud KMS roles." {
+    gc_issue["overly_permissive_kms_privileges"]
+}
+
+overly_permissive_kms_privileges_metadata := {
+    "Policy Code": "PR-GCP-CLD-SAK-005",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure, GCP IAM user have overly permissive Cloud KMS roles.",
+    "Policy Description": "Ensure, IAM users who have overly permissive Cloud KMS roles. Built-in/Predefined IAM role Cloud KMS Admin allows the user to create, delete, and manage service accounts. Built-in/Predefined IAM role Cloud KMS CryptoKey Encrypter/Decrypter allows the user to encrypt and decrypt data at rest using the encryption keys. It is recommended to follow the principle of 'Separation of Duties' ensuring that one individual does not have all the necessary permissions to be able to complete a malicious action.",
+    "Resource Type": "iam.v1.projects",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
+}
+
+
+#
+# PR-GCP-CLD-SAK-006
+# 
+#  "iam.v1.projects"
+
+default service_ac_privileges = null
+
+gc_issue["service_ac_privileges"] {
+    contains(lower(input.bindings[_].role), "roles/iam.serviceaccountactor")
+}
+gc_issue["service_ac_privileges"] {
+    contains(lower(input.bindings[_].role), "roles/iam.serviceaccountuser")
+}
+gc_issue["service_ac_privileges"] {
+    contains(lower(input.bindings[_].role), "roles/iam.serviceaccounttokencreator")
+}
+
+service_ac_privileges {
+    not gc_issue["service_ac_privileges"]
+}
+
+service_ac_privileges = false {
+    gc_issue["service_ac_privileges"]
+}
+
+service_ac_privileges_err = "Ensure, GCP IAM user with service account privileges." {
+    gc_issue["service_ac_privileges"]
+}
+
+service_ac_privileges_metadata := {
+    "Policy Code": "PR-GCP-CLD-SAK-006",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure, GCP IAM user with service account privileges.",
+    "Policy Description": "Ensure, IAM users don't have service account privileges. Adding any user as service account actor will enable these users to have service account privileges. Adding only authorized corporate IAM users as service account actors will make sure that your information is secure.",
+    "Resource Type": "iam.v1.projects",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
+}
