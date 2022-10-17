@@ -226,7 +226,35 @@
                     ]
                     }
                 ]
-}
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_SERVICE_AC",
+                    "type": "projects.serviceAccounts.list",
+                    "get_method" : "iam/projects.serviceAccounts.get",
+                    "collection": "project_svc_account",
+                    "tags": [
+                      {
+                        "cloud": "GCP",
+                        "service": [
+                          "iam"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "masterSnapshotId": "GOOGLE_SERVICE_AC_KEY",
+                    "type": "projects.serviceAccounts.list",
+                    "get_method" : "iam/projects.serviceAccounts.keys.get",
+                    "collection": "project_svc_account_key",
+                    "tags": [
+                      {
+                        "cloud": "GCP",
+                        "service": [
+                          "iam"
+                        ]
+                      }
+                    ]
+                  }
             ]
         }
     ]

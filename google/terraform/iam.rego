@@ -504,3 +504,129 @@ service_ac_privileges_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
 }
+
+
+#
+# PR-GCP-TRF-SAK-007
+# Change the memeber and members 
+
+list_var = ["appspot.gserviceaccount.com",
+            "developer.gserviceaccount.com",
+            "cloudservices.gserviceaccount.com",
+            "system.gserviceaccount.com",
+            "cloudbuild.gserviceaccount.com"]
+
+default iam_primitive_roles_in_use = null
+
+gc_issue["iam_primitive_roles_in_use"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_policy"
+	count([c | contains(input.resources[_].properties.binding[_].members[_] , list_var[_]); c = 1]) == 0
+    contains(lower(input.resources[_].properties.binding[_].role), "roles/editor")
+}
+
+gc_issue["iam_primitive_roles_in_use"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_policy"
+	count([c | contains(input.resources[_].properties.binding[_].members[_] , list_var[_]); c = 1]) == 0
+    contains(lower(input.resources[_].properties.binding[_].role), "roles/owner")
+}
+
+gc_issue["iam_primitive_roles_in_use"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_policy"
+	count([c | contains(input.resources[_].properties.binding[_].member[_] , list_var[_]); c = 1]) == 0
+    contains(lower(input.resources[_].properties.binding[_].role), "roles/editor")
+}
+
+gc_issue["iam_primitive_roles_in_use"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_policy"
+	count([c | contains(input.resources[_].properties.binding[_].member[_] , list_var[_]); c = 1]) == 0
+    contains(lower(input.resources[_].properties.binding[_].role), "roles/owner")
+}
+
+gc_issue["iam_primitive_roles_in_use"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_binding"
+	count([c | contains(input.resources[_].properties.members[_] , list_var[_]); c = 1]) == 0
+    contains(lower(input.resources[_].properties.role), "roles/editor")
+}
+
+gc_issue["iam_primitive_roles_in_use"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_binding"
+	count([c | contains(input.resources[_].properties.members[_] , list_var[_]); c = 1]) == 0
+    contains(lower(input.resources[_].properties.role), "roles/owner")
+}
+
+gc_issue["iam_primitive_roles_in_use"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_binding"
+	count([c | contains(input.resources[_].properties.member[_] , list_var[_]); c = 1]) == 0
+    contains(lower(input.resources[_].properties.role), "roles/editor")
+}
+
+gc_issue["iam_primitive_roles_in_use"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_binding"
+	count([c | contains(input.resources[_].properties.member[_] , list_var[_]); c = 1]) == 0
+    contains(lower(input.resources[_].properties.role), "roles/owner")
+}
+
+gc_issue["iam_primitive_roles_in_use"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_member"
+    bindings := resource.properties
+	count([c | contains(input.resources[_].properties.members , list_var[_]); c = 1]) == 0
+    contains(lower(input.resources[_].properties.role), "roles/owner")
+}
+
+gc_issue["iam_primitive_roles_in_use"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_member"
+    bindings := resource.properties
+	count([c | contains(input.resources[_].properties.members , list_var[_]); c = 1]) == 0
+    contains(lower(input.resources[_].properties.role), "roles/editor")
+}
+
+gc_issue["iam_primitive_roles_in_use"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_member"
+    bindings := resource.properties
+	count([c | contains(input.resources[_].properties.member , list_var[_]); c = 1]) == 0
+    contains(lower(input.resources[_].properties.role), "roles/owner")
+}
+
+gc_issue["iam_primitive_roles_in_use"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_member"
+    bindings := resource.properties
+	count([c | contains(input.resources[_].properties.member , list_var[_]); c = 1]) == 0
+    contains(lower(input.resources[_].properties.role), "roles/editor")
+}
+
+iam_primitive_roles_in_use {
+    lower(input.resources[_].type) == google_project_iam[_]
+    not gc_issue["iam_primitive_roles_in_use"]
+}
+
+iam_primitive_roles_in_use = false {
+    gc_issue["iam_primitive_roles_in_use"]
+}
+
+iam_primitive_roles_in_use_err = "Ensure, GCP IAM primitive roles are in use." {
+    gc_issue["iam_primitive_roles_in_use"]
+}
+
+iam_primitive_roles_in_use_metadata := {
+    "Policy Code": "PR-GCP-TRF-SAK-007",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure, GCP IAM primitive roles are in use.",
+    "Policy Description": "Ensure, GCP IAM users assigned with primitive roles. Primitive roles are Roles that existed prior to Cloud IAM. Primitive roles (owner, editor) are built-in and provide a broader access to resources making them prone to attacks and privilege escalation. Predefined roles provide more granular controls than primitive roles and therefore Predefined roles should be used. Note: For a new GCP project, service accounts are assigned with role/editor permissions. GCP recommends not to revoke the permissions on the SA account. Reference: https://cloud.google.com/iam/docs/service-accounts Limitation: This policy alerts for Service agents which are Google-managed service accounts. Service Agents are by default assigned with some roles by Google cloud and these roles shouldn't be revoked. Reference: https://cloud.google.com/iam/docs/service-agents In case any specific service agent needs to be bypassed, this policy can be cloned and modified accordingly.",
+    "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"]
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
+}
