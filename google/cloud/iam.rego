@@ -363,5 +363,6 @@ svc_ac_user_has_svc_ac_key_metadata := {
     "Policy Description": "This policy checks user managed service accounts that use user managed service account keys instead of Google-managed. For user-managed keys, the User has to take ownership of key management activities. Even after owner precaution, keys can be easily leaked by common development malpractices like checking keys into the source code or leaving them in downloads directory or accidentally leaving them on support blogs/channels. So It is recommended to limit the use of User-managed service account keys and instead use Google-managed keys which can not be downloaded.",
     "Resource Type": "iam.v1.serviceaccounts.key",
     "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts"
     "Resource Help URL": "https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys"
 }
