@@ -1,4 +1,5 @@
 package rule
+import future.keywords
 
 # https://cloud.google.com/compute/docs/reference/rest/v1/firewalls
 
@@ -2112,23 +2113,24 @@ gc_issue["instance_with_more_svc_ac_permission"]{
 	upper(X.status) == "RUNNING"
 
 	Y := input.GOOGLE_PROJECTS_IAM[_]
-    lower(X.serviceAccounts[_].email) == lower(Y.bindings[_].members[_])
-
-    not contains(Y.bindings[_].role, "projects")
+    concat("",["serviceaccount:",lower(X.serviceAccounts[_].email)]) == lower(Y.bindings[_].members[_]) 
+	count([c | contains(input.GOOGLE_PROJECTS_IAM[_].bindings[_].role, "projects"); c = 1]) == 0
 }
 
 gc_issue["instance_with_more_svc_ac_permission"]{
 	X := input.GOOGLE_INSTANCE[_]
 	not startswith(lower(X.name), "gke-")
 	upper(X.status) == "RUNNING"
-
 	Y := input.GOOGLE_PROJECTS_IAM[_]
-    lower(X.serviceAccounts[_].email) == lower(Y.bindings[_].members[_])
-
-    not contains(Y.bindings[_].role, "roles/viewer")
+	trim(lower(Y.bindings[_].members[_]), "serviceaccount:") == lower(X.serviceAccounts[_].email) 
+    total_roles_list := {app | some app in input.GOOGLE_PROJECTS_IAM[_].bindings[_]; contains(app, "roles/")}
+    total_roles_count := count(total_roles_list)
+    require_str_list := {app | some app in total_roles_list;  contains(app, "roles/viewer")}
+    require_str_count := count(require_str_list)
+    total_roles_count - require_str_count != 0
 }
 
-instance_with_more_svc_ac_permission{
+instance_with_more_svc_ac_permission {
     not gc_issue["instance_with_more_svc_ac_permission"]
 }
 
@@ -2151,6 +2153,5 @@ instance_with_more_svc_ac_permission_metadata := {
 	"Policy Help URL": "",
 	"Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances",
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
-
 }
 
