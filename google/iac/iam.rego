@@ -138,13 +138,6 @@ gc_issue["admin_privileges_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "iam.v1.projects"
     contains(lower(resource.bindings[_].members[_]), "iam.gserviceaccount.com")
-    contains(lower(resource.bindings[_].role), "Admin")
-}
-
-gc_issue["admin_privileges_enabled"] {
-    resource := input.resources[i]
-    lower(resource.type) == "iam.v1.projects"
-    contains(lower(resource.bindings[_].members[_]), "iam.gserviceaccount.com")
     contains(lower(resource.bindings[_].role), "roles/editor")
 }
 

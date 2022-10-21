@@ -3507,7 +3507,7 @@
                 {
                     "masterTestId": "PR-GCP-TRF-SAK-002",
                     "masterSnapshotId": [
-                        "GOOGLE_PROJECTS_IAM"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -3614,7 +3614,7 @@
                 {
                     "masterTestId": "PR-GCP-TRF-SAK-003",
                     "masterSnapshotId": [
-                        "GOOGLE_PROJECTS_IAM"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -3715,7 +3715,7 @@
                 {
                     "masterTestId": "PR-GCP-TRF-SAK-004",
                     "masterSnapshotId": [
-                        "GOOGLE_PROJECTS_IAM"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -3816,7 +3816,7 @@
                 {
                     "masterTestId": "PR-GCP-TRF-SAK-005",
                     "masterSnapshotId": [
-                        "GOOGLE_PROJECTS_IAM"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -3917,7 +3917,7 @@
                 {
                     "masterTestId": "PR-GCP-TRF-SAK-006",
                     "masterSnapshotId": [
-                        "GOOGLE_PROJECTS_IAM"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
@@ -4035,7 +4035,7 @@
                 {
                     "masterTestId": "PR-GCP-TRF-SAK-007",
                     "masterSnapshotId": [
-                        "GOOGLE_PROJECTS_IAM"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",

@@ -69,7 +69,7 @@ non_gcp_account_access_denied_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure, Non-corporate accounts have access to Google Cloud Platform (GCP) resources.",
     "Policy Description": "Ensure, using personal accounts to access GCP resources may compromise the security of your business. Using fully managed corporate Google accounts to access Google Cloud Platform resources is recommended to make sure that your resources are secure. NOTE : This policy requires customization before using it. To customize, follow the steps mentioned: (1) Clone this policy and replace '@yourcompanydomainname' in RQL with your domain name. For example: 'user does not end with @prismacloud.io and user does not end with gserviceaccount.com'. (2) For multiple domains, update the RQL with conditions for each domain. For example: 'user does not end with @prismacloud.io and user does not end with @prismacloud.com and user does not end with gserviceaccount.com'.",
-    "Resource Type": "google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"
+    "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"],
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
 }
@@ -102,24 +102,9 @@ gc_issue["admin_privileges_enabled"] {
     lower(resource.type) == "google_project_iam_policy"
     bindings := resource.properties.binding[_]
     contains(lower(bindings.members[_]), "iam.gserviceaccount.com")
-    contains(lower(bindings.role), "Admin")
-}
-
-gc_issue["admin_privileges_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "google_project_iam_policy"
-    bindings := resource.properties.binding[_]
-    contains(lower(bindings.members[_]), "iam.gserviceaccount.com")
     contains(lower(bindings.role), "roles/editor")
 }
 
-gc_issue["admin_privileges_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "google_project_iam_policy"
-    bindings := resource.properties.binding[_]
-    contains(lower(bindings.member[_]), "iam.gserviceaccount.com")
-    contains(lower(bindings.role), "Admin")
-}
 
 gc_issue["admin_privileges_enabled"] {
     resource := input.resources[_]
@@ -161,13 +146,6 @@ gc_issue["admin_privileges_enabled"] {
     contains(lower(bindings.role), "roles/owner")
 }
 
-gc_issue["admin_privileges_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "google_project_iam_binding"
-    bindings := resource.properties
-    contains(lower(bindings.members[_]), "iam.gserviceaccount.com")
-    contains(lower(bindings.role), "Admin")
-}
 
 gc_issue["admin_privileges_enabled"] {
     resource := input.resources[_]
@@ -193,13 +171,6 @@ gc_issue["admin_privileges_enabled"] {
     contains(lower(bindings.role), "roles/editor")
 }
 
-gc_issue["admin_privileges_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "google_project_iam_binding"
-    bindings := resource.properties
-    contains(lower(bindings.member[_]), "iam.gserviceaccount.com")
-    contains(lower(bindings.role), "Admin")
-}
 
 gc_issue["admin_privileges_enabled"] {
     resource := input.resources[_]
@@ -217,13 +188,6 @@ gc_issue["admin_privileges_enabled"] {
     contains(lower(bindings.role), "admin")
 }
 
-gc_issue["admin_privileges_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "google_project_iam_member"
-    bindings := resource.properties
-    contains(lower(bindings.members), "iam.gserviceaccount.com")
-    contains(lower(bindings.role), "Admin")
-}
 
 gc_issue["admin_privileges_enabled"] {
     resource := input.resources[_]
@@ -239,14 +203,6 @@ gc_issue["admin_privileges_enabled"] {
     bindings := resource.properties
     contains(lower(bindings.members), "iam.gserviceaccount.com")
     contains(lower(bindings.role), "roles/owner")
-}
-
-gc_issue["admin_privileges_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "google_project_iam_member"
-    bindings := resource.properties
-    contains(lower(bindings.member), "iam.gserviceaccount.com")
-    contains(lower(bindings.role), "Admin")
 }
 
 gc_issue["admin_privileges_enabled"] {
@@ -293,7 +249,7 @@ admin_privileges_enabled_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure, GCP IAM Service account has admin privileges.",
     "Policy Description": "Ensure, service accounts which have admin privileges. Application uses the service account to make requests to the Google API of a service so that the users aren't directly involved. It is recommended not to use admin access for ServiceAccount.",
-    "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"]
+    "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"],
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
 }
@@ -349,7 +305,7 @@ overly_permissive_ac_privileges_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure, GCP IAM Users have overly permissive service account privileges.",
     "Policy Description": "Ensure, IAM users which have overly permissive service account privileges. Any user should not have Service Account Admin and Service Account User, both roles assigned at a time. Built-in/Predefined IAM role Service Account admin allows the user to create, delete, manage service accounts. Built-in/Predefined IAM role Service Account User allows the user to assign service accounts to Apps/Compute Instances. It is recommended to follow the principle of 'Separation of Duties' ensuring that one individual does not have all the necessary permissions to be able to complete a malicious action or meant to help avoid security or privacy incidents and errors.",
-    "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"]
+    "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"],
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
 }
@@ -405,7 +361,7 @@ overly_permissive_kms_privileges_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure, GCP IAM user have overly permissive Cloud KMS roles.",
     "Policy Description": "Ensure, IAM users who have overly permissive Cloud KMS roles. Built-in/Predefined IAM role Cloud KMS Admin allows the user to create, delete, and manage service accounts. Built-in/Predefined IAM role Cloud KMS CryptoKey Encrypter/Decrypter allows the user to encrypt and decrypt data at rest using the encryption keys. It is recommended to follow the principle of 'Separation of Duties' ensuring that one individual does not have all the necessary permissions to be able to complete a malicious action.",
-    "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"]
+    "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"],
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
 }
@@ -500,7 +456,7 @@ service_ac_privileges_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure, GCP IAM user with service account privileges.",
     "Policy Description": "Ensure, IAM users don't have service account privileges. Adding any user as service account actor will enable these users to have service account privileges. Adding only authorized corporate IAM users as service account actors will make sure that your information is secure.",
-    "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"]
+    "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"],
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
 }
@@ -577,7 +533,6 @@ gc_issue["iam_primitive_roles_in_use"] {
 gc_issue["iam_primitive_roles_in_use"] {
     resource := input.resources[_]
     lower(resource.type) == "google_project_iam_member"
-    bindings := resource.properties
 	count([c | contains(input.resources[_].properties.members , list_var[_]); c = 1]) == 0
     contains(lower(input.resources[_].properties.role), "roles/owner")
 }
@@ -585,7 +540,6 @@ gc_issue["iam_primitive_roles_in_use"] {
 gc_issue["iam_primitive_roles_in_use"] {
     resource := input.resources[_]
     lower(resource.type) == "google_project_iam_member"
-    bindings := resource.properties
 	count([c | contains(input.resources[_].properties.members , list_var[_]); c = 1]) == 0
     contains(lower(input.resources[_].properties.role), "roles/editor")
 }
@@ -593,7 +547,6 @@ gc_issue["iam_primitive_roles_in_use"] {
 gc_issue["iam_primitive_roles_in_use"] {
     resource := input.resources[_]
     lower(resource.type) == "google_project_iam_member"
-    bindings := resource.properties
 	count([c | contains(input.resources[_].properties.member , list_var[_]); c = 1]) == 0
     contains(lower(input.resources[_].properties.role), "roles/owner")
 }
@@ -601,7 +554,6 @@ gc_issue["iam_primitive_roles_in_use"] {
 gc_issue["iam_primitive_roles_in_use"] {
     resource := input.resources[_]
     lower(resource.type) == "google_project_iam_member"
-    bindings := resource.properties
 	count([c | contains(input.resources[_].properties.member , list_var[_]); c = 1]) == 0
     contains(lower(input.resources[_].properties.role), "roles/editor")
 }
@@ -626,7 +578,7 @@ iam_primitive_roles_in_use_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure, GCP IAM primitive roles are in use.",
     "Policy Description": "Ensure, GCP IAM users assigned with primitive roles. Primitive roles are Roles that existed prior to Cloud IAM. Primitive roles (owner, editor) are built-in and provide a broader access to resources making them prone to attacks and privilege escalation. Predefined roles provide more granular controls than primitive roles and therefore Predefined roles should be used. Note: For a new GCP project, service accounts are assigned with role/editor permissions. GCP recommends not to revoke the permissions on the SA account. Reference: https://cloud.google.com/iam/docs/service-accounts Limitation: This policy alerts for Service agents which are Google-managed service accounts. Service Agents are by default assigned with some roles by Google cloud and these roles shouldn't be revoked. Reference: https://cloud.google.com/iam/docs/service-agents In case any specific service agent needs to be bypassed, this policy can be cloned and modified accordingly.",
-    "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"]
+    "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"],
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
 }

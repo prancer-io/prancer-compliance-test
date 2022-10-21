@@ -189,6 +189,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_STORAGE",
                     "type": "storage/storage/b.list",
+                    "get_method": "storage/b_iam.get",
                     "collection": "storage",
                     "tags": [
                         {
@@ -202,59 +203,31 @@
                 {
                     "masterSnapshotId": "GOOGLE_PROJECT_INFO",
                     "type": "compute/projects.list",
-                    "get_method" : "compute/projects.get",
+                    "get_method": "compute/projects.get",
                     "collection": "project_info",
                     "tags": [
-                      {
-                        "cloud": "GCP",
-                        "service": [
-                          "compute"
-                        ]
-                      }
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
+                            ]
+                        }
                     ]
                 },
                 {
-                "masterSnapshotId": "GOOGLE_PROJECTS_IAM",
-                "type": "compute/projects.list",
-                "get_method" : "cloudresourcemanager/projects.getIamPolicy",
-                "collection": "project_iam_user",
-                "tags": [
-                    {
-                    "cloud": "GCP",
-                    "service": [
-                        "compute"
-                    ]
-                    }
-                ]
-                },
-                {
-                    "masterSnapshotId": "GOOGLE_SERVICE_AC",
-                    "type": "projects.serviceAccounts.list",
-                    "get_method" : "iam/projects.serviceAccounts.get",
-                    "collection": "project_svc_account",
+                    "masterSnapshotId": "GOOGLE_PROJECTS_IAM",
+                    "type": "compute/projects.list",
+                    "get_method": "cloudresourcemanager/projects.getIamPolicy",
+                    "collection": "project_iam_user",
                     "tags": [
-                      {
-                        "cloud": "GCP",
-                        "service": [
-                          "iam"
-                        ]
-                      }
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
+                            ]
+                        }
                     ]
-                  },
-                  {
-                    "masterSnapshotId": "GOOGLE_SERVICE_AC_KEY",
-                    "type": "projects.serviceAccounts.list",
-                    "get_method" : "iam/projects.serviceAccounts.keys.get",
-                    "collection": "project_svc_account_key",
-                    "tags": [
-                      {
-                        "cloud": "GCP",
-                        "service": [
-                          "iam"
-                        ]
-                      }
-                    ]
-                  }
+                }
             ]
         }
     ]

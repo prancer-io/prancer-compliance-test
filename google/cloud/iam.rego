@@ -1,80 +1,80 @@
 package rule
 
-https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys
+# https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys
 
 #
 # PR-GCP-CLD-SAK-001
 #
 
-default svc_account_key = null
+# default svc_account_key = null
 
 
-gc_attribute_absence["svc_account_key"] {
-    # lower(resource.type) == "iam.v1.serviceaccounts.key"
-    not input.name
-}
+# gc_attribute_absence["svc_account_key"] {
+#     # lower(resource.type) == "iam.v1.serviceaccounts.key"
+#     not input.name
+# }
 
-source_path[{"svc_account_key": metadata}] {
-    # lower(resource.type) == "iam.v1.serviceaccounts.key"
-    not input.name
-    metadata := {
-        "resource_path": [
-            ["resources", i, "properties", "name"]
-        ],
-    }
-}
+# source_path[{"svc_account_key": metadata}] {
+#     # lower(resource.type) == "iam.v1.serviceaccounts.key"
+#     not input.name
+#     metadata := {
+#         "resource_path": [
+#             ["resources", i, "properties", "name"]
+#         ],
+#     }
+# }
 
-gc_issue["svc_account_key"] {
-    # lower(resource.type) == "iam.v1.serviceaccounts.key"
-    contains(lower(input.name), "iam.gserviceaccount.com")
-    time.now_ns() - time.parse_rfc3339_ns(input.validAfterTime) > 7776000000000000
-}
+# gc_issue["svc_account_key"] {
+#     # lower(resource.type) == "iam.v1.serviceaccounts.key"
+#     contains(lower(input.name), "iam.gserviceaccount.com")
+#     time.now_ns() - time.parse_rfc3339_ns(input.validAfterTime) > 7776000000000000
+# }
 
-source_path[{"svc_account_key": metadata}] {
-    # lower(resource.type) == "iam.v1.serviceaccounts.key"
-    contains(lower(input.name), "iam.gserviceaccount.com")
-    time.now_ns() - time.parse_rfc3339_ns(input.validAfterTime) > 7776000000000000
-    metadata := {
-        "resource_path": [
-            ["resources", i, "properties", "validAfterTime"]
-        ],
-    }
-}
+# source_path[{"svc_account_key": metadata}] {
+#     # lower(resource.type) == "iam.v1.serviceaccounts.key"
+#     contains(lower(input.name), "iam.gserviceaccount.com")
+#     time.now_ns() - time.parse_rfc3339_ns(input.validAfterTime) > 7776000000000000
+#     metadata := {
+#         "resource_path": [
+#             ["resources", i, "properties", "validAfterTime"]
+#         ],
+#     }
+# }
 
 
-svc_account_key {
-    # lower(input.resources[i].type) == "iam.v1.serviceaccounts.key"
-    not gc_issue["svc_account_key"]
-    not gc_attribute_absence["svc_account_key"]
-}
+# svc_account_key {
+#     # lower(input.resources[i].type) == "iam.v1.serviceaccounts.key"
+#     not gc_issue["svc_account_key"]
+#     not gc_attribute_absence["svc_account_key"]
+# }
 
-svc_account_key = false {
-    gc_issue["svc_account_key"]
-}
+# svc_account_key = false {
+#     gc_issue["svc_account_key"]
+# }
 
-svc_account_key = false {
-    gc_attribute_absence["svc_account_key"]
-}
+# svc_account_key = false {
+#     gc_attribute_absence["svc_account_key"]
+# }
 
-svc_account_key_err = "GCP User managed service account keys are not rotated for 90 days" {
-    gc_issue["svc_account_key"]
-}
+# svc_account_key_err = "GCP User managed service account keys are not rotated for 90 days" {
+#     gc_issue["svc_account_key"]
+# }
 
-svc_account_key_miss_err = "GCP User managed service account keys attribute name missing in the resource" {
-    gc_attribute_absence["svc_account_key"]
-}
+# svc_account_key_miss_err = "GCP User managed service account keys attribute name missing in the resource" {
+#     gc_attribute_absence["svc_account_key"]
+# }
 
-svc_account_key_metadata := {
-    "Policy Code": "PR-GCP-CLD-SAK-001",
-    "Type": "IaC",
-    "Product": "GCP",
-    "Language": "GCP deployment",
-    "Policy Title": "GCP User managed service account keys are not rotated for 90 days",
-    "Policy Description": "This policy identifies user-managed service account keys which are not rotated from last 90 days or more. Rotating Service Account keys will reduce the window of opportunity for an access key that is associated with a compromised or terminated account to be used. Service Account keys should be rotated to ensure that data cannot be accessed with an old key which might have been lost, cracked, or stolen. It is recommended that all user-managed service account keys are regularly rotated.",
-    "Resource Type": "iam.v1.serviceaccounts.key",
-    "Policy Help URL": "",
-    # "Resource Help URL": "https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys"
-}
+# svc_account_key_metadata := {
+#     "Policy Code": "PR-GCP-CLD-SAK-001",
+#     "Type": "IaC",
+#     "Product": "GCP",
+#     "Language": "GCP deployment",
+#     "Policy Title": "GCP User managed service account keys are not rotated for 90 days",
+#     "Policy Description": "This policy identifies user-managed service account keys which are not rotated from last 90 days or more. Rotating Service Account keys will reduce the window of opportunity for an access key that is associated with a compromised or terminated account to be used. Service Account keys should be rotated to ensure that data cannot be accessed with an old key which might have been lost, cracked, or stolen. It is recommended that all user-managed service account keys are regularly rotated.",
+#     "Resource Type": "iam.v1.serviceaccounts.key",
+#     "Policy Help URL": "",
+#     # "Resource Help URL": "https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys"
+# }
 
 
 #
@@ -123,11 +123,6 @@ default admin_privileges_enabled = null
 gc_issue["admin_privileges_enabled"] {
     contains(lower(input.bindings[_].members[_]), "iam.gserviceaccount.com")
     contains(lower(input.bindings[_].role), "admin")
-}
-
-gc_issue["admin_privileges_enabled"] {
-    contains(lower(input.bindings[_].members[_]), "iam.gserviceaccount.com")
-    contains(lower(input.bindings[_].role), "Admin")
 }
 
 gc_issue["admin_privileges_enabled"] {
@@ -199,7 +194,7 @@ overly_permissive_ac_privileges_metadata := {
     "Resource Type": "iam.v1.projects",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
-
+}
 
 #
 # PR-GCP-CLD-SAK-005
@@ -325,44 +320,4 @@ iam_primitive_roles_in_use_metadata := {
     "Resource Type": "iam.v1.projects",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
-}
-
-
-#
-# PR-GCP-CLD-SAK-008
-#
-## "iam.v1.serviceaccounts.key" ##
-
-default svc_ac_user_has_svc_ac_key = null
-
-gc_issue["svc_ac_user_has_svc_ac_key"] {
-    X := input.GOOGLE_SERVICE_AC_KEY[_]
-    contains(X.keys[_].name, "iam.gserviceaccount.com")
-    contains(lower(input.GOOGLE_SERVICE_AC_KEY[_].keys[_].name), lower(input.GOOGLE_SERVICE_AC[_].email))
-    contains(input.GOOGLE_SERVICE_AC_KEY[_].keys[_].keyType, "USER_MANAGED")
-}
-
-svc_ac_user_has_svc_ac_key {
-    not gc_issue["svc_ac_user_has_svc_ac_key"]
-}
-
-svc_ac_user_has_svc_ac_key = false {
-    gc_issue["svc_ac_user_has_svc_ac_key"]
-}
-
-svc_ac_user_has_svc_ac_key_err = "Ensure, GCP User managed service accounts have user managed service account keys." {
-    gc_issue["svc_ac_user_has_svc_ac_key"]
-}
-
-svc_ac_user_has_svc_ac_key_metadata := {
-    "Policy Code": "PR-GCP-CLD-SAK-008",
-    "Type": "IaC",
-    "Product": "GCP",
-    "Language": "GCP deployment",
-    "Policy Title": "Ensure, GCP User managed service accounts have user managed service account keys.",
-    "Policy Description": "This policy checks user managed service accounts that use user managed service account keys instead of Google-managed. For user-managed keys, the User has to take ownership of key management activities. Even after owner precaution, keys can be easily leaked by common development malpractices like checking keys into the source code or leaving them in downloads directory or accidentally leaving them on support blogs/channels. So It is recommended to limit the use of User-managed service account keys and instead use Google-managed keys which can not be downloaded.",
-    "Resource Type": "iam.v1.serviceaccounts.key",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts"
-    "Resource Help URL": "https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys"
 }

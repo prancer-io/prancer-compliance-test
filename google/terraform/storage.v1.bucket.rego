@@ -522,7 +522,7 @@ default publicly_to_all_authenticated_users = null
 gc_issue["publicly_to_all_authenticated_users"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_iam_policy"
-    binding := resource.bindings[_]
+    binding := resource.properties.bindings[_]
     contains(lower(binding.role), "roles/storage")
     contains(lower(binding.members[_]), "allauthenticatedusers")
 }
@@ -530,7 +530,7 @@ gc_issue["publicly_to_all_authenticated_users"] {
 gc_issue["publicly_to_all_authenticated_users"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_iam_policy"
-    binding := resource.bindings[_]
+    binding := resource.properties.bindings[_]
     contains(lower(binding.role), "roles/storage")
     contains(lower(binding.member[_]), "allauthenticatedusers")
 }
@@ -538,29 +538,29 @@ gc_issue["publicly_to_all_authenticated_users"] {
 gc_issue["publicly_to_all_authenticated_users"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_iam_binding"
-    contains(lower(resource.role), "roles/storage")
-    contains(lower(resource.members[_]), "allauthenticatedusers")
+    contains(lower(resource.properties.role), "roles/storage")
+    contains(lower(resource.properties.members[_]), "allauthenticatedusers")
 }
 
 gc_issue["publicly_to_all_authenticated_users"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_iam_binding"
-    contains(lower(resource.role), "roles/storage")
-    contains(lower(resource.member[_]), "allauthenticatedusers")
+    contains(lower(resource.properties.role), "roles/storage")
+    contains(lower(resource.properties.member[_]), "allauthenticatedusers")
 }
 
 gc_issue["publicly_to_all_authenticated_users"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_iam_member"
-    contains(lower(resource.role), "roles/storage")
-    contains(lower(resource.members), "allauthenticatedusers")
+    contains(lower(resource.properties.role), "roles/storage")
+    contains(lower(resource.properties.members), "allauthenticatedusers")
 }
 
 gc_issue["publicly_to_all_authenticated_users"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_iam_member"
-    contains(lower(resource.role), "roles/storage")
-    contains(lower(resource.member), "allauthenticatedusers")
+    contains(lower(resource.properties.role), "roles/storage")
+    contains(lower(resource.properties.member), "allauthenticatedusers")
 }
 publicly_to_all_authenticated_users {
     lower(input.resources[_].type) == google_storage_bucket_iam[_]
@@ -582,7 +582,7 @@ publicly_to_all_authenticated_users_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure GCP Storage buckets are publicly accessible to all authenticated users.",
     "Policy Description": "Checks the buckets which are publicly accessible to all authenticated users. Enabling public access to Storage Buckets enables anybody with a web association to access sensitive information that is critical to business. Access over a whole bucket is controlled by IAM. Access to individual objects within the bucket is controlled by its ACLs.",
-    "Resource Type": "google_storage_bucket_iam_policy", "google_storage_bucket_iam_binding","google_storage_bucket_iam_member"
+    "Resource Type": ["google_storage_bucket_iam_policy", "google_storage_bucket_iam_binding","google_storage_bucket_iam_member"],
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
 }
@@ -598,7 +598,7 @@ default publicly_to_all_users = null
 gc_issue["publicly_to_all_users"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_iam_policy"
-    binding := resource.bindings[_]
+    binding := resource.properties.bindings[_]
     contains(lower(binding.role), "roles/storage")
     contains(lower(binding.members[_]), "allusers")
 }
@@ -606,7 +606,7 @@ gc_issue["publicly_to_all_users"] {
 gc_issue["publicly_to_all_users"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_iam_policy"
-    binding := resource.bindings[_]
+    binding := resource.properties.bindings[_]
     contains(lower(binding.role), "roles/storage")
     contains(lower(binding.member[_]), "allusers")
 }
@@ -614,29 +614,29 @@ gc_issue["publicly_to_all_users"] {
 gc_issue["publicly_to_all_users"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_iam_binding"
-    contains(lower(resource.role), "roles/storage")
-    contains(lower(resource.members[_]), "allusers")
+    contains(lower(resource.properties.role), "roles/storage")
+    contains(lower(resource.properties.members[_]), "allusers")
 }
 
 gc_issue["publicly_to_all_users"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_iam_binding"
-    contains(lower(resource.role), "roles/storage")
-    contains(lower(resource.member[_]), "allusers")
+    contains(lower(resource.properties.role), "roles/storage")
+    contains(lower(resource.properties.member[_]), "allusers")
 }
 
 gc_issue["publicly_to_all_users"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_iam_member"
-    contains(lower(resource.role), "roles/storage")
-    contains(lower(resource.members), "allusers")
+    contains(lower(resource.properties.role), "roles/storage")
+    contains(lower(resource.properties.members), "allusers")
 }
 
 gc_issue["publicly_to_all_users"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_iam_member"
-    contains(lower(resource.role), "roles/storage")
-    contains(lower(resource.member), "allusers")
+    contains(lower(resource.properties.role), "roles/storage")
+    contains(lower(resource.properties.member), "allusers")
 }
 publicly_to_all_users {
     lower(input.resources[_].type) == google_storage_bucket_iam[_]
@@ -658,7 +658,7 @@ publicly_to_all_users_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure GCP Storage buckets are publicly accessible to all users.",
     "Policy Description": "Checks the buckets which are publicly accessible to all users. Enabling public access to Storage buckets enables anybody with a web association to access sensitive information that is critical to business. Access over a whole bucket is controlled by IAM. Access to individual objects within the bucket is controlled by its ACLs.",
-    "Resource Type": "google_storage_bucket_iam_policy", "google_storage_bucket_iam_binding","google_storage_bucket_iam_member"
+    "Resource Type": ["google_storage_bucket_iam_policy", "google_storage_bucket_iam_binding","google_storage_bucket_iam_member"],
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
 }
