@@ -29,6 +29,12 @@
                     "version": "2021-09-01"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_226",
+                    "type": "Microsoft.ContainerInstance/containerGroups",
+                    "collection": "Microsoft.ContainerInstance",
+                    "version": "2021-10-01"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_231",
                     "type": "Microsoft.Network/networkSecurityGroups",
                     "collection": "Microsoft.Network",
