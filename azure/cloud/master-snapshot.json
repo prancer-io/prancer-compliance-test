@@ -29,6 +29,12 @@
                     "version": "2021-09-01"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_226",
+                    "type": "Microsoft.ContainerInstance/containerGroups",
+                    "collection": "Microsoft.ContainerInstance",
+                    "version": "2021-10-01"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_231",
                     "type": "Microsoft.Network/networkSecurityGroups",
                     "collection": "Microsoft.Network",
@@ -301,6 +307,18 @@
                 {
                     "masterSnapshotId": "AZRSNP_412",
                     "type": "Microsoft.DBforPostgreSQL/servers",
+                    "collection": "Microsoft.DBforPostgreSQL",
+                    "version": "2017-12-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_413",
+                    "type": "microsoft.dbforpostgresql/servers/firewallrules",
+                    "collection": "Microsoft.DBforPostgreSQL",
+                    "version": "2017-12-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_414",
+                    "type": "Microsoft.DBforPostgreSQL/servers/configurations",
                     "collection": "Microsoft.DBforPostgreSQL",
                     "version": "2017-12-01"
                 },
