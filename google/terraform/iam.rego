@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 #
 # PR-GCP-TRF-SAK-002
 # 
@@ -579,6 +583,53 @@ iam_primitive_roles_in_use_metadata := {
     "Policy Title": "Ensure, GCP IAM primitive roles are in use.",
     "Policy Description": "Ensure, GCP IAM users assigned with primitive roles. Primitive roles are Roles that existed prior to Cloud IAM. Primitive roles (owner, editor) are built-in and provide a broader access to resources making them prone to attacks and privilege escalation. Predefined roles provide more granular controls than primitive roles and therefore Predefined roles should be used. Note: For a new GCP project, service accounts are assigned with role/editor permissions. GCP recommends not to revoke the permissions on the SA account. Reference: https://cloud.google.com/iam/docs/service-accounts Limitation: This policy alerts for Service agents which are Google-managed service accounts. Service Agents are by default assigned with some roles by Google cloud and these roles shouldn't be revoked. Reference: https://cloud.google.com/iam/docs/service-agents In case any specific service agent needs to be bypassed, this policy can be cloned and modified accordingly.",
     "Resource Type": ["google_project_iam_policy", "google_project_iam_binding", "google_project_iam_member"],
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
+}
+
+
+#
+# PR-GCP-TRF-SAK-008
+#
+
+default audit_not_config_proper = null
+
+gc_issue["audit_not_config_proper"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_audit_config"
+    audit := resource.properties.audit_log_config[_]
+    not contains(lower(audit.service), "allservices")
+}
+
+gc_issue["audit_not_config_proper"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_project_iam_audit_config"
+    audit := resource.properties.audit_log_config[_]
+	has_property(audit, "exempted_members")
+	count(audit.exempted_members[_]) != 0
+}
+
+audit_not_config_proper {
+    lower(input.resources[_].type) == "google_project_iam_audit_config"
+    not gc_issue["audit_not_config_proper"]
+}
+
+audit_not_config_proper = false {
+    gc_issue["audit_not_config_proper"]
+}
+
+audit_not_config_proper_err = "Ensure, GCP Project audit logging is not configured properly across all services and all users in a project." {
+    gc_issue["audit_not_config_proper"]
+}
+
+audit_not_config_proper_metadata := {
+    "Policy Code": "PR-GCP-TRF-SAK-008",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Ensure, GCP Project audit logging is not configured properly across all services and all users in a project.",
+    "Policy Description": "Ensure, GCP projects in which cloud audit logging is not configured properly across all services and all users. It is recommended that cloud audit logging is configured to track all Admin activities and read, write access to user data. Logs should be captured for all users and there should be no exempted users in any of the audit config section.",
+    "Resource Type": "google_project_iam_audit_config",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
 }

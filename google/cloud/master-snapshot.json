@@ -96,6 +96,21 @@
                     ]
                 },
                 {
+                    "masterSnapshotId": "GOOGLE_DNS_POLICY",
+                    "type": "dns/dns_policies.list",
+                    "get_method": "dns/dns_policies.get",
+
+                    "collection": "networks",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "dns"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterSnapshotId": "GOOGLE_SUBNETWORKS",
                     "type": "compute/subnetworks.aggregatedList",
                     "collection": "subnetworks",

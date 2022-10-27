@@ -1832,6 +1832,37 @@ net_default_metadata := {
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/networks"
 }
 
+
+#
+# PR-GCP-CLD-NET-003
+#
+
+default ntw_config_with_dns_logging_disabled = true
+
+ntw_config_with_dns_logging_disabled = false{
+    X := input.GOOGLE_NETWORK[_]
+    Y := input.GOOGLE_DNS_POLICY[_]
+    not contains(Y.networks[_].networkUrl, X.items[_].name)
+    Y.enableLogging
+}
+
+ntw_config_with_dns_logging_disabled_err = "Ensure, GCP VPC network not configured with DNS policy with logging enabled." {
+    not ntw_config_with_dns_logging_disabled
+}
+
+ntw_config_with_dns_logging_disabled_metadata := {
+    "Policy Code": "PR-GCP-CLD-NET-003",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP cloud",
+    "Policy Title": "Ensure, GCP VPC network not configured with DNS policy with logging enabled.",
+    "Policy Description": "This policy identifies the projects which have configured with legacy networks. Legacy networks have a single network IPv4 prefix range and a single gateway IP address for the whole network. Subnetworks cannot be created in a legacy network. Legacy networks can have an impact on high network traffic projects and subject to the single point of failure.",
+    "Resource Type": "compute.v1.network",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/networks"
+}
+
+
 #
 # PR-GCP-CLD-SUBN-001
 #
@@ -2123,9 +2154,9 @@ gc_issue["instance_with_more_svc_ac_permission"]{
 	upper(X.status) == "RUNNING"
 	Y := input.GOOGLE_PROJECTS_IAM[_]
 	trim(lower(Y.bindings[_].members[_]), "serviceaccount:") == lower(X.serviceAccounts[_].email) 
-    total_roles_list := {app | some app in input.GOOGLE_PROJECTS_IAM[_].bindings[_]; contains(app, "roles/")}
+    total_roles_list := {c | some c in input.GOOGLE_PROJECTS_IAM[_].bindings[_]; contains(c, "roles/")}
     total_roles_count := count(total_roles_list)
-    require_str_list := {app | some app in total_roles_list;  contains(app, "roles/viewer")}
+    require_str_list := {c | some c in total_roles_list;  contains(c, "roles/viewer")}
     require_str_count := count(require_str_list)
     total_roles_count - require_str_count != 0
 }

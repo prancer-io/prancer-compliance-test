@@ -2741,6 +2741,39 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-GCP-CLD-NET-003",
+                    "masterSnapshotId": [
+                        "GOOGLE_NETWORK",
+                        "GOOGLE_DNS_POLICY"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-NET-003",
+                            "eval": "data.rule.ntw_config_with_dns_logging_disabled",
+                            "message": "data.rule.ntw_config_with_dns_logging_disabled_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/networks' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_NET_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP VPC network not configured with DNS policy with logging enabled.",
+                    "description": "This policy identifies the projects which have configured with legacy networks. Legacy networks have a single network IPv4 prefix range and a single gateway IP address for the whole network. Subnetworks cannot be created in a legacy network. Legacy networks can have an impact on high network traffic projects and subject to the single point of failure.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CIS",
+                                "CIS v1.2.0 (GCP)-2.12"
+                            ],
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-GCP-CLD-SUBN-001",
                     "masterSnapshotId": [
                         "GOOGLE_SUBNETWORKS"
@@ -5475,6 +5508,89 @@
                                 "PIPEDA-4.7.3",
                                 "SOC 2-CC6.2",
                                 "SOC 2-CC6.3"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-008",
+                    "masterSnapshotId": [
+                        "GOOGLE_PROJECTS_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-008",
+                            "eval": "data.rule.audit_not_config_proper",
+                            "message": "data.rule.audit_not_config_proper_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/resource-manager/reference/rest/v1/projects' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP Project audit logging is not configured properly across all services and all users in a project.",
+                    "description": "Ensure, GCP projects in which cloud audit logging is not configured properly across all services and all users. It is recommended that cloud audit logging is configured to track all Admin activities and read, write access to user data. Logs should be captured for all users and there should be no exempted users in any of the audit config section.",
+                                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CMMC",
+                                "CIS",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "MITRE ATT&CK",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "APRA (CPS 234) Information Security-CPS234-35",
+                                "APRA (CPS 234) Information Security-CPS234-36",
+                                "Brazilian Data Protection Law (LGPD)-Article 31",
+                                "Brazilian Data Protection Law (LGPD)-Article 48",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.0.0 (GCP)-2.1",
+                                "CIS v1.1.0 (GCP)-2.1",
+                                "CIS v1.2.0 (GCP)-2.1",
+                                "CSA CCM v.4.0.1-LOG-05",
+                                "CSA CCM v.4.0.1-LOG-06",
+                                "CSA CCM v.4.0.1-LOG-08",
+                                "CSA CCM v.4.0.1-LOG-13",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AU.3.046",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AU.5.055",
+                                "HITRUST v.9.4.2-Control Reference:09.ab",
+                                "HITRUST v.9.4.2-Control Reference:09.ac",
+                                "ISO/IEC 27002:2013-12.4.1",
+                                "ISO/IEC 27002:2013-12.4.3",
+                                "ISO/IEC 27002:2013-12.4.4",
+                                "ISO/IEC 27002:2013-16.1.1",
+                                "ISO/IEC 27017:2015-12.4.1",
+                                "ISO/IEC 27017:2015-12.4.4",
+                                "ISO/IEC 27017:2015-16.1.2",
+                                "MITRE ATT&CK v10.0-T1562.008 - Impair Defenses:Disable Cloud Logs",
+                                "NIST 800-53 Rev 5-Account Management | Automated Audit Actions",
+                                "NIST 800-53 Rev 5-Content of Audit Records",
+                                "NIST 800-53 Rev 5-Event Logging",
+                                "NIST 800-53 Rev4-AC-2 (4)",
+                                "NIST 800-53 Rev4-AU-2",
+                                "NIST 800-53 Rev4-AU-3",
+                                "NIST CSF-PR.PT-1",
+                                "NIST SP 800-171 Revision 2-3.3.4",
+                                "NIST SP 800-172-3.14.2e",
+                                "PCI DSS v3.2.1-10.2.3",
+                                "PCI DSS v3.2.1-10.6",
+                                "PIPEDA-4.1.4"
                             ],
                             "service": [
                                 "iam"
