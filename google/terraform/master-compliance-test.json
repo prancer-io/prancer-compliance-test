@@ -1336,6 +1336,96 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-GCP-TRF-INST-015",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.v1.instance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-INST-015",
+                            "eval": "data.rule.compute_ip_forwarding_enable",
+                            "message": "data.rule.compute_ip_forwarding_enable_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_INST_015.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP VM instances have IP Forwarding enabled.",
+                    "description": "This policy checks VM instances that have IP Forwarding enabled. IP Forwarding could open unintended and undesirable communication paths and allows VM instances to send and receive packets with the non-matching destination or source IPs. To enable the source and destination IP match check, disable IP Forwarding.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CMMC",
+                                "CIS",
+                                "HITRUST",
+                                "ISO 27001",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.0.0 (GCP)-4.5",
+                                "CIS v1.1.0 (GCP)-4.6",
+                                "CIS v1.2.0 (GCP)-4.6",
+                                "CSA CCM v.4.0.1-DSP-07",
+                                "CSA CCM v.4.0.1-DSP-10",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IVS-03",
+                                "CSA CCM v.4.0.1-UEM-11",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-CM.2.062",
+                                "HITRUST v.9.4.2-Control Reference:01.n",
+                                "HITRUST v.9.4.2-Control Reference:01.o",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO/IEC 27002:2013-12.2.1",
+                                "ISO/IEC 27002:2013-12.3.1",
+                                "ISO/IEC 27002:2013-13.1.1",
+                                "ISO/IEC 27002:2013-13.1.2",
+                                "ISO/IEC 27002:2013-13.1.3",
+                                "ISO/IEC 27002:2013-13.2.1",
+                                "ISO/IEC 27002:2013-13.2.3",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.2.5",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-8.3.1",
+                                "ISO/IEC 27002:2013-8.3.3",
+                                "ISO/IEC 27017:2015-6.1.1",
+                                "ISO/IEC 27018:2019-10.1.2",
+                                "ISO/IEC 27018:2019-12.3.1",
+                                "NIST CSF-PR.AC-5",
+                                "NIST CSF-PR.DS-5",
+                                "NIST CSF-PR.PT-4",
+                                "NIST SP 800-171 Revision 2-3.13.5",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS v3.2.1-1.2.1",
+                                "PIPEDA-4.7.3"
+                    ],
+                        "service": [
+                            "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_compute_instance"
+                    ]
+                },
+                {
                     "masterTestId": "PR-GCP-TRF-NET-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -2840,6 +2930,183 @@
                     ],
                     "resourceTypes": [
                         "google_container_node_pool"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-CLT-034",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container.v1.cluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-CLT-034",
+                            "eval": "data.rule.secret_encrypted",
+                            "message": "data.rule.secret_encrypted_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a> ",
+                            "remediationFunction": "PR_GCP_TRF_CLT_034.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP Kubernetes cluster Application-layer Secrets are decrypted.",
+                    "description": "This policy established Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers who gain access to an offline copy of etc. This policy checks your cluster for the Application-layer Secrets Encryption security feature and alerts if it is not enabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CIS",
+                                "CSA CCM",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "APRA (CPS 234) Information Security-CPS234-15",
+                                "APRA (CPS 234) Information Security-CPS234-16",
+                                "APRA (CPS 234) Information Security-CPS234-17",
+                                "APRA (CPS 234) Information Security-CPS234-21",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.1.0 (GKE)-5.3.1",
+                                "CSA CCM v.4.0.1-CEK-03",
+                                "CSA CCM v.4.0.1-DSP-10",
+                                "CSA CCM v.4.0.1-IVS-03",
+                                "CSA CCM v.4.0.1-UEM-11",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.177",
+                                "HITRUST v.9.4.2-Control Reference:10.a",
+                                "ISO/IEC 27002:2013-10.1.1",
+                                "ISO/IEC 27002:2013-12.2.1",
+                                "ISO/IEC 27002:2013-12.3.1",
+                                "ISO/IEC 27002:2013-13.1.1",
+                                "ISO/IEC 27002:2013-13.1.2",
+                                "ISO/IEC 27002:2013-13.1.3",
+                                "ISO/IEC 27002:2013-13.2.1",
+                                "ISO/IEC 27002:2013-13.2.3",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.1.3",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-8.3.1",
+                                "ISO/IEC 27002:2013-8.3.3",
+                                "ISO/IEC 27017:2015-10.1.1",
+                                "ISO/IEC 27017:2015-10.1.2",
+                                "ISO/IEC 27017:2015-6.1.1",
+                                "ISO/IEC 27018:2019-10.1.2",
+                                "ISO/IEC 27018:2019-12.3.1",
+                                "NIST 800-53 Rev 5-Protection of Information at Rest | Cryptographic Protection",
+                                "NIST 800-53 Rev 5-Remote Access | Protection of Confidentiality and Integrity Using Encryption",
+                                "NIST 800-53 Rev4-AC-17 (2)",
+                                "NIST 800-53 Rev4-SC-28 (1)",
+                                "NIST CSF-PR.DS-2",
+                                "NIST CSF-PR.DS-5",
+                                "NIST SP 800-171 Revision 2-3.13.8",
+                                "NIST SP 800-172-3.1.3e",
+                                "PCI DSS v3.2.1-6.3",
+                                "PIPEDA-4.7.3"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                    "google_container_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-CLT-035",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container.v1.cluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-CLT-035",
+                            "eval": "data.rule.private_endpoint_disabled",
+                            "message": "data.rule.private_endpoint_disabled_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a> ",
+                            "remediationFunction": "PR_GCP_TRF_CLT_035.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure GCP Kubernetes Engine private cluster has private endpoint disabled.",
+                    "description": "This policy finds GCP Kubernetes Engine private clusters with private endpoint disabled. A public endpoint might expose the current cluster and Kubernetes API version and an attacker may be able to determine whether it is vulnerable to an attack. Unless required, disabling the public endpoint will help prevent such threats, and require the attacker to be on the master's VPC network to perform any attack on the Kubernetes API. It is recommended to enable the private endpoint and disable public access on Kubernetes clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CMMC",
+                                "CIS",
+                                "HITRUST",
+                                "ISO 27001",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.0.0 (GCP)-7.15",
+                                "CIS v1.1.0 (GKE)-5.6.4",
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.1.004",
+                                "HITRUST v.9.4.2-Control Reference:10.a",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.8.2.3",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "NIST CSF-PR.IP-1",
+                                "NIST SP 800-171 Revision 2-3.4.2",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS v3.2.1-6.3",
+                                "PIPEDA-4.7.3"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_container_cluster"
                     ]
                 },
                 {

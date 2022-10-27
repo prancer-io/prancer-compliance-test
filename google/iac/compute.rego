@@ -1957,6 +1957,44 @@ compute_instance_external_ip_metadata := {
 }
 
 
+#
+# PR-GCP-GDF-INST-015
+#
+
+default compute_ip_forwarding_enable = null
+
+gc_issue["compute_ip_forwarding_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    resource.properties.canIpForward == true
+    not startswith(lower(resource.name), "gke-")
+}
+
+compute_ip_forwarding_enable {
+    lower(input.resources[i].type) == "compute.v1.instance"
+    not gc_issue["compute_ip_forwarding_enable"]
+}
+
+compute_ip_forwarding_enable = false {
+    gc_issue["compute_ip_forwarding_enable"]
+}
+
+compute_ip_forwarding_enable_err = "Ensure GCP VM instances have IP Forwarding enabled." {
+    gc_issue["compute_ip_forwarding_enable"]
+}
+
+compute_ip_forwarding_enable_metadata := {
+    "Policy Code": "PR-GCP-GDF-INST-015",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure Ensure GCP VM instances have IP Forwarding enabled.",
+    "Policy Description": "This policy identifies VM instances that have IP Forwarding enabled. IP Forwarding could open unintended and undesirable communication paths and allows VM instances to send and receive packets with the non-matching destination or source IPs. To enable the source and destination IP match check, disable IP Forwarding.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+
 # https://cloud.google.com/compute/docs/reference/rest/v1/networks
 
 #
