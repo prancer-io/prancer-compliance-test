@@ -1842,8 +1842,8 @@ default ntw_config_with_dns_logging_disabled = true
 ntw_config_with_dns_logging_disabled = false{
     X := input.GOOGLE_NETWORK[_]
     Y := input.GOOGLE_DNS_POLICY[_]
-    not contains(Y.networks[_].networkUrl, X.items[_].name)
-    Y.enableLogging
+    count([c | contains(Y.networks[_].networkUrl, X.name); c=1]) == 0
+    not Y.enableLogging
 }
 
 ntw_config_with_dns_logging_disabled_err = "Ensure, GCP VPC network not configured with DNS policy with logging enabled." {
@@ -1852,7 +1852,7 @@ ntw_config_with_dns_logging_disabled_err = "Ensure, GCP VPC network not configur
 
 ntw_config_with_dns_logging_disabled_metadata := {
     "Policy Code": "PR-GCP-CLD-NET-003",
-    "Type": "IaC",
+    "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
     "Policy Title": "Ensure, GCP VPC network not configured with DNS policy with logging enabled.",
