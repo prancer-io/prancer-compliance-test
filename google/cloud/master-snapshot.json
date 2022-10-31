@@ -226,6 +226,48 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_API_KEYS",
+                    "type": "apikeys/apikeys.list",
+                    "get_method": "apikeys/apikeys.get",
+                    "collection": "google_api_keys",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "apikeys"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_APP_ENGINE",
+                    "type": "appengine/app.get",
+                    "get_method": "appengine/app.get",
+                    "collection": "google_app_engine",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "apps"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_SECURITY_POLICY",
+                    "type": "compute/securityPolicies.list",
+                    "get_method": "compute/securityPolicies.get",
+                    "collection": "google_security_policy",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "apps"
+                            ]
+                        }
+                    ]
                 }
             ]
         }

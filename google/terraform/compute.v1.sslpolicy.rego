@@ -181,3 +181,51 @@ lbs_quic_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies"
 }
+
+
+#
+# PR-GCP-TRF-SCP-001
+#
+
+default armor_not_config_with_cve = null
+
+gc_issue["armor_not_config_with_cve"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_compute_security_policy"
+    rule := resource.rule[_].match[_].expr
+    not contains(rule.expression, "cve-canary")
+}
+
+gc_issue["armor_not_config_with_cve"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_compute_security_policy"
+    rule := resource.rule[_]
+    contains(rule.match[_].expr.expression, "cve-canary")
+    lower(rule.action) == "allow"
+}
+
+armor_not_config_with_cve {
+    resource := input.resources[_]
+    lower(resource.type) == "google_compute_security_policy"
+    not gc_issue["armor_not_config_with_cve"]
+}
+
+armor_not_config_with_cve = false {
+    gc_issue["armor_not_config_with_cve"]
+}
+
+armor_not_config_with_cve_err = "Ensure, GCP Cloud Armor policy not configured with cve-canary rule." {
+    gc_issue["armor_not_config_with_cve"]
+}
+
+armor_not_config_with_cve_metadata := {
+    "Policy Code": "PR-GCP-TRF-SCP-001",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP cloud",
+    "Policy Title": "Ensure, GCP Cloud Armor policy not configured with cve-canary rule.",
+    "Policy Description": "This policy identifies GCP Cloud Armor rules where cve-canary is not enabled. Preconfigured WAF rule called "cve-canary" can help detect and block exploit attempts of CVE-2021-44228 and CVE-2021-45046 to address the Apache Log4j vulnerability. It is recommended to create a Cloud Armor security policy with rule blocking Apache Log4j exploit attempts. Reference : https://cloud.google.com/blog/products/identity-security/cloud-armor-waf-rule-to-help-address-apache-log4j-vulnerability",
+    "Resource Type": "google_compute_security_policy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/securityPolicies"
+}

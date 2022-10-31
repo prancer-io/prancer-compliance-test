@@ -2952,6 +2952,162 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-GCP-CLD-SAK-010",
+                    "masterSnapshotId": [
+                        "GOOGLE_API_KEYS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-010",
+                            "eval": "data.rule.api_key_rotation_90_days",
+                            "message": "data.rule.api_key_rotation_90_days_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP API key not rotating in every 90 days.",
+                    "description": "This policy identifies GCP API keys for which the creation date is aged more than 90 days. Google recommends using the standard authentication flow instead of API Keys. However, there are limited cases where API keys are more appropriate. API keys should be rotated to ensure that data cannot be accessed with an old key that might have been lost, cracked, or stolen.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "apikeys"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-011",
+                    "masterSnapshotId": [
+                        "GOOGLE_API_KEYS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-011",
+                            "eval": "data.rule.api_target_not_exist",
+                            "message": "data.rule.api_target_not_exist_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP API key not restricting any specific API.",
+                    "description": "This policy checks GCP API keys that are not restricting any specific APIs. API keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API keys to use (call) only APIs required by an application.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "CIS"
+
+                            ],
+                            "service": [
+                                "apikeys"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-012",
+                    "masterSnapshotId": [
+                        "GOOGLE_API_KEYS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-012",
+                            "eval": "data.rule.api_key_has_no_specific_restriction",
+                            "message": "data.rule.api_key_has_no_specific_restriction_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP API key not restricted to use by specified Hosts and Apps.",
+                    "description": "This policy checks GCP API key not restricted to use by specified Hosts and Apps. Unrestricted keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API key usage to trusted hosts, HTTP referrers and apps.",
+                                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "CIS"
+
+                            ],
+                            "service": [
+                                "apikeys"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-APE-001",
+                    "masterSnapshotId": [
+                        "GOOGLE_APP_ENGINE"
+                    ],
+                    "type": "rego",
+                    "rule": "file(app.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-APE-001",
+                            "eval": "data.rule.app_engine_iap_disabled",
+                            "message": "data.rule.app_engine_iap_disabled_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_APE_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP App Engine Identity-Aware Proxy is disabled.",
+                    "description": "This policy identifies GCP App Engine applications for which Identity-Aware Proxy(IAP) is disabled.  IAP is used to enforce access control policies for applications and resources. It works with signed headers or the App Engine standard environment Users API to secure your app. It is recommended to enable Identity-Aware Proxy for securing the App engine. Reference: https://cloud.google.com/iap/docs/concepts-overview ",
+                        "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "CIS"
+
+                            ],
+                            "service": [
+                                "apps"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SCP-001",
+                    "masterSnapshotId": [
+                        "GOOGLE_SECURITY_POLICY"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SCP-001",
+                            "eval": "data.rule.armor_not_config_with_cve",
+                            "message": "data.rule.armor_not_config_with_cve_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/securityPolicies' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SCP_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP Cloud Armor policy not configured with cve-canary rule.",
+                    "description": "This policy identifies GCP Cloud Armor rules where cve-canary is not enabled. Preconfigured WAF rule called 'cve-canary' can help detect and block exploit attempts of CVE-2021-44228 and CVE-2021-45046 to address the Apache Log4j vulnerability. It is recommended to create a Cloud Armor security policy with rule blocking Apache Log4j exploit attempts. Reference : https://cloud.google.com/blog/products/identity-security/cloud-armor-waf-rule-to-help-address-apache-log4j-vulnerability",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [],
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-GCP-CLD-NET-001",
                     "masterSnapshotId": [
                         "GOOGLE_NETWORK"
