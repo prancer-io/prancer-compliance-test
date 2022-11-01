@@ -243,8 +243,8 @@
                 },
                 {
                     "masterSnapshotId": "GOOGLE_APP_ENGINE",
-                    "type": "appengine/app.get",
-                    "get_method": "appengine/app.get",
+                    "type": "appengine/apps.get",
+                    "get_method": "appengine/apps.get",
                     "collection": "google_app_engine",
                     "tags": [
                         {
@@ -265,6 +265,34 @@
                             "cloud": "GCP",
                             "service": [
                                 "apps"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_SERVICES_LIST",
+                    "type": "serviceusage/gcp_services.list",
+                    "get_method": "serviceusage/gcp_services.get",
+                    "collection": "google_services",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "services"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_BIGQUERY",
+                    "type": "bigquery/datasets.list",
+                    "get_method": "bigquery/datasets.get",
+                    "collection": "bigquery",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "bigquery"
                             ]
                         }
                     ]

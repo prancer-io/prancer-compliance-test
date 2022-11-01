@@ -3108,6 +3108,97 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-GCP-CLD-SVC-001",
+                    "masterSnapshotId": [
+                        "GOOGLE_SERVICES_LIST"
+                    ],
+                    "type": "rego",
+                    "rule": "file(service.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SVC-001",
+                            "eval": "data.rule.vulnerability_scan_disabled",
+                            "message": "data.rule.vulnerability_scan_disabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://cloud.google.com/service-usage/docs/reference/rest/v1/services' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SVC_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP GCR Container Vulnerability Scanning is disabled.",
+                    "description": "This policy identifies GCP accounts where GCR Container Vulnerability Scanning is not enabled. GCR Container Analysis and other third party products allow images stored in GCR to be scanned for known vulnerabilities. Vulnerabilities in software packages can be exploited by hackers or malicious users to obtain unauthorized access to local cloud resources. It is recommended to enable vulnerability scanning for images stored in Google Container Registry.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "CSA CCM v.4.0.1-A&A-03",
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-DSP-01",
+                                "CSA CCM v.4.0.1-DSP-04",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-TVM-01",
+                                "CSA CCM v.4.0.1-TVM-07",
+                                "CSA CCM v.4.0.1-TVM-08",
+                                "CSA CCM v.4.0.1-TVM-09",
+                                "CSA CCM v.4.0.1-TVM-10",
+                                "CSA CCM v.4.0.1-UEM-03",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "HITRUST v.9.4.2-Control Reference:10.m",
+                                "ISO/IEC 27002:2013-12.1.1",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-12.6.1",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27002:2013-14.2.4",
+                                "ISO/IEC 27002:2013-16.1.2",
+                                "ISO/IEC 27002:2013-16.1.3",
+                                "ISO/IEC 27002:2013-18.2.1",
+                                "ISO/IEC 27002:2013-5.1.1",
+                                "ISO/IEC 27002:2013-5.1.2",
+                                "ISO/IEC 27002:2013-8.2.1",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "ISO/IEC 27018:2019-18.2.1",
+                                "NIST CSF-DE.AE-4",
+                                "NIST CSF-DE.CM-8",
+                                "NIST CSF-ID.RA-1",
+                                "NIST CSF-ID.RA-3",
+                                "NIST CSF-ID.RA-4",
+                                "NIST CSF-ID.RA-5",
+                                "NIST CSF-PR.IP-1",
+                                "NIST CSF-RS.AN-2",
+                                "NIST CSF-RS.MI-3",
+                                "NIST SP 800-171 Revision 2-3.11.1",
+                                "NIST SP 800-171 Revision 2-3.11.2",
+                                "NIST SP 800-172-3.12.1e",
+                                "PCI DSS v3.2.1-6.1",
+                                "PCI DSS v3.2.1-6.2"
+                            ],
+                            "service": [
+                                "services"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-GCP-CLD-NET-001",
                     "masterSnapshotId": [
                         "GOOGLE_NETWORK"
