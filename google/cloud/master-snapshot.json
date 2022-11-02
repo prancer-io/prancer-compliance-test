@@ -202,9 +202,22 @@
                     ]
                 },
                 {
-                    "masterSnapshotId": "GOOGLE_STORAGE",
+                    "masterSnapshotId": "GOOGLE_STORAGE_IAM",
                     "type": "storage/storage/b.list",
                     "get_method": "storage/b_iam.get",
+                    "collection": "storage",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "storage"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_STORAGE",
+                    "type": "storage/storage/b.list",
                     "collection": "storage",
                     "tags": [
                         {

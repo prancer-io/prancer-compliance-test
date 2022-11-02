@@ -5680,7 +5680,7 @@
                 {
                     "masterTestId": "PR-GCP-CLD-BKT-011",
                     "masterSnapshotId": [
-                        "GOOGLE_STORAGE"
+                        "GOOGLE_STORAGE_IAM"
                     ],
                     "type": "rego",
                     "rule": "file(storage.rego)",
@@ -5774,7 +5774,7 @@
                 {
                     "masterTestId": "PR-GCP-CLD-BKT-012",
                     "masterSnapshotId": [
-                        "GOOGLE_STORAGE"
+                        "GOOGLE_STORAGE_IAM"
                     ],
                     "type": "rego",
                     "rule": "file(storage.rego)",
