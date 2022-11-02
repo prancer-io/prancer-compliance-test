@@ -200,23 +200,36 @@
                     ]
                 },
                 {
-                    "masterSnapshotId": "GOOGLE_SERVICE_AC",
-                    "type": "iam/projects.serviceAccounts.list",
-                    "get_method": "iam/projects.serviceAccounts.get",
-                    "collection": "project_svc_account",
+                    "masterSnapshotId": "GOOGLE_STORAGE_IAM",
+                    "type": "storage/storage/b.list",
+                    "collection": "storage",
                     "tags": [
                         {
                             "cloud": "GCP",
                             "service": [
-                                "iam"
+                                "storage"
                             ]
                         }
                     ]
                 },
                 {
+                    "masterSnapshotId": "GOOGLE_SERVICE_AC",
+                    "type": "iam/projects.accounts.list",
+                    "get_method" : "iam/projects.accounts.get",
+                    "collection": "project_svc_account",
+                    "tags": [
+                      {
+                        "cloud": "GCP",
+                        "service": [
+                          "iam"
+                        ]
+                      }
+                    ]
+                },
+                {
                     "masterSnapshotId": "GOOGLE_SERVICE_AC_KEY",
-                    "type": ["iam/projects.serviceAccounts.list","projects.serviceAccounts.keys.list"],
-                    "get_method": "iam/projects.serviceAccounts.keys.get",
+                    "type": ["iam/projects.accounts.list","projects.accounts.keys.list"],
+                    "get_method": "iam/projects.accounts.keys.get",
                     "collection": "project_svc_account_key",
                     "tags": [
                         {
@@ -229,8 +242,8 @@
                 },
                 {
                     "masterSnapshotId": "GOOGLE_API_KEYS",
-                    "type": "apikeys/apikeys.list",
-                    "get_method": "apikeys/apikeys.get",
+                    "type": "apikeys/keys.list",
+                    "get_method": "apikeys/keys.get",
                     "collection": "google_api_keys",
                     "tags": [
                         {
