@@ -187,6 +187,20 @@
                     ]
                 },
                 {
+                    "masterSnapshotId": "GOOGLE_STORAGE_IAM",
+                    "type": "storage/storage/b.list",
+                    "get_method": "storage/b_iam.get",
+                    "collection": "storage",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "storage"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterSnapshotId": "GOOGLE_STORAGE",
                     "type": "storage/storage/b.list",
                     "collection": "storage",
@@ -200,9 +214,10 @@
                     ]
                 },
                 {
-                    "masterSnapshotId": "GOOGLE_STORAGE_IAM",
-                    "type": "storage/storage/b.list",
-                    "collection": "storage",
+                    "masterSnapshotId": "GOOGLE_PROJECT_INFO",
+                    "type": "compute/projects.list",
+                    "get_method": "compute/projects.get",
+                    "collection": "project_info",
                     "tags": [
                         {
                             "cloud": "GCP",
