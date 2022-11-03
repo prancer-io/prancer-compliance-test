@@ -1,5 +1,10 @@
 package rule
 
+
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys
 
 #

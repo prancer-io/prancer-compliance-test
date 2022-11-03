@@ -96,6 +96,21 @@
                     ]
                 },
                 {
+                    "masterSnapshotId": "GOOGLE_DNS_POLICY",
+                    "type": "dns/dns_policies.list",
+                    "get_method": "dns/dns_policies.get",
+
+                    "collection": "networks",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "dns"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterSnapshotId": "GOOGLE_SUBNETWORKS",
                     "type": "compute/subnetworks.aggregatedList",
                     "collection": "subnetworks",
@@ -187,6 +202,20 @@
                     ]
                 },
                 {
+                    "masterSnapshotId": "GOOGLE_STORAGE_IAM",
+                    "type": "storage/storage/b.list",
+                    "get_method": "storage/b_iam.get",
+                    "collection": "storage",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "storage"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterSnapshotId": "GOOGLE_STORAGE",
                     "type": "storage/storage/b.list",
                     "collection": "storage",
@@ -195,6 +224,34 @@
                             "cloud": "GCP",
                             "service": [
                                 "storage"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_PROJECT_INFO",
+                    "type": "compute/projects.list",
+                    "get_method": "compute/projects.get",
+                    "collection": "project_info",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_PROJECTS_IAM",
+                    "type": "compute/projects.list",
+                    "get_method": "cloudresourcemanager/projects.getIamPolicy",
+                    "collection": "project_iam_user",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
                             ]
                         }
                     ]
