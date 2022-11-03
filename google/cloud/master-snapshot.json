@@ -255,20 +255,6 @@
                             ]
                         }
                     ]
-                },
-                {
-                    "masterSnapshotId": "GOOGLE_CLOUD_RUN",
-                    "type": "run/CloudRun.list",
-                    "get_method": ["run/CloudRun.get"],
-                    "collection": "google_cloud_run",
-                    "tags": [
-                      {
-                        "cloud": "GCP",
-                        "service": [
-                          "cloud run"
-                        ]
-                      }
-                    ]
                 }
             ]
         }
