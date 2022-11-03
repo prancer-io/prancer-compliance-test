@@ -2265,3 +2265,54 @@ instance_with_more_svc_ac_permission_metadata := {
     "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
 }
 
+
+#
+# PR-GCP-CLD-CLR-001
+#
+
+default cld_run_with_over_permission_ingress = null
+
+gc_attribute_absence["cld_run_with_over_permission_ingress"]{
+    has_property(input.status, "conditions")
+}
+
+gc_issue["cld_run_with_over_permission_ingress"]{
+
+    lower(input.status.conditions[_].type) == "ready"
+    lower(input.status.conditions[_].status) == "true"
+    lower(input.status.conditions[_].type) == "routesready"
+    lower(input.status.conditions[_].status) == "true"
+    lower(input.metadata.annotations.['run.googleapis.com/ingress']) == "all"
+
+}
+
+cld_run_with_over_permission_ingress {
+    not gc_issue["cld_run_with_over_permission_ingress"]
+    not gc_attribute_absence["cld_run_with_over_permission_ingress"]
+}
+
+cld_run_with_over_permission_ingress = false {
+    gc_issue["cld_run_with_over_permission_ingress"]
+}
+
+cld_run_with_over_permission_ingress = false {
+    gc_attribute_absence["cld_run_with_over_permission_ingress"]
+}
+
+cld_run_with_over_permission_ingress_err = "Ensure, GCP Cloud Run service with overly permissive ingress rule." {
+    gc_issue["cld_run_with_over_permission_ingress"]
+}else = "Ensure, GCP Cloud Run service with overly permissive ingress rule."{
+    gc_attribute_absence["cld_run_with_over_permission_ingress"]
+}
+
+cld_run_with_over_permission_ingress_metadata := {
+    "Policy Code": "PR-GCP-CLD-CLR-001",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure, GCP Cloud Run service with overly permissive ingress rule.",
+    "Policy Description": "This policy checks GCP Cloud Run services configured with overly permissive ingress rules. It is recommended to restrict the traffic from the internet and other resources by allowing traffic to enter through load balancers or internal traffic for better network-based access control.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/projects"
+}
