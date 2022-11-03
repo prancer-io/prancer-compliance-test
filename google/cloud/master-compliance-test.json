@@ -5415,6 +5415,37 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-CLR-001",
+                    "masterSnapshotId": [
+                        "GOOGLE_CLOUD_RUN"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-CLR-001",
+                            "eval": "data.rule.cld_run_with_over_permission_ingress",
+                            "message": "data.rule.cld_run_with_over_permission_ingress_err",
+                            "remediationDescription": "Ensure, GCP Cloud Run service with overly permissive ingress rule.",
+                            "remediationFunction": "PR_GCP_CLD_CLR_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP Cloud Run service with overly permissive ingress rule.",
+                    "description": "This policy checks GCP Cloud Run services configured with overly permissive ingress rules. It is recommended to restrict the traffic from the internet and other resources by allowing traffic to enter through load balancers or internal traffic for better network-based access control.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
