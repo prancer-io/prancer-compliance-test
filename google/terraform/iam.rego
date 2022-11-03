@@ -63,7 +63,7 @@ gc_issue["api_key_has_no_specific_restriction"]{
     lower(resource.type) == "google_apikeys_key"
     has_property(resource.properties.restrictions[_], "browser_key_restrictions")
     browser_key_restriction := resource.properties.restrictions[_].browser_key_restrictions[_]
-    contains(browser_key_restriction.allowed_referrers[_], "*.[tld]")
+    contains(lower(browser_key_restriction.allowed_referrers[_]), "*.[tld]")
 }
 
 gc_issue["api_key_has_no_specific_restriction"]{
@@ -71,7 +71,7 @@ gc_issue["api_key_has_no_specific_restriction"]{
     lower(resource.type) == "google_apikeys_key"
     has_property(resource.properties.restrictions[_], "browser_key_restrictions")
     browser_key_restriction := resource.properties.restrictions[_].browser_key_restrictions[_]
-    contains(browser_key_restriction.allowed_referrers[_], "*.[tld]/*")
+    contains(lower(browser_key_restriction.allowed_referrers[_]), "*.[tld]/*")
 }   
 
 gc_issue["api_key_has_no_specific_restriction"]{
@@ -115,6 +115,10 @@ api_key_has_no_specific_restriction {
 
 api_key_has_no_specific_restriction = false {
     gc_issue["api_key_has_no_specific_restriction"]
+    
+}
+
+api_key_has_no_specific_restriction = false {
     gc_attribute_absence["api_key_has_no_specific_restriction"]
     
 }
