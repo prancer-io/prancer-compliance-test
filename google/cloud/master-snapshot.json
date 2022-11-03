@@ -189,7 +189,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_STORAGE_IAM",
                     "type": "storage/storage/b.list",
-                    "get_method": "storage/b_iam.get",
+                    "get_method": ["storage/b_iam.get"],
                     "collection": "storage",
                     "tags": [
                         {
@@ -216,7 +216,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_PROJECT_INFO",
                     "type": "compute/projects.list",
-                    "get_method": "compute/projects.get",
+                    "get_method": ["compute/projects.get"],
                     "collection": "project_info",
                     "tags": [
                         {
@@ -230,7 +230,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_SERVICE_AC",
                     "type": "iam/projects.accounts.list",
-                    "get_method" : "iam/projects.accounts.get",
+                    "get_method" :["iam/projects.accounts.get"],
                     "collection": "project_svc_account",
                     "tags": [
                       {
@@ -243,8 +243,8 @@
                 },
                 {
                     "masterSnapshotId": "GOOGLE_SERVICE_AC_KEY",
-                    "type": ["iam/projects.accounts.list","projects.accounts.keys.list"],
-                    "get_method": "iam/projects.accounts.keys.get",
+                    "type": "iam/projects.accounts.list",
+                    "get_method": ["projects.accounts.keys.list","iam/projects.accounts.keys.get"],
                     "collection": "project_svc_account_key",
                     "tags": [
                         {
@@ -258,7 +258,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_API_KEYS",
                     "type": "apikeys/keys.list",
-                    "get_method": "apikeys/keys.get",
+                    "get_method": ["apikeys/keys.get"],
                     "collection": "google_api_keys",
                     "tags": [
                         {
@@ -272,7 +272,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_APP_ENGINE",
                     "type": "appengine/apps.get",
-                    "get_method": "appengine/apps.get",
+                    "get_method": ["appengine/apps.get"],
                     "collection": "google_app_engine",
                     "tags": [
                         {
@@ -286,7 +286,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_SECURITY_POLICY",
                     "type": "compute/securityPolicies.list",
-                    "get_method": "compute/securityPolicies.get",
+                    "get_method": ["compute/securityPolicies.get"],
                     "collection": "google_security_policy",
                     "tags": [
                         {
@@ -300,7 +300,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_SERVICES_LIST",
                     "type": "serviceusage/gcp_services.list",
-                    "get_method": "serviceusage/gcp_services.get",
+                    "get_method": ["serviceusage/gcp_services.get"],
                     "collection": "google_services",
                     "tags": [
                         {
@@ -314,7 +314,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_BIGQUERY",
                     "type": "bigquery/datasets.list",
-                    "get_method": "bigquery/datasets.get",
+                    "get_method": ["bigquery/datasets.get"],
                     "collection": "bigquery",
                     "tags": [
                         {
