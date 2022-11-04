@@ -2130,17 +2130,15 @@ lbs_quic_metadata := {
 default cld_run_with_over_permission_ingress = null
 
 gc_attribute_absence["cld_run_with_over_permission_ingress"]{
-    has_property(input.status, "conditions")
+    count([c | has_property(input.items[_].status, "conditions"); c=1]) == 0
 }
 
 gc_issue["cld_run_with_over_permission_ingress"]{
-
-    lower(input.status.conditions[_].type) == "ready"
-    lower(input.status.conditions[_].status) == "true"
-    lower(input.status.conditions[_].type) == "routesready"
-    lower(input.status.conditions[_].status) == "true"
-    lower(input.metadata.annotations.['run.googleapis.com/ingress']) == "all"
-
+    lower(input.items[_].status.conditions[_].type) == "ready"
+    lower(input.items[_].status.conditions[_].status) == "true"
+    lower(input.items[_].status.conditions[_].type) == "routesready"
+    lower(input.items[_].status.conditions[_].status) == "true"
+    lower(input.items[_].metadata.annotations["run.googleapis.com/ingress"]) == "all"
 }
 
 cld_run_with_over_permission_ingress {
