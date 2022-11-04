@@ -121,7 +121,7 @@ svc_ac_user_has_svc_ac_key_metadata := {
 default api_key_rotation_90_days = null
 
 gc_issue["api_key_rotation_90_days"] {
-    time.parse_rfc3339_ns(input.createTime) > 1659248441
+    time.now_ns() - time.parse_rfc3339_ns(input.createTime) > 7776000000000000
 }
 
 api_key_rotation_90_days {

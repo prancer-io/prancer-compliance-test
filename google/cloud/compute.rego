@@ -2134,10 +2134,12 @@ gc_attribute_absence["cld_run_with_over_permission_ingress"]{
 }
 
 gc_issue["cld_run_with_over_permission_ingress"]{
-    lower(input.items[_].status.conditions[_].type) == "ready"
-    lower(input.items[_].status.conditions[_].status) == "true"
-    lower(input.items[_].status.conditions[_].type) == "routesready"
-    lower(input.items[_].status.conditions[_].status) == "true"
+	ready := input.items[_].status.conditions[_]
+    lower(ready.type) == "ready"
+    lower(ready.status) == "true"
+    routes := input.items[_].status.conditions[_]
+    lower(routes.type) == "routesready"
+    lower(routes.status) == "true"
     lower(input.items[_].metadata.annotations["run.googleapis.com/ingress"]) == "all"
 }
 

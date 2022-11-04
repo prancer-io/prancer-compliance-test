@@ -29,7 +29,7 @@ api_target_not_exist_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure, GCP API key not restricting any specific API.",
     "Policy Description": "This policy checks GCP API keys that are not restricting any specific APIs. API keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API keys to use (call) only APIs required by an application.",
-    "Resource Type": "projects.locations.keys",
+    "Resource Type": "google_apikeys_key",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys"
 }
@@ -135,7 +135,7 @@ api_key_has_no_specific_restriction_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure, GCP API key not restricted to use by specified Hosts and Apps.",
     "Policy Description": "This policy checks GCP API key not restricted to use by specified Hosts and Apps. Unrestricted keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API key usage to trusted hosts, HTTP referrers and apps.",
-    "Resource Type": "projects.locations.keys",
+    "Resource Type": "google_apikeys_key",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys"
 }

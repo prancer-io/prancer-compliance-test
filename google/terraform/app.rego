@@ -12,7 +12,6 @@ has_property(parent_object, target_property) {
 default app_engine_iap_disabled = true
 
 gc_issue["app_engine_iap_disabled"]{
-    
     resource := input.resources[_]
     lower(resource.type) == "google_app_engine_application"
     upper(resource.properties.serving_status) == "SERVING"
@@ -20,7 +19,6 @@ gc_issue["app_engine_iap_disabled"]{
 }
 
 gc_issue["app_engine_iap_disabled"]{
-    
     resource := input.resources[_]
     lower(resource.type) == "google_app_engine_application"
     upper(resource.properties.serving_status) == "SERVING"
@@ -28,7 +26,6 @@ gc_issue["app_engine_iap_disabled"]{
 }
 
 gc_issue["app_engine_iap_disabled"]{
-    
     resource := input.resources[_]
     lower(resource.type) == "google_app_engine_application"
     upper(resource.properties.serving_status) == "SERVING"

@@ -271,7 +271,7 @@
                 },
                 {
                     "masterSnapshotId": "GOOGLE_APP_ENGINE",
-                    "type": "appengine/apps.get",
+                    "type": "appengine/apps.list",
                     "get_method": ["appengine/apps.get"],
                     "collection": "google_app_engine",
                     "tags": [
@@ -299,8 +299,8 @@
                 },
                 {
                     "masterSnapshotId": "GOOGLE_SERVICES_LIST",
-                    "type": "serviceusage/gcp_services.list",
-                    "get_method": ["serviceusage/gcp_services.get"],
+                    "type": "serviceusage/gcp.services.list",
+                    "get_method": ["serviceusage/gcp.services.get"],
                     "collection": "google_services",
                     "tags": [
                         {
