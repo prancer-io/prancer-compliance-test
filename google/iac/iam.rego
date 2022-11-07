@@ -96,7 +96,7 @@ default non_gcp_account_access_denied = null
 gc_issue["non_gcp_account_access_denied"] {
     resource := input.resources[i]
     lower(resource.type) == "iam.v1.projects"
-    not contains(lower(resource.bindings[_].members[_]), "gserviceaccount.com")
+    not contains(lower(resource.properties.policy.bindings[_].members[_]), "gserviceaccount.com")
 }
 
 non_gcp_account_access_denied {
@@ -135,22 +135,22 @@ default admin_privileges_enabled = null
 gc_issue["admin_privileges_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "iam.v1.projects"
-    contains(lower(resource.bindings[_].members[_]), "iam.gserviceaccount.com")
-    contains(lower(resource.bindings[_].role), "admin")
+    contains(lower(resource.properties.policy.bindings[_].members[_]), "iam.gserviceaccount.com")
+    contains(lower(resource.properties.policy.bindings[_].role), "admin")
 }
 
 gc_issue["admin_privileges_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "iam.v1.projects"
-    contains(lower(resource.bindings[_].members[_]), "iam.gserviceaccount.com")
-    contains(lower(resource.bindings[_].role), "roles/editor")
+    contains(lower(resource.properties.policy.bindings[_].members[_]), "iam.gserviceaccount.com")
+    contains(lower(resource.properties.policy.bindings[_].role), "roles/editor")
 }
 
 gc_issue["admin_privileges_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "iam.v1.projects"
-    contains(lower(resource.bindings[_].members[_]), "iam.gserviceaccount.com")
-    contains(lower(resource.bindings[_].role), "roles/owner")
+    contains(lower(resource.properties.policy.bindings[_].members[_]), "iam.gserviceaccount.com")
+    contains(lower(resource.properties.policy.bindings[_].role), "roles/owner")
 }
 
 admin_privileges_enabled {
