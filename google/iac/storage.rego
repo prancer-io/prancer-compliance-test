@@ -632,7 +632,7 @@ storage_bucket_retention_enable_metadata := {
 
 default publicly_to_all_authenticated_users = null
 
-gc_attribute_absence["publicly_to_all_authenticated_users"] {
+gc_issue["publicly_to_all_authenticated_users"] {
     resource := input.resources[i]
     lower(resource.type) == "storage.v1.bucket"
     binding := resource.properties.bindings[_]
@@ -672,7 +672,7 @@ publicly_to_all_authenticated_users_metadata := {
 
 default publicly_to_all_users = null
 
-gc_attribute_absence["publicly_to_all_authenticated_users"] {
+gc_issue["publicly_to_all_authenticated_users"] {
     resource := input.resources[i]
     lower(resource.type) == "storage.v1.bucket"
     binding := resource.properties.bindings[_]
