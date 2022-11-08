@@ -3664,7 +3664,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AWS-0001-RGX",
+                    "masterTestId": "PR-GCP-0001-RGX",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3672,7 +3672,7 @@
                     "rule": "file(secret_tf.py)",
                     "evals": [
                         {
-                            "id": "PR-AWS-0001-RGX",
+                            "id": "PR-GCP-0001-RGX",
                             "eval": "password_leak",
                             "message": "password_leak_err",
                             "remediationDescription": "",
@@ -3700,7 +3700,7 @@
                     ]
                  },
                  {
-                    "masterTestId": "PR-AWS-0001-RGX",
+                    "masterTestId": "PR-GCP-0001-RGX",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3708,7 +3708,7 @@
                     "rule": "file(secret_tf.py)",
                     "evals": [
                         {
-                            "id": "PR-AWS-0001-RGX",
+                            "id": "PR-GCP-0001-RGX",
                             "eval": "entropy_password",
                             "message": "entropy_password_err",
                             "remediationDescription": "",

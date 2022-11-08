@@ -5,7 +5,7 @@
 # Title: There is a possibility that secure password is exposed
 
 
-***<font color="white">Master Test Id:</font>*** PR-AWS-0001-RGX
+***<font color="white">Master Test Id:</font>*** PR-GCP-0001-RGX
 
 ***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
 
@@ -19,7 +19,7 @@
 
 |Title|Description|
 | :---: | :---: |
-|id|PR-AWS-0001-RGX|
+|id|PR-GCP-0001-RGX|
 |eval|entropy_password|
 |message|entropy_password_err|
 |remediationDescription||
