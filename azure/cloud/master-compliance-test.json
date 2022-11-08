@@ -11864,6 +11864,223 @@
                     "severity": "Medium",
                     "title": "Azure Virtual Machine scale sets should utilize managed disks",
                     "description": "This policy identifies Azure Virtual machine scale sets which are not utilising Managed Disks. Using Azure Managed disk over traditional BLOB storage based VHD's has more advantage features like Managed disks are by default encrypted, reduces cost over storage accounts and more resilient as Microsoft will manage the disk storage and move around if underlying hardware goes faulty. It is recommended to move BLOB based VHD's to Managed Disks."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-001",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-001",
+                            "eval": "data.rule.event_grid_topic_has_public_network_access_disabled",
+                            "message": "data.rule.event_grid_topic_has_public_network_access_disabled_err",
+                            "remediationDescription": "01. Navigate to your event grid topic, and switch to the Networking tab.<br>02. Select Private endpoints only to allow only private endpoint connections to access this resource. Use the Private endpoint connections tab on this page to manage connections. For step-by-step instructions to create a private endpoint connection, visit https://learn.microsoft.com/en-us/azure/event-grid/configure-private-endpoints#use-azure-portal.<br>03. Select Save on the toolbar",
+                            "remediationFunction": "PR_AZR_CLD_EGR_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_508"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should disable public network access",
+                    "description": "Disabling public network access improves security by ensuring that the resource isn't exposed on the public internet. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-002",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-002",
+                            "eval": "data.rule.event_grid_topic_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_topic_has_local_auth_disabled_err",
+                            "remediationDescription": "01. Navigate to your event grid topic.<br>02. On the Overview page, in the Essentials section, select the current value for Local Authentication.<br>03. On the Local Authentication page, select Disabled.<br>04. Select OK to close the Local Authentication page.",
+                            "remediationFunction": "PR_AZR_CLD_EGR_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_508"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should disable local authentication",
+                    "description": "Disable local authentication methods so that your Azure Event Grid topics exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-003",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-003",
+                            "eval": "data.rule.event_grid_domain_configured_with_private_endpoint",
+                            "message": "data.rule.event_grid_domain_configured_with_private_endpoint_err",
+                            "remediationDescription": "01. Navigate to your event grid domain, and switch to the Networking tab.<br>02. Select Private endpoints only to allow only private endpoint connections to access this resource. Use the Private endpoint connections tab on this page to manage connections. For step-by-step instructions to create a private endpoint connection, visit https://learn.microsoft.com/en-us/azure/event-grid/configure-private-endpoints#use-azure-portal.<br>03. Select Save on the toolbar.",
+                            "remediationFunction": "PR_AZR_CLD_EGR_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_509"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should have private endpoints configured",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your resources, they'll be protected against data leakage risks. Learn more at: https://aka.ms/privateendpoints."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-004",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-004",
+                            "eval": "data.rule.event_grid_topic_configured_with_private_endpoint",
+                            "message": "data.rule.event_grid_topic_configured_with_private_endpoint_err",
+                            "remediationDescription": "01. Navigate to your topic.<br>02. Switch to the Networking tab of your topics page. In the Public access tab, select Private endpoints only. For step-by-step instructions to create a private endpoint connection, visit https://learn.microsoft.com/en-us/azure/event-grid/configure-private-endpoints#use-azure-portal.<br>03. Select Save on the toolbar.",
+                            "remediationFunction": "PR_AZR_CLD_EGR_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_508"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should have private endpoints configured",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your resources, they'll be protected against data leakage risks. Learn more at: https://aka.ms/privateendpoints."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-005",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-005",
+                            "eval": "data.rule.event_grid_domain_has_public_network_access_disabled",
+                            "message": "data.rule.event_grid_domain_has_public_network_access_disabled_err",
+                            "remediationDescription": "01. Navigate to your event grid domain, and switch to the Networking tab.<br>02. Select Private endpoints only to allow only private endpoint connections to access this resource. Use the Private endpoint connections tab on this page to manage connections. For step-by-step instructions to create a private endpoint connection, visit https://learn.microsoft.com/en-us/azure/event-grid/configure-private-endpoints#use-azure-portal.<br>03. Select Save on the toolbar.",
+                            "remediationFunction": "PR_AZR_CLD_EGR_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_509"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should disable public network access",
+                    "description": "Disable public network access for Azure Event Grid resource so that it isn't accessible over the public internet. This will help protect them against data leakage risks. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-006",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-006",
+                            "eval": "data.rule.event_grid_domain_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_domain_has_local_auth_disabled_err",
+                            "remediationDescription": "01. Navigate to your event grid domain.<br>02. On the Overview page, in the Essentials section, select the current value for Local Authentication.<br>03. On the Local Authentication page, select Disabled.<br>04. Select OK to close the Local Authentication page.",
+                            "remediationFunction": "PR_AZR_CLD_EGR_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_509"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should disable local authentication",
+                    "description": "Disable local authentication methods so that your Azure Event Grid domains exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-009",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-009",
+                            "eval": "data.rule.event_grid_partnernamespace_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_partnernamespace_has_local_auth_disabled_err",
+                            "remediationDescription": "01. Navigate to your event grid partner namespace.<br>02. On the Overview page, in the Essentials section, select the current value for Local Authentication.<br>03. On the Local Authentication page, select Disabled.<br>04. Select OK to close the Local Authentication page.",
+                            "remediationFunction": "PR_AZR_CLD_EGR_009.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_510"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid partner namespaces should disable local authentication",
+                    "description": "Disabling local authentication methods improves security by ensuring that Azure Event Grid partner namespaces exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth."
                 }
             ]
         }

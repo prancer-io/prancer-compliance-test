@@ -14104,6 +14104,244 @@
                     "resourceTypes": [
                         "microsoft.compute/virtualmachines"
                     ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-001",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-001",
+                            "eval": "data.rule.event_grid_topic_has_public_network_access_disabled",
+                            "message": "data.rule.event_grid_topic_has_public_network_access_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/topics' make sure property publicNetworkAccess exist and has value set to 'disabled' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should disable public network access",
+                    "description": "Disabling public network access improves security by ensuring that the resource isn't exposed on the public internet. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/topics"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-002",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-002",
+                            "eval": "data.rule.event_grid_topic_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_topic_has_local_auth_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/topics' make sure property disableLocalAuth exist and has value set to 'true' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should disable local authentication",
+                    "description": "Disable local authentication methods so that your Azure Event Grid topics exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/topics"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-003",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-003",
+                            "eval": "data.rule.event_grid_domain_configured_with_private_endpoint",
+                            "message": "data.rule.event_grid_domain_configured_with_private_endpoint_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/domains/privateendpointconnections' make sure property privateLinkServiceConnectionState.status exist and has value set to 'Approved' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains/privateendpointconnections?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should have private endpoints configured",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your resources, they'll be protected against data leakage risks. Learn more at: https://aka.ms/privateendpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/domains"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-004",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-004",
+                            "eval": "data.rule.event_grid_topic_configured_with_private_endpoint",
+                            "message": "data.rule.event_grid_topic_configured_with_private_endpoint_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/topics/privateendpointconnections' make sure property privateLinkServiceConnectionState.status exist and has value set to 'Approved' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics/privateendpointconnections?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should have private endpoints configured",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your resources, they'll be protected against data leakage risks. Learn more at: https://aka.ms/privateendpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/topics"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-005",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-005",
+                            "eval": "data.rule.event_grid_domain_has_public_network_access_disabled",
+                            "message": "data.rule.event_grid_domain_has_public_network_access_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/domains' make sure property publicNetworkAccess exist and has value set to 'Disabled' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should disable public network access",
+                    "description": "Disable public network access for Azure Event Grid resource so that it isn't accessible over the public internet. This will help protect them against data leakage risks. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/domains"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-006",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-006",
+                            "eval": "data.rule.event_grid_domain_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_domain_has_local_auth_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/domains' make sure property disableLocalAuth exist and has value set to 'true' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should disable local authentication",
+                    "description": "Disable local authentication methods so that your Azure Event Grid domains exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/domains"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-009",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-009",
+                            "eval": "data.rule.event_grid_partnernamespace_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_partnernamespace_has_local_auth_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/partnernamespaces' make sure property disableLocalAuth exist and has value set to 'true' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/partnernamespaces?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid partner namespaces should disable local authentication",
+                    "description": "Disabling local authentication methods improves security by ensuring that Azure Event Grid partner namespaces exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/partnernamespaces"
+                    ]
                 }
             ]
         }

@@ -405,6 +405,24 @@
                     "type": "Microsoft.Compute/virtualMachineScaleSets",
                     "collection": "Microsoft.Compute",
                     "version": "2022-03-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_508",
+                    "type": "Microsoft.EventGrid/topics",
+                    "collection": "Microsoft.EventGrid",
+                    "version": "2022-06-15"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_509",
+                    "type": "Microsoft.EventGrid/domains",
+                    "collection": "Microsoft.EventGrid",
+                    "version": "2022-06-15"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_510",
+                    "type": "Microsoft.EventGrid/partnerNamespaces",
+                    "collection": "Microsoft.EventGrid",
+                    "version": "2022-06-15"
                 }
             ]
         }
