@@ -3700,7 +3700,7 @@
                     ]
                  },
                  {
-                    "masterTestId": "PR-GCP-0002-RGX",
+                    "masterTestId": "PR-GCP-0001-RGX",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3708,7 +3708,7 @@
                     "rule": "file(secret_tf.py)",
                     "evals": [
                         {
-                            "id": "PR-GCP-0002-RGX",
+                            "id": "PR-GCP-0001-RGX",
                             "eval": "entropy_password",
                             "message": "entropy_password_err",
                             "remediationDescription": "",
