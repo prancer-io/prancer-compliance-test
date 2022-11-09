@@ -994,17 +994,17 @@
 
 ----------------------------------------------------
 
-***<font color="white">Master Test ID:</font>*** PR-AWS-0001-RGX
+***<font color="white">Master Test ID:</font>*** PR-GCP-0001-RGX
 
-***<font color="white">ID:</font>*** PR-AWS-0001-RGX
+***<font color="white">ID:</font>*** PR-GCP-0001-RGX
 
 ***Title: [There is a possibility that secure password is exposed]***
 
 ----------------------------------------------------
 
-***<font color="white">Master Test ID:</font>*** PR-AWS-0001-RGX
+***<font color="white">Master Test ID:</font>*** PR-GCP-0002-RGX
 
-***<font color="white">ID:</font>*** PR-AWS-0001-RGX
+***<font color="white">ID:</font>*** PR-GCP-0002-RGX
 
 ***Title: [There is a possibility that secure password is exposed]***
 
@@ -1219,7 +1219,8 @@
 [SQL Instances with network authorization exposing them to the Internet]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-SQLI-005.md
 [Storage Bucket does not have Access and Storage Logging enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-BKT-004.md
 [Storage Buckets with publicly accessible Stackdriver logs]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-BKT-005.md
-[There is a possibility that secure password is exposed]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-AWS-0001-RGX.md
+[There is a possibility that secure password is exposed]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-0001-RGX.md
+[There is a possibility that secure password is exposed]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-0002-RGX.md
 [VM Instances enabled with Pre-Emptible termination]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-INST-004.md
 [VM Instances without any Custom metadata information]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-INST-005.md
 [VM Instances without any Label information]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-INST-006.md
