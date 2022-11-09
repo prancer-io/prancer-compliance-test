@@ -5761,7 +5761,7 @@
                         }
                     ],
                     "resourceTypes": [
-                       "iam.v1.projects"
+                       "gcp-types/iam-v1:iam.projects.serviceaccounts.getiampolicy"
                     ]
                 },
                 {
@@ -5860,7 +5860,7 @@
                         }
                     ],
                     "resourceTypes": [
-                       "iam.v1.projects"
+                       "gcp-types/iam-v1:iam.projects.serviceaccounts.getiampolicy"
                     ]
                 },
                 {
@@ -5959,7 +5959,7 @@
                         }
                     ],
                     "resourceTypes": [
-                       "iam.v1.projects"
+                       "gcp-types/iam-v1:iam.projects.serviceaccounts.getiampolicy"
                     ]
                 },
                 {
@@ -6059,7 +6059,7 @@
                         }
                     ],
                     "resourceTypes": [
-                       "iam.v1.projects"
+                       "gcp-types/iam-v1:iam.projects.serviceaccounts.getiampolicy"
                     ]
                 },
                 {
@@ -6175,7 +6175,7 @@
                         }
                     ],
                     "resourceTypes": [
-                       "iam.v1.projects"
+                       "gcp-types/iam-v1:iam.projects.serviceaccounts.getiampolicy"
                     ]
                 },
                 {
@@ -6272,7 +6272,7 @@
                         }
                     ],
                     "resourceTypes": [
-                       "iam.v1.projects"
+                       "gcp-types/iam-v1:iam.projects.serviceaccounts.getiampolicy"
                     ]
                 },
                 {
@@ -6358,7 +6358,7 @@
                         }
                     ],
                     "resourceTypes": [
-                       "iam.v1.projects"
+                       "gcp-types/iam-v1:iam.projects.serviceaccounts.getiampolicy"
                     ]
                 },
                 {
