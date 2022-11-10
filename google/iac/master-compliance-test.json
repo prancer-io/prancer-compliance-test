@@ -5774,8 +5774,8 @@
                     "evals": [
                         {
                             "id": "PR-GCP-GDF-SAK-003",
-                            "eval": "data.rule.non_gcp_account_access_denied",
-                            "message": "data.rule.non_gcp_account_access_denied_err",
+                            "eval": "data.rule.admin_privileges_enabled",
+                            "message": "data.rule.admin_privileges_enabled_err",
                             "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/resource-manager/reference/rest/v1/projects' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_SAK_003.py"
                         }
