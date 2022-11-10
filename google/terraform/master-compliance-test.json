@@ -3716,7 +3716,7 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "TTesting   here is a possibility that secure password is exposed",
+                    "title": "There is a possibility that secure password is exposed",
                     "description": "There is a possibility that secure password is exposed",
                     "tags": [
                         {
