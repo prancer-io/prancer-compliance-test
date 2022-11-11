@@ -12081,6 +12081,68 @@
                     "severity": "Medium",
                     "title": "Azure Event Grid partner namespaces should disable local authentication",
                     "description": "Disabling local authentication methods improves security by ensuring that Azure Event Grid partner namespaces exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-RSV-001",
+                    "type": "rego",
+                    "rule": "file(recoveryservices_vaults.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-RSV-001",
+                            "eval": "data.rule.recoveryservices_vaults_usage_custom_managed_keys_for_encryption",
+                            "message": "data.rule.recoveryservices_vaults_usage_custom_managed_keys_for_encryption_err",
+                            "remediationDescription": "01. Go to your Recovery Services vault -> Properties.<br>02. Select Update under Encryption Settings.<br>03. In the Encryption Settings pane, select Use your own key and enter the Key URI with which you want to encrypt the data in this Recovery Services vault.<br>04. Select Save.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/backup/encryption-at-rest-with-cmk?tabs=portal#configure-a-vault-to-encrypt-using-customer-managed-keys' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_CLD_RSV_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_511"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Recovery Services vaults should use customer-managed keys for encryption",
+                    "description": "Use customer-managed keys to manage the encryption at rest of your backup data. By default, customer data is encrypted with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/AB-CmkEncryption."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-RSV-002",
+                    "type": "rego",
+                    "rule": "file(recoveryservices_vaults.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-RSV-002",
+                            "eval": "data.rule.recoveryservices_vaults_configured_with_private_endpoint",
+                            "message": "data.rule.recoveryservices_vaults_configured_with_private_endpoint_err",
+                            "remediationDescription": "01. Navigate to your vault and go to Private endpoint connections on the left navigation bar. Select +Private endpoint on the top to start creating a new private endpoint for this vault.<br>02. Once in the Create Private Endpoint process, you'll be required to specify details for creating your private endpoint connection.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/backup/private-endpoints#create-private-endpoints-for-azure-backup' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_CLD_RSV_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_511"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Recovery Services vaults should use private link",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to Azure Recovery Services vaults, data leakage risks are reduced. Learn more about private links at: https://aka.ms/AB-PrivateEndpoints."
                 }
             ]
         }

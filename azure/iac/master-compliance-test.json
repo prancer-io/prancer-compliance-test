@@ -14342,6 +14342,74 @@
                     "resourceTypes": [
                         "microsoft.eventgrid/partnernamespaces"
                     ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-RSV-001",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(recoveryservices_vaults.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-RSV-001",
+                            "eval": "data.rule.recoveryservices_vaults_usage_custom_managed_keys_for_encryption",
+                            "message": "data.rule.recoveryservices_vaults_usage_custom_managed_keys_for_encryption_err",
+                            "remediationDescription": "For Resource type 'Microsoft.RecoveryServices/vaults' make sure property encryption.keyVaultProperties.keyUri exist and value key url from key vault to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_RSV_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Recovery Services vaults should use customer-managed keys for encryption",
+                    "description": "Use customer-managed keys to manage the encryption at rest of your backup data. By default, customer data is encrypted with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/AB-CmkEncryption.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.RecoveryServices/vaults"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-RSV-002",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(recoveryservices_vaults.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-RSV-002",
+                            "eval": "data.rule.recoveryservices_vaults_configured_with_private_endpoint",
+                            "message": "data.rule.recoveryservices_vaults_configured_with_private_endpoint_err",
+                            "remediationDescription": "For Resource type 'Microsoft.RecoveryServices/vaults/privateendpointconnections' make sure property privateLinkServiceConnectionState.status exist and set value to 'Approved' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults/privateendpointconnections?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_RSV_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Recovery Services vaults should use private link",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to Azure Recovery Services vaults, data leakage risks are reduced. Learn more about private links at: https://aka.ms/AB-PrivateEndpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.RecoveryServices/vaults"
+                    ]
                 }
             ]
         }

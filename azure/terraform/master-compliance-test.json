@@ -14981,7 +14981,7 @@
                             "id": "PR-AZR-TRF-EGR-006",
                             "eval": "data.rule.event_grid_domain_has_local_auth_disabled",
                             "message": "data.rule.event_grid_domain_has_local_auth_disabled_err",
-                            "remediationDescription": "In 'azurerm_eventgrid_domain' resource, make sure 'local_auth_enabled' exist and has value'false' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventgrid_domain#local_auth_enabled' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_eventgrid_domain' resource, make sure 'local_auth_enabled' exist and has value 'false' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventgrid_domain#local_auth_enabled' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_EGR_006.py"
                         }
                     ],
@@ -15001,6 +15001,74 @@
                     ],
                     "resourceTypes": [
                         "azurerm_eventgrid_domain"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-RSV-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(recoveryservices_vaults.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-RSV-001",
+                            "eval": "data.rule.recoveryservices_vaults_usage_custom_managed_keys_for_encryption",
+                            "message": "data.rule.recoveryservices_vaults_usage_custom_managed_keys_for_encryption_err",
+                            "remediationDescription": "In 'azurerm_recovery_services_vault' resource, make sure 'encryption.key_id' exist and has value as the Key Vault key id used to encrypt this vault to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/recovery_services_vault#key_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_RSV_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Recovery Services vaults should use customer-managed keys for encryption",
+                    "description": "Use customer-managed keys to manage the encryption at rest of your backup data. By default, customer data is encrypted with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/AB-CmkEncryption.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_recovery_services_vault"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-RSV-002",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(recoveryservices_vaults.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-RSV-002",
+                            "eval": "data.rule.recoveryservices_vaults_configured_with_private_endpoint",
+                            "message": "data.rule.recoveryservices_vaults_configured_with_private_endpoint_err",
+                            "remediationDescription": "Make sure resource 'azurerm_recovery_services_vault' and 'azurerm_private_endpoint' exist and make sure id of azurerm_recovery_services_vault set on private_service_connection[_].private_connection_resource_id property of azurerm_private_endpoint. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_RSV_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Recovery Services vaults should use private link",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to Azure Recovery Services vaults, data leakage risks are reduced. Learn more about private links at: https://aka.ms/AB-PrivateEndpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_recovery_services_vault"
                     ]
                 }
             ]

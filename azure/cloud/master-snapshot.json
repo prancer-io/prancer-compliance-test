@@ -423,6 +423,12 @@
                     "type": "Microsoft.EventGrid/partnerNamespaces",
                     "collection": "Microsoft.EventGrid",
                     "version": "2022-06-15"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_511",
+                    "type": "Microsoft.RecoveryServices/vaults",
+                    "collection": "Microsoft.RecoveryServices",
+                    "version": "2022-04-01"
                 }
             ]
         }
