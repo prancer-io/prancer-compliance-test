@@ -4,7 +4,7 @@ array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }
 
-# https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults?pivots=deployment-language-CLD-template
+# https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults?pivots=deployment-language-arm-template
 
 #
 # PR-AZR-CLD-RSV-001
@@ -53,11 +53,11 @@ recoveryservices_vaults_usage_custom_managed_keys_for_encryption_metadata := {
     "Policy Description": "Use customer-managed keys to manage the encryption at rest of your backup data. By default, customer data is encrypted with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/AB-CmkEncryption.",
     "Resource Type": "Microsoft.RecoveryServices/vaults",
     "Policy Help URL": "",
-    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults?pivots=deployment-language-CLD-template"
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults?pivots=deployment-language-arm-template"
 }
 
 
-# https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults?pivots=deployment-language-CLD-template
+# https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults?pivots=deployment-language-arm-template
 
 #
 # PR-AZR-CLD-RSV-002
@@ -130,5 +130,5 @@ recoveryservices_vaults_configured_with_private_endpoint_metadata := {
     "Policy Description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to Azure Recovery Services vaults, data leakage risks are reduced. Learn more about private links at: https://aka.ms/AB-PrivateEndpoints.",
     "Resource Type": "Microsoft.RecoveryServices/vaults",
     "Policy Help URL": "",
-    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults?pivots=deployment-language-CLD-template"
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults?pivots=deployment-language-arm-template"
 }
