@@ -3600,6 +3600,142 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-GCP-TRF-SAK-011",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-SAK-011",
+                            "eval": "data.rule.api_target_not_exist",
+                            "message": "data.rule.api_target_not_exist_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_SAK_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP API key not restricting any specific API.",
+                    "description": "This policy checks GCP API keys that are not restricting any specific APIs. API keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API keys to use (call) only APIs required by an application.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_apikeys_key"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-SAK-012",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-SAK-012",
+                            "eval": "data.rule.api_key_has_no_specific_restriction",
+                            "message": "data.rule.api_key_has_no_specific_restriction_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_SAK_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP API key not restricted to use by specified Hosts and Apps.",
+                    "description": "This policy checks GCP API key not restricted to use by specified Hosts and Apps. Unrestricted keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API key usage to trusted hosts, HTTP referrers and apps.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_apikeys_key"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-APE-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(app.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-APE-001",
+                            "eval": "data.rule.app_engine_iap_disabled",
+                            "message": "data.rule.app_engine_iap_disabled_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_APE_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP App Engine Identity-Aware Proxy is disabled.",
+                    "description": "This policy identifies GCP App Engine applications for which Identity-Aware Proxy(IAP) is disabled.  IAP is used to enforce access control policies for applications and resources. It works with signed headers or the App Engine standard environment Users API to secure your app. It is recommended to enable Identity-Aware Proxy for securing the App engine. Reference: https://cloud.google.com/iap/docs/concepts-overview ",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_app_engine_application"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-SCP-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.v1.sslpolicy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-SCP-001",
+                            "eval": "data.rule.armor_not_config_with_cve",
+                            "message": "data.rule.armor_not_config_with_cve_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/securityPolicies' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_SCP_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP Cloud Armor policy not configured with cve-canary rule.",
+                    "description": "This policy identifies GCP Cloud Armor rules where cve-canary is not enabled. Preconfigured WAF rule called 'cve-canary' can help detect and block exploit attempts of CVE-2021-44228 and CVE-2021-45046 to address the Apache Log4j vulnerability. It is recommended to create a Cloud Armor security policy with rule blocking Apache Log4j exploit attempts. Reference : https://cloud.google.com/blog/products/identity-security/cloud-armor-waf-rule-to-help-address-apache-log4j-vulnerability",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_compute_security_policy"
+                    ]
+                },
+                {
                     "masterTestId": "PR-GCP-TRF-PUB-001",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
