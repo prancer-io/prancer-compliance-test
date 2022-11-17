@@ -5217,7 +5217,7 @@
                         "GDF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "python",
-                    "rule": "file(secret_tf.py)",
+                    "rule": "file(secret_gcp_iac.py)",
                     "evals": [
                         {
                             "id": "PR-GCP-0002-RGX",

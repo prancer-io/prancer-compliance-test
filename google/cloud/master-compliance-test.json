@@ -2223,7 +2223,6 @@
                         }
                     ]
                 },
-              
                 {
                     "masterTestId": "PR-GCP-CLD-DISK-001",
                     "masterSnapshotId": [
@@ -2946,9 +2945,6 @@
                                 "ISO/IEC 27018:2019-12.3.1",
                                 "MITRE ATT&CK v10.0-T1078 - Valid Accounts",
                                 "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
                                 "MITRE ATT&CK v8.2-T1078",
                                 "NIST CSF-PR.AC-5",
                                 "NIST CSF-PR.DS-5",
@@ -3040,10 +3036,6 @@
                                 "ISO/IEC 27018:2019-9.2.3",
                                 "ISO/IEC 27018:2019-9.2.5",
                                 "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v8.2-T1078",
                                 "MITRE ATT&CK v8.2-T1098",
@@ -3055,6 +3047,189 @@
                                 "PCI DSS v3.2.1-7.1",
                                 "PCI DSS v3.2.1-7.1.2",
                                 "PIPEDA-4.7.3"
+                            ],
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-APE-001",
+                    "masterSnapshotId": [
+                        "GOOGLE_APP_ENGINE"
+                    ],
+                    "type": "rego",
+                    "rule": "file(app.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-APE-001",
+                            "eval": "data.rule.app_engine_iap_disabled",
+                            "message": "data.rule.app_engine_iap_disabled_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_APE_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP App Engine Identity-Aware Proxy is disabled.",
+                    "description": "This policy identifies GCP App Engine applications for which Identity-Aware Proxy(IAP) is disabled.  IAP is used to enforce access control policies for applications and resources. It works with signed headers or the App Engine standard environment Users API to secure your app. It is recommended to enable Identity-Aware Proxy for securing the App engine. Reference: https://cloud.google.com/iap/docs/concepts-overview ",
+                        "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "CIS"
+
+                            ],
+                            "service": [
+                                "apps"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SCP-001",
+                    "masterSnapshotId": [
+                        "GOOGLE_SECURITY_POLICY"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SCP-001",
+                            "eval": "data.rule.armor_not_config_with_cve",
+                            "message": "data.rule.armor_not_config_with_cve_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/securityPolicies' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SCP_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP Cloud Armor policy not configured with cve-canary rule.",
+                    "description": "This policy identifies GCP Cloud Armor rules where cve-canary is not enabled. Preconfigured WAF rule called 'cve-canary' can help detect and block exploit attempts of CVE-2021-44228 and CVE-2021-45046 to address the Apache Log4j vulnerability. It is recommended to create a Cloud Armor security policy with rule blocking Apache Log4j exploit attempts. Reference : https://cloud.google.com/blog/products/identity-security/cloud-armor-waf-rule-to-help-address-apache-log4j-vulnerability",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [],
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SVC-001",
+                    "masterSnapshotId": [
+                        "GOOGLE_SERVICES_LIST"
+                    ],
+                    "type": "rego",
+                    "rule": "file(service.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SVC-001",
+                            "eval": "data.rule.vulnerability_scan_disabled",
+                            "message": "data.rule.vulnerability_scan_disabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://cloud.google.com/service-usage/docs/reference/rest/v1/services' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SVC_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP GCR Container Vulnerability Scanning is disabled.",
+                    "description": "This policy identifies GCP accounts where GCR Container Vulnerability Scanning is not enabled. GCR Container Analysis and other third party products allow images stored in GCR to be scanned for known vulnerabilities. Vulnerabilities in software packages can be exploited by hackers or malicious users to obtain unauthorized access to local cloud resources. It is recommended to enable vulnerability scanning for images stored in Google Container Registry.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "CSA CCM v.4.0.1-A&A-03",
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-DSP-01",
+                                "CSA CCM v.4.0.1-DSP-04",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-TVM-01",
+                                "CSA CCM v.4.0.1-TVM-07",
+                                "CSA CCM v.4.0.1-TVM-08",
+                                "CSA CCM v.4.0.1-TVM-09",
+                                "CSA CCM v.4.0.1-TVM-10",
+                                "CSA CCM v.4.0.1-UEM-03",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "HITRUST v.9.4.2-Control Reference:10.m",
+                                "ISO/IEC 27002:2013-12.1.1",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-12.6.1",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27002:2013-14.2.4",
+                                "ISO/IEC 27002:2013-16.1.2",
+                                "ISO/IEC 27002:2013-16.1.3",
+                                "ISO/IEC 27002:2013-18.2.1",
+                                "ISO/IEC 27002:2013-5.1.1",
+                                "ISO/IEC 27002:2013-5.1.2",
+                                "ISO/IEC 27002:2013-8.2.1",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "ISO/IEC 27018:2019-18.2.1",
+                                "NIST CSF-DE.AE-4",
+                                "NIST CSF-DE.CM-8",
+                                "NIST CSF-ID.RA-1",
+                                "NIST CSF-ID.RA-3",
+                                "NIST CSF-ID.RA-4",
+                                "NIST CSF-ID.RA-5",
+                                "NIST CSF-PR.IP-1",
+                                "NIST CSF-RS.AN-2",
+                                "NIST CSF-RS.MI-3",
+                                "NIST SP 800-171 Revision 2-3.11.1",
+                                "NIST SP 800-171 Revision 2-3.11.2",
+                                "NIST SP 800-172-3.12.1e",
+                                "PCI DSS v3.2.1-6.1",
+                                "PCI DSS v3.2.1-6.2"
+                            ],
+                            "service": [
+                                "services"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-CLR-001",
+                    "masterSnapshotId": [
+                        "GOOGLE_CLOUD_RUN"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-CLR-001",
+                            "eval": "data.rule.cld_run_with_over_permission_ingress",
+                            "message": "data.rule.cld_run_with_over_permission_ingress_err",
+                            "remediationDescription": "Ensure, GCP Cloud Run service with overly permissive ingress rule.",
+                            "remediationFunction": "PR_GCP_CLD_CLR_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP Cloud Run service with overly permissive ingress rule.",
+                    "description": "This policy checks GCP Cloud Run services configured with overly permissive ingress rules. It is recommended to restrict the traffic from the internet and other resources by allowing traffic to enter through load balancers or internal traffic for better network-based access control.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CIS"
                             ],
                             "service": [
                                 "compute"
@@ -5388,9 +5563,6 @@
                             "ISO 27001:2013-A.9.2.5",
                             "MITRE ATT&CK v10.0-T1078 - Valid Accounts",
                             "MITRE ATT&CK v6.3-T1078",
-                            "MITRE ATT&CK v6.3-T1078",
-                            "MITRE ATT&CK v6.3-T1078",
-                            "MITRE ATT&CK v6.3-T1078",
                             "MITRE ATT&CK v8.2-T1078",
                             "NIST 800-53 Rev4-AC-3 (4)",
                             "NIST 800-53 Rev4-AC-3 (4)(a)",
@@ -5489,10 +5661,6 @@
                                 "ISO/IEC 27018:2019-9.2.5",
                                 "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
                                 "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v8.2-T1078",
                                 "MITRE ATT&CK v8.2-T1098",
@@ -5585,10 +5753,6 @@
                                 "ISO/IEC 27018:2019-9.2.5",
                                 "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
                                 "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v8.2-T1078",
                                 "MITRE ATT&CK v8.2-T1098",
@@ -5682,10 +5846,6 @@
                                 "ISO/IEC 27018:2019-9.2.5",
                                 "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
                                 "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v8.2-T1078",
                                 "MITRE ATT&CK v8.2-T1098",
@@ -5791,10 +5951,6 @@
                                 "ISO/IEC 27018:2019-9.2.5",
                                 "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
                                 "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v8.2-T1078",
                                 "MITRE ATT&CK v8.2-T1098",
@@ -5885,10 +6041,6 @@
                                 "ISO 27001:2013-A.9.2.5",
                                 "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
                                 "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v8.2-T1078",
                                 "MITRE ATT&CK v8.2-T1098",
@@ -5995,6 +6147,194 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-GCP-CLD-SAK-009",
+                    "masterSnapshotId": [
+                        "GOOGLE_SERVICE_AC_KEY",
+                        "GOOGLE_SERVICE_AC"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-009",
+                            "eval": "data.rule.svc_ac_user_has_svc_ac_key",
+                            "message": "data.rule.svc_ac_user_has_svc_ac_key_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP User managed service accounts have user managed service account keys.",
+                    "description": "This policy checks user managed service accounts that use user managed service account keys instead of Google-managed. For user-managed keys, the User has to take ownership of key management activities. Even after owner precaution, keys can be easily leaked by common development malpractices like checking keys into the source code or leaving them in downloads directory or accidentally leaving them on support blogs/channels. So It is recommended to limit the use of User-managed service account keys and instead use Google-managed keys which can not be downloaded.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CMMC",
+                                "CIS",
+                                "HITRUST",
+                                "ISO 27001",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MITRE ATT&CK",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "APRA (CPS 234) Information Security-CPS234-14",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 46",
+                                "Brazilian Data Protection Law (LGPD)-Article 6",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.0.0 (GCP)-1.3",
+                                "CIS v1.1.0 (GCP)-1.4",
+                                "CIS v1.2.0 (GCP)-1.4",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IAM-04",
+                                "CSA CCM v.4.0.1-IAM-05",
+                                "CSA CCM v.4.0.1-IAM-09",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.2.007",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.9.2.3",
+                                "ISO 27001:2013-A.9.2.5",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-6.1.2",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.1.2",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "MITRE ATT&CK v6.3-T1078",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1078",
+                                "NIST 800-53 Rev 5-Least Privilege",
+                                "NIST 800-53 Rev4-AC-6",
+                                "NIST CSF-PR.AC-4",
+                                "NIST SP 800-171 Revision 2-3.1.5",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI DSS v3.2.1-7.1.2",
+                                "PIPEDA-4.7.3"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-010",
+                    "masterSnapshotId": [
+                        "GOOGLE_API_KEYS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-010",
+                            "eval": "data.rule.api_key_rotation_90_days",
+                            "message": "data.rule.api_key_rotation_90_days_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP API key not rotating in every 90 days.",
+                    "description": "This policy identifies GCP API keys for which the creation date is aged more than 90 days. Google recommends using the standard authentication flow instead of API Keys. However, there are limited cases where API keys are more appropriate. API keys should be rotated to ensure that data cannot be accessed with an old key that might have been lost, cracked, or stolen.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "apikeys"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-011",
+                    "masterSnapshotId": [
+                        "GOOGLE_API_KEYS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-011",
+                            "eval": "data.rule.api_target_not_exist",
+                            "message": "data.rule.api_target_not_exist_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP API key not restricting any specific API.",
+                    "description": "This policy checks GCP API keys that are not restricting any specific APIs. API keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API keys to use (call) only APIs required by an application.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "CIS"
+
+                            ],
+                            "service": [
+                                "apikeys"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-012",
+                    "masterSnapshotId": [
+                        "GOOGLE_API_KEYS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-012",
+                            "eval": "data.rule.api_key_has_no_specific_restriction",
+                            "message": "data.rule.api_key_has_no_specific_restriction_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP API key not restricted to use by specified Hosts and Apps.",
+                    "description": "This policy checks GCP API key not restricted to use by specified Hosts and Apps. Unrestricted keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API key usage to trusted hosts, HTTP referrers and apps.",
+                                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "CIS"
+
+                            ],
+                            "service": [
+                                "apikeys"
+                            ]
+                        }
+                    ]
+                },
+                {
                         "masterTestId": "PR-GCP-CLD-PRIF-001",
                         "masterSnapshotId": [
                             "GOOGLE_PROJECT_INFO"
@@ -6055,9 +6395,6 @@
                                     "ISO/IEC 27017:2015-12.4.4",
                                     "ISO/IEC 27017:2015-16.1.2",
                                     "MITRE ATT&CK v10.0-T1078 - Valid Accounts",
-                                    "MITRE ATT&CK v6.3-T1078",
-                                    "MITRE ATT&CK v6.3-T1078",
-                                    "MITRE ATT&CK v6.3-T1078",
                                     "MITRE ATT&CK v6.3-T1078",
                                     "MITRE ATT&CK v8.2-T1078",
                                     "NIST CSF-PR.PT-1",
@@ -6234,7 +6571,7 @@
                             ]
                         }
                     ]
-                }   
+                }
             ]
         }
     ]
