@@ -7531,6 +7531,254 @@
                     "description": "This policy identifies Azure Container registries which has Public access to All networks enabled. Azure ACR is used to store Docker container images which might contain sensitive information. It is highly recommended to restrict public access from allow access from Selected networks or make it Private by disabling the Public access."
                 },
                 {
+                    "masterTestId": "PR-AZR-CLD-ACR-007",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-007",
+                            "eval": "data.rule.acr_repository_scoped_access_token_disabled",
+                            "message": "data.rule.acr_repository_scoped_access_token_disabled_err",
+                            "remediationDescription": "01. In the portal, navigate to your container registry and select Repository permissions > Token (Preview).<br>02. On the Token details tab of each token, in Status, select Disabled.<br>03. Then select Save.",
+                            "remediationFunction": "PR_AZR_CLD_ACR_007.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries repository scoped access token is disabled",
+                    "description": "Disable repository scoped access tokens for your registry so that repositories are not accessible by tokens. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-008",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-008",
+                            "eval": "data.rule.acr_has_premium_sku",
+                            "message": "data.rule.acr_has_premium_sku_err",
+                            "remediationDescription": "01. In the portal, navigate to your container registry Overview and select Update, then select Premium SKU from SKU drop-down.<br>02. Select Save.",
+                            "remediationFunction": "PR_AZR_CLD_ACR_008.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should have SKUs that support Private Links",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The private link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your container registries instead of the entire service, data leakage risks are reduced. Learn more at: https://aka.ms/acr/private-link."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-009",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-009",
+                            "eval": "data.rule.acr_anonymous_auth_disabled",
+                            "message": "data.rule.acr_anonymous_auth_disabled_err",
+                            "remediationDescription": "Using Azure CLI, Disable anonymous pull access by running this command: 'az acr update --name <your-registry-name> --anonymous-pull-enabled false'.",
+                            "remediationFunction": "PR_AZR_CLD_ACR_009.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries has anonymous authentication disabled",
+                    "description": "Disable anonymous pull for your registry so that data not accessible by unauthenticated user. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-010",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-010",
+                            "eval": "data.rule.acr_not_allowing_unrestricted_network_access",
+                            "message": "data.rule.acr_not_allowing_unrestricted_network_access_err",
+                            "remediationDescription": "01. To limit access to a selected public network, first change the default action to deny access. Substitute the name of your registry in the following Azure CLI az acr update command: 'az acr update --name <your-registry-name> --default-action Deny'.<br>02. In the portal, navigate to your container registry and select Settings > Networking.<br>03. On the Public access tab, in Allow public network access, select Disabled. Then select Save.",
+                            "remediationFunction": "PR_AZR_CLD_ACR_010.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries should not allow unrestricted network access",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-011",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-011",
+                            "eval": "data.rule.acr_configured_with_private_endpoint",
+                            "message": "data.rule.acr_configured_with_private_endpoint_err",
+                            "remediationDescription": "01. In the portal, navigate to your container registry.<br>02. Under Settings, select Networking.<br>03. On the Private endpoints tab, select + Private endpoint.<br>04. Now visit <a href='https://learn.microsoft.com/en-us/azure/container-registry/container-registry-private-link#set-up-private-endpoint---portal-recommended' target='_blank'>here</a> for further instruction.",
+                            "remediationFunction": "PR_AZR_CLD_ACR_011.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Container registries should have private endpoints configured",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-012",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-012",
+                            "eval": "data.rule.acr_has_arm_audience_token_auth_disabled",
+                            "message": "data.rule.acr_has_arm_audience_token_auth_disabled_err",
+                            "remediationDescription": "Run the Azure CLI command to disable the status of the registry's policy: 'az acr config authentication-as-arm update -r <registry> --status [disabled]'",
+                            "remediationFunction": "PR_AZR_CLD_ACR_012.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should have ARM audience token authentication disabled",
+                    "description": "Disable Azure Active Directory ARM audience tokens for authentication to your registry. Only Azure Container Registry (ACR) audience tokens will be used for authentication. This will ensure only tokens meant for usage on the registry can be used for authentication. Disabling ARM audience tokens does not affect admin user's or scoped access tokens' authentication. Learn more at: https://aka.ms/acr/authentication."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-013",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-013",
+                            "eval": "data.rule.acr_export_disabled",
+                            "message": "data.rule.acr_export_disabled_err",
+                            "remediationDescription": "01. Run az resource update to set the exportPolicy status in an existing registry to disabled. Substitute the names of your registry and resource group.<br>02. When disabling the exportPolicy property, also set the publicNetworkAccess property to disabled. az resource update --resource-group myResourceGroup --name myregistry --resource-type 'Microsoft.ContainerRegistry/registries' --api-version '2021-06-01-preview' --set 'properties.policies.exportPolicy.status=disabled' --set 'properties.publicNetworkAccess=disabled'",
+                            "remediationFunction": "PR_AZR_CLD_ACR_013.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries should have exports disabled",
+                    "description": "Disabling exports improves security by ensuring data in a registry is accessed solely via the dataplane ('docker pull'). Data cannot be moved out of the registry via 'acr import' or via 'acr transfer'. In order to disable exports, public network access must be disabled. Learn more at: https://aka.ms/acr/export-policy."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-014",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-014",
+                            "eval": "data.rule.acr_usage_custom_managed_key_for_encryption",
+                            "message": "data.rule.acr_usage_custom_managed_key_for_encryption_err",
+                            "remediationDescription": "Please visit <a href='https://learn.microsoft.com/en-us/azure/container-registry/tutorial-enable-customer-managed-keys#enable-a-customer-managed-key-by-using-the-azure-portal' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_CLD_ACR_014.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should be encrypted with a customer-managed key",
+                    "description": "Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK."
+                },
+                {
                     "masterTestId": "PR-AZR-CLD-NSG-001",
                     "type": "rego",
                     "rule": "file(nsg.rego)",

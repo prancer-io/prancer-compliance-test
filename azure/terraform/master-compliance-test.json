@@ -12003,6 +12003,245 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AZR-TRF-ACR-007",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-007",
+                            "eval": "data.rule.acr_repository_scoped_access_token_disabled",
+                            "message": "data.rule.acr_repository_scoped_access_token_disabled_err",
+                            "remediationDescription": "In 'azurerm_container_registry_token' resource, set the value to 'false' at property 'enabled' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry_token#enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries repository scoped access token is disabled",
+                    "description": "Disable repository scoped access tokens for your registry so that repositories are not accessible by tokens. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                               "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry_token"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACR-008",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-008",
+                            "eval": "data.rule.acr_has_premium_sku",
+                            "message": "data.rule.acr_has_premium_sku_err",
+                            "remediationDescription": "In 'azurerm_container_registry' resource, set the value to 'Premium' at property 'sku' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#sku' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should have SKUs that support Private Links",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The private link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your container registries instead of the entire service, data leakage risks are reduced. Learn more at: https://aka.ms/acr/private-link.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                               "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACR-009",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-009",
+                            "eval": "data.rule.acr_anonymous_auth_disabled",
+                            "message": "data.rule.acr_anonymous_auth_disabled_err",
+                            "remediationDescription": "In 'azurerm_container_registry' resource, set the value to 'false' at property 'anonymous_pull_enabled' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#anonymous_pull_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries has anonymous authentication disabled",
+                    "description": "Disable anonymous pull for your registry so that data not accessible by unauthenticated user. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                               "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACR-010",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-010",
+                            "eval": "data.rule.acr_not_allowing_unrestricted_network_access",
+                            "message": "data.rule.acr_not_allowing_unrestricted_network_access_err",
+                            "remediationDescription": "In 'azurerm_container_registry' resource, set the value to 'false' at property 'public_network_access_enabled' and set the value to 'Deny' at property 'network_rule_set.default_action' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#default_action' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries should not allow unrestricted network access",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                               "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACR-011",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-011",
+                            "eval": "data.rule.acr_configured_with_private_endpoint",
+                            "message": "data.rule.acr_configured_with_private_endpoint_err",
+                            "remediationDescription": "'azurerm_container_registry' resource need to have a link with 'azurerm_private_endpoint', set 'id' of 'azurerm_container_registry' to property 'private_connection_resource_id' under 'azurerm_private_endpoint' resources 'private_service_connection' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint#private_connection_resource_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Container registries should have private endpoints configured",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                               "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry",
+                        "azurerm_private_endpoint"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACR-013",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-013",
+                            "eval": "data.rule.acr_export_disabled",
+                            "message": "data.rule.acr_export_disabled_err",
+                            "remediationDescription": "In 'azurerm_container_registry' resource, set the value to 'false' at property 'public_network_access_enabled' and set the value to 'false' at property 'export_policy_enabled' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#export_policy_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Container registries should have private endpoints configured",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                               "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACR-014",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-014",
+                            "eval": "data.rule.acr_usage_custom_managed_key_for_encryption",
+                            "message": "data.rule.acr_usage_custom_managed_key_for_encryption_err",
+                            "remediationDescription": "In 'azurerm_container_registry' resource, set the value to 'true' at property 'encryption.enabled' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#encryption' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should be encrypted with a customer-managed key",
+                    "description": "Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                               "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AZR-TRF-ASC-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"

@@ -8530,7 +8530,7 @@
                             "id": "PR-AZR-ARM-ACR-004",
                             "eval": "data.rule.aci_configured_with_vnet",
                             "message": "data.rule.aci_configured_with_vnet_err",
-                            "remediationDescription": "Make sure 'Microsoft.ContainerInstance/containerGroups' resource property ipAddress.type has value 'Private' to fix the issue. please visiting <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerinstance/containergroups?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerInstance/containerGroups' resource property ipAddress.type has value 'Private' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerinstance/containergroups?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
                             "remediationFunction": "PR_AZR_ARM_ACR_004.py"
                         }
                     ],
@@ -8565,7 +8565,7 @@
                             "id": "PR-AZR-ARM-ACR-005",
                             "eval": "data.rule.aci_configured_with_managed_identity",
                             "message": "data.rule.aci_configured_with_managed_identity_err",
-                            "remediationDescription": "Make sure 'Microsoft.ContainerInstance/containerGroups' resources identity.type dont have value 'None' to fix the issue. please visiting <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerinstance/containergroups?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerInstance/containerGroups' resources identity.type dont have value 'None' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerinstance/containergroups?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
                             "remediationFunction": "PR_AZR_ARM_ACR_005.py"
                         }
                     ],
@@ -8600,7 +8600,7 @@
                             "id": "PR-AZR-ARM-ACR-006",
                             "eval": "data.rule.acr_public_access_disabled",
                             "message": "data.rule.acr_public_access_disabled_err",
-                            "remediationDescription": "Make sure 'Microsoft.ContainerRegistry/registries' resources property publicNetworkAccess has value 'Disabled' to fix the issue. please visiting <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerRegistry/registries' resources property publicNetworkAccess has value 'Disabled' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
                             "remediationFunction": "PR_AZR_ARM_ACR_006.py"
                         }
                     ],
@@ -8613,6 +8613,279 @@
                             "compliance": [
                                 "MITRE ATT&CK",
                                 "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-007",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-007",
+                            "eval": "data.rule.acr_repository_scoped_access_token_disabled",
+                            "message": "data.rule.acr_repository_scoped_access_token_disabled_err",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerRegistry/registries/tokens' resources property status has value 'Disabled' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/tokens?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries repository scoped access token is disabled",
+                    "description": "Disable repository scoped access tokens for your registry so that repositories are not accessible by tokens. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries/tokens"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-008",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-008",
+                            "eval": "data.rule.acr_has_premium_sku",
+                            "message": "data.rule.acr_has_premium_sku_err",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerRegistry/registries' resources property sku.name has value 'Premium' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should have SKUs that support Private Links",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The private link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your container registries instead of the entire service, data leakage risks are reduced. Learn more at: https://aka.ms/acr/private-link.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-009",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-009",
+                            "eval": "data.rule.acr_anonymous_auth_disabled",
+                            "message": "data.rule.acr_anonymous_auth_disabled_err",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerRegistry/registries' resources property anonymousPullEnabled has value 'false' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries has anonymous authentication disabled",
+                    "description": "Disable anonymous pull for your registry so that data not accessible by unauthenticated user. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-010",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-010",
+                            "eval": "data.rule.acr_not_allowing_unrestricted_network_access",
+                            "message": "data.rule.acr_not_allowing_unrestricted_network_access_err",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerRegistry/registries' resources property publicNetworkAccess has value 'Disabled' and networkRuleSet.defaultAction has value 'Deny' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries should not allow unrestricted network access",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-011",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-011",
+                            "eval": "data.rule.acr_configured_with_private_endpoint",
+                            "message": "data.rule.acr_configured_with_private_endpoint_err",
+                            "remediationDescription": "Make sure 'microsoft.containerregistry/registries/privateendpointconnections' resources property privateLinkServiceConnectionState.status has value 'Approved' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Container registries should have private endpoints configured",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries",
+                        "microsoft.containerregistry/registries/privateendpointconnection"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-012",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-012",
+                            "eval": "data.rule.acr_has_arm_audience_token_auth_disabled",
+                            "message": "data.rule.acr_has_arm_audience_token_auth_disabled_err",
+                            "remediationDescription": "Make sure 'microsoft.containerregistry/registries' resources property policies.azureADAuthenticationAsArmPolicy.status has value 'Disabled' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should have ARM audience token authentication disabled",
+                    "description": "Disable Azure Active Directory ARM audience tokens for authentication to your registry. Only Azure Container Registry (ACR) audience tokens will be used for authentication. This will ensure only tokens meant for usage on the registry can be used for authentication. Disabling ARM audience tokens does not affect admin user's or scoped access tokens' authentication. Learn more at: https://aka.ms/acr/authentication.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-013",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-013",
+                            "eval": "data.rule.acr_export_disabled",
+                            "message": "data.rule.acr_export_disabled_err",
+                            "remediationDescription": "Make sure 'microsoft.containerregistry/registries' resources property policies.exportPolicy.status has value 'Disabled' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries should have exports disabled",
+                    "description": "Disabling exports improves security by ensuring data in a registry is accessed solely via the dataplane ('docker pull'). Data cannot be moved out of the registry via 'acr import' or via 'acr transfer'. In order to disable exports, public network access must be disabled. Learn more at: https://aka.ms/acr/export-policy.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-014",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-014",
+                            "eval": "data.rule.acr_usage_custom_managed_key_for_encryption",
+                            "message": "data.rule.acr_usage_custom_managed_key_for_encryption_err",
+                            "remediationDescription": "Make sure 'microsoft.containerregistry/registries' resources property encryption.status has value 'Enabled' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should be encrypted with a customer-managed key",
+                    "description": "Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
                             ],
                             "service": [
                                 "arm"

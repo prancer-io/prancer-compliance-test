@@ -275,3 +275,406 @@ acr_public_access_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry"
 }
+
+
+#
+# PR-AZR-TRF-ACR-007
+#
+# Defaults to true
+default acr_repository_scoped_access_token_disabled = null
+
+azure_attribute_absence ["acr_repository_scoped_access_token_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry_token"
+    not has_property(resource.properties, "enabled")
+}
+
+azure_issue ["acr_repository_scoped_access_token_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry_token"
+    lower(resource.properties.enabled) != false
+}
+
+acr_repository_scoped_access_token_disabled {
+    lower(input.resources[_].type) == "azurerm_container_registry_token"
+    not azure_attribute_absence["acr_repository_scoped_access_token_disabled"]
+    not azure_issue["acr_repository_scoped_access_token_disabled"]
+}
+
+acr_repository_scoped_access_token_disabled = false {
+    azure_attribute_absence["acr_repository_scoped_access_token_disabled"]
+}
+
+acr_repository_scoped_access_token_disabled = false {
+    azure_issue["acr_repository_scoped_access_token_disabled"]
+}
+
+acr_repository_scoped_access_token_disabled_err = "Azure Container registries repository scoped access token is currently not disabled" {
+    azure_issue["acr_repository_scoped_access_token_disabled"]
+} else = "azurerm_container_registry_token property enabled is missing from the resource" {
+    azure_attribute_absence["acr_repository_scoped_access_token_disabled"] 
+}
+
+acr_repository_scoped_access_token_disabled_metadata := {
+    "Policy Code": "PR-AZR-TRF-ACR-007",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Azure Container registries repository scoped access token is disabled",
+    "Policy Description": "Disable repository scoped access tokens for your registry so that repositories are not accessible by tokens. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication.",
+    "Resource Type": "azurerm_container_registry_token",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry_token"
+}
+
+
+#
+# PR-AZR-TRF-ACR-008
+#
+default acr_has_premium_sku = null
+
+azure_attribute_absence ["acr_has_premium_sku"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    not resource.properties.sku
+}
+
+azure_issue ["acr_has_premium_sku"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    lower(resource.properties.sku) != "premium"
+}
+
+acr_has_premium_sku {
+    lower(input.resources[_].type) == "azurerm_container_registry"
+    not azure_attribute_absence["acr_has_premium_sku"]
+    not azure_issue["acr_has_premium_sku"]
+}
+
+acr_has_premium_sku = false {
+    azure_attribute_absence["acr_has_premium_sku"]
+}
+
+acr_has_premium_sku = false {
+    azure_issue["acr_has_premium_sku"]
+}
+
+acr_has_premium_sku_err = "Azure Container registries currently dont have SKUs that support Private Links" {
+    azure_issue["acr_has_premium_sku"]
+} else = "azurerm_container_registry property sku is missing from the resource" {
+    azure_attribute_absence["acr_has_premium_sku"] 
+}
+
+acr_has_premium_sku_metadata := {
+    "Policy Code": "PR-AZR-TRF-ACR-008",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Container registries should have SKUs that support Private Links",
+    "Policy Description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The private link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your container registries instead of the entire service, data leakage risks are reduced. Learn more at: https://aka.ms/acr/private-link.",
+    "Resource Type": "azurerm_container_registry",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry"
+}
+
+
+#
+# PR-AZR-TRF-ACR-009
+#
+# Defaults to false
+default acr_anonymous_auth_disabled = null
+
+azure_attribute_absence ["acr_anonymous_auth_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    not resource.properties.anonymous_pull_enabled
+}
+
+azure_issue ["acr_anonymous_auth_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    resource.properties.anonymous_pull_enabled == true
+}
+
+acr_anonymous_auth_disabled {
+    lower(input.resources[_].type) == "azurerm_container_registry"
+    not azure_attribute_absence["acr_anonymous_auth_disabled"]
+    not azure_issue["acr_anonymous_auth_disabled"]
+}
+
+acr_anonymous_auth_disabled {
+    lower(input.resources[_].type) == "azurerm_container_registry"
+    azure_attribute_absence["acr_anonymous_auth_disabled"]
+    not azure_issue["acr_anonymous_auth_disabled"]
+}
+
+acr_anonymous_auth_disabled = false {
+    azure_issue["acr_anonymous_auth_disabled"]
+}
+
+acr_anonymous_auth_disabled_err = "Azure Container registries anonymous authentication is currently not disabled" {
+    azure_issue["acr_anonymous_auth_disabled"]
+}
+
+acr_anonymous_auth_disabled_metadata := {
+    "Policy Code": "PR-AZR-TRF-ACR-009",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Azure Container registries has anonymous authentication disabled",
+    "Policy Description": "Disable anonymous pull for your registry so that data not accessible by unauthenticated user. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication.",
+    "Resource Type": "azurerm_container_registry",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry"
+}
+
+
+#
+# PR-AZR-TRF-ACR-010
+#
+default acr_not_allowing_unrestricted_network_access = null
+
+# Defaults to true
+azure_attribute_absence ["acr_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    not has_property(resource.properties, "public_network_access_enabled")
+}
+
+# Defaults to Allow
+azure_attribute_absence ["acr_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    network_rule_set := resource.properties.network_rule_set[_]
+    not network_rule_set.default_action
+}
+
+azure_issue ["acr_not_allowing_unrestricted_network_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    resource.properties.public_network_access_enabled == true
+}
+
+azure_issue ["acr_not_allowing_unrestricted_network_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    network_rule_set := resource.properties.network_rule_set[_]
+    lower(network_rule_set.default_action) == "allow"
+}
+
+acr_not_allowing_unrestricted_network_access {
+    lower(input.resources[_].type) == "azurerm_container_registry"
+    not azure_attribute_absence["acr_not_allowing_unrestricted_network_access"]
+    not azure_issue["acr_not_allowing_unrestricted_network_access"]
+}
+
+acr_not_allowing_unrestricted_network_access = false {
+    azure_attribute_absence["acr_not_allowing_unrestricted_network_access"]
+}
+
+acr_not_allowing_unrestricted_network_access = false {
+    azure_issue["acr_not_allowing_unrestricted_network_access"]
+}
+
+acr_not_allowing_unrestricted_network_access_err = "Azure Container registries currently allowing unrestricted network access" {
+    azure_issue["acr_not_allowing_unrestricted_network_access"]
+} else = "azurerm_container_registry property public_network_access_enabled and network_rule_set.default_action are missing from the resource" {
+    azure_attribute_absence["acr_not_allowing_unrestricted_network_access"] 
+}
+
+acr_not_allowing_unrestricted_network_access_metadata := {
+    "Policy Code": "PR-AZR-TRF-ACR-010",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Azure Container registries should not allow unrestricted network access",
+    "Policy Description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
+    "Resource Type": "azurerm_container_registry",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry"
+}
+
+
+# PR-AZR-TRF-ACR-011
+
+default acr_configured_with_private_endpoint = null
+
+azure_attribute_absence ["acr_configured_with_private_endpoint"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+azure_issue ["acr_configured_with_private_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
+
+acr_configured_with_private_endpoint = false {
+    lower(input.resources[_].type) == "azurerm_container_registry"
+    azure_attribute_absence["acr_configured_with_private_endpoint"]
+}
+
+acr_configured_with_private_endpoint {
+    lower(input.resources[_].type) == "azurerm_container_registry"
+    not azure_attribute_absence["acr_configured_with_private_endpoint"]
+    not azure_issue["acr_configured_with_private_endpoint"]
+}
+
+acr_configured_with_private_endpoint = false {
+    lower(input.resources[_].type) == "azurerm_container_registry"
+    azure_issue["acr_configured_with_private_endpoint"]
+}
+
+acr_configured_with_private_endpoint_err = "azurerm_container_registry should have link with azurerm_private_endpoint and azurerm_private_endpoint's private_service_connection either need to have 'private_connection_resource_id' or 'private_connection_resource_alias' property. Seems there is no link established or mentioed properties are missing." {
+    lower(input.resources[_].type) == "azurerm_container_registry"
+    azure_attribute_absence["acr_configured_with_private_endpoint"]
+} else = "MySQL server currently not using private link" {
+    lower(input.resources[_].type) == "azurerm_container_registry"
+    azure_issue["acr_configured_with_private_endpoint"]
+}
+
+acr_configured_with_private_endpoint_metadata := {
+    "Policy Code": "PR-AZR-TRF-ACR-011",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Container registries should have private endpoints configured",
+    "Policy Description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
+    "Resource Type": "azurerm_container_registry",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry"
+}
+
+#
+# PR-AZR-TRF-ACR-013
+#
+default acr_export_disabled = null
+
+# Defaults to true
+azure_attribute_absence ["acr_export_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    not has_property(resource.properties, "public_network_access_enabled")
+}
+
+# Defaults to true
+azure_attribute_absence ["acr_export_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    not has_property(resource.properties, "export_policy_enabled")
+}
+
+azure_issue ["acr_export_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    resource.properties.public_network_access_enabled != false
+}
+
+azure_issue ["acr_export_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    resource.properties.export_policy_enabled != false
+}
+
+acr_export_disabled {
+    lower(input.resources[_].type) == "azurerm_container_registry"
+    not azure_attribute_absence["acr_export_disabled"]
+    not azure_issue["acr_export_disabled"]
+}
+
+acr_export_disabled = false {
+    azure_attribute_absence["acr_export_disabled"]
+}
+
+acr_export_disabled = false {
+    azure_issue["acr_export_disabled"]
+}
+
+acr_export_disabled_err = "Azure Container registries currently dont have exports disabled" {
+    azure_issue["acr_export_disabled"]
+} else = "azurerm_container_registry property public_network_access_enabled and export_policy_enabled are missing from the resource" {
+    azure_attribute_absence["acr_export_disabled"] 
+}
+
+acr_export_disabled_metadata := {
+    "Policy Code": "PR-AZR-TRF-ACR-013",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Azure Container registries should have exports disabled",
+    "Policy Description": "Disabling exports improves security by ensuring data in a registry is accessed solely via the dataplane ('docker pull'). Data cannot be moved out of the registry via 'acr import' or via 'acr transfer'. In order to disable exports, public network access must be disabled. Learn more at: https://aka.ms/acr/export-policy.",
+    "Resource Type": "azurerm_container_registry",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry"
+}
+
+
+#
+# PR-AZR-TRF-ACR-014
+#
+default acr_usage_custom_managed_key_for_encryption = null
+
+azure_attribute_absence ["acr_usage_custom_managed_key_for_encryption"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    not resource.properties.encryption
+}
+
+azure_attribute_absence ["acr_usage_custom_managed_key_for_encryption"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    not resource.properties.encryption.enabled
+}
+
+azure_issue ["acr_usage_custom_managed_key_for_encryption"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_container_registry"
+    resource.properties.encryption.enabled != true
+}
+
+acr_usage_custom_managed_key_for_encryption {
+    lower(input.resources[_].type) == "azurerm_container_registry"
+    not azure_attribute_absence["acr_usage_custom_managed_key_for_encryption"]
+    not azure_issue["acr_usage_custom_managed_key_for_encryption"]
+}
+
+acr_usage_custom_managed_key_for_encryption = false {
+    azure_attribute_absence["acr_usage_custom_managed_key_for_encryption"]
+}
+
+acr_usage_custom_managed_key_for_encryption = false {
+    azure_issue["acr_usage_custom_managed_key_for_encryption"]
+}
+
+acr_usage_custom_managed_key_for_encryption_err = "Azure Container registries currently dont use customer-managed key for encryption" {
+    azure_issue["acr_usage_custom_managed_key_for_encryption"]
+} else = "azurerm_container_registry property encryption.enabled is missing from the resource" {
+    azure_attribute_absence["acr_usage_custom_managed_key_for_encryption"] 
+}
+
+acr_usage_custom_managed_key_for_encryption_metadata := {
+    "Policy Code": "PR-AZR-TRF-ACR-014",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Container registries should be encrypted with a customer-managed key",
+    "Policy Description": "Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.",
+    "Resource Type": "azurerm_container_registry",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry"
+}
