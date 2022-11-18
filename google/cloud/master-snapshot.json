@@ -96,6 +96,21 @@
                     ]
                 },
                 {
+                    "masterSnapshotId": "GOOGLE_DNS_POLICY",
+                    "type": "dns/dns.policies.list",
+                    "get_method": ["dns/dns.policies.get"],
+
+                    "collection": "networks",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "dns"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterSnapshotId": "GOOGLE_SUBNETWORKS",
                     "type": "compute/subnetworks.aggregatedList",
                     "collection": "subnetworks",
@@ -137,6 +152,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_BIGQUERY",
                     "type": "bigquery/datasets.list",
+                    "get_method": ["bigquery/datasets.get"],
                     "collection": "bigquery",
                     "tags": [
                         {
@@ -222,9 +238,23 @@
                         {
                             "cloud": "GCP",
                             "service": [
-                                "storage"
+                                "compute"
                             ]
                         }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_PROJECTS_IAM",
+                    "type": "compute/projects.list",
+                    "get_method": ["cloudresourcemanager/projects.getIamPolicy"],
+                    "collection": "project_iam_user",
+                    "tags": [
+                      {
+                        "cloud": "GCP",
+                        "service": [
+                          "iam"
+                        ]
+                      }
                     ]
                 },
                 {
@@ -250,7 +280,7 @@
                         {
                             "cloud": "GCP",
                             "service": [
-                                "iam"
+                                "compute"
                             ]
                         }
                     ]
@@ -307,20 +337,6 @@
                             "cloud": "GCP",
                             "service": [
                                 "services"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterSnapshotId": "GOOGLE_BIGQUERY",
-                    "type": "bigquery/datasets.list",
-                    "get_method": ["bigquery/datasets.get"],
-                    "collection": "bigquery",
-                    "tags": [
-                        {
-                            "cloud": "GCP",
-                            "service": [
-                                "bigquery"
                             ]
                         }
                     ]

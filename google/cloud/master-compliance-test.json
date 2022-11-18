@@ -2223,7 +2223,6 @@
                         }
                     ]
                 },
-              
                 {
                     "masterTestId": "PR-GCP-CLD-DISK-001",
                     "masterSnapshotId": [
@@ -2855,28 +2854,139 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-GCP-CLD-SAK-009",
+                    "masterTestId": "PR-GCP-CLD-INST-016",
                     "masterSnapshotId": [
-                        "GOOGLE_SERVICE_AC_KEY",
-                        "GOOGLE_SERVICE_AC"
+                        "GOOGLE_INSTANCE",
+                        "GOOGLE_PROJECT_INFO"
                     ],
                     "type": "rego",
-                    "rule": "file(iam.rego)",
+                    "rule": "file(compute.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-CLD-SAK-009",
-                            "eval": "data.rule.svc_ac_user_has_svc_ac_key",
-                            "message": "data.rule.svc_ac_user_has_svc_ac_key_err",
-                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys' target='_blank'>here</a>",
-                            "remediationFunction": "PR_GCP_CLD_SAK_009.py"
+                            "id": "PR-GCP-CLD-INST-016",
+                            "eval": "data.rule.project_os_login_overridden_by_instnace",
+                            "message": "data.rule.project_os_login_overridden_by_instnace_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_INST_016.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure, GCP User managed service accounts have user managed service account keys.",
-                    "description": "This policy checks user managed service accounts that use user managed service account keys instead of Google-managed. For user-managed keys, the User has to take ownership of key management activities. Even after owner precaution, keys can be easily leaked by common development malpractices like checking keys into the source code or leaving them in downloads directory or accidentally leaving them on support blogs/channels. So It is recommended to limit the use of User-managed service account keys and instead use Google-managed keys which can not be downloaded.",
+                    "title": "Ensure, GCP VM instance OS login overrides Project metadata OS login configuration.",
+                    "description": "It checks, GCP VM instances where OS login configuration is disabled and overriding enabled Project OS login configuration. Enabling OS Login ensures that SSH keys used to connect to instances are mapped with IAM users. Revoking access to IAM user will revoke all the SSH keys associated with that particular user. It facilitates centralized and automated SSH key pair management which is useful in handling cases like a response to compromised SSH key pairs. Note: Enabling OS Login on instances disables metadata-based SSH key configurations on those instances. Disabling OS Login restores SSH keys that you have configured in a project or instance metadata. Reference: https://cloud.google.com/compute/docs/instances/managing-instance-access",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CMMC",
+                                "CIS",
+                                "HITRUST",
+                                "ISO 27001",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "MITRE ATT&CK",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.0.0 (GCP)-4.5",
+                                "CIS v1.1.0 (GCP)-4.6",
+                                "CIS v1.2.0 (GCP)-4.6",
+                                "CIS v1.0.0 (GCP)-4.3",
+                                "CIS v1.1.0 (GCP)-4.4",
+                                "CIS v1.2.0 (GCP)-4.4",
+                                "CSA CCM v.4.0.1-LOG-05",
+                                "CSA CCM v.4.0.1-LOG-06",
+                                "CSA CCM v.4.0.1-LOG-08",
+                                "CSA CCM v.4.0.1-LOG-13",
+                                "CSA CCM v.4.0.1-DSP-07",
+                                "CSA CCM v.4.0.1-DSP-10",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IVS-03",
+                                "CSA CCM v.4.0.1-UEM-11",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-CM.2.062",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-CM.2.061",
+                                "HITRUST v.9.4.2-Control Reference:01.n",
+                                "HITRUST v.9.4.2-Control Reference:01.o",
+                                "HITRUST v.9.4.2-Control Reference:10.a",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO/IEC 27002:2013-12.2.1",
+                                "ISO/IEC 27002:2013-12.3.1",
+                                "ISO/IEC 27002:2013-13.1.1",
+                                "ISO/IEC 27002:2013-13.1.2",
+                                "ISO/IEC 27002:2013-13.1.3",
+                                "ISO/IEC 27002:2013-13.2.1",
+                                "ISO/IEC 27002:2013-13.2.3",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.2.5",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-8.3.1",
+                                "ISO/IEC 27002:2013-8.3.3",
+                                "ISO/IEC 27002:2013-12.4.1",
+                                "ISO/IEC 27002:2013-12.4.3",
+                                "ISO/IEC 27002:2013-12.4.4",
+                                "ISO/IEC 27002:2013-16.1.1",
+                                "ISO/IEC 27017:2015-12.4.1",
+                                "ISO/IEC 27017:2015-12.4.4",
+                                "ISO/IEC 27017:2015-16.1.2",
+                                "ISO/IEC 27017:2015-6.1.1",
+                                "ISO/IEC 27018:2019-10.1.2",
+                                "ISO/IEC 27018:2019-12.3.1",
+                                "MITRE ATT&CK v10.0-T1078 - Valid Accounts",
+                                "MITRE ATT&CK v6.3-T1078",
+                                "MITRE ATT&CK v8.2-T1078",
+                                "NIST CSF-PR.AC-5",
+                                "NIST CSF-PR.DS-5",
+                                "NIST CSF-PR.PT-4",
+                                "NIST CSF-PR.PT-1",
+                                "NIST SP 800-171 Revision 2-3.3.4",
+                                "NIST SP 800-171 Revision 2-3.13.5",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS v3.2.1-1.2.1",
+                                "PCI DSS v3.2.1-6.3",
+                                "PIPEDA-4.7.3"
+                            ],
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-INST-017",
+                    "masterSnapshotId": [
+                        "GOOGLE_INSTANCE",
+                        "GOOGLE_PROJECTS_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-INST-017",
+                            "eval": "data.rule.instance_with_more_svc_ac_permission",
+                            "message": "data.rule.instance_with_more_svc_ac_permission_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_INST_017.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP VM instances with excessive service account permissions.",
+                    "description": "It checks, VM instances with service account which have excessive permissions other than viewer/reader access. It is recommended that each instance that needs to call a Google API should run as a service account with the minimum permissions necessary for that instance to do its job. In practice, this means you should configure service accounts for your instances with the following process: 1) Create a new service account rather than using the Compute Engine default service account. 2) Grant IAM roles to that service account for only the resources that it needs. 3) Configure the instance to run as that service account. 4) Configure VM instance least permissive service account with only viewer/reader role until it is necessary to have more access. Avoid granting more access than necessary and regularly check your service account permissions to make sure they are up-to-date.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
                             "compliance": [
                                 "APRA",
                                 "LGPD",
@@ -2890,21 +3000,19 @@
                                 "ISO/IEC 27017",
                                 "ISO/IEC 27018",
                                 "MITRE ATT&CK",
-                                "NIST 800",
                                 "NIST CSF",
+                                "NIST 800",
                                 "NIST SP",
                                 "PCI DSS",
                                 "PIPEDA",
-                                "APRA (CPS 234) Information Security-CPS234-14",
                                 "APRA (CPS 234) Information Security-CPS234-23",
                                 "APRA (CPS 234) Information Security-CPS234-27",
                                 "APRA (CPS 234) Information Security-CPS234-34",
                                 "Brazilian Data Protection Law (LGPD)-Article 46",
                                 "Brazilian Data Protection Law (LGPD)-Article 6",
                                 "CCPA 2018-1798.150(a)(1)",
-                                "CIS v1.0.0 (GCP)-1.3",
-                                "CIS v1.1.0 (GCP)-1.4",
-                                "CIS v1.2.0 (GCP)-1.4",
+                                "CIS v1.1.0 (GCP)-4.2",
+                                "CIS v1.2.0 (GCP)-4.2",
                                 "CSA CCM v.4.0.1-DSP-17",
                                 "CSA CCM v.4.0.1-IAM-04",
                                 "CSA CCM v.4.0.1-IAM-05",
@@ -2912,10 +3020,9 @@
                                 "CSA CCM v.4.0.1-IAM-16",
                                 "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.2.007",
                                 "HITRUST v.9.4.2-Control Reference:01.c",
+                                "ISO 27001:2013-A.14.1.2",
                                 "ISO 27001:2013-A.16.1.4",
-                                "ISO 27001:2013-A.18.1",
                                 "ISO 27001:2013-A.18.1.3",
-                                "ISO 27001:2013-A.9.2.3",
                                 "ISO 27001:2013-A.9.2.5",
                                 "ISO/IEC 27002:2013-18.1.3",
                                 "ISO/IEC 27002:2013-18.1.4",
@@ -2929,119 +3036,20 @@
                                 "ISO/IEC 27018:2019-9.2.3",
                                 "ISO/IEC 27018:2019-9.2.5",
                                 "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1078",
-                                "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v6.3-T1098",
                                 "MITRE ATT&CK v8.2-T1078",
+                                "MITRE ATT&CK v8.2-T1098",
                                 "NIST 800-53 Rev 5-Least Privilege",
                                 "NIST 800-53 Rev4-AC-6",
                                 "NIST CSF-PR.AC-4",
                                 "NIST SP 800-171 Revision 2-3.1.5",
-                                "NIST SP 800-172-3.4.1e",
-                                "NIST SP 800-172-3.4.2e",
+                                "NIST SP 800-172-3.1.2e",
                                 "PCI DSS v3.2.1-7.1",
                                 "PCI DSS v3.2.1-7.1.2",
                                 "PIPEDA-4.7.3"
                             ],
                             "service": [
-                                "iam"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-GCP-CLD-SAK-010",
-                    "masterSnapshotId": [
-                        "GOOGLE_API_KEYS"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-CLD-SAK-010",
-                            "eval": "data.rule.api_key_rotation_90_days",
-                            "message": "data.rule.api_key_rotation_90_days_err",
-                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
-                            "remediationFunction": "PR_GCP_CLD_SAK_010.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure, GCP API key not rotating in every 90 days.",
-                    "description": "This policy identifies GCP API keys for which the creation date is aged more than 90 days. Google recommends using the standard authentication flow instead of API Keys. However, there are limited cases where API keys are more appropriate. API keys should be rotated to ensure that data cannot be accessed with an old key that might have been lost, cracked, or stolen.",
-                    "tags": [
-                        {
-                            "cloud": "cloud",
-                            "compliance": [
-                                "CIS"
-                            ],
-                            "service": [
-                                "apikeys"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-GCP-CLD-SAK-011",
-                    "masterSnapshotId": [
-                        "GOOGLE_API_KEYS"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-CLD-SAK-011",
-                            "eval": "data.rule.api_target_not_exist",
-                            "message": "data.rule.api_target_not_exist_err",
-                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
-                            "remediationFunction": "PR_GCP_CLD_SAK_011.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure, GCP API key not restricting any specific API.",
-                    "description": "This policy checks GCP API keys that are not restricting any specific APIs. API keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API keys to use (call) only APIs required by an application.",
-                    "tags": [
-                        {
-                            "cloud": "cloud",
-                            "compliance": [
-                                "CIS"
-
-                            ],
-                            "service": [
-                                "apikeys"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-GCP-CLD-SAK-012",
-                    "masterSnapshotId": [
-                        "GOOGLE_API_KEYS"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-GCP-CLD-SAK-012",
-                            "eval": "data.rule.api_key_has_no_specific_restriction",
-                            "message": "data.rule.api_key_has_no_specific_restriction_err",
-                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
-                            "remediationFunction": "PR_GCP_CLD_SAK_012.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure, GCP API key not restricted to use by specified Hosts and Apps.",
-                    "description": "This policy checks GCP API key not restricted to use by specified Hosts and Apps. Unrestricted keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API key usage to trusted hosts, HTTP referrers and apps.",
-                                    "tags": [
-                        {
-                            "cloud": "cloud",
-                            "compliance": [
-                                "CIS"
-
-                            ],
-                            "service": [
-                                "apikeys"
+                                "compute"
                             ]
                         }
                     ]
@@ -3199,6 +3207,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-GCP-CLD-CLR-001",
+                    "masterSnapshotId": [
+                        "GOOGLE_CLOUD_RUN"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-CLR-001",
+                            "eval": "data.rule.cld_run_with_over_permission_ingress",
+                            "message": "data.rule.cld_run_with_over_permission_ingress_err",
+                            "remediationDescription": "Ensure, GCP Cloud Run service with overly permissive ingress rule.",
+                            "remediationFunction": "PR_GCP_CLD_CLR_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP Cloud Run service with overly permissive ingress rule.",
+                    "description": "This policy checks GCP Cloud Run services configured with overly permissive ingress rules. It is recommended to restrict the traffic from the internet and other resources by allowing traffic to enter through load balancers or internal traffic for better network-based access control.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-GCP-CLD-NET-001",
                     "masterSnapshotId": [
                         "GOOGLE_NETWORK"
@@ -3265,6 +3304,39 @@
                                 "CSA-CCM",
                                 "CIS",
                                 "HITRUST"
+                            ],
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-NET-003",
+                    "masterSnapshotId": [
+                        "GOOGLE_NETWORK",
+                        "GOOGLE_DNS_POLICY"
+                    ],
+                    "type": "rego",
+                    "rule": "file(compute.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-NET-003",
+                            "eval": "data.rule.ntw_config_with_dns_logging_disabled",
+                            "message": "data.rule.ntw_config_with_dns_logging_disabled_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/networks' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_NET_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP VPC network not configured with DNS policy with logging enabled.",
+                    "description": "This policy identifies the projects which have configured with legacy networks. Legacy networks have a single network IPv4 prefix range and a single gateway IP address for the whole network. Subnetworks cannot be created in a legacy network. Legacy networks can have an impact on high network traffic projects and subject to the single point of failure.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CIS",
+                                "CIS v1.2.0 (GCP)-2.12"
                             ],
                             "service": [
                                 "compute"
@@ -5417,32 +5489,1085 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-GCP-CLD-CLR-001",
+                    "masterTestId": "PR-GCP-CLD-SAK-002",
                     "masterSnapshotId": [
-                        "GOOGLE_CLOUD_RUN"
+                        "GOOGLE_PROJECTS_IAM"
                     ],
                     "type": "rego",
-                    "rule": "file(compute.rego)",
+                    "rule": "file(iam.rego)",
                     "evals": [
                         {
-                            "id": "PR-GCP-CLD-CLR-001",
-                            "eval": "data.rule.cld_run_with_over_permission_ingress",
-                            "message": "data.rule.cld_run_with_over_permission_ingress_err",
-                            "remediationDescription": "Ensure, GCP Cloud Run service with overly permissive ingress rule.",
-                            "remediationFunction": "PR_GCP_CLD_CLR_001.py"
+                            "id": "PR-GCP-CLD-SAK-002",
+                            "eval": "data.rule.non_gcp_account_access_denied",
+                            "message": "data.rule.non_gcp_account_access_denied_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/resource-manager/reference/rest/v1/projects' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_002.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure, GCP Cloud Run service with overly permissive ingress rule.",
-                    "description": "This policy checks GCP Cloud Run services configured with overly permissive ingress rules. It is recommended to restrict the traffic from the internet and other resources by allowing traffic to enter through load balancers or internal traffic for better network-based access control.",
+                    "title": "Ensure, Non-corporate accounts have access to Google Cloud Platform (GCP) resources.",
+                    "description": "Ensure, using personal accounts to access GCP resources may compromise the security of your business. Using fully managed corporate Google accounts to access Google Cloud Platform resources is recommended to make sure that your resources are secure. NOTE : This policy requires customization before using it. To customize, follow the steps mentioned: (1) Clone this policy and replace '@yourcompanydomainname' in RQL with your domain name. For example: 'user does not end with @prismacloud.io and user does not end with gserviceaccount.com'. (2) For multiple domains, update the RQL with conditions for each domain. For example: 'user does not end with @prismacloud.io and user does not end with @prismacloud.com and user does not end with gserviceaccount.com",
                     "tags": [
                         {
-                            "cloud": "GCP",
+                            "cloud": "cloud",
+                            "compliance": [
+                            "APRA",
+                            "LGPD",
+                            "CCPA",
+                            "CSA CCM",
+                            "CMMC",
+                            "CIS",
+                            "HITRUST",
+                            "HIPAA",
+                            "GDPR-Article",
+                            "ISO 27001",
+                            "MITRE ATT&CK",
+                            "NIST 800",
+                            "NIST CSF",
+                            "NIST SP",
+                            "PCI DSS",
+                            "PIPEDA",
+                            "SOC",
+                            "APRA (CPS 234) Information Security-CPS234-23",
+                            "APRA (CPS 234) Information Security-CPS234-27",
+                            "APRA (CPS 234) Information Security-CPS234-34",
+                            "Brazilian Data Protection Law (LGPD)-Article 46",
+                            "Brazilian Data Protection Law (LGPD)-Article 6",
+                            "CCPA 2018-1798.150(a)(1)",
+                            "CIS v1.0.0 (GCP)-1.1",
+                            "CIS v1.1.0 (GCP)-1.1",
+                            "CIS v1.2.0 (GCP)-1.1",
+                            "CSA CCM v3.0.1-DSI-06",
+                            "CSA CCM v3.0.1-IAM-01",
+                            "CSA CCM v3.0.1-IAM-02",
+                            "CSA CCM v3.0.1-IAM-03",
+                            "CSA CCM v3.0.1-IAM-06",
+                            "CSA CCM v3.0.1-IAM-09",
+                            "CSA CCM v3.0.1-IAM-10",
+                            "CSA CCM v3.0.1-IVS-11",
+                            "CSA CCM v3.0.1-STA-01",
+                            "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.1.001",
+                            "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.1.002",
+                            "GDPR-Article 25",
+                            "GDPR-Article 32",
+                            "HIPAA-164.308(a)(4)(ii)(B)",
+                            "HIPAA-164.312(a)(2)(i)",
+                            "HITRUST CSF v9.3-Control Reference:01.c",
+                            "HITRUST CSF v9.3-Control Reference:01.s",
+                            "HITRUST CSF v9.3-Control Reference:01.v",
+                            "HITRUST CSF v9.3-Control Reference:01.y",
+                            "HITRUST CSF v9.3-Control Reference:05.i",
+                            "ISO 27001:2013-A.16.1.4",
+                            "ISO 27001:2013-A.18.1",
+                            "ISO 27001:2013-A.9.2.3",
+                            "ISO 27001:2013-A.9.2.5",
+                            "MITRE ATT&CK v10.0-T1078 - Valid Accounts",
+                            "MITRE ATT&CK v6.3-T1078",
+                            "MITRE ATT&CK v8.2-T1078",
+                            "NIST 800-53 Rev4-AC-3 (4)",
+                            "NIST 800-53 Rev4-AC-3 (4)(a)",
+                            "NIST 800-53 Rev4-AC-3 (4)(b)",
+                            "NIST 800-53 Rev4-AC-3 (4)(c)",
+                            "NIST 800-53 Rev4-AC-3 (4)(d)",
+                            "NIST 800-53 Rev4-AC-3 (4)(e)",
+                            "NIST 800-53 Rev4-AC-6",
+                            "NIST CSF-DE.CM-3",
+                            "NIST CSF-PR.AC-4",
+                            "NIST CSF-PR.DS-5",
+                            "NIST SP 800-171 Revision 2-3.1.5",
+                            "NIST SP 800-172-3.1.2e",
+                            "PCI DSS v3.2.1-7.1.2",
+                            "PCI DSS v3.2.1-7.1.3",
+                            "PIPEDA-4.1.4",
+                            "SOC 2-CC6.3"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-003",
+                    "masterSnapshotId": [
+                        "GOOGLE_PROJECTS_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-003",
+                            "eval": "data.rule.admin_privileges_enabled",
+                            "message": "data.rule.admin_privileges_enabled_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/resource-manager/reference/rest/v1/projects' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP IAM Service account has admin privileges.",
+                    "description": "Ensure, service accounts which have admin privileges. Application uses the service account to make requests to the Google API of a service so that the users aren't directly involved. It is recommended not to use admin access for ServiceAccount.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CIS",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MITRE ATT&CK",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "APRA (CPS 234) Information Security-CPS234-14",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.0.0 (GCP)-1.4",
+                                "CIS v1.1.0 (GCP)-1.5",
+                                "CIS v1.2.0 (GCP)-1.5",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IAM-04",
+                                "CSA CCM v.4.0.1-IAM-05",
+                                "CSA CCM v.4.0.1-IAM-09",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-CM.2.061",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.9.2.3",
+                                "ISO 27001:2013-A.9.2.5",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-6.1.2",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.1.2",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
+                                "MITRE ATT&CK v6.3-T1078",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1078",
+                                "MITRE ATT&CK v8.2-T1098",
+                                "NIST 800-53 Rev 5-Least Privilege",
+                                "NIST 800-53 Rev4-AC-6",
+                                "NIST CSF-PR.AC-4",
+                                "NIST SP 800-171 Revision 2-3.1.5",
+                                "NIST SP 800-172-3.1.2e",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI DSS v3.2.1-7.1.2",
+                                "PIPEDA-4.7.3"
+                                ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-004",
+                    "masterSnapshotId": [
+                        "GOOGLE_PROJECTS_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-004",
+                            "eval": "data.rule.overly_permissive_ac_privileges",
+                            "message": "data.rule.overly_permissive_ac_privileges_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/resource-manager/reference/rest/v1/projects' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP IAM Users have overly permissive service account privileges.",
+                    "description": "Ensure, IAM users which have overly permissive service account privileges. Any user should not have Service Account Admin and Service Account User, both roles assigned at a time. Built-in/Predefined IAM role Service Account admin allows the user to create, delete, manage service accounts. Built-in/Predefined IAM role Service Account User allows the user to assign service accounts to Apps/Compute Instances. It is recommended to follow the principle of 'Separation of Duties' ensuring that one individual does not have all the necessary permissions to be able to complete a malicious action or meant to help avoid security or privacy incidents and errors.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CIS",
+                                "CSA CCM",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MITRE ATT&CK",
+                                "NIST CSF",
+                                "NIST SP",
+                                "NIST 800",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "APRA (CPS 234) Information Security-CPS234-14",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 46",
+                                "Brazilian Data Protection Law (LGPD)-Article 6",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.0.0 (GCP)-1.7",
+                                "CIS v1.1.0 (GCP)-1.8",
+                                "CIS v1.2.0 (GCP)-1.8",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IAM-04",
+                                "CSA CCM v.4.0.1-IAM-05",
+                                "CSA CCM v.4.0.1-IAM-09",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.2.007",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.9.2.3",
+                                "ISO 27001:2013-A.9.2.5",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-6.1.2",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.1.2",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
+                                "MITRE ATT&CK v6.3-T1078",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1078",
+                                "MITRE ATT&CK v8.2-T1098",
+                                "NIST 800-53 Rev 5-Least Privilege",
+                                "NIST 800-53 Rev4-AC-6",
+                                "NIST CSF-PR.AC-4",
+                                "NIST SP 800-171 Revision 2-3.1.5",
+                                "NIST SP 800-172-3.1.2e",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI DSS v3.2.1-7.1.2",
+                                "PIPEDA-4.7.3"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-005",
+                    "masterSnapshotId": [
+                        "GOOGLE_PROJECTS_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-005",
+                            "eval": "data.rule.overly_permissive_kms_privileges",
+                            "message": "data.rule.overly_permissive_kms_privileges_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/resource-manager/reference/rest/v1/projects' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP IAM user have overly permissive Cloud KMS roles.",
+                    "description": "Ensure, IAM users who have overly permissive Cloud KMS roles. Built-in/Predefined IAM role Cloud KMS Admin allows the user to create, delete, and manage service accounts. Built-in/Predefined IAM role Cloud KMS CryptoKey Encrypter/Decrypter allows the user to encrypt and decrypt data at rest using the encryption keys. It is recommended to follow the principle of 'Separation of Duties' ensuring that one individual does not have all the necessary permissions to be able to complete a malicious action.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CIS",
+                                "CSA CCM",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MITRE ATT&CK",
+                                "NIST CSF",
+                                "NIST SP",
+                                "NIST 800",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "APRA (CPS 234) Information Security-CPS234-14",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 46",
+                                "Brazilian Data Protection Law (LGPD)-Article 6",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.0.0 (GCP)-1.9",
+                                "CIS v1.1.0 (GCP)-1.11",
+                                "CIS v1.2.0 (GCP)-1.11",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IAM-04",
+                                "CSA CCM v.4.0.1-IAM-05",
+                                "CSA CCM v.4.0.1-IAM-09",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.2.007",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.9.2.3",
+                                "ISO 27001:2013-A.9.2.5",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-6.1.2",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.1.2",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
+                                "MITRE ATT&CK v6.3-T1078",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1078",
+                                "MITRE ATT&CK v8.2-T1098",
+                                "NIST 800-53 Rev 5-Least Privilege",
+                                "NIST 800-53 Rev4-AC-6",
+                                "NIST CSF-PR.AC-4",
+                                "NIST SP 800-171 Revision 2-3.1.5",
+                                "NIST SP 800-172-3.1.2e",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI DSS v3.2.1-7.1.2",
+                                "PIPEDA-4.7.3"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-006",
+                    "masterSnapshotId": [
+                        "GOOGLE_PROJECTS_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-006",
+                            "eval": "data.rule.service_ac_privileges",
+                            "message": "data.rule.service_ac_privileges_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/resource-manager/reference/rest/v1/projects' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP IAM user with service account privileges.",
+                    "description": "Ensure, IAM users don't have service account privileges. Adding any user as service account actor will enable these users to have service account privileges. Adding only authorized corporate IAM users as service account actors will make sure that your information is secure.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CMMC",
+                                "CIS",
+                                "HITRUST",
+                                "HIPAA",
+                                "ISO 27001",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MITRE ATT&CK",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "SOC",
+                                "APRA (CPS 234) Information Security-CPS234-14",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 46",
+                                "Brazilian Data Protection Law (LGPD)-Article 6",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.0.0 (GCP)-1.5",
+                                "CIS v1.1.0 (GCP)-1.6",
+                                "CIS v1.2.0 (GCP)-1.6",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IAM-04",
+                                "CSA CCM v.4.0.1-IAM-05",
+                                "CSA CCM v.4.0.1-IAM-09",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "CSA CCM v3.0.1-DSI-06",
+                                "CSA CCM v3.0.1-IAM-01",
+                                "CSA CCM v3.0.1-IAM-02",
+                                "CSA CCM v3.0.1-IAM-06",
+                                "CSA CCM v3.0.1-IAM-07",
+                                "CSA CCM v3.0.1-IAM-09",
+                                "CSA CCM v3.0.1-IAM-10",
+                                "CSA CCM v3.0.1-IVS-11",
+                                "CSA CCM v3.0.1-STA-01",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.2.007",
+                                "HIPAA-164.312(a)(1)",
+                                "HITRUST CSF v9.3-Control Reference:01.c",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.9.2.3",
+                                "ISO 27001:2013-A.9.2.5",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-6.1.2",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.1.2",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
+                                "MITRE ATT&CK v6.3-T1078",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1078",
+                                "MITRE ATT&CK v8.2-T1098",
+                                "NIST 800-53 Rev4-AC-6 (5)",
+                                "NIST 800-53 Rev4-AC-6 (6)",
+                                "NIST 800-53 Rev4-SI-4 (20)",
+                                "NIST CSF-PR.AC-4",
+                                "NIST SP 800-171 Revision 2-3.1.5",
+                                "NIST SP 800-172-3.1.2e",
+                                "PCI DSS v3.2.1-7.1.2",
+                                "PIPEDA-4.7.3",
+                                "SOC 2-CC6.1",
+                                "SOC 2-CC6.3",
+                                "SOC 2-CC6.6",
+                                "SOC 2-CC6.7"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-007",
+                    "masterSnapshotId": [
+                        "GOOGLE_PROJECTS_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-007",
+                            "eval": "data.rule.iam_primitive_roles_in_use",
+                            "message": "data.rule.iam_primitive_roles_in_use_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/resource-manager/reference/rest/v1/projects' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP IAM primitive roles are in use.",
+                    "description": "Ensure, GCP IAM users assigned with primitive roles. Primitive roles are Roles that existed prior to Cloud IAM. Primitive roles (owner, editor) are built-in and provide a broader access to resources making them prone to attacks and privilege escalation. Predefined roles provide more granular controls than primitive roles and therefore Predefined roles should be used. Note: For a new GCP project, service accounts are assigned with role/editor permissions. GCP recommends not to revoke the permissions on the SA account. Reference: https://cloud.google.com/iam/docs/service-accounts Limitation: This policy alerts for Service agents which are Google-managed service accounts. Service Agents are by default assigned with some roles by Google cloud and these roles shouldn't be revoked. Reference: https://cloud.google.com/iam/docs/service-agents In case any specific service agent needs to be bypassed, this policy can be cloned and modified accordingly.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CMMC",
+                                "GDPR",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MITRE ATT&CK",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "SOC",
+                                "APRA (CPS 234) Information Security-CPS234-14",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 48",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CSA CCM v3.0.1-DSI-06",
+                                "CSA CCM v3.0.1-IAM-01",
+                                "CSA CCM v3.0.1-IAM-02",
+                                "CSA CCM v3.0.1-IAM-06",
+                                "CSA CCM v3.0.1-IAM-09",
+                                "CSA CCM v3.0.1-IAM-10",
+                                "CSA CCM v3.0.1-IVS-11",
+                                "CSA CCM v3.0.1-STA-01",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AU.3.046",
+                                "GDPR-Article 25",
+                                "GDPR-Article 32",
+                                "HIPAA-164.312(a)(1)",
+                                "HITRUST CSF v9.3-Control Reference:01.c",
+                                "HITRUST CSF v9.3-Control Reference:01.s",
+                                "HITRUST CSF v9.3-Control Reference:01.v",
+                                "HITRUST CSF v9.3-Control Reference:01.y",
+                                "HITRUST CSF v9.3-Control Reference:05.i",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1",
+                                "ISO 27001:2013-A.9.2.3",
+                                "ISO 27001:2013-A.9.2.5",
+                                "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
+                                "MITRE ATT&CK v6.3-T1078",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1078",
+                                "MITRE ATT&CK v8.2-T1098",
+                                "NIST 800-53 Rev4-AC-2 (7)(b)",
+                                "NIST 800-53 Rev4-AC-2 (7)(c)",
+                                "NIST 800-53 Rev4-AC-6",
+                                "NIST CSF-DE.CM-3",
+                                "NIST CSF-PR.AC-4",
+                                "NIST CSF-PR.DS-5",
+                                "NIST SP 800-171 Revision 2-3.1.5",
+                                "NIST SP 800-172-3.1.2e",
+                                "PCI DSS v3.2.1-7.1.2",
+                                "PIPEDA-4.7.3",
+                                "SOC 2-CC6.2",
+                                "SOC 2-CC6.3"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-008",
+                    "masterSnapshotId": [
+                        "GOOGLE_PROJECTS_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-008",
+                            "eval": "data.rule.audit_not_config_proper",
+                            "message": "data.rule.audit_not_config_proper_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/resource-manager/reference/rest/v1/projects' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP Project audit logging is not configured properly across all services and all users in a project.",
+                    "description": "Ensure, GCP projects in which cloud audit logging is not configured properly across all services and all users. It is recommended that cloud audit logging is configured to track all Admin activities and read, write access to user data. Logs should be captured for all users and there should be no exempted users in any of the audit config section.",
+                                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CMMC",
+                                "CIS",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "MITRE ATT&CK",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "APRA (CPS 234) Information Security-CPS234-35",
+                                "APRA (CPS 234) Information Security-CPS234-36",
+                                "Brazilian Data Protection Law (LGPD)-Article 31",
+                                "Brazilian Data Protection Law (LGPD)-Article 48",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.0.0 (GCP)-2.1",
+                                "CIS v1.1.0 (GCP)-2.1",
+                                "CIS v1.2.0 (GCP)-2.1",
+                                "CSA CCM v.4.0.1-LOG-05",
+                                "CSA CCM v.4.0.1-LOG-06",
+                                "CSA CCM v.4.0.1-LOG-08",
+                                "CSA CCM v.4.0.1-LOG-13",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AU.3.046",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AU.5.055",
+                                "HITRUST v.9.4.2-Control Reference:09.ab",
+                                "HITRUST v.9.4.2-Control Reference:09.ac",
+                                "ISO/IEC 27002:2013-12.4.1",
+                                "ISO/IEC 27002:2013-12.4.3",
+                                "ISO/IEC 27002:2013-12.4.4",
+                                "ISO/IEC 27002:2013-16.1.1",
+                                "ISO/IEC 27017:2015-12.4.1",
+                                "ISO/IEC 27017:2015-12.4.4",
+                                "ISO/IEC 27017:2015-16.1.2",
+                                "MITRE ATT&CK v10.0-T1562.008 - Impair Defenses:Disable Cloud Logs",
+                                "NIST 800-53 Rev 5-Account Management | Automated Audit Actions",
+                                "NIST 800-53 Rev 5-Content of Audit Records",
+                                "NIST 800-53 Rev 5-Event Logging",
+                                "NIST 800-53 Rev4-AC-2 (4)",
+                                "NIST 800-53 Rev4-AU-2",
+                                "NIST 800-53 Rev4-AU-3",
+                                "NIST CSF-PR.PT-1",
+                                "NIST SP 800-171 Revision 2-3.3.4",
+                                "NIST SP 800-172-3.14.2e",
+                                "PCI DSS v3.2.1-10.2.3",
+                                "PCI DSS v3.2.1-10.6",
+                                "PIPEDA-4.1.4"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-009",
+                    "masterSnapshotId": [
+                        "GOOGLE_SERVICE_AC_KEY",
+                        "GOOGLE_SERVICE_AC"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-009",
+                            "eval": "data.rule.svc_ac_user_has_svc_ac_key",
+                            "message": "data.rule.svc_ac_user_has_svc_ac_key_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP User managed service accounts have user managed service account keys.",
+                    "description": "This policy checks user managed service accounts that use user managed service account keys instead of Google-managed. For user-managed keys, the User has to take ownership of key management activities. Even after owner precaution, keys can be easily leaked by common development malpractices like checking keys into the source code or leaving them in downloads directory or accidentally leaving them on support blogs/channels. So It is recommended to limit the use of User-managed service account keys and instead use Google-managed keys which can not be downloaded.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CSA CCM",
+                                "CMMC",
+                                "CIS",
+                                "HITRUST",
+                                "ISO 27001",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MITRE ATT&CK",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "APRA (CPS 234) Information Security-CPS234-14",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 46",
+                                "Brazilian Data Protection Law (LGPD)-Article 6",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.0.0 (GCP)-1.3",
+                                "CIS v1.1.0 (GCP)-1.4",
+                                "CIS v1.2.0 (GCP)-1.4",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IAM-04",
+                                "CSA CCM v.4.0.1-IAM-05",
+                                "CSA CCM v.4.0.1-IAM-09",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.2.007",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.9.2.3",
+                                "ISO 27001:2013-A.9.2.5",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-6.1.2",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.1.2",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "MITRE ATT&CK v6.3-T1078",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1078",
+                                "NIST 800-53 Rev 5-Least Privilege",
+                                "NIST 800-53 Rev4-AC-6",
+                                "NIST CSF-PR.AC-4",
+                                "NIST SP 800-171 Revision 2-3.1.5",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI DSS v3.2.1-7.1.2",
+                                "PIPEDA-4.7.3"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-010",
+                    "masterSnapshotId": [
+                        "GOOGLE_API_KEYS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-010",
+                            "eval": "data.rule.api_key_rotation_90_days",
+                            "message": "data.rule.api_key_rotation_90_days_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP API key not rotating in every 90 days.",
+                    "description": "This policy identifies GCP API keys for which the creation date is aged more than 90 days. Google recommends using the standard authentication flow instead of API Keys. However, there are limited cases where API keys are more appropriate. API keys should be rotated to ensure that data cannot be accessed with an old key that might have been lost, cracked, or stolen.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
                             "compliance": [
                                 "CIS"
                             ],
                             "service": [
-                                "compute"
+                                "apikeys"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-011",
+                    "masterSnapshotId": [
+                        "GOOGLE_API_KEYS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-011",
+                            "eval": "data.rule.api_target_not_exist",
+                            "message": "data.rule.api_target_not_exist_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP API key not restricting any specific API.",
+                    "description": "This policy checks GCP API keys that are not restricting any specific APIs. API keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API keys to use (call) only APIs required by an application.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "CIS"
+
+                            ],
+                            "service": [
+                                "apikeys"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-SAK-012",
+                    "masterSnapshotId": [
+                        "GOOGLE_API_KEYS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-SAK-012",
+                            "eval": "data.rule.api_key_has_no_specific_restriction",
+                            "message": "data.rule.api_key_has_no_specific_restriction_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_SAK_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure, GCP API key not restricted to use by specified Hosts and Apps.",
+                    "description": "This policy checks GCP API key not restricted to use by specified Hosts and Apps. Unrestricted keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API key usage to trusted hosts, HTTP referrers and apps.",
+                                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "CIS"
+
+                            ],
+                            "service": [
+                                "apikeys"
+                            ]
+                        }
+                    ]
+                },
+                {
+                        "masterTestId": "PR-GCP-CLD-PRIF-001",
+                        "masterSnapshotId": [
+                            "GOOGLE_PROJECT_INFO"
+                        ],
+                        "type": "rego",
+                        "rule": "file(compute.rego)",
+                        "evals": [
+                            {
+                                "id": "PR-GCP-CLD-PRIF-001",
+                                "eval": "data.rule.os_login_disable",
+                                "message": "data.rule.os_login_disable_err",
+                                "remediationDescription": "Make sure that GCP Projects have OS Login disabled",
+                                "remediationFunction": "PR_GCP_CLD_PRIF_001.py"
+                            }
+                        ],
+                        "severity": "Medium",
+                        "title": "Make sure that GCP Projects have OS Login disabled",
+                        "description": "This policy checks GCP Projects which have OS Login disabled. Enabling OS Login ensures that SSH keys used to connect to instances are mapped with IAM users. Revoking access to IAM user will revoke all the SSH keys associated with that particular user. It facilitates centralized and automated SSH key pair management which is useful in handling cases like a response to compromised SSH key pairs.",
+                        "tags": [
+                            {
+                                "cloud": "GCP",
+                                "compliance": [
+                                    "APRA",
+                                    "LGPD",
+                                    "CCPA",
+                                    "CSA CCM",
+                                    "CMMC",
+                                    "CIS",
+                                    "HITRUST",
+                                    "ISO 27001",
+                                    "ISO/IEC 27002",
+                                    "ISO/IEC 27017",
+                                    "MITRE ATT&CK",
+                                    "NIST CSF",
+                                    "NIST SP",
+                                    "PCI DSS",
+                                    "PIPEDA",
+                                    "APRA (CPS 234) Information Security-CPS234-23",
+                                    "APRA (CPS 234) Information Security-CPS234-27",
+                                    "APRA (CPS 234) Information Security-CPS234-34",
+                                    "Brazilian Data Protection Law (LGPD)-Article 49",
+                                    "CCPA 2018-1798.150(a)(1)",
+                                    "CIS v1.0.0 (GCP)-4.3",
+                                    "CIS v1.1.0 (GCP)-4.4",
+                                    "CIS v1.2.0 (GCP)-4.4",
+                                    "CSA CCM v.4.0.1-LOG-05",
+                                    "CSA CCM v.4.0.1-LOG-06",
+                                    "CSA CCM v.4.0.1-LOG-08",
+                                    "CSA CCM v.4.0.1-LOG-13",
+                                    "Cybersecurity Maturity Model Certification (CMMC) v.1.02-CM.2.061",
+                                    "HITRUST v.9.4.2-Control Reference:10.a",
+                                    "ISO 27001:2013-A.16.1.4",
+                                    "ISO/IEC 27002:2013-12.4.1",
+                                    "ISO/IEC 27002:2013-12.4.3",
+                                    "ISO/IEC 27002:2013-12.4.4",
+                                    "ISO/IEC 27002:2013-16.1.1",
+                                    "ISO/IEC 27017:2015-12.4.1",
+                                    "ISO/IEC 27017:2015-12.4.4",
+                                    "ISO/IEC 27017:2015-16.1.2",
+                                    "MITRE ATT&CK v10.0-T1078 - Valid Accounts",
+                                    "MITRE ATT&CK v6.3-T1078",
+                                    "MITRE ATT&CK v8.2-T1078",
+                                    "NIST CSF-PR.PT-1",
+                                    "NIST SP 800-171 Revision 2-3.3.4",
+                                    "NIST SP 800-172-3.4.1e",
+                                    "NIST SP 800-172-3.4.2e",
+                                    "PCI DSS v3.2.1-6.3",
+                                    "PIPEDA-4.7.3"
+                                ],
+                                "service": [
+                                    "compute"
+                                ]
+                            }
+                        ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-BKT-011",
+                    "masterSnapshotId": [
+                        "GOOGLE_STORAGE_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-BKT-011",
+                            "eval": "data.rule.publicly_to_all_authenticated_users",
+                            "message": "data.rule.publicly_to_all_authenticated_users_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_BKT_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP Storage buckets are publicly accessible to all authenticated users.",
+                    "description": "It Checks to ensure that the buckets which are publicly accessible to all authenticated users. Enabling public access to Storage Buckets enables anybody with a web association to access sensitive information that is critical to business. Access over a whole bucket is controlled by IAM. Access to individual objects within the bucket is controlled by its ACLs.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CIS",
+                                "CSA CCM",
+                                "CMMC",
+                                "GDPR",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MITRE ATT&CK",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "SOC",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 26",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.1.0 (GCP)-5.1",
+                                "CIS v1.2.0 (GCP)-4.9",
+                                "CSA CCM v3.0.1-DSI-02",
+                                "CSA CCM v3.0.1-IVS-06",
+                                "CSA CCM v3.0.1-IVS-08",
+                                "CSA CCM v3.0.1-MOS-13",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.1.004",
+                                "GDPR-Article 25",
+                                "GDPR-Article 46",
+                                "HIPAA-164.308(a)(4)(ii)(B)",
+                                "HIPAA-164.312(c)(1)",
+                                "HITRUST CSF v9.3-Control Reference:01.m",
+                                "HITRUST CSF v9.3-Control Reference:01.n",
+                                "HITRUST CSF v9.3-Control Reference:01.p",
+                                "HITRUST CSF v9.3-Control Reference:05.j",
+                                "HITRUST CSF v9.3-Control Reference:06.e",
+                                "HITRUST CSF v9.3-Control Reference:09.m",
+                                "HITRUST CSF v9.3-Control Reference:09.z",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.9.2.5",
+                                "MITRE ATT&CK v10.0-T1530 - Data from Cloud Storage Object",
+                                "MITRE ATT&CK v6.3-T1530",
+                                "MITRE ATT&CK v8.2-T1530",
+                                "NIST 800-53 Rev4-AC-8c",
+                                "NIST 800-53 Rev4-SC-7b",
+                                "NIST CSF-DE.AE-1",
+                                "NIST CSF-DE.CM-1",
+                                "NIST CSF-DE.CM-7",
+                                "NIST CSF-ID.RA-5",
+                                "NIST CSF-PR.AC-5",
+                                "NIST CSF-PR.DS-5",
+                                "NIST CSF-PR.PT-4",
+                                "NIST SP 800-171 Revision 2-3.1.22",
+                                "NIST SP 800-172-3.14.3e",
+                                "PCI DSS v3.2.1-7.1",
+                                "PIPEDA-4.1.4",
+                                "SOC 2-CC6.1",
+                                "SOC 2-CC6.6",
+                                "SOC 2-CC6.7"
+                            ],
+                            "service": [
+                                "storage"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-BKT-012",
+                    "masterSnapshotId": [
+                        "GOOGLE_STORAGE_IAM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-BKT-012",
+                            "eval": "data.rule.publicly_to_all_users",
+                            "message": "data.rule.publicly_to_all_users_err",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_BKT_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP Storage buckets are publicly accessible to all users.",
+                    "description": "It Checks to ensure that the buckets which are publicly accessible to all users. Enabling public access to Storage buckets enables anybody with a web association to access sensitive information that is critical to business. Access over a whole bucket is controlled by IAM. Access to individual objects within the bucket is controlled by its ACLs.",
+                    "tags": [
+                        {
+                            "cloud": "cloud",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CCPA",
+                                "CIS",
+                                "CMMC",
+                                "HITRUST",
+                                "ISO 27001",
+                                "MITRE ATT&CK",
+                                "NIST 800",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 26",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CIS v1.0.0 (GCP)-5.1",
+                                "CIS v1.1.0 (GCP)-5.1",
+                                "CIS v1.2.0 (GCP)-5.1",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.1.004",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "HITRUST v.9.4.2-Control Reference:09.m",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.9.2.5",
+                                "MITRE ATT&CK v10.0-T1530 - Data from Cloud Storage Object",
+                                "MITRE ATT&CK v6.3-T1530",
+                                "MITRE ATT&CK v8.2-T1530",
+                                "NIST 800-53 Rev 5-Boundary Protection",
+                                "NIST 800-53 Rev4-SC-7",
+                                "NIST SP 800-171 Revision 2-3.1.22",
+                                "NIST SP 800-172-3.14.3e",
+                                "PCI DSS v3.2.1-1.3",
+                                "PCI DSS v3.2.1-7.1",
+                                "PIPEDA-4.1.4"
+                            ],
+                            "service": [
+                                "storage"
                             ]
                         }
                     ]
