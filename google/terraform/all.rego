@@ -59,9 +59,6 @@ default waf_log4j_vulnerability = null
 gc_issue["waf_log4j_vulnerability"] {
     resource := input.resources[i]
     lower(resource.type) == "google_compute_security_policy"
-    rule := resource.properties.rule[_]
-    match := rule.match[_]
-    expr := match.expr[_]
     count([c | lower(resource.properties.rule[_].match[_].expr[_].expression) == "evaluatepreconfiguredexpr('cve-canary')"; c:=1]) == 0
 }
 

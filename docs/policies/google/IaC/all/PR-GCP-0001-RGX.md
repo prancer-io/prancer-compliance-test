@@ -5,9 +5,9 @@
 # Title: There is a possibility that secure password is exposed
 
 
-***<font color="white">Master Test Id:</font>*** PR-AWS-0001-RGX
+***<font color="white">Master Test Id:</font>*** PR-GCP-0001-RGX
 
-***<font color="white">Master Snapshot Id:</font>*** ['TRF_TEMPLATE_SNAPSHOT']
+***<font color="white">Master Snapshot Id:</font>*** ['GDF_TEMPLATE_SNAPSHOT']
 
 ***<font color="white">type:</font>*** python
 
@@ -19,7 +19,7 @@
 
 |Title|Description|
 | :---: | :---: |
-|id|PR-AWS-0001-RGX|
+|id|PR-GCP-0001-RGX|
 |eval|entropy_password|
 |message|entropy_password_err|
 |remediationDescription||
@@ -36,8 +36,8 @@
 | :---: | :---: |
 |cloud|git|
 |compliance|['CSA-CCM', 'HITRUST', 'ISO 27001', 'NIST 800', 'NIST CSF', 'PCI-DSS']|
-|service|['terraform']|
+|service|['deploymentmanager']|
 
 
 
-[secret_tf.py]: https://github.com/prancer-io/prancer-compliance-test/tree/master/google/terraform/secret_tf.py
+[secret_tf.py]: https://github.com/prancer-io/prancer-compliance-test/tree/master/google/iac/secret_tf.py

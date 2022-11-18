@@ -1957,6 +1957,44 @@ compute_instance_external_ip_metadata := {
 }
 
 
+#
+# PR-GCP-GDF-INST-015
+#
+
+default compute_ip_forwarding_enable = null
+
+gc_issue["compute_ip_forwarding_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    resource.properties.canIpForward == true
+    not startswith(lower(resource.name), "gke-")
+}
+
+compute_ip_forwarding_enable {
+    lower(input.resources[i].type) == "compute.v1.instance"
+    not gc_issue["compute_ip_forwarding_enable"]
+}
+
+compute_ip_forwarding_enable = false {
+    gc_issue["compute_ip_forwarding_enable"]
+}
+
+compute_ip_forwarding_enable_err = "Ensure GCP VM instances have IP Forwarding enabled." {
+    gc_issue["compute_ip_forwarding_enable"]
+}
+
+compute_ip_forwarding_enable_metadata := {
+    "Policy Code": "PR-GCP-GDF-INST-015",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure Ensure GCP VM instances have IP Forwarding enabled.",
+    "Policy Description": "This policy identifies VM instances that have IP Forwarding enabled. IP Forwarding could open unintended and undesirable communication paths and allows VM instances to send and receive packets with the non-matching destination or source IPs. To enable the source and destination IP match check, disable IP Forwarding.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+
 # https://cloud.google.com/compute/docs/reference/rest/v1/networks
 
 #
@@ -2226,4 +2264,64 @@ lbs_quic_metadata := {
     "Resource Type": "compute.v1.targethttpsproxy",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies"
+}
+
+
+#
+# PR-GCP-GDF-PRIF-001
+#
+
+default os_login_disable = null
+
+gc_attribute_absence["os_login_disable"]{
+    resource := input.resources[_]
+    lower(resource.type) == "compute.v1.instance"
+    not resource.properties.metadata.items
+}
+
+gc_issue["os_login_disable"] {
+    resource := input.resources[_]
+    lower(resource.type) == "compute.v1.instance"
+    not contains(lower(resource.properties.metadata.items[_].key), "enable-oslogin")
+}
+
+gc_issue["os_login_disable"] {
+    resource := input.resources[_]
+    lower(resource.type) == "compute.v1.instance"
+    contains(lower(resource.properties.metadata.items[_].key), "enable-oslogin")
+    contains(lower(resource.properties.metadata.items[_].value), "false")
+}
+
+os_login_disable {
+    lower(input.resources[_].type) == "compute.v1.instance"
+    not gc_issue["os_login_disable"]
+    not gc_attribute_absence["os_login_disable"]
+}
+
+os_login_disable = false {
+    lower(input.resources[_].type) == "compute.v1.instance"
+    gc_issue["os_login_disable"]
+}
+
+os_login_disable = false {
+    lower(input.resources[_].type) == "compute.v1.instance"
+    gc_attribute_absence["os_login_disable"]
+}
+
+os_login_disable_err = "Make sure that GCP Projects have OS Login disabled." {
+    gc_issue["os_login_disable"]
+}else ="Make sure that GCP Projects have OS Login disabled."{
+    gc_attribute_absence["os_login_disable"]
+}
+
+os_login_disable_metadata := {
+    "Policy Code": "PR-GCP-GDF-PRIF-001",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Make sure that GCP Projects have OS Login disabled.",
+    "Policy Description": "This policy checks GCP Projects which have OS Login disabled. Enabling OS Login ensures that SSH keys used to connect to instances are mapped with IAM users. Revoking access to IAM user will revoke all the SSH keys associated with that particular user. It facilitates centralized and automated SSH key pair management which is useful in handling cases like a response to compromised SSH key pairs.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/projects"
 }
