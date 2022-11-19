@@ -435,14 +435,14 @@ acr_anonymous_auth_disabled_metadata := {
 default acr_not_allowing_unrestricted_network_access = null
 
 # Defaults to true
-azure_attribute_absence ["acr_public_access_disabled"] {
+azure_attribute_absence ["acr_not_allowing_unrestricted_network_access"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_container_registry"
     not has_property(resource.properties, "public_network_access_enabled")
 }
 
 # Defaults to Allow
-azure_attribute_absence ["acr_public_access_disabled"] {
+azure_attribute_absence ["acr_not_allowing_unrestricted_network_access"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_container_registry"
     network_rule_set := resource.properties.network_rule_set[_]

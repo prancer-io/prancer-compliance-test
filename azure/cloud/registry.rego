@@ -308,19 +308,19 @@ default acr_has_premium_sku = null
 azure_attribute_absence ["acr_has_premium_sku"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
-    not resource.properties.sku
+    not resource.sku
 }
 
 azure_attribute_absence ["acr_has_premium_sku"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
-    not resource.properties.sku.name
+    not resource.sku.name
 }
 
 azure_issue ["acr_has_premium_sku"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
-    lower(resource.properties.sku.name) != "premium"
+    lower(resource.sku.name) != "premium"
 }
 
 acr_has_premium_sku {
@@ -378,8 +378,10 @@ acr_anonymous_auth_disabled {
     not azure_issue["acr_anonymous_auth_disabled"]
 }
 
-acr_anonymous_auth_disabled = false {
+acr_anonymous_auth_disabled {
+    lower(input.resources[_].type) == "microsoft.containerregistry/registries"
     azure_attribute_absence["acr_anonymous_auth_disabled"]
+    not azure_issue["acr_anonymous_auth_disabled"]
 }
 
 acr_anonymous_auth_disabled = false {
@@ -388,8 +390,6 @@ acr_anonymous_auth_disabled = false {
 
 acr_anonymous_auth_disabled_err = "Azure Container registries anonymous authentication is currently not disabled" {
     azure_issue["acr_anonymous_auth_disabled"]
-} else = "Azure Container registries property anonymousPullEnabled is missing from the resource" {
-    azure_attribute_absence["acr_anonymous_auth_disabled"] 
 }
 
 acr_anonymous_auth_disabled_metadata := {
@@ -409,13 +409,13 @@ acr_anonymous_auth_disabled_metadata := {
 
 default acr_not_allowing_unrestricted_network_access = null
 
-azure_attribute_absence ["acr_public_access_disabled"] {
+azure_attribute_absence ["acr_not_allowing_unrestricted_network_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
     not resource.properties.publicNetworkAccess
 }
 
-azure_attribute_absence ["acr_public_access_disabled"] {
+azure_attribute_absence ["acr_not_allowing_unrestricted_network_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
     not resource.properties.networkRuleSet.defaultAction
@@ -430,7 +430,7 @@ azure_issue ["acr_not_allowing_unrestricted_network_access"] {
 azure_issue ["acr_not_allowing_unrestricted_network_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
-    lower(resource.properties.networkRuleSet.defaultAction) == "allow"
+    lower(resource.properties.networkRuleSet.defaultAction) != "deny"
 }
 
 acr_not_allowing_unrestricted_network_access {
@@ -557,7 +557,7 @@ azure_attribute_absence ["acr_has_arm_audience_token_auth_disabled"] {
 azure_issue ["acr_has_arm_audience_token_auth_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
-    lower(resource.properties.policies.azureADAuthenticationAsArmPolicy.status) == "enabled"
+    lower(resource.properties.policies.azureADAuthenticationAsArmPolicy.status) != "disabled"
 }
 
 acr_has_arm_audience_token_auth_disabled {
