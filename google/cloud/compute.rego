@@ -2280,7 +2280,7 @@ gc_issue["instance_with_more_svc_ac_permission"]{
     total_roles_count := count(total_roles_list)
     require_str_list := {c | some c in total_roles_list;  contains(c, "roles/viewer")}
     require_str_count := count(require_str_list)
-    total_roles_count - require_str_count != 0
+    total_roles_count - require_str_count == 0
 }
 
 instance_with_more_svc_ac_permission {
