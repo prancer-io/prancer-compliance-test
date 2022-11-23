@@ -486,3 +486,79 @@ storage_bucket_retention_enable_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
 }
+
+
+#
+# PR-GCP-CLD-BKT-011
+# 
+# "storage.v1.bucket"
+
+default publicly_to_all_authenticated_users = null
+
+gc_issue["publicly_to_all_authenticated_users"] {
+    binding := input.bindings[_]
+    contains(lower(binding.role), "roles/storage")
+    contains(lower(binding.members[_]), "allauthenticatedusers")
+}
+
+publicly_to_all_authenticated_users {
+    not gc_issue["publicly_to_all_authenticated_users"]
+}
+
+publicly_to_all_authenticated_users = false {
+    gc_issue["publicly_to_all_authenticated_users"]
+}
+
+publicly_to_all_authenticated_users_err = "Ensure GCP Storage buckets are publicly accessible to all authenticated users." {
+    gc_issue["publicly_to_all_authenticated_users"]
+}
+
+publicly_to_all_authenticated_users_metadata := {
+    "Policy Code": "PR-GCP-CLD-BKT-011",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP cloud",
+    "Policy Title": "Ensure GCP Storage buckets are publicly accessible to all authenticated users.",
+    "Policy Description": "Checks the buckets which are publicly accessible to all authenticated users. Enabling public access to Storage Buckets enables anybody with a web association to access sensitive information that is critical to business. Access over a whole bucket is controlled by IAM. Access to individual objects within the bucket is controlled by its ACLs.",
+    "Resource Type": "storage.v1.bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
+
+#
+# PR-GCP-CLD-BKT-012
+#
+# "storage.v1.bucket"
+
+default publicly_to_all_users = null
+
+gc_issue["publicly_to_all_users"] {
+    binding := input.bindings[_]
+    contains(lower(binding.role), "roles/storage")
+    contains(lower(binding.members[_]), "allusers")
+}
+
+publicly_to_all_users {
+    not gc_issue["publicly_to_all_users"]
+}
+
+publicly_to_all_users = false {
+    gc_issue["publicly_to_all_users"]
+}
+
+publicly_to_all_users_err = "Ensure GCP Storage buckets are publicly accessible to all users." {
+    gc_issue["publicly_to_all_users"]
+}
+
+publicly_to_all_users_metadata := {
+    "Policy Code": "PR-GCP-CLD-BKT-012",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP cloud",
+    "Policy Title": "Ensure GCP Storage buckets are publicly accessible to all users.",
+    "Policy Description": "Checks the buckets which are publicly accessible to all users. Enabling public access to Storage buckets enables anybody with a web association to access sensitive information that is critical to business. Access over a whole bucket is controlled by IAM. Access to individual objects within the bucket is controlled by its ACLs.",
+    "Resource Type": "storage.v1.bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}

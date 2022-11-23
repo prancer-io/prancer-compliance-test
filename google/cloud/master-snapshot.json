@@ -96,6 +96,21 @@
                     ]
                 },
                 {
+                    "masterSnapshotId": "GOOGLE_DNS_POLICY",
+                    "type": "dns/dns.policies.list",
+                    "get_method": ["dns/dns.policies.get"],
+
+                    "collection": "networks",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "dns"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterSnapshotId": "GOOGLE_SUBNETWORKS",
                     "type": "compute/subnetworks.aggregatedList",
                     "collection": "subnetworks",
@@ -137,6 +152,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_BIGQUERY",
                     "type": "bigquery/datasets.list",
+                    "get_method": ["bigquery/datasets.get"],
                     "collection": "bigquery",
                     "tags": [
                         {
@@ -187,6 +203,20 @@
                     ]
                 },
                 {
+                    "masterSnapshotId": "GOOGLE_STORAGE_IAM",
+                    "type": "storage/storage/b.list",
+                    "get_method": ["storage/b_iam.get"],
+                    "collection": "storage",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "storage"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterSnapshotId": "GOOGLE_STORAGE",
                     "type": "storage/storage/b.list",
                     "collection": "storage",
@@ -197,6 +227,132 @@
                                 "storage"
                             ]
                         }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_PROJECT_INFO",
+                    "type": "compute/projects.list",
+                    "get_method": ["compute/projects.get"],
+                    "collection": "project_info",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_PROJECTS_IAM",
+                    "type": "compute/projects.list",
+                    "get_method": ["cloudresourcemanager/projects.getIamPolicy"],
+                    "collection": "project_iam_user",
+                    "tags": [
+                      {
+                        "cloud": "GCP",
+                        "service": [
+                          "iam"
+                        ]
+                      }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_SERVICE_AC",
+                    "type": "iam/projects.accounts.list",
+                    "get_method" :["iam/projects.accounts.get"],
+                    "collection": "project_svc_account",
+                    "tags": [
+                      {
+                        "cloud": "GCP",
+                        "service": [
+                          "iam"
+                        ]
+                      }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_SERVICE_AC_KEY",
+                    "type": "iam/projects.accounts.list",
+                    "get_method": ["projects.accounts.keys.list","iam/projects.accounts.keys.get"],
+                    "collection": "project_svc_account_key",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_API_KEYS",
+                    "type": "apikeys/keys.list",
+                    "get_method": ["apikeys/keys.get"],
+                    "collection": "google_api_keys",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "apikeys"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_APP_ENGINE",
+                    "type": "appengine/apps.list",
+                    "get_method": ["appengine/apps.get"],
+                    "collection": "google_app_engine",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "apps"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_SECURITY_POLICY",
+                    "type": "compute/securityPolicies.list",
+                    "get_method": ["compute/securityPolicies.get"],
+                    "collection": "google_security_policy",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "apps"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_SERVICES_LIST",
+                    "type": "serviceusage/gcp.services.list",
+                    "get_method": ["serviceusage/gcp.services.get"],
+                    "collection": "google_services",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": [
+                                "services"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_CLOUD_RUN",
+                    "type": "run/CloudRun.list",
+                    "get_method": ["run/CloudRun.get"],
+                    "collection": "google_cloud_run",
+                    "tags": [
+                      {
+                        "cloud": "GCP",
+                        "service": [
+                          "cloud run"
+                        ]
+                      }
                     ]
                 }
             ]

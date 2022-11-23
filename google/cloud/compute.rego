@@ -1,4 +1,6 @@
 package rule
+import future.keywords
+import future.keywords.every
 
 # https://cloud.google.com/compute/docs/reference/rest/v1/firewalls
 
@@ -1824,6 +1826,49 @@ compute_ip_forwarding_enable_metadata := {
 
 
 #
+# PR-GCP-CLD-SCP-001
+#
+
+default armor_not_config_with_cve = null
+
+gc_issue["armor_not_config_with_cve"] {
+    rule := input.rules[_].match.expr
+    not contains(rule.expression, "cve-canary")
+}
+
+gc_issue["armor_not_config_with_cve"] {
+    has_property(input, "rules")
+    rule := input.rules[_]
+    contains(rule.match.expr.expression, "cve-canary")
+    rule.action == "allow"
+}
+
+armor_not_config_with_cve {
+    not gc_issue["armor_not_config_with_cve"]
+}
+
+armor_not_config_with_cve = false {
+    gc_issue["armor_not_config_with_cve"]
+}
+
+armor_not_config_with_cve_err = "Ensure, GCP Cloud Armor policy not configured with cve-canary rule." {
+    gc_issue["armor_not_config_with_cve"]
+}
+
+armor_not_config_with_cve_metadata := {
+    "Policy Code": "PR-GCP-CLD-SCP-001",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP cloud",
+    "Policy Title": "Ensure, GCP Cloud Armor policy not configured with cve-canary rule.",
+    "Policy Description": "This policy identifies GCP Cloud Armor rules where cve-canary is not enabled. Preconfigured WAF rule called 'cve-canary' can help detect and block exploit attempts of CVE-2021-44228 and CVE-2021-45046 to address the Apache Log4j vulnerability. It is recommended to create a Cloud Armor security policy with rule blocking Apache Log4j exploit attempts. Reference : https://cloud.google.com/blog/products/identity-security/cloud-armor-waf-rule-to-help-address-apache-log4j-vulnerability",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/securityPolicies"
+}
+
+
+#
 # PR-GCP-CLD-NET-001
 #
 
@@ -1909,6 +1954,37 @@ net_default_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/networks"
 }
+
+
+#
+# PR-GCP-CLD-NET-003
+#
+
+default ntw_config_with_dns_logging_disabled = true
+
+ntw_config_with_dns_logging_disabled = false{
+    X := input.GOOGLE_NETWORK[_]
+    Y := input.GOOGLE_DNS_POLICY[_]
+    count([c | contains(Y.networks[_].networkUrl, X.name); c=1]) == 0
+    not Y.enableLogging
+}
+
+ntw_config_with_dns_logging_disabled_err = "Ensure, GCP VPC network not configured with DNS policy with logging enabled." {
+    not ntw_config_with_dns_logging_disabled
+}
+
+ntw_config_with_dns_logging_disabled_metadata := {
+    "Policy Code": "PR-GCP-CLD-NET-003",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP cloud",
+    "Policy Title": "Ensure, GCP VPC network not configured with DNS policy with logging enabled.",
+    "Policy Description": "This policy identifies the projects which have configured with legacy networks. Legacy networks have a single network IPv4 prefix range and a single gateway IP address for the whole network. Subnetworks cannot be created in a legacy network. Legacy networks can have an impact on high network traffic projects and subject to the single point of failure.",
+    "Resource Type": "compute.v1.network",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/networks"
+}
+
 
 #
 # PR-GCP-CLD-SUBN-001
@@ -2077,4 +2153,155 @@ lbs_quic_metadata := {
     "Resource Type": "compute.v1.targethttpsproxy",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies"
+}
+
+#
+# PR-GCP-CLD-PRIF-001
+# 
+default os_login_disable = null
+
+
+gc_attribute_absence["os_login_disable"]{
+    not input.commonInstanceMetadata.items
+}
+
+gc_issue["os_login_disable"] {
+    project_info := input.commonInstanceMetadata.items[_]
+    not contains(project_info.key, "enable-oslogin")
+}
+
+gc_issue["os_login_disable"] {
+    project_info := input.commonInstanceMetadata.items[_]
+    contains(project_info.key, "enable-oslogin")
+    lower(project_info.value) == "false"
+}
+
+os_login_disable {
+    not gc_issue["os_login_disable"]
+    not gc_attribute_absence["os_login_disable"]
+}
+
+os_login_disable = false {
+    gc_issue["os_login_disable"]
+}
+
+os_login_disable = false {
+    gc_attribute_absence["os_login_disable"]
+}
+
+os_login_disable_err = "Make sure that GCP Projects have OS Login disabled." {
+    gc_issue["os_login_disable"]
+}else ="Make sure that GCP Projects have OS Login disabled."{
+    gc_attribute_absence["os_login_disable"]
+}
+
+os_login_disable_metadata := {
+    "Policy Code": "PR-GCP-CLD-PRIF-001",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP cloud",
+    "Policy Title": "Make sure that GCP Projects have OS Login disabled",
+    "Policy Description": "This policy checks GCP Projects which have OS Login disabled. Enabling OS Login ensures that SSH keys used to connect to instances are mapped with IAM users. Revoking access to IAM user will revoke all the SSH keys associated with that particular user. It facilitates centralized and automated SSH key pair management which is useful in handling cases like a response to compromised SSH key pairs.",
+    "Resource Type": "compute.v1.projects",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/projects"
+}
+
+
+#
+# PR-GCP-CLD-INST-016
+# 
+
+info_value_list = ["Yes", "Y", "True", "true", "TRUE", "1"]
+
+instance_value_list = ["No", "N", "False", "false", "FALSE", "0"]
+
+default project_os_login_overridden_by_instnace = true
+
+project_os_login_overridden_by_instnace = false{
+	X := input.GOOGLE_PROJECT_INFO[_]
+	has_property(X.commonInstanceMetadata, "items")
+	project_info_items = X.commonInstanceMetadata.items[_]
+	contains(project_info_items.key, "enable-oslogin")
+	count([c | contains(input.GOOGLE_PROJECT_INFO[_].commonInstanceMetadata.items[_].value, info_value_list[_]); c = 1]) != 0
+
+	Y := input.GOOGLE_INSTANCE[_]
+	has_property(Y.metadata, "items")
+	has_property(Y.metadata.items[_], "key")
+	project_instance_items = Y.metadata.items[_]
+	contains(project_instance_items.key, "enable-oslogin")
+	count([c | contains(input.GOOGLE_INSTANCE[_].metadata.items[_].value, instance_value_list[_]); c = 1]) != 0
+	not startswith(lower(Y.name), "gke-")
+	upper(Y.status) == "RUNNING"
+
+	contains(Y.zone, X.name)
+}
+
+project_os_login_overridden_by_instnace_err = "Ensure, GCP VM instance OS login overrides Project metadata OS login configuration." {
+	not project_os_login_overridden_by_instnace
+}
+
+project_os_login_overridden_by_instnace_metadata := {
+	"Policy Code": "PR-GCP-CLD-INST-016",
+	"Type": "cloud",
+	"Product": "GCP",
+	"Language": "GCP cloud",
+	"Policy Title": "Ensure, GCP VM instance OS login overrides Project metadata OS login configuration.",
+	"Policy Description": "It checks, GCP VM instances where OS login configuration is disabled and overriding enabled Project OS login configuration. Enabling OS Login ensures that SSH keys used to connect to instances are mapped with IAM users. Revoking access to IAM user will revoke all the SSH keys associated with that particular user. It facilitates centralized and automated SSH key pair management which is useful in handling cases like a response to compromised SSH key pairs. Note: Enabling OS Login on instances disables metadata-based SSH key configurations on those instances. Disabling OS Login restores SSH keys that you have configured in a project or instance metadata. Reference: https://cloud.google.com/compute/docs/instances/managing-instance-access",
+	"Resource Type": ["compute.v1.projects","compute.v1.instance"],
+	"Policy Help URL": "",
+	"Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+	"Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/projects"
+}
+
+
+#
+# PR-GCP-CLD-CLR-001
+#
+
+default cld_run_with_over_permission_ingress = null
+
+gc_attribute_absence["cld_run_with_over_permission_ingress"]{
+    count([c | has_property(input.items[_].status, "conditions"); c=1]) == 0
+}
+
+gc_issue["cld_run_with_over_permission_ingress"]{
+	ready := input.items[_].status.conditions[_]
+    lower(ready.type) == "ready"
+    lower(ready.status) == "true"
+    routes := input.items[_].status.conditions[_]
+    lower(routes.type) == "routesready"
+    lower(routes.status) == "true"
+    lower(input.items[_].metadata.annotations["run.googleapis.com/ingress"]) == "all"
+}
+
+cld_run_with_over_permission_ingress {
+    not gc_issue["cld_run_with_over_permission_ingress"]
+    not gc_attribute_absence["cld_run_with_over_permission_ingress"]
+}
+
+cld_run_with_over_permission_ingress = false {
+    gc_issue["cld_run_with_over_permission_ingress"]
+}
+
+cld_run_with_over_permission_ingress = false {
+    gc_attribute_absence["cld_run_with_over_permission_ingress"]
+}
+
+cld_run_with_over_permission_ingress_err = "Ensure, GCP Cloud Run service with overly permissive ingress rule." {
+    gc_issue["cld_run_with_over_permission_ingress"]
+}else = "Ensure, GCP Cloud Run service with overly permissive ingress rule."{
+    gc_attribute_absence["cld_run_with_over_permission_ingress"]
+}
+
+cld_run_with_over_permission_ingress_metadata := {
+    "Policy Code": "PR-GCP-CLD-CLR-001",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure, GCP Cloud Run service with overly permissive ingress rule.",
+    "Policy Description": "This policy checks GCP Cloud Run services configured with overly permissive ingress rules. It is recommended to restrict the traffic from the internet and other resources by allowing traffic to enter through load balancers or internal traffic for better network-based access control.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/projects"
 }
