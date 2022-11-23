@@ -1,5 +1,6 @@
 package rule
 import future.keywords
+import future.keywords.every
 
 # https://cloud.google.com/compute/docs/reference/rest/v1/firewalls
 
@@ -2256,7 +2257,7 @@ project_os_login_overridden_by_instnace_metadata := {
 
 #
 # PR-GCP-CLD-INST-017
-# 
+# Need to fix all_viewer role condition.
 
 default instance_with_more_svc_ac_permission = null
 
@@ -2265,10 +2266,22 @@ gc_issue["instance_with_more_svc_ac_permission"]{
 	not startswith(lower(X.name), "gke-")
 	upper(X.status) == "RUNNING"
 
-	Y := input.GOOGLE_PROJECTS_IAM[_]
-    concat("",["serviceaccount:",lower(X.serviceAccounts[_].email)]) == lower(Y.bindings[_].members[_]) 
-	count([c | contains(input.GOOGLE_PROJECTS_IAM[_].bindings[_].role, "projects"); c = 1]) == 0
+	Y := input.GOOGLE_PROJECTS_IAM[_].bindings[_]
+    concat("",["serviceaccount:",lower(X.serviceAccounts[_].email)]) == lower(Y.members[_]) 
+	count([c | contains(Y.role, "projects"); c = 1]) == 0
 }
+
+# Suppose to check role in Project Iam for the user (ServiceAC) present in Compute Instance
+# gc_issue["instance_with_more_svc_ac_permission"] {
+# 	X := input.GOOGLE_INSTANCE[_]
+# 	Y := input.GOOGLE_PROJECTS_IAM[_].bindings[_]
+#     temp := trim(lower(Y.members[_]), "serviceaccount:")
+#     temp_x := lower(X.serviceAccounts[_].email)
+#     every c in input.GOOGLE_PROJECTS_IAM[_].bindings[_] {
+#         temp == temp_x
+#         c[0] == "roles/viewer"
+#     }
+# }
 
 gc_issue["instance_with_more_svc_ac_permission"]{
 	X := input.GOOGLE_INSTANCE[_]
