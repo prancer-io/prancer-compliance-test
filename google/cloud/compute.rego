@@ -1,5 +1,6 @@
 package rule
 import future.keywords
+import future.keywords.every
 
 # https://cloud.google.com/compute/docs/reference/rest/v1/firewalls
 
@@ -2251,61 +2252,6 @@ project_os_login_overridden_by_instnace_metadata := {
 	"Policy Help URL": "",
 	"Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances",
 	"Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/projects"
-}
-
-
-#
-# PR-GCP-CLD-INST-017
-# 
-
-default instance_with_more_svc_ac_permission = null
-
-gc_issue["instance_with_more_svc_ac_permission"]{
-	X := input.GOOGLE_INSTANCE[_]
-	not startswith(lower(X.name), "gke-")
-	upper(X.status) == "RUNNING"
-
-	Y := input.GOOGLE_PROJECTS_IAM[_]
-    concat("",["serviceaccount:",lower(X.serviceAccounts[_].email)]) == lower(Y.bindings[_].members[_]) 
-	count([c | contains(input.GOOGLE_PROJECTS_IAM[_].bindings[_].role, "projects"); c = 1]) == 0
-}
-
-gc_issue["instance_with_more_svc_ac_permission"]{
-	X := input.GOOGLE_INSTANCE[_]
-	not startswith(lower(X.name), "gke-")
-	upper(X.status) == "RUNNING"
-	Y := input.GOOGLE_PROJECTS_IAM[_]
-	trim(lower(Y.bindings[_].members[_]), "serviceaccount:") == lower(X.serviceAccounts[_].email) 
-    total_roles_list := {c | some c in input.GOOGLE_PROJECTS_IAM[_].bindings[_]; contains(c, "roles/")}
-    total_roles_count := count(total_roles_list)
-    require_str_list := {c | some c in total_roles_list;  contains(c, "roles/viewer")}
-    require_str_count := count(require_str_list)
-    total_roles_count - require_str_count == 0
-}
-
-instance_with_more_svc_ac_permission {
-    not gc_issue["instance_with_more_svc_ac_permission"]
-}
-
-instance_with_more_svc_ac_permission = false{
-    gc_issue["instance_with_more_svc_ac_permission"]
-}
-
-instance_with_more_svc_ac_permission_err = "Ensure, GCP VM instances with excessive service account permissions." {
-	gc_issue["instance_with_more_svc_ac_permission"]
-}
-
-instance_with_more_svc_ac_permission_metadata := {
-	"Policy Code": "PR-GCP-CLD-INST-017",
-	"Type": "cloud",
-	"Product": "GCP",
-	"Language": "GCP cloud",
-	"Policy Title": "Ensure, GCP VM instances with excessive service account permissions.",
-	"Policy Description": "It checks, VM instances with service account which have excessive permissions other than viewer/reader access. It is recommended that each instance that needs to call a Google API should run as a service account with the minimum permissions necessary for that instance to do its job. In practice, this means you should configure service accounts for your instances with the following process: 1) Create a new service account rather than using the Compute Engine default service account. 2) Grant IAM roles to that service account for only the resources that it needs. 3) Configure the instance to run as that service account. 4) Configure VM instance least permissive service account with only viewer/reader role until it is necessary to have more access. Avoid granting more access than necessary and regularly check your service account permissions to make sure they are up-to-date.",
-	"Resource Type": ["compute.v1.projects","compute.v1.instance"],
-	"Policy Help URL": "",
-	"Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances",
-    "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
 }
 
 
