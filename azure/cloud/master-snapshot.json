@@ -429,6 +429,30 @@
                     "type": "Microsoft.RecoveryServices/vaults",
                     "collection": "Microsoft.RecoveryServices",
                     "version": "2022-04-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_512",
+                    "type": "Microsoft.EventHub/namespaces",
+                    "collection": "Microsoft.EventHub",
+                    "version": "2022-01-01-preview"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_512",
+                    "type": "Microsoft.EventHub/namespaces",
+                    "collection": "Microsoft.EventHub",
+                    "version": "2022-01-01-preview"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_513",
+                    "type": "Microsoft.EventHub/namespaces/authorizationRules",
+                    "collection": "Microsoft.EventHub",
+                    "version": "2022-01-01-preview"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_514",
+                    "type": "Microsoft.EventHub/namespaces/eventhubs",
+                    "collection": "Microsoft.EventHub",
+                    "version": "2022-01-01-preview"
                 }
             ]
         }

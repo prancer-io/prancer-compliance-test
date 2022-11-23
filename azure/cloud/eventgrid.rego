@@ -4,7 +4,7 @@ array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }
 
-# https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-CLD-template
+# https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-arm-template
 
 #
 # PR-AZR-CLD-EGR-001
@@ -53,7 +53,7 @@ event_grid_topic_has_public_network_access_disabled_metadata := {
     "Policy Description": "Disabling public network access improves security by ensuring that the resource isn't exposed on the public internet. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints.",
     "Resource Type": "microsoft.eventgrid/topics",
     "Policy Help URL": "",
-    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-CLD-template"
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-arm-template"
 }
 
 
@@ -104,10 +104,10 @@ event_grid_topic_has_local_auth_disabled_metadata := {
     "Policy Description": "Disable local authentication methods so that your Azure Event Grid topics exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth.",
     "Resource Type": "microsoft.eventgrid/topics",
     "Policy Help URL": "",
-    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-CLD-template"
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-arm-template"
 }
 
-# https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains/privateendpointconnections?pivots=deployment-language-CLD-template
+# https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains/privateendpointconnections?pivots=deployment-language-arm-template
 # PR-AZR-CLD-EGR-003
 
 default event_grid_domain_configured_with_private_endpoint = null
@@ -177,11 +177,11 @@ event_grid_domain_configured_with_private_endpoint_metadata := {
     "Policy Description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your resources, they'll be protected against data leakage risks. Learn more at: https://aka.ms/privateendpoints.",
     "Resource Type": "microsoft.eventgrid/domains",
     "Policy Help URL": "",
-    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains?pivots=deployment-language-CLD-template"
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains?pivots=deployment-language-arm-template"
 }
 
 
-# https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics/privateendpointconnections?pivots=deployment-language-CLD-template
+# https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics/privateendpointconnections?pivots=deployment-language-arm-template
 # PR-AZR-CLD-EGR-004
 
 default event_grid_topic_configured_with_private_endpoint = null
@@ -251,7 +251,7 @@ event_grid_topic_configured_with_private_endpoint_metadata := {
     "Policy Description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your resources, they'll be protected against data leakage risks. Learn more at: https://aka.ms/privateendpoints.",
     "Resource Type": "Microsoft.EventGrid/topics",
     "Policy Help URL": "",
-    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-CLD-template"
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-arm-template"
 }
 
 
@@ -302,7 +302,7 @@ event_grid_domain_has_public_network_access_disabled_metadata := {
     "Policy Description": "Disable public network access for Azure Event Grid resource so that it isn't accessible over the public internet. This will help protect them against data leakage risks. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints.",
     "Resource Type": "microsoft.eventgrid/domains",
     "Policy Help URL": "",
-    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains?pivots=deployment-language-CLD-template"
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains?pivots=deployment-language-arm-template"
 }
 
 
@@ -353,7 +353,7 @@ event_grid_domain_has_local_auth_disabled_metadata := {
     "Policy Description": "Disable local authentication methods so that your Azure Event Grid domains exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth.",
     "Resource Type": "microsoft.eventgrid/domains",
     "Policy Help URL": "",
-    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains?pivots=deployment-language-CLD-template"
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains?pivots=deployment-language-arm-template"
 }
 
 
@@ -404,5 +404,5 @@ event_grid_partnernamespace_has_local_auth_disabled_metadata := {
     "Policy Description": "Disabling local authentication methods improves security by ensuring that Azure Event Grid partner namespaces exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth.",
     "Resource Type": "microsoft.eventgrid/partnernamespaces",
     "Policy Help URL": "",
-    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/partnernamespaces?pivots=deployment-language-CLD-template"
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/partnernamespaces?pivots=deployment-language-arm-template"
 }

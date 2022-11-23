@@ -14683,6 +14683,223 @@
                     "resourceTypes": [
                         "Microsoft.RecoveryServices/vaults"
                     ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EHB-001",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EHB-001",
+                            "eval": "data.rule.event_hub_namespace_has_local_auth_disabled",
+                            "message": "data.rule.event_hub_namespace_has_local_auth_disabled_err",
+                            "remediationDescription": "For Resource type 'Microsoft.EventHub/namespaces' make sure property disableLocalAuth exist and set value to 'true' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EHB_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Hub namespaces should have local authentication methods disabled",
+                    "description": "Disabling local authentication methods improves security by ensuring that Azure Event Hub namespaces exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/disablelocalauth-eh.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.EventHub/namespaces"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EHB-002",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EHB-002",
+                            "eval": "data.rule.event_hub_namespace_has_double_encryption_enabled",
+                            "message": "data.rule.event_hub_namespace_has_double_encryption_enabled_err",
+                            "remediationDescription": "For Resource type 'Microsoft.EventHub/namespaces' make sure property 'encryption.requireInfrastructureEncryption' exist and set value to 'true' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EHB_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Event Hub namespaces should have double encryption enabled",
+                    "description": "Enabling double encryption helps protect and safeguard your data to meet your organizational security and compliance commitments. When double encryption has been enabled, data in the storage account is encrypted twice, once at the service level and once at the infrastructure level, using two different encryption algorithms and two different keys.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.EventHub/namespaces"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EHB-004",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EHB-004",
+                            "eval": "data.rule.event_hub_namespace_configured_with_private_endpoint",
+                            "message": "data.rule.event_hub_namespace_configured_with_private_endpoint_err",
+                            "remediationDescription": "For Resource type Microsoft.EventHub/namespaces/privateEndpointConnections make sure property 'privateLinkServiceConnectionState.status' exist and set value to 'Approved' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces/privateendpointconnections?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EHB_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Hub namespaces should have private endpoints configured",
+                    "description": "Private endpoints connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to Event Hub namespaces, you can reduce data leakage risks. Learn more at: https://docs.microsoft.com/azure/event-hubs/private-link-service.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.EventHub/namespaces",
+                        "Microsoft.EventHub/namespaces/privateEndpointConnections"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EHB-005",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EHB-005",
+                            "eval": "data.rule.event_hub_namespace_usage_custom_managed_key_for_encryption",
+                            "message": "data.rule.event_hub_namespace_usage_custom_managed_key_for_encryption_err",
+                            "remediationDescription": "For Resource type Microsoft.EventHub/namespaces make sure property 'encryption.keySource' exist and set value to 'microsoft.keyvault' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EHB_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Event Hub namespaces should use customer-managed key for encryption",
+                    "description": "Azure Event Hubs supports the option of encrypting data at rest with either Microsoft-managed keys (default) or customer-managed keys. Choosing to encrypt data using customer-managed keys enables you to assign, rotate, disable, and revoke access to the keys that Event Hub will use to encrypt data in your namespace. Note that Event Hub only supports encryption with customer-managed keys for namespaces in dedicated clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CMMC",
+                                "CMMC_2.0_L2_SC.L2-3.13.10",
+                                "FedRAMP",
+                                "FedRAMP_High_R4_SC-12",
+                                "FedRAMP_Moderate_R4_SC-12",
+                                "NIST_SP",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-53_R5_SC-12",
+                                "RMiT",
+                                "RMiT_v1.0_10.53"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.EventHub/namespaces"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EHB-006",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EHB-006",
+                            "eval": "data.rule.event_hub_namespace_only_has_rootmanage_sharedaccesskey",
+                            "message": "data.rule.event_hub_namespace_only_has_rootmanage_sharedaccesskey_err",
+                            "remediationDescription": "For Resource type Microsoft.EventHub/namespaces/authorizationRules make sure property 'name' exist and set value to 'RootManageSharedAccessKey' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces/authorizationrules?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EHB_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "All authorization rules except RootManageSharedAccessKey should be removed from Event Hub namespace",
+                    "description": "Event Hub clients should not use a namespace level access policy that provides access to all queues and topics in a namespace. To align with the least privilege security model, you should create access policies at the entity level for queues and topics to provide access to only the specific entity",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.EventHub/namespaces/authorizationRules"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EHB-007",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EHB-007",
+                            "eval": "data.rule.event_hub_instance_has_auth_rule_defined",
+                            "message": "data.rule.event_hub_instance_has_auth_rule_defined_err",
+                            "remediationDescription": "Make sure microsoft.eventhub/namespaces/eventhubs/authorizationrules resource exist for resource type Microsoft.EventHub/namespaces/eventhubs to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces/eventhubs/authorizationrules?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EHB_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Authorization rules on the Event Hub instance should be defined",
+                    "description": "Audit existence of authorization rules on Event Hub entities to grant least-privileged access",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "RMiT",
+                                "RMiT_v1.0_10.55"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.EventHub/namespaces/eventhubs",
+                        "microsoft.eventhub/namespaces/eventhubs/authorizationrules"
+                    ]
                 }
             ]
         }

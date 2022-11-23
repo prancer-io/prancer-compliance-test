@@ -12133,7 +12133,7 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "Compute"
+                                "EventGrid"
                             ]
                         }
                     ],
@@ -12164,7 +12164,7 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "Compute"
+                                "EventGrid"
                             ]
                         }
                     ],
@@ -12195,7 +12195,7 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "Compute"
+                                "EventGrid"
                             ]
                         }
                     ],
@@ -12226,7 +12226,7 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "Compute"
+                                "EventGrid"
                             ]
                         }
                     ],
@@ -12257,7 +12257,7 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "Compute"
+                                "EventGrid"
                             ]
                         }
                     ],
@@ -12288,7 +12288,7 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "Compute"
+                                "EventGrid"
                             ]
                         }
                     ],
@@ -12319,7 +12319,7 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "Compute"
+                                "EventGrid"
                             ]
                         }
                     ],
@@ -12350,7 +12350,7 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "Compute"
+                                "RecoveryServices"
                             ]
                         }
                     ],
@@ -12381,7 +12381,7 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "Compute"
+                                "RecoveryServices"
                             ]
                         }
                     ],
@@ -12391,6 +12391,204 @@
                     "severity": "Medium",
                     "title": "Azure Recovery Services vaults should use private link",
                     "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to Azure Recovery Services vaults, data leakage risks are reduced. Learn more about private links at: https://aka.ms/AB-PrivateEndpoints."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EHB-001",
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EHB-001",
+                            "eval": "data.rule.event_hub_namespace_has_local_auth_disabled",
+                            "message": "data.rule.event_hub_namespace_has_local_auth_disabled_err",
+                            "remediationDescription": "01. Navigate to your Event Hubs namespace using the Azure portal.<br>02. In the namespace overview section, click on the Local Authentication.<br>03. Now select Disabled option and click Ok to save the changes",
+                            "remediationFunction": "PR_AZR_CLD_EHB_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "EventHub"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_512"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Hub namespaces should have local authentication methods disabled",
+                    "description": "Disabling local authentication methods improves security by ensuring that Azure Event Hub namespaces exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/disablelocalauth-eh."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EHB-002",
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EHB-002",
+                            "eval": "data.rule.event_hub_namespace_has_double_encryption_enabled",
+                            "message": "data.rule.event_hub_namespace_has_double_encryption_enabled_err",
+                            "remediationDescription": "01. Select the namespace on which you want to enable BYOK.<br>02. On the Settings page of your Event Hubs namespace, select Encryption.<br>03. Select Encrypt with Customer-managed key and check Enable infrastructure-level encryption checkbox.<br>04. Click Save to complete,",
+                            "remediationFunction": "PR_AZR_CLD_EHB_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "EventHub"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_512"
+                    ],
+                    "severity": "Medium",
+                    "title": "Event Hub namespaces should have double encryption enabled",
+                    "description": "Enabling double encryption helps protect and safeguard your data to meet your organizational security and compliance commitments. When double encryption has been enabled, data in the storage account is encrypted twice, once at the service level and once at the infrastructure level, using two different encryption algorithms and two different keys."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EHB-004",
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EHB-004",
+                            "eval": "data.rule.event_hub_namespace_configured_with_private_endpoint",
+                            "message": "data.rule.event_hub_namespace_configured_with_private_endpoint_err",
+                            "remediationDescription": "01. Navigate to your Event Hubs namespace using the Azure portal.<br>02. On the Networking page, for Public network access, select Disabled so that the namespace to be accessed only via private endpoints.<br>03. To create and integrate a private endpoint please visit <a href='https://learn.microsoft.com/en-us/azure/event-hubs/private-link-service#add-a-private-endpoint-using-azure-portal' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_CLD_EHB_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "EventHub"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_512"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Hub namespaces should have private endpoints configured",
+                    "description": "Private endpoints connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to Event Hub namespaces, you can reduce data leakage risks. Learn more at: https://docs.microsoft.com/azure/event-hubs/private-link-service."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EHB-005",
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EHB-005",
+                            "eval": "data.rule.event_hub_namespace_usage_custom_managed_key_for_encryption",
+                            "message": "data.rule.event_hub_namespace_usage_custom_managed_key_for_encryption_err",
+                            "remediationDescription": "01. Select the namespace on which you want to enable BYOK.<br>02. On the Settings page of your Event Hubs namespace, select Encryption.<br>03. Check the Customer-managed key encryption at rest checkbox.<br>04. Select save to complete.",
+                            "remediationFunction": "PR_AZR_CLD_EHB_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CMMC",
+                                "CMMC_2.0_L2_SC.L2-3.13.10",
+                                "FedRAMP",
+                                "FedRAMP_High_R4_SC-12",
+                                "FedRAMP_Moderate_R4_SC-12",
+                                "NIST_SP",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-53_R5_SC-12",
+                                "RMiT",
+                                "RMiT_v1.0_10.53"
+                            ],
+                            "service": [
+                                "EventHub"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_512"
+                    ],
+                    "severity": "Medium",
+                    "title": "Event Hub namespaces should use customer-managed key for encryption",
+                    "description": "Azure Event Hubs supports the option of encrypting data at rest with either Microsoft-managed keys (default) or customer-managed keys. Choosing to encrypt data using customer-managed keys enables you to assign, rotate, disable, and revoke access to the keys that Event Hub will use to encrypt data in your namespace. Note that Event Hub only supports encryption with customer-managed keys for namespaces in dedicated clusters."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EHB-006",
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EHB-006",
+                            "eval": "data.rule.event_hub_namespace_only_has_rootmanage_sharedaccesskey",
+                            "message": "data.rule.event_hub_namespace_only_has_rootmanage_sharedaccesskey_err",
+                            "remediationDescription": "Upon creation of the Eventhub namespace, a default AuthorizationRule Policy is created called 'RootManageSharedAccessKey' which includes the Access/Authorization keys you need. This default policy can be viewed & managed in the Portal by navigating to the EventhubNamespace -> 'Shared Access Policies' under Settings. Don't add any custom access policies/keys here.",
+                            "remediationFunction": "PR_AZR_CLD_EHB_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "EventHub"
+                            ]
+                        }              
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_512",
+                        "AZRSNP_513"
+                    ],
+                    "severity": "Medium",
+                    "title": "All authorization rules except RootManageSharedAccessKey should be removed from Event Hub namespace",
+                    "description": "Event Hub clients should not use a namespace level access policy that provides access to all queues and topics in a namespace. To align with the least privilege security model, you should create access policies at the entity level for queues and topics to provide access to only the specific entity"
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EHB-007",
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EHB-007",
+                            "eval": "data.rule.event_hub_instance_has_auth_rule_defined",
+                            "message": "data.rule.event_hub_instance_has_auth_rule_defined_err",
+                            "remediationDescription": "Upon creation of the Eventhub instance, no AuthorizationRule Policy get created by default. From Azure portal create a shared access policy by navigating to the EventhubInstance -> 'Shared Access Policies' under Settings. Make sure you have at least one access policy defined.",
+                            "remediationFunction": "PR_AZR_CLD_EHB_007.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "RMiT",
+                                "RMiT_v1.0_10.55"
+                            ],
+                            "service": [
+                                "EventHub"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_514"
+                    ],
+                    "severity": "Medium",
+                    "title": "Authorization rules on the Event Hub instance should be defined",
+                    "description": "Audit existence of authorization rules on Event Hub entities to grant least-privileged access"
                 }
             ]
         }
