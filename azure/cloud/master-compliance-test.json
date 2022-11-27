@@ -7531,6 +7531,279 @@
                     "description": "This policy identifies Azure Container registries which has Public access to All networks enabled. Azure ACR is used to store Docker container images which might contain sensitive information. It is highly recommended to restrict public access from allow access from Selected networks or make it Private by disabling the Public access."
                 },
                 {
+                    "masterTestId": "PR-AZR-CLD-ACR-007",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-007",
+                            "eval": "data.rule.acr_repository_scoped_access_token_disabled",
+                            "message": "data.rule.acr_repository_scoped_access_token_disabled_err",
+                            "remediationDescription": "01. In the portal, navigate to your container registry and select Repository permissions > Token (Preview).<br>02. On the Token details tab of each token, in Status, select Disabled.<br>03. Then select Save.",
+                            "remediationFunction": "PR_AZR_CLD_ACR_007.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries repository scoped access token is disabled",
+                    "description": "Disable repository scoped access tokens for your registry so that repositories are not accessible by tokens. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-008",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-008",
+                            "eval": "data.rule.acr_has_premium_sku",
+                            "message": "data.rule.acr_has_premium_sku_err",
+                            "remediationDescription": "01. In the portal, navigate to your container registry Overview and select Update, then select Premium SKU from SKU drop-down.<br>02. Select Save.",
+                            "remediationFunction": "PR_AZR_CLD_ACR_008.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should have SKUs that support Private Links",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The private link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your container registries instead of the entire service, data leakage risks are reduced. Learn more at: https://aka.ms/acr/private-link."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-009",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-009",
+                            "eval": "data.rule.acr_anonymous_auth_disabled",
+                            "message": "data.rule.acr_anonymous_auth_disabled_err",
+                            "remediationDescription": "Using Azure CLI, Disable anonymous pull access by running this command: 'az acr update --name <your-registry-name> --anonymous-pull-enabled false'.",
+                            "remediationFunction": "PR_AZR_CLD_ACR_009.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries has anonymous authentication disabled",
+                    "description": "Disable anonymous pull for your registry so that data not accessible by unauthenticated user. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-010",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-010",
+                            "eval": "data.rule.acr_not_allowing_unrestricted_network_access",
+                            "message": "data.rule.acr_not_allowing_unrestricted_network_access_err",
+                            "remediationDescription": "01. To limit access to a selected public network, first change the default action to deny access. Substitute the name of your registry in the following Azure CLI az acr update command: 'az acr update --name <your-registry-name> --default-action Deny'.<br>02. In the portal, navigate to your container registry and select Settings > Networking.<br>03. On the Public access tab, in Allow public network access, select Disabled. Then select Save.",
+                            "remediationFunction": "PR_AZR_CLD_ACR_010.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_NS-1",
+                                "Azure_Security_Benchmark_v3.0_NS-2",
+                                "CMMC",
+                                "CMMC_2.0_L2_AC.L2-3.1.3",
+                                "CMMC_2.0_L2_SC.L1-3.13.1",
+                                "CMMC_2.0_L2_SC.L1-3.13.5",
+                                "CMMC_2.0_L2_SC.L2-3.13.2",
+                                "CMMC_2.0_L2_SC.L2-3.13.6",
+                                "CMMC_L3_AC.1.001",
+                                "CMMC_L3_AC.1.002",
+                                "CMMC_L3_AC.2.016"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries should not allow unrestricted network access",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-011",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-011",
+                            "eval": "data.rule.acr_configured_with_private_endpoint",
+                            "message": "data.rule.acr_configured_with_private_endpoint_err",
+                            "remediationDescription": "01. In the portal, navigate to your container registry.<br>02. Under Settings, select Networking.<br>03. On the Private endpoints tab, select + Private endpoint.<br>04. Now visit <a href='https://learn.microsoft.com/en-us/azure/container-registry/container-registry-private-link#set-up-private-endpoint---portal-recommended' target='_blank'>here</a> for further instruction.",
+                            "remediationFunction": "PR_AZR_CLD_ACR_011.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Container registries should have private endpoints configured",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-012",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-012",
+                            "eval": "data.rule.acr_has_arm_audience_token_auth_disabled",
+                            "message": "data.rule.acr_has_arm_audience_token_auth_disabled_err",
+                            "remediationDescription": "Run the Azure CLI command to disable the status of the registry's policy: 'az acr config authentication-as-arm update -r <registry> --status [disabled]'",
+                            "remediationFunction": "PR_AZR_CLD_ACR_012.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should have ARM audience token authentication disabled",
+                    "description": "Disable Azure Active Directory ARM audience tokens for authentication to your registry. Only Azure Container Registry (ACR) audience tokens will be used for authentication. This will ensure only tokens meant for usage on the registry can be used for authentication. Disabling ARM audience tokens does not affect admin user's or scoped access tokens' authentication. Learn more at: https://aka.ms/acr/authentication."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-013",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-013",
+                            "eval": "data.rule.acr_export_disabled",
+                            "message": "data.rule.acr_export_disabled_err",
+                            "remediationDescription": "01. Run az resource update to set the exportPolicy status in an existing registry to disabled. Substitute the names of your registry and resource group.<br>02. When disabling the exportPolicy property, also set the publicNetworkAccess property to disabled. az resource update --resource-group myResourceGroup --name myregistry --resource-type 'Microsoft.ContainerRegistry/registries' --api-version '2021-06-01-preview' --set 'properties.policies.exportPolicy.status=disabled' --set 'properties.publicNetworkAccess=disabled'",
+                            "remediationFunction": "PR_AZR_CLD_ACR_013.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries should have exports disabled",
+                    "description": "Disabling exports improves security by ensuring data in a registry is accessed solely via the dataplane ('docker pull'). Data cannot be moved out of the registry via 'acr import' or via 'acr transfer'. In order to disable exports, public network access must be disabled. Learn more at: https://aka.ms/acr/export-policy."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACR-014",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACR-014",
+                            "eval": "data.rule.acr_usage_custom_managed_key_for_encryption",
+                            "message": "data.rule.acr_usage_custom_managed_key_for_encryption_err",
+                            "remediationDescription": "Please visit <a href='https://learn.microsoft.com/en-us/azure/container-registry/tutorial-enable-customer-managed-keys#enable-a-customer-managed-key-by-using-the-azure-portal' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_CLD_ACR_014.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_DP-5",
+                                "Azure_Security_Benchmark_v3.0_DP-5",
+                                "CMMC",
+                                "CMMC_2.0_L2_SC.L2-3.13.10",
+                                "CMMC_L3_SC.3.177",
+                                "FedRAMP",
+                                "FedRAMP_High_R4_SC-12",
+                                "FedRAMP_Moderate_R4_SC-12",
+                                "NIST_SP",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-53_R4_SC-12",
+                                "NIST_SP_800-53_R5_SC-12",
+                                "NZ_ISM",
+                                "NZ_ISM_v3.5_CR-3"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should be encrypted with a customer-managed key",
+                    "description": "Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK."
+                },
+                {
                     "masterTestId": "PR-AZR-CLD-NSG-001",
                     "type": "rego",
                     "rule": "file(nsg.rego)",
@@ -11864,6 +12137,529 @@
                     "severity": "Medium",
                     "title": "Azure Virtual Machine scale sets should utilize managed disks",
                     "description": "This policy identifies Azure Virtual machine scale sets which are not utilising Managed Disks. Using Azure Managed disk over traditional BLOB storage based VHD's has more advantage features like Managed disks are by default encrypted, reduces cost over storage accounts and more resilient as Microsoft will manage the disk storage and move around if underlying hardware goes faulty. It is recommended to move BLOB based VHD's to Managed Disks."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-001",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-001",
+                            "eval": "data.rule.event_grid_topic_has_public_network_access_disabled",
+                            "message": "data.rule.event_grid_topic_has_public_network_access_disabled_err",
+                            "remediationDescription": "01. Navigate to your event grid topic, and switch to the Networking tab.<br>02. Select Private endpoints only to allow only private endpoint connections to access this resource. Use the Private endpoint connections tab on this page to manage connections. For step-by-step instructions to create a private endpoint connection, visit https://learn.microsoft.com/en-us/azure/event-grid/configure-private-endpoints#use-azure-portal.<br>03. Select Save on the toolbar",
+                            "remediationFunction": "PR_AZR_CLD_EGR_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "EventGrid"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_508"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should disable public network access",
+                    "description": "Disabling public network access improves security by ensuring that the resource isn't exposed on the public internet. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-002",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-002",
+                            "eval": "data.rule.event_grid_topic_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_topic_has_local_auth_disabled_err",
+                            "remediationDescription": "01. Navigate to your event grid topic.<br>02. On the Overview page, in the Essentials section, select the current value for Local Authentication.<br>03. On the Local Authentication page, select Disabled.<br>04. Select OK to close the Local Authentication page.",
+                            "remediationFunction": "PR_AZR_CLD_EGR_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "EventGrid"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_508"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should disable local authentication",
+                    "description": "Disable local authentication methods so that your Azure Event Grid topics exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-003",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-003",
+                            "eval": "data.rule.event_grid_domain_configured_with_private_endpoint",
+                            "message": "data.rule.event_grid_domain_configured_with_private_endpoint_err",
+                            "remediationDescription": "01. Navigate to your event grid domain, and switch to the Networking tab.<br>02. Select Private endpoints only to allow only private endpoint connections to access this resource. Use the Private endpoint connections tab on this page to manage connections. For step-by-step instructions to create a private endpoint connection, visit https://learn.microsoft.com/en-us/azure/event-grid/configure-private-endpoints#use-azure-portal.<br>03. Select Save on the toolbar.",
+                            "remediationFunction": "PR_AZR_CLD_EGR_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_NS-2",
+                                "Azure_Security_Benchmark_v2.0_NS-3",
+                                "Azure_Security_Benchmark_v3.0_NS-2",
+                                "CMMC",
+                                "CMMC_2.0_L2_AC.L1-3.1.1",
+                                "CMMC_2.0_L2_AC.L2-3.1.12",
+                                "CMMC_2.0_L2_AC.L2-3.1.13",
+                                "CMMC_2.0_L2_AC.L2-3.1.14",
+                                "CMMC_2.0_L2_AC.L2-3.1.3",
+                                "CMMC_2.0_L2_SC.L1-3.13.1",
+                                "CMMC_2.0_L2_SC.L1-3.13.5"
+                            ],
+                            "service": [
+                                "EventGrid"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_509"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should have private endpoints configured",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your resources, they'll be protected against data leakage risks. Learn more at: https://aka.ms/privateendpoints."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-004",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-004",
+                            "eval": "data.rule.event_grid_topic_configured_with_private_endpoint",
+                            "message": "data.rule.event_grid_topic_configured_with_private_endpoint_err",
+                            "remediationDescription": "01. Navigate to your topic.<br>02. Switch to the Networking tab of your topics page. In the Public access tab, select Private endpoints only. For step-by-step instructions to create a private endpoint connection, visit https://learn.microsoft.com/en-us/azure/event-grid/configure-private-endpoints#use-azure-portal.<br>03. Select Save on the toolbar.",
+                            "remediationFunction": "PR_AZR_CLD_EGR_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_NS-2",
+                                "Azure_Security_Benchmark_v2.0_NS-3",
+                                "Azure_Security_Benchmark_v3.0_NS-2",
+                                "CMMC",
+                                "CMMC_2.0_L2_AC.L1-3.1.1",
+                                "CMMC_2.0_L2_AC.L2-3.1.12",
+                                "CMMC_2.0_L2_AC.L2-3.1.13",
+                                "CMMC_2.0_L2_AC.L2-3.1.14",
+                                "CMMC_2.0_L2_AC.L2-3.1.3",
+                                "CMMC_2.0_L2_SC.L1-3.13.1",
+                                "CMMC_2.0_L2_SC.L1-3.13.5"
+                            ],
+                            "service": [
+                                "EventGrid"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_508"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should have private endpoints configured",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your resources, they'll be protected against data leakage risks. Learn more at: https://aka.ms/privateendpoints."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-005",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-005",
+                            "eval": "data.rule.event_grid_domain_has_public_network_access_disabled",
+                            "message": "data.rule.event_grid_domain_has_public_network_access_disabled_err",
+                            "remediationDescription": "01. Navigate to your event grid domain, and switch to the Networking tab.<br>02. Select Private endpoints only to allow only private endpoint connections to access this resource. Use the Private endpoint connections tab on this page to manage connections. For step-by-step instructions to create a private endpoint connection, visit https://learn.microsoft.com/en-us/azure/event-grid/configure-private-endpoints#use-azure-portal.<br>03. Select Save on the toolbar.",
+                            "remediationFunction": "PR_AZR_CLD_EGR_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_NS-2",
+                                "Azure_Security_Benchmark_v2.0_NS-3",
+                                "Azure_Security_Benchmark_v3.0_NS-2",
+                                "CMMC",
+                                "CMMC_2.0_L2_AC.L1-3.1.1",
+                                "CMMC_2.0_L2_AC.L2-3.1.12",
+                                "CMMC_2.0_L2_AC.L2-3.1.13",
+                                "CMMC_2.0_L2_AC.L2-3.1.14",
+                                "CMMC_2.0_L2_AC.L2-3.1.3",
+                                "CMMC_2.0_L2_SC.L1-3.13.1",
+                                "CMMC_2.0_L2_SC.L1-3.13.5"
+                            ],
+                            "service": [
+                                "EventGrid"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_509"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should disable public network access",
+                    "description": "Disable public network access for Azure Event Grid resource so that it isn't accessible over the public internet. This will help protect them against data leakage risks. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-006",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-006",
+                            "eval": "data.rule.event_grid_domain_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_domain_has_local_auth_disabled_err",
+                            "remediationDescription": "01. Navigate to your event grid domain.<br>02. On the Overview page, in the Essentials section, select the current value for Local Authentication.<br>03. On the Local Authentication page, select Disabled.<br>04. Select OK to close the Local Authentication page.",
+                            "remediationFunction": "PR_AZR_CLD_EGR_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "EventGrid"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_509"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should disable local authentication",
+                    "description": "Disable local authentication methods so that your Azure Event Grid domains exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EGR-009",
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EGR-009",
+                            "eval": "data.rule.event_grid_partnernamespace_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_partnernamespace_has_local_auth_disabled_err",
+                            "remediationDescription": "01. Navigate to your event grid partner namespace.<br>02. On the Overview page, in the Essentials section, select the current value for Local Authentication.<br>03. On the Local Authentication page, select Disabled.<br>04. Select OK to close the Local Authentication page.",
+                            "remediationFunction": "PR_AZR_CLD_EGR_009.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "EventGrid"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_510"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid partner namespaces should disable local authentication",
+                    "description": "Disabling local authentication methods improves security by ensuring that Azure Event Grid partner namespaces exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-RSV-001",
+                    "type": "rego",
+                    "rule": "file(recoveryservices_vaults.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-RSV-001",
+                            "eval": "data.rule.recoveryservices_vaults_usage_custom_managed_keys_for_encryption",
+                            "message": "data.rule.recoveryservices_vaults_usage_custom_managed_keys_for_encryption_err",
+                            "remediationDescription": "01. Go to your Recovery Services vault -> Properties.<br>02. Select Update under Encryption Settings.<br>03. In the Encryption Settings pane, select Use your own key and enter the Key URI with which you want to encrypt the data in this Recovery Services vault.<br>04. Select Save.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/backup/encryption-at-rest-with-cmk?tabs=portal#configure-a-vault-to-encrypt-using-customer-managed-keys' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_CLD_RSV_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CMMC",
+                                "CMMC_2.0_L2_SC.L2-3.13.10",
+                                "FedRAMP",
+                                "FedRAMP_High_R4_SC-12",
+                                "FedRAMP_Moderate_R4_SC-12",
+                                "NIST_SP",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-53_R4_SC-12",
+                                "NIST_SP_800-53_R5_SC-12",
+                                "RBI_ITF_NBFC",
+                                "RBI_ITF_NBFC_v2017_6",
+                                "RBI_ITF_NBFC_v2017_6.2",
+                                "RBI_ITF_NBFC_v2017_6.3",
+                                "RBI_ITF_NBFC_v2017_6.4"
+                            ],
+                            "service": [
+                                "RecoveryServices"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_511"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Recovery Services vaults should use customer-managed keys for encryption",
+                    "description": "Use customer-managed keys to manage the encryption at rest of your backup data. By default, customer data is encrypted with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/AB-CmkEncryption."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-RSV-002",
+                    "type": "rego",
+                    "rule": "file(recoveryservices_vaults.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-RSV-002",
+                            "eval": "data.rule.recoveryservices_vaults_configured_with_private_endpoint",
+                            "message": "data.rule.recoveryservices_vaults_configured_with_private_endpoint_err",
+                            "remediationDescription": "01. Navigate to your vault and go to Private endpoint connections on the left navigation bar. Select +Private endpoint on the top to start creating a new private endpoint for this vault.<br>02. Once in the Create Private Endpoint process, you'll be required to specify details for creating your private endpoint connection.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/backup/private-endpoints#create-private-endpoints-for-azure-backup' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_CLD_RSV_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "RecoveryServices"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_511"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Recovery Services vaults should use private link",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to Azure Recovery Services vaults, data leakage risks are reduced. Learn more about private links at: https://aka.ms/AB-PrivateEndpoints."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EHB-001",
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EHB-001",
+                            "eval": "data.rule.event_hub_namespace_has_local_auth_disabled",
+                            "message": "data.rule.event_hub_namespace_has_local_auth_disabled_err",
+                            "remediationDescription": "01. Navigate to your Event Hubs namespace using the Azure portal.<br>02. In the namespace overview section, click on the Local Authentication.<br>03. Now select Disabled option and click Ok to save the changes",
+                            "remediationFunction": "PR_AZR_CLD_EHB_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "EventHub"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_512"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Hub namespaces should have local authentication methods disabled",
+                    "description": "Disabling local authentication methods improves security by ensuring that Azure Event Hub namespaces exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/disablelocalauth-eh."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EHB-002",
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EHB-002",
+                            "eval": "data.rule.event_hub_namespace_has_double_encryption_enabled",
+                            "message": "data.rule.event_hub_namespace_has_double_encryption_enabled_err",
+                            "remediationDescription": "01. Select the namespace on which you want to enable BYOK.<br>02. On the Settings page of your Event Hubs namespace, select Encryption.<br>03. Select Encrypt with Customer-managed key and check Enable infrastructure-level encryption checkbox.<br>04. Click Save to complete,",
+                            "remediationFunction": "PR_AZR_CLD_EHB_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "EventHub"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_512"
+                    ],
+                    "severity": "Medium",
+                    "title": "Event Hub namespaces should have double encryption enabled",
+                    "description": "Enabling double encryption helps protect and safeguard your data to meet your organizational security and compliance commitments. When double encryption has been enabled, data in the storage account is encrypted twice, once at the service level and once at the infrastructure level, using two different encryption algorithms and two different keys."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EHB-004",
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EHB-004",
+                            "eval": "data.rule.event_hub_namespace_configured_with_private_endpoint",
+                            "message": "data.rule.event_hub_namespace_configured_with_private_endpoint_err",
+                            "remediationDescription": "01. Navigate to your Event Hubs namespace using the Azure portal.<br>02. On the Networking page, for Public network access, select Disabled so that the namespace to be accessed only via private endpoints.<br>03. To create and integrate a private endpoint please visit <a href='https://learn.microsoft.com/en-us/azure/event-hubs/private-link-service#add-a-private-endpoint-using-azure-portal' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_CLD_EHB_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "EventHub"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_512"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Hub namespaces should have private endpoints configured",
+                    "description": "Private endpoints connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to Event Hub namespaces, you can reduce data leakage risks. Learn more at: https://docs.microsoft.com/azure/event-hubs/private-link-service."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EHB-005",
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EHB-005",
+                            "eval": "data.rule.event_hub_namespace_usage_custom_managed_key_for_encryption",
+                            "message": "data.rule.event_hub_namespace_usage_custom_managed_key_for_encryption_err",
+                            "remediationDescription": "01. Select the namespace on which you want to enable BYOK.<br>02. On the Settings page of your Event Hubs namespace, select Encryption.<br>03. Check the Customer-managed key encryption at rest checkbox.<br>04. Select save to complete.",
+                            "remediationFunction": "PR_AZR_CLD_EHB_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CMMC",
+                                "CMMC_2.0_L2_SC.L2-3.13.10",
+                                "FedRAMP",
+                                "FedRAMP_High_R4_SC-12",
+                                "FedRAMP_Moderate_R4_SC-12",
+                                "NIST_SP",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-53_R5_SC-12",
+                                "RMiT",
+                                "RMiT_v1.0_10.53"
+                            ],
+                            "service": [
+                                "EventHub"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_512"
+                    ],
+                    "severity": "Medium",
+                    "title": "Event Hub namespaces should use customer-managed key for encryption",
+                    "description": "Azure Event Hubs supports the option of encrypting data at rest with either Microsoft-managed keys (default) or customer-managed keys. Choosing to encrypt data using customer-managed keys enables you to assign, rotate, disable, and revoke access to the keys that Event Hub will use to encrypt data in your namespace. Note that Event Hub only supports encryption with customer-managed keys for namespaces in dedicated clusters."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EHB-006",
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EHB-006",
+                            "eval": "data.rule.event_hub_namespace_only_has_rootmanage_sharedaccesskey",
+                            "message": "data.rule.event_hub_namespace_only_has_rootmanage_sharedaccesskey_err",
+                            "remediationDescription": "Upon creation of the Eventhub namespace, a default AuthorizationRule Policy is created called 'RootManageSharedAccessKey' which includes the Access/Authorization keys you need. This default policy can be viewed & managed in the Portal by navigating to the EventhubNamespace -> 'Shared Access Policies' under Settings. Don't add any custom access policies/keys here.",
+                            "remediationFunction": "PR_AZR_CLD_EHB_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "EventHub"
+                            ]
+                        }              
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_512",
+                        "AZRSNP_513"
+                    ],
+                    "severity": "Medium",
+                    "title": "All authorization rules except RootManageSharedAccessKey should be removed from Event Hub namespace",
+                    "description": "Event Hub clients should not use a namespace level access policy that provides access to all queues and topics in a namespace. To align with the least privilege security model, you should create access policies at the entity level for queues and topics to provide access to only the specific entity"
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-EHB-007",
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-EHB-007",
+                            "eval": "data.rule.event_hub_instance_has_auth_rule_defined",
+                            "message": "data.rule.event_hub_instance_has_auth_rule_defined_err",
+                            "remediationDescription": "Upon creation of the Eventhub instance, no AuthorizationRule Policy get created by default. From Azure portal create a shared access policy by navigating to the EventhubInstance -> 'Shared Access Policies' under Settings. Make sure you have at least one access policy defined.",
+                            "remediationFunction": "PR_AZR_CLD_EHB_007.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "RMiT",
+                                "RMiT_v1.0_10.55"
+                            ],
+                            "service": [
+                                "EventHub"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_514"
+                    ],
+                    "severity": "Medium",
+                    "title": "Authorization rules on the Event Hub instance should be defined",
+                    "description": "Audit existence of authorization rules on Event Hub entities to grant least-privileged access"
                 }
             ]
         }

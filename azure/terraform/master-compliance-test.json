@@ -12003,6 +12003,270 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AZR-TRF-ACR-007",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-007",
+                            "eval": "data.rule.acr_repository_scoped_access_token_disabled",
+                            "message": "data.rule.acr_repository_scoped_access_token_disabled_err",
+                            "remediationDescription": "In 'azurerm_container_registry_token' resource, set the value to 'false' at property 'enabled' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry_token#enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries repository scoped access token is disabled",
+                    "description": "Disable repository scoped access tokens for your registry so that repositories are not accessible by tokens. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                               "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry_token"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACR-008",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-008",
+                            "eval": "data.rule.acr_has_premium_sku",
+                            "message": "data.rule.acr_has_premium_sku_err",
+                            "remediationDescription": "In 'azurerm_container_registry' resource, set the value to 'Premium' at property 'sku' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#sku' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should have SKUs that support Private Links",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The private link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your container registries instead of the entire service, data leakage risks are reduced. Learn more at: https://aka.ms/acr/private-link.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                               "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACR-009",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-009",
+                            "eval": "data.rule.acr_anonymous_auth_disabled",
+                            "message": "data.rule.acr_anonymous_auth_disabled_err",
+                            "remediationDescription": "In 'azurerm_container_registry' resource, set the value to 'false' at property 'anonymous_pull_enabled' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#anonymous_pull_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries has anonymous authentication disabled",
+                    "description": "Disable anonymous pull for your registry so that data not accessible by unauthenticated user. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                               "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACR-010",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-010",
+                            "eval": "data.rule.acr_not_allowing_unrestricted_network_access",
+                            "message": "data.rule.acr_not_allowing_unrestricted_network_access_err",
+                            "remediationDescription": "In 'azurerm_container_registry' resource, set the value to 'false' at property 'public_network_access_enabled' and set the value to 'Deny' at property 'network_rule_set.default_action' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#default_action' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries should not allow unrestricted network access",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_NS-1",
+                                "Azure_Security_Benchmark_v3.0_NS-2",
+                                "CMMC",
+                                "CMMC_2.0_L2_AC.L2-3.1.3",
+                                "CMMC_2.0_L2_SC.L1-3.13.1",
+                                "CMMC_2.0_L2_SC.L1-3.13.5",
+                                "CMMC_2.0_L2_SC.L2-3.13.2",
+                                "CMMC_2.0_L2_SC.L2-3.13.6",
+                                "CMMC_L3_AC.1.001",
+                                "CMMC_L3_AC.1.002",
+                                "CMMC_L3_AC.2.016"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACR-011",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-011",
+                            "eval": "data.rule.acr_configured_with_private_endpoint",
+                            "message": "data.rule.acr_configured_with_private_endpoint_err",
+                            "remediationDescription": "'azurerm_container_registry' resource need to have a link with 'azurerm_private_endpoint', set 'id' of 'azurerm_container_registry' to property 'private_connection_resource_id' under 'azurerm_private_endpoint' resources 'private_service_connection' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint#private_connection_resource_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Container registries should have private endpoints configured",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                               "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry",
+                        "azurerm_private_endpoint"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACR-013",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-013",
+                            "eval": "data.rule.acr_export_disabled",
+                            "message": "data.rule.acr_export_disabled_err",
+                            "remediationDescription": "In 'azurerm_container_registry' resource, set the value to 'false' at property 'public_network_access_enabled' and set the value to 'false' at property 'export_policy_enabled' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#export_policy_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Container registries should have private endpoints configured",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                               "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACR-014",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-014",
+                            "eval": "data.rule.acr_usage_custom_managed_key_for_encryption",
+                            "message": "data.rule.acr_usage_custom_managed_key_for_encryption_err",
+                            "remediationDescription": "In 'azurerm_container_registry' resource, set the value to 'true' at property 'encryption.enabled' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#encryption' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should be encrypted with a customer-managed key",
+                    "description": "Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_DP-5",
+                                "Azure_Security_Benchmark_v3.0_DP-5",
+                                "CMMC",
+                                "CMMC_2.0_L2_SC.L2-3.13.10",
+                                "CMMC_L3_SC.3.177",
+                                "FedRAMP",
+                                "FedRAMP_High_R4_SC-12",
+                                "FedRAMP_Moderate_R4_SC-12",
+                                "NIST_SP",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-53_R4_SC-12",
+                                "NIST_SP_800-53_R5_SC-12",
+                                "NZ_ISM",
+                                "NZ_ISM_v3.5_CR-3"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry"
+                    ]
+                },
+                {
                     "masterTestId": "PR-AZR-TRF-ASC-002",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -14865,6 +15129,384 @@
                     ],
                     "resourceTypes": [
                         "azurerm_virtual_machine_scale_set"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-EGR-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-EGR-001",
+                            "eval": "data.rule.event_grid_topic_has_public_network_access_disabled",
+                            "message": "data.rule.event_grid_topic_has_public_network_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_eventgrid_topic' resource, make sure 'public_network_access_enabled' exist and has value'false' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventgrid_topic#public_network_access_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_EGR_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should disable public network access",
+                    "description": "Disabling public network access improves security by ensuring that the resource isn't exposed on the public internet. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_eventgrid_topic"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-EGR-002",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-EGR-002",
+                            "eval": "data.rule.event_grid_topic_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_topic_has_local_auth_disabled_err",
+                            "remediationDescription": "In 'azurerm_eventgrid_topic' resource, make sure 'local_auth_enabled' exist and has value'false' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventgrid_topic#local_auth_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_EGR_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should disable local authentication",
+                    "description": "Disable local authentication methods so that your Azure Event Grid topics exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_eventgrid_topic"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-EGR-005",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-EGR-005",
+                            "eval": "data.rule.event_grid_domain_has_public_network_access_disabled",
+                            "message": "data.rule.event_grid_domain_has_public_network_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_eventgrid_domain' resource, make sure 'public_network_access_enabled' exist and has value'false' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventgrid_domain#public_network_access_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_EGR_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should disable public network access",
+                    "description": "Disable public network access for Azure Event Grid resource so that it isn't accessible over the public internet. This will help protect them against data leakage risks. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_NS-2",
+                                "Azure_Security_Benchmark_v2.0_NS-3",
+                                "Azure_Security_Benchmark_v3.0_NS-2",
+                                "CMMC",
+                                "CMMC_2.0_L2_AC.L1-3.1.1",
+                                "CMMC_2.0_L2_AC.L2-3.1.12",
+                                "CMMC_2.0_L2_AC.L2-3.1.13",
+                                "CMMC_2.0_L2_AC.L2-3.1.14",
+                                "CMMC_2.0_L2_AC.L2-3.1.3",
+                                "CMMC_2.0_L2_SC.L1-3.13.1",
+                                "CMMC_2.0_L2_SC.L1-3.13.5"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_eventgrid_domain"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-EGR-006",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-EGR-006",
+                            "eval": "data.rule.event_grid_domain_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_domain_has_local_auth_disabled_err",
+                            "remediationDescription": "In 'azurerm_eventgrid_domain' resource, make sure 'local_auth_enabled' exist and has value 'false' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventgrid_domain#local_auth_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_EGR_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should disable local authentication",
+                    "description": "Disable local authentication methods so that your Azure Event Grid domains exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_eventgrid_domain"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-RSV-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(recoveryservices_vaults.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-RSV-001",
+                            "eval": "data.rule.recoveryservices_vaults_usage_custom_managed_keys_for_encryption",
+                            "message": "data.rule.recoveryservices_vaults_usage_custom_managed_keys_for_encryption_err",
+                            "remediationDescription": "In 'azurerm_recovery_services_vault' resource, make sure 'encryption.key_id' exist and has value as the Key Vault key id used to encrypt this vault to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/recovery_services_vault#key_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_RSV_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Recovery Services vaults should use customer-managed keys for encryption",
+                    "description": "Use customer-managed keys to manage the encryption at rest of your backup data. By default, customer data is encrypted with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/AB-CmkEncryption.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CMMC",
+                                "CMMC_2.0_L2_SC.L2-3.13.10",
+                                "FedRAMP",
+                                "FedRAMP_High_R4_SC-12",
+                                "FedRAMP_Moderate_R4_SC-12",
+                                "NIST_SP",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-53_R4_SC-12",
+                                "NIST_SP_800-53_R5_SC-12",
+                                "RBI_ITF_NBFC",
+                                "RBI_ITF_NBFC_v2017_6",
+                                "RBI_ITF_NBFC_v2017_6.2",
+                                "RBI_ITF_NBFC_v2017_6.3",
+                                "RBI_ITF_NBFC_v2017_6.4"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_recovery_services_vault"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-RSV-002",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(recoveryservices_vaults.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-RSV-002",
+                            "eval": "data.rule.recoveryservices_vaults_configured_with_private_endpoint",
+                            "message": "data.rule.recoveryservices_vaults_configured_with_private_endpoint_err",
+                            "remediationDescription": "Make sure resource 'azurerm_recovery_services_vault' and 'azurerm_private_endpoint' exist and make sure id of azurerm_recovery_services_vault set on private_service_connection[_].private_connection_resource_id property of azurerm_private_endpoint. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_RSV_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Recovery Services vaults should use private link",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to Azure Recovery Services vaults, data leakage risks are reduced. Learn more about private links at: https://aka.ms/AB-PrivateEndpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_recovery_services_vault"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-EHB-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-EHB-001",
+                            "eval": "data.rule.event_hub_namespace_has_local_auth_disabled",
+                            "message": "data.rule.event_hub_namespace_has_local_auth_disabled_err",
+                            "remediationDescription": "In 'azurerm_eventhub_namespace' resource, make sure 'local_authentication_enabled' exist and has value 'false' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace#local_authentication_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_EHB_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Hub namespaces should have local authentication methods disabled",
+                    "description": "Disabling local authentication methods improves security by ensuring that Azure Event Hub namespaces exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/disablelocalauth-eh.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_eventhub_namespace"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-EHB-005",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-EHB-005",
+                            "eval": "data.rule.event_hub_namespace_usage_custom_managed_key_for_encryption",
+                            "message": "data.rule.event_hub_namespace_usage_custom_managed_key_for_encryption_err",
+                            "remediationDescription": "Make sure resource 'azurerm_eventhub_namespace' and 'azurerm_eventhub_namespace_customer_managed_key' exist and id of azurerm_eventhub_namespace set on eventhub_namespace_id property of azurerm_eventhub_namespace_customer_managed_key to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace_customer_managed_key#eventhub_namespace_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_EHB_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Event Hub namespaces should use customer-managed key for encryption",
+                    "description": "Azure Event Hubs supports the option of encrypting data at rest with either Microsoft-managed keys (default) or customer-managed keys. Choosing to encrypt data using customer-managed keys enables you to assign, rotate, disable, and revoke access to the keys that Event Hub will use to encrypt data in your namespace. Note that Event Hub only supports encryption with customer-managed keys for namespaces in dedicated clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CMMC",
+                                "CMMC_2.0_L2_SC.L2-3.13.10",
+                                "FedRAMP",
+                                "FedRAMP_High_R4_SC-12",
+                                "FedRAMP_Moderate_R4_SC-12",
+                                "NIST_SP",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-53_R5_SC-12",
+                                "RMiT",
+                                "RMiT_v1.0_10.53"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_eventhub_namespace",
+                        "azurerm_eventhub_namespace_customer_managed_key"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-EHB-006",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-EHB-006",
+                            "eval": "data.rule.event_hub_namespace_only_has_rootmanage_sharedaccesskey",
+                            "message": "data.rule.event_hub_namespace_only_has_rootmanage_sharedaccesskey_err",
+                            "remediationDescription": "In 'azurerm_eventhub_namespace_authorization_rule' resource, make sure 'name' exist and value dont have anything other than 'RootManageSharedAccessKey' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace_authorization_rule' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_EHB_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "All authorization rules except RootManageSharedAccessKey should be removed from Event Hub namespace",
+                    "description": "Event Hub clients should not use a namespace level access policy that provides access to all queues and topics in a namespace. To align with the least privilege security model, you should create access policies at the entity level for queues and topics to provide access to only the specific entity",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_eventhub_namespace",
+                        "azurerm_eventhub_namespace_authorization_rule"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-EHB-007",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-EHB-007",
+                            "eval": "data.rule.event_hub_instance_has_auth_rule_defined",
+                            "message": "data.rule.event_hub_instance_has_auth_rule_defined_err",
+                            "remediationDescription": "Make sure resource 'azurerm_eventhub' and 'azurerm_eventhub_authorization_rule' exist and name of azurerm_eventhub set on eventhub_name property of azurerm_eventhub_authorization_rule to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_authorization_rule' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_EHB_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Authorization rules on the Event Hub instance should be defined",
+                    "description": "Audit existence of authorization rules on Event Hub entities to grant least-privileged access",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "RMiT",
+                                "RMiT_v1.0_10.55"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_eventhub",
+                        "azurerm_eventhub_authorization_rule"
                     ]
                 }
             ]

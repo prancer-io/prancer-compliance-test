@@ -8412,36 +8412,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AZR-ARM-SEC-001",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(secrets.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-ARM-SEC-001",
-                            "eval": "data.rule.gl_azure_secrets",
-                            "message": "data.rule.gl_azure_secrets_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_ARM_SEC_001.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Secrets are not hardcoded in the ARM template",
-                    "description": "Secrets should not be hardcoded in the ARM Template. Make sure to put those secrets in a vault and access from there.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": []
-                },
-                {
                     "masterTestId": "PR-AZR-ARM-ACR-003",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -8530,7 +8500,7 @@
                             "id": "PR-AZR-ARM-ACR-004",
                             "eval": "data.rule.aci_configured_with_vnet",
                             "message": "data.rule.aci_configured_with_vnet_err",
-                            "remediationDescription": "Make sure 'Microsoft.ContainerInstance/containerGroups' resource property ipAddress.type has value 'Private' to fix the issue. please visiting <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerinstance/containergroups?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerInstance/containerGroups' resource property ipAddress.type has value 'Private' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerinstance/containergroups?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
                             "remediationFunction": "PR_AZR_ARM_ACR_004.py"
                         }
                     ],
@@ -8565,7 +8535,7 @@
                             "id": "PR-AZR-ARM-ACR-005",
                             "eval": "data.rule.aci_configured_with_managed_identity",
                             "message": "data.rule.aci_configured_with_managed_identity_err",
-                            "remediationDescription": "Make sure 'Microsoft.ContainerInstance/containerGroups' resources identity.type dont have value 'None' to fix the issue. please visiting <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerinstance/containergroups?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerInstance/containerGroups' resources identity.type dont have value 'None' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerinstance/containergroups?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
                             "remediationFunction": "PR_AZR_ARM_ACR_005.py"
                         }
                     ],
@@ -8600,7 +8570,7 @@
                             "id": "PR-AZR-ARM-ACR-006",
                             "eval": "data.rule.acr_public_access_disabled",
                             "message": "data.rule.acr_public_access_disabled_err",
-                            "remediationDescription": "Make sure 'Microsoft.ContainerRegistry/registries' resources property publicNetworkAccess has value 'Disabled' to fix the issue. please visiting <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerRegistry/registries' resources property publicNetworkAccess has value 'Disabled' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
                             "remediationFunction": "PR_AZR_ARM_ACR_006.py"
                         }
                     ],
@@ -8622,6 +8592,334 @@
                     "resourceTypes": [
                         "Microsoft.ContainerRegistry/registries"
                     ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-007",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-007",
+                            "eval": "data.rule.acr_repository_scoped_access_token_disabled",
+                            "message": "data.rule.acr_repository_scoped_access_token_disabled_err",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerRegistry/registries/tokens' resources property status has value 'Disabled' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/tokens?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries repository scoped access token is disabled",
+                    "description": "Disable repository scoped access tokens for your registry so that repositories are not accessible by tokens. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries/tokens"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-008",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-008",
+                            "eval": "data.rule.acr_has_premium_sku",
+                            "message": "data.rule.acr_has_premium_sku_err",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerRegistry/registries' resources sku.name has value 'Premium' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should have SKUs that support Private Links",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The private link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your container registries instead of the entire service, data leakage risks are reduced. Learn more at: https://aka.ms/acr/private-link.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-009",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-009",
+                            "eval": "data.rule.acr_anonymous_auth_disabled",
+                            "message": "data.rule.acr_anonymous_auth_disabled_err",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerRegistry/registries' resources property anonymousPullEnabled has value 'false' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries has anonymous authentication disabled",
+                    "description": "Disable anonymous pull for your registry so that data not accessible by unauthenticated user. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-010",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-010",
+                            "eval": "data.rule.acr_not_allowing_unrestricted_network_access",
+                            "message": "data.rule.acr_not_allowing_unrestricted_network_access_err",
+                            "remediationDescription": "Make sure 'Microsoft.ContainerRegistry/registries' resources property publicNetworkAccess has value 'Disabled' and networkRuleSet.defaultAction has value 'Deny' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries should not allow unrestricted network access",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_NS-1",
+                                "Azure_Security_Benchmark_v3.0_NS-2",
+                                "CMMC",
+                                "CMMC_2.0_L2_AC.L2-3.1.3",
+                                "CMMC_2.0_L2_SC.L1-3.13.1",
+                                "CMMC_2.0_L2_SC.L1-3.13.5",
+                                "CMMC_2.0_L2_SC.L2-3.13.2",
+                                "CMMC_2.0_L2_SC.L2-3.13.6",
+                                "CMMC_L3_AC.1.001",
+                                "CMMC_L3_AC.1.002",
+                                "CMMC_L3_AC.2.016"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-011",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-011",
+                            "eval": "data.rule.acr_configured_with_private_endpoint",
+                            "message": "data.rule.acr_configured_with_private_endpoint_err",
+                            "remediationDescription": "Make sure 'microsoft.containerregistry/registries/privateendpointconnections' resources property privateLinkServiceConnectionState.status has value 'Approved' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Container registries should have private endpoints configured",
+                    "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries",
+                        "microsoft.containerregistry/registries/privateendpointconnection"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-012",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-012",
+                            "eval": "data.rule.acr_has_arm_audience_token_auth_disabled",
+                            "message": "data.rule.acr_has_arm_audience_token_auth_disabled_err",
+                            "remediationDescription": "Make sure 'microsoft.containerregistry/registries' resources property policies.azureADAuthenticationAsArmPolicy.status has value 'Disabled' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should have ARM audience token authentication disabled",
+                    "description": "Disable Azure Active Directory ARM audience tokens for authentication to your registry. Only Azure Container Registry (ACR) audience tokens will be used for authentication. This will ensure only tokens meant for usage on the registry can be used for authentication. Disabling ARM audience tokens does not affect admin user's or scoped access tokens' authentication. Learn more at: https://aka.ms/acr/authentication.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-013",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-013",
+                            "eval": "data.rule.acr_export_disabled",
+                            "message": "data.rule.acr_export_disabled_err",
+                            "remediationDescription": "Make sure 'microsoft.containerregistry/registries' resources property policies.exportPolicy.status has value 'Disabled' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container registries should have exports disabled",
+                    "description": "Disabling exports improves security by ensuring data in a registry is accessed solely via the dataplane ('docker pull'). Data cannot be moved out of the registry via 'acr import' or via 'acr transfer'. In order to disable exports, public network access must be disabled. Learn more at: https://aka.ms/acr/export-policy.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-ACR-014",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ACR-014",
+                            "eval": "data.rule.acr_usage_custom_managed_key_for_encryption",
+                            "message": "data.rule.acr_usage_custom_managed_key_for_encryption_err",
+                            "remediationDescription": "Make sure 'microsoft.containerregistry/registries' resources property encryption.status has value 'Enabled' to fix the issue. please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries?pivots=deployment-language-arm-template' target='_blank'>here</a> for details",
+                            "remediationFunction": "PR_AZR_ARM_ACR_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Container registries should be encrypted with a customer-managed key",
+                    "description": "Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_DP-5",
+                                "Azure_Security_Benchmark_v3.0_DP-5",
+                                "CMMC",
+                                "CMMC_2.0_L2_SC.L2-3.13.10",
+                                "CMMC_L3_SC.3.177",
+                                "FedRAMP",
+                                "FedRAMP_High_R4_SC-12",
+                                "FedRAMP_Moderate_R4_SC-12",
+                                "NIST_SP",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-53_R4_SC-12",
+                                "NIST_SP_800-53_R5_SC-12",
+                                "NZ_ISM",
+                                "NZ_ISM_v3.5_CR-3"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.ContainerRegistry/registries"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-SEC-001",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SEC-001",
+                            "eval": "data.rule.gl_azure_secrets",
+                            "message": "data.rule.gl_azure_secrets_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_ARM_SEC_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Secrets are not hardcoded in the ARM template",
+                    "description": "Secrets should not be hardcoded in the ARM Template. Make sure to put those secrets in a vault and access from there.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": []
                 },
                 {
                     "masterTestId": "PR-AZR-ARM-SEC-002",
@@ -14103,6 +14401,575 @@
                     ],
                     "resourceTypes": [
                         "microsoft.compute/virtualmachines"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-001",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-001",
+                            "eval": "data.rule.event_grid_topic_has_public_network_access_disabled",
+                            "message": "data.rule.event_grid_topic_has_public_network_access_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/topics' make sure property publicNetworkAccess exist and has value set to 'disabled' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should disable public network access",
+                    "description": "Disabling public network access improves security by ensuring that the resource isn't exposed on the public internet. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/topics"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-002",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-002",
+                            "eval": "data.rule.event_grid_topic_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_topic_has_local_auth_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/topics' make sure property disableLocalAuth exist and has value set to 'true' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should disable local authentication",
+                    "description": "Disable local authentication methods so that your Azure Event Grid topics exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/topics"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-003",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-003",
+                            "eval": "data.rule.event_grid_domain_configured_with_private_endpoint",
+                            "message": "data.rule.event_grid_domain_configured_with_private_endpoint_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/domains/privateendpointconnections' make sure property privateLinkServiceConnectionState.status exist and has value set to 'Approved' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains/privateendpointconnections?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should have private endpoints configured",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your resources, they'll be protected against data leakage risks. Learn more at: https://aka.ms/privateendpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_NS-2",
+                                "Azure_Security_Benchmark_v2.0_NS-3",
+                                "Azure_Security_Benchmark_v3.0_NS-2",
+                                "CMMC",
+                                "CMMC_2.0_L2_AC.L1-3.1.1",
+                                "CMMC_2.0_L2_AC.L2-3.1.12",
+                                "CMMC_2.0_L2_AC.L2-3.1.13",
+                                "CMMC_2.0_L2_AC.L2-3.1.14",
+                                "CMMC_2.0_L2_AC.L2-3.1.3",
+                                "CMMC_2.0_L2_SC.L1-3.13.1",
+                                "CMMC_2.0_L2_SC.L1-3.13.5"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/domains"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-004",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-004",
+                            "eval": "data.rule.event_grid_topic_configured_with_private_endpoint",
+                            "message": "data.rule.event_grid_topic_configured_with_private_endpoint_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/topics/privateendpointconnections' make sure property privateLinkServiceConnectionState.status exist and has value set to 'Approved' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics/privateendpointconnections?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid topics should have private endpoints configured",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your resources, they'll be protected against data leakage risks. Learn more at: https://aka.ms/privateendpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_NS-2",
+                                "Azure_Security_Benchmark_v2.0_NS-3",
+                                "Azure_Security_Benchmark_v3.0_NS-2",
+                                "CMMC",
+                                "CMMC_2.0_L2_AC.L1-3.1.1",
+                                "CMMC_2.0_L2_AC.L2-3.1.12",
+                                "CMMC_2.0_L2_AC.L2-3.1.13",
+                                "CMMC_2.0_L2_AC.L2-3.1.14",
+                                "CMMC_2.0_L2_AC.L2-3.1.3",
+                                "CMMC_2.0_L2_SC.L1-3.13.1",
+                                "CMMC_2.0_L2_SC.L1-3.13.5"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/topics"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-005",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-005",
+                            "eval": "data.rule.event_grid_domain_has_public_network_access_disabled",
+                            "message": "data.rule.event_grid_domain_has_public_network_access_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/domains' make sure property publicNetworkAccess exist and has value set to 'Disabled' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should disable public network access",
+                    "description": "Disable public network access for Azure Event Grid resource so that it isn't accessible over the public internet. This will help protect them against data leakage risks. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure_Security_Benchmark",
+                                "Azure_Security_Benchmark_v2.0_NS-2",
+                                "Azure_Security_Benchmark_v2.0_NS-3",
+                                "Azure_Security_Benchmark_v3.0_NS-2",
+                                "CMMC",
+                                "CMMC_2.0_L2_AC.L1-3.1.1",
+                                "CMMC_2.0_L2_AC.L2-3.1.12",
+                                "CMMC_2.0_L2_AC.L2-3.1.13",
+                                "CMMC_2.0_L2_AC.L2-3.1.14",
+                                "CMMC_2.0_L2_AC.L2-3.1.3",
+                                "CMMC_2.0_L2_SC.L1-3.13.1",
+                                "CMMC_2.0_L2_SC.L1-3.13.5"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/domains"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-006",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-006",
+                            "eval": "data.rule.event_grid_domain_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_domain_has_local_auth_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/domains' make sure property disableLocalAuth exist and has value set to 'true' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/domains?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid domains should disable local authentication",
+                    "description": "Disable local authentication methods so that your Azure Event Grid domains exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/domains"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EGR-009",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventgrid.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EGR-009",
+                            "eval": "data.rule.event_grid_partnernamespace_has_local_auth_disabled",
+                            "message": "data.rule.event_grid_partnernamespace_has_local_auth_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.eventgrid/partnernamespaces' make sure property disableLocalAuth exist and has value set to 'true' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/partnernamespaces?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EGR_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Grid partner namespaces should disable local authentication",
+                    "description": "Disabling local authentication methods improves security by ensuring that Azure Event Grid partner namespaces exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/aeg-disablelocalauth.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.eventgrid/partnernamespaces"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-RSV-001",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(recoveryservices_vaults.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-RSV-001",
+                            "eval": "data.rule.recoveryservices_vaults_usage_custom_managed_keys_for_encryption",
+                            "message": "data.rule.recoveryservices_vaults_usage_custom_managed_keys_for_encryption_err",
+                            "remediationDescription": "For Resource type 'Microsoft.RecoveryServices/vaults' make sure property encryption.keyVaultProperties.keyUri exist and value key url from key vault to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_RSV_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Recovery Services vaults should use customer-managed keys for encryption",
+                    "description": "Use customer-managed keys to manage the encryption at rest of your backup data. By default, customer data is encrypted with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/AB-CmkEncryption.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CMMC",
+                                "CMMC_2.0_L2_SC.L2-3.13.10",
+                                "FedRAMP",
+                                "FedRAMP_High_R4_SC-12",
+                                "FedRAMP_Moderate_R4_SC-12",
+                                "NIST_SP",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-53_R4_SC-12",
+                                "NIST_SP_800-53_R5_SC-12",
+                                "RBI_ITF_NBFC",
+                                "RBI_ITF_NBFC_v2017_6",
+                                "RBI_ITF_NBFC_v2017_6.2",
+                                "RBI_ITF_NBFC_v2017_6.3",
+                                "RBI_ITF_NBFC_v2017_6.4"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.RecoveryServices/vaults"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-RSV-002",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(recoveryservices_vaults.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-RSV-002",
+                            "eval": "data.rule.recoveryservices_vaults_configured_with_private_endpoint",
+                            "message": "data.rule.recoveryservices_vaults_configured_with_private_endpoint_err",
+                            "remediationDescription": "For Resource type 'Microsoft.RecoveryServices/vaults/privateendpointconnections' make sure property privateLinkServiceConnectionState.status exist and set value to 'Approved' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults/privateendpointconnections?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_RSV_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Recovery Services vaults should use private link",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to Azure Recovery Services vaults, data leakage risks are reduced. Learn more about private links at: https://aka.ms/AB-PrivateEndpoints.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.RecoveryServices/vaults"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EHB-001",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EHB-001",
+                            "eval": "data.rule.event_hub_namespace_has_local_auth_disabled",
+                            "message": "data.rule.event_hub_namespace_has_local_auth_disabled_err",
+                            "remediationDescription": "For Resource type 'Microsoft.EventHub/namespaces' make sure property disableLocalAuth exist and set value to 'true' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EHB_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Hub namespaces should have local authentication methods disabled",
+                    "description": "Disabling local authentication methods improves security by ensuring that Azure Event Hub namespaces exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/disablelocalauth-eh.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.EventHub/namespaces"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EHB-002",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EHB-002",
+                            "eval": "data.rule.event_hub_namespace_has_double_encryption_enabled",
+                            "message": "data.rule.event_hub_namespace_has_double_encryption_enabled_err",
+                            "remediationDescription": "For Resource type 'Microsoft.EventHub/namespaces' make sure property 'encryption.requireInfrastructureEncryption' exist and set value to 'true' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EHB_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Event Hub namespaces should have double encryption enabled",
+                    "description": "Enabling double encryption helps protect and safeguard your data to meet your organizational security and compliance commitments. When double encryption has been enabled, data in the storage account is encrypted twice, once at the service level and once at the infrastructure level, using two different encryption algorithms and two different keys.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.EventHub/namespaces"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EHB-004",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EHB-004",
+                            "eval": "data.rule.event_hub_namespace_configured_with_private_endpoint",
+                            "message": "data.rule.event_hub_namespace_configured_with_private_endpoint_err",
+                            "remediationDescription": "For Resource type Microsoft.EventHub/namespaces/privateEndpointConnections make sure property 'privateLinkServiceConnectionState.status' exist and set value to 'Approved' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces/privateendpointconnections?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EHB_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Event Hub namespaces should have private endpoints configured",
+                    "description": "Private endpoints connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to Event Hub namespaces, you can reduce data leakage risks. Learn more at: https://docs.microsoft.com/azure/event-hubs/private-link-service.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.EventHub/namespaces",
+                        "Microsoft.EventHub/namespaces/privateEndpointConnections"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EHB-005",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EHB-005",
+                            "eval": "data.rule.event_hub_namespace_usage_custom_managed_key_for_encryption",
+                            "message": "data.rule.event_hub_namespace_usage_custom_managed_key_for_encryption_err",
+                            "remediationDescription": "For Resource type Microsoft.EventHub/namespaces make sure property 'encryption.keySource' exist and set value to 'microsoft.keyvault' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EHB_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Event Hub namespaces should use customer-managed key for encryption",
+                    "description": "Azure Event Hubs supports the option of encrypting data at rest with either Microsoft-managed keys (default) or customer-managed keys. Choosing to encrypt data using customer-managed keys enables you to assign, rotate, disable, and revoke access to the keys that Event Hub will use to encrypt data in your namespace. Note that Event Hub only supports encryption with customer-managed keys for namespaces in dedicated clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CMMC",
+                                "CMMC_2.0_L2_SC.L2-3.13.10",
+                                "FedRAMP",
+                                "FedRAMP_High_R4_SC-12",
+                                "FedRAMP_Moderate_R4_SC-12",
+                                "NIST_SP",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-171_R2_3.13.10",
+                                "NIST_SP_800-53_R5_SC-12",
+                                "RMiT",
+                                "RMiT_v1.0_10.53"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.EventHub/namespaces"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EHB-006",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EHB-006",
+                            "eval": "data.rule.event_hub_namespace_only_has_rootmanage_sharedaccesskey",
+                            "message": "data.rule.event_hub_namespace_only_has_rootmanage_sharedaccesskey_err",
+                            "remediationDescription": "For Resource type Microsoft.EventHub/namespaces/authorizationRules make sure property 'name' exist and set value to 'RootManageSharedAccessKey' to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces/authorizationrules?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EHB_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "All authorization rules except RootManageSharedAccessKey should be removed from Event Hub namespace",
+                    "description": "Event Hub clients should not use a namespace level access policy that provides access to all queues and topics in a namespace. To align with the least privilege security model, you should create access policies at the entity level for queues and topics to provide access to only the specific entity",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.EventHub/namespaces/authorizationRules"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-EHB-007",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eventhub.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-EHB-007",
+                            "eval": "data.rule.event_hub_instance_has_auth_rule_defined",
+                            "message": "data.rule.event_hub_instance_has_auth_rule_defined_err",
+                            "remediationDescription": "Make sure microsoft.eventhub/namespaces/eventhubs/authorizationrules resource exist for resource type Microsoft.EventHub/namespaces/eventhubs to fix the issue.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces/eventhubs/authorizationrules?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_EHB_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Authorization rules on the Event Hub instance should be defined",
+                    "description": "Audit existence of authorization rules on Event Hub entities to grant least-privileged access",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "RMiT",
+                                "RMiT_v1.0_10.55"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "Microsoft.EventHub/namespaces/eventhubs",
+                        "microsoft.eventhub/namespaces/eventhubs/authorizationrules"
                     ]
                 }
             ]
