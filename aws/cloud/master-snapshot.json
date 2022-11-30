@@ -165,8 +165,9 @@
 				},
 				{
 					"masterSnapshotId": "TEST_EFS",
-					"arn": "arn:aws:efs:::",
-					"type": "efs",
+					"arn": "arn:aws:elasticfilesystem:::",
+					"type": "elasticfilesystem",
+					"boto_type": "efs",
 					"collection": "aws_efs",
 					"listMethod": "describe_file_systems",
 					"detailMethods": [
@@ -531,8 +532,9 @@
 				},
 				{
 					"masterSnapshotId": "TEST_TS",
-					"arn": "arn:aws:timestream-write:::",
+					"arn": "arn:aws:timestream:::",
 					"type": "timestream",
+					"boto_type" : "timestream-write",
 					"collection": "aws_ts",
 					"listMethod": "list_databases",
 					"detailMethods": [

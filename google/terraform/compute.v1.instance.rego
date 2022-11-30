@@ -330,7 +330,6 @@ default compute_configure_default_service = null
 gc_issue["compute_configure_default_service"] {
     resource := input.resources[i]
     lower(resource.type) == "google_compute_instance"
-    lower(resource.properties.status) == "running"
     not startswith(lower(resource.properties.name), "gke-")
     service_account := resource.properties.service_account[_]
     contains(lower(service_account.email), "compute@developer.gserviceaccount.com")
@@ -371,11 +370,10 @@ default compute_default_service_full_access = null
 gc_issue["compute_default_service_full_access"] {
     resource := input.resources[i]
     lower(resource.type) == "google_compute_instance"
-    lower(resource.properties.status) == "running"
     not startswith(lower(resource.properties.name), "gke-")
-    service_accounts := resource.properties.service_accounts[_]
-    contains(lower(service_accounts.email), "compute@developer.gserviceaccount.com")
-    lower(service_accounts.scopes) == "https://www.googleapis.com/auth/cloud-platform"
+    service_account := resource.properties.service_account[_]
+    contains(lower(service_account.email), "compute@developer.gserviceaccount.com")
+    lower(service_account.scopes) == "https://www.googleapis.com/auth/cloud-platform"
 }
 
 compute_default_service_full_access {
@@ -413,7 +411,6 @@ default compute_shielded_vm = null
 gc_issue["compute_shielded_vm"] {
     resource := input.resources[i]
     lower(resource.type) == "google_compute_instance"
-    lower(resource.properties.status) == "running"
     not startswith(lower(resource.properties.name), "gke-")
     shielded_instance_config := resource.properties.shielded_instance_config[_]
     not shielded_instance_config.enable_vtpm
@@ -422,7 +419,6 @@ gc_issue["compute_shielded_vm"] {
 gc_issue["compute_shielded_vm"] {
     resource := input.resources[i]
     lower(resource.type) == "google_compute_instance"
-    lower(resource.properties.status) == "running"
     not startswith(lower(resource.properties.name), "gke-")
     shielded_instance_config := resource.properties.shielded_instance_config[_]
     not shielded_instance_config.enable_integrity_monitoring
@@ -464,7 +460,7 @@ gc_issue["compute_instance_external_ip"] {
     resource := input.resources[i]
     lower(resource.type) == "google_compute_instance"
     network_interface := resource.properties.network_interface[_]
-    has_property(network_interface, "accessConfigs")
+    has_property(network_interface, "access_config")
     not startswith(lower(resource.properties.name), "gke-")
     not contains(lower(resource.properties.name), "default-pool")
 }
