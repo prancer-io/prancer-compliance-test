@@ -546,3 +546,31 @@ api_key_has_no_specific_restriction_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys"
 }
+
+
+#
+# PR-GCP-CLD-SAK-013
+#
+
+default api_keys_count_not_none = true
+
+api_keys_count_not_none = false{
+    X := input
+    count(X) == 0
+}
+
+api_keys_count_not_none_err = "Ensure, GCP API key is created for a project." {
+    not api_keys_count_not_none
+}
+
+api_keys_count_not_none_metadata := {
+    "Policy Code": "PR-GCP-CLD-SAK-013",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "Ensure, GCP API key is created for a project.",
+    "Policy Description": "This policy identifies GCP projects where API keys are created. Keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. To avoid the security risk in using API keys, it is recommended to use standard authentication flow instead.\n\nNote: There are limited cases where API keys are more appropriate. For example, if there is a mobile application that needs to use the Google Cloud Translation API, but doesn't otherwise need a backend server, API keys are the simplest way to authenticate to that API. If a business requires API keys to be used, then the API keys should be secured using appropriate IAM policies.",
+    "Resource Type": "projects.locations.keys",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/api-keys/docs/reference/rest/v2/projects.locations.keys"
+}

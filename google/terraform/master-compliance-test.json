@@ -2150,14 +2150,47 @@
                         {
                             "cloud": "git",
                             "compliance": [
+                                "ISM",
+                                "ACSC",
+                                "AESCSF",
+                                "ACSC",
+                                "LGPD",
+                                "CCPA",
                                 "CIS",
-                                "CSA-CCM",
+                                "CSA",
+                                "CMMC",
+                                "FFIEC",
                                 "HITRUST",
-                                "ISO 27001",
-                                "NIST 800",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
                                 "NIST CSF",
-                                "PCI-DSS"
-                            ],
+                                "NIST SP",
+                                "PCI",
+                                "PIPEDA",
+                                "ACSC Information Security Manual (ISM)",
+                                "Australian Cyber Security Centre (ACSC) Essential Eight",
+                                "Australian Energy Sector Cyber Security Framework (AESCSF)",
+                                "Brazilian Data Protection Law (LGPD)",
+                                "CCPA 2018",
+                                "CIS Controls v7.1",
+                                "CIS Controls v8",
+                                "CIS v1.1.0 (GKE)",
+                                "CIS v1.2.0 (GKE)",
+                                "CSA CCM v.4.0.1",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02",
+                                "FFIEC",
+                                "HITRUST v.9.4.2",
+                                "ISO/IEC 27002:2013",
+                                "ISO/IEC 27017:2015",
+                                "ISO/IEC 27018:2019",
+                                "NIST CSF",
+                                "NIST SP 800-171 Revision 2",
+                                "NIST SP 800-172",
+                                "PCI DSS v3.2.1",
+                                "PCI DSS v4.0",
+                                "PIPEDA"
+                              ],
                             "service": [
                                 "terraform"
                             ]
@@ -3100,6 +3133,76 @@
                                 "PCI DSS v3.2.1-6.3",
                                 "PIPEDA-4.7.3"
                             ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "google_container_cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-TRF-CLT-036",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container.v1.cluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-TRF-CLT-036",
+                            "eval": "data.rule.k8s_cld_monitoring",
+                            "message": "data.rule.k8s_cld_monitoring_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure GCP Kubernetes Engine Clusters have Cloud Monitoring disabled",
+                    "description": "This policy identifies Kubernetes Engine Clusters which have disabled Stackdriver monitoring. Enabling Stackdriver monitoring will let the Kubernetes Engine to monitor signals and build operations in the clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "ISM",
+                                "APRA",
+                                "AESCSF",
+                                "LGPD",
+                                "CCPA",
+                                "CIS",
+                                "CSA CCM",
+                                "CMMC",
+                                "FFIEC",
+                                "GDPR",
+                                "HIPAA",
+                                "NIST CSF",
+                                "NIST 800",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "SOC",
+                                "ACSC Information Security Manual (ISM)",
+                                "APRA (CPS 234) Information Security",
+                                "Australian Energy Sector Cyber Security Framework (AESCSF)",
+                                "Brazilian Data Protection Law (LGPD)",
+                                "CCPA 2018",
+                                "CIS Controls v7.1",
+                                "CIS Controls v8",
+                                "CIS v1.0.0 (GCP)",
+                                "CIS v1.1.0 (GKE)",
+                                "CIS v1.2.0 (GKE)",
+                                "CSA CCM v3.0.1",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02",
+                                "ISO 27001:2013",
+                                "NIST 800-53 Rev4",
+                                "NIST SP 800-171 Revision 2",
+                                "NIST SP 800-172",
+                                "PCI DSS v3.2.1",
+                                "PCI DSS v4.0",
+                                "PIPEDA",
+                                "SOC 2"
+                              ],
                             "service": [
                                 "terraform"
                             ]

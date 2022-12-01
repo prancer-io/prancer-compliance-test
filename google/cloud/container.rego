@@ -461,7 +461,17 @@ default k8s_binary_auth = null
 
 gc_issue["k8s_binary_auth"] {
     # lower(input.type) == "container.v1.cluster"
-    not input.binaryAuthorization.enabled
+    not input.binaryAuthorization.evaluationMode
+}
+
+gc_issue["k8s_binary_auth"] {
+    # lower(input.type) == "container.v1.cluster"
+    upper(input.binaryAuthorization.evaluationMode) == "EVALUATION_MODE_UNSPECIFIED"
+}
+
+gc_issue["k8s_binary_auth"] {
+    # lower(input.type) == "container.v1.cluster"
+    upper(put.binaryAuthorization.evaluationMode) == "DISABLED"
 }
 
 k8s_binary_auth {
@@ -479,7 +489,7 @@ k8s_binary_auth_err = "GCP Kubernetes Engine Clusters have binary authorization 
 
 k8s_binary_auth_metadata := {
     "Policy Code": "PR-GCP-CLD-CLT-012",
-    "Type": "IaC",
+    "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP Cloud",
     "Policy Title": "GCP Kubernetes Engine Clusters have binary authorization disabled",
@@ -1448,6 +1458,48 @@ private_endpoint_disabled_metadata := {
     "Language": "GCP Cloud",
     "Policy Title": "Ensure GCP Kubernetes Engine private cluster has private endpoint disabled.",
     "Policy Description": "This policy finds GCP Kubernetes Engine private clusters with private endpoint disabled. A public endpoint might expose the current cluster and Kubernetes API version and an attacker may be able to determine whether it is vulnerable to an attack. Unless required, disabling the public endpoint will help prevent such threats, and require the attacker to be on the master's VPC network to perform any attack on the Kubernetes API. It is recommended to enable the private endpoint and disable public access on Kubernetes clusters.",
+    "Resource Type": "container.v1.cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
+}
+
+
+#
+# PR-GCP-CLD-CLT-036
+#
+
+default k8s_cld_monitoring = null
+
+gc_issue["k8s_cld_monitoring"] {
+    # lower(input.type) == "container.v1.cluster"
+    not input.monitoringService
+}
+
+gc_issue["k8s_cld_monitoring"] {
+    # lower(input.type) == "container.v1.cluster"
+    lower(input.monitoringService) == "none"
+}
+
+k8s_cld_monitoring {
+    # lower(input.resources[i].type) == "container.v1.cluster"
+    not gc_issue["k8s_cld_monitoring"]
+}
+
+k8s_cld_monitoring = false {
+    gc_issue["k8s_cld_monitoring"]
+}
+
+k8s_cld_monitoring_err = "Ensure, GCP Kubernetes Engine Clusters have Cloud Monitoring disabled" {
+    gc_issue["k8s_cld_monitoring"]
+}
+
+k8s_cld_monitoring_metadata := {
+    "Policy Code": "PR-GCP-CLD-CLT-036",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP Cloud",
+    "Policy Title": "Ensure, GCP Kubernetes Engine Clusters have Cloud Monitoring disabled",
+    "Policy Description": "This policy identifies Kubernetes Engine Clusters which have disabled Stackdriver monitoring. Enabling Stackdriver monitoring will let the Kubernetes Engine to monitor signals and build operations in the clusters.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
