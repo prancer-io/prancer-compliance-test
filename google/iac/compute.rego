@@ -1354,6 +1354,23 @@ gc_issue["vm_ip_forward"] {
     resource := input.resources[i]
     lower(resource.type) == "compute.v1.instance"
     resource.properties.canIpForward
+    not startswith(lower(resource.properties.name), "gke-")
+}
+
+gc_issue["vm_ip_forward"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    resource.properties.canIpForward
+    startswith(lower(resource.properties.name), "gke-")
+    not has_property(resource.properties.disks[_].initializeParams , "labels")
+}
+
+gc_issue["vm_ip_forward"] {
+    resource := input.resources[i]
+    lower(resource.type) == "compute.v1.instance"
+    resource.properties.canIpForward
+    startswith(lower(resource.properties.name), "gke-")
+    not resource.properties.disks[_].initializeParams.labels
 }
 
 vm_ip_forward {
