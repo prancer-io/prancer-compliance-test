@@ -1070,7 +1070,7 @@
                             "id": "PR-GCP-TRF-INST-008",
                             "eval": "data.rule.compute_disk_csek",
                             "message": "data.rule.compute_disk_csek_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_TRF_INST_008.py"
                         }
                     ],
@@ -1109,7 +1109,7 @@
                             "id": "PR-GCP-TRF-INST-009",
                             "eval": "data.rule.compute_ssl_profile_restricted",
                             "message": "data.rule.compute_ssl_profile_restricted_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_TRF_INST_009.py"
                         }
                     ],
@@ -1148,7 +1148,7 @@
                             "id": "PR-GCP-TRF-INST-010",
                             "eval": "data.rule.compute_ssl_min_tls",
                             "message": "data.rule.compute_ssl_min_tls_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_TRF_INST_010.py"
                         }
                     ],
@@ -1187,7 +1187,7 @@
                             "id": "PR-GCP-TRF-INST-011",
                             "eval": "data.rule.compute_configure_default_service",
                             "message": "data.rule.compute_configure_default_service_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_INST_INST_011.py"
                         }
                     ],
@@ -1227,7 +1227,7 @@
                             "id": "PR-GCP-TRF-INST-012",
                             "eval": "data.rule.compute_default_service_full_access",
                             "message": "data.rule.compute_default_service_full_access_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_TRF_INST_012.py"
                         }
                     ],
@@ -1267,7 +1267,7 @@
                             "id": "PR-GCP-TRF-INST-013",
                             "eval": "data.rule.compute_shielded_vm",
                             "message": "data.rule.compute_shielded_vm_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_TRF_INST_013.py"
                         }
                     ],
@@ -1307,7 +1307,7 @@
                             "id": "PR-GCP-TRF-INST-014",
                             "eval": "data.rule.compute_instance_external_ip",
                             "message": "data.rule.compute_instance_external_ip_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_TRF_INST_014.py"
                         }
                     ],
@@ -1347,7 +1347,7 @@
                             "id": "PR-GCP-TRF-INST-015",
                             "eval": "data.rule.compute_ip_forwarding_enable",
                             "message": "data.rule.compute_ip_forwarding_enable_err",
-                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_TRF_INST_015.py"
                         }
                     ],
@@ -1437,8 +1437,8 @@
                             "id": "PR-GCP-TRF-NET-001",
                             "eval": "data.rule.net_legacy",
                             "message": "data.rule.net_legacy_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_TRF_NET_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1478,7 +1478,7 @@
                             "eval": "data.rule.net_default",
                             "message": "data.rule.net_default_err",
                             "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationFunction": "PR_GCP_TRF_NET_002.py"
                         }
                     ],
                     "severity": "Medium",
