@@ -1188,7 +1188,7 @@
                             "eval": "data.rule.compute_configure_default_service",
                             "message": "data.rule.compute_configure_default_service_err",
                             "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance' target='_blank'>here</a>",
-                            "remediationFunction": "PR_GCP_INST_INST_011.py"
+                            "remediationFunction": "PR_GCP_TRF_INST_011.py"
                         }
                     ],
                     "severity": "Medium",
