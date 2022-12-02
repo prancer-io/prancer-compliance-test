@@ -25,7 +25,7 @@ gc_issue["vm_ip_forward"] {
     lower(resource.type) == "google_compute_instance"
     resource.properties.can_ip_forward
     startswith(lower(resource.properties.name), "gke-")
-    not has_property(resource.properties.boot_disk[_].initialize_params , "labels")
+    count([c | has_property(resource.properties.boot_disk[_].initialize_params[_],"labels") ; c=1]) == 0
 }
 
 gc_issue["vm_ip_forward"] {
@@ -33,7 +33,7 @@ gc_issue["vm_ip_forward"] {
     lower(resource.type) == "google_compute_instance"
     resource.properties.can_ip_forward
     startswith(lower(resource.properties.name), "gke-")
-    not resource.properties.boot_disk[_].initialize_params.labels
+    count([c | resource.properties.boot_disk[_].initialize_params[_].labels ; c=1]) == 0
 }
 
 vm_ip_forward {

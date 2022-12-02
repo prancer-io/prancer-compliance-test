@@ -1214,14 +1214,14 @@ gc_issue["vm_ip_forward"] {
     # lower(resource.type) == "compute.v1.instance"
     input.canIpForward
     startswith(lower(input.name), "gke-")
-    not has_property(input.disks[_].initializeParams , "labels")
+    count([c | has_property(input.disks[_].initializeParams[_],"labels") ; c=1]) == 0
 }
 
 gc_issue["vm_ip_forward"] {
     # lower(resource.type) == "compute.v1.instance"
     input.canIpForward
     startswith(lower(input.name), "gke-")
-    not input.disks[_].initializeParams.labels
+    count([c | input.disks[_].initializeParams[_].labels ; c=1]) == 0
 }
 
 vm_ip_forward {
