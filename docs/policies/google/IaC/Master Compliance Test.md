@@ -286,7 +286,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-NET-001
 
-***Title: [GCP project is configured with legacy network]***
+***Title: [Ensure, GCP project is configured with legacy network]***
 
 ----------------------------------------------------
 
@@ -294,7 +294,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-NET-002
 
-***Title: [GCP project is using the default network]***
+***Title: [Ensure, GCP project is using the default network]***
 
 ----------------------------------------------------
 
@@ -302,7 +302,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-SUBN-001
 
-***Title: [GCP VPC Flow logs for the subnet is set to Off]***
+***Title: [Ensure, GCP VPC Flow logs for the subnet is set to Off]***
 
 ----------------------------------------------------
 
@@ -310,7 +310,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-SUBN-002
 
-***Title: [GCP VPC Network subnets have Private Google access disabled]***
+***Title: [GCP VPC Network subnets have Private Google access not enabled]***
 
 ----------------------------------------------------
 
@@ -318,7 +318,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-THP-001
 
-***Title: [GCP Load balancer HTTPS target proxy configured with default SSL policy instead of custom SSL policy]***
+***Title: [Ensure,  GCP Load balancer HTTPS target proxy configured with default SSL policy rather than custom SSL policy]***
 
 ----------------------------------------------------
 
@@ -326,7 +326,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-THP-002
 
-***Title: [GCP Load balancer HTTPS target proxy is not configured with QUIC protocol]***
+***Title: [Ensure,  Load balancer HTTPS target proxy is not configured with QUIC protocol in Google Cloud Provider]***
 
 ----------------------------------------------------
 
@@ -1196,8 +1196,8 @@
 [GCP Kubernetes cluster istioConfig not enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-024.md
 [GCP Kubernetes cluster not in redundant zones]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-025.md
 [GCP Kubernetes cluster size contains less than 3 nodes with auto upgrade enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-026.md
-[GCP Load balancer HTTPS target proxy configured with default SSL policy instead of custom SSL policy]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-THP-001.md
-[GCP Load balancer HTTPS target proxy is not configured with QUIC protocol]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-THP-002.md
+[Ensure,  GCP Load balancer HTTPS target proxy configured with default SSL policy rather than custom SSL policy]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-THP-001.md
+[Ensure,  Load balancer HTTPS target proxy is not configured with QUIC protocol in Google Cloud Provider]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-THP-002.md
 [GCP Log metric filter and alert exists for VPC network changes]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-LOG-007.md
 [GCP PostgreSQL instance database flag log_hostname is not set to off]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-PSQL-006.md
 [GCP SQL Instances without any Label information]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-SQLI-001.md
@@ -1208,10 +1208,10 @@
 [GCP VM instances have IP forwarding enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-INST-001.md
 [GCP VM instances have block project-wide SSH keys feature disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-INST-002.md
 [GCP VM instances have serial port access enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-INST-003.md
-[GCP VPC Flow logs for the subnet is set to Off]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-SUBN-001.md
-[GCP VPC Network subnets have Private Google access disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-SUBN-002.md
-[GCP project is configured with legacy network]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-NET-001.md
-[GCP project is using the default network]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-NET-002.md
+[Ensure, GCP VPC Flow logs for the subnet is set to Off]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-SUBN-001.md
+[GCP VPC Network subnets have Private Google access not enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-SUBN-002.md
+[Ensure, GCP project is configured with legacy network]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-NET-001.md
+[Ensure, GCP project is using the default network]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-NET-002.md
 [Logging on the Stackdriver exported Bucket is disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-BKT-003.md
 [SQL DB Instance backup Binary logs configuration is not enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-SQLI-002.md
 [SQL DB instance backup configuration is not enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-SQLI-003.md

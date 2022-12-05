@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP VPC Network subnets have Private Google access disabled
+# Title: GCP VPC Network subnets have Private Google access not enabled
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-CLD-SUBN-002

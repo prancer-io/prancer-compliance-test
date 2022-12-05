@@ -3164,7 +3164,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "GCP project is configured with legacy network",
+                    "title": "Ensure, GCP project is configured with legacy network",
                     "description": "This policy identifies the projects which have configured with legacy networks. Legacy networks have a single network IPv4 prefix range and a single gateway IP address for the whole network. Subnetworks cannot be created in a legacy network. Legacy networks can have an impact on high network traffic projects and subject to the single point of failure.",
                     "tags": [
                         {
@@ -3201,7 +3201,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "GCP project is using the default network",
+                    "title": "Ensure, GCP project is using the default network",
                     "description": "This policy identifies the projects which have default network configured. It is recommended to use network configuration based on your security and networking requirements, you should create your network and delete the default network.",
                     "tags": [
                         {
@@ -3271,7 +3271,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "GCP VPC Flow logs for the subnet is set to Off",
+                    "title": "Ensure, GCP VPC Flow logs for the subnet is set to Off",
                     "description": "This policy identifies the subnets in VPC Network which have Flow logs disabled. It enables to capture information about the IP traffic going to and from network interfaces in VPC Subnets.",
                     "tags": [
                         {
@@ -3308,7 +3308,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "GCP VPC Network subnets have Private Google access disabled",
+                    "title": "GCP VPC Network subnets have Private Google access not enabled",
                     "description": "This policy identifies GCP VPC Network subnets have disabled Private Google access. Private Google access enables virtual machine instances on a subnet to reach Google APIs and services using an internal IP address rather than an external IP address. Internal (private) IP addresses are internal to Google Cloud Platform and are not routable or reachable over the Internet. You can use Private Google access to allow VMs without Internet access to reach Google APIs, services, and properties that are accessible over HTTP/HTTPS.",
                     "tags": [
                         {
@@ -3345,7 +3345,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "GCP Load balancer HTTPS target proxy configured with default SSL policy instead of custom SSL policy",
+                    "title": "Ensure,  GCP Load balancer HTTPS target proxy configured with default SSL policy rather than custom SSL policy",
                     "description": "This policy identifies Load balancer HTTPS target proxies which are configured with default SSL Policy instead of custom SSL policy. It is a best practice to use custom SSL policy to access load balancers. It gives you closer control over SSL/TLS versions and ciphers.",
                     "tags": [
                         {
@@ -3381,7 +3381,7 @@
                         }
                     ],
                     "severity": "Low",
-                    "title": "GCP Load balancer HTTPS target proxy is not configured with QUIC protocol",
+                    "title": "Ensure,  Load balancer HTTPS target proxy is not configured with QUIC protocol in Google Cloud Provider",
                     "description": "This policy identifies Load Balancer HTTPS target proxies which are not configured with QUIC protocol. Enabling QUIC protocol in load balancer target https proxies adds advantage by establishing connections faster, stream-based multiplexing, improved loss recovery, and eliminates head-of-line blocking.",
                     "tags": [
                         {
