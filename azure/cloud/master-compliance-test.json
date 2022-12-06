@@ -445,8 +445,10 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
+                            
                             "service": [
                                 "Security"
                             ]
