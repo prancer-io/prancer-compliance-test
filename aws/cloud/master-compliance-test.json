@@ -785,7 +785,7 @@
                                 "SOC 2-CC6.1",
                                 "SOC 2-CC6.6",
                                 "SOC 2-CC6.7",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "subnet"
@@ -848,7 +848,7 @@
                             "cloud": "AWS",
                             "compliance": [
                                 "Best Practice",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "vpc"
@@ -942,7 +942,7 @@
                             "cloud": "AWS",
                             "compliance": [
                                 "Best Practice",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "vpc"
@@ -982,7 +982,7 @@
                                 "PCI DSS",
                                 "GDPR",
                                 "HIPAA",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "api gateway"
@@ -1014,7 +1014,7 @@
                             "cloud": "AWS",
                             "compliance": [
                                 "Best Practice",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "api gateway"
@@ -1755,7 +1755,7 @@
                                 "PIPEDA-4.1.4",
                                 "RMiT",
                                 "Risk Management in Technology (RMiT)-10.55",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "eks"
@@ -2198,7 +2198,7 @@
                                 "PIPEDA-4.7.3",
                                 "Risk Management in Technology (RMiT)-10.55",
                                 "Risk Management in Technology (RMiT)-10.68",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "eks",
@@ -3186,7 +3186,7 @@
                                 "NIST 800",
                                 "PCI DSS",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "cloud"
@@ -3775,7 +3775,7 @@
                             "cloud": "AWS",
                             "compliance": [
                                 "NIST 800",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "cloud"
@@ -3873,7 +3873,7 @@
                                 "PCI-DSS",
                                 "RMiT",
                                 "Risk Management in Technology (RMiT)-10.55",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "cloud"
@@ -3905,7 +3905,7 @@
                             "cloud": "AWS",
                             "compliance": [
                                 "Best Practice",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "cloud"
@@ -4000,7 +4000,7 @@
                             "compliance": [
                                 "AWS Well-Architected Framework",
                                 "AWS Well-Architected Framework-Data Protection",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "cloud"
@@ -5514,7 +5514,7 @@
                                 "PCI DSS v3.2.1",
                                 "RMiT",
                                 "Risk Management in Technology (RMiT)",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "sqs"
@@ -7614,7 +7614,7 @@
                                 "ISO 27001",
                                 "NIST 800",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "redshift"
@@ -8847,7 +8847,7 @@
                             "cloud": "AWS",
                             "compliance": [
                                 "NIST 800",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "cloudformation"
@@ -8879,7 +8879,7 @@
                             "cloud": "AWS",
                             "compliance": [
                                 "NIST 800",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "cloudformation"
@@ -8911,7 +8911,7 @@
                             "cloud": "AWS",
                             "compliance": [
                                 "NIST 800",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "cloudformation"
@@ -9995,7 +9995,7 @@
                                 "MAS TRM",
                                 "Risk Management in Technology (RMiT)-10.55",
                                 "RMiT",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "sns"
@@ -10032,7 +10032,7 @@
                                 "MAS TRM",
                                 "Risk Management in Technology (RMiT)-10.55",
                                 "RMiT",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "sns"
@@ -10069,7 +10069,7 @@
                                 "MAS TRM",
                                 "Risk Management in Technology (RMiT)-10.55",
                                 "RMiT",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "sns"
@@ -12227,7 +12227,7 @@
                             "compliance": [
                                 "PCI DSS",
                                 "GDPR",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "ecr"
@@ -12378,7 +12378,7 @@
                                 "PIPEDA-4.7.3",
                                 "RMiT",
                                 "Risk Management in Technology (RMiT)-10.55",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "ecs"
@@ -13294,7 +13294,7 @@
                             "compliance": [
                                 "HITRUST",
                                 "NIST 800",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "lambda",
@@ -16824,7 +16824,7 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": ["Zero Trust"],
+                            "compliance": ["zerotrust"],
                             "service": [
                                 "elasticache"
                             ]
@@ -18046,7 +18046,7 @@
                                 "Risk Management in Technology (RMiT)-10.68",
                                 "SOC 2",
                                 "SOC 2-CC6.1",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "security group"
@@ -18529,7 +18529,7 @@
                             "compliance": [
                                 "CIS",
                                 "NIST 800",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -18562,7 +18562,7 @@
                             "compliance": [
                                 "CIS",
                                 "NIST 800",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -18595,7 +18595,7 @@
                             "compliance": [
                                 "CIS",
                                 "NIST 800",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -18628,7 +18628,7 @@
                             "compliance": [
                                 "CIS",
                                 "NIST 800",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -18715,7 +18715,7 @@
                                 "Risk Management in Technology (RMiT)-10.55",
                                 "SOC 2",
                                 "SOC 2-CC6.3",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -18852,7 +18852,7 @@
                                 "Risk Management in Technology (RMiT)-10.55",
                                 "SOC 2",
                                 "SOC 2-CC6.3",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -18891,7 +18891,7 @@
                                 "NIST CSF",
                                 "PCI DSS",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -18937,7 +18937,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -18983,7 +18983,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19029,7 +19029,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19075,7 +19075,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19121,7 +19121,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19167,7 +19167,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19213,7 +19213,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19259,7 +19259,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19305,7 +19305,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19351,7 +19351,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19397,7 +19397,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19443,7 +19443,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19489,7 +19489,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19535,7 +19535,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19581,7 +19581,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19627,7 +19627,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19673,7 +19673,7 @@
                                 "NIST CSF",
                                 "RMiT",
                                 "SOC 2",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19706,7 +19706,7 @@
                             "compliance": [
                                 "AWS Well-Architected Framework",
                                 "AWS Well-Architected Framework-Identity and Access Management",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19794,7 +19794,7 @@
                                 "SOC 2-CC6.1",
                                 "SOC 2-CC6.6",
                                 "SOC 2-CC6.7",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -19970,7 +19970,7 @@
                                 "RMiT",
                                 "Risk Management in Technology (RMiT)-10.55",
                                 "Risk Management in Technology (RMiT)-10.68",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -20007,7 +20007,7 @@
                                 "MAS TRM 2021-9.1.1",
                                 "RMiT",
                                 "Risk Management in Technology (RMiT)-10.55",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -20166,7 +20166,7 @@
                                 "RMiT",
                                 "Risk Management in Technology (RMiT)-10.55",
                                 "Risk Management in Technology (RMiT)-10.68",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -20315,7 +20315,7 @@
                             "compliance": [
                                 "CIS",
                                 "Best Practice",
-                                "Zero Trust"
+                                "zerotrust"
                             ],
                             "service": [
                                 "amplify"
