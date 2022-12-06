@@ -143,7 +143,8 @@
                             "compliance": [
                                 "Best Practice",
                                 "MITRE ATT&CK",
-                                "MITRE ATT&CK v10.0-T1485 - Data Destruction"
+                                "MITRE ATT&CK v10.0-T1485 - Data Destruction",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Security"
@@ -478,7 +479,9 @@
                     "tags": [
                         {
                             "cloud": "azure",
-                            "compliance": [],
+                            "compliance": [
+                                "zerotrust"
+                            ],
                             "service": [
                                 "Security"
                             ]
@@ -1094,7 +1097,8 @@
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Storage"
@@ -1126,7 +1130,8 @@
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Storage"
@@ -1379,7 +1384,8 @@
                                 "PCI DSS v3.2.1-2.3", 
                                 "PCI DSS v3.2.1-4.1", 
                                 "PIPEDA",
-                                "PIPEDA-4.7.3"
+                                "PIPEDA-4.7.3",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Compute"
@@ -1571,7 +1577,8 @@
                                 "NIST SP 800-171 Revision 2-3.4.2", 
                                 "NIST SP 800-172-3.5.2e", 
                                 "PCI DSS",
-                                "PCI DSS v3.2.1-6.3"
+                                "PCI DSS v3.2.1-6.3",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Compute"
@@ -1664,7 +1671,8 @@
                                 "NIST SP 800-172-3.4.2e", 
                                 "PCI DSS",
                                 "PCI DSS v3.2.1-2.3", 
-                                "PCI DSS v3.2.1-4.1"
+                                "PCI DSS v3.2.1-4.1",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Compute"
@@ -1694,7 +1702,9 @@
                     "tags": [
                         {
                             "cloud": "azure",
-                            "compliance": [],
+                            "compliance": [
+                            "zerotrust"
+                        ],
                             "service": [
                                 "Compute"
                             ]
@@ -1979,7 +1989,8 @@
                                 "PCI DSS v3.2.1-2.3", 
                                 "PCI DSS v3.2.1-4.1", 
                                 "PIPEDA",
-                                "PIPEDA-4.7.3"
+                                "PIPEDA-4.7.3",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Compute"
@@ -2425,7 +2436,8 @@
                                 "SOC 2-CC6.1",
                                 "SOC 2-CC6.2",
                                 "SOC 2-CC6.3",
-                                "SOC 2-CC8.1"
+                                "SOC 2-CC8.1",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Databases"
@@ -2459,7 +2471,8 @@
                                 "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI-DSS"
+                                "PCI-DSS",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Databases"
@@ -2537,7 +2550,8 @@
                                 "PIPEDA-4.1.4",
                                 "SOC 2",
                                 "SOC 2-CC6.1",
-                                "SOC 2-CC8.1"
+                                "SOC 2-CC8.1",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Databases"
@@ -3631,7 +3645,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Databases"
@@ -3724,7 +3739,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Databases"
@@ -4217,7 +4233,8 @@
                                 "PCI DSS",
                                 "PCI DSS v3.2.1-A3.3.1",
                                 "PIPEDA",
-                                "PIPEDA-4.1.4"
+                                "PIPEDA-4.1.4",
+                                "zerotrust"
  
                             ],
                             "service": [
@@ -4434,7 +4451,8 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Databases"
@@ -4465,7 +4483,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Databases"
@@ -4569,7 +4588,8 @@
                                 "NIST SP 800-172-3.4.1e", 
                                 "NIST SP 800-172-3.4.2e", 
                                 "PCI DSS",
-                                "PCI DSS v3.2.1-6.3"
+                                "PCI DSS v3.2.1-6.3",
+                                "zerotrust"
 
                             ],
                             "service": [
@@ -4913,7 +4933,9 @@
                     "tags": [
                         {
                             "cloud": "azure",
-                            "compliance": [],
+                            "compliance": [
+                            "zerotrust"
+                        ],
                             "service": [
                                 "Containers"
                             ]
@@ -5003,7 +5025,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Containers"
@@ -5095,7 +5118,8 @@
                                 "PCI DSS v3.2.1-2.3", 
                                 "PCI DSS v3.2.1-4.1", 
                                 "PIPEDA",
-                                "PIPEDA-4.7.3"
+                                "PIPEDA-4.7.3",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Networking"
@@ -5187,7 +5211,8 @@
                                 "PCI DSS v3.2.1-2.3", 
                                 "PCI DSS v3.2.1-4.1", 
                                 "PIPEDA",
-                                "PIPEDA-4.7.3"
+                                "PIPEDA-4.7.3",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Networking"
@@ -5349,7 +5374,8 @@
                                 "HITRUST",
                                 "NIST 800",
                                 "NIST CSF",
-                                "PCI-DSS"
+                                "PCI-DSS",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Networking"
@@ -5517,7 +5543,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Databases"
@@ -5579,7 +5606,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Databases"
@@ -5617,7 +5645,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Databases"
@@ -5834,7 +5863,8 @@
                                 "PCI DSS v3.2.1-3.4.1",
                                 "PCI DSS v3.2.1-4.1",
                                 "PIPEDA",
-                                "PIPEDA-4.7.3"
+                                "PIPEDA-4.7.3",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Compute"
@@ -6423,7 +6453,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Analytics"
@@ -6459,7 +6490,8 @@
                                 "HITRUST",
                                 "NIST 800",
                                 "NIST CSF",
-                                "PCI-DSS"
+                                "PCI-DSS",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Databases"
@@ -6737,7 +6769,8 @@
                                 "NIST SP 800-171 Revision 2-3.14.6",
                                 "NIST SP 800-172-3.14.2e",
                                 "PCI DSS",
-                                "PCI DSS v3.2.1-1.2.1"
+                                "PCI DSS v3.2.1-1.2.1",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Databases"
@@ -7486,7 +7519,8 @@
                             "cloud": "azure",
                             "compliance": [
                                 "MITRE ATT&CK",
-                                "MITRE ATT&CK v10.0-T1550 - Use Alternate Authentication Material"
+                                "MITRE ATT&CK v10.0-T1550 - Use Alternate Authentication Material",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Containers"
@@ -7518,7 +7552,8 @@
                             "cloud": "azure",
                             "compliance": [
                                 "MITRE ATT&CK",
-                                "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application"
+                                "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Containers"
@@ -7549,7 +7584,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Containers"
@@ -7580,7 +7616,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Containers"
@@ -7611,7 +7648,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Containers"
@@ -7653,7 +7691,8 @@
                                 "CMMC_2.0_L2_SC.L2-3.13.6",
                                 "CMMC_L3_AC.1.001",
                                 "CMMC_L3_AC.1.002",
-                                "CMMC_L3_AC.2.016"
+                                "CMMC_L3_AC.2.016",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Containers"
@@ -7684,7 +7723,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Containers"
@@ -7715,7 +7755,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Containers"
@@ -7863,7 +7904,8 @@
                                 "HITRUST",
                                 "NIST 800",
                                 "NIST CSF",
-                                "PCI-DSS"
+                                "PCI-DSS",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Networking"
@@ -8144,7 +8186,8 @@
                                 "PCI DSS",
                                 "PCI DSS v3.2.1-1.2.1",
                                 "PIPEDA",
-                                "PIPEDA-4.7.3"
+                                "PIPEDA-4.7.3",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Networking"
@@ -8280,7 +8323,8 @@
                                 "PCI DSS",
                                 "PCI DSS v3.2.1-1.2.1",
                                 "PIPEDA",
-                                "PIPEDA-4.7.3"
+                                "PIPEDA-4.7.3",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Networking"
@@ -8316,7 +8360,8 @@
                                 "HITRUST",
                                 "NIST 800",
                                 "NIST CSF",
-                                "PCI-DSS"
+                                "PCI-DSS",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Networking"
@@ -8445,7 +8490,8 @@
                                 "PCI DSS",
                                 "PCI DSS v3.2.1-1.2.1",
                                 "PIPEDA",
-                                "PIPEDA-4.7.3"
+                                "PIPEDA-4.7.3",
+                                "zerotrust"
                             ],
                             "service": [
                                 "Networking"
@@ -12157,7 +12203,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "EventGrid"
@@ -12188,7 +12235,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "EventGrid"
@@ -12230,7 +12278,8 @@
                                 "CMMC_2.0_L2_AC.L2-3.1.14",
                                 "CMMC_2.0_L2_AC.L2-3.1.3",
                                 "CMMC_2.0_L2_SC.L1-3.13.1",
-                                "CMMC_2.0_L2_SC.L1-3.13.5"
+                                "CMMC_2.0_L2_SC.L1-3.13.5",
+                                "zerotrust"
                             ],
                             "service": [
                                 "EventGrid"
@@ -12272,7 +12321,8 @@
                                 "CMMC_2.0_L2_AC.L2-3.1.14",
                                 "CMMC_2.0_L2_AC.L2-3.1.3",
                                 "CMMC_2.0_L2_SC.L1-3.13.1",
-                                "CMMC_2.0_L2_SC.L1-3.13.5"
+                                "CMMC_2.0_L2_SC.L1-3.13.5",
+                                "zerotrust"
                             ],
                             "service": [
                                 "EventGrid"
@@ -12314,7 +12364,8 @@
                                 "CMMC_2.0_L2_AC.L2-3.1.14",
                                 "CMMC_2.0_L2_AC.L2-3.1.3",
                                 "CMMC_2.0_L2_SC.L1-3.13.1",
-                                "CMMC_2.0_L2_SC.L1-3.13.5"
+                                "CMMC_2.0_L2_SC.L1-3.13.5",
+                                "zerotrust"
                             ],
                             "service": [
                                 "EventGrid"
@@ -12345,7 +12396,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "EventGrid"
@@ -12376,7 +12428,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "EventGrid"
@@ -12420,7 +12473,8 @@
                                 "RBI_ITF_NBFC_v2017_6",
                                 "RBI_ITF_NBFC_v2017_6.2",
                                 "RBI_ITF_NBFC_v2017_6.3",
-                                "RBI_ITF_NBFC_v2017_6.4"
+                                "RBI_ITF_NBFC_v2017_6.4",
+                                "zerotrust"
                             ],
                             "service": [
                                 "RecoveryServices"
@@ -12451,7 +12505,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "RecoveryServices"
@@ -12482,7 +12537,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "EventHub"
@@ -12513,7 +12569,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "EventHub"
@@ -12544,7 +12601,8 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "Best Practice"
+                                "Best Practice",
+                                "zerotrust"
                             ],
                             "service": [
                                 "EventHub"
@@ -12585,7 +12643,8 @@
                                 "NIST_SP_800-171_R2_3.13.10",
                                 "NIST_SP_800-53_R5_SC-12",
                                 "RMiT",
-                                "RMiT_v1.0_10.53"
+                                "RMiT_v1.0_10.53",
+                                "zerotrust"
                             ],
                             "service": [
                                 "EventHub"
@@ -12649,7 +12708,8 @@
                             "cloud": "azure",
                             "compliance": [
                                 "RMiT",
-                                "RMiT_v1.0_10.55"
+                                "RMiT_v1.0_10.55",
+                                "zerotrust"
                             ],
                             "service": [
                                 "EventHub"
