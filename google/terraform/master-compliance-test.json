@@ -1675,12 +1675,12 @@
                             "id": "PR-GCP-TRF-CLT-001",
                             "eval": "data.rule.k8s_svc_account",
                             "message": "data.rule.k8s_svc_account_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_001.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Goole Cloud Provider.",
+                    "title": "Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Google Cloud Provider.",
                     "description": "This policy identifies Kubernetes Engine Cluster Nodes which have default Service account for Project access. By default, Kubernetes Engine nodes are given the Compute Engine default service account. This account has broad access and more permissions than are required to run your Kubernetes Engine cluster. You should create and use a least privileged service account to run your Kubernetes Engine cluster instead of using the Compute Engine default service account. If you are not creating a separate service account for your nodes, you should limit the scopes of the node service account to reduce the possibility of a privilege escalation in an attack.",
                     "tags": [
                         {
@@ -1718,8 +1718,8 @@
                             "id": "PR-GCP-TRF-CLT-002",
                             "eval": "data.rule.k8s_basicauth",
                             "message": "data.rule.k8s_basicauth_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1761,8 +1761,8 @@
                             "id": "PR-GCP-TRF-CLT-003",
                             "eval": "data.rule.k8s_client_cert",
                             "message": "data.rule.k8s_client_cert_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_003.py"
                         }
                     ],
                     "severity": "Low",
@@ -1804,8 +1804,8 @@
                             "id": "PR-GCP-TRF-CLT-004",
                             "eval": "data.rule.k8s_alias_ip",
                             "message": "data.rule.k8s_alias_ip_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_004.py"
                         }
                     ],
                     "severity": "Low",
@@ -1847,8 +1847,8 @@
                             "id": "PR-GCP-TRF-CLT-005",
                             "eval": "data.rule.k8s_alpha",
                             "message": "data.rule.k8s_alpha_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1888,8 +1888,8 @@
                             "id": "PR-GCP-TRF-CLT-006",
                             "eval": "data.rule.k8s_http_lbs",
                             "message": "data.rule.k8s_http_lbs_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_006.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1928,8 +1928,8 @@
                             "id": "PR-GCP-TRF-CLT-007",
                             "eval": "data.rule.k8s_legacy_abac",
                             "message": "data.rule.k8s_legacy_abac_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_007.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1970,8 +1970,8 @@
                             "id": "PR-GCP-TRF-CLT-008",
                             "eval": "data.rule.k8s_master_auth_net",
                             "message": "data.rule.k8s_master_auth_net_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_008.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2012,8 +2012,8 @@
                             "id": "PR-GCP-TRF-CLT-009",
                             "eval": "data.rule.k8s_net_policy",
                             "message": "data.rule.k8s_net_policy_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_009.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2054,8 +2054,8 @@
                             "id": "PR-GCP-TRF-CLT-010",
                             "eval": "data.rule.k8s_logging",
                             "message": "data.rule.k8s_logging_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_010.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2096,8 +2096,8 @@
                             "id": "PR-GCP-TRF-CLT-011",
                             "eval": "data.rule.k8s_monitor",
                             "message": "data.rule.k8s_monitor_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_011.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2139,8 +2139,8 @@
                             "id": "PR-GCP-TRF-CLT-012",
                             "eval": "data.rule.k8s_binary_auth",
                             "message": "data.rule.k8s_binary_auth_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_012.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2180,8 +2180,8 @@
                             "id": "PR-GCP-TRF-CLT-013",
                             "eval": "data.rule.k8s_legacy_endpoint",
                             "message": "data.rule.k8s_legacy_endpoint_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_013.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2221,8 +2221,8 @@
                             "id": "PR-GCP-TRF-CLT-014",
                             "eval": "data.rule.k8s_pod_security",
                             "message": "data.rule.k8s_pod_security_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_014.py"
                         }
                     ],
                     "severity": "Low",
@@ -2262,8 +2262,8 @@
                             "id": "PR-GCP-TRF-CLT-015",
                             "eval": "data.rule.k8s_egress_metering",
                             "message": "data.rule.k8s_egress_metering_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_015.py"
                         }
                     ],
                     "severity": "Low",
@@ -2302,8 +2302,8 @@
                             "id": "PR-GCP-TRF-CLT-016",
                             "eval": "data.rule.k8s_private",
                             "message": "data.rule.k8s_private_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_016.py"
                         }
                     ],
                     "severity": "Low",
@@ -2343,8 +2343,8 @@
                             "id": "PR-GCP-TRF-CLT-017",
                             "eval": "data.rule.k8s_private_node",
                             "message": "data.rule.k8s_private_node_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_017.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2384,8 +2384,8 @@
                             "id": "PR-GCP-TRF-CLT-018",
                             "eval": "data.rule.k8s_node_image",
                             "message": "data.rule.k8s_node_image_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_018.py"
                         }
                     ],
                     "severity": "Low",
@@ -2425,8 +2425,8 @@
                             "id": "PR-GCP-TRF-CLT-019",
                             "eval": "data.rule.k8s_network",
                             "message": "data.rule.k8s_network_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_019.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2465,8 +2465,8 @@
                             "id": "PR-GCP-TRF-CLT-021",
                             "eval": "data.rule.k8s_labels",
                             "message": "data.rule.k8s_labels_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_021.py"
                         }
                     ],
                     "severity": "Low",
@@ -2505,8 +2505,8 @@
                             "id": "PR-GCP-TRF-CLT-022",
                             "eval": "data.rule.k8s_db_encrypt",
                             "message": "data.rule.k8s_db_encrypt_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_022.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2546,8 +2546,8 @@
                             "id": "PR-GCP-TRF-CLT-023",
                             "eval": "data.rule.k8s_intra_node",
                             "message": "data.rule.k8s_intra_node_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_023.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2587,8 +2587,8 @@
                             "id": "PR-GCP-TRF-CLT-024",
                             "eval": "data.rule.k8s_istio",
                             "message": "data.rule.k8s_istio_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_024.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2627,8 +2627,8 @@
                             "id": "PR-GCP-TRF-CLT-025",
                             "eval": "data.rule.k8s_zones",
                             "message": "data.rule.k8s_zones_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "make sure you are following the deployment template format presented here for <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool' target='_blank'>Container Node Pool</a> and <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>Container Cluster</a>",
+                            "remediationFunction": "PR_GCP_TRF_CLT_025.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2667,7 +2667,7 @@
                             "id": "PR-GCP-TRF-CLT-027",
                             "eval": "data.rule.k8s_channel",
                             "message": "data.rule.k8s_channel_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a> ",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>here</a> ",
                             "remediationFunction": "PR_GCP_TRF_CLT_027.py"
                         }
                     ],
@@ -2707,7 +2707,7 @@
                             "id": "PR-GCP-TRF-CLT-028",
                             "eval": "data.rule.k8s_workload",
                             "message": "data.rule.k8s_workload_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a> ",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>here</a> ",
                             "remediationFunction": "PR_GCP_TRF_CLT_028.py"
                         }
                     ],
@@ -2748,7 +2748,7 @@
                             "id": "PR-GCP-TRF-CLT-029",
                             "eval": "data.rule.k8s_shield_node",
                             "message": "data.rule.k8s_shield_node_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a> ",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>here</a> ",
                             "remediationFunction": "PR_GCP_TRF_CLT_029.py"
                         }
                     ],
@@ -2788,7 +2788,7 @@
                             "id": "PR-GCP-TRF-CLT-030",
                             "eval": "data.rule.k8s_node_autorepair",
                             "message": "data.rule.k8s_node_autorepair_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a> ",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>here</a> ",
                             "remediationFunction": "PR_GCP_TRF_CLT_030.py"
                         }
                     ],
@@ -2826,7 +2826,7 @@
                             "id": "PR-GCP-TRF-CLT-031",
                             "eval": "data.rule.k8s_node_autoupgrade",
                             "message": "data.rule.k8s_node_autoupgrade_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a> ",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>here</a> ",
                             "remediationFunction": "PR_GCP_TRF_CLT_031.py"
                         }
                     ],
@@ -2864,7 +2864,7 @@
                             "id": "PR-GCP-TRF-CLT-032",
                             "eval": "data.rule.k8s_secure_boot",
                             "message": "data.rule.k8s_secure_boot_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a> ",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>here</a> ",
                             "remediationFunction": "PR_GCP_TRF_CLT_032.py"
                         }
                     ],
@@ -2904,7 +2904,7 @@
                             "id": "PR-GCP-TRF-CLT-033",
                             "eval": "data.rule.k8s_integrity_monitor",
                             "message": "data.rule.k8s_integrity_monitor_err",
-                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a> ",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>here</a> ",
                             "remediationFunction": "PR_GCP_TRF_CLT_033.py"
                         }
                     ],
@@ -2944,7 +2944,7 @@
                             "id": "PR-GCP-TRF-CLT-034",
                             "eval": "data.rule.secret_encrypted",
                             "message": "data.rule.secret_encrypted_err",
-                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a> ",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>here</a> ",
                             "remediationFunction": "PR_GCP_TRF_CLT_034.py"
                         }
                     ],
@@ -3035,7 +3035,7 @@
                             "id": "PR-GCP-TRF-CLT-035",
                             "eval": "data.rule.private_endpoint_disabled",
                             "message": "data.rule.private_endpoint_disabled_err",
-                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a> ",
+                            "remediationDescription": "Make sure you are following the deployment template format presented <a href='https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster' target='_blank'>here</a> ",
                             "remediationFunction": "PR_GCP_TRF_CLT_035.py"
                         }
                     ],

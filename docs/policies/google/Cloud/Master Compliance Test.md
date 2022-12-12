@@ -22,7 +22,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-CLD-CLT-001
 
-***Title: [Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Goole Cloud Provider.]***
+***Title: [Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Google Cloud Provider.]***
 
 ----------------------------------------------------
 
@@ -1145,7 +1145,7 @@
 [GCP Firewall rule allows internet traffic to Telnet port (23)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/Cloud/all/PR-GCP-CLD-FW-015.md
 [GCP Firewall rules allow inbound traffic from anywhere with no target tags set]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/Cloud/all/PR-GCP-CLD-FW-016.md
 [GCP Firewall with Inbound rule overly permissive to All Traffic]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/Cloud/all/PR-GCP-CLD-FW-017.md
-[Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Goole Cloud Provider.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/Cloud/all/PR-GCP-CLD-CLT-001.md
+[Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Google Cloud Provider.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/Cloud/all/PR-GCP-CLD-CLT-001.md
 [Ensure GCP Kubernetes Engine Clusters Basic Authentication is not set to Disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/Cloud/all/PR-GCP-CLD-CLT-002.md
 [GCP Kubernetes Engine Clusters Client Certificate is set to Disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/Cloud/all/PR-GCP-CLD-CLT-003.md
 [Ensure GCP Kubernetes Engine Clusters not have Alias IP enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/Cloud/all/PR-GCP-CLD-CLT-004.md

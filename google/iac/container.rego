@@ -61,7 +61,7 @@ k8s_svc_account = false {
     gc_attribute_absence["k8s_svc_account"]
 }
 
-k8s_svc_account_err = "Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Goole Cloud Provider." {
+k8s_svc_account_err = "Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Google Cloud Provider." {
     gc_issue["k8s_svc_account"]
 }
 
@@ -74,7 +74,7 @@ k8s_svc_account_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Goole Cloud Provider.",
+    "Policy Title": "Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Google Cloud Provider.",
     "Policy Description": "This policy identifies Kubernetes Engine Cluster Nodes which have default Service account for Project access. By default, Kubernetes Engine nodes are given the Compute Engine default service account. This account has broad access and more permissions than are required to run your Kubernetes Engine cluster. You should create and use a least privileged service account to run your Kubernetes Engine cluster instead of using the Compute Engine default service account. If you are not creating a separate service account for your nodes, you should limit the scopes of the node service account to reduce the possibility of a privilege escalation in an attack.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
