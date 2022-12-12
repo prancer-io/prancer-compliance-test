@@ -12,23 +12,11 @@ has_property(parent_object, target_property) {
 
 default k8s_svc_account = null
 
-gc_attribute_absence["k8s_svc_account"] {
-    resource := input.resources[_]
-    lower(resource.type) == "google_container_node_pool"
-    not resource.properties.node_config
-}
-
-gc_attribute_absence["k8s_svc_account"] {
-    resource := input.resources[_]
-    lower(resource.type) == "google_container_node_pool"
-    count(resource.properties.node_config) == 0
-}
-
 gc_issue["k8s_svc_account"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_node_pool"
     node_config := resource.properties.node_config[_]
-    not node_config.service_account
+    contains(node_config.service_account, "default")
 }
 
 gc_issue["k8s_svc_account"] {
@@ -41,19 +29,14 @@ gc_issue["k8s_svc_account"] {
 k8s_svc_account {
     lower(input.resources[_].type) == "google_container_node_pool"
     not gc_issue["k8s_svc_account"]
-    not gc_attribute_absence["k8s_svc_account"]
 }
 
 k8s_svc_account = false {
     gc_issue["k8s_svc_account"]
-} else = false {
-    gc_attribute_absence["k8s_svc_account"]
 }
 
 k8s_svc_account_err = "Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Google Cloud Provider." {
     gc_issue["k8s_svc_account"]
-} else = "Kubernetes Engine Cluster attribute management config missing in the resource" {
-    gc_attribute_absence["k8s_svc_account"]
 }
 
 k8s_svc_account_metadata := {
