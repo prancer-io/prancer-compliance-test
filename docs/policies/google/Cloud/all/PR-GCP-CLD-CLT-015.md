@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters not configured with network traffic egress metering
+# Title: Ensure GCP Kubernetes Engine Clusters  configured with network traffic ingress metering
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-CLD-CLT-015

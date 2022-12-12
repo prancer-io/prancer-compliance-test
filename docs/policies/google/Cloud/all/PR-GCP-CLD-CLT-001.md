@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Cluster Nodes have default Service account for Project access
+# Title: Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Goole Cloud Provider.
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-CLD-CLT-001

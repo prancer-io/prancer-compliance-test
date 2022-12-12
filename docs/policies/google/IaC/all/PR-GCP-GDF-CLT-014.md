@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters have pod security policy disabled
+# Title: Ensure GCP Kubernetes Engine Clusters not have pod security policy enabled
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-GDF-CLT-014

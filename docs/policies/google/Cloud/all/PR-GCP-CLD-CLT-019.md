@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters using the default network
+# Title: Ensure Kubernetes Engine Clusters using the default network in Google Cloud Provider
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-CLD-CLT-019

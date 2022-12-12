@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters not using Container-Optimized OS for Node image
+# Title: Ensure Kubernetes Engine Clusters not using Container-Optimized OS for Node image in Google Cloud Provider
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-TRF-CLT-018

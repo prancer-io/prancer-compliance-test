@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters have legacy compute engine metadata endpoints enabled
+# Title: Ensure GCP Kubernetes Engine Clusters not have legacy compute engine metadata endpoints disabled
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-GDF-CLT-013

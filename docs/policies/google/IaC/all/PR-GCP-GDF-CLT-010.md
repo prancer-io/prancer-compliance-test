@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters have Stackdriver Logging disabled
+# Title: Ensure GCP Kubernetes Engine Clusters not have Stackdriver Logging enabled
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-GDF-CLT-010

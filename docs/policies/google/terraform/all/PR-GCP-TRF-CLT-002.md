@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters Basic Authentication is set to Enabled
+# Title: Ensure GCP Kubernetes Engine Clusters Basic Authentication is not set to Disabled
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-TRF-CLT-002

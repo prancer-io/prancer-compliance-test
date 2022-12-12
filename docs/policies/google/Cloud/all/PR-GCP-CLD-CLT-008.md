@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters have Master authorized networks disabled
+# Title: Ensure GCP Kubernetes Engine Clusters not have Master authorized networks enabled
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-CLD-CLT-008

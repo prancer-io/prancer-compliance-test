@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters have HTTP load balancing disabled
+# Title: Ensure GCP Kubernetes Engine Clusters not have HTTP load balancing enabled
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-TRF-CLT-006

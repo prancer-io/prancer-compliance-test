@@ -334,7 +334,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-001
 
-***Title: [GCP Kubernetes Engine Cluster Nodes have default Service account for Project access]***
+***Title: [Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Goole Cloud Provider.]***
 
 ----------------------------------------------------
 
@@ -342,7 +342,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-002
 
-***Title: [GCP Kubernetes Engine Clusters Basic Authentication is set to Enabled]***
+***Title: [Ensure GCP Kubernetes Engine Clusters Basic Authentication is not set to Disabled]***
 
 ----------------------------------------------------
 
@@ -358,7 +358,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-004
 
-***Title: [GCP Kubernetes Engine Clusters have Alias IP disabled]***
+***Title: [Ensure GCP Kubernetes Engine Clusters not have Alias IP enabled]***
 
 ----------------------------------------------------
 
@@ -366,7 +366,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-005
 
-***Title: [GCP Kubernetes Engine Clusters have Alpha cluster feature enabled]***
+***Title: [Ensure GCP Kubernetes Engine Clusters not have Alpha cluster feature disabled]***
 
 ----------------------------------------------------
 
@@ -374,7 +374,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-006
 
-***Title: [GCP Kubernetes Engine Clusters have HTTP load balancing disabled]***
+***Title: [Ensure GCP Kubernetes Engine Clusters not have HTTP load balancing enabled]***
 
 ----------------------------------------------------
 
@@ -382,7 +382,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-007
 
-***Title: [GCP Kubernetes Engine Clusters have Legacy Authorization enabled]***
+***Title: [Ensure GCP Kubernetes Engine Clusters not have Legacy Authorization disabled]***
 
 ----------------------------------------------------
 
@@ -390,7 +390,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-008
 
-***Title: [GCP Kubernetes Engine Clusters have Master authorized networks disabled]***
+***Title: [Ensure GCP Kubernetes Engine Clusters not have Master authorized networks enabled]***
 
 ----------------------------------------------------
 
@@ -398,7 +398,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-009
 
-***Title: [GCP Kubernetes Engine Clusters have Network policy disabled]***
+***Title: [Ensure GCP Kubernetes Engine Clusters not have Network policy enabled]***
 
 ----------------------------------------------------
 
@@ -406,7 +406,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-010
 
-***Title: [GCP Kubernetes Engine Clusters have Stackdriver Logging disabled]***
+***Title: [Ensure GCP Kubernetes Engine Clusters not have Stackdriver Logging enabled]***
 
 ----------------------------------------------------
 
@@ -422,7 +422,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-012
 
-***Title: [GCP Kubernetes Engine Clusters have binary authorization disabled]***
+***Title: [Ensure GCP Kubernetes Engine Clusters not have binary authorization enabled]***
 
 ----------------------------------------------------
 
@@ -430,7 +430,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-013
 
-***Title: [GCP Kubernetes Engine Clusters have legacy compute engine metadata endpoints enabled]***
+***Title: [Ensure GCP Kubernetes Engine Clusters not have legacy compute engine metadata endpoints disabled]***
 
 ----------------------------------------------------
 
@@ -438,7 +438,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-014
 
-***Title: [GCP Kubernetes Engine Clusters have pod security policy disabled]***
+***Title: [Ensure GCP Kubernetes Engine Clusters not have pod security policy enabled]***
 
 ----------------------------------------------------
 
@@ -446,7 +446,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-015
 
-***Title: [GCP Kubernetes Engine Clusters not configured with network traffic egress metering]***
+***Title: [Ensure GCP Kubernetes Engine Clusters  configured with network traffic ingress metering]***
 
 ----------------------------------------------------
 
@@ -462,7 +462,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-017
 
-***Title: [GCP Kubernetes Engine Clusters not configured with private nodes feature]***
+***Title: [Ensure GCP Kubernetes Engine Clusters configured with private nodes feature to false]***
 
 ----------------------------------------------------
 
@@ -470,7 +470,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-018
 
-***Title: [GCP Kubernetes Engine Clusters not using Container-Optimized OS for Node image]***
+***Title: [Ensure Kubernetes Engine Clusters not using Container-Optimized OS for Node image in Google Cloud Provider]***
 
 ----------------------------------------------------
 
@@ -478,7 +478,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-019
 
-***Title: [GCP Kubernetes Engine Clusters using the default network]***
+***Title: [Ensure Kubernetes Engine Clusters using the default network in Google Cloud Provider]***
 
 ----------------------------------------------------
 
@@ -494,7 +494,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-021
 
-***Title: [GCP Kubernetes Engine Clusters without any label information]***
+***Title: [GCP Kubernetes Engine Clusters not having any label information]***
 
 ----------------------------------------------------
 
@@ -502,7 +502,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-022
 
-***Title: [GCP Kubernetes cluster Application-layer Secrets not encrypted]***
+***Title: [GCP Kubernetes cluster Application-layer Secrets decrypted]***
 
 ----------------------------------------------------
 
@@ -510,7 +510,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-023
 
-***Title: [GCP Kubernetes cluster intra-node visibility disabled]***
+***Title: [GCP Kubernetes cluster intra-node visibility is not enabled]***
 
 ----------------------------------------------------
 
@@ -526,7 +526,7 @@
 
 ***<font color="white">ID:</font>*** PR-GCP-GDF-CLT-025
 
-***Title: [GCP Kubernetes cluster not in redundant zones]***
+***Title: [Kubernetes cluster not in redundant zones for Google Cloud Provider]***
 
 ----------------------------------------------------
 
@@ -1170,31 +1170,31 @@
 [GCP Firewall rule allows internet traffic to Telnet port (23)]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-FW-015.md
 [GCP Firewall rules allow inbound traffic from anywhere with no target tags set]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-FW-016.md
 [GCP Firewall with Inbound rule overly permissive to All Traffic]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-FW-017.md
-[GCP Kubernetes Engine Cluster Nodes have default Service account for Project access]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-001.md
-[GCP Kubernetes Engine Clusters Basic Authentication is set to Enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-002.md
+[Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Goole Cloud Provider.]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-001.md
+[Ensure GCP Kubernetes Engine Clusters Basic Authentication is not set to Disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-002.md
 [GCP Kubernetes Engine Clusters Client Certificate is set to Disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-003.md
-[GCP Kubernetes Engine Clusters have Alias IP disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-004.md
-[GCP Kubernetes Engine Clusters have Alpha cluster feature enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-005.md
-[GCP Kubernetes Engine Clusters have HTTP load balancing disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-006.md
-[GCP Kubernetes Engine Clusters have Legacy Authorization enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-007.md
-[GCP Kubernetes Engine Clusters have Master authorized networks disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-008.md
-[GCP Kubernetes Engine Clusters have Network policy disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-009.md
-[GCP Kubernetes Engine Clusters have Stackdriver Logging disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-010.md
+[Ensure GCP Kubernetes Engine Clusters not have Alias IP enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-004.md
+[Ensure GCP Kubernetes Engine Clusters not have Alpha cluster feature disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-005.md
+[Ensure GCP Kubernetes Engine Clusters not have HTTP load balancing enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-006.md
+[Ensure GCP Kubernetes Engine Clusters not have Legacy Authorization disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-007.md
+[Ensure GCP Kubernetes Engine Clusters not have Master authorized networks enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-008.md
+[Ensure GCP Kubernetes Engine Clusters not have Network policy enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-009.md
+[Ensure GCP Kubernetes Engine Clusters not have Stackdriver Logging enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-010.md
 [GCP Kubernetes Engine Clusters have Stackdriver Monitoring disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-011.md
-[GCP Kubernetes Engine Clusters have binary authorization disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-012.md
-[GCP Kubernetes Engine Clusters have legacy compute engine metadata endpoints enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-013.md
-[GCP Kubernetes Engine Clusters have pod security policy disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-014.md
-[GCP Kubernetes Engine Clusters not configured with network traffic egress metering]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-015.md
+[Ensure GCP Kubernetes Engine Clusters not have binary authorization enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-012.md
+[Ensure GCP Kubernetes Engine Clusters not have legacy compute engine metadata endpoints disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-013.md
+[Ensure GCP Kubernetes Engine Clusters not have pod security policy enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-014.md
+[Ensure GCP Kubernetes Engine Clusters  configured with network traffic ingress metering]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-015.md
 [GCP Kubernetes Engine Clusters not configured with private cluster]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-016.md
-[GCP Kubernetes Engine Clusters not configured with private nodes feature]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-017.md
-[GCP Kubernetes Engine Clusters not using Container-Optimized OS for Node image]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-018.md
-[GCP Kubernetes Engine Clusters using the default network]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-019.md
+[Ensure GCP Kubernetes Engine Clusters configured with private nodes feature to false]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-017.md
+[Ensure Kubernetes Engine Clusters not using Container-Optimized OS for Node image in Google Cloud Provider]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-018.md
+[Ensure Kubernetes Engine Clusters using the default network in Google Cloud Provider]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-019.md
 [GCP Kubernetes Engine Clusters web UI/Dashboard is set to Enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-020.md
-[GCP Kubernetes Engine Clusters without any label information]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-021.md
-[GCP Kubernetes cluster Application-layer Secrets not encrypted]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-022.md
-[GCP Kubernetes cluster intra-node visibility disabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-023.md
+[GCP Kubernetes Engine Clusters not having any label information]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-021.md
+[GCP Kubernetes cluster Application-layer Secrets decrypted]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-022.md
+[GCP Kubernetes cluster intra-node visibility is not enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-023.md
 [GCP Kubernetes cluster istioConfig not enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-024.md
-[GCP Kubernetes cluster not in redundant zones]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-025.md
+[Kubernetes cluster not in redundant zones for Google Cloud Provider]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-025.md
 [GCP Kubernetes cluster size contains less than 3 nodes with auto upgrade enabled]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-CLT-026.md
 [Ensure,  GCP Load balancer HTTPS target proxy configured with default SSL policy rather than custom SSL policy]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-THP-001.md
 [Ensure,  Load balancer HTTPS target proxy is not configured with QUIC protocol in Google Cloud Provider]: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/google/IaC/all/PR-GCP-GDF-THP-002.md

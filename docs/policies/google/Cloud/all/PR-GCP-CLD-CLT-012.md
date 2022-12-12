@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters have binary authorization disabled
+# Title: Ensure GCP Kubernetes Engine Clusters not have binary authorization enabled
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-CLD-CLT-012
