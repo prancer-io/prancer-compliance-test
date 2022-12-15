@@ -20,32 +20,44 @@ azure_attribute_absence ["https_only"] {
     not resource.properties.httpsOnly
 }
 
-
 azure_issue ["https_only"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.httpsOnly != true
 }
 
-
 https_only {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    #lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["https_only"]
     not azure_issue["https_only"]
 }
 
-
 https_only = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["https_only"]
 }
 
 https_only = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["https_only"]
 }
 
 https_only_err = "Microsoft.web/Sites resource property httpsOnly missing in the resource" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["https_only"]
 } else = "Azure App Service Web app does not redirect HTTP to HTTPS" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["https_only"]
 }
 
@@ -111,25 +123,34 @@ azure_inner_issue ["min_tls_version"] {
 }
 
 min_tls_version {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    #lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["min_tls_version"]
     not azure_issue["min_tls_version"]
 }
 
 min_tls_version {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_inner_attribute_absence["min_tls_version"]
     not azure_inner_issue["min_tls_version"]
 }
 
 min_tls_version {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["min_tls_version"]
     azure_inner_attribute_absence["min_tls_version"]
 }
 
 min_tls_version = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["min_tls_version"]
     not azure_inner_attribute_absence["min_tls_version"]
     azure_issue["min_tls_version"]
@@ -137,32 +158,42 @@ min_tls_version = false {
 }
 
 min_tls_version = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_inner_attribute_absence["min_tls_version"]
     not azure_attribute_absence["min_tls_version"]
     azure_issue["min_tls_version"]
 }
 
 min_tls_version = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["min_tls_version"]
     not azure_inner_attribute_absence["min_tls_version"]
     azure_inner_issue["min_tls_version"]
 }
 
 min_tls_version_err = "Web App currently not configured with latest version TLS" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["min_tls_version"]
     not azure_inner_attribute_absence["min_tls_version"]
     azure_issue["min_tls_version"]
     azure_inner_issue["min_tls_version"]
 } else = "Web App currently not configured with latest version TLS" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_inner_attribute_absence["min_tls_version"]
     not azure_attribute_absence["min_tls_version"]
     azure_issue["min_tls_version"]
 } else = "Web App currently not configured with latest version TLS" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["min_tls_version"]
     not azure_inner_attribute_absence["min_tls_version"]
     azure_inner_issue["min_tls_version"]
@@ -198,22 +229,36 @@ azure_issue ["client_cert_enabled"] {
 }
 
 client_cert_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["client_cert_enabled"]
     not azure_issue["client_cert_enabled"]
 }
 
 client_cert_enabled = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["client_cert_enabled"]
 }
 
 client_cert_enabled = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["client_cert_enabled"]
 }
 
 client_cert_enabled_err = "microsoft.web/sites resource property clientCertEnabled missing in the resource" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["client_cert_enabled"]
 } else = "Web App does not have incoming client certificates enabled" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["client_cert_enabled"]
 }
 
@@ -279,55 +324,75 @@ azure_inner_issue ["http_20_enabled"] {
 }
 
 http_20_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["http_20_enabled"]
     not azure_issue["http_20_enabled"]
 }
 
 http_20_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_inner_attribute_absence["http_20_enabled"]
     not azure_inner_issue["http_20_enabled"]
 }
 
 http_20_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["http_20_enabled"]
     azure_inner_attribute_absence["http_20_enabled"]
 }
 
 http_20_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["http_20_enabled"]
     azure_inner_issue["http_20_enabled"]
 }
 
 http_20_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_inner_attribute_absence["http_20_enabled"]
     azure_issue["http_20_enabled"]
 }
 
 http_20_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["http_20_enabled"]
     azure_inner_issue["http_20_enabled"]
 }
 
 http_20_enabled_err = "Web App currently not using latest version of HTTP protocol" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["http_20_enabled"]
     azure_inner_issue["http_20_enabled"]
 } else = "microsoft.web/sites resource property siteConfig.http20Enabled is missing from the resource" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["http_20_enabled"]
     azure_inner_attribute_absence["http_20_enabled"]
 } else = "microsoft.web/sites resource property siteConfig.http20Enabled is missing from the resource" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_inner_attribute_absence["http_20_enabled"]
     azure_issue["http_20_enabled"]
 } else = "microsoft.web/sites resource property siteConfig.http20Enabled is missing from the resource" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["http_20_enabled"]
     azure_inner_issue["http_20_enabled"]
 }
@@ -408,25 +473,33 @@ azure_inner_issue["web_service_cors_not_allowing_all"] {
 }
 
 web_service_cors_not_allowing_all {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_cors_not_allowing_all"]
     not azure_issue["web_service_cors_not_allowing_all"]
 }
 
 web_service_cors_not_allowing_all {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
     not azure_inner_issue["web_service_cors_not_allowing_all"]
 }
 
 web_service_cors_not_allowing_all {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_cors_not_allowing_all"]
     azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
 }
 
 web_service_cors_not_allowing_all = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_cors_not_allowing_all"]
     not azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
     azure_issue["web_service_cors_not_allowing_all"]
@@ -434,32 +507,42 @@ web_service_cors_not_allowing_all = false {
 }
 
 web_service_cors_not_allowing_all = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
     not azure_attribute_absence["web_service_cors_not_allowing_all"]
     azure_issue["web_service_cors_not_allowing_all"]
 }
 
 web_service_cors_not_allowing_all = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_attribute_absence["web_service_cors_not_allowing_all"]
     not azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
     azure_inner_issue["web_service_cors_not_allowing_all"]
 }
 
 web_service_cors_not_allowing_all_err = "CORS configuration is currently allowing every resources to access Azure Web Service" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_cors_not_allowing_all"]
     not azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
     azure_issue["web_service_cors_not_allowing_all"]
     azure_inner_issue["web_service_cors_not_allowing_all"]
 } else = "CORS configuration is currently allowing every resources to access Azure Web Service" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
     not azure_attribute_absence["web_service_cors_not_allowing_all"]
     azure_issue["web_service_cors_not_allowing_all"]
 } else = "CORS configuration is currently allowing every resources to access Azure Web Service" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_attribute_absence["web_service_cors_not_allowing_all"]
     not azure_inner_attribute_absence["web_service_cors_not_allowing_all"]
     azure_inner_issue["web_service_cors_not_allowing_all"]
@@ -528,55 +611,75 @@ azure_inner_issue["web_service_http_logging_enabled"] {
 }
 
 web_service_http_logging_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_http_logging_enabled"]
     not azure_issue["web_service_http_logging_enabled"]
 }
 
 web_service_http_logging_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_inner_attribute_absence["web_service_http_logging_enabled"]
     not azure_inner_issue["web_service_http_logging_enabled"]
 }
 
 web_service_http_logging_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_http_logging_enabled"]
     azure_inner_attribute_absence["web_service_http_logging_enabled"]
 }
 
 web_service_http_logging_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["web_service_http_logging_enabled"]
     azure_inner_issue["web_service_http_logging_enabled"]
 }
 
 web_service_http_logging_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_inner_attribute_absence["web_service_http_logging_enabled"]
     azure_issue["web_service_http_logging_enabled"]
 }
 
 web_service_http_logging_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_http_logging_enabled"]
     azure_inner_issue["web_service_http_logging_enabled"]
 }
 
 web_service_http_logging_enabled_err = "Azure Web Service http logging is currently not enabled" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["web_service_http_logging_enabled"]
     azure_inner_issue["web_service_http_logging_enabled"]
 } else = "microsoft.web/sites property 'siteConfig.httpLoggingEnabled' need to be exist. Its missing from the resource" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_http_logging_enabled"]
     azure_inner_attribute_absence["web_service_http_logging_enabled"]
 } else = "microsoft.web/sites property 'siteConfig.httpLoggingEnabled' need to be exist. Its missing from the resource" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_inner_attribute_absence["web_service_http_logging_enabled"]
     azure_issue["web_service_http_logging_enabled"]
 } else = "microsoft.web/sites property 'siteConfig.httpLoggingEnabled' need to be exist. Its missing from the resource" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_http_logging_enabled"]
     azure_inner_issue["web_service_http_logging_enabled"]
 }
@@ -644,55 +747,75 @@ azure_inner_issue["web_service_detaild_error_message_enabled"] {
 }
 
 web_service_detaild_error_message_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_detaild_error_message_enabled"]
     not azure_issue["web_service_detaild_error_message_enabled"]
 }
 
 web_service_detaild_error_message_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_inner_attribute_absence["web_service_detaild_error_message_enabled"]
     not azure_inner_issue["web_service_detaild_error_message_enabled"]
 }
 
 web_service_detaild_error_message_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_detaild_error_message_enabled"]
     azure_inner_attribute_absence["web_service_detaild_error_message_enabled"]
 }
 
 web_service_detaild_error_message_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["web_service_detaild_error_message_enabled"]
     azure_inner_issue["web_service_detaild_error_message_enabled"]
 }
 
 web_service_detaild_error_message_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_inner_attribute_absence["web_service_detaild_error_message_enabled"]
     azure_issue["web_service_detaild_error_message_enabled"]
 }
 
 web_service_detaild_error_message_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_detaild_error_message_enabled"]
     azure_inner_issue["web_service_detaild_error_message_enabled"]
 }
 
 web_service_detaild_error_message_enabled_err = "Azure Web Service detaild error message is currently not enabled" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["web_service_detaild_error_message_enabled"]
     azure_inner_issue["web_service_detaild_error_message_enabled"]
 } else = "microsoft.web/sites property 'siteConfig.detailedErrorLoggingEnabled' need to be exist. Its missing from the resource." {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_detaild_error_message_enabled"]
     azure_inner_attribute_absence["web_service_detaild_error_message_enabled"]
 } else = "microsoft.web/sites property 'siteConfig.detailedErrorLoggingEnabled' need to be exist. Its missing from the resource." {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_inner_attribute_absence["web_service_detaild_error_message_enabled"]
     azure_issue["web_service_detaild_error_message_enabled"]
 } else = "microsoft.web/sites property 'siteConfig.detailedErrorLoggingEnabled' need to be exist. Its missing from the resource." {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_detaild_error_message_enabled"]
     azure_inner_issue["web_service_detaild_error_message_enabled"]
 }
@@ -760,55 +883,75 @@ azure_inner_issue["web_service_request_tracing_enabled"] {
 }
 
 web_service_request_tracing_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_request_tracing_enabled"]
     not azure_issue["web_service_request_tracing_enabled"]
 }
 
 web_service_request_tracing_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_inner_attribute_absence["web_service_request_tracing_enabled"]
     not azure_inner_issue["web_service_request_tracing_enabled"]
 }
 
 web_service_request_tracing_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_request_tracing_enabled"]
     azure_inner_attribute_absence["web_service_request_tracing_enabled"]
 }
 
 web_service_request_tracing_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["web_service_request_tracing_enabled"]
     azure_inner_issue["web_service_request_tracing_enabled"]
 }
 
 web_service_request_tracing_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_inner_attribute_absence["web_service_request_tracing_enabled"]
     azure_issue["web_service_request_tracing_enabled"]
 }
 
 web_service_request_tracing_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_request_tracing_enabled"]
     azure_inner_issue["web_service_request_tracing_enabled"]
 }
 
 web_service_request_tracing_enabled_err = "Azure Web Service Failed request tracing is currently not enabled" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["web_service_request_tracing_enabled"]
     azure_inner_issue["web_service_request_tracing_enabled"]
 } else = "microsoft.web/sites property 'siteConfig.requestTracingEnabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_request_tracing_enabled"]
     azure_inner_attribute_absence["web_service_request_tracing_enabled"]
 } else = "microsoft.web/sites property 'siteConfig.requestTracingEnabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_inner_attribute_absence["web_service_request_tracing_enabled"]
     azure_issue["web_service_request_tracing_enabled"]
 } else = "microsoft.web/sites property 'siteConfig.requestTracingEnabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_request_tracing_enabled"]
     azure_inner_issue["web_service_request_tracing_enabled"]
 }
@@ -842,17 +985,50 @@ azure_attribute_absence["web_service_managed_identity_provider_enabled"] {
     not resource.identity.type
 }
 
+azure_issue ["web_service_managed_identity_provider_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.identity.type), "systemassigned")
+}
+
+azure_issue ["web_service_managed_identity_provider_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.identity.type), "userassigned")
+}
+
 web_service_managed_identity_provider_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_managed_identity_provider_enabled"]
+    not azure_issue["web_service_managed_identity_provider_enabled"]
 }
 
 web_service_managed_identity_provider_enabled = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_managed_identity_provider_enabled"]
 }
 
+web_service_managed_identity_provider_enabled = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
+    azure_issue["web_service_managed_identity_provider_enabled"]
+}
+
 web_service_managed_identity_provider_enabled_err = "microsoft.web/sites property 'identity.type' need to be exist. Its missing from the resource." {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_managed_identity_provider_enabled"]
+} else = "Azure Web App Service currently dont have any identity provider enabled" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
+    azure_issue["web_service_managed_identity_provider_enabled"]
 }
 
 web_service_managed_identity_provider_enabled_metadata := {
@@ -917,25 +1093,33 @@ azure_inner_issue["web_service_remote_debugging_disabled"] {
 }
 
 web_service_remote_debugging_disabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_remote_debugging_disabled"]
     not azure_issue["web_service_remote_debugging_disabled"]
 }
 
 web_service_remote_debugging_disabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
     not azure_inner_issue["web_service_remote_debugging_disabled"]
 }
 
 web_service_remote_debugging_disabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_remote_debugging_disabled"]
     azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
 }
 
 web_service_remote_debugging_disabled = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_remote_debugging_disabled"]
     not azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
     azure_issue["web_service_remote_debugging_disabled"]
@@ -943,32 +1127,42 @@ web_service_remote_debugging_disabled = false {
 }
 
 web_service_remote_debugging_disabled = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
     not azure_attribute_absence["web_service_remote_debugging_disabled"]
     azure_issue["web_service_remote_debugging_disabled"]
 }
 
 web_service_remote_debugging_disabled = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_attribute_absence["web_service_remote_debugging_disabled"]
     not azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
     azure_inner_issue["web_service_remote_debugging_disabled"]
 }
 
 web_service_remote_debugging_disabled_err = "Azure Web Service remote debugging currently not disabled" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_remote_debugging_disabled"]
     not azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
     azure_issue["web_service_remote_debugging_disabled"]
     azure_inner_issue["web_service_remote_debugging_disabled"]
 } else = "Azure Web Service remote debugging currently not disabled" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
     not azure_attribute_absence["web_service_remote_debugging_disabled"]
     azure_issue["web_service_remote_debugging_disabled"]
 } else = "Azure Web Service remote debugging currently not disabled" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_attribute_absence["web_service_remote_debugging_disabled"]
     not azure_inner_attribute_absence["web_service_remote_debugging_disabled"]
     azure_inner_issue["web_service_remote_debugging_disabled"]
@@ -1040,55 +1234,75 @@ azure_inner_issue["web_service_ftp_deployment_disabled"] {
 }
 
 web_service_ftp_deployment_disabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_ftp_deployment_disabled"]
     not azure_issue["web_service_ftp_deployment_disabled"]
 }
 
 web_service_ftp_deployment_disabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_inner_attribute_absence["web_service_ftp_deployment_disabled"]
     not azure_inner_issue["web_service_ftp_deployment_disabled"]
 }
 
 web_service_ftp_deployment_disabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_ftp_deployment_disabled"]
     azure_inner_attribute_absence["web_service_ftp_deployment_disabled"]
 }
 
 web_service_ftp_deployment_disabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["web_service_ftp_deployment_disabled"]
     azure_inner_issue["web_service_ftp_deployment_disabled"]
 }
 
 web_service_ftp_deployment_disabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_inner_attribute_absence["web_service_ftp_deployment_disabled"]
     azure_issue["web_service_ftp_deployment_disabled"]
 }
 
 web_service_ftp_deployment_disabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_ftp_deployment_disabled"]
     azure_inner_issue["web_service_ftp_deployment_disabled"]
 }
 
 web_service_ftp_deployment_disabled_err = "Azure Web Service FTP deployment is currently not disabled" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["web_service_ftp_deployment_disabled"]
     azure_inner_issue["web_service_ftp_deployment_disabled"]
 } else = "microsoft.web/sites property 'siteConfig.ftpsState' need to be exist. Its missing from the resource." {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_ftp_deployment_disabled"]
     azure_inner_attribute_absence["web_service_ftp_deployment_disabled"]
 } else = "microsoft.web/sites property 'siteConfig.ftpsState' need to be exist. Its missing from the resource." {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_inner_attribute_absence["web_service_ftp_deployment_disabled"]
     azure_issue["web_service_ftp_deployment_disabled"]
 } else = "microsoft.web/sites property 'siteConfig.ftpsState' need to be exist. Its missing from the resource." {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_ftp_deployment_disabled"]
     azure_inner_issue["web_service_ftp_deployment_disabled"]
 }
@@ -1163,25 +1377,33 @@ azure_inner_issue["web_service_net_framework_latest"] {
 # we need to make it pass if property is missing, as microsoft.web/sites may not need dot net framework
 
 web_service_net_framework_latest {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_net_framework_latest"]
     not azure_issue["web_service_net_framework_latest"]
 }
 
 web_service_net_framework_latest {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_inner_attribute_absence["web_service_net_framework_latest"]
     not azure_inner_issue["web_service_net_framework_latest"]
 }
 
 web_service_net_framework_latest {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_net_framework_latest"]
     azure_inner_attribute_absence["web_service_net_framework_latest"]
 }
 
 web_service_net_framework_latest = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_net_framework_latest"]
     not azure_inner_attribute_absence["web_service_net_framework_latest"]
     azure_issue["web_service_net_framework_latest"]
@@ -1189,32 +1411,42 @@ web_service_net_framework_latest = false {
 }
 
 web_service_net_framework_latest = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_inner_attribute_absence["web_service_net_framework_latest"]
     not azure_attribute_absence["web_service_net_framework_latest"]
     azure_issue["web_service_net_framework_latest"]
 }
 
 web_service_net_framework_latest = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_attribute_absence["web_service_net_framework_latest"]
     not azure_inner_attribute_absence["web_service_net_framework_latest"]
     azure_inner_issue["web_service_net_framework_latest"]
 }
 
 web_service_net_framework_latest_err = "Azure web Service currently dont have latest version of Dot Net Framework" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_net_framework_latest"]
     not azure_inner_attribute_absence["web_service_net_framework_latest"]
     azure_issue["web_service_net_framework_latest"]
     azure_inner_issue["web_service_net_framework_latest"]
 } else = "Azure web Service currently dont have latest version of Dot Net Framework" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_inner_attribute_absence["web_service_net_framework_latest"]
     not azure_attribute_absence["web_service_net_framework_latest"]
     azure_issue["web_service_net_framework_latest"]
 } else = "Azure web Service currently dont have latest version of Dot Net Framework" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_attribute_absence["web_service_net_framework_latest"]
     not azure_inner_attribute_absence["web_service_net_framework_latest"]
     azure_inner_issue["web_service_net_framework_latest"]
@@ -1288,25 +1520,33 @@ azure_inner_issue["web_service_php_version_latest"] {
 # we need to make it pass if property is missing, as microsoft.web/sites may not need php
 
 web_service_php_version_latest {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_php_version_latest"]
     not azure_issue["web_service_php_version_latest"]
 }
 
 web_service_php_version_latest {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_inner_attribute_absence["web_service_php_version_latest"]
     not azure_inner_issue["web_service_php_version_latest"]
 }
 
 web_service_php_version_latest {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_php_version_latest"]
     azure_inner_attribute_absence["web_service_php_version_latest"]
 }
 
 web_service_php_version_latest = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_php_version_latest"]
     not azure_inner_attribute_absence["web_service_php_version_latest"]
     azure_issue["web_service_php_version_latest"]
@@ -1314,32 +1554,42 @@ web_service_php_version_latest = false {
 }
 
 web_service_php_version_latest = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_inner_attribute_absence["web_service_php_version_latest"]
     not azure_attribute_absence["web_service_php_version_latest"]
     azure_issue["web_service_php_version_latest"]
 }
 
 web_service_php_version_latest = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_attribute_absence["web_service_php_version_latest"]
     not azure_inner_attribute_absence["web_service_php_version_latest"]
     azure_inner_issue["web_service_php_version_latest"]
 }
 
 web_service_php_version_latest_err = "Azure Web Service currently dont have latest version of PHP" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_php_version_latest"]
     not azure_inner_attribute_absence["web_service_php_version_latest"]
     azure_issue["web_service_php_version_latest"]
     azure_inner_issue["web_service_php_version_latest"]
 } else = "Azure Web Service currently dont have latest version of PHP" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_inner_attribute_absence["web_service_php_version_latest"]
     not azure_attribute_absence["web_service_php_version_latest"]
     azure_issue["web_service_php_version_latest"]
 } else = "Azure Web Service currently dont have latest version of PHP" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_attribute_absence["web_service_php_version_latest"]
     not azure_inner_attribute_absence["web_service_php_version_latest"]
     azure_inner_issue["web_service_php_version_latest"]
@@ -1416,25 +1666,33 @@ azure_inner_issue["web_service_python_version_latest"] {
 # we need to make it pass if property is missing, as microsoft.web/sites may not need python
 
 web_service_python_version_latest {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_python_version_latest"]
     not azure_issue["web_service_python_version_latest"]
 }
 
 web_service_python_version_latest {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_inner_attribute_absence["web_service_python_version_latest"]
     not azure_inner_issue["web_service_python_version_latest"]
 }
 
 web_service_python_version_latest {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_python_version_latest"]
     azure_inner_attribute_absence["web_service_python_version_latest"]
 }
 
 web_service_python_version_latest = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_python_version_latest"]
     not azure_inner_attribute_absence["web_service_python_version_latest"]
     azure_issue["web_service_python_version_latest"]
@@ -1442,32 +1700,42 @@ web_service_python_version_latest = false {
 }
 
 web_service_python_version_latest = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_inner_attribute_absence["web_service_python_version_latest"]
     not azure_attribute_absence["web_service_python_version_latest"]
     azure_issue["web_service_python_version_latest"]
 }
 
 web_service_python_version_latest = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_attribute_absence["web_service_python_version_latest"]
     not azure_inner_attribute_absence["web_service_python_version_latest"]
     azure_inner_issue["web_service_python_version_latest"]
 }
 
 web_service_python_version_latest_err = "Azure Web Service currently dont have latest version of Python" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_python_version_latest"]
     not azure_inner_attribute_absence["web_service_python_version_latest"]
     azure_issue["web_service_python_version_latest"]
     azure_inner_issue["web_service_python_version_latest"]
 } else = "Azure Web Service currently dont have latest version of Python" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_inner_attribute_absence["web_service_python_version_latest"]
     not azure_attribute_absence["web_service_python_version_latest"]
     azure_issue["web_service_python_version_latest"]
 } else = "Azure Web Service currently dont have latest version of Python" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_attribute_absence["web_service_python_version_latest"]
     not azure_inner_attribute_absence["web_service_python_version_latest"]
     azure_inner_issue["web_service_python_version_latest"]
@@ -1541,25 +1809,33 @@ azure_inner_issue["web_service_java_version_latest"] {
 
 # we need to make it pass if property is missing, as microsoft.web/sites may not need java
 web_service_java_version_latest {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_java_version_latest"]
     not azure_issue["web_service_java_version_latest"]
 }
 
 web_service_java_version_latest {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_inner_attribute_absence["web_service_java_version_latest"]
     not azure_inner_issue["web_service_java_version_latest"]
 }
 
 web_service_java_version_latest {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["web_service_java_version_latest"]
     azure_inner_attribute_absence["web_service_java_version_latest"]
 }
 
 web_service_java_version_latest = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_java_version_latest"]
     not azure_inner_attribute_absence["web_service_java_version_latest"]
     azure_issue["web_service_java_version_latest"]
@@ -1567,32 +1843,42 @@ web_service_java_version_latest = false {
 }
 
 web_service_java_version_latest = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_inner_attribute_absence["web_service_java_version_latest"]
     not azure_attribute_absence["web_service_java_version_latest"]
     azure_issue["web_service_java_version_latest"]
 }
 
 web_service_java_version_latest = false {
-	lower(input.resources[_].type) == "microsoft.web/sites"
+	resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_attribute_absence["web_service_java_version_latest"]
     not azure_inner_attribute_absence["web_service_java_version_latest"]
     azure_inner_issue["web_service_java_version_latest"]
 }
 
 web_service_java_version_latest_err = "Azure Web Service currently dont have latest version of Java" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_java_version_latest"]
     not azure_inner_attribute_absence["web_service_java_version_latest"]
     azure_issue["web_service_java_version_latest"]
     azure_inner_issue["web_service_java_version_latest"]
 } else = "Azure Web Service currently dont have latest version of Java" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_inner_attribute_absence["web_service_java_version_latest"]
     not azure_attribute_absence["web_service_java_version_latest"]
     azure_issue["web_service_java_version_latest"]
 } else = "Azure Web Service currently dont have latest version of Java" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
  	azure_attribute_absence["web_service_java_version_latest"]
     not azure_inner_attribute_absence["web_service_java_version_latest"]
     azure_inner_issue["web_service_java_version_latest"]
