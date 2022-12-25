@@ -1,0 +1,47 @@
+parameters:
+- name: master_compliance
+  displayName: 'Master Compliance Test File'
+  type: string
+  default: https://raw.githubusercontent.com/prancer-io/prancer-compliance-test/master/azure/iac/master-compliance-test.json
+- name: Rego_File
+  displayName: 'REGO FILE'
+  type: string
+  default: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/iac
+- name: Path_File
+  displayName: 'PATH FILE'
+  type: string
+  default: https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/policies/azure/IaC/all
+- name: Branch
+  displayName: 'Git Branch'
+  type: string
+  default: azure_iac
+
+
+trigger:
+- master
+
+pool: dev-agent
+
+
+
+steps:
+- checkout: self
+  persistCredentials: true
+
+- script: |
+    git checkout -b "${{parameters.Branch}}"
+    python3 -m venv json2md_venv
+    source json2md_venv/bin/activate
+    pip install mdutils
+    curl -L -o masterTest.json "${{parameters.master_compliance}}"
+    export PATH_FILE="${{parameters.Path_File}}"
+    export REGO_FILE="${{parameters.Rego_File}}"
+    python docs/pythonFiles/json2mdGeneral.py
+    git add "Master Compliance Test.md"
+    git commit -m "add master Compliance test"
+    python docs/pythonFiles/json2mdDetail.py
+    rm -r masterTest.json
+    git add .
+    git commit -m "add test cases"
+    git push origin "${{parameters.Branch}}"
+  displayName: 'Run a multi-line script'
