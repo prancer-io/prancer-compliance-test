@@ -14493,6 +14493,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "azurerm_virtual_machine",
                         "azurerm_virtual_machine_extension"
                     ]
                 },
