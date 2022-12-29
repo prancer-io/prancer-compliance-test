@@ -1,7 +1,8 @@
 package rule
 
-# https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts
+# "apiVersion": "2020-01-01-preview"
 
+# https://learn.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts?pivots=deployment-language-arm-template
 #
 # PR-AZR-ARM-ASC-002
 #
@@ -11,31 +12,14 @@ default securitycontacts = null
 azure_attribute_absence["securitycontacts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    not resource.properties.email
-}
-
-source_path[{"securitycontacts":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.security/securitycontacts"
-    not resource.properties.email
-    metadata:= {
-        "resource_path": [["resources",i,"properties","email"]]
-    }
+    not resource.properties.emails
 }
 
 azure_issue["securitycontacts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
-}
-
-source_path[{"securitycontacts":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.security/securitycontacts"
-    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
-    metadata:= {
-        "resource_path": [["resources",i,"properties","email"]]
-    }
+    # re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
+    count(resource.properties.emails) == 0
 }
 
 securitycontacts {
@@ -52,9 +36,9 @@ securitycontacts = false {
     azure_attribute_absence["securitycontacts"]
 }
 
-securitycontacts_err = "Security Center currently does not have any valid security contact email configured" {
+securitycontacts_err = "Security Center currently does not have any security contact email configured" {
     azure_issue["securitycontacts"]
-} else = "Security Center security contacts property 'email' is missing from the resource" {
+} else = "Security Center security contacts property 'emails' is missing from the resource" {
     azure_attribute_absence["securitycontacts"]
 }
 
@@ -71,7 +55,7 @@ securitycontacts_metadata := {
 }
 
 
-#
+# 
 # PR-AZR-ARM-ASC-003
 #
 
@@ -83,28 +67,16 @@ azure_attribute_absence["alert_notifications"] {
     not resource.properties.alertNotifications
 }
 
-source_path[{"alert_notifications":metadata}] {
-    resource := input.resources[i]
+azure_attribute_absence["alert_notifications"] {
+    resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    not resource.properties.alertNotifications
-    metadata:= {
-        "resource_path": [["resources",i,"properties","alertNotifications"]]
-    }
+    not resource.properties.alertNotifications.state
 }
 
 azure_issue["alert_notifications"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    lower(resource.properties.alertNotifications) != "on"
-}
-
-source_path[{"alert_notifications":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.security/securitycontacts"
-    lower(resource.properties.alertNotifications) != "on"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","alertNotifications"]]
-    }
+    lower(resource.properties.alertNotifications.state) != "on"
 }
 
 alert_notifications {
@@ -121,7 +93,7 @@ alert_notifications = false {
     azure_attribute_absence["alert_notifications"]
 }
 
-alert_notifications_err = "microsoft.security/securitycontacts resource property alertNotifications missing in the resource" {
+alert_notifications_err = "microsoft.security/securitycontacts resource property alertNotifications.state is missing from the resource" {
     azure_attribute_absence["securitycontacts"]
 } else = "Send email notification for alerts is not enabled" {
     azure_issue["alert_notifications"]
@@ -132,7 +104,7 @@ alert_notifications_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Send email notification should be enabled",
+    "Policy Title": "Security Center shoud send security alerts notifications to the security contact",
     "Policy Description": "Setting the security alert Send email notification for alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place.",
     "Resource Type": "microsoft.security/securitycontacts",
     "Policy Help URL": "",
@@ -148,31 +120,19 @@ default securitycontacts_alerts_to_admins_enabled = null
 azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    not resource.properties.alertsToAdmins
+    not resource.properties.notificationsByRole
 }
 
-source_path[{"securitycontacts_alerts_to_admins_enabled":metadata}] {
-    resource := input.resources[i]
+azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"] {
+    resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    not resource.properties.alertsToAdmins
-    metadata:= {
-        "resource_path": [["resources",i,"properties","alertsToAdmins"]]
-    }
+    not resource.properties.notificationsByRole.state
 }
 
 azure_issue["securitycontacts_alerts_to_admins_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    lower(resource.properties.alertsToAdmins) != "on"
-}
-
-source_path[{"securitycontacts_alerts_to_admins_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.security/securitycontacts"
-    lower(resource.properties.alertsToAdmins) != "on"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","alertsToAdmins"]]
-    }
+    lower(resource.properties.notificationsByRole.state) != "on"
 }
 
 securitycontacts_alerts_to_admins_enabled {
@@ -191,7 +151,7 @@ securitycontacts_alerts_to_admins_enabled = false {
 
 securitycontacts_alerts_to_admins_enabled_err = "Security Center currently not configured to send security alerts notifications to subscription admins" {
     azure_issue["securitycontacts_alerts_to_admins_enabled"]
-} else = "microsoft.security/securitycontacts property 'alerts_to_admins' need to be exist. Its missing from the resource. Please set 'true' as value after property addition."  {
+} else = "microsoft.security/securitycontacts property 'notificationsByRole.state' need to be exist. Its missing from the resource. Please set 'On' as value after property addition."  {
     azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"]
 }
 
