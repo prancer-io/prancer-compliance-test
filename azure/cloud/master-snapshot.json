@@ -200,7 +200,7 @@
                     "masterSnapshotId": "AZRSNP_296",
                     "type": "Microsoft.Security/securityContacts",
                     "collection": "Microsoft.Security",
-                    "version": "2017-08-01-preview"
+                    "version": "2020-01-01-preview"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_299",

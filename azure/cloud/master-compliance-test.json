@@ -11396,7 +11396,7 @@
                         "AZRSNP_296"
                     ],
                     "severity": "Medium",
-                    "title": "Send email notification should be enabled",
+                    "title": "Security Center shoud send security alerts notifications to the security contact",
                     "description": "Setting the security alert Send email notification for alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place."
                 },
                 {
