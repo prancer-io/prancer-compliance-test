@@ -16036,6 +16036,215 @@
                     "resourceTypes": [
                         "azurerm_function_app"
                     ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACD-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(cosmosdb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACD-001",
+                            "eval": "data.rule.acd_ip_range_filter_configured",
+                            "message": "data.rule.acd_ip_range_filter_configured_err",
+                            "remediationDescription": "In 'azurerm_cosmosdb_account' resource, make sure property 'ip_range_filter' exist and not empty to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account#ip_range_filter' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACD_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cosmos DB IP range filter should be configured",
+                    "description": "This policy identifies Azure Cosmos DB with IP range filter not configured. Azure Cosmos DB should be restricted access from All Networks. It is recommended to add defined set of IP / IP range which can access Azure Cosmos DB from the Internet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-DSP-07",
+                                "CSA CCM v.4.0.1-DSP-10",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IVS-03",
+                                "CSA CCM v.4.0.1-UEM-11",
+                                "CMMC",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.192",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:10.a",
+                                "ISO/IEC 27002:2013",
+                                "ISO/IEC 27002:2013-12.2.1",
+                                "ISO/IEC 27002:2013-12.3.1",
+                                "ISO/IEC 27002:2013-13.1.1",
+                                "ISO/IEC 27002:2013-13.1.2",
+                                "ISO/IEC 27002:2013-13.1.3",
+                                "ISO/IEC 27002:2013-13.2.1",
+                                "ISO/IEC 27002:2013-13.2.3",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.2.5",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-8.3.1",
+                                "ISO/IEC 27002:2013-8.3.3",
+                                "ISO/IEC 27017:2015",
+                                "ISO/IEC 27017:2015-6.1.1",
+                                "ISO/IEC 27018:2019",
+                                "ISO/IEC 27018:2019-10.1.2",
+                                "ISO/IEC 27018:2019-12.3.1",
+                                "NIST CSF",
+                                "NIST CSF-PR.AC-5",
+                                "NIST CSF-PR.DS-5",
+                                "NIST CSF-PR.PT-4",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.13.5",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e",
+                                "PCI DSS",
+                                "PCI DSS v3.2.1-6.3"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_cosmosdb_account"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACD-003",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(cosmosdb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACD-003",
+                            "eval": "data.rule.acd_vnet_configured",
+                            "message": "data.rule.acd_vnet_configured_err",
+                            "remediationDescription": "In 'azurerm_cosmosdb_account' resource, make sure property 'is_virtual_network_filter_enabled' exist and has value 'true' and 'virtual_network_rule' defined to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACD_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cosmos DB Virtual network should be configured",
+                    "description": "This policy identifies Azure Cosmos DBs that are not configured with a Virtual network. Azure Cosmos DB by default is accessible from any source if the request is accompanied by a valid authorization token. By configuring Virtual network only requests originating from those subnets will get a valid response. It is recommended to configure Virtual network to Cosmos DB.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "ACSC Information Security Manual (ISM)",
+                                "CIS Controls",
+                                "CIS Controls v7.1",
+                                "CIS Controls v8",
+                                "MITRE ATT&CK v10.0",
+                                "MLPS",
+                                "MLPS 2.0 (Level 2)",
+                                "New Zealand Information Security Manual (NZISM v3.4)",
+                                "Secure Controls Framework (SCF) - 2022.2.1"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_cosmosdb_account"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACD-004",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(cosmosdb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACD-004",
+                            "eval": "data.rule.acd_ip_range_filter_configured_to_block_public_inbound_access",
+                            "message": "data.rule.acd_ip_range_filter_configured_to_block_public_inbound_access_err",
+                            "remediationDescription": "In 'azurerm_cosmosdb_account' resource, make sure property 'ip_range_filter' exist and dont have value '0.0.0.0' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account#ip_range_filter' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACD_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cosmos DB shoud not allow traffic from public Azure datacenters",
+                    "description": "This policy identifies Cosmos DBs that allow traffic from public Azure datacenters. If you enable this option, the IP address 0.0.0.0 is added to the list of allowed IP addresses. The list of IPs allowed by this option is wide, so it limits the effectiveness of a firewall policy. So it is recommended not to select the 'Accept connections from within public Azure datacenters' option for your Cosmos DB.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "ACSC Information Security Manual (ISM)",
+                                "CIS Controls",
+                                "CIS Controls v7.1",
+                                "CIS Controls v8",
+                                "FFIEC",
+                                "MLPS",
+                                "MLPS 2.0 (Level 2)",
+                                "New Zealand Information Security Manual (NZISM v3.4)",
+                                "PCI DSS",
+                                "PCI DSS v4.0",
+                                "Secure Controls Framework (SCF) - 2022.2.1"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_cosmosdb_account"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACD-005",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(cosmosdb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACD-005",
+                            "eval": "data.rule.acd_disbaled_key_based_metadata_write_access",
+                            "message": "data.rule.acd_disbaled_key_based_metadata_write_access_err",
+                            "remediationDescription": "In 'azurerm_cosmosdb_account' resource, make sure property 'access_key_metadata_writes_enabled' exist and has value set to 'false' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account#access_key_metadata_writes_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACD_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cosmos DB key based authentication should be disabled",
+                    "description": "This policy identifies Cosmos DBs that are enabled with key-based authentication. Disabling key-based metadata write access on Azure Cosmos DB prevents any changes to resources from a client connecting using the account keys. It is recommended to disable this feature for organizations who want higher degrees of control and governance for production environments.<br><br>NOTE: Enabling this feature can have an impact on your application. Make sure that you understand the impact before enabling it.<br><br>Refer for more details:<br>https://docs.microsoft.com/en-us/azure/cosmos-db/role-based-access-control#check-list-before-enabling",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "ACSC Information Security Manual (ISM)",
+                                "Australian Cyber Security Centre (ACSC) Essential Eight",
+                                "Australian Energy Sector Cyber Security Framework (AESCSF)",
+                                "CIS Controls",
+                                "CIS Controls v7.1",
+                                "CIS Controls v8",
+                                "FFIEC",
+                                "MITRE ATT&CK v10.0",
+                                "MLPS",
+                                "MLPS 2.0 (Level 2)",
+                                "PCI DSS",
+                                "PCI DSS v4.0",
+                                "Secure Controls Framework (SCF) - 2022.2.1"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_cosmosdb_account"
+                    ]
                 }
             ]
         }

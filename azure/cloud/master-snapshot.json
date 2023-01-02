@@ -453,6 +453,12 @@
                     "type": "Microsoft.EventHub/namespaces/eventhubs",
                     "collection": "Microsoft.EventHub",
                     "version": "2022-01-01-preview"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_515",
+                    "type": "Microsoft.DocumentDB/databaseAccounts",
+                    "collection": "Microsoft.DocumentDB",
+                    "version": "2022-08-15"
                 }
             ]
         }
