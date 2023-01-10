@@ -424,17 +424,17 @@ azure_attribute_absence["azure_function_app_has_auth_settings_enabled"] {
     not resource.dependsOn
 }
 
-azure_attribute_absence["azure_function_app_has_auth_settings_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites/config"
-    not resource.name
-}
+# azure_attribute_absence["azure_function_app_has_auth_settings_enabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.web/sites/config"
+#     not resource.name
+# }
 
-azure_attribute_absence["azure_function_app_has_auth_settings_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites/config"
-    not resource.properties.enabled
-}
+# azure_attribute_absence["azure_function_app_has_auth_settings_enabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.web/sites/config"
+#     not resource.properties.enabled
+# }
 
 azure_issue["azure_function_app_has_auth_settings_enabled"] {
     resource := input.resources[_]

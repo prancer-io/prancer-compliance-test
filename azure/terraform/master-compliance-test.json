@@ -16245,6 +16245,136 @@
                     "resourceTypes": [
                         "azurerm_cosmosdb_account"
                     ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-CDN-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(cdn.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-CDN-001",
+                            "eval": "data.rule.cdn_customdomain_configured_with_https",
+                            "message": "data.rule.cdn_customdomain_configured_with_https_err",
+                            "remediationDescription": "In 'azurerm_cdn_endpoint_custom_domain' resource, make sure either 'cdn_managed_https' or 'user_managed_https' block exist with required properties. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint_custom_domain' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_CDN_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure CDN Endpoint Custom domains should be configured with HTTPS",
+                    "description": "This policy identifies Azure CDN Endpoint Custom domains which has not configured with HTTPS. Enabling HTTPS would allow sensitive data to be delivered securely via TLS/SSL encryption when it is sent across the internet. It is recommended to enable HTTPS in Azure CDN Endpoint Custom domains which will provide additional security and protects your web applications from attacks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-CEK-03",
+                                "CSA CCM v.4.0.1-DSP-10",
+                                "CSA CCM v.4.0.1-IVS-03",
+                                "CSA CCM v.4.0.1-UEM-11",
+                                "ISO/IEC 27002:2013",
+                                "ISO/IEC 27002:2013-10.1.1",
+                                "ISO/IEC 27002:2013-12.2.1",
+                                "ISO/IEC 27002:2013-12.3.1",
+                                "ISO/IEC 27002:2013-13.1.1",
+                                "ISO/IEC 27002:2013-13.1.2",
+                                "ISO/IEC 27002:2013-13.1.3",
+                                "ISO/IEC 27002:2013-13.2.1",
+                                "ISO/IEC 27002:2013-13.2.3",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.1.3",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-8.3.1",
+                                "ISO/IEC 27002:2013-8.3.3",
+                                "ISO/IEC 27017:2015",
+                                "ISO/IEC 27017:2015-10.1.1",
+                                "ISO/IEC 27017:2015-10.1.2",
+                                "ISO/IEC 27017:2015-6.1.1",
+                                "ISO/IEC 27018:2019-10.1.2",
+                                "ISO/IEC 27018:2019-12.3.1",
+                                "NIST CSF",
+                                "NIST CSF-PR.DS-2",
+                                "NIST CSF-PR.DS-5",
+                                "NIST SP 800",
+                                "NIST SP 800-171 Revision 2-3.13.8",
+                                "NIST SP 800-172-3.4.1e",
+                                "NIST SP 800-172-3.4.2e"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_cdn_endpoint_custom_domain"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-CDN-002",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(cdn.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-CDN-002",
+                            "eval": "data.rule.cdn_customdomain_configured_with_secure_tls",
+                            "message": "data.rule.cdn_customdomain_configured_with_secure_tls_err",
+                            "remediationDescription": "In 'azurerm_cdn_endpoint_custom_domain' resource, make sure either 'cdn_managed_https.tls_version' or 'user_managed_https.tls_version' block exist and has value set to 'tls12' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint_custom_domain' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_CDN_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure CDN Endpoint Custom domains should use secure TLS version",
+                    "description": "This policy identifies Azure CDN Endpoint Custom domains which has insecure TLS version. TLS 1.2 resolves the security gap from its preceding versions. As a best security practice, use TLS 1.2 as the minimum TLS version for Azure CDN Endpoint Custom domains.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-CEK-03",
+                                "CSA CCM v.4.0.1-DSP-10",
+                                "CSA CCM v.4.0.1-IVS-03",
+                                "CSA CCM v.4.0.1-UEM-11",
+                                "ISO/IEC 27002:2013",
+                                "ISO/IEC 27002:2013-10.1.1",
+                                "ISO/IEC 27002:2013-12.2.1",
+                                "ISO/IEC 27002:2013-12.3.1",
+                                "ISO/IEC 27002:2013-13.1.1",
+                                "ISO/IEC 27002:2013-13.1.2",
+                                "ISO/IEC 27002:2013-13.1.3",
+                                "ISO/IEC 27002:2013-13.2.1",
+                                "ISO/IEC 27002:2013-13.2.3",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.1.3",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-8.3.1",
+                                "ISO/IEC 27002:2013-8.3.3",
+                                "ISO/IEC 27017:2015-10.1.1",
+                                "ISO/IEC 27017:2015-10.1.2",
+                                "ISO/IEC 27017:2015-6.1.1",
+                                "ISO/IEC 27018:2019-10.1.2",
+                                "ISO/IEC 27018:2019-12.3.1",
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application",
+                                "NIST CSF",
+                                "NIST CSF-PR.DS-2",
+                                "NIST CSF-PR.DS-5",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.13.8",
+                                "NIST SP 800-172-3.1.3e"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_cdn_endpoint_custom_domain"
+                    ]
                 }
             ]
         }

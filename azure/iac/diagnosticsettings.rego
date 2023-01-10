@@ -331,7 +331,7 @@ log_redis_cache_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Redis Cache audit logging should be enabled",
+    "Policy Title": "Redis Cache diagnostic logs should be enabled",
     "Policy Description": "Diagnostic settings for redis cache used to stream resource logs to a Log Analytics workspace. this policy will identify any redis cache which has this diagnostic settings missing or misconfigured.",
     "Resource Type": "microsoft.cache/redis",
     "Policy Help URL": "",
