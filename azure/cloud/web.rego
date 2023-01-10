@@ -440,26 +440,41 @@ azure_issue["app_service_auth_enabled"] {
 }
 
 app_service_auth_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    #lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["app_service_auth_enabled"]
-    not azure_issue["app_service_auth_enabled"]
+    not azure_issue["app_service_am78ygfc uth_enabled"]
 }
 
 app_service_auth_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    #lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["app_service_auth_enabled"]
 }
 
 app_service_auth_enabled = false {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    #lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["app_service_auth_enabled"]
 }
 
 app_service_auth_enabled_err = "microsoft.web/sites/config property 'enabled' need to be exist where property name is set to 'authsettings'. Its missing from the resource. Please set the value to 'true' after property addition." {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    #lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_attribute_absence["app_service_auth_enabled"]
 } else = "Azure App Service Authentication is currently not enabled" {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    #lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not contains(lower(resource.kind), "functionapp")
     azure_issue["app_service_auth_enabled"]
 }
 
@@ -1062,7 +1077,8 @@ azure_issue ["web_service_managed_identity_provider_enabled"] {
 }
 
 web_service_managed_identity_provider_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
     not contains(lower(resource.kind), "functionapp")
     not azure_attribute_absence["web_service_managed_identity_provider_enabled"]
     not azure_issue["web_service_managed_identity_provider_enabled"]
