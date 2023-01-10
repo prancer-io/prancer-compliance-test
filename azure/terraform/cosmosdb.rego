@@ -159,7 +159,7 @@ acd_ip_range_filter_configured_to_block_public_inbound_access_metadata := {
 
 
 #
-# PR-AZR-ARM-ACD-005
+# PR-AZR-TRF-ACD-005
 #
 
 # Defaults to true
@@ -198,10 +198,10 @@ acd_disbaled_key_based_metadata_write_access_err = "Azure Cosmos DB key based au
 }
 
 acd_disbaled_key_based_metadata_write_access_metadata := {
-    "Policy Code": "PR-AZR-ARM-ACD-005",
+    "Policy Code": "PR-AZR-TRF-ACD-005",
     "Type": "IaC",
     "Product": "AZR",
-    "Language": "ARM template",
+    "Language": "Terraform",
     "Policy Title": "Azure Cosmos DB key based authentication should be disabled",
     "Policy Description": "This policy identifies Cosmos DBs that are enabled with key-based authentication. Disabling key-based metadata write access on Azure Cosmos DB prevents any changes to resources from a client connecting using the account keys. It is recommended to disable this feature for organizations who want higher degrees of control and governance for production environments.<br><br>NOTE: Enabling this feature can have an impact on your application. Make sure that you understand the impact before enabling it.<br><br>Refer for more details:<br>https://docs.microsoft.com/en-us/azure/cosmos-db/role-based-access-control#check-list-before-enabling",
     "Resource Type": "azurerm_cosmosdb_account",

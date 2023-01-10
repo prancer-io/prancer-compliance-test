@@ -410,6 +410,72 @@ http_20_enabled_metadata := {
 }
 
 
+# https://learn.microsoft.com/en-us/azure/templates/microsoft.web/sites/config-authsettings?pivots=deployment-language-arm-template
+# The sites/config resource accepts different properties based on the value of the name property. This article shows the properties that are available when you set name: 'authsettings'.
+#
+# PR-AZR-CLD-WEB-005
+#
+
+default app_service_auth_enabled = null
+
+azure_attribute_absence ["app_service_auth_enabled"] {
+    count([c | lower(input.resources[_].type) == "microsoft.web/sites/config"; c := 1]) == 0
+}
+
+# azure_attribute_absence["app_service_auth_enabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.web/sites/config"
+#     not resource.dependsOn
+# }
+
+azure_issue["app_service_auth_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.web/sites/config";
+              # array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              lower(r.name) == "authsettings";
+              r.properties.enabled == true;
+              c := 1]) == 0
+}
+
+app_service_auth_enabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["app_service_auth_enabled"]
+    not azure_issue["app_service_auth_enabled"]
+}
+
+app_service_auth_enabled = false {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_attribute_absence["app_service_auth_enabled"]
+}
+
+app_service_auth_enabled = false {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_issue["app_service_auth_enabled"]
+}
+
+app_service_auth_enabled_err = "microsoft.web/sites/config property 'enabled' need to be exist where property name is set to 'authsettings'. Its missing from the resource. Please set the value to 'true' after property addition." {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_attribute_absence["app_service_auth_enabled"]
+} else = "Azure App Service Authentication is currently not enabled" {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_issue["app_service_auth_enabled"]
+}
+
+app_service_auth_enabled_metadata := {
+    "Policy Code": "PR-AZR-CLD-WEB-005",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Ensure Azure App Service Authentication is enabled",
+    "Policy Description": "This policy will identify the Azure app service which dont have authentication enabled and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.web/sites/config-authsettings?pivots=deployment-language-arm-template"
+}
+
+
 # PR-AZR-CLD-WEB-006
 #
 
@@ -1322,7 +1388,7 @@ web_service_ftp_deployment_disabled_metadata := {
 default web_service_net_framework_latest = null
 
 #Defaults to v4.0
-latest_dotnet_framework_version := "v6.0"
+latest_dotnet_framework_version := "v7.0"
 default_dotnet_framework_version := "v4.0"
 
 azure_attribute_absence ["web_service_net_framework_latest"] {

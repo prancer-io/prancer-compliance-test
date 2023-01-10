@@ -459,6 +459,12 @@
                     "type": "Microsoft.DocumentDB/databaseAccounts",
                     "collection": "Microsoft.DocumentDB",
                     "version": "2022-08-15"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_516",
+                    "type": "Microsoft.Cdn/profiles/endpoints/customDomains",
+                    "collection": "Microsoft.Cdn",
+                    "version": "2021-06-01"
                 }
             ]
         }
