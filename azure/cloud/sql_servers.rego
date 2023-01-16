@@ -341,3 +341,73 @@ sql_public_access_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers"
 }
+
+
+# https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers
+#
+# PR-AZR-CLD-SQL-065
+#
+
+default sql_server_configured_with_vnet = null
+
+azure_attribute_absence["sql_server_configured_with_vnet"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/virtualnetworkrules"; c := 1]) == 0
+}
+
+# azure_attribute_absence["sql_server_configured_with_vnet"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.sql/servers/virtualnetworkrules"
+#     not resource.dependsOn
+# }
+
+azure_attribute_absence["sql_server_configured_with_vnet"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/virtualnetworkrules"
+    not resource.properties.virtualNetworkSubnetId
+}
+
+azure_issue["sql_server_configured_with_vnet"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/virtualnetworkrules";
+              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              count(r.properties.virtualNetworkSubnetId) > 0;
+              c := 1]) == 0
+}
+
+sql_server_configured_with_vnet {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    not azure_attribute_absence["sql_server_configured_with_vnet"]
+    not azure_issue["sql_server_configured_with_vnet"]
+}
+
+sql_server_configured_with_vnet = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_issue["sql_server_configured_with_vnet"]
+}
+
+sql_server_configured_with_vnet = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_server_configured_with_vnet"]
+}
+
+sql_server_configured_with_vnet_err = "Azure SQL Server currently not configured with vnet" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_issue["sql_server_configured_with_vnet"]
+} else = "'microsoft.sql/servers/virtualnetworkrule' resource attribute 'virtualNetworkSubnetId' is missing or 'microsoft.sql/servers' dont have any dependent 'microsoft.sql/servers/virtualnetworkrule' resource defined" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_server_configured_with_vnet"]
+}
+
+sql_server_configured_with_vnet_metadata := {
+    "Policy Code": "PR-AZR-CLD-SQL-065",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Ensure that SQL Server configured with a virtual network",
+    "Policy Description": "This policy audits any SQL Server not configured to use a virtual network service endpoint.",
+    "Resource Type": "Microsoft.Sql/servers/virtualNetworkRules",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/virtualnetworkrules?pivots=deployment-language-arm-template"
+}

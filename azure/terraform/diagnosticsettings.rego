@@ -663,3 +663,72 @@ redis_cache_diagonstic_log_enabled_metadata := {
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache"
 }
 
+
+#
+# PR-AZR-TRF-MNT-013
+#
+default azure_traffic_manager_diagonstic_log_enabled = null
+
+azure_attribute_absence ["azure_traffic_manager_diagonstic_log_enabled"] {
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
+}
+
+azure_attribute_absence["azure_traffic_manager_diagonstic_log_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+    not resource.properties.log
+}
+
+azure_issue ["azure_traffic_manager_diagonstic_log_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_traffic_manager_profile"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possibility that one can be enabled and other can be disabled. which will mislead us. 
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
+}
+
+azure_traffic_manager_diagonstic_log_enabled = false {
+    lower(input.resources[_].type) == "azurerm_traffic_manager_profile"
+    azure_attribute_absence["azure_traffic_manager_diagonstic_log_enabled"]
+}
+
+azure_traffic_manager_diagonstic_log_enabled {
+    lower(input.resources[_].type) == "azurerm_traffic_manager_profile"
+    not azure_attribute_absence["azure_traffic_manager_diagonstic_log_enabled"]
+    not azure_issue["azure_traffic_manager_diagonstic_log_enabled"]
+}
+
+azure_traffic_manager_diagonstic_log_enabled = false {
+    lower(input.resources[_].type) == "azurerm_traffic_manager_profile"
+    azure_issue["azure_traffic_manager_diagonstic_log_enabled"]
+}
+
+azure_traffic_manager_diagonstic_log_enabled_err = "azurerm_traffic_manager_profile's azurerm_monitor_diagnostic_setting and its property block 'log' need to be exist. its currently missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_traffic_manager_profile"
+    azure_attribute_absence["azure_traffic_manager_diagonstic_log_enabled"]
+} else = "Azure Traffic Manager diagnostic logs is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_traffic_manager_profile"
+    azure_issue["azure_traffic_manager_diagonstic_log_enabled"] 
+}
+
+azure_traffic_manager_diagonstic_log_enabled_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-013",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Traffic Manager diagnostic logs should be enabled",
+    "Policy Description": "Diagnostic settings for Azure Traffic Manager used to stream resource logs to a Log Analytics workspace. this policy will identify any Azure Traffic Manager which has this diagnostic settings missing or misconfigured.",
+    "Resource Type": "azurerm_traffic_manager_profile",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/traffic_manager_profile"
+}
+
+

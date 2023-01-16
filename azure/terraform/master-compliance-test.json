@@ -11796,76 +11796,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "PR-AZR-TRF-ACR-004",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(registry.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-TRF-ACR-004",
-                            "eval": "data.rule.aci_configured_with_vnet",
-                            "message": "data.rule.aci_configured_with_vnet_err",
-                            "remediationDescription": "In 'azurerm_container_group' resource, set the value to 'private' at property 'ip_address_type' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_group#ip_address_type' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_TRF_ACR_004.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Azure Container Instance is configured with virtual network",
-                    "description": "This policy identifies Azure Container Instances (ACI) that are not configured with a virtual network. Making container instances public makes an internet routable network. By deploying container instances into an Azure virtual network, your containers can communicate securely with other resources in the virtual network. So it is recommended to configure all your container instances within a virtual network.<br><br>For more details:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-vnet",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "MITRE ATT&CK",
-                                "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "azurerm_container_group"
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AZR-TRF-ACR-005",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(registry.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-TRF-ACR-005",
-                            "eval": "data.rule.aci_configured_with_managed_identity",
-                            "message": "data.rule.aci_configured_with_managed_identity_err",
-                            "remediationDescription": "In 'azurerm_container_group' resource, set the value to 'SystemAssigned'/'UserAssigned' at property 'identity.type' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_group#identity' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_TRF_ACR_005.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Azure Container Instance is configured with managed identity",
-                    "description": "This policy identifies Azure Container Instances (ACI) that are not configured with the managed identity. The managed identity is authenticated with Azure AD, developers don't have to store any credentials in code. So It is recommended to configure managed identity on all your container instances.<br><br>For more details:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-managed-identity",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "MITRE ATT&CK",
-                                "MITRE ATT&CK v10.0-T1550 - Use Alternate Authentication Material"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "azurerm_container_group"
-                    ]
-                },
-                {
                     "masterTestId": "PR-AZR-TRF-ACR-006",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -16374,6 +16304,238 @@
                     ],
                     "resourceTypes": [
                         "azurerm_cdn_endpoint_custom_domain"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACI-001",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container_instance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACI-001",
+                            "eval": "data.rule.aci_configured_with_vnet",
+                            "message": "data.rule.aci_configured_with_vnet_err",
+                            "remediationDescription": "In 'azurerm_container_group' resource, set the value to 'private' at property 'ip_address_type' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_group#ip_address_type' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACI_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container Instance is configured with virtual network",
+                    "description": "This policy identifies Azure Container Instances (ACI) that are not configured with a virtual network. Making container instances public makes an internet routable network. By deploying container instances into an Azure virtual network, your containers can communicate securely with other resources in the virtual network. So it is recommended to configure all your container instances within a virtual network.<br><br>For more details:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-vnet",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_group"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACI-002",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container_instance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-002",
+                            "eval": "data.rule.aci_configured_with_managed_identity",
+                            "message": "data.rule.aci_configured_with_managed_identity_err",
+                            "remediationDescription": "In 'azurerm_container_group' resource, set the value to 'SystemAssigned'/'UserAssigned' at property 'identity.type' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_group#identity' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container Instance is configured with managed identity",
+                    "description": "This policy identifies Azure Container Instances (ACI) that are not configured with the managed identity. The managed identity is authenticated with Azure AD, developers don't have to store any credentials in code. So It is recommended to configure managed identity on all your container instances.<br><br>For more details:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-managed-identity",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1550 - Use Alternate Authentication Material"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_group"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-ACI-003",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(container_instance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ACR-003",
+                            "eval": "data.rule.aci_usage_cmk",
+                            "message": "data.rule.aci_usage_cmk_err",
+                            "remediationDescription": "In 'azurerm_container_group' resource, set the target key vault key id at property 'key_vault_key_id' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_group#key_vault_key_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ACR_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container Instance usage custom managed key for encryption",
+                    "description": "Secure your containers with greater flexibility using customer-managed keys. When you specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. Using customer-managed keys provides additional capabilities to control rotation of the key encryption key or cryptographically erase data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1550 - Use Alternate Authentication Material"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_group"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-MNT-013",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-MNT-013",
+                            "eval": "data.rule.azure_traffic_manager_diagonstic_log_enabled",
+                            "message": "data.rule.azure_traffic_manager_diagonstic_log_enabled_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, make sure 'log' block exist and 'target_resource_id' contains id of target 'azurerm_traffic_manager_profile' resource to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_MNT_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Traffic Manager diagnostic logs should be enabled",
+                    "description": "Diagnostic settings for Azure Traffic Manager used to stream resource logs to a Log Analytics workspace. this policy will identify any Azure Traffic Manager which has this diagnostic settings missing or misconfigured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "EU GDPR",
+                                "AICPA SOC 2",
+                                "CCPA",
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST SP",
+                                "NIST SP 800-53",
+                                "NIST CSF",
+                                "HIPPA",
+                                "PCI DSS",
+                                "ISO/IEC",
+                                "ISO/IEC 27001"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_traffic_manager_profile",
+                        "azurerm_monitor_diagnostic_setting"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-071",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-071",
+                            "eval": "data.rule.mssql_server_configured_with_vnet",
+                            "message": "data.rule.mssql_server_configured_with_vnet_err",
+                            "remediationDescription": "In 'azurerm_mssql_virtual_network_rule' resource, make sure property 'server_id' exist and has id of target 'azurerm_mssql_server' resource to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_virtual_network_rule#server_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_071.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that SQL Server configured with a virtual network",
+                    "description": "This policy audits any SQL Server not configured to use a virtual network service endpoint.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_virtual_network_rule"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-072",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-072",
+                            "eval": "data.rule.sql_server_configured_with_vnet",
+                            "message": "data.rule.sql_server_configured_with_vnet_err",
+                            "remediationDescription": "In 'azurerm_sql_virtual_network_rule' resource, make sure property 'server_name' exist and has name of target 'azurerm_sql_server' resource to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_virtual_network_rule#server_name' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_072.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that SQL Server configured with a virtual network",
+                    "description": "This policy audits any SQL Server not configured to use a virtual network service endpoint.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server",
+                        "azurerm_sql_virtual_network_rule"
                     ]
                 }
             ]

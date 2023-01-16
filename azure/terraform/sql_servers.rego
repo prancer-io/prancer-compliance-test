@@ -595,4 +595,138 @@ mssql_server_latest_tls_configured_metadata := {
 }
 
 
+# PR-AZR-TRF-SQL-071
+
+default mssql_server_configured_with_vnet = null
+
+azure_attribute_absence["mssql_server_configured_with_vnet"] {
+    count([c | input.resources[_].type == "azurerm_mssql_virtual_network_rule"; c := 1]) == 0
+}
+
+azure_attribute_absence["mssql_server_configured_with_vnet"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_virtual_network_rule"
+    not resource.properties.server_id
+}
+
+azure_issue["mssql_server_configured_with_vnet"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_virtual_network_rule";
+              contains(r.properties.server_id, resource.properties.compiletime_identity);
+              #lower(r.properties.state) == "enabled";
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_virtual_network_rule";
+              contains(r.properties.server_id, concat(".", [resource.type, resource.name]));
+              #lower(r.properties.state) == "enabled";
+              c := 1]) == 0
+}
+
+mssql_server_configured_with_vnet {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    not azure_attribute_absence["mssql_server_configured_with_vnet"]
+    not azure_issue["mssql_server_configured_with_vnet"]
+}
+
+mssql_server_configured_with_vnet = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    azure_attribute_absence["mssql_server_configured_with_vnet"]
+}
+
+mssql_server_configured_with_vnet = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    azure_issue["mssql_server_configured_with_vnet"]
+}
+
+mssql_server_configured_with_vnet_err = "Make sure resource azurerm_mssql_server and azurerm_mssql_virtual_network_rule both exist and linked. either related resource or link is missing." {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    azure_attribute_absence["mssql_server_configured_with_vnet"]
+} else = "VNET is currently not configured on SQL Server" {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    azure_issue["mssql_server_configured_with_vnet"]
+}
+
+mssql_server_configured_with_vnet_metadata := {
+    "Policy Code": "PR-AZR-TRF-SQL-071",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that SQL Server configured with a virtual network",
+    "Policy Description": "This policy audits any SQL Server not configured to use a virtual network service endpoint.",
+    "Resource Type": "azurerm_mssql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_virtual_network_rule"
+}
+
+
+# PR-AZR-TRF-SQL-072
+
+default sql_server_configured_with_vnet = null
+
+azure_attribute_absence["sql_server_configured_with_vnet"] {
+    count([c | input.resources[_].type == "azurerm_sql_virtual_network_rule"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_server_configured_with_vnet"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_sql_virtual_network_rule"
+    not resource.properties.server_id
+}
+
+azure_issue["sql_server_configured_with_vnet"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_sql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_sql_virtual_network_rule";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              #lower(r.properties.state) == "enabled";
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_sql_virtual_network_rule";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              #lower(r.properties.state) == "enabled";
+              c := 1]) == 0
+}
+
+sql_server_configured_with_vnet {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    not azure_attribute_absence["sql_server_configured_with_vnet"]
+    not azure_issue["sql_server_configured_with_vnet"]
+}
+
+sql_server_configured_with_vnet = false {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    azure_attribute_absence["sql_server_configured_with_vnet"]
+}
+
+sql_server_configured_with_vnet = false {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    azure_issue["sql_server_configured_with_vnet"]
+}
+
+sql_server_configured_with_vnet_err = "Make sure resource azurerm_sql_server and azurerm_sql_virtual_network_rule both exist and linked. either related resource or link is missing." {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    azure_attribute_absence["sql_server_configured_with_vnet"]
+} else = "VNET is currently not configured on SQL Server" {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    azure_issue["sql_server_configured_with_vnet"]
+}
+
+sql_server_configured_with_vnet_metadata := {
+    "Policy Code": "PR-AZR-TRF-SQL-072",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that SQL Server configured with a virtual network",
+    "Policy Description": "This policy audits any SQL Server not configured to use a virtual network service endpoint.",
+    "Resource Type": "azurerm_sql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_virtual_network_rule"
+}
+
+
+
+
 
