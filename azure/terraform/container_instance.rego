@@ -79,7 +79,7 @@ azure_issue["aci_configured_with_managed_identity"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_container_group"
     identity := resource.properties.identity[_]
-    lower(identity.type) == ""
+    count(identity.type) == 0
 }
 
 azure_issue["aci_configured_with_managed_identity"] {

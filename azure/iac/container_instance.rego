@@ -66,6 +66,12 @@ azure_attribute_absence ["aci_configured_with_managed_identity"] {
 azure_issue ["aci_configured_with_managed_identity"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerinstance/containergroups"
+    count(resource.identity.type) == 0
+}
+
+azure_issue ["aci_configured_with_managed_identity"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerinstance/containergroups"
     lower(resource.identity.type) == "none"
 }
 
