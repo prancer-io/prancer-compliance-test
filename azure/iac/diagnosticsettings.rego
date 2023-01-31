@@ -337,3 +337,53 @@ log_redis_cache_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings"
 }
+
+
+#
+# PR-AZR-ARM-MNT-013
+#
+
+default diagonstic_log_azure_traffic_manager = null
+
+azure_attribute_absence ["diagonstic_log_azure_traffic_manager"] {
+    count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1]) == 0
+}
+
+azure_attribute_absence["diagonstic_log_azure_traffic_manager"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.network/trafficmanagerprofiles")
+}
+
+azure_attribute_absence["diagonstic_log_azure_traffic_manager"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not resource.properties.logs
+}
+
+diagonstic_log_azure_traffic_manager {
+    lower(input.resources[_].type) == "microsoft.network/trafficmanagerprofiles"
+    not azure_attribute_absence["diagonstic_log_azure_traffic_manager"]
+}
+
+diagonstic_log_azure_traffic_manager = false {
+	lower(input.resources[_].type) == "microsoft.network/trafficmanagerprofiles"
+    azure_attribute_absence["diagonstic_log_azure_traffic_manager"]
+}
+
+diagonstic_log_azure_traffic_manager_err = "Azure Traffic Manager diagnostics logging is currently not enabled" {
+	lower(input.resources[_].type) == "microsoft.network/trafficmanagerprofiles"
+	azure_attribute_absence["diagonstic_log_azure_traffic_manager"]
+}
+
+diagonstic_log_azure_traffic_manager_metadata := {
+    "Policy Code": "PR-AZR-ARM-MNT-013",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Traffic Manager diagnostic logs should be enabled",
+    "Policy Description": "Diagnostic settings for Azure Traffic Manager used to stream resource logs to a Log Analytics workspace. this policy will identify any Azure Traffic Manager which has this diagnostic settings missing or misconfigured.",
+    "Resource Type": "Microsoft.Network/trafficManagerProfiles",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.network/trafficmanagerprofiles?pivots=deployment-language-arm-template"
+}

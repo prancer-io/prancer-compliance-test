@@ -7563,71 +7563,6 @@
                     "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry.<br><br>For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade"
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-ACR-004",
-                    "type": "rego",
-                    "rule": "file(registry.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-ACR-004",
-                            "eval": "data.rule.aci_configured_with_vnet",
-                            "message": "data.rule.aci_configured_with_vnet_err",
-                            "remediationDescription": "Virtual network can only be configured at the time of container instance creation. Hence, it is suggested to delete an existing container instance having not configured with virtual network and create a new container instance having virtual network configured with secure values.<br>Note: Backup or migrate data from the container instance before deleting it.<br><br>To create a Container Instance within a virtual network; follow below URL:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-vnet<br><br>To delete a reported Container instance; follow below URL:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-quickstart-portal#clean-up-resources",
-                            "remediationFunction": "PR_AZR_CLD_ACR_004.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "MITRE ATT&CK",
-                                "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application"
-                            ],
-                            "service": [
-                                "Containers"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_226"
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Azure Container Instance is configured with virtual network",
-                    "description": "This policy identifies Azure Container Instances (ACI) that are not configured with a virtual network. Making container instances public makes an internet routable network. By deploying container instances into an Azure virtual network, your containers can communicate securely with other resources in the virtual network. So it is recommended to configure all your container instances within a virtual network.<br><br>For more details:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-vnet"
-                },
-                {
-                    "masterTestId": "PR-AZR-CLD-ACR-005",
-                    "type": "rego",
-                    "rule": "file(registry.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-CLD-ACR-005",
-                            "eval": "data.rule.aci_configured_with_managed_identity",
-                            "message": "data.rule.aci_configured_with_managed_identity_err",
-                            "remediationDescription": "To enable managed identity on your container instance, follow below URL:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-managed-identity",
-                            "remediationFunction": "PR_AZR_CLD_ACR_005.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "MITRE ATT&CK",
-                                "MITRE ATT&CK v10.0-T1550 - Use Alternate Authentication Material",
-                                "zerotrust"
-                            ],
-                            "service": [
-                                "Containers"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_226"
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Azure Container Instance is configured with managed identity",
-                    "description": "This policy identifies Azure Container Instances (ACI) that are not configured with the managed identity. The managed identity is authenticated with Azure AD, developers don't have to store any credentials in code. So It is recommended to configure managed identity on all your container instances.<br><br>For more details:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-managed-identity"
-                },
-                {
                     "masterTestId": "PR-AZR-CLD-ACR-006",
                     "type": "rego",
                     "rule": "file(registry.rego)",
@@ -13751,6 +13686,140 @@
                     "severity": "Medium",
                     "title": "Azure CDN Endpoint Custom domains should use secure TLS version",
                     "description": "This policy identifies Azure CDN Endpoint Custom domains which has insecure TLS version. TLS 1.2 resolves the security gap from its preceding versions. As a best security practice, use TLS 1.2 as the minimum TLS version for Azure CDN Endpoint Custom domains."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACI-001",
+                    "type": "rego",
+                    "rule": "file(container_instance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACI-001",
+                            "eval": "data.rule.aci_configured_with_vnet",
+                            "message": "data.rule.aci_configured_with_vnet_err",
+                            "remediationDescription": "Virtual network can only be configured at the time of container instance creation. Hence, it is suggested to delete an existing container instance having not configured with virtual network and create a new container instance having virtual network configured with secure values.<br>Note: Backup or migrate data from the container instance before deleting it.<br><br>To create a Container Instance within a virtual network; follow below URL:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-vnet<br><br>To delete a reported Container instance; follow below URL:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-quickstart-portal#clean-up-resources",
+                            "remediationFunction": "PR_AZR_CLD_ACI_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1190 - Exploit Public-Facing Application"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_226"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container Instance is configured with virtual network",
+                    "description": "This policy identifies Azure Container Instances (ACI) that are not configured with a virtual network. Making container instances public makes an internet routable network. By deploying container instances into an Azure virtual network, your containers can communicate securely with other resources in the virtual network. So it is recommended to configure all your container instances within a virtual network.<br><br>For more details:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-vnet"
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACI-002",
+                    "type": "rego",
+                    "rule": "file(container_instance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACI-002",
+                            "eval": "data.rule.aci_configured_with_managed_identity",
+                            "message": "data.rule.aci_configured_with_managed_identity_err",
+                            "remediationDescription": "To enable managed identity on your container instance, follow below URL:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-managed-identity",
+                            "remediationFunction": "PR_AZR_CLD_ACI_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1550 - Use Alternate Authentication Material",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_226"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container Instance is configured with managed identity",
+                    "description": "This policy identifies Azure Container Instances (ACI) that are not configured with the managed identity. The managed identity is authenticated with Azure AD, developers don't have to store any credentials in code. So It is recommended to configure managed identity on all your container instances.<br><br>For more details:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-managed-identity"
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-ACI-003",
+                    "type": "rego",
+                    "rule": "file(container_instance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-ACI-003",
+                            "eval": "data.rule.aci_usage_cmk",
+                            "message": "data.rule.aci_usage_cmk_err",
+                            "remediationDescription": "CMK encryption can only be configured at the time of container instance creation. Hence, it is suggested to delete an existing container instance having not configured with CMK encryption and create a new container instance having CMK configured with target keyvault key configuration.<br>Note: Backup or migrate data from the container instance before deleting it.<br><br>To create a Container Instance within CMK encryption, during creation while in Advanced tab, under Key management, select Customer-managed Keys (CMK). select the required Key vault and keys and you will be done.",
+                            "remediationFunction": "PR_AZR_CLD_ACI_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "MITRE ATT&CK",
+                                "MITRE ATT&CK v10.0-T1550 - Use Alternate Authentication Material",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_226"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Container Instance usage custom managed key for encryption",
+                    "description": "Secure your containers with greater flexibility using customer-managed keys. When you specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. Using customer-managed keys provides additional capabilities to control rotation of the key encryption key or cryptographically erase data."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-SQL-065",
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-065",
+                            "eval": "data.rule.sql_server_configured_with_vnet",
+                            "message": "data.rule.sql_server_configured_with_vnet_err",
+                            "remediationDescription": "01. Sign in to the Azure portal.<br>02. Search for and select SQL servers, and then select your server. Under Security, select Networking.<br>03. Under the Public access tab, ensure Public network access is set to Select networks, otherwise the Virtual networks settings are hidden. Select + Add existing virtual network in the Virtual networks section.<br>04. In the new Create/Update pane, fill in the boxes with the names of your Azure resources.<br>05. See the resulting virtual network rule on the Firewall pane.<br>06. Set Allow Azure services and resources to access this server to No.",
+                            "remediationFunction": "PR_AZR_CLD_SQL_065.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_400"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that SQL Server configured with a virtual network",
+                    "description": "This policy audits any SQL Server not configured to use a virtual network service endpoint."
                 }
             ]
         }
