@@ -447,9 +447,9 @@ acr_configured_with_private_endpoint_err = "Azure Container registries currently
 
 acr_configured_with_private_endpoint_metadata := {
     "Policy Code": "PR-AZR-ARM-ACR-011",
-    "Type": "Cloud",
+    "Type": "IaC",
     "Product": "AZR",
-    "Language": "",
+    "Language": "ARM template",
     "Policy Title": "Azure Container registries should have private endpoints configured",
     "Policy Description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet.",
     "Resource Type": "Microsoft.ContainerRegistry/registries",

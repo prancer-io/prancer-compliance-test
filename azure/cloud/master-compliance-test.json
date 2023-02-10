@@ -13820,6 +13820,151 @@
                     "severity": "Medium",
                     "title": "Ensure that SQL Server configured with a virtual network",
                     "description": "This policy audits any SQL Server not configured to use a virtual network service endpoint."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-SQL-076",
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-076",
+                            "eval": "data.rule.sql_server_configured_with_private_endpoint",
+                            "message": "data.rule.sql_server_configured_with_private_endpoint_err",
+                            "remediationDescription": "01. Sign in to the Azure portal.<br>02. Search for and select SQL servers, and then select your server.<br>03. In the Networking section change the connectivity method to Private endpoint.<br>04. Select + Add private endpoint in Private endpoints.<br>05. In Create private endpoint, enter or select necessary required information.<br>06. Now Create and Save to complete the process.<br>07. Please visit <a href='https://learn.microsoft.com/en-us/azure/private-link/tutorial-private-endpoint-sql-portal#create-an-azure-sql-server-and-private-endpoint' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_CLD_SQL_076.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_400",
+                        "AZRSNP_517"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server should have private endpoints configured",
+                    "description": "Private endpoint connections enforce secure communication by enabling private connectivity to Azure SQL Server."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-SQL-077",
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-077",
+                            "eval": "data.rule.sql_ad_and_sql_auth_enabled",
+                            "message": "data.rule.sql_ad_and_sql_auth_enabled_err",
+                            "remediationDescription": "In the SQL Server in Azure portal, disable Azure AD-only auth feature by navigating to Settings-> Azure Active Directory -> Support Only Azure Active Directory authentication for this server and then uncheck the checkbox to fix the issue.",
+                            "remediationFunction": "PR_AZR_CLD_SQL_077.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_400"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SQL Server AD and SQL authentication is enabled",
+                    "description": "This policy will identify Azure SQL Server which does not support both Azure Active Directory and Sql Authentication"
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-SQL-078",
+                    "type": "rego",
+                    "rule": "file(sql_database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-078",
+                            "eval": "data.rule.sql_db_backup_usage_locally_redundant_backup_storage",
+                            "message": "data.rule.sql_db_backup_usage_locally_redundant_backup_storage_err",
+                            "remediationDescription": "Backup storage redundancy can only be configured during database creation. In the Create SQL Database window, check 'Locally-redundant backup storage' and you sould be good to go.",
+                            "remediationFunction": "PR_AZR_CLD_SQL_078.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server Database backup storage redundancy should configure to use locally redundant backup storage",
+                    "description": "This policy will identify Azure SQL Server database which is not configured to use locally redundant backup storage for backup storage redundancy"
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-SQL-079",
+                    "type": "rego",
+                    "rule": "file(sql_database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-SQL-079",
+                            "eval": "data.rule.sql_db_backup_restore_retention_config",
+                            "message": "data.rule.sql_db_backup_restore_retention_config_err",
+                            "remediationDescription": "01. From Azure portal, go to Azure SQL server configuration and click on Backups.<br>02. Select the database and configured policies.<br>03. Move the slider to increase the PITR value to 35 days.",
+                            "remediationFunction": "PR_AZR_CLD_SQL_079.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server Database Point in time restore retention configuration should be set for minimum 35 days",
+                    "description": "This policy checks Azure SQL Databases whose Point in time restore retention configuration is not configured for minimum 35 days."
                 }
             ]
         }

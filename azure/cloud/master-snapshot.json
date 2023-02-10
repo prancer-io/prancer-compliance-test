@@ -465,6 +465,12 @@
                     "type": "Microsoft.Cdn/profiles/endpoints/customDomains",
                     "collection": "Microsoft.Cdn",
                     "version": "2021-06-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_517",
+                    "type": "Microsoft.Sql/servers/privateEndpointConnections",
+                    "collection": "Microsoft.Sql",
+                    "version": "2022-05-01-preview"
                 }
             ]
         }
