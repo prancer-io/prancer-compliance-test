@@ -19,7 +19,7 @@ azure_attribute_absence["sql_db_log_audit"] {
 azure_attribute_absence["sql_db_log_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
-    not resource.properties.dependsOn
+    not resource.dependsOn
 }
 
 azure_attribute_absence["sql_db_log_audit"] {

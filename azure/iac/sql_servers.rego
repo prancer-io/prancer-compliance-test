@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }
@@ -220,9 +224,6 @@ sql_logical_server_login_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/administrators"
 }
-
-
-
 
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/failovergroups
@@ -483,4 +484,132 @@ sql_server_configured_with_vnet_metadata := {
     "Resource Type": "Microsoft.Sql/servers/virtualNetworkRules",
     "Policy Help URL": "",
     "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/virtualnetworkrules?pivots=deployment-language-arm-template"
+}
+
+
+# PR-AZR-ARM-SQL-076
+
+default sql_server_configured_with_private_endpoint = null
+
+azure_attribute_absence["sql_server_configured_with_private_endpoint"] {
+    count([c | lower(input.resources[_].type) == "microsoft.sql/servers/privateendpointconnections"; c := 1]) == 0
+}
+
+azure_attribute_absence["sql_server_configured_with_private_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/privateendpointconnections"
+    not resource.dependsOn
+}
+
+azure_attribute_absence["sql_server_configured_with_private_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/privateendpointconnections"
+    not resource.properties.privateLinkServiceConnectionState
+}
+
+azure_attribute_absence["sql_server_configured_with_private_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/privateendpointconnections"
+    not resource.properties.privateLinkServiceConnectionState.status
+}
+
+azure_issue["sql_server_configured_with_private_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.sql/servers/privateendpointconnections";
+              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              lower(r.properties.privateLinkServiceConnectionState.status) == "approved";
+              c := 1]) == 0
+}
+
+sql_server_configured_with_private_endpoint {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    not azure_attribute_absence["sql_server_configured_with_private_endpoint"]
+    not azure_issue["sql_server_configured_with_private_endpoint"]
+}
+
+sql_server_configured_with_private_endpoint = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_server_configured_with_private_endpoint"]
+}
+
+sql_server_configured_with_private_endpoint = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_issue["sql_server_configured_with_private_endpoint"]
+}
+
+sql_server_configured_with_private_endpoint_err = "Azure Container registries currently dont have private endpoints configured" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_issue["sql_server_configured_with_private_endpoint"]
+} else = "microsoft.containerregistry/registries/privateendpointconnections resoruce property 'privateLinkServiceConnectionState.status' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_server_configured_with_private_endpoint"]
+}
+
+sql_server_configured_with_private_endpoint_metadata := {
+    "Policy Code": "PR-AZR-ARM-SQL-076",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure SQL Server should have private endpoints configured",
+    "Policy Description": "Private endpoint connections enforce secure communication by enabling private connectivity to Azure SQL Server.",
+    "Resource Type": "Microsoft.Sql/servers",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers"
+}
+
+
+# PR-AZR-ARM-SQL-077
+
+default sql_ad_and_sql_auth_enabled = null
+
+azure_attribute_absence ["sql_ad_and_sql_auth_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    not resource.properties.administrators
+}
+
+azure_attribute_absence ["sql_ad_and_sql_auth_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    not has_property(resource.properties.administrators, "azureADOnlyAuthentication")
+}
+
+azure_issue ["sql_ad_and_sql_auth_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    resource.properties.administrators.azureADOnlyAuthentication == true
+}
+
+sql_ad_and_sql_auth_enabled {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    not azure_attribute_absence["sql_ad_and_sql_auth_enabled"]
+    not azure_issue["sql_ad_and_sql_auth_enabled"]
+}
+
+sql_ad_and_sql_auth_enabled {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    azure_attribute_absence["sql_ad_and_sql_auth_enabled"]
+    not azure_issue["sql_ad_and_sql_auth_enabled"]
+}
+
+sql_ad_and_sql_auth_enabled = false {
+    azure_issue["sql_ad_and_sql_auth_enabled"]
+}
+
+sql_ad_and_sql_auth_enabled_err = "Azure SQL Server AD and SQL authentication is currently not enabled." {
+    azure_issue["sql_ad_and_sql_auth_enabled"]
+}
+
+sql_ad_and_sql_auth_enabled_metadata := {
+    "Policy Code": "PR-AZR-ARM-SQL-077",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure SQL Server AD and SQL authentication is enabled",
+    "Policy Description": "This policy will identify Azure SQL Server which does not support both Azure Active Directory and Sql Authentication",
+    "Resource Type": "microsoft.sql/servers",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers?pivots=deployment-language-arm-template"
 }

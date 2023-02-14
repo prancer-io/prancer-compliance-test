@@ -16159,6 +16159,164 @@
                         "microsoft.sql/servers",
                         "Microsoft.Sql/servers/virtualNetworkRules"
                     ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-SQL-076",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-076",
+                            "eval": "data.rule.sql_server_configured_with_private_endpoint",
+                            "message": "data.rule.sql_server_configured_with_private_endpoint_err",
+                            "remediationDescription": "In Resource of type 'microsoft.sql/servers/privateendpointconnections' make sure properties.privateLinkServiceConnectionState.status exists and has value 'Approved'.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/privateendpointconnections?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_076.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server should have private endpoints configured",
+                    "description": "Private endpoint connections enforce secure communication by enabling private connectivity to Azure SQL Server.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/privateendpointconnections"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-SQL-077",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-077",
+                            "eval": "data.rule.sql_ad_and_sql_auth_enabled",
+                            "message": "data.rule.sql_ad_and_sql_auth_enabled_err",
+                            "remediationDescription": "In Resource of type 'microsoft.sql/servers' make sure to set the value to 'false' if properties.administrator.azureADOnlyAuthentication exists.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_077.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SQL Server AD and SQL authentication is enabled",
+                    "description": "This policy will identify Azure SQL Server which does not support both Azure Active Directory and Sql Authentication",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-SQL-078",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-078",
+                            "eval": "data.rule.sql_db_backup_usage_locally_redundant_backup_storage",
+                            "message": "data.rule.sql_db_backup_usage_locally_redundant_backup_storage_err",
+                            "remediationDescription": "In Resource of type 'microsoft.sql/servers/databases' make sure properties.requestedBackupStorageRedundancy exists and has value set to 'Local'.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/databases?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_078.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server Database backup storage redundancy should configure to use locally redundant backup storage",
+                    "description": "This policy will identify Azure SQL Server database which is not configured to use locally redundant backup storage for backup storage redundancy",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-ARM-SQL-079",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-079",
+                            "eval": "data.rule.sql_db_backup_restore_retention_config",
+                            "message": "data.rule.sql_db_backup_restore_retention_config_err",
+                            "remediationDescription": "In Resource of type 'microsoft.sql/servers/databases/backupshorttermretentionpolicies' make sure properties.retentionDays exists and has value set to '35'.<br>Please visit <a href='https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/databases/backupshorttermretentionpolicies?pivots=deployment-language-arm-template' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_079.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server Database Point in time restore retention configuration should be set for minimum 35 days",
+                    "description": "This policy checks Azure SQL Databases whose Point in time restore retention configuration is not configured for minimum 35 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases",
+                        "microsoft.sql/servers/databases/backupshorttermretentionpolicies"
+                    ]
                 }
             ]
         }

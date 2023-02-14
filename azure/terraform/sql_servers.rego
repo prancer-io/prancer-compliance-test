@@ -727,6 +727,73 @@ sql_server_configured_with_vnet_metadata := {
 }
 
 
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint
+# PR-AZR-TRF-SQL-076
+
+default mssql_server_configured_with_private_endpoint = null
+
+azure_attribute_absence ["mssql_server_configured_with_private_endpoint"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+azure_issue ["mssql_server_configured_with_private_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
+
+mssql_server_configured_with_private_endpoint = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    azure_attribute_absence["mssql_server_configured_with_private_endpoint"]
+}
+
+mssql_server_configured_with_private_endpoint {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    not azure_attribute_absence["mssql_server_configured_with_private_endpoint"]
+    not azure_issue["mssql_server_configured_with_private_endpoint"]
+}
+
+mssql_server_configured_with_private_endpoint = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    azure_issue["mssql_server_configured_with_private_endpoint"]
+}
+
+mssql_server_configured_with_private_endpoint_err = "azurerm_mssql_server should have link with azurerm_private_endpoint and azurerm_private_endpoint's private_service_connection either need to have 'private_connection_resource_id' or 'private_connection_resource_alias' property. Seems there is no link established or mentioed properties are missing." {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    azure_attribute_absence["mssql_server_configured_with_private_endpoint"]
+} else = "Azure KeyVault currently not using private link" {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    azure_issue["mssql_server_configured_with_private_endpoint"]
+}
+
+mssql_server_configured_with_private_endpoint_metadata := {
+    "Policy Code": "PR-AZR-TRF-SQL-076",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure SQL Server should have private endpoints configured",
+    "Policy Description": "Private endpoint connections enforce secure communication by enabling private connectivity to Azure SQL Server.",
+    "Resource Type": "azurerm_mssql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server"
+}
+
+
 
 
 

@@ -16537,6 +16537,163 @@
                         "azurerm_sql_server",
                         "azurerm_sql_virtual_network_rule"
                     ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-076",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-076",
+                            "eval": "data.rule.mssql_server_configured_with_private_endpoint",
+                            "message": "data.rule.mssql_server_configured_with_private_endpoint_err",
+                            "remediationDescription": "In 'azurerm_private_endpoint' resource, make sure properties.private_service_connection.private_connection_resource_id contains id of target azurerm_mssql_server to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_076.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server should have private endpoints configured",
+                    "description": "Private endpoint connections enforce secure communication by enabling private connectivity to Azure SQL Server.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_private_endpoint"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-077",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbadministrators.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-077",
+                            "eval": "data.rule.sql_ad_and_sql_auth_enabled",
+                            "message": "data.rule.sql_ad_and_sql_auth_enabled_err",
+                            "remediationDescription": "In 'azurerm_mssql_server' resource, make sure properties.azuread_administrator.azuread_authentication_only has value 'false' if exist to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#azuread_authentication_only' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_077.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SQL Server AD and SQL authentication is enabled",
+                    "description": "This policy will identify Azure SQL Server which does not support both Azure Active Directory and Sql Authentication",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-078",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-078",
+                            "eval": "data.rule.sql_db_backup_usage_locally_redundant_backup_storage",
+                            "message": "data.rule.sql_db_backup_usage_locally_redundant_backup_storage_err",
+                            "remediationDescription": "In 'azurerm_mssql_database' resource, make sure properties.storage_account_type has value 'Local' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database#storage_account_type' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_078.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server Database backup storage redundancy should configure to use locally redundant backup storage",
+                    "description": "This policy will identify Azure SQL Server database which is not configured to use locally redundant backup storage for backup storage redundancy",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_database"
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AZR-TRF-SQL-079",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-079",
+                            "eval": "data.rule.sql_db_backup_restore_retention_config",
+                            "message": "data.rule.sql_db_backup_restore_retention_config_err",
+                            "remediationDescription": "In 'azurerm_mssql_database' resource, make sure properties.short_term_retention_policy.retention_days has value '35' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database#retention_days' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_079.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server Database Point in time restore retention configuration should be set for minimum 35 days",
+                    "description": "This policy checks Azure SQL Databases whose Point in time restore retention configuration is not configured for minimum 35 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure_Security_Benchmark_v1.0",
+                                "HIPAA",
+                                "RMiT",
+                                "RMiT_v1.0",
+                                "SWIFT_CSCF_v2021"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_database"
+                    ]
                 }
             ]
         }
