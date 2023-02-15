@@ -4,6 +4,10 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry
 
 # PR-AZR-TRF-ACR-002
