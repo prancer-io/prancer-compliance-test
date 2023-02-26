@@ -202,3 +202,59 @@ vm_ip_forwarding_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines"
 }
+
+
+#
+# PR-AZR-ARM-VM-006
+#
+
+default vm_has_backup_configured = null
+
+azure_attribute_absence ["vm_has_backup_configured"] {
+    count([c | lower(input.resources[_].type) == "microsoft.recoveryservices/vaults/backupfabrics/protectioncontainers/protecteditems"; c := 1]) == 0
+}
+
+azure_issue["vm_has_backup_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    count([c | r := input.resources[_];
+              lower(r.type) == "microsoft.recoveryservices/vaults/backupfabrics/protectioncontainers/protecteditems";
+              contains(lower(r.name), lower(resource.name));
+              c := 1]) == 0
+}
+
+vm_has_backup_configured {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+    not azure_attribute_absence["vm_has_backup_configured"]
+    not azure_issue["vm_has_backup_configured"]
+}
+
+vm_has_backup_configured = false {
+	lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+    azure_attribute_absence["vm_has_backup_configured"]
+}
+
+vm_has_backup_configured = false {
+	lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+    azure_issue["vm_has_backup_configured"]
+}
+
+vm_has_backup_configured_err = "'microsoft.recoveryservices/vaults/backupfabrics/protectioncontainers/protecteditems' resource need to be exist and configured for 'microsoft.compute/virtualmachines'" {
+	lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+	azure_attribute_absence["vm_has_backup_configured"]
+} else = "Azure VM backup is currently not configured" {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+	azure_attribute_absence["vm_has_backup_configured"]
+}
+
+vm_has_backup_configured_metadata := {
+    "Policy Code": "PR-AZR-ARM-VM-006",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Backup should be enabled for Virtual Machines",
+    "Policy Description": "Ensure protection of your Azure Virtual Machines by enabling Azure Backup. Azure Backup is a secure and cost effective data protection solution for Azure.",
+    "Resource Type": "microsoft.compute/virtualmachines",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines"
+}

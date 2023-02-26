@@ -387,3 +387,118 @@ diagonstic_log_azure_traffic_manager_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.network/trafficmanagerprofiles?pivots=deployment-language-arm-template"
 }
+
+
+#
+# PR-AZR-ARM-MNT-025
+#
+
+default diagonstic_log_azure_eventhub_namespaces = null
+
+azure_attribute_absence ["diagonstic_log_azure_eventhub_namespaces"] {
+    count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1]) == 0
+}
+
+azure_attribute_absence["diagonstic_log_azure_eventhub_namespaces"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.eventhub/namespaces")
+}
+
+azure_attribute_absence["diagonstic_log_azure_eventhub_namespaces"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not resource.properties.logs
+}
+
+diagonstic_log_azure_eventhub_namespaces {
+    lower(input.resources[_].type) == "microsoft.eventhub/namespaces"
+    not azure_attribute_absence["diagonstic_log_azure_eventhub_namespaces"]
+}
+
+diagonstic_log_azure_eventhub_namespaces = false {
+	lower(input.resources[_].type) == "microsoft.eventhub/namespaces"
+    azure_attribute_absence["diagonstic_log_azure_eventhub_namespaces"]
+}
+
+diagonstic_log_azure_eventhub_namespaces_err = "Azure Event Hub Namespaces diagnostics logging is currently not enabled" {
+	lower(input.resources[_].type) == "microsoft.eventhub/namespaces"
+	azure_attribute_absence["diagonstic_log_azure_eventhub_namespaces"]
+}
+
+diagonstic_log_azure_eventhub_namespaces_metadata := {
+    "Policy Code": "PR-AZR-ARM-MNT-025",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Event Hub Namespaces diagnostic logs should be enabled",
+    "Policy Description": "Diagnostic settings for Azure Event Hub Namespaces used to stream resource logs to a Log Analytics workspace. this policy will identify any Azure Event Hub Namespaces which has this diagnostic settings missing or misconfigured.",
+    "Resource Type": "Microsoft.EventHub/namespaces",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.eventhub/namespaces?pivots=deployment-language-arm-template"
+}
+
+
+#
+# PR-AZR-ARM-MNT-026
+#
+
+default azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces = null
+
+azure_attribute_absence ["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"] {
+    count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1]) == 0
+}
+
+azure_attribute_absence["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.recoveryservices/vaults")
+}
+
+azure_attribute_absence["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not resource.properties.workspaceId
+}
+
+azure_issue["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    count(resource.properties.workspaceId) == 0
+}
+
+azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces {
+    lower(input.resources[_].type) == "microsoft.recoveryservices/vaults"
+    not azure_attribute_absence["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"]
+    not azure_issue["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"]
+}
+
+azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces = false {
+	lower(input.resources[_].type) == "microsoft.recoveryservices/vaults"
+    azure_issue["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"]
+}
+
+azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces = false {
+	lower(input.resources[_].type) == "microsoft.recoveryservices/vaults"
+    azure_attribute_absence["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"]
+}
+
+azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces_err = "'microsoft.recoveryservices/vaults' diagnostics logging 'microsoft.insights/diagnosticsettings' dont have any 'workspaceId' property configured" {
+	lower(input.resources[_].type) == "microsoft.recoveryservices/vaults"
+	azure_attribute_absence["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"]
+} else = "Azure Recovery Services Vault diagnostics logging is currently not configured to stream diagnostic settings to Log Analytics workspace" {
+    lower(input.resources[_].type) == "microsoft.recoveryservices/vaults"
+	azure_issue["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"]
+}
+
+azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces_metadata := {
+    "Policy Code": "PR-AZR-ARM-MNT-026",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Recovery Services Vault Diagnostic Settings stream to Log Analytics workspace",
+    "Policy Description": "Audit Diagnostic Settings for Recovery Services Vault to stream to Log Analytics workspace for Resource specific categories. If any of the Resource specific categories are not enabled, Recovery Services Vault is put on audit.",
+    "Resource Type": "Microsoft.RecoveryServices/vaults",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults?pivots=deployment-language-arm-template"
+}
