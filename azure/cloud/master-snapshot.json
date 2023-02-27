@@ -471,6 +471,12 @@
                     "type": "Microsoft.Sql/servers/privateEndpointConnections",
                     "collection": "Microsoft.Sql",
                     "version": "2022-05-01-preview"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_518",
+                    "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems",
+                    "collection": "Microsoft.RecoveryServices",
+                    "version": "2023-01-01"
                 }
             ]
         }

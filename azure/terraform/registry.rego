@@ -430,7 +430,7 @@ acr_configured_with_private_endpoint = false {
 acr_configured_with_private_endpoint_err = "azurerm_container_registry should have link with azurerm_private_endpoint and azurerm_private_endpoint's private_service_connection either need to have 'private_connection_resource_id' or 'private_connection_resource_alias' property. Seems there is no link established or mentioed properties are missing." {
     lower(input.resources[_].type) == "azurerm_container_registry"
     azure_attribute_absence["acr_configured_with_private_endpoint"]
-} else = "MySQL server currently not using private link" {
+} else = "ACR currently not using private link" {
     lower(input.resources[_].type) == "azurerm_container_registry"
     azure_issue["acr_configured_with_private_endpoint"]
 }

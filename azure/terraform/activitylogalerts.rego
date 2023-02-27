@@ -1,5 +1,17 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
+array_element_contains(target_array, element_string) = true {
+  contains(lower(target_array[_]), lower(element_string))
+} else = false { true }
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert
 
 #
@@ -186,18 +198,6 @@ azure_monitor_log_profile_retention_enabled_metadata := {
 
 default azure_monitor_log_profile_capture_all_activities = null
 
-contains(categories, element) = true {
-  lower(categories[_]) == element
-} else = false { true }
-
-#no_error {
-#    contains([
-#            "Action",
-#            "Delete",
-#            "Write"
-#          ], "Action")
-#}
-
 azure_attribute_absence["azure_monitor_log_profile_capture_all_activities"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_monitor_log_profile"
@@ -209,9 +209,9 @@ no_azure_issue["azure_monitor_log_profile_capture_all_activities"] {
     lower(resource.type) == "azurerm_monitor_log_profile"
     #categories := resource.properties.categories[_]
     #categories := resource.properties.categories
-    contains(resource.properties.categories, "action")
-    contains(resource.properties.categories, "delete")
-    contains(resource.properties.categories, "write")
+    array_contains(resource.properties.categories, "action")
+    array_contains(resource.properties.categories, "delete")
+    array_contains(resource.properties.categories, "write")
 }
 
 azure_monitor_log_profile_capture_all_activities = false {
@@ -246,4 +246,686 @@ azure_monitor_log_profile_capture_all_activities_metadata := {
     "Resource Type": "azurerm_monitor_log_profile",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_log_profile"
+}
+
+
+#
+# PR-AZR-TRF-MNT-014
+#
+
+default alerts_to_create_update_sql_server_firewall_rule_exist = null
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
+# by default alert get enabled if not exist.
+azure_attribute_absence["alerts_to_create_update_sql_server_firewall_rule_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    not resource.properties.criteria
+}
+
+azure_attribute_absence["alerts_to_create_update_sql_server_firewall_rule_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    criteria := resource.properties.criteria[_]
+    not criteria.operation_name
+}
+
+azure_issue["alerts_to_create_update_sql_server_firewall_rule_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    count([c | criteria := resource.properties.criteria[_];
+              lower(criteria.operation_name) == "microsoft.sql/servers/firewallrules/write";
+              not array_element_contains(resource.properties.scopes, "azurerm_resource_group");
+              c := 1]) == 0
+}
+
+alerts_to_create_update_sql_server_firewall_rule_exist {
+    lower(input.resources[_].type) == "azurerm_monitor_activity_log_alert"
+    not azure_attribute_absence["alerts_to_create_update_sql_server_firewall_rule_exist"]
+    not azure_issue["alerts_to_create_update_sql_server_firewall_rule_exist"]
+}
+
+alerts_to_create_update_sql_server_firewall_rule_exist = false {
+    azure_attribute_absence["alerts_to_create_update_sql_server_firewall_rule_exist"]
+}
+
+alerts_to_create_update_sql_server_firewall_rule_exist = false {
+    azure_issue["alerts_to_create_update_sql_server_firewall_rule_exist"]
+}
+
+alerts_to_create_update_sql_server_firewall_rule_exist_err = "Azure Activity log alert for create or update SQL server firewall rule currently not exist" {
+    azure_issue["alerts_to_create_update_sql_server_firewall_rule_exist"]
+} else = "azurerm_monitor_activity_log_alert property criteria.operation_name is missing from the resource." {
+    azure_attribute_absence["alerts_to_create_update_sql_server_firewall_rule_exist"]
+}
+
+alerts_to_create_update_sql_server_firewall_rule_exist_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-014",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Activity log alert for create or update SQL server firewall rule should exist",
+    "Policy Description": "This policy identifies the Azure accounts in which activity log alert for Create or update SQL server firewall rule does not exist. Creating an activity log alert for Create or update SQL server firewall rule gives insight into SQL server firewall rule access changes and may reduce the time it takes to detect suspicious activity.",
+    "Resource Type": "azurerm_monitor_activity_log_alert",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert"
+}
+
+
+#
+# PR-AZR-TRF-MNT-015
+#
+
+default alerts_to_create_update_nsg_exist = null
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
+# by default alert get enabled if not exist.
+azure_attribute_absence["alerts_to_create_update_nsg_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    not resource.properties.criteria
+}
+
+azure_attribute_absence["alerts_to_create_update_nsg_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    criteria := resource.properties.criteria[_]
+    not criteria.operation_name
+}
+
+azure_issue["alerts_to_create_update_nsg_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    count([c | criteria := resource.properties.criteria[_];
+              lower(criteria.operation_name) == "microsoft.network/networksecuritygroups/write";
+              not array_element_contains(resource.properties.scopes, "azurerm_resource_group");
+              c := 1]) == 0
+}
+
+alerts_to_create_update_nsg_exist {
+    lower(input.resources[_].type) == "azurerm_monitor_activity_log_alert"
+    not azure_attribute_absence["alerts_to_create_update_nsg_exist"]
+    not azure_issue["alerts_to_create_update_nsg_exist"]
+}
+
+alerts_to_create_update_nsg_exist = false {
+    azure_attribute_absence["alerts_to_create_update_nsg_exist"]
+}
+
+alerts_to_create_update_nsg_exist = false {
+    azure_issue["alerts_to_create_update_nsg_exist"]
+}
+
+alerts_to_create_update_nsg_exist_err = "Azure Activity log alert for create or update network security group currently not exist" {
+    azure_issue["alerts_to_create_update_nsg_exist"]
+} else = "azurerm_monitor_activity_log_alert property criteria.operation_name is missing from the resource." {
+    azure_attribute_absence["alerts_to_create_update_nsg_exist"]
+}
+
+alerts_to_create_update_nsg_exist_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-015",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Activity log alert for create or update network security group should exist",
+    "Policy Description": "This policy identifies the Azure accounts in which activity log alert for Create or update network security group does not exist. Creating an activity log alert for Create or update network security group gives insight into network access changes and may reduce the time it takes to detect suspicious activity.",
+    "Resource Type": "azurerm_monitor_activity_log_alert",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert"
+}
+
+
+#
+# PR-AZR-TRF-MNT-016
+#
+
+default alerts_to_create_update_nsg_rule_exist = null
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
+# by default alert get enabled if not exist.
+azure_attribute_absence["alerts_to_create_update_nsg_rule_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    not resource.properties.criteria
+}
+
+azure_attribute_absence["alerts_to_create_update_nsg_rule_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    criteria := resource.properties.criteria[_]
+    not criteria.operation_name
+}
+
+azure_issue["alerts_to_create_update_nsg_rule_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    count([c | criteria := resource.properties.criteria[_];
+              lower(criteria.operation_name) == "microsoft.network/networksecuritygroups/securityrules/write";
+              not array_element_contains(resource.properties.scopes, "azurerm_resource_group");
+              c := 1]) == 0
+}
+
+alerts_to_create_update_nsg_rule_exist {
+    lower(input.resources[_].type) == "azurerm_monitor_activity_log_alert"
+    not azure_attribute_absence["alerts_to_create_update_nsg_rule_exist"]
+    not azure_issue["alerts_to_create_update_nsg_rule_exist"]
+}
+
+alerts_to_create_update_nsg_rule_exist = false {
+    azure_attribute_absence["alerts_to_create_update_nsg_rule_exist"]
+}
+
+alerts_to_create_update_nsg_rule_exist = false {
+    azure_issue["alerts_to_create_update_nsg_rule_exist"]
+}
+
+alerts_to_create_update_nsg_rule_exist_err = "Azure Activity log alert for create or update network security group rule currently not exist" {
+    azure_issue["alerts_to_create_update_nsg_rule_exist"]
+} else = "azurerm_monitor_activity_log_alert property condition.allOf.field is missing from the resource." {
+    azure_attribute_absence["alerts_to_create_update_nsg_rule_exist"]
+}
+
+alerts_to_create_update_nsg_rule_exist_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-016",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Activity log alert for create or update network security group rule should exist",
+    "Policy Description": "This policy identifies the Azure accounts in which activity log alert for Create or update network security group rule does not exist. Creating an activity log alert for Create or update network security group rule gives insight into network rule access changes and may reduce the time it takes to detect suspicious activity.",
+    "Resource Type": "azurerm_monitor_activity_log_alert",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert"
+}
+
+
+#
+# PR-AZR-TRF-MNT-017
+#
+
+default alerts_to_create_update_security_solution_exist = null
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
+# by default alert get enabled if not exist.
+azure_attribute_absence["alerts_to_create_update_security_solution_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    not resource.properties.criteria
+}
+
+azure_attribute_absence["alerts_to_create_update_security_solution_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    criteria := resource.properties.criteria[_]
+    not criteria.operation_name
+}
+
+azure_issue["alerts_to_create_update_security_solution_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    count([c | criteria := resource.properties.criteria[_];
+              lower(criteria.operation_name) == "microsoft.security/securitysolutions/write";
+              not array_element_contains(resource.properties.scopes, "azurerm_resource_group");
+              c := 1]) == 0
+}
+
+alerts_to_create_update_security_solution_exist {
+    lower(input.resources[_].type) == "azurerm_monitor_activity_log_alert"
+    not azure_attribute_absence["alerts_to_create_update_security_solution_exist"]
+    not azure_issue["alerts_to_create_update_security_solution_exist"]
+}
+
+alerts_to_create_update_security_solution_exist = false {
+    azure_attribute_absence["alerts_to_create_update_security_solution_exist"]
+}
+
+alerts_to_create_update_security_solution_exist = false {
+    azure_issue["alerts_to_create_update_security_solution_exist"]
+}
+
+alerts_to_create_update_security_solution_exist_err = "Azure Activity log alert for create or update security solution currently not exist" {
+    azure_issue["alerts_to_create_update_security_solution_exist"]
+} else = "azurerm_monitor_activity_log_alert property criteria.operation_name is missing from the resource." {
+    azure_attribute_absence["alerts_to_create_update_security_solution_exist"]
+}
+
+alerts_to_create_update_security_solution_exist_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-017",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Activity log alert for create or update security solution should exist",
+    "Policy Description": "This policy identifies the Azure accounts in which activity log alert for Create or update security solution does not exist. Creating an activity log alert for Create or update security solution gives insight into changes to the active security solutions and may reduce the time it takes to detect suspicious activity.",
+    "Resource Type": "azurerm_monitor_activity_log_alert",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert"
+}
+
+
+#
+# PR-AZR-TRF-MNT-018
+#
+
+default alerts_to_create_policy_assignment_exist = null
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
+# by default alert get enabled if not exist.
+azure_attribute_absence["alerts_to_create_policy_assignment_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    not resource.properties.criteria
+}
+
+azure_attribute_absence["alerts_to_create_policy_assignment_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    criteria := resource.properties.criteria[_]
+    not criteria.operation_name
+}
+
+azure_issue["alerts_to_create_policy_assignment_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    count([c | criteria := resource.properties.criteria[_];
+              lower(criteria.operation_name) == "microsoft.authorization/policyassignments/write";
+              not array_element_contains(resource.properties.scopes, "azurerm_resource_group");
+              c := 1]) == 0
+}
+
+alerts_to_create_policy_assignment_exist {
+    lower(input.resources[_].type) == "azurerm_monitor_activity_log_alert"
+    not azure_attribute_absence["alerts_to_create_policy_assignment_exist"]
+    not azure_issue["alerts_to_create_policy_assignment_exist"]
+}
+
+alerts_to_create_policy_assignment_exist = false {
+    azure_attribute_absence["alerts_to_create_policy_assignment_exist"]
+}
+
+alerts_to_create_policy_assignment_exist = false {
+    azure_issue["alerts_to_create_policy_assignment_exist"]
+}
+
+alerts_to_create_policy_assignment_exist_err = "Azure Activity log alert for create policy assignment currently not exist" {
+    azure_issue["alerts_to_create_policy_assignment_exist"]
+} else = "azurerm_monitor_activity_log_alert property criteria.operation_name is missing from the resource." {
+    azure_attribute_absence["alerts_to_create_policy_assignment_exist"]
+}
+
+alerts_to_create_policy_assignment_exist_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-018",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Activity log alert for create policy assignment should exist",
+    "Policy Description": "This policy identifies the Azure accounts in which activity log alert for Create policy assignment does not exist. Creating an activity log alert for Create policy assignment gives insight into changes done in azure policy - assignments and may reduce the time it takes to detect unsolicited changes.",
+    "Resource Type": "azurerm_monitor_activity_log_alert",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert"
+}
+
+
+#
+# PR-AZR-TRF-MNT-019
+#
+
+default alerts_to_delete_sql_server_firewall_rule_exist = null
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
+# by default alert get enabled if not exist.
+azure_attribute_absence["alerts_to_delete_sql_server_firewall_rule_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    not resource.properties.criteria
+}
+
+azure_attribute_absence["alerts_to_delete_sql_server_firewall_rule_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    criteria := resource.properties.criteria[_]
+    not criteria.operation_name
+}
+
+azure_issue["alerts_to_delete_sql_server_firewall_rule_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    count([c | criteria := resource.properties.criteria[_];
+              lower(criteria.operation_name) == "microsoft.sql/servers/firewallrules/delete";
+              not array_element_contains(resource.properties.scopes, "azurerm_resource_group");
+              c := 1]) == 0
+}
+
+alerts_to_delete_sql_server_firewall_rule_exist {
+    lower(input.resources[_].type) == "azurerm_monitor_activity_log_alert"
+    not azure_attribute_absence["alerts_to_delete_sql_server_firewall_rule_exist"]
+    not azure_issue["alerts_to_delete_sql_server_firewall_rule_exist"]
+}
+
+alerts_to_delete_sql_server_firewall_rule_exist = false {
+    azure_attribute_absence["alerts_to_delete_sql_server_firewall_rule_exist"]
+}
+
+alerts_to_delete_sql_server_firewall_rule_exist = false {
+    azure_issue["alerts_to_delete_sql_server_firewall_rule_exist"]
+}
+
+alerts_to_delete_sql_server_firewall_rule_exist_err = "Azure Activity log alert for delete SQL server firewall rule currently not exist" {
+    azure_issue["alerts_to_delete_sql_server_firewall_rule_exist"]
+} else = "azurerm_monitor_activity_log_alert property criteria.operation_name is missing from the resource." {
+    azure_attribute_absence["alerts_to_delete_sql_server_firewall_rule_exist"]
+}
+
+alerts_to_delete_sql_server_firewall_rule_exist_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-019",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Activity log alert for delete SQL server firewall rule should exist",
+    "Policy Description": "This policy identifies the Azure accounts in which activity log alert for Delete SQL server firewall rule does not exist. Creating an activity log alert for Delete SQL server firewall rule gives insight into SQL server firewall rule access changes and may reduce the time it takes to detect suspicious activity.",
+    "Resource Type": "azurerm_monitor_activity_log_alert",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert"
+}
+
+
+#
+# PR-AZR-TRF-MNT-020
+#
+
+default alerts_to_delete_network_security_group_exist = null
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
+# by default alert get enabled if not exist.
+azure_attribute_absence["alerts_to_delete_network_security_group_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    not resource.properties.criteria
+}
+
+azure_attribute_absence["alerts_to_delete_network_security_group_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    criteria := resource.properties.criteria[_]
+    not criteria.operation_name
+}
+
+azure_issue["alerts_to_delete_network_security_group_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    count([c | criteria := resource.properties.criteria[_];
+              lower(criteria.operation_name) == "microsoft.network/networksecuritygroups/delete";
+              not array_element_contains(resource.properties.scopes, "azurerm_resource_group");
+              c := 1]) == 0
+}
+
+alerts_to_delete_network_security_group_exist {
+    lower(input.resources[_].type) == "azurerm_monitor_activity_log_alert"
+    not azure_attribute_absence["alerts_to_delete_network_security_group_exist"]
+    not azure_issue["alerts_to_delete_network_security_group_exist"]
+}
+
+alerts_to_delete_network_security_group_exist = false {
+    azure_attribute_absence["alerts_to_delete_network_security_group_exist"]
+}
+
+alerts_to_delete_network_security_group_exist = false {
+    azure_issue["alerts_to_delete_network_security_group_exist"]
+}
+
+alerts_to_delete_network_security_group_exist_err = "Azure Activity log alert for delete network security group currently not exist" {
+    azure_issue["alerts_to_delete_network_security_group_exist"]
+} else = "microsoft.insights/activitylogalerts property condition.allOf.field is missing from the resource." {
+    azure_attribute_absence["alerts_to_delete_network_security_group_exist"]
+}
+
+alerts_to_delete_network_security_group_exist_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-020",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Activity log alert for delete network security group should exist",
+    "Policy Description": "This policy identifies the Azure accounts in which activity log alert for Delete network security group does not exist. Creating an activity log alert for the Delete network security group gives insight into network access changes and may reduce the time it takes to detect suspicious activity.",
+    "Resource Type": "azurerm_monitor_activity_log_alert",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert"
+}
+
+
+#
+# PR-AZR-TRF-MNT-021
+#
+
+default alerts_to_delete_network_security_group_rule_exist = null
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
+# by default alert get enabled if not exist.
+azure_attribute_absence["alerts_to_delete_network_security_group_rule_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    not resource.properties.criteria
+}
+
+azure_attribute_absence["alerts_to_delete_network_security_group_rule_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    criteria := resource.properties.criteria[_]
+    not criteria.operation_name
+}
+
+azure_issue["alerts_to_delete_network_security_group_rule_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    count([c | criteria := resource.properties.criteria[_];
+              lower(criteria.operation_name) == "microsoft.network/networksecuritygroups/securityrules/delete";
+              not array_element_contains(resource.properties.scopes, "azurerm_resource_group");
+              c := 1]) == 0
+}
+
+alerts_to_delete_network_security_group_rule_exist {
+    lower(input.resources[_].type) == "azurerm_monitor_activity_log_alert"
+    not azure_attribute_absence["alerts_to_delete_network_security_group_rule_exist"]
+    not azure_issue["alerts_to_delete_network_security_group_rule_exist"]
+}
+
+alerts_to_delete_network_security_group_rule_exist = false {
+    azure_attribute_absence["alerts_to_delete_network_security_group_rule_exist"]
+}
+
+alerts_to_delete_network_security_group_rule_exist = false {
+    azure_issue["alerts_to_delete_network_security_group_rule_exist"]
+}
+
+alerts_to_delete_network_security_group_rule_exist_err = "Azure Activity log alert for delete network security group rule currently not exist" {
+    azure_issue["alerts_to_delete_network_security_group_rule_exist"]
+} else = "azurerm_monitor_activity_log_alert property criteria.operation_name is missing from the resource." {
+    azure_attribute_absence["alerts_to_delete_network_security_group_rule_exist"]
+}
+
+alerts_to_delete_network_security_group_rule_exist_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-021",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Activity log alert for delete network security group rule should exist",
+    "Policy Description": "This policy identifies the Azure accounts in which activity log alert for Delete network security group rule does not exist. Creating an activity log alert for Delete network security group rule gives insight into network rule access changes and may reduce the time it takes to detect suspicious activity.",
+    "Resource Type": "azurerm_monitor_activity_log_alert",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert"
+}
+
+
+#
+# PR-AZR-TRF-MNT-022
+#
+
+default alerts_to_delete_security_solution_exist = null
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
+# by default alert get enabled if not exist.
+azure_attribute_absence["alerts_to_delete_security_solution_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    not resource.properties.criteria
+}
+
+azure_attribute_absence["alerts_to_delete_security_solution_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    criteria := resource.properties.criteria[_]
+    not criteria.operation_name
+}
+
+azure_issue["alerts_to_delete_security_solution_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    count([c | criteria := resource.properties.criteria[_];
+              lower(criteria.operation_name) == "microsoft.security/securitysolutions/delete";
+              not array_element_contains(resource.properties.scopes, "azurerm_resource_group");
+              c := 1]) == 0
+}
+
+alerts_to_delete_security_solution_exist {
+    lower(input.resources[_].type) == "azurerm_monitor_activity_log_alert"
+    not azure_attribute_absence["alerts_to_delete_security_solution_exist"]
+    not azure_issue["alerts_to_delete_security_solution_exist"]
+}
+
+alerts_to_delete_security_solution_exist = false {
+    azure_attribute_absence["alerts_to_delete_security_solution_exist"]
+}
+
+alerts_to_delete_security_solution_exist = false {
+    azure_issue["alerts_to_delete_security_solution_exist"]
+}
+
+alerts_to_delete_security_solution_exist_err = "Azure Activity log alert for delete security solution currently not exist" {
+    azure_issue["alerts_to_delete_security_solution_exist"]
+} else = "azurerm_monitor_activity_log_alert property criteria.operation_name is missing from the resource." {
+    azure_attribute_absence["alerts_to_delete_security_solution_exist"]
+}
+
+alerts_to_delete_security_solution_exist_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-022",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Activity log alert for delete security solution should exist",
+    "Policy Description": "This policy identifies the Azure accounts in which activity log alert for Delete security solution does not exist. Creating an activity log alert for Delete security solution gives insight into changes to the active security solutions and may reduce the time it takes to detect suspicious activity.",
+    "Resource Type": "azurerm_monitor_activity_log_alert",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert"
+}
+
+
+#
+# PR-AZR-TRF-MNT-023
+#
+
+default alerts_to_update_security_policy_exist = null
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
+# by default alert get enabled if not exist.
+azure_attribute_absence["alerts_to_update_security_policy_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    not resource.properties.criteria
+}
+
+azure_attribute_absence["alerts_to_update_security_policy_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    criteria := resource.properties.criteria[_]
+    not criteria.operation_name
+}
+
+azure_issue["alerts_to_update_security_policy_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    count([c | criteria := resource.properties.criteria[_];
+              lower(criteria.operation_name) == "microsoft.security/policies/write";
+              not array_element_contains(resource.properties.scopes, "azurerm_resource_group");
+              c := 1]) == 0
+}
+
+alerts_to_update_security_policy_exist {
+    lower(input.resources[_].type) == "azurerm_monitor_activity_log_alert"
+    not azure_attribute_absence["alerts_to_update_security_policy_exist"]
+    not azure_issue["alerts_to_update_security_policy_exist"]
+}
+
+alerts_to_update_security_policy_exist = false {
+    azure_attribute_absence["alerts_to_update_security_policy_exist"]
+}
+
+alerts_to_update_security_policy_exist = false {
+    azure_issue["alerts_to_update_security_policy_exist"]
+}
+
+alerts_to_update_security_policy_exist_err = "Azure Activity log alert for update security policy currently not exist" {
+    azure_issue["alerts_to_update_security_policy_exist"]
+} else = "azurerm_monitor_activity_log_alert property criteria.operation_name is missing from the resource." {
+    azure_attribute_absence["alerts_to_update_security_policy_exist"]
+}
+
+alerts_to_update_security_policy_exist_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-023",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Activity log alert for update security policy should exist",
+    "Policy Description": "This policy identifies the Azure accounts in which activity log alert for Update security policy does not exist. Creating an activity log alert for Update security policy gives insight into changes to security policy and may reduce the time it takes to detect suspicious activity.",
+    "Resource Type": "azurerm_monitor_activity_log_alert",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert"
+}
+
+
+#
+# PR-AZR-TRF-MNT-024
+#
+
+default alerts_to_delete_policy_assignment_exist = null
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
+# by default alert get enabled if not exist.
+azure_attribute_absence["alerts_to_delete_policy_assignment_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    not resource.properties.criteria
+}
+
+azure_attribute_absence["alerts_to_delete_policy_assignment_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    criteria := resource.properties.criteria[_]
+    not criteria.operation_name
+}
+
+azure_issue["alerts_to_delete_policy_assignment_exist"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_activity_log_alert"
+    count([c | criteria := resource.properties.criteria[_];
+              lower(criteria.operation_name) == "microsoft.authorization/policyassignments/delete";
+              not array_element_contains(resource.properties.scopes, "azurerm_resource_group");
+              c := 1]) == 0
+}
+
+alerts_to_delete_policy_assignment_exist {
+    lower(input.resources[_].type) == "azurerm_monitor_activity_log_alert"
+    not azure_attribute_absence["alerts_to_delete_policy_assignment_exist"]
+    not azure_issue["alerts_to_delete_policy_assignment_exist"]
+}
+
+alerts_to_delete_policy_assignment_exist = false {
+    azure_attribute_absence["alerts_to_delete_policy_assignment_exist"]
+}
+
+alerts_to_delete_policy_assignment_exist = false {
+    azure_issue["alerts_to_delete_policy_assignment_exist"]
+}
+
+alerts_to_delete_policy_assignment_exist_err = "Azure Activity log alert for delete policy assignment currently not exist" {
+    azure_issue["alerts_to_delete_policy_assignment_exist"]
+} else = "azurerm_monitor_activity_log_alert property criteria.operation_name is missing from the resource." {
+    azure_attribute_absence["alerts_to_delete_policy_assignment_exist"]
+}
+
+alerts_to_delete_policy_assignment_exist_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-024",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Activity log alert for delete policy assignment should exist",
+    "Policy Description": "This policy identifies the Azure accounts in which activity log alert for Delete policy assignment does not exist. Creating an activity log alert for Delete policy assignment gives insight into changes done in azure policy - assignments and may reduce the time it takes to detect unsolicited changes.",
+    "Resource Type": "azurerm_monitor_activity_log_alert",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert"
 }

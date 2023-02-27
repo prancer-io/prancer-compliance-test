@@ -732,3 +732,141 @@ azure_traffic_manager_diagonstic_log_enabled_metadata := {
 }
 
 
+#
+# PR-AZR-TRF-MNT-025
+#
+default diagonstic_log_azure_eventhub_namespaces = null
+
+azure_attribute_absence ["diagonstic_log_azure_eventhub_namespaces"] {
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
+}
+
+azure_attribute_absence["diagonstic_log_azure_eventhub_namespaces"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+    not resource.properties.log
+}
+
+azure_issue ["diagonstic_log_azure_eventhub_namespaces"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_eventhub_namespace"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possibility that one can be enabled and other can be disabled. which will mislead us. 
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
+}
+
+diagonstic_log_azure_eventhub_namespaces = false {
+    lower(input.resources[_].type) == "azurerm_eventhub_namespace"
+    azure_attribute_absence["diagonstic_log_azure_eventhub_namespaces"]
+}
+
+diagonstic_log_azure_eventhub_namespaces {
+    lower(input.resources[_].type) == "azurerm_eventhub_namespace"
+    not azure_attribute_absence["diagonstic_log_azure_eventhub_namespaces"]
+    not azure_issue["diagonstic_log_azure_eventhub_namespaces"]
+}
+
+diagonstic_log_azure_eventhub_namespaces = false {
+    lower(input.resources[_].type) == "azurerm_eventhub_namespace"
+    azure_issue["diagonstic_log_azure_eventhub_namespaces"]
+}
+
+diagonstic_log_azure_eventhub_namespaces_err = "azurerm_eventhub_namespace's azurerm_monitor_diagnostic_setting and its property block 'log' need to be exist. its currently missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_eventhub_namespace"
+    azure_attribute_absence["diagonstic_log_azure_eventhub_namespaces"]
+} else = "Azure Event Hub Namespaces diagnostic logs is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_eventhub_namespace"
+    azure_issue["diagonstic_log_azure_eventhub_namespaces"] 
+}
+
+diagonstic_log_azure_eventhub_namespaces_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-025",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Event Hub Namespaces diagnostic logs should be enabled",
+    "Policy Description": "Diagnostic settings for Azure Event Hub Namespaces used to stream resource logs to a Log Analytics workspace. this policy will identify any Azure Event Hub Namespaces which has this diagnostic settings missing or misconfigured.",
+    "Resource Type": "azurerm_eventhub_namespace",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace"
+}
+
+
+#
+# PR-AZR-TRF-MNT-026
+#
+default azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces = null
+
+azure_attribute_absence ["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"] {
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
+}
+
+azure_attribute_absence["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+    not resource.properties.log_analytics_workspace_id
+}
+
+azure_issue ["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_recovery_services_vault"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possibility that one can be enabled and other can be disabled. which will mislead us. 
+              #r.properties.log[_].enabled == true;
+              count(r.properties.log_analytics_workspace_id) == 0;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              #r.properties.log[_].enabled == true;
+              count(r.properties.log_analytics_workspace_id) == 0;
+              c := 1]) == 0
+}
+
+azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces = false {
+    lower(input.resources[_].type) == "azurerm_recovery_services_vault"
+    azure_attribute_absence["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"]
+}
+
+azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces {
+    lower(input.resources[_].type) == "azurerm_recovery_services_vault"
+    not azure_attribute_absence["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"]
+    not azure_issue["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"]
+}
+
+azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces = false {
+    lower(input.resources[_].type) == "azurerm_recovery_services_vault"
+    azure_issue["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"]
+}
+
+azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces_err = "azurerm_recovery_services_vault's diagnostics logging azurerm_monitor_diagnostic_setting dont have any 'workspaceId' property configured." {
+    lower(input.resources[_].type) == "azurerm_recovery_services_vault"
+    azure_attribute_absence["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"]
+} else = "Azure Recovery Services Vault diagnostics logging is currently not configured to stream diagnostic settings to Log Analytics workspace" {
+    lower(input.resources[_].type) == "azurerm_recovery_services_vault"
+    azure_issue["azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces"] 
+}
+
+azure_recoveryservices_vaults_diagonstic_log_steam_to_log_analytics_workspaces_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-026",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Recovery Services Vault Diagnostic Settings stream to Log Analytics workspace",
+    "Policy Description": "Audit Diagnostic Settings for Recovery Services Vault to stream to Log Analytics workspace for Resource specific categories. If any of the Resource specific categories are not enabled, Recovery Services Vault is put on audit.",
+    "Resource Type": "azurerm_recovery_services_vault",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/recovery_services_vault"
+}
+
+

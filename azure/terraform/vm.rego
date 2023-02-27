@@ -459,3 +459,65 @@ vm_ip_forwarding_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine"
 }
+
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/backup_protected_vm
+# PR-AZR-TRF-VM-010
+#
+
+default vm_has_backup_configured = null
+
+azure_attribute_absence ["vm_has_backup_configured"] {
+    count([c | lower(input.resources[_].type) == "azurerm_backup_protected_vm"; c := 1]) == 0
+}
+
+azure_issue["vm_has_backup_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_virtual_machine"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_backup_protected_vm";
+              contains(r.properties.source_vm_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_backup_protected_vm";
+              contains(r.properties.source_vm_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
+
+vm_has_backup_configured {
+    lower(input.resources[_].type) == "azurerm_virtual_machine"
+    not azure_attribute_absence["vm_has_backup_configured"]
+    not azure_issue["vm_has_backup_configured"]
+}
+
+vm_has_backup_configured = false {
+	lower(input.resources[_].type) == "azurerm_virtual_machine"
+    azure_attribute_absence["vm_has_backup_configured"]
+}
+
+vm_has_backup_configured = false {
+	lower(input.resources[_].type) == "azurerm_virtual_machine"
+    azure_issue["vm_has_backup_configured"]
+}
+
+vm_has_backup_configured_err = "'azurerm_backup_protected_vm' resource need to be exist and configured for 'azurerm_virtual_machine'" {
+	lower(input.resources[_].type) == "azurerm_virtual_machine"
+	azure_attribute_absence["vm_has_backup_configured"]
+} else = "Azure VM backup is currently not configured" {
+    lower(input.resources[_].type) == "azurerm_virtual_machine"
+	azure_attribute_absence["vm_has_backup_configured"]
+}
+
+vm_has_backup_configured_metadata := {
+    "Policy Code": "PR-AZR-TRF-VM-010",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Backup should be enabled for Virtual Machines",
+    "Policy Description": "Ensure protection of your Azure Virtual Machines by enabling Azure Backup. Azure Backup is a secure and cost effective data protection solution for Azure.",
+    "Resource Type": "azurerm_virtual_machine",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine"
+}
+
