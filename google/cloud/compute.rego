@@ -1,6 +1,6 @@
 package rule
-import future.keywords
-import future.keywords.every
+# import future.keywords
+# import future.keywords.every
 
 # https://cloud.google.com/compute/docs/reference/rest/v1/firewalls
 
