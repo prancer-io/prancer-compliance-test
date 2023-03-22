@@ -12,7 +12,8 @@
 					"listMethod": "list_keys",
 					"detailMethods": [
 						"describe_key",
-						"get_key_rotation_status"
+						"get_key_rotation_status",
+						"list_resource_tags"
 					]
 				},
 				{
