@@ -477,6 +477,30 @@
                     "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems",
                     "collection": "Microsoft.RecoveryServices",
                     "version": "2023-01-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_519",
+                    "type": "Microsoft.Security/pricings",
+                    "collection": "Microsoft.Security",
+                    "version": "2023-01-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_520",
+                    "type": "Microsoft.Security/settings",
+                    "collection": "Microsoft.Security",
+                    "version": "2021-06-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_521",
+                    "type": "Microsoft.Security/autoProvisioningSettings",
+                    "collection": "Microsoft.Security",
+                    "version": "2017-08-01-preview"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_522",
+                    "type": "Microsoft.Security/securityContacts",
+                    "collection": "Microsoft.Security",
+                    "version": "2020-01-01-preview"
                 }
             ]
         }
