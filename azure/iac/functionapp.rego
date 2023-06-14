@@ -481,7 +481,7 @@ azure_function_app_has_auth_settings_enabled_err = "Azure Function App currently
     azure_attribute_absence["azure_function_app_has_auth_settings_enabled"]
 }
 
-http_20_enabled_metadata := {
+azure_function_app_has_auth_settings_enabled_metadata := {
     "Policy Code": "PR-AZR-ARM-AFA-005",
     "Type": "IaC",
     "Product": "AZR",
