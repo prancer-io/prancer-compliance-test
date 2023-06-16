@@ -7604,7 +7604,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.DBforPostgreSQL/servers/configurations"
+                        "microsoft.dbforpostgresql/servers/configurations"
                     ]
                 },
                 {
@@ -7682,7 +7682,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.DBforPostgreSQL/servers/configurations"
+                        "microsoft.dbforpostgresql/servers/configurations"
                     ]
                 },
                 {
@@ -7764,7 +7764,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.DBforPostgreSQL/servers/configurations"
+                        "microsoft.dbforpostgresql/servers/configurations"
                     ]
                 },
                 {
@@ -7846,7 +7846,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.DBforPostgreSQL/servers/configurations"
+                        "microsoft.dbforpostgresql/servers/configurations"
                     ]
                 },
                 {
@@ -7928,7 +7928,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.DBforPostgreSQL/servers/configurations"
+                        "microsoft.dbforpostgresql/servers/configurations"
                     ]
                 },
                 {
@@ -8002,7 +8002,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.DBforPostgreSQL/servers/configurations"
+                        "microsoft.dbforpostgresql/servers/configurations"
                     ]
                 },
                 {
@@ -8521,7 +8521,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.ContainerRegistry/registries"
+                        "microsoft.containerregistry/registries"
                     ]
                 },
                 {
@@ -8555,7 +8555,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.ContainerRegistry/registries/tokens"
+                        "microsoft.containerregistry/registries/tokens"
                     ]
                 },
                 {
@@ -8589,7 +8589,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.ContainerRegistry/registries"
+                        "microsoft.containerregistry/registries"
                     ]
                 },
                 {
@@ -8623,7 +8623,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.ContainerRegistry/registries"
+                        "microsoft.containerregistry/registries"
                     ]
                 },
                 {
@@ -8668,7 +8668,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.ContainerRegistry/registries"
+                        "microsoft.containerregistry/registries"
                     ]
                 },
                 {
@@ -8702,7 +8702,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.ContainerRegistry/registries",
+                        "microsoft.containerregistry/registries",
                         "microsoft.containerregistry/registries/privateendpointconnection"
                     ]
                 },
@@ -8737,7 +8737,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.ContainerRegistry/registries"
+                        "microsoft.containerregistry/registries"
                     ]
                 },
                 {
@@ -8771,7 +8771,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.ContainerRegistry/registries"
+                        "microsoft.containerregistry/registries"
                     ]
                 },
                 {
@@ -8819,7 +8819,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.ContainerRegistry/registries"
+                        "microsoft.containerregistry/registries"
                     ]
                 },
                 {
@@ -12428,7 +12428,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Storage/storageAccounts/fileServices/shares"
+                        "microsoft.storage/storageaccounts/fileservices/shares"
                     ]
                 },
                 {
@@ -14745,7 +14745,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.RecoveryServices/vaults"
+                        "microsoft.recoveryservices/vaults"
                     ]
                 },
                 {
@@ -14779,7 +14779,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.RecoveryServices/vaults"
+                        "microsoft.recoveryservices/vaults"
                     ]
                 },
                 {
@@ -14813,7 +14813,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.EventHub/namespaces"
+                        "microsoft.eventhub/namespaces"
                     ]
                 },
                 {
@@ -14847,7 +14847,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.EventHub/namespaces"
+                        "microsoft.eventhub/namespaces"
                     ]
                 },
                 {
@@ -14881,8 +14881,8 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.EventHub/namespaces",
-                        "Microsoft.EventHub/namespaces/privateEndpointConnections"
+                        "microsoft.eventhub/namespaces",
+                        "microsoft.eventhub/namespaces/privateendpointconnections"
                     ]
                 },
                 {
@@ -14926,7 +14926,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.EventHub/namespaces"
+                        "microsoft.eventhub/namespaces"
                     ]
                 },
                 {
@@ -14960,7 +14960,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.EventHub/namespaces/authorizationRules"
+                        "microsoft.eventhub/namespaces/authorizationrules"
                     ]
                 },
                 {
@@ -14995,7 +14995,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.EventHub/namespaces/eventhubs",
+                        "microsoft.eventhub/namespaces/eventhubs",
                         "microsoft.eventhub/namespaces/eventhubs/authorizationrules"
                     ]
                 },
@@ -16001,7 +16001,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.ContainerInstance/containerGroups"
+                        "microsoft.containerinstance/containergroups"
                     ]
                 },
                 {
@@ -16036,7 +16036,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.ContainerInstance/containerGroups"
+                        "microsoft.containerinstance/containergroups"
                     ]
                 },
                 {
@@ -16071,7 +16071,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.ContainerInstance/containerGroups"
+                        "microsoft.containerinstance/containergroups"
                     ]
                 },
                 {
@@ -16118,7 +16118,7 @@
                     ],
                     "resourceTypes": [
                         "microsoft.insights/diagnosticsettings",
-                        "Microsoft.Network/trafficManagerProfiles"
+                        "microsoft.network/trafficmanagerprofiles"
                     ]
                 },
                 {
@@ -16158,7 +16158,7 @@
                     ],
                     "resourceTypes": [
                         "microsoft.sql/servers",
-                        "Microsoft.Sql/servers/virtualNetworkRules"
+                        "microsoft.sql/servers/virtualnetworkrules"
                     ]
                 },
                 {
@@ -17788,7 +17788,7 @@
                     ],
                     "resourceTypes": [
                         "microsoft.insights/diagnosticsettings",
-                        "Microsoft.RecoveryServices/vaults"
+                        "microsoft.recoveryservices/vaults"
                     ]
                 },
                 {
@@ -17861,7 +17861,7 @@
                     ],
                     "resourceTypes": [
                         "microsoft.compute/virtualmachines",
-                        "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems"
+                        "microsoft.recoveryservices/vaults/backupfabrics/protectioncontainers/protecteditems"
                     ]
                 },
                 {
@@ -17939,7 +17939,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18013,7 +18013,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18088,7 +18088,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18163,7 +18163,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18204,7 +18204,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18279,7 +18279,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18354,7 +18354,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18388,7 +18388,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18463,7 +18463,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/settings"
+                        "microsoft.security/settings"
                     ]
                 },
                 {
@@ -18539,7 +18539,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/settings"
+                        "microsoft.security/settings"
                     ]
                 },
                 {
@@ -18641,7 +18641,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/autoProvisioningSettings"
+                        "microsoft.security/autoprovisioningsettings"
                     ]
                 },
                 {
@@ -18767,7 +18767,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/securityContacts"
+                        "microsoft.security/securitycontacts"
                     ]
                 },
                 {
@@ -18894,7 +18894,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/securityContacts"
+                        "microsoft.security/securitycontacts"
                     ]
                 },
                 {
@@ -19020,7 +19020,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/securityContacts"
+                        "microsoft.security/securitycontacts"
                     ]
                 }
             ]
