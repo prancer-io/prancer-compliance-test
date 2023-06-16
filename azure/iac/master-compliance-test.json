@@ -17939,7 +17939,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18013,7 +18013,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18088,7 +18088,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18163,7 +18163,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18204,7 +18204,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18279,7 +18279,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18354,7 +18354,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18388,7 +18388,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/pricings"
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -18463,7 +18463,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/settings"
+                        "microsoft.security/settings"
                     ]
                 },
                 {
@@ -18539,7 +18539,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/settings"
+                        "microsoft.security/settings"
                     ]
                 },
                 {
@@ -18641,7 +18641,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/autoProvisioningSettings"
+                        "microsoft.security/autoprovisioningsettings"
                     ]
                 },
                 {
@@ -18767,7 +18767,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/securityContacts"
+                        "microsoft.security/securitycontacts"
                     ]
                 },
                 {
@@ -18894,7 +18894,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/securityContacts"
+                        "microsoft.security/securitycontacts"
                     ]
                 },
                 {
@@ -19020,7 +19020,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "Microsoft.Security/securityContacts"
+                        "microsoft.security/securitycontacts"
                     ]
                 }
             ]
