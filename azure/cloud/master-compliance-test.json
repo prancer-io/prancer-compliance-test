@@ -15537,6 +15537,161 @@
                     "severity": "Medium",
                     "title": "Azure Microsoft Defender for Cloud security contact additional email should be set",
                     "description": "This policy identifies the Azure Microsoft Defender for Cloud (previously known as Azure Security Center and Azure Defender) which has not set security contact additional email addresses. Microsoft Defender for Cloud emails the subscription owners whenever a high-severity alert is triggered for their subscription. Providing a security contact email address as an additional email address ensures that the proper people are aware of any potential compromise in order to mitigate the risk in a timely fashion."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-RBA-001",
+                    "type": "rego",
+                    "rule": "file(rbac.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-RBA-001",
+                            "eval": "data.rule.custom_roles_dont_have_overly_permission",
+                            "message": "data.rule.custom_roles_dont_have_overly_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_RBA_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_523"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure custom role definition should not have overly permission",
+                    "description": "This policy identifies and audit azure subscriptions with custom roles that has overly permission. Least privilege access rule should be followed and only necessary privileges should be assigned instead of allowing full administrative access."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-RBA-002",
+                    "type": "rego",
+                    "rule": "file(rbac.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-RBA-002",
+                            "eval": "data.rule.role_assignments_dont_have_implicit_role_management_permissions",
+                            "message": "data.rule.role_assignments_dont_have_implicit_role_management_permissions_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_RBA_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_524"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure role assignments should not have implicit role management permissions",
+                    "description": "This policy identifies and audit azure role assignments that have implicit role management permission. Azure role assignments should be defined by the principle of least privilege."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-RBA-003",
+                    "type": "rego",
+                    "rule": "file(rbac.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-RBA-003",
+                            "eval": "data.rule.role_assignments_dont_have_implicit_managed_identity_permissions",
+                            "message": "data.rule.role_assignments_dont_have_implicit_managed_identity_permissions_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_RBA_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_524"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure role assignments should not have implicit managed identity permissions",
+                    "description": "This policy identifies and audit azure role assignments that have implicit managed identity permission. Azure role assignments should be defined by the principle of least privilege."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-RBA-004",
+                    "type": "rego",
+                    "rule": "file(rbac.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-RBA-004",
+                            "eval": "data.rule.role_assignments_dont_have_implicit_owner_permissions",
+                            "message": "data.rule.role_assignments_dont_have_implicit_owner_permissions_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_RBA_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_524"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure role assignments should not have implicit owner permissions",
+                    "description": "This policy identifies and audit azure role assignments that have implicit owner permission. Azure role assignments should be defined by the principle of least privilege."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-RBA-005",
+                    "type": "rego",
+                    "rule": "file(rbac.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-RBA-005",
+                            "eval": "data.rule.custom_roles_dont_have_subscription_owner_permission",
+                            "message": "data.rule.custom_roles_dont_have_subscription_owner_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_CLD_RBA_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_523"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure custom role definition should not have subscription owner permission",
+                    "description": "This policy identifies and audit azure subscriptions with custom roles that has subscription owner permission. Least privilege access rule should be followed and only necessary privileges should be assigned instead of allowing full administrative access."
                 }
             ]
         }

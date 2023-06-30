@@ -501,6 +501,18 @@
                     "type": "Microsoft.Security/securityContacts",
                     "collection": "Microsoft.Security",
                     "version": "2020-01-01-preview"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_523",
+                    "type": "Microsoft.Authorization/roleDefinitions",
+                    "collection": "Microsoft.Authorization",
+                    "version": "2022-04-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_524",
+                    "type": "Microsoft.Authorization/roleAssignments",
+                    "collection": "Microsoft.Authorization",
+                    "version": "2022-04-01"
                 }
             ]
         }
