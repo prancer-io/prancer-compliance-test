@@ -15539,23 +15539,27 @@
                     "description": "This policy identifies the Azure Microsoft Defender for Cloud (previously known as Azure Security Center and Azure Defender) which has not set security contact additional email addresses. Microsoft Defender for Cloud emails the subscription owners whenever a high-severity alert is triggered for their subscription. Providing a security contact email address as an additional email address ensures that the proper people are aware of any potential compromise in order to mitigate the risk in a timely fashion."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-RBA-001",
+                    "masterTestId": "PR-AZR-CLD-IAM-001",
                     "type": "rego",
-                    "rule": "file(rbac.rego)",
+                    "rule": "file(iam.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-CLD-RBA-001",
+                            "id": "PR-AZR-CLD-IAM-001",
                             "eval": "data.rule.custom_roles_dont_have_overly_permission",
                             "message": "data.rule.custom_roles_dont_have_overly_permission_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_RBA_001.py"
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Roles' tab in the upper menu.<br>03. Identify the overly permissive custom role and choose 'Edit'<br>.04. Instead of the wildcard, specify implicit permissions for the role.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_001.py"
                         }
                     ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
                             ],
                             "service": [
                                 "Security"
@@ -15565,28 +15569,32 @@
                     "masterSnapshotId": [
                         "AZRSNP_523"
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure custom role definition should not have overly permission",
                     "description": "This policy identifies and audit azure subscriptions with custom roles that has overly permission. Least privilege access rule should be followed and only necessary privileges should be assigned instead of allowing full administrative access."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-RBA-002",
+                    "masterTestId": "PR-AZR-CLD-IAM-002",
                     "type": "rego",
-                    "rule": "file(rbac.rego)",
+                    "rule": "file(iam.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-CLD-RBA-002",
+                            "id": "PR-AZR-CLD-IAM-002",
                             "eval": "data.rule.role_assignments_dont_have_implicit_role_management_permissions",
                             "message": "data.rule.role_assignments_dont_have_implicit_role_management_permissions_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_RBA_002.py"
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Role assignments' tab in the upper menu.<br>03.Identify the roles that has implicit role management permission<br>04. Remove all the implicit role management permission according to the principle of least privilege.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_002.py"
                         }
                     ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
                             ],
                             "service": [
                                 "Security"
@@ -15596,28 +15604,32 @@
                     "masterSnapshotId": [
                         "AZRSNP_524"
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure role assignments should not have implicit role management permissions",
                     "description": "This policy identifies and audit azure role assignments that have implicit role management permission. Azure role assignments should be defined by the principle of least privilege."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-RBA-003",
+                    "masterTestId": "PR-AZR-CLD-IAM-003",
                     "type": "rego",
-                    "rule": "file(rbac.rego)",
+                    "rule": "file(iam.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-CLD-RBA-003",
+                            "id": "PR-AZR-CLD-IAM-003",
                             "eval": "data.rule.role_assignments_dont_have_implicit_managed_identity_permissions",
                             "message": "data.rule.role_assignments_dont_have_implicit_managed_identity_permissions_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_RBA_003.py"
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Role assignments' tab in the upper menu.<br>03.Identify the roles that has implicit managed identity permission<br>04. Remove all the implicit managed identity permission according to the principle of least privilege.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_003.py"
                         }
                     ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
                             ],
                             "service": [
                                 "Security"
@@ -15627,28 +15639,32 @@
                     "masterSnapshotId": [
                         "AZRSNP_524"
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure role assignments should not have implicit managed identity permissions",
                     "description": "This policy identifies and audit azure role assignments that have implicit managed identity permission. Azure role assignments should be defined by the principle of least privilege."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-RBA-004",
+                    "masterTestId": "PR-AZR-CLD-IAM-004",
                     "type": "rego",
-                    "rule": "file(rbac.rego)",
+                    "rule": "file(iam.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-CLD-RBA-004",
+                            "id": "PR-AZR-CLD-IAM-004",
                             "eval": "data.rule.role_assignments_dont_have_implicit_owner_permissions",
                             "message": "data.rule.role_assignments_dont_have_implicit_owner_permissions_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_RBA_004.py"
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Role assignments' tab in the upper menu.<br>03.Identify the roles that has implicit owner permission<br>04. Remove all the implicit owner permission according to the principle of least privilege.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_004.py"
                         }
                     ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
                             ],
                             "service": [
                                 "Security"
@@ -15658,28 +15674,32 @@
                     "masterSnapshotId": [
                         "AZRSNP_524"
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure role assignments should not have implicit owner permissions",
                     "description": "This policy identifies and audit azure role assignments that have implicit owner permission. Azure role assignments should be defined by the principle of least privilege."
                 },
                 {
-                    "masterTestId": "PR-AZR-CLD-RBA-005",
+                    "masterTestId": "PR-AZR-CLD-IAM-005",
                     "type": "rego",
-                    "rule": "file(rbac.rego)",
+                    "rule": "file(iam.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-CLD-RBA-005",
+                            "id": "PR-AZR-CLD-IAM-005",
                             "eval": "data.rule.custom_roles_dont_have_subscription_owner_permission",
                             "message": "data.rule.custom_roles_dont_have_subscription_owner_permission_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_CLD_RBA_005.py"
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Roles' tab in the upper menu.<br>03. Identify the custom role that has subscription owner permission and choose 'Edit'<br>.04. Instead of the subscription owner, specify implicit permissions for the role.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_005.py"
                         }
                     ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
                             ],
                             "service": [
                                 "Security"
@@ -15689,9 +15709,79 @@
                     "masterSnapshotId": [
                         "AZRSNP_523"
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure custom role definition should not have subscription owner permission",
                     "description": "This policy identifies and audit azure subscriptions with custom roles that has subscription owner permission. Least privilege access rule should be followed and only necessary privileges should be assigned instead of allowing full administrative access."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-006",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-006",
+                            "eval": "data.rule.custom_roles_dont_have_wildcard_action",
+                            "message": "data.rule.custom_roles_dont_have_wildcard_action_err",
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Roles' tab in the upper menu.<br>03. Identify the custom role that has wildcard action defined and choose 'Edit'<br>.04. Instead of wildcard action, specify implicit permissions for the role.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_523"
+                    ],
+                    "severity": "High",
+                    "title": "Azure custom role definition should not have wildcard action",
+                    "description": "This policy identifies and audit custom roles that has wildcard action. When creating custom roles, you can use the wildcard (*) character to define permissions. It's recommended that you specify Actions and DataActions explicitly instead of using the wildcard (*) character. The additional access and permissions granted through future Actions or DataActions may be unwanted behavior using the wildcard."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-007",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-007",
+                            "eval": "data.rule.role_dont_have_direct_user_assignment",
+                            "message": "data.rule.role_dont_have_direct_user_assignment_err",
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Role assignments' tab in the upper menu.<br>03.Identify the roles that has direct user or service principal assignment<br>04. Remove all the direct user and service principal assingment and update those with group.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_007.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_524"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure to assign roles to groups, not users",
+                    "description": "To make role assignments more manageable, avoid assigning roles directly to users. Instead, assign roles to groups. Assigning roles to groups instead of users also helps minimize the number of role assignments, which has a limit of role assignments per subscription"
                 }
             ]
         }

@@ -19,7 +19,7 @@ array_element_startswith(target_array, element_string) = true {
 # https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/roledefinitions?pivots=deployment-language-arm-template
 # https://learn.microsoft.com/en-us/rest/api/authorization/role-definitions/list?tabs=HTTP
 #
-# PR-AZR-CLD-RBA-001
+# PR-AZR-CLD-IAM-001
 #
 
 default custom_roles_dont_have_overly_permission = null
@@ -46,7 +46,7 @@ custom_roles_dont_have_overly_permission_err = "Azure custom role definition cur
 }
 
 custom_roles_dont_have_overly_permission_metadata := {
-    "Policy Code": "PR-AZR-CLD-RBA-001",
+    "Policy Code": "PR-AZR-CLD-IAM-001",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -61,7 +61,7 @@ custom_roles_dont_have_overly_permission_metadata := {
 # https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/roleassignments?pivots=deployment-language-arm-template
 # https://learn.microsoft.com/en-us/rest/api/authorization/role-assignments/list-for-scope?tabs=HTTP
 #
-# PR-AZR-CLD-RBA-002
+# PR-AZR-CLD-IAM-002
 #
 
 default role_assignments_dont_have_implicit_role_management_permissions = null
@@ -93,7 +93,7 @@ role_assignments_dont_have_implicit_role_management_permissions_err = "Azure rol
 }
 
 role_assignments_dont_have_implicit_role_management_permissions_metadata := {
-    "Policy Code": "PR-AZR-CLD-RBA-002",
+    "Policy Code": "PR-AZR-CLD-IAM-002",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -108,7 +108,7 @@ role_assignments_dont_have_implicit_role_management_permissions_metadata := {
 # https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/roleassignments?pivots=deployment-language-arm-template
 # https://learn.microsoft.com/en-us/rest/api/authorization/role-assignments/list-for-scope?tabs=HTTP
 #
-# PR-AZR-CLD-RBA-003
+# PR-AZR-CLD-IAM-003
 #
 
 default role_assignments_dont_have_implicit_managed_identity_permissions = null
@@ -133,7 +133,7 @@ role_assignments_dont_have_implicit_managed_identity_permissions_err = "Azure ro
 }
 
 role_assignments_dont_have_implicit_managed_identity_permissions_metadata := {
-    "Policy Code": "PR-AZR-CLD-RBA-003",
+    "Policy Code": "PR-AZR-CLD-IAM-003",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -148,7 +148,7 @@ role_assignments_dont_have_implicit_managed_identity_permissions_metadata := {
 # https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/roleassignments?pivots=deployment-language-arm-template
 # https://learn.microsoft.com/en-us/rest/api/authorization/role-assignments/list-for-scope?tabs=HTTP
 #
-# PR-AZR-CLD-RBA-004
+# PR-AZR-CLD-IAM-004
 #
 
 default role_assignments_dont_have_implicit_owner_permissions = null
@@ -172,7 +172,7 @@ role_assignments_dont_have_implicit_owner_permissions_err = "Azure role assignme
 }
 
 role_assignments_dont_have_implicit_owner_permissions_metadata := {
-    "Policy Code": "PR-AZR-CLD-RBA-004",
+    "Policy Code": "PR-AZR-CLD-IAM-004",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -187,7 +187,7 @@ role_assignments_dont_have_implicit_owner_permissions_metadata := {
 # https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/roledefinitions?pivots=deployment-language-arm-template
 # https://learn.microsoft.com/en-us/rest/api/authorization/role-definitions/list?tabs=HTTP
 #
-# PR-AZR-CLD-RBA-005
+# PR-AZR-CLD-IAM-005
 #
 
 default custom_roles_dont_have_subscription_owner_permission = null
@@ -198,7 +198,7 @@ azure_issue["custom_roles_dont_have_subscription_owner_permission"] {
     lower(resource.properties.type) == "customrole"
     array_element_contains(resource.properties.assignableScopes, "subscriptions/")
     permissions := resource.properties.permissions[_]
-    array_contains(permissions.actions, "*")
+    array_element_startswith(permissions.actions, "*")
 }
 
 custom_roles_dont_have_subscription_owner_permission = false {
@@ -214,7 +214,7 @@ custom_roles_dont_have_subscription_owner_permission_err = "Azure custom role de
 }
 
 custom_roles_dont_have_subscription_owner_permission_metadata := {
-    "Policy Code": "PR-AZR-CLD-RBA-005",
+    "Policy Code": "PR-AZR-CLD-IAM-005",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -223,4 +223,84 @@ custom_roles_dont_have_subscription_owner_permission_metadata := {
     "Resource Type": "Microsoft.Authorization/roleDefinitions",
     "Policy Help URL": "",
     "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/roledefinitions?pivots=deployment-language-arm-template"
+}
+
+
+# https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/roledefinitions?pivots=deployment-language-arm-template
+# https://learn.microsoft.com/en-us/rest/api/authorization/role-definitions/list?tabs=HTTP
+#
+# PR-AZR-CLD-IAM-006
+#
+
+default custom_roles_dont_have_wildcard_action = null
+
+azure_issue["custom_roles_dont_have_wildcard_action"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/roledefinitions"
+    lower(resource.properties.type) == "customrole"
+    permissions := resource.properties.permissions[_]
+    array_element_contains(permissions.actions, "*")
+}
+
+custom_roles_dont_have_wildcard_action = false {
+    azure_issue["custom_roles_dont_have_wildcard_action"]
+}
+
+custom_roles_dont_have_wildcard_action {
+    not azure_issue["custom_roles_dont_have_wildcard_action"]
+}
+
+custom_roles_dont_have_wildcard_action_err = "Azure custom role definition currently have wildcard action" {
+    azure_issue["custom_roles_dont_have_wildcard_action"]
+}
+
+custom_roles_dont_have_wildcard_action_metadata := {
+    "Policy Code": "PR-AZR-CLD-IAM-006",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Azure custom role definition should not have wildcard action",
+    "Policy Description": "This policy identifies and audit custom roles that has wildcard action. When creating custom roles, you can use the wildcard (*) character to define permissions. It's recommended that you specify Actions and DataActions explicitly instead of using the wildcard (*) character. The additional access and permissions granted through future Actions or DataActions may be unwanted behavior using the wildcard.",
+    "Resource Type": "Microsoft.Authorization/roleDefinitions",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/roledefinitions?pivots=deployment-language-arm-template"
+}
+
+
+# https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/roleassignments?pivots=deployment-language-arm-template
+# https://learn.microsoft.com/en-us/rest/api/authorization/role-assignments/list-for-scope?tabs=HTTP
+#
+# PR-AZR-CLD-IAM-007
+#
+
+default role_dont_have_direct_user_assignment = null
+
+azure_issue["role_dont_have_direct_user_assignment"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/roleassignments"
+    lower(resource.properties.principalType) != "group"
+}
+
+role_dont_have_direct_user_assignment = false {
+    azure_issue["role_dont_have_direct_user_assignment"]
+}
+
+role_dont_have_direct_user_assignment {
+    not azure_issue["role_dont_have_direct_user_assignment"]
+}
+
+role_dont_have_direct_user_assignment_err = "Azure role currently have direct user assignment" {
+    azure_issue["role_dont_have_direct_user_assignment"]
+}
+
+role_dont_have_direct_user_assignment_metadata := {
+    "Policy Code": "PR-AZR-CLD-IAM-007",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Ensure to assign roles to groups, not users",
+    "Policy Description": "To make role assignments more manageable, avoid assigning roles directly to users. Instead, assign roles to groups. Assigning roles to groups instead of users also helps minimize the number of role assignments, which has a limit of role assignments per subscription",
+    "Resource Type": "Microsoft.Authorization/roleAssignments",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/roleassignments?pivots=deployment-language-arm-template"
 }
