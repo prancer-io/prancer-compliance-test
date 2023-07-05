@@ -2262,17 +2262,17 @@ project_os_login_overridden_by_instnace_metadata := {
 default cld_run_with_over_permission_ingress = null
 
 gc_attribute_absence["cld_run_with_over_permission_ingress"]{
-    count([c | has_property(input.items[_].status, "conditions"); c=1]) == 0
+    count([c | has_property(input.status, "conditions"); c=1]) == 0
 }
 
 gc_issue["cld_run_with_over_permission_ingress"]{
-	ready := input.items[_].status.conditions[_]
+	ready := input.status.conditions[_]
     lower(ready.type) == "ready"
     lower(ready.status) == "true"
-    routes := input.items[_].status.conditions[_]
+    routes := input.status.conditions[_]
     lower(routes.type) == "routesready"
     lower(routes.status) == "true"
-    lower(input.items[_].metadata.annotations["run.googleapis.com/ingress"]) == "all"
+    lower(input.metadata.annotations["run.googleapis.com/ingress"]) == "all"
 }
 
 cld_run_with_over_permission_ingress {
