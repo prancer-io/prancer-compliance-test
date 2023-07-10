@@ -513,6 +513,24 @@
                     "type": "Microsoft.Authorization/roleAssignments",
                     "collection": "Microsoft.Authorization",
                     "version": "2022-04-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_525",
+                    "type": "microsoft.graph.userRegistrationDetails",
+                    "collection": "microsoft.graph",
+                    "version": "beta"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_526",
+                    "type": "microsoft.graph.authorizationPolicy",
+                    "collection": "microsoft.graph",
+                    "version": "1.0"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_527",
+                    "type": "microsoft.graph.identitySecurityDefaultsEnforcementPolicy",
+                    "collection": "microsoft.graph",
+                    "version": "1.0"
                 }
             ]
         }

@@ -304,3 +304,385 @@ role_dont_have_direct_user_assignment_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/roleassignments?pivots=deployment-language-arm-template"
 }
+
+
+# https://learn.microsoft.com/en-us/graph/api/identitysecuritydefaultsenforcementpolicy-get?view=graph-rest-1.0&tabs=http
+#
+# PR-AZR-CLD-IAM-008
+#
+
+default aad_has_security_default_enabled = null
+
+azure_attribute_absence["aad_has_security_default_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.identitysecuritydefaultsenforcementpolicy"
+    not has_property(resource.properties, "isEnabled")
+}
+
+azure_issue["aad_has_security_default_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.identitysecuritydefaultsenforcementpolicy"
+    resource.properties.isEnabled != true
+}
+
+aad_has_security_default_enabled {
+    lower(input.resources[_].type) == "microsoft.graph.identitysecuritydefaultsenforcementpolicy"
+    not azure_attribute_absence["aad_has_security_default_enabled"]
+    not azure_issue["aad_has_security_default_enabled"]
+}
+
+aad_has_security_default_enabled = false {
+    azure_attribute_absence["aad_has_security_default_enabled"]
+}
+
+aad_has_security_default_enabled = false {
+    azure_issue["aad_has_security_default_enabled"]
+}
+
+aad_has_security_default_enabled_err = "AAD currently dont have security default enabled" {
+    azure_issue["aad_has_security_default_enabled"]
+} else = "Resource type identitySecurityDefaultsEnforcementPolicy dont have property 'isEnabled' available. Ensure its available." {
+    azure_attribute_absence["aad_has_security_default_enabled"]
+}
+
+aad_has_security_default_enabled_metadata := {
+    "Policy Code": "PR-AZR-CLD-IAM-008",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "AAD should have security default enabled",
+    "Policy Description": "Security defaults is a set of basic identity security mechanisms recommended by Microsoft. When enabled, these recommendations will be automatically enforced in your organization. Administrators and users will be better protected from common identity related attacks.",
+    "Resource Type": "microsoft.graph.identitySecurityDefaultsEnforcementPolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/graph/api/identitysecuritydefaultsenforcementpolicy-get?view=graph-rest-1.0&tabs=http"
+}
+
+
+# https://learn.microsoft.com/en-us/graph/api/authorizationpolicy-get?view=graph-rest-1.0&tabs=http
+#
+# PR-AZR-CLD-IAM-009
+#
+
+default allowed_to_create_app_is_disabled_for_aad_non_admin_users = null
+
+azure_attribute_absence["allowed_to_create_app_is_disabled_for_aad_non_admin_users"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.authorizationpolicy"
+    not resource.properties.defaultUserRolePermissions
+}
+
+azure_attribute_absence["allowed_to_create_app_is_disabled_for_aad_non_admin_users"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.authorizationpolicy"
+    not has_property(resource.properties.defaultUserRolePermissions, "allowedToCreateApps")
+}
+
+azure_issue["allowed_to_create_app_is_disabled_for_aad_non_admin_users"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.authorizationpolicy"
+    resource.properties.defaultUserRolePermissions.allowedToCreateApps == true
+}
+
+allowed_to_create_app_is_disabled_for_aad_non_admin_users {
+    lower(input.resources[_].type) == "microsoft.graph.authorizationpolicy"
+    not azure_attribute_absence["allowed_to_create_app_is_disabled_for_aad_non_admin_users"]
+    not azure_issue["allowed_to_create_app_is_disabled_for_aad_non_admin_users"]
+}
+
+allowed_to_create_app_is_disabled_for_aad_non_admin_users = false {
+    azure_attribute_absence["allowed_to_create_app_is_disabled_for_aad_non_admin_users"]
+}
+
+allowed_to_create_app_is_disabled_for_aad_non_admin_users = false {
+    azure_issue["allowed_to_create_app_is_disabled_for_aad_non_admin_users"]
+}
+
+allowed_to_create_app_is_disabled_for_aad_non_admin_users_err = "AAD non admin users currently have permission to create apps" {
+    azure_issue["allowed_to_create_app_is_disabled_for_aad_non_admin_users"]
+} else = "Resource type authorizationPolicy dont have property 'defaultUserRolePermissions.allowedToCreateApps' available. Ensure its available." {
+    azure_attribute_absence["allowed_to_create_app_is_disabled_for_aad_non_admin_users"]
+}
+
+allowed_to_create_app_is_disabled_for_aad_non_admin_users_metadata := {
+    "Policy Code": "PR-AZR-CLD-IAM-009",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "AAD non admin users should not have permission to create apps",
+    "Policy Description": "As a good practice only administrators or appropriately delegated users should be able to register applications. This policy will identify AAD non admin users who has app creation permission.",
+    "Resource Type": "microsoft.graph.authorizationPolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/graph/api/authorizationpolicy-get?view=graph-rest-1.0&tabs=http"
+}
+
+
+# https://learn.microsoft.com/en-us/graph/api/authorizationpolicy-get?view=graph-rest-1.0&tabs=http
+#
+# PR-AZR-CLD-IAM-010
+#
+
+default only_aad_admin_users_can_invite_guest_users = null
+
+azure_attribute_absence["only_aad_admin_users_can_invite_guest_users"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.authorizationpolicy"
+    not resource.properties.allowInvitesFrom
+}
+
+azure_issue["only_aad_admin_users_can_invite_guest_users"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.authorizationpolicy"
+    lower(resource.properties.allowInvitesFrom) != "adminsandguestinviters"
+}
+
+only_aad_admin_users_can_invite_guest_users {
+    lower(input.resources[_].type) == "microsoft.graph.authorizationpolicy"
+    not azure_attribute_absence["only_aad_admin_users_can_invite_guest_users"]
+    not azure_issue["only_aad_admin_users_can_invite_guest_users"]
+}
+
+only_aad_admin_users_can_invite_guest_users = false {
+    azure_attribute_absence["only_aad_admin_users_can_invite_guest_users"]
+}
+
+only_aad_admin_users_can_invite_guest_users = false {
+    azure_issue["only_aad_admin_users_can_invite_guest_users"]
+}
+
+only_aad_admin_users_can_invite_guest_users_err = "AAD non admin users currently have permission to invite guest users" {
+    azure_issue["only_aad_admin_users_can_invite_guest_users"]
+} else = "Resource type authorizationPolicy dont have property 'allowInvitesFrom' available. Ensure its available." {
+    azure_attribute_absence["only_aad_admin_users_can_invite_guest_users"]
+}
+
+only_aad_admin_users_can_invite_guest_users_metadata := {
+    "Policy Code": "PR-AZR-CLD-IAM-010",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Ensure only AAD users assigned to specific admin roles can invite guest users",
+    "Policy Description": "Restrict invitations to users with specific administrative roles only.",
+    "Resource Type": "microsoft.graph.authorizationPolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/graph/api/authorizationpolicy-get?view=graph-rest-1.0&tabs=http"
+}
+
+
+# https://learn.microsoft.com/en-us/graph/api/authenticationmethodsroot-list-userregistrationdetails?view=graph-rest-beta&tabs=http
+#
+# PR-AZR-CLD-IAM-011
+#
+
+default aad_users_has_mfa_enabled = null
+
+azure_attribute_absence["aad_users_has_mfa_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.userregistrationdetails"
+    not has_property(resource.properties, "isMfaRegistered")
+}
+
+azure_issue["aad_users_has_mfa_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.userregistrationdetails"
+    resource.properties.isMfaRegistered != true
+}
+
+aad_users_has_mfa_enabled {
+    lower(input.resources[_].type) == "microsoft.graph.userregistrationdetails"
+    not azure_attribute_absence["aad_users_has_mfa_enabled"]
+    not azure_issue["aad_users_has_mfa_enabled"]
+}
+
+aad_users_has_mfa_enabled = false {
+    azure_attribute_absence["aad_users_has_mfa_enabled"]
+}
+
+aad_users_has_mfa_enabled = false {
+    azure_issue["aad_users_has_mfa_enabled"]
+}
+
+aad_users_has_mfa_enabled_err = "AAD users currently dont have MFA enabled" {
+    azure_issue["aad_users_has_mfa_enabled"]
+} else = "Resource type userRegistrationDetails dont have property 'isMfaRegistered' available. Ensure its available." {
+    azure_attribute_absence["aad_users_has_mfa_enabled"]
+}
+
+aad_users_has_mfa_enabled_metadata := {
+    "Policy Code": "PR-AZR-CLD-IAM-011",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "AAD users should have MFA enabled",
+    "Policy Description": "This policy identifies Azure users for whom AD MFA (Active Directory Multi-Factor Authentication) is not enabled. Azure AD MFA is a simple best practice that adds an extra layer of protection on top of your user name and password. MFA provides increased security for your Azure account settings and resources. Enabling Azure AD Multi-Factor Authentication using Conditional Access policies is the recommended approach to protect users.",
+    "Resource Type": "microsoft.graph.userRegistrationDetails",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/graph/api/authenticationmethodsroot-list-userregistrationdetails?view=graph-rest-beta&tabs=http"
+}
+
+
+# https://learn.microsoft.com/en-us/graph/api/authorizationpolicy-get?view=graph-rest-1.0&tabs=http
+#
+# PR-AZR-CLD-IAM-012
+#
+
+default allowed_to_create_security_group_is_disabled_for_aad_non_admin_users = null
+
+azure_attribute_absence["allowed_to_create_security_group_is_disabled_for_aad_non_admin_users"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.authorizationpolicy"
+    not resource.properties.defaultUserRolePermissions
+}
+
+azure_attribute_absence["allowed_to_create_security_group_is_disabled_for_aad_non_admin_users"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.authorizationpolicy"
+    not has_property(resource.properties.defaultUserRolePermissions, "allowedToCreateSecurityGroups")
+}
+
+azure_issue["allowed_to_create_security_group_is_disabled_for_aad_non_admin_users"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.authorizationpolicy"
+    resource.properties.defaultUserRolePermissions.allowedToCreateSecurityGroups == true
+}
+
+allowed_to_create_security_group_is_disabled_for_aad_non_admin_users {
+    lower(input.resources[_].type) == "microsoft.graph.authorizationpolicy"
+    not azure_attribute_absence["allowed_to_create_security_group_is_disabled_for_aad_non_admin_users"]
+    not azure_issue["allowed_to_create_security_group_is_disabled_for_aad_non_admin_users"]
+}
+
+allowed_to_create_security_group_is_disabled_for_aad_non_admin_users = false {
+    azure_attribute_absence["allowed_to_create_security_group_is_disabled_for_aad_non_admin_users"]
+}
+
+allowed_to_create_security_group_is_disabled_for_aad_non_admin_users = false {
+    azure_issue["allowed_to_create_security_group_is_disabled_for_aad_non_admin_users"]
+}
+
+allowed_to_create_security_group_is_disabled_for_aad_non_admin_users_err = "AAD non admin users currently have permission to create security groups" {
+    azure_issue["allowed_to_create_security_group_is_disabled_for_aad_non_admin_users"]
+} else = "Resource type authorizationPolicy dont have property 'defaultUserRolePermissions.allowedToCreateSecurityGroups' available. Ensure its available." {
+    azure_attribute_absence["allowed_to_create_security_group_is_disabled_for_aad_non_admin_users"]
+}
+
+allowed_to_create_security_group_is_disabled_for_aad_non_admin_users_metadata := {
+    "Policy Code": "PR-AZR-CLD-IAM-012",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "AAD non admin users should not have permission to create security groups",
+    "Policy Description": "As a good practice only administrators should be able to create security groups. This policy will identify AAD non admin users who has security group creation permission",
+    "Resource Type": "microsoft.graph.authorizationPolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/graph/api/authorizationpolicy-get?view=graph-rest-1.0&tabs=http"
+}
+
+
+# https://learn.microsoft.com/en-us/graph/api/authorizationpolicy-get?view=graph-rest-1.0&tabs=http
+#
+# PR-AZR-CLD-IAM-013
+#
+
+default aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled = null
+
+azure_attribute_absence["aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.authorizationpolicy"
+    not resource.properties.defaultUserRolePermissions
+}
+
+azure_attribute_absence["aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.authorizationpolicy"
+    not has_property(resource.properties.defaultUserRolePermissions, "permissionGrantPoliciesAssigned")
+}
+
+azure_issue["aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.authorizationpolicy"
+    not array_contains(resource.properties.defaultUserRolePermissions.permissionGrantPoliciesAssigned, "microsoft-user-default-legacy")
+}
+
+aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled {
+    lower(input.resources[_].type) == "microsoft.graph.authorizationpolicy"
+    not azure_attribute_absence["aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled"]
+    not azure_issue["aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled"]
+}
+
+aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled = false {
+    azure_attribute_absence["aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled"]
+}
+
+aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled = false {
+    azure_issue["aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled"]
+}
+
+aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled_err = "'Users can consent to apps accessing company data on their behalf' configuration is currently not disabled" {
+    azure_issue["aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled"]
+} else = "Resource type authorizationPolicy dont have property 'defaultUserRolePermissions.permissionGrantPoliciesAssigned' available. Ensure its available." {
+    azure_attribute_absence["aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled"]
+}
+
+aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled_metadata := {
+    "Policy Code": "PR-AZR-CLD-IAM-013",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Ensure 'Users can consent to apps accessing company data on their behalf' configuration is disabled",
+    "Policy Description": "This policy identifies Azure Active Directory which have 'Users can consent to apps accessing company data on their behalf' configuration enabled. User profiles contain private information which could be shared with others without requiring any further consent from the user if this configuration is enabled. It is recommended not to allow users to use their identity outside of the cloud environment.",
+    "Resource Type": "microsoft.graph.authorizationPolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/graph/api/authorizationpolicy-get?view=graph-rest-1.0&tabs=http"
+}
+
+
+# https://learn.microsoft.com/en-us/graph/api/authenticationmethodsroot-list-userregistrationdetails?view=graph-rest-beta&tabs=http
+#
+# PR-AZR-CLD-IAM-014
+#
+
+default aad_dont_have_any_guest_users = null
+
+azure_attribute_absence["aad_dont_have_any_guest_users"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.userregistrationdetails"
+    not resource.properties.userType
+}
+
+azure_issue["aad_dont_have_any_guest_users"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.graph.userregistrationdetails"
+    lower(resource.properties.userType) == "guest"
+}
+
+aad_dont_have_any_guest_users {
+    lower(input.resources[_].type) == "microsoft.graph.userregistrationdetails"
+    not azure_attribute_absence["aad_dont_have_any_guest_users"]
+    not azure_issue["aad_dont_have_any_guest_users"]
+}
+
+aad_dont_have_any_guest_users = false {
+    azure_attribute_absence["aad_dont_have_any_guest_users"]
+}
+
+aad_dont_have_any_guest_users = false {
+    azure_issue["aad_dont_have_any_guest_users"]
+}
+
+aad_dont_have_any_guest_users_err = "AAD currently have guest users" {
+    azure_issue["aad_dont_have_any_guest_users"]
+} else = "Resource type userRegistrationDetails dont have property 'userType' available. Ensure its available." {
+    azure_attribute_absence["aad_dont_have_any_guest_users"]
+}
+
+aad_dont_have_any_guest_users_metadata := {
+    "Policy Code": "PR-AZR-CLD-IAM-014",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "",
+    "Policy Title": "Ensure AAD dont have guest users",
+    "Policy Description": "This policy identifies Azure Active Directory Guest users. Azure Active Directory allows B2B collaboration which lets you invite people from outside your organisation to be guest users in your cloud account. Avoid creating guest user in your cloud account unless you have business need. Guest users are usually added for users outside your employee on-boarding/off-boarding process and could potentially be overlooked leading to a potential vulnerability.",
+    "Resource Type": "microsoft.graph.userRegistrationDetails",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://learn.microsoft.com/en-us/graph/api/authenticationmethodsroot-list-userregistrationdetails?view=graph-rest-beta&tabs=http"
+}
