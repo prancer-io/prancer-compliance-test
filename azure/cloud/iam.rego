@@ -34,14 +34,23 @@ azure_issue["custom_roles_dont_have_overly_permission"] {
 }
 
 custom_roles_dont_have_overly_permission = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/roledefinitions"
+    lower(resource.properties.type) == "customrole"
     azure_issue["custom_roles_dont_have_overly_permission"]
 }
 
 custom_roles_dont_have_overly_permission {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/roledefinitions"
+    lower(resource.properties.type) == "customrole"
     not azure_issue["custom_roles_dont_have_overly_permission"]
 }
 
 custom_roles_dont_have_overly_permission_err = "Azure custom role definition currently have excessive permissions" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/roledefinitions"
+    lower(resource.properties.type) == "customrole"
     azure_issue["custom_roles_dont_have_overly_permission"]
 }
 
@@ -202,14 +211,23 @@ azure_issue["custom_roles_dont_have_subscription_owner_permission"] {
 }
 
 custom_roles_dont_have_subscription_owner_permission = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/roledefinitions"
+    lower(resource.properties.type) == "customrole"
     azure_issue["custom_roles_dont_have_subscription_owner_permission"]
 }
 
 custom_roles_dont_have_subscription_owner_permission {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/roledefinitions"
+    lower(resource.properties.type) == "customrole"
     not azure_issue["custom_roles_dont_have_subscription_owner_permission"]
 }
 
 custom_roles_dont_have_subscription_owner_permission_err = "Azure custom role definition currently have subscription owner permission" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/roledefinitions"
+    lower(resource.properties.type) == "customrole"
     azure_issue["custom_roles_dont_have_subscription_owner_permission"]
 }
 
@@ -243,14 +261,23 @@ azure_issue["custom_roles_dont_have_wildcard_action"] {
 }
 
 custom_roles_dont_have_wildcard_action = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/roledefinitions"
+    lower(resource.properties.type) == "customrole"
     azure_issue["custom_roles_dont_have_wildcard_action"]
 }
 
 custom_roles_dont_have_wildcard_action {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/roledefinitions"
+    lower(resource.properties.type) == "customrole"
     not azure_issue["custom_roles_dont_have_wildcard_action"]
 }
 
 custom_roles_dont_have_wildcard_action_err = "Azure custom role definition currently have wildcard action" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.authorization/roledefinitions"
+    lower(resource.properties.type) == "customrole"
     azure_issue["custom_roles_dont_have_wildcard_action"]
 }
 
