@@ -524,13 +524,13 @@
                     "masterSnapshotId": "AZRSNP_526",
                     "type": "microsoft.graph.authorizationPolicy",
                     "collection": "microsoft.graph",
-                    "version": "1.0"
+                    "version": "v1.0"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_527",
                     "type": "microsoft.graph.identitySecurityDefaultsEnforcementPolicy",
                     "collection": "microsoft.graph",
-                    "version": "1.0"
+                    "version": "v1.0"
                 }
             ]
         }
