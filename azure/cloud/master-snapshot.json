@@ -501,6 +501,36 @@
                     "type": "Microsoft.Security/securityContacts",
                     "collection": "Microsoft.Security",
                     "version": "2020-01-01-preview"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_523",
+                    "type": "Microsoft.Authorization/roleDefinitions",
+                    "collection": "Microsoft.Authorization",
+                    "version": "2022-04-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_524",
+                    "type": "Microsoft.Authorization/roleAssignments",
+                    "collection": "Microsoft.Authorization",
+                    "version": "2022-04-01"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_525",
+                    "type": "microsoft.graph.userRegistrationDetails",
+                    "collection": "microsoft.graph",
+                    "version": "beta"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_526",
+                    "type": "microsoft.graph.authorizationPolicy",
+                    "collection": "microsoft.graph",
+                    "version": "v1.0"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_527",
+                    "type": "microsoft.graph.identitySecurityDefaultsEnforcementPolicy",
+                    "collection": "microsoft.graph",
+                    "version": "v1.0"
                 }
             ]
         }

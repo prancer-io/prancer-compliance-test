@@ -15463,7 +15463,8 @@
                                 "CyberSecurity Law of the People's Republic of China-Article 56",
                                 "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SI.2.214",
                                 "GDPR",
-                                "GDPR-Article 30, GDPR-Article 32",
+                                "GDPR-Article 30", 
+                                "GDPR-Article 32",
                                 "GDPR-Article 46",
                                 "HIPAA",
                                 "HIPAA-164.308(a)(6)(ii)",
@@ -15537,6 +15538,571 @@
                     "severity": "Medium",
                     "title": "Azure Microsoft Defender for Cloud security contact additional email should be set",
                     "description": "This policy identifies the Azure Microsoft Defender for Cloud (previously known as Azure Security Center and Azure Defender) which has not set security contact additional email addresses. Microsoft Defender for Cloud emails the subscription owners whenever a high-severity alert is triggered for their subscription. Providing a security contact email address as an additional email address ensures that the proper people are aware of any potential compromise in order to mitigate the risk in a timely fashion."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-001",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-001",
+                            "eval": "data.rule.custom_roles_dont_have_overly_permission",
+                            "message": "data.rule.custom_roles_dont_have_overly_permission_err",
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Roles' tab in the upper menu.<br>03. Identify the overly permissive custom role and choose 'Edit'<br>.04. Instead of the wildcard, specify implicit permissions for the role.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_523"
+                    ],
+                    "severity": "High",
+                    "title": "Azure custom role definition should not have overly permission",
+                    "description": "This policy identifies and audit azure subscriptions with custom roles that has overly permission. Least privilege access rule should be followed and only necessary privileges should be assigned instead of allowing full administrative access."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-002",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-002",
+                            "eval": "data.rule.role_assignments_dont_have_implicit_role_management_permissions",
+                            "message": "data.rule.role_assignments_dont_have_implicit_role_management_permissions_err",
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Role assignments' tab in the upper menu.<br>03.Identify the roles that has implicit role management permission<br>04. Remove all the implicit role management permission according to the principle of least privilege.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_524"
+                    ],
+                    "severity": "High",
+                    "title": "Azure role assignments should not have implicit role management permissions",
+                    "description": "This policy identifies and audit azure role assignments that have implicit role management permission. Azure role assignments should be defined by the principle of least privilege."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-003",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-003",
+                            "eval": "data.rule.role_assignments_dont_have_implicit_managed_identity_permissions",
+                            "message": "data.rule.role_assignments_dont_have_implicit_managed_identity_permissions_err",
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Role assignments' tab in the upper menu.<br>03.Identify the roles that has implicit managed identity permission<br>04. Remove all the implicit managed identity permission according to the principle of least privilege.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_524"
+                    ],
+                    "severity": "High",
+                    "title": "Azure role assignments should not have implicit managed identity permissions",
+                    "description": "This policy identifies and audit azure role assignments that have implicit managed identity permission. Azure role assignments should be defined by the principle of least privilege."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-004",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-004",
+                            "eval": "data.rule.role_assignments_dont_have_implicit_owner_permissions",
+                            "message": "data.rule.role_assignments_dont_have_implicit_owner_permissions_err",
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Role assignments' tab in the upper menu.<br>03.Identify the roles that has implicit owner permission<br>04. Remove all the implicit owner permission according to the principle of least privilege.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_524"
+                    ],
+                    "severity": "High",
+                    "title": "Azure role assignments should not have implicit owner permissions",
+                    "description": "This policy identifies and audit azure role assignments that have implicit owner permission. Azure role assignments should be defined by the principle of least privilege."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-005",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-005",
+                            "eval": "data.rule.custom_roles_dont_have_subscription_owner_permission",
+                            "message": "data.rule.custom_roles_dont_have_subscription_owner_permission_err",
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Roles' tab in the upper menu.<br>03. Identify the custom role that has subscription owner permission and choose 'Edit'<br>.04. Instead of the subscription owner, specify implicit permissions for the role.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_523"
+                    ],
+                    "severity": "High",
+                    "title": "Azure custom role definition should not have subscription owner permission",
+                    "description": "This policy identifies and audit azure subscriptions with custom roles that has subscription owner permission. Least privilege access rule should be followed and only necessary privileges should be assigned instead of allowing full administrative access."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-006",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-006",
+                            "eval": "data.rule.custom_roles_dont_have_wildcard_action",
+                            "message": "data.rule.custom_roles_dont_have_wildcard_action_err",
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Roles' tab in the upper menu.<br>03. Identify the custom role that has wildcard action defined and choose 'Edit'<br>.04. Instead of wildcard action, specify implicit permissions for the role.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_523"
+                    ],
+                    "severity": "High",
+                    "title": "Azure custom role definition should not have wildcard action",
+                    "description": "This policy identifies and audit custom roles that has wildcard action. When creating custom roles, you can use the wildcard (*) character to define permissions. It's recommended that you specify Actions and DataActions explicitly instead of using the wildcard (*) character. The additional access and permissions granted through future Actions or DataActions may be unwanted behavior using the wildcard."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-007",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-007",
+                            "eval": "data.rule.role_dont_have_direct_user_assignment",
+                            "message": "data.rule.role_dont_have_direct_user_assignment_err",
+                            "remediationDescription": "01. Go to 'Access control (IAM)' in the relevant resource.<br>02. Choose the 'Role assignments' tab in the upper menu.<br>03.Identify the roles that has direct user or service principal assignment<br>04. Remove all the direct user and service principal assingment and update those with group.<br>05. Follow the guideline mentioned <a href='https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AZR_CLD_IAM_007.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_524"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure to assign roles to groups, not users",
+                    "description": "To make role assignments more manageable, avoid assigning roles directly to users. Instead, assign roles to groups. Assigning roles to groups instead of users also helps minimize the number of role assignments, which has a limit of role assignments per subscription"
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-008",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-008",
+                            "eval": "data.rule.aad_has_security_default_enabled",
+                            "message": "data.rule.aad_has_security_default_enabled_err",
+                            "remediationDescription": "01. Login to Azure portal.<br>02. goto Azure Active Directory and select 'Properties'.<br>03. Select 'Manage security defaults' link down below.<br>04. Set the 'Enable security defaults' toggle to Yes.<br>05. Select Save.",
+                            "remediationFunction": "PR_AZR_CLD_IAM_008.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CIS Foundations (Azure) v. 1.2.0",
+                                "CIS Foundations (Azure) v. 1.3.0",
+                                "CIS Foundations (Azure) v. 1.3.1",
+                                "CIS Foundations (Azure) v. 1.4.0",
+                                "CIS Foundations (Azure) v. 1.5.0",
+                                "CIS Foundations (Azure) v. 2.0",
+                                "PCI DSS",
+                                "PCI DSS 4.0"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_527"
+                    ],
+                    "severity": "High",
+                    "title": "AAD should have security default enabled",
+                    "description": "Security defaults is a set of basic identity security mechanisms recommended by Microsoft. When enabled, these recommendations will be automatically enforced in your organization. Administrators and users will be better protected from common identity related attacks."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-009",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-009",
+                            "eval": "data.rule.allowed_to_create_app_is_disabled_for_aad_non_admin_users",
+                            "message": "data.rule.allowed_to_create_app_is_disabled_for_aad_non_admin_users_err",
+                            "remediationDescription": "01. Login to Azure portal.<br>02. goto Azure Active Directory and select 'Users'.<br>03. Select User settings, set 'Users can register applications' to No.<br>04. Select Save.",
+                            "remediationFunction": "PR_AZR_CLD_IAM_009.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CIS Foundations (Azure) v. 1.2.0",
+                                "CIS Foundations (Azure) v. 1.3.0",
+                                "CIS Foundations (Azure) v. 1.3.1",
+                                "CIS Foundations (Azure) v. 1.4.0",
+                                "CIS Foundations (Azure) v. 1.5.0",
+                                "CIS Foundations (Azure) v. 2.0"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_526"
+                    ],
+                    "severity": "High",
+                    "title": "AAD non admin users should not have permission to create apps",
+                    "description": "As a good practice only administrators or appropriately delegated users should be able to register applications. This policy will identify AAD non admin users who has app creation permission."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-010",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-010",
+                            "eval": "data.rule.only_aad_admin_users_can_invite_guest_users",
+                            "message": "data.rule.only_aad_admin_users_can_invite_guest_users_err",
+                            "remediationDescription": "01. Login to Azure portal.<br>02. goto Azure Active Directory and select 'Users'.<br>03. Under All users, select User settings to access Azure Active Directory user settings.<br>04. On the 'User settings' configuration page, under 'External users', click 'Manage external collaboration settings'.<br>05. Now, under 'Guest invite Settings' select 'Only users assigned to specific admin roles can invite guest users'.<br>06. Select Save.",
+                            "remediationFunction": "PR_AZR_CLD_IAM_010.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CIS Foundations (Azure) v. 1.2.0",
+                                "CIS Foundations (Azure) v. 1.3.0",
+                                "CIS Foundations (Azure) v. 1.3.1",
+                                "CIS Foundations (Azure) v. 1.4.0",
+                                "CIS Foundations (Azure) v. 1.5.0",
+                                "CIS Foundations (Azure) v. 2.0"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_526"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure only AAD users assigned to specific admin roles can invite guest users",
+                    "description": "Restrict invitations to users with specific administrative roles only."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-011",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-011",
+                            "eval": "data.rule.aad_users_has_mfa_enabled",
+                            "message": "data.rule.aad_users_has_mfa_enabled_err",
+                            "remediationDescription": "01. Login to Azure portal.<br>02. goto Azure Active Directory and select 'Users'.<br>03. Under All users, Click on Per-User MFA button on the top bar.<br>04. Ensure that for all users MULTI-FACTOR AUTH STATUS is Enabled.",
+                            "remediationFunction": "PR_AZR_CLD_IAM_011.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CIS Foundations (Azure) v. 1.5.0",
+                                "CIS Foundations (Azure) v. 2.0",
+                                "PCI DSS",
+                                "PCI DSS 4.0"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_525"
+                    ],
+                    "severity": "High",
+                    "title": "AAD users should have MFA enabled",
+                    "description": "This policy identifies Azure users for whom AD MFA (Active Directory Multi-Factor Authentication) is not enabled. Azure AD MFA is a simple best practice that adds an extra layer of protection on top of your user name and password. MFA provides increased security for your Azure account settings and resources. Enabling Azure AD Multi-Factor Authentication using Conditional Access policies is the recommended approach to protect users."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-012",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-012",
+                            "eval": "data.rule.allowed_to_create_security_group_is_disabled_for_aad_non_admin_users",
+                            "message": "data.rule.allowed_to_create_security_group_is_disabled_for_aad_non_admin_users_err",
+                            "remediationDescription": "01. Login to Azure portal.<br>02. goto Azure Active Directory and select 'Groups'.<br>03. Under 'Groups', Go to 'General' in Settings.<br>04. Set 'Users can create security groups in Azure portals, API or PowerShell' to No.<br>05. Select Save.",
+                            "remediationFunction": "PR_AZR_CLD_IAM_012.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CIS Foundations (Azure) v. 1.2.0",
+                                "CIS Foundations (Azure) v. 1.3.0",
+                                "CIS Foundations (Azure) v. 1.3.1",
+                                "CIS Foundations (Azure) v. 1.4.0",
+                                "CIS Foundations (Azure) v. 1.5.0",
+                                "CIS Foundations (Azure) v. 2.0"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_526"
+                    ],
+                    "severity": "High",
+                    "title": "AAD non admin users should not have permission to create security groups",
+                    "description": "As a good practice only administrators should be able to create security groups. This policy will identify AAD non admin users who has security group creation permission"
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-013",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-013",
+                            "eval": "data.rule.aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled",
+                            "message": "data.rule.aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled_err",
+                            "remediationDescription": "01. Login to Azure portal.<br>02. Navigate to 'Azure Active Directory'.<br>03. Select 'Users' under 'Manage'.<br>04. Go to 'User settings'.<br>05. Click on 'Manage how end users launch and view their applications' if not selected.<br>06. Under 'Enterprise applications' select 'No' for 'Users can consent to apps accessing company data on their behalf'.<br>07. Click on 'Save'",
+                            "remediationFunction": "PR_AZR_CLD_IAM_013.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Azure Security Benchmark",
+                                "Azure Security Benchmark (v3)-GS-6", 
+                                "Azure Security Benchmark (v3)-IM-1", 
+                                "Azure Security Benchmark (v3)-IM-9", 
+                                "CIS",
+                                "CIS v1.1 (Azure)-1.9", 
+                                "CIS v1.2.0 (Azure)-1.9", 
+                                "CIS v1.3.0 (Azure)-1.9", 
+                                "CIS v1.4.0 (Azure)-1.9"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_526"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure 'Users can consent to apps accessing company data on their behalf' configuration is disabled",
+                    "description": "This policy identifies Azure Active Directory which have 'Users can consent to apps accessing company data on their behalf' configuration enabled. User profiles contain private information which could be shared with others without requiring any further consent from the user if this configuration is enabled. It is recommended not to allow users to use their identity outside of the cloud environment."
+                },
+                {
+                    "masterTestId": "PR-AZR-CLD-IAM-014",
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-CLD-IAM-014",
+                            "eval": "data.rule.aad_dont_have_any_guest_users",
+                            "message": "data.rule.aad_dont_have_any_guest_users_err",
+                            "remediationDescription": "01. Log in to the Azure Portal.<br>02. Go to 'Azure Active Directory' (Left Panel).<br>03. Click on 'Users' under 'Manage'.<br>04. Search for reported user in search pane.<br>05. Select on check box for the reported user.<br>06. Click on 'Delete user' in top pane.<br>07. Select 'OK' to confirm.",
+                            "remediationFunction": "PR_AZR_CLD_IAM_014.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-15", 
+                                "APRA (CPS 234) Information Security-CPS234-16", 
+                                "APRA (CPS 234) Information Security-CPS234-17", 
+                                "APRA (CPS 234) Information Security-CPS234-21", 
+                                "APRA (CPS 234) Information Security-CPS234-23", 
+                                "APRA (CPS 234) Information Security-CPS234-27", 
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Azure Security Benchmark", 
+                                "Azure Security Benchmark (v2)-PA-3", 
+                                "Azure Security Benchmark (v3)-PA-3", 
+                                "Azure Security Benchmark (v3)-PA-4", 
+                                "Azure Security Benchmark (v3)-PA-8", 
+                                "Brazilian Data Protection Law (LGPD)-Article 49", 
+                                "CIS",
+                                "CIS v1.2.0 (Azure)-1.3", 
+                                "CIS v1.3.0 (Azure)-1.3", 
+                                "CIS v1.3.1 (Azure)-1.3", 
+                                "CIS v1.4.0 (Azure)-1.3", 
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-DSP-17", 
+                                "CSA CCM v.4.0.1-HRS-04", 
+                                "CSA CCM v.4.0.1-IAM-01", 
+                                "CSA CCM v.4.0.1-IAM-04", 
+                                "CSA CCM v.4.0.1-IAM-05", 
+                                "CSA CCM v.4.0.1-IAM-09", 
+                                "CSA CCM v.4.0.1-IAM-14", 
+                                "CSA CCM v.4.0.1-IAM-16", 
+                                "CSA CCM v.4.0.1-UEM-13", 
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AT.2.056", 
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:01.c", 
+                                "ISO/IEC 27002:2013",
+                                "ISO/IEC 27002:2013-18.1.3", 
+                                "ISO/IEC 27002:2013-18.1.4", 
+                                "ISO/IEC 27002:2013-5.1.2", 
+                                "ISO/IEC 27002:2013-6.1.2", 
+                                "ISO/IEC 27002:2013-6.2.1", 
+                                "ISO/IEC 27002:2013-6.2.2", 
+                                "ISO/IEC 27002:2013-9.1.1", 
+                                "ISO/IEC 27002:2013-9.1.2", 
+                                "ISO/IEC 27002:2013-9.2.3", 
+                                "ISO/IEC 27002:2013-9.2.4", 
+                                "ISO/IEC 27002:2013-9.2.5", 
+                                "ISO/IEC 27002:2013-9.4.2", 
+                                "ISO/IEC 27017:2015",
+                                "ISO/IEC 27017:2015-9.1.2", 
+                                "ISO/IEC 27017:2015-9.2.3", 
+                                "ISO/IEC 27017:2015-9.2.4", 
+                                "ISO/IEC 27017:2015-9.2.5", 
+                                "ISO/IEC 27017:2015-9.4.2", 
+                                "ISO/IEC 27018:2019",
+                                "ISO/IEC 27018:2019-9.2.3", 
+                                "ISO/IEC 27018:2019-9.2.5", 
+                                "ISO/IEC 27018:2019-9.4.2", 
+                                "MITRE ATT&CK v10.0-T1078 - Valid Accounts",
+                                "NIST CSF", 
+                                "NIST CSF-PR.AC-3", 
+                                "NIST CSF-PR.AC-4", 
+                                "NIST CSF-PR.PT-3", 
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.1.2", 
+                                "NIST SP 800-172-3.1.2e", 
+                                "PCI DSS",
+                                "PCI DSS v3.2.1-7.1", 
+                                "PCI DSS v3.2.1-7.1.2"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_525"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AAD dont have guest users",
+                    "description": "This policy identifies Azure Active Directory Guest users. Azure Active Directory allows B2B collaboration which lets you invite people from outside your organisation to be guest users in your cloud account. Avoid creating guest user in your cloud account unless you have business need. Guest users are usually added for users outside your employee on-boarding/off-boarding process and could potentially be overlooked leading to a potential vulnerability."
                 }
             ]
         }
