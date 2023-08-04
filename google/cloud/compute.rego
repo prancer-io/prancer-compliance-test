@@ -1207,6 +1207,21 @@ default vm_ip_forward = null
 gc_issue["vm_ip_forward"] {
     # lower(resource.type) == "compute.v1.instance"
     input.canIpForward
+    not startswith(lower(input.name), "gke-")
+}
+
+gc_issue["vm_ip_forward"] {
+    # lower(resource.type) == "compute.v1.instance"
+    input.canIpForward
+    startswith(lower(input.name), "gke-")
+    count([c | has_property(input.disks[_].initializeParams[_],"labels") ; c=1]) == 0
+}
+
+gc_issue["vm_ip_forward"] {
+    # lower(resource.type) == "compute.v1.instance"
+    input.canIpForward
+    startswith(lower(input.name), "gke-")
+    count([c | input.disks[_].initializeParams[_].labels ; c=1]) == 0
 }
 
 vm_ip_forward {
