@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP project is configured with legacy network
+# Title: Ensure, GCP project is configured with legacy network
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-GDF-NET-001

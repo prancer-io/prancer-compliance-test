@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters have Alpha cluster feature enabled
+# Title: Ensure GCP Kubernetes Engine Clusters not have Alpha cluster feature disabled
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-CLD-CLT-005

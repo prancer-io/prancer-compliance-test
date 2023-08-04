@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Load balancer HTTPS target proxy is not configured with QUIC protocol
+# Title: Ensure,  Load balancer HTTPS target proxy is not configured with QUIC protocol in Google Cloud Provider
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-GDF-THP-002

@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes cluster Application-layer Secrets not encrypted
+# Title: GCP Kubernetes cluster Application-layer Secrets decrypted
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-CLD-CLT-022

@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP project is using the default network
+# Title: Ensure, GCP project is using the default network
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-GDF-NET-002

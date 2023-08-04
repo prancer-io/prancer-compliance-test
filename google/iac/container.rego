@@ -61,7 +61,7 @@ k8s_svc_account = false {
     gc_attribute_absence["k8s_svc_account"]
 }
 
-k8s_svc_account_err = "GCP Kubernetes Engine Cluster Nodes have default Service account for Project access" {
+k8s_svc_account_err = "Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Google Cloud Provider." {
     gc_issue["k8s_svc_account"]
 }
 
@@ -74,7 +74,7 @@ k8s_svc_account_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Cluster Nodes have default Service account for Project access",
+    "Policy Title": "Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Google Cloud Provider.",
     "Policy Description": "This policy identifies Kubernetes Engine Cluster Nodes which have default Service account for Project access. By default, Kubernetes Engine nodes are given the Compute Engine default service account. This account has broad access and more permissions than are required to run your Kubernetes Engine cluster. You should create and use a least privileged service account to run your Kubernetes Engine cluster instead of using the Compute Engine default service account. If you are not creating a separate service account for your nodes, you should limit the scopes of the node service account to reduce the possibility of a privilege escalation in an attack.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -130,7 +130,7 @@ k8s_basicauth = false {
     gc_issue["k8s_basicauth"]
 }
 
-k8s_basicauth_err = "GCP Kubernetes Engine Clusters Basic Authentication is set to Enabled" {
+k8s_basicauth_err = "Ensure GCP Kubernetes Engine Clusters Basic Authentication is not set to Disabled" {
     gc_issue["k8s_basicauth"]
 }
 
@@ -139,7 +139,7 @@ k8s_basicauth_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters Basic Authentication is set to Enabled",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters Basic Authentication is not set to Disabled",
     "Policy Description": "This policy identifies Kubernetes Engine Clusters which have enabled Basic authentication. Basic authentication allows a user to authenticate to the cluster with a username and password. Disabling Basic authentication will prevent attacks like brute force. Authenticate using client certificate or IAM.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -243,7 +243,7 @@ k8s_alias_ip = false {
     gc_issue["k8s_alias_ip"]
 }
 
-k8s_alias_ip_err = "GCP Kubernetes Engine Clusters have Alias IP disabled" {
+k8s_alias_ip_err = "Ensure GCP Kubernetes Engine Clusters not have Alias IP enabled" {
     gc_issue["k8s_alias_ip"]
 }
 
@@ -252,7 +252,7 @@ k8s_alias_ip_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters have Alias IP disabled",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters not have Alias IP enabled",
     "Policy Description": "This policy identifies Kubernetes Engine Clusters which have disabled Alias IP. Alias IP allows the networking layer to perform anti-spoofing checks to ensure that egress traffic is not sent with arbitrary source IPs. By enabling Alias IPs, Kubernetes Engine clusters can allocate IP addresses from a CIDR block known to Google Cloud Platform. This makes your cluster more scalable and allows your cluster to better interact with other GCP products and entities.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -291,7 +291,7 @@ k8s_alpha = false {
     gc_issue["k8s_alpha"]
 }
 
-k8s_alpha_err = "GCP Kubernetes Engine Clusters have Alpha cluster feature enabled" {
+k8s_alpha_err = "Ensure GCP Kubernetes Engine Clusters not have Alpha cluster feature disabled" {
     gc_issue["k8s_alpha"]
 }
 
@@ -300,7 +300,7 @@ k8s_alpha_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters have Alpha cluster feature enabled",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters not have Alpha cluster feature disabled",
     "Policy Description": "This policy identifies GCP Kubernetes Engine Clusters which have enabled alpha cluster. It is recommended to not use alpha clusters or alpha features for production workloads. Alpha clusters expire after 30 days and do not receive security updates. This cluster will not be covered by the Kubernetes Engine SLA.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -339,7 +339,7 @@ k8s_http_lbs = false {
     gc_issue["k8s_http_lbs"]
 }
 
-k8s_http_lbs_err = "GCP Kubernetes Engine Clusters have HTTP load balancing disabled" {
+k8s_http_lbs_err = "Ensure GCP Kubernetes Engine Clusters not have HTTP load balancing enabled" {
     gc_issue["k8s_http_lbs"]
 }
 
@@ -348,7 +348,7 @@ k8s_http_lbs_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters have HTTP load balancing disabled",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters not have HTTP load balancing enabled",
     "Policy Description": "This policy identifies GCP Kubernetes Engine Clusters which have disabled HTTP load balancing. HTTP/HTTPS load balancing provides global load balancing for HTTP/HTTPS requests destined for your instances. Enabling HTTP/HTTPS load balancers will let the Kubernetes Engine to terminate unauthorized HTTP/HTTPS requests and make better context-aware load balancing decisions.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -387,7 +387,7 @@ k8s_legacy_abac = false {
     gc_issue["k8s_legacy_abac"]
 }
 
-k8s_legacy_abac_err = "GCP Kubernetes Engine Clusters have Legacy Authorization enabled" {
+k8s_legacy_abac_err = "Ensure GCP Kubernetes Engine Clusters not have Legacy Authorization disabled" {
     gc_issue["k8s_legacy_abac"]
 }
 
@@ -396,7 +396,7 @@ k8s_legacy_abac_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters have Legacy Authorization enabled",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters not have Legacy Authorization disabled",
     "Policy Description": "This policy identifies GCP Kubernetes Engine Clusters which have enabled legacy authorizer. The legacy authorizer in Kubernetes Engine grants broad and statically defined permissions to all cluster users. After legacy authorizer setting is disabled, RBAC can limit permissions for authorized users based on need.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -435,7 +435,7 @@ k8s_master_auth_net = false {
     gc_issue["k8s_master_auth_net"]
 }
 
-k8s_master_auth_net_err = "GCP Kubernetes Engine Clusters have Master authorized networks disabled" {
+k8s_master_auth_net_err = "Ensure GCP Kubernetes Engine Clusters not have Master authorized networks enabled" {
     gc_issue["k8s_master_auth_net"]
 }
 
@@ -444,7 +444,7 @@ k8s_master_auth_net_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters have Master authorized networks disabled",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters not have Master authorized networks enabled",
     "Policy Description": "This policy identifies Kubernetes Engine Clusters which have disabled Master authorized networks. Enabling Master authorized networks will let the Kubernetes Engine block untrusted non-GCP source IPs from accessing the Kubernetes master through HTTPS.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -483,7 +483,7 @@ k8s_net_policy = false {
     gc_issue["k8s_net_policy"]
 }
 
-k8s_net_policy_err = "GCP Kubernetes Engine Clusters have Network policy disabled" {
+k8s_net_policy_err = "Ensure GCP Kubernetes Engine Clusters not have Network policy enabled" {
     gc_issue["k8s_net_policy"]
 }
 
@@ -492,7 +492,7 @@ k8s_net_policy_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters have Network policy disabled",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters not have Network policy enabled",
     "Policy Description": "This policy identifies Kubernetes Engine Clusters which have disabled Network policy. A network policy defines how groups of pods are allowed to communicate with each other and other network endpoints. By enabling network policy in a namespace for a pod, it will reject any connections that are not allowed by the network policy.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -553,7 +553,7 @@ k8s_logging = false {
     gc_attribute_absence["k8s_logging"]
 }
 
-k8s_logging_err = "GCP Kubernetes Engine Clusters have Stackdriver Logging disabled" {
+k8s_logging_err = "Ensure GCP Kubernetes Engine Clusters not have Stackdriver Logging enabled" {
     gc_issue["k8s_logging"]
 }
 
@@ -566,7 +566,7 @@ k8s_logging_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters have Stackdriver Logging disabled",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters not have Stackdriver Logging enabled",
     "Policy Description": "This policy identifies Kubernetes Engine Clusters which have disabled Stackdriver Logging. Enabling Stackdriver Logging will let the Kubernetes Engine to collect, process, and store your container and system logs in a dedicated persistent data store.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -677,7 +677,7 @@ k8s_binary_auth = false {
     gc_issue["k8s_binary_auth"]
 }
 
-k8s_binary_auth_err = "GCP Kubernetes Engine Clusters have binary authorization disabled" {
+k8s_binary_auth_err = "Ensure GCP Kubernetes Engine Clusters not have binary authorization enabled" {
     gc_issue["k8s_binary_auth"]
 }
 
@@ -686,7 +686,7 @@ k8s_binary_auth_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters have binary authorization disabled",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters not have binary authorization enabled",
     "Policy Description": "This policy identifies Google Kubernetes Engine (GKE) clusters that have disabled binary authorization. Binary authorization is a security control that ensures only trusted container images are deployed on GKE clusters. As a best practice, verify images prior to deployment to reduce the risk of running unintended or malicious code in your environment.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -725,7 +725,7 @@ k8s_legacy_endpoint = false {
     gc_issue["k8s_legacy_endpoint"]
 }
 
-k8s_legacy_endpoint_err = "GCP Kubernetes Engine Clusters have legacy compute engine metadata endpoints enabled" {
+k8s_legacy_endpoint_err = "Ensure GCP Kubernetes Engine Clusters not have legacy compute engine metadata endpoints disabled" {
     gc_issue["k8s_legacy_endpoint"]
 }
 
@@ -734,7 +734,7 @@ k8s_legacy_endpoint_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters have legacy compute engine metadata endpoints enabled",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters not have legacy compute engine metadata endpoints disabled",
     "Policy Description": "This policy identifies Google Kubernetes Engine (GKE) clusters that have legacy compute engine metadata endpoints enabled. Because GKE uses instance metadata to configure node VMs, some of this metadata is potentially sensitive and should be protected from workloads running on the cluster. Legacy metadata APIs expose the Compute Engine's instance metadata of server endpoints. As a best practice, disable legacy API and use v1 APIs to restrict a potential attacker from retrieving instance metadata.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -773,7 +773,7 @@ k8s_pod_security = false {
     gc_issue["k8s_pod_security"]
 }
 
-k8s_pod_security_err = "GCP Kubernetes Engine Clusters have pod security policy disabled" {
+k8s_pod_security_err = "Ensure GCP Kubernetes Engine Clusters not have pod security policy enabled" {
     gc_issue["k8s_pod_security"]
 }
 
@@ -782,7 +782,7 @@ k8s_pod_security_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters have pod security policy disabled",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters not have pod security policy enabled",
     "Policy Description": "This policy identifies Kubernetes Engine Clusters which have pod security policy disabled. The Pod Security Policy defines a set of conditions that pods must meet to be accepted by the cluster; when a request to create or update a pod does not meet the conditions in the pod security policy, that request is rejected and an error is returned.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -821,7 +821,7 @@ k8s_egress_metering = false {
     gc_issue["k8s_egress_metering"]
 }
 
-k8s_egress_metering_err = "GCP Kubernetes Engine Clusters not configured with network traffic egress metering" {
+k8s_egress_metering_err = "Ensure GCP Kubernetes Engine Clusters  configured with network traffic ingress metering" {
     gc_issue["k8s_egress_metering"]
 }
 
@@ -830,7 +830,7 @@ k8s_egress_metering_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters not configured with network traffic egress metering",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters  configured with network traffic ingress metering",
     "Policy Description": "This policy identifies Kubernetes Engine Clusters which are not configured with network traffic egress metering. When network traffic egress metering enabled, deployed DaemonSet pod meters network egress traffic by collecting data from the conntrack table, and exports the metered metrics to the specified destination. It is recommended to use, network egress metering so that you will be having data and track over monitored network traffic.<br><br>NOTE: Measuring network egress requires a network metering agent (NMA) running on each node. The NMA runs as a privileged pod, consumes some resources on the node (CPU, memory, and disk space), and enables the nf_conntrack_acct sysctl flag on the kernel (for connection tracking flow accounting). If you are comfortable with these caveats, you can enable network egress tracking for use with GKE usage metering.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -917,7 +917,7 @@ k8s_private_node = false {
     gc_issue["k8s_private_node"]
 }
 
-k8s_private_node_err = "GCP Kubernetes Engine Clusters not configured with private nodes feature" {
+k8s_private_node_err = "Ensure GCP Kubernetes Engine Clusters configured with private nodes feature to false" {
     gc_issue["k8s_private_node"]
 }
 
@@ -926,7 +926,7 @@ k8s_private_node_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters not configured with private nodes feature",
+    "Policy Title": "Ensure GCP Kubernetes Engine Clusters configured with private nodes feature to false",
     "Policy Description": "This policy identifies Google Kubernetes Engine (GKE) Clusters which are not configured with the private nodes feature. Private nodes feature makes your master inaccessible from the public internet and nodes do not have public IP addresses, so your workloads run in an environment that is isolated from the internet.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -1010,7 +1010,7 @@ k8s_node_image = false {
     gc_attribute_absence["k8s_node_image"]
 }
 
-k8s_node_image_err = "GCP Kubernetes Engine Clusters not using Container-Optimized OS for Node image" {
+k8s_node_image_err = "Ensure Kubernetes Engine Clusters not using Container-Optimized OS for Node image in Google Cloud Provider" {
     gc_issue["k8s_node_image"]
 }
 
@@ -1023,7 +1023,7 @@ k8s_node_image_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters not using Container-Optimized OS for Node image",
+    "Policy Title": "Ensure Kubernetes Engine Clusters not using Container-Optimized OS for Node image in Google Cloud Provider",
     "Policy Description": "This policy identifies Kubernetes Engine Clusters which do not have a container-optimized operating system for node image. Container-Optimized OS is an operating system image for your Compute Engine VMs that is optimized for running Docker containers. By using Container-Optimized OS for node image, you can bring up your Docker containers on Google Cloud Platform quickly, efficiently, and securely. The Container-Optimized OS node image is based on a recent version of the Linux kernel and is optimized to enhance node security. It is also regularly updated with features, security fixes, and patches. The Container-Optimized OS image provides better support, security, and stability than other images.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -1079,7 +1079,7 @@ k8s_network = false {
     gc_issue["k8s_network"]
 }
 
-k8s_network_err = "GCP Kubernetes Engine Clusters using the default network" {
+k8s_network_err = "Ensure Kubernetes Engine Clusters using the default network in Google Cloud Provider" {
     gc_issue["k8s_network"]
 }
 
@@ -1088,7 +1088,7 @@ k8s_network_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters using the default network",
+    "Policy Title": "Ensure Kubernetes Engine Clusters using the default network in Google Cloud Provider",
     "Policy Description": "This policy identifies Google Kubernetes Engine (GKE) clusters that are configured to use the default network. Because GKE uses this network when creating routes and firewalls for the cluster, as a best practice define a network configuration that meets your security and networking requirements for ingress and egress traffic, instead of using the default network.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -1192,7 +1192,7 @@ k8s_labels = false {
     gc_issue["k8s_labels"]
 }
 
-k8s_labels_err = "GCP Kubernetes Engine Clusters without any label information" {
+k8s_labels_err = "GCP Kubernetes Engine Clusters not having any label information" {
     gc_issue["k8s_labels"]
 }
 
@@ -1201,7 +1201,7 @@ k8s_labels_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes Engine Clusters without any label information",
+    "Policy Title": "GCP Kubernetes Engine Clusters not having any label information",
     "Policy Description": "This policy identifies all Kubernetes Engine Clusters which do not have labels. Having a cluster label helps you identify and categorize Kubernetes clusters.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -1296,7 +1296,7 @@ k8s_db_encrypt = false {
     gc_attribute_absence["k8s_db_encrypt"]
 }
 
-k8s_db_encrypt_err = "GCP Kubernetes cluster Application-layer Secrets not encrypted" {
+k8s_db_encrypt_err = "GCP Kubernetes cluster Application-layer Secrets decrypted" {
     gc_issue["k8s_db_encrypt"]
 }
 
@@ -1309,7 +1309,7 @@ k8s_db_encrypt_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes cluster Application-layer Secrets not encrypted",
+    "Policy Title": "GCP Kubernetes cluster Application-layer Secrets decrypted",
     "Policy Description": "Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers who gain access to an offline copy of etcd.<br><br>This policy checks your cluster for the Application-layer Secrets Encryption security feature and alerts if it is not enabled.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -1348,7 +1348,7 @@ k8s_intra_node = false {
     gc_issue["k8s_intra_node"]
 }
 
-k8s_intra_node_err = "GCP Kubernetes cluster intra-node visibility disabled" {
+k8s_intra_node_err = "GCP Kubernetes cluster intra-node visibility is not enabled" {
     gc_issue["k8s_intra_node"]
 }
 
@@ -1357,7 +1357,7 @@ k8s_intra_node_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes cluster intra-node visibility disabled",
+    "Policy Title": "GCP Kubernetes cluster intra-node visibility is not enabled",
     "Policy Description": "With Intranode Visibility, all network traffic in your cluster is seen by the Google Cloud Platform network. This means you can see flow logs for all traffic between Pods, including traffic between Pods on the same node. And you can create firewall rules that apply to all traffic between Pods.<br><br>This policy checks your cluster's intra-node visibility feature and generates an alert if it's disabled.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -1446,11 +1446,11 @@ k8s_zones = false {
     gc_issue["k8s_zones"]
 }
 
-k8s_zones_err = "GCP Kubernetes cluster Application-layer Secrets not encrypted" {
+k8s_zones_err = "GCP Kubernetes cluster Application-layer Secrets decrypted" {
     gc_issue["k8s_zones"]
 }
 
-k8s_zones_miss_err = "GCP Kubernetes cluster not in redundant zones" {
+k8s_zones_miss_err = "Kubernetes cluster not in redundant zones for Google Cloud Provider" {
     gc_attribute_absence["k8s_zones"]
 }
 
@@ -1459,7 +1459,7 @@ k8s_zones_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
-    "Policy Title": "GCP Kubernetes cluster not in redundant zones",
+    "Policy Title": "Kubernetes cluster not in redundant zones for Google Cloud Provider",
     "Policy Description": "Putting resources in different zones in a region provides isolation from many types of infrastructure, hardware, and software failures.<br><br>This policy alerts if your cluster is not located in at least 3 zones.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",

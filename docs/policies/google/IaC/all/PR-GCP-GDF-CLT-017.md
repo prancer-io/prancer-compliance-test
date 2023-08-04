@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters not configured with private nodes feature
+# Title: Ensure GCP Kubernetes Engine Clusters configured with private nodes feature to false
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-GDF-CLT-017

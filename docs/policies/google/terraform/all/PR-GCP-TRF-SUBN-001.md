@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP VPC Flow logs for the subnet is set to Off
+# Title: Ensure, GCP VPC Flow logs for the subnet is set to Off
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-TRF-SUBN-001

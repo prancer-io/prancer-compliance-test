@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters without any label information
+# Title: GCP Kubernetes Engine Clusters not having any label information
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-TRF-CLT-021

@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes cluster intra-node visibility disabled
+# Title: GCP Kubernetes cluster intra-node visibility is not enabled
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-TRF-CLT-023

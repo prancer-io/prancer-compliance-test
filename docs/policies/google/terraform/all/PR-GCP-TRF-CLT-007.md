@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters have Legacy Authorization enabled
+# Title: Ensure GCP Kubernetes Engine Clusters not have Legacy Authorization disabled
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-TRF-CLT-007

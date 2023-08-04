@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Load balancer HTTPS target proxy configured with default SSL policy instead of custom SSL policy
+# Title: Ensure,  GCP Load balancer HTTPS target proxy configured with default SSL policy rather than custom SSL policy
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-TRF-THP-001

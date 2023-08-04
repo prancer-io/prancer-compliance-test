@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes cluster not in redundant zones
+# Title: Kubernetes cluster not in redundant zones for Google Cloud Provider
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-GDF-CLT-025

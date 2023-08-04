@@ -113,7 +113,7 @@ lbs_ssl_policy = false {
     gc_issue["lbs_ssl_policy"]
 }
 
-lbs_ssl_policy_err = "GCP Load balancer HTTPS target proxy configured with default SSL policy instead of custom SSL policy" {
+lbs_ssl_policy_err = "Ensure,  GCP Load balancer HTTPS target proxy configured with default SSL policy rather than custom SSL policy" {
     gc_issue["lbs_ssl_policy"]
 }
 
@@ -122,7 +122,7 @@ lbs_ssl_policy_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "terraform",
-    "Policy Title": "GCP Load balancer HTTPS target proxy configured with default SSL policy instead of custom SSL policy",
+    "Policy Title": "Ensure,  GCP Load balancer HTTPS target proxy configured with default SSL policy rather than custom SSL policy",
     "Policy Description": "This policy identifies Load balancer HTTPS target proxies which are configured with default SSL Policy instead of custom SSL policy. It is a best practice to use custom SSL policy to access load balancers. It gives you closer control over SSL/TLS versions and ciphers.",
     "Resource Type": "google_compute_target_https_proxy",
     "Policy Help URL": "",
@@ -162,7 +162,7 @@ lbs_quic = false {
     gc_attribute_absence["lbs_quic"]
 }
 
-lbs_quic_err = "GCP Load balancer HTTPS target proxy is not configured with QUIC protocol" {
+lbs_quic_err = "Ensure,  Load balancer HTTPS target proxy is not configured with QUIC protocol in Google Cloud Provider" {
     gc_issue["lbs_quic"]
 }
 
@@ -175,7 +175,7 @@ lbs_quic_metadata := {
     "Type": "IaC",
     "Product": "GCP",
     "Language": "terraform",
-    "Policy Title": "GCP Load balancer HTTPS target proxy is not configured with QUIC protocol",
+    "Policy Title": "Ensure,  Load balancer HTTPS target proxy is not configured with QUIC protocol in Google Cloud Provider",
     "Policy Description": "This policy identifies Load Balancer HTTPS target proxies which are not configured with QUIC protocol. Enabling QUIC protocol in load balancer target https proxies adds advantage by establishing connections faster, stream-based multiplexing, improved loss recovery, and eliminates head-of-line blocking.",
     "Resource Type": "google_compute_target_https_proxy",
     "Policy Help URL": "",

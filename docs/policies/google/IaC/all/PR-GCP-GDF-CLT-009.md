@@ -2,7 +2,7 @@
 
 
 
-# Title: GCP Kubernetes Engine Clusters have Network policy disabled
+# Title: Ensure GCP Kubernetes Engine Clusters not have Network policy enabled
 
 
 ***<font color="white">Master Test Id:</font>*** PR-GCP-GDF-CLT-009
