@@ -9840,6 +9840,126 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-DS-001",
+                    "masterSnapshotId": [
+                        "TEST_DIRECTORYSERVICE",
+                        "TEST_EC2_04"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DS-001",
+                            "eval": "data.rule.directory_dhcp_option",
+                            "message": "data.rule.directory_dhcp_option_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ds.html#DirectoryService.Client.describe_directories' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS Directory Service DHCP options is set for the VPC hosting managed AD.",
+                    "description": "It checks if the VPC hosting the managed AD has DHCP options created. DHCP options allow any instances in that VPC to point to the specified domain and DNS servers to resolve their domain names.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "directoryservice"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-DS-002",
+                    "masterSnapshotId": [
+                        "TEST_DIRECTORYSERVICE",
+                        "TEST_EC2_04"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DS-002",
+                            "eval": "data.rule.directory_default_vpc",
+                            "message": "data.rule.directory_default_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ds.html#DirectoryService.Client.describe_directories' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS Directory Service is not launched using default VPC.",
+                    "description": "It checks if default VPC is being used. Default VPC are provided by AWS and not hardened hence shouldn't be used.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "directoryservice"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-DS-003",
+                    "masterSnapshotId": [
+                        "TEST_DIRECTORYSERVICE",
+                        "TEST_EC2_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DS-003",
+                            "eval": "data.rule.directory_security_group",
+                            "message": "data.rule.directory_security_group_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ds.html#DirectoryService.Client.describe_directories' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DS_003.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure the Security groups attached to domain controllers for AWS Directory Service are not used by other instances.",
+                    "description": "It checks if the security groups used by Domain controllers for AD are not shared with other resource interfaces. This is the best practice for setting up Domain controllers.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "directoryservice"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-DS-004",
+                    "masterSnapshotId": [
+                        "TEST_DIRECTORYSERVICE",
+                        "TEST_EC2_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DS-004",
+                            "eval": "data.rule.directory_subnet",
+                            "message": "data.rule.directory_subnet_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ds.html#DirectoryService.Client.describe_directories' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DS_004.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure the subnets used by the domain controllers for AWS Directory Service are not used by other instances.",
+                    "description": "It checks if subnets used by Domain controllers for AD are segregated from the user network. This is the best practice for setting up Domain controllers.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "directoryservice"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-SNS-001",
                     "masterSnapshotId": [
                         "TEST_SNS_01"
@@ -12042,6 +12162,198 @@
                                 "PCI DSS v3.2.1-6.3",
                                 "PCI-DSS",
                                 "SOC 2",
+                                "SOC 2-CC6.1",
+                                "SOC 2-CC8.1"
+                            ],
+                            "service": [
+                                "acm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ACM-008",
+                    "masterSnapshotId": [
+                        "TEST_ACM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(acm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ACM-008",
+                            "eval": "data.rule.acm_expiring_certificate",
+                            "message": "data.rule.acm_expiring_certificate_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm.html#ACM.Client.describe_certificate' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ACM_008.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AWS Certificate Manager (ACM) does not have certificates expiring in 30 days or less.",
+                    "description": "It identifies ACM certificates expiring in 30 days or less, which are in the AWS Certificate Manager. If SSL/TLS certificates are not renewed prior to their expiration date, they will become invalid and the communication between the client and the AWS resource that implements the certificates is no longer secure. As a best practice, it is recommended to renew certificates before their validity period ends. AWS Certificate Manager automatically renews certificates issued by the service that is used with other AWS resources. However, the ACM service does not renew automatically certificates that are not in use or not associated anymore with other AWS resources. So the renewal process must be done manually before these certificates become invalid. NOTE: If you wanted to be notified other than before or less than 30 days; you can clone this policy and replace '30' in RQL with your desired days value. For example, 15 days OR 7 days which will alert certificates expiring in 15 days or less OR 7 days or less respectively.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CSA CCM",
+                                "CIS",
+                                "CMMC",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MAS TRM",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "NZISM",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Foundational Security Best Practices standard-Data protection",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CIS AWS 3 Tier Web Architecture Benchmark v.1.0.0-1.15",
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "CyberSecurity Law of the People's Republic of China-Article 21",
+                                "CyberSecurity Law of the People's Republic of China-Article 31",
+                                "CyberSecurity Law of the People's Republic of China-Article 40",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.185",
+                                "HITRUST v.9.4.2-Control Reference:10.g",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "MAS TRM 2021-10.2.1",
+                                "MAS TRM 2021-10.2.8",
+                                "MAS TRM 2021-10.2.9",
+                                "MLPS 2.0-8.1.4.1",
+                                "NIST 800-53 Rev 5-Cryptographic Key Establishment and Management",
+                                "NIST 800-53 Rev 5-Public Key Infrastructure Certificates",
+                                "NIST 800-53 Rev4-SC-12",
+                                "NIST 800-53 Rev4-SC-17",
+                                "NIST CSF-PR.IP-1",
+                                "NIST SP 800-171 Revision 2-3.4.2",
+                                "NIST SP 800-172-3.5.2e",
+                                "New Zealand Information Security Manual (NZISM v3.4)-14.5",
+                                "PCI DSS v3.2.1-3.6.4"
+                            ],
+                            "service": [
+                                "acm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-ACM-009",
+                    "masterSnapshotId": [
+                        "TEST_ACM"
+                    ],
+                    "type": "rego",
+                    "rule": "file(acm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ACM-009",
+                            "eval": "data.rule.acm_expired_certificates",
+                            "message": "data.rule.acm_expired_certificates_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm.html#ACM.Client.describe_certificate' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ACM_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS Certificate Manager (ACM) does not have expired certificates.",
+                    "description": "It identifies expired certificates which are in AWS Certificate Manager. AWS Certificate Manager (ACM) is the preferred tool to provision, manage, and deploy your server certificates. With ACM you can request a certificate or deploy an existing ACM or external certificate to AWS resources. This policy generates alerts if there are any expired ACM managed certificates. As a best practice, it is recommended to delete expired certificates.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CSA CCM",
+                                "CMMC",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MAS TRM",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "NZISM",
+                                "SOC 2",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Foundational Security Best Practices standard-Data protection",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CSA CCM v.4.0.1-AIS-01",
+                                "CSA CCM v.4.0.1-AIS-02",
+                                "CSA CCM v.4.0.1-AIS-04",
+                                "CSA CCM v.4.0.1-CCC-01",
+                                "CSA CCM v.4.0.1-GRC-03",
+                                "CSA CCM v.4.0.1-IVS-04",
+                                "CSA CCM v.4.0.1-UEM-06",
+                                "CSA CCM v3.0.1-EKM-01",
+                                "CSA CCM v3.0.1-IAM-02",
+                                "CSA CCM v3.0.1-IAM-04",
+                                "CSA CCM v3.0.1-IAM-08",
+                                "CSA CCM v3.0.1-IAM-12",
+                                "CSA CCM v3.0.1-IVS-11",
+                                "CSA CCM v3.0.1-MOS-16",
+                                "CyberSecurity Law of the People's Republic of China-Article 21",
+                                "CyberSecurity Law of the People's Republic of China-Article 31",
+                                "CyberSecurity Law of the People's Republic of China-Article 40",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.185",
+                                "HITRUST CSF v9.3-Control Reference:01.q",
+                                "HITRUST v.9.4.2-Control Reference:10.g",
+                                "ISO/IEC 27002:2013-12.1.2",
+                                "ISO/IEC 27002:2013-14.1.1",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.2.1",
+                                "ISO/IEC 27002:2013-14.2.2",
+                                "ISO/IEC 27017:2015-12.1.2",
+                                "ISO/IEC 27017:2015-14.1.1",
+                                "ISO/IEC 27017:2015-14.1.2",
+                                "ISO/IEC 27017:2015-14.2.1",
+                                "ISO/IEC 27017:2015-14.2.5",
+                                "ISO/IEC 27017:2015-5.1.1",
+                                "ISO/IEC 27018:2019-12.1.2",
+                                "MAS TRM 2021-10.2.1",
+                                "MAS TRM 2021-10.2.8",
+                                "MAS TRM 2021-10.2.9",
+                                "MLPS 2.0-8.2.4.1",
+                                "NIST 800-171 Rev1-3.5.1",
+                                "NIST 800-171 Rev1-3.5.2",
+                                "NIST 800-53 Rev 5-Authenticator Management | Public Key-based Authentication",
+                                "NIST 800-53 Rev4-IA-5 (2)(a)",
+                                "NIST CSF-PR.IP-1",
+                                "NIST SP 800-171 Revision 2-3.4.2",
+                                "NIST SP 800-172-3.5.2e",
+                                "New Zealand Information Security Manual (NZISM v3.4)-14.5",
+                                "PCI DSS v3.2.1-3.6.4",
+                                "PIPEDA-4.7.3",
                                 "SOC 2-CC6.1",
                                 "SOC 2-CC8.1"
                             ],
