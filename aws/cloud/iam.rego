@@ -1738,3 +1738,29 @@ iam_deprecated_policies_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_attached_user_policies"
 }
+
+
+#
+# PR-AWS-CLD-IAM-048
+#
+default iam_mfa_device = true
+
+iam_mfa_device = false {
+    count(input.MFADevices) == 0
+}
+
+iam_mfa_device_err = "Ensure AWS user account with data access should be protected by MFA" {
+    not iam_mfa_device
+}
+
+iam_mfa_device_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-048",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensute AWS user accounts with data access should be protected by the MFA",
+    "Policy Description": "Enforce MFA on user accounts with data access to safeguard sensitive information and mitigate potential breaches.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-virtualmfadevice.html"
+}

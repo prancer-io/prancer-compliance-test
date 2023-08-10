@@ -907,6 +907,16 @@
 					]
 				},
 				{
+					"masterSnapshotId": "TEST_IAM_06",
+					"arn": "arn:aws:iam:::",
+					"type": "iam",
+					"collection": "aws_iam",
+					"listMethod": "list_users",
+					"detailMethods": [
+						"list_mfa_devices"
+					]
+				},
+				{
 					"masterSnapshotId": "TEST_AMPLIFY",
 					"arn": "arn:aws:amplify:::",
 					"type": "amplify",
