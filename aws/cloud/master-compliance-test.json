@@ -20580,8 +20580,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-048",
-                            "eval": "data.rule.iam_deprecated_policies",
-                            "message": "data.rule.iam_deprecated_policies_err",
+                            "eval": "data.rule.iam_mfa_device",
+                            "message": "data.rule.iam_mfa_device_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_IAM_047.py"
                         }
