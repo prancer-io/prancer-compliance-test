@@ -1003,6 +1003,43 @@ s3_only_owner_access_metadata := {
 }
 
 #
+# PR-AWS-CLD-S3-027
+#
+
+default bucket_cmk_encryption = true
+
+bucket_cmk_encryption = false {
+    rule := input.ServerSideEncryptionConfiguration.Rules[j]
+    not rule.BucketKeyEnabled
+}
+
+bucket_cmk_encryption = false {
+    rule := input.ServerSideEncryptionConfiguration.Rules[j]
+    lower(rule.ApplyServerSideEncryptionByDefault.SSEAlgorithm) != "aws:kms"
+}
+
+bucket_cmk_encryption = false {
+    rule := input.ServerSideEncryptionConfiguration.Rules[j]
+    contains(rule.ApplyServerSideEncryptionByDefault.KMSMasterKeyID, "alias/aws/s3")
+}
+
+bucket_cmk_encryption_err = "Ensure S3 bucket is encrypted using CMK" {
+    not bucket_cmk_encryption
+}
+
+bucket_cmk_encryption_metadata := {
+    "Policy Code": "PR-AWS-CLD-S3-027",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure S3 bucket is encrypted using CMK",
+    "Policy Description": "Ensure that your AWS S3 buckets are configured to use Server-Side Encryption with customer managed CMKs instead of S3-Managed Keys (SSE-S3) in order to obtain a fine-grained control over Amazon S3 data-at-rest encryption and decryption process",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionbydefault.html#cfn-s3-bucket-serversideencryptionbydefault-ssealgorithm"
+}
+
+#
 # PR-AWS-CLD-EFS-001
 #
 
@@ -1060,6 +1097,44 @@ efs_encrypt_metadata := {
 }
 
 #
+# PR-AWS-CLD-EFS-003
+#
+
+default efs_cmk = false
+
+efs_cmk = false {
+    EFS := input.TEST_EFS[_]
+    FileSystem := EFS.FileSystems[_]
+    not FileSystem.KmsKeyId
+}
+
+efs_cmk = false {
+    EFS := input.TEST_EFS[_]
+    FileSystem := EFS.FileSystems[_]
+    
+    KMS := input.TEST_KMS[_]
+    FileSystem.KmsKeyId == KMS.KeyMetadata.Arn
+    alias := KMS.Aliases[_]
+    alias.AliasName == "alias/aws/elasticfilesystem"
+}
+
+efs_cmk_err = "AWS Elastic File System (EFS) not encrypted using Customer Managed Key" {
+    not efs_cmk
+}
+
+efs_cmk_metadata := {
+    "Policy Code": "PR-AWS-CLD-EFS-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS Elastic File System (EFS) not encrypted using Customer Managed Key",
+    "Policy Description": "This policy identifies Elastic File Systems (EFSs) which are encrypted with default KMS keys and not with Keys managed by Customer. It is a best practice to use customer managed KMS Keys to encrypt your EFS data. It gives you full control over the encrypted data.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html"
+}
+
+#
 # PR-AWS-CLD-EBS-001
 #
 
@@ -1085,6 +1160,44 @@ ebs_encrypt_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html"
+}
+
+#
+# PR-AWS-CLD-EBS-002
+#
+
+default ebs_encrypt_with_cmk = true
+
+ebs_encrypt_with_cmk = false {
+    EC2 := input.TEST_EC2_01[_]
+    volumn := EC2.Volumes[_]
+    not volumn.KmsKeyId
+}
+
+ebs_encrypt_with_cmk = false {
+    EC2 := input.TEST_EC2_01[_]
+    volumn := EC2.Volumes[_]
+    
+    KMS := input.TEST_KMS[_]
+    volumn.KmsKeyId == KMS.KeyMetadata.Arn
+    alias := KMS.Aliases[_]
+    alias.AliasName == "alias/aws/ebs"
+}
+
+ebs_encrypt_with_cmk_err = "AWS EBS volumes are not encrypted with CMK" {
+    not ebs_encrypt_with_cmk
+}
+
+ebs_encrypt_with_cmk_metadata := {
+    "Policy Code": "PR-AWS-CLD-EBS-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS EBS volumes are not encrypted with CMK",
+    "Policy Description": "This policy identifies the EBS volumes which are not encrypted or encrypted with default KMS. The snapshots that you take of an encrypted EBS volume are also encrypted and can be moved between AWS Regions as needed. You cannot share encrypted snapshots with other AWS accounts and you cannot make them public. It is recommended that EBS volume should be encrypted with Customer Managed Key.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-volume.html#aws-resource-ec2-volume--examples"
 }
 
 #

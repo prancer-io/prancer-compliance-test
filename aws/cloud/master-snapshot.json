@@ -13,7 +13,8 @@
 					"detailMethods": [
 						"describe_key",
 						"get_key_rotation_status",
-						"list_resource_tags"
+						"list_resource_tags",
+						"list_aliases"
 					]
 				},
 				{
@@ -914,6 +915,16 @@
 					"listMethod": "list_users",
 					"detailMethods": [
 						"list_mfa_devices"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_IAM_07",
+					"arn": "arn:aws:iam:::",
+					"type": "iam",
+					"collection": "aws_iam",
+					"listMethod": "list_instance_profiles",
+					"detailMethods": [
+						"get_instance_profile"
 					]
 				},
 				{

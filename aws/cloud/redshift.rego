@@ -13,25 +13,22 @@ available_true_choices := ["true", true]
 default redshift_encrypt_key = true
 
 redshift_encrypt_key = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
-    Clusters := input.Clusters[_]
-    not Clusters.KmsKeyId
+    REDSHIFT := input.TEST_REDSHIFT_1[_]
+    Cluster := REDSHIFT.Clusters[_]
+    not Cluster.KmsKeyId
 }
 
 redshift_encrypt_key = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
-    Clusters := input.Clusters[_]
-    count(Clusters.KmsKeyId) == 0
+    REDSHIFT := input.TEST_REDSHIFT_1[_]
+    Cluster := REDSHIFT.Clusters[_]
+
+    KMS := input.TEST_KMS[_]
+    Cluster.KmsKeyId == KMS.KeyMetadata.Arn
+    alias := KMS.Aliases[_]
+    alias.AliasName == "alias/aws/redshift"
 }
 
 redshift_encrypt_key = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
-    Clusters := input.Clusters[_]
-    not startswith(lower(Clusters.KmsKeyId), "arn:")
-}
-
-redshift_encrypt_key = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
     Clusters := input.Clusters[_]
     not Clusters.Encrypted
 }

@@ -4136,6 +4136,38 @@
                     ]
                 },
                 {
+                    "masterTestId": "PR-AWS-CLD-S3-027",
+                    "masterSnapshotId": [
+                        "TEST_S3"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-S3-027",
+                            "eval": "data.rule.bucket_cmk_encryption",
+                            "message": "data.rule.bucket_cmk_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionbydefault.html#cfn-s3-bucket-serversideencryptionbydefault-ssealgorithm' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_S3_027.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure S3 bucket is encrypted using CMK",
+                    "description": "Ensure that your AWS S3 buckets are configured to use Server-Side Encryption with customer managed CMKs instead of S3-Managed Keys (SSE-S3) in order to obtain a fine-grained control over Amazon S3 data-at-rest encryption and decryption process",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "NIST 800",
+                                "GDPR"
+                            ],
+                            "service": [
+                                "cloud"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "PR-AWS-CLD-EFS-001",
                     "masterSnapshotId": [
                         "TEST_EFS"
@@ -4353,7 +4385,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "AWS EBS volumes are not encrypted",
+                    "title": "AWS EBS volumes are encrypted with kms",
                     "description": "This policy identifies the EBS volumes which are not encrypted. The snapshots that you take of an encrypted EBS volume are also encrypted and can be moved between AWS Regions as needed. You cannot share encrypted snapshots with other AWS accounts and you cannot make them public. It is recommended that EBS volume should be encrypted.",
                     "tags": [
                         {
@@ -4435,9 +4467,214 @@
                                 "SOC 2-CC6.1"
                             ],
                             "service": [
-                                "cloud"
+                                "ebs"
                             ]
                         }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EFS-003",
+                    "masterSnapshotId": [
+                        "TEST_EFS",
+                        "TEST_KMS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EFS-003",
+                            "eval": "data.rule.efs_cmk",
+                            "message": "data.rule.efs_cmk_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EFS_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Elastic File System (EFS) not encrypted using Customer Managed Key",
+                    "description": "This policy identifies Elastic File Systems (EFSs) which are encrypted with default KMS keys and not with Keys managed by Customer. It is a best practice to use customer managed KMS Keys to encrypt your EFS data. It gives you full control over the encrypted data.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "APRA (CPS 234) Information Security-CPS234-15",
+                                "APRA (CPS 234) Information Security-CPS234-16",
+                                "APRA (CPS 234) Information Security-CPS234-17",
+                                "APRA (CPS 234) Information Security-CPS234-21",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CCPA",
+                                "CCPA 2018-1798.150(a)(1)",
+                                "CMMC",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1-CEK-03",
+                                "CSA CCM v.4.0.1-DSP-10",
+                                "CSA CCM v.4.0.1-UEM-11",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "CyberSecurity Law of the People's Republic of China-Article 30",
+                                "CyberSecurity Law of the People's Republic of China-Article 31",
+                                "CyberSecurity Law of the People's Republic of China-Article 40",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.185",
+                                "HITRUST",
+                                "HITRUST v.9.4.2-Control Reference:06.d",
+                                "HITRUST v.9.4.2-Control Reference:09.s",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27002:2013-10.1.1",
+                                "ISO/IEC 27002:2013-12.2.1",
+                                "ISO/IEC 27002:2013-12.3.1",
+                                "ISO/IEC 27002:2013-13.2.1",
+                                "ISO/IEC 27002:2013-13.2.3",
+                                "ISO/IEC 27002:2013-14.1.2",
+                                "ISO/IEC 27002:2013-14.1.3",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-8.3.1",
+                                "ISO/IEC 27002:2013-8.3.3",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27017:2015-10.1.1",
+                                "ISO/IEC 27017:2015-10.1.2",
+                                "ISO/IEC 27017:2015-6.1.1",
+                                "ISO/IEC 27018",
+                                "ISO/IEC 27018:2019-10.1.2",
+                                "ISO/IEC 27018:2019-12.3.1",
+                                "LGPD",
+                                "MAS TRM",
+                                "MAS TRM 2021-11.1.1",
+                                "MAS TRM 2021-11.1.3",
+                                "MLPS",
+                                "MLPS 2.0-8.1.4.8",
+                                "NIST 800",
+                                "NIST 800-53 Rev 5-Cryptographic Key Establishment and Management",
+                                "NIST 800-53 Rev 5-Remote Access | Protection of Confidentiality and Integrity Using Encryption",
+                                "NIST 800-53 Rev 5-Transmission Confidentiality and Integrity | Cryptographic Protection",
+                                "NIST 800-53 Rev4-AC-17 (2)",
+                                "NIST 800-53 Rev4-SC-12",
+                                "NIST 800-53 Rev4-SC-8 (1)",
+                                "NIST CSF",
+                                "NIST CSF-PR.DS-1",
+                                "NIST CSF-PR.DS-5",
+                                "NIST SP",
+                                "NIST SP 800-171 Revision 2-3.13.16",
+                                "NIST SP 800-172-3.1.3e",
+                                "PCI DSS v3.2.1-3.4.1",
+                                "PCI DSS v3.2.1-4.1",
+                                "PCI-DSS",
+                                "PIPEDA",
+                                "PIPEDA-4.7.3",
+                                "RMiT",
+                                "Risk Management in Technology (RMiT)-10.51",
+                                "Risk Management in Technology (RMiT)-10.68"
+                            ],
+                            "service": [
+                                "efs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-EBS-002",
+                    "masterSnapshotId": [
+                      "TEST_EC2_01",
+                      "TEST_KMS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storage.rego)",
+                    "evals": [
+                        {
+                          "id": "PR-AWS-CLD-EBS-002",
+                          "eval": "data.rule.ebs_encrypt_with_cmk",
+                          "message": "data.rule.ebs_encrypt_with_cmk_err",
+                          "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-volume.html#aws-resource-ec2-volume--examples' target='_blank'>here</a>",
+                          "remediationFunction": "PR_AWS_CLD_EBS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EBS volumes are not encrypted with CMK",
+                    "description": "This policy identifies the EBS volumes which are not encrypted or encrypted with default KMS. The snapshots that you take of an encrypted EBS volume are also encrypted and can be moved between AWS Regions as needed. You cannot share encrypted snapshots with other AWS accounts and you cannot make them public. It is recommended that EBS volume should be encrypted with Customer Managed Key.",
+                    "tags": [
+                      {
+                        "cloud": "AWS",
+                        "compliance": [
+                          "APRA",
+                          "APRA (CPS 234) Information Security-CPS234-15",
+                          "APRA (CPS 234) Information Security-CPS234-16",
+                          "APRA (CPS 234) Information Security-CPS234-17",
+                          "APRA (CPS 234) Information Security-CPS234-21",
+                          "APRA (CPS 234) Information Security-CPS234-23",
+                          "APRA (CPS 234) Information Security-CPS234-27",
+                          "APRA (CPS 234) Information Security-CPS234-34",
+                          "AWS Foundational Security Best Practices standard",
+                          "AWS Foundational Security Best Practices standard-Data protection",
+                          "Brazilian Data Protection Law (LGPD)-Article 49",
+                          "CCPA",
+                          "CCPA 2018-1798.150(a)(1)",
+                          "CIS",
+                          "CIS v1.3.0 (AWS)-2.2.1",
+                          "CIS v1.4.0 (AWS)-2.2.1",
+                          "CMMC",
+                          "CSA CCM",
+                          "CSA CCM v3.0.1-CCC-04",
+                          "CSA CCM v3.0.1-EKM-02",
+                          "CSA CCM v3.0.1-EKM-03",
+                          "CSA CCM v3.0.1-EKM-04",
+                          "CyberSecurity Law of the People's Republic of China",
+                          "CyberSecurity Law of the People's Republic of China-Article 30",
+                          "CyberSecurity Law of the People's Republic of China-Article 31",
+                          "CyberSecurity Law of the People's Republic of China-Article 40",
+                          "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.177",
+                          "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SC.3.185",
+                          "Firmware, and Information Integrity",
+                          "GDPR",
+                          "GDPR-Article 25",
+                          "GDPR-Article 32",
+                          "HIPAA",
+                          "HIPAA-164.312(a)(2)(iv)",
+                          "HITRUST",
+                          "HITRUST CSF v9.3-Control Reference:01.j",
+                          "HITRUST CSF v9.3-Control Reference:01.v",
+                          "HITRUST CSF v9.3-Control Reference:01.y",
+                          "HITRUST CSF v9.3-Control Reference:05.i",
+                          "HITRUST CSF v9.3-Control Reference:06.f",
+                          "HITRUST CSF v9.3-Control Reference:09.ab",
+                          "HITRUST CSF v9.3-Control Reference:09.s",
+                          "HITRUST CSF v9.3-Control Reference:09.x",
+                          "HITRUST CSF v9.3-Control Reference:10.f",
+                          "ISO 27001",
+                          "ISO 27001:2013-A.10.1.2",
+                          "ISO 27001:2013-A.14.1.2",
+                          "ISO 27001:2013-A.14.1.3",
+                          "ISO 27001:2013-A.18.1.3",
+                          "ISO 27001:2013-A.8.2.3",
+                          "LGPD",
+                          "NIST 800",
+                          "NIST 800-171 Rev1-3.1.13",
+                          "NIST 800-171 Rev1-3.13.11",
+                          "NIST 800-53 Rev 5-Cryptographic Protection",
+                          "NIST 800-53 Rev 5-Remote Access | Protection of Confidentiality and Integrity Using Encryption",
+                          "NIST 800-53 Rev 5-Software",
+                          "NIST 800-53 Rev4-AC-17 (2)",
+                          "NIST 800-53 Rev4-SC-13",
+                          "NIST 800-53 Rev4-SI-7 (6)",
+                          "NIST CSF",
+                          "NIST CSF-PR.DS-1",
+                          "NIST CSF-PR.DS-5",
+                          "NIST SP",
+                          "NIST SP 800-171 Revision 2-3.13.16",
+                          "NIST SP 800-172-3.1.3e",
+                          "NZISM",
+                          "New Zealand Information Security Manual (NZISM v3.4)-17.1",
+                          "PCI DSS v3.2.1-3.4.1",
+                          "PCI-DSS",
+                          "PIPEDA",
+                          "PIPEDA-4.7.3",
+                          "SOC 2",
+                          "SOC 2-CC6.1"
+                        ],
+                        "service": [
+                          "ebs"
+                        ]
+                      }
                     ]
                 },
                 {
@@ -7487,7 +7724,8 @@
                 {
                     "masterTestId": "PR-AWS-CLD-RSH-001",
                     "masterSnapshotId": [
-                        "TEST_REDSHIFT_1"
+                        "TEST_REDSHIFT_1",
+                        "TEST_KMS"
                     ],
                     "type": "rego",
                     "rule": "file(redshift.rego)",
@@ -14692,7 +14930,8 @@
                 {
                     "masterTestId": "PR-AWS-CLD-RDS-003",
                     "masterSnapshotId": [
-                        "TEST_RDS_01"
+                        "TEST_RDS_01",
+                        "TEST_KMS"
                     ],
                     "type": "rego",
                     "rule": "file(database.rego)",
@@ -16451,6 +16690,36 @@
                     "severity": "Medium",
                     "title": "Ensure DocDB has audit logs enabled",
                     "description": "Ensure DocDB has audit logs enabled, this will export logs in docdb",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "docdb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-DDB-005",
+                    "masterSnapshotId": [
+                        "TEST_DDB_01",
+                        "TEST_KMS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-DDB-005",
+                            "eval": "data.rule.docdb_cluster_encrypted_with_cmk",
+                            "message": "data.rule.docdb_cluster_encrypted_with_cmk_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#aws-resource-docdb-dbcluster--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_DDB_005.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS DocumentDB is encrypted using KMS",
+                    "description": "The AWS DocumentDB must be secured with KMS instead of default kms",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -20582,13 +20851,97 @@
                             "id": "PR-AWS-CLD-IAM-048",
                             "eval": "data.rule.iam_mfa_device",
                             "message": "data.rule.iam_mfa_device_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_IAM_047.py"
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/list_mfa_devices.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_048.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure AWS IAM deprecated managed policies is not in use by User.",
-                    "description": "It checks for any usage of deprecated AWS IAM managed policies and returns an alert if it finds one in your cloud resources. When AWS deprecate an IAM managed policy, a new alternative is released with improved access restrictions. Existing IAM users and roles can continue to use the previous policy without interruption, however new IAM users and roles will use the new replacement policy. Before you migrate any user or role to the new replacement policy, we recommend you review their differences in the Policy section of AWS IAM console. If you require one or more of the removed permissions, please add them separately to any user or role. List of deprecated AWS IAM managed policies:AmazonElasticTranscoderFullAccess (replaced by AmazonElasticTranscoder_FullAccess).",
+                    "title": "Ensute AWS user accounts with data access should be protected by the MFA",
+                    "description": "Enforce MFA on user accounts with data access to safeguard sensitive information and mitigate potential breaches.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "LGPD",
+                                "CSA CCM",
+                                "CMMC",
+                                "CyberSecurity Law of the People's Republic of China",
+                                "HITRUST",
+                                "ISO/IEC 27002",
+                                "ISO/IEC 27017",
+                                "ISO/IEC 27018",
+                                "MAS TRM",
+                                "MITRE ATT&CK",
+                                "MLPS",
+                                "NIST 800",
+                                "NIST CSF",
+                                "NIST SP",
+                                "PCI DSS",
+                                "PIPEDA",
+                                "RMiT",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
+                                "APRA (CPS 234) Information Security-CPS234-34",
+                                "AWS Well-Architected Framework-Identity and Access Management",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-IAM-04",
+                                "CSA CCM v.4.0.1-IAM-05",
+                                "CSA CCM v.4.0.1-IAM-09",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "CyberSecurity Law of the People's Republic of China-Article 24",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AC.2.007",
+                                "HITRUST v.9.4.2-Control Reference:01.c",
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-6.1.2",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.1.2",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "MAS TRM 2021-9.1.1",
+                                "MITRE ATT&CK v10.0-T1098 - Account Manipulation",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v6.3-T1098",
+                                "MITRE ATT&CK v8.2-T1098",
+                                "MLPS 2.0-8.1.4.8",
+                                "NIST CSF-PR.AC-4",
+                                "NIST SP 800-171 Revision 2-3.1.5",
+                                "NIST SP 800-172-3.1.2e",
+                                "PCI DSS v3.2.1-7.1",
+                                "PCI DSS v3.2.1-7.1.2",
+                                "Risk Management in Technology (RMiT)-10.55"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-049",
+                    "masterSnapshotId": [
+                        "TEST_IAM_07"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-049",
+                            "eval": "data.rule.iam_instance_profile",
+                            "message": "data.rule.iam_instance_profile_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/list_instance_profiles.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_IAM_049.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure AWS Instance profile don't have '*' in the action or resource section of the policy statement of roles.",
+                    "description": "It identifies AWS IAM permissions that contain '*' in the action or resource section of the policy statement of role.",
                     "tags": [
                         {
                             "cloud": "AWS",

@@ -1764,3 +1764,36 @@ iam_mfa_device_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-virtualmfadevice.html"
 }
+
+#
+# PR-AWS-CLD-IAM-049
+#
+default iam_instance_profile = true
+
+iam_instance_profile = false {
+    role := input.InstanceProfile.Roles[_]
+    statement := role.AssumeRolePolicyDocument.Statement[_]
+    lower(statement.Action) == "*"
+}
+
+iam_instance_profile = false {
+    role := input.InstanceProfile.Roles[_]
+    statement := role.AssumeRolePolicyDocument.Statement[_]
+    lower(statement.Resource) == "*"
+}
+
+iam_instance_profile_err = "Ensure AWS Instance profile IAM should be least privileged" {
+    not iam_instance_profile
+}
+
+iam_instance_profile_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-049",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Instance profile don't have '*' in the action or resource section of the policy statement of roles.",
+    "Policy Description": "It identifies AWS IAM permissions that contain '*' in the action or resource section of the policy statement of role.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html"
+}
