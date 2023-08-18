@@ -20994,7 +20994,7 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure AWS Instance profile don't have '*' in the action or resource section of the policy statement of roles.",
+                    "title": "Ensure AWS Instance profile IAM should be least privileged.",
                     "description": "It identifies AWS IAM permissions that contain '*' in the action or resource section of the policy statement of role.",
                     "tags": [
                         {
