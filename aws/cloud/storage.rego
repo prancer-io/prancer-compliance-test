@@ -1100,7 +1100,7 @@ efs_encrypt_metadata := {
 # PR-AWS-CLD-EFS-003
 #
 
-default efs_cmk = false
+default efs_cmk = true
 
 efs_cmk = false {
     EFS := input.TEST_EFS[_]

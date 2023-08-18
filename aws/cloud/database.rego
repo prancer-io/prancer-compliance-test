@@ -1232,13 +1232,13 @@ default docdb_cluster_encrypted_with_cmk = true
 
 docdb_cluster_encrypted_with_cmk = false {
     DDB := input.TEST_DDB_01[_]
-    DBInstance := DDB.DBInstances[_]
+    DBInstance := DDB.DBClusters[_]
     not DBInstance.KmsKeyId
 }
 
 docdb_cluster_encrypted_with_cmk = false {
     DDB := input.TEST_DDB_01[_]
-    DBInstance := DDB.DBInstances[_]
+    DBInstance := DDB.DBClusters[_]
     
     KMS := input.TEST_KMS[_]
     DBInstance.KmsKeyId == KMS.KeyMetadata.Arn
