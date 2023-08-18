@@ -1739,9 +1739,34 @@ iam_deprecated_policies_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_attached_user_policies"
 }
 
-
 #
 # PR-AWS-CLD-IAM-048
+#
+
+default iam_root_mfa_device = true
+
+iam_root_mfa_device = false {
+    input.SummaryMap.AccountMFAEnabled == 0
+}
+
+iam_root_mfa_device_err = "Ensure AWS Root account should be protected by the MFA" {
+    not iam_root_mfa_device
+}
+
+iam_root_mfa_device_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-048",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Root account should be protected by the MFA",
+    "Policy Description": "Enforce MFA on user root account with data access to safeguard sensitive information and mitigate potential breaches.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-virtualmfadevice.html"
+}
+
+#
+# PR-AWS-CLD-IAM-049
 #
 default iam_mfa_device = true
 
@@ -1754,19 +1779,19 @@ iam_mfa_device_err = "Ensure AWS user account with data access should be protect
 }
 
 iam_mfa_device_metadata := {
-    "Policy Code": "PR-AWS-CLD-IAM-048",
+    "Policy Code": "PR-AWS-CLD-IAM-049",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensute AWS user accounts with data access should be protected by the MFA",
-    "Policy Description": "Enforce MFA on user accounts with data access to safeguard sensitive information and mitigate potential breaches.",
+    "Policy Title": "Ensure AWS IAM user accounts should be protected by the MFA",
+    "Policy Description": "Enforce MFA on IAM user accounts to safeguard sensitive information and mitigate potential breaches.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-virtualmfadevice.html"
 }
 
 #
-# PR-AWS-CLD-IAM-049
+# PR-AWS-CLD-IAM-050
 #
 default iam_instance_profile = true
 
@@ -1787,7 +1812,7 @@ iam_instance_profile_err = "Ensure AWS Instance profile IAM should be least priv
 }
 
 iam_instance_profile_metadata := {
-    "Policy Code": "PR-AWS-CLD-IAM-049",
+    "Policy Code": "PR-AWS-CLD-IAM-050",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
