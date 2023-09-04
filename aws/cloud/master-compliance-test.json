@@ -14910,7 +14910,7 @@
                             "id": "PR-AWS-CLD-RDS-003",
                             "eval": "data.rule.rds_encrypt_key",
                             "message": "data.rule.rds_encrypt_key_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbinstance.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_RDS_003.py"
                         }
                     ],

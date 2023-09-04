@@ -928,6 +928,16 @@
 					]
 				},
 				{
+					"masterSnapshotId": "TEST_IAM_08",
+					"arn": "arn:aws:iam:::",
+					"type": "iam",
+					"collection": "aws_iam",
+					"listMethod": "get_account_summary",
+					"detailMethods": [
+						"get_account_summary"
+					]
+				},
+				{
 					"masterSnapshotId": "TEST_AMPLIFY",
 					"arn": "arn:aws:amplify:::",
 					"type": "amplify",

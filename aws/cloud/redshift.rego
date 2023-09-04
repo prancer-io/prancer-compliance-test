@@ -29,8 +29,9 @@ redshift_encrypt_key = false {
 }
 
 redshift_encrypt_key = false {
-    Clusters := input.Clusters[_]
-    not Clusters.Encrypted
+    REDSHIFT := input.TEST_REDSHIFT_1[_]
+    Cluster := REDSHIFT.Clusters[_]
+    not Cluster.Encrypted
 }
 
 redshift_encrypt_key_err = "AWS Redshift Cluster not encrypted using Customer Managed Key" {
