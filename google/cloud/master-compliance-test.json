@@ -6360,7 +6360,7 @@
                 {
                     "masterTestId": "PR-GCP-CLD-IAM-014",
                     "masterSnapshotId": [
-                        "GOOGLE_PROJECTS_ACCOUNTS"
+                        "GOOGLE_PROJECTS_IDENTITY_PLATFORM_ACCOUNTS"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",

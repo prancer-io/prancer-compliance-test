@@ -359,7 +359,7 @@
                     ]
                 },
                 {
-                    "masterSnapshotId": "GOOGLE_PROJECTS_ACCOUNTS",
+                    "masterSnapshotId": "GOOGLE_PROJECTS_IDENTITY_PLATFORM_ACCOUNTS",
                     "type": "identitytoolkit/projects.accounts.batchGet",
                     "collection": "projects_accounts",
                     "tags": [
