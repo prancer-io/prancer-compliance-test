@@ -4,37 +4,37 @@ package rule
 # PR-GCP-CLD-BQ-001
 #
 
-default bigquery_public_access = null
+default bigquery_datasets_dont_have_public_access = null
 # available_types_bigquery_public_access = ["bigquery.v2.dataset", "gcp-types/bigquery-v2:datasets"]
 vulnerable_iam_members = ["allusers", "allauthenticatedusers"]
 vulnerable_roles = ["roles/editor", "roles/owner"]
 
-gc_issue["bigquery_public_access"] {
+gcp_issue["bigquery_datasets_dont_have_public_access"] {
     # lower(resource.type) == available_types_bigquery_public_access[_]
     access := input.access[_]
-    lower(access.role) == vulnerable_roles[_]
+    #lower(access.role) == vulnerable_roles[_]
     lower(access.iamMember) == vulnerable_iam_members[_]
 }
 
-bigquery_public_access {
+bigquery_datasets_dont_have_public_access {
     # lower(input.resources[i].type) == available_types_bigquery_public_access[_]
-    not gc_issue["bigquery_public_access"]
+    not gcp_issue["bigquery_datasets_dont_have_public_access"]
 }
 
-bigquery_public_access = false {
-    gc_issue["bigquery_public_access"]
+bigquery_datasets_dont_have_public_access = false {
+    gcp_issue["bigquery_datasets_dont_have_public_access"]
 }
 
-bigquery_public_access_err = "Ensure Big Query Datasets are not publically accessible" {
-    gc_issue["bigquery_public_access"]
+bigquery_datasets_dont_have_public_access_err = "BigQuery dataset currently publically accessible" {
+    gcp_issue["bigquery_datasets_dont_have_public_access"]
 }
 
-bigquery_public_access_metadata := {
+bigquery_datasets_dont_have_public_access_metadata := {
     "Policy Code": "PR-GCP-CLD-BQ-001",
-    "Type": "IaC",
+    "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
-    "Policy Title": "Ensure Big Query Datasets are not publically accessible",
+    "Policy Title": "Ensure BigQuery datasets are not publically accessible",
     "Policy Description": "Ensure there are no anonymously and/or publicly accessible BigQuery datasets available within your Google Cloud Platform (GCP) account. Google Cloud BigQuery datasets have Identity and Access Management (IAM) policies configured to determine who can have access to these resources",
     "Resource Type": "bigquery.v2.dataset",
     "Policy Help URL": "",

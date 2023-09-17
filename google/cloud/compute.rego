@@ -8,6 +8,24 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
+array_element_contains(target_array, element_string) = true {
+  contains(lower(target_array[_]), lower(element_string))
+} else = false { true }
+
+array_element_in(target_array, in_array) = true {
+  lower(target_array[_]) == lower(in_array[_])
+} else = false { true }
+
+array_element_contains_in(target_array, in_array) = true {
+  contains(lower(target_array[_]), lower(in_array[_]))
+} else = false { true }
+
+predefined_admin_roles = ["roles/Owner", "roles/Editor"]
+
 #
 # PR-GCP-CLD-FW-001
 #
@@ -1636,35 +1654,35 @@ compute_ssl_min_tls_metadata := {
 # PR-GCP-CLD-INST-011
 #
 
-default compute_configure_default_service = null
+default compute_instance_not_configured_to_use_default_service_account = null
 
-gc_issue["compute_configure_default_service"] {
+gc_issue["compute_instance_not_configured_to_use_default_service_account"] {
     # lower(resource.type) == "compute.v1.instance"
-    lower(input.status) == "running"
+    #lower(input.status) == "running"
     not startswith(lower(input.name), "gke-")
     serviceAccount := input.serviceAccounts[_]
     contains(lower(serviceAccount.email), "compute@developer.gserviceaccount.com")
 }
 
-compute_configure_default_service {
+compute_instance_not_configured_to_use_default_service_account {
     # lower(input.resources[i].type) == "compute.v1.instance"
-    not gc_issue["compute_configure_default_service"]
+    not gc_issue["compute_instance_not_configured_to_use_default_service_account"]
 }
 
-compute_configure_default_service = false {
-    gc_issue["compute_configure_default_service"]
+compute_instance_not_configured_to_use_default_service_account = false {
+    gc_issue["compute_instance_not_configured_to_use_default_service_account"]
 }
 
-compute_configure_default_service_err = "Ensure GCP VM instance not configured with default service account" {
-    gc_issue["compute_configure_default_service"]
+compute_instance_not_configured_to_use_default_service_account_err = "Compute instance currently configured to use the default service account" {
+    gc_issue["compute_instance_not_configured_to_use_default_service_account"]
 }
 
-compute_configure_default_service_metadata := {
+compute_instance_not_configured_to_use_default_service_account_metadata := {
     "Policy Code": "PR-GCP-CLD-INST-011",
-    "Type": "IaC",
+    "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
-    "Policy Title": "Ensure GCP VM instance not configured with default service account",
+    "Policy Title": "Compute instance should not configured to use the default service account",
     "Policy Description": "This policy identifies GCP VM instances configured with the default service account. To defend against privilege escalations if your VM is compromised and prevent an attacker from gaining access to all of your project, it is recommended to not use the default Compute Engine service account because it has the Editor role on the project.",
     "Resource Type": "compute.v1.instance",
     "Policy Help URL": "",
@@ -1676,36 +1694,36 @@ compute_configure_default_service_metadata := {
 # PR-GCP-CLD-INST-012
 #
 
-default compute_default_service_full_access = null
+default compute_instance_not_configured_to_use_default_service_account_with_full_access = null
 
-gc_issue["compute_default_service_full_access"] {
+gcp_issue["compute_instance_not_configured_to_use_default_service_account_with_full_access"] {
     # lower(resource.type) == "compute.v1.instance"
-    lower(input.status) == "running"
+    #lower(input.status) == "running"
     not startswith(lower(input.name), "gke-")
     serviceAccount := input.serviceAccounts[_]
     contains(lower(serviceAccount.email), "compute@developer.gserviceaccount.com")
-    lower(serviceAccount.scopes) == "https://www.googleapis.com/auth/cloud-platform"
+    #lower(serviceAccount.scopes) == "https://www.googleapis.com/auth/cloud-platform"
+    count([c | contains(lower(serviceAccount.scopes[_]), "cloud-platform"); c := 1]) > 0
 }
 
-compute_default_service_full_access {
-    # lower(input.resources[i].type) == "compute.v1.instance"
-    not gc_issue["compute_default_service_full_access"]
+compute_instance_not_configured_to_use_default_service_account_with_full_access {
+    not gcp_issue["compute_instance_not_configured_to_use_default_service_account_with_full_access"]
 }
 
-compute_default_service_full_access = false {
-    gc_issue["compute_default_service_full_access"]
+compute_instance_not_configured_to_use_default_service_account_with_full_access = false {
+    gcp_issue["compute_instance_not_configured_to_use_default_service_account_with_full_access"]
 }
 
-compute_default_service_full_access_err = "Ensure GCP VM instance not using a default service account with full access to all Cloud APIs" {
-    gc_issue["compute_default_service_full_access"]
+compute_instance_not_configured_to_use_default_service_account_with_full_access_err = "Compute instance currently configured to use the default service account with full access to all Cloud APIs" {
+    gcp_issue["compute_instance_not_configured_to_use_default_service_account_with_full_access"]
 }
 
-compute_default_service_full_access_metadata := {
+compute_instance_not_configured_to_use_default_service_account_with_full_access_metadata := {
     "Policy Code": "PR-GCP-CLD-INST-012",
-    "Type": "IaC",
+    "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
-    "Policy Title": "Ensure GCP VM instance not using a default service account with full access to all Cloud APIs",
+    "Policy Title": "Compute instance should not use default service account with full access to all Cloud APIs",
     "Policy Description": "This policy identifies the GCP VM instances which are using a default service account with full access to all Cloud APIs. To compliant with the principle of least privileges and prevent potential privilege escalation it is recommended that instances are not assigned to default service account 'Compute Engine default service account' with scope 'Allow full access to all Cloud APIs'.",
     "Resource Type": "compute.v1.instance",
     "Policy Help URL": "",
@@ -1839,6 +1857,137 @@ compute_ip_forwarding_enable_metadata := {
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
 }
 
+
+
+#
+# PR-GCP-CLD-INST-016
+# 
+
+info_value_list = ["Yes", "Y", "True", "true", "TRUE", "1"]
+
+instance_value_list = ["No", "N", "False", "false", "FALSE", "0"]
+
+default project_os_login_overridden_by_instnace = true
+
+project_os_login_overridden_by_instnace = false{
+	X := input.GOOGLE_PROJECT_INFO[_]
+	has_property(X.commonInstanceMetadata, "items")
+	project_info_items = X.commonInstanceMetadata.items[_]
+	contains(project_info_items.key, "enable-oslogin")
+	count([c | contains(input.GOOGLE_PROJECT_INFO[_].commonInstanceMetadata.items[_].value, info_value_list[_]); c = 1]) != 0
+
+	Y := input.GOOGLE_INSTANCE[_]
+	has_property(Y.metadata, "items")
+	has_property(Y.metadata.items[_], "key")
+	project_instance_items = Y.metadata.items[_]
+	contains(project_instance_items.key, "enable-oslogin")
+	count([c | contains(input.GOOGLE_INSTANCE[_].metadata.items[_].value, instance_value_list[_]); c = 1]) != 0
+	not startswith(lower(Y.name), "gke-")
+	upper(Y.status) == "RUNNING"
+
+	contains(Y.zone, X.name)
+}
+
+project_os_login_overridden_by_instnace_err = "Ensure, GCP VM instance OS login overrides Project metadata OS login configuration." {
+	not project_os_login_overridden_by_instnace
+}
+
+project_os_login_overridden_by_instnace_metadata := {
+	"Policy Code": "PR-GCP-CLD-INST-016",
+	"Type": "cloud",
+	"Product": "GCP",
+	"Language": "GCP cloud",
+	"Policy Title": "Ensure, GCP VM instance OS login overrides Project metadata OS login configuration.",
+	"Policy Description": "It checks, GCP VM instances where OS login configuration is disabled and overriding enabled Project OS login configuration. Enabling OS Login ensures that SSH keys used to connect to instances are mapped with IAM users. Revoking access to IAM user will revoke all the SSH keys associated with that particular user. It facilitates centralized and automated SSH key pair management which is useful in handling cases like a response to compromised SSH key pairs. Note: Enabling OS Login on instances disables metadata-based SSH key configurations on those instances. Disabling OS Login restores SSH keys that you have configured in a project or instance metadata. Reference: https://cloud.google.com/compute/docs/instances/managing-instance-access",
+	"Resource Type": ["compute.v1.projects","compute.v1.instance"],
+	"Policy Help URL": "",
+	"Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+
+#
+# PR-GCP-CLD-INST-017
+#
+
+default compute_instance_dont_have_predefined_admin_roles = null
+
+gcp_issue["compute_instance_dont_have_predefined_admin_roles"] {
+    not startswith(lower(input.name), "gke-")
+    serviceAccount := input.serviceAccounts[_]
+    array_element_contains(serviceAccount.scopes, "admin")
+}
+
+gcp_issue["compute_instance_dont_have_predefined_admin_roles"] {
+    not startswith(lower(input.name), "gke-")
+    serviceAccount := input.serviceAccounts[_]
+    array_element_in(serviceAccount.scopes, predefined_admin_roles)
+}
+
+compute_instance_dont_have_predefined_admin_roles {
+    not gcp_issue["compute_instance_dont_have_predefined_admin_roles"]
+}
+
+compute_instance_dont_have_predefined_admin_roles = false {
+    gcp_issue["compute_instance_dont_have_predefined_admin_roles"]
+}
+
+compute_instance_dont_have_predefined_admin_roles_err = "Compute engine currently have predefined admin roles assigned" {
+    gcp_issue["compute_instance_dont_have_predefined_admin_roles"]
+}
+
+compute_instance_dont_have_predefined_admin_roles_metadata := {
+    "Policy Code": "PR-GCP-CLD-INST-017",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP cloud",
+    "Policy Title": "Compute engine should not have predefined admin roles",
+    "Policy Description": "Service accounts are principals and can be granted access to a resource like a regular user account. However, service accounts often have greater access to more resources than a typical user. Some services, including Compute Engine, create a default service account that has the Editor (roles/Editor) or Owner role (roles/Owner) on the project by default. When you create a resource such as a Compute Engine virtual machine (VM) instance, and you do not specify a service account, the resource can automatically use the default service account. Although the default service account makes it easier for you to get started, it could lead to undesirable situations due to 'admin' scopes that are available to it.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
+
+
+#
+# PR-GCP-CLD-INST-018
+#
+
+default compute_instance_dont_have_iam_write_access_level = null
+
+gcp_issue["compute_instance_dont_have_iam_write_access_level"] {
+    not startswith(lower(input.name), "gke-")
+    serviceAccount := input.serviceAccounts[_]
+    array_element_contains_in(serviceAccount.scopes, ["admin", "manage", "update", "delete", "enable", "disable"])
+}
+
+gcp_issue["compute_instance_dont_have_iam_write_access_level"] {
+    not startswith(lower(input.name), "gke-")
+    serviceAccount := input.serviceAccounts[_]
+    array_element_in(serviceAccount.scopes, predefined_admin_roles)
+}
+
+compute_instance_dont_have_iam_write_access_level {
+    not gcp_issue["compute_instance_dont_have_iam_write_access_level"]
+}
+
+compute_instance_dont_have_iam_write_access_level = false {
+    gcp_issue["compute_instance_dont_have_iam_write_access_level"]
+}
+
+compute_instance_dont_have_iam_write_access_level_err = "Compute engine currently have IAM write access level" {
+    gcp_issue["compute_instance_dont_have_iam_write_access_level"]
+}
+
+compute_instance_dont_have_iam_write_access_level_metadata := {
+    "Policy Code": "PR-GCP-CLD-INST-018",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP cloud",
+    "Policy Title": "Compute engine should not have IAM write access level",
+    "Policy Description": "Some services, such as Compute Engine, create a default service account that has the Editor role (roles/editor) on the project by default. When you create a resource such as a Compute Engine virtual machine (VM) instance, and you do not specify a service account, the resource can automatically use the default service account. Although the default service account makes it easier for you to get started, it is very risky to share such a powerful service account across multiple applications.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances"
+}
 
 #
 # PR-GCP-CLD-SCP-001
@@ -2221,54 +2370,6 @@ os_login_disable_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/projects"
 }
-
-
-#
-# PR-GCP-CLD-INST-016
-# 
-
-info_value_list = ["Yes", "Y", "True", "true", "TRUE", "1"]
-
-instance_value_list = ["No", "N", "False", "false", "FALSE", "0"]
-
-default project_os_login_overridden_by_instnace = true
-
-project_os_login_overridden_by_instnace = false{
-	X := input.GOOGLE_PROJECT_INFO[_]
-	has_property(X.commonInstanceMetadata, "items")
-	project_info_items = X.commonInstanceMetadata.items[_]
-	contains(project_info_items.key, "enable-oslogin")
-	count([c | contains(input.GOOGLE_PROJECT_INFO[_].commonInstanceMetadata.items[_].value, info_value_list[_]); c = 1]) != 0
-
-	Y := input.GOOGLE_INSTANCE[_]
-	has_property(Y.metadata, "items")
-	has_property(Y.metadata.items[_], "key")
-	project_instance_items = Y.metadata.items[_]
-	contains(project_instance_items.key, "enable-oslogin")
-	count([c | contains(input.GOOGLE_INSTANCE[_].metadata.items[_].value, instance_value_list[_]); c = 1]) != 0
-	not startswith(lower(Y.name), "gke-")
-	upper(Y.status) == "RUNNING"
-
-	contains(Y.zone, X.name)
-}
-
-project_os_login_overridden_by_instnace_err = "Ensure, GCP VM instance OS login overrides Project metadata OS login configuration." {
-	not project_os_login_overridden_by_instnace
-}
-
-project_os_login_overridden_by_instnace_metadata := {
-	"Policy Code": "PR-GCP-CLD-INST-016",
-	"Type": "cloud",
-	"Product": "GCP",
-	"Language": "GCP cloud",
-	"Policy Title": "Ensure, GCP VM instance OS login overrides Project metadata OS login configuration.",
-	"Policy Description": "It checks, GCP VM instances where OS login configuration is disabled and overriding enabled Project OS login configuration. Enabling OS Login ensures that SSH keys used to connect to instances are mapped with IAM users. Revoking access to IAM user will revoke all the SSH keys associated with that particular user. It facilitates centralized and automated SSH key pair management which is useful in handling cases like a response to compromised SSH key pairs. Note: Enabling OS Login on instances disables metadata-based SSH key configurations on those instances. Disabling OS Login restores SSH keys that you have configured in a project or instance metadata. Reference: https://cloud.google.com/compute/docs/instances/managing-instance-access",
-	"Resource Type": ["compute.v1.projects","compute.v1.instance"],
-	"Policy Help URL": "",
-	"Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/instances",
-	"Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/projects"
-}
-
 
 #
 # PR-GCP-CLD-CLR-001
