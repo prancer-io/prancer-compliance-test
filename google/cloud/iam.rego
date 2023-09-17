@@ -495,11 +495,11 @@ api_key_rotated_every_90_days {
 }
 
 api_key_rotated_every_90_days = false {
-    gc_issue["api_key_rotated_every_90_days"]
+    gcp_issue["api_key_rotated_every_90_days"]
 }
 
 api_key_rotated_every_90_days_err = "API key currently not rotating in every 90 days." {
-    gc_issue["api_key_rotated_every_90_days"]
+    gcp_issue["api_key_rotated_every_90_days"]
 }
 
 api_key_rotated_every_90_days_metadata := {
