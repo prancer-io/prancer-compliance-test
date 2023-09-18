@@ -1682,7 +1682,7 @@ compute_instance_not_configured_to_use_default_service_account_metadata := {
     "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
-    "Policy Title": "Compute instance should not configured to use the default service account",
+    "Policy Title": "Compute instance should not configure to use the default service account",
     "Policy Description": "This policy identifies GCP VM instances configured with the default service account. To defend against privilege escalations if your VM is compromised and prevent an attacker from gaining access to all of your project, it is recommended to not use the default Compute Engine service account because it has the Editor role on the project.",
     "Resource Type": "compute.v1.instance",
     "Policy Help URL": "",

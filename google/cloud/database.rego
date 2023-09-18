@@ -34,7 +34,7 @@ bigquery_datasets_dont_have_public_access_metadata := {
     "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
-    "Policy Title": "Ensure BigQuery datasets are not publically accessible",
+    "Policy Title": "Ensure BigQuery datasets are not publicly accessible",
     "Policy Description": "Ensure there are no anonymously and/or publicly accessible BigQuery datasets available within your Google Cloud Platform (GCP) account. Google Cloud BigQuery datasets have Identity and Access Management (IAM) policies configured to determine who can have access to these resources",
     "Resource Type": "bigquery.v2.dataset",
     "Policy Help URL": "",
