@@ -5659,7 +5659,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure, Non-corporate accounts dont have access to Google Cloud Platform (GCP) resources",
+                    "title": "Ensure, Non-corporate accounts don't have access to Google Cloud Platform (GCP) resources",
                     "description": "Organizations does not have any control over personal Gmail accounts. Thus, it is recommended that you use fully managed corporate Google accounts for increased visibility, auditing, and control over access to Cloud Platform resources.",
                     "tags": [
                         {
@@ -5763,7 +5763,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Separation of duties should be enforced on user accounts containg service account related roles",
+                    "title": "Separation of duties should be enforced on user accounts containing service account related roles",
                     "description": "Separation of duties means that an individual should not have enough permissions that will enable him to complete a malicious action. Users should not have both the abilities to create and to use a service account. This might lead them to access resources that they should not have in the first place.",
                     "tags": [
                         {
@@ -5806,7 +5806,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Separation of duties should be enforced on user accounts containg KMS related roles",
+                    "title": "Separation of duties should be enforced on user accounts containing KMS related roles",
                     "description": "It is recommended that the principle of 'Separation of Duties' is enforced while assigning KMS related roles to users.The built-in/predefined IAM role Cloud KMS Admin allows the user/identity to create, delete, and manage service account(s). The built-in/predefined IAM role Cloud KMS CryptoKey Encrypter/Decrypter allows the user/identity (with adequate privileges on concerned resources) to encrypt and decrypt data at rest using an encryption key(s).The built-in/predefined IAM role Cloud KMS CryptoKey Encrypter allows the user/identity (with adequate privileges on concerned resources) to encrypt data at rest using an encryption key(s). The built-in/predefined IAM role Cloud KMS CryptoKey Decrypter allows the user/identity (with adequate privileges on concerned resources) to decrypt data at rest using an encryption key(s). Separation of duties is the concept of ensuring that one individual does not have all necessary permissions to be able to complete a malicious action. In Cloud KMS, this could be an action such as using a key to access and decrypt data a user should not normally have access to. Separation of duties is a business control typically used in larger organizations, meant to help avoid security or privacy incidents and errors. It is considered best practice. No user(s) should have Cloud KMS Admin and any of the Cloud KMS CryptoKey Encrypter/Decrypter, Cloud KMS CryptoKey Encrypter, Cloud KMS CryptoKey Decrypter roles assigned at the same time",
                     "tags": [
                         {
