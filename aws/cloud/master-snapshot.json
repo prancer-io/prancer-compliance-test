@@ -818,8 +818,8 @@
 				},
 				{
 					"masterSnapshotId": "TEST_DIRECTORYSERVICE",
-					"arn": "arn:aws:directoryservice:::",
-					"type": "directoryservice",
+					"arn": "arn:aws:ds:::",
+					"type": "ds",
 					"collection": "aws_directoryservice",
 					"listMethod": "describe_directories",
 					"detailMethods": [
