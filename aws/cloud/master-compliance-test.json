@@ -18826,14 +18826,14 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-001",
-                            "eval": "data.rule.iam_wildcard_resource",
-                            "message": "data.rule.iam_wildcard_resource_err",
+                            "eval": "data.rule.iam_policy_dont_have_wildcard_resource",
+                            "message": "data.rule.iam_policy_dont_have_wildcard_resource_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_IAM_001.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure no wildcards are specified in IAM policy with 'Resource' section",
+                    "title": "Ensure no wildcard resource is specified in IAM policy",
                     "description": "Using a wildcard in the Resource element in a role's trust policy would allow any IAM user in an account to access all Resources. This is a significant security gap and can be used to gain access to sensitive data.",
                     "tags": [
                         {
@@ -18859,14 +18859,14 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-002",
-                            "eval": "data.rule.iam_wildcard_action",
-                            "message": "data.rule.iam_wildcard_action_err",
+                            "eval": "data.rule.iam_policy_dont_have_wildcard_action",
+                            "message": "data.rule.iam_policy_dont_have_wildcard_action_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_IAM_002.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure no wildcards are specified in IAM policy with 'Action' section",
+                    "title": "Ensure no wildcard action is specified in IAM policy",
                     "description": "Using a wildcard in the Action element in a role's trust policy would allow any IAM user in an account to Manage all resources and a user can manipulate data. This is a significant security gap and can be used to gain access to sensitive data.",
                     "tags": [
                         {
@@ -20631,6 +20631,336 @@
                             ],
                             "service": [
                                 "amplify"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-051",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-051",
+                            "eval": "data.rule.managed_iam_policy_dont_have_full_s3_action_permission",
+                            "message": "data.rule.managed_iam_policy_dont_have_full_s3_action_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM managed policies do not have 'getObject' or full S3 action permissions",
+                    "description": "Ensuring AWS IAM managed policies do not have 'getObject' or full S3 action permissions, prevents potential Amazon S3 data exfiltration or manipulation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-028",
+                    "masterSnapshotId": [
+                        "TEST_IAM_06"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-028",
+                            "eval": "data.rule.iam_access_key_disabled_on_root_account",
+                            "message": "data.rule.iam_access_key_disabled_on_root_account_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_028.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS root account should not use access keys",
+                    "description": "To strengthen the security of your AWS environment and adhere to IAM best practices, ensure that the AWS root account user doesn't use access keys for making API requests to access cloud resources or billing information.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-052",
+                    "masterSnapshotId": [
+                        "TEST_IAM_09"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-052",
+                            "eval": "data.rule.iam_access_key_roated_every_90_days",
+                            "message": "data.rule.iam_access_key_roated_every_90_days_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_052.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM Access key should be roated every 90 days or less",
+                    "description": "Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS. AWS users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface (AWS CLI), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services. It is recommended that all access keys be regularly rotated. Rotating access keys will reduce the window of opportunity for an access key that is associated with a compromised or terminated account to be used. Access keys should be rotated to ensure that data cannot be accessed with an old key which might have been lost, cracked, or stolen.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-053",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-053",
+                            "eval": "data.rule.iam_password_policy_enforced",
+                            "message": "data.rule.iam_password_policy_enforced_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_053.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure to enforce IAM password policy",
+                    "description": "Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure password are comprised of different character sets, have minimal length, rotation and history restrictions.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-054",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-054",
+                            "eval": "data.rule.iam_password_policy_prevents_password_reuse",
+                            "message": "data.rule.iam_password_policy_prevents_password_reuse_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_054.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM password policy should prevent password reuse",
+                    "description": "IAM password policies can prevent the reuse of a given password by the same user. It is recommended that the password policy prevent the reuse of passwords. Preventing password reuse increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-055",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-055",
+                            "eval": "data.rule.iam_password_rotated_every_90_days",
+                            "message": "data.rule.iam_password_rotated_every_90_days_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_055.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM user password should be rotated every 90 days or less",
+                    "description": "IAM password policies can require passwords to be rotated or expired after a given number of days. It is recommended that the password policy expire passwords after 90 days or less. Reducing the password lifetime increases account resiliency against brute force login attempts. Additionally, requiring regular password changes help in the following scenarios: - Passwords can be stolen or compromised sometimes without your knowledge. This can happen via a system compromise, software vulnerability, or internal threat. Certain corporate and government web filters or proxy servers have the ability to intercept and record traffic even if it's encrypted. Many people use the same password for many systems such as work, email, and personal. Compromised end user workstations might have a keystroke logger.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-056",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-056",
+                            "eval": "data.rule.iam_password_policy_require_at_least_one_uppercase_letter",
+                            "message": "data.rule.iam_password_policy_require_at_least_one_uppercase_letter_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_056.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM password policy should require at least one uppercase letter",
+                    "description": "It is recommended that the password policy require at least one uppercase letter. Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure passwords consist of different character sets. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-057",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-057",
+                            "eval": "data.rule.iam_password_policy_require_at_least_one_lowercase_letter",
+                            "message": "data.rule.iam_password_policy_require_at_least_one_lowercase_letter_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_057.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM password policy should require at least one lowercase letter",
+                    "description": "It is recommended that the password policy require at least one lowercase letter. Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure passwords consist of different character sets. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-058",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-058",
+                            "eval": "data.rule.iam_password_policy_require_at_least_one_symbol",
+                            "message": "data.rule.iam_password_policy_require_at_least_one_symbol_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_058.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM password policy should require at least one symbol",
+                    "description": "It is recommended that the password policy require at least one symbol. Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure passwords consist of different character sets. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-059",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-059",
+                            "eval": "data.rule.iam_password_policy_require_at_least_one_number",
+                            "message": "data.rule.iam_password_policy_require_at_least_one_number_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_059.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM password policy should require at least one number",
+                    "description": "It is recommended that the password policy require at least one number. Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure passwords consist of different character sets. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-060",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-060",
+                            "eval": "data.rule.iam_password_policy_require_minimum_length_of_14",
+                            "message": "data.rule.iam_password_policy_require_minimum_length_of_14_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_060.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM password policy should require minimum password lenght of 14 or more",
+                    "description": "Set the IAM password policy to ensure passwords consist of at least 14 characters. Password policies are, in part, used to enforce password complexity requirements. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
                             ]
                         }
                     ]

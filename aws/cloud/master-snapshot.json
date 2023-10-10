@@ -915,6 +915,26 @@
 					"detailMethods": [
 						"get_app"
 					]
+				},
+				{
+					"masterSnapshotId": "TEST_IAM_09",
+					"arn": "arn:aws:iam:::",
+					"type": "iam",
+					"collection": "aws_iam",
+					"listMethod": "list_users",
+					"detailMethods": [
+						"list_access_keys"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_IAM_10",
+					"arn": "arn:aws:iam:::",
+					"type": "iam",
+					"collection": "aws_iam",
+					"listMethod": "get_account_password_policy",
+					"detailMethods": [
+						"get_account_password_policy"
+					]
 				}
 			]
 		}
