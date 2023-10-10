@@ -2086,3 +2086,86 @@ iam_password_policy_require_minimum_length_of_14_metadata := {
     "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_account_password_policy.html",
     "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html"
 }
+#
+# PR-AWS-CLD-IAM-048
+#
+
+default iam_root_mfa_device = true
+
+iam_root_mfa_device = false {
+    input.SummaryMap.AccountMFAEnabled == 0
+}
+
+iam_root_mfa_device_err = "Ensure AWS Root account should be protected by the MFA" {
+    not iam_root_mfa_device
+}
+
+iam_root_mfa_device_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-048",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Root account should be protected by the MFA",
+    "Policy Description": "Enforce MFA on user root account with data access to safeguard sensitive information and mitigate potential breaches.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-virtualmfadevice.html"
+}
+
+#
+# PR-AWS-CLD-IAM-049
+#
+default iam_mfa_device = true
+
+iam_mfa_device = false {
+    count(input.MFADevices) == 0
+}
+
+iam_mfa_device_err = "Ensure AWS user account with data access should be protected by MFA" {
+    not iam_mfa_device
+}
+
+iam_mfa_device_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-049",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM user accounts should be protected by the MFA",
+    "Policy Description": "Enforce MFA on IAM user accounts to safeguard sensitive information and mitigate potential breaches.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-virtualmfadevice.html"
+}
+
+#
+# PR-AWS-CLD-IAM-050
+#
+default iam_instance_profile = true
+
+iam_instance_profile = false {
+    role := input.InstanceProfile.Roles[_]
+    statement := role.AssumeRolePolicyDocument.Statement[_]
+    lower(statement.Action) == "*"
+}
+
+iam_instance_profile = false {
+    role := input.InstanceProfile.Roles[_]
+    statement := role.AssumeRolePolicyDocument.Statement[_]
+    lower(statement.Resource) == "*"
+}
+
+iam_instance_profile_err = "Ensure AWS Instance profile IAM should be least privileged" {
+    not iam_instance_profile
+}
+
+iam_instance_profile_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-050",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS Instance profile don't have '*' in the action or resource section of the policy statement of roles.",
+    "Policy Description": "It identifies AWS IAM permissions that contain '*' in the action or resource section of the policy statement of role.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html"
+}

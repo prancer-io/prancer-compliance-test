@@ -75,15 +75,19 @@ rds_public_metadata := {
 default rds_encrypt_key = true
 
 rds_encrypt_key = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
-    DBInstances := input.DBInstances[_]
-    not DBInstances.KmsKeyId
+    RDS := input.TEST_RDS_01[_]
+    DBInstance := RDS.DBInstances[_]
+    not DBInstance.KmsKeyId
 }
 
 rds_encrypt_key = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
-    DBInstances := input.DBInstances[_]
-    count(DBInstances.KmsKeyId) == 0
+    RDS := input.TEST_RDS_01[_]
+    DBInstance := RDS.DBInstances[_]
+
+    KMS := input.TEST_KMS[_]
+    DBInstance.KmsKeyId == KMS.KeyMetadata.Arn
+    alias := KMS.Aliases[_]
+    alias.AliasName == "alias/aws/rds"
 }
 
 rds_encrypt_key_err = "AWS RDS database not encrypted using Customer Managed Key" {
@@ -99,7 +103,7 @@ rds_encrypt_key_metadata := {
     "Policy Description": "This policy identifies RDS databases that are encrypted with default KMS keys and not with customer managed keys. As a best practice, use customer managed keys to encrypt the data on your RDS databases and maintain control of your keys and data on sensitive workloads.",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbinstance.html"
 }
 
 #
@@ -1220,6 +1224,43 @@ docdb_parameter_group_audit_logs_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#aws-resource-docdb-dbclusterparametergroup--examples"
 }
 
+#
+# PR-AWS-CLD-DDB-005
+#
+
+default docdb_cluster_encrypted_with_cmk = true
+
+docdb_cluster_encrypted_with_cmk = false {
+    DDB := input.TEST_DDB_01[_]
+    DBInstance := DDB.DBClusters[_]
+    not DBInstance.KmsKeyId
+}
+
+docdb_cluster_encrypted_with_cmk = false {
+    DDB := input.TEST_DDB_01[_]
+    DBInstance := DDB.DBClusters[_]
+    
+    KMS := input.TEST_KMS[_]
+    DBInstance.KmsKeyId == KMS.KeyMetadata.Arn
+    alias := KMS.Aliases[_]
+    alias.AliasName == "alias/aws/rds"
+}
+
+docdb_cluster_encrypted_with_cmk_err = "Ensure AWS DocumentDB is encrypted using CMK" {
+    not docdb_cluster_encrypted_with_cmk
+}
+
+docdb_cluster_encrypted_with_cmk_metadata := {
+    "Policy Code": "PR-AWS-CLD-DDB-005",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS DocumentDB is encrypted using CMK",
+    "Policy Description": "The AWS DocumentDB must be secured with CMK instead of default kms",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#aws-resource-docdb-dbcluster--examples"
+}
 
 #
 # PR-AWS-CLD-ATH-001
