@@ -10,47 +10,52 @@ has_property(parent_object, target_property) {
 # PR-GCP-CLD-CLT-001
 #
 
-default k8s_svc_account = null
+default k8s_not_using_default_svc_account = null
 
-gc_attribute_absence["k8s_svc_account"] {
+gcp_attribute_absence["k8s_not_using_default_svc_account"] {
+    not has_property(input, "nodeConfig")
+}
+
+gcp_attribute_absence["k8s_not_using_default_svc_account"] {
+    not has_property(input, "nodePools")
+}
+
+gcp_issue["k8s_not_using_default_svc_account"] {
     # lower(input.type) == "container.v1.cluster"
-    count([c | r = input.nodePools[j].config; c := 1]) == 0
+    lower(input.nodeConfig.serviceAccount) == "default"
 }
 
-gc_issue["k8s_svc_account"] {
+gcp_issue["k8s_not_using_default_svc_account"] {
     # lower(input.type) == "container.v1.cluster"
-    input.nodePools[j].config.serviceAccount == "default"
+    nodePools := input.nodePools[_]
+    lower(nodePools.config.serviceAccount) == "default"
 }
 
-
-k8s_svc_account {
-    # lower(input.resources[i].type) == "container.v1.cluster"
-    not gc_issue["k8s_svc_account"]
-    not gc_attribute_absence["k8s_svc_account"]
+k8s_not_using_default_svc_account {
+    not gcp_attribute_absence["k8s_not_using_default_svc_account"]
+    not gcp_issue["k8s_not_using_default_svc_account"]
 }
 
-k8s_svc_account = false {
-    gc_issue["k8s_svc_account"]
+k8s_not_using_default_svc_account = false {
+    gcp_issue["k8s_not_using_default_svc_account"]
 }
 
-k8s_svc_account = false {
-    gc_attribute_absence["k8s_svc_account"]
+k8s_not_using_default_svc_account = false {
+    gcp_attribute_absence["k8s_not_using_default_svc_account"]
 }
 
-k8s_svc_account_err = "Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Google Cloud Provider." {
-    gc_issue["k8s_svc_account"]
+k8s_not_using_default_svc_account_err = "Kubernetes Cluster currently configured to use default service account to access project" {
+    gcp_issue["k8s_not_using_default_svc_account"]
+} else = "Kubernetes Cluster attribute nodeConfig or nodePools is missing from the resource" {
+    gcp_attribute_absence["k8s_not_using_default_svc_account"]
 }
 
-k8s_svc_account_miss_err = "Kubernetes Engine Cluster attribute nodePools config missing in the resource" {
-    gc_attribute_absence["k8s_svc_account"]
-}
-
-k8s_svc_account_metadata := {
+k8s_not_using_default_svc_account_metadata := {
     "Policy Code": "PR-GCP-CLD-CLT-001",
-    "Type": "IaC",
+    "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP Cloud",
-    "Policy Title": "Ensure Kubernetes Engine Cluster Nodes have default Service account for Project access in Google Cloud Provider.",
+    "Policy Title": "Kubernetes Cluster should not use default service account to access project",
     "Policy Description": "This policy identifies Kubernetes Engine Cluster Nodes which have default Service account for Project access. By default, Kubernetes Engine nodes are given the Compute Engine default service account. This account has broad access and more permissions than are required to run your Kubernetes Engine cluster. You should create and use a least privileged service account to run your Kubernetes Engine cluster instead of using the Compute Engine default service account. If you are not creating a separate service account for your nodes, you should limit the scopes of the node service account to reduce the possibility of a privilege escalation in an attack.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
@@ -102,38 +107,38 @@ k8s_basicauth_metadata := {
 # PR-GCP-CLD-CLT-003
 #
 
-default k8s_client_cert = null
+default k8s_client_certificate_enabled = null
 
-gc_issue["k8s_client_cert"] {
-    # lower(input.type) == "container.v1.cluster"
-    not input.masterAuth.clientKey
-}
+# gcp_issue["k8s_client_certificate_enabled"] {
+#     # lower(input.type) == "container.v1.cluster"
+#     not input.masterAuth.clientKey
+# }
 
-gc_issue["k8s_client_cert"] {
+gcp_issue["k8s_client_certificate_enabled"] {
     # lower(input.type) == "container.v1.cluster"
     not input.masterAuth.clientCertificate
 }
 
-k8s_client_cert {
+k8s_client_certificate_enabled {
     # lower(input.resources[i].type) == "container.v1.cluster"
-    not gc_issue["k8s_client_cert"]
+    not gcp_issue["k8s_client_certificate_enabled"]
 }
 
-k8s_client_cert = false {
-    gc_issue["k8s_client_cert"]
+k8s_client_certificate_enabled = false {
+    gcp_issue["k8s_client_certificate_enabled"]
 }
 
-k8s_client_cert_err = "GCP Kubernetes Engine Clusters Client Certificate is set to Disabled" {
-    gc_issue["k8s_client_cert"]
+k8s_client_certificate_enabled_err = "Kubernetes Clusters client certificate is currently set to disabled" {
+    gcp_issue["k8s_client_certificate_enabled"]
 }
 
-k8s_client_cert_metadata := {
+k8s_client_certificate_enabled_metadata := {
     "Policy Code": "PR-GCP-CLD-CLT-003",
-    "Type": "IaC",
+    "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP Cloud",
-    "Policy Title": "GCP Kubernetes Engine Clusters Client Certificate is set to Disabled",
-    "Policy Description": "This policy identifies Kubernetes Engine Clusters which have disabled Client Certificate. A client certificate is a base64-encoded public certificate used by clients to authenticate to the cluster endpoint. Enabling Client Certificate will provide more security to authenticate users to the cluster.",
+    "Policy Title": "Client certificate should be enabled on Kubernetes Cluster",
+    "Policy Description": "This policy identifies Kubernetes Engine Clusters which have client certificate disabled. A client certificate is a base64-encoded public certificate used by clients to authenticate to the cluster endpoint. Enabling Client Certificate will provide more security to authenticate users to the cluster.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
@@ -251,33 +256,33 @@ k8s_http_lbs_metadata := {
 # PR-GCP-CLD-CLT-007
 #
 
-default k8s_legacy_abac = null
+default k8s_legacy_auth_disabled = null
 
-gc_issue["k8s_legacy_abac"] {
+gcp_issue["k8s_legacy_auth_disabled"] {
     # lower(input.type) == "container.v1.cluster"
     input.legacyAbac.enabled
 }
 
-k8s_legacy_abac {
+k8s_legacy_auth_disabled {
     # lower(input.resources[i].type) == "container.v1.cluster"
-    not gc_issue["k8s_legacy_abac"]
+    not gcp_issue["k8s_legacy_auth_disabled"]
 }
 
-k8s_legacy_abac = false {
-    gc_issue["k8s_legacy_abac"]
+k8s_legacy_auth_disabled = false {
+    gcp_issue["k8s_legacy_auth_disabled"]
 }
 
-k8s_legacy_abac_err = "Ensure GCP Kubernetes Engine Clusters not have Legacy Authorization disabled" {
-    gc_issue["k8s_legacy_abac"]
+k8s_legacy_auth_disabled_err = "Kubernetes Clusters currently dont have legacy authorization disabled" {
+    gcp_issue["k8s_legacy_auth_disabled"]
 }
 
-k8s_legacy_abac_metadata := {
+k8s_legacy_auth_disabled_metadata := {
     "Policy Code": "PR-GCP-CLD-CLT-007",
-    "Type": "IaC",
+    "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP Cloud",
-    "Policy Title": "Ensure GCP Kubernetes Engine Clusters not have Legacy Authorization disabled",
-    "Policy Description": "This policy identifies GCP Kubernetes Engine Clusters which have enabled legacy authorizer. The legacy authorizer in Kubernetes Engine grants broad and statically defined permissions to all cluster users. After legacy authorizer setting is disabled, RBAC can limit permissions for authorized users based on need.",
+    "Policy Title": "Kubernetes Clusters legacy authorization should be disabled",
+    "Policy Description": "This policy identifies GCP Kubernetes Engine Clusters which have legacy authorizer enabled. The legacy authorizer in Kubernetes Engine grants broad and statically defined permissions to all cluster users. After legacy authorizer setting is disabled, RBAC can limit permissions for authorized users based on need.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"

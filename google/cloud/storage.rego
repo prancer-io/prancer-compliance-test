@@ -254,41 +254,46 @@ storage_public_logs_metadata := {
 # PR-GCP-CLD-BKT-006
 #
 
-default storage_uniform_bucket_access = null
+default storage_uniform_bucket_access_enabled = null
 
-gc_attribute_absence["storage_uniform_bucket_access"] {
+gc_attribute_absence["storage_uniform_bucket_access_enabled"] {
     # lower(resource.type) == "storage.v1.bucket"
     not input.iamConfiguration
 }
 
-gc_attribute_absence["storage_uniform_bucket_access"] {
+gc_attribute_absence["storage_uniform_bucket_access_enabled"] {
+    # lower(resource.type) == "storage.v1.bucket"
+    not input.iamConfiguration.uniformBucketLevelAccess
+}
+
+gc_issue["storage_uniform_bucket_access_enabled"] {
     # lower(resource.type) == "storage.v1.bucket"
     not input.iamConfiguration.uniformBucketLevelAccess.enabled
 }
 
-storage_uniform_bucket_access {
+storage_uniform_bucket_access_enabled {
     # lower(input.resources[i].type) == "storage.v1.bucket"
-    not gc_issue["storage_uniform_bucket_access"]
-    not gc_attribute_absence["storage_uniform_bucket_access"]
+    not gc_issue["storage_uniform_bucket_access_enabled"]
+    not gc_attribute_absence["storage_uniform_bucket_access_enabled"]
 }
 
-storage_uniform_bucket_access = false {
+storage_uniform_bucket_access_enabled = false {
+    gc_issue["storage_uniform_bucket_access_enabled"]
+}
+
+storage_uniform_bucket_access_enabled = false {
+    gc_attribute_absence["storage_uniform_bucket_access_enabled"]
+}
+
+storage_uniform_bucket_access_enabled_err = "GCP cloud storage bucket with uniform bucket-level access disabled" {
     gc_issue["storage_uniform_bucket_access"]
-}
-
-storage_uniform_bucket_access = false {
+} else = "GCP cloud storage bucket 'iamConfiguration.uniformBucketLevelAccess' property is missing" {
     gc_attribute_absence["storage_uniform_bucket_access"]
 }
 
-storage_uniform_bucket_access_err = "GCP cloud storage bucket with uniform bucket-level access disabled" {
-    gc_issue["storage_uniform_bucket_access"]
-} else = "GCP cloud storage bucket `iamConfiguration.uniformBucketLevelAccess.enabled` property is missing" {
-    gc_attribute_absence["storage_uniform_bucket_access"]
-}
-
-storage_uniform_bucket_access_metadata := {
+storage_uniform_bucket_access_enabled_metadata := {
     "Policy Code": "PR-GCP-CLD-BKT-006",
-    "Type": "IaC",
+    "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
     "Policy Title": "Ensure cloud storage bucket with uniform bucket-level access enabled",
@@ -491,74 +496,72 @@ storage_bucket_retention_enable_metadata := {
 #
 # PR-GCP-CLD-BKT-011
 # 
-# "storage.v1.bucket"
 
-default publicly_to_all_authenticated_users = null
+default bucket_not_accessible_publicly_to_all_authenticated_users = null
 
-gc_issue["publicly_to_all_authenticated_users"] {
+gcp_issue["bucket_not_accessible_publicly_to_all_authenticated_users"] {
     binding := input.bindings[_]
-    contains(lower(binding.role), "roles/storage")
+    #contains(lower(binding.role), "roles/storage")
     contains(lower(binding.members[_]), "allauthenticatedusers")
 }
 
-publicly_to_all_authenticated_users {
-    not gc_issue["publicly_to_all_authenticated_users"]
+bucket_not_accessible_publicly_to_all_authenticated_users {
+    not gcp_issue["bucket_not_accessible_publicly_to_all_authenticated_users"]
 }
 
-publicly_to_all_authenticated_users = false {
-    gc_issue["publicly_to_all_authenticated_users"]
+bucket_not_accessible_publicly_to_all_authenticated_users = false {
+    gcp_issue["bucket_not_accessible_publicly_to_all_authenticated_users"]
 }
 
-publicly_to_all_authenticated_users_err = "Ensure GCP Storage buckets are publicly accessible to all authenticated users." {
-    gc_issue["publicly_to_all_authenticated_users"]
+bucket_not_accessible_publicly_to_all_authenticated_users_err = "Storage buckets currently publicly accessible to all authenticated users" {
+    gcp_issue["bucket_not_accessible_publicly_to_all_authenticated_users"]
 }
 
-publicly_to_all_authenticated_users_metadata := {
+bucket_not_accessible_publicly_to_all_authenticated_users_metadata := {
     "Policy Code": "PR-GCP-CLD-BKT-011",
     "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
-    "Policy Title": "Ensure GCP Storage buckets are publicly accessible to all authenticated users.",
-    "Policy Description": "Checks the buckets which are publicly accessible to all authenticated users. Enabling public access to Storage Buckets enables anybody with a web association to access sensitive information that is critical to business. Access over a whole bucket is controlled by IAM. Access to individual objects within the bucket is controlled by its ACLs.",
-    "Resource Type": "storage.v1.bucket",
+    "Policy Title": "Storage buckets should not publicly accessible to all authenticated users",
+    "Policy Description": "Audit the buckets which are publicly accessible to all authenticated users. Enabling public access to Storage Buckets enables anybody with a web association to access sensitive information that is critical to business. Access over a whole bucket is controlled by IAM. Access to individual objects within the bucket is controlled by its ACLs.",
+    "Resource Type": "storage.v1.buckets.getIamPolicy",
     "Policy Help URL": "",
-    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets/getIamPolicy"
 }
 
 
 #
 # PR-GCP-CLD-BKT-012
 #
-# "storage.v1.bucket"
 
-default publicly_to_all_users = null
+default bucket_not_accessible_publicly_to_all_users = null
 
-gc_issue["publicly_to_all_users"] {
+gcp_issue["bucket_not_accessible_publicly_to_all_users"] {
     binding := input.bindings[_]
-    contains(lower(binding.role), "roles/storage")
+    #contains(lower(binding.role), "roles/storage")
     contains(lower(binding.members[_]), "allusers")
 }
 
-publicly_to_all_users {
-    not gc_issue["publicly_to_all_users"]
+bucket_not_accessible_publicly_to_all_users {
+    not gcp_issue["bucket_not_accessible_publicly_to_all_users"]
 }
 
-publicly_to_all_users = false {
-    gc_issue["publicly_to_all_users"]
+bucket_not_accessible_publicly_to_all_users = false {
+    gcp_issue["bucket_not_accessible_publicly_to_all_users"]
 }
 
-publicly_to_all_users_err = "Ensure GCP Storage buckets are publicly accessible to all users." {
-    gc_issue["publicly_to_all_users"]
+bucket_not_accessible_publicly_to_all_users_err = "Ensure GCP Storage buckets are publicly accessible to all users" {
+    gcp_issue["bucket_not_accessible_publicly_to_all_users"]
 }
 
-publicly_to_all_users_metadata := {
+bucket_not_accessible_publicly_to_all_users_metadata := {
     "Policy Code": "PR-GCP-CLD-BKT-012",
     "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
-    "Policy Title": "Ensure GCP Storage buckets are publicly accessible to all users.",
+    "Policy Title": "Storage buckets should not publicly accessible to all users",
     "Policy Description": "Checks the buckets which are publicly accessible to all users. Enabling public access to Storage buckets enables anybody with a web association to access sensitive information that is critical to business. Access over a whole bucket is controlled by IAM. Access to individual objects within the bucket is controlled by its ACLs.",
-    "Resource Type": "storage.v1.bucket",
+    "Resource Type": "storage.v1.buckets.getIamPolicy",
     "Policy Help URL": "",
-    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets/getIamPolicy"
 }
