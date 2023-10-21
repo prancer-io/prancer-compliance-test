@@ -1884,8 +1884,8 @@ managed_iam_policy_dont_have_full_s3_action_permission_metadata := {
     "Policy Title": "Ensure AWS IAM managed policies do not have 'getObject' or full S3 action permissions",
     "Policy Description": "Ensuring AWS IAM managed policies do not have 'getObject' or full S3 action permissions, prevents potential Amazon S3 data exfiltration or manipulation.",
     "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
 }
 
 
@@ -1893,24 +1893,24 @@ managed_iam_policy_dont_have_full_s3_action_permission_metadata := {
 # PR-AWS-CLD-IAM-052
 #
 
-default iam_access_key_roated_every_90_days = true
+default iam_access_key_rotated_every_90_days = true
 
-iam_access_key_roated_every_90_days = false {
+iam_access_key_rotated_every_90_days = false {
     accessKeyMetadata := input.AccessKeyMetadata[_]
     lower(accessKeyMetadata.Status) == "active"
     time.now_ns() - time.parse_rfc3339_ns(accessKeyMetadata.CreateDate) > 7776000000000000
 }
 
-iam_access_key_roated_every_90_days_err = "IAM Access key currently not getting rotated every 90 days or less" {
-    not iam_access_key_roated_every_90_days
+iam_access_key_rotated_every_90_days_err = "IAM Access key currently not getting rotated every 90 days or less" {
+    not iam_access_key_rotated_every_90_days
 }
 
-managed_iam_policy_dont_have_full_s3_action_permission_metadata := {
+iam_access_key_rotated_every_90_days_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-052",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "IAM Access key should be roated every 90 days or less",
+    "Policy Title": "IAM Access key should be rotated every 90 days or less",
     "Policy Description": "Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS. AWS users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface (AWS CLI), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services. It is recommended that all access keys be regularly rotated. Rotating access keys will reduce the window of opportunity for an access key that is associated with a compromised or terminated account to be used. Access keys should be rotated to ensure that data cannot be accessed with an old key which might have been lost, cracked, or stolen.",
     "Resource Type": "",
     "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/list_access_keys.html",
@@ -2163,9 +2163,255 @@ iam_password_policy_require_minimum_length_of_14_metadata := {
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "IAM password policy should require minimum password lenght of 14 or more",
+    "Policy Title": "IAM password policy should require minimum password length of 14 or more",
     "Policy Description": "Set the IAM password policy to ensure passwords consist of at least 14 characters. Password policies are, in part, used to enforce password complexity requirements. Setting a password complexity policy increases account resiliency against brute force login attempts.",
     "Resource Type": "",
     "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_account_password_policy.html",
     "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-061
+#
+
+default iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission = true
+
+iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "ec2:DescribeInstances")
+    array_contains(policy_statement.Action, "ssm:listCommands")
+    array_contains(policy_statement.Action, "ssm:listCommandInvocations")
+    array_contains(policy_statement.Action, "ssm:sendCommand")
+}
+
+iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "ec2:DescribeInstances")
+    array_contains(policy_statement.Action, "ssm:listCommands")
+    array_contains(policy_statement.Action, "ssm:listCommandInvocations")
+    array_contains(policy_statement.Action, "ssm:sendCommand")
+}
+
+
+iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission_err = "IAM policy currently not preventing privilege escalation via EC2 and SSM permissions" {
+    not iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-061",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via EC2 and SSM permissions",
+    "Policy Description": "An adversary with ec2:DescribeInstances, ssm:listCommands, ssm:listCommandInvocations, and ssm:sendCommand permissions can execute commands on SSM-supported instances, potentially escalating privileges by finding an instance with a highly privileged IAM role.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-062
+#
+
+default iam_policy_prevents_privilege_escalation_via_codestar = true
+
+iam_policy_prevents_privilege_escalation_via_codestar = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "codestar:CreateProject")
+    array_contains(policy_statement.Action, "codestar:AssociateTeamMember")
+}
+
+iam_policy_prevents_privilege_escalation_via_codestar = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "codestar:CreateProject")
+    array_contains(policy_statement.Action, "codestar:AssociateTeamMember")
+}
+
+
+iam_policy_prevents_privilege_escalation_via_codestar_err = "IAM policy currently allowing privilege escalation via Codestar create project and associate team member permissions. which should be prevented." {
+    not iam_policy_prevents_privilege_escalation_via_codestar
+}
+
+iam_policy_prevents_privilege_escalation_via_codestar_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-062",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should not allow privilege escalation via Codestar create project and associate team member permissions",
+    "Policy Description": "An adversary with codestar:CreateProject and codestar:AssociateTeamMember permissions can create a CodeStar project, become its owner, and gain access to various AWS services permissions, useful for further enumeration like lambda:List*, iam:ListRoles, iam:ListUsers, etc.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-063
+#
+
+default iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions = true
+
+iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "ec2:DescribeInstances")
+    array_contains(policy_statement.Action, "ec2-instance-connect:SendSSHPublicKey")
+    array_contains(policy_statement.Action, "ec2-instance-connect:SendSerialConsoleSSHPublicKey")
+}
+
+iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "ec2:DescribeInstances")
+    array_contains(policy_statement.Action, "ec2-instance-connect:SendSSHPublicKey")
+    array_contains(policy_statement.Action, "ec2-instance-connect:SendSerialConsoleSSHPublicKey")
+}
+
+
+iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions_err = "IAM policy currently allowing privilege escalation via EC2 Instance Connect permissions. which should be prevented." {
+    not iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions
+}
+
+iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-063",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should not allow privilege escalation via EC2 Instance Connect permissions",
+    "Policy Description": "An adversary with ec2:DescribeInstances, ec2-instance-connect:SendSSHPublicKey, and ec2-instance-connect:SendSerialConsoleSSHPublicKey permissions, and access to a public IP enabled instance, can push SSH keys and connect to the EC2 instance, potentially escalating privileges.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-064
+#
+
+default iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission = true
+
+iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "ec2:DescribeInstances")
+    array_contains(policy_statement.Action, "ssm:StartSession")
+    array_contains(policy_statement.Action, "ssm:DescribeSessions")
+    array_contains(policy_statement.Action, "ssm:GetConnectionStatus")
+    array_contains(policy_statement.Action, "ssm:DescribeInstanceProperties")
+    array_contains(policy_statement.Action, "ssm:TerminateSession")
+    array_contains(policy_statement.Action, "ssm:ResumeSession")
+}
+
+iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "ec2:DescribeInstances")
+    array_contains(policy_statement.Action, "ssm:StartSession")
+    array_contains(policy_statement.Action, "ssm:DescribeSessions")
+    array_contains(policy_statement.Action, "ssm:GetConnectionStatus")
+    array_contains(policy_statement.Action, "ssm:DescribeInstanceProperties")
+    array_contains(policy_statement.Action, "ssm:TerminateSession")
+    array_contains(policy_statement.Action, "ssm:ResumeSession")
+}
+
+
+iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission_err = "IAM policy currently not preventing privilege escalation via EC2 describe and SSM session permissions" {
+    not iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-064",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via EC2 describe and SSM session permissions",
+    "Policy Description": "With ec2:DescribeInstances, various ssm permissions, an adversary can connect to any SSM-supported instance. They might escalate privileges by accessing an instance with a high-privilege IAM role.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-065
+#
+
+default iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission = true
+
+iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "glue:UpdateDevEndpoint")
+    array_contains(policy_statement.Action, "glue:GetDevEndpoint")
+}
+
+iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "glue:UpdateDevEndpoint")
+    array_contains(policy_statement.Action, "glue:GetDevEndpoint")
+}
+
+
+iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission_err = "IAM policy currently not preventing privilege escalation via EC2 describe and SSM session permissions" {
+    not iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-065",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via glue dev endpoint permissions",
+    "Policy Description": "With the glue:UpdateDevEndpoint permission, an adversary can change the SSH key for a glue endpoint, allowing SSH access and potential retrieval of IAM credentials from its associated role. The glue:GetDevEndpoint permission can be beneficial to identify the endpoint if unknown.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
 }

@@ -21149,7 +21149,7 @@
                             "eval": "data.rule.managed_iam_policy_dont_have_full_s3_action_permission",
                             "message": "data.rule.managed_iam_policy_dont_have_full_s3_action_permission_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AWS_CLD_IAM_011.py"
+                            "remediationFunction": "PR_AWS_CLD_IAM_051.py"
                         }
                     ],
                     "severity": "Medium",
@@ -21206,14 +21206,14 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-052",
-                            "eval": "data.rule.iam_access_key_roated_every_90_days",
-                            "message": "data.rule.iam_access_key_roated_every_90_days_err",
+                            "eval": "data.rule.iam_access_key_rotated_every_90_days",
+                            "message": "data.rule.iam_access_key_rotated_every_90_days_err",
                             "remediationDescription": "",
                             "remediationFunction": "PR_AWS_CLD_IAM_052.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "IAM Access key should be roated every 90 days or less",
+                    "title": "IAM Access key should be rotated every 90 days or less",
                     "description": "Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS. AWS users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface (AWS CLI), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services. It is recommended that all access keys be regularly rotated. Rotating access keys will reduce the window of opportunity for an access key that is associated with a compromised or terminated account to be used. Access keys should be rotated to ensure that data cannot be accessed with an old key which might have been lost, cracked, or stolen.",
                     "tags": [
                         {
@@ -21453,8 +21453,158 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "IAM password policy should require minimum password lenght of 14 or more",
+                    "title": "IAM password policy should require minimum password length of 14 or more",
                     "description": "Set the IAM password policy to ensure passwords consist of at least 14 characters. Password policies are, in part, used to enforce password complexity requirements. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-061",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-061",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_061.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via EC2 and SSM permissions",
+                    "description": "An adversary with ec2:DescribeInstances, ssm:listCommands, ssm:listCommandInvocations, and ssm:sendCommand permissions can execute commands on SSM-supported instances, potentially escalating privileges by finding an instance with a highly privileged IAM role.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-062",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-062",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_codestar",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_codestar_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_062.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should not allow privilege escalation via Codestar create project and associate team member permissions",
+                    "description": "An adversary with codestar:CreateProject and codestar:AssociateTeamMember permissions can create a CodeStar project, become its owner, and gain access to various AWS services permissions, useful for further enumeration like lambda:List*, iam:ListRoles, iam:ListUsers, etc.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-063",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-063",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_063.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should not allow privilege escalation via EC2 Instance Connect permissions",
+                    "description": "An adversary with ec2:DescribeInstances, ec2-instance-connect:SendSSHPublicKey, and ec2-instance-connect:SendSerialConsoleSSHPublicKey permissions, and access to a public IP enabled instance, can push SSH keys and connect to the EC2 instance, potentially escalating privileges.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-064",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-064",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_064.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via EC2 describe and SSM session permissions",
+                    "description": "With ec2:DescribeInstances, various ssm permissions, an adversary can connect to any SSM-supported instance. They might escalate privileges by accessing an instance with a high-privilege IAM role.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-065",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-065",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_065.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via glue dev endpoint permissions",
+                    "description": "With the glue:UpdateDevEndpoint permission, an adversary can change the SSH key for a glue endpoint, allowing SSH access and potential retrieval of IAM credentials from its associated role. The glue:GetDevEndpoint permission can be beneficial to identify the endpoint if unknown.",
                     "tags": [
                         {
                             "cloud": "AWS",
