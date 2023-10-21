@@ -21615,6 +21615,36 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-066",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-066",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_066.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and codebuild permissions",
+                    "description": "With iam:PassRole and various codebuild permissions, an adversary can create a CodeBuild project and assign it a higher-privileged role, enabling privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
                 }
             ]
         }

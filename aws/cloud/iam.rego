@@ -2400,7 +2400,7 @@ iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission = fals
 }
 
 
-iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission_err = "IAM policy currently not preventing privilege escalation via EC2 describe and SSM session permissions" {
+iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission_err = "IAM policy currently not preventing privilege escalation via glue dev endpoint permissions" {
     not iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission
 }
 
@@ -2411,6 +2411,55 @@ iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission_metada
     "Language": "AWS Cloud",
     "Policy Title": "IAM policy should prevent privilege escalation via glue dev endpoint permissions",
     "Policy Description": "With the glue:UpdateDevEndpoint permission, an adversary can change the SSH key for a glue endpoint, allowing SSH access and potential retrieval of IAM credentials from its associated role. The glue:GetDevEndpoint permission can be beneficial to identify the endpoint if unknown.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-066
+#
+
+default iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "codebuild:CreateProject")
+    array_contains(policy_statement.Action, "codebuild:StartBuildBatch")
+    array_contains(policy_statement.Action, "codebuild:StartBuild")
+}
+
+iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "codebuild:CreateProject")
+    array_contains(policy_statement.Action, "codebuild:StartBuildBatch")
+    array_contains(policy_statement.Action, "codebuild:StartBuild")
+}
+
+iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission_err = "IAM policy currently not preventing privilege escalation via passrole and codebuild permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-066",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and codebuild permissions",
+    "Policy Description": "With iam:PassRole and various codebuild permissions, an adversary can create a CodeBuild project and assign it a higher-privileged role, enabling privilege escalation.",
     "Resource Type": "",
     "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
     "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
