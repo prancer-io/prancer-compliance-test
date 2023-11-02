@@ -2421,9 +2421,9 @@ iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission_metada
 # PR-AWS-CLD-IAM-066
 #
 
-default iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission = true
+default iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission = true
 
-iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission = false {
+iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission = false {
     # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
@@ -2436,7 +2436,7 @@ iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission =
     array_contains(policy_statement.Action, "codebuild:StartBuild")
 }
 
-iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission = false {
+iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission = false {
     # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
@@ -2449,17 +2449,248 @@ iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission =
     array_contains(policy_statement.Action, "codebuild:StartBuild")
 }
 
-iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission_err = "IAM policy currently not preventing privilege escalation via passrole and codebuild permissions" {
-    not iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission
+iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission_err = "IAM policy currently not preventing privilege escalation via passrole and codebuild permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission
 }
 
-iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission_metadata := {
+iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-066",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
     "Policy Title": "IAM policy should prevent privilege escalation via passrole and codebuild permissions",
     "Policy Description": "With iam:PassRole and various codebuild permissions, an adversary can create a CodeBuild project and assign it a higher-privileged role, enabling privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-067
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "codestar:CreateProject")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "codestar:CreateProject")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission_err = "IAM policy currently not preventing privilege escalation via passrole and create project permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-067",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and create project permissions",
+    "Policy Description": "With iam:PassRole and CreateProject permissions, an adversary can create a project and assign it a higher-privileged role, enabling privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-068
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "datapipeline:ActivatePipeline")
+    array_contains(policy_statement.Action, "datapipeline:CreatePipeline")
+    array_contains(policy_statement.Action, "datapipeline:PutPipelineDefinition")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "datapipeline:ActivatePipeline")
+    array_contains(policy_statement.Action, "datapipeline:CreatePipeline")
+    array_contains(policy_statement.Action, "datapipeline:PutPipelineDefinition")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission_err = "IAM policy currently not preventing privilege escalation via passrole and data pipeline permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-068",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and data pipeline permissions",
+    "Policy Description": "With iam:PassRole and specific datapipeline permissions, an adversary can create a pipeline with a higher-privileged role, enabling privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-069
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "ec2:RunInstances")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "ec2:RunInstances")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission_err = "IAM policy currently not preventing privilege escalation via passrole and ec2 permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-069",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and ec2 permissions",
+    "Policy Description": "With iam:PassRole and ec2:RunInstances permissions, an adversary can launch an EC2 instance with a higher-privileged role, facilitating privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-070
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "glue:CreateJob")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "glue:CreateJob")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission_err = "IAM policy currently not preventing privilege escalation via passrole and glue create job permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-070",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and glue create job permissions",
+    "Policy Description": "With iam:PassRole and glue:CreateJob permissions, an adversary can establish a Glue job with a higher-privileged role, enabling privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-071
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "glue:CreateDevEndpoint")
+    array_contains(policy_statement.Action, "glue:GetDevEndpoint")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "glue:CreateDevEndpoint")
+    array_contains(policy_statement.Action, "glue:GetDevEndpoint")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission_err = "IAM policy currently not preventing privilege escalation via passrole and glue development endpoint permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-071",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and glue development endpoint permissions",
+    "Policy Description": "With iam:PassRole, glue:GetDevEndpoint and glue:CreateDevEndpoint permissions, an adversary can set up a Glue development endpoint with a higher-privileged role, facilitating privilege escalation.",
     "Resource Type": "",
     "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
     "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"

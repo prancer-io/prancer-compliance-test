@@ -21626,8 +21626,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-066",
-                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission",
-                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passcode_and_codebuild_permission_err",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission_err",
                             "remediationDescription": "",
                             "remediationFunction": "PR_AWS_CLD_IAM_066.py"
                         }
@@ -21635,6 +21635,156 @@
                     "severity": "Medium",
                     "title": "IAM policy should prevent privilege escalation via passrole and codebuild permissions",
                     "description": "With iam:PassRole and various codebuild permissions, an adversary can create a CodeBuild project and assign it a higher-privileged role, enabling privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-067",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-067",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_067.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and create project permissions",
+                    "description": "With iam:PassRole and CreateProject permissions, an adversary can create a project and assign it a higher-privileged role, enabling privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-068",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-068",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_068.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and data pipeline permissions",
+                    "description": "With iam:PassRole and specific datapipeline permissions, an adversary can create a pipeline with a higher-privileged role, enabling privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-069",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-069",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_069.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and ec2 permissions",
+                    "description": "With iam:PassRole and ec2:RunInstances permissions, an adversary can launch an EC2 instance with a higher-privileged role, facilitating privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-070",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-070",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_070.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and glue create job permissions",
+                    "description": "With iam:PassRole and glue:CreateJob permissions, an adversary can establish a Glue job with a higher-privileged role, enabling privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-071",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-071",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_071.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and glue development endpoint permissions",
+                    "description": "With iam:PassRole, glue:GetDevEndpoint and glue:CreateDevEndpoint permissions, an adversary can set up a Glue development endpoint with a higher-privileged role, facilitating privilege escalation.",
                     "tags": [
                         {
                             "cloud": "AWS",
