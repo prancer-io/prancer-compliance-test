@@ -2695,3 +2695,142 @@ iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permis
     "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
     "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
 }
+
+
+#
+# PR-AWS-CLD-IAM-072
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "glue:UpdateJob")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "glue:UpdateJob")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission_err = "IAM policy currently not preventing privilege escalation via passrole and glue update job permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-072",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and glue update job permissions",
+    "Policy Description": "With iam:PassRole and glue:UpdateJob permissions, an adversary can modify a Glue job's role and command, enabling privilege escalation to a higher-privileged role.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-073
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "lambda:InvokeFunction")
+    array_contains(policy_statement.Action, "lambda:CreateFunction")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "lambda:InvokeFunction")
+    array_contains(policy_statement.Action, "lambda:CreateFunction")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission_err = "IAM policy currently not preventing privilege escalation via passrole and create and invoke Lambda function permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-073",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and create and invoke Lambda function permissions",
+    "Policy Description": "With iam:PassRole, lambda:CreateFunction, and lambda:InvokeFunction permissions, an adversary can create and invoke a Lambda function using a higher-privileged role, facilitating privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-074
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "lambda:CreateEventSourceMapping")
+    array_contains(policy_statement.Action, "lambda:CreateFunction")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "lambda:CreateEventSourceMapping")
+    array_contains(policy_statement.Action, "lambda:CreateFunction")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission_err = "IAM policy currently not preventing privilege escalation via passrole, lambda create function and event source mapping permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-074",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole, lambda create function and event source mapping permissions",
+    "Policy Description": "With iam:PassRole, lambda:CreateEventSourceMapping, and lambda:CreateFunction permissions, an adversary can link a Lambda function with a higher-privileged role to a DynamoDB table. When a new table record is added, the Lambda triggers with the enhanced role, enabling privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}

@@ -21795,6 +21795,96 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-072",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-072",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_072.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and glue update job permissions",
+                    "description": "With iam:PassRole and glue:UpdateJob permissions, an adversary can modify a Glue job's role and command, enabling privilege escalation to a higher-privileged role.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-073",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-073",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_073.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and create and invoke Lambda function permissions",
+                    "description": "With iam:PassRole, lambda:CreateFunction, and lambda:InvokeFunction permissions, an adversary can create and invoke Lambda function using a higher-privileged role, facilitating privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-074",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-074",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_074.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole, lambda create function and event source mapping permissions",
+                    "description": "With iam:PassRole, lambda:CreateEventSourceMapping, and lambda:CreateFunction permissions, an adversary can link a Lambda function with a higher-privileged role to a DynamoDB table. When a new table record is added, the Lambda triggers with the enhanced role, enabling privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
