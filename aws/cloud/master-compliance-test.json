@@ -21159,6 +21159,18 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 5",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v11.3",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1",
+                                "ISO 27001:2022",
+                                "SOC2",
+                                "SOC2 based on AICPA TSC 2017"
                             ],
                             "service": [
                                 "iam"
@@ -21189,6 +21201,8 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "APRA",
+                                "APRA 234"
                             ],
                             "service": [
                                 "iam"
@@ -21219,6 +21233,44 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "NIST 800-171",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v4.0.1",
+                                "GDPR Readiness",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "APRA",
+                                "APRA 234",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "SOC2",
+                                "SOC2 based on AICPA TSC 2017",
+                                "MAS TRM Framework",
+                                "HITRUST",
+                                "ITSG",
+                                "ITSG-33"
                             ],
                             "service": [
                                 "iam"
@@ -21249,6 +21301,39 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
                             ],
                             "service": [
                                 "iam"
@@ -21279,6 +21364,39 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
                             ],
                             "service": [
                                 "iam"
@@ -21309,6 +21427,39 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
                             ],
                             "service": [
                                 "iam"
@@ -21339,6 +21490,39 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
                             ],
                             "service": [
                                 "iam"
@@ -21369,6 +21553,39 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
                             ],
                             "service": [
                                 "iam"
@@ -21399,6 +21616,39 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
                             ],
                             "service": [
                                 "iam"
@@ -21429,6 +21679,39 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
                             ],
                             "service": [
                                 "iam"
@@ -21459,6 +21742,39 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
                             ],
                             "service": [
                                 "iam"
@@ -21489,6 +21805,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21519,6 +21838,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21549,6 +21871,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21579,6 +21904,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21609,6 +21937,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21639,6 +21970,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21669,6 +22003,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21699,6 +22036,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21729,6 +22069,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21759,6 +22102,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21789,6 +22135,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21819,6 +22168,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21849,6 +22201,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
@@ -21879,6 +22234,9 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
                             ],
                             "service": [
                                 "iam"
