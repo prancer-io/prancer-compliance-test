@@ -246,34 +246,6 @@ ec2_deletion_termination_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html"
 }
 
-#
-# PR-AWS-CLD-EC2-007
-#
-
-default ami_not_infected = true
-
-ami_not_infected = false {
-    # lower(resource.Type) == "aws::ec2::instance"
-    images := input.Images[_]
-    lower(images.Platform) == "windows"
-    contains(lower(images.ImageId), "ami-1e542176")
-}
-
-ami_not_infected_err = "Ensure Amazon Machine Image (AMI) is not infected with mining malware." {
-    not ami_not_infected
-}
-
-ami_not_infected_metadata := {
-    "Policy Code": "PR-AWS-CLD-EC2-007",
-    "Type": "cloud",
-    "Product": "AWS",
-    "Language": "AWS Cloud",
-    "Policy Title": "Ensure Amazon Machine Image (AMI) is not infected with mining malware.",
-    "Policy Description": "This policy identifies Amazon Machine Images (AMIs) that are infected with mining malware. As per research, AWS Community AMI Windows 2008 hosted by an unverified vendor containing malicious code running an unidentified crypto (Monero) miner. It is recommended to delete such AMIs to protect from malicious activity and attack blast.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
-}
 
 #
 # PR-AWS-CLD-EC2-008
@@ -298,35 +270,6 @@ ebs_snapshot_public_access_metadata := {
     "Language": "AWS Cloud",
     "Policy Title": "Ensure AWS EBS snapshots are not accessible to the public",
     "Policy Description": "This policy identifies EC2 EBS snapshots are accessible to the public. Amazon Elastic Block Store (Amazon EBS) provides persistent block storage volumes with Amazon EC2 instances in the AWS Cloud. If EBS snapshots are inadvertently shared to the public, any unauthorized user with AWS console access can gain access to the snapshots and gain access to sensitive data.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
-}
-
-#
-# PR-AWS-CLD-EC2-009
-#
-
-default ami_is_not_publicly_accessible = true
-
-ami_is_not_publicly_accessible = false {
-    # lower(resource.Type) == "aws::ec2::instance"
-    images := input.Images[_]
-    lower(images.Public) == available_true_choices[_]
-    not images.ImageOwnerAlias
-}
-
-ami_is_not_publicly_accessible_err = "Ensure AWS Amazon Machine Image (AMI) is not publicly accessible." {
-    not ami_is_not_publicly_accessible
-}
-
-ami_is_not_publicly_accessible_metadata := {
-    "Policy Code": "PR-AWS-CLD-EC2-009",
-    "Type": "cloud",
-    "Product": "AWS",
-    "Language": "AWS Cloud",
-    "Policy Title": "Ensure AWS Amazon Machine Image (AMI) is not publicly accessible.",
-    "Policy Description": "It identifies AWS AMIs which are owned by the AWS account and are accessible to the public. Amazon Machine Image (AMI) provides information to launch an instance in the cloud. The AMIs may contain proprietary customer information and should be accessible only to authorized internal users.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
