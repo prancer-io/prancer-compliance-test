@@ -50,7 +50,7 @@ ami_not_infected_with_mining_malware_err = "AMI currently infected with mining m
 }
 
 ami_not_infected_with_mining_malware_metadata := {
-    "Policy Code": "PR-AWS-CLD-EC2-007",
+    "Policy Code": "PR-AWS-CLD-AMI-002",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
