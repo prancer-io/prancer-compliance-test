@@ -10956,8 +10956,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-EC2-012",
-                            "eval": "data.rule.ebs_deletion_protection",
-                            "message": "data.rule.ebs_deletion_protection_err",
+                            "eval": "data.rule.ami_not_infected_with_mining_malware",
+                            "message": "data.rule.ami_not_infected_with_mining_malware_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_EC2_012.py"
                         }
