@@ -22159,8 +22159,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-AMI-002",
-                            "eval": "data.rule.ami_not_infected",
-                            "message": "data.rule.ami_not_infected_err",
+                            "eval": "data.rule.ami_not_infected_with_mining_malware",
+                            "message": "data.rule.ami_not_infected_with_mining_malware_err",
                             "remediationDescription": "How to delete reported AMI can be found <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_AMI_002.py"
                         }
