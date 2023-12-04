@@ -966,6 +966,16 @@
 					"detailMethods": [
 						"get_account_password_policy"
 					]
+				},
+				{
+					"masterSnapshotId": "TEST_AMI_01",
+					"arn": "arn:aws:ec2:::",
+					"type": "ec2",
+					"collection": "aws_ec2",
+					"listMethod": "describe_images",
+					"detailMethods": [
+						"describe_images"
+					]
 				}
 			]
 		}
