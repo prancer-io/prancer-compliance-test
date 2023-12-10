@@ -6,6 +6,22 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
+array_element_contains(target_array, element_string) = true {
+  contains(lower(target_array[_]), lower(element_string))
+} else = false { true }
+
+array_element_in(target_array, in_array) = true {
+  lower(target_array[_]) == lower(in_array[_])
+} else = false { true }
+
+array_element_contains_in(target_array, in_array) = true {
+  contains(lower(target_array[_]), lower(in_array[_]))
+} else = false { true }
+
 iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount"]
 ip_address = ["0.0.0.0/0", "::/0"]
 available_true_choices := ["true", true]
@@ -14,24 +30,30 @@ available_false_choices := ["false", false]
 #
 # PR-AWS-CLD-IAM-001
 #
-default iam_wildcard_resource = true
+default iam_policy_dont_have_wildcard_resource = true
 
-iam_wildcard_resource = false {
+iam_policy_dont_have_wildcard_resource = false {
     # lower(resource.Type) == "aws::iam::policy"
-    statement := input.PolicyVersion.Document.Statement[j]
+    statement := input.PolicyVersion.Document.Statement[_]
     lower(statement.Resource) == "*"
 }
 
-iam_wildcard_resource_err = "Ensure no wildcards are specified in IAM policy with 'Resource' section" {
-    not iam_wildcard_resource
+iam_policy_dont_have_wildcard_resource = false {
+    # lower(resource.Type) == "aws::iam::policy"
+    statement := input.PolicyVersion.Document.Statement[_]
+    array_element_contains(statement.Resource, "*")
 }
 
-iam_wildcard_resource_metadata := {
+iam_policy_dont_have_wildcard_resource_err = "IAM policy currently have wildcard resource specified. Ensure there is no wildcard specified" {
+    not iam_policy_dont_have_wildcard_resource
+}
+
+iam_policy_dont_have_wildcard_resource_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-001",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure no wildcards are specified in IAM policy with 'Resource' section",
+    "Policy Title": "Ensure no wildcard resource is specified in IAM policy",
     "Policy Description": "Using a wildcard in the Resource element in a role's trust policy would allow any IAM user in an account to access all Resources. This is a significant security gap and can be used to gain access to sensitive data.",
     "Resource Type": "",
     "Policy Help URL": "",
@@ -41,31 +63,31 @@ iam_wildcard_resource_metadata := {
 #
 # PR-AWS-CLD-IAM-002
 #
-default iam_wildcard_action = true
+default iam_policy_dont_have_wildcard_action = true
 
-iam_wildcard_action = false {
+iam_policy_dont_have_wildcard_action = false {
     # lower(resource.Type) == "aws::iam::managedpolicy"
-    statement := input.PolicyVersion.Document.Statement[j]
+    statement := input.PolicyVersion.Document.Statement[_]
     lower(statement.Action) == "*"
 }
 
 
-iam_wildcard_action = false {
+iam_policy_dont_have_wildcard_action = false {
     # lower(resource.Type) == "aws::iam::policy"
-    statement := input.PolicyVersion.Document.Statement[j]
-    lower(statement.Action) == "*"
+    statement := input.PolicyVersion.Document.Statement[_]
+    array_element_contains(statement.Action, "*")
 }
 
-iam_wildcard_action_err = "Ensure no wildcards are specified in IAM policy with 'Action' section" {
+iam_policy_dont_have_wildcard_action_err = "IAM policy currently have wildcard action specified. Ensure there is no wildcard specified" {
     not iam_wildcard_action
 }
 
-iam_wildcard_action_metadata := {
+iam_policy_dont_have_wildcard_action_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-002",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure no wildcards are specified in IAM policy with 'Action' section",
+    "Policy Title": "Ensure no wildcard action is specified in IAM policy",
     "Policy Description": "Using a wildcard in the Action element in a role's trust policy would allow any IAM user in an account to Manage all resources and a user can manipulate data. This is a significant security gap and can be used to gain access to sensitive data.",
     "Resource Type": "",
     "Policy Help URL": "",
@@ -1167,25 +1189,24 @@ iam_policy_permission_may_cause_privilege_escalation_metadata := {
 # PR-AWS-CLD-IAM-028
 #
 
-default iam_access_key_enabled_on_root_account = true
+default iam_access_key_disabled_on_root_account = true
 
-iam_access_key_enabled_on_root_account = false {
+iam_access_key_disabled_on_root_account = false {
     # lower(resource.Type) == "aws::iam::policy"
-    input.SummaryMap.AccountAccessKeysPresent == 0
-    
+    input.SummaryMap.AccountAccessKeysPresent > 0
 }
 
-iam_access_key_enabled_on_root_account_err = "Ensure AWS Access key is enabled on root account." {
-    not iam_access_key_enabled_on_root_account
+iam_access_key_disabled_on_root_account_err = "AWS root account currently using access keys. Please deactive the access keys" {
+    not iam_access_key_disabled_on_root_account
 }
 
-iam_access_key_enabled_on_root_account_metadata := {
+iam_access_key_disabled_on_root_account_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-028",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure AWS Access key is enabled on root account.",
-    "Policy Description": "It identifies that account access key is enabled or not from IAM account summary.",
+    "Policy Title": "AWS root account should not use access keys",
+    "Policy Description": "To strengthen the security of your AWS environment and adhere to IAM best practices, ensure that the AWS root account user doesn't use access keys for making API requests to access cloud resources or billing information.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#accountsummary"
@@ -1821,4 +1842,995 @@ iam_instance_profile_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html"
+}
+
+#
+# PR-AWS-CLD-IAM-051
+#
+
+s3_restricted_actions = ["s3:*", "s3:getobject"]
+
+default managed_iam_policy_dont_have_full_s3_action_permission = true
+
+managed_iam_policy_dont_have_full_s3_action_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    lower(policy_statement.Effect) == "allow"
+    array_element_in(policy_statement.Action, s3_restricted_actions)
+}
+
+# from rezoan: might be unnecessary, as i did saw Action is always an Array. But did saw this use case on other existing policies, thats why adding the rule checking assuming other developers has found something related to this.
+managed_iam_policy_dont_have_full_s3_action_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    lower(policy_statement.Effect) == "allow"
+    lower(policy_statement.Action) == s3_restricted_actions[_]
+}
+
+
+managed_iam_policy_dont_have_full_s3_action_permission_err = "AWS IAM managed policies currently have 'getObject' or full S3 action permissions" {
+    not managed_iam_policy_dont_have_full_s3_action_permission
+}
+
+managed_iam_policy_dont_have_full_s3_action_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-051",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS IAM managed policies do not have 'getObject' or full S3 action permissions",
+    "Policy Description": "Ensuring AWS IAM managed policies do not have 'getObject' or full S3 action permissions, prevents potential Amazon S3 data exfiltration or manipulation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-052
+#
+
+default iam_access_key_rotated_every_90_days = true
+
+iam_access_key_rotated_every_90_days = false {
+    accessKeyMetadata := input.AccessKeyMetadata[_]
+    lower(accessKeyMetadata.Status) == "active"
+    time.now_ns() - time.parse_rfc3339_ns(accessKeyMetadata.CreateDate) > 7776000000000000
+}
+
+iam_access_key_rotated_every_90_days_err = "IAM Access key currently not getting rotated every 90 days or less" {
+    not iam_access_key_rotated_every_90_days
+}
+
+iam_access_key_rotated_every_90_days_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-052",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM Access key should be rotated every 90 days or less",
+    "Policy Description": "Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS. AWS users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface (AWS CLI), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services. It is recommended that all access keys be regularly rotated. Rotating access keys will reduce the window of opportunity for an access key that is associated with a compromised or terminated account to be used. Access keys should be rotated to ensure that data cannot be accessed with an old key which might have been lost, cracked, or stolen.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/list_access_keys.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAccessKeys.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-053
+#
+
+default iam_password_policy_enforced = true
+
+iam_password_policy_enforced = false {
+    not input.PasswordPolicy
+}
+
+# iam_password_policy_enforced = false {
+#     to_number(input.PasswordPolicy.MinimumPasswordLength) < 8
+# }
+
+iam_password_policy_enforced_err = "IAM password policy currently not enforced" {
+    not iam_password_policy_enforced
+}
+
+iam_password_policy_enforced_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-053",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure to enforce IAM password policy",
+    "Policy Description": "Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure password are comprised of different character sets, have minimal length, rotation and history restrictions.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_account_password_policy.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-054
+#
+
+default iam_password_policy_prevents_password_reuse = true
+
+iam_password_policy_prevents_password_reuse = false {
+    not input.PasswordPolicy
+}
+
+#  Last 24 passwords should be prevented to be reused as standard. Change this as per company policy.
+iam_password_policy_prevents_password_reuse = false {
+    to_number(input.PasswordPolicy.PasswordReusePrevention) < 24
+}
+
+iam_password_policy_prevents_password_reuse_err = "IAM password policy not prevents password reuse" {
+    not iam_password_policy_prevents_password_reuse
+}
+
+iam_password_policy_prevents_password_reuse_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-054",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM password policy should prevent password reuse",
+    "Policy Description": "IAM password policies can prevent the reuse of a given password by the same user. It is recommended that the password policy prevent the reuse of passwords. Preventing password reuse increases account resiliency against brute force login attempts.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_account_password_policy.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-055
+#
+
+default iam_password_rotated_every_90_days = true
+
+iam_password_rotated_every_90_days = false {
+    not input.PasswordPolicy
+}
+
+iam_password_rotated_every_90_days = false {
+    to_number(input.PasswordPolicy.MaxPasswordAge) <= 0
+}
+
+iam_password_rotated_every_90_days = false {
+    to_number(input.PasswordPolicy.MaxPasswordAge) > 90
+}
+
+iam_password_rotated_every_90_days_err = "IAM user password not getting rotated every 90 days" {
+    not iam_password_rotated_every_90_days
+}
+
+iam_password_rotated_every_90_days_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-055",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM user password should be rotated every 90 days or less",
+    "Policy Description": "IAM password policies can require passwords to be rotated or expired after a given number of days. It is recommended that the password policy expire passwords after 90 days or less. Reducing the password lifetime increases account resiliency against brute force login attempts. Additionally, requiring regular password changes help in the following scenarios: - Passwords can be stolen or compromised sometimes without your knowledge. This can happen via a system compromise, software vulnerability, or internal threat. Certain corporate and government web filters or proxy servers have the ability to intercept and record traffic even if it's encrypted. Many people use the same password for many systems such as work, email, and personal. Compromised end user workstations might have a keystroke logger.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_account_password_policy.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-056
+#
+
+default iam_password_policy_require_at_least_one_uppercase_letter = true
+
+iam_password_policy_require_at_least_one_uppercase_letter = false {
+    not input.PasswordPolicy
+}
+
+iam_password_policy_require_at_least_one_uppercase_letter = false {
+    not input.PasswordPolicy.RequireUppercaseCharacters
+}
+
+iam_password_policy_require_at_least_one_uppercase_letter_err = "IAM password policy currently not requires at least one uppercase letter" {
+    not iam_password_policy_require_at_least_one_uppercase_letter
+}
+
+iam_password_policy_require_at_least_one_uppercase_letter_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-056",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM password policy should require at least one uppercase letter",
+    "Policy Description": "It is recommended that the password policy require at least one uppercase letter. Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure passwords consist of different character sets. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_account_password_policy.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-057
+#
+
+default iam_password_policy_require_at_least_one_lowercase_letter = true
+
+iam_password_policy_require_at_least_one_lowercase_letter = false {
+    not input.PasswordPolicy
+}
+
+iam_password_policy_require_at_least_one_lowercase_letter = false {
+    not input.PasswordPolicy.RequireLowercaseCharacters
+}
+
+iam_password_policy_require_at_least_one_lowercase_letter_err = "IAM password policy currently not requires at least one lowercase letter" {
+    not iam_password_policy_require_at_least_one_lowercase_letter
+}
+
+iam_password_policy_require_at_least_one_lowercase_letter_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-057",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM password policy should require at least one lowercase letter",
+    "Policy Description": "It is recommended that the password policy require at least one lowercase letter. Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure passwords consist of different character sets. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_account_password_policy.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-058
+#
+
+default iam_password_policy_require_at_least_one_symbol = true
+
+iam_password_policy_require_at_least_one_symbol = false {
+    not input.PasswordPolicy
+}
+
+iam_password_policy_require_at_least_one_symbol = false {
+    not input.PasswordPolicy.RequireSymbols
+}
+
+iam_password_policy_require_at_least_one_symbol_err = "IAM password policy currently not requires at least one symbol" {
+    not iam_password_policy_require_at_least_one_symbol
+}
+
+iam_password_policy_require_at_least_one_symbol_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-058",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM password policy should require at least one symbol",
+    "Policy Description": "It is recommended that the password policy require at least one symbol. Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure passwords consist of different character sets. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_account_password_policy.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-059
+#
+
+default iam_password_policy_require_at_least_one_number = true
+
+iam_password_policy_require_at_least_one_number = false {
+    not input.PasswordPolicy
+}
+
+iam_password_policy_require_at_least_one_number = false {
+    not input.PasswordPolicy.RequireNumbers
+}
+
+iam_password_policy_require_at_least_one_number_err = "IAM password policy currently not requires at least one number" {
+    not iam_password_policy_require_at_least_one_number
+}
+
+iam_password_policy_require_at_least_one_number_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-059",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM password policy should require at least one number",
+    "Policy Description": "It is recommended that the password policy require at least one number. Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure passwords consist of different character sets. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_account_password_policy.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-060
+#
+
+default iam_password_policy_require_minimum_length_of_14 = true
+
+iam_password_policy_require_minimum_length_of_14 = false {
+    not input.PasswordPolicy
+}
+
+iam_password_policy_require_minimum_length_of_14 = false {
+    to_number(input.PasswordPolicy.MinimumPasswordLength) < 14
+}
+
+iam_password_policy_require_minimum_length_of_14_err = "IAM password policy currently not reuires minimum password lenght of 14" {
+    not iam_password_policy_require_minimum_length_of_14
+}
+
+iam_password_policy_require_minimum_length_of_14_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-060",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM password policy should require minimum password length of 14 or more",
+    "Policy Description": "Set the IAM password policy to ensure passwords consist of at least 14 characters. Password policies are, in part, used to enforce password complexity requirements. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_account_password_policy.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-061
+#
+
+default iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission = true
+
+iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "ec2:DescribeInstances")
+    array_contains(policy_statement.Action, "ssm:listCommands")
+    array_contains(policy_statement.Action, "ssm:listCommandInvocations")
+    array_contains(policy_statement.Action, "ssm:sendCommand")
+}
+
+iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "ec2:DescribeInstances")
+    array_contains(policy_statement.Action, "ssm:listCommands")
+    array_contains(policy_statement.Action, "ssm:listCommandInvocations")
+    array_contains(policy_statement.Action, "ssm:sendCommand")
+}
+
+
+iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission_err = "IAM policy currently not preventing privilege escalation via EC2 and SSM permissions" {
+    not iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-061",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via EC2 and SSM permissions",
+    "Policy Description": "An adversary with ec2:DescribeInstances, ssm:listCommands, ssm:listCommandInvocations, and ssm:sendCommand permissions can execute commands on SSM-supported instances, potentially escalating privileges by finding an instance with a highly privileged IAM role.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-062
+#
+
+default iam_policy_prevents_privilege_escalation_via_codestar = true
+
+iam_policy_prevents_privilege_escalation_via_codestar = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "codestar:CreateProject")
+    array_contains(policy_statement.Action, "codestar:AssociateTeamMember")
+}
+
+iam_policy_prevents_privilege_escalation_via_codestar = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "codestar:CreateProject")
+    array_contains(policy_statement.Action, "codestar:AssociateTeamMember")
+}
+
+
+iam_policy_prevents_privilege_escalation_via_codestar_err = "IAM policy currently allowing privilege escalation via Codestar create project and associate team member permissions. which should be prevented." {
+    not iam_policy_prevents_privilege_escalation_via_codestar
+}
+
+iam_policy_prevents_privilege_escalation_via_codestar_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-062",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should not allow privilege escalation via Codestar create project and associate team member permissions",
+    "Policy Description": "An adversary with codestar:CreateProject and codestar:AssociateTeamMember permissions can create a CodeStar project, become its owner, and gain access to various AWS services permissions, useful for further enumeration like lambda:List*, iam:ListRoles, iam:ListUsers, etc.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-063
+#
+
+default iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions = true
+
+iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "ec2:DescribeInstances")
+    array_contains(policy_statement.Action, "ec2-instance-connect:SendSSHPublicKey")
+    array_contains(policy_statement.Action, "ec2-instance-connect:SendSerialConsoleSSHPublicKey")
+}
+
+iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "ec2:DescribeInstances")
+    array_contains(policy_statement.Action, "ec2-instance-connect:SendSSHPublicKey")
+    array_contains(policy_statement.Action, "ec2-instance-connect:SendSerialConsoleSSHPublicKey")
+}
+
+
+iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions_err = "IAM policy currently allowing privilege escalation via EC2 Instance Connect permissions. which should be prevented." {
+    not iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions
+}
+
+iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-063",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should not allow privilege escalation via EC2 Instance Connect permissions",
+    "Policy Description": "An adversary with ec2:DescribeInstances, ec2-instance-connect:SendSSHPublicKey, and ec2-instance-connect:SendSerialConsoleSSHPublicKey permissions, and access to a public IP enabled instance, can push SSH keys and connect to the EC2 instance, potentially escalating privileges.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-064
+#
+
+default iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission = true
+
+iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "ec2:DescribeInstances")
+    array_contains(policy_statement.Action, "ssm:StartSession")
+    array_contains(policy_statement.Action, "ssm:DescribeSessions")
+    array_contains(policy_statement.Action, "ssm:GetConnectionStatus")
+    array_contains(policy_statement.Action, "ssm:DescribeInstanceProperties")
+    array_contains(policy_statement.Action, "ssm:TerminateSession")
+    array_contains(policy_statement.Action, "ssm:ResumeSession")
+}
+
+iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "ec2:DescribeInstances")
+    array_contains(policy_statement.Action, "ssm:StartSession")
+    array_contains(policy_statement.Action, "ssm:DescribeSessions")
+    array_contains(policy_statement.Action, "ssm:GetConnectionStatus")
+    array_contains(policy_statement.Action, "ssm:DescribeInstanceProperties")
+    array_contains(policy_statement.Action, "ssm:TerminateSession")
+    array_contains(policy_statement.Action, "ssm:ResumeSession")
+}
+
+
+iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission_err = "IAM policy currently not preventing privilege escalation via EC2 describe and SSM session permissions" {
+    not iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-064",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via EC2 describe and SSM session permissions",
+    "Policy Description": "With ec2:DescribeInstances, various ssm permissions, an adversary can connect to any SSM-supported instance. They might escalate privileges by accessing an instance with a high-privilege IAM role.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-065
+#
+
+default iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission = true
+
+iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "glue:UpdateDevEndpoint")
+    array_contains(policy_statement.Action, "glue:GetDevEndpoint")
+}
+
+iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "glue:UpdateDevEndpoint")
+    array_contains(policy_statement.Action, "glue:GetDevEndpoint")
+}
+
+
+iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission_err = "IAM policy currently not preventing privilege escalation via glue dev endpoint permissions" {
+    not iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-065",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via glue dev endpoint permissions",
+    "Policy Description": "With the glue:UpdateDevEndpoint permission, an adversary can change the SSH key for a glue endpoint, allowing SSH access and potential retrieval of IAM credentials from its associated role. The glue:GetDevEndpoint permission can be beneficial to identify the endpoint if unknown.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-066
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "codebuild:CreateProject")
+    array_contains(policy_statement.Action, "codebuild:StartBuildBatch")
+    array_contains(policy_statement.Action, "codebuild:StartBuild")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "codebuild:CreateProject")
+    array_contains(policy_statement.Action, "codebuild:StartBuildBatch")
+    array_contains(policy_statement.Action, "codebuild:StartBuild")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission_err = "IAM policy currently not preventing privilege escalation via passrole and codebuild permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-066",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and codebuild permissions",
+    "Policy Description": "With iam:PassRole and various codebuild permissions, an adversary can create a CodeBuild project and assign it a higher-privileged role, enabling privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-067
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "codestar:CreateProject")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "codestar:CreateProject")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission_err = "IAM policy currently not preventing privilege escalation via passrole and create project permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-067",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and create project permissions",
+    "Policy Description": "With iam:PassRole and CreateProject permissions, an adversary can create a project and assign it a higher-privileged role, enabling privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-068
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "datapipeline:ActivatePipeline")
+    array_contains(policy_statement.Action, "datapipeline:CreatePipeline")
+    array_contains(policy_statement.Action, "datapipeline:PutPipelineDefinition")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "datapipeline:ActivatePipeline")
+    array_contains(policy_statement.Action, "datapipeline:CreatePipeline")
+    array_contains(policy_statement.Action, "datapipeline:PutPipelineDefinition")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission_err = "IAM policy currently not preventing privilege escalation via passrole and data pipeline permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-068",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and data pipeline permissions",
+    "Policy Description": "With iam:PassRole and specific datapipeline permissions, an adversary can create a pipeline with a higher-privileged role, enabling privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-069
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "ec2:RunInstances")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "ec2:RunInstances")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission_err = "IAM policy currently not preventing privilege escalation via passrole and ec2 permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-069",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and ec2 permissions",
+    "Policy Description": "With iam:PassRole and ec2:RunInstances permissions, an adversary can launch an EC2 instance with a higher-privileged role, facilitating privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-070
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "glue:CreateJob")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "glue:CreateJob")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission_err = "IAM policy currently not preventing privilege escalation via passrole and glue create job permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-070",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and glue create job permissions",
+    "Policy Description": "With iam:PassRole and glue:CreateJob permissions, an adversary can establish a Glue job with a higher-privileged role, enabling privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-071
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "glue:CreateDevEndpoint")
+    array_contains(policy_statement.Action, "glue:GetDevEndpoint")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "glue:CreateDevEndpoint")
+    array_contains(policy_statement.Action, "glue:GetDevEndpoint")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission_err = "IAM policy currently not preventing privilege escalation via passrole and glue development endpoint permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-071",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and glue development endpoint permissions",
+    "Policy Description": "With iam:PassRole, glue:GetDevEndpoint and glue:CreateDevEndpoint permissions, an adversary can set up a Glue development endpoint with a higher-privileged role, facilitating privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-072
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "glue:UpdateJob")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "glue:UpdateJob")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission_err = "IAM policy currently not preventing privilege escalation via passrole and glue update job permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-072",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and glue update job permissions",
+    "Policy Description": "With iam:PassRole and glue:UpdateJob permissions, an adversary can modify a Glue job's role and command, enabling privilege escalation to a higher-privileged role.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-073
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "lambda:InvokeFunction")
+    array_contains(policy_statement.Action, "lambda:CreateFunction")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "lambda:InvokeFunction")
+    array_contains(policy_statement.Action, "lambda:CreateFunction")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission_err = "IAM policy currently not preventing privilege escalation via passrole and create and invoke Lambda function permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-073",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole and create and invoke Lambda function permissions",
+    "Policy Description": "With iam:PassRole, lambda:CreateFunction, and lambda:InvokeFunction permissions, an adversary can create and invoke a Lambda function using a higher-privileged role, facilitating privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
+}
+
+
+#
+# PR-AWS-CLD-IAM-074
+#
+
+default iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission = true
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    array_contains(policy_statement.Resource, "*")
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "lambda:CreateEventSourceMapping")
+    array_contains(policy_statement.Action, "lambda:CreateFunction")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission = false {
+    # lower(resource.Type) == "aws::iam::policyversion"
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[_]
+    policy_statement.Resource == "*"
+    lower(policy_statement.Effect) == "allow"
+    array_contains(policy_statement.Action, "iam:PassRole")
+    array_contains(policy_statement.Action, "lambda:CreateEventSourceMapping")
+    array_contains(policy_statement.Action, "lambda:CreateFunction")
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission_err = "IAM policy currently not preventing privilege escalation via passrole, lambda create function and event source mapping permissions" {
+    not iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission
+}
+
+iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission_metadata := {
+    "Policy Code": "PR-AWS-CLD-IAM-074",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "IAM policy should prevent privilege escalation via passrole, lambda create function and event source mapping permissions",
+    "Policy Description": "With iam:PassRole, lambda:CreateEventSourceMapping, and lambda:CreateFunction permissions, an adversary can link a Lambda function with a higher-privileged role to a DynamoDB table. When a new table record is added, the Lambda triggers with the enhanced role, enabling privilege escalation.",
+    "Resource Type": "",
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
 }
