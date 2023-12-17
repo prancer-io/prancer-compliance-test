@@ -19860,42 +19860,38 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-023",
                     "masterSnapshotId": [
-                        "TEST_IAM_02"
+                        "TEST_LAMBDA_02"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-023",
-                            "eval": "data.rule.lambda_function_is_publicly_accessible_through_iam_policies",
-                            "message": "data.rule.lambda_function_is_publicly_accessible_through_iam_policies_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "eval": "data.rule.lambda_function_is_not_publicly_accessible_through_resource_policies",
+                            "message": "data.rule.lambda_function_is_not_publicly_accessible_through_resource_policies_err",
+                            "remediationDescription": "01. Go to 'Lambda' dashboard.<br>02. In the left menu, select 'Functions'.<br>03. Select the relevant Lambda Function.<br>04. Under 'Configurations', go to 'Permissions'.<br>05. Under 'Resource-based policy statements', select the relevant statement.<br>06. Edit the statement according to the principle of least privilege.",
                             "remediationFunction": "PR_AWS_CLD_IAM_023.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
-                    "description": "This policy identifies the AWS Lambda Function resources which are publicly accessible through IAM policies. Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "title": "Lambda Function should not publicly exposed via resource policy without a condition",
+                    "description": "Determine the specific resource-based principals' permissions needed by your Lambda Functions, and then craft a resource-based policy for these principals only.",
                     "tags": [
                         {
                             "cloud": "AWS",
                             "compliance": [
                                 "APRA",
-                                "AWS Well-Architected Framework-Identity and Access Management",
-                                "LGPD",
-                                "CSA CCM",
-                                "CyberSecurity Law of the People's Republic of China",
-                                "CMMC",
-                                "GDPR",
+                                "APRA 234",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 5",
+                                "PCI DSS",
+                                "PCI DSS 4.0",
                                 "HITRUST",
-                                "MAS TRM",
-                                "MITRE ATT&CK",
-                                "MLPS",
-                                "NIST 800",
-                                "NIST CSF",
-                                "RMiT",
-                                "SOC 2",
-                                "zerotrust"
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1",
+                                "AWS Foundational Security Best Practices (FSBP) standard",
+                                "SOC 2"
                             ],
                             "service": [
                                 "iam"

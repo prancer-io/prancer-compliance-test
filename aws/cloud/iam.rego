@@ -6,7 +6,7 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
-iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount"]
+iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount", "aws:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
 ip_address = ["0.0.0.0/0", "::/0"]
 available_true_choices := ["true", true]
 available_false_choices := ["false", false]
@@ -397,7 +397,7 @@ ec2_instance_with_iam_permissions_management_access = false {
     policy_action := policy_statement.Action[_]
     policy_action == action[_]
     services := policy_statement.Principal.Service[_]
-    contains(services, "ec2")
+    contains(lower(services), "ec2")
 }
 
 ec2_instance_with_iam_permissions_management_access = false {
@@ -406,7 +406,7 @@ ec2_instance_with_iam_permissions_management_access = false {
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action[_]
     services := policy_statement.Principal.Service[_]
-    contains(services, "ec2")
+    contains(lower(services), "ec2")
 }
 
 ec2_instance_with_iam_permissions_management_access = false {
@@ -415,7 +415,7 @@ ec2_instance_with_iam_permissions_management_access = false {
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
     policy_action == action[_]
-    contains(policy_statement.Principal.Service, "ec2")
+    contains(lower(policy_statement.Principal.Service), "ec2")
 }
 
 ec2_instance_with_iam_permissions_management_access = false {
@@ -423,7 +423,7 @@ ec2_instance_with_iam_permissions_management_access = false {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action[_]
-    contains(policy_statement.Principal.Service, "ec2")
+    contains(lower(policy_statement.Principal.Service), "ec2")
 }
 
 ec2_instance_with_iam_permissions_management_access_err = "Ensure that the AWS EC2 instances don't have a risky set of permissions management access to minimize security risks." {
@@ -457,7 +457,7 @@ lambda_function_with_iam_write_access = false {
     policy_action := policy_statement.Action[_]
     policy_action == action_lambda_function_with_iam_write_access[_]
     services := policy_statement.Principal.Service[_]
-    contains(services, "lambda")
+    contains(lower(services), "lambda")
 }
 
 lambda_function_with_iam_write_access = false {
@@ -466,7 +466,7 @@ lambda_function_with_iam_write_access = false {
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_iam_write_access[_]
     services := policy_statement.Principal.Service[_]
-    contains(services, "lambda")
+    contains(lower(services), "lambda")
 }
 
 lambda_function_with_iam_write_access = false {
@@ -475,7 +475,7 @@ lambda_function_with_iam_write_access = false {
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
     policy_action == action_lambda_function_with_iam_write_access[_]
-    contains(policy_statement.Principal.Service, "lambda")
+    contains(lower(policy_statement.Principal.Service), "lambda")
 }
 
 lambda_function_with_iam_write_access = false {
@@ -483,7 +483,7 @@ lambda_function_with_iam_write_access = false {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_iam_write_access[_]
-    contains(policy_statement.Principal.Service, "lambda")
+    contains(lower(policy_statement.Principal.Service), "lambda")
 }
 
 lambda_function_with_iam_write_access_err = "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks." {
@@ -960,41 +960,49 @@ ecr_repository_is_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-023
 #
 
-default lambda_function_is_publicly_accessible_through_iam_policies = false
+default lambda_function_is_not_publicly_accessible_through_resource_policies = true
 
-lambda_function_is_publicly_accessible_through_iam_policies = true {
+lambda_function_is_not_publicly_accessible_through_resource_policies = false {
 #     lower(resource.Type) == "aws::iam::role"
-    some string
-    role_policy_document := input.Role.AssumeRolePolicyDocument
-    policy_statement := role_policy_document.Statement[i]
-    contains(lower(policy_statement.Principal.Service), "lambda")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    # some string
+    # role_policy_document := input.Role.AssumeRolePolicyDocument
+    # policy_statement := role_policy_document.Statement[i]
+    # contains(lower(policy_statement.Principal.Service), "lambda")
+    # not has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    policy_statement := input.Statement[_]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Principal.AWS == "*"
+    not policy_statement.Condition
 }
 
-lambda_function_is_publicly_accessible_through_iam_policies = true {
+lambda_function_is_not_publicly_accessible_through_resource_policies = false {
 #     lower(resource.Type) == "aws::iam::role"
-    some string
-    role_policy_document := input.Role.AssumeRolePolicyDocument
-    policy_statement := role_policy_document.Statement[i]
-    services := policy_statement.Principal.Service[_]
-    contains(lower(services), "lambda")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    # some string
+    # role_policy_document := input.Role.AssumeRolePolicyDocument
+    # policy_statement := role_policy_document.Statement[i]
+    # services := policy_statement.Principal.Service[_]
+    # contains(lower(services), "lambda")
+    # not has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    policy_statement := input.Statement[_]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Principal == "*"
+    not policy_statement.Condition
 }
 
-lambda_function_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
-    not lambda_function_is_publicly_accessible_through_iam_policies
+lambda_function_is_not_publicly_accessible_through_resource_policies_err = "Lambda Function currently publicly exposed via resource policy without a condition. Please fix." {
+    not lambda_function_is_not_publicly_accessible_through_iam_policies
 }
 
-lambda_function_is_publicly_accessible_through_iam_policies_metadata := {
+lambda_function_is_not_publicly_accessible_through_resource_policies_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-023",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
-    "Policy Description": "This policy identifies the AWS Lambda Function resources which are publicly accessible through IAM policies. Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Policy Title": "Lambda Function should not publicly exposed via resource policy without a condition",
+    "Policy Description": "Determine the specific resource-based principals' permissions needed by your Lambda Functions, and then craft a resource-based policy for these principals only.",
     "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda/client/get_policy.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html"
 }
 
 #

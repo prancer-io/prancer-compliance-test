@@ -956,6 +956,16 @@
 					"detailMethods": [
 						"describe_images"
 					]
+				},
+				{
+					"masterSnapshotId": "TEST_LAMBDA_02",
+					"arn": "arn:aws:lambda:::",
+					"type": "lambda",
+					"collection": "aws_lmd",
+					"listMethod": "list_functions",
+					"detailMethods": [
+						"get_policy"
+					]
 				}
 			]
 		}
