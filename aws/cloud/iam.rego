@@ -6,10 +6,19 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+array_contains(target_array, element) = true {
+  lower(target_array[_]) == lower(element)
+} else = false { true }
+
+array_element_contains(target_array, element_string) = true {
+  contains(lower(target_array[_]), lower(element_string))
+} else = false { true }
+
 iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount", "aws:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
-ip_address = ["0.0.0.0/0", "::/0"]
+ip_address = ["0.0.0.0/0", "::/0", "0.0.0.0"]
 available_true_choices := ["true", true]
 available_false_choices := ["false", false]
+
 
 #
 # PR-AWS-CLD-IAM-001
@@ -19,6 +28,7 @@ default iam_wildcard_resource = true
 iam_wildcard_resource = false {
     # lower(resource.Type) == "aws::iam::policy"
     statement := input.PolicyVersion.Document.Statement[j]
+    lower(statement.Effect) == "allow"
     lower(statement.Resource) == "*"
 }
 
@@ -38,6 +48,7 @@ iam_wildcard_resource_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
 }
 
+
 #
 # PR-AWS-CLD-IAM-002
 #
@@ -46,15 +57,16 @@ default iam_wildcard_action = true
 iam_wildcard_action = false {
     # lower(resource.Type) == "aws::iam::managedpolicy"
     statement := input.PolicyVersion.Document.Statement[j]
+    lower(statement.Effect) == "allow"
     lower(statement.Action) == "*"
 }
 
 
-iam_wildcard_action = false {
-    # lower(resource.Type) == "aws::iam::policy"
-    statement := input.PolicyVersion.Document.Statement[j]
-    lower(statement.Action) == "*"
-}
+# iam_wildcard_action = false {
+#     # lower(resource.Type) == "aws::iam::policy"
+#     statement := input.PolicyVersion.Document.Statement[j]
+#     lower(statement.Action) == "*"
+# }
 
 iam_wildcard_action_err = "Ensure no wildcards are specified in IAM policy with 'Action' section" {
     not iam_wildcard_action
@@ -73,7 +85,6 @@ iam_wildcard_action_metadata := {
 }
 
 
-
 #
 # PR-AWS-CLD-IAM-003
 #
@@ -82,6 +93,7 @@ default iam_wildcard_principal = true
 iam_wildcard_principal = false {
     # lower(resource.Type) == "aws::iam::role"
     statement := input.PolicyVersion.Document.Statement[j]
+    lower(statement.Effect) == "allow"
     lower(statement.Principal) == "*"
 }
 
@@ -109,7 +121,14 @@ default iam_resource_format = true
 
 iam_resource_format = false {
     statement := input.PolicyVersion.Document.Statement[j]
+    lower(statement.Effect) == "allow"
     lower(statement.Resource) == "arn:aws:*:*"
+}
+
+iam_resource_format = false {
+    statement := input.PolicyVersion.Document.Statement[j]
+    lower(statement.Effect) == "allow"
+    array_contains(statement.Resource, "arn:aws:*:*")
 }
 
 iam_resource_format_err = "Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*'" {
@@ -129,11 +148,26 @@ iam_resource_format_metadata := {
 }
 
 
-
 #
 # PR-AWS-CLD-IAM-005
 #
 default iam_assume_permission = true
+
+iam_assume_permission = false {
+    # lower(resource.Type) == "aws::iam::policy"
+    statement := input.PolicyVersion.Document.Statement[j]
+    lower(statement.Effect) == "allow"
+    array_element_contains(statement.Action, "sts:assumerole")
+    statement.Condition == "*"
+}
+
+iam_assume_permission = false {
+    # lower(resource.Type) == "aws::iam::policy"
+    statement := input.PolicyVersion.Document.Statement[j]
+    lower(statement.Effect) == "allow"
+    array_element_contains(statement.Action, "sts:assumerole")
+    not statement.Condition
+}
 
 iam_assume_permission = false {
     # lower(resource.Type) == "aws::iam::policy"
@@ -167,6 +201,7 @@ iam_assume_permission_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
 }
 
+
 #
 # PR-AWS-CLD-IAM-006
 #
@@ -175,8 +210,10 @@ default iam_all_traffic = true
 iam_all_traffic = false {
     # lower(resource.Type) == "aws::iam::policy"
     statement := input.PolicyVersion.Document.Statement[j]
+    lower(statement.Effect) == "allow"
     source_ip := statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"][k]
-    lower(source_ip) == "0.0.0.0/0"
+    contains(lower(source_ip), "0.0.0.0")
+    #lower(source_ip) == "0.0.0.0/0"
 }
 
 iam_all_traffic_err = "AWS IAM policy is overly permissive to all traffic via condition clause" {
@@ -225,7 +262,7 @@ iam_administrative_privileges_metadata := {
 }
 
 
-#
+# Need to reverify this policy. seems wrong to me.
 # PR-AWS-CLD-IAM-008
 #
 default iam_user_group_attach = true
@@ -269,7 +306,8 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
-    contains(lower(policy_statement.Action[_]), "lambda:")
+    array_element_contains(policy_statement.Action, "lambda:")
+    #contains(lower(policy_statement.Action[_]), "lambda:")
 }
 
 lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
@@ -289,7 +327,8 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
-    contains(lower(policy_statement.Action[_]), "lambda:")
+    #contains(lower(policy_statement.Action[_]), "lambda:")
+    array_element_contains(policy_statement.Action, "lambda:")
 }
 
 lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
@@ -327,10 +366,11 @@ default iam_policy_not_overly_permissive_to_lambda_service = true
 
 iam_policy_not_overly_permissive_to_lambda_service = false {
     # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
+     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
-    policy_statement.Action[_] == "lambda:*"
+    lower(policy_statement.Effect) == "allow"
+    lower(policy_statement.Action[_]) == "lambda:*"
     policy_statement.Resource[_] == "*"
     not policy_statement.Condition
 }
@@ -340,7 +380,8 @@ iam_policy_not_overly_permissive_to_lambda_service = false {
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
-    policy_statement.Action == "lambda:*"
+    lower(policy_statement.Effect) == "allow"
+    lower(policy_statement.Action) == "lambda:*"
     policy_statement.Resource[_] == "*"
     not policy_statement.Condition
 }
@@ -350,7 +391,8 @@ iam_policy_not_overly_permissive_to_lambda_service = false {
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
-    policy_statement.Action[_] == "lambda:*"
+    lower(policy_statement.Effect) == "allow"
+    lower(policy_statement.Action[_]) == "lambda:*"
     policy_statement.Resource == "*"
     not policy_statement.Condition
 }
@@ -360,7 +402,8 @@ iam_policy_not_overly_permissive_to_lambda_service = false {
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
-    policy_statement.Action == "lambda:*"
+    lower(policy_statement.Effect) == "allow"
+    lower(policy_statement.Action) == "lambda:*"
     policy_statement.Resource == "*"
     not policy_statement.Condition
 }
@@ -394,25 +437,30 @@ ec2_instance_with_iam_permissions_management_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_action := policy_statement.Action[_]
     policy_action == action[_]
-    services := policy_statement.Principal.Service[_]
-    contains(lower(services), "ec2")
+    array_element_contains(policy_statement.Principal.Service, "ec2")
+    #services := policy_statement.Principal.Service[_]
+    #contains(lower(services), "ec2")
 }
 
 ec2_instance_with_iam_permissions_management_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_statement.Action == action[_]
-    services := policy_statement.Principal.Service[_]
-    contains(lower(services), "ec2")
+    array_element_contains(policy_statement.Principal.Service, "ec2")
+    #services := policy_statement.Principal.Service[_]
+    #contains(lower(services), "ec2")
 }
 
 ec2_instance_with_iam_permissions_management_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_action := policy_statement.Action[_]
     policy_action == action[_]
     contains(lower(policy_statement.Principal.Service), "ec2")
@@ -422,6 +470,7 @@ ec2_instance_with_iam_permissions_management_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_statement.Action == action[_]
     contains(lower(policy_statement.Principal.Service), "ec2")
 }
@@ -454,25 +503,30 @@ lambda_function_with_iam_write_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_action := policy_statement.Action[_]
     policy_action == action_lambda_function_with_iam_write_access[_]
-    services := policy_statement.Principal.Service[_]
-    contains(lower(services), "lambda")
+    array_element_contains(policy_statement.Principal.Service, "lambda")
+    #services := policy_statement.Principal.Service[_]
+    #contains(lower(services), "lambda")
 }
 
 lambda_function_with_iam_write_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_statement.Action == action_lambda_function_with_iam_write_access[_]
-    services := policy_statement.Principal.Service[_]
-    contains(lower(services), "lambda")
+    array_element_contains(policy_statement.Principal.Service, "lambda")
+    #services := policy_statement.Principal.Service[_]
+    #contains(lower(services), "lambda")
 }
 
 lambda_function_with_iam_write_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_action := policy_statement.Action[_]
     policy_action == action_lambda_function_with_iam_write_access[_]
     contains(lower(policy_statement.Principal.Service), "lambda")
@@ -482,6 +536,7 @@ lambda_function_with_iam_write_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_statement.Action == action_lambda_function_with_iam_write_access[_]
     contains(lower(policy_statement.Principal.Service), "lambda")
 }
@@ -502,6 +557,7 @@ lambda_function_with_iam_write_access_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
 }
 
+
 #
 # PR-AWS-CLD-IAM-015
 #
@@ -514,36 +570,42 @@ lambda_function_with_iam_permissions_management_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_action := policy_statement.Action[_]
     policy_action == action_lambda_function_with_iam_permissions_management_access[_]
-    services := policy_statement.Principal.Service[_]
-    contains(services, "lambda")
+    array_element_contains(policy_statement.Principal.Service, "lambda")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "lambda")
 }
 
 lambda_function_with_iam_permissions_management_access = false {
     # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_statement.Action == action_lambda_function_with_iam_permissions_management_access[_]
-    services := policy_statement.Principal.Service[_]
-    contains(services, "lambda")
+    array_element_contains(policy_statement.Principal.Service, "lambda")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "lambda")
 }
 
 lambda_function_with_iam_permissions_management_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_action := policy_statement.Action[_]
     policy_action == action_lambda_function_with_iam_permissions_management_access[_]
-    contains(policy_statement.Principal.Service, "lambda")
+    contains(lower(policy_statement.Principal.Service), "lambda")
 }
 
 lambda_function_with_iam_permissions_management_access = false {
     # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_statement.Action == action_lambda_function_with_iam_permissions_management_access[_]
-    contains(policy_statement.Principal.Service, "lambda")
+    contains(lower(policy_statement.Principal.Service), "lambda")
 }
 
 lambda_function_with_iam_permissions_management_access_err = "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of permissions management access permissions to minimize security risks." {
@@ -562,6 +624,7 @@ lambda_function_with_iam_permissions_management_access_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
 }
 
+
 #
 # PR-AWS-CLD-IAM-016
 #
@@ -574,36 +637,42 @@ ec2_instance_with_iam_write_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_action := policy_statement.Action[_]
     policy_action == action_ec2_instance_with_iam_write_access[_]
-    services := policy_statement.Principal.Service[_]
-    contains(services, "ec2")
+    array_element_contains(policy_statement.Principal.Service, "ec2")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "ec2")
 }
 
 ec2_instance_with_iam_write_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_statement.Action == action_ec2_instance_with_iam_write_access[_]
-    services := policy_statement.Principal.Service[_]
-    contains(services, "ec2")
+    array_element_contains(policy_statement.Principal.Service, "ec2")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "ec2")
 }
 
 ec2_instance_with_iam_write_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_action := policy_statement.Action[_]
     policy_action == action_ec2_instance_with_iam_write_access[_]
-    contains(policy_statement.Principal.Service, "ec2")
+    contains(lower(policy_statement.Principal.Service), "ec2")
 }
 
 ec2_instance_with_iam_write_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_statement.Action == action_ec2_instance_with_iam_write_access[_]
-    contains(policy_statement.Principal.Service, "ec2")
+    contains(lower(policy_statement.Principal.Service), "ec2")
 }
 
 ec2_instance_with_iam_write_access_err = "Ensure that the AWS EC2 instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks." {
@@ -622,6 +691,7 @@ ec2_instance_with_iam_write_access_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
 }
 
+
 #
 # PR-AWS-CLD-IAM-017
 #
@@ -634,36 +704,42 @@ lambda_function_with_org_write_access = false {
     # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_action := policy_statement.Action[_]
     policy_action == action_lambda_function_with_org_write_access[_]
-    services := policy_statement.Principal.Service[_]
-    contains(services, "lambda")
+    array_element_contains(policy_statement.Principal.Service, "lambda")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "lambda")
 }
 
 lambda_function_with_org_write_access = false {
     # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_statement.Action == action_lambda_function_with_org_write_access[_]
-    services := policy_statement.Principal.Service[_]
-    contains(services, "lambda")
+    array_element_contains(policy_statement.Principal.Service, "lambda")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "lambda")
 }
 
 lambda_function_with_org_write_access = false {
     # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_action := policy_statement.Action[_]
     policy_action == action_lambda_function_with_org_write_access[_]
-    contains(policy_statement.Principal.Service, "lambda")
+    contains(lower(policy_statement.Principal.Service), "lambda")
 }
 
 lambda_function_with_org_write_access = false {
     # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_statement.Action == action_lambda_function_with_org_write_access[_]
-    contains(policy_statement.Principal.Service, "lambda")
+    contains(lower(policy_statement.Principal.Service), "lambda")
 }
 
 lambda_function_with_org_write_access_err = "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of org write permissions to minimize security risks." {
@@ -682,6 +758,7 @@ lambda_function_with_org_write_access_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
 }
 
+
 #
 # PR-AWS-CLD-IAM-018
 #
@@ -692,36 +769,42 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_resource := policy_statement.Resource[_]
     lower(policy_resource) == "*"
-    services := policy_statement.Principal.Service[_]
-    contains(services, "elasticbeanstalk")
+    array_element_contains(policy_statement.Principal.Service, "elasticbeanstalk")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "elasticbeanstalk")
 }
 
 elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     lower(policy_statement.Resource) == "*"
-    services := policy_statement.Principal.Service[_]
-    contains(services, "elasticbeanstalk")
+    array_element_contains(policy_statement.Principal.Service, "elasticbeanstalk")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "elasticbeanstalk")
 }
 
 elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_resource := policy_statement.Resource[_]
     lower(policy_resource) == "*"
-    contains(policy_statement.Principal.Service, "elasticbeanstalk")
+    contains(lower(policy_statement.Principal.Service), "elasticbeanstalk")
 }
 
 elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     lower(policy_statement.Resource) == "*"
-    contains(policy_statement.Principal.Service, "elasticbeanstalk")
+    contains(lower(policy_statement.Principal.Service), "elasticbeanstalk")
 }
 
 elasticbeanstalk_platform_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of elastic bean stalk." {
@@ -750,36 +833,42 @@ ec2_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_resource := policy_statement.Resource[_]
     lower(policy_resource) == "*"
-    services := policy_statement.Principal.Service[_]
-    contains(services, "ec2")
+    array_element_contains(policy_statement.Principal.Service, "ec2")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "ec2")
 }
 
 ec2_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     lower(policy_statement.Resource) == "*"
-    services := policy_statement.Principal.Service[_]
-    contains(services, "ec2")
+    array_element_contains(policy_statement.Principal.Service, "ec2")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "ec2")
 }
 
 ec2_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_resource := policy_statement.Resource[_]
     lower(policy_resource) == "*"
-    contains(policy_statement.Principal.Service, "ec2")
+    contains(lower(policy_statement.Principal.Service), "ec2")
 }
 
 ec2_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     lower(policy_statement.Resource) == "*"
-    contains(policy_statement.Principal.Service, "ec2")
+    contains(lower(policy_statement.Principal.Service), "ec2")
 }
 
 ec2_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ec2." {
@@ -808,10 +897,12 @@ lambda_function_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_resource := policy_statement.Resource[_]
     lower(policy_resource) == "*"
-    services := policy_statement.Principal.Service[_]
-    contains(services, "lambda")
+    array_element_contains(policy_statement.Principal.Service, "lambda")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "lambda")
 }
 
 
@@ -819,26 +910,30 @@ lambda_function_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     lower(policy_statement.Resource) == "*"
-    services := policy_statement.Principal.Service[_]
-    contains(services, "lambda")
+    array_element_contains(policy_statement.Principal.Service, "lambda")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "lambda")
 }
 
 lambda_function_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_resource := policy_statement.Resource[_]
     lower(policy_resource) == "*"
-    contains(policy_statement.Principal.Service, "lambda")
+    contains(lower(policy_statement.Principal.Service), "lambda")
 }
 
 lambda_function_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     lower(policy_statement.Resource) == "*"
-    contains(policy_statement.Principal.Service, "lambda")
+    contains(lower(policy_statement.Principal.Service), "lambda")
 }
 
 lambda_function_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of lambda function." {
@@ -857,6 +952,7 @@ lambda_function_with_iam_wildcard_resource_access_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
 }
 
+
 #
 # PR-AWS-CLD-IAM-021
 #
@@ -867,36 +963,42 @@ ecs_task_definition_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_resource := policy_statement.Resource[_]
     lower(policy_resource) == "*"
-    services := policy_statement.Principal.Service[_]
-    contains(services, "ecs")
+    array_element_contains(policy_statement.Principal.Service, "ecs")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "ecs")
 }
 
 ecs_task_definition_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     lower(policy_statement.Resource) == "*"
-    services := policy_statement.Principal.Service[_]
-    contains(services, "ecs")
+    array_element_contains(policy_statement.Principal.Service, "ecs")
+    #services := policy_statement.Principal.Service[_]
+    #contains(services, "ecs")
 }
 
 ecs_task_definition_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     policy_resource := policy_statement.Resource[_]
     lower(policy_resource) == "*"
-    contains(policy_statement.Principal.Service, "ecs")
+    contains(lower(policy_statement.Principal.Service), "ecs")
 }
 
 ecs_task_definition_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
     lower(policy_statement.Resource) == "*"
-    contains(policy_statement.Principal.Service, "ecs")
+    contains(lower(policy_statement.Principal.Service), "ecs")
 }
 
 ecs_task_definition_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ecs task definition." {
@@ -915,45 +1017,54 @@ ecs_task_definition_with_iam_wildcard_resource_access_metadata := {
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
 }
 
+
 #
 # PR-AWS-CLD-IAM-022
 #
 
-default ecr_repository_is_publicly_accessible_through_iam_policies = false
+default ecr_repository_is_not_publicly_accessible_through_resource_policies = true
 
-ecr_repository_is_publicly_accessible_through_iam_policies = true {
+ecr_repository_is_not_publicly_accessible_through_resource_policies = false {
 #     lower(resource.Type) == "aws::iam::role"
-    some string
-    role_policy_document := input.Role.AssumeRolePolicyDocument
-    policy_statement := role_policy_document.Statement[i]
-    contains(lower(policy_statement.Principal.Service), "ecr")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    # some string
+    # role_policy_document := input.Role.AssumeRolePolicyDocument
+    # policy_statement := role_policy_document.Statement[i]
+    # contains(lower(policy_statement.Principal.Service), "ecr")
+    # has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    policy_statement := input.Statement[_]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Principal.AWS == "*"
+    not policy_statement.Condition
 }
 
-ecr_repository_is_publicly_accessible_through_iam_policies = true {
+ecr_repository_is_not_publicly_accessible_through_resource_policies = false {
 #     lower(resource.Type) == "aws::iam::role"
-    some string
-    role_policy_document := input.Role.AssumeRolePolicyDocument
-    policy_statement := role_policy_document.Statement[i]
-    services := policy_statement.Principal.Service[_]
-    contains(lower(services), "ecr")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    # some string
+    # role_policy_document := input.Role.AssumeRolePolicyDocument
+    # policy_statement := role_policy_document.Statement[i]
+    # services := policy_statement.Principal.Service[_]
+    # contains(lower(services), "ecr")
+    # has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    policy_statement := input.Statement[_]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Principal == "*"
+    not policy_statement.Condition
 }
 
-ecr_repository_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS ECR Repository resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
-    not ecr_repository_is_publicly_accessible_through_iam_policies
+ecr_repository_is_not_publicly_accessible_through_resource_policies_err = "AWS ECR Repository provisioned in your AWS account currently publicly exposed via resource policy without a condition. Please fix." {
+    not ecr_repository_is_not_publicly_accessible_through_resource_policies
 }
 
-ecr_repository_is_publicly_accessible_through_iam_policies_metadata := {
+ecr_repository_is_not_publicly_accessible_through_resource_policies_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-022",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that the AWS ECR Repository resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
-    "Policy Description": "It identifies the AWS ECR Repository resources which are publicly accessible through IAM policies. Ensure that the AWS ECR Repository resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Policy Title": "AWS ECR Repository should not publicly exposed via resource policy without a condition",
+    "Policy Description": "Protect the Amazon ECR image repositories available within your AWS account from any unauthorized access. Amazon Elastic Container Registry uses resource-based policies to control access. These types of permission policies let you specify who has access to your ECR repositories and what actions they can perform on them. Allowing public access to your Amazon ECR image repositories through resource-based policies can lead to data leakage and/or data loss.",
     "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecr/client/get_repository_policy.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html"
 }
 
 #
@@ -1005,45 +1116,54 @@ lambda_function_is_not_publicly_accessible_through_resource_policies_metadata :=
     "Resource Help URL": "https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html"
 }
 
+
 #
 # PR-AWS-CLD-IAM-024
 #
 
-default s3_bucket_is_publicly_accessible_through_iam_policies = false
+default s3_bucket_is_not_publicly_accessible_through_resource_policies = true
 
-s3_bucket_is_publicly_accessible_through_iam_policies = true {
+s3_bucket_is_not_publicly_accessible_through_resource_policies = false {
 #     lower(resource.Type) == "aws::iam::role"
-    some string
-    role_policy_document := input.Role.AssumeRolePolicyDocument
-    policy_statement := role_policy_document.Statement[i]
-    contains(lower(policy_statement.Principal.Service), "s3")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    # some string
+    # role_policy_document := input.Role.AssumeRolePolicyDocument
+    # policy_statement := role_policy_document.Statement[i]
+    # contains(lower(policy_statement.Principal.Service), "s3")
+    # has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    policy_statement := input.Statement[_]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Principal.AWS == "*"
+    not policy_statement.Condition
 }
 
-s3_bucket_is_publicly_accessible_through_iam_policies = true {
+s3_bucket_is_not_publicly_accessible_through_resource_policies = false {
 #     lower(resource.Type) == "aws::iam::role"
-    some string
-    role_policy_document := input.Role.AssumeRolePolicyDocument
-    policy_statement := role_policy_document.Statement[i]
-    services := policy_statement.Principal.Service[_]
-    contains(lower(services), "s3")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    # some string
+    # role_policy_document := input.Role.AssumeRolePolicyDocument
+    # policy_statement := role_policy_document.Statement[i]
+    # services := policy_statement.Principal.Service[_]
+    # contains(lower(services), "s3")
+    # has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    policy_statement := input.Statement[_]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Principal == "*"
+    not policy_statement.Condition
 }
 
-s3_bucket_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS S3 bucket resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
-    not s3_bucket_is_publicly_accessible_through_iam_policies
+s3_bucket_is_not_publicly_accessible_through_resource_policies_err = "AWS S3 bucket currently publicly exposed via resource policy without a condition. Please fix." {
+    not s3_bucket_is_not_publicly_accessible_through_resource_policies
 }
 
-s3_bucket_is_publicly_accessible_through_iam_policies_metadata := {
+s3_bucket_is_not_publicly_accessible_through_resource_policies_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-024",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that the AWS S3 bucket resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
-    "Policy Description": "This policy identifies the AWS S3 bucket resources which are publicly accessible through IAM policies. Ensure that the AWS S3 bucket resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Policy Title": "AWS S3 bucket should not publicly exposed via resource policy without a condition",
+    "Policy Description": "Misconfigured S3 buckets can leak private information to the entire internet or allow unauthorized data tampering / deletion. S3 bucket policy should ensure that principal of least privilege is being followed. A condition statement can be used to control the scope of the policy.",
     "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/client/get_bucket_policy.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html"
 }
 
 #

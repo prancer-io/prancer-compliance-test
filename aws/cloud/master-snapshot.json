@@ -966,6 +966,26 @@
 					"detailMethods": [
 						"get_policy"
 					]
+				},
+				{
+					"masterSnapshotId": "TEST_ECR_01",
+					"arn": "arn:aws:ecr:::",
+					"type": "ecr",
+					"collection": "aws_ecr",
+					"listMethod": "describe_repositories",
+					"detailMethods": [
+						"get_repository_policy"
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_S3_01",
+					"arn": "arn:aws:s3:::",
+					"type": "s3",
+					"collection": "aws_s3",
+					"listMethod": "list_buckets",
+					"detailMethods": [
+						"get_bucket_policy"
+					]
 				}
 			]
 		}
