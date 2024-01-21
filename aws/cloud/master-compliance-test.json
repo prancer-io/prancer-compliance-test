@@ -19785,8 +19785,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-021",
-                            "eval": "data.rule.ecs_task_definition_with_iam_wildcard_resource_access",
-                            "message": "data.rule.ecs_task_definition_with_iam_wildcard_resource_access_err",
+                            "eval": "data.rule.ecs_task_definition_dont_have_iam_wildcard_resource_access",
+                            "message": "data.rule.ecs_task_definition_dont_have_iam_wildcard_resource_access_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_IAM_021.py"
                         }
@@ -19833,7 +19833,7 @@
                             "id": "PR-AWS-CLD-IAM-022",
                             "eval": "data.rule.ecr_repository_is_not_publicly_accessible_through_resource_policies",
                             "message": "data.rule.ecr_repository_is_not_publicly_accessible_through_resource_policies_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationDescription": "",
                             "remediationFunction": "PR_AWS_CLD_IAM_022.py"
                         }
                     ],
@@ -19921,7 +19921,7 @@
                             "id": "PR-AWS-CLD-IAM-024",
                             "eval": "data.rule.s3_bucket_is_not_publicly_accessible_through_resource_policies",
                             "message": "data.rule.s3_bucket_is_not_publicly_accessible_through_resource_policies_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "remediationDescription": "",
                             "remediationFunction": "PR_AWS_CLD_IAM_024.py"
                         }
                     ],
@@ -19958,22 +19958,22 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-025",
                     "masterSnapshotId": [
-                        "TEST_IAM_02"
+                        "TEST_SQS"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-025",
-                            "eval": "data.rule.sqs_queue_is_publicly_accessible_through_iam_policies",
-                            "message": "data.rule.sqs_queue_is_publicly_accessible_through_iam_policies_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "eval": "data.rule.sqs_is_not_publicly_accessible_through_resource_policies",
+                            "message": "data.rule.sqs_is_not_publicly_accessible_through_resource_policies_err",
+                            "remediationDescription": "",
                             "remediationFunction": "PR_AWS_CLD_IAM_025.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
-                    "description": "This policy identifies the AWS SQS Queue resources which are publicly accessible through IAM policies. Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "title": "AWS SQS should not publicly exposed via resource policy without a condition",
+                    "description": "SQS might contain sensitive information. Determine the specific principals the their required actions, and then craft IAM policy with the required permissions.",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -20004,22 +20004,22 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-026",
                     "masterSnapshotId": [
-                        "TEST_IAM_02"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-026",
-                            "eval": "data.rule.secret_manager_secret_is_publicly_accessible_through_iam_policies",
-                            "message": "data.rule.secret_manager_secret_is_publicly_accessible_through_iam_policies_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "eval": "data.rule.secret_manager_secret_is_not_publicly_accessible_through_iam_policies",
+                            "message": "data.rule.secret_manager_secret_is_not_publicly_accessible_through_iam_policies_err",
+                            "remediationDescription": "",
                             "remediationFunction": "PR_AWS_CLD_IAM_026.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
-                    "description": "This policy identifies the AWS Secret Manager Secret resources which are publicly accessible through IAM policies. Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "title": "AWS Secrets Manager Secrets should not publicly accessible through IAM policies",
+                    "description": "This policy aims to enhance the security of AWS Secrets stored in AWS Secrets Manager by preventing them from being publicly accessible through IAM policies. AWS Secrets Manager is a secure and scalable way to manage sensitive information, and allowing public access via IAM policies can lead to unauthorized exposure of critical secrets. By implementing this policy, access to secrets is restricted only to authorized entities, reducing the risk of unauthorized access and enhancing the overall security of the AWS environment.",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -20050,16 +20050,16 @@
                 {
                     "masterTestId": "PR-AWS-CLD-IAM-027",
                     "masterSnapshotId": [
-                        "TEST_IAM_02"
+                        "TEST_IAM_01"
                     ],
                     "type": "rego",
                     "rule": "file(iam.rego)",
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-027",
-                            "eval": "data.rule.iam_policy_permission_may_cause_privilege_escalation",
-                            "message": "data.rule.iam_policy_permission_may_cause_privilege_escalation_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role' target='_blank'>here</a>",
+                            "eval": "data.rule.iam_policy_permission_should_not_cause_privilege_escalation",
+                            "message": "data.rule.iam_policy_permission_should_not_cause_privilege_escalation_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_IAM_027.py"
                         }
                     ],
@@ -20207,38 +20207,6 @@
                                 "SOC 2-CC6.6",
                                 "SOC 2-CC6.7",
                                 "zerotrust"
-                            ],
-                            "service": [
-                                "iam"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "PR-AWS-CLD-IAM-041",
-                    "masterSnapshotId": [
-                        "TEST_IAM_01"
-                    ],
-                    "type": "rego",
-                    "rule": "file(iam.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-IAM-041",
-                            "eval": "data.rule.not_allow_decryption_actions_on_all_kms_keys",
-                            "message": "data.rule.not_allow_decryption_actions_on_all_kms_keys_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_IAM_041.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure AWS IAM policy does not allows decryption actions on all KMS keys.",
-                    "description": "It identifies IAM policies that allow decryption actions on all KMS keys. Instead of granting permissions for all keys, determine the minimum set of keys that users need to access encrypted data. You should grant to identities only the kms:Decrypt or kms:ReEncryptFrom permissions and only for the keys that are required to perform a task. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data.",
-                    "tags": [
-                        {
-                            "cloud": "AWS",
-                            "compliance": [
-                                "AWS Well-Architected Framework",
-                                "AWS Well-Architected Framework-Identity and Access Management"
                             ],
                             "service": [
                                 "iam"

@@ -957,9 +957,9 @@ lambda_function_with_iam_wildcard_resource_access_metadata := {
 # PR-AWS-CLD-IAM-021
 #
 
-default ecs_task_definition_with_iam_wildcard_resource_access = true
+default ecs_task_definition_dont_have_iam_wildcard_resource_access = true
 
-ecs_task_definition_with_iam_wildcard_resource_access = false {
+ecs_task_definition_dont_have_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -971,7 +971,7 @@ ecs_task_definition_with_iam_wildcard_resource_access = false {
     #contains(services, "ecs")
 }
 
-ecs_task_definition_with_iam_wildcard_resource_access = false {
+ecs_task_definition_dont_have_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -982,7 +982,7 @@ ecs_task_definition_with_iam_wildcard_resource_access = false {
     #contains(services, "ecs")
 }
 
-ecs_task_definition_with_iam_wildcard_resource_access = false {
+ecs_task_definition_dont_have_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -992,7 +992,7 @@ ecs_task_definition_with_iam_wildcard_resource_access = false {
     contains(lower(policy_statement.Principal.Service), "ecs")
 }
 
-ecs_task_definition_with_iam_wildcard_resource_access = false {
+ecs_task_definition_dont_have_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1001,11 +1001,11 @@ ecs_task_definition_with_iam_wildcard_resource_access = false {
     contains(lower(policy_statement.Principal.Service), "ecs")
 }
 
-ecs_task_definition_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ecs task definition." {
-    not ecs_task_definition_with_iam_wildcard_resource_access
+ecs_task_definition_dont_have_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ecs task definition." {
+    not ecs_task_definition_dont_have_iam_wildcard_resource_access
 }
 
-ecs_task_definition_with_iam_wildcard_resource_access_metadata := {
+ecs_task_definition_dont_have_iam_wildcard_resource_access_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-021",
     "Type": "cloud",
     "Product": "AWS",
@@ -1170,116 +1170,163 @@ s3_bucket_is_not_publicly_accessible_through_resource_policies_metadata := {
 # PR-AWS-CLD-IAM-025
 #
 
-default sqs_queue_is_publicly_accessible_through_iam_policies = false
+default sqs_is_not_publicly_accessible_through_resource_policies = true
 
-condition_for_sqs := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
+#condition_for_sqs := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
 
-sqs_queue_is_publicly_accessible_through_iam_policies = true {
+sqs_is_not_publicly_accessible_through_resource_policies = false {
 #     lower(resource.Type) == "aws::iam::role"
-    some string
-    role_policy_document := input.Role.AssumeRolePolicyDocument
-    policy_statement := role_policy_document.Statement[i]
-    contains(lower(policy_statement.Principal.Service), "sqs")
-    has_property(policy_statement.Condition[string], condition_for_sqs[_])
+    # some string
+    # role_policy_document := input.Role.AssumeRolePolicyDocument
+    # policy_statement := role_policy_document.Statement[i]
+    # contains(lower(policy_statement.Principal.Service), "sqs")
+    # has_property(policy_statement.Condition[string], condition_for_sqs[_])
+    policy_statement := input.Attributes.Policy.Statement[_]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Principal.AWS == "*"
+    lower(policy_statement.Action[_]) == "sqs:*"
+    not policy_statement.Condition
 }
 
-sqs_queue_is_publicly_accessible_through_iam_policies = true {
+sqs_is_not_publicly_accessible_through_resource_policies = false {
 #     lower(resource.Type) == "aws::iam::role"
-    some string
-    role_policy_document := input.Role.AssumeRolePolicyDocument
-    policy_statement := role_policy_document.Statement[i]
-    services := policy_statement.Principal.Service[_]
-    contains(lower(services), "sqs")
-    has_property(policy_statement.Condition[string], condition_for_sqs[_])
+    policy_statement := input.Attributes.Policy.Statement[_]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Principal.AWS == "*"
+    lower(policy_statement.Action) == "sqs:*"
+    not policy_statement.Condition
 }
 
-sqs_queue_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
-    not sqs_queue_is_publicly_accessible_through_iam_policies
+sqs_is_not_publicly_accessible_through_resource_policies = false {
+#     lower(resource.Type) == "aws::iam::role"
+    # some string
+    # role_policy_document := input.Role.AssumeRolePolicyDocument
+    # policy_statement := role_policy_document.Statement[i]
+    # services := policy_statement.Principal.Service[_]
+    # contains(lower(services), "sqs")
+    # has_property(policy_statement.Condition[string], condition_for_sqs[_])
+    policy_statement := input.Attributes.Policy.Statement[_]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Principal == "*"
+    lower(policy_statement.Action[_]) == "sqs:*"
+    not policy_statement.Condition
 }
 
-sqs_queue_is_publicly_accessible_through_iam_policies_metadata := {
+sqs_is_not_publicly_accessible_through_resource_policies = false {
+#     lower(resource.Type) == "aws::iam::role"
+    policy_statement := input.Attributes.Policy.Statement[_]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Principal == "*"
+    lower(policy_statement.Action) == "sqs:*"
+    not policy_statement.Condition
+}
+
+sqs_is_not_publicly_accessible_through_resource_policies_err = "AWS SQS currently publicly exposed via resource policy without a condition. Please fix." {
+    not sqs_is_not_publicly_accessible_through_resource_policies
+}
+
+sqs_is_not_publicly_accessible_through_resource_policies_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-025",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
-    "Policy Description": "This policy identifies the AWS SQS Queue resources which are publicly accessible through IAM policies. Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Policy Title": "AWS SQS should not publicly exposed via resource policy without a condition",
+    "Policy Description": "SQS might contain sensitive information. Determine the specific principals the their required actions, and then craft IAM policy with the required permissions.",
     "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sqs/client/get_queue_attributes.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html"
 }
 
 #
 # PR-AWS-CLD-IAM-026
 #
 
-default secret_manager_secret_is_publicly_accessible_through_iam_policies = false
+default secret_manager_secret_is_not_publicly_accessible_through_iam_policies = true
 
-secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
-    some string
-    role_policy_document := input.Role.AssumeRolePolicyDocument
-    policy_statement := role_policy_document.Statement[i]
-    contains(lower(policy_statement.Principal.Service), "secretsmanager")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+secret_manager_secret_is_not_publicly_accessible_through_iam_policies = false {
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource == "*"
+    array_contains(policy_statement.Action, "secretsmanager:GetSecretValue")
 }
 
-secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
-    some string
-    role_policy_document := input.Role.AssumeRolePolicyDocument
-    policy_statement := role_policy_document.Statement[i]
-    services := policy_statement.Principal.Service[_]
-    contains(lower(services), "secretsmanager")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+secret_manager_secret_is_not_publicly_accessible_through_iam_policies = false {
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource == "*"
+    array_contains(policy_statement.Action, "secretsmanager:*")
 }
 
-secret_manager_secret_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
-    not secret_manager_secret_is_publicly_accessible_through_iam_policies
+secret_manager_secret_is_not_publicly_accessible_through_iam_policies = false {
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource == "*"
+    lower(policy_statement.Action) = "secretsmanager:getsecretvalue"
 }
 
-secret_manager_secret_is_publicly_accessible_through_iam_policies_metadata := {
+secret_manager_secret_is_not_publicly_accessible_through_iam_policies = false {
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
+    lower(policy_statement.Effect) == "allow"
+    policy_statement.Resource == "*"
+    lower(policy_statement.Action) = "secretsmanager:*"
+}
+
+secret_manager_secret_is_not_publicly_accessible_through_iam_policies_err = "Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
+    not secret_manager_secret_is_not_publicly_accessible_through_iam_policies
+}
+
+secret_manager_secret_is_not_publicly_accessible_through_iam_policies_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-026",
     "Type": "cloud",
     "Product": "AWS",
     "Language": "AWS Cloud",
-    "Policy Title": "Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
-    "Policy Description": "This policy identifies the AWS Secret Manager Secret resources which are publicly accessible through IAM policies. Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Policy Title": "AWS Secrets Manager Secrets should not publicly accessible through IAM policies",
+    "Policy Description": "This policy aims to enhance the security of AWS Secrets stored in AWS Secrets Manager by preventing them from being publicly accessible through IAM policies. AWS Secrets Manager is a secure and scalable way to manage sensitive information, and allowing public access via IAM policies can lead to unauthorized exposure of critical secrets. By implementing this policy, access to secrets is restricted only to authorized entities, reducing the risk of unauthorized access and enhancing the overall security of the AWS environment.",
     "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
 }
 
 #
 # PR-AWS-CLD-IAM-027
 #
 
-default iam_policy_permission_may_cause_privilege_escalation = true
+default iam_policy_permission_should_not_cause_privilege_escalation = true
 
 action_iam_policy_permission_may_cause_privilege_escalation := ["iam:CreatePolicyVersion", "iam:SetDefaultPolicyVersion", "iam:PassRole", "iam:CreateAccessKey", "iam:CreateLoginProfile", "iam:UpdateLoginProfile", "iam:AttachUserPolicy", "iam:AttachGroupPolicy", "iam:AttachRolePolicy", "iam:PutUserPolicy", "iam:PutGroupPolicy", "iam:PutRolePolicy", "iam:AddUserToGroup", "iam:UpdateAssumeRolePolicy", "iam:*"]
 
-iam_policy_permission_may_cause_privilege_escalation = false {
+iam_policy_permission_should_not_cause_privilege_escalation = false {
     # lower(resource.Type) == "aws::iam::policyversion"
-    role_policy_document := input.Role.AssumeRolePolicyDocument
-    policy_statement := role_policy_document.Statement[i]
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_action := policy_statement.Action[_]
     policy_action == action_iam_policy_permission_may_cause_privilege_escalation[_]
 }
 
-iam_policy_permission_may_cause_privilege_escalation = false {
+iam_policy_permission_should_not_cause_privilege_escalation = false {
     # lower(resource.Type) == "aws::iam::policyversion"
-    role_policy_document := input.Role.AssumeRolePolicyDocument
-    policy_statement := role_policy_document.Statement[i]
+    version := input.PolicyVersion
+    policy_document := version.Document
+    policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Action == action_iam_policy_permission_may_cause_privilege_escalation[_]
 }
 
-iam_policy_permission_may_cause_privilege_escalation_err = "Ensure AWS IAM policy do not have permission which may cause privilege escalation." {
-    not iam_policy_permission_may_cause_privilege_escalation
+iam_policy_permission_should_not_cause_privilege_escalation_err = "Ensure AWS IAM policy do not have permission which may cause privilege escalation." {
+    not iam_policy_permission_should_not_cause_privilege_escalation
 }
 
-iam_policy_permission_may_cause_privilege_escalation_metadata := {
+iam_policy_permission_should_not_cause_privilege_escalation_metadata := {
     "Policy Code": "PR-AWS-CLD-IAM-027",
     "Type": "cloud",
     "Product": "AWS",
@@ -1287,8 +1334,8 @@ iam_policy_permission_may_cause_privilege_escalation_metadata := {
     "Policy Title": "Ensure AWS IAM policy do not have permission which may cause privilege escalation.",
     "Policy Description": "It identifies AWS IAM Policy which have permission that may cause privilege escalation. AWS IAM policy having weak permissions could be exploited by an attacker to elevate privileges. It is recommended to follow the principle of least privileges ensuring that AWS IAM policy does not have these sensitive permissions.",
     "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_role"
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam/client/get_policy_version.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html"
 }
 
 #
@@ -1323,7 +1370,7 @@ iam_access_key_enabled_on_root_account_metadata := {
 # PR-AWS-CLD-IAM-029
 #
 
-default iam_policy_not_overly_permissive_to_all_traffic_for_ecs= true
+default iam_policy_not_overly_permissive_to_all_traffic_for_ecs = true
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
     # lower(resource.Type) == "aws::iam::policyversion"
@@ -1366,7 +1413,7 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
 }
 
 
-iam_policy_not_overly_permissive_to_all_traffic_for_ecs_err = "Ensure IAM policy is not overly permissive to all traffic for ecs." {
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs_err = "ECS IAM policy currently have overly permissive to allow traffic from any source. Please Fix." {
     not iam_policy_not_overly_permissive_to_all_traffic_for_ecs
 }
 
@@ -1449,155 +1496,155 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 # PR-AWS-CLD-IAM-041
 #
 
-default not_allow_decryption_actions_on_all_kms_keys = true
+# default not_allow_decryption_actions_on_all_kms_keys = true
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
-    policy_document := version.Document
-    policy_statement := policy_document.Statement[i]
-    lower(policy_statement.Effect) == "allow"
-    policy_statement.Resource == "*"
-    contains(policy_statement.Action[_], "kms:*")
-    not policy_statement.Condition
-}
+# not_allow_decryption_actions_on_all_kms_keys = false {
+#     # lower(resource.Type) == "aws::iam::policyversion"
+#     version := input.PolicyVersion
+#     policy_document := version.Document
+#     policy_statement := policy_document.Statement[i]
+#     lower(policy_statement.Effect) == "allow"
+#     policy_statement.Resource == "*"
+#     contains(policy_statement.Action[_], "kms:*")
+#     not policy_statement.Condition
+# }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
-    policy_document := version.Document
-    policy_statement := policy_document.Statement[i]
-    lower(policy_statement.Effect) == "allow"
-    policy_statement.Resource == "*"
-    contains(policy_statement.Action, "kms:*")
-    not policy_statement.Condition
-}
+# not_allow_decryption_actions_on_all_kms_keys = false {
+#     # lower(resource.Type) == "aws::iam::policyversion"
+#     version := input.PolicyVersion
+#     policy_document := version.Document
+#     policy_statement := policy_document.Statement[i]
+#     lower(policy_statement.Effect) == "allow"
+#     policy_statement.Resource == "*"
+#     contains(policy_statement.Action, "kms:*")
+#     not policy_statement.Condition
+# }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
-    policy_document := version.Document
-    policy_statement := policy_document.Statement[i]
-    lower(policy_statement.Effect) == "allow"
-    policy_statement.Resource[_]== "*"
-    contains(policy_statement.Action, "kms:*")
-    not policy_statement.Condition
-}
+# not_allow_decryption_actions_on_all_kms_keys = false {
+#     # lower(resource.Type) == "aws::iam::policyversion"
+#     version := input.PolicyVersion
+#     policy_document := version.Document
+#     policy_statement := policy_document.Statement[i]
+#     lower(policy_statement.Effect) == "allow"
+#     policy_statement.Resource[_]== "*"
+#     contains(policy_statement.Action, "kms:*")
+#     not policy_statement.Condition
+# }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
-    policy_document := version.Document
-    policy_statement := policy_document.Statement[i]
-    lower(policy_statement.Effect) == "allow"
-    policy_statement.Resource[_] == "*"
-    contains(policy_statement.Action[_], "kms:*")
-    not policy_statement.Condition
-}
+# not_allow_decryption_actions_on_all_kms_keys = false {
+#     # lower(resource.Type) == "aws::iam::policyversion"
+#     version := input.PolicyVersion
+#     policy_document := version.Document
+#     policy_statement := policy_document.Statement[i]
+#     lower(policy_statement.Effect) == "allow"
+#     policy_statement.Resource[_] == "*"
+#     contains(policy_statement.Action[_], "kms:*")
+#     not policy_statement.Condition
+# }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
-    policy_document := version.Document
-    policy_statement := policy_document.Statement[i]
-    lower(policy_statement.Effect) == "allow"
-    policy_statement.Resource == "*"
-    contains(policy_statement.Action[_], "kms:Decrypt")
-    not policy_statement.Condition
-}
+# not_allow_decryption_actions_on_all_kms_keys = false {
+#     # lower(resource.Type) == "aws::iam::policyversion"
+#     version := input.PolicyVersion
+#     policy_document := version.Document
+#     policy_statement := policy_document.Statement[i]
+#     lower(policy_statement.Effect) == "allow"
+#     policy_statement.Resource == "*"
+#     contains(policy_statement.Action[_], "kms:Decrypt")
+#     not policy_statement.Condition
+# }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
-    policy_document := version.Document
-    policy_statement := policy_document.Statement[i]
-    lower(policy_statement.Effect) == "allow"
-    policy_statement.Resource == "*"
-    contains(policy_statement.Action, "kms:Decrypt")
-    not policy_statement.Condition
-}
+# not_allow_decryption_actions_on_all_kms_keys = false {
+#     # lower(resource.Type) == "aws::iam::policyversion"
+#     version := input.PolicyVersion
+#     policy_document := version.Document
+#     policy_statement := policy_document.Statement[i]
+#     lower(policy_statement.Effect) == "allow"
+#     policy_statement.Resource == "*"
+#     contains(policy_statement.Action, "kms:Decrypt")
+#     not policy_statement.Condition
+# }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
-    policy_document := version.Document
-    policy_statement := policy_document.Statement[i]
-    lower(policy_statement.Effect) == "allow"
-    policy_statement.Resource[_]== "*"
-    contains(policy_statement.Action, "kms:Decrypt")
-    not policy_statement.Condition
-}
+# not_allow_decryption_actions_on_all_kms_keys = false {
+#     # lower(resource.Type) == "aws::iam::policyversion"
+#     version := input.PolicyVersion
+#     policy_document := version.Document
+#     policy_statement := policy_document.Statement[i]
+#     lower(policy_statement.Effect) == "allow"
+#     policy_statement.Resource[_]== "*"
+#     contains(policy_statement.Action, "kms:Decrypt")
+#     not policy_statement.Condition
+# }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
-    policy_document := version.Document
-    policy_statement := policy_document.Statement[i]
-    lower(policy_statement.Effect) == "allow"
-    policy_statement.Resource[_] == "*"
-    contains(policy_statement.Action[_], "kms:Decrypt")
-    not policy_statement.Condition
-}
+# not_allow_decryption_actions_on_all_kms_keys = false {
+#     # lower(resource.Type) == "aws::iam::policyversion"
+#     version := input.PolicyVersion
+#     policy_document := version.Document
+#     policy_statement := policy_document.Statement[i]
+#     lower(policy_statement.Effect) == "allow"
+#     policy_statement.Resource[_] == "*"
+#     contains(policy_statement.Action[_], "kms:Decrypt")
+#     not policy_statement.Condition
+# }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
-    policy_document := version.Document
-    policy_statement := policy_document.Statement[i]
-    lower(policy_statement.Effect) == "allow"
-    policy_statement.Resource == "*"
-    contains(policy_statement.Action[_], "kms:ReEncryptFrom")
-    not policy_statement.Condition
-}
+# not_allow_decryption_actions_on_all_kms_keys = false {
+#     # lower(resource.Type) == "aws::iam::policyversion"
+#     version := input.PolicyVersion
+#     policy_document := version.Document
+#     policy_statement := policy_document.Statement[i]
+#     lower(policy_statement.Effect) == "allow"
+#     policy_statement.Resource == "*"
+#     contains(policy_statement.Action[_], "kms:ReEncryptFrom")
+#     not policy_statement.Condition
+# }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
-    policy_document := version.Document
-    policy_statement := policy_document.Statement[i]
-    lower(policy_statement.Effect) == "allow"
-    policy_statement.Resource == "*"
-    contains(policy_statement.Action, "kms:ReEncryptFrom")
-    not policy_statement.Condition
-}
+# not_allow_decryption_actions_on_all_kms_keys = false {
+#     # lower(resource.Type) == "aws::iam::policyversion"
+#     version := input.PolicyVersion
+#     policy_document := version.Document
+#     policy_statement := policy_document.Statement[i]
+#     lower(policy_statement.Effect) == "allow"
+#     policy_statement.Resource == "*"
+#     contains(policy_statement.Action, "kms:ReEncryptFrom")
+#     not policy_statement.Condition
+# }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
-    policy_document := version.Document
-    policy_statement := policy_document.Statement[i]
-    lower(policy_statement.Effect) == "allow"
-    policy_statement.Resource[_]== "*"
-    contains(policy_statement.Action, "kms:ReEncryptFrom")
-    not policy_statement.Condition
-}
+# not_allow_decryption_actions_on_all_kms_keys = false {
+#     # lower(resource.Type) == "aws::iam::policyversion"
+#     version := input.PolicyVersion
+#     policy_document := version.Document
+#     policy_statement := policy_document.Statement[i]
+#     lower(policy_statement.Effect) == "allow"
+#     policy_statement.Resource[_]== "*"
+#     contains(policy_statement.Action, "kms:ReEncryptFrom")
+#     not policy_statement.Condition
+# }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
-    version := input.PolicyVersion
-    policy_document := version.Document
-    policy_statement := policy_document.Statement[i]
-    lower(policy_statement.Effect) == "allow"
-    policy_statement.Resource[_] == "*"
-    contains(policy_statement.Action[_], "kms:ReEncryptFrom")
-    not policy_statement.Condition
-}
+# not_allow_decryption_actions_on_all_kms_keys = false {
+#     # lower(resource.Type) == "aws::iam::policyversion"
+#     version := input.PolicyVersion
+#     policy_document := version.Document
+#     policy_statement := policy_document.Statement[i]
+#     lower(policy_statement.Effect) == "allow"
+#     policy_statement.Resource[_] == "*"
+#     contains(policy_statement.Action[_], "kms:ReEncryptFrom")
+#     not policy_statement.Condition
+# }
 
-not_allow_decryption_actions_on_all_kms_keys_err = "Ensure AWS IAM policy does not allows decryption actions on all KMS keys." {
-    not not_allow_decryption_actions_on_all_kms_keys
-}
+# not_allow_decryption_actions_on_all_kms_keys_err = "Ensure AWS IAM policy does not allows decryption actions on all KMS keys." {
+#     not not_allow_decryption_actions_on_all_kms_keys
+# }
 
-not_allow_decryption_actions_on_all_kms_keys_metadata := {
-    "Policy Code": "PR-AWS-CLD-IAM-041",
-    "Type": "cloud",
-    "Product": "AWS",
-    "Language": "AWS Cloud",
-    "Policy Title": "Ensure AWS IAM policy does not allows decryption actions on all KMS keys.",
-    "Policy Description": "It identifies IAM policies that allow decryption actions on all KMS keys. Instead of granting permissions for all keys, determine the minimum set of keys that users need to access encrypted data. You should grant to identities only the kms:Decrypt or kms:ReEncryptFrom permissions and only for the keys that are required to perform a task. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
-}
+# not_allow_decryption_actions_on_all_kms_keys_metadata := {
+#     "Policy Code": "PR-AWS-CLD-IAM-041",
+#     "Type": "cloud",
+#     "Product": "AWS",
+#     "Language": "AWS Cloud",
+#     "Policy Title": "Ensure AWS IAM policy does not allows decryption actions on all KMS keys.",
+#     "Policy Description": "It identifies IAM policies that allow decryption actions on all KMS keys. Instead of granting permissions for all keys, determine the minimum set of keys that users need to access encrypted data. You should grant to identities only the kms:Decrypt or kms:ReEncryptFrom permissions and only for the keys that are required to perform a task. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data.",
+#     "Resource Type": "",
+#     "Policy Help URL": "",
+#     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.list_policy_versions"
+# }
 
 #
 # PR-AWS-CLD-IAM-042
