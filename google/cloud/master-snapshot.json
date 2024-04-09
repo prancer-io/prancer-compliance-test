@@ -354,6 +354,22 @@
                         ]
                       }
                     ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_SECRET_MANAGER",
+                    "type": "secretmanager/projects.secrets.list",
+                    "get_method": [
+                      "secretmanager/projects.secrets.get"
+                    ],
+                    "collection": "google_secret_manager",
+                    "tags": [
+                      {
+                        "cloud": "GCP",
+                        "service": [
+                          "secret manager"
+                        ]
+                      }
+                    ]
                 }
             ]
         }
