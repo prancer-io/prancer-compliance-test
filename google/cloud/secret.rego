@@ -35,8 +35,8 @@ secret_rotation_enabled_metadata := {
     "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
-    "Policy Title": "Ensure GCP secret manager value rotation should be enabled",
-    "Policy Description": "This policy identifies GCP secrets that are not rotating values. A  Secret Manager is used to securely store API keys, passwords, and other sensitive information. It's recommended to make sure the 'rotation period' is set to a specific time to ensure data cannot be accessed through the old value.",
+    "Policy Title": "Ensure GCP secret manager rotation should be enabled",
+    "Policy Description": "This policy identifies GCP secrets that are not rotated. A  Secret Manager is used to securely store API keys, passwords, and other sensitive information. It is recommended to make sure the 'rotation period' is set to a specific time to ensure data cannot be accessed through the old value.",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/secret-manager/docs/reference/rest/v1/projects.secrets"
 }
@@ -77,8 +77,8 @@ secret_rotation_metadata := {
     "Type": "cloud",
     "Product": "GCP",
     "Language": "GCP cloud",
-    "Policy Title": "Ensure that the GCP Secret Manager value is rotated every 90 days or less",
-    "Policy Description": "This policy identifies GCP secrets that are not rotating values in every 90 days. A  Secret Manager is used to securely store API keys, passwords, and other sensitive information. It's recommended to make sure the 'rotation period' is set to a specific time to ensure data cannot be accessed through the old value.",
+    "Policy Title": "Ensure that the GCP Secret Manager is rotated every 90 days or less",
+    "Policy Description": "This policy identifies GCP secrets that are not rotated with in every 90 days. A  Secret Manager is used to securely store API keys, passwords, and other sensitive information. It is recommended to make sure the 'rotation period' is set to a specific time to ensure data cannot be accessed through the old value.",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/secret-manager/docs/reference/rest/v1/projects.secrets"
 }
@@ -120,7 +120,7 @@ secret_customer_managed_encryption_metadata := {
     "Product": "GCP",
     "Language": "GCP cloud",
     "Policy Title": "Ensure GCP secrets should be encrypted with a customer-managed key",
-    "Policy Description": "This policy identifies GCP secrets that are not encrypted with a customer-managed key. By default secret payloads are encrypted by keys managed by Google. It's recommended to make sure the secrets are encrpted with the Customer managed keys for greater control.",
+    "Policy Description": "This policy identifies GCP secrets that are not encrypted with a customer-managed key. By default secret payloads are encrypted by keys managed by Google. It is recommended to make sure the secrets are encrypted with the Customer managed keys for greater control.",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/secret-manager/docs/reference/rest/v1/projects.secrets"
 }
