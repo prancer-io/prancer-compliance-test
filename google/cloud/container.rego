@@ -471,7 +471,7 @@ gc_issue["k8s_binary_auth"] {
 
 gc_issue["k8s_binary_auth"] {
     # lower(input.type) == "container.v1.cluster"
-    upper(put.binaryAuthorization.evaluationMode) == "DISABLED"
+    upper(input.binaryAuthorization.evaluationMode) == "DISABLED"
 }
 
 k8s_binary_auth {
