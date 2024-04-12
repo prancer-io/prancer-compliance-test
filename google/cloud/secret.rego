@@ -124,3 +124,42 @@ secret_customer_managed_encryption_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/secret-manager/docs/reference/rest/v1/projects.secrets"
 }
+
+#
+# PR-GCP-CLD-SCR-004
+#
+
+default secret_iam_over_privilged = null
+
+gc_issue["secret_iam_over_privilged_not_enabled"] {
+    binding := input.bindings[_]
+    contains(lower(binding.members[_]), "allauthenticatedusers")
+}
+
+gc_issue["secret_iam_over_privilged_not_enabled"] {
+    binding := input.bindings[_]
+    contains(lower(binding.members[_]), "allusers")
+}
+
+secret_iam_over_privilged {
+    not gc_issue["secret_iam_over_privilged_not_enabled"]
+}
+
+secret_iam_over_privilged = false {
+    gc_issue["secret_iam_over_privilged_not_enabled"]
+}
+
+secret_iam_over_privilged_err = "Ensure GCP secrets should be encrypted with a customer-managed key" {
+    gc_issue["secret_iam_over_privilged_not_enabled"]
+}
+
+secret_iam_over_privilged_metadata := {
+    "Policy Code": "PR-GCP-CLD-SCR-004",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP cloud",
+    "Policy Title": "Ensure GCP secrets should not have over priviliged access",
+    "Policy Description": "This policy identifies GCP secrets with overprivileged access. It is recommended to provide the minimum necessary access to resources to perform a specific task to comply with the principle of least privileges and to prevent possible privilege escalation.",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/secret-manager/docs/reference/rest/v1/projects.secrets"
+}

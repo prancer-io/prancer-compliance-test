@@ -6708,7 +6708,25 @@
                                 }
                             ]
                         },
-                            "description": "This policy identifies GCP secrets that are not encrypted with a customer-managed key. By default secret payloads are encrypted by keys managed by Google. It's recommended to make sure the secrets are encrpted with the Customer managed keys for greater control.",
+                        {
+                            "masterTestId": "PR-GCP-CLD-SCR-004",
+                            "masterSnapshotId": [
+                                "GOOGLE_SECRET_MANAGER_POLICY"
+                            ],
+                            "type": "rego",
+                            "rule": "file(secret.rego)",
+                            "evals": [
+                                {
+                                    "id": "PR-GCP-CLD-SCR-004",
+                                    "eval": "data.rule.secret_iam_over_privilged",
+                                    "message": "data.rule.secret_iam_over_privilged_err",
+                                    "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/secret-manager/docs/reference/rest/v1/projects.secrets' target='_blank'>here</a>",
+                                    "remediationFunction": "PR_GCP_CLD_SCR_004.py"
+                                }
+                            ],
+                            "severity": "High",
+                            "title": "Ensure GCP secrets should not have over priviliged access",
+                            "description": "This policy identifies GCP secrets with overprivileged access. It is recommended to provide the minimum necessary access to resources to perform a specific task to comply with the principle of least privileges and to prevent possible privilege escalation.",
                             "tags": [
                                 {
                                     "cloud": "GCP",
