@@ -370,6 +370,22 @@
                         ]
                       }
                     ]
+                },
+                {
+                  "masterSnapshotId": "GOOGLE_SECRET_MANAGER_POLICY",
+                  "type": "secretmanager/projects.secrets.list",
+                  "get_method": [
+                    "secretmanager/projects.secrets.getIamPolicy"
+                  ],
+                  "collection": "secret_manager_policy",
+                  "tags": [
+                    {
+                      "cloud": "GCP",
+                      "service": [
+                        "secret manager"
+                      ]
+                    }
+                  ]
                 }
             ]
         }
