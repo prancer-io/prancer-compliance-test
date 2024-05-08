@@ -6354,6 +6354,134 @@
                             "service": [
                                 "storage"
                             ]
+                        },
+                        {
+                            "masterTestId": "PR-GCP-CLD-SCR-001",
+                            "masterSnapshotId": [
+                                "GOOGLE_SECRET_MANAGER"
+                            ],
+                            "type": "rego",
+                            "rule": "file(secret.rego)",
+                            "evals": [
+                                {
+                                    "id": "PR-GCP-CLD-SCR-001",
+                                    "eval": "data.rule.secret_rotation_enabled",
+                                    "message": "data.rule.secret_rotation_enabled_err",
+                                    "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/secret-manager/docs/reference/rest/v1/projects.secrets' target='_blank'>here</a>",
+                                    "remediationFunction": "PR_GCP_CLD_SCR_001.py"
+                                }
+                            ],
+                            "severity": "Medium",
+                            "title": "Ensure GCP secret manager rotation should be enabled",
+                            "description": "This policy identifies GCP secrets that are not rotated values. A  Secret Manager is used to securely store API keys, passwords, and other sensitive information. It's recommended to make sure the 'rotation period' is set to a specific time to ensure data cannot be accessed through the old value.",
+                            "tags": [
+                                {
+                                    "cloud": "GCP",
+                                    "compliance": [
+                                        "NIST 800",
+                                        "PCI-DSS",
+                                        "CIS"
+                                    ],
+                                    "service": [
+                                        "secret manager"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "masterTestId": "PR-GCP-CLD-SCR-002",
+                            "masterSnapshotId": [
+                                "GOOGLE_SECRET_MANAGER"
+                            ],
+                            "type": "rego",
+                            "rule": "file(secret.rego)",
+                            "evals": [
+                                {
+                                    "id": "PR-GCP-CLD-SCR-002",
+                                    "eval": "data.rule.secret_rotation",
+                                    "message": "data.rule.secret_rotation_err",
+                                    "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/secret-manager/docs/reference/rest/v1/projects.secrets' target='_blank'>here</a>",
+                                    "remediationFunction": "PR_GCP_CLD_SCR_002.py"
+                                }
+                            ],
+                            "severity": "Medium",
+                            "title": "Ensure that the GCP Secret Manager is rotated every 90 days or less",
+                            "description": "This policy identifies GCP Secret Manager that are not rotating values with in every 90 days. A  Secret Manager is used to securely store API keys, passwords, and other sensitive information. It is recommended to make sure the 'rotation period' is set to a specific time to ensure data cannot be accessed through the old value.",
+                            "tags": [
+                                {
+                                    "cloud": "GCP",
+                                    "compliance": [
+                                        "NIST 800",
+                                        "PCI-DSS",
+                                        "CIS"
+                                    ],
+                                    "service": [
+                                        "secret manager"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "masterTestId": "PR-GCP-CLD-SCR-003",
+                            "masterSnapshotId": [
+                                "GOOGLE_SECRET_MANAGER"
+                            ],
+                            "type": "rego",
+                            "rule": "file(secret.rego)",
+                            "evals": [
+                                {
+                                    "id": "PR-GCP-CLD-SCR-003",
+                                    "eval": "data.rule.secret_customer_managed_encryption",
+                                    "message": "data.rule.secret_customer_managed_encryption_err",
+                                    "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/secret-manager/docs/reference/rest/v1/projects.secrets' target='_blank'>here</a>",
+                                    "remediationFunction": "PR_GCP_CLD_SCR_003.py"
+                                }
+                            ],
+                            "severity": "Medium",
+                            "title": "Ensure GCP secrets should be encrypted with a customer-managed key",
+                            "description": "This policy identifies GCP secrets that are not encrypted with a customer-managed key. By default secret payloads are encrypted by keys managed by Google. It is recommended to make sure the secrets are encrypted with the Customer managed keys for greater control.",
+                            "tags": [
+                                {
+                                    "cloud": "GCP",
+                                    "compliance": [
+                                        "Best Practice"
+                                    ],
+                                    "service": [
+                                        "secret manager"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "masterTestId": "PR-GCP-CLD-SCR-004",
+                            "masterSnapshotId": [
+                                "GOOGLE_SECRET_MANAGER_POLICY"
+                            ],
+                            "type": "rego",
+                            "rule": "file(secret.rego)",
+                            "evals": [
+                                {
+                                    "id": "PR-GCP-CLD-SCR-004",
+                                    "eval": "data.rule.secret_iam_over_privilged",
+                                    "message": "data.rule.secret_iam_over_privilged_err",
+                                    "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/secret-manager/docs/reference/rest/v1/projects.secrets' target='_blank'>here</a>",
+                                    "remediationFunction": "PR_GCP_CLD_SCR_004.py"
+                                }
+                            ],
+                            "severity": "High",
+                            "title": "Ensure GCP secrets should not have over priviliged access",
+                            "description": "This policy identifies GCP secrets with overprivileged access. It is recommended to provide the minimum necessary access to resources to perform a specific task to comply with the principle of least privileges and to prevent possible privilege escalation.",
+                            "tags": [
+                                {
+                                    "cloud": "GCP",
+                                    "compliance": [
+                                        "Best Practice"
+                                    ],
+                                    "service": [
+                                        "secret manager"
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 },

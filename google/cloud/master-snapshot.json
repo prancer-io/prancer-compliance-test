@@ -359,6 +359,38 @@
                     ]
                 },
                 {
+                    "masterSnapshotId": "GOOGLE_SECRET_MANAGER",
+                    "type": "secretmanager/projects.secrets.list",
+                    "get_method": [
+                      "secretmanager/projects.secrets.get"
+                    ],
+                    "collection": "google_secret_manager",
+                    "tags": [
+                      {
+                        "cloud": "GCP",
+                        "service": [
+                          "secret manager"
+                        ]
+                      }
+                    ]
+                },
+                {
+                  "masterSnapshotId": "GOOGLE_SECRET_MANAGER_POLICY",
+                  "type": "secretmanager/projects.secrets.list",
+                  "get_method": [
+                    "secretmanager/projects.secrets.getIamPolicy"
+                  ],
+                  "collection": "secret_manager_policy",
+                  "tags": [
+                    {
+                      "cloud": "GCP",
+                      "service": [
+                        "secret manager"
+                      ]
+                    }
+                  ]
+                },
+                {
                     "masterSnapshotId": "GOOGLE_PROJECTS_IDENTITY_PLATFORM_ACCOUNTS",
                     "type": "identitytoolkit/projects.accounts.batchGet",
                     "collection": "projects_accounts",
