@@ -7,7 +7,6 @@
                 {
                     "masterSnapshotId": "GOOGLE_CLUSTER",
                     "type": "container/projects.locations.clusters.list",
-                    "get_method": ["container/projects.locations.clusters.get"],
                     "collection": "kubernetes.clusters",
                     "tags": [
                         {
