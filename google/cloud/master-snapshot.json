@@ -72,7 +72,6 @@
                 {
                     "masterSnapshotId": "GOOGLE_INSTANCE",
                     "type": "compute/instances.aggregatedList",
-                    "get_method": ["compute/instances.get"],
                     "collection": "instances",
                     "tags": [
                         {
