@@ -391,6 +391,9 @@
                 {
                     "masterSnapshotId": "GOOGLE_PROJECTS_IDENTITY_PLATFORM_ACCOUNTS",
                     "type": "identitytoolkit/projects.accounts.batchGet",
+                    "get_method": [
+                        "identitytoolkit/projects.accounts.batchGet"
+                    ],
                     "collection": "projects_accounts",
                     "tags": [
                       {
