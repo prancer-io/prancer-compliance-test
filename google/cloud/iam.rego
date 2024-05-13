@@ -72,15 +72,15 @@ gcp_issue["gcp_dont_have_non_corporate_account"] {
 }
 
 gcp_dont_have_non_corporate_account {
-    not gcp_issue["non_gcp_account_access_denied"]
+    not gcp_issue["gcp_dont_have_non_corporate_account"]
 }
 
 gcp_dont_have_non_corporate_account = false {
-    gcp_issue["non_gcp_account_access_denied"]
+    gcp_issue["gcp_dont_have_non_corporate_account"]
 }
 
 gcp_dont_have_non_corporate_account_err = "Non-corporate accounts currently have access to Google Cloud Platform (GCP) resources." {
-    gcp_issue["non_gcp_account_access_denied"]
+    gcp_issue["gcp_dont_have_non_corporate_account"]
 }
 
 gcp_dont_have_non_corporate_account_metadata := {

@@ -204,7 +204,7 @@
                 },
                 {
                     "masterSnapshotId": "GOOGLE_STORAGE_IAM",
-                    "type": "storage/storage/b.list",
+                    "type": "storage/b.list",
                     "get_method": ["storage/b.getIamPolicy"],
                     "collection": "storage",
                     "tags": [
@@ -218,7 +218,7 @@
                 },
                 {
                     "masterSnapshotId": "GOOGLE_STORAGE",
-                    "type": "storage/storage/b.list",
+                    "type": "storage/b.list",
                     "get_method": ["storage/b.get"],
                     "collection": "storage",
                     "tags": [
