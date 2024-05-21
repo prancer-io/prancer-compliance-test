@@ -6,7 +6,7 @@
             "nodes": [
                 {
                     "masterSnapshotId": "GOOGLE_CLUSTER",
-                    "type": "container/projects.zones.clusters.list",
+                    "type": "container/projects.locations.clusters.list",
                     "collection": "kubernetes.clusters",
                     "tags": [
                         {
@@ -205,7 +205,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_STORAGE_IAM",
                     "type": "storage/storage/b.list",
-                    "get_method": ["storage/b_iam.get"],
+                    "get_method": ["storage/b.getIamPolicy"],
                     "collection": "storage",
                     "tags": [
                         {
@@ -219,6 +219,7 @@
                 {
                     "masterSnapshotId": "GOOGLE_STORAGE",
                     "type": "storage/storage/b.list",
+                    "get_method": ["storage/b.get"],
                     "collection": "storage",
                     "tags": [
                         {
@@ -386,6 +387,22 @@
                       ]
                     }
                   ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_PROJECTS_IDENTITY_PLATFORM_ACCOUNTS",
+                    "type": "identitytoolkit/projects.accounts.batchGet",
+                    "get_method": [
+                        "identitytoolkit/projects.accounts.batchGet"
+                    ],
+                    "collection": "projects_accounts",
+                    "tags": [
+                      {
+                        "cloud": "GCP",
+                        "service": [
+                          "identitytoolkit"
+                        ]
+                      }
+                    ]
                 }
             ]
         }
