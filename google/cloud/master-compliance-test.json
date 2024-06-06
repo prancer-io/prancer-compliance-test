@@ -35,7 +35,8 @@
                                 "CIS Foundations v. 1.0.0"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -74,7 +75,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -110,7 +112,8 @@
                                 "MITRE ATT&CK Framework v12.1"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -149,7 +152,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -186,7 +190,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -222,7 +227,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -258,7 +264,8 @@
                                 "MITRE ATT&CK Framework v12.1"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -296,7 +303,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -334,7 +342,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -372,7 +381,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -411,7 +421,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -481,7 +492,9 @@
                                 "PIPEDA"
                               ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine",
+                                "security"
                             ]
                         }
                     ]
@@ -518,7 +531,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -555,7 +569,9 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine",
+                                "security"
                             ]
                         }
                     ]
@@ -591,7 +607,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -628,7 +645,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -665,7 +683,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -702,7 +721,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -738,7 +758,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -775,7 +796,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -811,7 +833,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -848,7 +871,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -885,7 +909,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -921,7 +946,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -957,7 +983,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -991,7 +1018,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -1028,7 +1056,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -1065,7 +1094,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -1102,7 +1132,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -1137,7 +1168,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -1172,7 +1204,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -1209,7 +1242,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -1246,7 +1280,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -1334,7 +1369,9 @@
                                 "PIPEDA-4.7.3"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine",
+                                "security"
                             ]
                         }
                     ]
@@ -1417,7 +1454,8 @@
                                 "PIPEDA-4.7.3"
                             ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -1484,7 +1522,8 @@
                                 "SOC 2"
                               ],
                             "service": [
-                                "container"
+                                "container",
+                                "kubernetes engine"
                             ]
                         }
                     ]
@@ -1522,7 +1561,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -1561,7 +1601,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -1600,7 +1641,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -1639,7 +1681,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -1678,7 +1721,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -1717,7 +1761,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -1756,7 +1801,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -1795,7 +1841,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -1834,7 +1881,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -1873,7 +1921,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -1912,7 +1961,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -1952,7 +2002,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -1991,7 +2042,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -2031,7 +2083,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -2070,7 +2123,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -2106,7 +2160,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -2144,7 +2199,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -2173,7 +2229,8 @@
                             "cloud": "GCP",
                             "compliance": [],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -2309,8 +2366,10 @@
                                 "PIPEDA-4.7.3"
                             ],
                             "service": [
-                                "compute", 
-                                "container"
+                                "container",
+                                "kubernetes engine",
+                                "security",
+                                "networking"
                             ]
                         }
                     ]
@@ -3175,13 +3234,14 @@
                     "description": "This policy identifies GCP App Engine applications for which Identity-Aware Proxy(IAP) is disabled.  IAP is used to enforce access control policies for applications and resources. It works with signed headers or the App Engine standard environment Users API to secure your app. It is recommended to enable Identity-Aware Proxy for securing the App engine. Reference: https://cloud.google.com/iap/docs/concepts-overview ",
                         "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS"
 
                             ],
                             "service": [
-                                "apps"
+                                "apps",
+                                "appengine"
                             ]
                         }
                     ]
@@ -3210,7 +3270,9 @@
                             "cloud": "GCP",
                             "compliance": [],
                             "service": [
-                                "compute"
+                                "compute",
+                                "security"
+
                             ]
                         }
                     ]
@@ -3369,7 +3431,8 @@
                                 "HITRUST"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -3406,7 +3469,8 @@
                                 "HITRUST"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -3439,7 +3503,8 @@
                                 "CIS v1.2.0 (GCP)-2.12"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -3476,7 +3541,8 @@
                                 "HITRUST"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -3513,7 +3579,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute"
+                                "compute",
+                                "networking"
                             ]
                         }
                     ]
@@ -3701,7 +3768,8 @@
                             "cloud": "GCP",
                             "compliance": [],
                             "service": [
-                                "pubsub"
+                                "pubsub",
+                                "security"
                             ]
                         }
                     ]
@@ -3730,7 +3798,8 @@
                             "cloud": "GCP",
                             "compliance": [],
                             "service": [
-                                "compute"
+                                "compute",
+                                "security"
                             ]
                         }
                     ]
@@ -3769,7 +3838,8 @@
                                 "NIST 800-53 Rev 5"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -3798,7 +3868,8 @@
                             "cloud": "GCP",
                             "compliance": [],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -3827,7 +3898,8 @@
                             "cloud": "GCP",
                             "compliance": [],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -3862,7 +3934,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -3898,7 +3971,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -3935,7 +4009,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -3970,7 +4045,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4007,7 +4083,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4044,7 +4121,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4075,7 +4153,8 @@
                                 "CIS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4106,7 +4185,8 @@
                                 "CIS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4137,7 +4217,8 @@
                                 "CIS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4168,7 +4249,8 @@
                                 "CIS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4204,7 +4286,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4240,7 +4323,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4271,7 +4355,8 @@
                                 "CIS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4302,7 +4387,8 @@
                                 "CIS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4333,7 +4419,8 @@
                                 "CIS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4364,7 +4451,8 @@
                                 "CIS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4401,7 +4489,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4438,7 +4527,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4475,7 +4565,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4506,7 +4597,8 @@
                                 "CIS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4537,7 +4629,8 @@
                                 "CIS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4568,7 +4661,8 @@
                                 "CIS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4599,7 +4693,8 @@
                                 "CIS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4636,7 +4731,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -4673,7 +4769,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloud"
+                                "cloud",
+                                "databases"
                             ]
                         }
                     ]
@@ -5272,7 +5369,7 @@
                     "description": "This policy identifies Storage buckets that are encrypted with the default Google-managed keys. As a best practice, use Customer-managed key to encrypt the data in your storage bucket and ensure full control over your data.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CSA-CCM",
                                 "HITRUST",
@@ -5308,7 +5405,7 @@
                     "description": "This policy identifies Storage log buckets which have object versioning disabled. Enabling object versioning on storage log buckets will protect your cloud storage data from being overwritten or accidentally deleted. It is recommended to enable object versioning feature on all storage buckets where sinks are configured.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CSA-CCM",
@@ -5345,7 +5442,7 @@
                     "description": "Checks to ensure that logging is enabled on a Stackdriver exported Bucket. Enabled logging provides information about all the requests made on the bucket.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CSA-CCM",
@@ -5382,7 +5479,7 @@
                     "description": "Checks to verify that the configuration on the Storage Buckets is enabled for access logs and storage logs.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "GDPR",
                                 "CIS",
@@ -5421,7 +5518,7 @@
                     "description": "Checks to ensure that Stackdriver logs on Storage Buckets are not public. Giving public access to Stackdriver logs will enable anyone with a web association to retrieve sensitive information that is critical to business. Stackdriver Logging enables to store, search, investigate, monitor and alert on log information/events from Google Cloud Platform. The permission needs to be set only for authorized users.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CSA-CCM",
@@ -5459,7 +5556,7 @@
                     "description": "Checks to ensure that Stackdriver logs on Storage Buckets are not public. Giving public access to Stackdriver logs will enable anyone with a web association to retrieve sensitive information that is critical to business. Stackdriver Logging enables to store, search, investigate, monitor and alert on log information/events from Google Cloud Platform. The permission needs to be set only for authorized users.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CIS Foundations v. 1.1.0",
@@ -5499,7 +5596,7 @@
                     "description": "This policy identifies GCP storage buckets that are not configured with default Event-Based Hold. An event-based hold resets the object's time in the bucket for the purposes of the retention period. This behavior is useful when you want an object to persist in your bucket for a certain length of time after a certain event occurs. It is recommended to enable this feature to protect individual objects from deletion.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                             ],
                             "service": [
@@ -5529,7 +5626,7 @@
                     "description": "This policy identifies GCP storage buckets that are sending logs to themselves. When storage buckets use the same bucket to send their access logs, a loop of logs will be created, which is not a security best practice. It is recommended to spin up new and different log buckets for storage bucket logging.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                             ],
                             "service": [
@@ -5559,7 +5656,7 @@
                     "description": "This policy identifies GCP log buckets for which retention policy is not configured using bucket lock. It is recommended to configure the data retention policy for cloud storage buckets using bucket lock to permanently prevent the policy from being reduced or removed in case the system is compromised by an attacker or a malicious insider.\n\nNote: Locking a bucket is an irreversible action. Once you lock a bucket, you cannot remove the retention policy from the bucket or decrease the retention period for the policy.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [],
                             "service": [
                                 "storage"
@@ -5588,7 +5685,7 @@
                     "description": "This policy identifies GCP log buckets for which retention policy is not enabled. Enabling retention policies on log buckets will protect logs stored in cloud storage buckets from being overwritten or accidentally deleted. It is recommended to configure a data retention policy for these cloud storage buckets to store the activity logs for forensics and security investigations.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [],
                             "service": [
                                 "storage"
@@ -5617,7 +5714,7 @@
                     "description": "This policy identifies user-managed service account keys which are not rotated from last 90 days or more. Rotating Service Account keys will reduce the window of opportunity for an access key that is associated with a compromised or terminated account to be used. Service Account keys should be rotated to ensure that data cannot be accessed with an old key which might have been lost, cracked, or stolen. It is recommended that all user-managed service account keys are regularly rotated.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CIS Foundations v. 1.0.0",
@@ -5663,7 +5760,7 @@
                     "description": "Organizations does not have any control over personal Gmail accounts. Thus, it is recommended that you use fully managed corporate Google accounts for increased visibility, auditing, and control over access to Cloud Platform resources.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CIS Foundations v. 1.0.0",
@@ -5719,7 +5816,7 @@
                     "description": "A ServiceAccount Access holder can perform critical actions like delete, update change settings, etc. without user intervention. For this reason, it's recommended that service accounts not have Admin rights.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CIS Foundations v. 1.0.0",
@@ -5767,7 +5864,7 @@
                     "description": "Separation of duties means that an individual should not have enough permissions that will enable him to complete a malicious action. Users should not have both the abilities to create and to use a service account. This might lead them to access resources that they should not have in the first place.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CIS Foundations v. 1.0.0",
@@ -5810,7 +5907,7 @@
                     "description": "It is recommended that the principle of 'Separation of Duties' is enforced while assigning KMS related roles to users.The built-in/predefined IAM role Cloud KMS Admin allows the user/identity to create, delete, and manage service account(s). The built-in/predefined IAM role Cloud KMS CryptoKey Encrypter/Decrypter allows the user/identity (with adequate privileges on concerned resources) to encrypt and decrypt data at rest using an encryption key(s).The built-in/predefined IAM role Cloud KMS CryptoKey Encrypter allows the user/identity (with adequate privileges on concerned resources) to encrypt data at rest using an encryption key(s). The built-in/predefined IAM role Cloud KMS CryptoKey Decrypter allows the user/identity (with adequate privileges on concerned resources) to decrypt data at rest using an encryption key(s). Separation of duties is the concept of ensuring that one individual does not have all necessary permissions to be able to complete a malicious action. In Cloud KMS, this could be an action such as using a key to access and decrypt data a user should not normally have access to. Separation of duties is a business control typically used in larger organizations, meant to help avoid security or privacy incidents and errors. It is considered best practice. No user(s) should have Cloud KMS Admin and any of the Cloud KMS CryptoKey Encrypter/Decrypter, Cloud KMS CryptoKey Encrypter, Cloud KMS CryptoKey Decrypter roles assigned at the same time",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CIS Foundations v. 1.0.0",
@@ -5849,7 +5946,7 @@
                     "description": "It is recommended to assign the Service Account User (iam.serviceAccountUser) and Service Account Token Creator (iam.serviceAccountTokenCreator) roles to a user for a specific service account rather than assigning the role to a user at project level.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CIS Foundations v. 1.1.0",
@@ -5889,7 +5986,7 @@
                     "description": "Basic/Primitive roles include many permissions across all GCP services. Using them will result violation of the principle of least privilege. You should avoid using basic roles, and use predefined roles or custom roles instead.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "LGPD",
                                 "LGPD regulation",
@@ -5927,7 +6024,7 @@
                     "description": "This policy will audit GCP projects which dont have audit logging configured for all services and users. It's recommended that cloud audit logging is configured to track all Admin activities and read, write access to user data. Logs should be captured for all users and there should be no exempted users in any of the audit config section.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "APRA",
                                 "APRA (CPS 234) Information Security-CPS234-23",
@@ -6012,7 +6109,7 @@
                     "description": "This policy audit service accounts that usage user managed keys instead of Google-managed. For user-managed keys, the User has to take ownership of key management activities. Even after owner precaution, keys can be easily leaked by common development malpractices like checking keys into the source code or leaving them in downloads directory or accidentally leaving them on support blogs/channels. So It is recommended to limit the use of User-managed service account keys and instead use Google-managed keys which can not be downloaded.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CIS Foundations v. 1.0.0",
@@ -6059,7 +6156,7 @@
                     "description": "This policy identifies GCP API keys for which the creation date is aged more than 90 days. Google recommends using the standard authentication flow instead of API Keys. However, there are limited cases where API keys are more appropriate. API keys should be rotated to ensure that data cannot be accessed with an old key that might have been lost, cracked, or stolen.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CIS Foundations v. 1.0.0",
@@ -6074,7 +6171,8 @@
                                 "MITRE ATT&CK Framework v12.1"
                             ],
                             "service": [
-                                "apikeys"
+                                "apikeys",
+                                "api management"
                             ]
                         }
                     ]
@@ -6100,14 +6198,15 @@
                     "description": "API keys are unrestricted by default. Unrestricted keys are insecure because they can be used by anyone from anywhere. For production applications, you should set both application restrictions and API restrictions.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "NIST",
                                 "NIST 800-53 Rev 5",
                                 "Best Practice"
                             ],
                             "service": [
-                                "apikeys"
+                                "apikeys",
+                                "api management"
                             ]
                         }
                     ]
@@ -6133,13 +6232,14 @@
                     "description": "Application restrictions limit an API key's usage to specific websites, IP addresses, Android applications, or iOS applications. You can set one application restriction per key. Unrestricted keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API key usage to trusted hosts, HTTP referrers and apps.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "Best Practice"
                                 
                             ],
                             "service": [
-                                "apikeys"
+                                "apikeys",
+                                "api management"
                             ]
                         }
                     ]
@@ -6165,12 +6265,13 @@
                     "description": "This policy identifies GCP projects where API keys are created. Keys are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. To avoid the security risk in using API keys, it is recommended to use standard authentication flow instead.\n\nNote: There are limited cases where API keys are more appropriate. For example, if there is a mobile application that needs to use the Google Cloud Translation API, but doesn't otherwise need a backend server, API keys are the simplest way to authenticate to that API. If a business requires API keys to be used, then the API keys should be secured using appropriate IAM policies.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "Best Practice"
                             ],
                             "service": [
-                                "apikeys"
+                                "apikeys",
+                                "api management"
                             ]
                         }
                     ]
@@ -6272,7 +6373,7 @@
                     "description": "Audit the buckets which are publicly accessible to all authenticated users. Enabling public access to Storage Buckets enables anybody with a web association to access sensitive information that is critical to business. Access over a whole bucket is controlled by IAM. Access to individual objects within the bucket is controlled by its ACLs.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CIS Foundations v. 1.0.0",
@@ -6325,7 +6426,7 @@
                     "description": "Checks the buckets which are publicly accessible to all users. Enabling public access to Storage buckets enables anybody with a web association to access sensitive information that is critical to business. Access over a whole bucket is controlled by IAM. Access to individual objects within the bucket is controlled by its ACLs.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CIS Foundations v. 1.0.0",
@@ -6506,7 +6607,7 @@
                     "description": "This policy identity and audit GCP Identity platform accounts which dont have MFA enabled.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "LGPD",
                                 "LGPD regulation",
@@ -6547,7 +6648,7 @@
                     "description": "In case of a compromised service account, an attacker would be able to make lateral movement easily. Therefore you should avoid giving a service account permissions to use other service accounts or to set iam policies.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "LGPD",
                                 "LGPD regulation",
@@ -6586,7 +6687,7 @@
                     "description": "Granting users or service accounts with one of the roles: roles/iam.workloadIdentityUser or roles/iam.serviceAccountUser or roles/iam.serviceAccountTokenCreator will in practice grant them with all of the permissions of the service accounts in the project, which violates the principle of least privilege. These roles needs to be granted at the service account level and not project level.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "LGPD",
                                 "LGPD regulation",
@@ -6628,7 +6729,7 @@
                     "description": "A user with 'roles/deploymentmanager.editor' role and 'deploymentmanager.deployments.create' permission can create almost any resource. Make sure this permission is only given to admin users",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "Best Practice"
                             ],
@@ -6659,7 +6760,7 @@
                     "description": "API keys are unrestricted by default. Those are insecure because they can be viewed publicly, such as from within a browser, or they can be accessed on a device where the key resides. It is recommended to restrict API keys to use (call) only APIs required by an application.",
                     "tags": [
                         {
-                            "cloud": "cloud",
+                            "cloud": "GCP",
                             "compliance": [
                                 "CIS",
                                 "CIS Foundations v. 1.0.0",
@@ -6675,7 +6776,8 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "apikeys"
+                                "apikeys",
+                                "api management"
                             ]
                         }
                     ]
