@@ -36,7 +36,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -76,7 +76,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -113,7 +113,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -153,7 +153,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -191,7 +191,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -228,7 +228,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -265,7 +265,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -304,7 +304,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -343,7 +343,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -382,7 +382,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -422,7 +422,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -493,8 +493,8 @@
                               ],
                             "service": [
                                 "container",
-                                "kubernetes engine",
-                                "security"
+                                "Kubernetes Engine",
+                                "Security"
                             ]
                         }
                     ]
@@ -532,7 +532,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -570,8 +570,8 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine",
-                                "security"
+                                "Kubernetes Engine",
+                                "Security"
                             ]
                         }
                     ]
@@ -608,7 +608,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -646,7 +646,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -684,7 +684,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -722,7 +722,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -759,7 +759,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -797,7 +797,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -834,7 +834,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -872,7 +872,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -910,7 +910,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -947,7 +947,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -984,7 +984,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -1019,7 +1019,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -1057,7 +1057,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -1095,7 +1095,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -1133,7 +1133,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -1169,7 +1169,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -1205,7 +1205,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -1243,7 +1243,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -1281,7 +1281,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -1370,8 +1370,8 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine",
-                                "security"
+                                "Kubernetes Engine",
+                                "Security"
                             ]
                         }
                     ]
@@ -1455,7 +1455,7 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -1523,7 +1523,7 @@
                               ],
                             "service": [
                                 "container",
-                                "kubernetes engine"
+                                "Kubernetes Engine"
                             ]
                         }
                     ]
@@ -1561,8 +1561,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -1601,8 +1601,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -1641,8 +1641,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -1681,8 +1681,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -1721,8 +1721,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -1761,8 +1761,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -1801,8 +1801,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -1841,8 +1841,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -1881,8 +1881,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -1921,8 +1921,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -1961,8 +1961,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -2002,8 +2002,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -2042,8 +2042,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -2083,8 +2083,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -2123,8 +2123,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -2160,8 +2160,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -2199,8 +2199,8 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -2229,8 +2229,8 @@
                             "cloud": "GCP",
                             "compliance": [],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -2367,9 +2367,9 @@
                             ],
                             "service": [
                                 "container",
-                                "kubernetes engine",
-                                "security",
-                                "networking"
+                                "Kubernetes Engine",
+                                "Security",
+                                "Networking"
                             ]
                         }
                     ]
@@ -3241,7 +3241,7 @@
                             ],
                             "service": [
                                 "apps",
-                                "appengine"
+                                "AppEngine"
                             ]
                         }
                     ]
@@ -3270,8 +3270,8 @@
                             "cloud": "GCP",
                             "compliance": [],
                             "service": [
-                                "compute",
-                                "security"
+                                "Compute",
+                                "Security"
 
                             ]
                         }
@@ -3431,8 +3431,8 @@
                                 "HITRUST"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -3469,8 +3469,8 @@
                                 "HITRUST"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -3503,8 +3503,8 @@
                                 "CIS v1.2.0 (GCP)-2.12"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -3541,8 +3541,8 @@
                                 "HITRUST"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -3579,8 +3579,8 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "compute",
-                                "networking"
+                                "Compute",
+                                "Networking"
                             ]
                         }
                     ]
@@ -3769,7 +3769,7 @@
                             "compliance": [],
                             "service": [
                                 "pubsub",
-                                "security"
+                                "Security"
                             ]
                         }
                     ]
@@ -3798,8 +3798,8 @@
                             "cloud": "GCP",
                             "compliance": [],
                             "service": [
-                                "compute",
-                                "security"
+                                "Compute",
+                                "Security"
                             ]
                         }
                     ]
@@ -3839,7 +3839,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -3869,7 +3869,7 @@
                             "compliance": [],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -3899,7 +3899,7 @@
                             "compliance": [],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -3935,7 +3935,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -3972,7 +3972,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4010,7 +4010,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4046,7 +4046,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4084,7 +4084,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4122,7 +4122,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4154,7 +4154,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4186,7 +4186,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4218,7 +4218,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4250,7 +4250,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4287,7 +4287,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4324,7 +4324,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4356,7 +4356,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4388,7 +4388,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4420,7 +4420,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4452,7 +4452,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4490,7 +4490,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4528,7 +4528,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4566,7 +4566,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4598,7 +4598,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4630,7 +4630,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4662,7 +4662,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4694,7 +4694,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4732,7 +4732,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -4770,7 +4770,7 @@
                             ],
                             "service": [
                                 "cloud",
-                                "databases"
+                                "Databases"
                             ]
                         }
                     ]
@@ -5379,7 +5379,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "storage"
+                                "Storage"
                             ]
                         }
                     ]
@@ -5416,7 +5416,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "storage"
+                                "Storage"
                             ]
                         }
                     ]
@@ -5453,7 +5453,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "storage"
+                                "Storage"
                             ]
                         }
                     ]
@@ -5492,7 +5492,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "storage"
+                                "Storage"
                             ]
                         }
                     ]
@@ -5530,7 +5530,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "storage"
+                                "Storage"
                             ]
                         }
                     ]
@@ -5570,7 +5570,7 @@
                                 "MITRE ATT&CK Framework v12.1"
                             ],
                             "service": [
-                                "storage"
+                                "Storage"
                             ]
                         }
                     ]
@@ -5600,7 +5600,7 @@
                             "compliance": [
                             ],
                             "service": [
-                                "storage"
+                                "Storage"
                             ]
                         }
                     ]
@@ -5630,7 +5630,7 @@
                             "compliance": [
                             ],
                             "service": [
-                                "storage"
+                                "Storage"
                             ]
                         }
                     ]
@@ -5659,7 +5659,7 @@
                             "cloud": "GCP",
                             "compliance": [],
                             "service": [
-                                "storage"
+                                "Storage"
                             ]
                         }
                     ]
@@ -5688,7 +5688,7 @@
                             "cloud": "GCP",
                             "compliance": [],
                             "service": [
-                                "storage"
+                                "Storage"
                             ]
                         }
                     ]
@@ -6172,7 +6172,7 @@
                             ],
                             "service": [
                                 "apikeys",
-                                "api management"
+                                "API management"
                             ]
                         }
                     ]
@@ -6206,7 +6206,7 @@
                             ],
                             "service": [
                                 "apikeys",
-                                "api management"
+                                "API management"
                             ]
                         }
                     ]
@@ -6239,7 +6239,7 @@
                             ],
                             "service": [
                                 "apikeys",
-                                "api management"
+                                "API management"
                             ]
                         }
                     ]
@@ -6271,7 +6271,7 @@
                             ],
                             "service": [
                                 "apikeys",
-                                "api management"
+                                "API management"
                             ]
                         }
                     ]
@@ -6400,7 +6400,7 @@
                                 "ISO 27001:2013"
                             ],
                             "service": [
-                                "storage"
+                                "Storage"
                             ]
                         }
                     ]
@@ -6453,7 +6453,7 @@
                                 "ISO 27001:2013"
                             ],
                             "service": [
-                                "storage"
+                                "Storage"
                             ]
                         }
                     ]
@@ -6777,7 +6777,7 @@
                             ],
                             "service": [
                                 "apikeys",
-                                "api management"
+                                "API management"
                             ]
                         }
                     ]
