@@ -5734,7 +5734,10 @@
                                 "GDPR Readiness"
                             ],
                             "service": [
-                                "iam"
+                                "IAM",
+                                "Service Account",
+                                "Secrets",
+                                "Security"
                             ]
                         }
                     ]
@@ -5790,7 +5793,9 @@
                                 "GDPR Readiness"
                             ],
                             "service": [
-                                "iam"
+                                "IAM",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -5838,7 +5843,9 @@
                                 "GDPR Readiness"
                             ],
                             "service": [
-                                "iam"
+                                "IAM",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -5881,7 +5888,9 @@
                                 "GDPR Readiness"
                             ],
                             "service": [
-                                "iam"
+                                "IAM",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -5920,7 +5929,9 @@
                                 "NIST 800-53 Rev 5"
                             ],
                             "service": [
-                                "iam"
+                                "IAM",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -5960,7 +5971,9 @@
                                 "MITRE ATT&CK Framework v12.1"
                             ],
                             "service": [
-                                "iam"
+                                "IAM",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -5998,7 +6011,9 @@
                                 "GDPR Readiness"
                             ],
                             "service": [
-                                "iam"
+                                "IAM",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -6082,7 +6097,9 @@
                                 "PIPEDA-4.1.4"
                             ],
                             "service": [
-                                "iam"
+                                "IAM",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -6130,7 +6147,10 @@
                                 "GDPR Readiness"
                             ],
                             "service": [
-                                "iam"
+                                "IAM",
+                                "Service Account",
+                                "Secrets",
+                                "Security"
                             ]
                         }
                     ]
@@ -6171,8 +6191,10 @@
                                 "MITRE ATT&CK Framework v12.1"
                             ],
                             "service": [
-                                "apikeys",
-                                "API management"
+                                "API Keys",
+                                "API management",
+                                "Secrets",
+                                "Security"
                             ]
                         }
                     ]
@@ -6205,8 +6227,10 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "apikeys",
-                                "API management"
+                                "API Keys",
+                                "API management",
+                                "Secrets",
+                                "Security"
                             ]
                         }
                     ]
@@ -6238,8 +6262,10 @@
                                 
                             ],
                             "service": [
-                                "apikeys",
-                                "API management"
+                                "API Keys",
+                                "API management",
+                                "Secrets",
+                                "Security"
                             ]
                         }
                     ]
@@ -6270,8 +6296,10 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "apikeys",
-                                "API management"
+                                "API Keys",
+                                "API management",
+                                "Secrets",
+                                "Security"
                             ]
                         }
                     ]
@@ -6486,7 +6514,9 @@
                                 "CIS"
                             ],
                             "service": [
-                                "secret manager"
+                                "Secret Manager",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -6519,7 +6549,9 @@
                                 "CIS"
                             ],
                             "service": [
-                                "secret manager"
+                                "Secret Manager",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -6550,7 +6582,9 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "secret manager"
+                                "Secret Manager",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -6581,7 +6615,9 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "secret manager"
+                                "Secret Manager",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -6622,7 +6658,9 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "identitytoolkit"
+                                "Identity Toolkit",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -6661,7 +6699,9 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "iam"
+                                "IAM",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -6703,7 +6743,9 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "iam"
+                                "IAM",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -6734,7 +6776,9 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "iam"
+                                "IAM",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
@@ -6776,8 +6820,109 @@
                                 "Best Practice"
                             ],
                             "service": [
-                                "apikeys",
-                                "API management"
+                                "API Keys",
+                                "API management",
+                                "Secrets",
+                                "Security"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-APG-001",
+                    "masterSnapshotId": [
+                        "GOOGLE_APIGEE"
+                    ],
+                    "type": "rego",
+                    "rule": "file(apigee.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-APG-001",
+                            "eval": "data.rule.spike_arrest",
+                            "message": "data.rule.spike_arrest_err",
+                            "remediationDescription": "Make sure you add the Spike Arrest policy in Apigee <a href='https://cloud.google.com/apigee/docs/api-platform/reference/policies/spike-arrest-policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_APG_001.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Apigee Spike Arrest Policy is Implemented",
+                    "description": "This policy ensures that a Spike Arrest policy is implemented in Apigee to control traffic spikes and protect APIs from excessive load. By enforcing rate limiting, this policy helps maintain the availability and reliability of services, preventing potential service degradation or outages caused by sudden surges in API requests. It is recommended to configure the Spike Arrest policy to appropriate thresholds that align with expected traffic patterns and business requirements.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "APIgee",
+                                "Security",
+                                "Secrets"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-APG-002",
+                    "masterSnapshotId": [
+                        "GOOGLE_APIGEE"
+                    ],
+                    "type": "rego",
+                    "rule": "file(apigee.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-APG-002",
+                            "eval": "data.rule.json_threat_protection",
+                            "message": "data.rule.json_threat_protection_err",
+                            "remediationDescription": "Make sure you add the JSON Threat Protection policy in Apigee <a href='https://cloud.google.com/apigee/docs/api-platform/reference/policies/json-threat-protection-policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_APG_002.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Apigee JSON Threat Protection Policy is Implemented",
+                    "description": "This policy ensures that a JSON Threat Protection policy is implemented in Apigee to protect APIs from malicious JSON payloads. By enforcing JSON validation and protection, this policy helps maintain the security and integrity of services, preventing potential attacks or disruptions caused by harmful JSON content. It is recommended to configure the JSON Threat Protection policy to appropriate thresholds and rules that align with expected API payloads and security requirements.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "APIgee",
+                                "Security",
+                                "Secrets"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-APG-003",
+                    "masterSnapshotId": [
+                        "GOOGLE_APIGEE"
+                    ],
+                    "type": "rego",
+                    "rule": "file(apigee.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-APG-003",
+                            "eval": "data.rule.xml_threat_protection",
+                            "message": "data.rule.xml_threat_protection_err",
+                            "remediationDescription": "Make sure you add the XML Threat Protection policy in Apigee <a href='https://cloud.google.com/apigee/docs/api-platform/reference/policies/xml-threat-protection-policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_APG_003.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Apigee XML Threat Protection Policy is Implemented",
+                    "description": "This policy ensures that an XML Threat Protection policy is implemented in Apigee to protect APIs from malicious XML payloads. By enforcing XML validation and protection, this policy helps maintain the security and integrity of services, preventing potential attacks or disruptions caused by harmful XML content. It is recommended to configure the XML Threat Protection policy to appropriate thresholds and rules that align with expected API payloads and security requirements.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "APIgee",
+                                "Security",
+                                "Secrets"
                             ]
                         }
                     ]
