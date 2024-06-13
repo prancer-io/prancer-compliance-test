@@ -71,7 +71,7 @@ spike_arrest_metadata := {
     "Policy Description": "",
     "Resource Type": "iam.v1.projects",
     "Policy Help URL": "",
-    "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
+    "Resource Help URL": "https://cloud.google.com/apigee/docs/api-platform/reference/policies/spike-arrest-policy"
 }
 
 # PR-GCP-CLD-APG-002
@@ -120,7 +120,7 @@ json_threat_protection_metadata := {
     "Policy Description": "",
     "Resource Type": "iam.v1.projects",
     "Policy Help URL": "",
-    "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
+    "Resource Help URL": "https://cloud.google.com/apigee/docs/api-platform/reference/policies/json-threat-protection-policy"
 }
 
 # PR-GCP-CLD-APG-003
@@ -169,5 +169,54 @@ xml_threat_protection_metadata := {
     "Policy Description": "",
     "Resource Type": "iam.v1.projects",
     "Policy Help URL": "",
-    "Resource Help URL": "https://cloud.google.com/resource-manager/reference/rest/v1/projects"
+    "Resource Help URL": "https://cloud.google.com/apigee/docs/api-platform/reference/policies/xml-threat-protection-policy"
+}
+
+
+# PR-GCP-CLD-APG-004
+default oauth_validation = null
+
+gc_issue["oauth_validation"] {
+    count([c| lower(input.policies[_].name) == "oauthv2"; c:=1]) == 0
+}
+
+gc_issue["oauth_validation_usage_in_proxy_flows"] {
+    not policy_used_in_flows(policy_names("oauthv2"), "proxies")
+}
+
+gc_issue["oauth_validation_usage_in_target_flows"] {
+    not policy_used_in_flows(policy_names("oauthv2"), "targets")
+}
+
+oauth_validation {
+    not gc_issue["oauth_validation"]
+    not gc_issue["oauth_validation_usage_in_proxy_flows"]
+} {
+    not gc_issue["oauth_validation"]
+    not gc_issue["oauth_validation_usage_in_target_flows"]
+}
+
+oauth_validation = false {
+    gc_issue["oauth_validation"]
+} {
+    gc_issue["oauth_validation_usage_in_proxy_flows"]
+    gc_issue["oauth_validation_usage_in_target_flows"]
+}
+
+oauth_validation_err = "OAuth Validation policy not added in Apigee or not used in any flow" {
+    gc_issue["oauth_validation"]
+} {
+    gc_issue["oauth_validation_usage_in_proxy_flows"]
+    gc_issue["oauth_validation_usage_in_target_flows"]
+}
+oauth_validation_metadata := {
+    "Policy Code": "PR-GCP-CLD-APG-004",
+    "Type": "cloud",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "OAuth Validation policy not added in Apigee",
+    "Policy Description": "",
+    "Resource Type": "iam.v1.projects",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/apigee/docs/api-platform/reference/policies/oauthv2-policy"
 }

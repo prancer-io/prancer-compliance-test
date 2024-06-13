@@ -421,24 +421,6 @@
                             ]
                         }
                     ]
-                },
-                {
-                    "masterSnapshotId": "GOOGLE_APIGEE",
-                    "type": "apigee/organizations.apis.deployments.list",
-                    "get_method": [
-                        "apigee/organizations.apis.revisions.get"
-                    ],
-                    "collection": "apigee_policy",
-                    "tags": [
-                        {
-                            "cloud": "GCP",
-                            "service": [
-                                "APIgee",
-                                "Security",
-                                "Secrets"
-                            ]
-                        }
-                    ]
                 }
             ]
         }

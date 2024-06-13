@@ -6926,6 +6926,39 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "PR-GCP-CLD-APG-004",
+                    "masterSnapshotId": [
+                        "GOOGLE_APIGEE"
+                    ],
+                    "type": "rego",
+                    "rule": "file(apigee.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-CLD-APG-004",
+                            "eval": "data.rule.oauth_validation",
+                            "message": "data.rule.oauth_validation_err",
+                            "remediationDescription": "Make sure you add the OAuth Validation policy in Apigee <a href='https://cloud.google.com/apigee/docs/api-platform/reference/policies/oauthv2-policy' target='_blank'>here</a>",
+                            "remediationFunction": "PR_GCP_CLD_APG_004.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Apigee OAuth Validation Policy is Implemented",
+                    "description": "This policy ensures that an OAuth Validation policy is implemented in Apigee to protect APIs from unauthorized access. By enforcing OAuth token validation, this policy helps maintain the security and integrity of services, preventing potential unauthorized access or misuse of APIs. It is recommended to configure the OAuth Validation policy to appropriate settings that align with expected access patterns and security requirements.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "APIgee",
+                                "Security",
+                                "Authentication"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
