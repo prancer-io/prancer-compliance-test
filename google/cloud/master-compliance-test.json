@@ -21,7 +21,7 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "GKE cluster must not use the default service account to access the project",
+                    "title": "Ensure GKE node pools use dedicated least-privilege service accounts",
                     "description": "This policy identifies Kubernetes Engine Cluster Nodes which have default Service account for Project access. By default, Kubernetes Engine nodes are given the Compute Engine default service account. This account has broad access and more permissions than are required to run your Kubernetes Engine cluster. You should create and use a least privileged service account to run your Kubernetes Engine cluster instead of using the Compute Engine default service account. If you are not creating a separate service account for your nodes, you should limit the scopes of the node service account to reduce the possibility of a privilege escalation in an attack.",
                     "tags": [
                         {
@@ -516,7 +516,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure GCP Kubernetes Engine Clusters not have legacy compute engine metadata endpoints disabled",
+                    "title": "Ensure GCP Kubernetes Engine Clusters not have legacy compute engine metadata endpoints",
                     "description": "This policy identifies Google Kubernetes Engine (GKE) clusters that have legacy compute engine metadata endpoints enabled. Because GKE uses instance metadata to configure node VMs, some of this metadata is potentially sensitive and should be protected from workloads running on the cluster. Legacy metadata APIs expose the Compute Engine's instance metadata of server endpoints. As a best practice, disable legacy API and use v1 APIs to restrict a potential attacker from retrieving instance metadata.",
                     "tags": [
                         {
@@ -3454,7 +3454,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure, GCP project is using the default network",
+                    "title": "Default VPC network must be deleted from GCP projects",
                     "description": "This policy identifies the projects which have default network configured. It is recommended to use network configuration based on your security and networking requirements, you should create your network and delete the default network.",
                     "tags": [
                         {
