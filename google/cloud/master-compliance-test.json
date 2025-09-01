@@ -3526,7 +3526,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure, GCP VPC Flow logs for the subnet is set to Off",
+                    "title": "VPC Flow Logs must be enabled on subnet",
                     "description": "This policy identifies the subnets in VPC Network which have Flow logs disabled. It enables to capture information about the IP traffic going to and from network interfaces in VPC Subnets.",
                     "tags": [
                         {
@@ -5995,7 +5995,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Avoid using IAM primitive roles",
+                    "title": "IAM primitive roles (Owner/Editor/Viewer) must not be assigned; use least-privilege predefined or custom roles instead.",
                     "description": "Basic/Primitive roles include many permissions across all GCP services. Using them will result violation of the principle of least privilege. You should avoid using basic roles, and use predefined roles or custom roles instead.",
                     "tags": [
                         {
@@ -6316,12 +6316,12 @@
                                 "id": "PR-GCP-CLD-PRIF-001",
                                 "eval": "data.rule.os_login_disable",
                                 "message": "data.rule.os_login_disable_err",
-                                "remediationDescription": "Make sure that GCP Projects have OS Login disabled",
+                                "remediationDescription": "OS Login must be enabled at the project level (and preferably 2FA).",
                                 "remediationFunction": "PR_GCP_CLD_PRIF_001.py"
                             }
                         ],
                         "severity": "Medium",
-                        "title": "Make sure that GCP Projects have OS Login disabled",
+                        "title": "OS Login must be enabled at the project level (and preferably 2FA).",
                         "description": "This policy checks GCP Projects which have OS Login disabled. Enabling OS Login ensures that SSH keys used to connect to instances are mapped with IAM users. Revoking access to IAM user will revoke all the SSH keys associated with that particular user. It facilitates centralized and automated SSH key pair management which is useful in handling cases like a response to compromised SSH key pairs.",
                         "tags": [
                             {
@@ -6682,7 +6682,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Service accounts should not have permissions to use other service accounts or set iam policies",
+                    "title": "Service accounts must not have impersonation or IAM-admin roles beyond least privilege.",
                     "description": "In case of a compromised service account, an attacker would be able to make lateral movement easily. Therefore you should avoid giving a service account permissions to use other service accounts or to set iam policies.",
                     "tags": [
                         {
