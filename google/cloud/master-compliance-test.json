@@ -20,8 +20,8 @@
                             "remediationFunction": "PR_GCP_CLD_CLT_001.py"
                         }
                     ],
-                    "severity": "High",
-                    "title": "GKE cluster must not use the default service account to access the project",
+                    "severity": "Medium",
+                    "title": "Ensure GKE node pools use dedicated least-privilege service accounts",
                     "description": "This policy identifies Kubernetes Engine Cluster Nodes which have default Service account for Project access. By default, Kubernetes Engine nodes are given the Compute Engine default service account. This account has broad access and more permissions than are required to run your Kubernetes Engine cluster. You should create and use a least privileged service account to run your Kubernetes Engine cluster instead of using the Compute Engine default service account. If you are not creating a separate service account for your nodes, you should limit the scopes of the node service account to reduce the possibility of a privilege escalation in an attack.",
                     "tags": [
                         {
@@ -443,7 +443,7 @@
                             "remediationFunction": "PR_GCP_CLD_CLT_012.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Binary Authorization must be enabled on the GKE cluster",
                     "description": "This policy identifies Google Kubernetes Engine (GKE) clusters that have disabled binary authorization. Binary authorization is a security control that ensures only trusted container images are deployed on GKE clusters. As a best practice, verify images prior to deployment to reduce the risk of running unintended or malicious code in your environment.",
                     "tags": [
@@ -516,7 +516,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure GCP Kubernetes Engine Clusters not have legacy compute engine metadata endpoints disabled",
+                    "title": "Ensure GCP Kubernetes Engine Clusters not have legacy compute engine metadata endpoints",
                     "description": "This policy identifies Google Kubernetes Engine (GKE) clusters that have legacy compute engine metadata endpoints enabled. Because GKE uses instance metadata to configure node VMs, some of this metadata is potentially sensitive and should be protected from workloads running on the cluster. Legacy metadata APIs expose the Compute Engine's instance metadata of server endpoints. As a best practice, disable legacy API and use v1 APIs to restrict a potential attacker from retrieving instance metadata.",
                     "tags": [
                         {
@@ -855,7 +855,7 @@
                             "remediationFunction": "PR_GCP_CLD_CLT_022.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Application-layer Secrets must be encrypted in the GKE cluster",
                     "description": "Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers who gain access to an offline copy of etcd.<br><br> This policy checks your cluster for the Application-layer Secrets Encryption security feature and alerts if it is not enabled.",
                     "tags": [
@@ -1226,7 +1226,7 @@
                             "remediationFunction": "PR_GCP_CLD_CLT_032.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Shielded GKE nodes must have Secure Boot enabled",
                     "description": "This policy identifies GCP Kubernetes cluster shielded GKE nodes with Secure Boot disabled. An attacker may seek to alter boot components to persist malware or rootkits during system initialization. It is recommended to enable Secure Boot for Shielded GKE Nodes to verify the diGCPal signature of node boot components.",
                     "tags": [
@@ -3454,7 +3454,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure, GCP project is using the default network",
+                    "title": "Default VPC network must be deleted from GCP projects",
                     "description": "This policy identifies the projects which have default network configured. It is recommended to use network configuration based on your security and networking requirements, you should create your network and delete the default network.",
                     "tags": [
                         {
