@@ -1,0 +1,16 @@
+{
+  "mode": "with-fixes",
+  "timestamp": "2025-11-25T21:27:07.658Z",
+  "summary": {
+    "total": 15,
+    "passed": 15,
+    "failed": 0,
+    "skipped": 0,
+    "falsePositives": 0,
+    "passRate": "100.00%"
+  },
+  "analysis": {
+    "falsePositiveRisk": "No false positives detected",
+    "recommendation": "Existence checks are working correctly"
+  }
+}

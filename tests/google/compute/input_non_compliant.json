@@ -1,0 +1,31 @@
+{
+    "kind": "compute#firewall",
+    "id": "1234567890123456790",
+    "name": "allow-all-ssh",
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/my-project/global/firewalls/allow-all-ssh",
+    "network": "https://www.googleapis.com/compute/v1/projects/my-project/global/networks/my-vpc",
+    "direction": "INGRESS",
+    "priority": 1000,
+    "sourceRanges": [
+        "0.0.0.0/0"
+    ],
+    "allowed": [
+        {
+            "IPProtocol": "tcp",
+            "ports": ["22"]
+        },
+        {
+            "IPProtocol": "tcp",
+            "ports": ["3389"]
+        },
+        {
+            "IPProtocol": "tcp",
+            "ports": ["21"]
+        },
+        {
+            "IPProtocol": "tcp",
+            "ports": ["53"]
+        }
+    ],
+    "disabled": false
+}

@@ -1,0 +1,11 @@
+{
+    "Instances": [
+        {
+            "InstanceId": "i-0123456789abcdef0",
+            "InstanceType": "t3.micro",
+            "State": {
+                "Name": "running"
+            }
+        }
+    ]
+}
