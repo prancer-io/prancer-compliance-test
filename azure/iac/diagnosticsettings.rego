@@ -1,5 +1,67 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.insights/diagnosticsettings resources exist
+microsoft_insights_diagnosticsettings_exists {
+    existence.azure_resource_exists("microsoft.insights/diagnosticsettings")
+}
+
+# Check if microsoft.keyvault/vaults resources exist
+microsoft_keyvault_vaults_exists {
+    existence.azure_resource_exists("microsoft.keyvault/vaults")
+}
+
+# Check if microsoft.network/loadbalancers resources exist
+microsoft_network_loadbalancers_exists {
+    existence.azure_resource_exists("microsoft.network/loadbalancers")
+}
+
+# Check if microsoft.storage/storageaccounts resources exist
+microsoft_storage_storageaccounts_exists {
+    existence.azure_resource_exists("microsoft.storage/storageaccounts")
+}
+
+# Check if microsoft.storage/storageaccounts/blobservices resources exist
+microsoft_storage_storageaccounts_blobservices_exists {
+    existence.azure_resource_exists("microsoft.storage/storageaccounts/blobservices")
+}
+
+# Check if microsoft.storage/storageaccounts/queueservices resources exist
+microsoft_storage_storageaccounts_queueservices_exists {
+    existence.azure_resource_exists("microsoft.storage/storageaccounts/queueservices")
+}
+
+# Check if microsoft.storage/storageaccounts/tableservices resources exist
+microsoft_storage_storageaccounts_tableservices_exists {
+    existence.azure_resource_exists("microsoft.storage/storageaccounts/tableservices")
+}
+
+# Check if microsoft.cache/redis resources exist
+microsoft_cache_redis_exists {
+    existence.azure_resource_exists("microsoft.cache/redis")
+}
+
+# Check if microsoft.network/trafficmanagerprofiles resources exist
+microsoft_network_trafficmanagerprofiles_exists {
+    existence.azure_resource_exists("microsoft.network/trafficmanagerprofiles")
+}
+
+# Check if microsoft.eventhub/namespaces resources exist
+microsoft_eventhub_namespaces_exists {
+    existence.azure_resource_exists("microsoft.eventhub/namespaces")
+}
+
+# Check if microsoft.recoveryservices/vaults resources exist
+microsoft_recoveryservices_vaults_exists {
+    existence.azure_resource_exists("microsoft.recoveryservices/vaults")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings
 # https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-manager-diagnostic-settings
 #

@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if this is a valid GCP resource
+gcp_resource_valid {
+    existence.gcp_resource_exists
+}
+
 # https://cloud.google.com/config-connector/docs/reference/resource-docs/sql/sqlinstance
 
 #

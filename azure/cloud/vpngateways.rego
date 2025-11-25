@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.network/vpngateways/vpnconnections resources exist
+microsoft_network_vpngateways_vpnconnections_exists {
+    existence.azure_resource_exists("microsoft.network/vpngateways/vpnconnections")
+}
+
+# Check if microsoft.network/vpngateways resources exist
+microsoft_network_vpngateways_exists {
+    existence.azure_resource_exists("microsoft.network/vpngateways")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

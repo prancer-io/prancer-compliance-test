@@ -1,0 +1,405 @@
+package rule
+
+available_true_choices := ["true", true]
+
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
+
+#
+# PR-AWS-CLD-EC2-001
+#
+
+default ec2_iam_role = true
+
+ec2_iam_role = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    not Instances.IamInstanceProfile
+}
+
+ec2_iam_role = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    not startswith(lower(Instances.IamInstanceProfile), "arn:")
+}
+
+ec2_iam_role_err = "AWS EC2 Instance IAM Role not enabled" {
+    not ec2_iam_role
+}
+
+ec2_iam_role_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-001",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS EC2 Instance IAM Role not enabled",
+    "Policy Description": "AWS provides Identity Access Management (IAM) roles to securely access AWS services and resources. The role is an identity with permission policies that define what the identity can and cannot do in AWS. As a best practice, create IAM roles and attach the role to manage EC2 instance permissions securely instead of distributing or sharing keys or passwords.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html"
+}
+
+#
+# PR-AWS-CLD-EC2-002
+#
+
+default ec2_no_vpc = true
+
+ec2_no_vpc = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    not Instances.SubnetId
+    count([c | Instances.NetworkInterfaces[_].SubnetId; c := 1]) == 0
+}
+
+ec2_no_vpc_err = "AWS EC2 instance is not configured with VPC" {
+    not ec2_no_vpc
+}
+
+ec2_no_vpc_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-002",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS EC2 instance is not configured with VPC",
+    "Policy Description": "This policy identifies the EC2 instances which are still using EC2 Classic. There are no VPCs deployed any EC2 instances will be running on AWS EC2 Classic. Deploying VPCs will enable you to leverage enhanced infrastructure security controls.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html"
+}
+
+#
+# PR-AWS-CLD-EC2-003
+#
+
+default ec2_public_ip = true
+
+ec2_public_ip = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    NetworkInterfaces := Instances.NetworkInterfaces[j]
+    not has_property(NetworkInterfaces, "AssociatePublicIpAddress")
+}
+
+ec2_public_ip = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    Instances.NetworkInterfaces[j].AssociatePublicIpAddress == true
+    lower(Instances.SecurityGroups[k]) == "default"
+}
+
+ec2_public_ip_err = "AWS EC2 instances with Public IP and associated with Security Groups have Internet Access" {
+    not ec2_public_ip
+}
+
+ec2_public_ip_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-003",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "AWS EC2 instances with Public IP and associated with Security Groups have Internet Access",
+    "Policy Description": "This policy identifies AWS EC2 instances with Public IP and associated with Security Groups have Internet Access. EC2 instance receives a public IP address when launched in a default VPC security group (A security group acts as a virtual firewall for your instance to control inbound and outbound traffic.) and we don't assign a public IP address to instances launched in a non-default subnet. Therefore it's a best practice to ensure that there are no EC2 instances with Public IP that are associated with Security Groups which have Internet Access.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html"
+}
+
+#
+# PR-AWS-CLD-EC2-004
+#
+
+default ec2_ebs_optimized = true
+
+ec2_ebs_optimized = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    not Instances.EbsOptimized
+}
+
+ec2_ebs_optimized_err = "Ensure that EC2 instace is EBS Optimized" {
+    not ec2_ebs_optimized
+}
+
+ec2_ebs_optimized_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-004",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure that EC2 instace is EBS Optimized",
+    "Policy Description": "Enable EbsOptimized provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-ebsoptimized"
+}
+
+
+#
+# PR-AWS-CLD-EC2-005
+#
+
+default ec2_monitoring = true
+
+ec2_monitoring = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    not Instances.Monitoring
+}
+
+ec2_monitoring = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    lower(Instances.Monitoring.State) != "enabled"
+}
+
+ec2_monitoring_err = "Ensure detailed monitoring is enabled for EC2 instances" {
+    not ec2_monitoring
+}
+
+ec2_monitoring_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-005",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure detailed monitoring is enabled for EC2 instances",
+    "Policy Description": "Ensure that detailed monitoring is enabled for your Amazon EC2 instances in order to have enough monitoring data to help you make better decisions on architecting and managing compute resources within your AWS account",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-monitoring"
+}
+
+
+#
+# PR-AWS-CLD-EC2-006
+#
+
+default ec2_deletion_termination = true
+
+ec2_deletion_termination = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    BlockDeviceMappings := Instances.BlockDeviceMappings[_]
+    has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    BlockDeviceMappings.Ebs.DeleteOnTermination == available_true_choices[_]
+    NetworkInterfaces := Instances.NetworkInterfaces[_]
+    has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+    NetworkInterfaces.Attachment.DeleteOnTermination == available_true_choices[_]
+}
+
+ec2_deletion_termination = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    BlockDeviceMappings := Instances.BlockDeviceMappings[_]
+    has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    BlockDeviceMappings.Ebs.DeleteOnTermination == available_true_choices[_]
+    NetworkInterfaces := Instances.NetworkInterfaces[_]
+    not has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+}
+
+
+ec2_deletion_termination = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    BlockDeviceMappings := Instances.BlockDeviceMappings[_]
+    not has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    NetworkInterfaces := Instances.NetworkInterfaces[_]
+    has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+    NetworkInterfaces.Attachment.DeleteOnTermination == available_true_choices[_]
+}
+
+ec2_deletion_termination = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Reservations := input.Reservations[_]
+    Instances := Reservations.Instances[_]
+    BlockDeviceMappings := Instances.BlockDeviceMappings[_]
+    not has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    NetworkInterfaces := Instances.NetworkInterfaces[_]
+    not has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+}
+
+ec2_deletion_termination_err = "Ensure AWS EC2 EBS and Network components' deletion protection is enabled" {
+    not ec2_deletion_termination
+}
+
+ec2_deletion_termination_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-006",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS EC2 EBS and Network components' deletion protection is enabled",
+    "Policy Description": "This checks if the EBS volumes are configured to be terminated along with the EC2 instance",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html"
+}
+
+
+#
+# PR-AWS-CLD-EC2-008
+#
+
+default ebs_snapshot_public_access = true
+
+ebs_snapshot_public_access = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    CreateVolumePermissions := input.CreateVolumePermissions[_]
+    lower(CreateVolumePermissions.Group) == "all"
+}
+
+ebs_snapshot_public_access_err = "Ensure AWS EBS snapshots are not accessible to public" {
+    not ebs_snapshot_public_access
+}
+
+ebs_snapshot_public_access_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-008",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS EBS snapshots are not accessible to the public",
+    "Policy Description": "This policy identifies EC2 EBS snapshots are accessible to the public. Amazon Elastic Block Store (Amazon EBS) provides persistent block storage volumes with Amazon EC2 instances in the AWS Cloud. If EBS snapshots are inadvertently shared to the public, any unauthorized user with AWS console access can gain access to the snapshots and gain access to sensitive data.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_images"
+}
+
+#
+# PR-AWS-CLD-EC2-011
+#
+
+default ebs_volume_attached = true
+
+ebs_volume_attached = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Volumes := input.Volumes[_]
+    count(Volumes.Attachments) == 0
+}
+
+ebs_volume_attached = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Volumes := input.Volumes[_]
+    Attachment := Volumes.Attachments[_]
+    lower(Attachment.State) != "attached"
+}
+
+ebs_volume_attached_err = "Ensure EBS volume is attached" {
+    not ebs_volume_attached
+}
+
+ebs_volume_attached_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-011",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EBS volume is attached",
+    "Policy Description": "This control check if EBS snapshots are encrypted at-rest. Snapshots of EBS volumes should be encrypted to avoid misuse. Encryption can be enabled at the account level for EBS volumes and snapshots",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html"
+}
+
+
+#
+# PR-AWS-CLD-EC2-012
+#
+
+default ebs_deletion_protection = true
+
+ebs_deletion_protection = false {
+    # lower(resource.Type) == "aws::ec2::instance"
+    Volumes := input.Volumes[_]
+    Attachment := Volumes.Attachments[_]
+    Attachment.DeleteOnTermination == false
+}
+
+ebs_deletion_protection_err = "Ensure EBS deletion protection is enabled" {
+    not ebs_deletion_protection
+}
+
+ebs_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-012",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EBS deletion protection is enabled",
+    "Policy Description": "This control checks if the EBS volumes provisioned is configured with deletion protection which protects from accidental deletions",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-volumes.html"
+}
+
+#
+# PR-AWS-CLD-EC2-013
+# aws::ec2::instance
+#
+
+default ec2_instance_configured_with_instance_metadata_service_v2 = true
+
+ec2_instance_configured_with_instance_metadata_service_v2 = false {
+    Reservation := input.Reservations[_]
+    Instance := Reservation.Instances[_]
+    lower(Instance.State.Name) == "running"
+    lower(Instance.MetadataOptions.HttpEndpoint) == "enabled"
+    lower(Instance.MetadataOptions.HttpTokens) == "required"
+}
+
+ec2_instance_configured_with_instance_metadata_service_v2_err = "Ensure AWS EC2 instance is configured with Instance Metadata Service v2 (IMDSv2)." {
+    not ec2_instance_configured_with_instance_metadata_service_v2
+}
+
+ec2_instance_configured_with_instance_metadata_service_v2_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-013",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure AWS EC2 instance is configured with Instance Metadata Service v2 (IMDSv2).",
+    "Policy Description": "It identifies AWS instances that are not configured with Instance Metadata Service v2 (IMDSv2). With IMDSv2, every request is now protected by session authentication. IMDSv2 protects against misconfigured-open website application firewalls, misconfigured-open reverse proxies, unpatched SSRF vulnerabilities, and misconfigured-open layer-3 firewalls and network address translation. It is recommended to use only IMDSv2 for all your EC2 instances. For more details:https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_instances"
+}
+
+
+#
+# PR-AWS-CLD-EC2-014
+# aws::ec2::instance
+# aws::ec2::vpcendpoint
+
+default ec2_vpcendpoint = true
+
+ec2_vpcendpoint = false {
+    X := input.TEST_EC2_01[_]
+    Reservation := X.Reservations[_]
+    Instance := Reservation.Instances[_]
+    Y := input.TEST_EC2_06[_]
+    VpcEndpoint := Y.VpcEndpoints[_]
+    Instance.VpcId != VpcEndpoint.VpcId
+}
+
+ec2_vpcendpoint_err = "Ensure EC2 is communicating with other services outside VPC using VPC-endpoint." {
+    not ec2_vpcendpoint
+}
+
+ec2_vpcendpoint_metadata := {
+    "Policy Code": "PR-AWS-CLD-EC2-014",
+    "Type": "cloud",
+    "Product": "AWS",
+    "Language": "AWS Cloud",
+    "Policy Title": "Ensure EC2 is communicating with other services outside VPC using VPC-endpoint.",
+    "Policy Description": "It checks if a VPC endpoint is configured for EC2 to communicate to other AWs Services. Communication between AWS services by default traverses the internet to the service endpoints. This can be routed via the VPC by the usage of VPC endpoints.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_instances"
+}

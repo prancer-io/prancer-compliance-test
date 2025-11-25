@@ -4,6 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_monitor_activity_log_alert resources exist
+azurerm_monitor_activity_log_alert_exists {
+    existence.azure_resource_exists("azurerm_monitor_activity_log_alert")
+}
+
+# Check if azurerm_monitor_log_profile resources exist
+azurerm_monitor_log_profile_exists {
+    existence.azure_resource_exists("azurerm_monitor_log_profile")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

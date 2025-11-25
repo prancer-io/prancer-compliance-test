@@ -4,6 +4,28 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_postgresql_server resources exist
+azurerm_postgresql_server_exists {
+    existence.azure_resource_exists("azurerm_postgresql_server")
+}
+
+# Check if azurerm_postgresql_firewall_rule resources exist
+azurerm_postgresql_firewall_rule_exists {
+    existence.azure_resource_exists("azurerm_postgresql_firewall_rule")
+}
+
+# Check if azurerm_postgresql_configuration resources exist
+azurerm_postgresql_configuration_exists {
+    existence.azure_resource_exists("azurerm_postgresql_configuration")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

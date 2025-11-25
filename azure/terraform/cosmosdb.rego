@@ -4,6 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_cosmosdb_account resources exist
+azurerm_cosmosdb_account_exists {
+    existence.azure_resource_exists("azurerm_cosmosdb_account")
+}
+
+# Check if azurerm_cosmosdb_accounts resources exist
+azurerm_cosmosdb_accounts_exists {
+    existence.azure_resource_exists("azurerm_cosmosdb_accounts")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account
 #
 # PR-AZR-TRF-ACD-001

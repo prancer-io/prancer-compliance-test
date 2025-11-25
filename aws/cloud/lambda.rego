@@ -12,7 +12,7 @@ has_property(parent_object, target_property) {
 # aws::lambda::function
 #
 
-default lambda_env = true
+default lambda_env = null
 
 lambda_env = false {
     input.Configuration.Environment
@@ -45,7 +45,7 @@ lambda_env_metadata := {
 # aws::lambda::function
 #
 
-default lambda_vpc = true
+default lambda_vpc = null
 
 lambda_vpc = false {
     not input.Configuration.VpcConfig.SubnetIds
@@ -76,7 +76,7 @@ lambda_vpc_metadata := {
 # aws::lambda::function
 #
 
-default lambda_tracing = true
+default lambda_tracing = null
 
 lambda_tracing = false {
     not input.Configuration.TracingConfig.Mode
@@ -108,7 +108,7 @@ lambda_tracing_metadata := {
 # aws::lambda::function
 #
 
-default lambda_concurrent_execution = true
+default lambda_concurrent_execution = null
 
 lambda_concurrent_execution = false {
     not input.Concurrency.ReservedConcurrentExecutions
@@ -137,7 +137,7 @@ lambda_concurrent_execution_metadata := {
 # aws::lambda::function
 #
 
-default lambda_dlq = true
+default lambda_dlq = null
 
 lambda_dlq = false {
     not input.Configuration.DeadLetterConfig.TargetArn
@@ -165,7 +165,7 @@ lambda_dlq_metadata := {
 # aws::lambda::function
 # aws::ec2::vpc
 
-default lambda_default_vpc = true
+default lambda_default_vpc = null
 
 lambda_default_vpc = false {
     X := input.TEST_EC2_04[_]
@@ -198,7 +198,7 @@ lambda_default_vpc_metadata := {
 # aws::lambda::function
 # aws::ec2::vpcendpoint
 
-default lambda_vpc_endpoint = true
+default lambda_vpc_endpoint = null
 
 lambda_vpc_endpoint = false {
     X := input.TEST_LAMBDA[_]
@@ -241,7 +241,7 @@ lambda_vpc_endpoint_metadata := {
 # aws::lambda::function
 # aws::ec2::vpc
 
-default lambda_runs_in_vpc = true
+default lambda_runs_in_vpc = null
 
 lambda_runs_in_vpc = false {
     X := input.TEST_LAMBDA[_]
@@ -284,7 +284,7 @@ lambda_runs_in_vpc_metadata := {
 # aws::lambda::function
 # aws::ec2::securitygroup
 
-default lambda_outbound_rule = true
+default lambda_outbound_rule = null
 
 lambda_outbound_rule = false {
     X := input.TEST_LAMBDA[_]

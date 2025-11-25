@@ -7,6 +7,18 @@ has_property(parent_object, target_property) {
 }
 
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if this is a valid GCP resource
+gcp_resource_valid {
+    existence.gcp_resource_exists
+}
+
 #
 # PR-GCP-GDF-CLT-001
 #
@@ -1937,7 +1949,7 @@ secret_encrypted_metadata := {
 # PR-GCP-GDF-CLT-035
 #
 
-default private_endpoint_disabled = true
+default private_endpoint_disabled = null
 
 gc_issue["private_endpoint_disabled"] {
     resource := input.resources[i]

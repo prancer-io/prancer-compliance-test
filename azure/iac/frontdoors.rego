@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.network/frontdoors resources exist
+microsoft_network_frontdoors_exists {
+    existence.azure_resource_exists("microsoft.network/frontdoors")
+}
+
+# Check if microsoft.network/frontdoorwebapplicationfirewallpolicies resources exist
+microsoft_network_frontdoorwebapplicationfirewallpolicies_exists {
+    existence.azure_resource_exists("microsoft.network/frontdoorwebapplicationfirewallpolicies")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/frontdoorwebapplicationfirewallpolicies?tabs=json
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/frontdoors?tabs=json
 #

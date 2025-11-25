@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.recoveryservices/vaults resources exist
+microsoft_recoveryservices_vaults_exists {
+    existence.azure_resource_exists("microsoft.recoveryservices/vaults")
+}
+
+# Check if microsoft.recoveryservices/vaults/privateendpointconnections resources exist
+microsoft_recoveryservices_vaults_privateendpointconnections_exists {
+    existence.azure_resource_exists("microsoft.recoveryservices/vaults/privateendpointconnections")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

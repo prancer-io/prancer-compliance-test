@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.keyvault/vaults/secrets resources exist
+microsoft_keyvault_vaults_secrets_exists {
+    existence.azure_resource_exists("microsoft.keyvault/vaults/secrets")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets
 
 #

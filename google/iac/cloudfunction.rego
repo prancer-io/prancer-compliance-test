@@ -1,6 +1,18 @@
 package rego
 
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if this is a valid GCP resource
+gcp_resource_valid {
+    existence.gcp_resource_exists
+}
+
 #
 # PR-GCP-GDF-CF-001
 #

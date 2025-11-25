@@ -4,6 +4,33 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_storage_account resources exist
+azurerm_storage_account_exists {
+    existence.azure_resource_exists("azurerm_storage_account")
+}
+
+# Check if azurerm_storage_account_network_rules resources exist
+azurerm_storage_account_network_rules_exists {
+    existence.azure_resource_exists("azurerm_storage_account_network_rules")
+}
+
+# Check if azurerm_advanced_threat_protection resources exist
+azurerm_advanced_threat_protection_exists {
+    existence.azure_resource_exists("azurerm_advanced_threat_protection")
+}
+
+# Check if azurerm_storage_encryption_scope resources exist
+azurerm_storage_encryption_scope_exists {
+    existence.azure_resource_exists("azurerm_storage_encryption_scope")
+}
+
 array_contains(array_property, element) = true {
   lower(array_property[_]) == element
 } else = false { true }

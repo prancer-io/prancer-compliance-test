@@ -6,6 +6,18 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if Resources resources exist
+resources_exists {
+    existence.aws_resource_exists("Resources")
+}
+
 iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount"]
 
 ip_address = ["0.0.0.0/0", "::/0"]

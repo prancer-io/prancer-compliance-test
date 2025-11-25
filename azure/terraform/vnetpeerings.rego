@@ -4,6 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_virtual_network_peering resources exist
+azurerm_virtual_network_peering_exists {
+    existence.azure_resource_exists("azurerm_virtual_network_peering")
+}
+
+# Check if azurerm_virtual_network resources exist
+azurerm_virtual_network_exists {
+    existence.azure_resource_exists("azurerm_virtual_network")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering
 
 #

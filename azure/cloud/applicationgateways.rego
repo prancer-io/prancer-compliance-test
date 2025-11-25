@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.network/applicationgateways resources exist
+microsoft_network_applicationgateways_exists {
+    existence.azure_resource_exists("microsoft.network/applicationgateways")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways
 
 #

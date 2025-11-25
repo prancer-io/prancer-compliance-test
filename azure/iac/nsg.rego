@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.network/networksecuritygroups resources exist
+microsoft_network_networksecuritygroups_exists {
+    existence.azure_resource_exists("microsoft.network/networksecuritygroups")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups
 
 iports := [

@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_frontdoor resources exist
+azurerm_frontdoor_exists {
+    existence.azure_resource_exists("azurerm_frontdoor")
+}
+
+# Check if azurerm_frontdoor_firewall_policy resources exist
+azurerm_frontdoor_firewall_policy_exists {
+    existence.azure_resource_exists("azurerm_frontdoor_firewall_policy")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/frontdoor
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/frontdoor_firewall_policy
 #

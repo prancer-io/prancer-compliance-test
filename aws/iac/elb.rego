@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if Resources resources exist
+resources_exists {
+    existence.aws_resource_exists("Resources")
+}
+
+# Check if Parameters resources exist
+parameters_exists {
+    existence.aws_resource_exists("Parameters")
+}
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
 

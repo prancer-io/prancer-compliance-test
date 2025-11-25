@@ -8,6 +8,18 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if this is a valid GCP resource
+gcp_resource_valid {
+    existence.gcp_resource_exists
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }
@@ -1867,7 +1879,7 @@ info_value_list = ["Yes", "Y", "True", "true", "TRUE", "1"]
 
 instance_value_list = ["No", "N", "False", "false", "FALSE", "0"]
 
-default project_os_login_overridden_by_instnace = true
+default project_os_login_overridden_by_instnace = null
 
 project_os_login_overridden_by_instnace = false{
 	X := input.GOOGLE_PROJECT_INFO[_]
@@ -2124,7 +2136,7 @@ net_default_metadata := {
 # PR-GCP-CLD-NET-003
 #
 
-default ntw_config_with_dns_logging_disabled = true
+default ntw_config_with_dns_logging_disabled = null
 
 ntw_config_with_dns_logging_disabled = false{
     X := input.GOOGLE_NETWORK[_]

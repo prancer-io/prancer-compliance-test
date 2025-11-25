@@ -10,7 +10,7 @@ has_property(parent_object, target_property) {
 # PR-AWS-CLD-SQS-001
 #
 
-default sqs_deadletter = true
+default sqs_deadletter = null
 
 sqs_deadletter = false {
     # lower(resource.Type) == "aws::sqs::queue"
@@ -38,7 +38,7 @@ sqs_deadletter_metadata := {
 # PR-AWS-CLD-SQS-002
 #
 
-default sqs_encrypt_key = true
+default sqs_encrypt_key = null
 
 
 sqs_encrypt_key = false {
@@ -67,7 +67,7 @@ sqs_encrypt_key_metadata := {
 # PR-AWS-CLD-SQS-003
 #
 
-default sqs_encrypt = true
+default sqs_encrypt = null
 
 sqs_encrypt = false {
     # lower(resource.Type) == "aws::sqs::queue"
@@ -100,7 +100,7 @@ sqs_encrypt_metadata := {
 # PR-AWS-CLD-SQS-004
 #
 
-default sqs_policy_public = true
+default sqs_policy_public = null
 
 sqs_policy_public = false {
     # lower(resource.Type) == "aws::sqs::queuepolicy"
@@ -147,7 +147,7 @@ sqs_policy_public_metadata := {
 # PR-AWS-CLD-SQS-005
 #
 
-default sqs_policy_action = true
+default sqs_policy_action = null
 
 sqs_policy_action = false {
     # lower(resource.Type) == "aws::sqs::queuepolicy"
@@ -186,7 +186,7 @@ sqs_policy_action_metadata := {
 # PR-AWS-CLD-SQS-006
 # aws::sqs::queuepolicy
 
-default sqs_not_overly_permissive = true
+default sqs_not_overly_permissive = null
 
 sqs_not_overly_permissive = false {
     policy := json.unmarshal(input.Attributes.Policy)
@@ -224,7 +224,7 @@ sqs_not_overly_permissive_metadata := {
 # PR-AWS-CLD-SQS-007
 # aws::sqs::queuepolicy
 
-default sqs_accessible_via_specific_vpc = true
+default sqs_accessible_via_specific_vpc = null
 
 sqs_accessible_via_specific_vpc = false {
     policy := json.unmarshal(input.Attributes.Policy)
@@ -271,7 +271,7 @@ sqs_accessible_via_specific_vpc_metadata := {
 # PR-AWS-CLD-SQS-008
 # aws::sqs::queuepolicy
 
-default sqs_encrypted_in_transit = true
+default sqs_encrypted_in_transit = null
 
 sqs_encrypted_in_transit = false {
     policy := json.unmarshal(input.Attributes.Policy)

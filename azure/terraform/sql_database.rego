@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_mssql_database resources exist
+azurerm_mssql_database_exists {
+    existence.azure_resource_exists("azurerm_mssql_database")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

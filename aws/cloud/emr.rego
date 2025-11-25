@@ -9,7 +9,7 @@ available_false_choices := ["false", false]
 # PR-AWS-CLD-EMR-001
 #
 
-default emr_security = true
+default emr_security = null
 
 emr_security = false {
     # lower(resource.Type) == "aws::emr::cluster"
@@ -42,7 +42,7 @@ emr_security_metadata := {
 # PR-AWS-CLD-EMR-002
 #
 
-default emr_kerberos = true
+default emr_kerberos = null
 
 emr_kerberos = false {
     # lower(resource.Type) == "aws::emr::cluster"
@@ -75,7 +75,7 @@ emr_kerberos_metadata := {
 # PR-AWS-CLD-EMR-003
 #
 
-default emr_s3_encryption = true
+default emr_s3_encryption = null
 
 emr_s3_encryption = false {
     # lower(resource.Type) == "aws::emr::securityconfiguration"
@@ -110,7 +110,7 @@ emr_s3_encryption_metadata := {
 # PR-AWS-CLD-EMR-004
 #
 
-default emr_local_encryption_cmk = true
+default emr_local_encryption_cmk = null
 
 emr_local_encryption_cmk = false {
     # lower(resource.Type) == "aws::emr::securityconfiguration"
@@ -149,7 +149,7 @@ emr_local_encryption_cmk_metadata := {
 # PR-AWS-CLD-EMR-006
 #
 
-default emr_rest_encryption = true
+default emr_rest_encryption = null
 
 emr_rest_encryption = false {
     # lower(resource.Type) == "aws::emr::securityconfiguration"
@@ -176,7 +176,7 @@ emr_rest_encryption_metadata := {
 # PR-AWS-CLD-EMR-007
 #
 
-default emr_transit_encryption = true
+default emr_transit_encryption = null
 
 emr_transit_encryption = false {
     # lower(resource.Type) == "aws::emr::securityconfiguration"
@@ -203,7 +203,7 @@ emr_transit_encryption_metadata := {
 # PR-AWS-CLD-EMR-008
 #
 
-default emr_cluster_level_logging = true
+default emr_cluster_level_logging = null
 
 emr_cluster_level_logging = false {
     # lower(resource.Type) == "aws::emr::cluster"
@@ -230,7 +230,7 @@ emr_cluster_level_logging_metadata := {
 # PR-AWS-CLD-EMR-009
 #
 
-default emr_cluster_not_visible_to_all_iam_users = true
+default emr_cluster_not_visible_to_all_iam_users = null
 
 emr_cluster_not_visible_to_all_iam_users = false {
     # lower(resource.Type) == "aws::emr::cluster"
@@ -257,7 +257,7 @@ emr_cluster_not_visible_to_all_iam_users_metadata := {
 # PR-AWS-CLD-EMR-010
 #
 
-default emr_termination_protection_is_enabled = true
+default emr_termination_protection_is_enabled = null
 
 emr_termination_protection_is_enabled = false {
     # lower(resource.Type) == "aws::emr::cluster"
@@ -286,7 +286,7 @@ emr_termination_protection_is_enabled_metadata := {
 # aws::emr::cluster
 # aws::ec2::securitygroup
 
-default emr_security_group_port = true
+default emr_security_group_port = null
 
 emr_security_group_port = false {
     Y := input.TEST_SG[_]

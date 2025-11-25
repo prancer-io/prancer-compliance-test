@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_firewall resources exist
+azurerm_firewall_exists {
+    existence.azure_resource_exists("azurerm_firewall")
+}
+
+# Check if azurerm_firewall_policy resources exist
+azurerm_firewall_policy_exists {
+    existence.azure_resource_exists("azurerm_firewall_policy")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy
 #

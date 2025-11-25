@@ -1,5 +1,27 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.dbforpostgresql/servers resources exist
+microsoft_dbforpostgresql_servers_exists {
+    existence.azure_resource_exists("microsoft.dbforpostgresql/servers")
+}
+
+# Check if microsoft.dbforpostgresql/servers/configurations resources exist
+microsoft_dbforpostgresql_servers_configurations_exists {
+    existence.azure_resource_exists("microsoft.dbforpostgresql/servers/configurations")
+}
+
+# Check if microsoft.dbforpostgresql/servers/firewallrules resources exist
+microsoft_dbforpostgresql_servers_firewallrules_exists {
+    existence.azure_resource_exists("microsoft.dbforpostgresql/servers/firewallrules")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

@@ -1,0 +1,42 @@
+package rule
+
+#
+# PR-GCP-CLD-KMS-001
+#
+
+default kms_key_rotation = null
+
+gc_issue["kms_key_rotation"] {
+    # lower(resource.type) == "gcp-types/cloudkms-v1:projects.locations.keyrings.cryptokeys"
+    not input.rotationPeriod
+}
+
+gc_issue["kms_key_rotation"] {
+    # lower(resource.type) == "gcp-types/cloudkms-v1:projects.locations.keyrings.cryptokeys"
+    input.rotationPeriod > 7776000
+}
+
+kms_key_rotation {
+    # lower(input.resources[i].type) == "gcp-types/cloudkms-v1:projects.locations.keyrings.cryptokeys"
+    not gc_issue["kms_key_rotation"]
+}
+
+kms_key_rotation = false {
+    gc_issue["kms_key_rotation"]
+}
+
+kms_key_rotation_err = "Ensure GCP KMS encryption key rotating in every 90 days" {
+    gc_issue["kms_key_rotation"]
+}
+
+kms_key_rotation_metadata := {
+    "Policy Code": "PR-GCP-CLD-KMS-001",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP cloud",
+    "Policy Title": "Ensure GCP KMS encryption key rotating in every 90 days",
+    "Policy Description": "This policy identifies GCP KMS encryption keys that are not rotating every 90 days.  A key is used to protect some corpus of data. A collection of files could be encrypted with the same key and people with decrypt permissions on that key would be able to decrypt those files. It's recommended to make sure the 'rotation period' is set to a specific time to ensure data cannot be accessed through the old key.",
+    # "Resource Type": "gcp-types/cloudkms-v1:projects.locations.keyrings.cryptokeys",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys"
+}

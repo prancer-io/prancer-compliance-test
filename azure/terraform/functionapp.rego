@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_function_app resources exist
+azurerm_function_app_exists {
+    existence.azure_resource_exists("azurerm_function_app")
+}
+
 array_contains(target_list, element) = true {
   lower(target_list[_]) == element
 } else = false { true }

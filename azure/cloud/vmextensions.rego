@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.compute/virtualmachines/extensions resources exist
+microsoft_compute_virtualmachines_extensions_exists {
+    existence.azure_resource_exists("microsoft.compute/virtualmachines/extensions")
+}
+
+# Check if microsoft.compute/virtualmachines resources exist
+microsoft_compute_virtualmachines_exists {
+    existence.azure_resource_exists("microsoft.compute/virtualmachines")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

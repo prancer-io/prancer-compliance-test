@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if this is a valid GCP resource
+gcp_resource_valid {
+    existence.gcp_resource_exists
+}
+
 concat_string(value1, value2) = output {
     out := array.concat([value1], [value2])
     x := concat("", out)

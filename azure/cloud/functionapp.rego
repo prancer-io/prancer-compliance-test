@@ -4,6 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.web/sites resources exist
+microsoft_web_sites_exists {
+    existence.azure_resource_exists("microsoft.web/sites")
+}
+
+# Check if microsoft.web/sites/config resources exist
+microsoft_web_sites_config_exists {
+    existence.azure_resource_exists("microsoft.web/sites/config")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

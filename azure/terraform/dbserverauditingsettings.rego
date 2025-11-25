@@ -1,5 +1,27 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_mssql_server_extended_auditing_policy resources exist
+azurerm_mssql_server_extended_auditing_policy_exists {
+    existence.azure_resource_exists("azurerm_mssql_server_extended_auditing_policy")
+}
+
+# Check if azurerm_sql_server resources exist
+azurerm_sql_server_exists {
+    existence.azure_resource_exists("azurerm_sql_server")
+}
+
+# Check if azurerm_mssql_server resources exist
+azurerm_mssql_server_exists {
+    existence.azure_resource_exists("azurerm_mssql_server")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/auditingsettings
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy
 #

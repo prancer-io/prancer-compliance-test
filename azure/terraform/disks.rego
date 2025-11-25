@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_managed_disk resources exist
+azurerm_managed_disk_exists {
+    existence.azure_resource_exists("azurerm_managed_disk")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/managed_disk
 
 #

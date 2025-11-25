@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_virtual_machine_extension resources exist
+azurerm_virtual_machine_extension_exists {
+    existence.azure_resource_exists("azurerm_virtual_machine_extension")
+}
+
+# Check if azurerm_virtual_machine resources exist
+azurerm_virtual_machine_exists {
+    existence.azure_resource_exists("azurerm_virtual_machine")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension
 
 #

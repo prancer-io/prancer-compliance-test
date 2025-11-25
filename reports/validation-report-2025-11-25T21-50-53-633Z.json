@@ -1,0 +1,43 @@
+{
+  "timestamp": "2025-11-25T21:50:53.633Z",
+  "summary": {
+    "totalFiles": 386,
+    "filesWithExistence": 259,
+    "nullDefaults": 2752,
+    "trueDefaults": 0,
+    "successRate": "67.1%"
+  },
+  "byProvider": {
+    "aws": {
+      "files": 90,
+      "existence": 44
+    },
+    "azure": {
+      "files": 162,
+      "existence": 157
+    },
+    "google": {
+      "files": 57,
+      "existence": 57
+    },
+    "kubernetes": {
+      "files": 75,
+      "existence": 0
+    },
+    "other": {
+      "files": 2,
+      "existence": 1
+    }
+  },
+  "issues": [
+    {
+      "file": "aws/iac/database.rego",
+      "issue": "Unbalanced braces: 586 open, 584 close"
+    },
+    {
+      "file": "azure/terraform/storageaccounts.rego",
+      "issue": "Unbalanced braces: 155 open, 154 close"
+    }
+  ],
+  "missingPackage": []
+}

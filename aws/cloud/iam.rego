@@ -6,6 +6,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if UserDetailList resources exist
+userdetaillist_exists {
+    existence.aws_resource_exists("UserDetailList")
+}
+
+# Check if AttachedPolicies resources exist
+attachedpolicies_exists {
+    existence.aws_resource_exists("AttachedPolicies")
+}
+
 iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount"]
 ip_address = ["0.0.0.0/0", "::/0"]
 available_true_choices := ["true", true]
@@ -14,7 +31,7 @@ available_false_choices := ["false", false]
 #
 # PR-AWS-CLD-IAM-001
 #
-default iam_wildcard_resource = true
+default iam_wildcard_resource = null
 
 iam_wildcard_resource = false {
     # lower(resource.Type) == "aws::iam::policy"
@@ -41,7 +58,7 @@ iam_wildcard_resource_metadata := {
 #
 # PR-AWS-CLD-IAM-002
 #
-default iam_wildcard_action = true
+default iam_wildcard_action = null
 
 iam_wildcard_action = false {
     # lower(resource.Type) == "aws::iam::managedpolicy"
@@ -77,7 +94,7 @@ iam_wildcard_action_metadata := {
 #
 # PR-AWS-CLD-IAM-003
 #
-default iam_wildcard_principal = true
+default iam_wildcard_principal = null
 
 iam_wildcard_principal = false {
     # lower(resource.Type) == "aws::iam::role"
@@ -105,7 +122,7 @@ iam_wildcard_principal_metadata := {
 #
 # PR-AWS-CLD-IAM-004
 #
-default iam_resource_format = true
+default iam_resource_format = null
 
 iam_resource_format = false {
     statement := input.PolicyVersion.Document.Statement[j]
@@ -133,7 +150,7 @@ iam_resource_format_metadata := {
 #
 # PR-AWS-CLD-IAM-005
 #
-default iam_assume_permission = true
+default iam_assume_permission = null
 
 iam_assume_permission = false {
     # lower(resource.Type) == "aws::iam::policy"
@@ -170,7 +187,7 @@ iam_assume_permission_metadata := {
 #
 # PR-AWS-CLD-IAM-006
 #
-default iam_all_traffic = true
+default iam_all_traffic = null
 
 iam_all_traffic = false {
     # lower(resource.Type) == "aws::iam::policy"
@@ -198,7 +215,7 @@ iam_all_traffic_metadata := {
 #
 # PR-AWS-CLD-IAM-007
 #
-default iam_administrative_privileges = true
+default iam_administrative_privileges = null
 
 iam_administrative_privileges = false {
     # lower(resource.Type) == "aws::iam::policy"
@@ -228,7 +245,7 @@ iam_administrative_privileges_metadata := {
 #
 # PR-AWS-CLD-IAM-008
 #
-default iam_user_group_attach = true
+default iam_user_group_attach = null
 
 iam_user_group_attach = false {
     # lower(resource.Type) == "aws::iam::usertogroupaddition"
@@ -260,7 +277,7 @@ iam_user_group_attach_metadata := {
 # PR-AWS-CLD-IAM-011
 #
 
-default lambda_iam_policy_not_overly_permissive_to_all_traffic = true
+default lambda_iam_policy_not_overly_permissive_to_all_traffic = null
 
 lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
     # lower(resource.Type) == "aws::iam::policyversion"
@@ -323,7 +340,7 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 # PR-AWS-CLD-IAM-012
 #
 
-default iam_policy_not_overly_permissive_to_lambda_service = true
+default iam_policy_not_overly_permissive_to_lambda_service = null
 
 iam_policy_not_overly_permissive_to_lambda_service = false {
     # lower(resource.Type) == "aws::iam::policyversion"
@@ -386,7 +403,7 @@ iam_policy_not_overly_permissive_to_lambda_service_metadata := {
 # PR-AWS-CLD-IAM-013
 #
 
-default ec2_instance_with_iam_permissions_management_access = true
+default ec2_instance_with_iam_permissions_management_access = null
 
 action := ["iam:AttachGroupPolicy","iam:AttachRolePolicy","iam:AttachUserPolicy","iam:CreatePolicy","iam:CreatePolicyVersion","iam:DeleteAccountPasswordPolicy","iam:DeleteGroupPolicy","iam:DeletePolicy","iam:DeletePolicyVersion","iam:DeleteRolePermissionsBoundary","iam:DeleteRolePolicy","iam:DeleteUserPermissionsBoundary","iam:DeleteUserPolicy","iam:DetachGroupPolicy","iam:DetachRolePolicy","iam:DetachUserPolicy","iam:PutGroupPolicy","iam:PutRolePermissionsBoundary","iam:PutRolePolicy","iam:PutUserPermissionsBoundary","iam:PutUserPolicy","iam:SetDefaultPolicyVersion","iam:UpdateAssumeRolePolicy"]
 
@@ -446,7 +463,7 @@ ec2_instance_with_iam_permissions_management_access_metadata := {
 # PR-AWS-CLD-IAM-014
 #
 
-default lambda_function_with_iam_write_access = true
+default lambda_function_with_iam_write_access = null
 
 action_lambda_function_with_iam_write_access := ["iam:AddClientIDToOpenIDConnectProvider","iam:AddRoleToInstanceProfile","iam:AddUserToGroup","iam:ChangePassword","iam:CreateAccessKey","iam:CreateAccountAlias","iam:CreateGroup","iam:CreateInstanceProfile","iam:CreateLoginProfile","iam:CreateOpenIDConnectProvider","iam:CreateRole","iam:CreateSAMLProvider","iam:CreateServiceLinkedRole","iam:CreateServiceSpecificCredential","iam:CreateUser","iam:CreateVirtualMFADevice","iam:DeactivateMFADevice","iam:DeleteAccessKey","iam:DeleteAccountAlias","iam:DeleteGroup","iam:DeleteInstanceProfile","iam:DeleteLoginProfile","iam:DeleteOpenIDConnectProvider","iam:DeleteRole","iam:DeleteSAMLProvider","iam:DeleteSSHPublicKey","iam:DeleteServerCertificate","iam:DeleteServiceLinkedRole","iam:DeleteServiceSpecificCredential","iam:DeleteSigningCertificate","iam:DeleteUser","iam:DeleteVirtualMFADevice","iam:EnableMFADevice","iam:PassRole","iam:RemoveClientIDFromOpenIDConnectProvider","iam:RemoveRoleFromInstanceProfile","iam:RemoveUserFromGroup","iam:ResetServiceSpecificCredential","iam:ResyncMFADevice","iam:SetSecurityTokenServicePreferences","iam:UpdateAccessKey","iam:UpdateAccountPasswordPolicy","iam:UpdateGroup","iam:UpdateLoginProfile","iam:UpdateOpenIDConnectProviderThumbprint","iam:UpdateRole","iam:UpdateRoleDescription","iam:UpdateSAMLProvider","iam:UpdateSSHPublicKey","iam:UpdateServerCertificate","iam:UpdateServiceSpecificCredential","iam:UpdateSigningCertificate","iam:UpdateUser","iam:UploadSSHPublicKey","iam:UploadServerCertificate","iam:UploadSigningCertificate"]
 
@@ -506,7 +523,7 @@ lambda_function_with_iam_write_access_metadata := {
 # PR-AWS-CLD-IAM-015
 #
 
-default lambda_function_with_iam_permissions_management_access = true
+default lambda_function_with_iam_permissions_management_access = null
 
 action_lambda_function_with_iam_permissions_management_access := ["iam:AttachGroupPolicy","iam:AttachRolePolicy","iam:AttachUserPolicy","iam:CreatePolicy","iam:CreatePolicyVersion","iam:DeleteAccountPasswordPolicy","iam:DeleteGroupPolicy","iam:DeletePolicy","iam:DeletePolicyVersion","iam:DeleteRolePermissionsBoundary","iam:DeleteRolePolicy","iam:DeleteUserPermissionsBoundary","iam:DeleteUserPolicy","iam:DetachGroupPolicy","iam:DetachRolePolicy","iam:DetachUserPolicy","iam:PutGroupPolicy","iam:PutRolePermissionsBoundary","iam:PutRolePolicy","iam:PutUserPermissionsBoundary","iam:PutUserPolicy","iam:SetDefaultPolicyVersion","iam:UpdateAssumeRolePolicy"]
 
@@ -566,7 +583,7 @@ lambda_function_with_iam_permissions_management_access_metadata := {
 # PR-AWS-CLD-IAM-016
 #
 
-default ec2_instance_with_iam_write_access = true
+default ec2_instance_with_iam_write_access = null
 
 action_ec2_instance_with_iam_write_access := ["iam:AddClientIDToOpenIDConnectProvider","iam:AddRoleToInstanceProfile","iam:AddUserToGroup","iam:ChangePassword","iam:CreateAccessKey","iam:CreateAccountAlias","iam:CreateGroup","iam:CreateInstanceProfile","iam:CreateLoginProfile","iam:CreateOpenIDConnectProvider","iam:CreateRole","iam:CreateSAMLProvider","iam:CreateServiceLinkedRole","iam:CreateServiceSpecificCredential","iam:CreateUser","iam:CreateVirtualMFADevice","iam:DeactivateMFADevice","iam:DeleteAccessKey","iam:DeleteAccountAlias","iam:DeleteGroup","iam:DeleteInstanceProfile","iam:DeleteLoginProfile","iam:DeleteOpenIDConnectProvider","iam:DeleteRole","iam:DeleteSAMLProvider","iam:DeleteSSHPublicKey","iam:DeleteServerCertificate","iam:DeleteServiceLinkedRole","iam:DeleteServiceSpecificCredential","iam:DeleteSigningCertificate","iam:DeleteUser","iam:DeleteVirtualMFADevice","iam:EnableMFADevice","iam:PassRole","iam:RemoveClientIDFromOpenIDConnectProvider","iam:RemoveRoleFromInstanceProfile","iam:RemoveUserFromGroup","iam:ResetServiceSpecificCredential","iam:ResyncMFADevice","iam:SetSecurityTokenServicePreferences","iam:UpdateAccessKey","iam:UpdateAccountPasswordPolicy","iam:UpdateGroup","iam:UpdateLoginProfile","iam:UpdateOpenIDConnectProviderThumbprint","iam:UpdateRole","iam:UpdateRoleDescription","iam:UpdateSAMLProvider","iam:UpdateSSHPublicKey","iam:UpdateServerCertificate","iam:UpdateServiceSpecificCredential","iam:UpdateSigningCertificate","iam:UpdateUser","iam:UploadSSHPublicKey","iam:UploadServerCertificate","iam:UploadSigningCertificate"]
 
@@ -626,7 +643,7 @@ ec2_instance_with_iam_write_access_metadata := {
 # PR-AWS-CLD-IAM-017
 #
 
-default lambda_function_with_org_write_access = true
+default lambda_function_with_org_write_access = null
 
 action_lambda_function_with_org_write_access := ["organizations:AcceptHandshake","organizations:AttachPolicy","organizations:CancelHandshake","organizations:CreateAccount","organizations:CreateGovCloudAccount","organizations:CreateOrganization","organizations:CreateOrganizationalUnit","organizations:CreatePolicy","organizations:DeclineHandshake","organizations:DeleteOrganization","organizations:DeleteOrganizationalUnit","organizations:DeletePolicy","organizations:DeregisterDelegatedAdministrator","organizations:DetachPolicy","organizations:DisableAWSServiceAccess","organizations:DisablePolicyType","organizations:EnableAWSServiceAccess","organizations:EnableAllFeatures","organizations:EnablePolicyType","organizations:InviteAccountToOrganization","organizations:LeaveOrganization","organizations:MoveAccount","organizations:RegisterDelegatedAdministrator","organizations:RemoveAccountFromOrganization","organizations:UpdateOrganizationalUnit","organizations:UpdatePolicy"]
 
@@ -686,7 +703,7 @@ lambda_function_with_org_write_access_metadata := {
 # PR-AWS-CLD-IAM-018
 #
 
-default elasticbeanstalk_platform_with_iam_wildcard_resource_access = true
+default elasticbeanstalk_platform_with_iam_wildcard_resource_access = null
 
 elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
@@ -744,7 +761,7 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access_metadata := {
 # PR-AWS-CLD-IAM-019
 #
 
-default ec2_with_iam_wildcard_resource_access = true
+default ec2_with_iam_wildcard_resource_access = null
 
 ec2_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
@@ -802,7 +819,7 @@ ec2_with_iam_wildcard_resource_access_metadata := {
 # PR-AWS-CLD-IAM-020
 #
 
-default lambda_function_with_iam_wildcard_resource_access = true
+default lambda_function_with_iam_wildcard_resource_access = null
 
 lambda_function_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
@@ -861,7 +878,7 @@ lambda_function_with_iam_wildcard_resource_access_metadata := {
 # PR-AWS-CLD-IAM-021
 #
 
-default ecs_task_definition_with_iam_wildcard_resource_access = true
+default ecs_task_definition_with_iam_wildcard_resource_access = null
 
 ecs_task_definition_with_iam_wildcard_resource_access = false {
 #     lower(resource.Type) == "aws::iam::role"
@@ -1126,7 +1143,7 @@ secret_manager_secret_is_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-027
 #
 
-default iam_policy_permission_may_cause_privilege_escalation = true
+default iam_policy_permission_may_cause_privilege_escalation = null
 
 action_iam_policy_permission_may_cause_privilege_escalation := ["iam:CreatePolicyVersion", "iam:SetDefaultPolicyVersion", "iam:PassRole", "iam:CreateAccessKey", "iam:CreateLoginProfile", "iam:UpdateLoginProfile", "iam:AttachUserPolicy", "iam:AttachGroupPolicy", "iam:AttachRolePolicy", "iam:PutUserPolicy", "iam:PutGroupPolicy", "iam:PutRolePolicy", "iam:AddUserToGroup", "iam:UpdateAssumeRolePolicy", "iam:*"]
 
@@ -1167,7 +1184,7 @@ iam_policy_permission_may_cause_privilege_escalation_metadata := {
 # PR-AWS-CLD-IAM-028
 #
 
-default iam_access_key_enabled_on_root_account = true
+default iam_access_key_enabled_on_root_account = null
 
 iam_access_key_enabled_on_root_account = false {
     # lower(resource.Type) == "aws::iam::policy"
@@ -1195,7 +1212,7 @@ iam_access_key_enabled_on_root_account_metadata := {
 # PR-AWS-CLD-IAM-029
 #
 
-default iam_policy_not_overly_permissive_to_all_traffic_for_ecs= true
+default iam_policy_not_overly_permissive_to_all_traffic_for_ecs= null
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
     # lower(resource.Type) == "aws::iam::policyversion"
@@ -1258,7 +1275,7 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs_metadata := {
 # PR-AWS-CLD-IAM-030
 #
 
-default elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = true
+default elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = null
 
 elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
     # lower(resource.Type) == "aws::iam::policyversion"
@@ -1321,7 +1338,7 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 # PR-AWS-CLD-IAM-041
 #
 
-default not_allow_decryption_actions_on_all_kms_keys = true
+default not_allow_decryption_actions_on_all_kms_keys = null
 
 not_allow_decryption_actions_on_all_kms_keys = false {
     # lower(resource.Type) == "aws::iam::policyversion"
@@ -1475,7 +1492,7 @@ not_allow_decryption_actions_on_all_kms_keys_metadata := {
 # PR-AWS-CLD-IAM-042
 #
 
-default iam_policy_attached_to_user = true
+default iam_policy_attached_to_user = null
 
 iam_policy_attached_to_user = false {
     UserDetail := input.UserDetailList[_]
@@ -1502,7 +1519,7 @@ iam_policy_attached_to_user_metadata := {
 # PR-AWS-CLD-IAM-043
 #
 
-default iam_policy_not_overly_permissive_to_all_traffic = true
+default iam_policy_not_overly_permissive_to_all_traffic = null
 
 iam_policy_not_overly_permissive_to_all_traffic = false {
     # lower(resource.Type) == "aws::iam::policyversion"
@@ -1565,7 +1582,7 @@ iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 # PR-AWS-CLD-IAM-044
 #
 
-default iam_policy_not_overly_permissive_to_sts_service = true
+default iam_policy_not_overly_permissive_to_sts_service = null
 
 iam_policy_not_overly_permissive_to_sts_service = false {
     # lower(resource.Type) == "aws::iam::policyversion"
@@ -1674,7 +1691,7 @@ sns_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-046
 # aws::iam::policyversion
 
-default sagemaker_not_overly_permissive_to_all_traffic = true
+default sagemaker_not_overly_permissive_to_all_traffic = null
 
 sagemaker_not_overly_permissive_to_all_traffic = false {
     version := input.PolicyVersion
@@ -1715,7 +1732,7 @@ sagemaker_not_overly_permissive_to_all_traffic_metadata := {
 # aws::iam::policy
 # aws::iam::user
 
-default iam_deprecated_policies = true
+default iam_deprecated_policies = null
 
 iam_deprecated_policies = false {
     policy := input.AttachedPolicies[_]
@@ -1743,7 +1760,7 @@ iam_deprecated_policies_metadata := {
 # PR-AWS-CLD-IAM-048
 #
 
-default iam_root_mfa_device = true
+default iam_root_mfa_device = null
 
 iam_root_mfa_device = false {
     input.SummaryMap.AccountMFAEnabled == 0
@@ -1768,7 +1785,7 @@ iam_root_mfa_device_metadata := {
 #
 # PR-AWS-CLD-IAM-049
 #
-default iam_mfa_device = true
+default iam_mfa_device = null
 
 iam_mfa_device = false {
     count(input.MFADevices) == 0
@@ -1793,7 +1810,7 @@ iam_mfa_device_metadata := {
 #
 # PR-AWS-CLD-IAM-050
 #
-default iam_instance_profile = true
+default iam_instance_profile = null
 
 iam_instance_profile = false {
     role := input.InstanceProfile.Roles[_]

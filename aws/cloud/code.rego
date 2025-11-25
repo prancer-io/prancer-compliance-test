@@ -4,7 +4,7 @@ package rule
 # PR-AWS-CLD-CB-001
 #
 
-default codebuild_encryption_disable = true
+default codebuild_encryption_disable = null
 
 codebuild_encryption_disable = false {
     # lower(resource.Type) == "aws::codebuild::project"
@@ -33,7 +33,7 @@ codebuild_encryption_disable_metadata := {
 # PR-AWS-CLD-CB-002
 #
 
-default codebuild_encryption = true
+default codebuild_encryption = null
 
 codebuild_encryption = false {
     # lower(resource.Type) == "aws::codebuild::project"
@@ -68,7 +68,7 @@ codebuild_encryption_metadata := {
 # PR-AWS-CLD-CP-001
 #
 
-default cp_artifact_encrypt = true
+default cp_artifact_encrypt = null
 
 cp_artifact_encrypt = false {
     # lower(resource.Type) == "aws::codepipeline::pipeline"
@@ -101,7 +101,7 @@ cp_artifact_encrypt_metadata := {
 # PR-AWS-CLD-CD-001
 #
 
-default deploy_compute_platform = true
+default deploy_compute_platform = null
 
 deploy_compute_platform = false {
     # lower(resource.Type) == "aws::codedeploy::application"

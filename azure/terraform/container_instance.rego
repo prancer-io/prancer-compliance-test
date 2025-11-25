@@ -4,6 +4,18 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_container_group resources exist
+azurerm_container_group_exists {
+    existence.azure_resource_exists("azurerm_container_group")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_group
 #
 # PR-AZR-TRF-ACI-001

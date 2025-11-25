@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.sql/servers/auditingsettings resources exist
+microsoft_sql_servers_auditingsettings_exists {
+    existence.azure_resource_exists("microsoft.sql/servers/auditingsettings")
+}
+
+# Check if microsoft.sql/servers resources exist
+microsoft_sql_servers_exists {
+    existence.azure_resource_exists("microsoft.sql/servers")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

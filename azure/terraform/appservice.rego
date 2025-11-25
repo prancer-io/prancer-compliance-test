@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_app_service resources exist
+azurerm_app_service_exists {
+    existence.azure_resource_exists("azurerm_app_service")
+}
+
 #
 # PR-AZR-TRF-WEB-001
 #

@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if Resources resources exist
+resources_exists {
+    existence.aws_resource_exists("Resources")
+}
+
 #
 # PR-AWS-0263-CFR
 #

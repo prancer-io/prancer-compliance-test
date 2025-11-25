@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.containerregistry/registries/webhooks resources exist
+microsoft_containerregistry_registries_webhooks_exists {
+    existence.azure_resource_exists("microsoft.containerregistry/registries/webhooks")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks
 
 #

@@ -4,6 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_mariadb_server resources exist
+azurerm_mariadb_server_exists {
+    existence.azure_resource_exists("azurerm_mariadb_server")
+}
+
+# Check if azurerm_mariadb_firewall_rule resources exist
+azurerm_mariadb_firewall_rule_exists {
+    existence.azure_resource_exists("azurerm_mariadb_firewall_rule")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_firewall_rule
 
 # PR-AZR-TRF-SQL-012

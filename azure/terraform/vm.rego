@@ -4,6 +4,43 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_virtual_machine resources exist
+azurerm_virtual_machine_exists {
+    existence.azure_resource_exists("azurerm_virtual_machine")
+}
+
+# Check if azurerm_linux_virtual_machine resources exist
+azurerm_linux_virtual_machine_exists {
+    existence.azure_resource_exists("azurerm_linux_virtual_machine")
+}
+
+# Check if azurerm_linux_virtual_machine_scale_set resources exist
+azurerm_linux_virtual_machine_scale_set_exists {
+    existence.azure_resource_exists("azurerm_linux_virtual_machine_scale_set")
+}
+
+# Check if azurerm_windows_virtual_machine resources exist
+azurerm_windows_virtual_machine_exists {
+    existence.azure_resource_exists("azurerm_windows_virtual_machine")
+}
+
+# Check if azurerm_network_interface resources exist
+azurerm_network_interface_exists {
+    existence.azure_resource_exists("azurerm_network_interface")
+}
+
+# Check if azurerm_backup_protected_vm resources exist
+azurerm_backup_protected_vm_exists {
+    existence.azure_resource_exists("azurerm_backup_protected_vm")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine
 
 #

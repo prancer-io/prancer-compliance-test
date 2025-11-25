@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.sql/servers resources exist
+microsoft_sql_servers_exists {
+    existence.azure_resource_exists("microsoft.sql/servers")
+}
+
+# Check if microsoft.sql/servers/firewallrules resources exist
+microsoft_sql_servers_firewallrules_exists {
+    existence.azure_resource_exists("microsoft.sql/servers/firewallrules")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

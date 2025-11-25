@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.databricks/workspaces resources exist
+microsoft_databricks_workspaces_exists {
+    existence.azure_resource_exists("microsoft.databricks/workspaces")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json
 
 #

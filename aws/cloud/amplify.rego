@@ -4,7 +4,7 @@ package rule
 # PR-AWS-CLD-AMF-001
 # AWS::Amplify::App
 
-default amplify_basic_auth = true
+default amplify_basic_auth = null
 
 amplify_basic_auth = false {
     not input.app.enableBasicAuth
@@ -30,7 +30,7 @@ amplify_basic_auth_metadata := {
 # PR-AWS-CLD-AMF-002
 # AWS::Amplify::App
 
-default amplify_pr_preview = true
+default amplify_pr_preview = null
 
 amplify_pr_preview = false {
     input.app.enableAutoBranchCreation == true

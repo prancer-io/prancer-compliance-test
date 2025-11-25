@@ -4,6 +4,33 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.sql/servers resources exist
+microsoft_sql_servers_exists {
+    existence.azure_resource_exists("microsoft.sql/servers")
+}
+
+# Check if microsoft.sql/servers/administrators resources exist
+microsoft_sql_servers_administrators_exists {
+    existence.azure_resource_exists("microsoft.sql/servers/administrators")
+}
+
+# Check if microsoft.sql/servers/virtualnetworkrules resources exist
+microsoft_sql_servers_virtualnetworkrules_exists {
+    existence.azure_resource_exists("microsoft.sql/servers/virtualnetworkrules")
+}
+
+# Check if microsoft.sql/servers/privateendpointconnections resources exist
+microsoft_sql_servers_privateendpointconnections_exists {
+    existence.azure_resource_exists("microsoft.sql/servers/privateendpointconnections")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

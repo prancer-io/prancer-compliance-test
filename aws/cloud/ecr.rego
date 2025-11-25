@@ -11,7 +11,7 @@ has_property(parent_object, target_property) {
 # PR-AWS-CLD-ECR-001
 #
 
-default ecr_imagetag = true
+default ecr_imagetag = null
 
 ecr_imagetag = false {
     # lower(resource.Type) == "aws::ecr::repository"
@@ -39,7 +39,7 @@ ecr_imagetag_metadata := {
 # PR-AWS-CLD-ECR-002
 #
 
-default ecr_encryption = true
+default ecr_encryption = null
 
 ecr_encryption = false {
     # lower(resource.Type) == "aws::ecr::repository"
@@ -68,7 +68,7 @@ ecr_encryption_metadata := {
 # PR-AWS-CLD-ECR-003
 #
 
-default ecr_scan = true
+default ecr_scan = null
 
 ecr_scan = false {
     # lower(resource.Type) == "aws::ecr::repository"
@@ -103,7 +103,7 @@ ecr_scan_metadata := {
 # PR-AWS-CLD-ECR-004
 #
 
-default ecr_public_access_disable = true
+default ecr_public_access_disable = null
 
 ecr_public_access_disable = false {
     # lower(resource.Type) == "aws::ecr::repository"
@@ -150,7 +150,7 @@ ecr_public_access_disable_metadata := {
 # PR-AWS-CLD-ECR-005
 #
 
-default ecr_vulnerability = true
+default ecr_vulnerability = null
 
 ecr_vulnerability = false {
     # lower(resource.Type) == "aws::ecr::repository"
@@ -188,7 +188,7 @@ ecr_vulnerability_metadata := {
 # PR-AWS-CLD-ECR-006
 #
 
-default ecr_accessible_only_via_private_endpoint = true
+default ecr_accessible_only_via_private_endpoint = null
 
 ecr_accessible_only_via_private_endpoint = false {
     # lower(resource.Type) == "aws::ecr::repository"
@@ -219,7 +219,7 @@ ecr_accessible_only_via_private_endpoint_metadata := {
 # PR-AWS-CLD-ECR-007
 #
 
-default lifecycle_policy_is_enabled = true
+default lifecycle_policy_is_enabled = null
 
 lifecycle_policy_is_enabled = false {
     # lower(resource.Type) == "aws::ecr::repository"
@@ -256,7 +256,7 @@ lifecycle_policy_is_enabled_metadata := {
 # AWS::KMS::Key
 # AWS::ECR::Repository
 
-default ecr_encrypted_using_key = true
+default ecr_encrypted_using_key = null
 
 ecr_encrypted_using_key = false {
 	ecr := input.TEST_ECR[_]

@@ -10,7 +10,7 @@ has_property(parent_object, target_property) {
 # PR-AWS-CLD-SGM-001
 #
 
-default sagemaker_encryption_kms = true
+default sagemaker_encryption_kms = null
 
 sagemaker_encryption_kms = false {
     # lower(resource.Type) == "aws::sagemaker::notebookinstance"
@@ -42,7 +42,7 @@ sagemaker_encryption_kms_metadata := {
 # PR-AWS-CLD-SGM-002
 #
 
-default sagemaker_rootaccess_enabled = true
+default sagemaker_rootaccess_enabled = null
 
 sagemaker_rootaccess_enabled = false {
     # lower(resource.Type) == "aws::sagemaker::notebookinstance"
@@ -75,7 +75,7 @@ sagemaker_rootaccess_enabled_metadata := {
 # PR-AWS-CLD-SGM-003
 #
 
-default sagemaker_direct_internet_access_enabled = true
+default sagemaker_direct_internet_access_enabled = null
 
 sagemaker_direct_internet_access_enabled = false {
     # lower(resource.Type) == "aws::sagemaker::notebookinstance"
@@ -108,7 +108,7 @@ sagemaker_direct_internet_access_enabled_metadata := {
 # PR-AWS-CLD-SGM-004
 #
 
-default sagemaker_vpc = true
+default sagemaker_vpc = null
 
 sagemaker_vpc = false {
     # lower(resource.Type) == "aws::sagemaker::notebookinstance"
@@ -142,7 +142,7 @@ sagemaker_vpc_metadata := {
 # aws::sagemaker::notebookinstance
 # AWS::KMS::Key
 
-default sagemaker_customer_managed_key = true
+default sagemaker_customer_managed_key = null
 
 sagemaker_customer_managed_key = false {
     X := input.TEST_SAGEMAKER[_]

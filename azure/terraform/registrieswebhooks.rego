@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_container_registry_webhook resources exist
+azurerm_container_registry_webhook_exists {
+    existence.azure_resource_exists("azurerm_container_registry_webhook")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_container_registry_webhook
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry_webhook
 #

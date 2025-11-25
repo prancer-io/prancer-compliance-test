@@ -4,6 +4,28 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.containerregistry/registries resources exist
+microsoft_containerregistry_registries_exists {
+    existence.azure_resource_exists("microsoft.containerregistry/registries")
+}
+
+# Check if microsoft.containerregistry/registries/tokens resources exist
+microsoft_containerregistry_registries_tokens_exists {
+    existence.azure_resource_exists("microsoft.containerregistry/registries/tokens")
+}
+
+# Check if microsoft.containerregistry/registries/privateendpointconnections resources exist
+microsoft_containerregistry_registries_privateendpointconnections_exists {
+    existence.azure_resource_exists("microsoft.containerregistry/registries/privateendpointconnections")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

@@ -1,5 +1,37 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.eventhub/namespaces resources exist
+microsoft_eventhub_namespaces_exists {
+    existence.azure_resource_exists("microsoft.eventhub/namespaces")
+}
+
+# Check if microsoft.eventhub/namespaces/privateendpointconnections resources exist
+microsoft_eventhub_namespaces_privateendpointconnections_exists {
+    existence.azure_resource_exists("microsoft.eventhub/namespaces/privateendpointconnections")
+}
+
+# Check if microsoft.eventhub/namespaces/authorizationrules resources exist
+microsoft_eventhub_namespaces_authorizationrules_exists {
+    existence.azure_resource_exists("microsoft.eventhub/namespaces/authorizationrules")
+}
+
+# Check if microsoft.eventhub/namespaces/eventhubs/authorizationrules resources exist
+microsoft_eventhub_namespaces_eventhubs_authorizationrules_exists {
+    existence.azure_resource_exists("microsoft.eventhub/namespaces/eventhubs/authorizationrules")
+}
+
+# Check if microsoft.eventhub/namespaces/eventhubs resources exist
+microsoft_eventhub_namespaces_eventhubs_exists {
+    existence.azure_resource_exists("microsoft.eventhub/namespaces/eventhubs")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.sql/servers/databases/securityalertpolicies resources exist
+microsoft_sql_servers_databases_securityalertpolicies_exists {
+    existence.azure_resource_exists("microsoft.sql/servers/databases/securityalertpolicies")
+}
+
+# Check if microsoft.sql/servers/databases resources exist
+microsoft_sql_servers_databases_exists {
+    existence.azure_resource_exists("microsoft.sql/servers/databases")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies
 
 

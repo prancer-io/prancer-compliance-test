@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if SecurityGroups resources exist
+securitygroups_exists {
+    existence.aws_resource_exists("SecurityGroups")
+}
+
+# Check if SecurityGroupRules resources exist
+securitygrouprules_exists {
+    existence.aws_resource_exists("SecurityGroupRules")
+}
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html
 
 
@@ -7,7 +24,7 @@ package rule
 # PR-AWS-CLD-SG-001
 #
 
-default port_135 = true
+default port_135 = null
 
 port_135 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -45,7 +62,7 @@ port_135_metadata := {
 # PR-AWS-CLD-SG-002
 #
 
-default port_137 = true
+default port_137 = null
 
 port_137 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -83,7 +100,7 @@ port_137_metadata := {
 # PR-AWS-CLD-SG-003
 #
 
-default port_138 = true
+default port_138 = null
 
 port_138 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -121,7 +138,7 @@ port_138_metadata := {
 # PR-AWS-CLD-SG-004
 #
 
-default port_1433 = true
+default port_1433 = null
 
 port_1433 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -159,7 +176,7 @@ port_1433_metadata := {
 # PR-AWS-CLD-SG-005
 #
 
-default port_1434 = true
+default port_1434 = null
 
 port_1434 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -197,7 +214,7 @@ port_1434_metadata := {
 # PR-AWS-CLD-SG-006
 #
 
-default port_20 = true
+default port_20 = null
 
 port_20 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -235,7 +252,7 @@ port_20_metadata := {
 # PR-AWS-CLD-SG-007
 #
 
-default port_21 = true
+default port_21 = null
 
 port_21 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -273,7 +290,7 @@ port_21_metadata := {
 # PR-AWS-CLD-SG-008
 #
 
-default port_22 = true
+default port_22 = null
 
 port_22 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -311,7 +328,7 @@ port_22_metadata := {
 # PR-AWS-CLD-SG-009
 #
 
-default port_23 = true
+default port_23 = null
 
 port_23 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -349,7 +366,7 @@ port_23_metadata := {
 # PR-AWS-CLD-SG-010
 #
 
-default port_25 = true
+default port_25 = null
 
 port_25 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -387,7 +404,7 @@ port_25_metadata := {
 # PR-AWS-CLD-SG-011
 #
 
-default port_3306 = true
+default port_3306 = null
 
 port_3306 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -425,7 +442,7 @@ port_3306_metadata := {
 # PR-AWS-CLD-SG-012
 #
 
-default port_3389 = true
+default port_3389 = null
 
 port_3389 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -463,7 +480,7 @@ port_3389_metadata := {
 # PR-AWS-CLD-SG-013
 #
 
-default port_4333 = true
+default port_4333 = null
 
 port_4333 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -501,7 +518,7 @@ port_4333_metadata := {
 # PR-AWS-CLD-SG-014
 #
 
-default port_445 = true
+default port_445 = null
 
 port_445 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -539,7 +556,7 @@ port_445_metadata := {
 # PR-AWS-CLD-SG-015
 #
 
-default port_53 = true
+default port_53 = null
 
 port_53 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -577,7 +594,7 @@ port_53_metadata := {
 # PR-AWS-CLD-SG-016
 #
 
-default port_5432 = true
+default port_5432 = null
 
 port_5432 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -615,7 +632,7 @@ port_5432_metadata := {
 # PR-AWS-CLD-SG-017
 #
 
-default port_5500 = true
+default port_5500 = null
 
 port_5500 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -653,7 +670,7 @@ port_5500_metadata := {
 # PR-AWS-CLD-SG-018
 #
 
-default port_5900 = true
+default port_5900 = null
 
 port_5900 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -691,7 +708,7 @@ port_5900_metadata := {
 # PR-AWS-CLD-SG-019
 #
 
-default port_all = true
+default port_all = null
 
 port_all = false {
     SecurityGroups := input.SecurityGroups[_]
@@ -727,7 +744,7 @@ port_all_metadata := {
 # PR-AWS-CLD-SG-020
 #
 
-default port_proto_all = true
+default port_proto_all = null
 
 port_proto_all = false {
     SecurityGroups := input.SecurityGroups[_]
@@ -763,7 +780,7 @@ port_proto_all_metadata := {
 # PR-AWS-CLD-SG-021
 #
 
-default port_69 = true
+default port_69 = null
 
 port_69 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -802,7 +819,7 @@ port_69_metadata := {
 # PR-AWS-CLD-SG-022
 #
 
-default sg_tag = true
+default sg_tag = null
 
 sg_tag = false {
     SecurityGroups := input.SecurityGroups[_]
@@ -836,7 +853,7 @@ sg_tag_metadata := {
 # PR-AWS-CLD-SG-023
 #
 
-default sg_description_absent = true
+default sg_description_absent = null
 
 sg_description_absent = false {
     # lower(resource.Type) == "aws::ec2::securitygroup"
@@ -883,7 +900,7 @@ sg_description_absent_metadata := {
 # PR-AWS-CLD-SG-024
 #
 
-default port_9300 = true
+default port_9300 = null
 
 port_9300 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -922,7 +939,7 @@ port_9300_metadata := {
 # PR-AWS-CLD-SG-025
 #
 
-default port_5601 = true
+default port_5601 = null
 
 port_5601 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -961,7 +978,7 @@ port_5601_metadata := {
 # PR-AWS-CLD-SG-026
 #
 
-default port_2379 = true
+default port_2379 = null
 
 port_2379 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -999,7 +1016,7 @@ port_2379_metadata := {
 # PR-AWS-CLD-SG-027
 #
 
-default port_5986 = true
+default port_5986 = null
 
 port_5986 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -1038,7 +1055,7 @@ port_5986_metadata := {
 # PR-AWS-CLD-SG-028
 #
 
-default port_5985 = true
+default port_5985 = null
 
 port_5985 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -1077,7 +1094,7 @@ port_5985_metadata := {
 # PR-AWS-CLD-SG-029
 #
 
-default port_1270 = true
+default port_1270 = null
 
 port_1270 = false {
     # lower(input.Type) == "aws::ec2::securitygroup"	
@@ -1115,7 +1132,7 @@ port_1270_metadata := {
 # PR-AWS-CLD-SG-030
 #
 
-default db_exposed = true
+default db_exposed = null
 
 db_ports := [
     1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000
@@ -1159,7 +1176,7 @@ db_exposed_metadata := {
 # PR-AWS-CLD-SG-031
 #
 
-default bitcoin_ports = true
+default bitcoin_ports = null
 
 bc_ports := [
     8332, 8333
@@ -1203,7 +1220,7 @@ bitcoin_ports_metadata := {
 # PR-AWS-CLD-SG-032
 #
 
-default ethereum_ports = true
+default ethereum_ports = null
 
 eth_ports := [
     8545, 30303
@@ -1247,7 +1264,7 @@ ethereum_ports_metadata := {
 # PR-AWS-CLD-SG-033
 #
 
-default sg_vpc = true
+default sg_vpc = null
 
 sg_vpc = false {
     SecurityGroups := input.SecurityGroups[_]
@@ -1282,7 +1299,7 @@ sg_vpc_metadata := {
 # PR-AWS-CLD-SG-034
 #
 
-default ec2_instance_has_restricted_access = true
+default ec2_instance_has_restricted_access = null
 
 ec2_instance_allowed_protocols := ["http", "https"]
 

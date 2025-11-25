@@ -5,11 +5,23 @@ has_property(parent_object, target_property) {
 }
 
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if this is a valid GCP resource
+gcp_resource_valid {
+    existence.gcp_resource_exists
+}
+
 #
 # PR-GCP-TRF-APE-001
 #
 
-default app_engine_iap_disabled = true
+default app_engine_iap_disabled = null
 
 gc_issue["app_engine_iap_disabled"]{
     resource := input.resources[_]

@@ -5,6 +5,18 @@ has_property(parent_object, target_property) {
 }
 
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_cdn_endpoint_custom_domain resources exist
+azurerm_cdn_endpoint_custom_domain_exists {
+    existence.azure_resource_exists("azurerm_cdn_endpoint_custom_domain")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint_custom_domain
 #
 # PR-AZR-TRF-CDN-001

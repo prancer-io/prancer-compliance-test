@@ -4,6 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_container_registry resources exist
+azurerm_container_registry_exists {
+    existence.azure_resource_exists("azurerm_container_registry")
+}
+
+# Check if azurerm_container_registry_token resources exist
+azurerm_container_registry_token_exists {
+    existence.azure_resource_exists("azurerm_container_registry_token")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }
