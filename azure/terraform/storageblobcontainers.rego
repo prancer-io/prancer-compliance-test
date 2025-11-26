@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_storage_container resources exist
+azurerm_storage_container_exists {
+    existence.azure_resource_exists("azurerm_storage_container")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container
 #

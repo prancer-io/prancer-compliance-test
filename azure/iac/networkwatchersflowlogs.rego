@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.network/networkwatchers/flowlogs resources exist
+microsoft_network_networkwatchers_flowlogs_exists {
+    existence.azure_resource_exists("microsoft.network/networkwatchers/flowlogs")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs
 
 #

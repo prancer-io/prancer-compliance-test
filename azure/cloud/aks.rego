@@ -4,6 +4,18 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.containerservice/managedclusters resources exist
+microsoft_containerservice_managedclusters_exists {
+    existence.azure_resource_exists("microsoft.containerservice/managedclusters")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters
 
 #

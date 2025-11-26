@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.network/virtualnetworks/subnets resources exist
+microsoft_network_virtualnetworks_subnets_exists {
+    existence.azure_resource_exists("microsoft.network/virtualnetworks/subnets")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets
 
 #

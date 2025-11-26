@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.authorization/locks resources exist
+microsoft_authorization_locks_exists {
+    existence.azure_resource_exists("microsoft.authorization/locks")
+}
+
+# Check if microsoft.resources/resourcegroups resources exist
+microsoft_resources_resourcegroups_exists {
+    existence.azure_resource_exists("microsoft.resources/resourcegroups")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/2016-09-01/locks
 
 #

@@ -4,6 +4,18 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if this is a valid GCP resource
+gcp_resource_valid {
+    existence.gcp_resource_exists
+}
+
 #
 # PR-GCP-TRF-SAK-002
 # 
@@ -639,7 +651,7 @@ audit_not_config_proper_metadata := {
 # PR-GCP-TRF-SAK-011
 #
 
-default api_target_not_exist = true
+default api_target_not_exist = null
 
 api_target_not_exist = false{
     resource := input.resources[_]

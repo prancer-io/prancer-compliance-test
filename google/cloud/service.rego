@@ -5,10 +5,22 @@ has_property(parent_object, target_property) {
 }
 
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if this is a valid GCP resource
+gcp_resource_valid {
+    existence.gcp_resource_exists
+}
+
 # PR-GCP-CLD-SVC-001
 #
 
-default vulnerability_scan_disabled = true
+default vulnerability_scan_disabled = null
 
 vulnerability_scan_disabled = false {
     input

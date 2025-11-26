@@ -5,7 +5,7 @@ package rule
 #
 # PR-AWS-CLD-MSK-001
 #
-default msk_encryption_at_rest_cmk = true
+default msk_encryption_at_rest_cmk = null
 
 msk_encryption_at_rest_cmk = false {
     # lower(resource.Type) == "aws::msk::cluster"
@@ -36,7 +36,7 @@ msk_encryption_at_rest_cmk_metadata := {
 #
 # PR-AWS-CLD-MSK-002
 #
-default msk_in_transit_encryption = true
+default msk_in_transit_encryption = null
 
 msk_in_transit_encryption = false {
     # lower(resource.Type) == "aws::msk::cluster"
@@ -63,7 +63,7 @@ msk_in_transit_encryption_metadata := {
 #
 # PR-AWS-CLD-MSK-003
 #
-default msk_in_transit_encryption_tls = true
+default msk_in_transit_encryption_tls = null
 
 msk_in_transit_encryption_tls = false {
     # lower(resource.Type) == "aws::msk::cluster"
@@ -95,7 +95,7 @@ msk_in_transit_encryption_tls_metadata := {
 #
 # PR-AWS-CLD-MSK-004
 #
-default msk_vpc = true
+default msk_vpc = null
 
 msk_vpc = false {
     # lower(resource.Type) == "aws::msk::cluster"
@@ -127,7 +127,7 @@ msk_vpc_metadata := {
 #
 # PR-AWS-CLD-MSK-005
 #
-default msk_cluster_logging_enable = true
+default msk_cluster_logging_enable = null
 
 msk_cluster_logging_enable = false {
     # lower(resource.Type) == "aws::msk::cluster"
@@ -154,7 +154,7 @@ msk_cluster_logging_enable_metadata := {
 # PR-AWS-CLD-MSK-006
 #
 
-default msk_cluster_enhanced_monitoring_enable = true
+default msk_cluster_enhanced_monitoring_enable = null
 
 msk_cluster_enhanced_monitoring_enable = false {
     # lower(resource.Type) == "aws::msk::cluster"
@@ -191,7 +191,7 @@ msk_cluster_enhanced_monitoring_enable_metadata := {
 # PR-AWS-CLD-MSK-007
 #
 
-default msk_public_access = true
+default msk_public_access = null
 
 msk_public_access = false {
     # lower(resource.Type) == "aws::msk::cluster"
@@ -220,7 +220,7 @@ msk_public_access_metadata := {
 # aws::msk::cluster
 # aws::kms::key
 
-default msk_data_is_encrypted = true
+default msk_data_is_encrypted = null
 
 msk_data_is_encrypted = false {
     X := input.TEST_MSK[_]

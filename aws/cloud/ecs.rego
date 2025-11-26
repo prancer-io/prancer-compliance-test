@@ -6,7 +6,7 @@ package rule
 # PR-AWS-CLD-ECS-001
 #
 
-default ecs_task_evelated = true
+default ecs_task_evelated = null
 
 ecs_task_evelated = false {
     # lower(resource.Type) == "aws::ecs::taskdefinition"
@@ -34,7 +34,7 @@ ecs_task_evelated_metadata := {
 # PR-AWS-CLD-ECS-002
 #
 
-default ecs_exec = true
+default ecs_exec = null
 
 ecs_exec = false {
     # lower(resource.Type) == "aws::ecs::taskdefinition"
@@ -74,7 +74,7 @@ ecs_exec_metadata := {
 # PR-AWS-CLD-ECS-003
 #
 
-default ecs_root_user = true
+default ecs_root_user = null
 
 ecs_root_user = false {
     # lower(resource.Type) == "aws::ecs::taskdefinition"
@@ -101,7 +101,7 @@ ecs_root_user_metadata := {
 # PR-AWS-CLD-ECS-004
 #
 
-default ecs_root_filesystem = true
+default ecs_root_filesystem = null
 
 ecs_root_filesystem = false {
     # lower(resource.Type) == "aws::ecs::taskdefinition"
@@ -130,7 +130,7 @@ ecs_root_filesystem_metadata := {
 # PR-AWS-CLD-ECS-005
 #
 
-default ecs_resource_limit = true
+default ecs_resource_limit = null
 
 ecs_resource_limit = false {
     # lower(resource.Type) == "aws::ecs::taskdefinition"
@@ -197,7 +197,7 @@ ecs_resource_limit_metadata := {
 # PR-AWS-CLD-ECS-006
 #
 
-default ecs_logging = true
+default ecs_logging = null
 
 ecs_logging = false {
     # lower(resource.Type) == "aws::ecs::taskdefinition"
@@ -244,7 +244,7 @@ ecs_logging_metadata := {
 # PR-AWS-CLD-ECS-007
 #
 
-default ecs_transit_enabled = true
+default ecs_transit_enabled = null
 
 ecs_transit_enabled = false {
     # lower(resource.Type) == "aws::ecs::taskdefinition"
@@ -279,7 +279,7 @@ ecs_transit_enabled_metadata := {
 # PR-AWS-CLD-ECS-008
 #
 
-default ecs_container_insight_enable = true
+default ecs_container_insight_enable = null
 
 ecs_container_insight_enable = false {
     # lower(resource.Type) == "aws::ecs::cluster"
@@ -320,7 +320,7 @@ ecs_container_insight_enable_metadata := {
 # PR-AWS-CLD-ECS-009
 #
 
-default ecs_enable_execute_command = true
+default ecs_enable_execute_command = null
 
 ecs_enable_execute_command = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
@@ -350,7 +350,7 @@ ecs_enable_execute_command_metadata := {
 # PR-AWS-CLD-ECS-010
 #
 
-default ecs_assign_public_ip = true
+default ecs_assign_public_ip = null
 
 ecs_assign_public_ip = false {
     # type = ["aws::ecs::service", "aws::ecs::taskset"]
@@ -380,7 +380,7 @@ ecs_assign_public_ip_metadata := {
 # PR-AWS-CLD-ECS-011
 #
 
-default ecs_launch_type = true
+default ecs_launch_type = null
 
 ecs_launch_type = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
@@ -416,7 +416,7 @@ ecs_launch_type_metadata := {
 # PR-AWS-CLD-ECS-012
 #
 
-default ecs_subnet = true
+default ecs_subnet = null
 
 ecs_subnet = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
@@ -453,7 +453,7 @@ ecs_subnet_metadata := {
 # PR-AWS-CLD-ECS-013
 #
 
-default ecs_security_group = true
+default ecs_security_group = null
 
 ecs_security_group = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
@@ -490,7 +490,7 @@ ecs_security_group_metadata := {
 # PR-AWS-CLD-ECS-014
 #
 
-default ecs_network_mode = true
+default ecs_network_mode = null
 
 ecs_network_mode = false {
     # lower(resource.Type) == "aws::ecs::taskdefinition"
@@ -533,7 +533,7 @@ ecs_network_mode_metadata := {
 # aws::ecs::taskdefinition
 #
 
-default ecs_fargate_task_definition_logging_is_enabled= true
+default ecs_fargate_task_definition_logging_is_enabled= null
 
 ecs_fargate_task_definition_logging_is_enabled = false {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
@@ -565,7 +565,7 @@ ecs_fargate_task_definition_logging_is_enabled_metadata := {
 # PR-AWS-CLD-ECS-016
 #
 
-default no_ecs_task_definition_empty_roles = true
+default no_ecs_task_definition_empty_roles = null
 
 no_ecs_task_definition_empty_roles = false {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
@@ -608,7 +608,7 @@ no_ecs_task_definition_empty_roles_metadata := {
 # aws::ecs::taskdefinition
 #
 
-default ecs_log_driver = true
+default ecs_log_driver = null
 
 ecs_log_driver = false {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
@@ -645,7 +645,7 @@ ecs_log_driver_metadata := {
 # PR-AWS-CLD-ECS-018
 #
 
-default ecs_configured_with_active_services = true
+default ecs_configured_with_active_services = null
 
 ecs_configured_with_active_services = false {
     # lower(resource.Type) == "aws::ecs::cluster"
@@ -675,7 +675,7 @@ ecs_configured_with_active_services_metadata := {
 # aws::ecs::cluster
 # aws::ecs::service
 
-default ecs_registered_instance = true
+default ecs_registered_instance = null
 
 ecs_registered_instance = false {
     service := input.services[_]

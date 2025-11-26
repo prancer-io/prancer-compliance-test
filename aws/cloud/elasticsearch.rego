@@ -259,7 +259,7 @@ esearch_encrypt_kms_metadata := {
 # aws::elasticsearch::domain
 #
 
-default esearch_custom_endpoint_configured = true
+default esearch_custom_endpoint_configured = null
 
 esearch_custom_endpoint_configured = false {
     input.DomainStatus.DomainEndpointOptions.CustomEndpointEnabled == available_false_choices[_]
@@ -287,7 +287,7 @@ esearch_custom_endpoint_configured_metadata := {
 # aws::elasticsearch::domain
 #
 
-default esearch_slow_logs_is_enabled  = true
+default esearch_slow_logs_is_enabled  = null
 
 esearch_slow_logs_is_enabled = false {
     not input.DomainStatus.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled
@@ -323,7 +323,7 @@ esearch_slow_logs_is_enabled_metadata := {
 # aws::elasticsearch::domain
 #
 
-default authentication_is_saml_based  = true
+default authentication_is_saml_based  = null
 
 authentication_is_saml_based = false {
     not input.DomainStatus.AdvancedSecurityOptions.SAMLOptions.Idp.EntityId
@@ -351,7 +351,7 @@ authentication_is_saml_based_metadata := {
 # aws::elasticsearch::domain
 #
 
-default fine_grained_encryption_for_elasticsearch  = true
+default fine_grained_encryption_for_elasticsearch  = null
 
 fine_grained_encryption_for_elasticsearch = false {
     input.DomainStatus.EncryptionAtRestOptions.Enabled == available_false_choices[_]
@@ -387,7 +387,7 @@ fine_grained_encryption_for_elasticsearch_metadata := {
 # aws::elasticsearch::domain
 #
 
-default custom_endpoint_has_certificate  = true
+default custom_endpoint_has_certificate  = null
 
 custom_endpoint_has_certificate = false {
     input.DomainStatus.DomainEndpointOptions.CustomEndpointEnabled == available_false_choices[_]
@@ -458,7 +458,7 @@ elasticsearch_domain_not_publicly_accessible_metadata := {
 # aws::elasticsearch::domain
 # AWS::KMS::Key
 
-default elasticsearch_gs_managed_key = true
+default elasticsearch_gs_managed_key = null
 
 elasticsearch_gs_managed_key = false {
     X := input.TEST_ELASTICSEARCH[_]
@@ -496,7 +496,7 @@ elasticsearch_gs_managed_key_metadata := {
 # aws::elasticsearch::domain
 #
 
-default es_advanced_security  = true
+default es_advanced_security  = null
 
 es_advanced_security = false {
     not input.DomainStatus.AdvancedSecurityOptions.Enabled

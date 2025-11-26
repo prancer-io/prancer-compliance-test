@@ -4,6 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_eventgrid_topic resources exist
+azurerm_eventgrid_topic_exists {
+    existence.azure_resource_exists("azurerm_eventgrid_topic")
+}
+
+# Check if azurerm_eventgrid_domain resources exist
+azurerm_eventgrid_domain_exists {
+    existence.azure_resource_exists("azurerm_eventgrid_domain")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

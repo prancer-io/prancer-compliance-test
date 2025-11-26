@@ -1,5 +1,27 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.dbformysql/servers/firewallrules resources exist
+microsoft_dbformysql_servers_firewallrules_exists {
+    existence.azure_resource_exists("microsoft.dbformysql/servers/firewallrules")
+}
+
+# Check if microsoft.dbformariadb/servers/firewallrules resources exist
+microsoft_dbformariadb_servers_firewallrules_exists {
+    existence.azure_resource_exists("microsoft.dbformariadb/servers/firewallrules")
+}
+
+# Check if microsoft.dbformysql/servers resources exist
+microsoft_dbformysql_servers_exists {
+    existence.azure_resource_exists("microsoft.dbformysql/servers")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules
 
 # PR-AZR-ARM-SQL-014

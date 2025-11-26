@@ -1,5 +1,32 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_subnet resources exist
+azurerm_subnet_exists {
+    existence.azure_resource_exists("azurerm_subnet")
+}
+
+# Check if azurerm_network_security_group resources exist
+azurerm_network_security_group_exists {
+    existence.azure_resource_exists("azurerm_network_security_group")
+}
+
+# Check if azurerm_subnet_network_security_group_association resources exist
+azurerm_subnet_network_security_group_association_exists {
+    existence.azure_resource_exists("azurerm_subnet_network_security_group_association")
+}
+
+# Check if azurerm_virtual_network resources exist
+azurerm_virtual_network_exists {
+    existence.azure_resource_exists("azurerm_virtual_network")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_subnet
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association
 #

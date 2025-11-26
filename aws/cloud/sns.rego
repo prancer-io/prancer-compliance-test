@@ -7,11 +7,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if Subscriptions resources exist
+subscriptions_exists {
+    existence.aws_resource_exists("Subscriptions")
+}
+
 #
 # PR-AWS-CLD-SNS-001
 #
 
-default sns_protocol = true
+default sns_protocol = null
 
 sns_protocol = false {
     # lower(resource.Type) == "aws::sns::subscription"
@@ -39,7 +51,7 @@ sns_protocol_metadata := {
 # PR-AWS-CLD-SNS-002
 #
 
-default sns_encrypt_key = true
+default sns_encrypt_key = null
 
 sns_encrypt_key = false {
     # lower(resource.Type) == "aws::sns::topic"
@@ -66,7 +78,7 @@ sns_encrypt_key_metadata := {
 # PR-AWS-CLD-SNS-003
 #
 
-default sns_encrypt = true
+default sns_encrypt = null
 
 sns_encrypt = false {
     # lower(resource.Type) == "aws::sns::topic"
@@ -99,7 +111,7 @@ sns_encrypt_metadata := {
 # PR-AWS-CLD-SNS-004
 #
 
-default sns_policy_public = true
+default sns_policy_public = null
 
 sns_policy_public = false {
     # lower(resource.Type) == "aws::sns::topicpolicy"
@@ -146,7 +158,7 @@ sns_policy_public_metadata := {
 # PR-AWS-CLD-SNS-005
 # aws::sns::topicpolicy
 
-default sns_not_unauthorized_access = true
+default sns_not_unauthorized_access = null
 
 sns_not_unauthorized_access = false {
     policy := json.unmarshal(input.Attributes.Policy)
@@ -193,7 +205,7 @@ sns_not_unauthorized_access_metadata := {
 # PR-AWS-CLD-SNS-006
 # aws::sns::topicpolicy
 
-default sns_permissive_for_publishing = true
+default sns_permissive_for_publishing = null
 
 sns_permissive_for_publishing = false {
     policy := json.unmarshal(input.Attributes.Policy)
@@ -270,7 +282,7 @@ sns_permissive_for_publishing_metadata := {
 # PR-AWS-CLD-SNS-007
 # aws::sns::topicpolicy
 
-default sns_permissive_for_subscription = true
+default sns_permissive_for_subscription = null
 
 action_for_subscription := ["sns:subscribe", "sns:receive"]
 
@@ -349,7 +361,7 @@ sns_permissive_for_subscription_metadata := {
 # PR-AWS-CLD-SNS-008
 # aws::sns::topicpolicy
 
-default sns_cross_account_access = true
+default sns_cross_account_access = null
 
 sns_cross_account_access = false {
     policy := json.unmarshal(input.Attributes.Policy)
@@ -393,7 +405,7 @@ sns_cross_account_access_metadata := {
 # PR-AWS-CLD-SNS-009
 # aws::sns::topicpolicy
 
-default sns_accessible_via_specific_vpc = true
+default sns_accessible_via_specific_vpc = null
 
 sns_accessible_via_specific_vpc = false {
     policy := json.unmarshal(input.Attributes.Policy)
@@ -437,7 +449,7 @@ sns_accessible_via_specific_vpc_metadata := {
 # PR-AWS-CLD-SNS-010
 # aws::sns::topicpolicy
 
-default sns_secure_data_transport = true
+default sns_secure_data_transport = null
 
 sns_secure_data_transport = false {
     policy := json.unmarshal(input.Attributes.Policy)

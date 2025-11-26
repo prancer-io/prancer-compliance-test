@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.compute/disks resources exist
+microsoft_compute_disks_exists {
+    existence.azure_resource_exists("microsoft.compute/disks")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks
 
 #

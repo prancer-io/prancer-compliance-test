@@ -4,6 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.insights/activitylogalerts resources exist
+microsoft_insights_activitylogalerts_exists {
+    existence.azure_resource_exists("microsoft.insights/activitylogalerts")
+}
+
+# Check if microsoft.insights/logprofiles resources exist
+microsoft_insights_logprofiles_exists {
+    existence.azure_resource_exists("microsoft.insights/logprofiles")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

@@ -1,10 +1,42 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if Resources resources exist
+resources_exists {
+    existence.aws_resource_exists("Resources")
+}
+
+# Check if CORSRules resources exist
+corsrules_exists {
+    existence.aws_resource_exists("CORSRules")
+}
+
+# Check if Grants resources exist
+grants_exists {
+    existence.aws_resource_exists("Grants")
+}
+
+# Check if FileSystems resources exist
+filesystems_exists {
+    existence.aws_resource_exists("FileSystems")
+}
+
+# Check if Volumes resources exist
+volumes_exists {
+    existence.aws_resource_exists("Volumes")
+}
+
 # 
 # PR-AWS-CLD-S3-001
 # 
 
-default s3_accesslog = true
+default s3_accesslog = null
 
 s3_accesslog = false {
     not input.LoggingEnabled
@@ -41,7 +73,7 @@ s3_accesslog_metadata := {
 # PR-AWS-CLD-S3-002
 #
 
-default s3_acl_delete = true
+default s3_acl_delete = null
 
 s3_acl_delete = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
@@ -87,7 +119,7 @@ s3_acl_delete_metadata := {
 # PR-AWS-CLD-S3-003
 #
 
-default s3_acl_get = true
+default s3_acl_get = null
 
 s3_acl_get = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
@@ -142,7 +174,7 @@ s3_acl_get_metadata := {
 # PR-AWS-CLD-S3-004
 #
 
-default s3_acl_list = true
+default s3_acl_list = null
 
 s3_acl_list = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
@@ -199,7 +231,7 @@ s3_acl_list_metadata := {
 # PR-AWS-CLD-S3-005
 #
 
-default s3_acl_put = true
+default s3_acl_put = null
 
 s3_acl_put = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
@@ -353,7 +385,7 @@ s3_versioning_metadata := {
 # PR-AWS-CLD-S3-009
 #
 
-default s3_transport = true
+default s3_transport = null
 
 s3_transport = false {
     # lower(resource.Type) == "aws::s3::bucketpolicy"
@@ -549,7 +581,7 @@ s3_encryption_metadata := {
 # PR-AWS-CLD-S3-013
 #
 
-default s3_website = true
+default s3_website = null
 
 s3_website = false {
     # lower(resource.Type) == "aws::s3::bucket"
@@ -592,7 +624,7 @@ s3_website_metadata := {
 # PR-AWS-CLD-S3-014
 #
 
-default s3_cors = true
+default s3_cors = null
 
 s3_cors = false {
     # lower(resource.Type) == "aws::s3::bucket"
@@ -622,7 +654,7 @@ s3_cors_metadata := {
 # PR-AWS-CLD-S3-015
 #
 
-default bucket_kms_encryption = true
+default bucket_kms_encryption = null
 
 
 bucket_kms_encryption = false {
@@ -694,7 +726,7 @@ s3_object_lock_enable_metadata := {
 # PR-AWS-CLD-S3-017
 #
 
-default s3_cross_region_replica = true
+default s3_cross_region_replica = null
 
 s3_cross_region_replica = false {
     # lower(resource.Type) == "aws::s3::bucket"
@@ -733,7 +765,7 @@ s3_cross_region_replica_metadata := {
 # PR-AWS-CLD-S3-018
 #
 
-default s3_public_access_block = true
+default s3_public_access_block = null
 
 s3_public_access_block = false {
     # lower(resource.Type) == "aws::s3::bucket"
@@ -761,7 +793,7 @@ s3_public_access_block_metadata := {
 # PR-AWS-CLD-S3-019
 #
 
-default s3_restrict_public_bucket = true
+default s3_restrict_public_bucket = null
 
 s3_restrict_public_bucket = false {
     # lower(resource.Type) == "aws::s3::bucket"
@@ -789,7 +821,7 @@ s3_restrict_public_bucket_metadata := {
 # PR-AWS-CLD-S3-020
 #
 
-default s3_ignore_public_acl = true
+default s3_ignore_public_acl = null
 
 
 s3_ignore_public_acl = false {
@@ -818,7 +850,7 @@ s3_ignore_public_acl_metadata := {
 # PR-AWS-CLD-S3-021
 #
 
-default s3_block_public_policy = true
+default s3_block_public_policy = null
 
 s3_block_public_policy = false {
     # lower(resource.Type) == "aws::s3::bucket"
@@ -846,7 +878,7 @@ s3_block_public_policy_metadata := {
 # aws::s3::bucketpolicy
 #
 
-default s3_overly_permissive_to_any_principal = true
+default s3_overly_permissive_to_any_principal = null
 
 s3_overly_permissive_to_any_principal = false {
     policy := json.unmarshal(input.Policy)
@@ -892,7 +924,7 @@ s3_overly_permissive_to_any_principal_metadata := {
 # aws::s3::bucketpolicy
 #
 
-default s3_has_a_policy_attached = true
+default s3_has_a_policy_attached = null
 
 s3_has_a_policy_attached = false {
     policy := json.unmarshal(input.Policy)
@@ -919,7 +951,7 @@ s3_has_a_policy_attached_metadata := {
 # PR-AWS-CLD-S3-025
 # aws::s3::bucketpolicy
 
-default policy_is_not_overly_permissive_to_vpc_endpoints = true
+default policy_is_not_overly_permissive_to_vpc_endpoints = null
 
 policy_is_not_overly_permissive_to_vpc_endpoints = false {
     policy := json.unmarshal(input.Policy)
@@ -973,7 +1005,7 @@ policy_is_not_overly_permissive_to_vpc_endpoints_metadata := {
 # PR-AWS-CLD-S3-026
 #
 
-default s3_only_owner_access = true
+default s3_only_owner_access = null
 
 s3_only_owner_access = false {
     owner_id := input.Owner.ID
@@ -1006,7 +1038,7 @@ s3_only_owner_access_metadata := {
 # PR-AWS-CLD-S3-027
 #
 
-default bucket_cmk_encryption = true
+default bucket_cmk_encryption = null
 
 bucket_cmk_encryption = false {
     rule := input.ServerSideEncryptionConfiguration.Rules[j]
@@ -1072,7 +1104,7 @@ efs_kms_metadata := {
 # PR-AWS-CLD-EFS-002
 #
 
-default efs_encrypt = true
+default efs_encrypt = null
 
 efs_encrypt = false {
     # lower(resource.Type) == "aws::efs::filesystem"
@@ -1100,7 +1132,7 @@ efs_encrypt_metadata := {
 # PR-AWS-CLD-EFS-003
 #
 
-default efs_cmk = true
+default efs_cmk = null
 
 efs_cmk = false {
     EFS := input.TEST_EFS[_]
@@ -1138,7 +1170,7 @@ efs_cmk_metadata := {
 # PR-AWS-CLD-EBS-001
 #
 
-default ebs_encrypt = true
+default ebs_encrypt = null
 
 ebs_encrypt = false {
     # lower(resource.Type) == "aws::ec2::volume"
@@ -1166,7 +1198,7 @@ ebs_encrypt_metadata := {
 # PR-AWS-CLD-EBS-002
 #
 
-default ebs_encrypt_with_cmk = true
+default ebs_encrypt_with_cmk = null
 
 ebs_encrypt_with_cmk = false {
     EC2 := input.TEST_EC2_01[_]
@@ -1204,7 +1236,7 @@ ebs_encrypt_with_cmk_metadata := {
 # PR-AWS-CLD-BKP-001
 #
 
-default backup_public_access_disable = true
+default backup_public_access_disable = null
 
 backup_public_access_disable = false {
     # lower(resource.Type) == "aws::backup::backupvault"
@@ -1279,7 +1311,7 @@ transer_server_public_expose_metadata := {
 # PR-AWS-CLD-TRF-002
 # aws::transfer::server
 
-default transfer_server_protocol = true
+default transfer_server_protocol = null
 
 transfer_server_protocol = false {
     protocol := input.Server.Protocols[_]

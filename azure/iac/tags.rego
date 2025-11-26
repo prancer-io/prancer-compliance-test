@@ -1,5 +1,132 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.documentdb/databaseaccounts resources exist
+microsoft_documentdb_databaseaccounts_exists {
+    existence.azure_resource_exists("microsoft.documentdb/databaseaccounts")
+}
+
+# Check if microsoft.network/applicationgateways resources exist
+microsoft_network_applicationgateways_exists {
+    existence.azure_resource_exists("microsoft.network/applicationgateways")
+}
+
+# Check if microsoft.insights/activitylogalerts resources exist
+microsoft_insights_activitylogalerts_exists {
+    existence.azure_resource_exists("microsoft.insights/activitylogalerts")
+}
+
+# Check if microsoft.containerservice/managedclusters resources exist
+microsoft_containerservice_managedclusters_exists {
+    existence.azure_resource_exists("microsoft.containerservice/managedclusters")
+}
+
+# Check if microsoft.databricks/workspaces resources exist
+microsoft_databricks_workspaces_exists {
+    existence.azure_resource_exists("microsoft.databricks/workspaces")
+}
+
+# Check if microsoft.dbformysql/servers resources exist
+microsoft_dbformysql_servers_exists {
+    existence.azure_resource_exists("microsoft.dbformysql/servers")
+}
+
+# Check if microsoft.compute/disks resources exist
+microsoft_compute_disks_exists {
+    existence.azure_resource_exists("microsoft.compute/disks")
+}
+
+# Check if microsoft.keyvault/vaults resources exist
+microsoft_keyvault_vaults_exists {
+    existence.azure_resource_exists("microsoft.keyvault/vaults")
+}
+
+# Check if microsoft.keyvault/vaults/keys resources exist
+microsoft_keyvault_vaults_keys_exists {
+    existence.azure_resource_exists("microsoft.keyvault/vaults/keys")
+}
+
+# Check if microsoft.keyvault/vaults/secrets resources exist
+microsoft_keyvault_vaults_secrets_exists {
+    existence.azure_resource_exists("microsoft.keyvault/vaults/secrets")
+}
+
+# Check if microsoft.insights/logprofiles resources exist
+microsoft_insights_logprofiles_exists {
+    existence.azure_resource_exists("microsoft.insights/logprofiles")
+}
+
+# Check if microsoft.network/networkwatchers/flowlogs resources exist
+microsoft_network_networkwatchers_flowlogs_exists {
+    existence.azure_resource_exists("microsoft.network/networkwatchers/flowlogs")
+}
+
+# Check if microsoft.network/networksecuritygroups resources exist
+microsoft_network_networksecuritygroups_exists {
+    existence.azure_resource_exists("microsoft.network/networksecuritygroups")
+}
+
+# Check if microsoft.dbforpostgresql/servers resources exist
+microsoft_dbforpostgresql_servers_exists {
+    existence.azure_resource_exists("microsoft.dbforpostgresql/servers")
+}
+
+# Check if microsoft.cache/redis resources exist
+microsoft_cache_redis_exists {
+    existence.azure_resource_exists("microsoft.cache/redis")
+}
+
+# Check if microsoft.containerregistry/registries resources exist
+microsoft_containerregistry_registries_exists {
+    existence.azure_resource_exists("microsoft.containerregistry/registries")
+}
+
+# Check if microsoft.containerregistry/registries/webhooks resources exist
+microsoft_containerregistry_registries_webhooks_exists {
+    existence.azure_resource_exists("microsoft.containerregistry/registries/webhooks")
+}
+
+# Check if microsoft.sql/managedinstances resources exist
+microsoft_sql_managedinstances_exists {
+    existence.azure_resource_exists("microsoft.sql/managedinstances")
+}
+
+# Check if microsoft.storage/storageaccounts resources exist
+microsoft_storage_storageaccounts_exists {
+    existence.azure_resource_exists("microsoft.storage/storageaccounts")
+}
+
+# Check if microsoft.compute/virtualmachines resources exist
+microsoft_compute_virtualmachines_exists {
+    existence.azure_resource_exists("microsoft.compute/virtualmachines")
+}
+
+# Check if microsoft.compute/virtualmachines/extensions resources exist
+microsoft_compute_virtualmachines_extensions_exists {
+    existence.azure_resource_exists("microsoft.compute/virtualmachines/extensions")
+}
+
+# Check if microsoft.network/virtualnetworks/subnets resources exist
+microsoft_network_virtualnetworks_subnets_exists {
+    existence.azure_resource_exists("microsoft.network/virtualnetworks/subnets")
+}
+
+# Check if microsoft.network/vpngateways resources exist
+microsoft_network_vpngateways_exists {
+    existence.azure_resource_exists("microsoft.network/vpngateways")
+}
+
+# Check if microsoft.web/sites resources exist
+microsoft_web_sites_exists {
+    existence.azure_resource_exists("microsoft.web/sites")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.documentdb/databaseaccounts
 
 # PR-AZR-0105-ARM

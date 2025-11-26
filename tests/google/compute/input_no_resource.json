@@ -1,0 +1,9 @@
+{
+    "kind": "compute#instance",
+    "id": "9876543210987654321",
+    "name": "my-vm-instance",
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/my-project/zones/us-central1-a/instances/my-vm",
+    "zone": "us-central1-a",
+    "machineType": "n1-standard-1",
+    "status": "RUNNING"
+}

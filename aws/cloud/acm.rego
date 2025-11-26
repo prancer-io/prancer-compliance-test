@@ -6,7 +6,7 @@ package rule
 # PR-AWS-CLD-ACM-001
 #
 
-default acm_wildcard = true
+default acm_wildcard = null
 
 acm_wildcard = false {
     # lower(resource.Type) == "aws::certificatemanager::certificate"
@@ -49,7 +49,7 @@ acm_wildcard_metadata := {
 # PR-AWS-CLD-ACM-002
 #
 
-default acm_ct_log = true
+default acm_ct_log = null
 
 acm_ct_log = false {
     # lower(resource.Type) == "aws::certificatemanager::certificate"
@@ -77,7 +77,7 @@ acm_ct_log_metadata := {
 # PR-AWS-CLD-ACM-003
 #
 
-default acm_certificate_arn = true
+default acm_certificate_arn = null
 
 acm_certificate_arn = false {
     # type = ["aws::certificatemanager::certificate", "aws::acmpca::certificate", "aws::acmpca::certificateauthorityactivation"]
@@ -118,7 +118,7 @@ acm_certificate_arn_metadata := {
 # PR-AWS-CLD-ACM-005
 #
 
-default acm_do_not_have_unused_certificate = true         
+default acm_do_not_have_unused_certificate = null         
 
 acm_do_not_have_unused_certificate = false {
     # lower(resource.Type) == "aws::certificatemanager::certificate"
@@ -150,7 +150,7 @@ acm_do_not_have_unused_certificate_metadata := {
 # PR-AWS-CLD-ACM-006
 #
 
-default acm_do_not_have_certificate_pending_validation = true
+default acm_do_not_have_certificate_pending_validation = null
 
 acm_do_not_have_certificate_pending_validation = false {
     # lower(resource.Type) == "aws::certificatemanager::certificate"
@@ -178,7 +178,7 @@ acm_do_not_have_certificate_pending_validation_metadata := {
 # PR-AWS-CLD-ACM-007
 #
 
-default acm_do_not_have_invalid_or_failed = true
+default acm_do_not_have_invalid_or_failed = null
 
 certificate_invalid_or_failed_status := ["validation_timed_out", "failed"]
 
@@ -209,7 +209,7 @@ acm_do_not_have_invalid_or_failed_metadata := {
 # PR-AWS-CLD-ACM-008
 # aws::certificatemanager::certificate"
 
-default acm_expiring_certificate = true
+default acm_expiring_certificate = null
 
 acm_expiring_certificate = false {
     lower(input.Certificate.Status) == "issued"
@@ -240,7 +240,7 @@ acm_expiring_certificate_metadata := {
 # PR-AWS-CLD-ACM-009
 # aws::certificatemanager::certificate"
 
-default acm_expired_certificates = true
+default acm_expired_certificates = null
 
 acm_expired_certificates = false {
     lower(input.Certificate.Status) == "expired"

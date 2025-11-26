@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if Clusters resources exist
+clusters_exists {
+    existence.aws_resource_exists("Clusters")
+}
+
+# Check if Parameters resources exist
+parameters_exists {
+    existence.aws_resource_exists("Parameters")
+}
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html
 
@@ -10,7 +27,7 @@ available_true_choices := ["true", true]
 # PR-AWS-CLD-RSH-001
 #
 
-default redshift_encrypt_key = true
+default redshift_encrypt_key = null
 
 redshift_encrypt_key = false {
     REDSHIFT := input.TEST_REDSHIFT_1[_]
@@ -54,7 +71,7 @@ redshift_encrypt_key_metadata := {
 # PR-AWS-CLD-RSH-002
 #
 
-default redshift_public = true
+default redshift_public = null
 
 redshift_public = false {
     # lower(resource.Type) == "aws::redshift::cluster"
@@ -82,7 +99,7 @@ redshift_public_metadata := {
 # PR-AWS-CLD-RSH-003
 #
 
-default redshift_require_ssl = true
+default redshift_require_ssl = null
 
 redshift_require_ssl = false {
     # lower(resource.Type) == "aws::redshift::clusterparametergroup"
@@ -121,7 +138,7 @@ redshift_require_ssl_metadata := {
 # PR-AWS-CLD-RSH-004
 #
 
-default redshift_encrypt = true
+default redshift_encrypt = null
 
 redshift_encrypt = false {
     # lower(resource.Type) == "aws::redshift::cluster"
@@ -150,7 +167,7 @@ redshift_encrypt_metadata := {
 # PR-AWS-CLD-RSH-005
 #
 
-default redshift_allow_version_upgrade = true
+default redshift_allow_version_upgrade = null
 
 redshift_allow_version_upgrade = false {
     # lower(resource.Type) == "aws::redshift::cluster"
@@ -179,7 +196,7 @@ redshift_allow_version_upgrade_metadata := {
 # PR-AWS-CLD-RSH-006
 #
 
-default redshift_deploy_vpc = true
+default redshift_deploy_vpc = null
 
 redshift_allow_version_upgrade = false {
     # lower(resource.Type) == "aws::redshift::cluster"
@@ -220,7 +237,7 @@ redshift_deploy_vpc_metadata := {
 # PR-AWS-CLD-RSH-007
 #
 
-default redshift_audit = true
+default redshift_audit = null
 
 redshift_audit = false {
     # lower(resource.Type) == "aws::redshift::cluster"
@@ -255,7 +272,7 @@ redshift_audit_metadata := {
 # PR-AWS-CLD-RSH-008
 # aws::redshift::cluster
 
-default redshift_enhanced_vpc_routing = true
+default redshift_enhanced_vpc_routing = null
 
 redshift_enhanced_vpc_routing = false {
     Clusters := input.Clusters[_]
@@ -283,7 +300,7 @@ redshift_enhanced_vpc_routing_metadata := {
 # PR-AWS-CLD-RSH-009
 # aws::redshift::cluster
 
-default redshift_not_provisioned_with_ec2_classic = true
+default redshift_not_provisioned_with_ec2_classic = null
 
 redshift_not_provisioned_with_ec2_classic = false {
     Clusters := input.Clusters[_]
@@ -321,7 +338,7 @@ redshift_not_provisioned_with_ec2_classic_metadata := {
 # PR-AWS-CLD-RSH-010
 # aws::redshift::cluster
 
-default redshift_deferred_maintenance_window = true
+default redshift_deferred_maintenance_window = null
 
 redshift_deferred_maintenance_window = false {
     Clusters := input.Clusters[_]
@@ -364,7 +381,7 @@ redshift_deferred_maintenance_window_metadata := {
 # PR-AWS-CLD-RSH-011
 # aws::redshift::cluster
 
-default redshift_not_default_master_username = true
+default redshift_not_default_master_username = null
 
 redshift_not_default_master_username = false {
     Clusters := input.Clusters[_]
@@ -392,7 +409,7 @@ redshift_not_default_master_username_metadata := {
 # PR-AWS-CLD-RSH-012
 # aws::redshift::cluster
 
-default redshift_not_default_port = true
+default redshift_not_default_port = null
 
 redshift_not_default_port = false {
     Clusters := input.Clusters[_]
@@ -420,7 +437,7 @@ redshift_not_default_port_metadata := {
 # PR-AWS-CLD-RSH-013
 # aws::redshift::cluster
 
-default redshift_automated_backup = true
+default redshift_automated_backup = null
 
 redshift_automated_backup = false {
     Clusters := input.Clusters[_]

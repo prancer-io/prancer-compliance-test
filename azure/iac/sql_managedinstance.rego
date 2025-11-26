@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.sql/managedinstances resources exist
+microsoft_sql_managedinstances_exists {
+    existence.azure_resource_exists("microsoft.sql/managedinstances")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances
 
 #

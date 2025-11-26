@@ -6,6 +6,18 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if Resources resources exist
+resources_exists {
+    existence.aws_resource_exists("Resources")
+}
+
 rules_packages = [
     "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-JnA8Zp85",
     "arn:aws:inspector:us-east-1:316112463485:rulespackage/0-gEjTy7T7",

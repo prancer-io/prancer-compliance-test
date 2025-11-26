@@ -1,5 +1,32 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.sql/servers resources exist
+microsoft_sql_servers_exists {
+    existence.azure_resource_exists("microsoft.sql/servers")
+}
+
+# Check if microsoft.sql/servers/securityalertpolicies resources exist
+microsoft_sql_servers_securityalertpolicies_exists {
+    existence.azure_resource_exists("microsoft.sql/servers/securityalertpolicies")
+}
+
+# Check if microsoft.sql/managedinstances/securityalertpolicies resources exist
+microsoft_sql_managedinstances_securityalertpolicies_exists {
+    existence.azure_resource_exists("microsoft.sql/managedinstances/securityalertpolicies")
+}
+
+# Check if microsoft.sql/managedinstances resources exist
+microsoft_sql_managedinstances_exists {
+    existence.azure_resource_exists("microsoft.sql/managedinstances")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

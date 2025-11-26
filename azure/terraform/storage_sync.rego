@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_storage_sync resources exist
+azurerm_storage_sync_exists {
+    existence.azure_resource_exists("azurerm_storage_sync")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_sync
 # PR-AZR-TRF-STS-001
 #

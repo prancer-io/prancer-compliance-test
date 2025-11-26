@@ -4,6 +4,38 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_sql_server resources exist
+azurerm_sql_server_exists {
+    existence.azure_resource_exists("azurerm_sql_server")
+}
+
+# Check if azurerm_mssql_server resources exist
+azurerm_mssql_server_exists {
+    existence.azure_resource_exists("azurerm_mssql_server")
+}
+
+# Check if azurerm_mssql_firewall_rule resources exist
+azurerm_mssql_firewall_rule_exists {
+    existence.azure_resource_exists("azurerm_mssql_firewall_rule")
+}
+
+# Check if azurerm_mssql_virtual_network_rule resources exist
+azurerm_mssql_virtual_network_rule_exists {
+    existence.azure_resource_exists("azurerm_mssql_virtual_network_rule")
+}
+
+# Check if azurerm_sql_virtual_network_rule resources exist
+azurerm_sql_virtual_network_rule_exists {
+    existence.azure_resource_exists("azurerm_sql_virtual_network_rule")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server
 
 #

@@ -1,0 +1,56 @@
+{
+    "SecurityGroups": [
+        {
+            "GroupId": "sg-0123456789abcdef0",
+            "GroupName": "web-server-sg-compliant",
+            "Description": "Security group for web servers",
+            "VpcId": "vpc-0123456789abcdef0",
+            "IpPermissions": [
+                {
+                    "FromPort": 443,
+                    "ToPort": 443,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "10.0.0.0/8",
+                            "Description": "Allow HTTPS from internal network"
+                        }
+                    ],
+                    "Ipv6Ranges": []
+                },
+                {
+                    "FromPort": 80,
+                    "ToPort": 80,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "10.0.0.0/8",
+                            "Description": "Allow HTTP from internal network"
+                        }
+                    ],
+                    "Ipv6Ranges": []
+                }
+            ],
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ]
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "web-server-sg"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "production"
+                }
+            ]
+        }
+    ]
+}

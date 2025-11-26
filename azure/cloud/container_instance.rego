@@ -5,6 +5,18 @@ has_property(parent_object, target_property) {
 }
 
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.containerinstance/containergroups resources exist
+microsoft_containerinstance_containergroups_exists {
+    existence.azure_resource_exists("microsoft.containerinstance/containergroups")
+}
+
 # PR-AZR-CLD-ACI-001
 
 default aci_configured_with_vnet = null

@@ -1,5 +1,32 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_mssql_firewall_rule resources exist
+azurerm_mssql_firewall_rule_exists {
+    existence.azure_resource_exists("azurerm_mssql_firewall_rule")
+}
+
+# Check if azurerm_mssql_server resources exist
+azurerm_mssql_server_exists {
+    existence.azure_resource_exists("azurerm_mssql_server")
+}
+
+# Check if azurerm_sql_firewall_rule resources exist
+azurerm_sql_firewall_rule_exists {
+    existence.azure_resource_exists("azurerm_sql_firewall_rule")
+}
+
+# Check if azurerm_sql_server resources exist
+azurerm_sql_server_exists {
+    existence.azure_resource_exists("azurerm_sql_server")
+}
+
 #
 # PR-AZR-TRF-SQL-007
 #

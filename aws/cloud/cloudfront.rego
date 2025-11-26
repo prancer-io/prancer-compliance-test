@@ -6,7 +6,7 @@ package rule
 # PR-AWS-CLD-CF-001
 #
 
-default cf_default_cache = true
+default cf_default_cache = null
 
 cf_default_cache = false {
     # lower(resource.Type) == "aws::cloudfront::distribution"
@@ -39,7 +39,7 @@ cf_default_cache_metadata := {
 # PR-AWS-CLD-CF-002
 #
 
-default cf_ssl_protocol = true
+default cf_ssl_protocol = null
 
 cf_ssl_protocol = false {
     # lower(resource.Type) == "aws::cloudfront::distribution"
@@ -74,7 +74,7 @@ cf_ssl_protocol_metadata := {
 # PR-AWS-CLD-CF-003
 #
 
-default cf_logging = true
+default cf_logging = null
 
 cf_logging = false {
     # lower(resource.Type) == "aws::cloudfront::distribution"
@@ -106,7 +106,7 @@ cf_logging_metadata := {
 # PR-AWS-CLD-CF-004
 #
 
-default cf_https_only = true
+default cf_https_only = null
 
 cf_https_only = false {
     # lower(resource.Type) == "aws::cloudfront::distribution"
@@ -136,7 +136,7 @@ cf_https_only_metadata := {
 # PR-AWS-CLD-CF-005
 #
 
-default cf_https = true
+default cf_https = null
 
 cf_https = false {
     # lower(resource.Type) == "aws::cloudfront::distribution"
@@ -170,7 +170,7 @@ cf_https_metadata := {
 # PR-AWS-CLD-CF-006
 #
 
-default cf_min_protocol = true
+default cf_min_protocol = null
 
 cf_min_protocol = false {
     # lower(resource.Type) == "aws::cloudfront::distribution"
@@ -204,7 +204,7 @@ cf_min_protocol_metadata := {
 # PR-AWS-CLD-CF-007
 #
 
-default cf_firewall = true
+default cf_firewall = null
 
 cf_firewall = false {
     # lower(resource.Type) == "aws::cloudfront::distribution"
@@ -236,7 +236,7 @@ cf_firewall_metadata := {
 # PR-AWS-CLD-CF-008
 #
 
-default cf_default_ssl = true
+default cf_default_ssl = null
 
 cf_default_ssl = false {
     # lower(resource.Type) == "aws::cloudfront::distribution"
@@ -263,7 +263,7 @@ cf_default_ssl_metadata := {
 # PR-AWS-CLD-CF-009
 #
 
-default cf_geo_restriction = true
+default cf_geo_restriction = null
 
 cf_geo_restriction = false {
     # lower(resource.Type) == "aws::cloudfront::distribution"
@@ -297,7 +297,7 @@ cf_geo_restriction_metadata := {
 # PR-AWS-CLD-CF-010
 #
 
-default cf_s3_origin = true
+default cf_s3_origin = null
 
 cf_s3_origin = false {
     # lower(resource.Type) == "aws::cloudfront::distribution"

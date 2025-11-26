@@ -1,5 +1,67 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_monitor_diagnostic_setting resources exist
+azurerm_monitor_diagnostic_setting_exists {
+    existence.azure_resource_exists("azurerm_monitor_diagnostic_setting")
+}
+
+# Check if azurerm_key_vault resources exist
+azurerm_key_vault_exists {
+    existence.azure_resource_exists("azurerm_key_vault")
+}
+
+# Check if azurerm_lb resources exist
+azurerm_lb_exists {
+    existence.azure_resource_exists("azurerm_lb")
+}
+
+# Check if azurerm_storage_account resources exist
+azurerm_storage_account_exists {
+    existence.azure_resource_exists("azurerm_storage_account")
+}
+
+# Check if azurerm_storage_blob resources exist
+azurerm_storage_blob_exists {
+    existence.azure_resource_exists("azurerm_storage_blob")
+}
+
+# Check if azurerm_storage_queue resources exist
+azurerm_storage_queue_exists {
+    existence.azure_resource_exists("azurerm_storage_queue")
+}
+
+# Check if azurerm_storage_table resources exist
+azurerm_storage_table_exists {
+    existence.azure_resource_exists("azurerm_storage_table")
+}
+
+# Check if azurerm_redis_cache resources exist
+azurerm_redis_cache_exists {
+    existence.azure_resource_exists("azurerm_redis_cache")
+}
+
+# Check if azurerm_traffic_manager_profile resources exist
+azurerm_traffic_manager_profile_exists {
+    existence.azure_resource_exists("azurerm_traffic_manager_profile")
+}
+
+# Check if azurerm_eventhub_namespace resources exist
+azurerm_eventhub_namespace_exists {
+    existence.azure_resource_exists("azurerm_eventhub_namespace")
+}
+
+# Check if azurerm_recovery_services_vault resources exist
+azurerm_recovery_services_vault_exists {
+    existence.azure_resource_exists("azurerm_recovery_services_vault")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting
 #
 # PR-AZR-TRF-MNT-002

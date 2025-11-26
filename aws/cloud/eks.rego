@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if Resources resources exist
+resources_exists {
+    existence.aws_resource_exists("Resources")
+}
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html
 
 available_true_choices := ["true", true]
@@ -40,7 +52,7 @@ eks_multiple_sg_metadata := {
 
 # describe_cluster
 
-default eks_encryption_resources = true
+default eks_encryption_resources = null
 
 eks_encryption_resources = false {
     # lower(resource.Type) == "aws::eks::cluster"
@@ -68,7 +80,7 @@ eks_encryption_resources_metadata := {
 # PR-AWS-CLD-EKS-004
 #
 
-default eks_encryption_kms = true
+default eks_encryption_kms = null
 
 eks_encryption_kms = false {
     resource := input.Resources[i]
@@ -97,7 +109,7 @@ eks_encryption_kms_metadata := {
 # PR-AWS-CLD-EKS-006
 #
 
-default eks_approved_kubernetes_version = true
+default eks_approved_kubernetes_version = null
 
 platform_version := ["1.20", "1.19", "1.18"]
 
@@ -126,7 +138,7 @@ eks_approved_kubernetes_version_metadata := {
 # PR-AWS-CLD-EKS-007
 #
 
-default eks_with_security_group_attached = true
+default eks_with_security_group_attached = null
 
 eks_with_security_group_attached = false {
     # lower(resource.Type) == "aws::eks::cluster"
@@ -153,7 +165,7 @@ eks_with_security_group_attached_metadata := {
 # PR-AWS-CLD-EKS-008
 #
 
-default eks_with_private_access = true
+default eks_with_private_access = null
 
 eks_with_private_access = false {
     # lower(resource.Type) == "aws::eks::cluster"
@@ -185,7 +197,7 @@ eks_with_private_access_metadata := {
 # PR-AWS-CLD-EKS-009
 #
 
-default eks_logging_enabled = true
+default eks_logging_enabled = null
 
 eks_logging_enabled = false {
     # lower(resource.Type) == "aws::eks::cluster"
@@ -239,7 +251,7 @@ eks_logging_enabled_metadata := {
 # aws::eks::cluster
 # AWS::KMS::Key
 
-default eks_gs_managed_key = true
+default eks_gs_managed_key = null
 
 eks_gs_managed_key = false {
     X := input.TEST_EKS[_]
@@ -271,7 +283,7 @@ eks_gs_managed_key_metadata := {
 # aws::eks::cluster
 # aws::ec2::vpcendpoint
 
-default eks_not_default_vpc = true
+default eks_not_default_vpc = null
 
 eks_not_default_vpc = false {
     X := input.TEST_EKS[_]
@@ -303,7 +315,7 @@ eks_not_default_vpc_metadata := {
 # aws::eks::cluster
 # aws::ec2::securitygroup
 
-default eks_security_groups = true
+default eks_security_groups = null
 
 eks_security_groups = false {
     X := input.TEST_EKS[_]
@@ -347,7 +359,7 @@ eks_security_groups_metadata := {
 # PR-AWS-CLD-EKS-013
 # aws::eks::cluster
 
-default eks_creation = true
+default eks_creation = null
 
 eks_creation = false {
     created_timestamp := input.cluster.createdAt["$date"]
@@ -378,7 +390,7 @@ eks_creation_metadata := {
 # aws::eks::cluster
 # aws::ec2::securitygroup
 
-default eks_overly_permissive_security_groups = true
+default eks_overly_permissive_security_groups = null
 
 eks_overly_permissive_security_groups = false {
     X := input.TEST_EKS[_]

@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_security_center_subscription_pricing resources exist
+azurerm_security_center_subscription_pricing_exists {
+    existence.azure_resource_exists("azurerm_security_center_subscription_pricing")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_security_center_subscription_pricing
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_subscription_pricing
 #

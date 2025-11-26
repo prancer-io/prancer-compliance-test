@@ -4,11 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if Images resources exist
+images_exists {
+    existence.aws_resource_exists("Images")
+}
+
 #
 # PR-AWS-CLD-AMI-001
 #
 
-default ami_public_access_disabled = true
+default ami_public_access_disabled = null
 
 ami_public_access_disabled = false {
     images := input.Images[_]
@@ -36,7 +48,7 @@ ami_public_access_disabled_metadata := {
 # PR-AWS-CLD-AMI-002
 #
 
-default ami_not_infected_with_mining_malware = true
+default ami_not_infected_with_mining_malware = null
 
 ami_not_infected_with_mining_malware = false {
     # lower(resource.Type) == "aws::ec2::instance"
@@ -66,7 +78,7 @@ ami_not_infected_with_mining_malware_metadata := {
 # PR-AWS-CLD-AMI-003
 #
 
-default ami_not_older_than_180_days = true
+default ami_not_older_than_180_days = null
 
 ami_not_older_than_180_days = false {
     images := input.Images[_]

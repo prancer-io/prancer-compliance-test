@@ -4,6 +4,18 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_virtual_machine_scale_set resources exist
+azurerm_virtual_machine_scale_set_exists {
+    existence.azure_resource_exists("azurerm_virtual_machine_scale_set")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

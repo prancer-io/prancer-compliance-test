@@ -10,6 +10,18 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_kubernetes_cluster resources exist
+azurerm_kubernetes_cluster_exists {
+    existence.azure_resource_exists("azurerm_kubernetes_cluster")
+}
+
 default aks_cni_net = null
 
 azure_attribute_absence["aks_cni_net"] {

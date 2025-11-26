@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_network_watcher_flow_log resources exist
+azurerm_network_watcher_flow_log_exists {
+    existence.azure_resource_exists("azurerm_network_watcher_flow_log")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher_flow_log
 
 #

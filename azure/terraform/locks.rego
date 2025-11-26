@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_management_lock resources exist
+azurerm_management_lock_exists {
+    existence.azure_resource_exists("azurerm_management_lock")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock
 
 #

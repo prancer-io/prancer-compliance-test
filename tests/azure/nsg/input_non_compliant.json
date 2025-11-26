@@ -1,0 +1,54 @@
+{
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/test-rg/providers/Microsoft.Network/networkSecurityGroups/nsg-non-compliant",
+            "name": "nsg-non-compliant",
+            "location": "eastus",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "allow-all-tcp-inbound",
+                        "properties": {
+                            "direction": "Inbound",
+                            "access": "Allow",
+                            "protocol": "Tcp",
+                            "sourceAddressPrefix": "*",
+                            "sourcePortRange": "*",
+                            "destinationAddressPrefix": "*",
+                            "destinationPortRange": "*",
+                            "priority": 100
+                        }
+                    },
+                    {
+                        "name": "allow-ssh-from-internet",
+                        "properties": {
+                            "direction": "Inbound",
+                            "access": "Allow",
+                            "protocol": "Tcp",
+                            "sourceAddressPrefix": "0.0.0.0/0",
+                            "sourcePortRange": "*",
+                            "destinationAddressPrefix": "*",
+                            "destinationPortRange": "22",
+                            "priority": 110
+                        }
+                    },
+                    {
+                        "name": "allow-rdp-from-internet",
+                        "properties": {
+                            "direction": "Inbound",
+                            "access": "Allow",
+                            "protocol": "Tcp",
+                            "sourceAddressPrefix": "Internet",
+                            "sourcePortRange": "*",
+                            "destinationAddressPrefix": "*",
+                            "destinationPortRange": "3389",
+                            "priority": 120
+                        }
+                    }
+                ],
+                "defaultSecurityRules": []
+            }
+        }
+    ]
+}

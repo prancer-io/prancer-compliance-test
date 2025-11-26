@@ -12,11 +12,88 @@ has_property(parent_object, target_property) {
 }
 
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if DBClusters resources exist
+dbclusters_exists {
+    existence.aws_resource_exists("DBClusters")
+}
+
+# Check if DBInstances resources exist
+dbinstances_exists {
+    existence.aws_resource_exists("DBInstances")
+}
+
+# Check if EventSubscriptionsList resources exist
+eventsubscriptionslist_exists {
+    existence.aws_resource_exists("EventSubscriptionsList")
+}
+
+# Check if Parameters resources exist
+parameters_exists {
+    existence.aws_resource_exists("Parameters")
+}
+
+# Check if GlobalClusters resources exist
+globalclusters_exists {
+    existence.aws_resource_exists("GlobalClusters")
+}
+
+# Check if DBSnapshots resources exist
+dbsnapshots_exists {
+    existence.aws_resource_exists("DBSnapshots")
+}
+
+# Check if Clusters resources exist
+clusters_exists {
+    existence.aws_resource_exists("Clusters")
+}
+
+# Check if Databases resources exist
+databases_exists {
+    existence.aws_resource_exists("Databases")
+}
+
+# Check if KinesisDataStreamDestinations resources exist
+kinesisdatastreamdestinations_exists {
+    existence.aws_resource_exists("KinesisDataStreamDestinations")
+}
+
+# Check if ReplicationGroups resources exist
+replicationgroups_exists {
+    existence.aws_resource_exists("ReplicationGroups")
+}
+
+# Check if CacheClusters resources exist
+cacheclusters_exists {
+    existence.aws_resource_exists("CacheClusters")
+}
+
+# Check if Endpoints resources exist
+endpoints_exists {
+    existence.aws_resource_exists("Endpoints")
+}
+
+# Check if ReplicationInstances resources exist
+replicationinstances_exists {
+    existence.aws_resource_exists("ReplicationInstances")
+}
+
+# Check if Certificates resources exist
+certificates_exists {
+    existence.aws_resource_exists("Certificates")
+}
+
 #
 # PR-AWS-CLD-RDS-001
 #
 
-default rds_cluster_encrypt = true
+default rds_cluster_encrypt = null
 
 rds_cluster_encrypt = false {
     # lower(resource.Type) == "aws::rds::dbcluster"
@@ -44,7 +121,7 @@ rds_cluster_encrypt_metadata := {
 # PR-AWS-CLD-RDS-002
 #
 
-default rds_public = true
+default rds_public = null
 
 rds_public = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
@@ -72,7 +149,7 @@ rds_public_metadata := {
 # PR-AWS-CLD-RDS-003
 #
 
-default rds_encrypt_key = true
+default rds_encrypt_key = null
 
 rds_encrypt_key = false {
     RDS := input.TEST_RDS_01[_]
@@ -110,7 +187,7 @@ rds_encrypt_key_metadata := {
 # PR-AWS-CLD-RDS-004
 #
 
-default rds_instance_event = true
+default rds_instance_event = null
 
 rds_instance_event = false {
     # lower(resource.Type) == "aws::rds::eventsubscription"
@@ -139,7 +216,7 @@ rds_instance_event_metadata := {
 # PR-AWS-CLD-RDS-005
 #
 
-default rds_secgroup_event = true
+default rds_secgroup_event = null
 
 rds_secgroup_event = false {
     # lower(resource.Type) == "aws::rds::eventsubscription"
@@ -168,7 +245,7 @@ rds_secgroup_event_metadata := {
 # PR-AWS-CLD-RDS-006
 #
 
-default rds_encrypt = true
+default rds_encrypt = null
 
 rds_encrypt = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
@@ -196,7 +273,7 @@ rds_encrypt_metadata := {
 # PR-AWS-CLD-RDS-007
 #
 
-default rds_multiaz = true
+default rds_multiaz = null
 
 rds_multiaz = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
@@ -226,7 +303,7 @@ rds_multiaz_metadata := {
 # PR-AWS-CLD-RDS-008
 #
 
-default rds_snapshot = true
+default rds_snapshot = null
 
 rds_snapshot = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
@@ -254,7 +331,7 @@ rds_snapshot_metadata := {
 # PR-AWS-CLD-RDS-009
 #
 
-default rds_backup = true
+default rds_backup = null
 
 rds_backup = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
@@ -289,7 +366,7 @@ rds_backup_metadata := {
 # PR-AWS-CLD-RDS-010
 #
 
-default rds_upgrade = true
+default rds_upgrade = null
 
 
 rds_upgrade = false {
@@ -318,7 +395,7 @@ rds_upgrade_metadata := {
 # PR-AWS-CLD-RDS-011
 #
 
-default rds_retention = true
+default rds_retention = null
 
 rds_retention = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
@@ -353,7 +430,7 @@ rds_retention_metadata := {
 # PR-AWS-CLD-RDS-012
 #
 
-default rds_cluster_retention = true
+default rds_cluster_retention = null
 
 rds_cluster_retention = false {
     # lower(resource.Type) == "aws::rds::dbcluster"
@@ -388,7 +465,7 @@ rds_cluster_retention_metadata := {
 # PR-AWS-CLD-RDS-013
 #
 
-default rds_cluster_deletion_protection = true
+default rds_cluster_deletion_protection = null
 
 rds_cluster_deletion_protection = false {
     # lower(resource.Type) == "aws::rds::dbcluster"
@@ -417,7 +494,7 @@ rds_cluster_deletion_protection_metadata := {
 # PR-AWS-CLD-RDS-014
 #
 
-default rds_pgaudit_enable = true
+default rds_pgaudit_enable = null
 
 rds_pgaudit_enable = false {
     # lower(resource.Type) == "aws::rds::dbparametergroup"
@@ -468,7 +545,7 @@ rds_pgaudit_enable_metadata := {
 # PR-AWS-CLD-RDS-015
 #
 
-default rds_global_cluster_encrypt = true
+default rds_global_cluster_encrypt = null
 
 rds_global_cluster_encrypt = false {
     # lower(resource.Type) == "aws::rds::globalcluster"
@@ -496,7 +573,7 @@ rds_global_cluster_encrypt_metadata := {
 # PR-AWS-CLD-RDS-016
 #
 
-default cluster_iam_authenticate = true
+default cluster_iam_authenticate = null
 
 cluster_iam_authenticate = false {
     # lower(resource.Type) == "aws::rds::dbcluster"
@@ -524,7 +601,7 @@ cluster_iam_authenticate_metadata := {
 # PR-AWS-CLD-RDS-017
 #
 
-default db_instance_iam_authenticate = true
+default db_instance_iam_authenticate = null
 
 db_instance_iam_authenticate = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
@@ -553,7 +630,7 @@ db_instance_iam_authenticate_metadata := {
 # PR-AWS-CLD-RDS-018
 #
 
-default db_instance_cloudwatch_logs = true
+default db_instance_cloudwatch_logs = null
 
 db_instance_cloudwatch_logs = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
@@ -589,7 +666,7 @@ db_instance_cloudwatch_logs_metadata := {
 # PR-AWS-CLD-RDS-019
 #
 
-default db_instance_monitor = true
+default db_instance_monitor = null
 
 db_instance_monitor = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
@@ -617,7 +694,7 @@ db_instance_monitor_metadata := {
 # PR-AWS-CLD-RDS-021
 #
 
-default db_instance_engine_version = true
+default db_instance_engine_version = null
 
 db_instance_engine_version = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
@@ -646,7 +723,7 @@ db_instance_engine_version_metadata := {
 # PR-AWS-CLD-RDS-022
 #
 
-default db_cluster_engine_version = true
+default db_cluster_engine_version = null
 
 db_cluster_engine_version = false {
     # lower(resource.Type) == "aws::rds::dbcluster"
@@ -675,7 +752,7 @@ db_cluster_engine_version_metadata := {
 # PR-AWS-CLD-RDS-023
 #
 
-default db_instance_approved_postgres_version = true
+default db_instance_approved_postgres_version = null
 
 db_instance_approved_postgres_version = false {
     # lower(resource.Type) == "aws::rds::dbinstance"
@@ -704,7 +781,7 @@ db_instance_approved_postgres_version_metadata := {
 # PR-AWS-CLD-RDS-024
 #
 
-default db_cluster_approved_postgres_version = true
+default db_cluster_approved_postgres_version = null
 
 db_cluster_approved_postgres_version = false {
     # lower(resource.Type) == "aws::rds::dbcluster"
@@ -733,7 +810,7 @@ db_cluster_approved_postgres_version_metadata := {
 # PR-AWS-CLD-RDS-025
 #
 
-default db_snapshot_is_encrypted = true
+default db_snapshot_is_encrypted = null
 
 db_snapshot_is_encrypted = false {
     DBSnapshot := input.DBSnapshots[_]
@@ -761,7 +838,7 @@ db_snapshot_is_encrypted_metadata := {
 # PR-AWS-CLD-RDS-026
 #
 
-default rds_snapshot_with_access = true
+default rds_snapshot_with_access = null
 
 rds_snapshot_with_access = false {
     DBSnapshotAttribute := input.DBSnapshotAttributesResult.DBSnapshotAttributes[_]
@@ -790,7 +867,7 @@ rds_snapshot_with_access_metadata := {
 # aws::rds::dbinstance
 #
 
-default rds_iam_database_auth = true
+default rds_iam_database_auth = null
 
 rds_iam_database_auth = false {
     DBInstance := input.DBInstances[_]
@@ -818,7 +895,7 @@ rds_iam_database_auth_metadata := {
 # aws::rds::dbcluster
 #
 
-default rds_cluster_backup_retention = true
+default rds_cluster_backup_retention = null
 
 rds_cluster_backup_retention = false {
     DBClusters := input.DBClusters[_]
@@ -850,7 +927,7 @@ rds_cluster_backup_retention_metadata := {
 # PR-AWS-CLD-RDS-029
 # aws::rds::dbinstance
 
-default db_instance_deletion_protection = true
+default db_instance_deletion_protection = null
 
 db_instance_deletion_protection = false {
     DBInstance := input.DBInstances[_]
@@ -877,7 +954,7 @@ db_instance_deletion_protection_metadata := {
 # PR-AWS-CLD-RDS-030
 # aws::rds::dbinstance
 
-default db_instance_backup_retention_period = true
+default db_instance_backup_retention_period = null
 
 db_instance_backup_retention_period = false {
     DBInstance := input.DBInstances[_]
@@ -912,7 +989,7 @@ db_instance_backup_retention_period_metadata := {
 # aws::rds::dbcluster
 # AWS::KMS::Key
 
-default rds_cluster_encrypt_cmk = true
+default rds_cluster_encrypt_cmk = null
 
 rds_cluster_encrypt_cmk = false {
     X := input.TEST_RDS_02[_]
@@ -944,7 +1021,7 @@ rds_cluster_encrypt_cmk_metadata := {
 # PR-AWS-CLD-DAX-001
 #
 
-default dax_encrypt = true
+default dax_encrypt = null
 
 dax_encrypt = false {
     # lower(resource.Type) == "aws::dax::cluster"
@@ -979,7 +1056,7 @@ dax_encrypt_metadata := {
 # PR-AWS-CLD-DAX-002
 #
 
-default dax_cluster_endpoint_encrypt_at_rest = true
+default dax_cluster_endpoint_encrypt_at_rest = null
 
 dax_cluster_endpoint_encrypt_at_rest = false {
     # lower(resource.Type) == "aws::dax::cluster"
@@ -1015,7 +1092,7 @@ dax_cluster_endpoint_encrypt_at_rest_metadata := {
 # aws::dax::cluster
 # AWS::KMS::Key
 
-default dax_gs_managed_key = true
+default dax_gs_managed_key = null
 
 dax_gs_managed_key = false {
     X := input.TEST_DAX[_]
@@ -1046,7 +1123,7 @@ dax_gs_managed_key_metadata := {
 # PR-AWS-CLD-QLDB-001
 #
 
-default qldb_permission_mode = true
+default qldb_permission_mode = null
 
 qldb_permission_mode = false {
     # lower(resource.Type) == "aws::qldb::ledger"
@@ -1075,7 +1152,7 @@ qldb_permission_mode_metadata := {
 # PR-AWS-CLD-DDB-001
 #
 
-default docdb_cluster_encrypt = true
+default docdb_cluster_encrypt = null
 
 docdb_cluster_encrypt = false {
     # lower(resource.Type) == "aws::docdb::dbcluster"
@@ -1104,7 +1181,7 @@ docdb_cluster_encrypt_metadata := {
 # PR-AWS-CLD-DDB-002
 #
 
-default docdb_cluster_logs = true
+default docdb_cluster_logs = null
 
 docdb_cluster_logs = false {
     # lower(resource.Type) == "aws::docdb::dbcluster"
@@ -1139,7 +1216,7 @@ docdb_cluster_logs_metadata := {
 # PR-AWS-CLD-DDB-003
 #
 
-default docdb_parameter_group_tls_enable = true
+default docdb_parameter_group_tls_enable = null
 
 docdb_parameter_group_tls_enable = false {
     # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
@@ -1184,7 +1261,7 @@ docdb_parameter_group_tls_enable_metadata := {
 # PR-AWS-CLD-DDB-004
 #
 
-default docdb_parameter_group_audit_logs = true
+default docdb_parameter_group_audit_logs = null
 
 docdb_parameter_group_audit_logs = false {
     # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
@@ -1228,7 +1305,7 @@ docdb_parameter_group_audit_logs_metadata := {
 # PR-AWS-CLD-DDB-005
 #
 
-default docdb_cluster_encrypted_with_cmk = true
+default docdb_cluster_encrypted_with_cmk = null
 
 docdb_cluster_encrypted_with_cmk = false {
     DDB := input.TEST_DDB_01[_]
@@ -1266,7 +1343,7 @@ docdb_cluster_encrypted_with_cmk_metadata := {
 # PR-AWS-CLD-ATH-001
 #
 
-default athena_encryption_disabling_prevent = true
+default athena_encryption_disabling_prevent = null
 
 athena_encryption_disabling_prevent = false {
     # lower(resource.Type) == "aws::athena::workgroup"
@@ -1293,7 +1370,7 @@ athena_encryption_disabling_prevent_metadata := {
 # PR-AWS-CLD-ATH-002
 #
 
-default athena_logging_is_enabled = true
+default athena_logging_is_enabled = null
 
 athena_logging_is_enabled = false {
     # lower(resource.Type) == "aws::athena::workgroup"
@@ -1321,7 +1398,7 @@ athena_logging_is_enabled_metadata := {
 # PR-AWS-CLD-TS-001
 #
 
-default timestream_database_encryption = true
+default timestream_database_encryption = null
 
 timestream_database_encryption = false {
     # lower(resource.Type) == "aws::timestream::database"
@@ -1363,7 +1440,7 @@ timestream_database_encryption_metadata := {
 # PR-AWS-CLD-NPT-001
 #
 
-default neptune_cluster_logs = true
+default neptune_cluster_logs = null
 
 neptune_cluster_logs = false {
     # lower(resource.Type) == "aws::neptune::dbcluster"
@@ -1398,7 +1475,7 @@ neptune_cluster_logs_metadata := {
 # PR-AWS-CLD-DD-001
 #
 
-default dynamodb_encrypt = true
+default dynamodb_encrypt = null
 
 dynamodb_encrypt = false {
     # lower(resource.Type) == "aws::dynamodb::table"
@@ -1432,7 +1509,7 @@ dynamodb_encrypt_metadata := {
 # PR-AWS-CLD-DD-002
 #
 
-default dynamodb_PITR_enable = true
+default dynamodb_PITR_enable = null
 
 dynamodb_PITR_enable = false {
     # lower(resource.Type) == "aws::dynamodb::table"
@@ -1465,7 +1542,7 @@ dynamodb_PITR_enable_metadata := {
 # PR-AWS-CLD-DD-003
 #
 
-default dynamodb_kinesis_stream = true
+default dynamodb_kinesis_stream = null
 
 dynamodb_kinesis_stream = false {
     # lower(resource.Type) == "aws::dynamodb::table"
@@ -1501,7 +1578,7 @@ dynamodb_kinesis_stream_metadata := {
 # aws::dynamodb::table
 # AWS::KMS::Key
 
-default dynamodb_not_customer_managed_key = true
+default dynamodb_not_customer_managed_key = null
 
 dynamodb_not_customer_managed_key = false {
     X := input.TEST_DD[_]
@@ -1534,7 +1611,7 @@ dynamodb_not_customer_managed_key_metadata := {
 # PR-AWS-CLD-EC-001
 #
 
-default cache_failover = true
+default cache_failover = null
 
 cache_failover = false {
     # lower(resource.Type) == "aws::elasticache::replicationgroup"
@@ -1563,7 +1640,7 @@ cache_failover_metadata := {
 # PR-AWS-CLD-EC-002
 #
 
-default cache_redis_auth = true
+default cache_redis_auth = null
 
 cache_redis_auth = false {
     # lower(resource.Type) == "aws::elasticache::replicationgroup"
@@ -1592,7 +1669,7 @@ cache_redis_auth_metadata := {
 # PR-AWS-CLD-EC-003
 #
 
-default cache_redis_encrypt = true
+default cache_redis_encrypt = null
 
 
 cache_redis_encrypt = false {
@@ -1622,7 +1699,7 @@ cache_redis_encrypt_metadata := {
 # PR-AWS-CLD-EC-004
 #
 
-default cache_encrypt = true
+default cache_encrypt = null
 
 cache_encrypt = false {
     # lower(resource.Type) == "aws::elasticache::replicationgroup"
@@ -1651,7 +1728,7 @@ cache_encrypt_metadata := {
 # PR-AWS-CLD-EC-005
 #
 
-default cache_ksm_key = true
+default cache_ksm_key = null
 
 cache_ksm_key = false {
     # lower(resource.Type) == "aws::elasticache::replicationgroup"
@@ -1685,7 +1762,7 @@ cache_ksm_key_metadata := {
 # PR-AWS-CLD-EC-009
 #
 
-default cache_replication_group_id = true
+default cache_replication_group_id = null
 
 cache_replication_group_id = false {
     # lower(resource.Type) == "aws::elasticache::replicationgroup"
@@ -1731,7 +1808,7 @@ cache_replication_group_id_metadata := {
 # PR-AWS-CLD-EC-007
 #
 
-default automatic_backups_for_redis_cluster = true
+default automatic_backups_for_redis_cluster = null
 
 automatic_backups_for_redis_cluster = false {
     # lower(resource.Type) == "aws::elasticache::cachecluster"
@@ -1759,7 +1836,7 @@ automatic_backups_for_redis_cluster_metadata := {
 # PR-AWS-CLD-EC-008
 #
 
-default redis_with_intransit_encryption = true
+default redis_with_intransit_encryption = null
 
 redis_with_intransit_encryption = false {
     # lower(resource.Type) == "aws::elasticache::cachecluster"
@@ -1790,7 +1867,7 @@ redis_with_intransit_encryption_metadata := {
 # aws::elasticache::cachecluster
 # aws::elasticache::replicationgroup
 
-default cache_cluster_vpc = true
+default cache_cluster_vpc = null
 
 cache_cluster_vpc = false {
     X := input.TEST_EC_01[_]
@@ -1846,7 +1923,7 @@ cache_cluster_vpc_metadata := {
 # PR-AWS-CLD-DMS-001
 #
 
-default dms_endpoint = true
+default dms_endpoint = null
 
 dms_endpoint = false {
     # lower(resource.Type) == "aws::dms::endpoint"
@@ -1883,7 +1960,7 @@ dms_endpoint_metadata := {
 # PR-AWS-CLD-DMS-002
 #
 
-default dms_public_access = true
+default dms_public_access = null
 
 dms_public_access = false {
     # lower(resource.Type) == "aws::dms::replicationinstance"
@@ -1912,7 +1989,7 @@ dms_public_access_metadata := {
 # PR-AWS-CLD-DMS-003
 #
 
-default dms_certificate_expiry = true
+default dms_certificate_expiry = null
 
 dms_certificate_expiry = false {
     # lower(resource.Type) == "aws::dms::replicationinstance"
@@ -1944,7 +2021,7 @@ dms_certificate_expiry_metadata := {
 # PR-AWS-CLD-DMS-004
 # aws::dms::replicationinstance
 
-default dms_gs_managed_key = true
+default dms_gs_managed_key = null
 
 dms_gs_managed_key = false {
     X := input.TEST_DMS_02[_]

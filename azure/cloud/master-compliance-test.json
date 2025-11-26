@@ -34,7 +34,7 @@
                         "AZRSNP_228"
                     ],
                     "severity": "Low",
-                    "title": "Ensure at least one principal has access to Keyvault",
+                    "title": "Azure Key Vault must have at least one access policy configured",
                     "description": "Use the Azure Key Vault to store secrets within the Microsoft Azure environment. Secrets in Azure Key Vault are octet sequences with a maximum size of 25k bytes each."
                 },
                 {
@@ -120,7 +120,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_228"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
                     "description": "The key vault contains object keys, secrets, and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates), etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user."
                 },
@@ -156,7 +156,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Key vault should have purge protection enabled",
-                    "description": "The key vault contains object keys, secrets, and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation"
+                    "description": "The key vault contains object keys, secrets, and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-KV-004",
@@ -246,7 +246,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_228"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Key Vault keys should have an expiration date",
                     "description": "This policy identifies Azure Key Vault keys that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly."
                 },
@@ -338,7 +338,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_228"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Key Vault secrets should have an expiration date",
                     "description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly."
                 },
@@ -460,7 +460,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Configure Azure Key Vaults with private endpoints",
-                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your key vault, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview"
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your key vault, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-KV-010",
@@ -489,7 +489,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_228"
                     ],
-                    "severity": "Medium",
+                    "severity": "Critical",
                     "title": "Azure KeyVault Public Network Access should be 'disabled'",
                     "description": "Azure KeyVault Public Network Access should be 'disabled' so that it's not accessible over the public internet. This can reduce data leakage risks."
                 },
@@ -752,7 +752,7 @@
                     ],
                     "severity": "High",
                     "title": "Ensure that 'Storage service encryption' is enabled for the File Service",
-                    "description": "Azure Storage encryption protects your data and helps you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows",
+                    "description": "Azure Storage encryption protects your data and helps you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows.",
                     "masterSnapshotId": [
                         "AZRSNP_301"
                     ]
@@ -875,7 +875,7 @@
                     ],
                     "severity": "High",
                     "title": "Storage Accounts location configuration should be inside of Europe",
-                    "description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
+                    "description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope.",
                     "masterSnapshotId": [
                         "AZRSNP_301"
                     ]
@@ -939,9 +939,9 @@
                             ]
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Critical",
                     "title": "Ensure that Storage Account should not allow public access to all blobs or containers",
-                    "description": "This policy will identify which Storage Account has public access enabled for all blobs or containers",
+                    "description": "This policy will identify which Storage Account has public access enabled for all blobs or containers.",
                     "masterSnapshotId": [
                         "AZRSNP_301"
                     ]
@@ -1073,8 +1073,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Azure Storage Account has latest version of tls configured",
-                    "description": "This policy will identify the Azure Storage Account which don't have the latest version of tls configured and give the alert",
+                    "title": "Azure Storage Account has latest version of TLS configured",
+                    "description": "This policy will identify the Azure Storage Account which don't have the latest version of tls configured and give the alert.",
                     "masterSnapshotId": [
                         "AZRSNP_301"
                     ]
@@ -1104,9 +1104,9 @@
                             ]
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Critical",
                     "title": "Storage accounts should use private link",
-                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your storage account, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your storage account, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview.",
                     "masterSnapshotId": [
                         "AZRSNP_301",
                         "AZRSNP_500"
@@ -1261,7 +1261,7 @@
                             ]
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "Storage accounts should prevent shared key access",
                     "description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key and is recommended by Microsoft.",
                     "masterSnapshotId": [
@@ -1394,8 +1394,8 @@
                     "masterSnapshotId": [
                         "AZRSNP_100"
                     ],
-                    "severity": "Medium",
-                    "title": "Ensure Azure App Service Web App enforce https connection",
+                    "severity": "Low",
+                    "title": "Azure App Service Web App enforce https connection",
                     "description": "Azure Web Apps by default allow sites to run under both HTTP and HTTPS and can be accessed by anyone using non-secure HTTP links. Non-secure HTTP requests can be restricted and all HTTP requests redirected to the secure HTTPS port. We recommend you enforce HTTPS-only traffic to increase security. This will redirect all non-secure HTTP requests to HTTPS ports. HTTPS uses the SSL/TLS protocol to provide a secure connection, which is both encrypted and authenticated."
                 },
                 {
@@ -1496,7 +1496,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_100"
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "Web App should use the latest version of TLS encryption",
                     "description": "App service currently allows the web app to set TLS versions 1.0, 1.1, and 1.2. For secure web app connections, it is highly recommended to only use the latest TLS 1.2 version."
                 },
@@ -1681,7 +1681,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_100"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Web App should use the latest version of HTTP",
                     "description": "We recommend you use the latest HTTP version for web apps and take advantage of any security fixes and new functionalities featured. With each software installation you can determine if a given update meets your organization's requirements. Organizations should verify the compatibility and support provided for any additional software, assessing the current version against the update revision being considered."
                 },
@@ -1775,8 +1775,8 @@
                         "AZRSNP_100"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Azure App Service Authentication is enabled",
-                    "description": "This policy will identify the Azure app service which dont have authentication enabled and give alert"
+                    "title": "Azure App Service Authentication is enabled",
+                    "description": "This policy will identify the Azure app service which dont have authentication enabled and give alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-WEB-006",
@@ -1807,7 +1807,7 @@
                     ],
                     "severity": "High",
                     "title": "Ensure CORS configuration is not allowing every resources to access Azure Web Service",
-                    "description": "This policy will identify CORS configuration which are allowing every resoruce to access Azure Web service and give alert"
+                    "description": "This policy will identify CORS configuration which are allowing every resoruce to access Azure Web service and give alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-WEB-007",
@@ -1836,7 +1836,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service http logging should be enabled",
-                    "description": "This policy will identify the Azure Web service which don't have http logging enabled and give alert"
+                    "description": "This policy will identify the Azure Web service which don't have http logging enabled and give alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-WEB-008",
@@ -1865,7 +1865,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service detailed error message should be enabled",
-                    "description": "This policy will identify the Azure Web service which doesn't have a detailed error message enabled and give the alert"
+                    "description": "This policy will identify the Azure Web service which doesn't have a detailed error message enabled and give the alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-WEB-009",
@@ -1894,7 +1894,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service request tracing should be enabled",
-                    "description": "This policy will identify the Azure web service which doesn't have request tracing enabled and give the alert"
+                    "description": "This policy will identify the Azure web service which doesn't have request tracing enabled and give the alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-WEB-010",
@@ -1990,7 +1990,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Managed Identity provider should be enabled",
-                    "description": "This policy will identify the Azure Web service which doesn't have Managed Identity provider enabled and give the alert"
+                    "description": "This policy will identify the Azure Web service which doesn't have Managed Identity provider enabled and give the alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-WEB-011",
@@ -2093,7 +2093,7 @@
                     ],
                     "severity": "Low",
                     "title": "Azure Web Service remote debugging should be disabled",
-                    "description": "This policy will identify the Azure web service which has remote debugging enabled and give the alert"
+                    "description": "This policy will identify the Azure web service which has remote debugging enabled and give the alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-WEB-012",
@@ -2195,7 +2195,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service FTP deployments should be disabled",
-                    "description": "This policy will identify the Azure web service which has FTP deployment enabled and gives the alert"
+                    "description": "This policy will identify the Azure web service which has FTP deployment enabled and gives the alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-WEB-013",
@@ -2224,7 +2224,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Dot Net Framework should be latest",
-                    "description": "This policy will identify the Azure web service which doesn't have the latest version of Net Framework and give the alert"
+                    "description": "This policy will identify the Azure web service which doesn't have the latest version of Net Framework and give the alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-WEB-014",
@@ -2294,7 +2294,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service PHP version should be latest",
-                    "description": "This policy will identify the Azure web service which doesn't have the latest version of PHP and give the alert"
+                    "description": "This policy will identify the Azure web service which doesn't have the latest version of PHP and give the alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-WEB-015",
@@ -2364,7 +2364,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Python version should be latest",
-                    "description": "This policy will identify the Azure web service which doesn't have the latest version of Python and give the alert"
+                    "description": "This policy will identify the Azure web service which doesn't have the latest version of Python and give the alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-WEB-016",
@@ -2434,7 +2434,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Web Service Java version should be latest",
-                    "description": "This policy will identify the Azure web service which doesn't have the latest version of Java and give the alert"
+                    "description": "This policy will identify the Azure web service which doesn't have the latest version of Java and give the alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-001",
@@ -2684,7 +2684,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_400"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure SQL Database Auditing Retention should be 90 days or more",
                     "description": "This policy identifies SQL Databases that have Auditing Retention of fewer than 90 days. Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days."
                 },
@@ -2855,7 +2855,7 @@
                     ],
                     "severity": "High",
                     "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses"
+                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-014",
@@ -2942,7 +2942,7 @@
                     ],
                     "severity": "High",
                     "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-                    "description": "This policy will identify MySQL Database Server firewall rule that is currently allowing ingress from all Azure-internal IP addresses"
+                    "description": "This policy will identify MySQL Database Server firewall rule that is currently allowing ingress from all Azure-internal IP addresses."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-016",
@@ -3030,7 +3030,7 @@
                         "AZRSNP_411"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure ssl enforcement is enabled on MySQL server Database Server.",
+                    "title": "Ensure SSL enforcement is enabled on MySQL server Database Server",
                     "description": "Enable SSL connection on MySQL Servers databases. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application."
                 },
                 {
@@ -3141,7 +3141,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_263"
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "SQL Databases should have security alert policies enabled",
                     "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat."
                 },
@@ -3336,7 +3336,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_263"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure SQL database threat detection alerts should be enabled for all threat types",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
                 },
@@ -3454,7 +3454,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Threat Detection alert should be configured to send notifications to the SQL server account administrators",
-                    "description": "Ensure that threat detection alert is configured to send notifications to the sql server account administrators"
+                    "description": "Ensure that threat detection alert is configured to send notifications to the sql server account administrators."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-022",
@@ -3582,7 +3582,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_400"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers."
                 },
@@ -3680,7 +3680,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_400"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers."
                 },
@@ -3711,9 +3711,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_411"
                     ],
-                    "severity": "High",
+                    "severity": "Critical",
                     "title": "Ensure MySQL servers don't have public network access enabled",
-                    "description": "Always use Private Endpoint for Azure MySQL Database Server"
+                    "description": "Always use Private Endpoint for Azure MySQL Database Server."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-061",
@@ -3744,8 +3744,8 @@
                         "AZRSNP_411"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Azure MySQL Server has latest version of tls configured",
-                    "description": "This policy will identify the Azure MySQL Server which doesn't have the latest version of tls configured and give the alert"
+                    "title": "Azure MySQL Server has latest version of TLS configured",
+                    "description": "This policy will identify the Azure MySQL Server which doesn't have the latest version of tls configured and give the alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-056",
@@ -3775,7 +3775,7 @@
                         "AZRSNP_409"
                     ],
                     "severity": "High",
-                    "title": "Ensure ssl enforcement is enabled on MariaDB Server.",
+                    "title": "Ensure SSL enforcement is enabled on MariaDB Server",
                     "description": "Enable SSL connection on MariaDB Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application."
                 },
                 {
@@ -3805,9 +3805,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_409"
                     ],
-                    "severity": "High",
+                    "severity": "Critical",
                     "title": "Ensure MariaDB servers don't have public network access enabled",
-                    "description": "Always use Private Endpoint for MariaDB Server"
+                    "description": "Always use Private Endpoint for MariaDB Server."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-058",
@@ -3838,7 +3838,7 @@
                         "AZRSNP_409"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Geo-redundant backup is enabled on MariaDB server.",
+                    "title": "Ensure Geo-redundant backup is enabled on MariaDB server",
                     "description": "Azure Database for MariaDB provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage."
                 },
                 {
@@ -3869,7 +3869,7 @@
                         "AZRSNP_409"
                     ],
                     "severity": "Low",
-                    "title": "Ensure MariaDB Server is using latest TLS version.",
+                    "title": "Ensure MariaDB Server is using latest TLS version",
                     "description": "This policy identifies Azure MariaDB database servers that are not using the latest TLS version for SSL enforcement. Azure Database for MariaDB uses Transport Layer Security (TLS) from communication with client applications. As a best security practice, use the newer TLS version as the minimum TLS version for the MariaDB database server. Currently, Azure MariaDB supports TLS 1.2 version which resolves the security gap from its preceding versions."
                 },
                 {
@@ -3997,7 +3997,7 @@
                         "AZRSNP_401"
                     ],
                     "severity": "Medium",
-                    "title": "Advanced data security should be enabled on your SQL managed instance.",
+                    "title": "Advanced data security should be enabled on your SQL managed instance",
                     "description": "Advanced data security should be enabled on your SQL managed instance."
                 },
                 {
@@ -4148,7 +4148,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_400"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are equal or greater than 90 days",
                     "description": "Azure SQL Database Threat Detection is a security intelligence feature built into the Azure SQL Database service. Working around the clock to learn, profile and detect anomalous database activities, Azure SQL Database Threat Detection identifies potential threats to the database. Security officers or other designated administrators can get an immediate notification about suspicious database activities as they occur. Each notification provides details of the suspicious activity and recommends how to further investigate and mitigate the threat."
                 },
@@ -4220,7 +4220,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_400"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats."
                 },
@@ -4249,9 +4249,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_401"
                     ],
-                    "severity": "Medium",
+                    "severity": "Critical",
                     "title": "SQL Managed Instance should have public endpoint access disabled",
-                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance"
+                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-042",
@@ -4416,7 +4416,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_400"
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "Azure SQL server audit log retention should be 90 days or higher",
                     "description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be 90 days or higher."
                 },
@@ -4548,7 +4548,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_400"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure SQL Server administrator login does not contain 'Admin/Administrator' as name",
                     "description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks."
                 },
@@ -4581,8 +4581,8 @@
                         "AZRSNP_400"
                     ],
                     "severity": "High",
-                    "title": "Ensure Azure SQL Server has latest version of tls configured",
-                    "description": "This policy will identify the Azure SQL Server which doesn't have the latest version of tls configured and give the alert"
+                    "title": "Azure SQL Server has latest version of TLS configured",
+                    "description": "This policy will identify the Azure SQL Server which doesn't have the latest version of tls configured and give the alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-047",
@@ -4611,9 +4611,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_400"
                     ],
-                    "severity": "High",
+                    "severity": "Critical",
                     "title": "Ensure SQL servers don't have public network access enabled",
-                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance"
+                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-AKS-001",
@@ -4843,7 +4843,7 @@
                         "AZRSNP_219"
                     ],
                     "severity": "Medium",
-                    "title": "Azure AKS cluster monitoring not enabled",
+                    "title": "Azure AKS cluster monitoring must be enabled",
                     "description": "Azure Monitor for containers gives you performance visibility by collecting memory and processor metrics from controllers, nodes, and containers that are available in Kubernetes through the Metrics API. Container logs are also collected. After you enable monitoring from Kubernetes clusters, metrics and logs are automatically collected for you through a containerized version of the Log Analytics agent for Linux. Metrics are written to the metrics store and log data is written to the logs store associated with your Log Analytics workspace."
                 },
                 {
@@ -4877,7 +4877,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_219"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure AKS cluster pool profile count should contain 3 nodes or more",
                     "description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes."
                 },
@@ -4968,7 +4968,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure AKS enable role-based access control (RBAC) should be enforced",
-                    "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled."
+                    "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (Role-Based Access Control (RBAC)). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-AKS-006",
@@ -4997,7 +4997,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Managed Azure AD RBAC for AKS cluster should be enabled",
-                    "description": "Azure Kubernetes Service (AKS) can be configured to use Azure Active Directory (AD) for user authentication. In this configuration, you sign in to an AKS cluster using an Azure AD authentication token. You can also configure Kubernetes role-based access control (Kubernetes RBAC) to limit access to cluster resources based a user's identity or group membership. Visit https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac for details."
+                    "description": "Azure Kubernetes Service (AKS) can be configured to use Azure Active Directory (AD) for user authentication. In this configuration, you sign in to an AKS cluster using an Azure AD authentication token. You can also configure Kubernetes role-based access control (Kubernetes Role-Based Access Control (RBAC)) to limit access to cluster resources based a user's identity or group membership. Visit https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac for details."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-AKS-007",
@@ -5057,7 +5057,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_219"
                     ],
-                    "severity": "Low",
+                    "severity": "Medium",
                     "title": "Ensure AKS cluster network policies are enforced",
                     "description": "Network policy options in AKS include two ways to implement a network policy. You can choose between Azure Network Policies or Calico Network Policies. In both cases, the underlying controlling layer is based on Linux IPTables to enforce the specified policies. Policies are translated into sets of allowed and disallowed IP pairs. These pairs are then programmed as IPTable rules."
                 },
@@ -5088,7 +5088,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure Kubernetes Dashboard is disabled",
-                    "description": "Disable the Kubernetes dashboard on Azure Kubernetes Service"
+                    "description": "Disable the Kubernetes dashboard on Azure Kubernetes Service."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-AKS-010",
@@ -5213,7 +5213,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Application Gateway should not allow TLSv1.1 or lower",
-                    "description": "Transport Layer Security (TLS), previously known as Secure Sockets Layer (SSL), is the standard security technology for establishing an encrypted link between a web server and a browser. This link ensures that all data passed between the web server and browsers remain private and encrypted. Application gateway supports both TLS termination at the gateway as well as end to end TLS encryption. The minimum allowed TLS version should be 1.2"
+                    "description": "Transport Layer Security (TLS), previously known as Secure Sockets Layer (SSL), is the standard security technology for establishing an encrypted link between a web server and a browser. This link ensures that all data passed between the web server and browsers remain private and encrypted. Application gateway supports both TLS termination at the gateway as well as end to end TLS encryption. The minimum allowed TLS version should be 1.2."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-AGW-002",
@@ -5396,7 +5396,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_221"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure Application Gateway is using Https protocol",
                     "description": "Application Gateway allows setting network protocols Http and Https. It is highly recommended to use Https protocol for secure connections."
                 },
@@ -5431,7 +5431,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_221"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure Application Gateway frontendIPConfigurations does not have public ip configured",
                     "description": "Application Gateway allows setting public or private ip in frontendIPConfigurations. It is highly recommended to only configure private ip in frontendIPConfigurations."
                 },
@@ -5467,7 +5467,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_221"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure Application Gateway Backend is using Https protocol",
                     "description": "Application Gateway allows setting backend network protocols Http and Https. It is highly recommended to use Https protocol for secure connections."
                 },
@@ -5504,7 +5504,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure Application Gateway secret certificates stores in keyvault",
-                    "description": "This policy will identify application gateways that don't have SSL certificates stored in keyVault and alert"
+                    "description": "This policy will identify application gateways that don't have SSL certificates stored in keyVault and alert."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-AGW-007",
@@ -5533,9 +5533,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_221"
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "Azure Application Gateway V2 should have the Web application firewall (WAF) enabled with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 for proactive protection against CVE-2021-44228 exploit",
-                    "description": "It is recommended to enable WAF policy with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 on Application Gateway V2 to immediately avail of additional protection from log4j Remote Command Execution. details at <a href='https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/' target='_blank'>here</a>"
+                    "description": "It is recommended to enable Web Application Firewall (WAF) policy with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 on Application Gateway V2 to immediately avail of additional protection from log4j Remote Command Execution. details at <a href='https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/' target='_blank'>here</a>."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-ARC-001",
@@ -5569,7 +5569,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_420"
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "Ensure that the Redis Cache accepts only SSL connections",
                     "description": "It is recommended that Redis Cache should allow only SSL connections. Note: some Redis tools (like redis-cli) do not support SSL. When using such tools plain connection ports should be enabled."
                 },
@@ -5604,7 +5604,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_420"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Redis cache should have a backup",
                     "description": "Replicate Redis Cache server data to another Redis Cache server using geo replication. This feature is only available for Premium tier Redis Cache. From performance point of view, Microsoft recommends that both Redis Caches (Primary and the linked secondary) reside in the same region."
                 },
@@ -5636,7 +5636,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_420"
                     ],
-                    "severity": "Medium",
+                    "severity": "Critical",
                     "title": "Azure Cache for Redis should disable public network access",
                     "description": "Disabling public network access improves security by ensuring that the Azure Cache for Redis isn't exposed on the public internet. You can limit exposure of your Azure Cache for Redis by creating private endpoints instead. Learn more at: https://docs.microsoft.com/azure/azure-cache-for-redis/cache-private-link."
                 },
@@ -5667,7 +5667,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_420"
                     ],
-                    "severity": "Medium",
+                    "severity": "Critical",
                     "title": "Azure Cache for Redis should reside within a virtual network",
                     "description": "Azure Virtual Network deployment provides enhanced security and isolation for your Azure Cache for Redis, as well as subnets, access control policies, and other features to further restrict access.When an Azure Cache for Redis instance is configured with a virtual network, it is not publicly addressable and can only be accessed from virtual machines and applications within the virtual network."
                 },
@@ -5702,7 +5702,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Configure Azure Cache for redis with private endpoints",
-                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your cache for redis, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview"
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your cache for redis, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-ARC-007",
@@ -5721,8 +5721,8 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure Azure Redis Cache has latest version of tls configured",
-                    "description": "This policy will identify the Azure Redis Cache which doesn't have the latest version of tls configured and give the alert",
+                    "title": "Azure Redis Cache has latest version of TLS configured",
+                    "description": "This policy will identify the Azure Redis Cache which doesn't have the latest version of tls configured and give the alert.",
                     "tags": [
                         {
                             "cloud": "azure",
@@ -5800,7 +5800,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_274"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Virtual Machine should be assigned to an availability set",
                     "description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure.<br><br>This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (Ha) best practice, deploy your VMs in an availability set."
                 },
@@ -5829,7 +5829,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_274"
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "Azure Linux Instance should not use basic authentication(Use SSH Key Instead)",
                     "description": "SSH is an encrypted connection protocol that allows secure sign-ins over unsecured connections. SSH is the default connection protocol for Linux VMs hosted in Azure. Using secure shell (SSH) key pair, it is possible to spin up a Linux virtual machine on Azure that defaults to using SSH keys for authentication, eliminating the need for passwords to sign in. We recommend connecting to a VM using SSH keys. Using basic authentication with SSH connections leaves VMs vulnerable to brute-force attacks or guessing of passwords."
                 },
@@ -5858,7 +5858,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_274"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Virtual Machine should have endpoint protection installed",
                     "description": "This policy identifies Azure Virtual Machines (VMs) that do not have endpoint protection installed. Installing endpoint protection systems (like Antimalware for Azure) provides for real-time protection capability that helps identify and remove viruses, spyware, and other malicious software. As a best practice, install endpoint protection on all VMs and computers to help identify and remove viruses, spyware, and other malicious software."
                 },
@@ -5956,7 +5956,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_277"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure disk should have Azure Disk Encryption (ADE) enabled",
                     "description": "To meet your organizational security or compliance requirement, Azure provides disk encryption at rest using Azure Storage Service Encryption (SSE) and Azure Disk Encryption (ADE). Starting February 2017, SSE is enabled by default for all managed disks. ADE is integrated with Azure Key Vault to help you control, manage, and audit the disk encryption keys and secrets.<br><br>This policy detects Virtual Machine (VM) OS disks that are not encrypted at rest using ADE. As a best practice, enable ADE for provide volume encryption for the OS disk. For more information, see https://docs.microsoft.com/en-us/azure/security/azure-security-disk-encryption-overview."
                 },
@@ -5989,7 +5989,7 @@
                     ],
                     "severity": "High",
                     "title": "Enable server-side encryption with customer-managed keys for managed disks",
-                    "description": "Azure Disk Storage allows you to manage your own keys when using server-side encryption (SSE) for managed disks, if you choose"
+                    "description": "Azure Disk Storage allows you to manage your own keys when using server-side encryption (SSE) for managed disks, if you choose."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NET-004",
@@ -6179,9 +6179,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_275"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Virtual Network subnet should be configured with Network Security Group",
-                    "description": "This policy identifies Azure Virtual Network (VNet) subnet which doesn't have any association with Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level.<br><br>For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/"
+                    "description": "This policy identifies Azure Virtual Network (VNet) subnet which doesn't have any association with Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level.<br><br>For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NET-006",
@@ -6281,7 +6281,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_307"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Ensure VPN gateways is configured with cryptographic algorithm",
                     "description": "Azure VPN gateways to use a custom IPsec/IKE policy with specific cryptographic algorithms and key strengths, rather than the Azure default policy sets. IPsec and IKE protocol standard supports a wide range of cryptographic algorithms in various combinations. If customers do not request a specific combination of cryptographic algorithms and parameters, Azure VPN gateways use a set of default proposals. Typically due to compliance or security requirements, you can now configure your Azure VPN gateways to use a custom IPsec/IKE policy with specific cryptographic algorithms and key strengths, rather than the Azure default policy sets. It is thus recommended to use custom policy sets and choose strong cryptography."
                 },
@@ -6363,9 +6363,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_431"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Network Watcher Network Security Group (NSG) flow logs should be enabled",
-                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs to improve network visibility."
+                    "description": "This policy identifies Azure Network Security Groups (Network Security Group (NSG)) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs to improve network visibility."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NTW-002",
@@ -6398,9 +6398,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_431"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Network Watcher Network Security Group (NSG) traffic analytics should be enabled",
-                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs to improve network visibility."
+                    "description": "This policy identifies Azure Network Security Groups (Network Security Group (NSG)) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs to improve network visibility."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NTW-003",
@@ -6483,9 +6483,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_431"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Network Watcher Network Security Group (NSG) flow logs retention should be greater than 90 days",
-                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs and set the log retention period to at least 90 days."
+                    "description": "This policy identifies Azure Network Security Groups (Network Security Group (NSG)) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs and set the log retention period to at least 90 days."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-DBK-001",
@@ -6584,7 +6584,7 @@
                         "AZRSNP_412"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Geo-redundant backup is enabled on PostgreSQL database server.",
+                    "title": "Ensure Geo-redundant backup is enabled on PostgreSQL database server",
                     "description": "Azure Database for PostgreSQL provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage."
                 },
                 {
@@ -6676,7 +6676,7 @@
                         "AZRSNP_412"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure ssl enforcement is enabled on PostgreSQL Database Server.",
+                    "title": "Ensure SSL enforcement is enabled on PostgreSQL Database Server",
                     "description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application."
                 },
                 {
@@ -6759,9 +6759,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_412"
                     ],
-                    "severity": "Medium",
+                    "severity": "Critical",
                     "title": "Ensure PostgreSQL servers don't have public network access enabled",
-                    "description": "Always use Private Endpoint for PostgreSQL Server"
+                    "description": "Always use Private Endpoint for PostgreSQL Server."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-067",
@@ -6864,7 +6864,7 @@
                     ],
                     "severity": "High",
                     "title": "PostgreSQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-                    "description": "This policy will identify PostgreSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses"
+                    "description": "This policy will identify PostgreSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-068",
@@ -6899,7 +6899,7 @@
                     ],
                     "severity": "Low",
                     "title": "Ensure PostgreSQL database server Infrastructure double encryption is enabled",
-                    "description": "This policy identifies PostgreSQL database servers in which Infrastructure double encryption is disabled. Infrastructure double encryption adds a second layer of encryption using service-managed keys. It is recommended to enable infrastructure double encryption on PostgreSQL database servers so that encryption can be implemented at the layer closest to the storage device or network wires. For more details: https://docs.microsoft.com/en-us/azure/postgresql/concepts-infrastructure-double-encryption"
+                    "description": "This policy identifies PostgreSQL database servers in which Infrastructure double encryption is disabled. Infrastructure double encryption adds a second layer of encryption using service-managed keys. It is recommended to enable infrastructure double encryption on PostgreSQL database servers so that encryption can be implemented at the layer closest to the storage device or network wires. For more details: https://docs.microsoft.com/en-us/azure/postgresql/concepts-infrastructure-double-encryption."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-070",
@@ -7547,9 +7547,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_224"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Container Registry should not use the deprecated classic registry",
-                    "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry.<br><br>For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade"
+                    "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry.<br><br>For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-ACR-006",
@@ -7580,8 +7580,8 @@
                     "masterSnapshotId": [
                         "AZRSNP_224"
                     ],
-                    "severity": "Medium",
-                    "title": "Ensure Azure Container registries public access to All networks is disabled",
+                    "severity": "Critical",
+                    "title": "Azure Container registries public access to All networks is disabled",
                     "description": "This policy identifies Azure Container registries which has Public access to All networks enabled. Azure ACR is used to store Docker container images which might contain sensitive information. It is highly recommended to restrict public access from allow access from Selected networks or make it Private by disabling the Public access."
                 },
                 {
@@ -7613,7 +7613,7 @@
                         "AZRSNP_224"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Azure Container registries repository scoped access token is disabled",
+                    "title": "Azure Container registries repository scoped access token is disabled",
                     "description": "Disable repository scoped access tokens for your registry so that repositories are not accessible by tokens. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication."
                 },
                 {
@@ -7676,8 +7676,8 @@
                     "masterSnapshotId": [
                         "AZRSNP_224"
                     ],
-                    "severity": "Medium",
-                    "title": "Ensure Azure Container registries has anonymous authentication disabled",
+                    "severity": "Critical",
+                    "title": "Azure Container registries has anonymous authentication disabled",
                     "description": "Disable anonymous pull for your registry so that data not accessible by unauthenticated user. Disabling local authentication methods like admin user, repository scoped access tokens and anonymous pull improves security by ensuring that container registries exclusively require Azure Active Directory identities for authentication. Learn more at: https://aka.ms/acr/authentication."
                 },
                 {
@@ -7720,7 +7720,7 @@
                         "AZRSNP_224"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Azure Container registries should not allow unrestricted network access",
+                    "title": "Azure Container registries should not allow unrestricted network access",
                     "description": "Azure container registries by default accept connections over the internet from hosts on any network. To protect your registries from potential threats, allow access from only specific private endpoints, public IP addresses or address ranges. If your registry doesn't have network rules configured, it will appear in the unhealthy resources. Learn more about Container Registry network rules here: https://aka.ms/acr/privatelink, https://aka.ms/acr/portal/public-network and https://aka.ms/acr/vnet."
                 },
                 {
@@ -7814,8 +7814,8 @@
                     "masterSnapshotId": [
                         "AZRSNP_224"
                     ],
-                    "severity": "Medium",
-                    "title": "Ensure Azure Container registries should have exports disabled",
+                    "severity": "Critical",
+                    "title": "Azure Container registries should have exports disabled",
                     "description": "Disabling exports improves security by ensuring data in a registry is accessed solely via the dataplane ('docker pull'). Data cannot be moved out of the registry via 'acr import' or via 'acr transfer'. In order to disable exports, public network access must be disabled. Learn more at: https://aka.ms/acr/export-policy."
                 },
                 {
@@ -7861,7 +7861,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Container registries should be encrypted with a customer-managed key",
-                    "description": "Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK."
+                    "description": "Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/Customer Master Key (CMK).Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK.Use customer-managed keys to manage the encryption at rest of the contents of your registries. By default, the data is encrypted at rest with service-managed keys, but customer-managed keys are commonly required to meet regulatory compliance standards. Customer-managed keys enable the data to be encrypted with an Azure Key Vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more at https://aka.ms/acr/CMK."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-001",
@@ -8214,7 +8214,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_231"
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all traffic from Internet on UDP protocol",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on UDP protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports."
                 },
@@ -8351,7 +8351,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_231"
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all traffic from Internet on any protocol",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on any protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports."
                 },
@@ -8520,7 +8520,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group shouldn't allow ICMP (Ping)",
-                    "description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.<br><br>This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.<br><br>This policy detects any Network Security Group (NSG) rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-009",
@@ -8655,7 +8655,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group shouldn't allow FTP (TCP Port 21)",
-                    "description": "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-010",
@@ -9121,7 +9121,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow Windows SMB (TCP Port 445)",
-                    "description": "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-018",
@@ -9256,7 +9256,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow DNS (UDP Port 53)",
-                    "description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-019",
@@ -9391,7 +9391,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow FTP-Data (TCP Port 20)",
-                    "description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-020",
@@ -9526,7 +9526,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow MS SQL (TCP Port 4333)",
-                    "description": "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-021",
@@ -9661,7 +9661,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow MySQL (TCP Port 3306)",
-                    "description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-022",
@@ -9796,7 +9796,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group allows NetBIOS (UDP Port 137 and 138)",
-                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 and 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows NetBIOS traffic on UDP port 137 and 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-023",
@@ -9930,7 +9930,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow PostgreSQL (TCP Port 5432)",
-                    "description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-024",
@@ -10065,7 +10065,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow SMTP (TCP Port 25)",
-                    "description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-025",
@@ -10200,7 +10200,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)",
-                    "description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP Port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows SQLServer traffic on TCP Port 1433 and UDP Port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-026",
@@ -10335,7 +10335,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow Telnet (TCP Port 23)",
-                    "description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH.<br>This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH.<br>This policy detects any Network Security Group (NSG) rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-027",
@@ -10470,7 +10470,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow VNC Listener (TCP Port 5500)",
-                    "description": "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services,     or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-028",
@@ -10605,7 +10605,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow VNC Server (TCP Port 5900)",
-                    "description": "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-029",
@@ -10736,7 +10736,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow Windows RPC (TCP Port 135)",
-                    "description": "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
+                    "description": "This policy detects any Network Security Group (NSG) rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-NSG-030",
@@ -10866,7 +10866,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_231"
                     ],
-                    "severity": "Low",
+                    "severity": "High",
                     "title": "Azure Network Security Group with Outbound rule to should not allow all traffic to any source",
                     "description": "This policy identifies NSGs which allows outgoing traffic to any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic to known sources on authorized protocols and ports."
                 },
@@ -11004,7 +11004,7 @@
                     ],
                     "severity": "Low",
                     "title": "Activity log alerts settings should be enabled",
-                    "description": "Activity log alerts are alerts that activate when a new activity log event occurs that matches the conditions specified in the alert. Based on the order and volume of the events recorded in Azure activity log, the alert rule will fire. Activity log alert rules are Azure resources, so they can be created by using an Azure Resource Manager template. "
+                    "description": "Activity log alerts are alerts that activate when a new activity log event occurs that matches the conditions specified in the alert. Based on the order and volume of the events recorded in Azure activity log, the alert rule will fire. Activity log alert rules are Azure resources, so they can be created by using an Azure Resource Manager template."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-MNT-009",
@@ -11086,9 +11086,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_501"
                     ],
-                    "severity": "Medium",
-                    "title": "activity log retention should be set to 365 days or greater",
-                    "description": "Specifies the retention policy for the log. We recommend you set activity log retention for 365 days or greater. (A value of 0 will retain the events indefinitely.)"
+                    "severity": "Low",
+                    "title": "Activity log retention should be set to 365 days or greater",
+                    "description": "Specifies the retention policy for the log. We recommend you set activity log retention for 365 days or greater. (A value of 0 will retain the events indefinitely.)."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-MNT-010",
@@ -11115,7 +11115,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_501"
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Activity log profile retention should be enabled",
                     "description": "This policy identifies Microsoft.Insights/logprofiles which don't have log retention enabled. Activity Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access."
                 },
@@ -11151,8 +11151,8 @@
                     "masterSnapshotId": [
                         "AZRSNP_501"
                     ],
-                    "severity": "High",
-                    "title": "log profile should be configured to capture all activities",
+                    "severity": "Low",
+                    "title": "Log profile should be configured to capture all activities",
                     "description": "the categories of the logs. These categories are created as is convenient to the user. Some values are: 'Write', 'Delete', and/or 'Action.' We recommend you configure the log profile to export all activities from the control/management plane."
                 },
                 {
@@ -11189,7 +11189,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Soft delete on blob service should be enabled",
-                    "description": "The blob service properties for blob soft delete. It helps to restore removed blob within configured retention days"
+                    "description": "The blob service properties for blob soft delete. It helps to restore removed blob within configured retention days."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-STR-002",
@@ -11482,7 +11482,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Firewall Premium should be configured with both IDPS Alert & Deny mode and TLS inspection enabled for proactive protection against CVE-2021-44228 exploit",
-                    "description": "Azure Firewall Premium has enhanced protection from the Log4j RCE CVE-2021-44228 vulnerability and exploit. Azure Firewall premium IDPS (Intrusion Detection and Prevention System) provides IDPS inspection for all east-west traffic and outbound traffic to internet. details at https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/"
+                    "description": "Azure Firewall Premium has enhanced protection from the Log4j RCE CVE-2021-44228 vulnerability and exploit. Azure Firewall premium IDPS (Intrusion Detection and Prevention System) provides IDPS inspection for all east-west traffic and outbound traffic to internet. details at https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-FRD-001",
@@ -11512,9 +11512,9 @@
                         "AZRSNP_220",
                         "AZRSNP_502"
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "Azure frontDoors should have configured with WAF policy with Default Rule Set 1.0/1.1 for proactive protection against CVE-2021-44228 exploit",
-                    "description": "It is recommended to enable WAF policy with Default Rule Set 1.0/1.1 on Front Door deployments to immediately avail of additional protection from log4j Remote Command Execution. details at https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/"
+                    "description": "It is recommended to enable Web Application Firewall (WAF) policy with Default Rule Set 1.0/1.1 on Front Door deployments to immediately avail of additional protection from log4j Remote Command Execution. details at https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-051",
@@ -11637,7 +11637,7 @@
                             "remediationFunction": "PR_AZR_CLD_SQL_053.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers.",
                     "tags": [
@@ -11739,7 +11739,7 @@
                             "remediationFunction": "PR_AZR_CLD_SQL_055.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers.",
                     "tags": [
@@ -11995,7 +11995,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_274"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Virtual Machine should utilize managed disks",
                     "description": "This policy identifies Azure Virtual Machines which are not utilising Managed Disks. Using Azure Managed disk over traditional BLOB based VHD's has more advantage features like Managed disks are by default encrypted, reduces cost over storage accounts and more resilient as Microsoft will manage the disk storage and move around if underlying hardware goes faulty. It is recommended to move BLOB based VHD's to Managed Disks."
                 },
@@ -12064,7 +12064,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_274"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Virtual Machine NIC should have IP forwarding disabled",
                     "description": "This policy identifies Azure Virtual machine NIC which have IP forwarding enabled. IP forwarding on a virtual machine's NIC allows the machine to receive and forward traffic addressed to other destinations. As a best practice, before you enable IP forwarding in a Virtual Machine NIC, review the configuration with your network security team to ensure that it does not allow an attacker to exploit the set up to route packets through the host and compromise your network."
                 },
@@ -12199,7 +12199,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_507"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Virtual Machine scale sets should utilize managed disks",
                     "description": "This policy identifies Azure Virtual machine scale sets which are not utilising Managed Disks. Using Azure Managed disk over traditional BLOB storage based VHD's has more advantage features like Managed disks are by default encrypted, reduces cost over storage accounts and more resilient as Microsoft will manage the disk storage and move around if underlying hardware goes faulty. It is recommended to move BLOB based VHD's to Managed Disks."
                 },
@@ -12231,7 +12231,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_508"
                     ],
-                    "severity": "Medium",
+                    "severity": "Critical",
                     "title": "Azure Event Grid topics should disable public network access",
                     "description": "Disabling public network access improves security by ensuring that the resource isn't exposed on the public internet. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints."
                 },
@@ -12392,7 +12392,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_509"
                     ],
-                    "severity": "Medium",
+                    "severity": "Critical",
                     "title": "Azure Event Grid domains should disable public network access",
                     "description": "Disable public network access for Azure Event Grid resource so that it isn't accessible over the public internet. This will help protect them against data leakage risks. You can limit exposure of your resources by creating private endpoints instead. Learn more at: https://aka.ms/privateendpoints."
                 },
@@ -12705,7 +12705,7 @@
                     ],
                     "severity": "Medium",
                     "title": "All authorization rules except RootManageSharedAccessKey should be removed from Event Hub namespace",
-                    "description": "Event Hub clients should not use a namespace level access policy that provides access to all queues and topics in a namespace. To align with the least privilege security model, you should create access policies at the entity level for queues and topics to provide access to only the specific entity"
+                    "description": "Event Hub clients should not use a namespace level access policy that provides access to all queues and topics in a namespace. To align with the least privilege security model, you should create access policies at the entity level for queues and topics to provide access to only the specific entity."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-EHB-007",
@@ -12738,7 +12738,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Authorization rules on the Event Hub instance should be defined",
-                    "description": "Audit existence of authorization rules on Event Hub entities to grant least-privileged access"
+                    "description": "Audit existence of authorization rules on Event Hub entities to grant least-privileged access."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-AFA-001",
@@ -12834,8 +12834,8 @@
                     "masterSnapshotId": [
                         "AZRSNP_100"
                     ],
-                    "severity": "Medium",
-                    "title": "Ensure Azure Function App enforce https connection",
+                    "severity": "Low",
+                    "title": "Azure Function App enforce https connection",
                     "description": "This policy identifies Azure Function App which doesn't redirect HTTP to HTTPS. Azure Function App can be accessed by anyone using non-secure HTTP links by default. Non-secure HTTP requests can be restricted and all HTTP requests redirected to the secure HTTPS port. It is recommended to enforce HTTPS-only traffic."
                 },
                 {
@@ -12936,7 +12936,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_100"
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "Azure Function App should use the latest version of TLS encryption",
                     "description": "This policy identifies Azure Function App which are not set with latest version of TLS encryption. Azure currently allows the Function App to set TLS versions 1.0, 1.1 and 1.2. It is highly recommended to use the latest TLS 1.2 version for Function App secure connections."
                 },
@@ -13383,7 +13383,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_515"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Cosmos DB IP range filter should be configured",
                     "description": "This policy identifies Azure Cosmos DB with IP range filter not configured. Azure Cosmos DB should be restricted access from All Networks. It is recommended to add defined set of IP / IP range which can access Azure Cosmos DB from the Internet."
                 },
@@ -13422,9 +13422,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_515"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Cosmos DB should have private endpoints configured",
-                    "description": "This policy identifies Cosmos DBs that are not configured with a private endpoint connection. Azure Cosmos DB private endpoints can be configured using Azure Private Link. Private Link allows users to access an Azure Cosmos account from within the virtual network or from any peered virtual network. When Private Link is combined with restricted NSG policies, it helps reduce the risk of data exfiltration. It is recommended to configure Private Endpoint Connection to Cosmos DB."
+                    "description": "This policy identifies Cosmos DBs that are not configured with a private endpoint connection. Azure Cosmos DB private endpoints can be configured using Azure Private Link. Private Link allows users to access an Azure Cosmos account from within the virtual network or from any peered virtual network. When Private Link is combined with restricted Network Security Group (NSG) policies, it helps reduce the risk of data exfiltration. It is recommended to configure Private Endpoint Connection to Cosmos DB."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-ACD-003",
@@ -13462,7 +13462,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_515"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Cosmos DB Virtual network should be configured",
                     "description": "This policy identifies Azure Cosmos DBs that are not configured with a Virtual network. Azure Cosmos DB by default is accessible from any source if the request is accompanied by a valid authorization token. By configuring Virtual network only requests originating from those subnets will get a valid response. It is recommended to configure Virtual network to Cosmos DB."
                 },
@@ -13504,7 +13504,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_515"
                     ],
-                    "severity": "Medium",
+                    "severity": "Critical",
                     "title": "Azure Cosmos DB shoud not allow traffic from public Azure datacenters",
                     "description": "This policy identifies Cosmos DBs that allow traffic from public Azure datacenters. If you enable this option, the IP address 0.0.0.0 is added to the list of allowed IP addresses. The list of IPs allowed by this option is wide, so it limits the effectiveness of a firewall policy. So it is recommended not to select the 'Accept connections from within public Azure datacenters' option for your Cosmos DB."
                 },
@@ -13548,9 +13548,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_515"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Cosmos DB key based authentication should be disabled",
-                    "description": "This policy identifies Cosmos DBs that are enabled with key-based authentication. Disabling key-based metadata write access on Azure Cosmos DB prevents any changes to resources from a client connecting using the account keys. It is recommended to disable this feature for organizations who want higher degrees of control and governance for production environments.<br><br>NOTE: Enabling this feature can have an impact on your application. Make sure that you understand the impact before enabling it.<br><br>Refer for more details:<br>https://docs.microsoft.com/en-us/azure/cosmos-db/role-based-access-control#check-list-before-enabling"
+                    "description": "This policy identifies Cosmos DBs that are enabled with key-based authentication. Disabling key-based metadata write access on Azure Cosmos DB prevents any changes to resources from a client connecting using the account keys. It is recommended to disable this feature for organizations who want higher degrees of control and governance for production environments.<br><br>NOTE: Enabling this feature can have an impact on your application. Make sure that you understand the impact before enabling it.<br><br>Refer for more details:<br>https://docs.microsoft.com/en-us/azure/cosmos-db/role-based-access-control#check-list-before-enabling."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-CDN-001",
@@ -13610,7 +13610,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_516"
                     ],
-                    "severity": "Medium",
+                    "severity": "Critical",
                     "title": "Azure CDN Endpoint Custom domains should be configured with HTTPS",
                     "description": "This policy identifies Azure CDN Endpoint Custom domains which has not configured with HTTPS. Enabling HTTPS would allow sensitive data to be delivered securely via TLS/SSL encryption when it is sent across the internet. It is recommended to enable HTTPS in Azure CDN Endpoint Custom domains which will provide additional security and protects your web applications from attacks."
                 },
@@ -13704,9 +13704,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_226"
                     ],
-                    "severity": "Medium",
-                    "title": "Ensure Azure Container Instance is configured with virtual network",
-                    "description": "This policy identifies Azure Container Instances (ACI) that are not configured with a virtual network. Making container instances public makes an internet routable network. By deploying container instances into an Azure virtual network, your containers can communicate securely with other resources in the virtual network. So it is recommended to configure all your container instances within a virtual network.<br><br>For more details:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-vnet"
+                    "severity": "Low",
+                    "title": "Azure Container Instance is configured with virtual network",
+                    "description": "This policy identifies Azure Container Instances (ACI) that are not configured with a virtual network. Making container instances public makes an internet routable network. By deploying container instances into an Azure virtual network, your containers can communicate securely with other resources in the virtual network. So it is recommended to configure all your container instances within a virtual network.<br><br>For more details:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-vnet."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-ACI-002",
@@ -13737,9 +13737,9 @@
                     "masterSnapshotId": [
                         "AZRSNP_226"
                     ],
-                    "severity": "Medium",
-                    "title": "Ensure Azure Container Instance is configured with managed identity",
-                    "description": "This policy identifies Azure Container Instances (ACI) that are not configured with the managed identity. The managed identity is authenticated with Azure AD, developers don't have to store any credentials in code. So It is recommended to configure managed identity on all your container instances.<br><br>For more details:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-managed-identity"
+                    "severity": "Low",
+                    "title": "Azure Container Instance is configured with managed identity",
+                    "description": "This policy identifies Azure Container Instances (ACI) that are not configured with the managed identity. The managed identity is authenticated with Azure AD, developers don't have to store any credentials in code. So It is recommended to configure managed identity on all your container instances.<br><br>For more details:<br>https://docs.microsoft.com/en-us/azure/container-instances/container-instances-managed-identity."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-ACI-003",
@@ -13771,7 +13771,7 @@
                         "AZRSNP_226"
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Azure Container Instance usage custom managed key for encryption",
+                    "title": "Azure Container Instance usage custom managed key for encryption",
                     "description": "Secure your containers with greater flexibility using customer-managed keys. When you specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. Using customer-managed keys provides additional capabilities to control rotation of the key encryption key or cryptographically erase data."
                 },
                 {
@@ -13881,7 +13881,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure SQL Server AD and SQL authentication is enabled",
-                    "description": "This policy will identify Azure SQL Server which does not support both Azure Active Directory and Sql Authentication"
+                    "description": "This policy will identify Azure SQL Server which does not support both Azure Active Directory and Sql Authentication."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-078",
@@ -13917,7 +13917,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server Database backup storage redundancy should configure to use locally redundant backup storage",
-                    "description": "This policy will identify Azure SQL Server database which is not configured to use locally redundant backup storage for backup storage redundancy"
+                    "description": "This policy will identify Azure SQL Server database which is not configured to use locally redundant backup storage for backup storage redundancy."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-SQL-079",
@@ -14492,7 +14492,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_519"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Microsoft Defender for Cloud Defender plans should be set to On",
                     "description": "This policy identifies Azure Microsoft Defender for Cloud which has a Defender setting set to Off. Enabling Azure Defender provides advanced security capabilities like providing threat intelligence, anomaly detection, and behavior analytics in the Azure Microsoft Defender for Cloud. It is highly recommended to enable Azure Defender for all Azure services."
                 },
@@ -14563,7 +14563,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_519"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Microsoft Defender for Cloud should be set to On for App Services",
                     "description": "This policy identifies Azure Microsoft Defender for Cloud (previously known as Azure Security Center and Azure Defender) which has defender setting for App Service is set to Off. Enabling Microsoft Defender for Cloud provides the tools needed to harden your resources, track your security posture, protect against cyberattacks, and streamline security management. It is highly recommended to enable Microsoft Defender for App Service."
                 },
@@ -14635,7 +14635,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_519"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Microsoft Defender for Cloud should be set to On for Azure SQL Databases",
                     "description": "This policy identifies Azure Microsoft Defender for Cloud (previously known as Azure Security Center and Azure Defender) which has defender setting for Azure SQL Databases is set to Off. Enabling Microsoft Defender for Cloud provides the tools needed to harden your resources, track your security posture, protect against cyberattacks, and streamline security management. It is highly recommended to enable Microsoft Defender for Azure SQL Databases."
                 },
@@ -14707,7 +14707,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_519"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Microsoft Defender for Cloud should be set to On for Key Vault",
                     "description": "This policy identifies Azure Microsoft Defender for Cloud (previously known as Azure Security Center and Azure Defender) which has defender setting for Azure Key Vault is set to Off. Enabling Microsoft Defender for Cloud provides the tools needed to harden your resources, track your security posture, protect against cyberattacks, and streamline security management. It is highly recommended to enable Microsoft Defender for Azure Key Vault."
                 },
@@ -14745,7 +14745,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_519"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Microsoft Defender for Cloud should be set to On for SQL VM",
                     "description": "This policy identifies Azure Microsoft Defender for Cloud (previously known as Azure Security Center and Azure Defender) which has defender setting for Azure SQL VM is set to Off. Enabling Microsoft Defender for Cloud provides the tools needed to harden your resources, track your security posture, protect against cyberattacks, and streamline security management. It is highly recommended to enable Microsoft Defender for Azure SQL VM."
                 },
@@ -14817,7 +14817,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_519"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Microsoft Defender for Cloud should be set to On for VMs",
                     "description": "This policy identifies Azure Microsoft Defender for Cloud (previously known as Azure Security Center and Azure Defender) which has defender setting for Azure VM is set to Off. Enabling Microsoft Defender for Cloud provides the tools needed to harden your resources, track your security posture, protect against cyberattacks, and streamline security management. It is highly recommended to enable Microsoft Defender for Azure VM."
                 },
@@ -14889,7 +14889,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_519"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Microsoft Defender for Cloud should be set to On for Storage",
                     "description": "This policy identifies Azure Microsoft Defender for Cloud (previously known as Azure Security Center and Azure Defender) which has defender setting for Azure Storage is set to Off. Enabling Microsoft Defender for Cloud provides the tools needed to harden your resources, track your security posture, protect against cyberattacks, and streamline security management. It is highly recommended to enable Microsoft Defender for Azure Storage."
                 },
@@ -14920,7 +14920,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_519"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Microsoft Defender for Cloud should be set to On for Containers",
                     "description": "This policy identifies Azure Microsoft Defender for Cloud (previously known as Azure Security Center and Azure Defender) which has defender setting for Azure Containers is set to Off. Enabling Microsoft Defender for Cloud provides the tools needed to harden your resources, track your security posture, protect against cyberattacks, and streamline security management. It is highly recommended to enable Microsoft Defender for Azure Containers."
                 },
@@ -14992,7 +14992,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_520"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Microsoft Defender for Cloud MCAS integration should be enabled",
                     "description": "This policy identifies Azure Microsoft Defender for Cloud (previously known as Azure Security Center and Azure Defender) which has Microsoft Defender for Cloud Apps (MCAS) integration disabled. Enabling Microsoft Defender for Cloud provides the tools needed to harden your resources, track your security posture, protect against cyberattacks, and streamline security management. It is highly recommended to enable Microsoft Defender for MCAS."
                 },
@@ -15065,7 +15065,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_520"
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Microsoft Defender for Cloud WDATP integration should be enabled",
                     "description": "This policy identifies Azure Microsoft Defender for Cloud (previously known as Azure Security Center and Azure Defender) which has Microsoft Defender for Cloud Apps (WDATP) integration disabled. Enabling Microsoft Defender for Cloud provides the tools needed to harden your resources, track your security posture, protect against cyberattacks, and streamline security management. It is highly recommended to enable Microsoft Defender for WDATP."
                 },
@@ -15463,7 +15463,7 @@
                                 "CyberSecurity Law of the People's Republic of China-Article 56",
                                 "Cybersecurity Maturity Model Certification (CMMC) v.1.02-SI.2.214",
                                 "GDPR",
-                                "GDPR-Article 30", 
+                                "GDPR-Article 30",
                                 "GDPR-Article 32",
                                 "GDPR-Article 46",
                                 "HIPAA",
@@ -15745,7 +15745,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_523"
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "Azure custom role definition should not have wildcard action",
                     "description": "This policy identifies and audit custom roles that has wildcard action. When creating custom roles, you can use the wildcard (*) character to define permissions. It's recommended that you specify Actions and DataActions explicitly instead of using the wildcard (*) character. The additional access and permissions granted through future Actions or DataActions may be unwanted behavior using the wildcard."
                 },
@@ -15782,7 +15782,7 @@
                     ],
                     "severity": "High",
                     "title": "Ensure to assign roles to groups, not users",
-                    "description": "To make role assignments more manageable, avoid assigning roles directly to users. Instead, assign roles to groups. Assigning roles to groups instead of users also helps minimize the number of role assignments, which has a limit of role assignments per subscription"
+                    "description": "To make role assignments more manageable, avoid assigning roles directly to users. Instead, assign roles to groups. Assigning roles to groups instead of users also helps minimize the number of role assignments, which has a limit of role assignments per subscription."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-IAM-008",
@@ -15819,7 +15819,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_527"
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "AAD should have security default enabled",
                     "description": "Security defaults is a set of basic identity security mechanisms recommended by Microsoft. When enabled, these recommendations will be automatically enforced in your organization. Administrators and users will be better protected from common identity related attacks."
                 },
@@ -15928,7 +15928,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_525"
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "AAD users should have MFA enabled",
                     "description": "This policy identifies Azure users for whom AD MFA (Active Directory Multi-Factor Authentication) is not enabled. Azure AD MFA is a simple best practice that adds an extra layer of protection on top of your user name and password. MFA provides increased security for your Azure account settings and resources. Enabling Azure AD Multi-Factor Authentication using Conditional Access policies is the recommended approach to protect users."
                 },
@@ -15967,7 +15967,7 @@
                     ],
                     "severity": "High",
                     "title": "AAD non admin users should not have permission to create security groups",
-                    "description": "As a good practice only administrators should be able to create security groups. This policy will identify AAD non admin users who has security group creation permission"
+                    "description": "As a good practice only administrators should be able to create security groups. This policy will identify AAD non admin users who has security group creation permission."
                 },
                 {
                     "masterTestId": "PR-AZR-CLD-IAM-013",
@@ -15987,13 +15987,13 @@
                             "cloud": "azure",
                             "compliance": [
                                 "Azure Security Benchmark",
-                                "Azure Security Benchmark (v3)-GS-6", 
-                                "Azure Security Benchmark (v3)-IM-1", 
-                                "Azure Security Benchmark (v3)-IM-9", 
+                                "Azure Security Benchmark (v3)-GS-6",
+                                "Azure Security Benchmark (v3)-IM-1",
+                                "Azure Security Benchmark (v3)-IM-9",
                                 "CIS",
-                                "CIS v1.1 (Azure)-1.9", 
-                                "CIS v1.2.0 (Azure)-1.9", 
-                                "CIS v1.3.0 (Azure)-1.9", 
+                                "CIS v1.1 (Azure)-1.9",
+                                "CIS v1.2.0 (Azure)-1.9",
+                                "CIS v1.3.0 (Azure)-1.9",
                                 "CIS v1.4.0 (Azure)-1.9"
                             ],
                             "service": [
@@ -16004,7 +16004,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_526"
                     ],
-                    "severity": "High",
+                    "severity": "Low",
                     "title": "Ensure 'Users can consent to apps accessing company data on their behalf' configuration is disabled",
                     "description": "This policy identifies Azure Active Directory which have 'Users can consent to apps accessing company data on their behalf' configuration enabled. User profiles contain private information which could be shared with others without requiring any further consent from the user if this configuration is enabled. It is recommended not to allow users to use their identity outside of the cloud environment."
                 },
@@ -16026,70 +16026,70 @@
                             "cloud": "azure",
                             "compliance": [
                                 "APRA",
-                                "APRA (CPS 234) Information Security-CPS234-15", 
-                                "APRA (CPS 234) Information Security-CPS234-16", 
-                                "APRA (CPS 234) Information Security-CPS234-17", 
-                                "APRA (CPS 234) Information Security-CPS234-21", 
-                                "APRA (CPS 234) Information Security-CPS234-23", 
-                                "APRA (CPS 234) Information Security-CPS234-27", 
+                                "APRA (CPS 234) Information Security-CPS234-15",
+                                "APRA (CPS 234) Information Security-CPS234-16",
+                                "APRA (CPS 234) Information Security-CPS234-17",
+                                "APRA (CPS 234) Information Security-CPS234-21",
+                                "APRA (CPS 234) Information Security-CPS234-23",
+                                "APRA (CPS 234) Information Security-CPS234-27",
                                 "APRA (CPS 234) Information Security-CPS234-34",
-                                "Azure Security Benchmark", 
-                                "Azure Security Benchmark (v2)-PA-3", 
-                                "Azure Security Benchmark (v3)-PA-3", 
-                                "Azure Security Benchmark (v3)-PA-4", 
-                                "Azure Security Benchmark (v3)-PA-8", 
-                                "Brazilian Data Protection Law (LGPD)-Article 49", 
+                                "Azure Security Benchmark",
+                                "Azure Security Benchmark (v2)-PA-3",
+                                "Azure Security Benchmark (v3)-PA-3",
+                                "Azure Security Benchmark (v3)-PA-4",
+                                "Azure Security Benchmark (v3)-PA-8",
+                                "Brazilian Data Protection Law (LGPD)-Article 49",
                                 "CIS",
-                                "CIS v1.2.0 (Azure)-1.3", 
-                                "CIS v1.3.0 (Azure)-1.3", 
-                                "CIS v1.3.1 (Azure)-1.3", 
-                                "CIS v1.4.0 (Azure)-1.3", 
+                                "CIS v1.2.0 (Azure)-1.3",
+                                "CIS v1.3.0 (Azure)-1.3",
+                                "CIS v1.3.1 (Azure)-1.3",
+                                "CIS v1.4.0 (Azure)-1.3",
                                 "CSA CCM",
-                                "CSA CCM v.4.0.1-DSP-17", 
-                                "CSA CCM v.4.0.1-HRS-04", 
-                                "CSA CCM v.4.0.1-IAM-01", 
-                                "CSA CCM v.4.0.1-IAM-04", 
-                                "CSA CCM v.4.0.1-IAM-05", 
-                                "CSA CCM v.4.0.1-IAM-09", 
-                                "CSA CCM v.4.0.1-IAM-14", 
-                                "CSA CCM v.4.0.1-IAM-16", 
-                                "CSA CCM v.4.0.1-UEM-13", 
-                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AT.2.056", 
+                                "CSA CCM v.4.0.1-DSP-17",
+                                "CSA CCM v.4.0.1-HRS-04",
+                                "CSA CCM v.4.0.1-IAM-01",
+                                "CSA CCM v.4.0.1-IAM-04",
+                                "CSA CCM v.4.0.1-IAM-05",
+                                "CSA CCM v.4.0.1-IAM-09",
+                                "CSA CCM v.4.0.1-IAM-14",
+                                "CSA CCM v.4.0.1-IAM-16",
+                                "CSA CCM v.4.0.1-UEM-13",
+                                "Cybersecurity Maturity Model Certification (CMMC) v.1.02-AT.2.056",
                                 "HITRUST",
-                                "HITRUST v.9.4.2-Control Reference:01.c", 
+                                "HITRUST v.9.4.2-Control Reference:01.c",
                                 "ISO/IEC 27002:2013",
-                                "ISO/IEC 27002:2013-18.1.3", 
-                                "ISO/IEC 27002:2013-18.1.4", 
-                                "ISO/IEC 27002:2013-5.1.2", 
-                                "ISO/IEC 27002:2013-6.1.2", 
-                                "ISO/IEC 27002:2013-6.2.1", 
-                                "ISO/IEC 27002:2013-6.2.2", 
-                                "ISO/IEC 27002:2013-9.1.1", 
-                                "ISO/IEC 27002:2013-9.1.2", 
-                                "ISO/IEC 27002:2013-9.2.3", 
-                                "ISO/IEC 27002:2013-9.2.4", 
-                                "ISO/IEC 27002:2013-9.2.5", 
-                                "ISO/IEC 27002:2013-9.4.2", 
+                                "ISO/IEC 27002:2013-18.1.3",
+                                "ISO/IEC 27002:2013-18.1.4",
+                                "ISO/IEC 27002:2013-5.1.2",
+                                "ISO/IEC 27002:2013-6.1.2",
+                                "ISO/IEC 27002:2013-6.2.1",
+                                "ISO/IEC 27002:2013-6.2.2",
+                                "ISO/IEC 27002:2013-9.1.1",
+                                "ISO/IEC 27002:2013-9.1.2",
+                                "ISO/IEC 27002:2013-9.2.3",
+                                "ISO/IEC 27002:2013-9.2.4",
+                                "ISO/IEC 27002:2013-9.2.5",
+                                "ISO/IEC 27002:2013-9.4.2",
                                 "ISO/IEC 27017:2015",
-                                "ISO/IEC 27017:2015-9.1.2", 
-                                "ISO/IEC 27017:2015-9.2.3", 
-                                "ISO/IEC 27017:2015-9.2.4", 
-                                "ISO/IEC 27017:2015-9.2.5", 
-                                "ISO/IEC 27017:2015-9.4.2", 
+                                "ISO/IEC 27017:2015-9.1.2",
+                                "ISO/IEC 27017:2015-9.2.3",
+                                "ISO/IEC 27017:2015-9.2.4",
+                                "ISO/IEC 27017:2015-9.2.5",
+                                "ISO/IEC 27017:2015-9.4.2",
                                 "ISO/IEC 27018:2019",
-                                "ISO/IEC 27018:2019-9.2.3", 
-                                "ISO/IEC 27018:2019-9.2.5", 
-                                "ISO/IEC 27018:2019-9.4.2", 
+                                "ISO/IEC 27018:2019-9.2.3",
+                                "ISO/IEC 27018:2019-9.2.5",
+                                "ISO/IEC 27018:2019-9.4.2",
                                 "MITRE ATT&CK v10.0-T1078 - Valid Accounts",
-                                "NIST CSF", 
-                                "NIST CSF-PR.AC-3", 
-                                "NIST CSF-PR.AC-4", 
-                                "NIST CSF-PR.PT-3", 
+                                "NIST CSF",
+                                "NIST CSF-PR.AC-3",
+                                "NIST CSF-PR.AC-4",
+                                "NIST CSF-PR.PT-3",
                                 "NIST SP",
-                                "NIST SP 800-171 Revision 2-3.1.2", 
-                                "NIST SP 800-172-3.1.2e", 
+                                "NIST SP 800-171 Revision 2-3.1.2",
+                                "NIST SP 800-172-3.1.2e",
                                 "PCI DSS",
-                                "PCI DSS v3.2.1-7.1", 
+                                "PCI DSS v3.2.1-7.1",
                                 "PCI DSS v3.2.1-7.1.2"
                             ],
                             "service": [

@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.network/azurefirewalls resources exist
+microsoft_network_azurefirewalls_exists {
+    existence.azure_resource_exists("microsoft.network/azurefirewalls")
+}
+
+# Check if microsoft.network/firewallpolicies resources exist
+microsoft_network_firewallpolicies_exists {
+    existence.azure_resource_exists("microsoft.network/firewallpolicies")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/azurefirewalls?tabs=json
 
 #

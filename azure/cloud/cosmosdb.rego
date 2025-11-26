@@ -4,6 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.documentdb/databaseaccounts resources exist
+microsoft_documentdb_databaseaccounts_exists {
+    existence.azure_resource_exists("microsoft.documentdb/databaseaccounts")
+}
+
+# Check if microsoft.documentdb/databaseaccounts/privateendpointconnections resources exist
+microsoft_documentdb_databaseaccounts_privateendpointconnections_exists {
+    existence.azure_resource_exists("microsoft.documentdb/databaseaccounts/privateendpointconnections")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

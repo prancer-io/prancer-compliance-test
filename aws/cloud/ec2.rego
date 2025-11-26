@@ -6,13 +6,35 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if Reservations resources exist
+reservations_exists {
+    existence.aws_resource_exists("Reservations")
+}
+
+# Check if CreateVolumePermissions resources exist
+createvolumepermissions_exists {
+    existence.aws_resource_exists("CreateVolumePermissions")
+}
+
+# Check if Volumes resources exist
+volumes_exists {
+    existence.aws_resource_exists("Volumes")
+}
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 
 #
 # PR-AWS-CLD-EC2-001
 #
 
-default ec2_iam_role = true
+default ec2_iam_role = null
 
 ec2_iam_role = false {
     # lower(resource.Type) == "aws::ec2::instance"
@@ -48,7 +70,7 @@ ec2_iam_role_metadata := {
 # PR-AWS-CLD-EC2-002
 #
 
-default ec2_no_vpc = true
+default ec2_no_vpc = null
 
 ec2_no_vpc = false {
     # lower(resource.Type) == "aws::ec2::instance"
@@ -78,7 +100,7 @@ ec2_no_vpc_metadata := {
 # PR-AWS-CLD-EC2-003
 #
 
-default ec2_public_ip = true
+default ec2_public_ip = null
 
 ec2_public_ip = false {
     # lower(resource.Type) == "aws::ec2::instance"
@@ -116,7 +138,7 @@ ec2_public_ip_metadata := {
 # PR-AWS-CLD-EC2-004
 #
 
-default ec2_ebs_optimized = true
+default ec2_ebs_optimized = null
 
 ec2_ebs_optimized = false {
     # lower(resource.Type) == "aws::ec2::instance"
@@ -146,7 +168,7 @@ ec2_ebs_optimized_metadata := {
 # PR-AWS-CLD-EC2-005
 #
 
-default ec2_monitoring = true
+default ec2_monitoring = null
 
 ec2_monitoring = false {
     # lower(resource.Type) == "aws::ec2::instance"
@@ -183,7 +205,7 @@ ec2_monitoring_metadata := {
 # PR-AWS-CLD-EC2-006
 #
 
-default ec2_deletion_termination = true
+default ec2_deletion_termination = null
 
 ec2_deletion_termination = false {
     # lower(resource.Type) == "aws::ec2::instance"
@@ -251,7 +273,7 @@ ec2_deletion_termination_metadata := {
 # PR-AWS-CLD-EC2-008
 #
 
-default ebs_snapshot_public_access = true
+default ebs_snapshot_public_access = null
 
 ebs_snapshot_public_access = false {
     # lower(resource.Type) == "aws::ec2::instance"
@@ -279,7 +301,7 @@ ebs_snapshot_public_access_metadata := {
 # PR-AWS-CLD-EC2-011
 #
 
-default ebs_volume_attached = true
+default ebs_volume_attached = null
 
 ebs_volume_attached = false {
     # lower(resource.Type) == "aws::ec2::instance"
@@ -315,7 +337,7 @@ ebs_volume_attached_metadata := {
 # PR-AWS-CLD-EC2-012
 #
 
-default ebs_deletion_protection = true
+default ebs_deletion_protection = null
 
 ebs_deletion_protection = false {
     # lower(resource.Type) == "aws::ec2::instance"
@@ -345,7 +367,7 @@ ebs_deletion_protection_metadata := {
 # aws::ec2::instance
 #
 
-default ec2_instance_configured_with_instance_metadata_service_v2 = true
+default ec2_instance_configured_with_instance_metadata_service_v2 = null
 
 ec2_instance_configured_with_instance_metadata_service_v2 = false {
     Reservation := input.Reservations[_]
@@ -377,7 +399,7 @@ ec2_instance_configured_with_instance_metadata_service_v2_metadata := {
 # aws::ec2::instance
 # aws::ec2::vpcendpoint
 
-default ec2_vpcendpoint = true
+default ec2_vpcendpoint = null
 
 ec2_vpcendpoint = false {
     X := input.TEST_EC2_01[_]

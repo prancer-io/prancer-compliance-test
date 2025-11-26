@@ -4,6 +4,38 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.storage/storageaccounts/blobservices resources exist
+microsoft_storage_storageaccounts_blobservices_exists {
+    existence.azure_resource_exists("microsoft.storage/storageaccounts/blobservices")
+}
+
+# Check if microsoft.storage/storageaccounts resources exist
+microsoft_storage_storageaccounts_exists {
+    existence.azure_resource_exists("microsoft.storage/storageaccounts")
+}
+
+# Check if microsoft.network/privateendpoints resources exist
+microsoft_network_privateendpoints_exists {
+    existence.azure_resource_exists("microsoft.network/privateendpoints")
+}
+
+# Check if microsoft.storage/storageaccounts/encryptionscopes resources exist
+microsoft_storage_storageaccounts_encryptionscopes_exists {
+    existence.azure_resource_exists("microsoft.storage/storageaccounts/encryptionscopes")
+}
+
+# Check if microsoft.storage/storageaccounts/fileservices/shares resources exist
+microsoft_storage_storageaccounts_fileservices_shares_exists {
+    existence.azure_resource_exists("microsoft.storage/storageaccounts/fileservices/shares")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

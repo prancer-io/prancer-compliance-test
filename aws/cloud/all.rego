@@ -7,6 +7,63 @@ has_property(parent_object, target_property) {
 }
 
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if SecretList resources exist
+secretlist_exists {
+    existence.aws_resource_exists("SecretList")
+}
+
+# Check if Workspaces resources exist
+workspaces_exists {
+    existence.aws_resource_exists("Workspaces")
+}
+
+# Check if Directories resources exist
+directories_exists {
+    existence.aws_resource_exists("Directories")
+}
+
+# Check if LaunchConfigurations resources exist
+launchconfigurations_exists {
+    existence.aws_resource_exists("LaunchConfigurations")
+}
+
+# Check if AutoScalingGroups resources exist
+autoscalinggroups_exists {
+    existence.aws_resource_exists("AutoScalingGroups")
+}
+
+# Check if Stacks resources exist
+stacks_exists {
+    existence.aws_resource_exists("Stacks")
+}
+
+# Check if ConfigurationRecorders resources exist
+configurationrecorders_exists {
+    existence.aws_resource_exists("ConfigurationRecorders")
+}
+
+# Check if ConfigurationAggregators resources exist
+configurationaggregators_exists {
+    existence.aws_resource_exists("ConfigurationAggregators")
+}
+
+# Check if ConfigurationRecordersStatus resources exist
+configurationrecordersstatus_exists {
+    existence.aws_resource_exists("ConfigurationRecordersStatus")
+}
+
+# Check if ResourceRecordSets resources exist
+resourcerecordsets_exists {
+    existence.aws_resource_exists("ResourceRecordSets")
+}
+
 rules_packages = [
     "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-JnA8Zp85",
     "arn:aws:inspector:us-east-1:316112463485:rulespackage/0-gEjTy7T7",
@@ -32,7 +89,7 @@ rules_packages = [
 # PR-AWS-CLD-SM-001
 #
 
-default secret_manager_kms = true
+default secret_manager_kms = null
 
 secret_manager_kms = false {
     # lower(resource.Type) == "aws::secretsmanager::secret"
@@ -66,7 +123,7 @@ secret_manager_kms_metadata := {
 # PR-AWS-CLD-SM-003
 # aws::secretsmanager::secret
 
-default secret_manager_automatic_rotation = true
+default secret_manager_automatic_rotation = null
 
 secret_manager_automatic_rotation = false {
     SecretList := input.SecretList[_]
@@ -98,7 +155,7 @@ secret_manager_automatic_rotation_metadata := {
 # PR-AWS-CLD-SM-004
 # aws::secretsmanager::secret
 
-default secret_manager_rotation_period = true
+default secret_manager_rotation_period = null
 
 secret_manager_rotation_period = false {
     SecretList := input.SecretList[_]
@@ -130,7 +187,7 @@ secret_manager_rotation_period_metadata := {
 # PR-AWS-CLD-LG-001
 #
 
-default log_group_encryption = true
+default log_group_encryption = null
 
 log_group_encryption = false {
     # lower(resource.Type) == "aws::logs::loggroup"
@@ -170,7 +227,7 @@ log_group_encryption_metadata := {
 # PR-AWS-CLD-LG-002
 #
 
-default log_group_retention = true
+default log_group_retention = null
 
 log_group_retention = false {
     # lower(resource.Type) == "aws::logs::loggroup"
@@ -199,7 +256,7 @@ log_group_retention_metadata := {
 # PR-AWS-CLD-WS-001
 #
 
-default workspace_volume_encrypt = true
+default workspace_volume_encrypt = null
 
 workspace_volume_encrypt = false {
     # lower(resource.Type) == "aws::workspaces::workspace"
@@ -228,7 +285,7 @@ workspace_volume_encrypt_metadata := {
 # PR-AWS-CLD-WS-002
 # aws::workspaces::workspace
 
-default workspace_root_volume_encrypt = true
+default workspace_root_volume_encrypt = null
 
 workspace_root_volume_encrypt = false {
     Workspaces := input.Workspaces[_]
@@ -256,7 +313,7 @@ workspace_root_volume_encrypt_metadata := {
 # PR-AWS-CLD-WS-003
 # aws::workspaces::workspace
 
-default workspace_directory_type = true
+default workspace_directory_type = null
 
 workspace_directory_type = false {
     directory := input.Directories[_]
@@ -284,7 +341,7 @@ workspace_directory_type_metadata := {
 # PR-AWS-CLD-GLUE-001
 #
 
-default glue_catalog_encryption = true
+default glue_catalog_encryption = null
 
 glue_catalog_encryption = false {
     # lower(resource.Type) == "aws::glue::datacatalogencryptionsettings"
@@ -322,7 +379,7 @@ glue_catalog_encryption_metadata := {
 # PR-AWS-CLD-GLUE-002
 #
 
-default glue_security_config = true
+default glue_security_config = null
 
 glue_security_config = false {
     # lower(resource.Type) == "aws::glue::securityconfiguration"
@@ -365,7 +422,7 @@ glue_security_config_metadata := {
 # PR-AWS-CLD-GLUE-003
 # aws::glue::securityconfiguration
 
-default glue_encrypt_data_at_rest = true
+default glue_encrypt_data_at_rest = null
 
 glue_encrypt_data_at_rest = false {
     not input.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode
@@ -416,7 +473,7 @@ glue_encrypt_data_at_rest_metadata := {
 # aws::glue::securityconfiguration
 # AWS::KMS::Key
 
-default glue_cmk_key = true
+default glue_cmk_key = null
 
 glue_cmk_key = false {
     X := input.TEST_ALL_06[_]
@@ -448,7 +505,7 @@ glue_cmk_key_metadata := {
 # aws::glue::securityconfiguration
 # AWS::KMS::Key
 
-default glue_cloudwatch_cmk_key = true
+default glue_cloudwatch_cmk_key = null
 
 glue_cloudwatch_cmk_key = false {
     X := input.TEST_ALL_06[_]
@@ -479,7 +536,7 @@ glue_cloudwatch_cmk_key_metadata := {
 # PR-AWS-CLD-GLUE-006
 # aws::glue::datacatalogencryptionsettings
 
-default glue_catalog_password = true
+default glue_catalog_password = null
 
 glue_catalog_password = false {
     not input.DataCatalogEncryptionSettings.ConnectionPasswordEncryption
@@ -506,7 +563,7 @@ glue_catalog_password_metadata := {
 # PR-AWS-CLD-AS-001
 #
 
-default as_volume_encrypted = true
+default as_volume_encrypted = null
 
 as_volume_encrypted = false {
     # lower(resource.Type) == "aws::autoscaling::launchconfiguration"
@@ -541,7 +598,7 @@ as_volume_encrypted_metadata := {
 # PR-AWS-CLD-AS-002
 #
 
-default as_elb_health_check = true
+default as_elb_health_check = null
 
 as_elb_health_check = false {
     # lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
@@ -591,7 +648,7 @@ as_elb_health_check_metadata := {
 # PR-AWS-CLD-AS-003
 #
 
-default as_http_token = true
+default as_http_token = null
 
 as_http_token = false {
     # lower(resource.Type) == "aws::autoscaling::launchconfiguration"
@@ -626,7 +683,7 @@ as_http_token_metadata := {
 # PR-AWS-CLD-CFR-001
 #
 
-default cf_sns = true
+default cf_sns = null
 
 cf_sns = false {
     # lower(resource.Type) == "aws::cloudformation::stack"
@@ -660,7 +717,7 @@ cf_sns_metadata := {
 # PR-AWS-CLD-CFR-002
 #
 
-default cloudFormation_template_configured_with_stack_policy = true
+default cloudFormation_template_configured_with_stack_policy = null
 
 cloudFormation_template_configured_with_stack_policy = false {
     # lower(resource.Type) == "AWS::CloudFormation::Stack"
@@ -687,7 +744,7 @@ cloudFormation_template_configured_with_stack_policy_metadata := {
 # PR-AWS-CLD-CFR-003
 #
 
-default cloudFormation_rollback_is_disabled = true
+default cloudFormation_rollback_is_disabled = null
 
 cloudFormation_rollback_is_disabled = false {
     # lower(resource.Type) == "AWS::CloudFormation::Stack"
@@ -715,7 +772,7 @@ cloudFormation_rollback_is_disabled_metadata := {
 # PR-AWS-CLD-CFR-004
 #
 
-default role_arn_exist = true
+default role_arn_exist = null
 
 role_arn_exist = false {
     # lower(resource.Type) == "AWS::CloudFormation::Stack"
@@ -743,7 +800,7 @@ role_arn_exist_metadata := {
 # PR-AWS-CLD-CFR-005
 #
 
-default stack_with_not_all_capabilities = true
+default stack_with_not_all_capabilities = null
 
 stack_with_not_all_capabilities = false {
     # lower(resource.Type) == "AWS::CloudFormation::Stack"
@@ -771,7 +828,7 @@ stack_with_not_all_capabilities_metadata := {
 # PR-AWS-CLD-CFR-006
 #
 
-default termination_protection_in_stacks_is_enabled = true
+default termination_protection_in_stacks_is_enabled = null
 
 termination_protection_in_stacks_is_enabled = false {
     # lower(resource.Type) == "AWS::CloudFormation::Stack"
@@ -800,7 +857,7 @@ termination_protection_in_stacks_is_enabled_metadata := {
 # PR-AWS-CLD-CFG-001
 #
 
-default config_all_resource = true
+default config_all_resource = null
 
 config_all_resource = false {
     # lower(resource.Type) == "aws::config::configurationrecorder"
@@ -843,7 +900,7 @@ config_all_resource_metadata := {
 # PR-AWS-CLD-CFG-002
 #
 
-default aws_config_configuration_aggregator = true
+default aws_config_configuration_aggregator = null
 
 aws_config_configuration_aggregator = false {
     # lower(resource.Type) == "aws::config::configurationaggregator".
@@ -873,7 +930,7 @@ aws_config_configuration_aggregator_metadata := {
 # PR-AWS-CLD-CFG-003
 #
 
-default aws_config_recorder_status = true
+default aws_config_recorder_status = null
 
 aws_config_recorder_status = false {
     # lower(resource.Type) == "aws::config::configurationrecorder".
@@ -902,7 +959,7 @@ aws_config_recorder_status_metadata := {
 # PR-AWS-CLD-CFG-004
 #
 
-default config_includes_global_resources = true
+default config_includes_global_resources = null
 
 config_includes_global_resources = false {
     # lower(resource.Type) == "aws::config::configurationrecorder".
@@ -929,7 +986,7 @@ config_includes_global_resources_metadata := {
 #
 # PR-AWS-CLD-KNS-001
 #
-default kinesis_encryption = true
+default kinesis_encryption = null
 
 kinesis_encryption = false {
     # lower(resource.Type) == "aws::kinesis::stream"
@@ -1002,7 +1059,7 @@ kinesis_encryption_kms_metadata := {
 # PR-AWS-CLD-KNS-003
 # aws::kinesis::stream
 
-default kinesis_gs_kms_key = true
+default kinesis_gs_kms_key = null
 
 kinesis_gs_kms_key = false {
     X := input.TEST_ALL_11[_]
@@ -1041,7 +1098,7 @@ kinesis_gs_kms_key_metadata := {
 # PR-AWS-CLD-KNS-004
 # aws::kinesis::stream
 
-default kinesis_shard_level_metrics = true
+default kinesis_shard_level_metrics = null
 
 kinesis_shard_level_metrics = false {
     Enhanced_Monitoring := input.StreamDescription.EnhancedMonitoring[_]
@@ -1074,7 +1131,7 @@ kinesis_shard_level_metrics_metadata := {
 #
 # PR-AWS-CLD-MQ-001
 #
-default mq_publicly_accessible = true
+default mq_publicly_accessible = null
 
 mq_publicly_accessible = false {
     # lower(resource.Type) == "aws::amazonmq::broker"
@@ -1107,7 +1164,7 @@ mq_publicly_accessible_metadata := {
 #
 # PR-AWS-CLD-MQ-002
 #
-default mq_logging_enable = true
+default mq_logging_enable = null
 
 mq_logging_enable = false {
     # lower(resource.Type) == "aws::amazonmq::broker"
@@ -1134,7 +1191,7 @@ mq_logging_enable_metadata := {
 # PR-AWS-CLD-MQ-003
 #
 
-default mq_activemq_approved_engine_version = true
+default mq_activemq_approved_engine_version = null
 
 mq_activemq_approved_engine_version = false {
     # lower(resource.Type) == "aws::amazonmq::broker"
@@ -1162,7 +1219,7 @@ mq_activemq_approved_engine_version_metadata := {
 # PR-AWS-CLD-MQ-004
 #
 
-default mq_rabbitmq_approved_engine_version = true
+default mq_rabbitmq_approved_engine_version = null
 
 mq_rabbitmq_approved_engine_version = false {
     # lower(resource.Type) == "aws::amazonmq::broker"
@@ -1190,7 +1247,7 @@ mq_rabbitmq_approved_engine_version_metadata := {
 # PR-AWS-CLD-MQ-005
 #
 
-default audit_logs_published_to_cloudWatch = true
+default audit_logs_published_to_cloudWatch = null
 
 audit_logs_published_to_cloudWatch = false {
     # lower(resource.Type) == "aws::amazonmq::broker"
@@ -1223,7 +1280,7 @@ audit_logs_published_to_cloudWatch_metadata := {
 # PR-AWS-CLD-R53-001
 #
 
-default route_healthcheck_disable = true
+default route_healthcheck_disable = null
 
 route_healthcheck_disable = false {
     # lower(resource.Type) == "aws::route53::recordsetgroup"
@@ -1252,7 +1309,7 @@ route_healthcheck_disable_metadata := {
 # PR-AWS-CLD-WAF-001
 #
 
-default waf_log4j_vulnerability = true
+default waf_log4j_vulnerability = null
 
 waf_log4j_vulnerability = false {
     # lower(resource.Type) == "aws::wafv2::webacl"
@@ -1290,7 +1347,7 @@ waf_log4j_vulnerability_metadata := {
 # PR-AWS-CLD-INS-001
 #
 
-default ins_package = true
+default ins_package = null
 
 ins_package = false {
     # lower(resource.Type) == "aws::wafv2::webacl"
@@ -1323,7 +1380,7 @@ ins_package_metadata := {
 # PR-AWS-CLD-APS-001
 #
 
-default appsync_not_configured_with_firewall_v2 = true
+default appsync_not_configured_with_firewall_v2 = null
 
 appsync_not_configured_with_firewall_v2 = false {
     # lower(resource.Type) == "aws::appsync::graphql"
@@ -1353,7 +1410,7 @@ appsync_not_configured_with_firewall_v2_metadata := {
 # AWS::DirectoryService::SimpleAD
 # aws::ec2::vpc
 
-default directory_dhcp_option = true
+default directory_dhcp_option = null
 
 directory_dhcp_option = false {
     X := input.TEST_DIRECTORYSERVICE[_]
@@ -1388,7 +1445,7 @@ directory_dhcp_option_metadata := {
 # AWS::DirectoryService::SimpleAD
 # aws::ec2::vpc
 
-default directory_default_vpc = true
+default directory_default_vpc = null
 
 directory_default_vpc = false {
     X := input.TEST_DIRECTORYSERVICE[_]
@@ -1423,7 +1480,7 @@ directory_default_vpc_metadata := {
 # AWS::DirectoryService::SimpleAD
 # aws::ec2::instance
 
-default directory_security_group = true
+default directory_security_group = null
 
 directory_security_group = false {
     X := input.TEST_DIRECTORYSERVICE[_]
@@ -1459,7 +1516,7 @@ directory_security_group_metadata := {
 # AWS::DirectoryService::SimpleAD
 # aws::ec2::instance
 
-default directory_subnet = true
+default directory_subnet = null
 
 directory_subnet = false {
     X := input.TEST_DIRECTORYSERVICE[_]

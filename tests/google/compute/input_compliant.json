@@ -1,0 +1,21 @@
+{
+    "kind": "compute#firewall",
+    "id": "1234567890123456789",
+    "name": "allow-internal-only",
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/my-project/global/firewalls/allow-internal-only",
+    "network": "https://www.googleapis.com/compute/v1/projects/my-project/global/networks/my-vpc",
+    "direction": "INGRESS",
+    "priority": 1000,
+    "sourceRanges": [
+        "10.0.0.0/8",
+        "172.16.0.0/12",
+        "192.168.0.0/16"
+    ],
+    "allowed": [
+        {
+            "IPProtocol": "tcp",
+            "ports": ["22", "443", "80"]
+        }
+    ],
+    "disabled": false
+}

@@ -4,6 +4,18 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_recovery_services_vault resources exist
+azurerm_recovery_services_vault_exists {
+    existence.azure_resource_exists("azurerm_recovery_services_vault")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

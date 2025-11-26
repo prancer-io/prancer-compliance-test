@@ -4,6 +4,18 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.compute/virtualmachinescalesets resources exist
+microsoft_compute_virtualmachinescalesets_exists {
+    existence.azure_resource_exists("microsoft.compute/virtualmachinescalesets")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

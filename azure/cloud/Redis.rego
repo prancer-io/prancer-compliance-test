@@ -4,6 +4,33 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.cache/redis resources exist
+microsoft_cache_redis_exists {
+    existence.azure_resource_exists("microsoft.cache/redis")
+}
+
+# Check if microsoft.cache/redis/linkedservers resources exist
+microsoft_cache_redis_linkedservers_exists {
+    existence.azure_resource_exists("microsoft.cache/redis/linkedservers")
+}
+
+# Check if microsoft.cache/redis/firewallrules resources exist
+microsoft_cache_redis_firewallrules_exists {
+    existence.azure_resource_exists("microsoft.cache/redis/firewallrules")
+}
+
+# Check if microsoft.network/privateendpoints resources exist
+microsoft_network_privateendpoints_exists {
+    existence.azure_resource_exists("microsoft.network/privateendpoints")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

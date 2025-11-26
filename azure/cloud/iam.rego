@@ -4,6 +4,38 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.authorization/roledefinitions resources exist
+microsoft_authorization_roledefinitions_exists {
+    existence.azure_resource_exists("microsoft.authorization/roledefinitions")
+}
+
+# Check if microsoft.authorization/roleassignments resources exist
+microsoft_authorization_roleassignments_exists {
+    existence.azure_resource_exists("microsoft.authorization/roleassignments")
+}
+
+# Check if microsoft.graph.identitysecuritydefaultsenforcementpolicy resources exist
+microsoft_graph_identitysecuritydefaultsenforcementpolicy_exists {
+    existence.azure_resource_exists("microsoft.graph.identitysecuritydefaultsenforcementpolicy")
+}
+
+# Check if microsoft.graph.authorizationpolicy resources exist
+microsoft_graph_authorizationpolicy_exists {
+    existence.azure_resource_exists("microsoft.graph.authorizationpolicy")
+}
+
+# Check if microsoft.graph.userregistrationdetails resources exist
+microsoft_graph_userregistrationdetails_exists {
+    existence.azure_resource_exists("microsoft.graph.userregistrationdetails")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

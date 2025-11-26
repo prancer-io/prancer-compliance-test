@@ -4,6 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.compute/virtualmachines resources exist
+microsoft_compute_virtualmachines_exists {
+    existence.azure_resource_exists("microsoft.compute/virtualmachines")
+}
+
+# Check if microsoft.recoveryservices/vaults/backupfabrics/protectioncontainers/protecteditems resources exist
+microsoft_recoveryservices_vaults_backupfabrics_protectioncontainers_protecteditems_exists {
+    existence.azure_resource_exists("microsoft.recoveryservices/vaults/backupfabrics/protectioncontainers/protecteditems")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

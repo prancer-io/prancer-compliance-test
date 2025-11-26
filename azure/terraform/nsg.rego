@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_network_security_rule resources exist
+azurerm_network_security_rule_exists {
+    existence.azure_resource_exists("azurerm_network_security_rule")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule
 
 iports := [

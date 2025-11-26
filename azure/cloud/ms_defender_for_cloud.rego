@@ -4,6 +4,33 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.security/pricings resources exist
+microsoft_security_pricings_exists {
+    existence.azure_resource_exists("microsoft.security/pricings")
+}
+
+# Check if microsoft.security/settings resources exist
+microsoft_security_settings_exists {
+    existence.azure_resource_exists("microsoft.security/settings")
+}
+
+# Check if microsoft.security/autoprovisioningsettings resources exist
+microsoft_security_autoprovisioningsettings_exists {
+    existence.azure_resource_exists("microsoft.security/autoprovisioningsettings")
+}
+
+# Check if microsoft.security/securitycontacts resources exist
+microsoft_security_securitycontacts_exists {
+    existence.azure_resource_exists("microsoft.security/securitycontacts")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

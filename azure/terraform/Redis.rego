@@ -4,6 +4,28 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_redis_cache resources exist
+azurerm_redis_cache_exists {
+    existence.azure_resource_exists("azurerm_redis_cache")
+}
+
+# Check if azurerm_redis_linked_server resources exist
+azurerm_redis_linked_server_exists {
+    existence.azure_resource_exists("azurerm_redis_linked_server")
+}
+
+# Check if azurerm_redis_firewall_rule resources exist
+azurerm_redis_firewall_rule_exists {
+    existence.azure_resource_exists("azurerm_redis_firewall_rule")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache
 
 # PR-AZR-TRF-ARC-001

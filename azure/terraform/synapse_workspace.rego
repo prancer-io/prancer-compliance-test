@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_synapse_workspace resources exist
+azurerm_synapse_workspace_exists {
+    existence.azure_resource_exists("azurerm_synapse_workspace")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/synapse_workspace
 # PR-AZR-TRF-SWM-001
 #

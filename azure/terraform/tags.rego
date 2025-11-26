@@ -1,5 +1,127 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_monitor_activity_log_alert resources exist
+azurerm_monitor_activity_log_alert_exists {
+    existence.azure_resource_exists("azurerm_monitor_activity_log_alert")
+}
+
+# Check if azurerm_kubernetes_cluster resources exist
+azurerm_kubernetes_cluster_exists {
+    existence.azure_resource_exists("azurerm_kubernetes_cluster")
+}
+
+# Check if azurerm_application_gateway resources exist
+azurerm_application_gateway_exists {
+    existence.azure_resource_exists("azurerm_application_gateway")
+}
+
+# Check if azurerm_app_service resources exist
+azurerm_app_service_exists {
+    existence.azure_resource_exists("azurerm_app_service")
+}
+
+# Check if azurerm_databricks_workspace resources exist
+azurerm_databricks_workspace_exists {
+    existence.azure_resource_exists("azurerm_databricks_workspace")
+}
+
+# Check if azurerm_sql_server resources exist
+azurerm_sql_server_exists {
+    existence.azure_resource_exists("azurerm_sql_server")
+}
+
+# Check if azurerm_mssql_server resources exist
+azurerm_mssql_server_exists {
+    existence.azure_resource_exists("azurerm_mssql_server")
+}
+
+# Check if azurerm_key_vault resources exist
+azurerm_key_vault_exists {
+    existence.azure_resource_exists("azurerm_key_vault")
+}
+
+# Check if azurerm_lb resources exist
+azurerm_lb_exists {
+    existence.azure_resource_exists("azurerm_lb")
+}
+
+# Check if azurerm_storage_account resources exist
+azurerm_storage_account_exists {
+    existence.azure_resource_exists("azurerm_storage_account")
+}
+
+# Check if azurerm_key_vault_key resources exist
+azurerm_key_vault_key_exists {
+    existence.azure_resource_exists("azurerm_key_vault_key")
+}
+
+# Check if azurerm_managed_disk resources exist
+azurerm_managed_disk_exists {
+    existence.azure_resource_exists("azurerm_managed_disk")
+}
+
+# Check if azurerm_key_vault_secret resources exist
+azurerm_key_vault_secret_exists {
+    existence.azure_resource_exists("azurerm_key_vault_secret")
+}
+
+# Check if azurerm_mariadb_server resources exist
+azurerm_mariadb_server_exists {
+    existence.azure_resource_exists("azurerm_mariadb_server")
+}
+
+# Check if azurerm_mysql_server resources exist
+azurerm_mysql_server_exists {
+    existence.azure_resource_exists("azurerm_mysql_server")
+}
+
+# Check if azurerm_network_watcher_flow_log resources exist
+azurerm_network_watcher_flow_log_exists {
+    existence.azure_resource_exists("azurerm_network_watcher_flow_log")
+}
+
+# Check if azurerm_network_security_group resources exist
+azurerm_network_security_group_exists {
+    existence.azure_resource_exists("azurerm_network_security_group")
+}
+
+# Check if azurerm_postgresql_server resources exist
+azurerm_postgresql_server_exists {
+    existence.azure_resource_exists("azurerm_postgresql_server")
+}
+
+# Check if azurerm_redis_cache resources exist
+azurerm_redis_cache_exists {
+    existence.azure_resource_exists("azurerm_redis_cache")
+}
+
+# Check if azurerm_container_registry resources exist
+azurerm_container_registry_exists {
+    existence.azure_resource_exists("azurerm_container_registry")
+}
+
+# Check if azurerm_virtual_machine resources exist
+azurerm_virtual_machine_exists {
+    existence.azure_resource_exists("azurerm_virtual_machine")
+}
+
+# Check if azurerm_virtual_machine_extension resources exist
+azurerm_virtual_machine_extension_exists {
+    existence.azure_resource_exists("azurerm_virtual_machine_extension")
+}
+
+# Check if azurerm_virtual_network_gateway_connection resources exist
+azurerm_virtual_network_gateway_connection_exists {
+    existence.azure_resource_exists("azurerm_virtual_network_gateway_connection")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert
 
 # PR-AZR-0161-TRF

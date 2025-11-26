@@ -1,5 +1,37 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.eventgrid/topics resources exist
+microsoft_eventgrid_topics_exists {
+    existence.azure_resource_exists("microsoft.eventgrid/topics")
+}
+
+# Check if microsoft.eventgrid/domains/privateendpointconnections resources exist
+microsoft_eventgrid_domains_privateendpointconnections_exists {
+    existence.azure_resource_exists("microsoft.eventgrid/domains/privateendpointconnections")
+}
+
+# Check if microsoft.eventgrid/domains resources exist
+microsoft_eventgrid_domains_exists {
+    existence.azure_resource_exists("microsoft.eventgrid/domains")
+}
+
+# Check if microsoft.eventgrid/topics/privateendpointconnections resources exist
+microsoft_eventgrid_topics_privateendpointconnections_exists {
+    existence.azure_resource_exists("microsoft.eventgrid/topics/privateendpointconnections")
+}
+
+# Check if microsoft.eventgrid/partnernamespaces resources exist
+microsoft_eventgrid_partnernamespaces_exists {
+    existence.azure_resource_exists("microsoft.eventgrid/partnernamespaces")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

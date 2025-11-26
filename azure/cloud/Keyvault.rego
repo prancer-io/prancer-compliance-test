@@ -1,5 +1,27 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.keyvault/vaults/accesspolicies resources exist
+microsoft_keyvault_vaults_accesspolicies_exists {
+    existence.azure_resource_exists("microsoft.keyvault/vaults/accesspolicies")
+}
+
+# Check if microsoft.keyvault/vaults resources exist
+microsoft_keyvault_vaults_exists {
+    existence.azure_resource_exists("microsoft.keyvault/vaults")
+}
+
+# Check if microsoft.network/privateendpoints resources exist
+microsoft_network_privateendpoints_exists {
+    existence.azure_resource_exists("microsoft.network/privateendpoints")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

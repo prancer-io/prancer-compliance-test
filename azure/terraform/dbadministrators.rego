@@ -4,6 +4,23 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_sql_server resources exist
+azurerm_sql_server_exists {
+    existence.azure_resource_exists("azurerm_sql_server")
+}
+
+# Check if azurerm_mssql_server resources exist
+azurerm_mssql_server_exists {
+    existence.azure_resource_exists("azurerm_mssql_server")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_active_directory_administrator
 #

@@ -1,0 +1,1814 @@
+package rule
+
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html
+
+ports = [
+    "135", "137", "138", "1433", "1434", "20", "21", "22", "23", "25", "3306", "3389", "4333",
+    "445", "53", "5432", "5500", "5900", "69", "9300", "5601", "2379", "5986", "5985", "1270"
+]
+
+aws_issue[port] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := ports[_]
+
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= to_number(port)
+    to_number(ingress.ToPort) >= to_number(port)
+}
+
+source_path[{concat("_",["port", port]): metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := ports[_]
+
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= to_number(port)
+    to_number(ingress.ToPort) >= to_number(port)
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIp"]
+        ],
+    }
+}
+
+aws_issue[port] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := ports[_]
+
+    resource.Properties.CidrIp == "0.0.0.0/0"
+    to_number(resource.Properties.FromPort) <= to_number(port)
+    to_number(resource.Properties.ToPort) >= to_number(port)
+}
+
+source_path[{concat("_",["port", port]): metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := ports[_]
+
+    resource.Properties.CidrIp == "0.0.0.0/0"
+    to_number(resource.Properties.FromPort) <= to_number(port)
+    to_number(resource.Properties.ToPort) >= to_number(port)
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrIp"]
+        ],
+    }
+}
+
+aws_issue[port] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := ports[_]
+
+    ingress.CidrIpv6 == "::/0"
+    to_number(ingress.FromPort) <= to_number(port)
+    to_number(ingress.ToPort) >= to_number(port)
+}
+
+source_path[{concat("_",["port", port]): metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := ports[_]
+
+    ingress.CidrIpv6 == "::/0"
+    to_number(ingress.FromPort) <= to_number(port)
+    to_number(ingress.ToPort) >= to_number(port)
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIpv6"]
+        ],
+    }
+}
+
+aws_issue[port] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := ports[_]
+
+    resource.Properties.CidrIpv6 == "::/0"
+    to_number(resource.Properties.FromPort) <= to_number(port)
+    to_number(resource.Properties.ToPort) >= to_number(port)
+}
+
+source_path[{concat("_",["port", port]): metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := ports[_]
+
+    resource.Properties.CidrIpv6 == "::/0"
+    to_number(resource.Properties.FromPort) <= to_number(port)
+    to_number(resource.Properties.ToPort) >= to_number(port)
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrIpv6"]
+        ],
+    }
+}
+
+aws_issue["all"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.SecurityGroupIngress[j].CidrIpv6 == "::/0"
+}
+
+source_path[{"all": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.SecurityGroupIngress[j].CidrIpv6 == "::/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIpv6"]
+        ],
+    }
+}
+
+aws_issue["all"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.CidrIpv6 == "::/0"
+}
+
+source_path[{"all": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.CidrIpv6 == "::/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrIpv6"]
+        ],
+    }
+}
+
+aws_issue["all"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.SecurityGroupIngress[j].CidrIp == "0.0.0.0/0"
+}
+
+source_path[{"all": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.SecurityGroupIngress[j].CidrIp == "0.0.0.0/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIp"]
+        ],
+    }
+}
+
+aws_issue["all"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.CidrIp == "0.0.0.0/0"
+}
+
+source_path[{"all": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.CidrIp == "0.0.0.0/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrIp"]
+        ],
+    }
+}
+
+aws_issue["proto_all"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    ingress := resource.Properties.SecurityGroupEgress[j]
+    ingress.CidrIp == "0.0.0.0/0"
+}
+
+source_path[{"proto_all": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    ingress := resource.Properties.SecurityGroupEgress[j]
+    ingress.CidrIp == "0.0.0.0/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupEgress", j, "CidrIp"]
+        ],
+    }
+}
+
+aws_issue["proto_all"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupegress"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.CidrIp == "0.0.0.0/0"
+}
+
+source_path[{"proto_all": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupegress"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.CidrIp == "0.0.0.0/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrIp"]
+        ],
+    }
+}
+
+aws_issue["proto_all"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    ingress := resource.Properties.SecurityGroupEgress[j]
+    ingress.CidrIpv6 == "::/0"
+}
+
+source_path[{"proto_all": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    ingress := resource.Properties.SecurityGroupEgress[j]
+    ingress.CidrIpv6 == "::/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupEgress", j, "CidrIpv6"]
+        ],
+    }
+}
+
+aws_issue["proto_all"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupegress"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.CidrIpv6 == "::/0"
+}
+
+source_path[{"proto_all": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupegress"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.CidrIpv6 == "::/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrIpv6"]
+        ],
+    }
+}
+
+#
+# PR-AWS-CFR-SG-001
+#
+
+default port_135 = null
+
+port_135 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["135"]
+}
+
+port_135 = false {
+    aws_issue["135"]
+}
+
+port_135_err = "AWS Security Groups allow internet traffic from internet to Windows RPC port (135)" {
+        aws_issue["135"]
+}
+
+port_135_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to Windows RPC port (135)",
+    "Policy Description": "This policy identifies the security groups which are exposing Windows RPC port (135) to the internet. It is recommended that Global permission to access the well known services Windows RPC port (135) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-002
+#
+
+default port_137 = null
+
+port_137 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["137"]
+}
+
+port_137 = false {
+    aws_issue["137"]
+}
+
+port_137_err = "AWS Security Groups allow internet traffic from internet to NetBIOS port (137)" {
+        aws_issue["137"]
+}
+
+port_137_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to NetBIOS port (137)",
+    "Policy Description": "This policy identifies the security groups which are exposing NetBIOS port (137) to the internet. It is recommended that Global permission to access the well known services NetBIOS port (137) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-003
+#
+
+default port_138 = null
+
+port_138 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["138"]
+}
+
+port_138 = false {
+    aws_issue["138"]
+}
+
+port_138_err = "AWS Security Groups allow internet traffic from internet to NetBIOS port (138)" {
+        aws_issue["138"]
+}
+
+port_138_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to NetBIOS port (138)",
+    "Policy Description": "This policy identifies the security groups which are exposing NetBIOS port (138) to the internet. It is recommended that Global permission to access the well known services NetBIOS port (138) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-004
+#
+
+default port_1433 = null
+
+port_1433 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["1433"]
+}
+
+port_1433 = false {
+    aws_issue["1433"]
+}
+
+port_1433_err = "AWS Security Groups allow internet traffic from internet to SQLServer port (1433)" {
+    aws_issue["1433"]
+}
+
+port_1433_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1433)",
+    "Policy Description": "This policy identifies the security groups which are exposing SQLServer port (1433) to the internet. It is recommended that Global permission to access the well known services SQLServer port (1433) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-005
+#
+
+default port_1434 = null
+
+port_1434 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["1434"]
+}
+
+port_1434 = false {
+    aws_issue["1434"]
+}
+
+port_1434_err = "AWS Security Groups allow internet traffic from internet to SQLServer port (1434)" {
+    aws_issue["1434"]
+}
+
+port_1434_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1434)",
+    "Policy Description": "This policy identifies the security groups which are exposing SQLServer port (1434) to the internet. It is recommended that Global permission to access the well known services SQLServer port (1434) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-006
+#
+
+default port_20 = null
+
+port_20 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["20"]
+}
+
+port_20 = false {
+    aws_issue["20"]
+}
+
+port_20_err = "AWS Security Groups allow internet traffic from internet to FTP-Data port (20)" {
+        aws_issue["20"]
+}
+
+port_20_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to FTP-Data port (20)",
+    "Policy Description": "This policy identifies the security groups which are exposing FTP-Data port (20) to the internet. It is recommended that Global permission to access the well known services FTP-Data port (20) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-007
+#
+
+default port_21 = null
+
+port_21 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["21"]
+}
+
+port_21 = false {
+    aws_issue["21"]
+}
+
+port_21_err = "AWS Security Groups allow internet traffic from internet to FTP port (21)" {
+        aws_issue["21"]
+}
+
+port_21_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to FTP port (21)",
+    "Policy Description": "This policy identifies the security groups which are exposing FTP port (21) to the internet. It is recommended that Global permission to access the well known services FTP port (21) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-008
+#
+
+default port_22 = null
+
+port_22 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["22"]
+}
+
+port_22 = false {
+    aws_issue["22"]
+}
+
+port_22_err = "AWS Security Groups allow internet traffic to SSH port (22)" {
+        aws_issue["22"]
+}
+
+port_22_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic to SSH port (22)",
+    "Policy Description": "This policy identifies AWS Security Groups which do allow inbound traffic on SSH port (22) from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-009
+#
+
+default port_23 = null
+
+port_23 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["23"]
+}
+
+port_23 = false {
+    aws_issue["23"]
+}
+
+port_23_err = "AWS Security Groups allow internet traffic from internet to Telnet port (23)" {
+        aws_issue["23"]
+}
+
+port_23_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-009",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to Telnet port (23)",
+    "Policy Description": "This policy identifies the security groups which are exposing Telnet port (23) to the internet. It is recommended that Global permission to access the well known services Telnet port (23) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-010
+#
+
+default port_25 = null
+
+port_25 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["25"]
+}
+
+port_25 = false {
+    aws_issue["25"]
+}
+
+port_25_err = "AWS Security Groups allow internet traffic from internet to SMTP port (25)" {
+        aws_issue["25"]
+}
+
+port_25_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-010",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to SMTP port (25)",
+    "Policy Description": "This policy identifies the security groups which are exposing SMTP port (25) to the internet. It is recommended that Global permission to access the well known services SMTP port (25) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-011
+#
+
+default port_3306 = null
+
+port_3306 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["3306"]
+}
+
+port_3306 = false {
+    aws_issue["3306"]
+}
+
+port_3306_err = "AWS Security Groups allow internet traffic from internet to MYSQL port (3306)" {
+    aws_issue["3306"]
+}
+
+port_3306_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-011",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to MYSQL port (3306)",
+    "Policy Description": "This policy identifies the security groups which are exposing MYSQL port (3306) to the internet. It is recommended that Global permission to access the well known services MYSQL port (3306) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-012
+#
+
+default port_3389 = null
+
+port_3389 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["3389"]
+}
+
+port_3389 = false {
+    aws_issue["3389"]
+}
+
+port_3389_err = "AWS Security Groups allow internet traffic from internet to RDP port (3389)" {
+    aws_issue["3389"]
+}
+
+port_3389_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-012",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to RDP port (3389)",
+    "Policy Description": "This policy identifies the security groups which is exposing RDP port (3389) to the internet. Security Groups do not allow inbound traffic on RDP port (3389) from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-013
+#
+
+default port_4333 = null
+
+port_4333 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["4333"]
+}
+
+port_4333 = false {
+    aws_issue["4333"]
+}
+
+port_4333_err = "AWS Security Groups allow internet traffic from internet to MSQL port (4333)" {
+    aws_issue["4333"]
+}
+
+port_4333_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-013",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to MSQL port (4333)",
+    "Policy Description": "This policy identifies the security groups which are exposing MSQL port (4333) to the internet. It is recommended that Global permission to access the well known services MSQL port (4333) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-014
+#
+
+default port_445 = null
+
+port_445 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["445"]
+}
+
+port_445 = false {
+    aws_issue["445"]
+}
+
+port_445_err = "AWS Security Groups allow internet traffic from internet to CIFS port (445)" {
+        aws_issue["445"]
+}
+
+port_445_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-014",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to CIFS port (445)",
+    "Policy Description": "This policy identifies the security groups which are exposing CIFS port (445) to the internet. It is recommended that Global permission to access the well known services CIFS port (445) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-015
+#
+
+default port_53 = null
+
+port_53 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["53"]
+}
+
+port_53 = false {
+    aws_issue["53"]
+}
+
+port_53_err = "AWS Security Groups allow internet traffic from internet to DNS port (53)" {
+        aws_issue["53"]
+}
+
+port_53_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-015",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to DNS port (53)",
+    "Policy Description": "This policy identifies the security groups which are exposing DNS port (53) to the internet. It is recommended that Global permission to access the well known services DNS port (53) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-016
+#
+
+default port_5432 = null
+
+port_5432 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["5432"]
+}
+
+port_5432 = false {
+    aws_issue["5432"]
+}
+
+port_5432_err = "AWS Security Groups allow internet traffic from internet to PostgreSQL port (5432)" {
+    aws_issue["5432"]
+}
+
+port_5432_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-016",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to PostgreSQL port (5432)",
+    "Policy Description": "This policy identifies the security groups which are exposing PostgreSQL port (5432) to the internet. It is recommended that Global permission to access the well known services PostgreSQL port (5432) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-017
+#
+
+default port_5500 = null
+
+port_5500 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["5500"]
+}
+
+port_5500 = false {
+    aws_issue["5500"]
+}
+
+port_5500_err = "AWS Security Groups allow internet traffic from internet to VNC Listener port (5500)" {
+    aws_issue["5500"]
+}
+
+port_5500_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-017",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to VNC Listener port (5500)",
+    "Policy Description": "This policy identifies the security groups which are exposing VNC Listener port (5500) to the internet. It is recommended that Global permission to access the well known services VNC Listener port (5500) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-018
+#
+
+default port_5900 = null
+
+port_5900 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["5900"]
+}
+
+port_5900 = false {
+    aws_issue["5900"]
+}
+
+port_5900_err = "AWS Security Groups allow internet traffic from internet to VNC Server port (5900)" {
+    aws_issue["5900"]
+}
+
+port_5900_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-018",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to VNC Server port (5900)",
+    "Policy Description": "This policy identifies the security groups which are exposing VNC Server port (5900) to the internet. It is recommended that Global permission to access the well known services VNC Server port (5900) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-019
+#
+
+default port_all = null
+
+port_all {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["all"]
+}
+
+port_all = false {
+    aws_issue["all"]
+}
+
+port_all_err = "AWS Default Security Group does not restrict all traffic" {
+    aws_issue["all"]
+}
+
+port_all_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-019",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Default Security Group does not restrict all traffic",
+    "Policy Description": "This policy identifies the default security group which does not restrict all inbound and outbound traffic. A VPC comes with a default security group whose initial configuration deny all inbound traffic from internet and allow all outbound traffic. If you do not specify a security group when you launch an instance, the instance is automatically assigned to this default security group. As a result, the instance may accidentally send outbound traffic.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-020
+#
+
+default port_proto_all = null
+
+port_proto_all {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["proto_all"]
+}
+
+port_proto_all = false {
+    aws_issue["proto_all"]
+}
+
+port_proto_all_err = "AWS Security Groups with Inbound rule overly permissive to All Traffic" {
+        aws_issue["proto_all"]
+}
+
+port_proto_all_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-020",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups with Inbound rule overly permissive to All Traffic",
+    "Policy Description": "This policy identifies AWS Security Groups which do allow inbound traffic on all protocols from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-021
+#
+
+default port_69 = null
+
+port_69 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["69"]
+}
+
+port_69 = false {
+    aws_issue["69"]
+}
+
+port_69_err = "AWS Security Groups allow internet traffic from internet to Trivial File Transfer Protocol Port (69)" {
+    aws_issue["69"]
+}
+
+port_69_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-021",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to Trivial File Transfer Protocol Port (69)",
+    "Policy Description": "This policy identifies the security groups which are exposing Trivial File Transfer Protocol Port (69) to the internet. It is recommended that Global permission to access the well known services Trivial File Transfer Protocol Port (69) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+
+#
+# PR-AWS-CFR-SG-022
+#
+
+default sg_tag = null
+
+aws_issue["sg_tag"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    count(resource.Properties.Tags) == 0
+}
+
+aws_issue["sg_tag"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    not resource.Properties.Tags
+}
+
+sg_tag {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["sg_tag"]
+}
+
+sg_tag = false {
+    aws_issue["sg_tag"]
+}
+
+sg_tag_err = "Ensure AWS resources that support tags have Tags" {
+    aws_issue["sg_tag"]
+}
+
+sg_tag_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-022",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS resources that support tags have Tags",
+    "Policy Description": "Many different types of AWS resources support tags. Tags allow you to add metadata to a resource to help identify ownership, perform cost / billing analysis, and to enrich a resource with other valuable information, such as descriptions and environment names. While there are many ways that tags can be used, we recommend you follow a tagging practice.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-tags"
+}
+
+
+#
+# PR-AWS-CFR-SG-023
+#
+
+default sg_description_absent = null
+
+aws_issue["sg_description_absent"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    not ingress.description
+}
+
+source_path[{"sg_description_absent": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    not ingress.description
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "description"]
+        ],
+    }
+}
+
+aws_issue["sg_description_absent"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    count(ingress.description) == 0
+}
+
+source_path[{"sg_description_absent": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    count(ingress.description) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "description"]
+        ],
+    }
+}
+
+sg_description_absent {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["sg_description_absent"]
+}
+
+sg_description_absent = false {
+    aws_issue["sg_description_absent"]
+}
+
+sg_description_absent_err = "Ensure every Security Group rule contains a description" {
+    aws_issue["sg_description_absent"]
+}
+
+sg_description_absent_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-023",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure every Security Group rule contains a description",
+    "Policy Description": "We recommend you add descriptive text to each of your Security Group Rules clarifying each rule's goals, this helps prevent developer errors.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule-1.html#cfn-ec2-security-group-rule-description"
+}
+
+
+#
+# PR-AWS-CFR-SG-024
+#
+
+default port_9300 = null
+
+port_9300 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["9300"]
+}
+
+port_9300 = false {
+    aws_issue["9300"]
+}
+
+port_9300_err = "AWS Security Groups allow internet traffic from internet to ElasticSearch Protocol Port (9300)" {
+    aws_issue["9300"]
+}
+
+port_9300_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-024",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to ElasticSearch Protocol Port (9300)",
+    "Policy Description": "This policy identifies the security groups which are exposing ElasticSearch Protocol Port (9300) to the internet. It is recommended that Global permission to access the well known services ElasticSearch Protocol Port (9300) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+
+#
+# PR-AWS-CFR-SG-025
+#
+
+default port_5601 = null
+
+port_5601 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["5601"]
+}
+
+port_5601 = false {
+    aws_issue["5601"]
+}
+
+port_5601_err = "AWS Security Groups allow internet traffic from internet to Kibana Protocol Port (5601)" {
+    aws_issue["5601"]
+}
+
+port_5601_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-025",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to Kibana Protocol Port (5601)",
+    "Policy Description": "This policy identifies the security groups which are exposing Kibana Protocol Port (5601) to the internet. It is recommended that Global permission to access the well known services Kibana Protocol Port (5601) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+
+#
+# PR-AWS-CFR-SG-026
+#
+
+default port_2379 = null
+
+port_2379 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["2379"]
+}
+
+port_2379 = false {
+    aws_issue["2379"]
+}
+
+port_2379_err = "AWS Security Groups allow internet traffic from internet to etcd-client Protocol Port (2379)" {
+    aws_issue["2379"]
+}
+
+port_2379_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-026",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to etcd-client Protocol Port (2379)",
+    "Policy Description": "This policy identifies the security groups which are exposing etcd-client Protocol Port (2379) to the internet. It is recommended that Global permission to access the well known services etcd-client Protocol Port (2379) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-027
+#
+
+default port_5986 = null
+
+port_5986 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["5986"]
+}
+
+port_5986 = false {
+    aws_issue["5986"]
+}
+
+port_5986_err = "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986)" {
+    aws_issue["5986"]
+}
+
+port_5986_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-027",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986)",
+    "Policy Description": "This policy identifies the security groups which are exposing WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986) to the internet. It is recommended that Global permission to access the well known services WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+
+#
+# PR-AWS-CFR-SG-028
+#
+
+default port_5985 = null
+
+port_5985 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["5985"]
+}
+
+port_5985 = false {
+    aws_issue["5985"]
+}
+
+port_5985_err = "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985)" {
+    aws_issue["5985"]
+}
+
+port_5985_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-028",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985)",
+    "Policy Description": "This policy identifies the security groups which are exposing WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985) to the internet. It is recommended that Global permission to access the well known services WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+
+#
+# PR-AWS-CFR-SG-029
+#
+
+default port_1270 = null
+
+port_1270 {
+    type := ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["1270"]
+}
+
+port_1270 = false {
+    aws_issue["1270"]
+}
+
+port_1270_err = "AWS Security Groups allow internet traffic from internet to Microsoft Operations Manager Protocol Port (1270)" {
+    aws_issue["1270"]
+}
+
+port_1270_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-029",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to Microsoft Operations Manager Protocol Port (1270)",
+    "Policy Description": "This policy identifies the security groups which are exposing Microsoft Operations Manager Protocol Port (1270) to the internet. It is recommended that Global permission to access the well known services Microsoft Operations Manager Protocol Port (1270) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-030
+#
+
+default db_exposed = null
+
+db_ports := [
+    1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000
+]
+
+aws_issue["db_exposed"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := db_ports[_]
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+}
+
+source_path[{"db_exposed": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := db_ports[_]
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIp"]
+        ],
+    }
+}
+
+aws_issue["db_exposed"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := db_ports[_]
+    resource.properties.CidrIp == "0.0.0.0/0"
+    to_number(resource.properties.FromPort) <= port
+    to_number(resource.properties.ToPort) >= port
+}
+
+source_path[{"db_exposed": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := db_ports[_]
+    resource.properties.CidrIp == "0.0.0.0/0"
+    to_number(resource.properties.FromPort) <= port
+    to_number(resource.properties.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrIp"]
+        ],
+    }
+}
+
+aws_issue["db_exposed"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := db_ports[_]
+    ingress.CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+}
+
+source_path[{"db_exposed": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := db_ports[_]
+    ingress.CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIpv6"]
+        ],
+    }
+}
+
+aws_issue["db_exposed"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := db_ports[_]
+    resource.properties.CidrIpv6 == "::/0"
+    to_number(resource.properties.FromPort) <= port
+    to_number(resource.properties.ToPort) >= port
+}
+
+source_path[{"db_exposed": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := db_ports[_]
+    resource.properties.CidrIpv6 == "::/0"
+    to_number(resource.properties.FromPort) <= port
+    to_number(resource.properties.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrIpv6"]
+        ],
+    }
+}
+
+db_exposed {
+    type = ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["db_exposed"]
+}
+
+db_exposed = false {
+    aws_issue["db_exposed"]
+}
+
+db_exposed_err = "Publicly exposed DB Ports" {
+    aws_issue["db_exposed"]
+}
+
+db_exposed_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-030",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Publicly exposed DB Ports",
+    "Policy Description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-031
+#
+
+default bitcoin_ports = null
+
+bc_ports := [
+    8332, 8333
+]
+
+aws_issue["bitcoin_ports"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := bc_ports[_]
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+}
+
+source_path[{"bitcoin_ports": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := bc_ports[_]
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIp"]
+        ],
+    }
+}
+
+aws_issue["bitcoin_ports"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := bc_ports[_]
+    resource.properties.CidrIp == "0.0.0.0/0"
+    to_number(resource.properties.FromPort) <= port
+    to_number(resource.properties.ToPort) >= port
+}
+
+source_path[{"bitcoin_ports": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := bc_ports[_]
+    resource.properties.CidrIp == "0.0.0.0/0"
+    to_number(resource.properties.FromPort) <= port
+    to_number(resource.properties.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrIp"]
+        ],
+    }
+}
+
+aws_issue["bitcoin_ports"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := bc_ports[_]
+    ingress.CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+}
+
+source_path[{"bitcoin_ports": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := bc_ports[_]
+    ingress.CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIpv6"]
+        ],
+    }
+}
+
+aws_issue["bitcoin_ports"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := bc_ports[_]
+    resource.properties.CidrIpv6 == "::/0"
+    to_number(resource.properties.FromPort) <= port
+    to_number(resource.properties.ToPort) >= port
+}
+
+source_path[{"bitcoin_ports": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := bc_ports[_]
+    resource.properties.CidrIpv6 == "::/0"
+    to_number(resource.properties.FromPort) <= port
+    to_number(resource.properties.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrIpv6"]
+        ],
+    }
+}
+
+bitcoin_ports {
+    type = ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["bitcoin_ports"]
+}
+
+bitcoin_ports = false {
+    aws_issue["bitcoin_ports"]
+}
+
+bitcoin_ports_err = "Instance is communicating with ports known to mine Bitcoin" {
+    aws_issue["bitcoin_ports"]
+}
+
+bitcoin_ports_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-031",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Instance is communicating with ports known to mine Bitcoin",
+    "Policy Description": "Identifies traffic from internal workloads to internet IPs on ports 8332,8333 that are known to mine Bitcoins. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-032
+#
+
+default ethereum_ports = null
+
+eth_ports := [
+    8545, 30303
+]
+
+aws_issue["ethereum_ports"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := eth_ports[_]
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+}
+
+source_path[{"ethereum_ports": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := eth_ports[_]
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIp"]
+        ],
+    }
+}
+
+aws_issue["ethereum_ports"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := eth_ports[_]
+    resource.properties.CidrIp == "0.0.0.0/0"
+    to_number(resource.properties.FromPort) <= port
+    to_number(resource.properties.ToPort) >= port
+}
+
+source_path[{"ethereum_ports": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := eth_ports[_]
+    resource.properties.CidrIp == "0.0.0.0/0"
+    to_number(resource.properties.FromPort) <= port
+    to_number(resource.properties.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrIp"]
+        ],
+    }
+}
+
+aws_issue["ethereum_ports"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := eth_ports[_]
+    ingress.CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+}
+
+source_path[{"ethereum_ports": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := eth_ports[_]
+    ingress.CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIpv6"]
+        ],
+    }
+}
+
+aws_issue["ethereum_ports"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := eth_ports[_]
+    resource.properties.CidrIpv6 == "::/0"
+    to_number(resource.properties.FromPort) <= port
+    to_number(resource.properties.ToPort) >= port
+}
+
+source_path[{"ethereum_ports": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroupingress"
+    port := eth_ports[_]
+    resource.properties.CidrIpv6 == "::/0"
+    to_number(resource.properties.FromPort) <= port
+    to_number(resource.properties.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrIpv6"]
+        ],
+    }
+}
+
+ethereum_ports {
+    type = ["aws::ec2::securitygroup", "aws::ec2::securitygroupingress"]
+    lower(input.Resources[i].Type) == type[_]
+    not aws_issue["ethereum_ports"]
+}
+
+ethereum_ports = false {
+    aws_issue["ethereum_ports"]
+}
+
+ethereum_ports_err = "Instance is communicating with ports known to mine Ethereum" {
+    aws_issue["ethereum_ports"]
+}
+
+ethereum_ports_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-032",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Instance is communicating with ports known to mine Ethereum",
+    "Policy Description": "Ethereum Identifies traffic from internal workloads to internet IPs on ports 8545,30303 that are known to mine Ethereum. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-033
+#
+
+default sg_vpc = null
+
+aws_attribute_absence["sg_vpc"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    not resource.Properties.VpcId
+}
+
+source_path[{"sg_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    not resource.Properties.VpcId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "VpcId"]
+        ],
+    }
+}
+
+aws_issue["sg_vpc"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    count(resource.Properties.VpcId) == 0
+}
+
+source_path[{"sg_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    count(resource.Properties.VpcId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "VpcId"]
+        ],
+    }
+}
+
+aws_issue["sg_vpc"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    resource.Properties.VpcId == null
+}
+
+source_path[{"sg_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    resource.Properties.VpcId == null
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "VpcId"]
+        ],
+    }
+}
+
+sg_vpc {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["sg_vpc"]
+    not aws_attribute_absence["sg_vpc"]
+}
+
+sg_vpc = false {
+    aws_issue["sg_vpc"]
+}
+
+sg_vpc = false {
+    aws_attribute_absence["sg_vpc"]
+}
+
+sg_vpc_err = "Ensure Security groups has attached to a VPCs" {
+    aws_issue["sg_vpc"]
+} else = "Ensure Security groups has attached to a VPCs" {
+    aws_attribute_absence["sg_vpc"]
+}
+
+sg_vpc_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-033",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Security groups has attached to a VPCs",
+    "Policy Description": "Ensure Security groups has attached to a VPCs else Shared security groups/port ranges lead to violation of principle of least privilege due to the reviewers not being aware that the security group/port range is shared.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-vpcid"
+}
+
+#
+# PR-AWS-CFR-SG-034
+#
+
+default ec2_instance_has_restricted_access = null
+
+ec2_instance_allowed_protocols := ["http", "https"]
+
+ec2_instance_allowed_ports := [443, 80]
+
+is_secure["ipv4"] = true {
+    # lower(resource.Type) == "aws::ec2::securitygroup"
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    SecurityRule := resource.Properties.SecurityGroupIngress[_]
+    lower(SecurityRule.IpProtocol) == ec2_instance_allowed_protocols[_]
+    lower(SecurityRule.CidrIp) == "0.0.0.0/0"
+	SecurityRule.FromPort == ec2_instance_allowed_ports[_]
+	SecurityRule.ToPort == ec2_instance_allowed_ports[_]
+    SecurityRule.FromPort == SecurityRule.ToPort
+}
+
+aws_issue["ec2_instance_has_restricted_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    SecurityRule := resource.Properties.SecurityGroupIngress[_]
+    lower(SecurityRule.CidrIp) == "0.0.0.0/0"
+    not is_secure["ipv4"]
+}
+
+is_secure["ipv6"] = true {
+    # lower(resource.Type) == "aws::ec2::securitygroup"
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    SecurityRule := resource.Properties.SecurityGroupIngress[_]
+    lower(SecurityRule.IpProtocol) == ec2_instance_allowed_protocols[_]
+    lower(SecurityRule.CidrIpv6) == "::/0"
+	SecurityRule.FromPort == ec2_instance_allowed_ports[_]
+	SecurityRule.ToPort == ec2_instance_allowed_ports[_]
+    SecurityRule.FromPort == SecurityRule.ToPort
+}
+
+aws_issue["ec2_instance_has_restricted_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    SecurityRule := resource.Properties.SecurityGroupIngress[_]
+    lower(SecurityRule.CidrIp) == "::/0"
+    not is_secure["ipv6"]
+}
+
+ec2_instance_has_restricted_access = false {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    aws_issue["ec2_instance_has_restricted_access"]
+}
+
+ec2_instance_has_restricted_access {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["ec2_instance_has_restricted_access"]
+}
+
+ec2_instance_has_restricted_access_err = "Ensure EC2 instance that is not internet reachable with unrestricted access (0.0.0.0/0) other than HTTP/HTTPS port monitoring is enabled for EC2 instances" {
+    not aws_issue["ec2_instance_has_restricted_access"]
+}
+
+ec2_instance_has_restricted_access_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-034",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure EC2 instance that is not internet reachable with unrestricted access (0.0.0.0/0) other than HTTP/HTTPS port monitoring is enabled for EC2 instances",
+    "Policy Description": "Ensure restrict traffic from unknown IP addresses and limit the access to known hosts, services, or specific entities. NOTE: We are excluding the HTTP-80 and HTTPs-443 web ports as these are Internet-facing ports with legitimate traffic.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#aws-properties-ec2-security-group--examples"
+}

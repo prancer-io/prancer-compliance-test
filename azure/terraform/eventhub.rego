@@ -4,6 +4,38 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_eventhub_namespace resources exist
+azurerm_eventhub_namespace_exists {
+    existence.azure_resource_exists("azurerm_eventhub_namespace")
+}
+
+# Check if azurerm_eventhub_namespace_customer_managed_key resources exist
+azurerm_eventhub_namespace_customer_managed_key_exists {
+    existence.azure_resource_exists("azurerm_eventhub_namespace_customer_managed_key")
+}
+
+# Check if azurerm_eventhub_namespace_authorization_rule resources exist
+azurerm_eventhub_namespace_authorization_rule_exists {
+    existence.azure_resource_exists("azurerm_eventhub_namespace_authorization_rule")
+}
+
+# Check if azurerm_eventhub_authorization_rule resources exist
+azurerm_eventhub_authorization_rule_exists {
+    existence.azure_resource_exists("azurerm_eventhub_authorization_rule")
+}
+
+# Check if azurerm_eventhub resources exist
+azurerm_eventhub_exists {
+    existence.azure_resource_exists("azurerm_eventhub")
+}
+
 array_contains(target_array, element) = true {
   lower(target_array[_]) == lower(element)
 } else = false { true }

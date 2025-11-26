@@ -1,12 +1,24 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if Resources resources exist
+resources_exists {
+    existence.aws_resource_exists("Resources")
+}
+
 #
 # PR-AWS-CLD-AG-001
 #
 
 # get_rest_api
 
-default gateway_private = true
+default gateway_private = null
 
 gateway_private = false {
     # lower(resource.Type) == "aws::apigateway::restapi"
@@ -41,7 +53,7 @@ gateway_private_metadata := {
 
 # get_request_validators
 
-default gateway_validate_parameter = true
+default gateway_validate_parameter = null
 
 gateway_validate_parameter = false {
     # lower(resource.Type) == "aws::apigateway::requestvalidator"
@@ -72,7 +84,7 @@ gateway_validate_parameter_metadata := {
 
 # get_authorizers
 
-default gateway_request_authorizer = true
+default gateway_request_authorizer = null
 
 gateway_request_authorizer = false {
     # lower(resource.Type) == "aws::apigateway::authorizer"
@@ -103,7 +115,7 @@ gateway_request_authorizer_metadata := {
 
 # get_stages
 
-default gateway_logging_enable = true
+default gateway_logging_enable = null
 
 gateway_logging_enable = false {
     # lower(input.Resources[i].Type) == "aws::apigateway::stage"
@@ -138,7 +150,7 @@ gateway_logging_enable_metadata := {
 
 # get_stages
 
-default gateway_tracing_enable = true
+default gateway_tracing_enable = null
 
 gateway_tracing_enable = false {
     # lower(resource.Type) == "aws::apigateway::stage"
@@ -169,7 +181,7 @@ gateway_tracing_enable_metadata := {
 
 # get_resources
 
-default gateway_method_public_access = true
+default gateway_method_public_access = null
 
 gateway_method_public_access = false {
     # lower(resource.Type) == "aws::apigateway::method"
@@ -212,7 +224,7 @@ gateway_method_public_access_metadata := {
 
 # get_stages
 
-default api_gw_cert = true
+default api_gw_cert = null
 
 api_gw_cert = false {
     # lower(resource.Type) == "aws::apigateway::stage"
@@ -246,7 +258,7 @@ api_gw_cert_metadata := {
 # PR-AWS-CLD-AG-008
 #
 
-default api_gateway_not_configured_with_firewall_v2 = true
+default api_gateway_not_configured_with_firewall_v2 = null
 
 api_gateway_not_configured_with_firewall_v2 = false {
     # lower(resource.Type) == "aws::apigateway::stage"
@@ -280,7 +292,7 @@ api_gateway_not_configured_with_firewall_v2_metadata := {
 # PR-AWS-CLD-AG-009
 #
 
-default api_gateway_uses_specific_tls_version = true
+default api_gateway_uses_specific_tls_version = null
 
 api_gateway_uses_specific_tls_version = false {
     # lower(resource.Type) == "aws::apigateway::domainname"
@@ -308,7 +320,7 @@ api_gateway_uses_specific_tls_version_metadata := {
 # PR-AWS-CLD-AG-010
 #
 
-default api_gateway_content_encoding_is_enabled = true
+default api_gateway_content_encoding_is_enabled = null
 
 api_gateway_content_encoding_is_enabled = false {
     # lower(resource.Type) == "aws::apigateway::restapi"
@@ -336,7 +348,7 @@ api_gateway_content_encoding_is_enabled_metadata := {
 # PR-AWS-CLD-AG-011
 # aws::apigateway::domainname
 
-default api_gateway_gs_managed_acm = true
+default api_gateway_gs_managed_acm = null
 
 api_gateway_gs_managed_acm = false {
     X := input.TEST_API_GATEWAY_04[_]

@@ -1,5 +1,22 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_virtual_network_gateway_connection resources exist
+azurerm_virtual_network_gateway_connection_exists {
+    existence.azure_resource_exists("azurerm_virtual_network_gateway_connection")
+}
+
+# Check if azurerm_virtual_network_gateway resources exist
+azurerm_virtual_network_gateway_exists {
+    existence.azure_resource_exists("azurerm_virtual_network_gateway")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_gateway_connection
 
 #

@@ -4,13 +4,25 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if EventSelectors resources exist
+eventselectors_exists {
+    existence.aws_resource_exists("EventSelectors")
+}
+
 # https://docs.aws.amazon.com/awscloudtrail/latest/APIReference
 
 #
 # PR-AWS-CLD-CT-001
 #
 
-default ct_regions = true
+default ct_regions = null
 
 ct_regions = false {
     # lower(resource.Type) == "aws::cloudtrail::trail"
@@ -38,7 +50,7 @@ ct_regions_metadata := {
 # PR-AWS-CLD-CT-002
 #
 
-default ct_log_validation = true
+default ct_log_validation = null
 
 ct_log_validation = false {
     # lower(resource.Type) == "aws::cloudtrail::trail"
@@ -65,7 +77,7 @@ ct_log_validation_metadata := {
 # PR-AWS-CLD-CT-003
 #
 
-default ct_master_key = true
+default ct_master_key = null
 
 ct_master_key = false {
     # lower(resource.Type) == "aws::cloudtrail::trail"
@@ -93,7 +105,7 @@ ct_master_key_metadata := {
 # PR-AWS-CLD-CT-004
 #
 
-default ct_cloudwatch = true
+default ct_cloudwatch = null
 
 ct_cloudwatch = false {
     # lower(resource.Type) == "aws::cloudtrail::trail"
@@ -158,7 +170,7 @@ logging_data_events_for_s3_and_lambda_metadata := {
 # PR-AWS-CLD-CT-006
 #
 
-default cloudtrail_is_enabled = true
+default cloudtrail_is_enabled = null
 
 cloudtrail_is_enabled = false {
     # lower(resource.Type) == "aws::cloudtrail::trail"
@@ -186,7 +198,7 @@ cloudtrail_is_enabled_metadata := {
 # PR-AWS-CLD-CT-007
 # aws::cloudtrail::trail
 
-default cloudtrail_logging_is_enabled = true
+default cloudtrail_logging_is_enabled = null
 
 cloudtrail_logging_is_enabled = false {
     not input.IsLogging
@@ -217,7 +229,7 @@ cloudtrail_logging_is_enabled_metadata := {
 # PR-AWS-CLD-CT-008
 # aws::cloudtrail::trail
 
-default cloudtrail_with_cloudwatch = true
+default cloudtrail_with_cloudwatch = null
 
 cloudtrail_with_cloudwatch = false {
     has_property(input, "CloudWatchLogsLogGroupArn")

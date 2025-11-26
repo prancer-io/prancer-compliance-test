@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.dbformysql/servers resources exist
+microsoft_dbformysql_servers_exists {
+    existence.azure_resource_exists("microsoft.dbformysql/servers")
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers
 
 # PR-AZR-ARM-SQL-016

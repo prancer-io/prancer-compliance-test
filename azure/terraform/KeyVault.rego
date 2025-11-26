@@ -1,5 +1,32 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_key_vault_access_policy resources exist
+azurerm_key_vault_access_policy_exists {
+    existence.azure_resource_exists("azurerm_key_vault_access_policy")
+}
+
+# Check if azurerm_key_vault resources exist
+azurerm_key_vault_exists {
+    existence.azure_resource_exists("azurerm_key_vault")
+}
+
+# Check if azurerm_key_vault_key resources exist
+azurerm_key_vault_key_exists {
+    existence.azure_resource_exists("azurerm_key_vault_key")
+}
+
+# Check if azurerm_key_vault_secret resources exist
+azurerm_key_vault_secret_exists {
+    existence.azure_resource_exists("azurerm_key_vault_secret")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault
 # It's possible to define Key Vault Access Policies both within the azurerm_key_vault resource via the access_policy block and by using the azurerm_key_vault_access_policy resource. 
 # However it's not possible to use both methods to manage Access Policies within a KeyVault, since there'll be conflicts.

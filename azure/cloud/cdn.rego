@@ -5,6 +5,18 @@ has_property(parent_object, target_property) {
 }
 
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if microsoft.cdn/profiles/endpoints/customdomains resources exist
+microsoft_cdn_profiles_endpoints_customdomains_exists {
+    existence.azure_resource_exists("microsoft.cdn/profiles/endpoints/customdomains")
+}
+
 # https://learn.microsoft.com/en-us/rest/api/cdn/custom-domains/create?tabs=HTTP#customdomain
 #
 # PR-AZR-CLD-CDN-001

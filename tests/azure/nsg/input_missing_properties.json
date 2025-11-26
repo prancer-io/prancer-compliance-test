@@ -1,0 +1,11 @@
+{
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/test-rg/providers/Microsoft.Network/networkSecurityGroups/nsg-missing-props",
+            "name": "nsg-missing-props",
+            "location": "eastus",
+            "properties": {}
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+    "SecurityGroups": [
+        {
+            "GroupId": "sg-0123456789abcdef1",
+            "GroupName": "insecure-sg",
+            "Description": "Insecure security group",
+            "VpcId": "vpc-0123456789abcdef0",
+            "IpPermissions": [
+                {
+                    "FromPort": 22,
+                    "ToPort": 22,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0",
+                            "Description": "SSH from anywhere - INSECURE"
+                        }
+                    ],
+                    "Ipv6Ranges": [
+                        {
+                            "CidrIpv6": "::/0"
+                        }
+                    ]
+                },
+                {
+                    "FromPort": 3389,
+                    "ToPort": 3389,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0",
+                            "Description": "RDP from anywhere - INSECURE"
+                        }
+                    ],
+                    "Ipv6Ranges": []
+                },
+                {
+                    "FromPort": 3306,
+                    "ToPort": 3306,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0",
+                            "Description": "MySQL from anywhere - INSECURE"
+                        }
+                    ],
+                    "Ipv6Ranges": []
+                }
+            ],
+            "IpPermissionsEgress": [],
+            "Tags": []
+        }
+    ]
+}

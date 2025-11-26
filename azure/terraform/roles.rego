@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_role_definition resources exist
+azurerm_role_definition_exists {
+    existence.azure_resource_exists("azurerm_role_definition")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition
 
 # PR-AZR-TRF-ARD-001

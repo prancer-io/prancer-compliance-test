@@ -1,12 +1,49 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if Subnets resources exist
+subnets_exists {
+    existence.aws_resource_exists("Subnets")
+}
+
+# Check if Addresses resources exist
+addresses_exists {
+    existence.aws_resource_exists("Addresses")
+}
+
+# Check if VpcEndpointConnections resources exist
+vpcendpointconnections_exists {
+    existence.aws_resource_exists("VpcEndpointConnections")
+}
+
+# Check if Vpcs resources exist
+vpcs_exists {
+    existence.aws_resource_exists("Vpcs")
+}
+
+# Check if VpcPeeringConnections resources exist
+vpcpeeringconnections_exists {
+    existence.aws_resource_exists("VpcPeeringConnections")
+}
+
+# Check if VpcEndpoints resources exist
+vpcendpoints_exists {
+    existence.aws_resource_exists("VpcEndpoints")
+}
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html
 
 #
 # PR-AWS-CLD-VPC-001
 #
 
-default vpc_subnet_autoip = true
+default vpc_subnet_autoip = null
 
 vpc_subnet_autoip = false {
     # lower(resource.Type) == "aws::ec2::subnet"
@@ -34,7 +71,7 @@ vpc_subnet_autoip_metadata := {
 # PR-AWS-CLD-VPC-002
 #
 
-default eip_instance_link = true
+default eip_instance_link = null
 
 eip_instance_link = false {
     # lower(resource.Type) == "aws::ec2::eip"
@@ -64,7 +101,7 @@ eip_instance_link_metadata := {
 # PR-AWS-CLD-VPC-003
 #
 
-default vpc_endpoint_manual_acceptance = true
+default vpc_endpoint_manual_acceptance = null
 
 vpc_endpoint_manual_acceptance = false {
     # lower(resource.Type) == "aws::ec2::vpcendpointservice"
@@ -93,7 +130,7 @@ vpc_endpoint_manual_acceptance_metadata := {
 # PR-AWS-CLD-VPC-004
 # aws::ec2::vpc
 
-default default_vpc_not_used = true
+default default_vpc_not_used = null
 
 default_vpc_not_used = false {
     vpc := input.Vpcs[_]
@@ -122,7 +159,7 @@ default_vpc_not_used_metadata := {
 # PR-AWS-CLD-VPC-005
 # aws::ec2::vpcpeeringconnection
 
-default vpc_peering_connection_inactive = true
+default vpc_peering_connection_inactive = null
 
 vpc_peering_connection_inactive = false {
     VpcPeeringConnection := input.VpcPeeringConnections[_]
@@ -150,7 +187,7 @@ vpc_peering_connection_inactive_metadata := {
 # PR-AWS-CLD-VPC-006
 # aws::ec2::vpcendpoint
 
-default vpc_policy_not_overly_permissive = true
+default vpc_policy_not_overly_permissive = null
 
 vpc_policy_not_overly_permissive = false {
     VpcEndpoint := input.VpcEndpoints[_]

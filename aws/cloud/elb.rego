@@ -4,6 +4,43 @@ has_property(parent_object, target_property) {
 	_ = parent_object[target_property]
 }
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if PolicyDescriptions resources exist
+policydescriptions_exists {
+    existence.aws_resource_exists("PolicyDescriptions")
+}
+
+# Check if LoadBalancerAttributes resources exist
+loadbalancerattributes_exists {
+    existence.aws_resource_exists("LoadBalancerAttributes")
+}
+
+# Check if LoadBalancerDescriptions resources exist
+loadbalancerdescriptions_exists {
+    existence.aws_resource_exists("LoadBalancerDescriptions")
+}
+
+# Check if Attributes resources exist
+attributes_exists {
+    existence.aws_resource_exists("Attributes")
+}
+
+# Check if Listeners resources exist
+listeners_exists {
+    existence.aws_resource_exists("Listeners")
+}
+
+# Check if LoadBalancers resources exist
+loadbalancers_exists {
+    existence.aws_resource_exists("LoadBalancers")
+}
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
 
@@ -11,7 +48,7 @@ has_property(parent_object, target_property) {
 # PR-AWS-CLD-ELB-001
 #
 
-default elb_insecure_cipher = true
+default elb_insecure_cipher = null
 
 insecure_ciphers := [
     "DHE-RSA-AES128-SHA",
@@ -122,7 +159,7 @@ elb_insecure_cipher_metadata := {
 # PR-AWS-CLD-ELB-002
 #
 
-default elb_insecure_protocol = true
+default elb_insecure_protocol = null
 
 insecure_ssl_protocols := [
     "Protocol-SSLv3",
@@ -166,7 +203,7 @@ elb_insecure_protocol_metadata := {
 # PR-AWS-CLD-ELB-003
 #
 
-default elb_access_log = true
+default elb_access_log = null
 
 elb_access_log = false {
     # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
@@ -194,7 +231,7 @@ elb_access_log_metadata := {
 # PR-AWS-CLD-ELB-004
 #
 
-default elb_conn_drain = true
+default elb_conn_drain = null
 
 
 elb_conn_drain = false {
@@ -223,7 +260,7 @@ elb_conn_drain_metadata := {
 # PR-AWS-CLD-ELB-005
 #
 
-default elb_crosszone = true
+default elb_crosszone = null
 
 elb_crosszone = false {
     # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
@@ -251,7 +288,7 @@ elb_crosszone_metadata := {
 # PR-AWS-CLD-ELB-008
 #
 
-default elb_not_in_use = true
+default elb_not_in_use = null
 
 elb_not_in_use = false {
     # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
@@ -285,7 +322,7 @@ elb_not_in_use_metadata := {
 # PR-AWS-CLD-ELB-009
 #
 
-default elb_alb_logs = true
+default elb_alb_logs = null
 
 elb_alb_logs = false {
     # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
@@ -327,7 +364,7 @@ elb_alb_logs_metadata := {
 # PR-AWS-CLD-ELB-010
 #
 
-default elb_listener_ssl = true
+default elb_listener_ssl = null
 
 elb_listener_ssl = false {
     # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
@@ -363,7 +400,7 @@ elb_listener_ssl_metadata := {
 # PR-AWS-CLD-ELB-011
 #
 
-default elb_over_https = true
+default elb_over_https = null
 
 elb_over_https = false {
     # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
@@ -392,7 +429,7 @@ elb_over_https_metadata := {
 # PR-AWS-CLD-ELB-012
 #
 
-default elb_v2_listener_ssl = true
+default elb_v2_listener_ssl = null
 
 elb_v2_listener_ssl = false {
     # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
@@ -441,7 +478,7 @@ elb_v2_listener_ssl_metadata := {
 # PR-AWS-CLD-ELB-013
 #
 
-default elb_drop_invalid_header = true
+default elb_drop_invalid_header = null
 
 elb_drop_invalid_header = false {
     # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
@@ -471,7 +508,7 @@ elb_drop_invalid_header_metadata := {
 # PR-AWS-CLD-ELB-014
 #
 
-default elb_certificate_listner_arn = true
+default elb_certificate_listner_arn = null
 
 elb_certificate_listner_arn = false {
     # lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
@@ -513,7 +550,7 @@ elb_certificate_listner_arn_metadata := {
 #
 
 
-default elb_listener_sslpolicy = true
+default elb_listener_sslpolicy = null
 
 allowed_ssl_policies = ["ELBSecurityPolicy-TLS-1-2-2017-01", "ELBSecurityPolicy-TLS-1-2-Ext-2018-06", "ELBSecurityPolicy-FS-1-2-2019-08", "ELBSecurityPolicy-FS-1-2-Res-2019-08", "ELBSecurityPolicy-FS-1-2-Res-2020-10"]
 
@@ -550,7 +587,7 @@ elb_listener_sslpolicy_metadata := {
 # PR-AWS-CLD-ELB-016
 #
 
-default elb_subnet = true
+default elb_subnet = null
 
 elb_subnet = false {
     # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
@@ -590,7 +627,7 @@ elb_subnet_metadata := {
 # PR-AWS-CLD-ELB-017
 #
 
-default elb_scheme = true
+default elb_scheme = null
 
 elb_scheme = false {
     # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
@@ -631,7 +668,7 @@ elb_scheme_metadata := {
 # PR-AWS-CLD-ELB-018
 #
 
-default elb_type = true
+default elb_type = null
 
 elb_type = false {
     # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
@@ -666,7 +703,7 @@ elb_type_metadata := {
 # PR-AWS-CLD-ELB-019
 #
 
-default elb_protocol = true
+default elb_protocol = null
 
 elb_protocol = false {
     # lower(resource.Type) == "aws::elasticloadbalancingv2::targetgroup"
@@ -705,7 +742,7 @@ elb_protocol_metadata := {
 # aws::elasticloadbalancingv2::loadbalancer
 #
 
-default elb_deletion_protection = true
+default elb_deletion_protection = null
 
 elb_deletion_protection = false {
     Attribute := input.Attributes[j]
@@ -735,7 +772,7 @@ elb_deletion_protection_metadata := {
 # aws::elasticloadbalancingv2::loadbalancer
 #
 
-default elb_gateway_load_balancer = true
+default elb_gateway_load_balancer = null
 
 elb_gateway_load_balancer = false {
     LoadBalancer := input.LoadBalancers[_]
@@ -764,7 +801,7 @@ elb_gateway_load_balancer_metadata := {
 # aws::elasticloadbalancing::loadbalancer
 #
 
-default elb_internet_facing_load_balancer = true
+default elb_internet_facing_load_balancer = null
 
 elb_internet_facing_load_balancer = false {
     LoadBalancer := input.LoadBalancers[_]
@@ -794,7 +831,7 @@ elb_internet_facing_load_balancer_metadata := {
 # aws::elasticloadbalancingv2::loadbalancer
 #
 
-default elb2_internet_facing_load_balancer = true
+default elb2_internet_facing_load_balancer = null
 
 elb2_internet_facing_load_balancer = false {
     LoadBalancer := input.LoadBalancers[_]
@@ -823,7 +860,7 @@ elb2_internet_facing_load_balancer_metadata := {
 # aws::elasticloadbalancingv2::loadbalancer
 #
 
-default elb_waf_enabled = true
+default elb_waf_enabled = null
 
 elb_waf_enabled = false {
     Attribute := input.Attributes[j]
@@ -852,7 +889,7 @@ elb_waf_enabled_metadata := {
 # PR-AWS-CLD-ELB-025
 # aws::elasticloadbalancingv2::listener
 
-default elbv2_ssl_negotiation_policy = true
+default elbv2_ssl_negotiation_policy = null
 
 elbv2_ssl_negotiation_policy = false {
     Listener := input.Listeners[_]
@@ -881,7 +918,7 @@ elbv2_ssl_negotiation_policy_metadata := {
 # aws::elasticloadbalancingv2::listener
 # aws::certificatemanager::certificate
 
-default elbv2_tls_certificate = true
+default elbv2_tls_certificate = null
 
 elbv2_tls_certificate = false {
     X := input.TEST_ELB_02[_]
@@ -915,7 +952,7 @@ elbv2_tls_certificate_metadata := {
 # aws::elasticloadbalancingv2::listener
 # aws::elasticloadbalancingv2::loadbalancer
 
-default elbv2_tls_listener = true
+default elbv2_tls_listener = null
 
 elbv2_tls_listener = false {
     X := input.TEST_ELB_06[_]
@@ -950,7 +987,7 @@ elbv2_tls_listener_metadata := {
 # aws::elasticloadbalancingv2::listener
 # aws::elasticloadbalancingv2::loadbalancer
 
-default elbv2_check_certificate = true
+default elbv2_check_certificate = null
 
 elbv2_check_certificate = false {
     X := input.TEST_ELB_06[_]
@@ -996,7 +1033,7 @@ elbv2_check_certificate_metadata := {
 # aws::ec2::securitygroup
 # aws::elasticloadbalancingv2::loadbalancer
 
-default elbv2_egress_rule = true
+default elbv2_egress_rule = null
 
 elbv2_egress_rule = false {
     X := input.TEST_ELB_06[_]
@@ -1033,7 +1070,7 @@ elbv2_egress_rule_metadata := {
 # aws::ec2::securitygroup
 # aws::elasticloadbalancingv2::loadbalancer
 
-default elbv2_invalid_security_group = true
+default elbv2_invalid_security_group = null
 
 elbv2_invalid_security_group = false {
     X := input.TEST_ELB_06[_]
@@ -1078,7 +1115,7 @@ elbv2_invalid_security_group_metadata := {
 # aws::elasticloadbalancingv2::listener
 # aws::elasticloadbalancingv2::loadbalancer
 
-default nlb_v2_security_policy = true
+default nlb_v2_security_policy = null
 
 nlb_v2_security_policy = false {
     X := input.TEST_ELB_06[_]

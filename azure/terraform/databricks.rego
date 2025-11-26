@@ -1,5 +1,17 @@
 package rule
 
+
+##############################################################################
+# EXISTENCE CHECKS - Auto-generated
+##############################################################################
+
+import data.lib.existence
+
+# Check if azurerm_databricks_workspace resources exist
+azurerm_databricks_workspace_exists {
+    existence.azure_resource_exists("azurerm_databricks_workspace")
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/databricks_workspace
 
 #
