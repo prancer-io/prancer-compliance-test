@@ -12,32 +12,32 @@ has_property(parent_object, target_property) {
 # aws::lambda::function
 #
 
-default lambda_env = true
+default lambda_env_variables_encrypted_with_cmk = true
 
-lambda_env = false {
-    input.Configuration.Environment
+lambda_env_variables_encrypted_with_cmk = false {
+    input.Configuration.Environment.Variables
     not input.Configuration.KMSKeyArn
 }
 
-lambda_env = false {
-    input.Configuration.Environment
+lambda_env_variables_encrypted_with_cmk = false {
+    input.Configuration.Environment.Variables
     not startswith(lower(input.Configuration.KMSKeyArn), "arn:")
 }
 
-lambda_env_err = "AWS Lambda Environment Variables not encrypted at-rest using CMK" {
-    not lambda_env
+lambda_env_variables_encrypted_with_cmk_err = "AWS Lambda Environment variables currently not encrypted at-rest using CMK" {
+    not lambda_env_variables_encrypted_with_cmk
 }
 
-lambda_env_metadata := {
+lambda_env_variables_encrypted_with_cmk_metadata := {
     "Policy Code": "PR-AWS-CLD-LMD-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "AWS Lambda Environment Variables not encrypted at-rest using CMK",
-    "Policy Description": "When you create or update Lambda functions that use Environment variables, AWS Lambda encrypts them using the AWS Key Management Service. When your Lambda function is invoked, those values are decrypted and made available to the Lambda code.<br><br>This policy verifies that Lambda function uses the AMS Key Management Service to encrypt variables at-rest with CMK.",
+    "Policy Title": "AWS Lambda Environment variables should be encrypted at-rest using CMK",
+    "Policy Description": "Lambda Function's environment variables are encrypted by default using the AWS default keys. Use Customer Master Keys to add another layer of control to the encryption.",
     "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html"
+    "Policy Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/lambda/client/get_function.html",
+    "Resource Help URL": "https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html"
 }
 
 #
