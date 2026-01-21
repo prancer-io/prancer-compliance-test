@@ -4615,36 +4615,36 @@
                 {
                     "masterTestId": "PR-AWS-CLD-EBS-002",
                     "masterSnapshotId": [
-                      "TEST_EC2_01",
-                      "TEST_KMS"
+                        "TEST_EC2_01",
+                        "TEST_KMS"
                     ],
                     "type": "rego",
                     "rule": "file(storage.rego)",
                     "evals": [
                         {
-                          "id": "PR-AWS-CLD-EBS-002",
-                          "eval": "data.rule.ebs_encrypt_with_cmk",
-                          "message": "data.rule.ebs_encrypt_with_cmk_err",
-                          "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-volume.html#aws-resource-ec2-volume--examples' target='_blank'>here</a>",
-                          "remediationFunction": "PR_AWS_CLD_EBS_002.py"
+                            "id": "PR-AWS-CLD-EBS-002",
+                            "eval": "data.rule.ebs_encrypt_with_cmk",
+                            "message": "data.rule.ebs_encrypt_with_cmk_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-volume.html#aws-resource-ec2-volume--examples' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EBS_002.py"
                         }
                     ],
                     "severity": "Medium",
                     "title": "AWS EBS volumes are not encrypted with CMK",
                     "description": "This policy identifies the EBS volumes which are not encrypted or encrypted with default KMS. The snapshots that you take of an encrypted EBS volume are also encrypted and can be moved between AWS Regions as needed. You cannot share encrypted snapshots with other AWS accounts and you cannot make them public. It is recommended that EBS volume should be encrypted with Customer Managed Key.",
                     "tags": [
-                      {
-                        "cloud": "AWS",
-                        "compliance": [
-                            "GDPR",
-                            "APRA",
-                            "MAS",
-                            "NIST4"
-                        ],
-                        "service": [
-                          "ebs"
-                        ]
-                      }
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "GDPR",
+                                "APRA",
+                                "MAS",
+                                "NIST4"
+                            ],
+                            "service": [
+                                "ebs"
+                            ]
+                        }
                     ]
                 },
                 {
@@ -12639,34 +12639,34 @@
                     ]
                 },
                 {
-                    "masterTestId":"PR-AWS-CLD-ECR-008",
-                    "masterSnapshotId":[
-                       "TEST_ECR",
-                       "TEST_KMS"
+                    "masterTestId": "PR-AWS-CLD-ECR-008",
+                    "masterSnapshotId": [
+                        "TEST_ECR",
+                        "TEST_KMS"
                     ],
-                    "type":"rego",
-                    "rule":"file(ecr.rego)",
-                    "evals":[
-                       {
-                          "id":"PR-AWS-CLD-ECR-008",
-                          "eval":"data.rule.ecr_encrypted_using_key",
-                          "message":"data.rule.ecr_encrypted_using_key_err",
-                          "remediationDescription":"Make sure you are following the Terraform template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecr.html#ECR.Client.describe_repositories' target='_blank'>here</a>",
-                          "remediationFunction":"PR_AWS_CLD_ECR_008.py"
-                       }
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-ECR-008",
+                            "eval": "data.rule.ecr_encrypted_using_key",
+                            "message": "data.rule.ecr_encrypted_using_key_err",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented <a href='https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecr.html#ECR.Client.describe_repositories' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_ECR_008.py"
+                        }
                     ],
-                    "severity":"Medium",
-                    "title":"Ensure ECR is encrypted using dedicated GS managed KMS key.",
-                    "description":"It checks if a GS managed KMS key (CMK) is used for ECR encryption instead of AWS provided keys.",
-                    "tags":[
-                       {
-                          "cloud":"AWS",
-                          "compliance":[],
-                          "service":[
-                             "ecr",
-                             "kms"
-                          ]
-                       }
+                    "severity": "Medium",
+                    "title": "Ensure ECR is encrypted using dedicated GS managed KMS key.",
+                    "description": "It checks if a GS managed KMS key (CMK) is used for ECR encryption instead of AWS provided keys.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [],
+                            "service": [
+                                "ecr",
+                                "kms"
+                            ]
+                        }
                     ]
                 },
                 {
@@ -17230,7 +17230,9 @@
                     "tags": [
                         {
                             "cloud": "AWS",
-                            "compliance": ["zerotrust"],
+                            "compliance": [
+                                "zerotrust"
+                            ],
                             "service": [
                                 "elasticache"
                             ]
@@ -18920,14 +18922,14 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-001",
-                            "eval": "data.rule.iam_wildcard_resource",
-                            "message": "data.rule.iam_wildcard_resource_err",
+                            "eval": "data.rule.iam_policy_dont_have_wildcard_resource",
+                            "message": "data.rule.iam_policy_dont_have_wildcard_resource_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_IAM_001.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure no wildcards are specified in IAM policy with 'Resource' section",
+                    "title": "Ensure no wildcard resource is specified in IAM policy",
                     "description": "Using a wildcard in the Resource element in a role's trust policy would allow any IAM user in an account to access all Resources. This is a significant security gap and can be used to gain access to sensitive data.",
                     "tags": [
                         {
@@ -18953,14 +18955,14 @@
                     "evals": [
                         {
                             "id": "PR-AWS-CLD-IAM-002",
-                            "eval": "data.rule.iam_wildcard_action",
-                            "message": "data.rule.iam_wildcard_action_err",
+                            "eval": "data.rule.iam_policy_dont_have_wildcard_action",
+                            "message": "data.rule.iam_policy_dont_have_wildcard_action_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CLD_IAM_002.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure no wildcards are specified in IAM policy with 'Action' section",
+                    "title": "Ensure no wildcard action is specified in IAM policy",
                     "description": "Using a wildcard in the Action element in a role's trust policy would allow any IAM user in an account to Manage all resources and a user can manipulate data. This is a significant security gap and can be used to gain access to sensitive data.",
                     "tags": [
                         {
@@ -20983,6 +20985,1114 @@
                             ],
                             "service": [
                                 "amplify"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-051",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-051",
+                            "eval": "data.rule.managed_iam_policy_dont_have_full_s3_action_permission",
+                            "message": "data.rule.managed_iam_policy_dont_have_full_s3_action_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_051.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS IAM managed policies do not have 'getObject' or full S3 action permissions",
+                    "description": "Ensuring AWS IAM managed policies do not have 'getObject' or full S3 action permissions, prevents potential Amazon S3 data exfiltration or manipulation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 5",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v11.3",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.4.0.1",
+                                "ISO 27001:2022",
+                                "SOC2",
+                                "SOC2 based on AICPA TSC 2017"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-028",
+                    "masterSnapshotId": [
+                        "TEST_IAM_06"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-028",
+                            "eval": "data.rule.iam_access_key_disabled_on_root_account",
+                            "message": "data.rule.iam_access_key_disabled_on_root_account_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_028.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS root account should not use access keys",
+                    "description": "To strengthen the security of your AWS environment and adhere to IAM best practices, ensure that the AWS root account user doesn't use access keys for making API requests to access cloud resources or billing information.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "APRA",
+                                "APRA 234"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-052",
+                    "masterSnapshotId": [
+                        "TEST_IAM_09"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-052",
+                            "eval": "data.rule.iam_access_key_rotated_every_90_days",
+                            "message": "data.rule.iam_access_key_rotated_every_90_days_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_052.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM Access key should be rotated every 90 days or less",
+                    "description": "Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS. AWS users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface (AWS CLI), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services. It is recommended that all access keys be regularly rotated. Rotating access keys will reduce the window of opportunity for an access key that is associated with a compromised or terminated account to be used. Access keys should be rotated to ensure that data cannot be accessed with an old key which might have been lost, cracked, or stolen.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "NIST 800-171",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v4.0.1",
+                                "GDPR Readiness",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "APRA",
+                                "APRA 234",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "SOC2",
+                                "SOC2 based on AICPA TSC 2017",
+                                "MAS TRM Framework",
+                                "HITRUST",
+                                "ITSG",
+                                "ITSG-33"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-053",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-053",
+                            "eval": "data.rule.iam_password_policy_enforced",
+                            "message": "data.rule.iam_password_policy_enforced_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_053.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure to enforce IAM password policy",
+                    "description": "Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure password are comprised of different character sets, have minimal length, rotation and history restrictions.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-054",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-054",
+                            "eval": "data.rule.iam_password_policy_prevents_password_reuse",
+                            "message": "data.rule.iam_password_policy_prevents_password_reuse_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_054.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM password policy should prevent password reuse",
+                    "description": "IAM password policies can prevent the reuse of a given password by the same user. It is recommended that the password policy prevent the reuse of passwords. Preventing password reuse increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-055",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-055",
+                            "eval": "data.rule.iam_password_rotated_every_90_days",
+                            "message": "data.rule.iam_password_rotated_every_90_days_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_055.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM user password should be rotated every 90 days or less",
+                    "description": "IAM password policies can require passwords to be rotated or expired after a given number of days. It is recommended that the password policy expire passwords after 90 days or less. Reducing the password lifetime increases account resiliency against brute force login attempts. Additionally, requiring regular password changes help in the following scenarios: - Passwords can be stolen or compromised sometimes without your knowledge. This can happen via a system compromise, software vulnerability, or internal threat. Certain corporate and government web filters or proxy servers have the ability to intercept and record traffic even if it's encrypted. Many people use the same password for many systems such as work, email, and personal. Compromised end user workstations might have a keystroke logger.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-056",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-056",
+                            "eval": "data.rule.iam_password_policy_require_at_least_one_uppercase_letter",
+                            "message": "data.rule.iam_password_policy_require_at_least_one_uppercase_letter_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_056.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM password policy should require at least one uppercase letter",
+                    "description": "It is recommended that the password policy require at least one uppercase letter. Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure passwords consist of different character sets. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-057",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-057",
+                            "eval": "data.rule.iam_password_policy_require_at_least_one_lowercase_letter",
+                            "message": "data.rule.iam_password_policy_require_at_least_one_lowercase_letter_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_057.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM password policy should require at least one lowercase letter",
+                    "description": "It is recommended that the password policy require at least one lowercase letter. Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure passwords consist of different character sets. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-058",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-058",
+                            "eval": "data.rule.iam_password_policy_require_at_least_one_symbol",
+                            "message": "data.rule.iam_password_policy_require_at_least_one_symbol_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_058.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM password policy should require at least one symbol",
+                    "description": "It is recommended that the password policy require at least one symbol. Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure passwords consist of different character sets. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-059",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-059",
+                            "eval": "data.rule.iam_password_policy_require_at_least_one_number",
+                            "message": "data.rule.iam_password_policy_require_at_least_one_number_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_059.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM password policy should require at least one number",
+                    "description": "It is recommended that the password policy require at least one number. Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure passwords consist of different character sets. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-060",
+                    "masterSnapshotId": [
+                        "TEST_IAM_10"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-060",
+                            "eval": "data.rule.iam_password_policy_require_minimum_length_of_14",
+                            "message": "data.rule.iam_password_policy_require_minimum_length_of_14_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_060.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "IAM password policy should require minimum password length of 14 or more",
+                    "description": "Set the IAM password policy to ensure passwords consist of at least 14 characters. Password policies are, in part, used to enforce password complexity requirements. Setting a password complexity policy increases account resiliency against brute force login attempts.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "HIPAA",
+                                "LGPD",
+                                "NIST 800-53",
+                                "NIST 800-53 Rev 4",
+                                "NIST 800-53 Rev 5",
+                                "NIST 800-171",
+                                "CIS Foundations",
+                                "CIS Foundations v1.0.0",
+                                "CIS Foundations v1.1.0",
+                                "CIS Foundations v1.2.0",
+                                "CIS Foundations v1.3.0",
+                                "CIS Foundations v1.4.0",
+                                "CIS Foundations v1.5.0",
+                                "CIS Foundations v2.0.0",
+                                "MITRE ATT&CK Framework",
+                                "MITRE ATT&CK Framework v10",
+                                "MITRE ATT&CK Framework v11.3",
+                                "PCI-DSS",
+                                "PCI-DSS 3.2",
+                                "PCI-DSS 4.0",
+                                "HITRUST",
+                                "HITRUST v11.0.0",
+                                "CSA CCM",
+                                "CSA CCM v.3.0.1",
+                                "CSA CCM v.4.0.1",
+                                "GDPR",
+                                "ISO 27001:2013",
+                                "ISO 27001:2022",
+                                "NIST CSF",
+                                "NIST CSF v1.1",
+                                "MAS TRM Framework",
+                                "ITSG",
+                                "ITSG-33"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-061",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-061",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_ec2_and_ssm_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_061.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via EC2 and SSM permissions",
+                    "description": "An adversary with ec2:DescribeInstances, ssm:listCommands, ssm:listCommandInvocations, and ssm:sendCommand permissions can execute commands on SSM-supported instances, potentially escalating privileges by finding an instance with a highly privileged IAM role.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-062",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-062",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_codestar",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_codestar_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_062.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should not allow privilege escalation via Codestar create project and associate team member permissions",
+                    "description": "An adversary with codestar:CreateProject and codestar:AssociateTeamMember permissions can create a CodeStar project, become its owner, and gain access to various AWS services permissions, useful for further enumeration like lambda:List*, iam:ListRoles, iam:ListUsers, etc.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-063",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-063",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_ec2_instance_connect_permissions_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_063.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should not allow privilege escalation via EC2 Instance Connect permissions",
+                    "description": "An adversary with ec2:DescribeInstances, ec2-instance-connect:SendSSHPublicKey, and ec2-instance-connect:SendSerialConsoleSSHPublicKey permissions, and access to a public IP enabled instance, can push SSH keys and connect to the EC2 instance, potentially escalating privileges.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-064",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-064",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_ec2_describe_and_ssm_session_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_064.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via EC2 describe and SSM session permissions",
+                    "description": "With ec2:DescribeInstances, various ssm permissions, an adversary can connect to any SSM-supported instance. They might escalate privileges by accessing an instance with a high-privilege IAM role.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-065",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-065",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_glue_dev_endpoint_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_065.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via glue dev endpoint permissions",
+                    "description": "With the glue:UpdateDevEndpoint permission, an adversary can change the SSH key for a glue endpoint, allowing SSH access and potential retrieval of IAM credentials from its associated role. The glue:GetDevEndpoint permission can be beneficial to identify the endpoint if unknown.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-066",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-066",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_codebuild_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_066.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and codebuild permissions",
+                    "description": "With iam:PassRole and various codebuild permissions, an adversary can create a CodeBuild project and assign it a higher-privileged role, enabling privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-067",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-067",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_createproject_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_067.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and create project permissions",
+                    "description": "With iam:PassRole and CreateProject permissions, an adversary can create a project and assign it a higher-privileged role, enabling privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-068",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-068",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_datapipeline_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_068.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and data pipeline permissions",
+                    "description": "With iam:PassRole and specific datapipeline permissions, an adversary can create a pipeline with a higher-privileged role, enabling privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-069",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-069",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_ec2_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_069.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and ec2 permissions",
+                    "description": "With iam:PassRole and ec2:RunInstances permissions, an adversary can launch an EC2 instance with a higher-privileged role, facilitating privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-070",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-070",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_gluecreatejob_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_070.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and glue create job permissions",
+                    "description": "With iam:PassRole and glue:CreateJob permissions, an adversary can establish a Glue job with a higher-privileged role, enabling privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-071",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-071",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_gluedevendpoint_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_071.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and glue development endpoint permissions",
+                    "description": "With iam:PassRole, glue:GetDevEndpoint and glue:CreateDevEndpoint permissions, an adversary can set up a Glue development endpoint with a higher-privileged role, facilitating privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-072",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-072",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_glueupdatejob_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_072.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and glue update job permissions",
+                    "description": "With iam:PassRole and glue:UpdateJob permissions, an adversary can modify a Glue job's role and command, enabling privilege escalation to a higher-privileged role.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-073",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-073",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_create_and_invoke_Lambda_function_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_073.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole and create and invoke Lambda function permissions",
+                    "description": "With iam:PassRole, lambda:CreateFunction, and lambda:InvokeFunction permissions, an adversary can create and invoke Lambda function using a higher-privileged role, facilitating privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "PR-AWS-CLD-IAM-074",
+                    "masterSnapshotId": [
+                        "TEST_IAM_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-IAM-074",
+                            "eval": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission",
+                            "message": "data.rule.iam_policy_prevents_privilege_escalation_via_passrole_and_lambda_create_function_and_event_source_mapping_permission_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_CLD_IAM_074.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IAM policy should prevent privilege escalation via passrole, lambda create function and event source mapping permissions",
+                    "description": "With iam:PassRole, lambda:CreateEventSourceMapping, and lambda:CreateFunction permissions, an adversary can link a Lambda function with a higher-privileged role to a DynamoDB table. When a new table record is added, the Lambda triggers with the enhanced role, enabling privilege escalation.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS",
+                                "NIST 800",
+                                "zerotrust"
+                            ],
+                            "service": [
+                                "iam"
                             ]
                         }
                     ]
