@@ -1,0 +1,446 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+    paths:
+      - '**.rego'
+      - '**.json'
+      - 'utils/**'
+      - 'scripts/**'
+      - '.github/workflows/**'
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+env:
+  OPA_VERSION: 'v0.63.0'
+  NODE_VERSION: '20'
+
+jobs:
+  # Job 1: Validate Rego Policy Syntax
+  rego-syntax-check:
+    name: Rego Syntax Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install OPA
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/${{ env.OPA_VERSION }}/opa_linux_amd64_static
+          chmod +x opa
+          sudo mv opa /usr/local/bin/opa
+          opa version
+
+      - name: Validate Rego syntax - AWS
+        run: |
+          echo "Validating AWS Rego files..."
+          for subdir in aws/cloud aws/iac aws/terraform aws/ack; do
+            if [ -d "$subdir" ]; then
+              echo "Checking $subdir/*.rego with common.rego..."
+              opa check $subdir/*.rego utils/common.rego 2>&1 || exit 1
+            fi
+          done
+
+      - name: Validate Rego syntax - Azure
+        run: |
+          echo "Validating Azure Rego files..."
+          for subdir in azure/cloud azure/iac azure/terraform azure/aso; do
+            if [ -d "$subdir" ]; then
+              echo "Checking $subdir/*.rego with common.rego..."
+              opa check $subdir/*.rego utils/common.rego 2>&1 || exit 1
+            fi
+          done
+
+      - name: Validate Rego syntax - Google Cloud
+        run: |
+          echo "Validating GCP Rego files..."
+          for subdir in google/cloud google/iac google/terraform google/kcc; do
+            if [ -d "$subdir" ]; then
+              echo "Checking $subdir/*.rego with common.rego..."
+              opa check $subdir/*.rego utils/common.rego 2>&1 || exit 1
+            fi
+          done
+
+      - name: Validate Rego syntax - Kubernetes
+        run: |
+          echo "Validating Kubernetes Rego files..."
+          for subdir in kubernetes/cloud kubernetes/iac; do
+            if [ -d "$subdir" ]; then
+              echo "Checking $subdir/*.rego with common.rego..."
+              opa check $subdir/*.rego utils/common.rego 2>&1 || exit 1
+            fi
+          done
+
+      - name: Validate Rego syntax - Shared Libraries
+        run: |
+          echo "Validating shared library Rego files..."
+          if [ -d "utils" ]; then
+            opa check utils/*.rego || exit 1
+          fi
+
+  # Job 2: Validate JSON Syntax
+  json-validation:
+    name: JSON Syntax Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Validate all JSON files
+        run: |
+          echo "Validating JSON files..."
+          errors=0
+
+          # Find all JSON files (excluding node_modules, backup, reports)
+          find . -name "*.json" \
+            -not -path "./node_modules/*" \
+            -not -path "./backup/*" \
+            -not -path "./reports/*" \
+            -not -path "./.git/*" \
+            -not -name "*.backup.json" | while read file; do
+            if ! node -e "JSON.parse(require('fs').readFileSync('$file', 'utf8'))" 2>/dev/null; then
+              echo "::error file=$file::Invalid JSON syntax in $file"
+              errors=$((errors + 1))
+            fi
+          done
+
+          if [ $errors -gt 0 ]; then
+            echo "Found $errors JSON files with syntax errors"
+            exit 1
+          fi
+          echo "All JSON files are valid"
+
+  # Job 3: Validate Master Compliance Test Files
+  compliance-test-validation:
+    name: Compliance Test Metadata Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Validate master-compliance-test.json files
+        run: |
+          echo "Validating compliance test metadata..."
+
+          node << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          const files = [
+            'aws/cloud/master-compliance-test.json',
+            'aws/iac/master-compliance-test.json',
+            'aws/terraform/master-compliance-test.json',
+            'aws/ack/master-compliance-test.json',
+            'azure/cloud/master-compliance-test.json',
+            'azure/iac/master-compliance-test.json',
+            'azure/terraform/master-compliance-test.json',
+            'azure/aso/master-compliance-test.json',
+            'google/cloud/master-compliance-test.json',
+            'google/iac/master-compliance-test.json',
+            'google/terraform/master-compliance-test.json',
+            'google/kcc/master-compliance-test.json',
+            'kubernetes/cloud/master-compliance-test.json',
+            'kubernetes/iac/master-compliance-test.json'
+          ];
+
+          let errors = 0;
+          let totalTests = 0;
+
+          for (const file of files) {
+            if (!fs.existsSync(file)) {
+              console.log(`Skipping (not found): ${file}`);
+              continue;
+            }
+
+            try {
+              const content = fs.readFileSync(file, 'utf8');
+              const data = JSON.parse(content);
+
+              if (!data.testSet || !Array.isArray(data.testSet)) {
+                console.log(`::error file=${file}::Missing or invalid testSet in ${file}`);
+                errors++;
+                continue;
+              }
+
+              let fileTests = 0;
+              for (const testGroup of data.testSet) {
+                if (!testGroup.cases || !Array.isArray(testGroup.cases)) {
+                  console.log(`::warning file=${file}::Missing cases array in testGroup`);
+                  continue;
+                }
+
+                for (const testCase of testGroup.cases) {
+                  fileTests++;
+
+                  // Validate required fields
+                  if (!testCase.masterTestId) {
+                    console.log(`::error file=${file}::Missing masterTestId in test case`);
+                    errors++;
+                  }
+                  if (!testCase.title) {
+                    console.log(`::warning file=${file}::Missing title for ${testCase.masterTestId}`);
+                  }
+                  if (!testCase.severity) {
+                    console.log(`::warning file=${file}::Missing severity for ${testCase.masterTestId}`);
+                  }
+                  if (!['Critical', 'High', 'Medium', 'Low'].includes(testCase.severity)) {
+                    console.log(`::warning file=${file}::Invalid severity '${testCase.severity}' for ${testCase.masterTestId}`);
+                  }
+                }
+              }
+
+              console.log(`✓ ${file}: ${fileTests} test cases validated`);
+              totalTests += fileTests;
+
+            } catch (e) {
+              console.log(`::error file=${file}::Error parsing ${file}: ${e.message}`);
+              errors++;
+            }
+          }
+
+          console.log(`\nTotal test cases validated: ${totalTests}`);
+
+          if (errors > 0) {
+            console.log(`\n::error::Found ${errors} validation errors`);
+            process.exit(1);
+          }
+
+          console.log('\n✓ All compliance test files validated successfully');
+          EOF
+
+  # Job 4: Run Policy Tests
+  policy-tests:
+    name: Policy Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install OPA
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/${{ env.OPA_VERSION }}/opa_linux_amd64_static
+          chmod +x opa
+          sudo mv opa /usr/local/bin/opa
+
+      - name: Run test suite
+        run: |
+          if [ -f "scripts/test-runner.js" ]; then
+            echo "Running policy tests..."
+            node scripts/test-runner.js || true
+          else
+            echo "No test runner found, skipping..."
+          fi
+
+      - name: Run OPA policy tests (if test files exist)
+        run: |
+          # Find and run any .test.rego files
+          test_files=$(find . -name "*_test.rego" -o -name "*.test.rego" 2>/dev/null | head -20)
+
+          if [ -n "$test_files" ]; then
+            echo "Running OPA unit tests..."
+            for test in $test_files; do
+              echo "Testing: $test"
+              opa test $(dirname $test) -v || exit 1
+            done
+          else
+            echo "No OPA test files found (.test.rego), skipping..."
+          fi
+
+  # Job 5: Rego Best Practices Check
+  rego-best-practices:
+    name: Rego Best Practices
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for common Rego issues
+        run: |
+          echo "Checking for common Rego issues..."
+          errors=0
+          warnings=0
+
+          # Check for files without package declarations
+          echo "Checking for missing package declarations..."
+          find . -name "*.rego" -not -path "./backup/*" -not -path "./fixed/*" | while read file; do
+            if ! grep -q "^package " "$file"; then
+              echo "::warning file=$file::Missing package declaration"
+              warnings=$((warnings + 1))
+            fi
+          done
+
+          # Check for TODO/FIXME comments
+          echo "Checking for TODO/FIXME comments..."
+          find . -name "*.rego" -not -path "./backup/*" | while read file; do
+            if grep -qi "TODO\|FIXME" "$file"; then
+              echo "::notice file=$file::Contains TODO/FIXME comments"
+            fi
+          done
+
+          # Check for hardcoded sensitive values
+          echo "Checking for potential sensitive values..."
+          find . -name "*.rego" -not -path "./backup/*" | while read file; do
+            if grep -Eqi "(password|secret|api_key|apikey|token)\s*[:=]\s*[\"'][^\"']+[\"']" "$file"; then
+              echo "::warning file=$file::Potential hardcoded sensitive value found"
+              warnings=$((warnings + 1))
+            fi
+          done
+
+          echo "Best practices check complete"
+          echo "Warnings: $warnings"
+
+  # Job 6: Check for Broken References
+  reference-check:
+    name: Reference Integrity Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Check Rego file references in JSON
+        run: |
+          echo "Checking for broken Rego file references..."
+
+          node << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          function findJsonFiles(dir) {
+            const results = [];
+            const items = fs.readdirSync(dir, { withFileTypes: true });
+            for (const item of items) {
+              const fullPath = path.join(dir, item.name);
+              if (item.name.startsWith('.') || item.name === 'node_modules' || item.name === 'backup') continue;
+              if (item.isDirectory()) {
+                results.push(...findJsonFiles(fullPath));
+              } else if (item.name === 'master-compliance-test.json') {
+                results.push(fullPath);
+              }
+            }
+            return results;
+          }
+
+          let errors = 0;
+          const jsonFiles = findJsonFiles('.');
+
+          for (const jsonFile of jsonFiles) {
+            const dir = path.dirname(jsonFile);
+            const content = JSON.parse(fs.readFileSync(jsonFile, 'utf8'));
+
+            if (!content.testSet) continue;
+
+            for (const testGroup of content.testSet) {
+              if (!testGroup.cases) continue;
+
+              for (const testCase of testGroup.cases) {
+                if (testCase.rule && testCase.rule.startsWith('file(')) {
+                  const regoFile = testCase.rule.match(/file\(([^)]+)\)/)?.[1];
+                  if (regoFile) {
+                    const regoPath = path.join(dir, regoFile);
+                    if (!fs.existsSync(regoPath)) {
+                      console.log(`::error file=${jsonFile}::Broken reference: ${regoFile} not found (referenced by ${testCase.masterTestId})`);
+                      errors++;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          if (errors > 0) {
+            console.log(`\nFound ${errors} broken file references`);
+            process.exit(1);
+          }
+
+          console.log('✓ All file references are valid');
+          EOF
+
+  # Job 7: PR Size Check
+  pr-size-check:
+    name: PR Size Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check PR size
+        run: |
+          # Get the number of changed files
+          changed_files=$(git diff --name-only origin/main...HEAD 2>/dev/null | wc -l || echo "0")
+
+          echo "Changed files in this PR: $changed_files"
+
+          if [ "$changed_files" -gt 100 ]; then
+            echo "::warning::Large PR with $changed_files changed files. Consider breaking into smaller PRs."
+          fi
+
+          # List changed Rego files
+          echo ""
+          echo "Changed Rego files:"
+          git diff --name-only origin/main...HEAD 2>/dev/null | grep "\.rego$" || echo "None"
+
+          echo ""
+          echo "Changed JSON files:"
+          git diff --name-only origin/main...HEAD 2>/dev/null | grep "\.json$" | head -20 || echo "None"
+
+  # Final summary job
+  validation-summary:
+    name: Validation Summary
+    runs-on: ubuntu-latest
+    needs:
+      - rego-syntax-check
+      - json-validation
+      - compliance-test-validation
+      - policy-tests
+      - rego-best-practices
+      - reference-check
+    if: always()
+    steps:
+      - name: Check all job results
+        run: |
+          echo "=== PR Validation Summary ==="
+          echo ""
+          echo "Rego Syntax: ${{ needs.rego-syntax-check.result }}"
+          echo "JSON Validation: ${{ needs.json-validation.result }}"
+          echo "Compliance Test Validation: ${{ needs.compliance-test-validation.result }}"
+          echo "Policy Tests: ${{ needs.policy-tests.result }}"
+          echo "Rego Best Practices: ${{ needs.rego-best-practices.result }}"
+          echo "Reference Check: ${{ needs.reference-check.result }}"
+          echo ""
+
+          # Determine overall status
+          if [ "${{ needs.rego-syntax-check.result }}" = "failure" ] || \
+             [ "${{ needs.json-validation.result }}" = "failure" ] || \
+             [ "${{ needs.compliance-test-validation.result }}" = "failure" ] || \
+             [ "${{ needs.reference-check.result }}" = "failure" ]; then
+            echo "::error::One or more critical validation checks failed"
+            exit 1
+          fi
+
+          echo "✓ All critical validations passed"
