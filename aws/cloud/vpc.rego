@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html
 
 #
@@ -9,7 +11,6 @@ package rule
 default vpc_subnet_autoip = true
 
 vpc_subnet_autoip = false {
-    # lower(resource.Type) == "aws::ec2::subnet"
     subnets := input.Subnets[_]
     subnets.MapPublicIpOnLaunch == true
 }
@@ -37,7 +38,6 @@ vpc_subnet_autoip_metadata := {
 default eip_instance_link = true
 
 eip_instance_link = false {
-    # lower(resource.Type) == "aws::ec2::eip"
     addresses = input.Addresses[_]
     lower(addresses.domain) == "vpc"
     not addresses.instanceId
@@ -67,7 +67,6 @@ eip_instance_link_metadata := {
 default vpc_endpoint_manual_acceptance = true
 
 vpc_endpoint_manual_acceptance = false {
-    # lower(resource.Type) == "aws::ec2::vpcendpointservice"
     VpcEndpointConnections := input.VpcEndpointConnections[_]
     lower(VpcEndpointConnections.vpcEndpointState) != "available"
 }

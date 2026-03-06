@@ -1,13 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
-
+import data.common
 
 # 
 # PR-AZR-CLD-VMSS-001

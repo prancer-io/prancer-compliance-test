@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html
 
 #
@@ -8,12 +10,10 @@ package rule
 default msk_encryption_at_rest_cmk = true
 
 msk_encryption_at_rest_cmk = false {
-    # lower(resource.Type) == "aws::msk::cluster"
     not input.ClusterInfo.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId
 }
 
 msk_encryption_at_rest_cmk = false {
-    # lower(resource.Type) == "aws::msk::cluster"
     count(input.ClusterInfo.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId) == 0
 }
 
@@ -39,7 +39,6 @@ msk_encryption_at_rest_cmk_metadata := {
 default msk_in_transit_encryption = true
 
 msk_in_transit_encryption = false {
-    # lower(resource.Type) == "aws::msk::cluster"
     not input.ClusterInfo.EncryptionInfo.EncryptionInTransit.InCluster
 }
 
@@ -66,12 +65,10 @@ msk_in_transit_encryption_metadata := {
 default msk_in_transit_encryption_tls = true
 
 msk_in_transit_encryption_tls = false {
-    # lower(resource.Type) == "aws::msk::cluster"
     not input.ClusterInfo.EncryptionInfo.EncryptionInTransit.ClientBroker
 }
 
 msk_in_transit_encryption_tls = false {
-    # lower(resource.Type) == "aws::msk::cluster"
     lower(input.ClusterInfo.EncryptionInfo.EncryptionInTransit.ClientBroker) != "tls"
 }
 
@@ -98,12 +95,10 @@ msk_in_transit_encryption_tls_metadata := {
 default msk_vpc = true
 
 msk_vpc = false {
-    # lower(resource.Type) == "aws::msk::cluster"
     not input.ClusterInfo.BrokerNodeGroupInfo.ClientSubnets
 }
 
 msk_vpc = false {
-    # lower(resource.Type) == "aws::msk::cluster"
     count(input.ClusterInfo.BrokerNodeGroupInfo.ClientSubnets) == 0
 }
 
@@ -130,7 +125,6 @@ msk_vpc_metadata := {
 default msk_cluster_logging_enable = true
 
 msk_cluster_logging_enable = false {
-    # lower(resource.Type) == "aws::msk::cluster"
     not input.ClusterInfo.LoggingInfo.BrokerLogs
 }
 
@@ -157,17 +151,14 @@ msk_cluster_logging_enable_metadata := {
 default msk_cluster_enhanced_monitoring_enable = true
 
 msk_cluster_enhanced_monitoring_enable = false {
-    # lower(resource.Type) == "aws::msk::cluster"
     lower(input.ClusterInfo.EnhancedMonitoring) == "default"
 }
 
 msk_cluster_enhanced_monitoring_enable = false {
-    # lower(resource.Type) == "aws::msk::cluster"
     input.ClusterInfo.EnhancedMonitoring == ""
 }
 
 msk_cluster_enhanced_monitoring_enable = false {
-    # lower(resource.Type) == "aws::msk::cluster"
     input.ClusterInfo.EnhancedMonitoring == null
 }
 
@@ -194,7 +185,6 @@ msk_cluster_enhanced_monitoring_enable_metadata := {
 default msk_public_access = true
 
 msk_public_access = false {
-    # lower(resource.Type) == "aws::msk::cluster"
     lower(input.ClusterInfo.BrokerNodeGroupInfo.ConnectivityInfo.PublicAccess.Type) != "disabled"
 }
 

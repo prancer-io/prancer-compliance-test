@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 #
 # PR-GCP-CLD-SCR-001
 #
@@ -57,7 +59,7 @@ gc_issue["secret_rotation_90_days"] {
 
 gc_issue["secret_rotation_90_days"] {
     rotationPeriod := trim_right(input.rotation.rotationPeriod, "s")
-    to_number(rotationPeriod) > 7776000
+    to_number(rotationPeriod) > common.ninety_days_seconds
 }
 
 secret_rotation {

@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html
 
 #
@@ -9,12 +11,10 @@ package rule
 default cf_default_cache = true
 
 cf_default_cache = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     not input.Distribution.DistributionConfig.DefaultCacheBehavior.FieldLevelEncryptionId
 }
 
 cf_default_cache = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     count(input.Distribution.DistributionConfig.DefaultCacheBehavior.FieldLevelEncryptionId) == 0
 }
 
@@ -42,13 +42,11 @@ cf_default_cache_metadata := {
 default cf_ssl_protocol = true
 
 cf_ssl_protocol = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     cert := input.Distribution.DistributionConfig.ViewerCertificate
     lower(cert.MinimumProtocolVersion) == "sslv3"
 }
 
 cf_ssl_protocol = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     origin_items := input.Distribution.DistributionConfig.Origins.Items[j]
     lower(origin_items.CustomOriginConfig.OriginSslProtocols.Items[k]) == "sslv3"
 }
@@ -77,12 +75,10 @@ cf_ssl_protocol_metadata := {
 default cf_logging = true
 
 cf_logging = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     not input.Distribution.DistributionConfig.Logging.Bucket
 }
 
 cf_logging = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     count(input.Distribution.DistributionConfig.Logging.Bucket) == 0
 }
 
@@ -109,7 +105,6 @@ cf_logging_metadata := {
 default cf_https_only = true
 
 cf_https_only = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     count(
         [c | lower(input.Distribution.DistributionConfig.Origins.Items[_].CustomOriginConfig.OriginProtocolPolicy) != "https-only"; c := 1
     ]) > 0
@@ -139,12 +134,10 @@ cf_https_only_metadata := {
 default cf_https = true
 
 cf_https = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     not input.Distribution.DistributionConfig.DefaultCacheBehavior.ViewerProtocolPolicy
 }
 
 cf_https = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     cache := input.Distribution.DistributionConfig.DefaultCacheBehavior
     lower(cache.ViewerProtocolPolicy) != "https-only"
     lower(cache.ViewerProtocolPolicy) != "redirect-to-https"
@@ -173,13 +166,11 @@ cf_https_metadata := {
 default cf_min_protocol = true
 
 cf_min_protocol = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     cert := input.Distribution.DistributionConfig.ViewerCertificate
     lower(cert.MinimumProtocolVersion) == "tlsv1"
 }
 
 cf_min_protocol = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     cert := input.Distribution.DistributionConfig.ViewerCertificate
     lower(cert.MinimumProtocolVersion) == "tlsv1_2016"
 }
@@ -207,12 +198,10 @@ cf_min_protocol_metadata := {
 default cf_firewall = true
 
 cf_firewall = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     not input.Distribution.DistributionConfig.WebACLId
 }
 
 cf_firewall = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     count(input.Distribution.DistributionConfig.WebACLId) == 0
 }
 
@@ -239,7 +228,6 @@ cf_firewall_metadata := {
 default cf_default_ssl = true
 
 cf_default_ssl = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     input.Distribution.DistributionConfig.ViewerCertificate.CloudFrontDefaultCertificate == true
 }
 
@@ -266,13 +254,11 @@ cf_default_ssl_metadata := {
 default cf_geo_restriction = true
 
 cf_geo_restriction = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     not input.Distribution.DistributionConfig.Restrictions
 }
 
 
 cf_geo_restriction = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     lower(input.Distribution.DistributionConfig.Restrictions.GeoRestriction.RestrictionType) == "none"
 }
 
@@ -300,21 +286,18 @@ cf_geo_restriction_metadata := {
 default cf_s3_origin = true
 
 cf_s3_origin = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     item := input.Distribution.DistributionConfig.Origins.Items[_]
     item.S3OriginConfig
     item.S3OriginConfig.OriginAccessIdentity == ""
 }
 
 cf_s3_origin = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     item := input.Distribution.DistributionConfig.Origins.Items[_]
     item.S3OriginConfig
     item.S3OriginConfig.OriginAccessIdentity == null
 }
 
 cf_s3_origin = false {
-    # lower(resource.Type) == "aws::cloudfront::distribution"
     item := input.Distribution.DistributionConfig.Origins.Items[_]
     item.S3OriginConfig
     not item.S3OriginConfig.OriginAccessIdentity

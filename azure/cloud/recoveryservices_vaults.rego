@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://learn.microsoft.com/en-us/azure/templates/microsoft.recoveryservices/vaults?pivots=deployment-language-arm-template
 
@@ -92,7 +90,7 @@ azure_issue["recoveryservices_vaults_configured_with_private_endpoint"] {
     lower(resource.type) == "microsoft.recoveryservices/vaults"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.recoveryservices/vaults/privateendpointconnections";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.privateLinkServiceConnectionState.status) == "approved";
               c := 1]) == 0
 }

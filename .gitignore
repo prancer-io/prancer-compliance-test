@@ -1,2 +1,33 @@
 *.template.json
 .*vscode
+.idea/
+
+# Sensitive Data
+*-sa-key.json
+*-key.json
+*credentials*.json
+.env
+.env.*
+
+# Binaries
+opa
+opa_*
+
+# Test Artifacts
+results/
+test-results/
+mock-gcp-data/
+test-input.json
+*.backup
+*.bak
+*.orig
+
+# Build and Cache
+*.pyc
+__pycache__/
+.pytest_cache/
+dist/
+build/
+
+# Logs
+*.log

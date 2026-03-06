@@ -1,9 +1,7 @@
 package rule
 
+import data.common
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
 
@@ -202,7 +200,7 @@ default lambda_vpc_endpoint = true
 
 lambda_vpc_endpoint = false {
     X := input.TEST_LAMBDA[_]
-    has_property(X.Configuration, "VpcConfig")
+    common.has_property(X.Configuration, "VpcConfig")
     X.Configuration.VpcConfig.VpcId != ""
     Y := input.TEST_EC2_06[_]
     VpcEndpoint := Y.VpcEndpoints[_]
@@ -211,7 +209,7 @@ lambda_vpc_endpoint = false {
 
 lambda_vpc_endpoint = false {
     X := input.TEST_LAMBDA[_]
-    has_property(X.Configuration, "VpcConfig")
+    common.has_property(X.Configuration, "VpcConfig")
     X.Configuration.VpcConfig.VpcId != null
     Y := input.TEST_EC2_06[_]
     VpcEndpoint := Y.VpcEndpoints[_]
@@ -245,7 +243,7 @@ default lambda_runs_in_vpc = true
 
 lambda_runs_in_vpc = false {
     X := input.TEST_LAMBDA[_]
-    has_property(X.Configuration, "VpcConfig")
+    common.has_property(X.Configuration, "VpcConfig")
     X.Configuration.VpcConfig.VpcId != ""
     Y := input.TEST_EC2_04[_]
     Vpc_ec2 := Y.Vpcs[_]
@@ -254,7 +252,7 @@ lambda_runs_in_vpc = false {
 
 lambda_runs_in_vpc = false {
     X := input.TEST_LAMBDA[_]
-    has_property(X.Configuration, "VpcConfig")
+    common.has_property(X.Configuration, "VpcConfig")
     X.Configuration.VpcConfig.VpcId != null
     Y := input.TEST_EC2_04[_]
     Vpc_ec2 := Y.Vpcs[_]
@@ -288,7 +286,7 @@ default lambda_outbound_rule = true
 
 lambda_outbound_rule = false {
     X := input.TEST_LAMBDA[_]
-    has_property(X.Configuration.VpcConfig, "SecurityGroupIds")
+    common.has_property(X.Configuration.VpcConfig, "SecurityGroupIds")
     Y := input.TEST_SG[_]
     SecurityGroup := Y.SecurityGroups[_]
     IpPermissions_Egress := SecurityGroup.IpPermissionsEgress[_]

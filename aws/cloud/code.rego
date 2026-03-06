@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 #
 # PR-AWS-CLD-CB-001
 #
@@ -7,7 +9,6 @@ package rule
 default codebuild_encryption_disable = true
 
 codebuild_encryption_disable = false {
-    # lower(resource.Type) == "aws::codebuild::project"
     projects := input.projects[_]
     projects.artifacts.encryptionDisabled == true
 }
@@ -36,13 +37,11 @@ codebuild_encryption_disable_metadata := {
 default codebuild_encryption = true
 
 codebuild_encryption = false {
-    # lower(resource.Type) == "aws::codebuild::project"
     projects := input.projects[_]
     not projects.encryptionKey
 }
 
 codebuild_encryption = false {
-    # lower(resource.Type) == "aws::codebuild::project"
     projects := input.projects[_]
     count(projects.encryptionKey) == 0
 }
@@ -71,12 +70,10 @@ codebuild_encryption_metadata := {
 default cp_artifact_encrypt = true
 
 cp_artifact_encrypt = false {
-    # lower(resource.Type) == "aws::codepipeline::pipeline"
     not input.pipeline.artifactStore.encryptionKey.id
 }
 
 cp_artifact_encrypt = false {
-    # lower(resource.Type) == "aws::codepipeline::pipeline"
     input.pipeline.artifactStore.encryptionKey.id
     lower(input.pipeline.artifactStore.encryptionKey.type) != "kms"
 }
@@ -104,13 +101,11 @@ cp_artifact_encrypt_metadata := {
 default deploy_compute_platform = true
 
 deploy_compute_platform = false {
-    # lower(resource.Type) == "aws::codedeploy::application"
     applicationsInfo := input.applicationsInfo[_]
     not applicationsInfo.computePlatform
 }
 
 deploy_compute_platform = false {
-    # lower(resource.Type) == "aws::codedeploy::application"
     applicationsInfo := input.applicationsInfo[_]
     lower(applicationsInfo.computePlatform) != "ecs"
     lower(applicationsInfo.computePlatform) != "lambda"

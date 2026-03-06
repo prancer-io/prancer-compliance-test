@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
 
 #
@@ -9,7 +11,6 @@ package rule
 default ecs_task_evelated = true
 
 ecs_task_evelated = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     input.taskDefinition.containerDefinitions
     input.taskDefinition.containerDefinitions[j].privileged == true
 }
@@ -37,19 +38,16 @@ ecs_task_evelated_metadata := {
 default ecs_exec = true
 
 ecs_exec = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     not input.taskDefinition.executionRoleArn
     not input.taskDefinition.taskRoleArn
 }
 
 ecs_exec = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     input.taskDefinition.executionRoleArn
     not startswith(lower(input.taskDefinition.executionRoleArn), "arn:aws:")
 }
 
 ecs_exec = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     input.taskDefinition.taskRoleArn
     not startswith(lower(input.taskDefinition.taskRoleArn), "arn:aws:")
 }
@@ -77,7 +75,6 @@ ecs_exec_metadata := {
 default ecs_root_user = true
 
 ecs_root_user = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     lower(input.taskDefinition.containerDefinitions[j].user) == "root"
 }
 
@@ -104,7 +101,6 @@ ecs_root_user_metadata := {
 default ecs_root_filesystem = true
 
 ecs_root_filesystem = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := input.taskDefinition.containerDefinitions[j]
     not container_definition.readonlyRootFilesystem
 }
@@ -133,45 +129,37 @@ ecs_root_filesystem_metadata := {
 default ecs_resource_limit = true
 
 ecs_resource_limit = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     not input.taskDefinition.cpu
 }
 
 ecs_resource_limit = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     to_number(input.taskDefinition.cpu) == 0
 }
 
 ecs_resource_limit = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := input.taskDefinition.containerDefinitions[j]
     not container_definition.cpu
 }
 
 ecs_resource_limit = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := input.taskDefinition.containerDefinitions[j]
     to_number(container_definition.cpu) == 0
 }
 
 ecs_resource_limit = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     not input.taskDefinition.memory
 }
 
 ecs_resource_limit = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     to_number(input.taskDefinition.memory) == 0
 }
 
 ecs_resource_limit = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := input.taskDefinition.containerDefinitions[j]
     not container_definition.memory
 }
 
 ecs_resource_limit = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := input.taskDefinition.containerDefinitions[j]
     to_number(container_definition.memory) == 0
 }
@@ -200,25 +188,21 @@ ecs_resource_limit_metadata := {
 default ecs_logging = true
 
 ecs_logging = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := input.taskDefinition.containerDefinitions[j]
     not container_definition.logConfiguration.logDriver
 }
 
 ecs_logging = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := input.taskDefinition.containerDefinitions[j]
     count(container_definition.logConfiguration.logDriver) == 0
 }
 
 ecs_logging = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := input.taskDefinition.containerDefinitions[j]
     container_definition.logConfiguration.logDriver == null
 }
 
 ecs_logging = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := input.taskDefinition.containerDefinitions[j]
     lower(container_definition.logConfiguration.logDriver) != "awslogs"
 }
@@ -247,13 +231,11 @@ ecs_logging_metadata := {
 default ecs_transit_enabled = true
 
 ecs_transit_enabled = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     volume := input.taskDefinition.volumes[j]
     not volume.efsVolumeConfiguration.transitEncryption
 }
 
 ecs_transit_enabled = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     volume := input.taskDefinition.volumes[j]
     lower(volume.efsVolumeConfiguration.transitEncryption) != "enabled"
 }
@@ -282,7 +264,6 @@ ecs_transit_enabled_metadata := {
 default ecs_container_insight_enable = true
 
 ecs_container_insight_enable = false {
-    # lower(resource.Type) == "aws::ecs::cluster"
     clusters := input.clusters[i]
     settings := clusters.settings[j]
     lower(settings.name) == "containerinsights" 
@@ -290,12 +271,10 @@ ecs_container_insight_enable = false {
 }
 
 ecs_container_insight_enable = false {
-    # lower(resource.Type) == "aws::ecs::cluster"
     count([c | input.clusters[i].settings[j].name == "containerinsights" ; c:=1]) == 0
 }
 
 ecs_container_insight_enable = false {
-    # lower(resource.Type) == "aws::ecs::cluster"
     count(input.settings) == 0
 }
 
@@ -324,7 +303,6 @@ default ecs_enable_execute_command = true
 
 ecs_enable_execute_command = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
-    # lower(resource.Type) == type[_]
     services := input.services[_]
     services.enableExecuteCommand == true
 }
@@ -354,7 +332,6 @@ default ecs_assign_public_ip = true
 
 ecs_assign_public_ip = false {
     # type = ["aws::ecs::service", "aws::ecs::taskset"]
-    # lower(resource.Type) == type[_]
     services := input.services[_]
     lower(services.networkConfiguration.awsvpcConfiguration.assignPublicIp) == "enabled"
 }
@@ -384,14 +361,12 @@ default ecs_launch_type = true
 
 ecs_launch_type = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
-    # lower(resource.Type) == type[_]
     services := input.services[_]
     not services.launchType
 }
 
 ecs_launch_type = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
-    # lower(resource.Type) == type[_]
     lower(input.launchType) != "fargate"
 }
 
@@ -420,14 +395,12 @@ default ecs_subnet = true
 
 ecs_subnet = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
-    # lower(resource.Type) == type[_]
     services := input.services[_]
     not services.networkConfiguration.awsvpcConfiguration.subnets
 }
 
 ecs_subnet = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
-    # lower(resource.Type) == type[_]
     services := input.services[_]
     count(services.networkConfiguration.awsvpcConfiguration.subnets) == 0
 }
@@ -457,14 +430,12 @@ default ecs_security_group = true
 
 ecs_security_group = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
-    # lower(resource.Type) == type[_]
     services := input.services[_]
     not services.networkConfiguration.awsvpcConfiguration.securityGroups
 }
 
 ecs_security_group = false {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
-    # lower(resource.Type) == type[_]
     services := input.services[_]
     count(services.networkConfiguration.awsvpcConfiguration.securityGroups) == 0
 }
@@ -493,22 +464,18 @@ ecs_security_group_metadata := {
 default ecs_network_mode = true
 
 ecs_network_mode = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     not input.taskDefinition.networkMode
 }
 
 ecs_network_mode = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     count(input.taskDefinition.networkMode) == 0
 }
 
 ecs_network_mode = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     input.taskDefinition.networkMode == null
 }
 
 ecs_network_mode = false {
-    # lower(resource.Type) == "aws::ecs::taskdefinition"
     lower(input.taskDefinition.networkMode) != "awsvpc"
 }
 
@@ -648,7 +615,6 @@ ecs_log_driver_metadata := {
 default ecs_configured_with_active_services = true
 
 ecs_configured_with_active_services = false {
-    # lower(resource.Type) == "aws::ecs::cluster"
     cluster := input.clusters[_]
     cluster.activeServicesCount == 0
 }

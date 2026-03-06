@@ -1,10 +1,8 @@
 package rule
 
-available_true_choices := ["true", true]
+import data.common
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+available_true_choices := ["true", true]
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 
@@ -15,14 +13,12 @@ has_property(parent_object, target_property) {
 default ec2_iam_role = true
 
 ec2_iam_role = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     not Instances.IamInstanceProfile
 }
 
 ec2_iam_role = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     not startswith(lower(Instances.IamInstanceProfile), "arn:")
@@ -51,7 +47,6 @@ ec2_iam_role_metadata := {
 default ec2_no_vpc = true
 
 ec2_no_vpc = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     not Instances.SubnetId
@@ -81,15 +76,13 @@ ec2_no_vpc_metadata := {
 default ec2_public_ip = true
 
 ec2_public_ip = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     NetworkInterfaces := Instances.NetworkInterfaces[j]
-    not has_property(NetworkInterfaces, "AssociatePublicIpAddress")
+    not common.has_property(NetworkInterfaces, "AssociatePublicIpAddress")
 }
 
 ec2_public_ip = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     Instances.NetworkInterfaces[j].AssociatePublicIpAddress == true
@@ -119,7 +112,6 @@ ec2_public_ip_metadata := {
 default ec2_ebs_optimized = true
 
 ec2_ebs_optimized = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     not Instances.EbsOptimized
@@ -149,14 +141,12 @@ ec2_ebs_optimized_metadata := {
 default ec2_monitoring = true
 
 ec2_monitoring = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     not Instances.Monitoring
 }
 
 ec2_monitoring = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     lower(Instances.Monitoring.State) != "enabled"
@@ -186,48 +176,44 @@ ec2_monitoring_metadata := {
 default ec2_deletion_termination = true
 
 ec2_deletion_termination = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     BlockDeviceMappings := Instances.BlockDeviceMappings[_]
-    has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    common.has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
     BlockDeviceMappings.Ebs.DeleteOnTermination == available_true_choices[_]
     NetworkInterfaces := Instances.NetworkInterfaces[_]
-    has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+    common.has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
     NetworkInterfaces.Attachment.DeleteOnTermination == available_true_choices[_]
 }
 
 ec2_deletion_termination = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     BlockDeviceMappings := Instances.BlockDeviceMappings[_]
-    has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    common.has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
     BlockDeviceMappings.Ebs.DeleteOnTermination == available_true_choices[_]
     NetworkInterfaces := Instances.NetworkInterfaces[_]
-    not has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+    not common.has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
 }
 
 
 ec2_deletion_termination = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     BlockDeviceMappings := Instances.BlockDeviceMappings[_]
-    not has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    not common.has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
     NetworkInterfaces := Instances.NetworkInterfaces[_]
-    has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+    common.has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
     NetworkInterfaces.Attachment.DeleteOnTermination == available_true_choices[_]
 }
 
 ec2_deletion_termination = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     BlockDeviceMappings := Instances.BlockDeviceMappings[_]
-    not has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
+    not common.has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
     NetworkInterfaces := Instances.NetworkInterfaces[_]
-    not has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+    not common.has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
 }
 
 ec2_deletion_termination_err = "Ensure AWS EC2 EBS and Network components' deletion protection is enabled" {
@@ -254,7 +240,6 @@ ec2_deletion_termination_metadata := {
 default ebs_snapshot_public_access = true
 
 ebs_snapshot_public_access = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     CreateVolumePermissions := input.CreateVolumePermissions[_]
     lower(CreateVolumePermissions.Group) == "all"
 }
@@ -282,13 +267,11 @@ ebs_snapshot_public_access_metadata := {
 default ebs_volume_attached = true
 
 ebs_volume_attached = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Volumes := input.Volumes[_]
     count(Volumes.Attachments) == 0
 }
 
 ebs_volume_attached = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Volumes := input.Volumes[_]
     Attachment := Volumes.Attachments[_]
     lower(Attachment.State) != "attached"
@@ -318,7 +301,6 @@ ebs_volume_attached_metadata := {
 default ebs_deletion_protection = true
 
 ebs_deletion_protection = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     Volumes := input.Volumes[_]
     Attachment := Volumes.Attachments[_]
     Attachment.DeleteOnTermination == false

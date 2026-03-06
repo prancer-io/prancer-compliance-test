@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings
 
@@ -33,7 +31,7 @@ azure_issue["sql_server_log_audit"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/auditingsettings";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.state) == "enabled";
               c := 1]) == 0
 }

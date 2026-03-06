@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html
 
 available_true_choices := ["true", true]
@@ -12,7 +14,6 @@ available_false_choices := ["false", false]
 default esearch_vpc = false
 
 esearch_vpc = true {
-    # lower(resource.Type) == "aws::elasticsearch::domain"
     count(input.DomainStatus.VPCOptions.SubnetIds) != 0
 }
 
@@ -39,7 +40,6 @@ esearch_vpc_metadata := {
 default esearch_encrypt = false
 
 esearch_encrypt = true {
-    # lower(resource.Type) == "aws::elasticsearch::domain"
     input.DomainStatus.EncryptionAtRestOptions.Enabled == true
 }
 
@@ -67,7 +67,6 @@ esearch_encrypt_metadata := {
 default esearch_master = false
 
 esearch_master = true {
-    # lower(resource.Type) == "aws::elasticsearch::domain"
     input.DomainStatus.ElasticsearchClusterConfig.DedicatedMasterEnabled == true
 }
 
@@ -95,7 +94,6 @@ esearch_master_metadata := {
 default esearch_index_slow_log = false
 
 esearch_index_slow_log = true {
-    # lower(resource.Type) == "aws::elasticsearch::domain"
     count(input.DomainStatus.LogPublishingOptions.INDEX_SLOW_LOGS.CloudWatchLogsLogGroupArn) != 0
 }
 
@@ -122,7 +120,6 @@ esearch_index_slow_log_metadata := {
 default esearch_search_slow_log = false
 
 esearch_search_slow_log = true {
-    # lower(resource.Type) == "aws::elasticsearch::domain"
     count(input.DomainStatus.LogPublishingOptions.SEARCH_SLOW_LOGS.CloudWatchLogsLogGroupArn) != 0
 }
 
@@ -149,7 +146,6 @@ esearch_search_slow_log_metadata := {
 default esearch_zone_awareness = false
 
 esearch_zone_awareness = true {
-    # lower(resource.Type) == "aws::elasticsearch::domain"
     input.DomainStatus.ElasticsearchClusterConfig.ZoneAwarenessEnabled == true
 }
 
@@ -177,7 +173,6 @@ esearch_zone_awareness_metadata := {
 default esearch_node_encryption = false
 
 esearch_node_encryption = true {
-    # lower(resource.Type) == "aws::elasticsearch::domain"
     input.DomainStatus.NodeToNodeEncryptionOptions.Enabled == true
 }
 
@@ -204,7 +199,6 @@ esearch_node_encryption_metadata := {
 default esearch_enforce_https = false
 
 esearch_enforce_https = true {
-    # lower(resource.Type) == "aws::elasticsearch::domain"
     input.DomainStatus.DomainEndpointOptions.EnforceHTTPS == true
 }
 
@@ -232,7 +226,6 @@ esearch_enforce_https_metadata := {
 default esearch_encrypt_kms = false
 
 esearch_encrypt_kms = true {
-    # lower(resource.Type) == "aws::elasticsearch::domain"
     input.DomainStatus.EncryptionAtRestOptions.Enabled == true
     count(input.DomainStatus.EncryptionAtRestOptions.KmsKeyId) != 0
 }

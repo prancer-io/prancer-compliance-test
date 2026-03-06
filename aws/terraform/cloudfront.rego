@@ -794,6 +794,13 @@ aws_issue["cf_default_ssl"] {
     lower(viewer_certificate.cloudfront_default_certificate) == "true"
 }
 
+aws_issue["cf_default_ssl"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    viewer_certificate := resource.properties.viewer_certificate[j]
+    viewer_certificate.cloudfront_default_certificate == true
+}
+
 source_path[{"cf_default_ssl": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_cloudfront_distribution"
@@ -805,13 +812,6 @@ source_path[{"cf_default_ssl": metadata}] {
             ["resources", i, "properties", "viewer_certificate", j, "cloudfront_default_certificate"]
         ],
     }
-}
-
-aws_bool_issue["cf_default_ssl"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_cloudfront_distribution"
-    viewer_certificate := resource.properties.viewer_certificate[j]
-    viewer_certificate.cloudfront_default_certificate == true
 }
 
 source_path[{"cf_default_ssl": metadata}] {
@@ -830,7 +830,6 @@ source_path[{"cf_default_ssl": metadata}] {
 cf_default_ssl {
     lower(input.resources[i].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_default_ssl"]
-    not aws_bool_issue["cf_default_ssl"]
     not aws_attribute_absence["cf_default_ssl"]
 }
 
@@ -839,17 +838,11 @@ cf_default_ssl = false {
 }
 
 cf_default_ssl = false {
-    aws_bool_issue["cf_default_ssl"]
-}
-
-cf_default_ssl = false {
     aws_attribute_absence["cf_default_ssl"]
 }
 
 cf_default_ssl_err = "AWS CloudFront web distribution with default SSL certificate (deprecated)" {
     aws_issue["cf_default_ssl"]
-} else = "AWS CloudFront web distribution with default SSL certificate (deprecated)" {
-    aws_bool_issue["cf_default_ssl"]
 } else = "AWS CloudFront web distribution with default SSL certificate (deprecated)" {
     aws_attribute_absence["cf_default_ssl"]
 }

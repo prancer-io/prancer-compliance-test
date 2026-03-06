@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html
 
 available_true_choices := ["true", true]
@@ -14,7 +16,6 @@ available_false_choices := ["false", false]
 default eks_multiple_sg = false
 
 eks_multiple_sg = true {
-    # lower(resource.Type) == "aws::eks::cluster"
     count(input.cluster.resourcesVpcConfig.securityGroupIds) < 1
 }
 
@@ -43,7 +44,6 @@ eks_multiple_sg_metadata := {
 default eks_encryption_resources = true
 
 eks_encryption_resources = false {
-    # lower(resource.Type) == "aws::eks::cluster"
     not input.cluster.encryptionConfig
 }
 
@@ -72,7 +72,6 @@ default eks_encryption_kms = true
 
 eks_encryption_kms = false {
     resource := input.Resources[i]
-    # lower(resource.Type) == "aws::eks::cluster"
     encryptionConfig := input.cluster.encryptionConfig[j]
     count(encryptionConfig.provider.keyArn) == 0
 }
@@ -102,7 +101,6 @@ default eks_approved_kubernetes_version = true
 platform_version := ["1.20", "1.19", "1.18"]
 
 eks_approved_kubernetes_version = false {
-    # lower(resource.Type) == "aws::eks::cluster"
     count([c | input.cluster.platformVersion == platform_version[_]; c:=1]) != 0
 }
 
@@ -129,7 +127,6 @@ eks_approved_kubernetes_version_metadata := {
 default eks_with_security_group_attached = true
 
 eks_with_security_group_attached = false {
-    # lower(resource.Type) == "aws::eks::cluster"
     not input.cluster.resourcesVpcConfig.securityGroupIds
 }
 
@@ -156,12 +153,10 @@ eks_with_security_group_attached_metadata := {
 default eks_with_private_access = true
 
 eks_with_private_access = false {
-    # lower(resource.Type) == "aws::eks::cluster"
     input.cluster.resourcesVpcConfig.endpointPrivateAccess == available_false_choices[_]
 }
 
 eks_with_private_access = false {
-    # lower(resource.Type) == "aws::eks::cluster"
     input.cluster.resourcesVpcConfig.endpointPublicAccess == available_true_choices[_]
 }
 
@@ -188,31 +183,26 @@ eks_with_private_access_metadata := {
 default eks_logging_enabled = true
 
 eks_logging_enabled = false {
-    # lower(resource.Type) == "aws::eks::cluster"
     cluster_logging := input.cluster.logging.clusterLogging[_]
     cluster_logging.types == null
 }
 
 eks_logging_enabled = false {
-    # lower(resource.Type) == "aws::eks::cluster"
     cluster_logging := input.cluster.logging.clusterLogging[_]
     count(cluster_logging.types) == 0
 }
 
 eks_logging_enabled = false {
-    # lower(resource.Type) == "aws::eks::cluster"
     cluster_logging := input.cluster.logging.clusterLogging[_]
     cluster_logging.types == ""
 }
 
 eks_logging_enabled = false {
-    # lower(resource.Type) == "aws::eks::cluster"
     cluster_logging := input.cluster.logging.clusterLogging[_]
     not cluster_logging.types
 }
 
 eks_logging_enabled = false {
-    # lower(resource.Type) == "aws::eks::cluster"
     cluster_logging := input.cluster.logging.clusterLogging[_]
     cluster_logging.enabled == available_false_choices[_]
 }
@@ -353,7 +343,7 @@ eks_creation = false {
     created_timestamp := input.cluster.createdAt["$date"]
     created_timestamp_nanosecond := created_timestamp * 1000000
     current_date_timestamp := time.now_ns()
-	(current_date_timestamp - created_timestamp_nanosecond) > 7776000000000000
+	(current_date_timestamp - created_timestamp_nanosecond) > common.ninety_days_nanoseconds
 }
 
 eks_creation_err = "Ensure AWS EKS images are not older than 90 days." {

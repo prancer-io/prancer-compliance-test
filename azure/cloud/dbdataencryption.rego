@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/databases/transparentdataencryption
 
@@ -88,7 +86,7 @@ azure_issue["db_encrypt"] {
     lower(resource.type) == "microsoft.sql/servers/databases"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/databases/transparentdataencryption";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.status) == "enabled";
               c := 1]) == 0
 }

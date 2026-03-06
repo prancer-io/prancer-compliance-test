@@ -1,12 +1,9 @@
 package rule
 
+import data.common
+
 available_true_choices := ["true", true]
 available_false_choices := ["false", false]
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-
 rules_packages = [
     "arn:aws:inspector:us-east-2:646659390643:rulespackage/0-JnA8Zp85",
     "arn:aws:inspector:us-east-1:316112463485:rulespackage/0-gEjTy7T7",
@@ -35,13 +32,11 @@ rules_packages = [
 default secret_manager_kms = true
 
 secret_manager_kms = false {
-    # lower(resource.Type) == "aws::secretsmanager::secret"
     SecretList := input.SecretList[_]
     not SecretList.KmsKeyId
 }
 
 secret_manager_kms = false {
-    # lower(resource.Type) == "aws::secretsmanager::secret"
     SecretList := input.SecretList[_]
     count(SecretList.KmsKeyId) == 0
 }
@@ -133,19 +128,16 @@ secret_manager_rotation_period_metadata := {
 default log_group_encryption = true
 
 log_group_encryption = false {
-    # lower(resource.Type) == "aws::logs::loggroup"
     logGroups := input.logGroups[_]
     not logGroups.KmsKeyId
 }
 
 log_group_encryption = false {
-    # lower(resource.Type) == "aws::logs::loggroup"
     logGroups := input.logGroups[_]
     count(logGroups.KmsKeyId) == 0
 }
 
 log_group_encryption = false {
-    # lower(resource.Type) == "aws::logs::loggroup"
     logGroups := input.logGroups[_]
     logGroups.KmsKeyId == null
 }
@@ -173,7 +165,6 @@ log_group_encryption_metadata := {
 default log_group_retention = true
 
 log_group_retention = false {
-    # lower(resource.Type) == "aws::logs::loggroup"
     logGroups := input.logGroups[_]
     not logGroups.RetentionInDays
 }
@@ -202,7 +193,6 @@ log_group_retention_metadata := {
 default workspace_volume_encrypt = true
 
 workspace_volume_encrypt = false {
-    # lower(resource.Type) == "aws::workspaces::workspace"
     Workspaces := input.Workspaces[_]
     not Workspaces.UserVolumeEncryptionEnabled
 }
@@ -287,17 +277,14 @@ workspace_directory_type_metadata := {
 default glue_catalog_encryption = true
 
 glue_catalog_encryption = false {
-    # lower(resource.Type) == "aws::glue::datacatalogencryptionsettings"
     not input.DataCatalogEncryptionSettings.ConnectionPasswordEncryption.ReturnConnectionPasswordEncrypted
 }
 
 glue_catalog_encryption = false {
-    # lower(resource.Type) == "aws::glue::datacatalogencryptionsettings"
     not input.DataCatalogEncryptionSettings.EncryptionAtRest.CatalogEncryptionMode
 }
 
 glue_catalog_encryption = false {
-    # lower(resource.Type) == "aws::glue::datacatalogencryptionsettings"
     lower(input.DataCatalogEncryptionSettings.EncryptionAtRest.CatalogEncryptionMode) != "sse-kms"
 }
 
@@ -325,22 +312,18 @@ glue_catalog_encryption_metadata := {
 default glue_security_config = true
 
 glue_security_config = false {
-    # lower(resource.Type) == "aws::glue::securityconfiguration"
     not input.SecurityConfiguration.EncryptionConfiguration
 }
 
 glue_security_config = false {
-    # lower(resource.Type) == "aws::glue::securityconfiguration"
     lower(input.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) != "sse-kms"
 }
 
 glue_security_config = false {
-    # lower(resource.Type) == "aws::glue::securityconfiguration"
     lower(input.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) != "sse-kms"
 }
 
 glue_security_config = false {
-    # lower(resource.Type) == "aws::glue::securityconfiguration"
     lower(input.SecurityConfiguration.EncryptionConfiguration.S3Encryption.S3EncryptionMode) != "sse-kms"
 }
 
@@ -421,7 +404,7 @@ default glue_cmk_key = true
 glue_cmk_key = false {
     X := input.TEST_ALL_06[_]
     Y := input.TEST_KMS[_]
-    has_property(X.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption, "KmsKeyArn")
+    common.has_property(X.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption, "KmsKeyArn")
     X.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption.KmsKeyArn == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
 }
@@ -453,7 +436,7 @@ default glue_cloudwatch_cmk_key = true
 glue_cloudwatch_cmk_key = false {
     X := input.TEST_ALL_06[_]
     Y := input.TEST_KMS[_]
-    has_property(X.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption, "KmsKeyArn")
+    common.has_property(X.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption, "KmsKeyArn")
     X.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption.KmsKeyArn == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
 }
@@ -509,13 +492,11 @@ glue_catalog_password_metadata := {
 default as_volume_encrypted = true
 
 as_volume_encrypted = false {
-    # lower(resource.Type) == "aws::autoscaling::launchconfiguration"
     LaunchConfigurations := input.LaunchConfigurations[_]
     count([c | LaunchConfigurations.BlockDeviceMappings; c:=1]) == 0
 }
 
 as_volume_encrypted = false {
-    # lower(resource.Type) == "aws::autoscaling::launchconfiguration"
     LaunchConfigurations := input.LaunchConfigurations[_]
     bdm := LaunchConfigurations.BlockDeviceMappings[j]
     not bdm.Ebs.Encrypted
@@ -544,28 +525,24 @@ as_volume_encrypted_metadata := {
 default as_elb_health_check = true
 
 as_elb_health_check = false {
-    # lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
     AutoScalingGroups := input.AutoScalingGroups[_]
     count(AutoScalingGroups.LoadBalancerNames) != 0
     not AutoScalingGroups.HealthCheckType
 }
 
 as_elb_health_check = false {
-    # lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
     AutoScalingGroups := input.AutoScalingGroups[_]
     count(AutoScalingGroups.LoadBalancerNames) != 0
     lower(AutoScalingGroups.HealthCheckType) != "elb"
 }
 
 as_elb_health_check = false {
-    # lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
     AutoScalingGroups := input.AutoScalingGroups[_]
     count(AutoScalingGroups.TargetGroupARNs) != 0
     not AutoScalingGroups.HealthCheckType
 }
 
 as_elb_health_check = false {
-    # lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
     AutoScalingGroups := input.AutoScalingGroups[_]
     count(AutoScalingGroups.TargetGroupARNs) != 0
     lower(AutoScalingGroups.HealthCheckType) != "elb"
@@ -594,13 +571,11 @@ as_elb_health_check_metadata := {
 default as_http_token = true
 
 as_http_token = false {
-    # lower(resource.Type) == "aws::autoscaling::launchconfiguration"
     LaunchConfigurations := input.LaunchConfigurations[_]
     lower(LaunchConfigurations.MetadataOptions.HttpTokens) != "required"
 }
 
 as_http_token = false {
-    # lower(resource.Type) == "aws::autoscaling::launchconfiguration"
     LaunchConfigurations := input.LaunchConfigurations[_]
     not LaunchConfigurations.MetadataOptions.HttpTokens
 }
@@ -629,13 +604,11 @@ as_http_token_metadata := {
 default cf_sns = true
 
 cf_sns = false {
-    # lower(resource.Type) == "aws::cloudformation::stack"
     Stacks := input.Stacks[_]
     not Stacks.NotificationARNs
 }
 
 cf_sns = false {
-    # lower(resource.Type) == "aws::cloudformation::stack"
     Stacks := input.Stacks[_]
     count(Stacks.NotificationARNs) == 0
 }
@@ -663,7 +636,6 @@ cf_sns_metadata := {
 default cloudFormation_template_configured_with_stack_policy = true
 
 cloudFormation_template_configured_with_stack_policy = false {
-    # lower(resource.Type) == "AWS::CloudFormation::Stack"
     count(input.StackPolicyBody) == 0
 }
 
@@ -690,7 +662,6 @@ cloudFormation_template_configured_with_stack_policy_metadata := {
 default cloudFormation_rollback_is_disabled = true
 
 cloudFormation_rollback_is_disabled = false {
-    # lower(resource.Type) == "AWS::CloudFormation::Stack"
     Stack := input.Stacks[_]
     Stack.DisableRollback == available_false_choices[_]
 }
@@ -718,7 +689,6 @@ cloudFormation_rollback_is_disabled_metadata := {
 default role_arn_exist = true
 
 role_arn_exist = false {
-    # lower(resource.Type) == "AWS::CloudFormation::Stack"
     Stack := input.Stacks[_]
     not Stack.RoleARN
 }
@@ -746,7 +716,6 @@ role_arn_exist_metadata := {
 default stack_with_not_all_capabilities = true
 
 stack_with_not_all_capabilities = false {
-    # lower(resource.Type) == "AWS::CloudFormation::Stack"
     Stack := input.Stacks[_]
     contains(Stack.Capabilities[_], "*")
 }
@@ -774,7 +743,6 @@ stack_with_not_all_capabilities_metadata := {
 default termination_protection_in_stacks_is_enabled = true
 
 termination_protection_in_stacks_is_enabled = false {
-    # lower(resource.Type) == "AWS::CloudFormation::Stack"
     Stack := input.Stacks[_]
     Stack.EnableTerminationProtection == available_false_choices[_]
 }
@@ -803,20 +771,17 @@ termination_protection_in_stacks_is_enabled_metadata := {
 default config_all_resource = true
 
 config_all_resource = false {
-    # lower(resource.Type) == "aws::config::configurationrecorder"
     ConfigurationRecorders := input.ConfigurationRecorders[_]
     not ConfigurationRecorders.recordingGroup
 }
 
 config_all_resource = false {
-    # lower(resource.Type) == "aws::config::configurationrecorder"
     ConfigurationRecorders := input.ConfigurationRecorders[_]
     ConfigurationRecorders.recordingGroup
     not ConfigurationRecorders.recordingGroup.allSupported
 }
 
 config_all_resource = false {
-    # lower(resource.Type) == "aws::config::configurationrecorder"
     ConfigurationRecorders := input.ConfigurationRecorders[_]
     ConfigurationRecorders.recordingGroup
     not ConfigurationRecorders.recordingGroup.includeGlobalResourceTypes
@@ -846,7 +811,6 @@ config_all_resource_metadata := {
 default aws_config_configuration_aggregator = true
 
 aws_config_configuration_aggregator = false {
-    # lower(resource.Type) == "aws::config::configurationaggregator".
     ConfigurationAggregators := input.ConfigurationAggregators[_]
     AccountAggregationSources := ConfigurationAggregators.AccountAggregationSources[_]
     not AccountAggregationSources.AllAwsRegions
@@ -876,7 +840,6 @@ aws_config_configuration_aggregator_metadata := {
 default aws_config_recorder_status = true
 
 aws_config_recorder_status = false {
-    # lower(resource.Type) == "aws::config::configurationrecorder".
     ConfigurationRecordersStatus := input.ConfigurationRecordersStatus[_]
     ConfigurationRecordersStatus.recording == true
     lower(ConfigurationRecordersStatus.lastStatus) == "failure"
@@ -905,7 +868,6 @@ aws_config_recorder_status_metadata := {
 default config_includes_global_resources = true
 
 config_includes_global_resources = false {
-    # lower(resource.Type) == "aws::config::configurationrecorder".
     ConfigurationRecorders := input.ConfigurationRecorders[_]
     ConfigurationRecorders.recordingGroup.includeGlobalResourceTypes == available_false_choices[_]
 }
@@ -932,12 +894,10 @@ config_includes_global_resources_metadata := {
 default kinesis_encryption = true
 
 kinesis_encryption = false {
-    # lower(resource.Type) == "aws::kinesis::stream"
     not input.StreamDescription.EncryptionType
 }
 
 kinesis_encryption = false {
-    # lower(resource.Type) == "aws::kinesis::stream"
     lower(input.StreamDescription.EncryptionType) == "none"
 }
 
@@ -965,18 +925,15 @@ kinesis_encryption_metadata := {
 default kinesis_encryption_kms = null
 
 kinesis_encryption_kms = false {
-    # lower(resource.Type) == "aws::kinesis::stream"
     not input.StreamDescription.EncryptionType
 }
 
 kinesis_encryption_kms = false {
-    # lower(resource.Type) == "aws::kinesis::stream"
     lower(input.StreamDescription.EncryptionType) == "kms"
     contains(lower(input.StreamDescription.KeyId), "aws/kinesis")
 }
 
 kinesis_encryption_kms = true {
-    # lower(resource.Type) == "aws::kinesis::stream"
     lower(input.StreamDescription.EncryptionType) == "kms"
     not contains(lower(input.StreamDescription.KeyId), "aws/kinesis")
 }
@@ -1045,12 +1002,12 @@ default kinesis_shard_level_metrics = true
 
 kinesis_shard_level_metrics = false {
     Enhanced_Monitoring := input.StreamDescription.EnhancedMonitoring[_]
-    not has_property(Enhanced_Monitoring, "ShardLevelMetrics")
+    not common.has_property(Enhanced_Monitoring, "ShardLevelMetrics")
 }
 
 kinesis_shard_level_metrics = false {
     Enhanced_Monitoring := input.StreamDescription.EnhancedMonitoring[_]
-    has_property(Enhanced_Monitoring, "ShardLevelMetrics")
+    common.has_property(Enhanced_Monitoring, "ShardLevelMetrics")
     count(Enhanced_Monitoring.ShardLevelMetrics) == 0
 }
 
@@ -1077,12 +1034,10 @@ kinesis_shard_level_metrics_metadata := {
 default mq_publicly_accessible = true
 
 mq_publicly_accessible = false {
-    # lower(resource.Type) == "aws::amazonmq::broker"
     input.PubliclyAccessible == true
 }
 
 mq_publicly_accessible = false {
-    # lower(resource.Type) == "aws::amazonmq::broker"
     lower(input.PubliclyAccessible) == "true"
 }
 
@@ -1110,7 +1065,6 @@ mq_publicly_accessible_metadata := {
 default mq_logging_enable = true
 
 mq_logging_enable = false {
-    # lower(resource.Type) == "aws::amazonmq::broker"
     not input.Logs.General
 }
 
@@ -1137,7 +1091,6 @@ mq_logging_enable_metadata := {
 default mq_activemq_approved_engine_version = true
 
 mq_activemq_approved_engine_version = false {
-    # lower(resource.Type) == "aws::amazonmq::broker"
     lower(input.EngineType) == "activemq"
     not startswith(input.EngineVersion, "5.16")
 }
@@ -1165,7 +1118,6 @@ mq_activemq_approved_engine_version_metadata := {
 default mq_rabbitmq_approved_engine_version = true
 
 mq_rabbitmq_approved_engine_version = false {
-    # lower(resource.Type) == "aws::amazonmq::broker"
     lower(input.EngineType) == "rabbitmq"
     not startswith(input.EngineVersion, "3.8")
 }
@@ -1193,13 +1145,11 @@ mq_rabbitmq_approved_engine_version_metadata := {
 default audit_logs_published_to_cloudWatch = true
 
 audit_logs_published_to_cloudWatch = false {
-    # lower(resource.Type) == "aws::amazonmq::broker"
     lower(input.EngineType) == "activemq"
     lower(input.Logs.Audit) == available_false_choices[_]
 }
 
 audit_logs_published_to_cloudWatch = false {
-    # lower(resource.Type) == "aws::amazonmq::broker"
     not input.Logs.Audit
 }
 
@@ -1226,7 +1176,6 @@ audit_logs_published_to_cloudWatch_metadata := {
 default route_healthcheck_disable = true
 
 route_healthcheck_disable = false {
-    # lower(resource.Type) == "aws::route53::recordsetgroup"
     ResourceRecordSets := input.ResourceRecordSets[j]
     not ResourceRecordSets.AliasTarget.EvaluateTargetHealth
 }
@@ -1255,7 +1204,6 @@ route_healthcheck_disable_metadata := {
 default waf_log4j_vulnerability = true
 
 waf_log4j_vulnerability = false {
-    # lower(resource.Type) == "aws::wafv2::webacl"
     Rules := input.WebACL.Rules[_]
     lower(Rules.Statement.ManagedRuleGroupStatement.Name) == "awsmanagedrulesknownbadinputsruleset"
     ExcludedRules := Rules.Statement.ManagedRuleGroupStatement.ExcludedRules[_]
@@ -1264,9 +1212,8 @@ waf_log4j_vulnerability = false {
 }
 
 waf_log4j_vulnerability = false {
-    # lower(resource.Type) == "aws::wafv2::webacl"
     Rules := input.WebACL.Rules[_]
-    not has_property(Rules.OverrideAction, "None")
+    not common.has_property(Rules.OverrideAction, "None")
 }
 
 waf_log4j_vulnerability_err = "JMSAppender in Log4j 1.2 is vulnerable to deserialization of untrusted data when the attacker has write access to the Log4j configuration" {
@@ -1293,13 +1240,11 @@ waf_log4j_vulnerability_metadata := {
 default ins_package = true
 
 ins_package = false {
-    # lower(resource.Type) == "aws::wafv2::webacl"
     rulesPackageArns := input.rulesPackageArns
     count([c | lower(rulesPackageArns[_]) == lower(rules_packages[_]); c:=1]) == 0
 }
 
 ins_package = false {
-    # lower(resource.Type) == "aws::wafv2::webacl"
     count(input.rulesPackageArns) == 0
 }
 
@@ -1326,7 +1271,6 @@ ins_package_metadata := {
 default appsync_not_configured_with_firewall_v2 = true
 
 appsync_not_configured_with_firewall_v2 = false {
-    # lower(resource.Type) == "aws::appsync::graphql"
     not input.graphqlApi.wafWebAclArn
 }
 

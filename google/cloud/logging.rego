@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 #
 # PR-GCP-CLD-LOG-001
 #
@@ -7,10 +9,8 @@ package rule
 default logging_audit_config = null
 
 logging_audit_config_contains = ["protopayload.methodname=", "protopayload.methodname ="]
-# available_types = ["gcp-types/logging-v2:projects.metrics", "logging.v2.metric"]
 
 gc_issue["logging_audit_config"] {
-    # lower(resource.type) == available_types[_]
     not gc_not_issue["logging_audit_config"]
 }
 
@@ -23,7 +23,6 @@ gc_not_issue["logging_audit_config"] {
 }
 
 logging_audit_config {
-    # lower(input.resources[i].type) == available_types[_]
     not gc_issue["logging_audit_config"]
 }
 
@@ -56,10 +55,8 @@ default logging_iam_permission_change = null
 
 logging_iam_permission_change_contains_1 = ["resource.type=", "resource.type ="]
 logging_iam_permission_change_contains_2 = ["protopayload.methodname=", "protopayload.methodname ="]
-# available_types = ["gcp-types/logging-v2:projects.metrics", "logging.v2.metric"]
 
 gc_issue["logging_iam_permission_change"] {
-    # lower(resource.type) == available_types[_]
     not gc_not_issue["logging_iam_permission_change"]
 }
 
@@ -75,7 +72,6 @@ gc_not_issue["logging_iam_permission_change"] {
 }
 
 logging_iam_permission_change {
-    # lower(input.resources[i].type) == available_types[_]
     not gc_issue["logging_iam_permission_change"]
 }
 
@@ -108,10 +104,8 @@ default logging_iam_custom_permission_change = null
 
 logging_iam_custom_permission_change_contains_1 = ["resource.type=", "resource.type ="]
 logging_iam_custom_permission_change_contains_2 = ["protopayload.methodname=", "protopayload.methodname ="]
-# available_types = ["gcp-types/logging-v2:projects.metrics", "logging.v2.metric"]
 
 gc_issue["logging_iam_custom_permission_change"] {
-    # lower(resource.type) == available_types[_]
     not gc_not_issue["logging_iam_custom_permission_change"]
 }
 
@@ -129,7 +123,6 @@ gc_not_issue["logging_iam_custom_permission_change"] {
 }
 
 logging_iam_custom_permission_change {
-    # lower(input.resources[i].type) == available_types[_]
     not gc_issue["logging_iam_custom_permission_change"]
 }
 
@@ -163,10 +156,8 @@ default logging_project_ownership = null
 logging_project_ownership_contains_1 = ["protopayload.servicename=", "protopayload.servicename ="]
 logging_project_ownership_contains_2 = ["protopayload.servicedata.policydelta.bindingdeltas.action=", "protopayload.servicedata.policydelta.bindingdeltas.action ="]
 logging_project_ownership_contains_3 = ["protopayload.servicedata.policydelta.bindingdeltas.role=", "protopayload.servicedata.policydelta.bindingdeltas.role ="]
-# available_types = ["gcp-types/logging-v2:projects.metrics", "logging.v2.metric"]
 
 gc_issue["logging_project_ownership"] {
-    # lower(resource.type) == available_types[_]
     not gc_not_issue["logging_project_ownership"]
 }
 
@@ -188,7 +179,6 @@ gc_not_issue["logging_project_ownership"] {
 }
 
 logging_project_ownership {
-    # lower(input.resources[i].type) == available_types[_]
     not gc_issue["logging_project_ownership"]
 }
 
@@ -220,10 +210,8 @@ logging_project_ownership_metadata := {
 default logging_sql_instance = null
 
 logging_sql_instance_contains = ["protopayload.methodname=", "protopayload.methodname ="]
-# available_types = ["gcp-types/logging-v2:projects.metrics", "logging.v2.metric"]
 
 gc_issue["logging_sql_instance"] {
-    # lower(resource.type) == available_types[_]
     not gc_not_issue["logging_sql_instance"]
 }
 
@@ -235,7 +223,6 @@ gc_not_issue["logging_sql_instance"] {
 }
 
 logging_sql_instance {
-    # lower(input.resources[i].type) == available_types[_]
     not gc_issue["logging_sql_instance"]
 }
 
@@ -268,10 +255,8 @@ default logging_vpc_firewall = null
 
 logging_vpc_firewall_contains_1 = ["resource.type=", "resource.type ="]
 logging_vpc_firewall_contains_2 = ["jsonPayload.event_subtype=", "jsonPayload.event_subtype ="]
-# available_types = ["gcp-types/logging-v2:projects.metrics", "logging.v2.metric"]
 
 gc_issue["logging_vpc_firewall"] {
-    # lower(resource.type) == available_types[_]
     not gc_not_issue["logging_vpc_firewall"]
 }
 
@@ -288,7 +273,6 @@ gc_not_issue["logging_vpc_firewall"] {
 }
 
 logging_vpc_firewall {
-    # lower(input.resources[i].type) == available_types[_]
     not gc_issue["logging_vpc_firewall"]
 }
 
@@ -321,10 +305,8 @@ default logging_vpc_network = null
 
 logging_vpc_network_contains_1 = ["resource.type=", "resource.type ="]
 logging_vpc_network_contains_2 = ["jsonPayload.event_subtype=", "jsonPayload.event_subtype ="]
-# available_types = ["gcp-types/logging-v2:projects.metrics", "logging.v2.metric"]
 
 gc_issue["logging_vpc_network"] {
-    # lower(resource.type) == available_types[_]
     not gc_not_issue["logging_vpc_network"]
 }
 
@@ -344,7 +326,6 @@ gc_not_issue["logging_vpc_network"] {
 }
 
 logging_vpc_network {
-    # lower(input.resources[i].type) == available_types[_]
     not gc_issue["logging_vpc_network"]
 }
 
@@ -377,10 +358,8 @@ default logging_vpc_route = null
 
 logging_vpc_route_contains_1 = ["resource.type=", "resource.type ="]
 logging_vpc_route_contains_2 = ["jsonPayload.event_subtype=", "jsonPayload.event_subtype ="]
-# available_types = ["gcp-types/logging-v2:projects.metrics", "logging.v2.metric"]
 
 gc_issue["logging_vpc_route"] {
-    # lower(resource.type) == available_types[_]
     not gc_not_issue["logging_vpc_route"]
 }
 
@@ -397,7 +376,6 @@ gc_not_issue["logging_vpc_route"] {
 }
 
 logging_vpc_route {
-    # lower(input.resources[i].type) == available_types[_]
     not gc_issue["logging_vpc_route"]
 }
 

@@ -1,17 +1,11 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 storage_account_need_to_skip(target_storage_account_resource) {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.storage/storageaccounts/blobservices/containers";
-              #array_contains(r.dependsOn, concat("/", [target_storage_account_resource.type, target_storage_account_resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [target_storage_account_resource.type, target_storage_account_resource.name]));
               contains(lower(r.name), "bootdiagnostics");
               c := 1]) > 0
 }
@@ -19,13 +13,13 @@ storage_account_need_to_skip(target_storage_account_resource) {
 storage_account_need_to_skip(target_storage_account_resource) {
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.storage/storageaccounts/blobservices/containers";
-              #array_contains(r.dependsOn, concat("/", [target_storage_account_resource.type, target_storage_account_resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [target_storage_account_resource.type, target_storage_account_resource.name]));
               contains(lower(r.name), "insights-logs-networksecuritygroupflowevent");
               c := 1]) > 0
 }
 
 storage_account_need_to_skip(target_storage_account_resource) {
-    has_property(target_storage_account_resource.tags, "ms-resource-usage")
+    common.has_property(target_storage_account_resource.tags, "ms-resource-usage")
     lower(target_storage_account_resource.tags["ms-resource-usage"]) == "azure-cloud-shell"
 }
 
@@ -47,7 +41,7 @@ azure_attribute_absence["storage_blob_soft_delete"] {
 azure_attribute_absence["storage_blob_soft_delete"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/blobservices"
-    not has_property(resource.properties.deleteRetentionPolicy, "enabled")
+    not common.has_property(resource.properties.deleteRetentionPolicy, "enabled")
 }
 
 azure_issue["storage_blob_soft_delete"] {
@@ -56,7 +50,7 @@ azure_issue["storage_blob_soft_delete"] {
     not storage_account_need_to_skip(resource)
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.storage/storageaccounts/blobservices";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.deleteRetentionPolicy.enabled;
               c := 1]) == 0
 }
@@ -121,7 +115,7 @@ azure_attribute_absence["storage_blob_container_soft_delete"] {
 azure_attribute_absence["storage_blob_container_soft_delete"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/blobservices"
-    not has_property(resource.properties.containerDeleteRetentionPolicy, "enabled")
+    not common.has_property(resource.properties.containerDeleteRetentionPolicy, "enabled")
 }
 
 azure_issue["storage_blob_container_soft_delete"] {
@@ -130,7 +124,7 @@ azure_issue["storage_blob_container_soft_delete"] {
     not storage_account_need_to_skip(resource)
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.storage/storageaccounts/blobservices";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.containerDeleteRetentionPolicy.enabled;
               c := 1]) == 0
 }
@@ -339,8 +333,6 @@ azure_issue["storage_threat_protection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     not storage_account_need_to_skip(resource)
-    #nested := input.resources[_]
-    #lower(nested.type) == "providers/advancedthreatprotectionsettings"
     #nested.properties.isEnabled != true
     nested_type := "providers/advancedthreatprotectionsettings"
     count([ c | lower(resource.resources[_].type) == nested_type; c = 1]) == 0
@@ -658,7 +650,7 @@ azure_attribute_absent["blobServicePublicAccessDisabled"] {
 	resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     not storage_account_need_to_skip(resource)
-    not has_property(resource.properties, "allowBlobPublicAccess")
+    not common.has_property(resource.properties, "allowBlobPublicAccess")
 }
 
 azure_issue["blobServicePublicAccessDisabled"] {
@@ -1175,7 +1167,7 @@ azure_attribute_absence["storage_account_allow_shared_key_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     not storage_account_need_to_skip(resource)
-    not has_property(resource.properties,"allowSharedKeyAccess")
+    not common.has_property(resource.properties,"allowSharedKeyAccess")
 }
 
 azure_issue["storage_account_allow_shared_key_access"] {
@@ -1242,7 +1234,7 @@ default storage_account_file_share_usage_smb_protocol = null
 azure_attribute_absence["storage_account_file_share_usage_smb_protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/fileservices/shares"
-    not has_property(resource.properties, "enabledProtocols")
+    not common.has_property(resource.properties, "enabledProtocols")
 }
 
 azure_issue["storage_account_file_share_usage_smb_protocol"] {

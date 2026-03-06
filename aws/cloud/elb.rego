@@ -1,8 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+import data.common
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
@@ -87,7 +85,6 @@ insecure_ciphers := [
 ]
 
 elb_insecure_cipher = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     PolicyDescriptions := input.PolicyDescriptions[_]
     PolicyAttributeDescriptions := PolicyDescriptions.PolicyAttributeDescriptions[k]
     lower(PolicyAttributeDescriptions.AttributeName) == lower(insecure_ciphers[_])
@@ -95,7 +92,6 @@ elb_insecure_cipher = false {
 }
 
 elb_insecure_cipher = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     PolicyDescriptions := input.PolicyDescriptions[_]
     PolicyAttributeDescriptions := PolicyDescriptions.PolicyAttributeDescriptions[k]
     lower(PolicyAttributeDescriptions.AttributeName) == lower(insecure_ciphers[_])
@@ -131,7 +127,6 @@ insecure_ssl_protocols := [
 ]
 
 elb_insecure_protocol = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     PolicyDescriptions := input.PolicyDescriptions[_]
     PolicyAttributeDescriptions := PolicyDescriptions.PolicyAttributeDescriptions[k]
     lower(PolicyAttributeDescriptions.AttributeName) == lower(insecure_ssl_protocols[_])
@@ -139,7 +134,6 @@ elb_insecure_protocol = false {
 }
 
 elb_insecure_protocol = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     PolicyDescriptions := input.PolicyDescriptions[_]
     PolicyAttributeDescriptions := PolicyDescriptions.PolicyAttributeDescriptions[k]
     lower(PolicyAttributeDescriptions.AttributeName) == lower(insecure_ssl_protocols[_])
@@ -169,7 +163,6 @@ elb_insecure_protocol_metadata := {
 default elb_access_log = true
 
 elb_access_log = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     LoadBalancerAttributes := input.LoadBalancerAttributes[_]
     not LoadBalancerAttributes.AccessLog.Enabled
 }
@@ -198,7 +191,6 @@ default elb_conn_drain = true
 
 
 elb_conn_drain = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     LoadBalancerAttributes := input.LoadBalancerAttributes[_]
     not LoadBalancerAttributes.ConnectionDraining.Enabled
 }
@@ -226,7 +218,6 @@ elb_conn_drain_metadata := {
 default elb_crosszone = true
 
 elb_crosszone = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     LoadBalancerAttributes := input.LoadBalancerAttributes[_]
     not LoadBalancerAttributes.CrossZoneLoadBalancing.Enabled
 }
@@ -254,13 +245,11 @@ elb_crosszone_metadata := {
 default elb_not_in_use = true
 
 elb_not_in_use = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
     not LoadBalancerDescriptions.Instances
 }
 
 elb_not_in_use = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
     count(LoadBalancerDescriptions.Instances) == 0
 }
@@ -288,22 +277,18 @@ elb_not_in_use_metadata := {
 default elb_alb_logs = true
 
 elb_alb_logs = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     not input.LoadBalancerAttributes
 }
 
 elb_alb_logs = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     not input.LoadBalancerAttributes.AccessLog.Enabled
 }
 
 elb_alb_logs = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     not input.LoadBalancerAttributes.AccessLog.S3BucketName
 }
 
 elb_alb_logs = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     count(input.LoadBalancerAttributes.AccessLog.S3BucketName) == 0
 }
 
@@ -330,14 +315,12 @@ elb_alb_logs_metadata := {
 default elb_listener_ssl = true
 
 elb_listener_ssl = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
     ListenerDescriptions := LoadBalancerDescriptions.ListenerDescriptions[_]
     count(ListenerDescriptions.Listener.SSLCertificateId) == 0
 }
 
 elb_listener_ssl = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
     ListenerDescriptions := LoadBalancerDescriptions.ListenerDescriptions[_]
     not ListenerDescriptions.Listener.SSLCertificateId
@@ -366,7 +349,6 @@ elb_listener_ssl_metadata := {
 default elb_over_https = true
 
 elb_over_https = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
     Listeners := input.Listeners
     lower(Listeners.Protocol) == "http"
 }
@@ -395,26 +377,22 @@ elb_over_https_metadata := {
 default elb_v2_listener_ssl = true
 
 elb_v2_listener_ssl = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
     Listeners := input.Listeners
     not Listeners.Certificates
 }
 
 elb_v2_listener_ssl = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
     Listeners := input.Listeners
     count(Listeners.Certificates) == 0
 }
 
 elb_v2_listener_ssl = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
     Listeners := input.Listeners
     Certificates := Listeners.Certificates[j]
     not Certificates.CertificateArn
 }
 
 elb_v2_listener_ssl = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
     Listeners := input.Listeners
     Certificates := Listeners.Certificates[j]
     count(Certificates.CertificateArn) == 0
@@ -444,7 +422,6 @@ elb_v2_listener_ssl_metadata := {
 default elb_drop_invalid_header = true
 
 elb_drop_invalid_header = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     Attribute := input.Attributes[j]
     lower(Attribute.Key) == "routing.http.drop_invalid_header_fields.enabled"
     lower(Attribute.Value) != "true"
@@ -474,19 +451,16 @@ elb_drop_invalid_header_metadata := {
 default elb_certificate_listner_arn = true
 
 elb_certificate_listner_arn = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
     Listeners := input.Listeners[_]
     not Listeners.ListenerArn
 }
 
 elb_certificate_listner_arn = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
     Listeners := input.Listeners[_]
     Listeners.ListenerArn == null
 }
 
 elb_certificate_listner_arn = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
     Listeners := input.Listeners[_]
     count(Listeners.ListenerArn) == 0
 }
@@ -518,13 +492,11 @@ default elb_listener_sslpolicy = true
 allowed_ssl_policies = ["ELBSecurityPolicy-TLS-1-2-2017-01", "ELBSecurityPolicy-TLS-1-2-Ext-2018-06", "ELBSecurityPolicy-FS-1-2-2019-08", "ELBSecurityPolicy-FS-1-2-Res-2019-08", "ELBSecurityPolicy-FS-1-2-Res-2020-10"]
 
 elb_listener_sslpolicy = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
     Listeners := input.Listeners[_]
     not Listeners.SslPolicy
 }
 
 elb_listener_sslpolicy = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
     Listeners := input.Listeners[_]
     count([c | lower(Listeners.SslPolicy) == lower(allowed_ssl_policies[_]); c:=1 ]) == 0
 }
@@ -553,19 +525,16 @@ elb_listener_sslpolicy_metadata := {
 default elb_subnet = true
 
 elb_subnet = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
 	not LoadBalancerDescriptions.Subnets
 }
 
 elb_subnet = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
 	LoadBalancerDescriptions.Subnets == null
 }
 
 elb_subnet = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
 	count(LoadBalancerDescriptions.Subnets) == 0
 }
@@ -593,19 +562,16 @@ elb_subnet_metadata := {
 default elb_scheme = true
 
 elb_scheme = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     LoadBalancers := input.LoadBalancers[_]
     not LoadBalancers.Scheme
 }
 
 elb_scheme = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     LoadBalancers := input.LoadBalancers[_]
     lower(LoadBalancers.Scheme) != "internal"
 }
 
 elb_scheme = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     LoadBalancers := input.LoadBalancers[_]
     LoadBalancers.Scheme == null
 }
@@ -634,13 +600,11 @@ elb_scheme_metadata := {
 default elb_type = true
 
 elb_type = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     LoadBalancers := input.LoadBalancers[_]
     lower(LoadBalancers.Type) != "application"
 }
 
 elb_type = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     LoadBalancers := input.LoadBalancers[_]
     LoadBalancers.Type == null
 }
@@ -669,7 +633,6 @@ elb_type_metadata := {
 default elb_protocol = true
 
 elb_protocol = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::targetgroup"
     TargetGroups := input.TargetGroups
     TargetTypeAllowed := ["instance" , "ip"]
     lower(TargetGroups.TargetType) == TargetTypeAllowed[_]
@@ -677,7 +640,6 @@ elb_protocol = false {
 }
 
 elb_protocol = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::targetgroup"
     TargetGroups := input.TargetGroups
     TargetTypeAllowed := ["instance" , "ip"]
     lower(TargetGroups.TargetType) == TargetTypeAllowed[_]
@@ -887,7 +849,7 @@ elbv2_tls_certificate = false {
     X := input.TEST_ELB_02[_]
     Listener := X.Listeners[_]
     elb_Certificate := Listener.Certificates[_]
-    has_property(elb_Certificate, "CertificateArn")
+    common.has_property(elb_Certificate, "CertificateArn")
     Y := input.TEST_ACM[_]
     elb_Certificate.CertificateArn != Y.Certificate.CertificateArn
 }
@@ -960,7 +922,7 @@ elbv2_check_certificate = false {
     Listener := Y.Listeners[_]
     LoadBalancer.LoadBalancerArn == Listener.LoadBalancerArn
     Certificate := Listener.Certificates[_]
-    not has_property(Certificate, "CertificateArn")
+    not common.has_property(Certificate, "CertificateArn")
 }
 
 elbv2_check_certificate = false {
@@ -970,7 +932,7 @@ elbv2_check_certificate = false {
     Y := input.TEST_ELB_02[_]
     Listener := Y.Listeners[_]
     LoadBalancer.LoadBalancerArn == Listener.LoadBalancerArn
-    not has_property(Listener, "Certificates")
+    not common.has_property(Listener, "Certificates")
 }
 
 elbv2_check_certificate_err = "Ensure AWS application ELB has TLS certificate attached to it." {

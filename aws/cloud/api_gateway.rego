@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 #
 # PR-AWS-CLD-AG-001
 #
@@ -9,7 +11,6 @@ package rule
 default gateway_private = true
 
 gateway_private = false {
-    # lower(resource.Type) == "aws::apigateway::restapi"
     count(input.endpointConfiguration.types) == 0
 }
 
@@ -44,7 +45,6 @@ gateway_private_metadata := {
 default gateway_validate_parameter = true
 
 gateway_validate_parameter = false {
-    # lower(resource.Type) == "aws::apigateway::requestvalidator"
     items := input.items[_]
     items.validateRequestParameters == false
 }
@@ -75,7 +75,6 @@ gateway_validate_parameter_metadata := {
 default gateway_request_authorizer = true
 
 gateway_request_authorizer = false {
-    # lower(resource.Type) == "aws::apigateway::authorizer"
     items := input.items[_]
     lower(items.type) != "request"
 }
@@ -141,7 +140,6 @@ gateway_logging_enable_metadata := {
 default gateway_tracing_enable = true
 
 gateway_tracing_enable = false {
-    # lower(resource.Type) == "aws::apigateway::stage"
     item := input.item[_]
     item.tracingEnabled != true
 }
@@ -172,7 +170,6 @@ gateway_tracing_enable_metadata := {
 default gateway_method_public_access = true
 
 gateway_method_public_access = false {
-    # lower(resource.Type) == "aws::apigateway::method"
     some string
     items := input.items[_]
     lower(items.resourceMethods[string].authorizationType) == "none"
@@ -180,7 +177,6 @@ gateway_method_public_access = false {
 }
 
 gateway_method_public_access = false {
-    # lower(resource.Type) == "aws::apigateway::method"
     some string
     items := input.items[_]
     items.resourceMethods[string]
@@ -215,13 +211,11 @@ gateway_method_public_access_metadata := {
 default api_gw_cert = true
 
 api_gw_cert = false {
-    # lower(resource.Type) == "aws::apigateway::stage"
     item := input.item[_]
     count(item.clientcertificateId) == 0
 }
 
 api_gw_cert = false {
-    # lower(resource.Type) == "aws::apigateway::stage"
     item := input.item[_]
     not item.clientcertificateId
 }
@@ -249,13 +243,11 @@ api_gw_cert_metadata := {
 default api_gateway_not_configured_with_firewall_v2 = true
 
 api_gateway_not_configured_with_firewall_v2 = false {
-    # lower(resource.Type) == "aws::apigateway::stage"
     item := input.item[_]
     not item.webAclArn
 }
 
 api_gateway_not_configured_with_firewall_v2 = false {
-    # lower(resource.Type) == "aws::apigateway::stage"
     item := input.item[_]
     lower(item.webAclArn) == "arn:aws:wafv2"
 }
@@ -283,7 +275,6 @@ api_gateway_not_configured_with_firewall_v2_metadata := {
 default api_gateway_uses_specific_tls_version = true
 
 api_gateway_uses_specific_tls_version = false {
-    # lower(resource.Type) == "aws::apigateway::domainname"
     input.securityPolicy != "TLS_1_2"
     
 }
@@ -311,7 +302,6 @@ api_gateway_uses_specific_tls_version_metadata := {
 default api_gateway_content_encoding_is_enabled = true
 
 api_gateway_content_encoding_is_enabled = false {
-    # lower(resource.Type) == "aws::apigateway::restapi"
     not input.minimumCompressionSize
 }
 

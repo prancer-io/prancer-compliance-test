@@ -1,8 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+import data.common
 
 # https://docs.aws.amazon.com/awscloudtrail/latest/APIReference
 
@@ -13,7 +11,6 @@ has_property(parent_object, target_property) {
 default ct_regions = true
 
 ct_regions = false {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
     input.trailList[_].IsMultiRegionTrail == false
 }
 
@@ -41,7 +38,6 @@ ct_regions_metadata := {
 default ct_log_validation = true
 
 ct_log_validation = false {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
     input.trailList[_].LogFileValidationEnabled == false
 }
 
@@ -68,12 +64,11 @@ ct_log_validation_metadata := {
 default ct_master_key = true
 
 ct_master_key = false {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
     trailList := input.trailList[_]
     not trailList.KmsKeyId
 }
 
-ct_master_key_err = "AWS CloudTrail is not enabled in all regions" {
+ct_master_key_err = "AWS CloudTrail logs are not encrypted using Customer Master Keys (CMKs)" {
     not ct_master_key
 }
 
@@ -96,13 +91,12 @@ ct_master_key_metadata := {
 default ct_cloudwatch = true
 
 ct_cloudwatch = false {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
     trailList := input.trailList[_]
     not trailList.CloudWatchLogsRoleArn
     not trailList.CloudWatchLogsLogGroupArn
 }
 
-ct_cloudwatch_err = "AWS CloudTrail is not enabled in all regions" {
+ct_cloudwatch_err = "CloudTrail trail is not integrated with CloudWatch Log" {
     not ct_cloudwatch
 }
 
@@ -125,14 +119,12 @@ ct_cloudwatch_metadata := {
 default logging_data_events_for_s3_and_lambda = false
 
 logging_data_events_for_s3_and_lambda = true {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
     event := input.EventSelectors[i]
     resource := event.DataResources[j]
     contains(lower(resource.Type), "aws::s3::object")
 }
 
 logging_data_events_for_s3_and_lambda = true {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
     event := input.EventSelectors[i]
     resource := event.DataResources[j]
     contains(lower(resource.Type), "aws::lambda::function")
@@ -161,7 +153,6 @@ logging_data_events_for_s3_and_lambda_metadata := {
 default cloudtrail_is_enabled = true
 
 cloudtrail_is_enabled = false {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
     count(input.trailList[_]) == 0
 }
 
@@ -220,10 +211,10 @@ cloudtrail_logging_is_enabled_metadata := {
 default cloudtrail_with_cloudwatch = true
 
 cloudtrail_with_cloudwatch = false {
-    has_property(input, "CloudWatchLogsLogGroupArn")
+    common.has_property(input, "CloudWatchLogsLogGroupArn")
     input.CloudWatchLogsLogGroupArn != ""
     input.IsMultiRegionTrail == false
-    has_property(input, "LatestCloudWatchLogsDeliveryTime")
+    common.has_property(input, "LatestCloudWatchLogsDeliveryTime")
 }
 
 cloudtrail_with_cloudwatch = false {

@@ -1,8 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+import data.common
 
 #
 # PR-AWS-CLD-AMI-001
@@ -39,7 +37,6 @@ ami_public_access_disabled_metadata := {
 default ami_not_infected_with_mining_malware = true
 
 ami_not_infected_with_mining_malware = false {
-    # lower(resource.Type) == "aws::ec2::instance"
     images := input.Images[_]
     contains(lower(images.Platform), "windows")
     contains(lower(images.ImageId), "ami-1e542176")

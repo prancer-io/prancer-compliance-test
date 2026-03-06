@@ -1,10 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_IAM.html
+import data.common
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_IAM.html
 
 iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount"]
 ip_address = ["0.0.0.0/0", "::/0"]
@@ -17,7 +15,6 @@ available_false_choices := ["false", false]
 default iam_wildcard_resource = true
 
 iam_wildcard_resource = false {
-    # lower(resource.Type) == "aws::iam::policy"
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Resource) == "*"
 }
@@ -44,14 +41,12 @@ iam_wildcard_resource_metadata := {
 default iam_wildcard_action = true
 
 iam_wildcard_action = false {
-    # lower(resource.Type) == "aws::iam::managedpolicy"
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Action) == "*"
 }
 
 
 iam_wildcard_action = false {
-    # lower(resource.Type) == "aws::iam::policy"
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Action) == "*"
 }
@@ -80,7 +75,6 @@ iam_wildcard_action_metadata := {
 default iam_wildcard_principal = true
 
 iam_wildcard_principal = false {
-    # lower(resource.Type) == "aws::iam::role"
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Principal) == "*"
 }
@@ -136,7 +130,6 @@ iam_resource_format_metadata := {
 default iam_assume_permission = true
 
 iam_assume_permission = false {
-    # lower(resource.Type) == "aws::iam::policy"
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Effect) == "allow"
     contains(lower(statement.Action), "sts:assumerole")
@@ -144,7 +137,6 @@ iam_assume_permission = false {
 }
 
 iam_assume_permission = false {
-    # lower(resource.Type) == "aws::iam::policy"
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Effect) == "allow"
     contains(lower(statement.Action), "sts:assumerole")
@@ -173,7 +165,6 @@ iam_assume_permission_metadata := {
 default iam_all_traffic = true
 
 iam_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policy"
     statement := input.PolicyVersion.Document.Statement[j]
     source_ip := statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"][k]
     lower(source_ip) == "0.0.0.0/0"
@@ -201,7 +192,6 @@ iam_all_traffic_metadata := {
 default iam_administrative_privileges = true
 
 iam_administrative_privileges = false {
-    # lower(resource.Type) == "aws::iam::policy"
     statement := input.PolicyVersion.Document.Statement[j]
     statement.Action == "*"
     statement.Resource == "*"
@@ -231,12 +221,10 @@ iam_administrative_privileges_metadata := {
 default iam_user_group_attach = true
 
 iam_user_group_attach = false {
-    # lower(resource.Type) == "aws::iam::usertogroupaddition"
     not input.PolicyVersion.Document
 }
 
 iam_user_group_attach = false {
-    # lower(resource.Type) == "aws::iam::usertogroupaddition"
     count(input.PolicyVersion.Document) < 1
 }
 
@@ -263,7 +251,6 @@ iam_user_group_attach_metadata := {
 default lambda_iam_policy_not_overly_permissive_to_all_traffic = true
 
 lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -273,7 +260,6 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
 }
 
 lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -283,7 +269,6 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
 }
 
 lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -293,7 +278,6 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
 }
 
 lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -326,7 +310,6 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 default iam_policy_not_overly_permissive_to_lambda_service = true
 
 iam_policy_not_overly_permissive_to_lambda_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -336,7 +319,6 @@ iam_policy_not_overly_permissive_to_lambda_service = false {
 }
 
 iam_policy_not_overly_permissive_to_lambda_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -346,7 +328,6 @@ iam_policy_not_overly_permissive_to_lambda_service = false {
 }
 
 iam_policy_not_overly_permissive_to_lambda_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -356,7 +337,6 @@ iam_policy_not_overly_permissive_to_lambda_service = false {
 }
 
 iam_policy_not_overly_permissive_to_lambda_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -521,7 +501,6 @@ lambda_function_with_iam_permissions_management_access = false {
 }
 
 lambda_function_with_iam_permissions_management_access = false {
-    # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_iam_permissions_management_access[_]
@@ -539,7 +518,6 @@ lambda_function_with_iam_permissions_management_access = false {
 }
 
 lambda_function_with_iam_permissions_management_access = false {
-    # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_iam_permissions_management_access[_]
@@ -631,7 +609,6 @@ default lambda_function_with_org_write_access = true
 action_lambda_function_with_org_write_access := ["organizations:AcceptHandshake","organizations:AttachPolicy","organizations:CancelHandshake","organizations:CreateAccount","organizations:CreateGovCloudAccount","organizations:CreateOrganization","organizations:CreateOrganizationalUnit","organizations:CreatePolicy","organizations:DeclineHandshake","organizations:DeleteOrganization","organizations:DeleteOrganizationalUnit","organizations:DeletePolicy","organizations:DeregisterDelegatedAdministrator","organizations:DetachPolicy","organizations:DisableAWSServiceAccess","organizations:DisablePolicyType","organizations:EnableAWSServiceAccess","organizations:EnableAllFeatures","organizations:EnablePolicyType","organizations:InviteAccountToOrganization","organizations:LeaveOrganization","organizations:MoveAccount","organizations:RegisterDelegatedAdministrator","organizations:RemoveAccountFromOrganization","organizations:UpdateOrganizationalUnit","organizations:UpdatePolicy"]
 
 lambda_function_with_org_write_access = false {
-    # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -641,7 +618,6 @@ lambda_function_with_org_write_access = false {
 }
 
 lambda_function_with_org_write_access = false {
-    # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_org_write_access[_]
@@ -650,7 +626,6 @@ lambda_function_with_org_write_access = false {
 }
 
 lambda_function_with_org_write_access = false {
-    # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -659,7 +634,6 @@ lambda_function_with_org_write_access = false {
 }
 
 lambda_function_with_org_write_access = false {
-    # lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_org_write_access[_]
@@ -927,7 +901,7 @@ ecr_repository_is_publicly_accessible_through_iam_policies = true {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "ecr")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
 ecr_repository_is_publicly_accessible_through_iam_policies = true {
@@ -937,7 +911,7 @@ ecr_repository_is_publicly_accessible_through_iam_policies = true {
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "ecr")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
 ecr_repository_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS ECR Repository resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -968,7 +942,7 @@ lambda_function_is_publicly_accessible_through_iam_policies = true {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "lambda")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
 lambda_function_is_publicly_accessible_through_iam_policies = true {
@@ -978,7 +952,7 @@ lambda_function_is_publicly_accessible_through_iam_policies = true {
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "lambda")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
 lambda_function_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1009,7 +983,7 @@ s3_bucket_is_publicly_accessible_through_iam_policies = true {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "s3")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
 s3_bucket_is_publicly_accessible_through_iam_policies = true {
@@ -1019,7 +993,7 @@ s3_bucket_is_publicly_accessible_through_iam_policies = true {
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "s3")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
 s3_bucket_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS S3 bucket resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1052,7 +1026,7 @@ sqs_queue_is_publicly_accessible_through_iam_policies = true {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "sqs")
-    has_property(policy_statement.Condition[string], condition_for_sqs[_])
+    common.has_property(policy_statement.Condition[string], condition_for_sqs[_])
 }
 
 sqs_queue_is_publicly_accessible_through_iam_policies = true {
@@ -1062,7 +1036,7 @@ sqs_queue_is_publicly_accessible_through_iam_policies = true {
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "sqs")
-    has_property(policy_statement.Condition[string], condition_for_sqs[_])
+    common.has_property(policy_statement.Condition[string], condition_for_sqs[_])
 }
 
 sqs_queue_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1093,7 +1067,7 @@ secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "secretsmanager")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
 secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
@@ -1103,7 +1077,7 @@ secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "secretsmanager")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
 secret_manager_secret_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1131,7 +1105,6 @@ default iam_policy_permission_may_cause_privilege_escalation = true
 action_iam_policy_permission_may_cause_privilege_escalation := ["iam:CreatePolicyVersion", "iam:SetDefaultPolicyVersion", "iam:PassRole", "iam:CreateAccessKey", "iam:CreateLoginProfile", "iam:UpdateLoginProfile", "iam:AttachUserPolicy", "iam:AttachGroupPolicy", "iam:AttachRolePolicy", "iam:PutUserPolicy", "iam:PutGroupPolicy", "iam:PutRolePolicy", "iam:AddUserToGroup", "iam:UpdateAssumeRolePolicy", "iam:*"]
 
 iam_policy_permission_may_cause_privilege_escalation = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
@@ -1140,7 +1113,6 @@ iam_policy_permission_may_cause_privilege_escalation = false {
 }
 
 iam_policy_permission_may_cause_privilege_escalation = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
@@ -1170,7 +1142,6 @@ iam_policy_permission_may_cause_privilege_escalation_metadata := {
 default iam_access_key_enabled_on_root_account = true
 
 iam_access_key_enabled_on_root_account = false {
-    # lower(resource.Type) == "aws::iam::policy"
     input.SummaryMap.AccountAccessKeysPresent == 0
     
 }
@@ -1198,7 +1169,6 @@ iam_access_key_enabled_on_root_account_metadata := {
 default iam_policy_not_overly_permissive_to_all_traffic_for_ecs= true
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1208,7 +1178,6 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
 }
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1218,7 +1187,6 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
 }
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1228,7 +1196,6 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
 }
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1261,7 +1228,6 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs_metadata := {
 default elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = true
 
 elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1271,7 +1237,6 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
 }
 
 elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1281,7 +1246,6 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
 }
 
 elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1291,7 +1255,6 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
 }
 
 elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1324,7 +1287,6 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 default not_allow_decryption_actions_on_all_kms_keys = true
 
 not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1335,7 +1297,6 @@ not_allow_decryption_actions_on_all_kms_keys = false {
 }
 
 not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1346,7 +1307,6 @@ not_allow_decryption_actions_on_all_kms_keys = false {
 }
 
 not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1357,7 +1317,6 @@ not_allow_decryption_actions_on_all_kms_keys = false {
 }
 
 not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1368,7 +1327,6 @@ not_allow_decryption_actions_on_all_kms_keys = false {
 }
 
 not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1379,7 +1337,6 @@ not_allow_decryption_actions_on_all_kms_keys = false {
 }
 
 not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1390,7 +1347,6 @@ not_allow_decryption_actions_on_all_kms_keys = false {
 }
 
 not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1401,7 +1357,6 @@ not_allow_decryption_actions_on_all_kms_keys = false {
 }
 
 not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1412,7 +1367,6 @@ not_allow_decryption_actions_on_all_kms_keys = false {
 }
 
 not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1423,7 +1377,6 @@ not_allow_decryption_actions_on_all_kms_keys = false {
 }
 
 not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1434,7 +1387,6 @@ not_allow_decryption_actions_on_all_kms_keys = false {
 }
 
 not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1445,7 +1397,6 @@ not_allow_decryption_actions_on_all_kms_keys = false {
 }
 
 not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1505,7 +1456,6 @@ iam_policy_attached_to_user_metadata := {
 default iam_policy_not_overly_permissive_to_all_traffic = true
 
 iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1515,7 +1465,6 @@ iam_policy_not_overly_permissive_to_all_traffic = false {
 }
 
 iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1525,7 +1474,6 @@ iam_policy_not_overly_permissive_to_all_traffic = false {
 }
 
 iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1535,7 +1483,6 @@ iam_policy_not_overly_permissive_to_all_traffic = false {
 }
 
 iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1568,7 +1515,6 @@ iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 default iam_policy_not_overly_permissive_to_sts_service = true
 
 iam_policy_not_overly_permissive_to_sts_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1579,7 +1525,6 @@ iam_policy_not_overly_permissive_to_sts_service = false {
 }
 
 iam_policy_not_overly_permissive_to_sts_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1590,7 +1535,6 @@ iam_policy_not_overly_permissive_to_sts_service = false {
 }
 
 iam_policy_not_overly_permissive_to_sts_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1601,7 +1545,6 @@ iam_policy_not_overly_permissive_to_sts_service = false {
 }
 
 iam_policy_not_overly_permissive_to_sts_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1641,7 +1584,7 @@ sns_publicly_accessible_through_iam_policies = true {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "sns")
-    has_property(policy_statement.Condition[string], sns_condition[_])
+    common.has_property(policy_statement.Condition[string], sns_condition[_])
 }
 
 sns_publicly_accessible_through_iam_policies = true {
@@ -1650,7 +1593,7 @@ sns_publicly_accessible_through_iam_policies = true {
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "sns")
-    has_property(policy_statement.Condition[string], sns_condition[_])
+    common.has_property(policy_statement.Condition[string], sns_condition[_])
 }
 
 sns_publicly_accessible_through_iam_policies_err = "Ensure AWS SNS Topic is not publicly accessible through IAM policies." {

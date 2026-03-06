@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers
 
@@ -97,7 +95,7 @@ azure_issue["sql_logical_server_login"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/administrators";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               not contains(lower(r.properties.login), "admin");
               not contains(lower(r.properties.login), "administrator");
               c := 1]) == 0
@@ -371,7 +369,7 @@ azure_issue["sql_server_configured_with_vnet"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/virtualnetworkrules";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               count(r.properties.virtualNetworkSubnetId) > 0;
               c := 1]) == 0
 }
@@ -444,7 +442,7 @@ azure_issue["sql_server_configured_with_private_endpoint"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/privateendpointconnections";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.privateLinkServiceConnectionState.status) == "approved";
               c := 1]) == 0
 }
@@ -499,7 +497,7 @@ azure_attribute_absence ["sql_ad_and_sql_auth_enabled"] {
 azure_attribute_absence ["sql_ad_and_sql_auth_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
-    not has_property(resource.properties.administrators, "azureADOnlyAuthentication")
+    not common.has_property(resource.properties.administrators, "azureADOnlyAuthentication")
 }
 
 azure_issue ["sql_ad_and_sql_auth_enabled"] {

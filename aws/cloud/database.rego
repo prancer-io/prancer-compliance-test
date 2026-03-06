@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html
 
@@ -7,11 +9,6 @@ deprecated_engine_versions := ["10.11","10.12","10.13","11.6","11.7","11.8"]
 deprecated_postgres_versions := ["13.2","13.1","12.6","12.5","12.4","12.3","12.2","11.11","11.10","11.9","11.8","11.7","11.6","11.5","11.4","11.3","11.2","11.1","10.16","10.15","10.14","10.13","10.12","10.11","10.10","10.9","10.7","10.6","10.5","10.4","10.3","10.1","9.6.21","9.6.20","9.6.19","9.6.18","9.6.17","9.6.16","9.6.15","9.6.14","9.6.12","9.6.11","9.6.10","9.6.9","9.6.8","9.6.6","9.6.5","9.6.3","9.6.2","9.6.1","9.5","9.4","9.3"]
 available_true_choices := ["true", true]
 available_false_choices := ["false", false]
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-
 #
 # PR-AWS-CLD-RDS-001
 #
@@ -19,7 +16,6 @@ has_property(parent_object, target_property) {
 default rds_cluster_encrypt = true
 
 rds_cluster_encrypt = false {
-    # lower(resource.Type) == "aws::rds::dbcluster"
     DBClusters := input.DBClusters[_]
     not DBClusters.StorageEncrypted
 }
@@ -47,7 +43,6 @@ rds_cluster_encrypt_metadata := {
 default rds_public = true
 
 rds_public = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     DBInstances.PubliclyAccessible == true
 }
@@ -113,7 +108,6 @@ rds_encrypt_key_metadata := {
 default rds_instance_event = true
 
 rds_instance_event = false {
-    # lower(resource.Type) == "aws::rds::eventsubscription"
     EventSubscriptionsList := input.EventSubscriptionsList[_]
     EventSubscriptionsList.Enabled == false
     EventSubscriptionsList.SourceType == "db-instance"
@@ -142,7 +136,6 @@ rds_instance_event_metadata := {
 default rds_secgroup_event = true
 
 rds_secgroup_event = false {
-    # lower(resource.Type) == "aws::rds::eventsubscription"
     EventSubscriptionsList := input.EventSubscriptionsList[_]
     EventSubscriptionsList.Enabled == false
     EventSubscriptionsList.SourceType == "db-security-group"
@@ -171,7 +164,6 @@ rds_secgroup_event_metadata := {
 default rds_encrypt = true
 
 rds_encrypt = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     not DBInstances.StorageEncrypted
 }
@@ -199,7 +191,6 @@ rds_encrypt_metadata := {
 default rds_multiaz = true
 
 rds_multiaz = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     lower(DBInstances.Engine) != "aurora"
     lower(DBInstances.Engine) != "sqlserver"
@@ -229,7 +220,6 @@ rds_multiaz_metadata := {
 default rds_snapshot = true
 
 rds_snapshot = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     not DBInstances.CopyTagsToSnapshot
 }
@@ -257,13 +247,11 @@ rds_snapshot_metadata := {
 default rds_backup = true
 
 rds_backup = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     not DBInstances.BackupRetentionPeriod
 }
 
 rds_backup = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     to_number(DBInstances.BackupRetentionPeriod) == 0
 }
@@ -293,7 +281,6 @@ default rds_upgrade = true
 
 
 rds_upgrade = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     not DBInstances.AutoMinorVersionUpgrade
 }
@@ -321,13 +308,11 @@ rds_upgrade_metadata := {
 default rds_retention = true
 
 rds_retention = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     not DBInstances.BackupRetentionPeriod
 }
 
 rds_retention = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     to_number(DBInstances.BackupRetentionPeriod) < 7
 }
@@ -356,13 +341,11 @@ rds_retention_metadata := {
 default rds_cluster_retention = true
 
 rds_cluster_retention = false {
-    # lower(resource.Type) == "aws::rds::dbcluster"
     DBClusters := input.DBClusters[_]
     not DBClusters.BackupRetentionPeriod
 }
 
 rds_cluster_retention = false {
-    # lower(resource.Type) == "aws::rds::dbcluster"
     DBClusters := input.DBClusters[_]
     to_number(DBClusters.BackupRetentionPeriod) < 7
 }
@@ -391,7 +374,6 @@ rds_cluster_retention_metadata := {
 default rds_cluster_deletion_protection = true
 
 rds_cluster_deletion_protection = false {
-    # lower(resource.Type) == "aws::rds::dbcluster"
     DBClusters := input.DBClusters[_]
     not DBClusters.DeletionProtection
 }
@@ -420,31 +402,26 @@ rds_cluster_deletion_protection_metadata := {
 default rds_pgaudit_enable = true
 
 rds_pgaudit_enable = false {
-    # lower(resource.Type) == "aws::rds::dbparametergroup"
     Parameters := input.Parameters[_]
     lower(Parameters.ParameterName) == "pgaudit.role"
     lower(Parameters.ParameterValue) != "rds_pgaudit"
 }
 
 rds_pgaudit_enable = false {
-    # lower(resource.Type) == "aws::rds::dbparametergroup"
     Parameters := input.Parameters[_]
     lower(Parameters.ParameterName) == "pgaudit.role"
     not Parameters.ParameterValue
 }
 
 rds_pgaudit_enable = false {
-    # lower(resource.Type) == "aws::rds::dbparametergroup"
     count([c| lower(input.Parameters[_].ParameterName) == "pgaudit.role"; c:=1]) == 0
 }
 
 rds_pgaudit_enable = false {
-    # lower(resource.Type) == "aws::rds::dbparametergroup"
     count(input.Parameters) == 0
 }
 
 rds_pgaudit_enable = false {
-    # lower(resource.Type) == "aws::rds::dbparametergroup"
     not input.Parameters
 }
 
@@ -471,7 +448,6 @@ rds_pgaudit_enable_metadata := {
 default rds_global_cluster_encrypt = true
 
 rds_global_cluster_encrypt = false {
-    # lower(resource.Type) == "aws::rds::globalcluster"
     GlobalClusters := input.GlobalClusters[_]
     not GlobalClusters.StorageEncrypted
 }
@@ -499,7 +475,6 @@ rds_global_cluster_encrypt_metadata := {
 default cluster_iam_authenticate = true
 
 cluster_iam_authenticate = false {
-    # lower(resource.Type) == "aws::rds::dbcluster"
     DBClusters := input.DBClusters[_]
     not DBClusters.EnableIAMDatabaseAuthentication
 }
@@ -527,7 +502,6 @@ cluster_iam_authenticate_metadata := {
 default db_instance_iam_authenticate = true
 
 db_instance_iam_authenticate = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     not DBInstances.EnableIAMDatabaseAuthentication
 }
@@ -556,13 +530,11 @@ db_instance_iam_authenticate_metadata := {
 default db_instance_cloudwatch_logs = true
 
 db_instance_cloudwatch_logs = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     count(DBInstances.EnabledCloudwatchLogsExports) == 0
 }
 
 db_instance_cloudwatch_logs = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     not DBInstances.EnabledCloudwatchLogsExports
 }
@@ -592,7 +564,6 @@ db_instance_cloudwatch_logs_metadata := {
 default db_instance_monitor = true
 
 db_instance_monitor = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     not DBInstances.MonitoringInterval
 }
@@ -620,7 +591,6 @@ db_instance_monitor_metadata := {
 default db_instance_engine_version = true
 
 db_instance_engine_version = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     lower(DBInstances.Engine) == "aurora-postgresql"
     lower(DBInstances.EngineVersion) == deprecated_engine_versions[_]
@@ -649,7 +619,6 @@ db_instance_engine_version_metadata := {
 default db_cluster_engine_version = true
 
 db_cluster_engine_version = false {
-    # lower(resource.Type) == "aws::rds::dbcluster"
     DBClusters := input.DBClusters[_]
     lower(DBClusters.Engine) == "aurora-postgresql"
     lower(DBClusters.EngineVersion) == deprecated_engine_versions[_]
@@ -678,7 +647,6 @@ db_cluster_engine_version_metadata := {
 default db_instance_approved_postgres_version = true
 
 db_instance_approved_postgres_version = false {
-    # lower(resource.Type) == "aws::rds::dbinstance"
     DBInstances := input.DBInstances[_]
     lower(DBInstances.Engine) == "postgres"
     lower(DBInstances.EngineVersion) == deprecated_postgres_versions[_]
@@ -707,7 +675,6 @@ db_instance_approved_postgres_version_metadata := {
 default db_cluster_approved_postgres_version = true
 
 db_cluster_approved_postgres_version = false {
-    # lower(resource.Type) == "aws::rds::dbcluster"
     DBClusters := input.DBClusters[_]
     lower(DBClusters.Engine) == "postgres"
     lower(DBClusters.EngineVersion) == deprecated_postgres_versions[_]
@@ -947,13 +914,11 @@ rds_cluster_encrypt_cmk_metadata := {
 default dax_encrypt = true
 
 dax_encrypt = false {
-    # lower(resource.Type) == "aws::dax::cluster"
     Clusters := input.Clusters[_]
     not Clusters.SSEDescription.Status
 }
 
 dax_encrypt = false {
-    # lower(resource.Type) == "aws::dax::cluster"
     Clusters := input.Clusters[_]
     lower(Clusters.SSEDescription.Status) != "enabling"
     lower(Clusters.SSEDescription.Status) != "enabled"
@@ -982,13 +947,11 @@ dax_encrypt_metadata := {
 default dax_cluster_endpoint_encrypt_at_rest = true
 
 dax_cluster_endpoint_encrypt_at_rest = false {
-    # lower(resource.Type) == "aws::dax::cluster"
     Clusters := input.Clusters[_]
     lower(Clusters.ClusterEndpointEncryptionType) != "tls"
 }
 
 dax_cluster_endpoint_encrypt_at_rest = false {
-    # lower(resource.Type) == "aws::dax::cluster"
     Clusters := input.Clusters[_]
     not Clusters.ClusterEndpointEncryptionType
 }
@@ -1049,7 +1012,6 @@ dax_gs_managed_key_metadata := {
 default qldb_permission_mode = true
 
 qldb_permission_mode = false {
-    # lower(resource.Type) == "aws::qldb::ledger"
     lower(input.PermissionsMode) != "standard"
 }
 
@@ -1078,7 +1040,6 @@ qldb_permission_mode_metadata := {
 default docdb_cluster_encrypt = true
 
 docdb_cluster_encrypt = false {
-    # lower(resource.Type) == "aws::docdb::dbcluster"
     DBClusters := input.DBClusters[_]
     not DBClusters.StorageEncrypted
 }
@@ -1107,14 +1068,12 @@ docdb_cluster_encrypt_metadata := {
 default docdb_cluster_logs = true
 
 docdb_cluster_logs = false {
-    # lower(resource.Type) == "aws::docdb::dbcluster"
     DBClusters := input.DBClusters[_]
     not DBClusters.EnabledCloudwatchLogsExports
 }
 
 
 docdb_cluster_logs = false {
-    # lower(resource.Type) == "aws::docdb::dbcluster"
     DBClusters := input.DBClusters[_]
     count(DBClusters.EnabledCloudwatchLogsExports) == 0
 }
@@ -1142,22 +1101,18 @@ docdb_cluster_logs_metadata := {
 default docdb_parameter_group_tls_enable = true
 
 docdb_parameter_group_tls_enable = false {
-    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
     not input.Parameters
 }
 
 docdb_parameter_group_tls_enable = false {
-    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
     count(input.Parameters) == 0
 }
 
 docdb_parameter_group_tls_enable = false {
-    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
     count([c | input.Parameters[_].ParameterName == "tls"; c:=1]) == 0
 }
 
 docdb_parameter_group_tls_enable = false {
-    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
     Parameters := input.Parameters[_]
     lower(Parameters.ParameterName) == "tls"
     lower(Parameters.ParameterValue) != "enabled"
@@ -1187,22 +1142,18 @@ docdb_parameter_group_tls_enable_metadata := {
 default docdb_parameter_group_audit_logs = true
 
 docdb_parameter_group_audit_logs = false {
-    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
     not input.Parameters
 }
 
 docdb_parameter_group_audit_logs = false {
-    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
     count(input.Parameters) == 0
 }
 
 docdb_parameter_group_audit_logs = false {
-    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
     count([c | input.Parameters[_].ParameterName == "audit_logs"; c:=1]) == 0
 }
 
 docdb_parameter_group_audit_logs = false {
-    # lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
     Parameters := input.Parameters[_]
     lower(Parameters.ParameterName) == "audit_logs"
     lower(Parameters.ParameterValue) != "enabled"
@@ -1269,7 +1220,6 @@ docdb_cluster_encrypted_with_cmk_metadata := {
 default athena_encryption_disabling_prevent = true
 
 athena_encryption_disabling_prevent = false {
-    # lower(resource.Type) == "aws::athena::workgroup"
     not input.WorkGroup.Configuration.EnforceWorkGroupConfiguration
 }
 
@@ -1296,7 +1246,6 @@ athena_encryption_disabling_prevent_metadata := {
 default athena_logging_is_enabled = true
 
 athena_logging_is_enabled = false {
-    # lower(resource.Type) == "aws::athena::workgroup"
     input.WorkGroup.Configuration.PublishCloudWatchMetricsEnabled == available_true_choices[_]
 }
 
@@ -1324,19 +1273,16 @@ athena_logging_is_enabled_metadata := {
 default timestream_database_encryption = true
 
 timestream_database_encryption = false {
-    # lower(resource.Type) == "aws::timestream::database"
     Databases := input.Databases[_]
     not Databases.KmsKeyId
 }
 
 timestream_database_encryption = false {
-    # lower(resource.Type) == "aws::timestream::database"
     Databases := input.Databases[_]
     count(Databases.KmsKeyId) == 0
 }
 
 timestream_database_encryption = false {
-    # lower(resource.Type) == "aws::timestream::database"
     Databases := input.Databases[_]
     Databases.KmsKeyId == null
 }
@@ -1366,13 +1312,11 @@ timestream_database_encryption_metadata := {
 default neptune_cluster_logs = true
 
 neptune_cluster_logs = false {
-    # lower(resource.Type) == "aws::neptune::dbcluster"
     DBClusters := input.DBClusters[_]
     not DBClusters.EnabledCloudwatchLogsExports
 }
 
 neptune_cluster_logs = false {
-    # lower(resource.Type) == "aws::neptune::dbcluster"
     DBClusters := input.DBClusters[_]
     count(DBClusters.EnabledCloudwatchLogsExports) == 0
 }
@@ -1401,13 +1345,11 @@ neptune_cluster_logs_metadata := {
 default dynamodb_encrypt = true
 
 dynamodb_encrypt = false {
-    # lower(resource.Type) == "aws::dynamodb::table"
     lower(input.Table.SSEDescription.Status) != "enabling"
     lower(input.Table.SSEDescription.Status) != "enabled"
 }
 
 dynamodb_encrypt = false {
-    # lower(resource.Type) == "aws::dynamodb::table"
     not input.Table.SSEDescription.Status
 }
 
@@ -1435,12 +1377,10 @@ dynamodb_encrypt_metadata := {
 default dynamodb_PITR_enable = true
 
 dynamodb_PITR_enable = false {
-    # lower(resource.Type) == "aws::dynamodb::table"
     not input.ContinuousBackupsDescription.PointInTimeRecoveryDescription.PointInTimeRecoveryStatus
 }
 
 dynamodb_PITR_enable = false {
-    # lower(resource.Type) == "aws::dynamodb::table"
     lower(input.ContinuousBackupsDescription.PointInTimeRecoveryDescription.PointInTimeRecoveryStatus) != "enabled"
 }
 
@@ -1468,13 +1408,11 @@ dynamodb_PITR_enable_metadata := {
 default dynamodb_kinesis_stream = true
 
 dynamodb_kinesis_stream = false {
-    # lower(resource.Type) == "aws::dynamodb::table"
     KinesisDataStreamDestinations := input.KinesisDataStreamDestinations[_]
     count(KinesisDataStreamDestinations.StreamArn) == 0
 }
 
 dynamodb_kinesis_stream = false {
-    # lower(resource.Type) == "aws::dynamodb::table"
     KinesisDataStreamDestinations := input.KinesisDataStreamDestinations[_]
     not KinesisDataStreamDestinations.StreamArn
 }
@@ -1508,7 +1446,7 @@ dynamodb_not_customer_managed_key = false {
     Y := input.TEST_KMS[_]
     X.Table.SSEDescription.Status == "ENABLED"
     X.Table.SSEDescription.SSEType == "KMS"
-    has_property(X.Table.SSEDescription, "KMSMasterKeyArn")
+    common.has_property(X.Table.SSEDescription, "KMSMasterKeyArn")
 	X.Table.SSEDescription.KMSMasterKeyArn == Y.KeyMetadata.Arn
 	Y.KeyMetadata.KeyManager != "CUSTOMER"
 }
@@ -1537,7 +1475,6 @@ dynamodb_not_customer_managed_key_metadata := {
 default cache_failover = true
 
 cache_failover = false {
-    # lower(resource.Type) == "aws::elasticache::replicationgroup"
     ReplicationGroups := input.ReplicationGroups[_]
     lower(ReplicationGroups.AutomaticFailover) != "enabled"
     lower(ReplicationGroups.AutomaticFailover) != "enabling"
@@ -1566,7 +1503,6 @@ cache_failover_metadata := {
 default cache_redis_auth = true
 
 cache_redis_auth = false {
-    # lower(resource.Type) == "aws::elasticache::replicationgroup"
     ReplicationGroups := input.ReplicationGroups[_]
     not ReplicationGroups.AuthTokenEnabled
 }
@@ -1596,7 +1532,6 @@ default cache_redis_encrypt = true
 
 
 cache_redis_encrypt = false {
-    # lower(resource.Type) == "aws::elasticache::replicationgroup"
     ReplicationGroups := input.ReplicationGroups[_]
     not ReplicationGroups.AtRestEncryptionEnabled
 }
@@ -1625,7 +1560,6 @@ cache_redis_encrypt_metadata := {
 default cache_encrypt = true
 
 cache_encrypt = false {
-    # lower(resource.Type) == "aws::elasticache::replicationgroup"
     ReplicationGroups := input.ReplicationGroups[_]
     not ReplicationGroups.TransitEncryptionEnabled
 }
@@ -1654,13 +1588,11 @@ cache_encrypt_metadata := {
 default cache_ksm_key = true
 
 cache_ksm_key = false {
-    # lower(resource.Type) == "aws::elasticache::replicationgroup"
     ReplicationGroups := input.ReplicationGroups[_]
     not ReplicationGroups.KmsKeyId
 }
 
 cache_ksm_key = false {
-    # lower(resource.Type) == "aws::elasticache::replicationgroup"
     ReplicationGroups := input.ReplicationGroups[_]
     not startswith(ReplicationGroups.KmsKeyId, "arn:")
 }
@@ -1688,25 +1620,21 @@ cache_ksm_key_metadata := {
 default cache_replication_group_id = true
 
 cache_replication_group_id = false {
-    # lower(resource.Type) == "aws::elasticache::replicationgroup"
     ReplicationGroups := input.ReplicationGroups[_]
     not ReplicationGroups.ReplicationGroupId
 }
 
 cache_replication_group_id = false {
-    # lower(resource.Type) == "aws::elasticache::replicationgroup"
     ReplicationGroups := input.ReplicationGroups[_]
     ReplicationGroups.ReplicationGroupId == ""
 }
 
 cache_replication_group_id = false {
-    # lower(resource.Type) == "aws::elasticache::replicationgroup"
     ReplicationGroups := input.ReplicationGroups[_]
     ReplicationGroups.ReplicationGroupId == null
 }
 
 cache_replication_group_id = false {
-    # lower(resource.Type) == "aws::elasticache::replicationgroup"
     ReplicationGroups := input.ReplicationGroups[_]
     contains(lower(ReplicationGroups.ReplicationGroupId), "*")
 }
@@ -1734,7 +1662,6 @@ cache_replication_group_id_metadata := {
 default automatic_backups_for_redis_cluster = true
 
 automatic_backups_for_redis_cluster = false {
-    # lower(resource.Type) == "aws::elasticache::cachecluster"
     CacheCluster := input.CacheClusters[_]
     CacheCluster.SnapshotRetentionLimit == 0
 }
@@ -1762,7 +1689,6 @@ automatic_backups_for_redis_cluster_metadata := {
 default redis_with_intransit_encryption = true
 
 redis_with_intransit_encryption = false {
-    # lower(resource.Type) == "aws::elasticache::cachecluster"
     CacheCluster := input.CacheClusters[_]
     CacheCluster.TransitEncryptionEnabled == available_false_choices[_]
     not CacheCluster.ReplicationGroupId
@@ -1849,14 +1775,12 @@ cache_cluster_vpc_metadata := {
 default dms_endpoint = true
 
 dms_endpoint = false {
-    # lower(resource.Type) == "aws::dms::endpoint"
     Endpoints := input.Endpoints[_]
     lower(Endpoints.EngineName) != "s3"
     lower(Endpoints.SslMode) == "none"
 }
 
 dms_endpoint = false {
-    # lower(resource.Type) == "aws::dms::endpoint"
     Endpoints := input.Endpoints[_]
     lower(Endpoints.EngineName) != "s3"
     not Endpoints.SslMode
@@ -1886,7 +1810,6 @@ dms_endpoint_metadata := {
 default dms_public_access = true
 
 dms_public_access = false {
-    # lower(resource.Type) == "aws::dms::replicationinstance"
     replication_instances := input.ReplicationInstances[_]
     replication_instances.PubliclyAccessible == true
 }
@@ -1915,7 +1838,6 @@ dms_public_access_metadata := {
 default dms_certificate_expiry = true
 
 dms_certificate_expiry = false {
-    # lower(resource.Type) == "aws::dms::replicationinstance"
     Certificate := input.Certificates[_]
     current_date_timestamp := time.now_ns()
 	expiry_timestamp := round(Certificate.ValidToDate)

@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html
 
@@ -57,7 +59,6 @@ redshift_encrypt_key_metadata := {
 default redshift_public = true
 
 redshift_public = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
     Clusters := input.Clusters[_]
     Clusters.PubliclyAccessible == true
 }
@@ -85,17 +86,14 @@ redshift_public_metadata := {
 default redshift_require_ssl = true
 
 redshift_require_ssl = false {
-    # lower(resource.Type) == "aws::redshift::clusterparametergroup"
     not input.Parameters
 }
 
 redshift_require_ssl = false {
-    # lower(resource.Type) == "aws::redshift::clusterparametergroup"
     count([c | lower(input.Parameters[_].ParameterName) == "require_ssl"; c := 1]) == 0
 }
 
 redshift_require_ssl = false {
-    # lower(resource.Type) == "aws::redshift::clusterparametergroup"
     params = input.Parameters[j]
     lower(params.ParameterName) == "require_ssl"
     lower(params.ParameterValue) == "false"
@@ -124,7 +122,6 @@ redshift_require_ssl_metadata := {
 default redshift_encrypt = true
 
 redshift_encrypt = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
     Clusters := input.Clusters[_]
     not Clusters.Encrypted
 }
@@ -153,7 +150,6 @@ redshift_encrypt_metadata := {
 default redshift_allow_version_upgrade = true
 
 redshift_allow_version_upgrade = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
     Clusters := input.Clusters[_]
     not Clusters.AllowVersionUpgrade
 }
@@ -182,19 +178,16 @@ redshift_allow_version_upgrade_metadata := {
 default redshift_deploy_vpc = true
 
 redshift_allow_version_upgrade = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
     Clusters := input.Clusters[_]
     count(Clusters.ClusterSubnetGroupName) == 0
 }
 
 redshift_allow_version_upgrade = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
     Clusters := input.Clusters[_]
     Clusters.ClusterSubnetGroupName == null
 }
 
 redshift_allow_version_upgrade = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
     Clusters := input.Clusters[_]
     not Clusters.ClusterSubnetGroupName
 }
@@ -223,13 +216,11 @@ redshift_deploy_vpc_metadata := {
 default redshift_audit = true
 
 redshift_audit = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
     Clusters := input.Clusters[_]
     not Clusters.LoggingProperties.BucketName
 }
 
 redshift_audit = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
     Clusters := input.Clusters[_]
     count(Clusters.LoggingProperties.BucketName) == 0
 }

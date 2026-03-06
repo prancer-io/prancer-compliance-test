@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # 
 # PR-AWS-CLD-S3-001
 # 
@@ -11,12 +13,10 @@ s3_accesslog = false {
 }
 
 s3_accesslog = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     count(input.LoggingEnabled.TargetBucket) == 0
 }
 
 s3_accesslog = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     count(input.LoggingEnabled.TargetPrefix) == 0
 }
 
@@ -44,13 +44,11 @@ s3_accesslog_metadata := {
 default s3_acl_delete = true
 
 s3_acl_delete = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     not policy.Statement
 }
 
 s3_acl_delete = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -59,7 +57,6 @@ s3_acl_delete = false {
 }
 
 s3_acl_delete = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -90,13 +87,11 @@ s3_acl_delete_metadata := {
 default s3_acl_get = true
 
 s3_acl_get = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     not policy.Statement
 }
 
 s3_acl_get = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -105,7 +100,6 @@ s3_acl_get = false {
 }
 
 s3_acl_get = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -114,7 +108,6 @@ s3_acl_get = false {
 }
 
 s3_acl_get = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -145,13 +138,11 @@ s3_acl_get_metadata := {
 default s3_acl_list = true
 
 s3_acl_list = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     not policy.Statement
 }
 
 s3_acl_list = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -160,7 +151,6 @@ s3_acl_list = false {
 }
 
 s3_acl_list = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -170,7 +160,6 @@ s3_acl_list = false {
 }
 
 s3_acl_list = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -202,13 +191,11 @@ s3_acl_list_metadata := {
 default s3_acl_put = true
 
 s3_acl_put = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     not policy.Statement
 }
 
 s3_acl_put = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -217,7 +204,6 @@ s3_acl_put = false {
 }
 
 s3_acl_put = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -227,7 +213,6 @@ s3_acl_put = false {
 }
 
 s3_acl_put = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -258,7 +243,6 @@ s3_acl_put_metadata := {
 default s3_cloudtrail = false
 
 s3_cloudtrail = true {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
     input.IsLogging == true
 }
 
@@ -285,7 +269,6 @@ s3_cloudtrail_metadata := {
 default s3_versioning = false
 
 s3_versioning = true {
-    # lower(resource.Type) == "aws::s3::bucket"
     lower(input.Status) == "enabled"
 }
 
@@ -356,7 +339,6 @@ s3_versioning_metadata := {
 default s3_transport = true
 
 s3_transport = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
     not statement.Condition.StringLike
@@ -364,7 +346,6 @@ s3_transport = false {
 }
 
 s3_transport = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
     statement.Condition.StringLike
@@ -372,7 +353,6 @@ s3_transport = false {
 }
 
 s3_transport = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
     statement.Condition.StringLike
@@ -380,7 +360,6 @@ s3_transport = false {
 }
 
 s3_transport = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
     statement.Condition.Bool
@@ -388,7 +367,6 @@ s3_transport = false {
 }
 
 s3_transport = false {
-    # lower(resource.Type) == "aws::s3::bucketpolicy"
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
     statement.Condition.Bool
@@ -525,7 +503,6 @@ s3_transport_metadata := {
 default s3_encryption = false
 
 s3_encryption = true {
-    # lower(resource.Type) == "aws::s3::bucket"
     input.ServerSideEncryptionConfiguration
 }
 
@@ -552,22 +529,18 @@ s3_encryption_metadata := {
 default s3_website = true
 
 s3_website = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     input.IndexDocument
 }
 
 s3_website = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     input.ErrorDocument
 }
 
 s3_website = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     input.RedirectAllRequestsTo
 }
 
 s3_website = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     input.RoutingRules
 }
 
@@ -595,7 +568,6 @@ s3_website_metadata := {
 default s3_cors = true
 
 s3_cors = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     cors_rule := input.CORSRules[_]
     cors_rule.AllowedHeaders[_] == "*"
     cors_rule.AllowedMethods[_] == "*"
@@ -626,19 +598,16 @@ default bucket_kms_encryption = true
 
 
 bucket_kms_encryption = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     rules := input.ServerSideEncryptionConfiguration.Rules[j]
     not rules.BucketKeyEnabled
 }
 
 bucket_kms_encryption = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     rules := input.ServerSideEncryptionConfiguration.Rules[j]
     lower(rules.ServerSideEncryptionByDefault.SSEAlgorithm) != "aws:kms"
 }
 
 bucket_kms_encryption = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     rules := input.ServerSideEncryptionConfiguration.Rules[j]
     lower(rules.ServerSideEncryptionByDefault.SSEAlgorithm) == "aws:kms"
     count(rules.ServerSideEncryptionByDefault.KMSMasterKeyID) == 0
@@ -669,7 +638,6 @@ bucket_kms_encryption_metadata := {
 default s3_object_lock_enable = false
 
 s3_object_lock_enable = true {
-    # lower(resource.Type) == "aws::s3::bucket"
     lower(input.ObjectLockConfiguration.ObjectLockEnabled) == "enabled"
 }
 
@@ -697,17 +665,14 @@ s3_object_lock_enable_metadata := {
 default s3_cross_region_replica = true
 
 s3_cross_region_replica = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     not input.ReplicationConfiguration
 }
 
 s3_cross_region_replica = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     count(input.ReplicationConfiguration.Rules) == 0
 }
 
 s3_cross_region_replica = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     Rules := input.ReplicationConfiguration.Rules[j]
     not Rules.Destination
 }
@@ -736,7 +701,6 @@ s3_cross_region_replica_metadata := {
 default s3_public_access_block = true
 
 s3_public_access_block = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     not input.PublicAccessBlockConfiguration.BlockPublicAcls
 }
 
@@ -764,7 +728,6 @@ s3_public_access_block_metadata := {
 default s3_restrict_public_bucket = true
 
 s3_restrict_public_bucket = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     not input.PublicAccessBlockConfiguration.RestrictPublicBuckets
 }
 
@@ -793,7 +756,6 @@ default s3_ignore_public_acl = true
 
 
 s3_ignore_public_acl = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     not input.PublicAccessBlockConfiguration.IgnorePublicAcls
 }
 
@@ -821,7 +783,6 @@ s3_ignore_public_acl_metadata := {
 default s3_block_public_policy = true
 
 s3_block_public_policy = false {
-    # lower(resource.Type) == "aws::s3::bucket"
     not input.PublicAccessBlockConfiguration.BlockPublicPolicy
 }
 
@@ -1047,7 +1008,6 @@ default efs_kms = false
 
 
 efs_kms = true {
-    # lower(resource.Type) == "aws::efs::filesystem"
     FileSystems := input.FileSystems[_]
     startswith(FileSystems.KmsKeyId, "arn:")
 }
@@ -1075,7 +1035,6 @@ efs_kms_metadata := {
 default efs_encrypt = true
 
 efs_encrypt = false {
-    # lower(resource.Type) == "aws::efs::filesystem"
     FileSystems := input.FileSystems[_]
     not FileSystems.Encrypted
 }
@@ -1141,7 +1100,6 @@ efs_cmk_metadata := {
 default ebs_encrypt = true
 
 ebs_encrypt = false {
-    # lower(resource.Type) == "aws::ec2::volume"
     volumes := input.Volumes[_]
     volumes.Encrypted != true
 }
@@ -1207,7 +1165,6 @@ ebs_encrypt_with_cmk_metadata := {
 default backup_public_access_disable = true
 
 backup_public_access_disable = false {
-    # lower(resource.Type) == "aws::backup::backupvault"
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -1215,7 +1172,6 @@ backup_public_access_disable = false {
 }
 
 backup_public_access_disable = false {
-    # lower(resource.Type) == "aws::backup::backupvault"
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -1223,7 +1179,6 @@ backup_public_access_disable = false {
 }
 
 backup_public_access_disable = false {
-    # lower(resource.Type) == "aws::backup::backupvault"
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -1254,7 +1209,6 @@ backup_public_access_disable_metadata := {
 default transer_server_public_expose = false
 
 transer_server_public_expose = true {
-    # lower(resource.Type) == "aws::transfer::server"
     lower(input.Server.EndpointType) == "vpc"
 }
 

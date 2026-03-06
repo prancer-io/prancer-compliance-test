@@ -1,16 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
-
-array_element_contains(target_array, element_string) = true {
-  contains(lower(target_array[_]), lower(element_string))
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts
 
@@ -194,9 +184,9 @@ azure_attribute_absence ["log_profile_category"] {
 no_azure_issue ["log_profile_category"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/logprofiles"
-    array_contains(resource.properties.categories, "write")
-    array_contains(resource.properties.categories, "delete")
-    array_contains(resource.properties.categories, "action")
+    common.array_contains(resource.properties.categories, "write")
+    common.array_contains(resource.properties.categories, "delete")
+    common.array_contains(resource.properties.categories, "action")
 }
 
 log_profile_category {
@@ -258,7 +248,7 @@ azure_issue["alerts_to_create_update_sql_server_firewall_rule_exist"] {
     count([c | allOf := resource.properties.condition.allOf[_];
               lower(allOf.field) == "operationname";
               lower(allOf.equals) == "microsoft.sql/servers/firewallrules/write";
-              not array_element_contains(resource.properties.scopes, "resourceGroups");
+              not common.array_element_contains(resource.properties.scopes, "resourceGroups");
               c := 1]) == 0
 }
 
@@ -320,7 +310,7 @@ azure_issue["alerts_to_create_update_nsg_exist"] {
     count([c | allOf := resource.properties.condition.allOf[_];
               lower(allOf.field) == "operationname";
               lower(allOf.equals) == "microsoft.network/networksecuritygroups/write";
-              not array_element_contains(resource.properties.scopes, "resourceGroups");
+              not common.array_element_contains(resource.properties.scopes, "resourceGroups");
               c := 1]) == 0
 }
 
@@ -382,7 +372,7 @@ azure_issue["alerts_to_create_update_nsg_rule_exist"] {
     count([c | allOf := resource.properties.condition.allOf[_];
               lower(allOf.field) == "operationname";
               lower(allOf.equals) == "microsoft.network/networksecuritygroups/securityrules/write";
-              not array_element_contains(resource.properties.scopes, "resourceGroups");
+              not common.array_element_contains(resource.properties.scopes, "resourceGroups");
               c := 1]) == 0
 }
 
@@ -444,7 +434,7 @@ azure_issue["alerts_to_create_update_security_solution_exist"] {
     count([c | allOf := resource.properties.condition.allOf[_];
               lower(allOf.field) == "operationname";
               lower(allOf.equals) == "microsoft.security/securitysolutions/write";
-              not array_element_contains(resource.properties.scopes, "resourceGroups");
+              not common.array_element_contains(resource.properties.scopes, "resourceGroups");
               c := 1]) == 0
 }
 
@@ -506,7 +496,7 @@ azure_issue["alerts_to_create_policy_assignment_exist"] {
     count([c | allOf := resource.properties.condition.allOf[_];
               lower(allOf.field) == "operationname";
               lower(allOf.equals) == "microsoft.authorization/policyassignments/write";
-              not array_element_contains(resource.properties.scopes, "resourceGroups");
+              not common.array_element_contains(resource.properties.scopes, "resourceGroups");
               c := 1]) == 0
 }
 
@@ -568,7 +558,7 @@ azure_issue["alerts_to_delete_sql_server_firewall_rule_exist"] {
     count([c | allOf := resource.properties.condition.allOf[_];
               lower(allOf.field) == "operationname";
               lower(allOf.equals) == "microsoft.sql/servers/firewallrules/delete";
-              not array_element_contains(resource.properties.scopes, "resourceGroups");
+              not common.array_element_contains(resource.properties.scopes, "resourceGroups");
               c := 1]) == 0
 }
 
@@ -630,7 +620,7 @@ azure_issue["alerts_to_delete_network_security_group_exist"] {
     count([c | allOf := resource.properties.condition.allOf[_];
               lower(allOf.field) == "operationname";
               lower(allOf.equals) == "microsoft.network/networksecuritygroups/delete";
-              not array_element_contains(resource.properties.scopes, "resourceGroups");
+              not common.array_element_contains(resource.properties.scopes, "resourceGroups");
               c := 1]) == 0
 }
 
@@ -692,7 +682,7 @@ azure_issue["alerts_to_delete_network_security_group_rule_exist"] {
     count([c | allOf := resource.properties.condition.allOf[_];
               lower(allOf.field) == "operationname";
               lower(allOf.equals) == "microsoft.network/networksecuritygroups/securityrules/delete";
-              not array_element_contains(resource.properties.scopes, "resourceGroups");
+              not common.array_element_contains(resource.properties.scopes, "resourceGroups");
               c := 1]) == 0
 }
 
@@ -754,7 +744,7 @@ azure_issue["alerts_to_delete_security_solution_exist"] {
     count([c | allOf := resource.properties.condition.allOf[_];
               lower(allOf.field) == "operationname";
               lower(allOf.equals) == "microsoft.security/securitysolutions/delete";
-              not array_element_contains(resource.properties.scopes, "resourceGroups");
+              not common.array_element_contains(resource.properties.scopes, "resourceGroups");
               c := 1]) == 0
 }
 
@@ -816,7 +806,7 @@ azure_issue["alerts_to_update_security_policy_exist"] {
     count([c | allOf := resource.properties.condition.allOf[_];
               lower(allOf.field) == "operationname";
               lower(allOf.equals) == "microsoft.security/policies/write";
-              not array_element_contains(resource.properties.scopes, "resourceGroups");
+              not common.array_element_contains(resource.properties.scopes, "resourceGroups");
               c := 1]) == 0
 }
 
@@ -878,7 +868,7 @@ azure_issue["alerts_to_delete_policy_assignment_exist"] {
     count([c | allOf := resource.properties.condition.allOf[_];
               lower(allOf.field) == "operationname";
               lower(allOf.equals) == "microsoft.authorization/policyassignments/delete";
-              not array_element_contains(resource.properties.scopes, "resourceGroups");
+              not common.array_element_contains(resource.properties.scopes, "resourceGroups");
               c := 1]) == 0
 }
 

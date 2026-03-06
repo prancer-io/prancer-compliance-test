@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies
@@ -92,7 +90,7 @@ azure_issue["sql_server_alert"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.state) == "enabled";
               c := 1]) == 0
 }
@@ -162,7 +160,7 @@ azure_issue["sql_managed_instance_alert"] {
     lower(resource.type) == "microsoft.sql/managedinstances"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/managedinstances/securityalertpolicies";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.state) == "enabled";
               c := 1]) == 0
 }
@@ -292,7 +290,7 @@ azure_issue["sql_server_email_account"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.emailAccountAdmins == true;
               c := 1]) == 0
 }
@@ -426,7 +424,7 @@ azure_issue["sql_server_email_addressess"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               count(r.properties.emailAddresses) > 0;
               c := 1]) == 0
 }
@@ -572,7 +570,7 @@ azure_issue["sql_server_retention_days"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               to_number(r.properties.retentionDays) > 0;
               to_number(r.properties.retentionDays) < 90;
               c := 1]) > 0
@@ -583,7 +581,7 @@ azure_issue["sql_server_retention_days"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               to_number(r.properties.retentionDays) < 0;
               c := 1]) > 0
 }
@@ -712,10 +710,10 @@ azure_issue["sql_server_disabled_alerts"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/securityalertpolicies";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               # default export came up with a blank entries: "disabledAlerts": [""]
               count(r.properties.disabledAlerts) > 0;
-              not array_contains(r.properties.disabledAlerts, "");
+              not common.array_contains(r.properties.disabledAlerts, "");
               c := 1]) > 0
 }
 

@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html
 
 #
@@ -9,22 +11,18 @@ package rule
 default acm_wildcard = true
 
 acm_wildcard = false {
-    # lower(resource.Type) == "aws::certificatemanager::certificate"
     not input.Certificate.DomainName
 }
 
 acm_wildcard = false {
-    # lower(resource.Type) == "aws::certificatemanager::certificate"
     startswith(input.Certificate.DomainName, "*")
 }
 
 acm_wildcard = false {
-    # lower(resource.Type) == "aws::certificatemanager::certificate"
     startswith(input.Certificate.SubjectAlternativeNames[_], "*")
 }
 
 acm_wildcard = false {
-    # lower(resource.Type) == "aws::certificatemanager::certificate"
     startswith(input.Certificate.DomainValidationOptions[_].DomainName, "*")
 }
 
@@ -52,7 +50,6 @@ acm_wildcard_metadata := {
 default acm_ct_log = true
 
 acm_ct_log = false {
-    # lower(resource.Type) == "aws::certificatemanager::certificate"
     lower(input.Certificate.Options.CertificateTransparencyLoggingPreference) != "enabled"
 }
 
@@ -81,19 +78,16 @@ default acm_certificate_arn = true
 
 acm_certificate_arn = false {
     # type = ["aws::certificatemanager::certificate", "aws::acmpca::certificate", "aws::acmpca::certificateauthorityactivation"]
-    # lower(resource.Type) == type[_]
     not input.Certificate.CertificateAuthorityArn
 }
 
 acm_certificate_arn = false {
     # type = ["aws::certificatemanager::certificate", "aws::acmpca::certificate", "aws::acmpca::certificateauthorityactivation"]
-    # lower(resource.Type) == type[_]
     count(input.Certificate.CertificateAuthorityArn) == 0
 }
 
 acm_certificate_arn = false{
     # type = ["aws::certificatemanager::certificate", "aws::acmpca::certificate", "aws::acmpca::certificateauthorityactivation"]
-    # lower(resource.Type) == type[_]
     input.Certificate.CertificateAuthorityArn == null
 }
 
@@ -121,12 +115,10 @@ acm_certificate_arn_metadata := {
 default acm_do_not_have_unused_certificate = true         
 
 acm_do_not_have_unused_certificate = false {
-    # lower(resource.Type) == "aws::certificatemanager::certificate"
     not input.Certificate.InUseBy
 }
 
 acm_do_not_have_unused_certificate = false {
-    # lower(resource.Type) == "aws::certificatemanager::certificate"
     count(input.Certificate.InUseBy) == 0
 }
 
@@ -153,7 +145,6 @@ acm_do_not_have_unused_certificate_metadata := {
 default acm_do_not_have_certificate_pending_validation = true
 
 acm_do_not_have_certificate_pending_validation = false {
-    # lower(resource.Type) == "aws::certificatemanager::certificate"
     lower(input.Certificate.Status) == "pending_validation"
 }
 
@@ -183,7 +174,6 @@ default acm_do_not_have_invalid_or_failed = true
 certificate_invalid_or_failed_status := ["validation_timed_out", "failed"]
 
 acm_do_not_have_invalid_or_failed = false {
-    # lower(resource.Type) == "aws::certificatemanager::certificate"
     lower(input.Certificate.Status) == certificate_invalid_or_failed_status[_]
 }
 

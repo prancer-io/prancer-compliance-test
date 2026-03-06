@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 #
 # PR-AWS-CLD-AMF-001
 # AWS::Amplify::App

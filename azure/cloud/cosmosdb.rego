@@ -1,12 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://learn.microsoft.com/en-us/azure/templates/microsoft.documentdb/databaseaccounts?pivots=deployment-language-arm-template
 #
@@ -100,7 +94,7 @@ azure_issue["azure_cosmos_db_configured_with_private_endpoint"] {
     lower(resource.type) == "microsoft.documentdb/databaseaccounts"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.documentdb/databaseaccounts/privateendpointconnections";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.privateLinkServiceConnectionState.status) == "approved";
               c := 1]) == 0
 }
@@ -152,7 +146,7 @@ default acd_vnet_configured = null
 azure_attribute_absence["acd_vnet_configured"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.documentdb/databaseaccounts"
-    not has_property(resource.properties, "isVirtualNetworkFilterEnabled")
+    not common.has_property(resource.properties, "isVirtualNetworkFilterEnabled")
 }
 
 azure_issue["acd_vnet_configured"] {
@@ -265,7 +259,7 @@ default acd_disbaled_key_based_metadata_write_access = null
 azure_attribute_absence["acd_disbaled_key_based_metadata_write_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.documentdb/databaseaccounts"
-    not has_property(resource.properties, "disableKeyBasedMetadataWriteAccess")
+    not common.has_property(resource.properties, "disableKeyBasedMetadataWriteAccess")
 }
 
 azure_issue["acd_disbaled_key_based_metadata_write_access"] {

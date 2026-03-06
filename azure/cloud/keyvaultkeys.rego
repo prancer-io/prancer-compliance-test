@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/keys
 
 #
@@ -23,7 +25,6 @@ azure_issue["kv_keys_expire"] {
     lower(resource.type) == "microsoft.keyvault/vaults/keys"
     #resource.properties.attributes.enabled != false
     to_number(resource.properties.attributes.exp) < 0
-    #count(resource.properties.rotationPolicy.attributes.expiryTime) == 0
 }
 
 

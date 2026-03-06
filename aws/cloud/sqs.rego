@@ -1,10 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html
+import data.common
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html
 
 #
 # PR-AWS-CLD-SQS-001
@@ -13,7 +11,6 @@ has_property(parent_object, target_property) {
 default sqs_deadletter = true
 
 sqs_deadletter = false {
-    # lower(resource.Type) == "aws::sqs::queue"
     RedrivePolicy := json.unmarshal(input.RedrivePolicy)
     not RedrivePolicy.deadLetterTargetArn
 }
@@ -42,7 +39,6 @@ default sqs_encrypt_key = true
 
 
 sqs_encrypt_key = false {
-    # lower(resource.Type) == "aws::sqs::queue"
     input.KmsMasterKeyId
     contains(lower(input.KmsMasterKeyId), "alias/aws/sqs")
 }
@@ -70,12 +66,10 @@ sqs_encrypt_key_metadata := {
 default sqs_encrypt = true
 
 sqs_encrypt = false {
-    # lower(resource.Type) == "aws::sqs::queue"
     not input.KmsMasterKeyId
 }
 
 sqs_encrypt = false {
-    # lower(resource.Type) == "aws::sqs::queue"
     count(input.KmsMasterKeyId) == 0
 }
 
@@ -103,7 +97,6 @@ sqs_encrypt_metadata := {
 default sqs_policy_public = true
 
 sqs_policy_public = false {
-    # lower(resource.Type) == "aws::sqs::queuepolicy"
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -111,7 +104,6 @@ sqs_policy_public = false {
 }
 
 sqs_policy_public = false {
-    # lower(resource.Type) == "aws::sqs::queuepolicy"
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -119,7 +111,6 @@ sqs_policy_public = false {
 }
 
 sqs_policy_public = false {
-    # lower(resource.Type) == "aws::sqs::queuepolicy"
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -150,7 +141,6 @@ sqs_policy_public_metadata := {
 default sqs_policy_action = true
 
 sqs_policy_action = false {
-    # lower(resource.Type) == "aws::sqs::queuepolicy"
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -158,7 +148,6 @@ sqs_policy_action = false {
 }
 
 sqs_policy_action = false {
-    # lower(resource.Type) == "aws::sqs::queuepolicy"
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -231,7 +220,7 @@ sqs_accessible_via_specific_vpc = false {
     statement := policy.Statement[j]
     statement.Condition
     lower(statement.Effect) == "allow"
-    not has_property(statement, "Condition")
+    not common.has_property(statement, "Condition")
 }
 
 sqs_accessible_via_specific_vpc = false {
@@ -239,7 +228,7 @@ sqs_accessible_via_specific_vpc = false {
     statement := policy.Statement[j]
     statement.Condition
     lower(statement.Effect) == "allow"
-    not has_property(statement.Condition, "StringEquals")
+    not common.has_property(statement.Condition, "StringEquals")
 }
 
 sqs_accessible_via_specific_vpc = false {
@@ -247,7 +236,7 @@ sqs_accessible_via_specific_vpc = false {
     statement := policy.Statement[j]
     statement.Condition
     lower(statement.Effect) == "allow"
-    not has_property(statement.Condition.StringEquals, "aws:SourceVpce")
+    not common.has_property(statement.Condition.StringEquals, "aws:SourceVpce")
 }
 
 sqs_accessible_via_specific_vpc_err = "Ensure SQS is only accessible via specific VPCe service." {

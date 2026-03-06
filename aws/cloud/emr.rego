@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration
 
 available_true_choices := ["true", true]
@@ -12,12 +14,10 @@ available_false_choices := ["false", false]
 default emr_security = true
 
 emr_security = false {
-    # lower(resource.Type) == "aws::emr::cluster"
     not input.SecurityConfiguration
 }
 
 emr_security = false{
-    # lower(resource.Type) == "aws::emr::cluster"
     count(input.SecurityConfiguration) == 0
 }
 
@@ -45,12 +45,10 @@ emr_security_metadata := {
 default emr_kerberos = true
 
 emr_kerberos = false {
-    # lower(resource.Type) == "aws::emr::cluster"
     not input.Cluster.KerberosAttributes.Realm
 }
 
 emr_kerberos = false {
-    # lower(resource.Type) == "aws::emr::cluster"
     count(input.Cluster.KerberosAttributes.Realm) == 0
 }
 
@@ -78,13 +76,11 @@ emr_kerberos_metadata := {
 default emr_s3_encryption = true
 
 emr_s3_encryption = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
     SecurityConfiguration := json.unmarshal(input.SecurityConfiguration)
     not SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode
 }
 
 emr_s3_encryption = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
     SecurityConfiguration := json.unmarshal(input.SecurityConfiguration)
     count(SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) == 0
 }
@@ -113,18 +109,15 @@ emr_s3_encryption_metadata := {
 default emr_local_encryption_cmk = true
 
 emr_local_encryption_cmk = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
     not input.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType
 }
 
 
 emr_local_encryption_cmk = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
     count(input.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) == 0
 }
 
 emr_local_encryption_cmk = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
     lower(input.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) != "awskms"
 }
 
@@ -152,7 +145,6 @@ emr_local_encryption_cmk_metadata := {
 default emr_rest_encryption = true
 
 emr_rest_encryption = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
     not input.SecurityConfiguration.EncryptionConfiguration.EnableAtRestEncryption
 }
 
@@ -179,7 +171,6 @@ emr_rest_encryption_metadata := {
 default emr_transit_encryption = true
 
 emr_transit_encryption = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
     not input.SecurityConfiguration.EncryptionConfiguration.EnableInTransitEncryption
 }
 
@@ -206,7 +197,6 @@ emr_transit_encryption_metadata := {
 default emr_cluster_level_logging = true
 
 emr_cluster_level_logging = false {
-    # lower(resource.Type) == "aws::emr::cluster"
     not input.Cluster.LogUri
 }
 
@@ -233,7 +223,6 @@ emr_cluster_level_logging_metadata := {
 default emr_cluster_not_visible_to_all_iam_users = true
 
 emr_cluster_not_visible_to_all_iam_users = false {
-    # lower(resource.Type) == "aws::emr::cluster"
     input.Cluster.VisibleToAllUsers == available_true_choices[_]
 }
 
@@ -260,7 +249,6 @@ emr_cluster_not_visible_to_all_iam_users_metadata := {
 default emr_termination_protection_is_enabled = true
 
 emr_termination_protection_is_enabled = false {
-    # lower(resource.Type) == "aws::emr::cluster"
     input.Cluster.TerminationProtected == available_false_choices[_]
 }
 

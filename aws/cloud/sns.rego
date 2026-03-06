@@ -1,11 +1,9 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
-
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
 
 #
 # PR-AWS-CLD-SNS-001
@@ -14,7 +12,6 @@ has_property(parent_object, target_property) {
 default sns_protocol = true
 
 sns_protocol = false {
-    # lower(resource.Type) == "aws::sns::subscription"
     Subscriptions := input.Subscriptions[_]
     lower(Subscriptions.Protocol) == "http"
 }
@@ -42,7 +39,6 @@ sns_protocol_metadata := {
 default sns_encrypt_key = true
 
 sns_encrypt_key = false {
-    # lower(resource.Type) == "aws::sns::topic"
     contains(lower(input.Attributes.KmsMasterKeyId), "alias/aws/sns")
 }
 
@@ -69,12 +65,10 @@ sns_encrypt_key_metadata := {
 default sns_encrypt = true
 
 sns_encrypt = false {
-    # lower(resource.Type) == "aws::sns::topic"
     not input.Attributes.KmsMasterKeyId
 }
 
 sns_encrypt = false {
-    # lower(resource.Type) == "aws::sns::topic"
     count(input.Attributes.KmsMasterKeyId) == 0
 }
 
@@ -102,7 +96,6 @@ sns_encrypt_metadata := {
 default sns_policy_public = true
 
 sns_policy_public = false {
-    # lower(resource.Type) == "aws::sns::topicpolicy"
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -110,7 +103,6 @@ sns_policy_public = false {
 }
 
 sns_policy_public = false {
-    # lower(resource.Type) == "aws::sns::topicpolicy"
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -118,7 +110,6 @@ sns_policy_public = false {
 }
 
 sns_policy_public = false {
-    # lower(resource.Type) == "aws::sns::topicpolicy"
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -399,21 +390,21 @@ sns_accessible_via_specific_vpc = false {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
-    not has_property(statement, "Condition")
+    not common.has_property(statement, "Condition")
 }
 
 sns_accessible_via_specific_vpc = false {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
-    not has_property(statement.Condition, "StringEquals")
+    not common.has_property(statement.Condition, "StringEquals")
 }
 
 sns_accessible_via_specific_vpc = false {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
-    not has_property(statement.Condition.StringEquals, "aws:SourceVpce")
+    not common.has_property(statement.Condition.StringEquals, "aws:SourceVpce")
 }
 
 sns_accessible_via_specific_vpc_err = "Ensure SNS is only accessible via specific VPCe service." {

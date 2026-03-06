@@ -1,24 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
-
-array_element_contains(target_array, element_string) = true {
-  contains(lower(target_array[_]), lower(element_string))
-} else = false { true }
-
-array_element_in(target_array, in_array) = true {
-  lower(target_array[_]) == lower(in_array[_])
-} else = false { true }
-
-array_element_contains_in(target_array, in_array) = true {
-  contains(lower(target_array[_]), lower(in_array[_]))
-} else = false { true }
+import data.common
 
 # https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys
 
@@ -29,13 +11,11 @@ array_element_contains_in(target_array, in_array) = true {
 default svc_user_managed_key_rotated_every_90_days = null
 
 gcp_issue["svc_user_managed_key_rotated_every_90_days"] {
-    #svcKey := input.GOOGLE_SERVICE_AC_KEY[_]
     lower(input.keyType) == "user_managed"
-    time.now_ns() - time.parse_rfc3339_ns(input.validAfterTime) > 7776000000000000
+    time.now_ns() - time.parse_rfc3339_ns(input.validAfterTime) > common.ninety_days_nanoseconds
 }
 
 svc_user_managed_key_rotated_every_90_days {
-    # lower(input.resources[i].type) == "iam.v1.serviceaccounts.key"
     not gcp_issue["svc_user_managed_key_rotated_every_90_days"]
 }
 
@@ -68,7 +48,7 @@ default gcp_dont_have_non_corporate_account = null
 
 gcp_issue["gcp_dont_have_non_corporate_account"] {
     bindings := input.bindings[_]
-    array_element_contains(bindings.members, "gmail.com")
+    common.array_element_contains(bindings.members, "gmail.com")
 }
 
 gcp_dont_have_non_corporate_account {
@@ -356,21 +336,13 @@ user_account_dont_have_service_account_related_privileges_metadata := {
 # PR-GCP-CLD-IAM-007
 # 
 
-#list_var = ["appspot.gserviceaccount.com",
-#            "developer.gserviceaccount.com",
-#            "cloudservices.gserviceaccount.com",
-#            "system.gserviceaccount.com",
-#            "cloudbuild.gserviceaccount.com"]
-
 default iam_primitive_roles_are_not_in_use = null
 
 gcp_issue["iam_primitive_roles_are_not_in_use"] {
-	#count([c | contains(input.bindings[_].members[_] , list_var[_]); c = 1]) == 0
     lower(input.bindings[_].role) == "roles/editor"
 }
 
 gcp_issue["iam_primitive_roles_are_not_in_use"] {
-	#count([c | contains(input.bindings[_].members[_] , list_var[_]); c = 1]) == 0
     lower(input.bindings[_].role) == "roles/owner"
 }
 
@@ -413,7 +385,7 @@ gcp_issue["project_has_audit_logging_configured_for_all_services_and_users"] {
     auditConfigs := input.auditConfigs[_]
     lower(auditConfigs.service) == "allservices"
     auditLogConfigs := auditConfigs.auditLogConfigs[_]
-	has_property(auditLogConfigs, "exemptedMembers")
+	common.has_property(auditLogConfigs, "exemptedMembers")
 	count(auditLogConfigs.exemptedMembers) > 0
 }
 
@@ -487,7 +459,7 @@ svc_dont_have_user_managed_key_metadata := {
 default api_key_rotated_every_90_days = null
 
 gcp_issue["api_key_rotated_every_90_days"] {
-    time.now_ns() - time.parse_rfc3339_ns(input.createTime) > 7776000000000000
+    time.now_ns() - time.parse_rfc3339_ns(input.createTime) > common.ninety_days_nanoseconds
 }
 
 api_key_rotated_every_90_days {
@@ -522,11 +494,11 @@ api_key_rotated_every_90_days_metadata := {
 default project_has_no_unrestricted_api_keys_created = null
 
 project_has_no_unrestricted_api_keys_created = false {
-    not has_property(input, "restrictions")
+    not common.has_property(input, "restrictions")
 }
 
 project_has_no_unrestricted_api_keys_created {
-    has_property(input, "restrictions")
+    common.has_property(input, "restrictions")
 }
 
 project_has_no_unrestricted_api_keys_created_err = "Project currently have unrestricted API keys created. Make sure to restrict them all for specific Application and APIs." {
@@ -553,52 +525,52 @@ project_has_no_unrestricted_api_keys_created_metadata := {
 default api_key_has_application_restriction = null
 
 gcp_attribute_absence["api_key_has_application_restriction"] {   
-    not has_property(input.restrictions, "browserKeyRestrictions")
-    not has_property(input.restrictions, "serverKeyRestrictions")
-    not has_property(input.restrictions, "androidKeyRestrictions")
-    not has_property(input.restrictions, "iosKeyRestrictions")
+    not common.has_property(input.restrictions, "browserKeyRestrictions")
+    not common.has_property(input.restrictions, "serverKeyRestrictions")
+    not common.has_property(input.restrictions, "androidKeyRestrictions")
+    not common.has_property(input.restrictions, "iosKeyRestrictions")
 }
 
 gcp_issue["api_key_has_application_restriction"] {
-    has_property(input.restrictions, "browserKeyRestrictions")
+    common.has_property(input.restrictions, "browserKeyRestrictions")
     browser_key_restriction := input.restrictions.browserKeyRestrictions[_]
-    array_element_contains(browser_key_restriction.allowedReferrers, "*")
+    common.array_element_contains(browser_key_restriction.allowedReferrers, "*")
 }   
 
 gcp_issue["api_key_has_application_restriction"] {
-    has_property(input.restrictions, "browserKeyRestrictions")
+    common.has_property(input.restrictions, "browserKeyRestrictions")
     browser_key_restriction := input.restrictions.browserKeyRestrictions[_]
-    array_element_contains(browser_key_restriction.allowedReferrers, "*.[tld]")
+    common.array_element_contains(browser_key_restriction.allowedReferrers, "*.[tld]")
 }   
 
 gcp_issue["api_key_has_application_restriction"] {
-    has_property(input.restrictions, "browserKeyRestrictions")
+    common.has_property(input.restrictions, "browserKeyRestrictions")
     browser_key_restriction := input.restrictions.browserKeyRestrictions[_]
-    array_element_contains(browser_key_restriction.allowedReferrers, "*.[tld]/*")
+    common.array_element_contains(browser_key_restriction.allowedReferrers, "*.[tld]/*")
 }   
 
 gcp_issue["api_key_has_application_restriction"] {
-    has_property(input.restrictions, "serverKeyRestrictions")
+    common.has_property(input.restrictions, "serverKeyRestrictions")
     server_key_restriction := input.restrictions.serverKeyRestrictions[_]
-    array_element_contains(server_key_restriction.allowedIps, "0.0.0.0")
+    common.array_element_contains(server_key_restriction.allowedIps, "0.0.0.0")
 }   
 
 gcp_issue["api_key_has_application_restriction"] {
-    has_property(input.restrictions, "serverKeyRestrictions")
+    common.has_property(input.restrictions, "serverKeyRestrictions")
     server_key_restriction := input.restrictions.serverKeyRestrictions[_]
-    array_element_contains(server_key_restriction.allowedIps, "0.0.0.0/0")
+    common.array_element_contains(server_key_restriction.allowedIps, "0.0.0.0/0")
 }   
 
 gcp_issue["api_key_has_application_restriction"] {
-    has_property(input.restrictions, "serverKeyRestrictions")
+    common.has_property(input.restrictions, "serverKeyRestrictions")
     server_key_restriction := input.restrictions.serverKeyRestrictions[_]
-    array_element_contains(server_key_restriction.allowedIps, "::/0")
+    common.array_element_contains(server_key_restriction.allowedIps, "::/0")
 }   
 
 gcp_issue["api_key_has_application_restriction"] {
-    has_property(input.restrictions, "serverKeyRestrictions")
+    common.has_property(input.restrictions, "serverKeyRestrictions")
     server_key_restriction := input.restrictions.serverKeyRestrictions[_]
-    array_element_contains(server_key_restriction.allowedIps, "::0")
+    common.array_element_contains(server_key_restriction.allowedIps, "::0")
 }   
 
 api_key_has_application_restriction = false {
@@ -846,11 +818,11 @@ iam_user_dont_have_permission_to_deploy_all_resources_metadata := {
 default api_key_has_api_restriction = null
 
 api_key_has_api_restriction = false {
-    not has_property(input, "restrictions")
+    not common.has_property(input, "restrictions")
 }
 
 api_key_has_api_restriction = false {
-    not has_property(input.restrictions, "apiTargets")
+    not common.has_property(input.restrictions, "apiTargets")
 }
 
 api_key_has_api_restriction = false {

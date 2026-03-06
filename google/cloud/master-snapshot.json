@@ -421,6 +421,30 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_KMS_KEYS",
+                    "type": "cloudkms/projects.locations.keyRings.cryptoKeys.list",
+                    "get_method": ["cloudkms/projects.locations.keyRings.cryptoKeys.get"],
+                    "collection": "kms_keys",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": ["cloudkms"]
+                        }
+                    ]
+                },
+                {
+                    "masterSnapshotId": "GOOGLE_KMS_KEYRINGS",
+                    "type": "cloudkms/projects.locations.keyRings.list",
+                    "get_method": ["cloudkms/projects.locations.keyRings.get"],
+                    "collection": "kms_keyrings",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "service": ["cloudkms"]
+                        }
+                    ]
                 }
             ]
         }

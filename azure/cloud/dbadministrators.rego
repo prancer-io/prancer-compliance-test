@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators
 
@@ -33,7 +31,7 @@ azure_issue["sql_server_ad_admin"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/administrators";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.administratorType) == "activedirectory";
               c := 1]) == 0
 }
@@ -209,7 +207,7 @@ azure_issue["sql_managedinstances_ad_admin"] {
     lower(resource.type) == "microsoft.sql/managedinstances"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/managedinstances/administrators";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.administratorType) == "activedirectory";
               c := 1]) == 0
 }

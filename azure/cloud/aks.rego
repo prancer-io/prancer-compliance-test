@@ -1,8 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters
 
@@ -488,7 +486,7 @@ default aks_local_account_disabled = null
 azure_attribute_absence["aks_local_account_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not has_property(resource.properties, "disableLocalAccounts")
+    not common.has_property(resource.properties, "disableLocalAccounts")
 }
 
 azure_issue["aks_local_account_disabled"] {

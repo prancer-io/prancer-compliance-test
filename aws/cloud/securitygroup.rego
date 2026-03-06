@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html
 
 
@@ -810,7 +812,6 @@ sg_tag = false {
 }
 
 sg_tag = false {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     SecurityGroups := input.SecurityGroups[_]
     not SecurityGroups.Tags
 }
@@ -839,25 +840,21 @@ sg_tag_metadata := {
 default sg_description_absent = true
 
 sg_description_absent = false {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     ipv6_range := input.SecurityGroups[_].IpPermissions[_].Ipv6Ranges[_]
     not ipv6_range.description
 }
 
 sg_description_absent = false {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     ipv6_range := input.SecurityGroups[_].IpPermissions[_].Ipv6Ranges[_]
     count(ipv6_range.description) == 0
 }
 
 sg_description_absent = false {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     ip_range := input.SecurityGroups[_].IpPermissions[_].IpRanges[_]
     not ip_range.description
 }
 
 sg_description_absent = false {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     ip_range := input.SecurityGroups[_].IpPermissions[_].IpRanges[_]
     count(ip_range.description) == 0
 }
@@ -1251,13 +1248,11 @@ default sg_vpc = true
 
 sg_vpc = false {
     SecurityGroups := input.SecurityGroups[_]
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     not SecurityGroups.VpcId
 }
 
 sg_vpc = false {
     SecurityGroups := input.SecurityGroups[_]
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     not SecurityGroups.VpcId
     count(SecurityGroups.VpcId) == 0
 }
@@ -1295,7 +1290,6 @@ ec2_instance_has_restricted_access = false {
 }
 
 is_secure["ipv6"] = true {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     SecurityRule := input.SecurityGroupRules[_]
     lower(SecurityRule.IpProtocol) == ec2_instance_allowed_protocols[_]
     lower(SecurityRule.CidrIpv6) == "::/0"
@@ -1311,7 +1305,6 @@ ec2_instance_has_restricted_access = false {
 }
 
 is_secure["ipv4"] = true {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     SecurityRule := input.SecurityGroupRules[_]
     lower(SecurityRule.IpProtocol) == ec2_instance_allowed_protocols[_]
     lower(SecurityRule.CidrIpv4) == "0.0.0.0/0"

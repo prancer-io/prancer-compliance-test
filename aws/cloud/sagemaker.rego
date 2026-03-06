@@ -1,10 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html
+import data.common
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html
 
 #
 # PR-AWS-CLD-SGM-001
@@ -13,12 +11,10 @@ has_property(parent_object, target_property) {
 default sagemaker_encryption_kms = true
 
 sagemaker_encryption_kms = false {
-    # lower(resource.Type) == "aws::sagemaker::notebookinstance"
     not input.KmsKeyId
 }
 
 sagemaker_encryption_kms = false {
-    # lower(resource.Type) == "aws::sagemaker::notebookinstance"
     count(input.KmsKeyId) == 0
 }
 
@@ -45,12 +41,10 @@ sagemaker_encryption_kms_metadata := {
 default sagemaker_rootaccess_enabled = true
 
 sagemaker_rootaccess_enabled = false {
-    # lower(resource.Type) == "aws::sagemaker::notebookinstance"
     lower(input.RootAccess) == "enabled"
 }
 
 sagemaker_rootaccess_enabled = false {
-    # lower(resource.Type) == "aws::sagemaker::notebookinstance"
     not input.RootAccess
 }
 
@@ -78,12 +72,10 @@ sagemaker_rootaccess_enabled_metadata := {
 default sagemaker_direct_internet_access_enabled = true
 
 sagemaker_direct_internet_access_enabled = false {
-    # lower(resource.Type) == "aws::sagemaker::notebookinstance"
     lower(input.DirectInternetAccess) == "enabled"
 }
 
 sagemaker_direct_internet_access_enabled = false {
-    # lower(resource.Type) == "aws::sagemaker::notebookinstance"
     not input.DirectInternetAccess
 }
 
@@ -111,12 +103,10 @@ sagemaker_direct_internet_access_enabled_metadata := {
 default sagemaker_vpc = true
 
 sagemaker_vpc = false {
-    # lower(resource.Type) == "aws::sagemaker::notebookinstance"
     count(input.SubnetId) == 0
 }
 
 sagemaker_vpc = false {
-    # lower(resource.Type) == "aws::sagemaker::notebookinstance"
     not input.SubnetId
 }
 
@@ -147,7 +137,7 @@ default sagemaker_customer_managed_key = true
 sagemaker_customer_managed_key = false {
     X := input.TEST_SAGEMAKER[_]
     X.NotebookInstanceStatus == "InService"
-    has_property(X, "KmsKeyId")
+    common.has_property(X, "KmsKeyId")
     Y := input.TEST_KMS[_]
     X.KmsKeyId == Y.KeyMetadata.KeyId
     Y.KeyMetadata.KeyManager == "AWS"

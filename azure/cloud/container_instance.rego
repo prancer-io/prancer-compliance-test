@@ -1,9 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
+import data.common
 
 # PR-AZR-CLD-ACI-001
 

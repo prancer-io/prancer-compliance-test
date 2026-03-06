@@ -1,11 +1,9 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imageTagMutability
 
-
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
 
 #
 # PR-AWS-CLD-ECR-001
@@ -14,7 +12,6 @@ has_property(parent_object, target_property) {
 default ecr_imagetag = true
 
 ecr_imagetag = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     repositories := input.repositories[_]
     lower(repositories.imageTagMutability) == "mutable"
 }
@@ -42,7 +39,6 @@ ecr_imagetag_metadata := {
 default ecr_encryption = true
 
 ecr_encryption = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     repositories := input.repositories[_]
     not repositories.encryptionConfiguration.encryptionType
 }
@@ -71,13 +67,11 @@ ecr_encryption_metadata := {
 default ecr_scan = true
 
 ecr_scan = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     repositories := input.repositories[_]
     not repositories.imageScanningConfiguration.scanOnPush
 }
 
 ecr_scan = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     repositories := input.repositories[_]
     lower(repositories.imageScanningConfiguration.scanOnPush) != "true"
 }
@@ -106,7 +100,6 @@ ecr_scan_metadata := {
 default ecr_public_access_disable = true
 
 ecr_public_access_disable = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     policyText := json.unmarshal(input.policyText)
     statement := policyText.Statement[j]
     lower(statement.Effect) == "allow"
@@ -114,7 +107,6 @@ ecr_public_access_disable = false {
 }
 
 ecr_public_access_disable = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     policyText := json.unmarshal(input.policyText)
     statement := policyText.Statement[j]
     lower(statement.Effect) == "allow"
@@ -122,7 +114,6 @@ ecr_public_access_disable = false {
 }
 
 ecr_public_access_disable = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     policyText := json.unmarshal(input.policyText)
     statement := policyText.Statement[j]
     lower(statement.Effect) == "allow"
@@ -153,18 +144,15 @@ ecr_public_access_disable_metadata := {
 default ecr_vulnerability = true
 
 ecr_vulnerability = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     lower(input.scanningConfiguration.scanType) != "enhanced"
 }
 
 ecr_vulnerability = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     rule = input.scanningConfiguration.rules[_]
     lower(rule.scanFrequency) != "continuous_scan"
 }
 
 ecr_vulnerability = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     count(input.scanningConfiguration.rules) == 0
 }
 
@@ -191,12 +179,11 @@ ecr_vulnerability_metadata := {
 default ecr_accessible_only_via_private_endpoint = true
 
 ecr_accessible_only_via_private_endpoint = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     policy := json.unmarshal(input.policyText)
     policy_statement := policy.Statement[j]
     policy_statement.Condition
     lower(policy_statement.Effect) == "allow"
-    not has_property(policy_statement.Condition.StringEquals, "aws:SourceVpce")
+    not common.has_property(policy_statement.Condition.StringEquals, "aws:SourceVpce")
 }
 
 ecr_accessible_only_via_private_endpoint_err = "Ensure ECR resources are accessible only via private endpoint." {
@@ -222,12 +209,10 @@ ecr_accessible_only_via_private_endpoint_metadata := {
 default lifecycle_policy_is_enabled = true
 
 lifecycle_policy_is_enabled = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     not input.lifecyclePolicyText
 }
 
 lifecycle_policy_is_enabled = false {
-    # lower(resource.Type) == "aws::ecr::repository"
     lifecyclePolicy := json.unmarshal(input.lifecyclePolicyText)
     rule := lifecyclePolicy.rules[j]
     lower(rule.selection.tagStatus) == "tagged"
@@ -262,7 +247,7 @@ ecr_encrypted_using_key = false {
 	ecr := input.TEST_ECR[_]
     X := ecr.repositories[i]
 	lower(X.encryptionConfiguration.encryptionType) == "kms"
-	has_property(X.encryptionConfiguration, "kmsKey")
+	common.has_property(X.encryptionConfiguration, "kmsKey")
 	Y := input.TEST_KMS[_]
 	X.encryptionConfiguration.kmsKey == Y.KeyMetadata.Arn
 	Y.KeyMetadata.KeyManager != "CUSTOMER"
@@ -272,7 +257,7 @@ ecr_encrypted_using_key = false {
 	ecr := input.TEST_ECR[_]
     X := ecr.repositories[i]
 	lower(X.encryptionConfiguration.encryptionType) == "kms"
-	has_property(X.encryptionConfiguration, "kmsKey")
+	common.has_property(X.encryptionConfiguration, "kmsKey")
 	Y := input.TEST_KMS[_]
 	X.encryptionConfiguration.kmsKey == Y.KeyMetadata.KeyId
 	Y.KeyMetadata.KeyManager != "CUSTOMER"

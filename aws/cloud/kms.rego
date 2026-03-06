@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/kms/latest/APIReference/
 
 #
@@ -35,7 +37,6 @@ kms_key_rotation_metadata := {
 default kms_key_state = false
 
 kms_key_state = true {
-    # lower(resource.Type) == "aws::kms::key"
     input.KeyMetadata.Enabled == true
 }
 
