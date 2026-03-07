@@ -639,12 +639,21 @@ audit_not_config_proper_metadata := {
 # PR-GCP-TRF-SAK-011
 #
 
-default api_target_not_exist = true
+default api_target_not_exist = null
 
-api_target_not_exist = false{
+api_target_not_exist_violation {
     resource := input.resources[_]
     lower(resource.type) == "google_apikeys_key"
     count([c | has_property(resource.properties.restrictions[_], "api_targets"); c=1]) == 0
+}
+
+api_target_not_exist {
+    input.resources
+    not api_target_not_exist_violation
+}
+
+api_target_not_exist = false {
+    api_target_not_exist_violation
 }
 
 api_target_not_exist_err = "Ensure, GCP API key not restricting any specific API." {

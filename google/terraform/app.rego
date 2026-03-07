@@ -9,7 +9,7 @@ has_property(parent_object, target_property) {
 # PR-GCP-TRF-APE-001
 #
 
-default app_engine_iap_disabled = true
+default app_engine_iap_disabled = null
 
 gc_issue["app_engine_iap_disabled"]{
     resource := input.resources[_]
@@ -30,6 +30,15 @@ gc_issue["app_engine_iap_disabled"]{
     lower(resource.type) == "google_app_engine_application"
     upper(resource.properties.serving_status) == "SERVING"
     resource.properties.iap.enabled == "false"
+}
+
+app_engine_iap_disabled {
+    input.resources
+    not gc_issue["app_engine_iap_disabled"]
+}
+
+app_engine_iap_disabled = false {
+    gc_issue["app_engine_iap_disabled"]
 }
 
 app_engine_iap_disabled_err = "Ensure, GCP App Engine Identity-Aware Proxy is disabled." {
