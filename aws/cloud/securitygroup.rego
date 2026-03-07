@@ -925,16 +925,16 @@ default port_proto_all = null
 
 port_proto_all_violation {
     SecurityGroups := input.SecurityGroups[_]
-    lower(SecurityGroups.GroupName) == "default"
-    egress := SecurityGroups.IpPermissionsEgress[_]
-    egress.IpRanges[_].CidrIp == "0.0.0.0/0"
+    ingress := SecurityGroups.IpPermissions[_]
+    ingress.IpProtocol == "-1"
+    ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
 }
 
 port_proto_all_violation {
     SecurityGroups := input.SecurityGroups[_]
-    lower(SecurityGroups.GroupName) == "default"
-    egress := SecurityGroups.IpPermissionsEgress[_]
-    egress.Ipv6Ranges[_].CidrIpv6 == "::/0"
+    ingress := SecurityGroups.IpPermissions[_]
+    ingress.IpProtocol == "-1"
+    ingress.Ipv6Ranges[_].CidrIpv6 == "::/0"
 }
 
 port_proto_all {

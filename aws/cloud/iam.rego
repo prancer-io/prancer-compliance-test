@@ -9,18 +9,25 @@ ip_address = ["0.0.0.0/0", "::/0"]
 available_true_choices := ["true", true]
 available_false_choices := ["false", false]
 
+# Skip AWS managed policies - they inherently use wildcards by design
+is_aws_managed_policy {
+    startswith(input.Arn, "arn:aws:iam::aws:policy/")
+}
+
 #
 # PR-AWS-CLD-IAM-001
 #
 default iam_wildcard_resource = null
 
 iam_wildcard_resource_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Resource) == "*"
 }
 
 iam_wildcard_resource {
     input.PolicyVersion
+    not is_aws_managed_policy
     not iam_wildcard_resource_violation
 }
 
@@ -50,17 +57,20 @@ iam_wildcard_resource_metadata := {
 default iam_wildcard_action = null
 
 iam_wildcard_action_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Action) == "*"
 }
 
 iam_wildcard_action_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Action) == "*"
 }
 
 iam_wildcard_action {
     input.PolicyVersion
+    not is_aws_managed_policy
     not iam_wildcard_action_violation
 }
 
@@ -92,12 +102,14 @@ iam_wildcard_action_metadata := {
 default iam_wildcard_principal = null
 
 iam_wildcard_principal_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Principal) == "*"
 }
 
 iam_wildcard_principal {
     input.PolicyVersion
+    not is_aws_managed_policy
     not iam_wildcard_principal_violation
 }
 
@@ -128,12 +140,14 @@ iam_wildcard_principal_metadata := {
 default iam_resource_format = null
 
 iam_resource_format_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Resource) == "arn:aws:*:*"
 }
 
 iam_resource_format {
     input.PolicyVersion
+    not is_aws_managed_policy
     not iam_resource_format_violation
 }
 
@@ -165,6 +179,7 @@ iam_resource_format_metadata := {
 default iam_assume_permission = null
 
 iam_assume_permission_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Effect) == "allow"
     contains(lower(statement.Action), "sts:assumerole")
@@ -172,6 +187,7 @@ iam_assume_permission_violation {
 }
 
 iam_assume_permission_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Effect) == "allow"
     contains(lower(statement.Action), "sts:assumerole")
@@ -180,6 +196,7 @@ iam_assume_permission_violation {
 
 iam_assume_permission {
     input.PolicyVersion
+    not is_aws_managed_policy
     not iam_assume_permission_violation
 }
 
@@ -209,6 +226,7 @@ iam_assume_permission_metadata := {
 default iam_all_traffic = null
 
 iam_all_traffic_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     source_ip := statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"][k]
     lower(source_ip) == "0.0.0.0/0"
@@ -216,6 +234,7 @@ iam_all_traffic_violation {
 
 iam_all_traffic {
     input.PolicyVersion
+    not is_aws_managed_policy
     not iam_all_traffic_violation
 }
 
@@ -245,6 +264,7 @@ iam_all_traffic_metadata := {
 default iam_administrative_privileges = null
 
 iam_administrative_privileges_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     statement.Action == "*"
     statement.Resource == "*"
@@ -253,6 +273,7 @@ iam_administrative_privileges_violation {
 
 iam_administrative_privileges {
     input.PolicyVersion
+    not is_aws_managed_policy
     not iam_administrative_privileges_violation
 }
 
@@ -283,15 +304,18 @@ iam_administrative_privileges_metadata := {
 default iam_user_group_attach = null
 
 iam_user_group_attach_violation {
+    not is_aws_managed_policy
     not input.PolicyVersion.Document
 }
 
 iam_user_group_attach_violation {
+    not is_aws_managed_policy
     count(input.PolicyVersion.Document) < 1
 }
 
 iam_user_group_attach {
     input.PolicyVersion
+    not is_aws_managed_policy
     not iam_user_group_attach_violation
 }
 
@@ -322,6 +346,7 @@ iam_user_group_attach_metadata := {
 default lambda_iam_policy_not_overly_permissive_to_all_traffic = null
 
 lambda_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -331,6 +356,7 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic_violation {
 }
 
 lambda_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -340,6 +366,7 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic_violation {
 }
 
 lambda_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -349,6 +376,7 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic_violation {
 }
 
 lambda_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -359,6 +387,7 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic_violation {
 
 lambda_iam_policy_not_overly_permissive_to_all_traffic {
     input.PolicyVersion
+    not is_aws_managed_policy
     not lambda_iam_policy_not_overly_permissive_to_all_traffic_violation
 }
 
@@ -390,6 +419,7 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 default iam_policy_not_overly_permissive_to_lambda_service = null
 
 iam_policy_not_overly_permissive_to_lambda_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -399,6 +429,7 @@ iam_policy_not_overly_permissive_to_lambda_service_violation {
 }
 
 iam_policy_not_overly_permissive_to_lambda_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -408,6 +439,7 @@ iam_policy_not_overly_permissive_to_lambda_service_violation {
 }
 
 iam_policy_not_overly_permissive_to_lambda_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -417,6 +449,7 @@ iam_policy_not_overly_permissive_to_lambda_service_violation {
 }
 
 iam_policy_not_overly_permissive_to_lambda_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -427,6 +460,7 @@ iam_policy_not_overly_permissive_to_lambda_service_violation {
 
 iam_policy_not_overly_permissive_to_lambda_service {
     input.PolicyVersion
+    not is_aws_managed_policy
     not iam_policy_not_overly_permissive_to_lambda_service_violation
 }
 
@@ -1356,6 +1390,7 @@ iam_access_key_enabled_on_root_account_metadata := {
 default iam_policy_not_overly_permissive_to_all_traffic_for_ecs = null
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1365,6 +1400,7 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation {
 }
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1374,6 +1410,7 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation {
 }
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1383,6 +1420,7 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation {
 }
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1393,6 +1431,7 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation {
 
 iam_policy_not_overly_permissive_to_all_traffic_for_ecs {
     input.PolicyVersion
+    not is_aws_managed_policy
     not iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation
 }
 
@@ -1424,6 +1463,7 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs_metadata := {
 default elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = null
 
 elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1433,6 +1473,7 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation {
 }
 
 elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1442,6 +1483,7 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation {
 }
 
 elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1451,6 +1493,7 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation {
 }
 
 elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1461,6 +1504,7 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation {
 
 elasticsearch_iam_policy_not_overly_permissive_to_all_traffic {
     input.PolicyVersion
+    not is_aws_managed_policy
     not elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation
 }
 
@@ -1492,6 +1536,7 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 default not_allow_decryption_actions_on_all_kms_keys = null
 
 not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1502,6 +1547,7 @@ not_allow_decryption_actions_on_all_kms_keys_violation {
 }
 
 not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1512,6 +1558,7 @@ not_allow_decryption_actions_on_all_kms_keys_violation {
 }
 
 not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1522,6 +1569,7 @@ not_allow_decryption_actions_on_all_kms_keys_violation {
 }
 
 not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1532,6 +1580,7 @@ not_allow_decryption_actions_on_all_kms_keys_violation {
 }
 
 not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1542,6 +1591,7 @@ not_allow_decryption_actions_on_all_kms_keys_violation {
 }
 
 not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1552,6 +1602,7 @@ not_allow_decryption_actions_on_all_kms_keys_violation {
 }
 
 not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1562,6 +1613,7 @@ not_allow_decryption_actions_on_all_kms_keys_violation {
 }
 
 not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1572,6 +1624,7 @@ not_allow_decryption_actions_on_all_kms_keys_violation {
 }
 
 not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1582,6 +1635,7 @@ not_allow_decryption_actions_on_all_kms_keys_violation {
 }
 
 not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1592,6 +1646,7 @@ not_allow_decryption_actions_on_all_kms_keys_violation {
 }
 
 not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1602,6 +1657,7 @@ not_allow_decryption_actions_on_all_kms_keys_violation {
 }
 
 not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1613,6 +1669,7 @@ not_allow_decryption_actions_on_all_kms_keys_violation {
 
 not_allow_decryption_actions_on_all_kms_keys {
     input.PolicyVersion
+    not is_aws_managed_policy
     not not_allow_decryption_actions_on_all_kms_keys_violation
 }
 
@@ -1679,6 +1736,7 @@ iam_policy_attached_to_user_metadata := {
 default iam_policy_not_overly_permissive_to_all_traffic = null
 
 iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1688,6 +1746,7 @@ iam_policy_not_overly_permissive_to_all_traffic_violation {
 }
 
 iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1697,6 +1756,7 @@ iam_policy_not_overly_permissive_to_all_traffic_violation {
 }
 
 iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1706,6 +1766,7 @@ iam_policy_not_overly_permissive_to_all_traffic_violation {
 }
 
 iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1716,6 +1777,7 @@ iam_policy_not_overly_permissive_to_all_traffic_violation {
 
 iam_policy_not_overly_permissive_to_all_traffic {
     input.PolicyVersion
+    not is_aws_managed_policy
     not iam_policy_not_overly_permissive_to_all_traffic_violation
 }
 
@@ -1747,6 +1809,7 @@ iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 default iam_policy_not_overly_permissive_to_sts_service = null
 
 iam_policy_not_overly_permissive_to_sts_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1757,6 +1820,7 @@ iam_policy_not_overly_permissive_to_sts_service_violation {
 }
 
 iam_policy_not_overly_permissive_to_sts_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1767,6 +1831,7 @@ iam_policy_not_overly_permissive_to_sts_service_violation {
 }
 
 iam_policy_not_overly_permissive_to_sts_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1777,6 +1842,7 @@ iam_policy_not_overly_permissive_to_sts_service_violation {
 }
 
 iam_policy_not_overly_permissive_to_sts_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1788,6 +1854,7 @@ iam_policy_not_overly_permissive_to_sts_service_violation {
 
 iam_policy_not_overly_permissive_to_sts_service {
     input.PolicyVersion
+    not is_aws_managed_policy
     not iam_policy_not_overly_permissive_to_sts_service_violation
 }
 
@@ -1861,6 +1928,7 @@ sns_publicly_accessible_through_iam_policies_metadata := {
 default sagemaker_not_overly_permissive_to_all_traffic = null
 
 sagemaker_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1870,6 +1938,7 @@ sagemaker_not_overly_permissive_to_all_traffic_violation {
 }
 
 sagemaker_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1880,6 +1949,7 @@ sagemaker_not_overly_permissive_to_all_traffic_violation {
 
 sagemaker_not_overly_permissive_to_all_traffic {
     input.PolicyVersion
+    not is_aws_managed_policy
     not sagemaker_not_overly_permissive_to_all_traffic_violation
 }
 
