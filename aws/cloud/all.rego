@@ -29,16 +29,25 @@ rules_packages = [
 # PR-AWS-CLD-SM-001
 #
 
-default secret_manager_kms = true
+default secret_manager_kms = null
 
-secret_manager_kms = false {
+secret_manager_kms_violation {
     SecretList := input.SecretList[_]
     not SecretList.KmsKeyId
 }
 
-secret_manager_kms = false {
+secret_manager_kms_violation {
     SecretList := input.SecretList[_]
     count(SecretList.KmsKeyId) == 0
+}
+
+secret_manager_kms {
+    input.SecretList
+    not secret_manager_kms_violation
+}
+
+secret_manager_kms = false {
+    secret_manager_kms_violation
 }
 
 secret_manager_kms_err = "Ensure that Secrets Manager secret is encrypted using KMS" {
@@ -61,16 +70,25 @@ secret_manager_kms_metadata := {
 # PR-AWS-CLD-SM-003
 # aws::secretsmanager::secret
 
-default secret_manager_automatic_rotation = true
+default secret_manager_automatic_rotation = null
 
-secret_manager_automatic_rotation = false {
+secret_manager_automatic_rotation_violation {
     SecretList := input.SecretList[_]
     not SecretList.RotationEnabled
 }
 
-secret_manager_automatic_rotation = false {
+secret_manager_automatic_rotation_violation {
     SecretList := input.SecretList[_]
     SecretList.RotationEnabled == available_false_choices[_]
+}
+
+secret_manager_automatic_rotation {
+    input.SecretList
+    not secret_manager_automatic_rotation_violation
+}
+
+secret_manager_automatic_rotation = false {
+    secret_manager_automatic_rotation_violation
 }
 
 secret_manager_automatic_rotation_err = "Ensure AWS Secrets Manager automatic rotation is enabled." {
@@ -93,16 +111,25 @@ secret_manager_automatic_rotation_metadata := {
 # PR-AWS-CLD-SM-004
 # aws::secretsmanager::secret
 
-default secret_manager_rotation_period = true
+default secret_manager_rotation_period = null
 
-secret_manager_rotation_period = false {
+secret_manager_rotation_period_violation {
     SecretList := input.SecretList[_]
     to_number(SecretList.RotationRules.AutomaticallyAfterDays) > 30
 }
 
-secret_manager_rotation_period = false {
+secret_manager_rotation_period_violation {
     SecretList := input.SecretList[_]
     not SecretList.RotationRules.AutomaticallyAfterDays
+}
+
+secret_manager_rotation_period {
+    input.SecretList
+    not secret_manager_rotation_period_violation
+}
+
+secret_manager_rotation_period = false {
+    secret_manager_rotation_period_violation
 }
 
 secret_manager_rotation_period_err = "Ensure AWS secret rotation period is per the GS standard (Ex: 30 days)." {
@@ -125,21 +152,30 @@ secret_manager_rotation_period_metadata := {
 # PR-AWS-CLD-LG-001
 #
 
-default log_group_encryption = true
+default log_group_encryption = null
 
-log_group_encryption = false {
+log_group_encryption_violation {
     logGroups := input.logGroups[_]
     not logGroups.KmsKeyId
 }
 
-log_group_encryption = false {
+log_group_encryption_violation {
     logGroups := input.logGroups[_]
     count(logGroups.KmsKeyId) == 0
 }
 
-log_group_encryption = false {
+log_group_encryption_violation {
     logGroups := input.logGroups[_]
     logGroups.KmsKeyId == null
+}
+
+log_group_encryption {
+    input.logGroups
+    not log_group_encryption_violation
+}
+
+log_group_encryption = false {
+    log_group_encryption_violation
 }
 
 log_group_encryption_err = "Ensure CloudWatch log groups are encrypted with KMS CMKs" {
@@ -162,11 +198,20 @@ log_group_encryption_metadata := {
 # PR-AWS-CLD-LG-002
 #
 
-default log_group_retention = true
+default log_group_retention = null
 
-log_group_retention = false {
+log_group_retention_violation {
     logGroups := input.logGroups[_]
     not logGroups.RetentionInDays
+}
+
+log_group_retention {
+    input.logGroups
+    not log_group_retention_violation
+}
+
+log_group_retention = false {
+    log_group_retention_violation
 }
 
 log_group_retention_err = "Ensure CloudWatch log groups has retention days defined" {
@@ -190,11 +235,20 @@ log_group_retention_metadata := {
 # PR-AWS-CLD-WS-001
 #
 
-default workspace_volume_encrypt = true
+default workspace_volume_encrypt = null
 
-workspace_volume_encrypt = false {
+workspace_volume_encrypt_violation {
     Workspaces := input.Workspaces[_]
     not Workspaces.UserVolumeEncryptionEnabled
+}
+
+workspace_volume_encrypt {
+    input.Workspaces
+    not workspace_volume_encrypt_violation
+}
+
+workspace_volume_encrypt = false {
+    workspace_volume_encrypt_violation
 }
 
 workspace_volume_encrypt_err = "Ensure that Workspace user volumes is encrypted" {
@@ -218,11 +272,20 @@ workspace_volume_encrypt_metadata := {
 # PR-AWS-CLD-WS-002
 # aws::workspaces::workspace
 
-default workspace_root_volume_encrypt = true
+default workspace_root_volume_encrypt = null
 
-workspace_root_volume_encrypt = false {
+workspace_root_volume_encrypt_violation {
     Workspaces := input.Workspaces[_]
     not Workspaces.RootVolumeEncryptionEnabled
+}
+
+workspace_root_volume_encrypt {
+    input.Workspaces
+    not workspace_root_volume_encrypt_violation
+}
+
+workspace_root_volume_encrypt = false {
+    workspace_root_volume_encrypt_violation
 }
 
 workspace_root_volume_encrypt_err = "Ensure that Workspace root volumes is encrypted." {
@@ -246,11 +309,20 @@ workspace_root_volume_encrypt_metadata := {
 # PR-AWS-CLD-WS-003
 # aws::workspaces::workspace
 
-default workspace_directory_type = true
+default workspace_directory_type = null
 
-workspace_directory_type = false {
+workspace_directory_type_violation {
     directory := input.Directories[_]
     lower(directory.DirectoryType) == "simple_ad"
+}
+
+workspace_directory_type {
+    input.Directories
+    not workspace_directory_type_violation
+}
+
+workspace_directory_type = false {
+    workspace_directory_type_violation
 }
 
 workspace_directory_type_err = "Ensure AWS WorkSpaces do not use directory type Simple AD." {
@@ -274,18 +346,27 @@ workspace_directory_type_metadata := {
 # PR-AWS-CLD-GLUE-001
 #
 
-default glue_catalog_encryption = true
+default glue_catalog_encryption = null
 
-glue_catalog_encryption = false {
+glue_catalog_encryption_violation {
     not input.DataCatalogEncryptionSettings.ConnectionPasswordEncryption.ReturnConnectionPasswordEncrypted
 }
 
-glue_catalog_encryption = false {
+glue_catalog_encryption_violation {
     not input.DataCatalogEncryptionSettings.EncryptionAtRest.CatalogEncryptionMode
 }
 
-glue_catalog_encryption = false {
+glue_catalog_encryption_violation {
     lower(input.DataCatalogEncryptionSettings.EncryptionAtRest.CatalogEncryptionMode) != "sse-kms"
+}
+
+glue_catalog_encryption {
+    input.DataCatalogEncryptionSettings
+    not glue_catalog_encryption_violation
+}
+
+glue_catalog_encryption = false {
+    glue_catalog_encryption_violation
 }
 
 glue_catalog_encryption_err = "Ensure Glue Data Catalog encryption is enabled" {
@@ -309,22 +390,31 @@ glue_catalog_encryption_metadata := {
 # PR-AWS-CLD-GLUE-002
 #
 
-default glue_security_config = true
+default glue_security_config = null
 
-glue_security_config = false {
+glue_security_config_violation {
     not input.SecurityConfiguration.EncryptionConfiguration
 }
 
-glue_security_config = false {
+glue_security_config_violation {
     lower(input.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) != "sse-kms"
 }
 
-glue_security_config = false {
+glue_security_config_violation {
     lower(input.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) != "sse-kms"
 }
 
-glue_security_config = false {
+glue_security_config_violation {
     lower(input.SecurityConfiguration.EncryptionConfiguration.S3Encryption.S3EncryptionMode) != "sse-kms"
+}
+
+glue_security_config {
+    input.SecurityConfiguration
+    not glue_security_config_violation
+}
+
+glue_security_config = false {
+    glue_security_config_violation
 }
 
 glue_security_config_err = "Ensure AWS Glue security configuration encryption is enabled" {
@@ -348,33 +438,42 @@ glue_security_config_metadata := {
 # PR-AWS-CLD-GLUE-003
 # aws::glue::securityconfiguration
 
-default glue_encrypt_data_at_rest = true
+default glue_encrypt_data_at_rest = null
 
-glue_encrypt_data_at_rest = false {
+glue_encrypt_data_at_rest_violation {
     not input.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode
 }
 
-glue_encrypt_data_at_rest = false {
+glue_encrypt_data_at_rest_violation {
     lower(input.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) == "disabled"
 }
 
-glue_encrypt_data_at_rest = false {
+glue_encrypt_data_at_rest_violation {
     not input.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode
 }
 
-glue_encrypt_data_at_rest = false {
+glue_encrypt_data_at_rest_violation {
     lower(input.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) == "disabled"
 }
 
-glue_encrypt_data_at_rest = false {
+glue_encrypt_data_at_rest_violation {
     S3_Encryption := input.SecurityConfiguration.EncryptionConfiguration.S3Encryption[_]
     lower(S3_Encryption.S3EncryptionMode) == "disabled"
 }
 
-glue_encrypt_data_at_rest = false {
+glue_encrypt_data_at_rest_violation {
     
     S3_Encryption := input.SecurityConfiguration.EncryptionConfiguration.S3Encryption[_]
     not S3_Encryption.S3EncryptionMode
+}
+
+glue_encrypt_data_at_rest {
+    input.SecurityConfiguration
+    not glue_encrypt_data_at_rest_violation
+}
+
+glue_encrypt_data_at_rest = false {
+    glue_encrypt_data_at_rest_violation
 }
 
 glue_encrypt_data_at_rest_err = "Ensure AWS Glue encrypt data at rest" {
@@ -399,14 +498,23 @@ glue_encrypt_data_at_rest_metadata := {
 # aws::glue::securityconfiguration
 # AWS::KMS::Key
 
-default glue_cmk_key = true
+default glue_cmk_key = null
 
-glue_cmk_key = false {
+glue_cmk_key_violation {
     X := input.TEST_ALL_06[_]
     Y := input.TEST_KMS[_]
     common.has_property(X.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption, "KmsKeyArn")
     X.SecurityConfiguration.EncryptionConfiguration.JobBookmarksEncryption.KmsKeyArn == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+glue_cmk_key {
+    input.TEST_ALL_06
+    not glue_cmk_key_violation
+}
+
+glue_cmk_key = false {
+    glue_cmk_key_violation
 }
 
 glue_cmk_key_err = "Ensure AWS Glue encrypt data at rest with GS managed Customer Master Key (CMK)." {
@@ -431,14 +539,23 @@ glue_cmk_key_metadata := {
 # aws::glue::securityconfiguration
 # AWS::KMS::Key
 
-default glue_cloudwatch_cmk_key = true
+default glue_cloudwatch_cmk_key = null
 
-glue_cloudwatch_cmk_key = false {
+glue_cloudwatch_cmk_key_violation {
     X := input.TEST_ALL_06[_]
     Y := input.TEST_KMS[_]
     common.has_property(X.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption, "KmsKeyArn")
     X.SecurityConfiguration.EncryptionConfiguration.CloudWatchEncryption.KmsKeyArn == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+glue_cloudwatch_cmk_key {
+    input.TEST_ALL_06
+    not glue_cloudwatch_cmk_key_violation
+}
+
+glue_cloudwatch_cmk_key = false {
+    glue_cloudwatch_cmk_key_violation
 }
 
 glue_cloudwatch_cmk_key_err = "Ensure AWS Glue encrypt data at rest with GS managed Customer Master Key (CMK)." {
@@ -462,10 +579,19 @@ glue_cloudwatch_cmk_key_metadata := {
 # PR-AWS-CLD-GLUE-006
 # aws::glue::datacatalogencryptionsettings
 
-default glue_catalog_password = true
+default glue_catalog_password = null
+
+glue_catalog_password_violation {
+    not input.DataCatalogEncryptionSettings.ConnectionPasswordEncryption
+}
+
+glue_catalog_password {
+    input.DataCatalogEncryptionSettings
+    not glue_catalog_password_violation
+}
 
 glue_catalog_password = false {
-    not input.DataCatalogEncryptionSettings.ConnectionPasswordEncryption
+    glue_catalog_password_violation
 }
 
 glue_catalog_password_err = "Ensure connection passwords for AWS Glue are encrypted." {
@@ -489,17 +615,26 @@ glue_catalog_password_metadata := {
 # PR-AWS-CLD-AS-001
 #
 
-default as_volume_encrypted = true
+default as_volume_encrypted = null
 
-as_volume_encrypted = false {
+as_volume_encrypted_violation {
     LaunchConfigurations := input.LaunchConfigurations[_]
     count([c | LaunchConfigurations.BlockDeviceMappings; c:=1]) == 0
 }
 
-as_volume_encrypted = false {
+as_volume_encrypted_violation {
     LaunchConfigurations := input.LaunchConfigurations[_]
     bdm := LaunchConfigurations.BlockDeviceMappings[j]
     not bdm.Ebs.Encrypted
+}
+
+as_volume_encrypted {
+    input.LaunchConfigurations
+    not as_volume_encrypted_violation
+}
+
+as_volume_encrypted = false {
+    as_volume_encrypted_violation
 }
 
 as_volume_encrypted_err = "Ensure EBS volumes have encrypted launch configurations" {
@@ -522,30 +657,39 @@ as_volume_encrypted_metadata := {
 # PR-AWS-CLD-AS-002
 #
 
-default as_elb_health_check = true
+default as_elb_health_check = null
 
-as_elb_health_check = false {
+as_elb_health_check_violation {
     AutoScalingGroups := input.AutoScalingGroups[_]
     count(AutoScalingGroups.LoadBalancerNames) != 0
     not AutoScalingGroups.HealthCheckType
 }
 
-as_elb_health_check = false {
+as_elb_health_check_violation {
     AutoScalingGroups := input.AutoScalingGroups[_]
     count(AutoScalingGroups.LoadBalancerNames) != 0
     lower(AutoScalingGroups.HealthCheckType) != "elb"
 }
 
-as_elb_health_check = false {
+as_elb_health_check_violation {
     AutoScalingGroups := input.AutoScalingGroups[_]
     count(AutoScalingGroups.TargetGroupARNs) != 0
     not AutoScalingGroups.HealthCheckType
 }
 
-as_elb_health_check = false {
+as_elb_health_check_violation {
     AutoScalingGroups := input.AutoScalingGroups[_]
     count(AutoScalingGroups.TargetGroupARNs) != 0
     lower(AutoScalingGroups.HealthCheckType) != "elb"
+}
+
+as_elb_health_check {
+    input.AutoScalingGroups
+    not as_elb_health_check_violation
+}
+
+as_elb_health_check = false {
+    as_elb_health_check_violation
 }
 
 as_elb_health_check_err = "Ensure auto scaling groups associated with a load balancer use elastic load balancing health checks" {
@@ -568,16 +712,25 @@ as_elb_health_check_metadata := {
 # PR-AWS-CLD-AS-003
 #
 
-default as_http_token = true
+default as_http_token = null
 
-as_http_token = false {
+as_http_token_violation {
     LaunchConfigurations := input.LaunchConfigurations[_]
     lower(LaunchConfigurations.MetadataOptions.HttpTokens) != "required"
 }
 
-as_http_token = false {
+as_http_token_violation {
     LaunchConfigurations := input.LaunchConfigurations[_]
     not LaunchConfigurations.MetadataOptions.HttpTokens
+}
+
+as_http_token {
+    input.LaunchConfigurations
+    not as_http_token_violation
+}
+
+as_http_token = false {
+    as_http_token_violation
 }
 
 as_http_token_err = "Ensure EC2 Auto Scaling Group does not launch IMDSv1" {
@@ -601,16 +754,25 @@ as_http_token_metadata := {
 # PR-AWS-CLD-CFR-001
 #
 
-default cf_sns = true
+default cf_sns = null
 
-cf_sns = false {
+cf_sns_violation {
     Stacks := input.Stacks[_]
     not Stacks.NotificationARNs
 }
 
-cf_sns = false {
+cf_sns_violation {
     Stacks := input.Stacks[_]
     count(Stacks.NotificationARNs) == 0
+}
+
+cf_sns {
+    input.Stacks
+    not cf_sns_violation
+}
+
+cf_sns = false {
+    cf_sns_violation
 }
 
 cf_sns_err = "AWS CloudFormation stack configured without SNS topic" {
@@ -633,10 +795,19 @@ cf_sns_metadata := {
 # PR-AWS-CLD-CFR-002
 #
 
-default cloudFormation_template_configured_with_stack_policy = true
+default cloudFormation_template_configured_with_stack_policy = null
+
+cloudFormation_template_configured_with_stack_policy_violation {
+    count(input.StackPolicyBody) == 0
+}
+
+cloudFormation_template_configured_with_stack_policy {
+    input.StackPolicyBody
+    not cloudFormation_template_configured_with_stack_policy_violation
+}
 
 cloudFormation_template_configured_with_stack_policy = false {
-    count(input.StackPolicyBody) == 0
+    cloudFormation_template_configured_with_stack_policy_violation
 }
 
 cloudFormation_template_configured_with_stack_policy_err = "Ensure CloudFormation template is configured with stack policy." {
@@ -659,11 +830,20 @@ cloudFormation_template_configured_with_stack_policy_metadata := {
 # PR-AWS-CLD-CFR-003
 #
 
-default cloudFormation_rollback_is_disabled = true
+default cloudFormation_rollback_is_disabled = null
 
-cloudFormation_rollback_is_disabled = false {
+cloudFormation_rollback_is_disabled_violation {
     Stack := input.Stacks[_]
     Stack.DisableRollback == available_false_choices[_]
+}
+
+cloudFormation_rollback_is_disabled {
+    input.Stacks
+    not cloudFormation_rollback_is_disabled_violation
+}
+
+cloudFormation_rollback_is_disabled = false {
+    cloudFormation_rollback_is_disabled_violation
 }
 
 cloudFormation_rollback_is_disabled_err = "Ensure Cloudformation rollback is disabled." {
@@ -686,11 +866,20 @@ cloudFormation_rollback_is_disabled_metadata := {
 # PR-AWS-CLD-CFR-004
 #
 
-default role_arn_exist = true
+default role_arn_exist = null
 
-role_arn_exist = false {
+role_arn_exist_violation {
     Stack := input.Stacks[_]
     not Stack.RoleARN
+}
+
+role_arn_exist {
+    input.Stacks
+    not role_arn_exist_violation
+}
+
+role_arn_exist = false {
+    role_arn_exist_violation
 }
 
 role_arn_exist_err = "Ensure an IAM policy is defined with the stack." {
@@ -713,11 +902,20 @@ role_arn_exist_metadata := {
 # PR-AWS-CLD-CFR-005
 #
 
-default stack_with_not_all_capabilities = true
+default stack_with_not_all_capabilities = null
 
-stack_with_not_all_capabilities = false {
+stack_with_not_all_capabilities_violation {
     Stack := input.Stacks[_]
     contains(Stack.Capabilities[_], "*")
+}
+
+stack_with_not_all_capabilities {
+    input.Stacks
+    not stack_with_not_all_capabilities_violation
+}
+
+stack_with_not_all_capabilities = false {
+    stack_with_not_all_capabilities_violation
 }
 
 stack_with_not_all_capabilities_err = "Ensure capabilities in stacks do not have * in it." {
@@ -740,11 +938,20 @@ stack_with_not_all_capabilities_metadata := {
 # PR-AWS-CLD-CFR-006
 #
 
-default termination_protection_in_stacks_is_enabled = true
+default termination_protection_in_stacks_is_enabled = null
 
-termination_protection_in_stacks_is_enabled = false {
+termination_protection_in_stacks_is_enabled_violation {
     Stack := input.Stacks[_]
     Stack.EnableTerminationProtection == available_false_choices[_]
+}
+
+termination_protection_in_stacks_is_enabled {
+    input.Stacks
+    not termination_protection_in_stacks_is_enabled_violation
+}
+
+termination_protection_in_stacks_is_enabled = false {
+    termination_protection_in_stacks_is_enabled_violation
 }
 
 termination_protection_in_stacks_is_enabled_err = "Ensure termination protection in stacks is enabled." {
@@ -768,23 +975,32 @@ termination_protection_in_stacks_is_enabled_metadata := {
 # PR-AWS-CLD-CFG-001
 #
 
-default config_all_resource = true
+default config_all_resource = null
 
-config_all_resource = false {
+config_all_resource_violation {
     ConfigurationRecorders := input.ConfigurationRecorders[_]
     not ConfigurationRecorders.recordingGroup
 }
 
-config_all_resource = false {
+config_all_resource_violation {
     ConfigurationRecorders := input.ConfigurationRecorders[_]
     ConfigurationRecorders.recordingGroup
     not ConfigurationRecorders.recordingGroup.allSupported
 }
 
-config_all_resource = false {
+config_all_resource_violation {
     ConfigurationRecorders := input.ConfigurationRecorders[_]
     ConfigurationRecorders.recordingGroup
     not ConfigurationRecorders.recordingGroup.includeGlobalResourceTypes
+}
+
+config_all_resource {
+    input.ConfigurationRecorders
+    not config_all_resource_violation
+}
+
+config_all_resource = false {
+    config_all_resource_violation
 }
 
 config_all_resource_err = "AWS Config must record all possible resources" {
@@ -808,12 +1024,21 @@ config_all_resource_metadata := {
 # PR-AWS-CLD-CFG-002
 #
 
-default aws_config_configuration_aggregator = true
+default aws_config_configuration_aggregator = null
 
-aws_config_configuration_aggregator = false {
+aws_config_configuration_aggregator_violation {
     ConfigurationAggregators := input.ConfigurationAggregators[_]
     AccountAggregationSources := ConfigurationAggregators.AccountAggregationSources[_]
     not AccountAggregationSources.AllAwsRegions
+}
+
+aws_config_configuration_aggregator {
+    input.ConfigurationAggregators
+    not aws_config_configuration_aggregator_violation
+}
+
+aws_config_configuration_aggregator = false {
+    aws_config_configuration_aggregator_violation
 }
 
 aws_config_configuration_aggregator_err = "Ensure AWS config is enabled in all regions" {
@@ -837,12 +1062,21 @@ aws_config_configuration_aggregator_metadata := {
 # PR-AWS-CLD-CFG-003
 #
 
-default aws_config_recorder_status = true
+default aws_config_recorder_status = null
 
-aws_config_recorder_status = false {
+aws_config_recorder_status_violation {
     ConfigurationRecordersStatus := input.ConfigurationRecordersStatus[_]
     ConfigurationRecordersStatus.recording == true
     lower(ConfigurationRecordersStatus.lastStatus) == "failure"
+}
+
+aws_config_recorder_status {
+    input.ConfigurationRecordersStatus
+    not aws_config_recorder_status_violation
+}
+
+aws_config_recorder_status = false {
+    aws_config_recorder_status_violation
 }
 
 aws_config_recorder_status_err = "Ensure AWS Config do not fails to deliver log files" {
@@ -865,11 +1099,20 @@ aws_config_recorder_status_metadata := {
 # PR-AWS-CLD-CFG-004
 #
 
-default config_includes_global_resources = true
+default config_includes_global_resources = null
 
-config_includes_global_resources = false {
+config_includes_global_resources_violation {
     ConfigurationRecorders := input.ConfigurationRecorders[_]
     ConfigurationRecorders.recordingGroup.includeGlobalResourceTypes == available_false_choices[_]
+}
+
+config_includes_global_resources {
+    input.ConfigurationRecorders
+    not config_includes_global_resources_violation
+}
+
+config_includes_global_resources = false {
+    config_includes_global_resources_violation
 }
 
 config_includes_global_resources_err = "Ensure AWS Config includes global resources types (IAM)." {
@@ -891,14 +1134,23 @@ config_includes_global_resources_metadata := {
 #
 # PR-AWS-CLD-KNS-001
 #
-default kinesis_encryption = true
+default kinesis_encryption = null
 
-kinesis_encryption = false {
+kinesis_encryption_violation {
     not input.StreamDescription.EncryptionType
 }
 
-kinesis_encryption = false {
+kinesis_encryption_violation {
     lower(input.StreamDescription.EncryptionType) == "none"
+}
+
+kinesis_encryption {
+    input.StreamDescription
+    not kinesis_encryption_violation
+}
+
+kinesis_encryption = false {
+    kinesis_encryption_violation
 }
 
 kinesis_encryption_err = "AWS Kinesis streams are not encrypted using Server Side Encryption" {
@@ -959,9 +1211,9 @@ kinesis_encryption_kms_metadata := {
 # PR-AWS-CLD-KNS-003
 # aws::kinesis::stream
 
-default kinesis_gs_kms_key = true
+default kinesis_gs_kms_key = null
 
-kinesis_gs_kms_key = false {
+kinesis_gs_kms_key_violation {
     X := input.TEST_ALL_11[_]
     X.StreamDescription.EncryptionType == "KMS"
     Y := input.TEST_KMS[_]
@@ -969,12 +1221,21 @@ kinesis_gs_kms_key = false {
     Y.KeyMetadata.KeyManager != "CUSTOMER"
 }
 
-kinesis_gs_kms_key = false {
+kinesis_gs_kms_key_violation {
     X := input.TEST_ALL_11[_]
     X.StreamDescription.EncryptionType == "KMS"
     Y := input.TEST_KMS[_]
     X.StreamDescription.KeyId == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+kinesis_gs_kms_key {
+    input.TEST_ALL_11
+    not kinesis_gs_kms_key_violation
+}
+
+kinesis_gs_kms_key = false {
+    kinesis_gs_kms_key_violation
 }
 
 kinesis_gs_kms_key_err = "Ensure Kinesis streams are encrypted using dedicated GS managed KMS key." {
@@ -998,17 +1259,26 @@ kinesis_gs_kms_key_metadata := {
 # PR-AWS-CLD-KNS-004
 # aws::kinesis::stream
 
-default kinesis_shard_level_metrics = true
+default kinesis_shard_level_metrics = null
 
-kinesis_shard_level_metrics = false {
+kinesis_shard_level_metrics_violation {
     Enhanced_Monitoring := input.StreamDescription.EnhancedMonitoring[_]
     not common.has_property(Enhanced_Monitoring, "ShardLevelMetrics")
 }
 
-kinesis_shard_level_metrics = false {
+kinesis_shard_level_metrics_violation {
     Enhanced_Monitoring := input.StreamDescription.EnhancedMonitoring[_]
     common.has_property(Enhanced_Monitoring, "ShardLevelMetrics")
     count(Enhanced_Monitoring.ShardLevelMetrics) == 0
+}
+
+kinesis_shard_level_metrics {
+    input.StreamDescription
+    not kinesis_shard_level_metrics_violation
+}
+
+kinesis_shard_level_metrics = false {
+    kinesis_shard_level_metrics_violation
 }
 
 kinesis_shard_level_metrics_err = "Ensure AWS Kinesis has shard-level metrics enabled (for critical applications)." {
@@ -1031,14 +1301,23 @@ kinesis_shard_level_metrics_metadata := {
 #
 # PR-AWS-CLD-MQ-001
 #
-default mq_publicly_accessible = true
+default mq_publicly_accessible = null
 
-mq_publicly_accessible = false {
+mq_publicly_accessible_violation {
     input.PubliclyAccessible == true
 }
 
-mq_publicly_accessible = false {
+mq_publicly_accessible_violation {
     lower(input.PubliclyAccessible) == "true"
+}
+
+mq_publicly_accessible {
+    input
+    not mq_publicly_accessible_violation
+}
+
+mq_publicly_accessible = false {
+    mq_publicly_accessible_violation
 }
 
 mq_publicly_accessible_err = "AWS MQ is publicly accessible" {
@@ -1062,10 +1341,19 @@ mq_publicly_accessible_metadata := {
 #
 # PR-AWS-CLD-MQ-002
 #
-default mq_logging_enable = true
+default mq_logging_enable = null
+
+mq_logging_enable_violation {
+    not input.Logs.General
+}
+
+mq_logging_enable {
+    input
+    not mq_logging_enable_violation
+}
 
 mq_logging_enable = false {
-    not input.Logs.General
+    mq_logging_enable_violation
 }
 
 mq_logging_enable_err = "Ensure Amazon MQ Broker logging is enabled" {
@@ -1088,11 +1376,20 @@ mq_logging_enable_metadata := {
 # PR-AWS-CLD-MQ-003
 #
 
-default mq_activemq_approved_engine_version = true
+default mq_activemq_approved_engine_version = null
 
-mq_activemq_approved_engine_version = false {
+mq_activemq_approved_engine_version_violation {
     lower(input.EngineType) == "activemq"
     not startswith(input.EngineVersion, "5.16")
+}
+
+mq_activemq_approved_engine_version {
+    input
+    not mq_activemq_approved_engine_version_violation
+}
+
+mq_activemq_approved_engine_version = false {
+    mq_activemq_approved_engine_version_violation
 }
 
 mq_activemq_approved_engine_version_err = "Ensure ActiveMQ engine version is approved by GS." {
@@ -1115,11 +1412,20 @@ mq_activemq_approved_engine_version_metadata := {
 # PR-AWS-CLD-MQ-004
 #
 
-default mq_rabbitmq_approved_engine_version = true
+default mq_rabbitmq_approved_engine_version = null
 
-mq_rabbitmq_approved_engine_version = false {
+mq_rabbitmq_approved_engine_version_violation {
     lower(input.EngineType) == "rabbitmq"
     not startswith(input.EngineVersion, "3.8")
+}
+
+mq_rabbitmq_approved_engine_version {
+    input
+    not mq_rabbitmq_approved_engine_version_violation
+}
+
+mq_rabbitmq_approved_engine_version = false {
+    mq_rabbitmq_approved_engine_version_violation
 }
 
 mq_rabbitmq_approved_engine_version_err = "Ensure RabbitMQ engine version is approved by GS." {
@@ -1142,15 +1448,24 @@ mq_rabbitmq_approved_engine_version_metadata := {
 # PR-AWS-CLD-MQ-005
 #
 
-default audit_logs_published_to_cloudWatch = true
+default audit_logs_published_to_cloudWatch = null
 
-audit_logs_published_to_cloudWatch = false {
+audit_logs_published_to_cloudWatch_violation {
     lower(input.EngineType) == "activemq"
     lower(input.Logs.Audit) == available_false_choices[_]
 }
 
-audit_logs_published_to_cloudWatch = false {
+audit_logs_published_to_cloudWatch_violation {
     not input.Logs.Audit
+}
+
+audit_logs_published_to_cloudWatch {
+    input
+    not audit_logs_published_to_cloudWatch_violation
+}
+
+audit_logs_published_to_cloudWatch = false {
+    audit_logs_published_to_cloudWatch_violation
 }
 
 audit_logs_published_to_cloudWatch_err = "Ensure General and Audit logs are published to CloudWatch." {
@@ -1173,11 +1488,20 @@ audit_logs_published_to_cloudWatch_metadata := {
 # PR-AWS-CLD-R53-001
 #
 
-default route_healthcheck_disable = true
+default route_healthcheck_disable = null
 
-route_healthcheck_disable = false {
+route_healthcheck_disable_violation {
     ResourceRecordSets := input.ResourceRecordSets[j]
     not ResourceRecordSets.AliasTarget.EvaluateTargetHealth
+}
+
+route_healthcheck_disable {
+    input.ResourceRecordSets
+    not route_healthcheck_disable_violation
+}
+
+route_healthcheck_disable = false {
+    route_healthcheck_disable_violation
 }
 
 route_healthcheck_disable_err = "Ensure Route53 DNS evaluateTargetHealth is enabled" {
@@ -1201,9 +1525,9 @@ route_healthcheck_disable_metadata := {
 # PR-AWS-CLD-WAF-001
 #
 
-default waf_log4j_vulnerability = true
+default waf_log4j_vulnerability = null
 
-waf_log4j_vulnerability = false {
+waf_log4j_vulnerability_violation {
     Rules := input.WebACL.Rules[_]
     lower(Rules.Statement.ManagedRuleGroupStatement.Name) == "awsmanagedrulesknownbadinputsruleset"
     ExcludedRules := Rules.Statement.ManagedRuleGroupStatement.ExcludedRules[_]
@@ -1211,9 +1535,18 @@ waf_log4j_vulnerability = false {
 
 }
 
-waf_log4j_vulnerability = false {
+waf_log4j_vulnerability_violation {
     Rules := input.WebACL.Rules[_]
     not common.has_property(Rules.OverrideAction, "None")
+}
+
+waf_log4j_vulnerability {
+    input.WebACL
+    not waf_log4j_vulnerability_violation
+}
+
+waf_log4j_vulnerability = false {
+    waf_log4j_vulnerability_violation
 }
 
 waf_log4j_vulnerability_err = "JMSAppender in Log4j 1.2 is vulnerable to deserialization of untrusted data when the attacker has write access to the Log4j configuration" {
@@ -1237,15 +1570,24 @@ waf_log4j_vulnerability_metadata := {
 # PR-AWS-CLD-INS-001
 #
 
-default ins_package = true
+default ins_package = null
 
-ins_package = false {
+ins_package_violation {
     rulesPackageArns := input.rulesPackageArns
     count([c | lower(rulesPackageArns[_]) == lower(rules_packages[_]); c:=1]) == 0
 }
 
-ins_package = false {
+ins_package_violation {
     count(input.rulesPackageArns) == 0
+}
+
+ins_package {
+    input.rulesPackageArns
+    not ins_package_violation
+}
+
+ins_package = false {
+    ins_package_violation
 }
 
 ins_package_err = "Enable AWS Inspector to detect Vulnerability" {
@@ -1268,10 +1610,19 @@ ins_package_metadata := {
 # PR-AWS-CLD-APS-001
 #
 
-default appsync_not_configured_with_firewall_v2 = true
+default appsync_not_configured_with_firewall_v2 = null
+
+appsync_not_configured_with_firewall_v2_violation {
+    not input.graphqlApi.wafWebAclArn
+}
+
+appsync_not_configured_with_firewall_v2 {
+    input.graphqlApi
+    not appsync_not_configured_with_firewall_v2_violation
+}
 
 appsync_not_configured_with_firewall_v2 = false {
-    not input.graphqlApi.wafWebAclArn
+    appsync_not_configured_with_firewall_v2_violation
 }
 
 appsync_not_configured_with_firewall_v2_err = "Ensure AppSync is configured with AWS Web Application Firewall v2." {
@@ -1297,15 +1648,24 @@ appsync_not_configured_with_firewall_v2_metadata := {
 # AWS::DirectoryService::SimpleAD
 # aws::ec2::vpc
 
-default directory_dhcp_option = true
+default directory_dhcp_option = null
 
-directory_dhcp_option = false {
+directory_dhcp_option_violation {
     X := input.TEST_DIRECTORYSERVICE[_]
     directory := X.DirectoryDescriptions[_]
     Y := input.TEST_EC2_04[_]
     vpc := Y.Vpcs[_]
     not vpc.DhcpOptionsId
     directory.VpcSettings.VpcId == vpc.VpcId
+}
+
+directory_dhcp_option {
+    input.TEST_DIRECTORYSERVICE
+    not directory_dhcp_option_violation
+}
+
+directory_dhcp_option = false {
+    directory_dhcp_option_violation
 }
 
 directory_dhcp_option_err = "Ensure AWS Directory Service DHCP options is set for the VPC hosting managed AD." {
@@ -1332,15 +1692,24 @@ directory_dhcp_option_metadata := {
 # AWS::DirectoryService::SimpleAD
 # aws::ec2::vpc
 
-default directory_default_vpc = true
+default directory_default_vpc = null
 
-directory_default_vpc = false {
+directory_default_vpc_violation {
     X := input.TEST_DIRECTORYSERVICE[_]
     directory := X.DirectoryDescriptions[_]
     Y := input.TEST_EC2_04[_]
     vpc := Y.Vpcs[_]
     vpc.IsDefault == true
     directory.VpcSettings.VpcId == vpc.VpcId
+}
+
+directory_default_vpc {
+    input.TEST_DIRECTORYSERVICE
+    not directory_default_vpc_violation
+}
+
+directory_default_vpc = false {
+    directory_default_vpc_violation
 }
 
 directory_default_vpc_err = "Ensure AWS Directory Service is not launched using default VPC." {
@@ -1367,9 +1736,9 @@ directory_default_vpc_metadata := {
 # AWS::DirectoryService::SimpleAD
 # aws::ec2::instance
 
-default directory_security_group = true
+default directory_security_group = null
 
-directory_security_group = false {
+directory_security_group_violation {
     X := input.TEST_DIRECTORYSERVICE[_]
     directory := X.DirectoryDescriptions[_]
     Y := input.TEST_EC2_01[_]
@@ -1377,6 +1746,15 @@ directory_security_group = false {
     Instance := Reservation.Instances[_]
     security_grp := Instance.SecurityGroups[_]
     directory.VpcSettings.SecurityGroupId == security_grp.GroupId
+}
+
+directory_security_group {
+    input.TEST_DIRECTORYSERVICE
+    not directory_security_group_violation
+}
+
+directory_security_group = false {
+    directory_security_group_violation
 }
 
 directory_security_group_err = "Ensure the Security groups attached to domain controllers for AWS Directory Service are not used by other instances." {
@@ -1403,9 +1781,9 @@ directory_security_group_metadata := {
 # AWS::DirectoryService::SimpleAD
 # aws::ec2::instance
 
-default directory_subnet = true
+default directory_subnet = null
 
-directory_subnet = false {
+directory_subnet_violation {
     X := input.TEST_DIRECTORYSERVICE[_]
     directory := X.DirectoryDescriptions[_]
     Y := input.TEST_EC2_01[_]
@@ -1413,6 +1791,15 @@ directory_subnet = false {
     Instance := Reservation.Instances[_]
     Subnet := directory.VpcSettings.SubnetIds[_]
     Subnet == Instance.SubnetId
+}
+
+directory_subnet {
+    input.TEST_DIRECTORYSERVICE
+    not directory_subnet_violation
+}
+
+directory_subnet = false {
+    directory_subnet_violation
 }
 
 directory_subnet_err = "Ensure the subnets used by the domain controllers for AWS Directory Service are not used by other instances." {

@@ -6,18 +6,28 @@ import data.common
 # PR-AWS-CLD-S3-001
 # 
 
-default s3_accesslog = true
+default s3_accesslog = null
 
-s3_accesslog = false {
+
+s3_accesslog_violation {
     not input.LoggingEnabled
 }
 
-s3_accesslog = false {
+s3_accesslog_violation {
     count(input.LoggingEnabled.TargetBucket) == 0
 }
 
-s3_accesslog = false {
+s3_accesslog_violation {
     count(input.LoggingEnabled.TargetPrefix) == 0
+}
+
+s3_accesslog {
+    input.LoggingEnabled
+    not s3_accesslog_violation
+}
+
+s3_accesslog = false {
+    s3_accesslog_violation
 }
 
 s3_accesslog_err = "AWS Access logging not enabled on S3 buckets" {
@@ -41,14 +51,15 @@ s3_accesslog_metadata := {
 # PR-AWS-CLD-S3-002
 #
 
-default s3_acl_delete = true
+default s3_acl_delete = null
 
-s3_acl_delete = false {
+
+s3_acl_delete_violation {
     policy := json.unmarshal(input.Policy)
     not policy.Statement
 }
 
-s3_acl_delete = false {
+s3_acl_delete_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -56,12 +67,21 @@ s3_acl_delete = false {
     startswith(lower(stat.Action),"s3:delete")
 }
 
-s3_acl_delete = false {
+s3_acl_delete_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action[_]),"s3:delete")
+}
+
+s3_acl_delete {
+    input.Policy
+    not s3_acl_delete_violation
+}
+
+s3_acl_delete = false {
+    s3_acl_delete_violation
 }
 
 s3_acl_delete_err = "AWS S3 Bucket has Global DELETE Permissions enabled via bucket policy" {
@@ -84,14 +104,15 @@ s3_acl_delete_metadata := {
 # PR-AWS-CLD-S3-003
 #
 
-default s3_acl_get = true
+default s3_acl_get = null
 
-s3_acl_get = false {
+
+s3_acl_get_violation {
     policy := json.unmarshal(input.Policy)
     not policy.Statement
 }
 
-s3_acl_get = false {
+s3_acl_get_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -99,7 +120,7 @@ s3_acl_get = false {
     lower(stat.Action[_]) == "s3:*"
 }
 
-s3_acl_get = false {
+s3_acl_get_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -107,12 +128,21 @@ s3_acl_get = false {
     startswith(lower(stat.Action),"s3:get")
 }
 
-s3_acl_get = false {
+s3_acl_get_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action[_]),"s3:get")
+}
+
+s3_acl_get {
+    input.Policy
+    not s3_acl_get_violation
+}
+
+s3_acl_get = false {
+    s3_acl_get_violation
 }
 
 s3_acl_get_err = "AWS S3 Bucket has Global get Permissions enabled via bucket policy" {
@@ -135,14 +165,15 @@ s3_acl_get_metadata := {
 # PR-AWS-CLD-S3-004
 #
 
-default s3_acl_list = true
+default s3_acl_list = null
 
-s3_acl_list = false {
+
+s3_acl_list_violation {
     policy := json.unmarshal(input.Policy)
     not policy.Statement
 }
 
-s3_acl_list = false {
+s3_acl_list_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -150,7 +181,7 @@ s3_acl_list = false {
     lower(stat.Action[_]) == "s3:*"
 }
 
-s3_acl_list = false {
+s3_acl_list_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -159,13 +190,22 @@ s3_acl_list = false {
 
 }
 
-s3_acl_list = false {
+s3_acl_list_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action[_]),"s3:list")
 
+}
+
+s3_acl_list {
+    input.Policy
+    not s3_acl_list_violation
+}
+
+s3_acl_list = false {
+    s3_acl_list_violation
 }
 
 s3_acl_list_err = "AWS S3 Bucket has Global list Permissions enabled via bucket policy" {
@@ -188,14 +228,15 @@ s3_acl_list_metadata := {
 # PR-AWS-CLD-S3-005
 #
 
-default s3_acl_put = true
+default s3_acl_put = null
 
-s3_acl_put = false {
+
+s3_acl_put_violation {
     policy := json.unmarshal(input.Policy)
     not policy.Statement
 }
 
-s3_acl_put = false {
+s3_acl_put_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -203,7 +244,7 @@ s3_acl_put = false {
     lower(stat.Action[_]) == "s3:*"
 }
 
-s3_acl_put = false {
+s3_acl_put_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -212,12 +253,21 @@ s3_acl_put = false {
 
 }
 
-s3_acl_put = false {
+s3_acl_put_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action[_]),"s3:put")
+}
+
+s3_acl_put {
+    input.Policy
+    not s3_acl_put_violation
+}
+
+s3_acl_put = false {
+    s3_acl_put_violation
 }
 
 s3_acl_put_err = "AWS S3 Bucket has Global put Permissions enabled via bucket policy" {
@@ -336,41 +386,51 @@ s3_versioning_metadata := {
 # PR-AWS-CLD-S3-009
 #
 
-default s3_transport = true
+default s3_transport = null
 
-s3_transport = false {
+
+s3_transport_violation {
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
     not statement.Condition.StringLike
     not statement.Condition.Bool
 }
 
-s3_transport = false {
+s3_transport_violation {
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
     statement.Condition.StringLike
     not statement.Condition.StringLike["aws:SecureTransport"]
 }
 
-s3_transport = false {
+s3_transport_violation {
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
     statement.Condition.StringLike
     lower(statement.Condition.StringLike["aws:SecureTransport"]) == "false"
 }
 
-s3_transport = false {
+s3_transport_violation {
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
     statement.Condition.Bool
     not statement.Condition.Bool["aws:SecureTransport"]
 }
 
-s3_transport = false {
+s3_transport_violation {
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
     statement.Condition.Bool
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
+}
+
+s3_transport {
+    input.Policy
+    not s3_transport_violation
+}
+
+s3_transport = false {
+    s3_transport_violation
 }
 
 s3_transport_err = "AWS S3 bucket not configured with secure data transport policy" {
@@ -526,22 +586,32 @@ s3_encryption_metadata := {
 # PR-AWS-CLD-S3-013
 #
 
-default s3_website = true
+default s3_website = null
 
-s3_website = false {
+
+s3_website_violation {
     input.IndexDocument
 }
 
-s3_website = false {
+s3_website_violation {
     input.ErrorDocument
 }
 
-s3_website = false {
+s3_website_violation {
     input.RedirectAllRequestsTo
 }
 
-s3_website = false {
+s3_website_violation {
     input.RoutingRules
+}
+
+s3_website {
+    input.IndexDocument
+    not s3_website_violation
+}
+
+s3_website = false {
+    s3_website_violation
 }
 
 s3_website_err = "S3 buckets with configurations set to host websites" {
@@ -565,12 +635,22 @@ s3_website_metadata := {
 # PR-AWS-CLD-S3-014
 #
 
-default s3_cors = true
+default s3_cors = null
 
-s3_cors = false {
+
+s3_cors_violation {
     cors_rule := input.CORSRules[_]
     cors_rule.AllowedHeaders[_] == "*"
     cors_rule.AllowedMethods[_] == "*"
+}
+
+s3_cors {
+    input.CORSRules
+    not s3_cors_violation
+}
+
+s3_cors = false {
+    s3_cors_violation
 }
 
 s3_cors_err = "Ensure S3 hosted sites supported hardened CORS" {
@@ -594,23 +674,33 @@ s3_cors_metadata := {
 # PR-AWS-CLD-S3-015
 #
 
-default bucket_kms_encryption = true
+default bucket_kms_encryption = null
 
 
-bucket_kms_encryption = false {
+
+bucket_kms_encryption_violation {
     rules := input.ServerSideEncryptionConfiguration.Rules[j]
     not rules.BucketKeyEnabled
 }
 
-bucket_kms_encryption = false {
+bucket_kms_encryption_violation {
     rules := input.ServerSideEncryptionConfiguration.Rules[j]
     lower(rules.ServerSideEncryptionByDefault.SSEAlgorithm) != "aws:kms"
 }
 
-bucket_kms_encryption = false {
+bucket_kms_encryption_violation {
     rules := input.ServerSideEncryptionConfiguration.Rules[j]
     lower(rules.ServerSideEncryptionByDefault.SSEAlgorithm) == "aws:kms"
     count(rules.ServerSideEncryptionByDefault.KMSMasterKeyID) == 0
+}
+
+bucket_kms_encryption {
+    input.ServerSideEncryptionConfiguration
+    not bucket_kms_encryption_violation
+}
+
+bucket_kms_encryption = false {
+    bucket_kms_encryption_violation
 }
 
 
@@ -662,19 +752,29 @@ s3_object_lock_enable_metadata := {
 # PR-AWS-CLD-S3-017
 #
 
-default s3_cross_region_replica = true
+default s3_cross_region_replica = null
 
-s3_cross_region_replica = false {
+
+s3_cross_region_replica_violation {
     not input.ReplicationConfiguration
 }
 
-s3_cross_region_replica = false {
+s3_cross_region_replica_violation {
     count(input.ReplicationConfiguration.Rules) == 0
 }
 
-s3_cross_region_replica = false {
+s3_cross_region_replica_violation {
     Rules := input.ReplicationConfiguration.Rules[j]
     not Rules.Destination
+}
+
+s3_cross_region_replica {
+    input.ReplicationConfiguration
+    not s3_cross_region_replica_violation
+}
+
+s3_cross_region_replica = false {
+    s3_cross_region_replica_violation
 }
 
 s3_cross_region_replica_err = "Ensure S3 bucket cross-region replication is enabled" {
@@ -698,10 +798,20 @@ s3_cross_region_replica_metadata := {
 # PR-AWS-CLD-S3-018
 #
 
-default s3_public_access_block = true
+default s3_public_access_block = null
+
+
+s3_public_access_block_violation {
+    not input.PublicAccessBlockConfiguration.BlockPublicAcls
+}
+
+s3_public_access_block {
+    input.PublicAccessBlockConfiguration
+    not s3_public_access_block_violation
+}
 
 s3_public_access_block = false {
-    not input.PublicAccessBlockConfiguration.BlockPublicAcls
+    s3_public_access_block_violation
 }
 
 s3_public_access_block_err = "Ensure S3 Bucket has public access blocks" {
@@ -725,10 +835,20 @@ s3_public_access_block_metadata := {
 # PR-AWS-CLD-S3-019
 #
 
-default s3_restrict_public_bucket = true
+default s3_restrict_public_bucket = null
+
+
+s3_restrict_public_bucket_violation {
+    not input.PublicAccessBlockConfiguration.RestrictPublicBuckets
+}
+
+s3_restrict_public_bucket {
+    input.PublicAccessBlockConfiguration
+    not s3_restrict_public_bucket_violation
+}
 
 s3_restrict_public_bucket = false {
-    not input.PublicAccessBlockConfiguration.RestrictPublicBuckets
+    s3_restrict_public_bucket_violation
 }
 
 s3_restrict_public_bucket_err = "Ensure S3 bucket RestrictPublicBucket is enabled" {
@@ -752,11 +872,21 @@ s3_restrict_public_bucket_metadata := {
 # PR-AWS-CLD-S3-020
 #
 
-default s3_ignore_public_acl = true
+default s3_ignore_public_acl = null
 
+
+
+s3_ignore_public_acl_violation {
+    not input.PublicAccessBlockConfiguration.IgnorePublicAcls
+}
+
+s3_ignore_public_acl {
+    input.PublicAccessBlockConfiguration
+    not s3_ignore_public_acl_violation
+}
 
 s3_ignore_public_acl = false {
-    not input.PublicAccessBlockConfiguration.IgnorePublicAcls
+    s3_ignore_public_acl_violation
 }
 
 s3_ignore_public_acl_err = "Ensure S3 bucket IgnorePublicAcls is enabled" {
@@ -780,10 +910,20 @@ s3_ignore_public_acl_metadata := {
 # PR-AWS-CLD-S3-021
 #
 
-default s3_block_public_policy = true
+default s3_block_public_policy = null
+
+
+s3_block_public_policy_violation {
+    not input.PublicAccessBlockConfiguration.BlockPublicPolicy
+}
+
+s3_block_public_policy {
+    input.PublicAccessBlockConfiguration
+    not s3_block_public_policy_violation
+}
 
 s3_block_public_policy = false {
-    not input.PublicAccessBlockConfiguration.BlockPublicPolicy
+    s3_block_public_policy_violation
 }
 
 s3_block_public_policy_err = "Ensure S3 Bucket BlockPublicPolicy is enabled" {
@@ -807,14 +947,15 @@ s3_block_public_policy_metadata := {
 # aws::s3::bucketpolicy
 #
 
-default s3_overly_permissive_to_any_principal = true
+default s3_overly_permissive_to_any_principal = null
 
-s3_overly_permissive_to_any_principal = false {
+
+s3_overly_permissive_to_any_principal_violation {
     policy := json.unmarshal(input.Policy)
     not policy.Statement
 }
 
-s3_overly_permissive_to_any_principal = false {
+s3_overly_permissive_to_any_principal_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
@@ -823,13 +964,22 @@ s3_overly_permissive_to_any_principal = false {
     not stat.Condition
 }
 
-s3_overly_permissive_to_any_principal = false {
+s3_overly_permissive_to_any_principal_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     lower(stat.Effect) == "allow"
     contains(stat.Principal, "*")
     startswith(lower(stat.Action[_]),"s3:")
     not stat.Condition
+}
+
+s3_overly_permissive_to_any_principal {
+    input.Policy
+    not s3_overly_permissive_to_any_principal_violation
+}
+
+s3_overly_permissive_to_any_principal = false {
+    s3_overly_permissive_to_any_principal_violation
 }
 
 s3_overly_permissive_to_any_principal_err = "Ensure AWS S3 bucket policy is not overly permissive to any principal." {
@@ -853,11 +1003,21 @@ s3_overly_permissive_to_any_principal_metadata := {
 # aws::s3::bucketpolicy
 #
 
-default s3_has_a_policy_attached = true
+default s3_has_a_policy_attached = null
 
-s3_has_a_policy_attached = false {
+
+s3_has_a_policy_attached_violation {
     policy := json.unmarshal(input.Policy)
     not policy.Statement
+}
+
+s3_has_a_policy_attached {
+    input.Policy
+    not s3_has_a_policy_attached_violation
+}
+
+s3_has_a_policy_attached = false {
+    s3_has_a_policy_attached_violation
 }
 
 s3_has_a_policy_attached_err = "Ensure AWS S3 bucket has a policy attached." {
@@ -880,9 +1040,10 @@ s3_has_a_policy_attached_metadata := {
 # PR-AWS-CLD-S3-025
 # aws::s3::bucketpolicy
 
-default policy_is_not_overly_permissive_to_vpc_endpoints = true
+default policy_is_not_overly_permissive_to_vpc_endpoints = null
 
-policy_is_not_overly_permissive_to_vpc_endpoints = false {
+
+policy_is_not_overly_permissive_to_vpc_endpoints_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     contains(stat.Condition.StringNotEquals, "aws:SourceVpce")
@@ -890,7 +1051,7 @@ policy_is_not_overly_permissive_to_vpc_endpoints = false {
     startswith(lower(stat.Action),"s3:*")
 }
 
-policy_is_not_overly_permissive_to_vpc_endpoints = false {
+policy_is_not_overly_permissive_to_vpc_endpoints_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     contains(stat.Condition.StringNotEquals, "aws:SourceVpce")
@@ -898,7 +1059,7 @@ policy_is_not_overly_permissive_to_vpc_endpoints = false {
     startswith(lower(stat.Action[_]),"s3:*")
 }
 
-policy_is_not_overly_permissive_to_vpc_endpoints = false {
+policy_is_not_overly_permissive_to_vpc_endpoints_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     contains(stat.Condition.StringEquals, "aws:SourceVpce")
@@ -906,12 +1067,21 @@ policy_is_not_overly_permissive_to_vpc_endpoints = false {
     startswith(lower(stat.Action),"s3:*")
 }
 
-policy_is_not_overly_permissive_to_vpc_endpoints = false {
+policy_is_not_overly_permissive_to_vpc_endpoints_violation {
     policy := json.unmarshal(input.Policy)
     stat := policy.Statement[_]
     contains(stat.Condition.StringEquals, "aws:SourceVpce")
     lower(stat.Effect) == "allow"
     startswith(lower(stat.Action[_]),"s3:*")
+}
+
+policy_is_not_overly_permissive_to_vpc_endpoints {
+    input.Policy
+    not policy_is_not_overly_permissive_to_vpc_endpoints_violation
+}
+
+policy_is_not_overly_permissive_to_vpc_endpoints = false {
+    policy_is_not_overly_permissive_to_vpc_endpoints_violation
 }
 
 policy_is_not_overly_permissive_to_vpc_endpoints_err = "Ensure AWS S3 bucket do not have policy that is overly permissive to VPC endpoints." {
@@ -934,17 +1104,27 @@ policy_is_not_overly_permissive_to_vpc_endpoints_metadata := {
 # PR-AWS-CLD-S3-026
 #
 
-default s3_only_owner_access = true
+default s3_only_owner_access = null
 
-s3_only_owner_access = false {
+
+s3_only_owner_access_violation {
     owner_id := input.Owner.ID
     not owner_id
 }
 
-s3_only_owner_access = false {
+s3_only_owner_access_violation {
     owner_id := input.Owner.ID
     count(input.Grants) >= 1
     count([c | (input.Grants[_].Grantee.ID == owner_id); c:=1]) == 0    
+}
+
+s3_only_owner_access {
+    input.Owner
+    not s3_only_owner_access_violation
+}
+
+s3_only_owner_access = false {
+    s3_only_owner_access_violation
 }
     
 s3_only_owner_access_err = "Ensure S3 bucket ACL is in use and any user other than the owner does not have any access on it." {
@@ -967,21 +1147,31 @@ s3_only_owner_access_metadata := {
 # PR-AWS-CLD-S3-027
 #
 
-default bucket_cmk_encryption = true
+default bucket_cmk_encryption = null
 
-bucket_cmk_encryption = false {
+
+bucket_cmk_encryption_violation {
     rule := input.ServerSideEncryptionConfiguration.Rules[j]
     not rule.BucketKeyEnabled
 }
 
-bucket_cmk_encryption = false {
+bucket_cmk_encryption_violation {
     rule := input.ServerSideEncryptionConfiguration.Rules[j]
     lower(rule.ApplyServerSideEncryptionByDefault.SSEAlgorithm) != "aws:kms"
 }
 
-bucket_cmk_encryption = false {
+bucket_cmk_encryption_violation {
     rule := input.ServerSideEncryptionConfiguration.Rules[j]
     contains(rule.ApplyServerSideEncryptionByDefault.KMSMasterKeyID, "alias/aws/s3")
+}
+
+bucket_cmk_encryption {
+    input.ServerSideEncryptionConfiguration
+    not bucket_cmk_encryption_violation
+}
+
+bucket_cmk_encryption = false {
+    bucket_cmk_encryption_violation
 }
 
 bucket_cmk_encryption_err = "Ensure S3 bucket is encrypted using CMK" {
@@ -1032,11 +1222,21 @@ efs_kms_metadata := {
 # PR-AWS-CLD-EFS-002
 #
 
-default efs_encrypt = true
+default efs_encrypt = null
 
-efs_encrypt = false {
+
+efs_encrypt_violation {
     FileSystems := input.FileSystems[_]
     not FileSystems.Encrypted
+}
+
+efs_encrypt {
+    input.FileSystems
+    not efs_encrypt_violation
+}
+
+efs_encrypt = false {
+    efs_encrypt_violation
 }
 
 efs_encrypt_err = "AWS Elastic File System (EFS) with encryption for data at rest disabled" {
@@ -1059,15 +1259,16 @@ efs_encrypt_metadata := {
 # PR-AWS-CLD-EFS-003
 #
 
-default efs_cmk = true
+default efs_cmk = null
 
-efs_cmk = false {
+
+efs_cmk_violation {
     EFS := input.TEST_EFS[_]
     FileSystem := EFS.FileSystems[_]
     not FileSystem.KmsKeyId
 }
 
-efs_cmk = false {
+efs_cmk_violation {
     EFS := input.TEST_EFS[_]
     FileSystem := EFS.FileSystems[_]
     
@@ -1075,6 +1276,15 @@ efs_cmk = false {
     FileSystem.KmsKeyId == KMS.KeyMetadata.Arn
     alias := KMS.Aliases[_]
     alias.AliasName == "alias/aws/elasticfilesystem"
+}
+
+efs_cmk {
+    input.TEST_EFS
+    not efs_cmk_violation
+}
+
+efs_cmk = false {
+    efs_cmk_violation
 }
 
 efs_cmk_err = "AWS Elastic File System (EFS) not encrypted using Customer Managed Key" {
@@ -1097,11 +1307,21 @@ efs_cmk_metadata := {
 # PR-AWS-CLD-EBS-001
 #
 
-default ebs_encrypt = true
+default ebs_encrypt = null
 
-ebs_encrypt = false {
+
+ebs_encrypt_violation {
     volumes := input.Volumes[_]
     volumes.Encrypted != true
+}
+
+ebs_encrypt {
+    input.Volumes
+    not ebs_encrypt_violation
+}
+
+ebs_encrypt = false {
+    ebs_encrypt_violation
 }
 
 ebs_encrypt_err = "AWS EBS volumes are not encrypted" {
@@ -1124,15 +1344,16 @@ ebs_encrypt_metadata := {
 # PR-AWS-CLD-EBS-002
 #
 
-default ebs_encrypt_with_cmk = true
+default ebs_encrypt_with_cmk = null
 
-ebs_encrypt_with_cmk = false {
+
+ebs_encrypt_with_cmk_violation {
     EC2 := input.TEST_EC2_01[_]
     volumn := EC2.Volumes[_]
     not volumn.KmsKeyId
 }
 
-ebs_encrypt_with_cmk = false {
+ebs_encrypt_with_cmk_violation {
     EC2 := input.TEST_EC2_01[_]
     volumn := EC2.Volumes[_]
     
@@ -1140,6 +1361,15 @@ ebs_encrypt_with_cmk = false {
     volumn.KmsKeyId == KMS.KeyMetadata.Arn
     alias := KMS.Aliases[_]
     alias.AliasName == "alias/aws/ebs"
+}
+
+ebs_encrypt_with_cmk {
+    input.TEST_EC2_01
+    not ebs_encrypt_with_cmk_violation
+}
+
+ebs_encrypt_with_cmk = false {
+    ebs_encrypt_with_cmk_violation
 }
 
 ebs_encrypt_with_cmk_err = "AWS EBS volumes are not encrypted with CMK" {
@@ -1162,27 +1392,37 @@ ebs_encrypt_with_cmk_metadata := {
 # PR-AWS-CLD-BKP-001
 #
 
-default backup_public_access_disable = true
+default backup_public_access_disable = null
 
-backup_public_access_disable = false {
+
+backup_public_access_disable_violation {
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
 }
 
-backup_public_access_disable = false {
+backup_public_access_disable_violation {
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
 }
 
-backup_public_access_disable = false {
+backup_public_access_disable_violation {
     policy := json.unmarshal(input.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
+}
+
+backup_public_access_disable {
+    input.Policy
+    not backup_public_access_disable_violation
+}
+
+backup_public_access_disable = false {
+    backup_public_access_disable_violation
 }
 
 backup_public_access_disable_err = "Ensure Glacier Backup policy is not publicly accessible" {
@@ -1233,11 +1473,21 @@ transer_server_public_expose_metadata := {
 # PR-AWS-CLD-TRF-002
 # aws::transfer::server
 
-default transfer_server_protocol = true
+default transfer_server_protocol = null
 
-transfer_server_protocol = false {
+
+transfer_server_protocol_violation {
     protocol := input.Server.Protocols[_]
     protocol == "FTP"
+}
+
+transfer_server_protocol {
+    input.Server
+    not transfer_server_protocol_violation
+}
+
+transfer_server_protocol = false {
+    transfer_server_protocol_violation
 }
 
 transfer_server_protocol_err = "Ensure Transfer Server is not use FTP protocol." {

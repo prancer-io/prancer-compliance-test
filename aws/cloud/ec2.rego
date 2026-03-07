@@ -10,18 +10,28 @@ available_true_choices := ["true", true]
 # PR-AWS-CLD-EC2-001
 #
 
-default ec2_iam_role = true
+default ec2_iam_role = null
 
-ec2_iam_role = false {
+
+ec2_iam_role_violation {
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     not Instances.IamInstanceProfile
 }
 
-ec2_iam_role = false {
+ec2_iam_role_violation {
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     not startswith(lower(Instances.IamInstanceProfile), "arn:")
+}
+
+ec2_iam_role {
+    input.Reservations
+    not ec2_iam_role_violation
+}
+
+ec2_iam_role = false {
+    ec2_iam_role_violation
 }
 
 ec2_iam_role_err = "AWS EC2 Instance IAM Role not enabled" {
@@ -44,13 +54,23 @@ ec2_iam_role_metadata := {
 # PR-AWS-CLD-EC2-002
 #
 
-default ec2_no_vpc = true
+default ec2_no_vpc = null
 
-ec2_no_vpc = false {
+
+ec2_no_vpc_violation {
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     not Instances.SubnetId
     count([c | Instances.NetworkInterfaces[_].SubnetId; c := 1]) == 0
+}
+
+ec2_no_vpc {
+    input.Reservations
+    not ec2_no_vpc_violation
+}
+
+ec2_no_vpc = false {
+    ec2_no_vpc_violation
 }
 
 ec2_no_vpc_err = "AWS EC2 instance is not configured with VPC" {
@@ -73,20 +93,30 @@ ec2_no_vpc_metadata := {
 # PR-AWS-CLD-EC2-003
 #
 
-default ec2_public_ip = true
+default ec2_public_ip = null
 
-ec2_public_ip = false {
+
+ec2_public_ip_violation {
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     NetworkInterfaces := Instances.NetworkInterfaces[j]
     not common.has_property(NetworkInterfaces, "AssociatePublicIpAddress")
 }
 
-ec2_public_ip = false {
+ec2_public_ip_violation {
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     Instances.NetworkInterfaces[j].AssociatePublicIpAddress == true
     lower(Instances.SecurityGroups[k]) == "default"
+}
+
+ec2_public_ip {
+    input.Reservations
+    not ec2_public_ip_violation
+}
+
+ec2_public_ip = false {
+    ec2_public_ip_violation
 }
 
 ec2_public_ip_err = "AWS EC2 instances with Public IP and associated with Security Groups have Internet Access" {
@@ -109,12 +139,22 @@ ec2_public_ip_metadata := {
 # PR-AWS-CLD-EC2-004
 #
 
-default ec2_ebs_optimized = true
+default ec2_ebs_optimized = null
 
-ec2_ebs_optimized = false {
+
+ec2_ebs_optimized_violation {
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     not Instances.EbsOptimized
+}
+
+ec2_ebs_optimized {
+    input.Reservations
+    not ec2_ebs_optimized_violation
+}
+
+ec2_ebs_optimized = false {
+    ec2_ebs_optimized_violation
 }
 
 ec2_ebs_optimized_err = "Ensure that EC2 instace is EBS Optimized" {
@@ -138,18 +178,28 @@ ec2_ebs_optimized_metadata := {
 # PR-AWS-CLD-EC2-005
 #
 
-default ec2_monitoring = true
+default ec2_monitoring = null
 
-ec2_monitoring = false {
+
+ec2_monitoring_violation {
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     not Instances.Monitoring
 }
 
-ec2_monitoring = false {
+ec2_monitoring_violation {
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     lower(Instances.Monitoring.State) != "enabled"
+}
+
+ec2_monitoring {
+    input.Reservations
+    not ec2_monitoring_violation
+}
+
+ec2_monitoring = false {
+    ec2_monitoring_violation
 }
 
 ec2_monitoring_err = "Ensure detailed monitoring is enabled for EC2 instances" {
@@ -173,9 +223,10 @@ ec2_monitoring_metadata := {
 # PR-AWS-CLD-EC2-006
 #
 
-default ec2_deletion_termination = true
+default ec2_deletion_termination = null
 
-ec2_deletion_termination = false {
+
+ec2_deletion_termination_violation {
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     BlockDeviceMappings := Instances.BlockDeviceMappings[_]
@@ -186,7 +237,7 @@ ec2_deletion_termination = false {
     NetworkInterfaces.Attachment.DeleteOnTermination == available_true_choices[_]
 }
 
-ec2_deletion_termination = false {
+ec2_deletion_termination_violation {
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     BlockDeviceMappings := Instances.BlockDeviceMappings[_]
@@ -197,7 +248,7 @@ ec2_deletion_termination = false {
 }
 
 
-ec2_deletion_termination = false {
+ec2_deletion_termination_violation {
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     BlockDeviceMappings := Instances.BlockDeviceMappings[_]
@@ -207,13 +258,22 @@ ec2_deletion_termination = false {
     NetworkInterfaces.Attachment.DeleteOnTermination == available_true_choices[_]
 }
 
-ec2_deletion_termination = false {
+ec2_deletion_termination_violation {
     Reservations := input.Reservations[_]
     Instances := Reservations.Instances[_]
     BlockDeviceMappings := Instances.BlockDeviceMappings[_]
     not common.has_property(BlockDeviceMappings.Ebs, "DeleteOnTermination")
     NetworkInterfaces := Instances.NetworkInterfaces[_]
     not common.has_property(NetworkInterfaces.Attachment, "DeleteOnTermination")
+}
+
+ec2_deletion_termination {
+    input.Reservations
+    not ec2_deletion_termination_violation
+}
+
+ec2_deletion_termination = false {
+    ec2_deletion_termination_violation
 }
 
 ec2_deletion_termination_err = "Ensure AWS EC2 EBS and Network components' deletion protection is enabled" {
@@ -237,11 +297,21 @@ ec2_deletion_termination_metadata := {
 # PR-AWS-CLD-EC2-008
 #
 
-default ebs_snapshot_public_access = true
+default ebs_snapshot_public_access = null
 
-ebs_snapshot_public_access = false {
+
+ebs_snapshot_public_access_violation {
     CreateVolumePermissions := input.CreateVolumePermissions[_]
     lower(CreateVolumePermissions.Group) == "all"
+}
+
+ebs_snapshot_public_access {
+    input.CreateVolumePermissions
+    not ebs_snapshot_public_access_violation
+}
+
+ebs_snapshot_public_access = false {
+    ebs_snapshot_public_access_violation
 }
 
 ebs_snapshot_public_access_err = "Ensure AWS EBS snapshots are not accessible to public" {
@@ -264,17 +334,27 @@ ebs_snapshot_public_access_metadata := {
 # PR-AWS-CLD-EC2-011
 #
 
-default ebs_volume_attached = true
+default ebs_volume_attached = null
 
-ebs_volume_attached = false {
+
+ebs_volume_attached_violation {
     Volumes := input.Volumes[_]
     count(Volumes.Attachments) == 0
 }
 
-ebs_volume_attached = false {
+ebs_volume_attached_violation {
     Volumes := input.Volumes[_]
     Attachment := Volumes.Attachments[_]
     lower(Attachment.State) != "attached"
+}
+
+ebs_volume_attached {
+    input.Volumes
+    not ebs_volume_attached_violation
+}
+
+ebs_volume_attached = false {
+    ebs_volume_attached_violation
 }
 
 ebs_volume_attached_err = "Ensure EBS volume is attached" {
@@ -298,12 +378,22 @@ ebs_volume_attached_metadata := {
 # PR-AWS-CLD-EC2-012
 #
 
-default ebs_deletion_protection = true
+default ebs_deletion_protection = null
 
-ebs_deletion_protection = false {
+
+ebs_deletion_protection_violation {
     Volumes := input.Volumes[_]
     Attachment := Volumes.Attachments[_]
     Attachment.DeleteOnTermination == false
+}
+
+ebs_deletion_protection {
+    input.Volumes
+    not ebs_deletion_protection_violation
+}
+
+ebs_deletion_protection = false {
+    ebs_deletion_protection_violation
 }
 
 ebs_deletion_protection_err = "Ensure EBS deletion protection is enabled" {
@@ -327,14 +417,24 @@ ebs_deletion_protection_metadata := {
 # aws::ec2::instance
 #
 
-default ec2_instance_configured_with_instance_metadata_service_v2 = true
+default ec2_instance_configured_with_instance_metadata_service_v2 = null
 
-ec2_instance_configured_with_instance_metadata_service_v2 = false {
+
+ec2_instance_configured_with_instance_metadata_service_v2_violation {
     Reservation := input.Reservations[_]
     Instance := Reservation.Instances[_]
     lower(Instance.State.Name) == "running"
     lower(Instance.MetadataOptions.HttpEndpoint) == "enabled"
     lower(Instance.MetadataOptions.HttpTokens) == "required"
+}
+
+ec2_instance_configured_with_instance_metadata_service_v2 {
+    input.Reservations
+    not ec2_instance_configured_with_instance_metadata_service_v2_violation
+}
+
+ec2_instance_configured_with_instance_metadata_service_v2 = false {
+    ec2_instance_configured_with_instance_metadata_service_v2_violation
 }
 
 ec2_instance_configured_with_instance_metadata_service_v2_err = "Ensure AWS EC2 instance is configured with Instance Metadata Service v2 (IMDSv2)." {
@@ -359,15 +459,25 @@ ec2_instance_configured_with_instance_metadata_service_v2_metadata := {
 # aws::ec2::instance
 # aws::ec2::vpcendpoint
 
-default ec2_vpcendpoint = true
+default ec2_vpcendpoint = null
 
-ec2_vpcendpoint = false {
+
+ec2_vpcendpoint_violation {
     X := input.TEST_EC2_01[_]
     Reservation := X.Reservations[_]
     Instance := Reservation.Instances[_]
     Y := input.TEST_EC2_06[_]
     VpcEndpoint := Y.VpcEndpoints[_]
     Instance.VpcId != VpcEndpoint.VpcId
+}
+
+ec2_vpcendpoint {
+    input.TEST_EC2_01
+    not ec2_vpcendpoint_violation
+}
+
+ec2_vpcendpoint = false {
+    ec2_vpcendpoint_violation
 }
 
 ec2_vpcendpoint_err = "Ensure EC2 is communicating with other services outside VPC using VPC-endpoint." {

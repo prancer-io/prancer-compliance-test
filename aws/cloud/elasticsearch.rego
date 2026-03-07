@@ -252,10 +252,19 @@ esearch_encrypt_kms_metadata := {
 # aws::elasticsearch::domain
 #
 
-default esearch_custom_endpoint_configured = true
+default esearch_custom_endpoint_configured = null
+
+esearch_custom_endpoint_configured_violation {
+    input.DomainStatus.DomainEndpointOptions.CustomEndpointEnabled == available_false_choices[_]
+}
+
+esearch_custom_endpoint_configured {
+    input.DomainStatus
+    not esearch_custom_endpoint_configured_violation
+}
 
 esearch_custom_endpoint_configured = false {
-    input.DomainStatus.DomainEndpointOptions.CustomEndpointEnabled == available_false_choices[_]
+    esearch_custom_endpoint_configured_violation
 }
 
 esearch_custom_endpoint_configured_err = "Ensure ElasticSearch has a custom endpoint configured." {
@@ -280,18 +289,27 @@ esearch_custom_endpoint_configured_metadata := {
 # aws::elasticsearch::domain
 #
 
-default esearch_slow_logs_is_enabled  = true
+default esearch_slow_logs_is_enabled = null
 
-esearch_slow_logs_is_enabled = false {
+esearch_slow_logs_is_enabled_violation {
     not input.DomainStatus.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled
 }
 
-esearch_slow_logs_is_enabled = false {
+esearch_slow_logs_is_enabled_violation {
     input.DomainStatus.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled == available_false_choices[_]
 }
 
-esearch_slow_logs_is_enabled = false {
+esearch_slow_logs_is_enabled_violation {
     input.DomainStatus.LogPublishingOptions.SEARCH_SLOW_LOGS.Enabled == available_false_choices[_]
+}
+
+esearch_slow_logs_is_enabled {
+    input.DomainStatus
+    not esearch_slow_logs_is_enabled_violation
+}
+
+esearch_slow_logs_is_enabled = false {
+    esearch_slow_logs_is_enabled_violation
 }
 
 esearch_slow_logs_is_enabled_err = "Ensure Slow Logs feature is enabled for ElasticSearch cluster." {
@@ -316,10 +334,19 @@ esearch_slow_logs_is_enabled_metadata := {
 # aws::elasticsearch::domain
 #
 
-default authentication_is_saml_based  = true
+default authentication_is_saml_based = null
+
+authentication_is_saml_based_violation {
+    not input.DomainStatus.AdvancedSecurityOptions.SAMLOptions.Idp.EntityId
+}
+
+authentication_is_saml_based {
+    input.DomainStatus
+    not authentication_is_saml_based_violation
+}
 
 authentication_is_saml_based = false {
-    not input.DomainStatus.AdvancedSecurityOptions.SAMLOptions.Idp.EntityId
+    authentication_is_saml_based_violation
 }
 
 authentication_is_saml_based_err = "Ensure authentication to Kibana is SAML based in ElasticSearch." {
@@ -344,18 +371,27 @@ authentication_is_saml_based_metadata := {
 # aws::elasticsearch::domain
 #
 
-default fine_grained_encryption_for_elasticsearch  = true
+default fine_grained_encryption_for_elasticsearch = null
 
-fine_grained_encryption_for_elasticsearch = false {
+fine_grained_encryption_for_elasticsearch_violation {
     input.DomainStatus.EncryptionAtRestOptions.Enabled == available_false_choices[_]
 }
 
-fine_grained_encryption_for_elasticsearch = false {
+fine_grained_encryption_for_elasticsearch_violation {
     input.DomainStatus.DomainEndpointOptions.EnforceHTTPS == available_false_choices[_]
 }
 
-fine_grained_encryption_for_elasticsearch = false {
+fine_grained_encryption_for_elasticsearch_violation {
     input.DomainStatus.NodeToNodeEncryptionOptions.Enabled == available_false_choices[_]
+}
+
+fine_grained_encryption_for_elasticsearch {
+    input.DomainStatus
+    not fine_grained_encryption_for_elasticsearch_violation
+}
+
+fine_grained_encryption_for_elasticsearch = false {
+    fine_grained_encryption_for_elasticsearch_violation
 }
 
 fine_grained_encryption_for_elasticsearch_err = "Ensure fine-grained access control is enabled during domain creation in ElasticSearch." {
@@ -380,10 +416,19 @@ fine_grained_encryption_for_elasticsearch_metadata := {
 # aws::elasticsearch::domain
 #
 
-default custom_endpoint_has_certificate  = true
+default custom_endpoint_has_certificate = null
+
+custom_endpoint_has_certificate_violation {
+    input.DomainStatus.DomainEndpointOptions.CustomEndpointEnabled == available_false_choices[_]
+}
+
+custom_endpoint_has_certificate {
+    input.DomainStatus
+    not custom_endpoint_has_certificate_violation
+}
 
 custom_endpoint_has_certificate = false {
-    input.DomainStatus.DomainEndpointOptions.CustomEndpointEnabled == available_false_choices[_]
+    custom_endpoint_has_certificate_violation
 }
 
 custom_endpoint_has_certificate_err = "Ensure custom endpoint has GS-managed ACM certificate associated in ElasticSearch." {
@@ -451,20 +496,29 @@ elasticsearch_domain_not_publicly_accessible_metadata := {
 # aws::elasticsearch::domain
 # AWS::KMS::Key
 
-default elasticsearch_gs_managed_key = true
+default elasticsearch_gs_managed_key = null
 
-elasticsearch_gs_managed_key = false {
+elasticsearch_gs_managed_key_violation {
     X := input.TEST_ELASTICSEARCH[_]
     Y := input.TEST_KMS[_]
     X.DomainStatus.EncryptionAtRestOptions.KmsKeyId == Y.KeyMetadata.KeyId
     Y.KeyMetadata.KeyManager != "CUSTOMER"
 }
 
-elasticsearch_gs_managed_key = false {
+elasticsearch_gs_managed_key_violation {
     X := input.TEST_ELASTICSEARCH[_]
     Y := input.TEST_KMS[_]
     X.DomainStatus.EncryptionAtRestOptions.KmsKeyId == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+elasticsearch_gs_managed_key {
+    input.TEST_ELASTICSEARCH
+    not elasticsearch_gs_managed_key_violation
+}
+
+elasticsearch_gs_managed_key = false {
+    elasticsearch_gs_managed_key_violation
 }
 
 elasticsearch_gs_managed_key_err = "Ensure ElasticSearch is encrypted at rest with GS managed KMS." {
@@ -489,11 +543,20 @@ elasticsearch_gs_managed_key_metadata := {
 # aws::elasticsearch::domain
 #
 
-default es_advanced_security  = true
+default es_advanced_security = null
 
-es_advanced_security = false {
+es_advanced_security_violation {
     not input.DomainStatus.AdvancedSecurityOptions.Enabled
     not input.DomainStatus.AdvancedSecurityOptions.InternalUserDatabaseEnabled
+}
+
+es_advanced_security {
+    input.DomainStatus
+    not es_advanced_security_violation
+}
+
+es_advanced_security = false {
+    es_advanced_security_violation
 }
 
 es_advanced_security_err = "Ensure AWS OpenSearch Fine-grained access control is enabled." {

@@ -8,14 +8,23 @@ import data.common
 # PR-AWS-CLD-CF-001
 #
 
-default cf_default_cache = true
+default cf_default_cache = null
 
-cf_default_cache = false {
+cf_default_cache_violation {
     not input.Distribution.DistributionConfig.DefaultCacheBehavior.FieldLevelEncryptionId
 }
 
-cf_default_cache = false {
+cf_default_cache_violation {
     count(input.Distribution.DistributionConfig.DefaultCacheBehavior.FieldLevelEncryptionId) == 0
+}
+
+cf_default_cache {
+    input.Distribution
+    not cf_default_cache_violation
+}
+
+cf_default_cache = false {
+    cf_default_cache_violation
 }
 
 cf_default_cache_err = "AWS CloudFront Distributions with Field-Level Encryption not enabled" {
@@ -39,16 +48,25 @@ cf_default_cache_metadata := {
 # PR-AWS-CLD-CF-002
 #
 
-default cf_ssl_protocol = true
+default cf_ssl_protocol = null
 
-cf_ssl_protocol = false {
+cf_ssl_protocol_violation {
     cert := input.Distribution.DistributionConfig.ViewerCertificate
     lower(cert.MinimumProtocolVersion) == "sslv3"
 }
 
-cf_ssl_protocol = false {
+cf_ssl_protocol_violation {
     origin_items := input.Distribution.DistributionConfig.Origins.Items[j]
     lower(origin_items.CustomOriginConfig.OriginSslProtocols.Items[k]) == "sslv3"
+}
+
+cf_ssl_protocol {
+    input.Distribution
+    not cf_ssl_protocol_violation
+}
+
+cf_ssl_protocol = false {
+    cf_ssl_protocol_violation
 }
 
 cf_ssl_protocol_err = "AWS CloudFront distribution is using insecure SSL protocols for HTTPS communication" {
@@ -72,14 +90,23 @@ cf_ssl_protocol_metadata := {
 # PR-AWS-CLD-CF-003
 #
 
-default cf_logging = true
+default cf_logging = null
 
-cf_logging = false {
+cf_logging_violation {
     not input.Distribution.DistributionConfig.Logging.Bucket
 }
 
-cf_logging = false {
+cf_logging_violation {
     count(input.Distribution.DistributionConfig.Logging.Bucket) == 0
+}
+
+cf_logging {
+    input.Distribution
+    not cf_logging_violation
+}
+
+cf_logging = false {
+    cf_logging_violation
 }
 
 cf_logging_err = "AWS CloudFront distribution with access logging disabled" {
@@ -102,12 +129,21 @@ cf_logging_metadata := {
 # PR-AWS-CLD-CF-004
 #
 
-default cf_https_only = true
+default cf_https_only = null
 
-cf_https_only = false {
+cf_https_only_violation {
     count(
         [c | lower(input.Distribution.DistributionConfig.Origins.Items[_].CustomOriginConfig.OriginProtocolPolicy) != "https-only"; c := 1
     ]) > 0
+}
+
+cf_https_only {
+    input.Distribution
+    not cf_https_only_violation
+}
+
+cf_https_only = false {
+    cf_https_only_violation
 }
 
 cf_https_only_err = "AWS CloudFront origin protocol policy does not enforce HTTPS-only" {
@@ -131,16 +167,25 @@ cf_https_only_metadata := {
 # PR-AWS-CLD-CF-005
 #
 
-default cf_https = true
+default cf_https = null
 
-cf_https = false {
+cf_https_violation {
     not input.Distribution.DistributionConfig.DefaultCacheBehavior.ViewerProtocolPolicy
 }
 
-cf_https = false {
+cf_https_violation {
     cache := input.Distribution.DistributionConfig.DefaultCacheBehavior
     lower(cache.ViewerProtocolPolicy) != "https-only"
     lower(cache.ViewerProtocolPolicy) != "redirect-to-https"
+}
+
+cf_https {
+    input.Distribution
+    not cf_https_violation
+}
+
+cf_https = false {
+    cf_https_violation
 }
 
 cf_https_err = "AWS CloudFront viewer protocol policy is not configured with HTTPS" {
@@ -163,16 +208,25 @@ cf_https_metadata := {
 # PR-AWS-CLD-CF-006
 #
 
-default cf_min_protocol = true
+default cf_min_protocol = null
 
-cf_min_protocol = false {
+cf_min_protocol_violation {
     cert := input.Distribution.DistributionConfig.ViewerCertificate
     lower(cert.MinimumProtocolVersion) == "tlsv1"
 }
 
-cf_min_protocol = false {
+cf_min_protocol_violation {
     cert := input.Distribution.DistributionConfig.ViewerCertificate
     lower(cert.MinimumProtocolVersion) == "tlsv1_2016"
+}
+
+cf_min_protocol {
+    input.Distribution
+    not cf_min_protocol_violation
+}
+
+cf_min_protocol = false {
+    cf_min_protocol_violation
 }
 
 cf_min_protocol_err = "AWS CloudFront web distribution that allow TLS versions 1.0 or lower" {
@@ -195,14 +249,23 @@ cf_min_protocol_metadata := {
 # PR-AWS-CLD-CF-007
 #
 
-default cf_firewall = true
+default cf_firewall = null
 
-cf_firewall = false {
+cf_firewall_violation {
     not input.Distribution.DistributionConfig.WebACLId
 }
 
-cf_firewall = false {
+cf_firewall_violation {
     count(input.Distribution.DistributionConfig.WebACLId) == 0
+}
+
+cf_firewall {
+    input.Distribution
+    not cf_firewall_violation
+}
+
+cf_firewall = false {
+    cf_firewall_violation
 }
 
 cf_firewall_err = "AWS CloudFront web distribution with AWS Web Application Firewall (AWS WAF) service disabled" {
@@ -225,10 +288,19 @@ cf_firewall_metadata := {
 # PR-AWS-CLD-CF-008
 #
 
-default cf_default_ssl = true
+default cf_default_ssl = null
+
+cf_default_ssl_violation {
+    input.Distribution.DistributionConfig.ViewerCertificate.CloudFrontDefaultCertificate == true
+}
+
+cf_default_ssl {
+    input.Distribution
+    not cf_default_ssl_violation
+}
 
 cf_default_ssl = false {
-    input.Distribution.DistributionConfig.ViewerCertificate.CloudFrontDefaultCertificate == true
+    cf_default_ssl_violation
 }
 
 cf_default_ssl_err = "AWS CloudFront web distribution with default SSL certificate (deprecated)" {
@@ -251,15 +323,23 @@ cf_default_ssl_metadata := {
 # PR-AWS-CLD-CF-009
 #
 
-default cf_geo_restriction = true
+default cf_geo_restriction = null
 
-cf_geo_restriction = false {
+cf_geo_restriction_violation {
     not input.Distribution.DistributionConfig.Restrictions
 }
 
+cf_geo_restriction_violation {
+    lower(input.Distribution.DistributionConfig.Restrictions.GeoRestriction.RestrictionType) == "none"
+}
+
+cf_geo_restriction {
+    input.Distribution
+    not cf_geo_restriction_violation
+}
 
 cf_geo_restriction = false {
-    lower(input.Distribution.DistributionConfig.Restrictions.GeoRestriction.RestrictionType) == "none"
+    cf_geo_restriction_violation
 }
 
 cf_geo_restriction_err = "AWS CloudFront web distribution with geo restriction disabled" {
@@ -283,24 +363,33 @@ cf_geo_restriction_metadata := {
 # PR-AWS-CLD-CF-010
 #
 
-default cf_s3_origin = true
+default cf_s3_origin = null
 
-cf_s3_origin = false {
+cf_s3_origin_violation {
     item := input.Distribution.DistributionConfig.Origins.Items[_]
     item.S3OriginConfig
     item.S3OriginConfig.OriginAccessIdentity == ""
 }
 
-cf_s3_origin = false {
+cf_s3_origin_violation {
     item := input.Distribution.DistributionConfig.Origins.Items[_]
     item.S3OriginConfig
     item.S3OriginConfig.OriginAccessIdentity == null
 }
 
-cf_s3_origin = false {
+cf_s3_origin_violation {
     item := input.Distribution.DistributionConfig.Origins.Items[_]
     item.S3OriginConfig
     not item.S3OriginConfig.OriginAccessIdentity
+}
+
+cf_s3_origin {
+    input.Distribution
+    not cf_s3_origin_violation
+}
+
+cf_s3_origin = false {
+    cf_s3_origin_violation
 }
 
 cf_s3_origin_err = "AWS Cloudfront Distribution with S3 have Origin Access set to disabled" {

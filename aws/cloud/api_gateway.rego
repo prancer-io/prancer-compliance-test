@@ -8,15 +8,24 @@ import data.common
 
 # get_rest_api
 
-default gateway_private = true
+default gateway_private = null
 
-gateway_private = false {
+gateway_private_violation {
     count(input.endpointConfiguration.types) == 0
 }
 
-gateway_private = false {
+gateway_private_violation {
     type := input.endpointConfiguration.types[j]
     count([c | lower(type) == "private"; c:=1]) == 0
+}
+
+gateway_private {
+    input.endpointConfiguration
+    not gateway_private_violation
+}
+
+gateway_private = false {
+    gateway_private_violation
 }
 
 gateway_private_err = "API Gateway should have API Endpoint type as private and not exposed to internet" {
@@ -42,11 +51,20 @@ gateway_private_metadata := {
 
 # get_request_validators
 
-default gateway_validate_parameter = true
+default gateway_validate_parameter = null
 
-gateway_validate_parameter = false {
+gateway_validate_parameter_violation {
     items := input.items[_]
     items.validateRequestParameters == false
+}
+
+gateway_validate_parameter {
+    input.items
+    not gateway_validate_parameter_violation
+}
+
+gateway_validate_parameter = false {
+    gateway_validate_parameter_violation
 }
 
 gateway_validate_parameter_err = "AWS API Gateway request parameter is not validated" {
@@ -72,11 +90,20 @@ gateway_validate_parameter_metadata := {
 
 # get_authorizers
 
-default gateway_request_authorizer = true
+default gateway_request_authorizer = null
 
-gateway_request_authorizer = false {
+gateway_request_authorizer_violation {
     items := input.items[_]
     lower(items.type) != "request"
+}
+
+gateway_request_authorizer {
+    input.items
+    not gateway_request_authorizer_violation
+}
+
+gateway_request_authorizer = false {
+    gateway_request_authorizer_violation
 }
 
 gateway_request_authorizer_err = "AWS API gateway request authorization is not set" {
@@ -102,16 +129,25 @@ gateway_request_authorizer_metadata := {
 
 # get_stages
 
-default gateway_logging_enable = true
+default gateway_logging_enable = null
 
-gateway_logging_enable = false {
+gateway_logging_enable_violation {
     # lower(input.Resources[i].Type) == "aws::apigateway::stage"
     item := input.item[_]
     count(item.accessLogSettings.destinationArn) == 0
 }
 
-gateway_logging_enable = false {
+gateway_logging_enable_violation {
     not input.accessLogSettings.destinationArn
+}
+
+gateway_logging_enable {
+    input.item
+    not gateway_logging_enable_violation
+}
+
+gateway_logging_enable = false {
+    gateway_logging_enable_violation
 }
 
 gateway_logging_enable_err = "Ensure that API Gateway has enabled access logging" {
@@ -137,11 +173,20 @@ gateway_logging_enable_metadata := {
 
 # get_stages
 
-default gateway_tracing_enable = true
+default gateway_tracing_enable = null
 
-gateway_tracing_enable = false {
+gateway_tracing_enable_violation {
     item := input.item[_]
     item.tracingEnabled != true
+}
+
+gateway_tracing_enable {
+    input.item
+    not gateway_tracing_enable_violation
+}
+
+gateway_tracing_enable = false {
+    gateway_tracing_enable_violation
 }
 
 gateway_tracing_enable_err = "Ensure API Gateway has tracing enabled" {
@@ -167,21 +212,30 @@ gateway_tracing_enable_metadata := {
 
 # get_resources
 
-default gateway_method_public_access = true
+default gateway_method_public_access = null
 
-gateway_method_public_access = false {
+gateway_method_public_access_violation {
     some string
     items := input.items[_]
     lower(items.resourceMethods[string].authorizationType) == "none"
     not items.resourceMethods[string].apiKeyRequired
 }
 
-gateway_method_public_access = false {
+gateway_method_public_access_violation {
     some string
     items := input.items[_]
     items.resourceMethods[string]
     not items.resourceMethods[string].authorizationType
     not items.resourceMethods[string].apiKeyRequired
+}
+
+gateway_method_public_access {
+    input.items
+    not gateway_method_public_access_violation
+}
+
+gateway_method_public_access = false {
+    gateway_method_public_access_violation
 }
 
 gateway_method_public_access_err = "Ensure API gateway methods are not publicly accessible" {
@@ -208,16 +262,25 @@ gateway_method_public_access_metadata := {
 
 # get_stages
 
-default api_gw_cert = true
+default api_gw_cert = null
 
-api_gw_cert = false {
+api_gw_cert_violation {
     item := input.item[_]
     count(item.clientcertificateId) == 0
 }
 
-api_gw_cert = false {
+api_gw_cert_violation {
     item := input.item[_]
     not item.clientcertificateId
+}
+
+api_gw_cert {
+    input.item
+    not api_gw_cert_violation
+}
+
+api_gw_cert = false {
+    api_gw_cert_violation
 }
 
 api_gw_cert_err = "AWS API Gateway endpoints without client certificate authentication" {
@@ -240,16 +303,25 @@ api_gw_cert_metadata := {
 # PR-AWS-CLD-AG-008
 #
 
-default api_gateway_not_configured_with_firewall_v2 = true
+default api_gateway_not_configured_with_firewall_v2 = null
 
-api_gateway_not_configured_with_firewall_v2 = false {
+api_gateway_not_configured_with_firewall_v2_violation {
     item := input.item[_]
     not item.webAclArn
 }
 
-api_gateway_not_configured_with_firewall_v2 = false {
+api_gateway_not_configured_with_firewall_v2_violation {
     item := input.item[_]
     lower(item.webAclArn) == "arn:aws:wafv2"
+}
+
+api_gateway_not_configured_with_firewall_v2 {
+    input.item
+    not api_gateway_not_configured_with_firewall_v2_violation
+}
+
+api_gateway_not_configured_with_firewall_v2 = false {
+    api_gateway_not_configured_with_firewall_v2_violation
 }
 
 api_gateway_not_configured_with_firewall_v2_err = "AWS API Gateway REST API not configured with AWS Web Application Firewall v2 (AWS WAFv2)" {
@@ -272,11 +344,20 @@ api_gateway_not_configured_with_firewall_v2_metadata := {
 # PR-AWS-CLD-AG-009
 #
 
-default api_gateway_uses_specific_tls_version = true
+default api_gateway_uses_specific_tls_version = null
 
-api_gateway_uses_specific_tls_version = false {
+api_gateway_uses_specific_tls_version_violation {
     input.securityPolicy != "TLS_1_2"
     
+}
+
+api_gateway_uses_specific_tls_version {
+    input.securityPolicy
+    not api_gateway_uses_specific_tls_version_violation
+}
+
+api_gateway_uses_specific_tls_version = false {
+    api_gateway_uses_specific_tls_version_violation
 }
 
 api_gateway_uses_specific_tls_version_err = "Ensure AWS API Gateway uses TLS 1.2 in transit" {
@@ -299,10 +380,19 @@ api_gateway_uses_specific_tls_version_metadata := {
 # PR-AWS-CLD-AG-010
 #
 
-default api_gateway_content_encoding_is_enabled = true
+default api_gateway_content_encoding_is_enabled = null
+
+api_gateway_content_encoding_is_enabled_violation {
+    not input.minimumCompressionSize
+}
+
+api_gateway_content_encoding_is_enabled {
+    input.minimumCompressionSize
+    not api_gateway_content_encoding_is_enabled_violation
+}
 
 api_gateway_content_encoding_is_enabled = false {
-    not input.minimumCompressionSize
+    api_gateway_content_encoding_is_enabled_violation
 }
 
 api_gateway_content_encoding_is_enabled_err = "Ensure content encoding is enabled for API Gateway." {
@@ -326,12 +416,21 @@ api_gateway_content_encoding_is_enabled_metadata := {
 # PR-AWS-CLD-AG-011
 # aws::apigateway::domainname
 
-default api_gateway_gs_managed_acm = true
+default api_gateway_gs_managed_acm = null
 
-api_gateway_gs_managed_acm = false {
+api_gateway_gs_managed_acm_violation {
     X := input.TEST_API_GATEWAY_04[_]
     Y := input.TEST_ACM[_]
     X.regionalCertificateArn != Y.Certificate.CertificateArn
+}
+
+api_gateway_gs_managed_acm {
+    input.TEST_API_GATEWAY_04
+    not api_gateway_gs_managed_acm_violation
+}
+
+api_gateway_gs_managed_acm = false {
+    api_gateway_gs_managed_acm_violation
 }
 
 api_gateway_gs_managed_acm_err = "Ensure custom domain in AWS API Gateway has GS-managed ACM certificate associated." {

@@ -1336,7 +1336,7 @@ secret_encrypted_metadata := {
 #
 # "container.v1.cluster"
 
-default private_endpoint_disabled = true
+default private_endpoint_disabled = null
 
 gc_issue["private_endpoint_disabled"] {
     upper(input.status) == "RUNNING"
@@ -1345,6 +1345,7 @@ gc_issue["private_endpoint_disabled"] {
 }
 
 private_endpoint_disabled {
+    input.name
     not gc_issue["private_endpoint_disabled"]
 }
 

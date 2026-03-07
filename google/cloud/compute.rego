@@ -1717,9 +1717,9 @@ info_value_list = ["Yes", "Y", "True", "true", "TRUE", "1"]
 
 instance_value_list = ["No", "N", "False", "false", "FALSE", "0"]
 
-default project_os_login_overridden_by_instnace = true
+default project_os_login_overridden_by_instnace = null
 
-project_os_login_overridden_by_instnace = false{
+project_os_login_overridden_by_instnace_violation {
 	X := input.GOOGLE_PROJECT_INFO[_]
 	common.has_property(X.commonInstanceMetadata, "items")
 	project_info_items = X.commonInstanceMetadata.items[_]
@@ -1736,6 +1736,16 @@ project_os_login_overridden_by_instnace = false{
 	upper(Y.status) == "RUNNING"
 
 	contains(Y.zone, X.name)
+}
+
+project_os_login_overridden_by_instnace {
+	input.GOOGLE_PROJECT_INFO
+	input.GOOGLE_INSTANCE
+	not project_os_login_overridden_by_instnace_violation
+}
+
+project_os_login_overridden_by_instnace = false {
+	project_os_login_overridden_by_instnace_violation
 }
 
 project_os_login_overridden_by_instnace_err = "Ensure, GCP VM instance OS login overrides Project metadata OS login configuration." {
@@ -1969,13 +1979,23 @@ net_default_metadata := {
 # PR-GCP-CLD-NET-003
 #
 
-default ntw_config_with_dns_logging_disabled = true
+default ntw_config_with_dns_logging_disabled = null
 
-ntw_config_with_dns_logging_disabled = false{
+ntw_config_with_dns_logging_disabled_violation {
     X := input.GOOGLE_NETWORK[_]
     Y := input.GOOGLE_DNS_POLICY[_]
     count([c | contains(Y.networks[_].networkUrl, X.name); c=1]) == 0
     not Y.enableLogging
+}
+
+ntw_config_with_dns_logging_disabled {
+    input.GOOGLE_NETWORK
+    input.GOOGLE_DNS_POLICY
+    not ntw_config_with_dns_logging_disabled_violation
+}
+
+ntw_config_with_dns_logging_disabled = false {
+    ntw_config_with_dns_logging_disabled_violation
 }
 
 ntw_config_with_dns_logging_disabled_err = "Ensure, GCP VPC network not configured with DNS policy with logging enabled." {

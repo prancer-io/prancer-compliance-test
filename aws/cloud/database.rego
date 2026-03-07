@@ -13,11 +13,20 @@ available_false_choices := ["false", false]
 # PR-AWS-CLD-RDS-001
 #
 
-default rds_cluster_encrypt = true
+default rds_cluster_encrypt = null
 
-rds_cluster_encrypt = false {
+rds_cluster_encrypt_violation {
     DBClusters := input.DBClusters[_]
     not DBClusters.StorageEncrypted
+}
+
+rds_cluster_encrypt {
+    input.DBClusters
+    not rds_cluster_encrypt_violation
+}
+
+rds_cluster_encrypt = false {
+    rds_cluster_encrypt_violation
 }
 
 rds_cluster_encrypt_err = "AWS RDS DB cluster encryption is disabled" {
@@ -40,11 +49,20 @@ rds_cluster_encrypt_metadata := {
 # PR-AWS-CLD-RDS-002
 #
 
-default rds_public = true
+default rds_public = null
 
-rds_public = false {
+rds_public_violation {
     DBInstances := input.DBInstances[_]
     DBInstances.PubliclyAccessible == true
+}
+
+rds_public {
+    input.DBInstances
+    not rds_public_violation
+}
+
+rds_public = false {
+    rds_public_violation
 }
 
 rds_public_err = "AWS RDS database instance is publicly accessible" {
@@ -67,15 +85,15 @@ rds_public_metadata := {
 # PR-AWS-CLD-RDS-003
 #
 
-default rds_encrypt_key = true
+default rds_encrypt_key = null
 
-rds_encrypt_key = false {
+rds_encrypt_key_violation {
     RDS := input.TEST_RDS_01[_]
     DBInstance := RDS.DBInstances[_]
     not DBInstance.KmsKeyId
 }
 
-rds_encrypt_key = false {
+rds_encrypt_key_violation {
     RDS := input.TEST_RDS_01[_]
     DBInstance := RDS.DBInstances[_]
 
@@ -83,6 +101,15 @@ rds_encrypt_key = false {
     DBInstance.KmsKeyId == KMS.KeyMetadata.Arn
     alias := KMS.Aliases[_]
     alias.AliasName == "alias/aws/rds"
+}
+
+rds_encrypt_key {
+    input.TEST_RDS_01
+    not rds_encrypt_key_violation
+}
+
+rds_encrypt_key = false {
+    rds_encrypt_key_violation
 }
 
 rds_encrypt_key_err = "AWS RDS database not encrypted using Customer Managed Key" {
@@ -105,12 +132,21 @@ rds_encrypt_key_metadata := {
 # PR-AWS-CLD-RDS-004
 #
 
-default rds_instance_event = true
+default rds_instance_event = null
 
-rds_instance_event = false {
+rds_instance_event_violation {
     EventSubscriptionsList := input.EventSubscriptionsList[_]
     EventSubscriptionsList.Enabled == false
     EventSubscriptionsList.SourceType == "db-instance"
+}
+
+rds_instance_event {
+    input.EventSubscriptionsList
+    not rds_instance_event_violation
+}
+
+rds_instance_event = false {
+    rds_instance_event_violation
 }
 
 rds_instance_event_err = "AWS RDS event subscription disabled for DB instance" {
@@ -133,12 +169,21 @@ rds_instance_event_metadata := {
 # PR-AWS-CLD-RDS-005
 #
 
-default rds_secgroup_event = true
+default rds_secgroup_event = null
 
-rds_secgroup_event = false {
+rds_secgroup_event_violation {
     EventSubscriptionsList := input.EventSubscriptionsList[_]
     EventSubscriptionsList.Enabled == false
     EventSubscriptionsList.SourceType == "db-security-group"
+}
+
+rds_secgroup_event {
+    input.EventSubscriptionsList
+    not rds_secgroup_event_violation
+}
+
+rds_secgroup_event = false {
+    rds_secgroup_event_violation
 }
 
 rds_secgroup_event_err = "AWS RDS event subscription disabled for DB security groups" {
@@ -161,11 +206,20 @@ rds_secgroup_event_metadata := {
 # PR-AWS-CLD-RDS-006
 #
 
-default rds_encrypt = true
+default rds_encrypt = null
 
-rds_encrypt = false {
+rds_encrypt_violation {
     DBInstances := input.DBInstances[_]
     not DBInstances.StorageEncrypted
+}
+
+rds_encrypt {
+    input.DBInstances
+    not rds_encrypt_violation
+}
+
+rds_encrypt = false {
+    rds_encrypt_violation
 }
 
 rds_encrypt_err = "AWS RDS instance is not encrypted" {
@@ -188,13 +242,22 @@ rds_encrypt_metadata := {
 # PR-AWS-CLD-RDS-007
 #
 
-default rds_multiaz = true
+default rds_multiaz = null
 
-rds_multiaz = false {
+rds_multiaz_violation {
     DBInstances := input.DBInstances[_]
     lower(DBInstances.Engine) != "aurora"
     lower(DBInstances.Engine) != "sqlserver"
     not DBInstances.MultiAZ
+}
+
+rds_multiaz {
+    input.DBInstances
+    not rds_multiaz_violation
+}
+
+rds_multiaz = false {
+    rds_multiaz_violation
 }
 
 rds_multiaz_err = "AWS RDS instance with Multi-Availability Zone disabled" {
@@ -217,11 +280,20 @@ rds_multiaz_metadata := {
 # PR-AWS-CLD-RDS-008
 #
 
-default rds_snapshot = true
+default rds_snapshot = null
 
-rds_snapshot = false {
+rds_snapshot_violation {
     DBInstances := input.DBInstances[_]
     not DBInstances.CopyTagsToSnapshot
+}
+
+rds_snapshot {
+    input.DBInstances
+    not rds_snapshot_violation
+}
+
+rds_snapshot = false {
+    rds_snapshot_violation
 }
 
 rds_snapshot_err = "AWS RDS instance with copy tags to snapshots disabled" {
@@ -244,22 +316,30 @@ rds_snapshot_metadata := {
 # PR-AWS-CLD-RDS-009
 #
 
-default rds_backup = true
+default rds_backup = null
 
-rds_backup = false {
+rds_backup_violation {
     DBInstances := input.DBInstances[_]
     not DBInstances.BackupRetentionPeriod
 }
 
-rds_backup = false {
+rds_backup_violation {
     DBInstances := input.DBInstances[_]
     to_number(DBInstances.BackupRetentionPeriod) == 0
+}
+
+rds_backup {
+    input.DBInstances
+    not rds_backup_violation
+}
+
+rds_backup = false {
+    rds_backup_violation
 }
 
 rds_backup_err = "AWS RDS instance without Automatic Backup setting" {
     not rds_backup
 }
-
 
 rds_backup_metadata := {
     "Policy Code": "PR-AWS-CLD-RDS-009",
@@ -277,12 +357,20 @@ rds_backup_metadata := {
 # PR-AWS-CLD-RDS-010
 #
 
-default rds_upgrade = true
+default rds_upgrade = null
 
-
-rds_upgrade = false {
+rds_upgrade_violation {
     DBInstances := input.DBInstances[_]
     not DBInstances.AutoMinorVersionUpgrade
+}
+
+rds_upgrade {
+    input.DBInstances
+    not rds_upgrade_violation
+}
+
+rds_upgrade = false {
+    rds_upgrade_violation
 }
 
 rds_upgrade_err = "AWS RDS minor upgrades not enabled" {
@@ -305,16 +393,25 @@ rds_upgrade_metadata := {
 # PR-AWS-CLD-RDS-011
 #
 
-default rds_retention = true
+default rds_retention = null
 
-rds_retention = false {
+rds_retention_violation {
     DBInstances := input.DBInstances[_]
     not DBInstances.BackupRetentionPeriod
 }
 
-rds_retention = false {
+rds_retention_violation {
     DBInstances := input.DBInstances[_]
     to_number(DBInstances.BackupRetentionPeriod) < 7
+}
+
+rds_retention {
+    input.DBInstances
+    not rds_retention_violation
+}
+
+rds_retention = false {
+    rds_retention_violation
 }
 
 rds_retention_err = "AWS RDS retention policy less than 7 days" {
@@ -338,16 +435,25 @@ rds_retention_metadata := {
 # PR-AWS-CLD-RDS-012
 #
 
-default rds_cluster_retention = true
+default rds_cluster_retention = null
 
-rds_cluster_retention = false {
+rds_cluster_retention_violation {
     DBClusters := input.DBClusters[_]
     not DBClusters.BackupRetentionPeriod
 }
 
-rds_cluster_retention = false {
+rds_cluster_retention_violation {
     DBClusters := input.DBClusters[_]
     to_number(DBClusters.BackupRetentionPeriod) < 7
+}
+
+rds_cluster_retention {
+    input.DBClusters
+    not rds_cluster_retention_violation
+}
+
+rds_cluster_retention = false {
+    rds_cluster_retention_violation
 }
 
 rds_cluster_retention_err = "AWS RDS retention policy less than 7 days" {
@@ -371,11 +477,20 @@ rds_cluster_retention_metadata := {
 # PR-AWS-CLD-RDS-013
 #
 
-default rds_cluster_deletion_protection = true
+default rds_cluster_deletion_protection = null
 
-rds_cluster_deletion_protection = false {
+rds_cluster_deletion_protection_violation {
     DBClusters := input.DBClusters[_]
     not DBClusters.DeletionProtection
+}
+
+rds_cluster_deletion_protection {
+    input.DBClusters
+    not rds_cluster_deletion_protection_violation
+}
+
+rds_cluster_deletion_protection = false {
+    rds_cluster_deletion_protection_violation
 }
 
 rds_cluster_deletion_protection_err = "Ensure RDS clusters and instances have deletion protection enabled" {
@@ -399,30 +514,39 @@ rds_cluster_deletion_protection_metadata := {
 # PR-AWS-CLD-RDS-014
 #
 
-default rds_pgaudit_enable = true
+default rds_pgaudit_enable = null
 
-rds_pgaudit_enable = false {
+rds_pgaudit_enable_violation {
     Parameters := input.Parameters[_]
     lower(Parameters.ParameterName) == "pgaudit.role"
     lower(Parameters.ParameterValue) != "rds_pgaudit"
 }
 
-rds_pgaudit_enable = false {
+rds_pgaudit_enable_violation {
     Parameters := input.Parameters[_]
     lower(Parameters.ParameterName) == "pgaudit.role"
     not Parameters.ParameterValue
 }
 
-rds_pgaudit_enable = false {
+rds_pgaudit_enable_violation {
     count([c| lower(input.Parameters[_].ParameterName) == "pgaudit.role"; c:=1]) == 0
 }
 
-rds_pgaudit_enable = false {
+rds_pgaudit_enable_violation {
     count(input.Parameters) == 0
 }
 
-rds_pgaudit_enable = false {
+rds_pgaudit_enable_violation {
     not input.Parameters
+}
+
+rds_pgaudit_enable {
+    input.Parameters
+    not rds_pgaudit_enable_violation
+}
+
+rds_pgaudit_enable = false {
+    rds_pgaudit_enable_violation
 }
 
 rds_pgaudit_enable_err = "Ensure PGAudit is enabled on RDS Postgres instances" {
@@ -445,11 +569,20 @@ rds_pgaudit_enable_metadata := {
 # PR-AWS-CLD-RDS-015
 #
 
-default rds_global_cluster_encrypt = true
+default rds_global_cluster_encrypt = null
 
-rds_global_cluster_encrypt = false {
+rds_global_cluster_encrypt_violation {
     GlobalClusters := input.GlobalClusters[_]
     not GlobalClusters.StorageEncrypted
+}
+
+rds_global_cluster_encrypt {
+    input.GlobalClusters
+    not rds_global_cluster_encrypt_violation
+}
+
+rds_global_cluster_encrypt = false {
+    rds_global_cluster_encrypt_violation
 }
 
 rds_global_cluster_encrypt_err = "AWS RDS Global DB cluster encryption is disabled" {
@@ -472,11 +605,20 @@ rds_global_cluster_encrypt_metadata := {
 # PR-AWS-CLD-RDS-016
 #
 
-default cluster_iam_authenticate = true
+default cluster_iam_authenticate = null
 
-cluster_iam_authenticate = false {
+cluster_iam_authenticate_violation {
     DBClusters := input.DBClusters[_]
     not DBClusters.EnableIAMDatabaseAuthentication
+}
+
+cluster_iam_authenticate {
+    input.DBClusters
+    not cluster_iam_authenticate_violation
+}
+
+cluster_iam_authenticate = false {
+    cluster_iam_authenticate_violation
 }
 
 cluster_iam_authenticate_err = "Ensure RDS cluster has IAM authentication enabled" {
@@ -499,11 +641,20 @@ cluster_iam_authenticate_metadata := {
 # PR-AWS-CLD-RDS-017
 #
 
-default db_instance_iam_authenticate = true
+default db_instance_iam_authenticate = null
 
-db_instance_iam_authenticate = false {
+db_instance_iam_authenticate_violation {
     DBInstances := input.DBInstances[_]
     not DBInstances.EnableIAMDatabaseAuthentication
+}
+
+db_instance_iam_authenticate {
+    input.DBInstances
+    not db_instance_iam_authenticate_violation
+}
+
+db_instance_iam_authenticate = false {
+    db_instance_iam_authenticate_violation
 }
 
 db_instance_iam_authenticate_err = "Ensure RDS instance has IAM authentication enabled" {
@@ -527,16 +678,25 @@ db_instance_iam_authenticate_metadata := {
 # PR-AWS-CLD-RDS-018
 #
 
-default db_instance_cloudwatch_logs = true
+default db_instance_cloudwatch_logs = null
 
-db_instance_cloudwatch_logs = false {
+db_instance_cloudwatch_logs_violation {
     DBInstances := input.DBInstances[_]
     count(DBInstances.EnabledCloudwatchLogsExports) == 0
 }
 
-db_instance_cloudwatch_logs = false {
+db_instance_cloudwatch_logs_violation {
     DBInstances := input.DBInstances[_]
     not DBInstances.EnabledCloudwatchLogsExports
+}
+
+db_instance_cloudwatch_logs {
+    input.DBInstances
+    not db_instance_cloudwatch_logs_violation
+}
+
+db_instance_cloudwatch_logs = false {
+    db_instance_cloudwatch_logs_violation
 }
 
 db_instance_cloudwatch_logs_err = "Ensure respective logs of Amazon RDS instance are enabled" {
@@ -556,16 +716,24 @@ db_instance_cloudwatch_logs_metadata := {
 }
 
 
-
 #
 # PR-AWS-CLD-RDS-019
 #
 
-default db_instance_monitor = true
+default db_instance_monitor = null
 
-db_instance_monitor = false {
+db_instance_monitor_violation {
     DBInstances := input.DBInstances[_]
     not DBInstances.MonitoringInterval
+}
+
+db_instance_monitor {
+    input.DBInstances
+    not db_instance_monitor_violation
+}
+
+db_instance_monitor = false {
+    db_instance_monitor_violation
 }
 
 db_instance_monitor_err = "Enhanced monitoring for Amazon RDS instances is enabled" {
@@ -588,12 +756,21 @@ db_instance_monitor_metadata := {
 # PR-AWS-CLD-RDS-021
 #
 
-default db_instance_engine_version = true
+default db_instance_engine_version = null
 
-db_instance_engine_version = false {
+db_instance_engine_version_violation {
     DBInstances := input.DBInstances[_]
     lower(DBInstances.Engine) == "aurora-postgresql"
     lower(DBInstances.EngineVersion) == deprecated_engine_versions[_]
+}
+
+db_instance_engine_version {
+    input.DBInstances
+    not db_instance_engine_version_violation
+}
+
+db_instance_engine_version = false {
+    db_instance_engine_version_violation
 }
 
 db_instance_engine_version_err = "Ensure RDS instances do not use a deprecated version of Aurora-PostgreSQL." {
@@ -616,12 +793,21 @@ db_instance_engine_version_metadata := {
 # PR-AWS-CLD-RDS-022
 #
 
-default db_cluster_engine_version = true
+default db_cluster_engine_version = null
 
-db_cluster_engine_version = false {
+db_cluster_engine_version_violation {
     DBClusters := input.DBClusters[_]
     lower(DBClusters.Engine) == "aurora-postgresql"
     lower(DBClusters.EngineVersion) == deprecated_engine_versions[_]
+}
+
+db_cluster_engine_version {
+    input.DBClusters
+    not db_cluster_engine_version_violation
+}
+
+db_cluster_engine_version = false {
+    db_cluster_engine_version_violation
 }
 
 db_cluster_engine_version_err = "Ensure RDS cluster do not use a deprecated version of Aurora-PostgreSQL." {
@@ -644,12 +830,21 @@ db_cluster_engine_version_metadata := {
 # PR-AWS-CLD-RDS-023
 #
 
-default db_instance_approved_postgres_version = true
+default db_instance_approved_postgres_version = null
 
-db_instance_approved_postgres_version = false {
+db_instance_approved_postgres_version_violation {
     DBInstances := input.DBInstances[_]
     lower(DBInstances.Engine) == "postgres"
     lower(DBInstances.EngineVersion) == deprecated_postgres_versions[_]
+}
+
+db_instance_approved_postgres_version {
+    input.DBInstances
+    not db_instance_approved_postgres_version_violation
+}
+
+db_instance_approved_postgres_version = false {
+    db_instance_approved_postgres_version_violation
 }
 
 db_instance_approved_postgres_version_err = "Ensure RDS instances do not use a deprecated version of PostgreSQL." {
@@ -672,12 +867,21 @@ db_instance_approved_postgres_version_metadata := {
 # PR-AWS-CLD-RDS-024
 #
 
-default db_cluster_approved_postgres_version = true
+default db_cluster_approved_postgres_version = null
 
-db_cluster_approved_postgres_version = false {
+db_cluster_approved_postgres_version_violation {
     DBClusters := input.DBClusters[_]
     lower(DBClusters.Engine) == "postgres"
     lower(DBClusters.EngineVersion) == deprecated_postgres_versions[_]
+}
+
+db_cluster_approved_postgres_version {
+    input.DBClusters
+    not db_cluster_approved_postgres_version_violation
+}
+
+db_cluster_approved_postgres_version = false {
+    db_cluster_approved_postgres_version_violation
 }
 
 db_cluster_approved_postgres_version_err = "Ensure RDS dbcluster do not use a deprecated version of PostgreSQL." {
@@ -700,12 +904,21 @@ db_cluster_approved_postgres_version_metadata := {
 # PR-AWS-CLD-RDS-025
 #
 
-default db_snapshot_is_encrypted = true
+default db_snapshot_is_encrypted = null
 
-db_snapshot_is_encrypted = false {
+db_snapshot_is_encrypted_violation {
     DBSnapshot := input.DBSnapshots[_]
     lower(DBSnapshot.Status) == "available"
     lower(DBSnapshot.Encrypted) == available_false_choices[_]
+}
+
+db_snapshot_is_encrypted {
+    input.DBSnapshots
+    not db_snapshot_is_encrypted_violation
+}
+
+db_snapshot_is_encrypted = false {
+    db_snapshot_is_encrypted_violation
 }
 
 db_snapshot_is_encrypted_err = "Ensure AWS RDS DB snapshot is encrypted." {
@@ -728,12 +941,21 @@ db_snapshot_is_encrypted_metadata := {
 # PR-AWS-CLD-RDS-026
 #
 
-default rds_snapshot_with_access = true
+default rds_snapshot_with_access = null
 
-rds_snapshot_with_access = false {
+rds_snapshot_with_access_violation {
     DBSnapshotAttribute := input.DBSnapshotAttributesResult.DBSnapshotAttributes[_]
     lower(DBSnapshotAttribute.AttributeName) == "restore"
     count(DBSnapshotAttribute.AttributeValues[_]) != 0
+}
+
+rds_snapshot_with_access {
+    input
+    not rds_snapshot_with_access_violation
+}
+
+rds_snapshot_with_access = false {
+    rds_snapshot_with_access_violation
 }
 
 rds_snapshot_with_access_err = "Ensure AWS RDS Snapshot with access for only monitored cloud accounts." {
@@ -757,11 +979,20 @@ rds_snapshot_with_access_metadata := {
 # aws::rds::dbinstance
 #
 
-default rds_iam_database_auth = true
+default rds_iam_database_auth = null
 
-rds_iam_database_auth = false {
+rds_iam_database_auth_violation {
     DBInstance := input.DBInstances[_]
     not DBInstance.IAMDatabaseAuthenticationEnabled
+}
+
+rds_iam_database_auth {
+    input.DBInstances
+    not rds_iam_database_auth_violation
+}
+
+rds_iam_database_auth = false {
+    rds_iam_database_auth_violation
 }
 
 rds_iam_database_auth_err = "Ensure AWS RDS DB authentication is only enabled via IAM" {
@@ -785,16 +1016,25 @@ rds_iam_database_auth_metadata := {
 # aws::rds::dbcluster
 #
 
-default rds_cluster_backup_retention = true
+default rds_cluster_backup_retention = null
 
-rds_cluster_backup_retention = false {
+rds_cluster_backup_retention_violation {
     DBClusters := input.DBClusters[_]
     not DBClusters.BackupRetentionPeriod
 }
 
-rds_cluster_backup_retention = false {
+rds_cluster_backup_retention_violation {
     DBClusters := input.DBClusters[_]
     to_number(DBClusters.BackupRetentionPeriod) < 30
+}
+
+rds_cluster_backup_retention {
+    input.DBClusters
+    not rds_cluster_backup_retention_violation
+}
+
+rds_cluster_backup_retention = false {
+    rds_cluster_backup_retention_violation
 }
 
 rds_cluster_backup_retention_err = "Ensure AWS RDS Cluster has setup backup retention period of at least 30 days" {
@@ -817,11 +1057,20 @@ rds_cluster_backup_retention_metadata := {
 # PR-AWS-CLD-RDS-029
 # aws::rds::dbinstance
 
-default db_instance_deletion_protection = true
+default db_instance_deletion_protection = null
 
-db_instance_deletion_protection = false {
+db_instance_deletion_protection_violation {
     DBInstance := input.DBInstances[_]
     lower(DBInstance.DeletionProtection) == available_false_choices[_]
+}
+
+db_instance_deletion_protection {
+    input.DBInstances
+    not db_instance_deletion_protection_violation
+}
+
+db_instance_deletion_protection = false {
+    db_instance_deletion_protection_violation
 }
 
 db_instance_deletion_protection_err = "Ensure AWS RDS DB instance has deletion protection enabled." {
@@ -844,18 +1093,26 @@ db_instance_deletion_protection_metadata := {
 # PR-AWS-CLD-RDS-030
 # aws::rds::dbinstance
 
-default db_instance_backup_retention_period = true
+default db_instance_backup_retention_period = null
 
-db_instance_backup_retention_period = false {
+db_instance_backup_retention_period_violation {
     DBInstance := input.DBInstances[_]
     to_number(DBInstance.BackupRetentionPeriod) < 30
 }
 
-db_instance_backup_retention_period = false {
+db_instance_backup_retention_period_violation {
     DBInstance := input.DBInstances[_]
     not DBInstance.BackupRetentionPeriod
 }
 
+db_instance_backup_retention_period {
+    input.DBInstances
+    not db_instance_backup_retention_period_violation
+}
+
+db_instance_backup_retention_period = false {
+    db_instance_backup_retention_period_violation
+}
 
 db_instance_backup_retention_period_err = "Ensure RDS DB instance has setup backup retention period of at least 30 days." {
     not db_instance_backup_retention_period
@@ -879,15 +1136,24 @@ db_instance_backup_retention_period_metadata := {
 # aws::rds::dbcluster
 # AWS::KMS::Key
 
-default rds_cluster_encrypt_cmk = true
+default rds_cluster_encrypt_cmk = null
 
-rds_cluster_encrypt_cmk = false {
+rds_cluster_encrypt_cmk_violation {
     X := input.TEST_RDS_02[_]
     DBCluster := X.DBClusters[_]
     DBCluster.StorageEncrypted == true
     Y := input.TEST_KMS[_]
     DBCluster.KmsKeyId == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+rds_cluster_encrypt_cmk {
+    input.TEST_RDS_02
+    not rds_cluster_encrypt_cmk_violation
+}
+
+rds_cluster_encrypt_cmk = false {
+    rds_cluster_encrypt_cmk_violation
 }
 
 rds_cluster_encrypt_cmk_err = "Ensure AWS RDS DB cluster is not encrypted using default KMS key instead of CMK." {
@@ -911,17 +1177,26 @@ rds_cluster_encrypt_cmk_metadata := {
 # PR-AWS-CLD-DAX-001
 #
 
-default dax_encrypt = true
+default dax_encrypt = null
 
-dax_encrypt = false {
+dax_encrypt_violation {
     Clusters := input.Clusters[_]
     not Clusters.SSEDescription.Status
 }
 
-dax_encrypt = false {
+dax_encrypt_violation {
     Clusters := input.Clusters[_]
     lower(Clusters.SSEDescription.Status) != "enabling"
     lower(Clusters.SSEDescription.Status) != "enabled"
+}
+
+dax_encrypt {
+    input.Clusters
+    not dax_encrypt_violation
+}
+
+dax_encrypt = false {
+    dax_encrypt_violation
 }
 
 dax_encrypt_err = "Ensure DAX is securely encrypted at rest" {
@@ -944,16 +1219,25 @@ dax_encrypt_metadata := {
 # PR-AWS-CLD-DAX-002
 #
 
-default dax_cluster_endpoint_encrypt_at_rest = true
+default dax_cluster_endpoint_encrypt_at_rest = null
 
-dax_cluster_endpoint_encrypt_at_rest = false {
+dax_cluster_endpoint_encrypt_at_rest_violation {
     Clusters := input.Clusters[_]
     lower(Clusters.ClusterEndpointEncryptionType) != "tls"
 }
 
-dax_cluster_endpoint_encrypt_at_rest = false {
+dax_cluster_endpoint_encrypt_at_rest_violation {
     Clusters := input.Clusters[_]
     not Clusters.ClusterEndpointEncryptionType
+}
+
+dax_cluster_endpoint_encrypt_at_rest {
+    input.Clusters
+    not dax_cluster_endpoint_encrypt_at_rest_violation
+}
+
+dax_cluster_endpoint_encrypt_at_rest = false {
+    dax_cluster_endpoint_encrypt_at_rest_violation
 }
 
 dax_cluster_endpoint_encrypt_at_rest_err = "Ensure AWS DAX data is encrypted in transit" {
@@ -978,14 +1262,23 @@ dax_cluster_endpoint_encrypt_at_rest_metadata := {
 # aws::dax::cluster
 # AWS::KMS::Key
 
-default dax_gs_managed_key = true
+default dax_gs_managed_key = null
 
-dax_gs_managed_key = false {
+dax_gs_managed_key_violation {
     X := input.TEST_DAX[_]
     Cluster := X.Clusters[_]
     Y := input.TEST_KMS[_]
     Cluster.SSEDescription.KMSMasterKeyArn == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+dax_gs_managed_key {
+    input.TEST_DAX
+    not dax_gs_managed_key_violation
+}
+
+dax_gs_managed_key = false {
+    dax_gs_managed_key_violation
 }
 
 dax_gs_managed_key_err = "Ensure for AWS DAX GS-managed key is used in encryption." {
@@ -1009,10 +1302,19 @@ dax_gs_managed_key_metadata := {
 # PR-AWS-CLD-QLDB-001
 #
 
-default qldb_permission_mode = true
+default qldb_permission_mode = null
+
+qldb_permission_mode_violation {
+    lower(input.PermissionsMode) != "standard"
+}
+
+qldb_permission_mode {
+    input.PermissionsMode
+    not qldb_permission_mode_violation
+}
 
 qldb_permission_mode = false {
-    lower(input.PermissionsMode) != "standard"
+    qldb_permission_mode_violation
 }
 
 qldb_permission_mode_err = "Ensure QLDB ledger permissions mode is set to STANDARD" {
@@ -1032,16 +1334,24 @@ qldb_permission_mode_metadata := {
 }
 
 
-
 #
 # PR-AWS-CLD-DDB-001
 #
 
-default docdb_cluster_encrypt = true
+default docdb_cluster_encrypt = null
 
-docdb_cluster_encrypt = false {
+docdb_cluster_encrypt_violation {
     DBClusters := input.DBClusters[_]
     not DBClusters.StorageEncrypted
+}
+
+docdb_cluster_encrypt {
+    input.DBClusters
+    not docdb_cluster_encrypt_violation
+}
+
+docdb_cluster_encrypt = false {
+    docdb_cluster_encrypt_violation
 }
 
 docdb_cluster_encrypt_err = "Ensure DocumentDB cluster is encrypted at rest" {
@@ -1065,17 +1375,25 @@ docdb_cluster_encrypt_metadata := {
 # PR-AWS-CLD-DDB-002
 #
 
-default docdb_cluster_logs = true
+default docdb_cluster_logs = null
 
-docdb_cluster_logs = false {
+docdb_cluster_logs_violation {
     DBClusters := input.DBClusters[_]
     not DBClusters.EnabledCloudwatchLogsExports
 }
 
-
-docdb_cluster_logs = false {
+docdb_cluster_logs_violation {
     DBClusters := input.DBClusters[_]
     count(DBClusters.EnabledCloudwatchLogsExports) == 0
+}
+
+docdb_cluster_logs {
+    input.DBClusters
+    not docdb_cluster_logs_violation
+}
+
+docdb_cluster_logs = false {
+    docdb_cluster_logs_violation
 }
 
 docdb_cluster_logs_err = "Ensure AWS DocumentDB logging is enabled" {
@@ -1098,24 +1416,33 @@ docdb_cluster_logs_metadata := {
 # PR-AWS-CLD-DDB-003
 #
 
-default docdb_parameter_group_tls_enable = true
+default docdb_parameter_group_tls_enable = null
 
-docdb_parameter_group_tls_enable = false {
+docdb_parameter_group_tls_enable_violation {
     not input.Parameters
 }
 
-docdb_parameter_group_tls_enable = false {
+docdb_parameter_group_tls_enable_violation {
     count(input.Parameters) == 0
 }
 
-docdb_parameter_group_tls_enable = false {
+docdb_parameter_group_tls_enable_violation {
     count([c | input.Parameters[_].ParameterName == "tls"; c:=1]) == 0
 }
 
-docdb_parameter_group_tls_enable = false {
+docdb_parameter_group_tls_enable_violation {
     Parameters := input.Parameters[_]
     lower(Parameters.ParameterName) == "tls"
     lower(Parameters.ParameterValue) != "enabled"
+}
+
+docdb_parameter_group_tls_enable {
+    input.Parameters
+    not docdb_parameter_group_tls_enable_violation
+}
+
+docdb_parameter_group_tls_enable = false {
+    docdb_parameter_group_tls_enable_violation
 }
 
 docdb_parameter_group_tls_enable_err = "Ensure DocDB ParameterGroup has TLS enable" {
@@ -1139,24 +1466,33 @@ docdb_parameter_group_tls_enable_metadata := {
 # PR-AWS-CLD-DDB-004
 #
 
-default docdb_parameter_group_audit_logs = true
+default docdb_parameter_group_audit_logs = null
 
-docdb_parameter_group_audit_logs = false {
+docdb_parameter_group_audit_logs_violation {
     not input.Parameters
 }
 
-docdb_parameter_group_audit_logs = false {
+docdb_parameter_group_audit_logs_violation {
     count(input.Parameters) == 0
 }
 
-docdb_parameter_group_audit_logs = false {
+docdb_parameter_group_audit_logs_violation {
     count([c | input.Parameters[_].ParameterName == "audit_logs"; c:=1]) == 0
 }
 
-docdb_parameter_group_audit_logs = false {
+docdb_parameter_group_audit_logs_violation {
     Parameters := input.Parameters[_]
     lower(Parameters.ParameterName) == "audit_logs"
     lower(Parameters.ParameterValue) != "enabled"
+}
+
+docdb_parameter_group_audit_logs {
+    input.Parameters
+    not docdb_parameter_group_audit_logs_violation
+}
+
+docdb_parameter_group_audit_logs = false {
+    docdb_parameter_group_audit_logs_violation
 }
 
 docdb_parameter_group_audit_logs_err = "Ensure DocDB has audit logs enabled" {
@@ -1179,15 +1515,15 @@ docdb_parameter_group_audit_logs_metadata := {
 # PR-AWS-CLD-DDB-005
 #
 
-default docdb_cluster_encrypted_with_cmk = true
+default docdb_cluster_encrypted_with_cmk = null
 
-docdb_cluster_encrypted_with_cmk = false {
+docdb_cluster_encrypted_with_cmk_violation {
     DDB := input.TEST_DDB_01[_]
     DBInstance := DDB.DBClusters[_]
     not DBInstance.KmsKeyId
 }
 
-docdb_cluster_encrypted_with_cmk = false {
+docdb_cluster_encrypted_with_cmk_violation {
     DDB := input.TEST_DDB_01[_]
     DBInstance := DDB.DBClusters[_]
     
@@ -1195,6 +1531,15 @@ docdb_cluster_encrypted_with_cmk = false {
     DBInstance.KmsKeyId == KMS.KeyMetadata.Arn
     alias := KMS.Aliases[_]
     alias.AliasName == "alias/aws/rds"
+}
+
+docdb_cluster_encrypted_with_cmk {
+    input.TEST_DDB_01
+    not docdb_cluster_encrypted_with_cmk_violation
+}
+
+docdb_cluster_encrypted_with_cmk = false {
+    docdb_cluster_encrypted_with_cmk_violation
 }
 
 docdb_cluster_encrypted_with_cmk_err = "Ensure AWS DocumentDB is encrypted using CMK" {
@@ -1217,10 +1562,19 @@ docdb_cluster_encrypted_with_cmk_metadata := {
 # PR-AWS-CLD-ATH-001
 #
 
-default athena_encryption_disabling_prevent = true
+default athena_encryption_disabling_prevent = null
+
+athena_encryption_disabling_prevent_violation {
+    not input.WorkGroup.Configuration.EnforceWorkGroupConfiguration
+}
+
+athena_encryption_disabling_prevent {
+    input.WorkGroup
+    not athena_encryption_disabling_prevent_violation
+}
 
 athena_encryption_disabling_prevent = false {
-    not input.WorkGroup.Configuration.EnforceWorkGroupConfiguration
+    athena_encryption_disabling_prevent_violation
 }
 
 athena_encryption_disabling_prevent_err = "Ensure to enable EnforceWorkGroupConfiguration for athena workgroup" {
@@ -1243,10 +1597,19 @@ athena_encryption_disabling_prevent_metadata := {
 # PR-AWS-CLD-ATH-002
 #
 
-default athena_logging_is_enabled = true
+default athena_logging_is_enabled = null
+
+athena_logging_is_enabled_violation {
+    input.WorkGroup.Configuration.PublishCloudWatchMetricsEnabled == available_true_choices[_]
+}
+
+athena_logging_is_enabled {
+    input.WorkGroup
+    not athena_logging_is_enabled_violation
+}
 
 athena_logging_is_enabled = false {
-    input.WorkGroup.Configuration.PublishCloudWatchMetricsEnabled == available_true_choices[_]
+    athena_logging_is_enabled_violation
 }
 
 athena_logging_is_enabled_err = "Ensure Athena logging is enabled for athena workgroup." {
@@ -1270,21 +1633,30 @@ athena_logging_is_enabled_metadata := {
 # PR-AWS-CLD-TS-001
 #
 
-default timestream_database_encryption = true
+default timestream_database_encryption = null
 
-timestream_database_encryption = false {
+timestream_database_encryption_violation {
     Databases := input.Databases[_]
     not Databases.KmsKeyId
 }
 
-timestream_database_encryption = false {
+timestream_database_encryption_violation {
     Databases := input.Databases[_]
     count(Databases.KmsKeyId) == 0
 }
 
-timestream_database_encryption = false {
+timestream_database_encryption_violation {
     Databases := input.Databases[_]
     Databases.KmsKeyId == null
+}
+
+timestream_database_encryption {
+    input.Databases
+    not timestream_database_encryption_violation
+}
+
+timestream_database_encryption = false {
+    timestream_database_encryption_violation
 }
 
 timestream_database_encryption_err = "Ensure Timestream database is encrypted using KMS" {
@@ -1304,21 +1676,29 @@ timestream_database_encryption_metadata := {
 }
 
 
-
 #
 # PR-AWS-CLD-NPT-001
 #
 
-default neptune_cluster_logs = true
+default neptune_cluster_logs = null
 
-neptune_cluster_logs = false {
+neptune_cluster_logs_violation {
     DBClusters := input.DBClusters[_]
     not DBClusters.EnabledCloudwatchLogsExports
 }
 
-neptune_cluster_logs = false {
+neptune_cluster_logs_violation {
     DBClusters := input.DBClusters[_]
     count(DBClusters.EnabledCloudwatchLogsExports) == 0
+}
+
+neptune_cluster_logs {
+    input.DBClusters
+    not neptune_cluster_logs_violation
+}
+
+neptune_cluster_logs = false {
+    neptune_cluster_logs_violation
 }
 
 neptune_cluster_logs_err = "Ensure Neptune logging is enabled" {
@@ -1342,15 +1722,24 @@ neptune_cluster_logs_metadata := {
 # PR-AWS-CLD-DD-001
 #
 
-default dynamodb_encrypt = true
+default dynamodb_encrypt = null
 
-dynamodb_encrypt = false {
+dynamodb_encrypt_violation {
     lower(input.Table.SSEDescription.Status) != "enabling"
     lower(input.Table.SSEDescription.Status) != "enabled"
 }
 
-dynamodb_encrypt = false {
+dynamodb_encrypt_violation {
     not input.Table.SSEDescription.Status
+}
+
+dynamodb_encrypt {
+    input.Table
+    not dynamodb_encrypt_violation
+}
+
+dynamodb_encrypt = false {
+    dynamodb_encrypt_violation
 }
 
 dynamodb_encrypt_err = "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK" {
@@ -1374,14 +1763,23 @@ dynamodb_encrypt_metadata := {
 # PR-AWS-CLD-DD-002
 #
 
-default dynamodb_PITR_enable = true
+default dynamodb_PITR_enable = null
 
-dynamodb_PITR_enable = false {
+dynamodb_PITR_enable_violation {
     not input.ContinuousBackupsDescription.PointInTimeRecoveryDescription.PointInTimeRecoveryStatus
 }
 
-dynamodb_PITR_enable = false {
+dynamodb_PITR_enable_violation {
     lower(input.ContinuousBackupsDescription.PointInTimeRecoveryDescription.PointInTimeRecoveryStatus) != "enabled"
+}
+
+dynamodb_PITR_enable {
+    input.ContinuousBackupsDescription
+    not dynamodb_PITR_enable_violation
+}
+
+dynamodb_PITR_enable = false {
+    dynamodb_PITR_enable_violation
 }
 
 dynamodb_PITR_enable_err = "Ensure DynamoDB PITR is enabled" {
@@ -1405,16 +1803,25 @@ dynamodb_PITR_enable_metadata := {
 # PR-AWS-CLD-DD-003
 #
 
-default dynamodb_kinesis_stream = true
+default dynamodb_kinesis_stream = null
 
-dynamodb_kinesis_stream = false {
+dynamodb_kinesis_stream_violation {
     KinesisDataStreamDestinations := input.KinesisDataStreamDestinations[_]
     count(KinesisDataStreamDestinations.StreamArn) == 0
 }
 
-dynamodb_kinesis_stream = false {
+dynamodb_kinesis_stream_violation {
     KinesisDataStreamDestinations := input.KinesisDataStreamDestinations[_]
     not KinesisDataStreamDestinations.StreamArn
+}
+
+dynamodb_kinesis_stream {
+    input.KinesisDataStreamDestinations
+    not dynamodb_kinesis_stream_violation
+}
+
+dynamodb_kinesis_stream = false {
+    dynamodb_kinesis_stream_violation
 }
 
 dynamodb_kinesis_stream_err = "Dynamo DB kinesis specification property should not be null" {
@@ -1439,9 +1846,9 @@ dynamodb_kinesis_stream_metadata := {
 # aws::dynamodb::table
 # AWS::KMS::Key
 
-default dynamodb_not_customer_managed_key = true
+default dynamodb_not_customer_managed_key = null
 
-dynamodb_not_customer_managed_key = false {
+dynamodb_not_customer_managed_key_violation {
     X := input.TEST_DD[_]
     Y := input.TEST_KMS[_]
     X.Table.SSEDescription.Status == "ENABLED"
@@ -1449,6 +1856,15 @@ dynamodb_not_customer_managed_key = false {
     common.has_property(X.Table.SSEDescription, "KMSMasterKeyArn")
 	X.Table.SSEDescription.KMSMasterKeyArn == Y.KeyMetadata.Arn
 	Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+dynamodb_not_customer_managed_key {
+    input.TEST_DD
+    not dynamodb_not_customer_managed_key_violation
+}
+
+dynamodb_not_customer_managed_key = false {
+    dynamodb_not_customer_managed_key_violation
 }
 
 dynamodb_not_customer_managed_key_err = "Ensure AWS DynamoDB does not uses customer managed CMK key to ensure encryption at rest." {
@@ -1472,12 +1888,21 @@ dynamodb_not_customer_managed_key_metadata := {
 # PR-AWS-CLD-EC-001
 #
 
-default cache_failover = true
+default cache_failover = null
 
-cache_failover = false {
+cache_failover_violation {
     ReplicationGroups := input.ReplicationGroups[_]
     lower(ReplicationGroups.AutomaticFailover) != "enabled"
     lower(ReplicationGroups.AutomaticFailover) != "enabling"
+}
+
+cache_failover {
+    input.ReplicationGroups
+    not cache_failover_violation
+}
+
+cache_failover = false {
+    cache_failover_violation
 }
 
 cache_failover_err = "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled" {
@@ -1500,11 +1925,20 @@ cache_failover_metadata := {
 # PR-AWS-CLD-EC-002
 #
 
-default cache_redis_auth = true
+default cache_redis_auth = null
 
-cache_redis_auth = false {
+cache_redis_auth_violation {
     ReplicationGroups := input.ReplicationGroups[_]
     not ReplicationGroups.AuthTokenEnabled
+}
+
+cache_redis_auth {
+    input.ReplicationGroups
+    not cache_redis_auth_violation
+}
+
+cache_redis_auth = false {
+    cache_redis_auth_violation
 }
 
 cache_redis_auth_err = "AWS ElastiCache Redis cluster with encryption for data at rest disabled" {
@@ -1528,12 +1962,20 @@ cache_redis_auth_metadata := {
 # PR-AWS-CLD-EC-003
 #
 
-default cache_redis_encrypt = true
+default cache_redis_encrypt = null
 
-
-cache_redis_encrypt = false {
+cache_redis_encrypt_violation {
     ReplicationGroups := input.ReplicationGroups[_]
     not ReplicationGroups.AtRestEncryptionEnabled
+}
+
+cache_redis_encrypt {
+    input.ReplicationGroups
+    not cache_redis_encrypt_violation
+}
+
+cache_redis_encrypt = false {
+    cache_redis_encrypt_violation
 }
 
 cache_redis_encrypt_err = "AWS ElastiCache Redis cluster with encryption for data at rest disabled" {
@@ -1557,11 +1999,20 @@ cache_redis_encrypt_metadata := {
 # PR-AWS-CLD-EC-004
 #
 
-default cache_encrypt = true
+default cache_encrypt = null
 
-cache_encrypt = false {
+cache_encrypt_violation {
     ReplicationGroups := input.ReplicationGroups[_]
     not ReplicationGroups.TransitEncryptionEnabled
+}
+
+cache_encrypt {
+    input.ReplicationGroups
+    not cache_encrypt_violation
+}
+
+cache_encrypt = false {
+    cache_encrypt_violation
 }
 
 cache_encrypt_err = "AWS ElastiCache Redis cluster with in-transit encryption disabled" {
@@ -1585,16 +2036,25 @@ cache_encrypt_metadata := {
 # PR-AWS-CLD-EC-005
 #
 
-default cache_ksm_key = true
+default cache_ksm_key = null
 
-cache_ksm_key = false {
+cache_ksm_key_violation {
     ReplicationGroups := input.ReplicationGroups[_]
     not ReplicationGroups.KmsKeyId
 }
 
-cache_ksm_key = false {
+cache_ksm_key_violation {
     ReplicationGroups := input.ReplicationGroups[_]
     not startswith(ReplicationGroups.KmsKeyId, "arn:")
+}
+
+cache_ksm_key {
+    input.ReplicationGroups
+    not cache_ksm_key_violation
+}
+
+cache_ksm_key = false {
+    cache_ksm_key_violation
 }
 
 cache_ksm_key_err = "Ensure that ElastiCache replication Group (Redis) are encrypted at rest with customer managed CMK key" {
@@ -1617,26 +2077,35 @@ cache_ksm_key_metadata := {
 # PR-AWS-CLD-EC-009
 #
 
-default cache_replication_group_id = true
+default cache_replication_group_id = null
 
-cache_replication_group_id = false {
+cache_replication_group_id_violation {
     ReplicationGroups := input.ReplicationGroups[_]
     not ReplicationGroups.ReplicationGroupId
 }
 
-cache_replication_group_id = false {
+cache_replication_group_id_violation {
     ReplicationGroups := input.ReplicationGroups[_]
     ReplicationGroups.ReplicationGroupId == ""
 }
 
-cache_replication_group_id = false {
+cache_replication_group_id_violation {
     ReplicationGroups := input.ReplicationGroups[_]
     ReplicationGroups.ReplicationGroupId == null
 }
 
-cache_replication_group_id = false {
+cache_replication_group_id_violation {
     ReplicationGroups := input.ReplicationGroups[_]
     contains(lower(ReplicationGroups.ReplicationGroupId), "*")
+}
+
+cache_replication_group_id {
+    input.ReplicationGroups
+    not cache_replication_group_id_violation
+}
+
+cache_replication_group_id = false {
+    cache_replication_group_id_violation
 }
 
 cache_replication_group_id_err = "Ensure ElastiCache (Redis) replicationGroupId is not empty or contains wildcards (*)." {
@@ -1659,11 +2128,20 @@ cache_replication_group_id_metadata := {
 # PR-AWS-CLD-EC-007
 #
 
-default automatic_backups_for_redis_cluster = true
+default automatic_backups_for_redis_cluster = null
 
-automatic_backups_for_redis_cluster = false {
+automatic_backups_for_redis_cluster_violation {
     CacheCluster := input.CacheClusters[_]
     CacheCluster.SnapshotRetentionLimit == 0
+}
+
+automatic_backups_for_redis_cluster {
+    input.CacheClusters
+    not automatic_backups_for_redis_cluster_violation
+}
+
+automatic_backups_for_redis_cluster = false {
+    automatic_backups_for_redis_cluster_violation
 }
 
 automatic_backups_for_redis_cluster_err = "Ensure in AWS ElastiCache, automatic backups is enabled for Redis cluster." {
@@ -1686,12 +2164,21 @@ automatic_backups_for_redis_cluster_metadata := {
 # PR-AWS-CLD-EC-008
 #
 
-default redis_with_intransit_encryption = true
+default redis_with_intransit_encryption = null
 
-redis_with_intransit_encryption = false {
+redis_with_intransit_encryption_violation {
     CacheCluster := input.CacheClusters[_]
     CacheCluster.TransitEncryptionEnabled == available_false_choices[_]
     not CacheCluster.ReplicationGroupId
+}
+
+redis_with_intransit_encryption {
+    input.CacheClusters
+    not redis_with_intransit_encryption_violation
+}
+
+redis_with_intransit_encryption = false {
+    redis_with_intransit_encryption_violation
 }
 
 redis_with_intransit_encryption_err = "Ensure ElastiCache Redis with in-transit encryption is disabled (Non-replication group)." {
@@ -1716,9 +2203,9 @@ redis_with_intransit_encryption_metadata := {
 # aws::elasticache::cachecluster
 # aws::elasticache::replicationgroup
 
-default cache_cluster_vpc = true
+default cache_cluster_vpc = null
 
-cache_cluster_vpc = false {
+cache_cluster_vpc_violation {
     X := input.TEST_EC_01[_]
     CacheCluster := X.CacheClusters[_]
     Y := input.TEST_EC[_]
@@ -1729,7 +2216,7 @@ cache_cluster_vpc = false {
     not CacheCluster.CacheSubnetGroupName
 }
 
-cache_cluster_vpc = false {
+cache_cluster_vpc_violation {
     X := input.TEST_EC_01[_]
     CacheCluster := X.CacheClusters[_]
     Y := input.TEST_EC[_]
@@ -1740,7 +2227,7 @@ cache_cluster_vpc = false {
     CacheCluster.CacheSubnetGroupName == ""
 }
 
-cache_cluster_vpc = false {
+cache_cluster_vpc_violation {
     X := input.TEST_EC_01[_]
     CacheCluster := X.CacheClusters[_]
     Y := input.TEST_EC[_]
@@ -1749,6 +2236,15 @@ cache_cluster_vpc = false {
     contains(MemberCluster, CacheCluster.CacheClusterId)
     CacheCluster.CacheClusterStatus == "available"
     CacheCluster.CacheSubnetGroupName == null
+}
+
+cache_cluster_vpc {
+    input.TEST_EC_01
+    not cache_cluster_vpc_violation
+}
+
+cache_cluster_vpc = false {
+    cache_cluster_vpc_violation
 }
 
 cache_cluster_vpc_err = "Ensure AWS ElastiCache cluster is associated with VPC." {
@@ -1772,18 +2268,27 @@ cache_cluster_vpc_metadata := {
 # PR-AWS-CLD-DMS-001
 #
 
-default dms_endpoint = true
+default dms_endpoint = null
 
-dms_endpoint = false {
+dms_endpoint_violation {
     Endpoints := input.Endpoints[_]
     lower(Endpoints.EngineName) != "s3"
     lower(Endpoints.SslMode) == "none"
 }
 
-dms_endpoint = false {
+dms_endpoint_violation {
     Endpoints := input.Endpoints[_]
     lower(Endpoints.EngineName) != "s3"
     not Endpoints.SslMode
+}
+
+dms_endpoint {
+    input.Endpoints
+    not dms_endpoint_violation
+}
+
+dms_endpoint = false {
+    dms_endpoint_violation
 }
 
 dms_endpoint_err = "Ensure DMS endpoints are supporting SSL configuration" {
@@ -1807,11 +2312,20 @@ dms_endpoint_metadata := {
 # PR-AWS-CLD-DMS-002
 #
 
-default dms_public_access = true
+default dms_public_access = null
 
-dms_public_access = false {
+dms_public_access_violation {
     replication_instances := input.ReplicationInstances[_]
     replication_instances.PubliclyAccessible == true
+}
+
+dms_public_access {
+    input.ReplicationInstances
+    not dms_public_access_violation
+}
+
+dms_public_access = false {
+    dms_public_access_violation
 }
 
 dms_public_access_err = "Ensure DMS replication instance is not publicly accessible" {
@@ -1835,14 +2349,23 @@ dms_public_access_metadata := {
 # PR-AWS-CLD-DMS-003
 #
 
-default dms_certificate_expiry = true
+default dms_certificate_expiry = null
 
-dms_certificate_expiry = false {
+dms_certificate_expiry_violation {
     Certificate := input.Certificates[_]
     current_date_timestamp := time.now_ns()
 	expiry_timestamp := round(Certificate.ValidToDate)
     expiry_timestamp_nanosecond := expiry_timestamp * 1000000000
     expiry_timestamp_nanosecond < current_date_timestamp
+}
+
+dms_certificate_expiry {
+    input.Certificates
+    not dms_certificate_expiry_violation
+}
+
+dms_certificate_expiry = false {
+    dms_certificate_expiry_violation
 }
 
 dms_certificate_expiry_err = "Ensure Database Migration Service (DMS) has not expired certificates" {
@@ -1866,9 +2389,9 @@ dms_certificate_expiry_metadata := {
 # PR-AWS-CLD-DMS-004
 # aws::dms::replicationinstance
 
-default dms_gs_managed_key = true
+default dms_gs_managed_key = null
 
-dms_gs_managed_key = false {
+dms_gs_managed_key_violation {
     X := input.TEST_DMS_02[_]
     ReplicationInstance := X.ReplicationInstances[_]
     Y := input.TEST_KMS[_]
@@ -1876,12 +2399,21 @@ dms_gs_managed_key = false {
     Y.KeyMetadata.KeyManager != "CUSTOMER"
 }
 
-dms_gs_managed_key = false {
+dms_gs_managed_key_violation {
     X := input.TEST_DMS_02[_]
     ReplicationInstance := X.ReplicationInstances[_]
     Y := input.TEST_KMS[_]
 	ReplicationInstance.KmsKeyId == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+dms_gs_managed_key {
+    input.TEST_DMS_02
+    not dms_gs_managed_key_violation
+}
+
+dms_gs_managed_key = false {
+    dms_gs_managed_key_violation
 }
 
 dms_gs_managed_key_err = "Ensure DMS replication instance in encrypted by GS provided CMK." {

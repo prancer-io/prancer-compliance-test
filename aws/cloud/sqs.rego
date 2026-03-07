@@ -8,11 +8,20 @@ import data.common
 # PR-AWS-CLD-SQS-001
 #
 
-default sqs_deadletter = true
+default sqs_deadletter = null
 
-sqs_deadletter = false {
+sqs_deadletter_violation {
     RedrivePolicy := json.unmarshal(input.RedrivePolicy)
     not RedrivePolicy.deadLetterTargetArn
+}
+
+sqs_deadletter {
+    input.RedrivePolicy
+    not sqs_deadletter_violation
+}
+
+sqs_deadletter = false {
+    sqs_deadletter_violation
 }
 
 sqs_deadletter_err = "AWS SQS does not have a dead letter queue configured" {
@@ -35,12 +44,20 @@ sqs_deadletter_metadata := {
 # PR-AWS-CLD-SQS-002
 #
 
-default sqs_encrypt_key = true
+default sqs_encrypt_key = null
 
-
-sqs_encrypt_key = false {
+sqs_encrypt_key_violation {
     input.KmsMasterKeyId
     contains(lower(input.KmsMasterKeyId), "alias/aws/sqs")
+}
+
+sqs_encrypt_key {
+    input.KmsMasterKeyId
+    not sqs_encrypt_key_violation
+}
+
+sqs_encrypt_key = false {
+    sqs_encrypt_key_violation
 }
 
 sqs_encrypt_key_err = "AWS SQS queue encryption using default KMS key instead of CMK" {
@@ -63,14 +80,23 @@ sqs_encrypt_key_metadata := {
 # PR-AWS-CLD-SQS-003
 #
 
-default sqs_encrypt = true
+default sqs_encrypt = null
 
-sqs_encrypt = false {
+sqs_encrypt_violation {
     not input.KmsMasterKeyId
 }
 
-sqs_encrypt = false {
+sqs_encrypt_violation {
     count(input.KmsMasterKeyId) == 0
+}
+
+sqs_encrypt {
+    input.KmsMasterKeyId
+    not sqs_encrypt_violation
+}
+
+sqs_encrypt = false {
+    sqs_encrypt_violation
 }
 
 sqs_encrypt_err = "AWS SQS server side encryption not enabled" {
@@ -94,27 +120,36 @@ sqs_encrypt_metadata := {
 # PR-AWS-CLD-SQS-004
 #
 
-default sqs_policy_public = true
+default sqs_policy_public = null
 
-sqs_policy_public = false {
+sqs_policy_public_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
 }
 
-sqs_policy_public = false {
+sqs_policy_public_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
 }
 
-sqs_policy_public = false {
+sqs_policy_public_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[k] = "*"
+}
+
+sqs_policy_public {
+    input.Attributes
+    not sqs_policy_public_violation
+}
+
+sqs_policy_public = false {
+    sqs_policy_public_violation
 }
 
 sqs_policy_public_err = "Ensure SQS queue policy is not publicly accessible" {
@@ -138,20 +173,29 @@ sqs_policy_public_metadata := {
 # PR-AWS-CLD-SQS-005
 #
 
-default sqs_policy_action = true
+default sqs_policy_action = null
 
-sqs_policy_action = false {
+sqs_policy_action_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Action == "sqs:*"
 }
 
-sqs_policy_action = false {
+sqs_policy_action_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Action[k] == "sqs:*"
+}
+
+sqs_policy_action {
+    input.Attributes
+    not sqs_policy_action_violation
+}
+
+sqs_policy_action = false {
+    sqs_policy_action_violation
 }
 
 sqs_policy_action_err = "Ensure SQS policy documents do not allow all actions" {
@@ -175,9 +219,9 @@ sqs_policy_action_metadata := {
 # PR-AWS-CLD-SQS-006
 # aws::sqs::queuepolicy
 
-default sqs_not_overly_permissive = true
+default sqs_not_overly_permissive = null
 
-sqs_not_overly_permissive = false {
+sqs_not_overly_permissive_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -185,12 +229,21 @@ sqs_not_overly_permissive = false {
     not statement.Condition
 }
 
-sqs_not_overly_permissive = false {
+sqs_not_overly_permissive_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
     startswith(lower(statement.Action[k]), "sqs:")
     not statement.Condition
+}
+
+sqs_not_overly_permissive {
+    input.Attributes
+    not sqs_not_overly_permissive_violation
+}
+
+sqs_not_overly_permissive = false {
+    sqs_not_overly_permissive_violation
 }
 
 sqs_not_overly_permissive_err = "Ensure AWS SQS queue access policy is not overly permissive." {
@@ -213,9 +266,9 @@ sqs_not_overly_permissive_metadata := {
 # PR-AWS-CLD-SQS-007
 # aws::sqs::queuepolicy
 
-default sqs_accessible_via_specific_vpc = true
+default sqs_accessible_via_specific_vpc = null
 
-sqs_accessible_via_specific_vpc = false {
+sqs_accessible_via_specific_vpc_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     statement.Condition
@@ -223,7 +276,7 @@ sqs_accessible_via_specific_vpc = false {
     not common.has_property(statement, "Condition")
 }
 
-sqs_accessible_via_specific_vpc = false {
+sqs_accessible_via_specific_vpc_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     statement.Condition
@@ -231,12 +284,21 @@ sqs_accessible_via_specific_vpc = false {
     not common.has_property(statement.Condition, "StringEquals")
 }
 
-sqs_accessible_via_specific_vpc = false {
+sqs_accessible_via_specific_vpc_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     statement.Condition
     lower(statement.Effect) == "allow"
     not common.has_property(statement.Condition.StringEquals, "aws:SourceVpce")
+}
+
+sqs_accessible_via_specific_vpc {
+    input.Attributes
+    not sqs_accessible_via_specific_vpc_violation
+}
+
+sqs_accessible_via_specific_vpc = false {
+    sqs_accessible_via_specific_vpc_violation
 }
 
 sqs_accessible_via_specific_vpc_err = "Ensure SQS is only accessible via specific VPCe service." {
@@ -260,9 +322,9 @@ sqs_accessible_via_specific_vpc_metadata := {
 # PR-AWS-CLD-SQS-008
 # aws::sqs::queuepolicy
 
-default sqs_encrypted_in_transit = true
+default sqs_encrypted_in_transit = null
 
-sqs_encrypted_in_transit = false {
+sqs_encrypted_in_transit_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -270,7 +332,7 @@ sqs_encrypted_in_transit = false {
     not statement.Condition.Bool["aws:SecureTransport"]
 }
 
-sqs_encrypted_in_transit = false {
+sqs_encrypted_in_transit_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -278,7 +340,7 @@ sqs_encrypted_in_transit = false {
     not statement.Condition.Bool["aws:SecureTransport"]
 }
 
-sqs_encrypted_in_transit = false {
+sqs_encrypted_in_transit_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -286,7 +348,7 @@ sqs_encrypted_in_transit = false {
     not statement.Condition.Bool["aws:SecureTransport"]
 }
 
-sqs_encrypted_in_transit = false {
+sqs_encrypted_in_transit_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -294,7 +356,7 @@ sqs_encrypted_in_transit = false {
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
-sqs_encrypted_in_transit = false {
+sqs_encrypted_in_transit_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -302,7 +364,7 @@ sqs_encrypted_in_transit = false {
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
-sqs_encrypted_in_transit = false {
+sqs_encrypted_in_transit_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "allow"
@@ -310,7 +372,7 @@ sqs_encrypted_in_transit = false {
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
-sqs_encrypted_in_transit = false {
+sqs_encrypted_in_transit_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "deny"
@@ -318,7 +380,7 @@ sqs_encrypted_in_transit = false {
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
 }
 
-sqs_encrypted_in_transit = false {
+sqs_encrypted_in_transit_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "deny"
@@ -326,12 +388,21 @@ sqs_encrypted_in_transit = false {
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
 }
 
-sqs_encrypted_in_transit = false {
+sqs_encrypted_in_transit_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[j]
     lower(statement.Effect) == "deny"
     statement.Principal.AWS[_] = "*"
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+sqs_encrypted_in_transit {
+    input.Attributes
+    not sqs_encrypted_in_transit_violation
+}
+
+sqs_encrypted_in_transit = false {
+    sqs_encrypted_in_transit_violation
 }
 
 sqs_encrypted_in_transit_err = "Ensure SQS data is encrypted in Transit using SSL/TLS." {

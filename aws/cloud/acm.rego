@@ -8,22 +8,31 @@ import data.common
 # PR-AWS-CLD-ACM-001
 #
 
-default acm_wildcard = true
+default acm_wildcard = null
 
-acm_wildcard = false {
+acm_wildcard_violation {
     not input.Certificate.DomainName
 }
 
-acm_wildcard = false {
+acm_wildcard_violation {
     startswith(input.Certificate.DomainName, "*")
 }
 
-acm_wildcard = false {
+acm_wildcard_violation {
     startswith(input.Certificate.SubjectAlternativeNames[_], "*")
 }
 
-acm_wildcard = false {
+acm_wildcard_violation {
     startswith(input.Certificate.DomainValidationOptions[_].DomainName, "*")
+}
+
+acm_wildcard {
+    input.Certificate
+    not acm_wildcard_violation
+}
+
+acm_wildcard = false {
+    acm_wildcard_violation
 }
 
 acm_wildcard_err = "AWS ACM Certificate with wildcard domain name" {
@@ -47,10 +56,19 @@ acm_wildcard_metadata := {
 # PR-AWS-CLD-ACM-002
 #
 
-default acm_ct_log = true
+default acm_ct_log = null
+
+acm_ct_log_violation {
+    lower(input.Certificate.Options.CertificateTransparencyLoggingPreference) != "enabled"
+}
+
+acm_ct_log {
+    input.Certificate
+    not acm_ct_log_violation
+}
 
 acm_ct_log = false {
-    lower(input.Certificate.Options.CertificateTransparencyLoggingPreference) != "enabled"
+    acm_ct_log_violation
 }
 
 acm_ct_log_err = "AWS Certificate Manager (ACM) has certificates with Certificate Transparency Logging disabled" {
@@ -74,21 +92,30 @@ acm_ct_log_metadata := {
 # PR-AWS-CLD-ACM-003
 #
 
-default acm_certificate_arn = true
+default acm_certificate_arn = null
 
-acm_certificate_arn = false {
+acm_certificate_arn_violation {
     # type = ["aws::certificatemanager::certificate", "aws::acmpca::certificate", "aws::acmpca::certificateauthorityactivation"]
     not input.Certificate.CertificateAuthorityArn
 }
 
-acm_certificate_arn = false {
+acm_certificate_arn_violation {
     # type = ["aws::certificatemanager::certificate", "aws::acmpca::certificate", "aws::acmpca::certificateauthorityactivation"]
     count(input.Certificate.CertificateAuthorityArn) == 0
 }
 
-acm_certificate_arn = false{
+acm_certificate_arn_violation {
     # type = ["aws::certificatemanager::certificate", "aws::acmpca::certificate", "aws::acmpca::certificateauthorityactivation"]
     input.Certificate.CertificateAuthorityArn == null
+}
+
+acm_certificate_arn {
+    input.Certificate
+    not acm_certificate_arn_violation
+}
+
+acm_certificate_arn = false {
+    acm_certificate_arn_violation
 }
 
 acm_certificate_arn_err = "Ensure that the CertificateManager certificates reference only Private ACMPCA certificate authorities" {
@@ -112,14 +139,23 @@ acm_certificate_arn_metadata := {
 # PR-AWS-CLD-ACM-005
 #
 
-default acm_do_not_have_unused_certificate = true         
+default acm_do_not_have_unused_certificate = null
 
-acm_do_not_have_unused_certificate = false {
+acm_do_not_have_unused_certificate_violation {
     not input.Certificate.InUseBy
 }
 
-acm_do_not_have_unused_certificate = false {
+acm_do_not_have_unused_certificate_violation {
     count(input.Certificate.InUseBy) == 0
+}
+
+acm_do_not_have_unused_certificate {
+    input.Certificate
+    not acm_do_not_have_unused_certificate_violation
+}
+
+acm_do_not_have_unused_certificate = false {
+    acm_do_not_have_unused_certificate_violation
 }
 
 acm_do_not_have_unused_certificate_err = "Ensure Certificate Manager (ACM) does not have unused certificates." {
@@ -142,12 +178,20 @@ acm_do_not_have_unused_certificate_metadata := {
 # PR-AWS-CLD-ACM-006
 #
 
-default acm_do_not_have_certificate_pending_validation = true
+default acm_do_not_have_certificate_pending_validation = null
 
-acm_do_not_have_certificate_pending_validation = false {
+acm_do_not_have_certificate_pending_validation_violation {
     lower(input.Certificate.Status) == "pending_validation"
 }
 
+acm_do_not_have_certificate_pending_validation {
+    input.Certificate
+    not acm_do_not_have_certificate_pending_validation_violation
+}
+
+acm_do_not_have_certificate_pending_validation = false {
+    acm_do_not_have_certificate_pending_validation_violation
+}
 
 acm_do_not_have_certificate_pending_validation_err = "Ensure AWS Certificate Manager (ACM) does not contain certificate pending validation." {
     not acm_do_not_have_certificate_pending_validation
@@ -169,14 +213,22 @@ acm_do_not_have_certificate_pending_validation_metadata := {
 # PR-AWS-CLD-ACM-007
 #
 
-default acm_do_not_have_invalid_or_failed = true
+default acm_do_not_have_invalid_or_failed = null
 
 certificate_invalid_or_failed_status := ["validation_timed_out", "failed"]
 
-acm_do_not_have_invalid_or_failed = false {
+acm_do_not_have_invalid_or_failed_violation {
     lower(input.Certificate.Status) == certificate_invalid_or_failed_status[_]
 }
 
+acm_do_not_have_invalid_or_failed {
+    input.Certificate
+    not acm_do_not_have_invalid_or_failed_violation
+}
+
+acm_do_not_have_invalid_or_failed = false {
+    acm_do_not_have_invalid_or_failed_violation
+}
 
 acm_do_not_have_invalid_or_failed_err = "Ensure AWS Certificate Manager (ACM) does not have invalid or failed certificate." {
     not acm_do_not_have_invalid_or_failed
@@ -199,14 +251,23 @@ acm_do_not_have_invalid_or_failed_metadata := {
 # PR-AWS-CLD-ACM-008
 # aws::certificatemanager::certificate"
 
-default acm_expiring_certificate = true
+default acm_expiring_certificate = null
 
-acm_expiring_certificate = false {
+acm_expiring_certificate_violation {
     lower(input.Certificate.Status) == "issued"
     exp_timestamp := input.Certificate.NotAfter["$date"]
     exp_timestamp_nanosecond := exp_timestamp * 1000000
     current_date_timestamp := time.now_ns()
 	(exp_timestamp_nanosecond - current_date_timestamp) < 2678400000000000
+}
+
+acm_expiring_certificate {
+    input.Certificate
+    not acm_expiring_certificate_violation
+}
+
+acm_expiring_certificate = false {
+    acm_expiring_certificate_violation
 }
 
 acm_expiring_certificate_err = "Ensure AWS Certificate Manager (ACM) does not have certificates expiring in 30 days or less." {
@@ -230,14 +291,23 @@ acm_expiring_certificate_metadata := {
 # PR-AWS-CLD-ACM-009
 # aws::certificatemanager::certificate"
 
-default acm_expired_certificates = true
+default acm_expired_certificates = null
 
-acm_expired_certificates = false {
+acm_expired_certificates_violation {
     lower(input.Certificate.Status) == "expired"
     exp_timestamp := input.Certificate.NotAfter["$date"]
     exp_timestamp_nanosecond := exp_timestamp * 1000000
     current_date_timestamp := time.now_ns()
 	(exp_timestamp_nanosecond - current_date_timestamp) < -1
+}
+
+acm_expired_certificates {
+    input.Certificate
+    not acm_expired_certificates_violation
+}
+
+acm_expired_certificates = false {
+    acm_expired_certificates_violation
 }
 
 acm_expired_certificates_err = "Ensure AWS Certificate Manager (ACM) does not have expired certificates." {

@@ -8,14 +8,23 @@ import data.common
 # PR-AWS-CLD-SGM-001
 #
 
-default sagemaker_encryption_kms = true
+default sagemaker_encryption_kms = null
 
-sagemaker_encryption_kms = false {
+sagemaker_encryption_kms_violation {
     not input.KmsKeyId
 }
 
-sagemaker_encryption_kms = false {
+sagemaker_encryption_kms_violation {
     count(input.KmsKeyId) == 0
+}
+
+sagemaker_encryption_kms {
+    input.KmsKeyId
+    not sagemaker_encryption_kms_violation
+}
+
+sagemaker_encryption_kms = false {
+    sagemaker_encryption_kms_violation
 }
 
 sagemaker_encryption_kms_err = "AWS SageMaker notebook instance not configured with data encryption at rest using KMS key" {
@@ -38,14 +47,23 @@ sagemaker_encryption_kms_metadata := {
 # PR-AWS-CLD-SGM-002
 #
 
-default sagemaker_rootaccess_enabled = true
+default sagemaker_rootaccess_enabled = null
 
-sagemaker_rootaccess_enabled = false {
+sagemaker_rootaccess_enabled_violation {
     lower(input.RootAccess) == "enabled"
 }
 
-sagemaker_rootaccess_enabled = false {
+sagemaker_rootaccess_enabled_violation {
     not input.RootAccess
+}
+
+sagemaker_rootaccess_enabled {
+    input.RootAccess
+    not sagemaker_rootaccess_enabled_violation
+}
+
+sagemaker_rootaccess_enabled = false {
+    sagemaker_rootaccess_enabled_violation
 }
 
 sagemaker_rootaccess_enabled_err = "AWS SageMaker notebook instance with root access enabled" {
@@ -69,14 +87,23 @@ sagemaker_rootaccess_enabled_metadata := {
 # PR-AWS-CLD-SGM-003
 #
 
-default sagemaker_direct_internet_access_enabled = true
+default sagemaker_direct_internet_access_enabled = null
 
-sagemaker_direct_internet_access_enabled = false {
+sagemaker_direct_internet_access_enabled_violation {
     lower(input.DirectInternetAccess) == "enabled"
 }
 
-sagemaker_direct_internet_access_enabled = false {
+sagemaker_direct_internet_access_enabled_violation {
     not input.DirectInternetAccess
+}
+
+sagemaker_direct_internet_access_enabled {
+    input.DirectInternetAccess
+    not sagemaker_direct_internet_access_enabled_violation
+}
+
+sagemaker_direct_internet_access_enabled = false {
+    sagemaker_direct_internet_access_enabled_violation
 }
 
 sagemaker_direct_internet_access_enabled_err = "AWS SageMaker notebook instance configured with direct internet access feature" {
@@ -100,14 +127,23 @@ sagemaker_direct_internet_access_enabled_metadata := {
 # PR-AWS-CLD-SGM-004
 #
 
-default sagemaker_vpc = true
+default sagemaker_vpc = null
 
-sagemaker_vpc = false {
+sagemaker_vpc_violation {
     count(input.SubnetId) == 0
 }
 
-sagemaker_vpc = false {
+sagemaker_vpc_violation {
     not input.SubnetId
+}
+
+sagemaker_vpc {
+    input.SubnetId
+    not sagemaker_vpc_violation
+}
+
+sagemaker_vpc = false {
+    sagemaker_vpc_violation
 }
 
 sagemaker_vpc_err = "AWS SageMaker notebook instance is not placed in VPC" {
@@ -132,15 +168,24 @@ sagemaker_vpc_metadata := {
 # aws::sagemaker::notebookinstance
 # AWS::KMS::Key
 
-default sagemaker_customer_managed_key = true
+default sagemaker_customer_managed_key = null
 
-sagemaker_customer_managed_key = false {
+sagemaker_customer_managed_key_violation {
     X := input.TEST_SAGEMAKER[_]
     X.NotebookInstanceStatus == "InService"
     common.has_property(X, "KmsKeyId")
     Y := input.TEST_KMS[_]
     X.KmsKeyId == Y.KeyMetadata.KeyId
     Y.KeyMetadata.KeyManager == "AWS"
+}
+
+sagemaker_customer_managed_key {
+    input.TEST_SAGEMAKER
+    not sagemaker_customer_managed_key_violation
+}
+
+sagemaker_customer_managed_key = false {
+    sagemaker_customer_managed_key_violation
 }
 
 sagemaker_customer_managed_key_err = "Ensure AWS SageMaker notebook instance is encrypted using Customer Managed Key." {

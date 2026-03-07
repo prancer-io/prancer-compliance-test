@@ -8,11 +8,20 @@ import data.common
 # PR-AWS-CLD-ECS-001
 #
 
-default ecs_task_evelated = true
+default ecs_task_evelated = null
 
-ecs_task_evelated = false {
+ecs_task_evelated_violation {
     input.taskDefinition.containerDefinitions
     input.taskDefinition.containerDefinitions[j].privileged == true
+}
+
+ecs_task_evelated {
+    input.taskDefinition
+    not ecs_task_evelated_violation
+}
+
+ecs_task_evelated = false {
+    ecs_task_evelated_violation
 }
 
 ecs_task_evelated_err = "AWS ECS task definition elevated privileges enabled" {
@@ -35,21 +44,30 @@ ecs_task_evelated_metadata := {
 # PR-AWS-CLD-ECS-002
 #
 
-default ecs_exec = true
+default ecs_exec = null
 
-ecs_exec = false {
+ecs_exec_violation {
     not input.taskDefinition.executionRoleArn
     not input.taskDefinition.taskRoleArn
 }
 
-ecs_exec = false {
+ecs_exec_violation {
     input.taskDefinition.executionRoleArn
     not startswith(lower(input.taskDefinition.executionRoleArn), "arn:aws:")
 }
 
-ecs_exec = false {
+ecs_exec_violation {
     input.taskDefinition.taskRoleArn
     not startswith(lower(input.taskDefinition.taskRoleArn), "arn:aws:")
+}
+
+ecs_exec {
+    input.taskDefinition
+    not ecs_exec_violation
+}
+
+ecs_exec = false {
+    ecs_exec_violation
 }
 
 ecs_exec_err = "AWS ECS/Fargate task definition execution IAM Role not found" {
@@ -72,10 +90,19 @@ ecs_exec_metadata := {
 # PR-AWS-CLD-ECS-003
 #
 
-default ecs_root_user = true
+default ecs_root_user = null
+
+ecs_root_user_violation {
+    lower(input.taskDefinition.containerDefinitions[j].user) == "root"
+}
+
+ecs_root_user {
+    input.taskDefinition
+    not ecs_root_user_violation
+}
 
 ecs_root_user = false {
-    lower(input.taskDefinition.containerDefinitions[j].user) == "root"
+    ecs_root_user_violation
 }
 
 ecs_root_user_err = "AWS ECS/Fargate task definition root user found" {
@@ -98,11 +125,20 @@ ecs_root_user_metadata := {
 # PR-AWS-CLD-ECS-004
 #
 
-default ecs_root_filesystem = true
+default ecs_root_filesystem = null
 
-ecs_root_filesystem = false {
+ecs_root_filesystem_violation {
     container_definition := input.taskDefinition.containerDefinitions[j]
     not container_definition.readonlyRootFilesystem
+}
+
+ecs_root_filesystem {
+    input.taskDefinition
+    not ecs_root_filesystem_violation
+}
+
+ecs_root_filesystem = false {
+    ecs_root_filesystem_violation
 }
 
 ecs_root_filesystem_err = "AWS ECS Task Definition readonlyRootFilesystem Not Enabled" {
@@ -126,42 +162,51 @@ ecs_root_filesystem_metadata := {
 # PR-AWS-CLD-ECS-005
 #
 
-default ecs_resource_limit = true
+default ecs_resource_limit = null
 
-ecs_resource_limit = false {
+ecs_resource_limit_violation {
     not input.taskDefinition.cpu
 }
 
-ecs_resource_limit = false {
+ecs_resource_limit_violation {
     to_number(input.taskDefinition.cpu) == 0
 }
 
-ecs_resource_limit = false {
+ecs_resource_limit_violation {
     container_definition := input.taskDefinition.containerDefinitions[j]
     not container_definition.cpu
 }
 
-ecs_resource_limit = false {
+ecs_resource_limit_violation {
     container_definition := input.taskDefinition.containerDefinitions[j]
     to_number(container_definition.cpu) == 0
 }
 
-ecs_resource_limit = false {
+ecs_resource_limit_violation {
     not input.taskDefinition.memory
 }
 
-ecs_resource_limit = false {
+ecs_resource_limit_violation {
     to_number(input.taskDefinition.memory) == 0
 }
 
-ecs_resource_limit = false {
+ecs_resource_limit_violation {
     container_definition := input.taskDefinition.containerDefinitions[j]
     not container_definition.memory
 }
 
-ecs_resource_limit = false {
+ecs_resource_limit_violation {
     container_definition := input.taskDefinition.containerDefinitions[j]
     to_number(container_definition.memory) == 0
+}
+
+ecs_resource_limit {
+    input.taskDefinition
+    not ecs_resource_limit_violation
+}
+
+ecs_resource_limit = false {
+    ecs_resource_limit_violation
 }
 
 ecs_resource_limit_err = "AWS ECS task definition resource limits not set." {
@@ -185,26 +230,35 @@ ecs_resource_limit_metadata := {
 # PR-AWS-CLD-ECS-006
 #
 
-default ecs_logging = true
+default ecs_logging = null
 
-ecs_logging = false {
+ecs_logging_violation {
     container_definition := input.taskDefinition.containerDefinitions[j]
     not container_definition.logConfiguration.logDriver
 }
 
-ecs_logging = false {
+ecs_logging_violation {
     container_definition := input.taskDefinition.containerDefinitions[j]
     count(container_definition.logConfiguration.logDriver) == 0
 }
 
-ecs_logging = false {
+ecs_logging_violation {
     container_definition := input.taskDefinition.containerDefinitions[j]
     container_definition.logConfiguration.logDriver == null
 }
 
-ecs_logging = false {
+ecs_logging_violation {
     container_definition := input.taskDefinition.containerDefinitions[j]
     lower(container_definition.logConfiguration.logDriver) != "awslogs"
+}
+
+ecs_logging {
+    input.taskDefinition
+    not ecs_logging_violation
+}
+
+ecs_logging = false {
+    ecs_logging_violation
 }
 
 
@@ -228,16 +282,25 @@ ecs_logging_metadata := {
 # PR-AWS-CLD-ECS-007
 #
 
-default ecs_transit_enabled = true
+default ecs_transit_enabled = null
 
-ecs_transit_enabled = false {
+ecs_transit_enabled_violation {
     volume := input.taskDefinition.volumes[j]
     not volume.efsVolumeConfiguration.transitEncryption
 }
 
-ecs_transit_enabled = false {
+ecs_transit_enabled_violation {
     volume := input.taskDefinition.volumes[j]
     lower(volume.efsVolumeConfiguration.transitEncryption) != "enabled"
+}
+
+ecs_transit_enabled {
+    input.taskDefinition
+    not ecs_transit_enabled_violation
+}
+
+ecs_transit_enabled = false {
+    ecs_transit_enabled_violation
 }
 
 ecs_transit_enabled_err = "Ensure EFS volumes in ECS task definitions have encryption in transit enabled" {
@@ -261,21 +324,30 @@ ecs_transit_enabled_metadata := {
 # PR-AWS-CLD-ECS-008
 #
 
-default ecs_container_insight_enable = true
+default ecs_container_insight_enable = null
 
-ecs_container_insight_enable = false {
+ecs_container_insight_enable_violation {
     clusters := input.clusters[i]
     settings := clusters.settings[j]
-    lower(settings.name) == "containerinsights" 
+    lower(settings.name) == "containerinsights"
     lower(settings.value) != "enabled"
 }
 
-ecs_container_insight_enable = false {
+ecs_container_insight_enable_violation {
     count([c | input.clusters[i].settings[j].name == "containerinsights" ; c:=1]) == 0
 }
 
-ecs_container_insight_enable = false {
+ecs_container_insight_enable_violation {
     count(input.settings) == 0
+}
+
+ecs_container_insight_enable {
+    input.clusters
+    not ecs_container_insight_enable_violation
+}
+
+ecs_container_insight_enable = false {
+    ecs_container_insight_enable_violation
 }
 
 ecs_container_insight_enable_err = "Ensure container insights are enabled on ECS cluster" {
@@ -299,12 +371,21 @@ ecs_container_insight_enable_metadata := {
 # PR-AWS-CLD-ECS-009
 #
 
-default ecs_enable_execute_command = true
+default ecs_enable_execute_command = null
 
-ecs_enable_execute_command = false {
+ecs_enable_execute_command_violation {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     services := input.services[_]
     services.enableExecuteCommand == true
+}
+
+ecs_enable_execute_command {
+    input.services
+    not ecs_enable_execute_command_violation
+}
+
+ecs_enable_execute_command = false {
+    ecs_enable_execute_command_violation
 }
 
 ecs_enable_execute_command_err = "Ensure ECS Services and Task Set enableExecuteCommand property set to False" {
@@ -328,12 +409,21 @@ ecs_enable_execute_command_metadata := {
 # PR-AWS-CLD-ECS-010
 #
 
-default ecs_assign_public_ip = true
+default ecs_assign_public_ip = null
 
-ecs_assign_public_ip = false {
+ecs_assign_public_ip_violation {
     # type = ["aws::ecs::service", "aws::ecs::taskset"]
     services := input.services[_]
     lower(services.networkConfiguration.awsvpcConfiguration.assignPublicIp) == "enabled"
+}
+
+ecs_assign_public_ip {
+    input.services
+    not ecs_assign_public_ip_violation
+}
+
+ecs_assign_public_ip = false {
+    ecs_assign_public_ip_violation
 }
 
 ecs_assign_public_ip_err = "Ensure that ECS Service and Task Set network configuration disallows the assignment of public IPs" {
@@ -357,17 +447,26 @@ ecs_assign_public_ip_metadata := {
 # PR-AWS-CLD-ECS-011
 #
 
-default ecs_launch_type = true
+default ecs_launch_type = null
 
-ecs_launch_type = false {
+ecs_launch_type_violation {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     services := input.services[_]
     not services.launchType
 }
 
-ecs_launch_type = false {
+ecs_launch_type_violation {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     lower(input.launchType) != "fargate"
+}
+
+ecs_launch_type {
+    input.services
+    not ecs_launch_type_violation
+}
+
+ecs_launch_type = false {
+    ecs_launch_type_violation
 }
 
 ecs_launch_type_err = "Ensure that ECS services and Task Sets are launched as Fargate type" {
@@ -391,18 +490,27 @@ ecs_launch_type_metadata := {
 # PR-AWS-CLD-ECS-012
 #
 
-default ecs_subnet = true
+default ecs_subnet = null
 
-ecs_subnet = false {
+ecs_subnet_violation {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     services := input.services[_]
     not services.networkConfiguration.awsvpcConfiguration.subnets
 }
 
-ecs_subnet = false {
+ecs_subnet_violation {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     services := input.services[_]
     count(services.networkConfiguration.awsvpcConfiguration.subnets) == 0
+}
+
+ecs_subnet {
+    input.services
+    not ecs_subnet_violation
+}
+
+ecs_subnet = false {
+    ecs_subnet_violation
 }
 
 ecs_subnet_err = "value(s) of subnets attached to aws ecs service or taskset awsvpcConfiguration resources are vended" {
@@ -426,18 +534,27 @@ ecs_subnet_metadata := {
 # PR-AWS-CLD-ECS-013
 #
 
-default ecs_security_group = true
+default ecs_security_group = null
 
-ecs_security_group = false {
+ecs_security_group_violation {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     services := input.services[_]
     not services.networkConfiguration.awsvpcConfiguration.securityGroups
 }
 
-ecs_security_group = false {
+ecs_security_group_violation {
     type = ["aws::ecs::service", "aws::ecs::taskset"]
     services := input.services[_]
     count(services.networkConfiguration.awsvpcConfiguration.securityGroups) == 0
+}
+
+ecs_security_group {
+    input.services
+    not ecs_security_group_violation
+}
+
+ecs_security_group = false {
+    ecs_security_group_violation
 }
 
 ecs_security_group_err = "VPC configurations on ECS Services and TaskSets must use either vended security groups" {
@@ -461,22 +578,31 @@ ecs_security_group_metadata := {
 # PR-AWS-CLD-ECS-014
 #
 
-default ecs_network_mode = true
+default ecs_network_mode = null
 
-ecs_network_mode = false {
+ecs_network_mode_violation {
     not input.taskDefinition.networkMode
 }
 
-ecs_network_mode = false {
+ecs_network_mode_violation {
     count(input.taskDefinition.networkMode) == 0
 }
 
-ecs_network_mode = false {
+ecs_network_mode_violation {
     input.taskDefinition.networkMode == null
 }
 
-ecs_network_mode = false {
+ecs_network_mode_violation {
     lower(input.taskDefinition.networkMode) != "awsvpc"
+}
+
+ecs_network_mode {
+    input.taskDefinition
+    not ecs_network_mode_violation
+}
+
+ecs_network_mode = false {
+    ecs_network_mode_violation
 }
 
 ecs_network_mode_err = "Ensure that ECS Task Definition have their network mode property set to awsvpc" {
@@ -500,16 +626,25 @@ ecs_network_mode_metadata := {
 # aws::ecs::taskdefinition
 #
 
-default ecs_fargate_task_definition_logging_is_enabled= true
+default ecs_fargate_task_definition_logging_is_enabled= null
 
-ecs_fargate_task_definition_logging_is_enabled = false {
+ecs_fargate_task_definition_logging_is_enabled_violation {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
     not containerDefinition.logConfiguration.logDriver
 }
 
-ecs_fargate_task_definition_logging_is_enabled = false {
+ecs_fargate_task_definition_logging_is_enabled_violation {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
     contains(lower(containerDefinition.logConfiguration.logDriver), "false")
+}
+
+ecs_fargate_task_definition_logging_is_enabled {
+    input.taskDefinition
+    not ecs_fargate_task_definition_logging_is_enabled_violation
+}
+
+ecs_fargate_task_definition_logging_is_enabled = false {
+    ecs_fargate_task_definition_logging_is_enabled_violation
 }
 
 ecs_fargate_task_definition_logging_is_enabled_err = "AWS ECS - Ensure Fargate task definition logging is enabled." {
@@ -532,26 +667,35 @@ ecs_fargate_task_definition_logging_is_enabled_metadata := {
 # PR-AWS-CLD-ECS-016
 #
 
-default no_ecs_task_definition_empty_roles = true
+default no_ecs_task_definition_empty_roles = null
 
-no_ecs_task_definition_empty_roles = false {
+no_ecs_task_definition_empty_roles_violation {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
     not containerDefinition.user
 }
 
-no_ecs_task_definition_empty_roles = false {
+no_ecs_task_definition_empty_roles_violation {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
     containerDefinition.user == ""
 }
 
-no_ecs_task_definition_empty_roles = false {
+no_ecs_task_definition_empty_roles_violation {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
     containerDefinition.user == null
 }
 
-no_ecs_task_definition_empty_roles = false {
+no_ecs_task_definition_empty_roles_violation {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
     contains(lower(containerDefinition.user), "*")
+}
+
+no_ecs_task_definition_empty_roles {
+    input.taskDefinition
+    not no_ecs_task_definition_empty_roles_violation
+}
+
+no_ecs_task_definition_empty_roles = false {
+    no_ecs_task_definition_empty_roles_violation
 }
 
 no_ecs_task_definition_empty_roles_err = "Ensure there are no undefined ECS task definition empty roles for ECS." {
@@ -575,21 +719,30 @@ no_ecs_task_definition_empty_roles_metadata := {
 # aws::ecs::taskdefinition
 #
 
-default ecs_log_driver = true
+default ecs_log_driver = null
 
-ecs_log_driver = false {
+ecs_log_driver_violation {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
     not containerDefinition.logConfiguration.logDriver
 }
 
-ecs_log_driver = false {
+ecs_log_driver_violation {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
     lower(containerDefinition.logConfiguration.logDriver) == ""
 }
 
-ecs_log_driver = false {
+ecs_log_driver_violation {
     containerDefinition := input.taskDefinition.containerDefinitions[_]
     containerDefinition.logConfiguration.logDriver == null
+}
+
+ecs_log_driver {
+    input.taskDefinition
+    not ecs_log_driver_violation
+}
+
+ecs_log_driver = false {
+    ecs_log_driver_violation
 }
 
 ecs_log_driver_err = "Ensure that a log driver has been configured for each ECS task definition." {
@@ -612,11 +765,20 @@ ecs_log_driver_metadata := {
 # PR-AWS-CLD-ECS-018
 #
 
-default ecs_configured_with_active_services = true
+default ecs_configured_with_active_services = null
 
-ecs_configured_with_active_services = false {
+ecs_configured_with_active_services_violation {
     cluster := input.clusters[_]
     cluster.activeServicesCount == 0
+}
+
+ecs_configured_with_active_services {
+    input.clusters
+    not ecs_configured_with_active_services_violation
+}
+
+ecs_configured_with_active_services = false {
+    ecs_configured_with_active_services_violation
 }
 
 ecs_configured_with_active_services_err = "Ensure AWS ECS cluster is configured with active services." {
@@ -641,15 +803,24 @@ ecs_configured_with_active_services_metadata := {
 # aws::ecs::cluster
 # aws::ecs::service
 
-default ecs_registered_instance = true
+default ecs_registered_instance = null
 
-ecs_registered_instance = false {
+ecs_registered_instance_violation {
     service := input.services[_]
     service.launchType == "EC2"
     cluster := input.clusters[_]
     cluster.status == "ACTIVE"
     cluster.registeredContainerInstancesCount == 0
     service.clusterArn == cluster.clusterArn
+}
+
+ecs_registered_instance {
+    input.services
+    not ecs_registered_instance_violation
+}
+
+ecs_registered_instance = false {
+    ecs_registered_instance_violation
 }
 
 ecs_registered_instance_err = "Ensure AWS ECS cluster is configured with a registered instance." {

@@ -9,11 +9,20 @@ import data.common
 # PR-AWS-CLD-SNS-001
 #
 
-default sns_protocol = true
+default sns_protocol = null
 
-sns_protocol = false {
+sns_protocol_violation {
     Subscriptions := input.Subscriptions[_]
     lower(Subscriptions.Protocol) == "http"
+}
+
+sns_protocol {
+    input.Subscriptions
+    not sns_protocol_violation
+}
+
+sns_protocol = false {
+    sns_protocol_violation
 }
 
 sns_protocol_err = "AWS SNS subscription is not configured with HTTPS" {
@@ -36,10 +45,19 @@ sns_protocol_metadata := {
 # PR-AWS-CLD-SNS-002
 #
 
-default sns_encrypt_key = true
+default sns_encrypt_key = null
+
+sns_encrypt_key_violation {
+    contains(lower(input.Attributes.KmsMasterKeyId), "alias/aws/sns")
+}
+
+sns_encrypt_key {
+    input.Attributes
+    not sns_encrypt_key_violation
+}
 
 sns_encrypt_key = false {
-    contains(lower(input.Attributes.KmsMasterKeyId), "alias/aws/sns")
+    sns_encrypt_key_violation
 }
 
 sns_encrypt_key_err = "AWS SNS topic encrypted using default KMS key instead of CMK" {
@@ -62,14 +80,23 @@ sns_encrypt_key_metadata := {
 # PR-AWS-CLD-SNS-003
 #
 
-default sns_encrypt = true
+default sns_encrypt = null
 
-sns_encrypt = false {
+sns_encrypt_violation {
     not input.Attributes.KmsMasterKeyId
 }
 
-sns_encrypt = false {
+sns_encrypt_violation {
     count(input.Attributes.KmsMasterKeyId) == 0
+}
+
+sns_encrypt {
+    input.Attributes
+    not sns_encrypt_violation
+}
+
+sns_encrypt = false {
+    sns_encrypt_violation
 }
 
 sns_encrypt_err = "AWS SNS topic with server-side encryption disabled" {
@@ -93,27 +120,36 @@ sns_encrypt_metadata := {
 # PR-AWS-CLD-SNS-004
 #
 
-default sns_policy_public = true
+default sns_policy_public = null
 
-sns_policy_public = false {
+sns_policy_public_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
 }
 
-sns_policy_public = false {
+sns_policy_public_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
 }
 
-sns_policy_public = false {
+sns_policy_public_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
+}
+
+sns_policy_public {
+    input.Attributes
+    not sns_policy_public_violation
+}
+
+sns_policy_public = false {
+    sns_policy_public_violation
 }
 
 sns_policy_public_err = "Ensure SNS Topic policy is not publicly accessible" {
@@ -137,9 +173,9 @@ sns_policy_public_metadata := {
 # PR-AWS-CLD-SNS-005
 # aws::sns::topicpolicy
 
-default sns_not_unauthorized_access = true
+default sns_not_unauthorized_access = null
 
-sns_not_unauthorized_access = false {
+sns_not_unauthorized_access_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -147,7 +183,7 @@ sns_not_unauthorized_access = false {
     not statement.Condition
 }
 
-sns_not_unauthorized_access = false {
+sns_not_unauthorized_access_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -155,12 +191,21 @@ sns_not_unauthorized_access = false {
     not statement.Condition
 }
 
-sns_not_unauthorized_access = false {
+sns_not_unauthorized_access_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     not statement.Condition
+}
+
+sns_not_unauthorized_access {
+    input.Attributes
+    not sns_not_unauthorized_access_violation
+}
+
+sns_not_unauthorized_access = false {
+    sns_not_unauthorized_access_violation
 }
 
 sns_not_unauthorized_access_err = "Ensure AWS SNS topic is not exposed to unauthorized access." {
@@ -184,9 +229,9 @@ sns_not_unauthorized_access_metadata := {
 # PR-AWS-CLD-SNS-006
 # aws::sns::topicpolicy
 
-default sns_permissive_for_publishing = true
+default sns_permissive_for_publishing = null
 
-sns_permissive_for_publishing = false {
+sns_permissive_for_publishing_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -195,7 +240,7 @@ sns_permissive_for_publishing = false {
     not statement.Condition
 }
 
-sns_permissive_for_publishing = false {
+sns_permissive_for_publishing_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -204,7 +249,7 @@ sns_permissive_for_publishing = false {
     not statement.Condition
 }
 
-sns_permissive_for_publishing = false {
+sns_permissive_for_publishing_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -213,7 +258,7 @@ sns_permissive_for_publishing = false {
     not statement.Condition
 }
 
-sns_permissive_for_publishing = false {
+sns_permissive_for_publishing_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -222,7 +267,7 @@ sns_permissive_for_publishing = false {
     not statement.Condition
 }
 
-sns_permissive_for_publishing = false {
+sns_permissive_for_publishing_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -231,13 +276,22 @@ sns_permissive_for_publishing = false {
     not statement.Condition
 }
 
-sns_permissive_for_publishing = false {
+sns_permissive_for_publishing_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement), "sns:publish")
     not statement.Condition
+}
+
+sns_permissive_for_publishing {
+    input.Attributes
+    not sns_permissive_for_publishing_violation
+}
+
+sns_permissive_for_publishing = false {
+    sns_permissive_for_publishing_violation
 }
 
 sns_permissive_for_publishing_err = "Ensure AWS SNS topic policy is not overly permissive for publishing." {
@@ -261,11 +315,11 @@ sns_permissive_for_publishing_metadata := {
 # PR-AWS-CLD-SNS-007
 # aws::sns::topicpolicy
 
-default sns_permissive_for_subscription = true
+default sns_permissive_for_subscription = null
 
 action_for_subscription := ["sns:subscribe", "sns:receive"]
 
-sns_permissive_for_subscription = false {
+sns_permissive_for_subscription_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -274,7 +328,7 @@ sns_permissive_for_subscription = false {
     not statement.Condition
 }
 
-sns_permissive_for_subscription = false {
+sns_permissive_for_subscription_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -283,7 +337,7 @@ sns_permissive_for_subscription = false {
     not statement.Condition
 }
 
-sns_permissive_for_subscription = false {
+sns_permissive_for_subscription_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -292,7 +346,7 @@ sns_permissive_for_subscription = false {
     not statement.Condition
 }
 
-sns_permissive_for_subscription = false {
+sns_permissive_for_subscription_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -301,7 +355,7 @@ sns_permissive_for_subscription = false {
     not statement.Condition
 }
 
-sns_permissive_for_subscription = false {
+sns_permissive_for_subscription_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -310,13 +364,22 @@ sns_permissive_for_subscription = false {
     not statement.Condition
 }
 
-sns_permissive_for_subscription = false {
+sns_permissive_for_subscription_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action), action_for_subscription[j])
     not statement.Condition
+}
+
+sns_permissive_for_subscription {
+    input.Attributes
+    not sns_permissive_for_subscription_violation
+}
+
+sns_permissive_for_subscription = false {
+    sns_permissive_for_subscription_violation
 }
 
 sns_permissive_for_subscription_err = "Ensure AWS SNS topic policy is not overly permissive for subscription." {
@@ -340,9 +403,9 @@ sns_permissive_for_subscription_metadata := {
 # PR-AWS-CLD-SNS-008
 # aws::sns::topicpolicy
 
-default sns_cross_account_access = true
+default sns_cross_account_access = null
 
-sns_cross_account_access = false {
+sns_cross_account_access_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -352,7 +415,7 @@ sns_cross_account_access = false {
     not contains(statement.Principal.AWS, "$.Owner")
 }
 
-sns_cross_account_access = false {
+sns_cross_account_access_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -361,6 +424,15 @@ sns_cross_account_access = false {
     principal_aws != "*"
     contains(principal_aws, "arn")
     not contains(principal_aws, "$.Owner")
+}
+
+sns_cross_account_access {
+    input.Attributes
+    not sns_cross_account_access_violation
+}
+
+sns_cross_account_access = false {
+    sns_cross_account_access_violation
 }
 
 sns_cross_account_access_err = "Ensure AWS SNS topic do not have cross-account access." {
@@ -384,27 +456,36 @@ sns_cross_account_access_metadata := {
 # PR-AWS-CLD-SNS-009
 # aws::sns::topicpolicy
 
-default sns_accessible_via_specific_vpc = true
+default sns_accessible_via_specific_vpc = null
 
-sns_accessible_via_specific_vpc = false {
+sns_accessible_via_specific_vpc_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     not common.has_property(statement, "Condition")
 }
 
-sns_accessible_via_specific_vpc = false {
+sns_accessible_via_specific_vpc_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     not common.has_property(statement.Condition, "StringEquals")
 }
 
-sns_accessible_via_specific_vpc = false {
+sns_accessible_via_specific_vpc_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
     not common.has_property(statement.Condition.StringEquals, "aws:SourceVpce")
+}
+
+sns_accessible_via_specific_vpc {
+    input.Attributes
+    not sns_accessible_via_specific_vpc_violation
+}
+
+sns_accessible_via_specific_vpc = false {
+    sns_accessible_via_specific_vpc_violation
 }
 
 sns_accessible_via_specific_vpc_err = "Ensure SNS is only accessible via specific VPCe service." {
@@ -428,15 +509,15 @@ sns_accessible_via_specific_vpc_metadata := {
 # PR-AWS-CLD-SNS-010
 # aws::sns::topicpolicy
 
-default sns_secure_data_transport = true
+default sns_secure_data_transport = null
 
-sns_secure_data_transport = false {
+sns_secure_data_transport_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     not statement.Condition.Bool["aws:SecureTransport"]
 }
 
-sns_secure_data_transport = false {
+sns_secure_data_transport_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -445,7 +526,7 @@ sns_secure_data_transport = false {
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
-sns_secure_data_transport = false {
+sns_secure_data_transport_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -454,8 +535,7 @@ sns_secure_data_transport = false {
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
-
-sns_secure_data_transport = false {
+sns_secure_data_transport_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -464,7 +544,7 @@ sns_secure_data_transport = false {
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
-sns_secure_data_transport = false {
+sns_secure_data_transport_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "allow"
@@ -473,7 +553,7 @@ sns_secure_data_transport = false {
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
-sns_secure_data_transport = false {
+sns_secure_data_transport_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "deny"
@@ -482,7 +562,7 @@ sns_secure_data_transport = false {
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
 }
 
-sns_secure_data_transport = false {
+sns_secure_data_transport_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "deny"
@@ -491,7 +571,7 @@ sns_secure_data_transport = false {
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
 }
 
-sns_secure_data_transport = false {
+sns_secure_data_transport_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "deny"
@@ -500,13 +580,22 @@ sns_secure_data_transport = false {
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
 }
 
-sns_secure_data_transport = false {
+sns_secure_data_transport_violation {
     policy := json.unmarshal(input.Attributes.Policy)
     statement := policy.Statement[_]
     lower(statement.Effect) == "deny"
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action), "publish")
     lower(statement.Condition.Bool["aws:SecureTransport"]) == "true"
+}
+
+sns_secure_data_transport {
+    input.Attributes
+    not sns_secure_data_transport_violation
+}
+
+sns_secure_data_transport = false {
+    sns_secure_data_transport_violation
 }
 
 sns_secure_data_transport_err = "Ensure SNS topic is configured with secure data transport policy." {
