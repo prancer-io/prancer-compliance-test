@@ -1096,10 +1096,9 @@ ecs_task_definition_with_iam_wildcard_resource_access_metadata := {
 # PR-AWS-CLD-IAM-022
 #
 
-default ecr_repository_is_publicly_accessible_through_iam_policies = false
+default ecr_repository_is_publicly_accessible_through_iam_policies = null
 
-ecr_repository_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+ecr_repository_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1107,14 +1106,22 @@ ecr_repository_is_publicly_accessible_through_iam_policies = true {
     common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
-ecr_repository_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+ecr_repository_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "ecr")
     common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
+}
+
+ecr_repository_is_publicly_accessible_through_iam_policies {
+    input.Role
+    not ecr_repository_is_publicly_accessible_through_iam_policies_violation
+}
+
+ecr_repository_is_publicly_accessible_through_iam_policies = false {
+    ecr_repository_is_publicly_accessible_through_iam_policies_violation
 }
 
 ecr_repository_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS ECR Repository resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1137,10 +1144,9 @@ ecr_repository_is_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-023
 #
 
-default lambda_function_is_publicly_accessible_through_iam_policies = false
+default lambda_function_is_publicly_accessible_through_iam_policies = null
 
-lambda_function_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+lambda_function_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1148,14 +1154,22 @@ lambda_function_is_publicly_accessible_through_iam_policies = true {
     common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
-lambda_function_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+lambda_function_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "lambda")
     common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
+}
+
+lambda_function_is_publicly_accessible_through_iam_policies {
+    input.Role
+    not lambda_function_is_publicly_accessible_through_iam_policies_violation
+}
+
+lambda_function_is_publicly_accessible_through_iam_policies = false {
+    lambda_function_is_publicly_accessible_through_iam_policies_violation
 }
 
 lambda_function_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1178,10 +1192,9 @@ lambda_function_is_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-024
 #
 
-default s3_bucket_is_publicly_accessible_through_iam_policies = false
+default s3_bucket_is_publicly_accessible_through_iam_policies = null
 
-s3_bucket_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+s3_bucket_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1189,14 +1202,22 @@ s3_bucket_is_publicly_accessible_through_iam_policies = true {
     common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
-s3_bucket_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+s3_bucket_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "s3")
     common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
+}
+
+s3_bucket_is_publicly_accessible_through_iam_policies {
+    input.Role
+    not s3_bucket_is_publicly_accessible_through_iam_policies_violation
+}
+
+s3_bucket_is_publicly_accessible_through_iam_policies = false {
+    s3_bucket_is_publicly_accessible_through_iam_policies_violation
 }
 
 s3_bucket_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS S3 bucket resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1219,12 +1240,11 @@ s3_bucket_is_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-025
 #
 
-default sqs_queue_is_publicly_accessible_through_iam_policies = false
+default sqs_queue_is_publicly_accessible_through_iam_policies = null
 
 condition_for_sqs := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
 
-sqs_queue_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+sqs_queue_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1232,14 +1252,22 @@ sqs_queue_is_publicly_accessible_through_iam_policies = true {
     common.has_property(policy_statement.Condition[string], condition_for_sqs[_])
 }
 
-sqs_queue_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+sqs_queue_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "sqs")
     common.has_property(policy_statement.Condition[string], condition_for_sqs[_])
+}
+
+sqs_queue_is_publicly_accessible_through_iam_policies {
+    input.Role
+    not sqs_queue_is_publicly_accessible_through_iam_policies_violation
+}
+
+sqs_queue_is_publicly_accessible_through_iam_policies = false {
+    sqs_queue_is_publicly_accessible_through_iam_policies_violation
 }
 
 sqs_queue_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1262,10 +1290,9 @@ sqs_queue_is_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-026
 #
 
-default secret_manager_secret_is_publicly_accessible_through_iam_policies = false
+default secret_manager_secret_is_publicly_accessible_through_iam_policies = null
 
-secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+secret_manager_secret_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1273,14 +1300,22 @@ secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
     common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
-secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+secret_manager_secret_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "secretsmanager")
     common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
+}
+
+secret_manager_secret_is_publicly_accessible_through_iam_policies {
+    input.Role
+    not secret_manager_secret_is_publicly_accessible_through_iam_policies_violation
+}
+
+secret_manager_secret_is_publicly_accessible_through_iam_policies = false {
+    secret_manager_secret_is_publicly_accessible_through_iam_policies_violation
 }
 
 secret_manager_secret_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1883,11 +1918,11 @@ iam_policy_not_overly_permissive_to_sts_service_metadata := {
 # PR-AWS-CLD-IAM-045
 # aws::iam::role
 
-default sns_publicly_accessible_through_iam_policies = false
+default sns_publicly_accessible_through_iam_policies = null
 
 sns_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
 
-sns_publicly_accessible_through_iam_policies = true {
+sns_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -1895,13 +1930,22 @@ sns_publicly_accessible_through_iam_policies = true {
     common.has_property(policy_statement.Condition[string], sns_condition[_])
 }
 
-sns_publicly_accessible_through_iam_policies = true {
+sns_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "sns")
     common.has_property(policy_statement.Condition[string], sns_condition[_])
+}
+
+sns_publicly_accessible_through_iam_policies {
+    input.Role
+    not sns_publicly_accessible_through_iam_policies_violation
+}
+
+sns_publicly_accessible_through_iam_policies = false {
+    sns_publicly_accessible_through_iam_policies_violation
 }
 
 sns_publicly_accessible_through_iam_policies_err = "Ensure AWS SNS Topic is not publicly accessible through IAM policies." {
