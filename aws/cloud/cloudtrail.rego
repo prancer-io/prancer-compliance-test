@@ -1,8 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+import data.common
 
 # https://docs.aws.amazon.com/awscloudtrail/latest/APIReference
 
@@ -10,11 +8,19 @@ has_property(parent_object, target_property) {
 # PR-AWS-CLD-CT-001
 #
 
-default ct_regions = true
+default ct_regions = null
+
+ct_regions_violation {
+    input.trailList[_].IsMultiRegionTrail == false
+}
+
+ct_regions {
+    input.trailList
+    not ct_regions_violation
+}
 
 ct_regions = false {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
-    input.trailList[_].IsMultiRegionTrail == false
+    ct_regions_violation
 }
 
 ct_regions_err = "AWS CloudTrail is not enabled in all regions" {
@@ -38,11 +44,19 @@ ct_regions_metadata := {
 # PR-AWS-CLD-CT-002
 #
 
-default ct_log_validation = true
+default ct_log_validation = null
+
+ct_log_validation_violation {
+    input.trailList[_].LogFileValidationEnabled == false
+}
+
+ct_log_validation {
+    input.trailList
+    not ct_log_validation_violation
+}
 
 ct_log_validation = false {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
-    input.trailList[_].LogFileValidationEnabled == false
+    ct_log_validation_violation
 }
 
 ct_log_validation_err = "AWS CloudTrail log validation is not enabled in all regions" {
@@ -65,15 +79,23 @@ ct_log_validation_metadata := {
 # PR-AWS-CLD-CT-003
 #
 
-default ct_master_key = true
+default ct_master_key = null
 
-ct_master_key = false {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
+ct_master_key_violation {
     trailList := input.trailList[_]
     not trailList.KmsKeyId
 }
 
-ct_master_key_err = "AWS CloudTrail is not enabled in all regions" {
+ct_master_key {
+    input.trailList
+    not ct_master_key_violation
+}
+
+ct_master_key = false {
+    ct_master_key_violation
+}
+
+ct_master_key_err = "AWS CloudTrail logs are not encrypted using Customer Master Keys (CMKs)" {
     not ct_master_key
 }
 
@@ -93,16 +115,24 @@ ct_master_key_metadata := {
 # PR-AWS-CLD-CT-004
 #
 
-default ct_cloudwatch = true
+default ct_cloudwatch = null
 
-ct_cloudwatch = false {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
+ct_cloudwatch_violation {
     trailList := input.trailList[_]
     not trailList.CloudWatchLogsRoleArn
     not trailList.CloudWatchLogsLogGroupArn
 }
 
-ct_cloudwatch_err = "AWS CloudTrail is not enabled in all regions" {
+ct_cloudwatch {
+    input.trailList
+    not ct_cloudwatch_violation
+}
+
+ct_cloudwatch = false {
+    ct_cloudwatch_violation
+}
+
+ct_cloudwatch_err = "CloudTrail trail is not integrated with CloudWatch Log" {
     not ct_cloudwatch
 }
 
@@ -125,14 +155,12 @@ ct_cloudwatch_metadata := {
 default logging_data_events_for_s3_and_lambda = false
 
 logging_data_events_for_s3_and_lambda = true {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
     event := input.EventSelectors[i]
     resource := event.DataResources[j]
     contains(lower(resource.Type), "aws::s3::object")
 }
 
 logging_data_events_for_s3_and_lambda = true {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
     event := input.EventSelectors[i]
     resource := event.DataResources[j]
     contains(lower(resource.Type), "aws::lambda::function")
@@ -158,11 +186,19 @@ logging_data_events_for_s3_and_lambda_metadata := {
 # PR-AWS-CLD-CT-006
 #
 
-default cloudtrail_is_enabled = true
+default cloudtrail_is_enabled = null
+
+cloudtrail_is_enabled_violation {
+    count(input.trailList[_]) == 0
+}
+
+cloudtrail_is_enabled {
+    input.trailList
+    not cloudtrail_is_enabled_violation
+}
 
 cloudtrail_is_enabled = false {
-    # lower(resource.Type) == "aws::cloudtrail::trail"
-    count(input.trailList[_]) == 0
+    cloudtrail_is_enabled_violation
 }
 
 cloudtrail_is_enabled_err = "Ensure AWS CloudTrail is enabled on the account." {
@@ -186,14 +222,23 @@ cloudtrail_is_enabled_metadata := {
 # PR-AWS-CLD-CT-007
 # aws::cloudtrail::trail
 
-default cloudtrail_logging_is_enabled = true
+default cloudtrail_logging_is_enabled = null
 
-cloudtrail_logging_is_enabled = false {
+cloudtrail_logging_is_enabled_violation {
     not input.IsLogging
 }
 
-cloudtrail_logging_is_enabled = false {
+cloudtrail_logging_is_enabled_violation {
     input.IsLogging == "false"
+}
+
+cloudtrail_logging_is_enabled {
+    input.IsLogging
+    not cloudtrail_logging_is_enabled_violation
+}
+
+cloudtrail_logging_is_enabled = false {
+    cloudtrail_logging_is_enabled_violation
 }
 
 cloudtrail_logging_is_enabled_err = "Ensure AWS CloudTrail logging is enabled." {
@@ -217,17 +262,26 @@ cloudtrail_logging_is_enabled_metadata := {
 # PR-AWS-CLD-CT-008
 # aws::cloudtrail::trail
 
-default cloudtrail_with_cloudwatch = true
+default cloudtrail_with_cloudwatch = null
 
-cloudtrail_with_cloudwatch = false {
-    has_property(input, "CloudWatchLogsLogGroupArn")
+cloudtrail_with_cloudwatch_violation {
+    common.has_property(input, "CloudWatchLogsLogGroupArn")
     input.CloudWatchLogsLogGroupArn != ""
     input.IsMultiRegionTrail == false
-    has_property(input, "LatestCloudWatchLogsDeliveryTime")
+    common.has_property(input, "LatestCloudWatchLogsDeliveryTime")
+}
+
+cloudtrail_with_cloudwatch_violation {
+    input.IsLogging == "false"
+}
+
+cloudtrail_with_cloudwatch {
+    input.IsLogging
+    not cloudtrail_with_cloudwatch_violation
 }
 
 cloudtrail_with_cloudwatch = false {
-    input.IsLogging == "false"
+    cloudtrail_with_cloudwatch_violation
 }
 
 cloudtrail_with_cloudwatch_err = "Ensure AWS CloudTrail logs is integrated with CloudWatch for all regions." {

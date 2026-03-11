@@ -1,23 +1,21 @@
 package rule
 
+import data.common
+
 #
 # PR-GCP-CLD-BQ-001
 #
 
 default bigquery_datasets_dont_have_public_access = null
-# available_types_bigquery_public_access = ["bigquery.v2.dataset", "gcp-types/bigquery-v2:datasets"]
 vulnerable_iam_members = ["allusers", "allauthenticatedusers"]
 vulnerable_roles = ["roles/editor", "roles/owner"]
 
 gcp_issue["bigquery_datasets_dont_have_public_access"] {
-    # lower(resource.type) == available_types_bigquery_public_access[_]
     access := input.access[_]
-    #lower(access.role) == vulnerable_roles[_]
     lower(access.iamMember) == vulnerable_iam_members[_]
 }
 
 bigquery_datasets_dont_have_public_access {
-    # lower(input.resources[i].type) == available_types_bigquery_public_access[_]
     not gcp_issue["bigquery_datasets_dont_have_public_access"]
 }
 
@@ -46,24 +44,20 @@ bigquery_datasets_dont_have_public_access_metadata := {
 #
 
 default storage_psql_log_hostname = null
-# available_types_storage_psql_log_hostname = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_hostname"] {
-    # lower(resource.type) == available_types_storage_psql_log_hostname[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_hostname"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_hostname"] {
-    # lower(resource.type) == available_types_storage_psql_log_hostname[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_hostname"); contains(lower(input.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
 }
 
 storage_psql_log_hostname {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_hostname[_]
     not gc_issue["storage_psql_log_hostname"]
 }
 
@@ -93,24 +87,20 @@ storage_psql_log_hostname_metadata := {
 #
 
 default storage_sql_skip_show_database = null
-# available_types_storage_sql_skip_show_database = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_sql_skip_show_database"] {
-    # lower(resource.type) == available_types_storage_sql_skip_show_database[_]
     lower(input.state) == "running"
     contains(lower(input.databaseVersion), "mysql")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "skip_show_database"); c:=1 ]) == 0
 }
 
 gc_issue["storage_sql_skip_show_database"] {
-    # lower(resource.type) == available_types_storage_sql_skip_show_database[_]
     lower(input.state) == "running"
     contains(lower(input.databaseVersion), "mysql")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "skip_show_database"); not contains(lower(input.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
 }
 
 storage_sql_skip_show_database {
-    # lower(input.resources[i].type) == available_types_storage_sql_skip_show_database[_]
     not gc_issue["storage_sql_skip_show_database"]
 }
 
@@ -140,24 +130,20 @@ storage_sql_skip_show_database_metadata := {
 #
 
 default storage_psql_log_lock_waits = null
-# available_types_storage_psql_log_lock_waits = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_lock_waits"] {
-    # lower(resource.type) == available_types_storage_psql_log_lock_waits[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_lock_waits"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_lock_waits"] {
-    # lower(resource.type) == available_types_storage_psql_log_lock_waits[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_lock_waits"); contains(lower(input.settings.databaseFlags[j].value), "off"); c:=1 ]) != 0
 }
 
 storage_psql_log_lock_waits {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_lock_waits[_]
     not gc_issue["storage_psql_log_lock_waits"]
 }
 
@@ -187,24 +173,20 @@ storage_psql_log_lock_waits_metadata := {
 #
 
 default storage_sql_local_infile = null
-# available_types_storage_sql_local_infile = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_sql_local_infile"] {
-    # lower(resource.type) == available_types_storage_sql_local_infile[_]
     lower(input.state) == "running"
     contains(lower(input.databaseVersion), "mysql")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "local_infile"); c:=1 ]) == 0
 }
 
 gc_issue["storage_sql_local_infile"] {
-    # lower(resource.type) == available_types_storage_sql_local_infile[_]
     lower(input.state) == "running"
     contains(lower(input.databaseVersion), "mysql")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "local_infile"); contains(lower(input.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
 }
 
 storage_sql_local_infile {
-    # lower(input.resources[i].type) == available_types_storage_sql_local_infile[_]
     not gc_issue["storage_sql_local_infile"]
 }
 
@@ -234,26 +216,21 @@ storage_sql_local_infile_metadata := {
 #
 
 default storage_sql_label_info = null
-# available_types_storage_sql_label_info = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_sql_label_info"] {
-    # lower(resource.type) == available_types_storage_sql_label_info[_]
     not input.settings.userLabels
 }
 
 gc_issue["storage_sql_label_info"] {
-    # lower(resource.type) == available_types_storage_sql_label_info[_]
-    count(input.settings.userLabels) == 0
+    not common.non_empty(input.settings.userLabels)
 }
 
 gc_issue["storage_sql_label_info"] {
-    # lower(resource.type) == available_types_storage_sql_label_info[_]
     input.settings.userLabels == null
 }
 
 
 storage_sql_label_info {
-    # lower(input.resources[i].type) == available_types_storage_sql_label_info[_]
     not gc_issue["storage_sql_label_info"]
 }
 
@@ -283,16 +260,13 @@ storage_sql_label_info_metadata := {
 #
 
 default storage_sql_flag_authentication = null
-# available_types_storage_sql_flag_authentication = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_sql_flag_authentication"] {
-    # lower(resource.type) == available_types_storage_sql_flag_authentication[_]
     contains(lower(input.databaseVersion), "sqlserver")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "contained database authentication"); contains(lower(input.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
 }
 
 storage_sql_flag_authentication {
-    # lower(input.resources[i].type) == available_types_storage_sql_flag_authentication[_]
     not gc_issue["storage_sql_flag_authentication"]
 }
 
@@ -322,16 +296,13 @@ storage_sql_flag_authentication_metadata := {
 #
 
 default storage_sql_owner_chaining = null
-# available_types_storage_sql_owner_chaining = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_sql_owner_chaining"] {
-    # lower(resource.type) == available_types_storage_sql_owner_chaining[_]
     contains(lower(input.databaseVersion), "sqlserver")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "cross db ownership chaining"); contains(lower(input.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
 }
 
 storage_sql_owner_chaining {
-    # lower(input.resources[i].type) == available_types_storage_sql_owner_chaining[_]
     not gc_issue["storage_sql_owner_chaining"]
 }
 
@@ -361,17 +332,14 @@ storage_sql_owner_chaining_metadata := {
 #
 
 default storage_sql_automated_backup = null
-# available_types_storage_sql_automated_backup = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_sql_automated_backup"] {
-    # lower(resource.type) == available_types_storage_sql_automated_backup[_]
     not input.settings.backupConfiguration.enabled
     lower(input.instanceType) != "read_replica_instance"
     lower(input.instanceType) != "on_premises_instance"
 }
 
 storage_sql_automated_backup {
-    # lower(input.resources[i].type) == available_types_storage_sql_automated_backup[_]
     not gc_issue["storage_sql_automated_backup"]
 }
 
@@ -401,17 +369,14 @@ storage_sql_automated_backup_metadata := {
 #
 
 default storage_sql_public_ip = null
-# available_types_storage_sql_public_ip = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_sql_public_ip"] {
-    # lower(resource.type) == available_types_storage_sql_public_ip[_]
     lower(input.backendType) == "second_gen"
     ipAddress := input.ipAddresses[_]
     contains(lower(ipAddress.type), "primary")
 }
 
 storage_sql_public_ip {
-    # lower(input.resources[i].type) == available_types_storage_sql_public_ip[_]
     not gc_issue["storage_sql_public_ip"]
 }
 
@@ -441,18 +406,15 @@ storage_sql_public_ip_metadata := {
 #
 
 default storage_sql_overly_permissive = null
-# available_types_storage_sql_overly_permissive = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 issued_ip = ["0.0.0.0/0", "::/0"]
 
 gc_issue["storage_sql_overly_permissive"] {
-    # lower(resource.type) == available_types_storage_sql_overly_permissive[_]
     lower(input.backendType) == "second_gen"
     authorizedNetwork := input.settings.ipConfiguration.authorizedNetworks[_]
     contains(lower(authorizedNetwork.value), issued_ip[_])
 }
 
 storage_sql_overly_permissive {
-    # lower(input.resources[i].type) == available_types_storage_sql_overly_permissive[_]
     not gc_issue["storage_sql_overly_permissive"]
 }
 
@@ -482,25 +444,21 @@ storage_sql_overly_permissive_metadata := {
 #
 
 default storage_sql_external_script = null
-# available_types_storage_sql_external_script = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 issued_ip = ["0.0.0.0/0", "::/0"]
 
 gc_issue["storage_sql_external_script"] {
-    # lower(resource.type) == available_types_storage_sql_external_script[_]
     lower(input.state) == "runnable"
     lower(input.databaseVersion) == "sqlserver"
     count([c| contains(lower(input.settings.databaseFlags[_].name), "external scripts enabled"); c:=1 ]) == 0
 }
 
 gc_issue["storage_sql_external_script"] {
-    # lower(resource.type) == available_types_storage_sql_external_script[_]
     lower(input.state) == "runnable"
     lower(input.databaseVersion) == "sqlserver"
     count([c| contains(lower(input.settings.databaseFlags[j].name), "external scripts enabled"); contains(lower(input.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
 }
 
 storage_sql_external_script {
-    # lower(input.resources[i].type) == available_types_storage_sql_external_script[_]
     not gc_issue["storage_sql_external_script"]
 }
 
@@ -530,25 +488,21 @@ storage_sql_external_script_metadata := {
 #
 
 default storage_sql_flag_remote = null
-# available_types_storage_sql_flag_remote = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 issued_ip = ["0.0.0.0/0", "::/0"]
 
 gc_issue["storage_sql_flag_remote"] {
-    # lower(resource.type) == available_types_storage_sql_flag_remote[_]
     lower(input.state) == "runnable"
     lower(input.databaseVersion) == "sqlserver"
     count([c| contains(lower(input.settings.databaseFlags[_].name), "remote access"); c:=1 ]) == 0
 }
 
 gc_issue["storage_sql_flag_remote"] {
-    # lower(resource.type) == available_types_storage_sql_flag_remote[_]
     lower(input.state) == "runnable"
     lower(input.databaseVersion) == "sqlserver"
     count([c| contains(lower(input.settings.databaseFlags[j].name), "remote access"); contains(lower(input.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
 }
 
 storage_sql_flag_remote {
-    # lower(input.resources[i].type) == available_types_storage_sql_flag_remote[_]
     not gc_issue["storage_sql_flag_remote"]
 }
 
@@ -579,24 +533,20 @@ storage_sql_flag_remote_metadata := {
 #
 
 default storage_psql_log_min_duration_statement = null
-# available_types_storage_psql_log_min_duration_statement = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_min_duration_statement"] {
-    # lower(resource.type) == available_types_storage_psql_log_min_duration_statement[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_min_duration_statement"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_min_duration_statement"] {
-    # lower(resource.type) == available_types_storage_psql_log_min_duration_statement[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_min_duration_statement"); input.settings.databaseFlags[j].value != -1; c:=1 ]) != 0
 }
 
 storage_psql_log_min_duration_statement {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_min_duration_statement[_]
     not gc_issue["storage_psql_log_min_duration_statement"]
 }
 
@@ -626,18 +576,15 @@ storage_psql_log_min_duration_statement_metadata := {
 #
 
 default storage_sql_user_connection = null
-# available_types_storage_sql_user_connection = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 issued_ip = ["0.0.0.0/0", "::/0"]
 
 gc_issue["storage_sql_user_connection"] {
-    # lower(resource.type) == available_types_storage_sql_user_connection[_]
     lower(input.state) == "runnable"
     lower(input.databaseVersion) == "sqlserver"
     count([c| contains(lower(input.settings.databaseFlags[_].name), "user connections"); c:=1 ]) == 0
 }
 
 storage_sql_user_connection {
-    # lower(input.resources[i].type) == available_types_storage_sql_user_connection[_]
     not gc_issue["storage_sql_user_connection"]
 }
 
@@ -667,18 +614,15 @@ storage_sql_user_connection_metadata := {
 #
 
 default storage_sql_user_option = null
-# available_types_storage_sql_user_option = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 issued_ip = ["0.0.0.0/0", "::/0"]
 
 gc_issue["storage_sql_user_option"] {
-    # lower(resource.type) == available_types_storage_sql_user_option[_]
     lower(input.state) == "runnable"
     lower(input.databaseVersion) == "sqlserver"
     count([c| contains(lower(input.settings.databaseFlags[_].name), "user options"); c:=1 ]) != 0
 }
 
 storage_sql_user_option {
-    # lower(input.resources[i].type) == available_types_storage_sql_user_option[_]
     not gc_issue["storage_sql_user_option"]
 }
 
@@ -708,24 +652,20 @@ storage_sql_user_option_metadata := {
 #
 
 default storage_psql_log_connections = null
-# available_types_storage_psql_log_connections = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_connections"] {
-    # lower(resource.type) == available_types_storage_psql_log_connections[_]
     lower(input.state) == "running"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_connections"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_connections"] {
-    # lower(resource.type) == available_types_storage_psql_log_connections[_]
     lower(input.state) == "running"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_connections"); contains(lower(input.settings.databaseFlags[j].value), "off"); c:=1 ]) != 0
 }
 
 storage_psql_log_connections {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_connections[_]
     not gc_issue["storage_psql_log_connections"]
 }
 
@@ -755,17 +695,14 @@ storage_psql_log_connections_metadata := {
 #
 
 default storage_psql_log_min_messages = null
-# available_types_storage_psql_log_min_messages = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_min_messages"] {
-    # lower(resource.type) == available_types_storage_psql_log_min_messages[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_min_messages"); c:=1 ]) == 0
 }
 
 storage_psql_log_min_messages {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_min_messages[_]
     not gc_issue["storage_psql_log_min_messages"]
 }
 
@@ -795,24 +732,20 @@ storage_psql_log_min_messages_metadata := {
 #
 
 default storage_psql_log_parser_stats = null
-# available_types_storage_psql_log_parser_stats = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_parser_stats"] {
-    # lower(resource.type) == available_types_storage_psql_log_parser_stats[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_parser_stats"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_parser_stats"] {
-    # lower(resource.type) == available_types_storage_psql_log_parser_stats[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_parser_stats"); contains(lower(input.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
 }
 
 storage_psql_log_parser_stats {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_parser_stats[_]
     not gc_issue["storage_psql_log_parser_stats"]
 }
 
@@ -842,24 +775,20 @@ storage_psql_log_parser_stats_metadata := {
 #
 
 default storage_psql_log_disconnections = null
-# available_types_storage_psql_log_disconnections = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_disconnections"] {
-    # lower(resource.type) == available_types_storage_psql_log_disconnections[_]
     lower(input.state) == "running"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_disconnections"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_disconnections"] {
-    # lower(resource.type) == available_types_storage_psql_log_disconnections[_]
     lower(input.state) == "running"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_disconnections"); contains(lower(input.settings.databaseFlags[j].value), "off"); c:=1 ]) != 0
 }
 
 storage_psql_log_disconnections {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_disconnections[_]
     not gc_issue["storage_psql_log_disconnections"]
 }
 
@@ -889,24 +818,20 @@ storage_psql_log_disconnections_metadata := {
 #
 
 default storage_psql_log_planner_stats = null
-# available_types_storage_psql_log_planner_stats = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_planner_stats"] {
-    # lower(resource.type) == available_types_storage_psql_log_planner_stats[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_planner_stats"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_planner_stats"] {
-    # lower(resource.type) == available_types_storage_psql_log_planner_stats[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_planner_stats"); contains(lower(input.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
 }
 
 storage_psql_log_planner_stats {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_planner_stats[_]
     not gc_issue["storage_psql_log_planner_stats"]
 }
 
@@ -936,24 +861,20 @@ storage_psql_log_planner_stats_metadata := {
 #
 
 default storage_psql_log_duration = null
-# available_types_storage_psql_log_duration = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_duration"] {
-    # lower(resource.type) == available_types_storage_psql_log_duration[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_duration"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_duration"] {
-    # lower(resource.type) == available_types_storage_psql_log_duration[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_duration"); contains(lower(input.settings.databaseFlags[j].value), "off"); c:=1 ]) != 0
 }
 
 storage_psql_log_duration {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_duration[_]
     not gc_issue["storage_psql_log_duration"]
 }
 
@@ -982,26 +903,22 @@ storage_psql_log_duration_metadata := {
 #
 
 default storage_psql_log_statement = null
-# available_types_storage_psql_log_statement = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 storage_psql_log_statement_issue_values = ["all", "none"]
 
 gc_issue["storage_psql_log_statement"] {
-    # lower(resource.type) == available_types_storage_psql_log_statement[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_statement"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_statement"] {
-    # lower(resource.type) == available_types_storage_psql_log_statement[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_statement"); contains(lower(input.settings.databaseFlags[j].value), storage_psql_log_statement_issue_values[_]); c:=1 ]) != 0
 }
 
 storage_psql_log_statement {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_statement[_]
     not gc_issue["storage_psql_log_statement"]
 }
 
@@ -1030,24 +947,20 @@ storage_psql_log_statement_metadata := {
 #
 
 default storage_psql_log_error_verbosity = null
-# available_types_storage_psql_log_error_verbosity = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_error_verbosity"] {
-    # lower(resource.type) == available_types_storage_psql_log_error_verbosity[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_error_verbosity"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_error_verbosity"] {
-    # lower(resource.type) == available_types_storage_psql_log_error_verbosity[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_error_verbosity"); contains(lower(input.settings.databaseFlags[j].value), "verbose"); c:=1 ]) != 0
 }
 
 storage_psql_log_error_verbosity {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_error_verbosity[_]
     not gc_issue["storage_psql_log_error_verbosity"]
 }
 
@@ -1077,24 +990,20 @@ storage_psql_log_error_verbosity_metadata := {
 #
 
 default storage_psql_log_statement_stats = null
-# available_types_storage_psql_log_statement_stats = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_statement_stats"] {
-    # lower(resource.type) == available_types_storage_psql_log_statement_stats[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_statement_stats"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_statement_stats"] {
-    # lower(resource.type) == available_types_storage_psql_log_statement_stats[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_statement_stats"); contains(lower(input.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
 }
 
 storage_psql_log_statement_stats {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_statement_stats[_]
     not gc_issue["storage_psql_log_statement_stats"]
 }
 
@@ -1124,24 +1033,20 @@ storage_psql_log_statement_stats_metadata := {
 #
 
 default storage_psql_log_executor_stats = null
-# available_types_storage_psql_log_executor_stats = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_executor_stats"] {
-    # lower(resource.type) == available_types_storage_psql_log_executor_stats[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_executor_stats"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_executor_stats"] {
-    # lower(resource.type) == available_types_storage_psql_log_executor_stats[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_executor_stats"); contains(lower(input.settings.databaseFlags[j].value), "on"); c:=1 ]) != 0
 }
 
 storage_psql_log_executor_stats {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_executor_stats[_]
     not gc_issue["storage_psql_log_executor_stats"]
 }
 
@@ -1171,24 +1076,20 @@ storage_psql_log_executor_stats_metadata := {
 #
 
 default storage_psql_log_temp_files = null
-# available_types_storage_psql_log_temp_files = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 gc_issue["storage_psql_log_temp_files"] {
-    # lower(resource.type) == available_types_storage_psql_log_temp_files[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_temp_files"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_temp_files"] {
-    # lower(resource.type) == available_types_storage_psql_log_temp_files[_]
     lower(input.state) == "runnable"
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_temp_files"); input.settings.databaseFlags[j].value != 0; c:=1 ]) != 0
 }
 
 storage_psql_log_temp_files {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_temp_files[_]
     not gc_issue["storage_psql_log_temp_files"]
 }
 
@@ -1218,23 +1119,19 @@ storage_psql_log_temp_files_metadata := {
 #
 
 default storage_psql_log_checkpoints = null
-# available_types_storage_psql_log_checkpoints = ["sqladmin.v1beta4.instance", "gcp-types/sqladmin-v1beta4:instances"]
 
 
 gc_issue["storage_psql_log_checkpoints"] {
-    # lower(resource.type) == available_types_storage_psql_log_checkpoints[_]
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[_].name), "log_checkpoints"); c:=1 ]) == 0
 }
 
 gc_issue["storage_psql_log_checkpoints"] {
-    # lower(resource.type) == available_types_storage_psql_log_checkpoints[_]
     contains(lower(input.databaseVersion), "postgres")
     count([c| contains(lower(input.settings.databaseFlags[j].name), "log_checkpoints"); contains(lower(input.settings.databaseFlags[j].value), "off"); c:=1 ]) != 0
 }
 
 storage_psql_log_checkpoints {
-    # lower(input.resources[i].type) == available_types_storage_psql_log_checkpoints[_]
     not gc_issue["storage_psql_log_checkpoints"]
 }
 

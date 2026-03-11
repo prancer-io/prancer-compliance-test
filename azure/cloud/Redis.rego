@@ -1,12 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/Microsoft.Cache/redis
 
@@ -17,7 +11,7 @@ default enableSslPort = null
 azure_attribute_absence ["enableSslPort"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
-    not has_property(resource.properties, "enableNonSslPort")
+    not common.has_property(resource.properties, "enableNonSslPort")
 }
 
 azure_issue ["enableSslPort"] {
@@ -86,7 +80,7 @@ azure_issue["serverRole"] {
     lower(resource.type) == "microsoft.cache/redis"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.cache/redis/linkedservers";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.serverRole) == "secondary";
               c := 1]) == 0
 }
@@ -431,7 +425,7 @@ azure_issue["redis_cache_firewall_not_allowing_full_inbound_access"] {
     lower(resource.type) == "microsoft.cache/redis"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.cache/redis/firewallrules";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               not contains(r.properties.startIP, "0.0.0.0");
               not contains(r.properties.endIP, "0.0.0.0");
               c := 1]) == 0

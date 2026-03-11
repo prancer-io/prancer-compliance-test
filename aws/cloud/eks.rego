@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html
 
 available_true_choices := ["true", true]
@@ -14,7 +16,6 @@ available_false_choices := ["false", false]
 default eks_multiple_sg = false
 
 eks_multiple_sg = true {
-    # lower(resource.Type) == "aws::eks::cluster"
     count(input.cluster.resourcesVpcConfig.securityGroupIds) < 1
 }
 
@@ -40,11 +41,19 @@ eks_multiple_sg_metadata := {
 
 # describe_cluster
 
-default eks_encryption_resources = true
+default eks_encryption_resources = null
+
+eks_encryption_resources_violation {
+    not input.cluster.encryptionConfig
+}
+
+eks_encryption_resources {
+    input.cluster
+    not eks_encryption_resources_violation
+}
 
 eks_encryption_resources = false {
-    # lower(resource.Type) == "aws::eks::cluster"
-    not input.cluster.encryptionConfig
+    eks_encryption_resources_violation
 }
 
 eks_encryption_resources_err = "Ensure AWS EKS cluster has secrets encryption enabled" {
@@ -68,13 +77,21 @@ eks_encryption_resources_metadata := {
 # PR-AWS-CLD-EKS-004
 #
 
-default eks_encryption_kms = true
+default eks_encryption_kms = null
 
-eks_encryption_kms = false {
+eks_encryption_kms_violation {
     resource := input.Resources[i]
-    # lower(resource.Type) == "aws::eks::cluster"
     encryptionConfig := input.cluster.encryptionConfig[j]
     count(encryptionConfig.provider.keyArn) == 0
+}
+
+eks_encryption_kms {
+    input.Resources
+    not eks_encryption_kms_violation
+}
+
+eks_encryption_kms = false {
+    eks_encryption_kms_violation
 }
 
 eks_encryption_kms_err = "Ensure Kubernetes secrets are encrypted using CMKs managed in AWS KMS" {
@@ -97,13 +114,21 @@ eks_encryption_kms_metadata := {
 # PR-AWS-CLD-EKS-006
 #
 
-default eks_approved_kubernetes_version = true
+default eks_approved_kubernetes_version = null
 
 platform_version := ["1.20", "1.19", "1.18"]
 
-eks_approved_kubernetes_version = false {
-    # lower(resource.Type) == "aws::eks::cluster"
+eks_approved_kubernetes_version_violation {
     count([c | input.cluster.platformVersion == platform_version[_]; c:=1]) != 0
+}
+
+eks_approved_kubernetes_version {
+    input.cluster
+    not eks_approved_kubernetes_version_violation
+}
+
+eks_approved_kubernetes_version = false {
+    eks_approved_kubernetes_version_violation
 }
 
 eks_approved_kubernetes_version_err = "Ensure AWS EKS only uses latest versions of Kubernetes." {
@@ -126,11 +151,19 @@ eks_approved_kubernetes_version_metadata := {
 # PR-AWS-CLD-EKS-007
 #
 
-default eks_with_security_group_attached = true
+default eks_with_security_group_attached = null
+
+eks_with_security_group_attached_violation {
+    not input.cluster.resourcesVpcConfig.securityGroupIds
+}
+
+eks_with_security_group_attached {
+    input.cluster
+    not eks_with_security_group_attached_violation
+}
 
 eks_with_security_group_attached = false {
-    # lower(resource.Type) == "aws::eks::cluster"
-    not input.cluster.resourcesVpcConfig.securityGroupIds
+    eks_with_security_group_attached_violation
 }
 
 eks_with_security_group_attached_err = "Ensure EKS cluster is configured with control plane security group attached to it." {
@@ -153,16 +186,23 @@ eks_with_security_group_attached_metadata := {
 # PR-AWS-CLD-EKS-008
 #
 
-default eks_with_private_access = true
+default eks_with_private_access = null
 
-eks_with_private_access = false {
-    # lower(resource.Type) == "aws::eks::cluster"
+eks_with_private_access_violation {
     input.cluster.resourcesVpcConfig.endpointPrivateAccess == available_false_choices[_]
 }
 
-eks_with_private_access = false {
-    # lower(resource.Type) == "aws::eks::cluster"
+eks_with_private_access_violation {
     input.cluster.resourcesVpcConfig.endpointPublicAccess == available_true_choices[_]
+}
+
+eks_with_private_access {
+    input.cluster
+    not eks_with_private_access_violation
+}
+
+eks_with_private_access = false {
+    eks_with_private_access_violation
 }
 
 eks_with_private_access_err = "Ensure only private access for Amazon EKS cluster's Kubernetes API is enabled." {
@@ -185,36 +225,40 @@ eks_with_private_access_metadata := {
 # PR-AWS-CLD-EKS-009
 #
 
-default eks_logging_enabled = true
+default eks_logging_enabled = null
 
-eks_logging_enabled = false {
-    # lower(resource.Type) == "aws::eks::cluster"
+eks_logging_enabled_violation {
     cluster_logging := input.cluster.logging.clusterLogging[_]
     cluster_logging.types == null
 }
 
-eks_logging_enabled = false {
-    # lower(resource.Type) == "aws::eks::cluster"
+eks_logging_enabled_violation {
     cluster_logging := input.cluster.logging.clusterLogging[_]
     count(cluster_logging.types) == 0
 }
 
-eks_logging_enabled = false {
-    # lower(resource.Type) == "aws::eks::cluster"
+eks_logging_enabled_violation {
     cluster_logging := input.cluster.logging.clusterLogging[_]
     cluster_logging.types == ""
 }
 
-eks_logging_enabled = false {
-    # lower(resource.Type) == "aws::eks::cluster"
+eks_logging_enabled_violation {
     cluster_logging := input.cluster.logging.clusterLogging[_]
     not cluster_logging.types
 }
 
-eks_logging_enabled = false {
-    # lower(resource.Type) == "aws::eks::cluster"
+eks_logging_enabled_violation {
     cluster_logging := input.cluster.logging.clusterLogging[_]
     cluster_logging.enabled == available_false_choices[_]
+}
+
+eks_logging_enabled {
+    input.cluster
+    not eks_logging_enabled_violation
+}
+
+eks_logging_enabled = false {
+    eks_logging_enabled_violation
 }
 
 eks_logging_enabled_err = "Ensure AWS EKS control plane logging is enabled." {
@@ -239,14 +283,23 @@ eks_logging_enabled_metadata := {
 # aws::eks::cluster
 # AWS::KMS::Key
 
-default eks_gs_managed_key = true
+default eks_gs_managed_key = null
 
-eks_gs_managed_key = false {
+eks_gs_managed_key_violation {
     X := input.TEST_EKS[_]
     Y := input.TEST_KMS[_]
     encryption_config := X.cluster.encryptionConfig[_]
     encryption_config.provider.keyArn == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+eks_gs_managed_key {
+    input.TEST_EKS
+    not eks_gs_managed_key_violation
+}
+
+eks_gs_managed_key = false {
+    eks_gs_managed_key_violation
 }
 
 eks_gs_managed_key_err = "Ensure GS-managed encryption key is used for AWS EKS." {
@@ -271,14 +324,23 @@ eks_gs_managed_key_metadata := {
 # aws::eks::cluster
 # aws::ec2::vpcendpoint
 
-default eks_not_default_vpc = true
+default eks_not_default_vpc = null
 
-eks_not_default_vpc = false {
+eks_not_default_vpc_violation {
     X := input.TEST_EKS[_]
     Y := input.TEST_EC2_04[_]
     Vpc := Y.Vpcs[_]
     X.cluster.resourcesVpcConfig.vpcId == Vpc.VpcId
     Vpc.IsDefault == true
+}
+
+eks_not_default_vpc {
+    input.TEST_EKS
+    not eks_not_default_vpc_violation
+}
+
+eks_not_default_vpc = false {
+    eks_not_default_vpc_violation
 }
 
 eks_not_default_vpc_err = "Ensure EKS cluster is not using the default VPC." {
@@ -303,9 +365,9 @@ eks_not_default_vpc_metadata := {
 # aws::eks::cluster
 # aws::ec2::securitygroup
 
-default eks_security_groups = true
+default eks_security_groups = null
 
-eks_security_groups = false {
+eks_security_groups_violation {
     X := input.TEST_EKS[_]
     Y := input.TEST_SG[_]
     SecurityGroup := Y.SecurityGroups[_]
@@ -315,7 +377,7 @@ eks_security_groups = false {
     X.cluster.resourcesVpcConfig.securityGroupIds == SecurityGroup.GroupId
 }
 
-eks_security_groups = false {
+eks_security_groups_violation {
     X := input.TEST_EKS[_]
     Y := input.TEST_SG[_]
     SecurityGroup := Y.SecurityGroups[_]
@@ -323,6 +385,15 @@ eks_security_groups = false {
     IpPermission.ToPort != 443
     IpPermission.IpProtocol == "tcp"
     X.cluster.resourcesVpcConfig.securityGroupIds == SecurityGroup.GroupId
+}
+
+eks_security_groups {
+    input.TEST_EKS
+    not eks_security_groups_violation
+}
+
+eks_security_groups = false {
+    eks_security_groups_violation
 }
 
 eks_security_groups_err = "Ensure security groups configured with EKS cluster only allows inbound on TCP port 443 (HTTPS)." {
@@ -338,7 +409,7 @@ eks_security_groups_metadata := {
     "Policy Description": "It checks for a security group rule for a specific port i.e. 443.",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/eks.html#EKS.Client.describe_cluster",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html",
     "Resource Help URL": "https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_security_groups"
 }
 
@@ -347,13 +418,22 @@ eks_security_groups_metadata := {
 # PR-AWS-CLD-EKS-013
 # aws::eks::cluster
 
-default eks_creation = true
+default eks_creation = null
 
-eks_creation = false {
+eks_creation_violation {
     created_timestamp := input.cluster.createdAt["$date"]
     created_timestamp_nanosecond := created_timestamp * 1000000
     current_date_timestamp := time.now_ns()
-	(current_date_timestamp - created_timestamp_nanosecond) > 7776000000000000
+	(current_date_timestamp - created_timestamp_nanosecond) > common.ninety_days_nanoseconds
+}
+
+eks_creation {
+    input.cluster
+    not eks_creation_violation
+}
+
+eks_creation = false {
+    eks_creation_violation
 }
 
 eks_creation_err = "Ensure AWS EKS images are not older than 90 days." {
@@ -378,9 +458,9 @@ eks_creation_metadata := {
 # aws::eks::cluster
 # aws::ec2::securitygroup
 
-default eks_overly_permissive_security_groups = true
+default eks_overly_permissive_security_groups = null
 
-eks_overly_permissive_security_groups = false {
+eks_overly_permissive_security_groups_violation {
     X := input.TEST_EKS[_]
     Y := input.TEST_SG[_]
     SecurityGroup := Y.SecurityGroups[_]
@@ -389,13 +469,22 @@ eks_overly_permissive_security_groups = false {
     X.cluster.resourcesVpcConfig.securityGroupIds == SecurityGroup.GroupId
 }
 
-eks_overly_permissive_security_groups = false {
+eks_overly_permissive_security_groups_violation {
     X := input.TEST_EKS[_]
     Y := input.TEST_SG[_]
     SecurityGroup := Y.SecurityGroups[_]
     IpPermission := SecurityGroup.IpPermissions[_]
     IpPermission.Ipv6Ranges.CidrIpv6 == "::/0"
     X.cluster.resourcesVpcConfig.securityGroupIds == SecurityGroup.GroupId
+}
+
+eks_overly_permissive_security_groups {
+    input.TEST_EKS
+    not eks_overly_permissive_security_groups_violation
+}
+
+eks_overly_permissive_security_groups = false {
+    eks_overly_permissive_security_groups_violation
 }
 
 eks_overly_permissive_security_groups_err = "Ensure AWS EKS cluster security group is not overly permissive to all traffic." {

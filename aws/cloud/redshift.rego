@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html
 
@@ -10,15 +12,15 @@ available_true_choices := ["true", true]
 # PR-AWS-CLD-RSH-001
 #
 
-default redshift_encrypt_key = true
+default redshift_encrypt_key = null
 
-redshift_encrypt_key = false {
+redshift_encrypt_key_violation {
     REDSHIFT := input.TEST_REDSHIFT_1[_]
     Cluster := REDSHIFT.Clusters[_]
     not Cluster.KmsKeyId
 }
 
-redshift_encrypt_key = false {
+redshift_encrypt_key_violation {
     REDSHIFT := input.TEST_REDSHIFT_1[_]
     Cluster := REDSHIFT.Clusters[_]
 
@@ -28,10 +30,19 @@ redshift_encrypt_key = false {
     alias.AliasName == "alias/aws/redshift"
 }
 
-redshift_encrypt_key = false {
+redshift_encrypt_key_violation {
     REDSHIFT := input.TEST_REDSHIFT_1[_]
     Cluster := REDSHIFT.Clusters[_]
     not Cluster.Encrypted
+}
+
+redshift_encrypt_key {
+    input.TEST_REDSHIFT_1
+    not redshift_encrypt_key_violation
+}
+
+redshift_encrypt_key = false {
+    redshift_encrypt_key_violation
 }
 
 redshift_encrypt_key_err = "AWS Redshift Cluster not encrypted using Customer Managed Key" {
@@ -54,12 +65,20 @@ redshift_encrypt_key_metadata := {
 # PR-AWS-CLD-RSH-002
 #
 
-default redshift_public = true
+default redshift_public = null
 
-redshift_public = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
+redshift_public_violation {
     Clusters := input.Clusters[_]
     Clusters.PubliclyAccessible == true
+}
+
+redshift_public {
+    input.Clusters
+    not redshift_public_violation
+}
+
+redshift_public = false {
+    redshift_public_violation
 }
 
 redshift_public_err = "AWS Redshift clusters should not be publicly accessible" {
@@ -82,23 +101,29 @@ redshift_public_metadata := {
 # PR-AWS-CLD-RSH-003
 #
 
-default redshift_require_ssl = true
+default redshift_require_ssl = null
 
-redshift_require_ssl = false {
-    # lower(resource.Type) == "aws::redshift::clusterparametergroup"
+redshift_require_ssl_violation {
     not input.Parameters
 }
 
-redshift_require_ssl = false {
-    # lower(resource.Type) == "aws::redshift::clusterparametergroup"
+redshift_require_ssl_violation {
     count([c | lower(input.Parameters[_].ParameterName) == "require_ssl"; c := 1]) == 0
 }
 
-redshift_require_ssl = false {
-    # lower(resource.Type) == "aws::redshift::clusterparametergroup"
+redshift_require_ssl_violation {
     params = input.Parameters[j]
     lower(params.ParameterName) == "require_ssl"
     lower(params.ParameterValue) == "false"
+}
+
+redshift_require_ssl {
+    input.Parameters
+    not redshift_require_ssl_violation
+}
+
+redshift_require_ssl = false {
+    redshift_require_ssl_violation
 }
 
 redshift_require_ssl_err = "AWS Redshift does not have require_ssl configured" {
@@ -121,12 +146,20 @@ redshift_require_ssl_metadata := {
 # PR-AWS-CLD-RSH-004
 #
 
-default redshift_encrypt = true
+default redshift_encrypt = null
 
-redshift_encrypt = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
+redshift_encrypt_violation {
     Clusters := input.Clusters[_]
     not Clusters.Encrypted
+}
+
+redshift_encrypt {
+    input.Clusters
+    not redshift_encrypt_violation
+}
+
+redshift_encrypt = false {
+    redshift_encrypt_violation
 }
 
 redshift_encrypt_err = "AWS Redshift instances are not encrypted" {
@@ -150,12 +183,20 @@ redshift_encrypt_metadata := {
 # PR-AWS-CLD-RSH-005
 #
 
-default redshift_allow_version_upgrade = true
+default redshift_allow_version_upgrade = null
 
-redshift_allow_version_upgrade = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
+redshift_allow_version_upgrade_violation {
     Clusters := input.Clusters[_]
     not Clusters.AllowVersionUpgrade
+}
+
+redshift_allow_version_upgrade {
+    input.Clusters
+    not redshift_allow_version_upgrade_violation
+}
+
+redshift_allow_version_upgrade = false {
+    redshift_allow_version_upgrade_violation
 }
 
 redshift_allow_version_upgrade_err = "Ensure Redshift cluster allow version upgrade by default" {
@@ -179,28 +220,34 @@ redshift_allow_version_upgrade_metadata := {
 # PR-AWS-CLD-RSH-006
 #
 
-default redshift_deploy_vpc = true
+default redshift_deploy_vpc = null
 
-redshift_allow_version_upgrade = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
+redshift_deploy_vpc_violation {
     Clusters := input.Clusters[_]
     count(Clusters.ClusterSubnetGroupName) == 0
 }
 
-redshift_allow_version_upgrade = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
+redshift_deploy_vpc_violation {
     Clusters := input.Clusters[_]
     Clusters.ClusterSubnetGroupName == null
 }
 
-redshift_allow_version_upgrade = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
+redshift_deploy_vpc_violation {
     Clusters := input.Clusters[_]
     not Clusters.ClusterSubnetGroupName
 }
 
+redshift_deploy_vpc {
+    input.Clusters
+    not redshift_deploy_vpc_violation
+}
+
+redshift_deploy_vpc = false {
+    redshift_deploy_vpc_violation
+}
+
 redshift_deploy_vpc_err = "Ensure Redshift is not deployed outside of a VPC" {
-    not redshift_allow_version_upgrade
+    not redshift_deploy_vpc
 }
 
 redshift_deploy_vpc_metadata := {
@@ -220,18 +267,25 @@ redshift_deploy_vpc_metadata := {
 # PR-AWS-CLD-RSH-007
 #
 
-default redshift_audit = true
+default redshift_audit = null
 
-redshift_audit = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
+redshift_audit_violation {
     Clusters := input.Clusters[_]
     not Clusters.LoggingProperties.BucketName
 }
 
-redshift_audit = false {
-    # lower(resource.Type) == "aws::redshift::cluster"
+redshift_audit_violation {
     Clusters := input.Clusters[_]
     count(Clusters.LoggingProperties.BucketName) == 0
+}
+
+redshift_audit {
+    input.Clusters
+    not redshift_audit_violation
+}
+
+redshift_audit = false {
+    redshift_audit_violation
 }
 
 redshift_audit_err = "AWS Redshift database does not have audit logging enabled" {
@@ -255,11 +309,20 @@ redshift_audit_metadata := {
 # PR-AWS-CLD-RSH-008
 # aws::redshift::cluster
 
-default redshift_enhanced_vpc_routing = true
+default redshift_enhanced_vpc_routing = null
 
-redshift_enhanced_vpc_routing = false {
+redshift_enhanced_vpc_routing_violation {
     Clusters := input.Clusters[_]
     Clusters.EnhancedVpcRouting == available_false_choices[_]
+}
+
+redshift_enhanced_vpc_routing {
+    input.Clusters
+    not redshift_enhanced_vpc_routing_violation
+}
+
+redshift_enhanced_vpc_routing = false {
+    redshift_enhanced_vpc_routing_violation
 }
 
 redshift_enhanced_vpc_routing_err = "Ensure AWS Redshift - Enhanced VPC routing must be enabled." {
@@ -283,21 +346,30 @@ redshift_enhanced_vpc_routing_metadata := {
 # PR-AWS-CLD-RSH-009
 # aws::redshift::cluster
 
-default redshift_not_provisioned_with_ec2_classic = true
+default redshift_not_provisioned_with_ec2_classic = null
 
-redshift_not_provisioned_with_ec2_classic = false {
+redshift_not_provisioned_with_ec2_classic_violation {
     Clusters := input.Clusters[_]
     not Clusters.VpcId
 }
 
-redshift_not_provisioned_with_ec2_classic = false {
+redshift_not_provisioned_with_ec2_classic_violation {
     Clusters := input.Clusters[_]
     Clusters.VpcId == ""
 }
 
-redshift_not_provisioned_with_ec2_classic = false {
+redshift_not_provisioned_with_ec2_classic_violation {
     Clusters := input.Clusters[_]
     Clusters.VpcId == null
+}
+
+redshift_not_provisioned_with_ec2_classic {
+    input.Clusters
+    not redshift_not_provisioned_with_ec2_classic_violation
+}
+
+redshift_not_provisioned_with_ec2_classic = false {
+    redshift_not_provisioned_with_ec2_classic_violation
 }
 
 redshift_not_provisioned_with_ec2_classic_err = "Ensure Redshift cluster is not provisioned using EC2-classic (deprecated) platform." {
@@ -321,26 +393,35 @@ redshift_not_provisioned_with_ec2_classic_metadata := {
 # PR-AWS-CLD-RSH-010
 # aws::redshift::cluster
 
-default redshift_deferred_maintenance_window = true
+default redshift_deferred_maintenance_window = null
 
-redshift_deferred_maintenance_window = false {
+redshift_deferred_maintenance_window_violation {
     Clusters := input.Clusters[_]
     Clusters.DeferredMaintenanceWindows == null
 }
 
-redshift_deferred_maintenance_window = false {
+redshift_deferred_maintenance_window_violation {
     Clusters := input.Clusters[_]
     Clusters.DeferredMaintenanceWindows == ""
 }
 
-redshift_deferred_maintenance_window = false {
+redshift_deferred_maintenance_window_violation {
     Clusters := input.Clusters[_]
     not Clusters.DeferredMaintenanceWindows
 }
 
-redshift_deferred_maintenance_window = false {
+redshift_deferred_maintenance_window_violation {
     Clusters := input.Clusters[_]
     count(Clusters.DeferredMaintenanceWindows) == 0
+}
+
+redshift_deferred_maintenance_window {
+    input.Clusters
+    not redshift_deferred_maintenance_window_violation
+}
+
+redshift_deferred_maintenance_window = false {
+    redshift_deferred_maintenance_window_violation
 }
 
 redshift_deferred_maintenance_window_err = "Ensure deferred maintenance window is enabled for Redshift cluster." {
@@ -364,11 +445,20 @@ redshift_deferred_maintenance_window_metadata := {
 # PR-AWS-CLD-RSH-011
 # aws::redshift::cluster
 
-default redshift_not_default_master_username = true
+default redshift_not_default_master_username = null
 
-redshift_not_default_master_username = false {
+redshift_not_default_master_username_violation {
     Clusters := input.Clusters[_]
     lower(Clusters.MasterUsername) == "awsuser"
+}
+
+redshift_not_default_master_username {
+    input.Clusters
+    not redshift_not_default_master_username_violation
+}
+
+redshift_not_default_master_username = false {
+    redshift_not_default_master_username_violation
 }
 
 redshift_not_default_master_username_err = "Ensure Redshift database clusters are not using default master username." {
@@ -392,11 +482,20 @@ redshift_not_default_master_username_metadata := {
 # PR-AWS-CLD-RSH-012
 # aws::redshift::cluster
 
-default redshift_not_default_port = true
+default redshift_not_default_port = null
 
-redshift_not_default_port = false {
+redshift_not_default_port_violation {
     Clusters := input.Clusters[_]
     Clusters.Endpoint.Port == 5439
+}
+
+redshift_not_default_port {
+    input.Clusters
+    not redshift_not_default_port_violation
+}
+
+redshift_not_default_port = false {
+    redshift_not_default_port_violation
 }
 
 redshift_not_default_port_err = "Ensure Redshift database clusters are not using default port(5439) for database connection." {
@@ -420,11 +519,20 @@ redshift_not_default_port_metadata := {
 # PR-AWS-CLD-RSH-013
 # aws::redshift::cluster
 
-default redshift_automated_backup = true
+default redshift_automated_backup = null
 
-redshift_automated_backup = false {
+redshift_automated_backup_violation {
     Clusters := input.Clusters[_]
     Clusters.AutomatedSnapshotRetentionPeriod == 0
+}
+
+redshift_automated_backup {
+    input.Clusters
+    not redshift_automated_backup_violation
+}
+
+redshift_automated_backup = false {
+    redshift_automated_backup_violation
 }
 
 redshift_automated_backup_err = "Ensure automated backups are enabled for Redshift cluster." {

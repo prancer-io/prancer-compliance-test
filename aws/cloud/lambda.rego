@@ -1,9 +1,7 @@
 package rule
 
+import data.common
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
 
@@ -12,16 +10,25 @@ has_property(parent_object, target_property) {
 # aws::lambda::function
 #
 
-default lambda_env = true
+default lambda_env = null
 
-lambda_env = false {
+lambda_env_violation {
     input.Configuration.Environment
     not input.Configuration.KMSKeyArn
 }
 
-lambda_env = false {
+lambda_env_violation {
     input.Configuration.Environment
     not startswith(lower(input.Configuration.KMSKeyArn), "arn:")
+}
+
+lambda_env {
+    input.Configuration
+    not lambda_env_violation
+}
+
+lambda_env = false {
+    lambda_env_violation
 }
 
 lambda_env_err = "AWS Lambda Environment Variables not encrypted at-rest using CMK" {
@@ -45,14 +52,23 @@ lambda_env_metadata := {
 # aws::lambda::function
 #
 
-default lambda_vpc = true
+default lambda_vpc = null
 
-lambda_vpc = false {
+lambda_vpc_violation {
     not input.Configuration.VpcConfig.SubnetIds
 }
 
-lambda_vpc = false {
+lambda_vpc_violation {
     count(input.Configuration.VpcConfig.SubnetIds) == 0
+}
+
+lambda_vpc {
+    input.Configuration
+    not lambda_vpc_violation
+}
+
+lambda_vpc = false {
+    lambda_vpc_violation
 }
 
 lambda_vpc_err = "AWS Lambda Function is not assigned to access within VPC" {
@@ -76,14 +92,23 @@ lambda_vpc_metadata := {
 # aws::lambda::function
 #
 
-default lambda_tracing = true
+default lambda_tracing = null
 
-lambda_tracing = false {
+lambda_tracing_violation {
     not input.Configuration.TracingConfig.Mode
 }
 
-lambda_tracing = false {
+lambda_tracing_violation {
     lower(input.Configuration.TracingConfig.Mode) == "passthrough"
+}
+
+lambda_tracing {
+    input.Configuration
+    not lambda_tracing_violation
+}
+
+lambda_tracing = false {
+    lambda_tracing_violation
 }
 
 lambda_tracing_err = "AWS Lambda functions with tracing not enabled" {
@@ -108,10 +133,19 @@ lambda_tracing_metadata := {
 # aws::lambda::function
 #
 
-default lambda_concurrent_execution = true
+default lambda_concurrent_execution = null
+
+lambda_concurrent_execution_violation {
+    not input.Concurrency.ReservedConcurrentExecutions
+}
+
+lambda_concurrent_execution {
+    input.Concurrency
+    not lambda_concurrent_execution_violation
+}
 
 lambda_concurrent_execution = false {
-    not input.Concurrency.ReservedConcurrentExecutions
+    lambda_concurrent_execution_violation
 }
 
 lambda_concurrent_execution_err = "Ensure AWS Lambda function is configured for function-level concurrent execution limit" {
@@ -137,10 +171,19 @@ lambda_concurrent_execution_metadata := {
 # aws::lambda::function
 #
 
-default lambda_dlq = true
+default lambda_dlq = null
+
+lambda_dlq_violation {
+    not input.Configuration.DeadLetterConfig.TargetArn
+}
+
+lambda_dlq {
+    input.Configuration
+    not lambda_dlq_violation
+}
 
 lambda_dlq = false {
-    not input.Configuration.DeadLetterConfig.TargetArn
+    lambda_dlq_violation
 }
 
 lambda_dlq_err = "Ensure AWS Lambda function is configured for a DLQ" {
@@ -165,14 +208,23 @@ lambda_dlq_metadata := {
 # aws::lambda::function
 # aws::ec2::vpc
 
-default lambda_default_vpc = true
+default lambda_default_vpc = null
 
-lambda_default_vpc = false {
+lambda_default_vpc_violation {
     X := input.TEST_EC2_04[_]
     Vpc_ec2 := X.Vpcs[_]
     Vpc_ec2.IsDefault == true
     Y := input.TEST_LAMBDA[_]
     Y.Configuration.VpcConfig.VpcId == Vpc_ec2.VpcId
+}
+
+lambda_default_vpc {
+    input.TEST_EC2_04
+    not lambda_default_vpc_violation
+}
+
+lambda_default_vpc = false {
+    lambda_default_vpc_violation
 }
 
 lambda_default_vpc_err = "Ensure AWS Lambda function is not launched in default VPC." {
@@ -198,24 +250,33 @@ lambda_default_vpc_metadata := {
 # aws::lambda::function
 # aws::ec2::vpcendpoint
 
-default lambda_vpc_endpoint = true
+default lambda_vpc_endpoint = null
 
-lambda_vpc_endpoint = false {
+lambda_vpc_endpoint_violation {
     X := input.TEST_LAMBDA[_]
-    has_property(X.Configuration, "VpcConfig")
+    common.has_property(X.Configuration, "VpcConfig")
     X.Configuration.VpcConfig.VpcId != ""
     Y := input.TEST_EC2_06[_]
     VpcEndpoint := Y.VpcEndpoints[_]
     X.Configuration.VpcConfig.VpcId != VpcEndpoint.VpcId
 }
 
-lambda_vpc_endpoint = false {
+lambda_vpc_endpoint_violation {
     X := input.TEST_LAMBDA[_]
-    has_property(X.Configuration, "VpcConfig")
+    common.has_property(X.Configuration, "VpcConfig")
     X.Configuration.VpcConfig.VpcId != null
     Y := input.TEST_EC2_06[_]
     VpcEndpoint := Y.VpcEndpoints[_]
     X.Configuration.VpcConfig.VpcId != VpcEndpoint.VpcId
+}
+
+lambda_vpc_endpoint {
+    input.TEST_LAMBDA
+    not lambda_vpc_endpoint_violation
+}
+
+lambda_vpc_endpoint = false {
+    lambda_vpc_endpoint_violation
 }
 
 lambda_vpc_endpoint_err = "Ensure AWS Lambda is using vpc endpoint." {
@@ -241,24 +302,33 @@ lambda_vpc_endpoint_metadata := {
 # aws::lambda::function
 # aws::ec2::vpc
 
-default lambda_runs_in_vpc = true
+default lambda_runs_in_vpc = null
 
-lambda_runs_in_vpc = false {
+lambda_runs_in_vpc_violation {
     X := input.TEST_LAMBDA[_]
-    has_property(X.Configuration, "VpcConfig")
+    common.has_property(X.Configuration, "VpcConfig")
     X.Configuration.VpcConfig.VpcId != ""
     Y := input.TEST_EC2_04[_]
     Vpc_ec2 := Y.Vpcs[_]
     X.Configuration.VpcConfig.VpcId != Vpc_ec2.VpcId
 }
 
-lambda_runs_in_vpc = false {
+lambda_runs_in_vpc_violation {
     X := input.TEST_LAMBDA[_]
-    has_property(X.Configuration, "VpcConfig")
+    common.has_property(X.Configuration, "VpcConfig")
     X.Configuration.VpcConfig.VpcId != null
     Y := input.TEST_EC2_04[_]
     Vpc_ec2 := Y.Vpcs[_]
     X.Configuration.VpcConfig.VpcId != Vpc_ec2.VpcId
+}
+
+lambda_runs_in_vpc {
+    input.TEST_LAMBDA
+    not lambda_runs_in_vpc_violation
+}
+
+lambda_runs_in_vpc = false {
+    lambda_runs_in_vpc_violation
 }
 
 lambda_runs_in_vpc_err = "Ensure AWS lambda runs in GS managed VPC." {
@@ -284,11 +354,11 @@ lambda_runs_in_vpc_metadata := {
 # aws::lambda::function
 # aws::ec2::securitygroup
 
-default lambda_outbound_rule = true
+default lambda_outbound_rule = null
 
-lambda_outbound_rule = false {
+lambda_outbound_rule_violation {
     X := input.TEST_LAMBDA[_]
-    has_property(X.Configuration.VpcConfig, "SecurityGroupIds")
+    common.has_property(X.Configuration.VpcConfig, "SecurityGroupIds")
     Y := input.TEST_SG[_]
     SecurityGroup := Y.SecurityGroups[_]
     IpPermissions_Egress := SecurityGroup.IpPermissionsEgress[_]
@@ -296,6 +366,15 @@ lambda_outbound_rule = false {
     IpRange.CidrIp == "0.0.0.0/0"
     lambda_sg := X.Configuration.VpcConfig.SecurityGroupIds[_] 
     lambda_sg == SecurityGroup.GroupId
+}
+
+lambda_outbound_rule {
+    input.TEST_LAMBDA
+    not lambda_outbound_rule_violation
+}
+
+lambda_outbound_rule = false {
+    lambda_outbound_rule_violation
 }
 
 lambda_outbound_rule_err = "Ensure AWS lambda outbound rule does not allow '0.0.0.0/0'." {

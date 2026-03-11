@@ -1,23 +1,30 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+import data.common
 
 
 # PR-GCP-CLD-SVC-001
 #
 
-default vulnerability_scan_disabled = true
+default vulnerability_scan_disabled = null
 
-vulnerability_scan_disabled = false {
+vulnerability_scan_disabled_violation {
     input
     contains(input.name, "containerscanning.googleapis.com")
     upper(input.state) == "ENABLED"
 }
 
+vulnerability_scan_disabled {
+    input.name
+    not vulnerability_scan_disabled_violation
+}
+
+vulnerability_scan_disabled = false {
+    vulnerability_scan_disabled_violation
+}
+
 vulnerability_scan_disabled_err = "Ensure, GCP GCR Container Vulnerability Scanning is disabled." {
-    not vulnerability_scan_disabled   
+    not vulnerability_scan_disabled
 }
 
 vulnerability_scan_disabled_metadata := {

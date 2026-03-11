@@ -1,10 +1,10 @@
 package rule
 
+import data.common
+
 # https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+# has_property is now provided by common.has_property
 
 #
 # PR-GCP-CLD-CLT-001
@@ -13,20 +13,18 @@ has_property(parent_object, target_property) {
 default k8s_not_using_default_svc_account = null
 
 gcp_attribute_absence["k8s_not_using_default_svc_account"] {
-    not has_property(input, "nodeConfig")
+    not common.has_property(input, "nodeConfig")
 }
 
 gcp_attribute_absence["k8s_not_using_default_svc_account"] {
-    not has_property(input, "nodePools")
+    not common.has_property(input, "nodePools")
 }
 
 gcp_issue["k8s_not_using_default_svc_account"] {
-    # lower(input.type) == "container.v1.cluster"
     lower(input.nodeConfig.serviceAccount) == "default"
 }
 
 gcp_issue["k8s_not_using_default_svc_account"] {
-    # lower(input.type) == "container.v1.cluster"
     nodePools := input.nodePools[_]
     lower(nodePools.config.serviceAccount) == "default"
 }
@@ -69,17 +67,14 @@ k8s_not_using_default_svc_account_metadata := {
 default k8s_basicauth = null
 
 gc_issue["k8s_basicauth"] {
-    # lower(input.type) == "container.v1.cluster"
     count(input.masterAuth.username) > 0
 }
 
 gc_issue["k8s_basicauth"] {
-    # lower(input.type) == "container.v1.cluster"
     count(input.masterAuth.password) > 0
 }
 
 k8s_basicauth {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_basicauth"]
 }
 
@@ -109,18 +104,11 @@ k8s_basicauth_metadata := {
 
 default k8s_client_certificate_enabled = null
 
-# gcp_issue["k8s_client_certificate_enabled"] {
-#     # lower(input.type) == "container.v1.cluster"
-#     not input.masterAuth.clientKey
-# }
-
 gcp_issue["k8s_client_certificate_enabled"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.masterAuth.clientCertificate
 }
 
 k8s_client_certificate_enabled {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gcp_issue["k8s_client_certificate_enabled"]
 }
 
@@ -151,12 +139,10 @@ k8s_client_certificate_enabled_metadata := {
 default k8s_alias_ip = null
 
 gc_issue["k8s_alias_ip"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.ipAllocationPolicy.useIpAliases
 }
 
 k8s_alias_ip {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_alias_ip"]
 }
 
@@ -187,12 +173,10 @@ k8s_alias_ip_metadata := {
 default k8s_alpha = null
 
 gc_issue["k8s_alpha"] {
-    # lower(input.type) == "container.v1.cluster"
     input.enableKubernetesAlpha
 }
 
 k8s_alpha {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_alpha"]
 }
 
@@ -223,12 +207,10 @@ k8s_alpha_metadata := {
 default k8s_http_lbs = null
 
 gc_issue["k8s_http_lbs"] {
-    # lower(input.type) == "container.v1.cluster"
     input.addonsConfig.httpLoadBalancing.disabled
 }
 
 k8s_http_lbs {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_http_lbs"]
 }
 
@@ -259,12 +241,10 @@ k8s_http_lbs_metadata := {
 default k8s_legacy_auth_disabled = null
 
 gcp_issue["k8s_legacy_auth_disabled"] {
-    # lower(input.type) == "container.v1.cluster"
     input.legacyAbac.enabled
 }
 
 k8s_legacy_auth_disabled {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gcp_issue["k8s_legacy_auth_disabled"]
 }
 
@@ -295,12 +275,10 @@ k8s_legacy_auth_disabled_metadata := {
 default k8s_master_auth_net = null
 
 gc_issue["k8s_master_auth_net"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.masterAuthorizedNetworksConfig.enabled
 }
 
 k8s_master_auth_net {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_master_auth_net"]
 }
 
@@ -331,12 +309,10 @@ k8s_master_auth_net_metadata := {
 default k8s_net_policy = null
 
 gc_issue["k8s_net_policy"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.networkPolicy.enabled
 }
 
 k8s_net_policy {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_net_policy"]
 }
 
@@ -367,17 +343,14 @@ k8s_net_policy_metadata := {
 default k8s_logging = null
 
 gc_attribute_absence["k8s_logging"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.loggingService
 }
 
 gc_issue["k8s_logging"] {
-    # lower(input.type) == "container.v1.cluster"
     lower(input.loggingService) == "none"
 }
 
 k8s_logging {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_logging"]
     not gc_attribute_absence["k8s_logging"]
 }
@@ -415,17 +388,14 @@ k8s_logging_metadata := {
 default k8s_monitor = null
 
 gc_attribute_absence["k8s_monitor"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.monitoringService
 }
 
 gc_issue["k8s_monitor"] {
-    # lower(input.type) == "container.v1.cluster"
     lower(input.monitoringService) == "none"
 }
 
 k8s_monitor {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_monitor"]
     not gc_attribute_absence["k8s_monitor"]
 }
@@ -465,22 +435,18 @@ k8s_monitor_metadata := {
 default k8s_binary_auth = null
 
 gc_issue["k8s_binary_auth"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.binaryAuthorization.evaluationMode
 }
 
 gc_issue["k8s_binary_auth"] {
-    # lower(input.type) == "container.v1.cluster"
     upper(input.binaryAuthorization.evaluationMode) == "EVALUATION_MODE_UNSPECIFIED"
 }
 
 gc_issue["k8s_binary_auth"] {
-    # lower(input.type) == "container.v1.cluster"
     upper(input.binaryAuthorization.evaluationMode) == "DISABLED"
 }
 
 k8s_binary_auth {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_binary_auth"]
 }
 
@@ -511,17 +477,14 @@ k8s_binary_auth_metadata := {
 default k8s_legacy_endpoint = null
 
 gc_issue["k8s_legacy_endpoint"] {
-    # lower(input.type) == "container.v1.cluster"
     lower(input.nodeConfig.metadata["disable-legacy-endpoints"]) == "true"
 }
 
 gc_issue["k8s_legacy_endpoint"] {
-    # lower(input.type) == "container.v1.cluster"
     input.nodeConfig.metadata["disable-legacy-endpoints"] == true
 }
 
 k8s_legacy_endpoint {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_legacy_endpoint"]
 }
 
@@ -552,12 +515,10 @@ k8s_legacy_endpoint_metadata := {
 default k8s_pod_security = null
 
 gc_issue["k8s_pod_security"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.podSecurityPolicyConfig.enabled
 }
 
 k8s_pod_security {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_pod_security"]
 }
 
@@ -588,12 +549,10 @@ k8s_pod_security_metadata := {
 default k8s_egress_metering = null
 
 gc_issue["k8s_egress_metering"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.resourceUsageExportConfig.enableNetworkEgressMetering
 }
 
 k8s_egress_metering {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_egress_metering"]
 }
 
@@ -624,12 +583,10 @@ k8s_egress_metering_metadata := {
 default k8s_private = null
 
 gc_issue["k8s_private"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.privateClusterConfig
 }
 
 k8s_private {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_private"]
 }
 
@@ -660,12 +617,10 @@ k8s_private_metadata := {
 default k8s_private_node = null
 
 gc_issue["k8s_private_node"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.privateClusterConfig.enablePrivateNodes
 }
 
 k8s_private_node {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_private_node"]
 }
 
@@ -696,25 +651,21 @@ k8s_private_node_metadata := {
 default k8s_node_image = null
 
 gc_attribute_absence["k8s_node_image"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.nodeConfig.imageType
     nodePools := input.nodePools[j]
     not nodePools.config.imageType
 }
 
 gc_issue["k8s_node_image"] {
-    # lower(input.type) == "container.v1.cluster"
     not startswith(lower(input.nodeConfig.imageType), "cos")
 }
 
 gc_issue["k8s_node_image"] {
-    # lower(input.type) == "container.v1.cluster"
     nodePools := input.nodePools[j]
     not startswith(lower(nodePools.config.imageType), "cos")
 }
 
 k8s_node_image {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_node_image"]
     not gc_attribute_absence["k8s_node_image"]
 }
@@ -754,17 +705,14 @@ k8s_node_image_metadata := {
 default k8s_network = null
 
 gc_issue["k8s_network"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.network
 }
 
 gc_issue["k8s_network"] {
-    # lower(input.type) == "container.v1.cluster"
     lower(input.network) == "default"
 }
 
 k8s_network {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_network"]
 }
 
@@ -795,12 +743,10 @@ k8s_network_metadata := {
 default k8s_dashboard = null
 
 gc_issue["k8s_dashboard"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.addonsConfig.kubernetesDashboard.disabled
 }
 
 k8s_dashboard {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_dashboard"]
 }
 
@@ -831,17 +777,14 @@ k8s_dashboard_metadata := {
 default k8s_labels = null
 
 gc_issue["k8s_labels"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.resourceLabels
 }
 
 gc_issue["k8s_labels"] {
-    # lower(input.type) == "container.v1.cluster"
-    count(input.resourceLabels) == 0
+    not common.non_empty(input.resourceLabels)
 }
 
 k8s_labels {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_labels"]
 }
 
@@ -872,27 +815,18 @@ k8s_labels_metadata := {
 default k8s_db_encrypt = null
 
 gc_attribute_absence["k8s_db_encrypt"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.databaseEncryption
 }
 
 gc_issue["k8s_db_encrypt"] {
-    # lower(input.type) == "container.v1.cluster"
     lower(input.databaseEncryption.state) != "encrypted"
 }
 
 gc_issue["k8s_db_encrypt"] {
-    # lower(input.type) == "container.v1.cluster"
-    not input.databaseEncryption.keyName
-}
-
-gc_issue["k8s_db_encrypt"] {
-    # lower(input.type) == "container.v1.cluster"
-    count(input.databaseEncryption.keyName) == 0
+    not common.non_empty(input.databaseEncryption.keyName)
 }
 
 k8s_db_encrypt {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_db_encrypt"]
     not gc_attribute_absence["k8s_db_encrypt"]
 }
@@ -932,12 +866,10 @@ k8s_db_encrypt_metadata := {
 default k8s_intra_node = null
 
 gc_issue["k8s_intra_node"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.networkConfig.enableIntraNodeVisibility
 }
 
 k8s_intra_node {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_intra_node"]
 }
 
@@ -968,12 +900,10 @@ k8s_intra_node_metadata := {
 default k8s_istio = null
 
 gc_issue["k8s_istio"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.addonsConfig.istioConfig.disabled
 }
 
 k8s_istio {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_istio"]
 }
 
@@ -1004,13 +934,11 @@ k8s_istio_metadata := {
 default k8s_zones = null
 
 gc_issue["k8s_zones"] {
-    # lower(input.type) == "container.v1.cluster"
     input.zone
     count(input.locations) < 3
 }
 
 k8s_zones {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_zones"]
 }
 
@@ -1045,28 +973,19 @@ k8s_zones_metadata := {
 default k8s_auto_upgrade = null
 
 gc_attribute_absence["k8s_auto_upgrade"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.currentNodeCount
 }
 
 gc_issue["k8s_auto_upgrade"] {
-    # lower(input.type) == "container.v1.cluster"
     to_number(input.currentNodeCount) < 3
     input.nodePools[j].management.autoUpgrade
 }
 
 gc_issue["k8s_auto_upgrade"] {
-    # lower(input.type) == "container.v1.cluster"
-    not input.databaseEncryption.keyName
-}
-
-gc_issue["k8s_auto_upgrade"] {
-    # lower(input.type) == "container.v1.cluster"
-    count(input.databaseEncryption.keyName) == 0
+    not common.non_empty(input.databaseEncryption.keyName)
 }
 
 k8s_auto_upgrade {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_auto_upgrade"]
     not gc_attribute_absence["k8s_auto_upgrade"]
 }
@@ -1107,12 +1026,10 @@ k8s_auto_upgrade_metadata := {
 default k8s_channel = null
 
 gc_issue["k8s_channel"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.releaseChannel.channel
 }
 
 k8s_channel {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_channel"]
 }
 
@@ -1144,14 +1061,12 @@ k8s_channel_metadata := {
 default k8s_workload = null
 
 gc_issue["k8s_workload"] {
-    # lower(input.type) == "container.v1.cluster"
     lower(input.status) == "running"
     not startswith(lower(input.resourceLabels["goog-composer-version"]), "composer-1")
     not input.workloadIdentityConfig
 }
 
 k8s_workload {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_workload"]
 }
 
@@ -1183,17 +1098,14 @@ k8s_workload_metadata := {
 default k8s_shield_node = null
 
 gc_issue["k8s_shield_node"] {
-    # lower(input.type) == "container.v1.cluster"
     lower(input.shieldedNodes) == "false"
 }
 
 gc_issue["k8s_shield_node"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.shieldedNodes
 }
 
 k8s_shield_node {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_shield_node"]
 }
 
@@ -1225,19 +1137,16 @@ k8s_shield_node_metadata := {
 default k8s_node_autorepair = null
 
 gc_issue["k8s_node_autorepair"] {
-    # lower(input.type) == "container.v1.cluster"
     node_pool := input.nodePools[_]
     not node_pool.management.autoRepair
 }
 
 gc_issue["k8s_node_autorepair"] {
-    # lower(input.type) == "container.v1.cluster"
     node_pool := input.nodePools[_]
     lower(node_pool.management.autoRepair) == "false"
 }
 
 k8s_node_autorepair {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_node_autorepair"]
 }
 
@@ -1269,19 +1178,16 @@ k8s_node_autorepair_metadata := {
 default k8s_node_autoupgrade = null
 
 gc_issue["k8s_node_autoupgrade"] {
-    # lower(input.type) == "container.v1.cluster"
     node_pool := input.nodePools[_]
     not node_pool.management.autoUpgrade
 }
 
 gc_issue["k8s_node_autoupgrade"] {
-    # lower(input.type) == "container.v1.cluster"
     node_pool := input.nodePools[_]
     lower(node_pool.management.autoUpgrade) == "false"
 }
 
 k8s_node_autoupgrade {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_node_autoupgrade"]
 }
 
@@ -1313,19 +1219,16 @@ k8s_node_autoupgrade_metadata := {
 default k8s_secure_boot = null
 
 gc_issue["k8s_secure_boot"] {
-    # lower(input.type) == "container.v1.cluster"
     node_pool := input.nodePools[_]
     not node_pool.config.shieldedInstanceConfig.enableSecureBoot
 }
 
 gc_issue["k8s_secure_boot"] {
-    # lower(input.type) == "container.v1.cluster"
     node_pool := input.nodePools[_]
     lower(node_pool.config.shieldedInstanceConfig.enableSecureBoot) == "false"
 }
 
 k8s_secure_boot {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_secure_boot"]
 }
 
@@ -1358,19 +1261,16 @@ k8s_secure_boot_metadata := {
 default k8s_integrity_monitor = null
 
 gc_issue["k8s_integrity_monitor"] {
-    # lower(input.type) == "container.v1.cluster"
     node_pool := input.nodePools[_]
     not node_pool.config.shieldedInstanceConfig.enableIntegrityMonitoring
 }
 
 gc_issue["k8s_integrity_monitor"] {
-    # lower(input.type) == "container.v1.cluster"
     node_pool := input.nodePools[_]
     lower(node_pool.config.shieldedInstanceConfig.enableIntegrityMonitoring) == "false"
 }
 
 k8s_integrity_monitor {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_integrity_monitor"]
 }
 
@@ -1436,15 +1336,16 @@ secret_encrypted_metadata := {
 #
 # "container.v1.cluster"
 
-default private_endpoint_disabled = true
+default private_endpoint_disabled = null
 
 gc_issue["private_endpoint_disabled"] {
     upper(input.status) == "RUNNING"
-    has_property(input, "privateClusterConfig")
-    not has_property(input.privateClusterConfig, "enablePrivateEndpoint")
+    common.has_property(input, "privateClusterConfig")
+    not common.has_property(input.privateClusterConfig, "enablePrivateEndpoint")
 }
 
 private_endpoint_disabled {
+    input.name
     not gc_issue["private_endpoint_disabled"]
 }
 
@@ -1476,17 +1377,14 @@ private_endpoint_disabled_metadata := {
 default k8s_cld_monitoring = null
 
 gc_issue["k8s_cld_monitoring"] {
-    # lower(input.type) == "container.v1.cluster"
     not input.monitoringService
 }
 
 gc_issue["k8s_cld_monitoring"] {
-    # lower(input.type) == "container.v1.cluster"
     lower(input.monitoringService) == "none"
 }
 
 k8s_cld_monitoring {
-    # lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_cld_monitoring"]
 }
 

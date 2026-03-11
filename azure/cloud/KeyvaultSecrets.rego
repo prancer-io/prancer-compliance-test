@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets
 
 #
@@ -12,7 +14,6 @@ azure_attribute_absence["kv_expire"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults/secrets"
     #create seperate rule with this property
-    #resource.properties.attributes.enabled != false
     not resource.properties.attributes.exp
 }
 
@@ -20,7 +21,6 @@ azure_attribute_absence["kv_expire"] {
 azure_issue["kv_expire"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults/secrets"
-    #resource.properties.attributes.enabled != false
     #Expiry date in seconds since 1970-01-01T00:00:00Z.
     to_number(resource.properties.attributes.exp) < 0
 }

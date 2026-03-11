@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration
 
 available_true_choices := ["true", true]
@@ -9,16 +11,23 @@ available_false_choices := ["false", false]
 # PR-AWS-CLD-EMR-001
 #
 
-default emr_security = true
+default emr_security = null
 
-emr_security = false {
-    # lower(resource.Type) == "aws::emr::cluster"
+emr_security_violation {
     not input.SecurityConfiguration
 }
 
-emr_security = false{
-    # lower(resource.Type) == "aws::emr::cluster"
+emr_security_violation {
     count(input.SecurityConfiguration) == 0
+}
+
+emr_security {
+    input.SecurityConfiguration
+    not emr_security_violation
+}
+
+emr_security = false {
+    emr_security_violation
 }
 
 emr_security_err = "AWS EMR cluster is not configured with security configuration" {
@@ -42,16 +51,23 @@ emr_security_metadata := {
 # PR-AWS-CLD-EMR-002
 #
 
-default emr_kerberos = true
+default emr_kerberos = null
 
-emr_kerberos = false {
-    # lower(resource.Type) == "aws::emr::cluster"
+emr_kerberos_violation {
     not input.Cluster.KerberosAttributes.Realm
 }
 
-emr_kerberos = false {
-    # lower(resource.Type) == "aws::emr::cluster"
+emr_kerberos_violation {
     count(input.Cluster.KerberosAttributes.Realm) == 0
+}
+
+emr_kerberos {
+    input.Cluster
+    not emr_kerberos_violation
+}
+
+emr_kerberos = false {
+    emr_kerberos_violation
 }
 
 emr_kerberos_err = "AWS EMR cluster is not configured with Kerberos Authentication" {
@@ -75,18 +91,25 @@ emr_kerberos_metadata := {
 # PR-AWS-CLD-EMR-003
 #
 
-default emr_s3_encryption = true
+default emr_s3_encryption = null
 
-emr_s3_encryption = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
+emr_s3_encryption_violation {
     SecurityConfiguration := json.unmarshal(input.SecurityConfiguration)
     not SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode
 }
 
-emr_s3_encryption = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
+emr_s3_encryption_violation {
     SecurityConfiguration := json.unmarshal(input.SecurityConfiguration)
     count(SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) == 0
+}
+
+emr_s3_encryption {
+    input.SecurityConfiguration
+    not emr_s3_encryption_violation
+}
+
+emr_s3_encryption = false {
+    emr_s3_encryption_violation
 }
 
 emr_s3_encryption_err = "AWS EMR cluster is not configured with CSE CMK for data at rest encryption (Amazon S3 with EMRFS)" {
@@ -110,22 +133,27 @@ emr_s3_encryption_metadata := {
 # PR-AWS-CLD-EMR-004
 #
 
-default emr_local_encryption_cmk = true
+default emr_local_encryption_cmk = null
 
-emr_local_encryption_cmk = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
+emr_local_encryption_cmk_violation {
     not input.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType
 }
 
-
-emr_local_encryption_cmk = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
+emr_local_encryption_cmk_violation {
     count(input.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) == 0
 }
 
-emr_local_encryption_cmk = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
+emr_local_encryption_cmk_violation {
     lower(input.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) != "awskms"
+}
+
+emr_local_encryption_cmk {
+    input.SecurityConfiguration
+    not emr_local_encryption_cmk_violation
+}
+
+emr_local_encryption_cmk = false {
+    emr_local_encryption_cmk_violation
 }
 
 emr_local_encryption_cmk_err = "AWS EMR cluster is not enabled with local disk encryption" {
@@ -149,11 +177,19 @@ emr_local_encryption_cmk_metadata := {
 # PR-AWS-CLD-EMR-006
 #
 
-default emr_rest_encryption = true
+default emr_rest_encryption = null
+
+emr_rest_encryption_violation {
+    not input.SecurityConfiguration.EncryptionConfiguration.EnableAtRestEncryption
+}
+
+emr_rest_encryption {
+    input.SecurityConfiguration
+    not emr_rest_encryption_violation
+}
 
 emr_rest_encryption = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
-    not input.SecurityConfiguration.EncryptionConfiguration.EnableAtRestEncryption
+    emr_rest_encryption_violation
 }
 
 emr_rest_encryption_err = "AWS EMR cluster is not enabled with data encryption at rest" {
@@ -176,11 +212,19 @@ emr_rest_encryption_metadata := {
 # PR-AWS-CLD-EMR-007
 #
 
-default emr_transit_encryption = true
+default emr_transit_encryption = null
+
+emr_transit_encryption_violation {
+    not input.SecurityConfiguration.EncryptionConfiguration.EnableInTransitEncryption
+}
+
+emr_transit_encryption {
+    input.SecurityConfiguration
+    not emr_transit_encryption_violation
+}
 
 emr_transit_encryption = false {
-    # lower(resource.Type) == "aws::emr::securityconfiguration"
-    not input.SecurityConfiguration.EncryptionConfiguration.EnableInTransitEncryption
+    emr_transit_encryption_violation
 }
 
 emr_transit_encryption_err = "AWS EMR cluster is not enabled with data encryption in transit" {
@@ -203,11 +247,19 @@ emr_transit_encryption_metadata := {
 # PR-AWS-CLD-EMR-008
 #
 
-default emr_cluster_level_logging = true
+default emr_cluster_level_logging = null
+
+emr_cluster_level_logging_violation {
+    not input.Cluster.LogUri
+}
+
+emr_cluster_level_logging {
+    input.Cluster
+    not emr_cluster_level_logging_violation
+}
 
 emr_cluster_level_logging = false {
-    # lower(resource.Type) == "aws::emr::cluster"
-    not input.Cluster.LogUri
+    emr_cluster_level_logging_violation
 }
 
 emr_cluster_level_logging_err = "Ensure Cluster level logging is enabled for EMR." {
@@ -230,11 +282,19 @@ emr_cluster_level_logging_metadata := {
 # PR-AWS-CLD-EMR-009
 #
 
-default emr_cluster_not_visible_to_all_iam_users = true
+default emr_cluster_not_visible_to_all_iam_users = null
+
+emr_cluster_not_visible_to_all_iam_users_violation {
+    input.Cluster.VisibleToAllUsers == available_true_choices[_]
+}
+
+emr_cluster_not_visible_to_all_iam_users {
+    input.Cluster
+    not emr_cluster_not_visible_to_all_iam_users_violation
+}
 
 emr_cluster_not_visible_to_all_iam_users = false {
-    # lower(resource.Type) == "aws::emr::cluster"
-    input.Cluster.VisibleToAllUsers == available_true_choices[_]
+    emr_cluster_not_visible_to_all_iam_users_violation
 }
 
 emr_cluster_not_visible_to_all_iam_users_err = "Ensure EMR cluster is not visible to all IAM users." {
@@ -257,11 +317,19 @@ emr_cluster_not_visible_to_all_iam_users_metadata := {
 # PR-AWS-CLD-EMR-010
 #
 
-default emr_termination_protection_is_enabled = true
+default emr_termination_protection_is_enabled = null
+
+emr_termination_protection_is_enabled_violation {
+    input.Cluster.TerminationProtected == available_false_choices[_]
+}
+
+emr_termination_protection_is_enabled {
+    input.Cluster
+    not emr_termination_protection_is_enabled_violation
+}
 
 emr_termination_protection_is_enabled = false {
-    # lower(resource.Type) == "aws::emr::cluster"
-    input.Cluster.TerminationProtected == available_false_choices[_]
+    emr_termination_protection_is_enabled_violation
 }
 
 emr_termination_protection_is_enabled_err = "Ensure Termination protection is enabled for instances in the cluster for EMR." {
@@ -286,9 +354,9 @@ emr_termination_protection_is_enabled_metadata := {
 # aws::emr::cluster
 # aws::ec2::securitygroup
 
-default emr_security_group_port = true
+default emr_security_group_port = null
 
-emr_security_group_port = false {
+emr_security_group_port_violation {
     Y := input.TEST_SG[_]
     SecurityGroup := Y.SecurityGroups[_]
     IpPermission := SecurityGroup.IpPermissions[_]
@@ -301,7 +369,7 @@ emr_security_group_port = false {
     X.Cluster.Ec2InstanceAttributes.EmrManagedMasterSecurityGroup == SecurityGroup.GroupId
 }
 
-emr_security_group_port = false {
+emr_security_group_port_violation {
     Y := input.TEST_SG[_]
     SecurityGroup := Y.SecurityGroups[_]
     IpPermission := SecurityGroup.IpPermissions[_]
@@ -314,7 +382,7 @@ emr_security_group_port = false {
     X.Cluster.Ec2InstanceAttributes.AdditionalMasterSecurityGroups == SecurityGroup.GroupId
 }
 
-emr_security_group_port = false {
+emr_security_group_port_violation {
     Y := input.TEST_SG[_]
     SecurityGroup := Y.SecurityGroups[_]
     IpPermission := SecurityGroup.IpPermissions[_]
@@ -327,7 +395,7 @@ emr_security_group_port = false {
     X.Cluster.Ec2InstanceAttributes.EmrManagedMasterSecurityGroup == SecurityGroup.GroupId
 }
 
-emr_security_group_port = false {
+emr_security_group_port_violation {
     Y := input.TEST_SG[_]
     SecurityGroup := Y.SecurityGroups[_]
     IpPermission := SecurityGroup.IpPermissions[_]
@@ -338,6 +406,15 @@ emr_security_group_port = false {
     X := input.TEST_EMR[_]
     X.Cluster.Status.State != "TERMINATING"
     X.Cluster.Ec2InstanceAttributes.AdditionalMasterSecurityGroups == SecurityGroup.GroupId
+}
+
+emr_security_group_port {
+    input.TEST_SG
+    not emr_security_group_port_violation
+}
+
+emr_security_group_port = false {
+    emr_security_group_port_violation
 }
 
 emr_security_group_port_err = "Ensure AWS EMR cluster Master Security Group do not allows all traffic to port 8088." {

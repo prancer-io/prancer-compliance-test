@@ -1,12 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries
 
@@ -17,7 +11,7 @@ default adminUserDisabled = null
 azure_attribute_absence ["adminUserDisabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
-    not has_property(resource.properties, "adminUserEnabled")
+    not common.has_property(resource.properties, "adminUserEnabled")
 }
 
 azure_issue ["adminUserDisabled"] {
@@ -402,7 +396,7 @@ azure_issue["acr_configured_with_private_endpoint"] {
     lower(resource.type) == "microsoft.containerregistry/registries"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.containerregistry/registries/privateendpointconnections";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.privateLinkServiceConnectionState.status) == "approved";
               c := 1]) == 0
 }

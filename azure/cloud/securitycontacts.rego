@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # "apiVersion": "2020-01-01-preview"
 
 # https://learn.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts?pivots=deployment-language-arm-template

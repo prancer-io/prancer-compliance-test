@@ -1,12 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://learn.microsoft.com/en-us/azure/templates/microsoft.security/pricings?pivots=deployment-language-arm-template
 # https://learn.microsoft.com/en-us/rest/api/defenderforcloud/pricings/list?tabs=HTTP
@@ -557,7 +551,7 @@ azure_attribute_absence["mdc_defender_mcas_integration_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/settings"
     lower(resource.name) == "mcas"
-    not has_property(resource.properties, "enabled")
+    not common.has_property(resource.properties, "enabled")
 }
 
 azure_issue["mdc_defender_mcas_integration_enabled"] {
@@ -613,7 +607,7 @@ azure_attribute_absence["mdc_defender_wdatp_integration_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/settings"
     lower(resource.name) == "wdatp"
-    not has_property(resource.properties, "enabled")
+    not common.has_property(resource.properties, "enabled")
 }
 
 azure_issue["mdc_defender_wdatp_integration_enabled"] {
@@ -831,7 +825,7 @@ azure_attribute_absence["mdc_defender_security_alert_email_notification_for_subs
 azure_issue["mdc_defender_security_alert_email_notification_for_subscription_owner_is_on"] {
      count([c | r := input.resources[_];
               lower(r.type) == "microsoft.security/securitycontacts";
-              array_contains(r.properties.notificationsByRole.roles, "Owner");
+              common.array_contains(r.properties.notificationsByRole.roles, "Owner");
               lower(r.properties.notificationsByRole.state) == "on";
               c := 1]) == 0
 }

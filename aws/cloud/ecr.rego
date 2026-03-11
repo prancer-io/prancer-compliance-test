@@ -1,22 +1,28 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imageTagMutability
 
-
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
 
 #
 # PR-AWS-CLD-ECR-001
 #
 
-default ecr_imagetag = true
+default ecr_imagetag = null
 
-ecr_imagetag = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+ecr_imagetag_violation {
     repositories := input.repositories[_]
     lower(repositories.imageTagMutability) == "mutable"
+}
+
+ecr_imagetag {
+    input.repositories
+    not ecr_imagetag_violation
+}
+
+ecr_imagetag = false {
+    ecr_imagetag_violation
 }
 
 ecr_imagetag_err = "Ensure ECR image tags are immutable" {
@@ -39,12 +45,20 @@ ecr_imagetag_metadata := {
 # PR-AWS-CLD-ECR-002
 #
 
-default ecr_encryption = true
+default ecr_encryption = null
 
-ecr_encryption = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+ecr_encryption_violation {
     repositories := input.repositories[_]
     not repositories.encryptionConfiguration.encryptionType
+}
+
+ecr_encryption {
+    input.repositories
+    not ecr_encryption_violation
+}
+
+ecr_encryption = false {
+    ecr_encryption_violation
 }
 
 ecr_encryption_err = "Ensure ECR repositories are encrypted" {
@@ -68,18 +82,25 @@ ecr_encryption_metadata := {
 # PR-AWS-CLD-ECR-003
 #
 
-default ecr_scan = true
+default ecr_scan = null
 
-ecr_scan = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+ecr_scan_violation {
     repositories := input.repositories[_]
     not repositories.imageScanningConfiguration.scanOnPush
 }
 
-ecr_scan = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+ecr_scan_violation {
     repositories := input.repositories[_]
     lower(repositories.imageScanningConfiguration.scanOnPush) != "true"
+}
+
+ecr_scan {
+    input.repositories
+    not ecr_scan_violation
+}
+
+ecr_scan = false {
+    ecr_scan_violation
 }
 
 ecr_scan_err = "Ensure ECR image scan on push is enabled" {
@@ -103,30 +124,36 @@ ecr_scan_metadata := {
 # PR-AWS-CLD-ECR-004
 #
 
-default ecr_public_access_disable = true
+default ecr_public_access_disable = null
 
-ecr_public_access_disable = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+ecr_public_access_disable_violation {
     policyText := json.unmarshal(input.policyText)
     statement := policyText.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
 }
 
-ecr_public_access_disable = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+ecr_public_access_disable_violation {
     policyText := json.unmarshal(input.policyText)
     statement := policyText.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
 }
 
-ecr_public_access_disable = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+ecr_public_access_disable_violation {
     policyText := json.unmarshal(input.policyText)
     statement := policyText.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS[k] = "*"
+}
+
+ecr_public_access_disable {
+    input.policyText
+    not ecr_public_access_disable_violation
+}
+
+ecr_public_access_disable = false {
+    ecr_public_access_disable_violation
 }
 
 ecr_public_access_disable_err = "Ensure AWS ECR Repository is not publicly accessible" {
@@ -150,22 +177,28 @@ ecr_public_access_disable_metadata := {
 # PR-AWS-CLD-ECR-005
 #
 
-default ecr_vulnerability = true
+default ecr_vulnerability = null
 
-ecr_vulnerability = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+ecr_vulnerability_violation {
     lower(input.scanningConfiguration.scanType) != "enhanced"
 }
 
-ecr_vulnerability = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+ecr_vulnerability_violation {
     rule = input.scanningConfiguration.rules[_]
     lower(rule.scanFrequency) != "continuous_scan"
 }
 
-ecr_vulnerability = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+ecr_vulnerability_violation {
     count(input.scanningConfiguration.rules) == 0
+}
+
+ecr_vulnerability {
+    input.scanningConfiguration
+    not ecr_vulnerability_violation
+}
+
+ecr_vulnerability = false {
+    ecr_vulnerability_violation
 }
 
 ecr_vulnerability_err = "Ensure ECR image scan on push is enabled" {
@@ -188,15 +221,23 @@ ecr_vulnerability_metadata := {
 # PR-AWS-CLD-ECR-006
 #
 
-default ecr_accessible_only_via_private_endpoint = true
+default ecr_accessible_only_via_private_endpoint = null
 
-ecr_accessible_only_via_private_endpoint = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+ecr_accessible_only_via_private_endpoint_violation {
     policy := json.unmarshal(input.policyText)
     policy_statement := policy.Statement[j]
     policy_statement.Condition
     lower(policy_statement.Effect) == "allow"
-    not has_property(policy_statement.Condition.StringEquals, "aws:SourceVpce")
+    not common.has_property(policy_statement.Condition.StringEquals, "aws:SourceVpce")
+}
+
+ecr_accessible_only_via_private_endpoint {
+    input.policyText
+    not ecr_accessible_only_via_private_endpoint_violation
+}
+
+ecr_accessible_only_via_private_endpoint = false {
+    ecr_accessible_only_via_private_endpoint_violation
 }
 
 ecr_accessible_only_via_private_endpoint_err = "Ensure ECR resources are accessible only via private endpoint." {
@@ -219,18 +260,25 @@ ecr_accessible_only_via_private_endpoint_metadata := {
 # PR-AWS-CLD-ECR-007
 #
 
-default lifecycle_policy_is_enabled = true
+default lifecycle_policy_is_enabled = null
 
-lifecycle_policy_is_enabled = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+lifecycle_policy_is_enabled_violation {
     not input.lifecyclePolicyText
 }
 
-lifecycle_policy_is_enabled = false {
-    # lower(resource.Type) == "aws::ecr::repository"
+lifecycle_policy_is_enabled_violation {
     lifecyclePolicy := json.unmarshal(input.lifecyclePolicyText)
     rule := lifecyclePolicy.rules[j]
     lower(rule.selection.tagStatus) == "tagged"
+}
+
+lifecycle_policy_is_enabled {
+    input.lifecyclePolicyText
+    not lifecycle_policy_is_enabled_violation
+}
+
+lifecycle_policy_is_enabled = false {
+    lifecycle_policy_is_enabled_violation
 }
 
 lifecycle_policy_is_enabled_err = "Ensure lifecycle policy is enabled for ECR image repositories." {
@@ -256,26 +304,35 @@ lifecycle_policy_is_enabled_metadata := {
 # AWS::KMS::Key
 # AWS::ECR::Repository
 
-default ecr_encrypted_using_key = true
+default ecr_encrypted_using_key = null
 
-ecr_encrypted_using_key = false {
+ecr_encrypted_using_key_violation {
 	ecr := input.TEST_ECR[_]
     X := ecr.repositories[i]
 	lower(X.encryptionConfiguration.encryptionType) == "kms"
-	has_property(X.encryptionConfiguration, "kmsKey")
+	common.has_property(X.encryptionConfiguration, "kmsKey")
 	Y := input.TEST_KMS[_]
 	X.encryptionConfiguration.kmsKey == Y.KeyMetadata.Arn
 	Y.KeyMetadata.KeyManager != "CUSTOMER"
 }
 
-ecr_encrypted_using_key = false {
+ecr_encrypted_using_key_violation {
 	ecr := input.TEST_ECR[_]
     X := ecr.repositories[i]
 	lower(X.encryptionConfiguration.encryptionType) == "kms"
-	has_property(X.encryptionConfiguration, "kmsKey")
+	common.has_property(X.encryptionConfiguration, "kmsKey")
 	Y := input.TEST_KMS[_]
 	X.encryptionConfiguration.kmsKey == Y.KeyMetadata.KeyId
 	Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+ecr_encrypted_using_key {
+    input.TEST_ECR
+    not ecr_encrypted_using_key_violation
+}
+
+ecr_encrypted_using_key = false {
+    ecr_encrypted_using_key_violation
 }
 
 ecr_encrypted_using_key_err = "Ensure ECR is encrypted using dedicated GS managed KMS key." {

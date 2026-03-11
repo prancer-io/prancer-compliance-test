@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://cloud.google.com/dns/docs/reference/v1/managedZones
 
 #
@@ -10,37 +12,32 @@ default dnssec_state = null
 
 
 gc_attribute_absence["dnssec_state"] {
-    # lower(resource.type) == "dns.v1.managedzone"
     not input.dnssecConfig.state
 }
 
 source_path[{"dnssec_state": metadata}] {
-    # lower(resource.type) == "dns.v1.managedzone"
     not input.dnssecConfig.state
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "dnssecConfig", "state"]
+            ["resources", 0, "properties", "dnssecConfig", "state"]
         ],
     }
 }
 
 gc_issue["dnssec_state"] {
-    # lower(resource.type) == "dns.v1.managedzone"
     lower(input.dnssecConfig.state) == "off"
 }
 
 source_path[{"dnssec_state": metadata}] {
-    # lower(resource.type) == "dns.v1.managedzone"
     lower(input.dnssecConfig.state) == "off"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "dnssecConfig", "state"]
+            ["resources", 0, "properties", "dnssecConfig", "state"]
         ],
     }
 }
 
 dnssec_state {
-    # lower(input.resources[i].type) == "dns.v1.managedzone"
     not gc_issue["dnssec_state"]
     not gc_attribute_absence["dnssec_state"]
 }
@@ -81,41 +78,36 @@ default dnssec_key_rsasha1 = null
 
 
 gc_attribute_absence["dnssec_key_rsasha1"] {
-    # lower(resource.type) == "dns.v1.managedzone"
     not input.dnssecConfig.defaultKeySpecs
 }
 
 source_path[{"dnssec_key_rsasha1": metadata}] {
-    # lower(resource.type) == "dns.v1.managedzone"
     not input.dnssecConfig.defaultKeySpecs
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "dnssecConfig", "defaultKeySpecs"]
+            ["resources", 0, "properties", "dnssecConfig", "defaultKeySpecs"]
         ],
     }
 }
 
 gc_issue["dnssec_key_rsasha1"] {
-    # lower(resource.type) == "dns.v1.managedzone"
     key := input.dnssecConfig.defaultKeySpecs[j]
     contains(lower(key.keyType), "keysigning")
     contains(lower(key.algorithm), "rsasha1")
 }
 
 source_path[{"dnssec_key_rsasha1": metadata}] {
-    # lower(resource.type) == "dns.v1.managedzone"
     key := input.dnssecConfig.defaultKeySpecs[j]
     contains(lower(key.keyType), "keysigning")
     contains(lower(key.algorithm), "rsasha1")
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "dnssecConfig", "defaultKeySpecs", j, "algorithm"]
+            ["resources", 0, "properties", "dnssecConfig", "defaultKeySpecs", j, "algorithm"]
         ],
     }
 }
 
 dnssec_key_rsasha1 {
-    # lower(input.resources[i].type) == "dns.v1.managedzone"
     not gc_issue["dnssec_key_rsasha1"]
     not gc_attribute_absence["dnssec_key_rsasha1"]
 }
@@ -156,41 +148,36 @@ default dnssec_zone_rsasha1 = null
 
 
 gc_attribute_absence["dnssec_zone_rsasha1"] {
-    # lower(resource.type) == "dns.v1.managedzone"
     not input.dnssecConfig.defaultKeySpecs
 }
 
 source_path[{"dnssec_zone_rsasha1": metadata}] {
-    # lower(resource.type) == "dns.v1.managedzone"
     not input.dnssecConfig.defaultKeySpecs
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "dnssecConfig", "defaultKeySpecs"]
+            ["resources", 0, "properties", "dnssecConfig", "defaultKeySpecs"]
         ],
     }
 }
 
 gc_issue["dnssec_zone_rsasha1"] {
-    # lower(resource.type) == "dns.v1.managedzone"
     key := input.dnssecConfig.defaultKeySpecs[j]
     contains(lower(key.keyType), "zonesigning")
     contains(lower(key.algorithm), "rsasha1")
 }
 
 source_path[{"dnssec_zone_rsasha1": metadata}] {
-    # lower(resource.type) == "dns.v1.managedzone"
     key := input.dnssecConfig.defaultKeySpecs[j]
     contains(lower(key.keyType), "zonesigning")
     contains(lower(key.algorithm), "rsasha1")
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "dnssecConfig", "defaultKeySpecs", j, "algorithm"]
+            ["resources", 0, "properties", "dnssecConfig", "defaultKeySpecs", j, "algorithm"]
         ],
     }
 }
 
 dnssec_zone_rsasha1 {
-    # lower(input.resources[i].type) == "dns.v1.managedzone"
     not gc_issue["dnssec_zone_rsasha1"]
     not gc_attribute_absence["dnssec_zone_rsasha1"]
 }

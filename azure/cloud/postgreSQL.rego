@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers
 
@@ -177,7 +175,7 @@ azure_issue["pg_ingress_from_any_ip_disabled"] {
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.dbforpostgresql/servers/firewallrules";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.startIpAddress == "0.0.0.0";
               c := 1]) > 0
 }
@@ -187,7 +185,7 @@ azure_issue["pg_ingress_from_any_ip_disabled"] {
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.dbforpostgresql/servers/firewallrules";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.endIpAddress == "0.0.0.0";
               c := 1]) > 0
 }
@@ -197,7 +195,7 @@ azure_issue["pg_ingress_from_any_ip_disabled"] {
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.dbforpostgresql/servers/firewallrules";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.endIpAddress == "255.255.255.255";
               c := 1]) > 0
 }
@@ -300,7 +298,7 @@ azure_issue["postgresql_log_retention_is_greater_than_three_days"] {
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.dbforpostgresql/servers/configurations";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.name) == "log_retention_days";
               to_number(r.properties.value) > 3;
               c := 1]) == 0
@@ -363,7 +361,7 @@ azure_issue["azurerm_postgresql_configuration_connection_throttling"] {
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.dbforpostgresql/servers/configurations";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.name) == "connection_throttling";
               lower(r.properties.value) == "on";
               c := 1]) == 0
@@ -419,7 +417,7 @@ azure_issue["azurerm_postgresql_configuration_log_checkpoints"] {
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.dbforpostgresql/servers/configurations";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.name) == "log_checkpoints";
               lower(r.properties.value) == "on";
               c := 1]) == 0
@@ -475,7 +473,7 @@ azure_issue["azurerm_postgresql_configuration_log_connections"] {
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.dbforpostgresql/servers/configurations";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.name) == "log_connections";
               lower(r.properties.value) == "on";
               c := 1]) == 0
@@ -531,7 +529,7 @@ azure_issue["azurerm_postgresql_configuration_log_disconnections"] {
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.dbforpostgresql/servers/configurations";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.name) == "log_disconnections";
               lower(r.properties.value) == "on";
               c := 1]) == 0
@@ -587,7 +585,7 @@ azure_issue["azurerm_postgresql_configuration_log_duration"] {
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.dbforpostgresql/servers/configurations";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.name) == "log_duration";
               lower(r.properties.value) == "on";
               c := 1]) == 0

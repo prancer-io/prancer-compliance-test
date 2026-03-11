@@ -1,17 +1,27 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html
 
 #
 # PR-AWS-CLD-VPC-001
 #
 
-default vpc_subnet_autoip = true
+default vpc_subnet_autoip = null
 
-vpc_subnet_autoip = false {
-    # lower(resource.Type) == "aws::ec2::subnet"
+vpc_subnet_autoip_violation {
     subnets := input.Subnets[_]
     subnets.MapPublicIpOnLaunch == true
+}
+
+vpc_subnet_autoip {
+    input.Subnets
+    not vpc_subnet_autoip_violation
+}
+
+vpc_subnet_autoip = false {
+    vpc_subnet_autoip_violation
 }
 
 vpc_subnet_autoip_err = "AWS VPC subnets should not allow automatic public IP assignment" {
@@ -34,13 +44,21 @@ vpc_subnet_autoip_metadata := {
 # PR-AWS-CLD-VPC-002
 #
 
-default eip_instance_link = true
+default eip_instance_link = null
 
-eip_instance_link = false {
-    # lower(resource.Type) == "aws::ec2::eip"
+eip_instance_link_violation {
     addresses = input.Addresses[_]
     lower(addresses.domain) == "vpc"
     not addresses.instanceId
+}
+
+eip_instance_link {
+    input.Addresses
+    not eip_instance_link_violation
+}
+
+eip_instance_link = false {
+    eip_instance_link_violation
 }
 
 eip_instance_link_err = "Ensure all EIP addresses allocated to a VPC are attached related EC2 instances" {
@@ -64,12 +82,20 @@ eip_instance_link_metadata := {
 # PR-AWS-CLD-VPC-003
 #
 
-default vpc_endpoint_manual_acceptance = true
+default vpc_endpoint_manual_acceptance = null
 
-vpc_endpoint_manual_acceptance = false {
-    # lower(resource.Type) == "aws::ec2::vpcendpointservice"
+vpc_endpoint_manual_acceptance_violation {
     VpcEndpointConnections := input.VpcEndpointConnections[_]
     lower(VpcEndpointConnections.vpcEndpointState) != "available"
+}
+
+vpc_endpoint_manual_acceptance {
+    input.VpcEndpointConnections
+    not vpc_endpoint_manual_acceptance_violation
+}
+
+vpc_endpoint_manual_acceptance = false {
+    vpc_endpoint_manual_acceptance_violation
 }
 
 vpc_endpoint_manual_acceptance_err = "Ensure VPC endpoint service is configured for manual acceptance" {
@@ -93,12 +119,21 @@ vpc_endpoint_manual_acceptance_metadata := {
 # PR-AWS-CLD-VPC-004
 # aws::ec2::vpc
 
-default default_vpc_not_used = true
+default default_vpc_not_used = null
 
-default_vpc_not_used = false {
+default_vpc_not_used_violation {
     vpc := input.Vpcs[_]
     vpc.IsDefault == true
     lower(vpc.State) == "available"
+}
+
+default_vpc_not_used {
+    input.Vpcs
+    not default_vpc_not_used_violation
+}
+
+default_vpc_not_used = false {
+    default_vpc_not_used_violation
 }
 
 default_vpc_not_used_err = "Ensure default VPC is not being used." {
@@ -122,11 +157,20 @@ default_vpc_not_used_metadata := {
 # PR-AWS-CLD-VPC-005
 # aws::ec2::vpcpeeringconnection
 
-default vpc_peering_connection_inactive = true
+default vpc_peering_connection_inactive = null
 
-vpc_peering_connection_inactive = false {
+vpc_peering_connection_inactive_violation {
     VpcPeeringConnection := input.VpcPeeringConnections[_]
     lower(VpcPeeringConnection.Status.Code) == "active"
+}
+
+vpc_peering_connection_inactive {
+    input.VpcPeeringConnections
+    not vpc_peering_connection_inactive_violation
+}
+
+vpc_peering_connection_inactive = false {
+    vpc_peering_connection_inactive_violation
 }
 
 vpc_peering_connection_inactive_err = "Ensure VPC peering connection is not active." {
@@ -150,9 +194,9 @@ vpc_peering_connection_inactive_metadata := {
 # PR-AWS-CLD-VPC-006
 # aws::ec2::vpcendpoint
 
-default vpc_policy_not_overly_permissive = true
+default vpc_policy_not_overly_permissive = null
 
-vpc_policy_not_overly_permissive = false {
+vpc_policy_not_overly_permissive_violation {
     VpcEndpoint := input.VpcEndpoints[_]
     policy := json.unmarshal(VpcEndpoint.PolicyDocument)
     statement := policy.Statement[i]
@@ -162,7 +206,7 @@ vpc_policy_not_overly_permissive = false {
     not statement.Condition
 }
 
-vpc_policy_not_overly_permissive = false {
+vpc_policy_not_overly_permissive_violation {
     VpcEndpoint := input.VpcEndpoints[_]
     policy := json.unmarshal(VpcEndpoint.PolicyDocument)
     statement := policy.Statement[i]
@@ -172,7 +216,7 @@ vpc_policy_not_overly_permissive = false {
     not statement.Condition
 }
 
-vpc_policy_not_overly_permissive = false {
+vpc_policy_not_overly_permissive_violation {
     VpcEndpoint := input.VpcEndpoints[_]
     policy := json.unmarshal(VpcEndpoint.PolicyDocument)
     statement := policy.Statement[i]
@@ -182,7 +226,7 @@ vpc_policy_not_overly_permissive = false {
     not statement.Condition
 }
 
-vpc_policy_not_overly_permissive = false {
+vpc_policy_not_overly_permissive_violation {
     VpcEndpoint := input.VpcEndpoints[_]
     policy := json.unmarshal(VpcEndpoint.PolicyDocument)
     statement := policy.Statement[i]
@@ -192,7 +236,7 @@ vpc_policy_not_overly_permissive = false {
     not statement.Condition
 }
 
-vpc_policy_not_overly_permissive = false {
+vpc_policy_not_overly_permissive_violation {
     VpcEndpoint := input.VpcEndpoints[_]
     policy := json.unmarshal(VpcEndpoint.PolicyDocument)
     statement := policy.Statement[i]
@@ -202,7 +246,7 @@ vpc_policy_not_overly_permissive = false {
     not statement.Condition
 }
 
-vpc_policy_not_overly_permissive = false {
+vpc_policy_not_overly_permissive_violation {
     VpcEndpoint := input.VpcEndpoints[_]
     policy := json.unmarshal(VpcEndpoint.PolicyDocument)
     statement := policy.Statement[i]
@@ -210,6 +254,15 @@ vpc_policy_not_overly_permissive = false {
     statement.Principal.AWS[_] = "*"
     contains(lower(statement.Action[_]), "*")
     not statement.Condition
+}
+
+vpc_policy_not_overly_permissive {
+    input.VpcEndpoints
+    not vpc_policy_not_overly_permissive_violation
+}
+
+vpc_policy_not_overly_permissive = false {
+    vpc_policy_not_overly_permissive_violation
 }
 
 vpc_policy_not_overly_permissive_err = "Ensure AWS VPC endpoint policy is not overly permissive." {

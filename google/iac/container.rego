@@ -1937,7 +1937,7 @@ secret_encrypted_metadata := {
 # PR-GCP-GDF-CLT-035
 #
 
-default private_endpoint_disabled = true
+default private_endpoint_disabled = null
 
 gc_issue["private_endpoint_disabled"] {
     resource := input.resources[i]

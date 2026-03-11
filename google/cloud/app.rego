@@ -1,8 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+import data.common
 
 
 #
@@ -13,12 +11,12 @@ default app_engine_iap_disabled = null
 
 gc_issue["app_engine_iap_disabled"] {
     upper(input.servingStatus) == "SERVING"
-    has_property(input, "iap")
+    common.has_property(input, "iap")
 }
 
 gc_issue["app_engine_iap_disabled"] {
     upper(input.servingStatus) == "SERVING"
-    count([c | has_property(input.iap, "enabled"); c=1]) == 0
+    count([c | common.has_property(input.iap, "enabled"); c=1]) == 0
 }
 
 gc_issue["app_engine_iap_disabled"] {

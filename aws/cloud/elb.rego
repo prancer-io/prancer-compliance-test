@@ -1,8 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+import data.common
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
@@ -11,7 +9,7 @@ has_property(parent_object, target_property) {
 # PR-AWS-CLD-ELB-001
 #
 
-default elb_insecure_cipher = true
+default elb_insecure_cipher = null
 
 insecure_ciphers := [
     "DHE-RSA-AES128-SHA",
@@ -86,20 +84,27 @@ insecure_ciphers := [
     "EXP-KRB5-RC4-MD5"
 ]
 
-elb_insecure_cipher = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+elb_insecure_cipher_violation {
     PolicyDescriptions := input.PolicyDescriptions[_]
     PolicyAttributeDescriptions := PolicyDescriptions.PolicyAttributeDescriptions[k]
     lower(PolicyAttributeDescriptions.AttributeName) == lower(insecure_ciphers[_])
     PolicyAttributeDescriptions.AttributeValue == true
 }
 
-elb_insecure_cipher = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+elb_insecure_cipher_violation {
     PolicyDescriptions := input.PolicyDescriptions[_]
     PolicyAttributeDescriptions := PolicyDescriptions.PolicyAttributeDescriptions[k]
     lower(PolicyAttributeDescriptions.AttributeName) == lower(insecure_ciphers[_])
     lower(PolicyAttributeDescriptions.AttributeValue) == "true"
+}
+
+elb_insecure_cipher {
+    input.PolicyDescriptions
+    not elb_insecure_cipher_violation
+}
+
+elb_insecure_cipher = false {
+    elb_insecure_cipher_violation
 }
 
 elb_insecure_cipher_err = "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with insecure ciphers" {
@@ -122,7 +127,7 @@ elb_insecure_cipher_metadata := {
 # PR-AWS-CLD-ELB-002
 #
 
-default elb_insecure_protocol = true
+default elb_insecure_protocol = null
 
 insecure_ssl_protocols := [
     "Protocol-SSLv3",
@@ -130,20 +135,27 @@ insecure_ssl_protocols := [
     "Protocol-TLSv1.1"
 ]
 
-elb_insecure_protocol = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+elb_insecure_protocol_violation {
     PolicyDescriptions := input.PolicyDescriptions[_]
     PolicyAttributeDescriptions := PolicyDescriptions.PolicyAttributeDescriptions[k]
     lower(PolicyAttributeDescriptions.AttributeName) == lower(insecure_ssl_protocols[_])
     PolicyAttributeDescriptions.AttributeValue == true
 }
 
-elb_insecure_protocol = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+elb_insecure_protocol_violation {
     PolicyDescriptions := input.PolicyDescriptions[_]
     PolicyAttributeDescriptions := PolicyDescriptions.PolicyAttributeDescriptions[k]
     lower(PolicyAttributeDescriptions.AttributeName) == lower(insecure_ssl_protocols[_])
     lower(PolicyAttributeDescriptions.AttributeValue) == "true"
+}
+
+elb_insecure_protocol {
+    input.PolicyDescriptions
+    not elb_insecure_protocol_violation
+}
+
+elb_insecure_protocol = false {
+    elb_insecure_protocol_violation
 }
 
 elb_insecure_protocol_err = "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol" {
@@ -166,12 +178,21 @@ elb_insecure_protocol_metadata := {
 # PR-AWS-CLD-ELB-003
 #
 
-default elb_access_log = true
+default elb_access_log = null
 
-elb_access_log = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+
+elb_access_log_violation {
     LoadBalancerAttributes := input.LoadBalancerAttributes[_]
     not LoadBalancerAttributes.AccessLog.Enabled
+}
+
+elb_access_log {
+    input.LoadBalancerAttributes
+    not elb_access_log_violation
+}
+
+elb_access_log = false {
+    elb_access_log_violation
 }
 
 elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabled" {
@@ -194,13 +215,22 @@ elb_access_log_metadata := {
 # PR-AWS-CLD-ELB-004
 #
 
-default elb_conn_drain = true
+default elb_conn_drain = null
 
 
-elb_conn_drain = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+
+elb_conn_drain_violation {
     LoadBalancerAttributes := input.LoadBalancerAttributes[_]
     not LoadBalancerAttributes.ConnectionDraining.Enabled
+}
+
+elb_conn_drain {
+    input.LoadBalancerAttributes
+    not elb_conn_drain_violation
+}
+
+elb_conn_drain = false {
+    elb_conn_drain_violation
 }
 
 elb_conn_drain_err = "AWS Elastic Load Balancer (Classic) with connection draining disabled" {
@@ -223,12 +253,21 @@ elb_conn_drain_metadata := {
 # PR-AWS-CLD-ELB-005
 #
 
-default elb_crosszone = true
+default elb_crosszone = null
 
-elb_crosszone = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+
+elb_crosszone_violation {
     LoadBalancerAttributes := input.LoadBalancerAttributes[_]
     not LoadBalancerAttributes.CrossZoneLoadBalancing.Enabled
+}
+
+elb_crosszone {
+    input.LoadBalancerAttributes
+    not elb_crosszone_violation
+}
+
+elb_crosszone = false {
+    elb_crosszone_violation
 }
 
 elb_crosszone_err = "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled" {
@@ -251,18 +290,26 @@ elb_crosszone_metadata := {
 # PR-AWS-CLD-ELB-008
 #
 
-default elb_not_in_use = true
+default elb_not_in_use = null
 
-elb_not_in_use = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+
+elb_not_in_use_violation {
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
     not LoadBalancerDescriptions.Instances
 }
 
-elb_not_in_use = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+elb_not_in_use_violation {
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
     count(LoadBalancerDescriptions.Instances) == 0
+}
+
+elb_not_in_use {
+    input.LoadBalancerDescriptions
+    not elb_not_in_use_violation
+}
+
+elb_not_in_use = false {
+    elb_not_in_use_violation
 }
 
 elb_not_in_use_err = "AWS Elastic Load Balancer (ELB) not in use" {
@@ -285,26 +332,32 @@ elb_not_in_use_metadata := {
 # PR-AWS-CLD-ELB-009
 #
 
-default elb_alb_logs = true
+default elb_alb_logs = null
 
-elb_alb_logs = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+
+elb_alb_logs_violation {
     not input.LoadBalancerAttributes
 }
 
-elb_alb_logs = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+elb_alb_logs_violation {
     not input.LoadBalancerAttributes.AccessLog.Enabled
 }
 
-elb_alb_logs = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+elb_alb_logs_violation {
     not input.LoadBalancerAttributes.AccessLog.S3BucketName
 }
 
-elb_alb_logs = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+elb_alb_logs_violation {
     count(input.LoadBalancerAttributes.AccessLog.S3BucketName) == 0
+}
+
+elb_alb_logs {
+    input.LoadBalancerAttributes
+    not elb_alb_logs_violation
+}
+
+elb_alb_logs = false {
+    elb_alb_logs_violation
 }
 
 elb_alb_logs_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
@@ -327,20 +380,28 @@ elb_alb_logs_metadata := {
 # PR-AWS-CLD-ELB-010
 #
 
-default elb_listener_ssl = true
+default elb_listener_ssl = null
 
-elb_listener_ssl = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+
+elb_listener_ssl_violation {
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
     ListenerDescriptions := LoadBalancerDescriptions.ListenerDescriptions[_]
     count(ListenerDescriptions.Listener.SSLCertificateId) == 0
 }
 
-elb_listener_ssl = false {
-    # lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+elb_listener_ssl_violation {
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
     ListenerDescriptions := LoadBalancerDescriptions.ListenerDescriptions[_]
     not ListenerDescriptions.Listener.SSLCertificateId
+}
+
+elb_listener_ssl {
+    input.LoadBalancerDescriptions
+    not elb_listener_ssl_violation
+}
+
+elb_listener_ssl = false {
+    elb_listener_ssl_violation
 }
 
 elb_listener_ssl_err = "AWS Elastic Load Balancer with listener TLS/SSL disabled" {
@@ -363,12 +424,21 @@ elb_listener_ssl_metadata := {
 # PR-AWS-CLD-ELB-011
 #
 
-default elb_over_https = true
+default elb_over_https = null
 
-elb_over_https = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+
+elb_over_https_violation {
     Listeners := input.Listeners
     lower(Listeners.Protocol) == "http"
+}
+
+elb_over_https {
+    input.Listeners
+    not elb_over_https_violation
+}
+
+elb_over_https = false {
+    elb_over_https_violation
 }
 
 elb_over_https_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
@@ -392,32 +462,38 @@ elb_over_https_metadata := {
 # PR-AWS-CLD-ELB-012
 #
 
-default elb_v2_listener_ssl = true
+default elb_v2_listener_ssl = null
 
-elb_v2_listener_ssl = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+
+elb_v2_listener_ssl_violation {
     Listeners := input.Listeners
     not Listeners.Certificates
 }
 
-elb_v2_listener_ssl = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+elb_v2_listener_ssl_violation {
     Listeners := input.Listeners
     count(Listeners.Certificates) == 0
 }
 
-elb_v2_listener_ssl = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+elb_v2_listener_ssl_violation {
     Listeners := input.Listeners
     Certificates := Listeners.Certificates[j]
     not Certificates.CertificateArn
 }
 
-elb_v2_listener_ssl = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+elb_v2_listener_ssl_violation {
     Listeners := input.Listeners
     Certificates := Listeners.Certificates[j]
     count(Certificates.CertificateArn) == 0
+}
+
+elb_v2_listener_ssl {
+    input.Listeners
+    not elb_v2_listener_ssl_violation
+}
+
+elb_v2_listener_ssl = false {
+    elb_v2_listener_ssl_violation
 }
 
 elb_v2_listener_ssl_err = "AWS Elastic Load Balancer V2 (ELBV2) with listener TLS/SSL disabled" {
@@ -441,13 +517,22 @@ elb_v2_listener_ssl_metadata := {
 # PR-AWS-CLD-ELB-013
 #
 
-default elb_drop_invalid_header = true
+default elb_drop_invalid_header = null
 
-elb_drop_invalid_header = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+
+elb_drop_invalid_header_violation {
     Attribute := input.Attributes[j]
     lower(Attribute.Key) == "routing.http.drop_invalid_header_fields.enabled"
     lower(Attribute.Value) != "true"
+}
+
+elb_drop_invalid_header {
+    input.Attributes
+    not elb_drop_invalid_header_violation
+}
+
+elb_drop_invalid_header = false {
+    elb_drop_invalid_header_violation
 }
 
 elb_drop_invalid_header_err = "Ensure that Application Load Balancer drops HTTP headers" {
@@ -471,24 +556,31 @@ elb_drop_invalid_header_metadata := {
 # PR-AWS-CLD-ELB-014
 #
 
-default elb_certificate_listner_arn = true
+default elb_certificate_listner_arn = null
 
-elb_certificate_listner_arn = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
+
+elb_certificate_listner_arn_violation {
     Listeners := input.Listeners[_]
     not Listeners.ListenerArn
 }
 
-elb_certificate_listner_arn = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
+elb_certificate_listner_arn_violation {
     Listeners := input.Listeners[_]
     Listeners.ListenerArn == null
 }
 
-elb_certificate_listner_arn = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
+elb_certificate_listner_arn_violation {
     Listeners := input.Listeners[_]
     count(Listeners.ListenerArn) == 0
+}
+
+elb_certificate_listner_arn {
+    input.Listeners
+    not elb_certificate_listner_arn_violation
+}
+
+elb_certificate_listner_arn = false {
+    elb_certificate_listner_arn_violation
 }
 
 elb_certificate_listner_arn_err = "Ensure the ELBv2 ListenerCertificate ListenerArn value is defined" {
@@ -513,20 +605,27 @@ elb_certificate_listner_arn_metadata := {
 #
 
 
-default elb_listener_sslpolicy = true
+default elb_listener_sslpolicy = null
 
 allowed_ssl_policies = ["ELBSecurityPolicy-TLS-1-2-2017-01", "ELBSecurityPolicy-TLS-1-2-Ext-2018-06", "ELBSecurityPolicy-FS-1-2-2019-08", "ELBSecurityPolicy-FS-1-2-Res-2019-08", "ELBSecurityPolicy-FS-1-2-Res-2020-10"]
 
-elb_listener_sslpolicy = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+elb_listener_sslpolicy_violation {
     Listeners := input.Listeners[_]
     not Listeners.SslPolicy
 }
 
-elb_listener_sslpolicy = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+elb_listener_sslpolicy_violation {
     Listeners := input.Listeners[_]
     count([c | lower(Listeners.SslPolicy) == lower(allowed_ssl_policies[_]); c:=1 ]) == 0
+}
+
+elb_listener_sslpolicy {
+    input.Listeners
+    not elb_listener_sslpolicy_violation
+}
+
+elb_listener_sslpolicy = false {
+    elb_listener_sslpolicy_violation
 }
 
 elb_listener_sslpolicy_err = "Ensure the Load Balancer Listener SSLPolicy is set to at least one value from approved policies" {
@@ -550,24 +649,31 @@ elb_listener_sslpolicy_metadata := {
 # PR-AWS-CLD-ELB-016
 #
 
-default elb_subnet = true
+default elb_subnet = null
 
-elb_subnet = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+
+elb_subnet_violation {
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
 	not LoadBalancerDescriptions.Subnets
 }
 
-elb_subnet = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+elb_subnet_violation {
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
 	LoadBalancerDescriptions.Subnets == null
 }
 
-elb_subnet = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+elb_subnet_violation {
     LoadBalancerDescriptions := input.LoadBalancerDescriptions[_]
 	count(LoadBalancerDescriptions.Subnets) == 0
+}
+
+elb_subnet {
+    input.LoadBalancerDescriptions
+    not elb_subnet_violation
+}
+
+elb_subnet = false {
+    elb_subnet_violation
 }
 
 elb_subnet_err = "Ensure one of Subnets or SubnetMappings is defined for loadbalancer" {
@@ -590,24 +696,31 @@ elb_subnet_metadata := {
 # PR-AWS-CLD-ELB-017
 #
 
-default elb_scheme = true
+default elb_scheme = null
 
-elb_scheme = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+
+elb_scheme_violation {
     LoadBalancers := input.LoadBalancers[_]
     not LoadBalancers.Scheme
 }
 
-elb_scheme = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+elb_scheme_violation {
     LoadBalancers := input.LoadBalancers[_]
     lower(LoadBalancers.Scheme) != "internal"
 }
 
-elb_scheme = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+elb_scheme_violation {
     LoadBalancers := input.LoadBalancers[_]
     LoadBalancers.Scheme == null
+}
+
+elb_scheme {
+    input.LoadBalancers
+    not elb_scheme_violation
+}
+
+elb_scheme = false {
+    elb_scheme_violation
 }
 
 elb_scheme_err = "Ensure LoadBalancer scheme is set to internal and not internet-facing" {
@@ -631,18 +744,26 @@ elb_scheme_metadata := {
 # PR-AWS-CLD-ELB-018
 #
 
-default elb_type = true
+default elb_type = null
 
-elb_type = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+
+elb_type_violation {
     LoadBalancers := input.LoadBalancers[_]
     lower(LoadBalancers.Type) != "application"
 }
 
-elb_type = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+elb_type_violation {
     LoadBalancers := input.LoadBalancers[_]
     LoadBalancers.Type == null
+}
+
+elb_type {
+    input.LoadBalancers
+    not elb_type_violation
+}
+
+elb_type = false {
+    elb_type_violation
 }
 
 elb_type_err = "Ensure all load balancers created are application load balancers" {
@@ -666,22 +787,30 @@ elb_type_metadata := {
 # PR-AWS-CLD-ELB-019
 #
 
-default elb_protocol = true
+default elb_protocol = null
 
-elb_protocol = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::targetgroup"
+
+elb_protocol_violation {
     TargetGroups := input.TargetGroups
     TargetTypeAllowed := ["instance" , "ip"]
     lower(TargetGroups.TargetType) == TargetTypeAllowed[_]
     lower(TargetGroups.Protocol) != "https"
 }
 
-elb_protocol = false {
-    # lower(resource.Type) == "aws::elasticloadbalancingv2::targetgroup"
+elb_protocol_violation {
     TargetGroups := input.TargetGroups
     TargetTypeAllowed := ["instance" , "ip"]
     lower(TargetGroups.TargetType) == TargetTypeAllowed[_]
     not TargetGroups.Protocol
+}
+
+elb_protocol {
+    input.TargetGroups
+    not elb_protocol_violation
+}
+
+elb_protocol = false {
+    elb_protocol_violation
 }
 
 elb_protocol_err = "Ensure LoadBalancer TargetGroup Protocol values are limited to HTTPS" {
@@ -705,12 +834,22 @@ elb_protocol_metadata := {
 # aws::elasticloadbalancingv2::loadbalancer
 #
 
-default elb_deletion_protection = true
+default elb_deletion_protection = null
 
-elb_deletion_protection = false {
+
+elb_deletion_protection_violation {
     Attribute := input.Attributes[j]
     lower(Attribute.Key) == "deletion_protection.enabled"
     lower(Attribute.Value) == "false"
+}
+
+elb_deletion_protection {
+    input.Attributes
+    not elb_deletion_protection_violation
+}
+
+elb_deletion_protection = false {
+    elb_deletion_protection_violation
 }
 
 elb_deletion_protection_err = "Ensure that AWS Elastic Load Balancer v2 (ELBv2) has deletion protection feature enabled" {
@@ -735,11 +874,21 @@ elb_deletion_protection_metadata := {
 # aws::elasticloadbalancingv2::loadbalancer
 #
 
-default elb_gateway_load_balancer = true
+default elb_gateway_load_balancer = null
 
-elb_gateway_load_balancer = false {
+
+elb_gateway_load_balancer_violation {
     LoadBalancer := input.LoadBalancers[_]
     lower(LoadBalancer.Type) == "gateway"
+}
+
+elb_gateway_load_balancer {
+    input.LoadBalancers
+    not elb_gateway_load_balancer_violation
+}
+
+elb_gateway_load_balancer = false {
+    elb_gateway_load_balancer_violation
 }
 
 elb_gateway_load_balancer_err = "Ensure that AWS ensure Gateway Load Balancer (GWLB) is not being used" {
@@ -764,11 +913,21 @@ elb_gateway_load_balancer_metadata := {
 # aws::elasticloadbalancing::loadbalancer
 #
 
-default elb_internet_facing_load_balancer = true
+default elb_internet_facing_load_balancer = null
 
-elb_internet_facing_load_balancer = false {
+
+elb_internet_facing_load_balancer_violation {
     LoadBalancer := input.LoadBalancers[_]
     contains(lower(LoadBalancer.Scheme), "internet-facing")
+}
+
+elb_internet_facing_load_balancer {
+    input.LoadBalancers
+    not elb_internet_facing_load_balancer_violation
+}
+
+elb_internet_facing_load_balancer = false {
+    elb_internet_facing_load_balancer_violation
 }
 
 elb_internet_facing_load_balancer_err = "Ensure Internet facing Classic ELB is not in use" {
@@ -794,11 +953,21 @@ elb_internet_facing_load_balancer_metadata := {
 # aws::elasticloadbalancingv2::loadbalancer
 #
 
-default elb2_internet_facing_load_balancer = true
+default elb2_internet_facing_load_balancer = null
 
-elb2_internet_facing_load_balancer = false {
+
+elb2_internet_facing_load_balancer_violation {
     LoadBalancer := input.LoadBalancers[_]
     contains(lower(LoadBalancer.Scheme), "internet-facing")
+}
+
+elb2_internet_facing_load_balancer {
+    input.LoadBalancers
+    not elb2_internet_facing_load_balancer_violation
+}
+
+elb2_internet_facing_load_balancer = false {
+    elb2_internet_facing_load_balancer_violation
 }
 
 elb2_internet_facing_load_balancer_err = "Ensure Internet facing Classic ELBV2 is not in use" {
@@ -823,12 +992,22 @@ elb2_internet_facing_load_balancer_metadata := {
 # aws::elasticloadbalancingv2::loadbalancer
 #
 
-default elb_waf_enabled = true
+default elb_waf_enabled = null
 
-elb_waf_enabled = false {
+
+elb_waf_enabled_violation {
     Attribute := input.Attributes[j]
     lower(Attribute.Key) == "waf.fail_open.enabled"
     lower(Attribute.Value) == "false"
+}
+
+elb_waf_enabled {
+    input.Attributes
+    not elb_waf_enabled_violation
+}
+
+elb_waf_enabled = false {
+    elb_waf_enabled_violation
 }
 
 elb_waf_enabled_err = "Ensure that public facing ELB has WAF attached" {
@@ -852,11 +1031,21 @@ elb_waf_enabled_metadata := {
 # PR-AWS-CLD-ELB-025
 # aws::elasticloadbalancingv2::listener
 
-default elbv2_ssl_negotiation_policy = true
+default elbv2_ssl_negotiation_policy = null
 
-elbv2_ssl_negotiation_policy = false {
+
+elbv2_ssl_negotiation_policy_violation {
     Listener := input.Listeners[_]
     contains(Listener.SslPolicy, "ELBSecurityPolicy-TLS-1-0-2015-04")
+}
+
+elbv2_ssl_negotiation_policy {
+    input.Listeners
+    not elbv2_ssl_negotiation_policy_violation
+}
+
+elbv2_ssl_negotiation_policy = false {
+    elbv2_ssl_negotiation_policy_violation
 }
 
 elbv2_ssl_negotiation_policy_err = "Ensure Elastic Load Balancer v2 (ELBv2) SSL negotiation policy is not configured with weak ciphers." {
@@ -881,15 +1070,25 @@ elbv2_ssl_negotiation_policy_metadata := {
 # aws::elasticloadbalancingv2::listener
 # aws::certificatemanager::certificate
 
-default elbv2_tls_certificate = true
+default elbv2_tls_certificate = null
 
-elbv2_tls_certificate = false {
+
+elbv2_tls_certificate_violation {
     X := input.TEST_ELB_02[_]
     Listener := X.Listeners[_]
     elb_Certificate := Listener.Certificates[_]
-    has_property(elb_Certificate, "CertificateArn")
+    common.has_property(elb_Certificate, "CertificateArn")
     Y := input.TEST_ACM[_]
     elb_Certificate.CertificateArn != Y.Certificate.CertificateArn
+}
+
+elbv2_tls_certificate {
+    input.TEST_ELB_02
+    not elbv2_tls_certificate_violation
+}
+
+elbv2_tls_certificate = false {
+    elbv2_tls_certificate_violation
 }
 
 elbv2_tls_certificate_err = "Ensure AWS ELB has GS created TLS certificate attached to it via ACM." {
@@ -915,9 +1114,10 @@ elbv2_tls_certificate_metadata := {
 # aws::elasticloadbalancingv2::listener
 # aws::elasticloadbalancingv2::loadbalancer
 
-default elbv2_tls_listener = true
+default elbv2_tls_listener = null
 
-elbv2_tls_listener = false {
+
+elbv2_tls_listener_violation {
     X := input.TEST_ELB_06[_]
     LoadBalancer := X.LoadBalancers[_]
     LoadBalancer.Type == "network"
@@ -925,6 +1125,15 @@ elbv2_tls_listener = false {
     Listener := Y.Listeners[_]
     LoadBalancer.LoadBalancerArn == Listener.LoadBalancerArn
     Listener.Protocol != "TLS"
+}
+
+elbv2_tls_listener {
+    input.TEST_ELB_06
+    not elbv2_tls_listener_violation
+}
+
+elbv2_tls_listener = false {
+    elbv2_tls_listener_violation
 }
 
 elbv2_tls_listener_err = "Ensure Network ELB is using TLS listeners." {
@@ -950,9 +1159,10 @@ elbv2_tls_listener_metadata := {
 # aws::elasticloadbalancingv2::listener
 # aws::elasticloadbalancingv2::loadbalancer
 
-default elbv2_check_certificate = true
+default elbv2_check_certificate = null
 
-elbv2_check_certificate = false {
+
+elbv2_check_certificate_violation {
     X := input.TEST_ELB_06[_]
     LoadBalancer := X.LoadBalancers[_]
     LoadBalancer.Type == "application"
@@ -960,17 +1170,26 @@ elbv2_check_certificate = false {
     Listener := Y.Listeners[_]
     LoadBalancer.LoadBalancerArn == Listener.LoadBalancerArn
     Certificate := Listener.Certificates[_]
-    not has_property(Certificate, "CertificateArn")
+    not common.has_property(Certificate, "CertificateArn")
 }
 
-elbv2_check_certificate = false {
+elbv2_check_certificate_violation {
     X := input.TEST_ELB_06[_]
     LoadBalancer := X.LoadBalancers[_]
     LoadBalancer.Type == "application"
     Y := input.TEST_ELB_02[_]
     Listener := Y.Listeners[_]
     LoadBalancer.LoadBalancerArn == Listener.LoadBalancerArn
-    not has_property(Listener, "Certificates")
+    not common.has_property(Listener, "Certificates")
+}
+
+elbv2_check_certificate {
+    input.TEST_ELB_06
+    not elbv2_check_certificate_violation
+}
+
+elbv2_check_certificate = false {
+    elbv2_check_certificate_violation
 }
 
 elbv2_check_certificate_err = "Ensure AWS application ELB has TLS certificate attached to it." {
@@ -996,9 +1215,10 @@ elbv2_check_certificate_metadata := {
 # aws::ec2::securitygroup
 # aws::elasticloadbalancingv2::loadbalancer
 
-default elbv2_egress_rule = true
+default elbv2_egress_rule = null
 
-elbv2_egress_rule = false {
+
+elbv2_egress_rule_violation {
     X := input.TEST_ELB_06[_]
     LoadBalancer := X.LoadBalancers[_]
     elb_security_group := LoadBalancer.SecurityGroups[_]
@@ -1008,6 +1228,15 @@ elbv2_egress_rule = false {
     IpRange := IpPermissions_Egress.IpRanges[_]
     IpRange.CidrIp == "0.0.0.0/0"
     elb_security_group == SecurityGroup.GroupId
+}
+
+elbv2_egress_rule {
+    input.TEST_ELB_06
+    not elbv2_egress_rule_violation
+}
+
+elbv2_egress_rule = false {
+    elbv2_egress_rule_violation
 }
 
 elbv2_egress_rule_err = "Ensure egress rule for AWS ELB security group is not set to '0.0.0.0/0'." {
@@ -1033,9 +1262,10 @@ elbv2_egress_rule_metadata := {
 # aws::ec2::securitygroup
 # aws::elasticloadbalancingv2::loadbalancer
 
-default elbv2_invalid_security_group = true
+default elbv2_invalid_security_group = null
 
-elbv2_invalid_security_group = false {
+
+elbv2_invalid_security_group_violation {
     X := input.TEST_ELB_06[_]
     LoadBalancer := X.LoadBalancers[_]
     elb_security_group := LoadBalancer.SecurityGroups[_]
@@ -1045,7 +1275,7 @@ elbv2_invalid_security_group = false {
     elb_security_group == SecurityGroup.GroupId
 }
 
-elbv2_invalid_security_group = false {
+elbv2_invalid_security_group_violation {
     X := input.TEST_ELB_06[_]
     LoadBalancer := X.LoadBalancers[_]
     elb_security_group := LoadBalancer.SecurityGroups[_]
@@ -1053,6 +1283,15 @@ elbv2_invalid_security_group = false {
     SecurityGroup := Y.SecurityGroups[_]
     count(SecurityGroup.IpPermissionsEgress) == 0
     elb_security_group == SecurityGroup.GroupId
+}
+
+elbv2_invalid_security_group {
+    input.TEST_ELB_06
+    not elbv2_invalid_security_group_violation
+}
+
+elbv2_invalid_security_group = false {
+    elbv2_invalid_security_group_violation
 }
 
 elbv2_invalid_security_group_err = "Ensure AWS Elastic Load Balancer v2 (ELBv2) is not configured with invalid security groups." {
@@ -1078,9 +1317,10 @@ elbv2_invalid_security_group_metadata := {
 # aws::elasticloadbalancingv2::listener
 # aws::elasticloadbalancingv2::loadbalancer
 
-default nlb_v2_security_policy = true
+default nlb_v2_security_policy = null
 
-nlb_v2_security_policy = false {
+
+nlb_v2_security_policy_violation {
     X := input.TEST_ELB_06[_]
     LoadBalancer := X.LoadBalancers[_]
     LoadBalancer.Type == "network"
@@ -1090,7 +1330,7 @@ nlb_v2_security_policy = false {
     Listener.SslPolicy != "ELBSecurityPolicy-TLS-1-2-Ext-2018-06" 
 }
 
-nlb_v2_security_policy = false {
+nlb_v2_security_policy_violation {
     X := input.TEST_ELB_06[_]
     LoadBalancer := X.LoadBalancers[_]
     LoadBalancer.Type == "network"
@@ -1098,6 +1338,15 @@ nlb_v2_security_policy = false {
     Listener := Y.Listeners[_]
     Listener.Protocol == "TLS"
     Listener.SslPolicy != "ELBSecurityPolicy-FS-1-2-Res-2020-10" 
+}
+
+nlb_v2_security_policy {
+    input.TEST_ELB_06
+    not nlb_v2_security_policy_violation
+}
+
+nlb_v2_security_policy = false {
+    nlb_v2_security_policy_violation
 }
 
 nlb_v2_security_policy_err = "Ensure AWS Network Load Balancer (NLB) is using the latest predefined security policy." {

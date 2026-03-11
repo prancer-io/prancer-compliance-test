@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://learn.microsoft.com/en-us/azure/templates/microsoft.eventgrid/topics?pivots=deployment-language-arm-template
 
@@ -139,7 +137,7 @@ azure_issue["event_grid_domain_configured_with_private_endpoint"] {
     lower(resource.type) == "microsoft.eventgrid/domains"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.eventgrid/domains/privateendpointconnections";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.privateLinkServiceConnectionState.status) == "approved";
               c := 1]) == 0
 }
@@ -213,7 +211,7 @@ azure_issue["event_grid_topic_configured_with_private_endpoint"] {
     lower(resource.type) == "microsoft.eventgrid/topics"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.eventgrid/topics/privateendpointconnections";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.privateLinkServiceConnectionState.status) == "approved";
               c := 1]) == 0
 }

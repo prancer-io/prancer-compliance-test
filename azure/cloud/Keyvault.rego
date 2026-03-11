@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults
 
@@ -35,7 +33,7 @@ azure_issue["KeyVault"] {
     lower(resource.type) == "microsoft.keyvault/vaults"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.keyvault/vaults/accesspolicies";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               count(r.properties.accessPolicies[_].permissions.keys) == 0;
               count(r.properties.accessPolicies[_].permissions.secrets) == 0;
               count(r.properties.accessPolicies[_].permissions.certificates) == 0;

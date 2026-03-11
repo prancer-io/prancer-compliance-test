@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways
 # Todo: Along with existing feature, need to update this policy based on https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways/vpnconnections?tabs=json
@@ -33,7 +31,7 @@ azure_issue["vpn_encrypt"] {
     lower(resource.type) == "microsoft.network/vpngateways"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.network/vpngateways/vpnconnections";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.ipsecPolicies[_].ipsecEncryption) != "none";
               c := 1]) == 0
 }

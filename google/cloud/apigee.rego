@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # Common function to extract policy names
 policy_names(policy_type) = {name |
     policy := input.policies[_]

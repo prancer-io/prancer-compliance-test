@@ -1,15 +1,25 @@
 package rule
 
+import data.common
+
 #
 # PR-AWS-CLD-CB-001
 #
 
-default codebuild_encryption_disable = true
+default codebuild_encryption_disable = null
 
-codebuild_encryption_disable = false {
-    # lower(resource.Type) == "aws::codebuild::project"
+codebuild_encryption_disable_violation {
     projects := input.projects[_]
     projects.artifacts.encryptionDisabled == true
+}
+
+codebuild_encryption_disable {
+    input.projects
+    not codebuild_encryption_disable_violation
+}
+
+codebuild_encryption_disable = false {
+    codebuild_encryption_disable_violation
 }
 
 codebuild_encryption_disable_err = "Ensure CodeBuild project Artifact encryption is not disabled" {
@@ -33,18 +43,25 @@ codebuild_encryption_disable_metadata := {
 # PR-AWS-CLD-CB-002
 #
 
-default codebuild_encryption = true
+default codebuild_encryption = null
 
-codebuild_encryption = false {
-    # lower(resource.Type) == "aws::codebuild::project"
+codebuild_encryption_violation {
     projects := input.projects[_]
     not projects.encryptionKey
 }
 
-codebuild_encryption = false {
-    # lower(resource.Type) == "aws::codebuild::project"
+codebuild_encryption_violation {
     projects := input.projects[_]
     count(projects.encryptionKey) == 0
+}
+
+codebuild_encryption {
+    input.projects
+    not codebuild_encryption_violation
+}
+
+codebuild_encryption = false {
+    codebuild_encryption_violation
 }
 
 codebuild_encryption_err = "Ensure that CodeBuild projects are encrypted using CMK" {
@@ -68,17 +85,24 @@ codebuild_encryption_metadata := {
 # PR-AWS-CLD-CP-001
 #
 
-default cp_artifact_encrypt = true
+default cp_artifact_encrypt = null
 
-cp_artifact_encrypt = false {
-    # lower(resource.Type) == "aws::codepipeline::pipeline"
+cp_artifact_encrypt_violation {
     not input.pipeline.artifactStore.encryptionKey.id
 }
 
-cp_artifact_encrypt = false {
-    # lower(resource.Type) == "aws::codepipeline::pipeline"
+cp_artifact_encrypt_violation {
     input.pipeline.artifactStore.encryptionKey.id
     lower(input.pipeline.artifactStore.encryptionKey.type) != "kms"
+}
+
+cp_artifact_encrypt {
+    input.pipeline
+    not cp_artifact_encrypt_violation
+}
+
+cp_artifact_encrypt = false {
+    cp_artifact_encrypt_violation
 }
 
 cp_artifact_encrypt_err = "Code Pipeline Encryption at rest with customer-managed key (CMK) should be enabled" {
@@ -101,19 +125,26 @@ cp_artifact_encrypt_metadata := {
 # PR-AWS-CLD-CD-001
 #
 
-default deploy_compute_platform = true
+default deploy_compute_platform = null
 
-deploy_compute_platform = false {
-    # lower(resource.Type) == "aws::codedeploy::application"
+deploy_compute_platform_violation {
     applicationsInfo := input.applicationsInfo[_]
     not applicationsInfo.computePlatform
 }
 
-deploy_compute_platform = false {
-    # lower(resource.Type) == "aws::codedeploy::application"
+deploy_compute_platform_violation {
     applicationsInfo := input.applicationsInfo[_]
     lower(applicationsInfo.computePlatform) != "ecs"
     lower(applicationsInfo.computePlatform) != "lambda"
+}
+
+deploy_compute_platform {
+    input.applicationsInfo
+    not deploy_compute_platform_violation
+}
+
+deploy_compute_platform = false {
+    deploy_compute_platform_violation
 }
 
 deploy_compute_platform_err = "AWS CodeDeploy application compute platform must be ECS or Lambda" {

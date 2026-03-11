@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances
 
 #
@@ -9,17 +11,14 @@ package rule
 default sql_labels = null
 
 gc_issue["sql_labels"] {
-    # lower(resource.type) == "sqladmin.v1beta4.instance"
     not input.settings.userLabels
 }
 
 gc_issue["sql_labels"] {
-    # lower(resource.type) == "sqladmin.v1beta4.instance"
-    count(input.settings.userLabels) == 0
+    not common.non_empty(input.settings.userLabels)
 }
 
 sql_labels {
-    # lower(input.resources[i].type) == "sqladmin.v1beta4.instance"
     not gc_issue["sql_labels"]
 }
 
@@ -51,18 +50,15 @@ default sql_binary_logs = null
 
 
 gc_attribute_absence["sql_binary_logs"] {
-    # lower(resource.type) == "sqladmin.v1beta4.instance"
     not input.databaseVersion
 }
 
 gc_issue["sql_binary_logs"] {
-    # lower(resource.type) == "sqladmin.v1beta4.instance"
     contains(lower(input.databaseVersion), "mysql")
     not input.settings.backupConfiguration.binaryLogEnabled
 }
 
 sql_binary_logs {
-    # lower(input.resources[i].type) == "sqladmin.v1beta4.instance"
     not gc_issue["sql_binary_logs"]
     not gc_attribute_absence["sql_binary_logs"]
 }
@@ -103,17 +99,14 @@ default sql_backup = null
 
 
 gc_attribute_absence["sql_backup"] {
-    # lower(resource.type) == "sqladmin.v1beta4.instance"
     not input.settings.backupConfiguration
 }
 
 gc_issue["sql_backup"] {
-    # lower(resource.type) == "sqladmin.v1beta4.instance"
     not input.settings.backupConfiguration.enabled
 }
 
 sql_backup {
-    # lower(input.resources[i].type) == "sqladmin.v1beta4.instance"
     not gc_issue["sql_backup"]
     not gc_attribute_absence["sql_backup"]
 }
@@ -154,17 +147,14 @@ default sql_ssl = null
 
 
 gc_attribute_absence["sql_ssl"] {
-    # lower(resource.type) == "sqladmin.v1beta4.instance"
     not input.settings.ipConfiguration.requireSsl
 }
 
 gc_issue["sql_ssl"] {
-    # lower(resource.type) == "sqladmin.v1beta4.instance"
     input.settings.ipConfiguration.requireSsl != true
 }
 
 sql_ssl {
-    # lower(input.resources[i].type) == "sqladmin.v1beta4.instance"
     not gc_issue["sql_ssl"]
     not gc_attribute_absence["sql_ssl"]
 }
@@ -205,27 +195,22 @@ default sql_exposed = null
 
 
 gc_attribute_absence["sql_exposed"] {
-    # lower(resource.type) == "sqladmin.v1beta4.instance"
     not input.settings.ipConfiguration.authorizedNetworks
 }
 
 gc_issue["sql_exposed"] {
-    # lower(resource.type) == "sqladmin.v1beta4.instance"
     input.settings.ipConfiguration.authorizedNetworks[j] == "0.0.0.0"
 }
 
 gc_issue["sql_exposed"] {
-    # lower(resource.type) == "sqladmin.v1beta4.instance"
     input.settings.ipConfiguration.authorizedNetworks[j] == "0.0.0.0/0"
 }
 
 gc_issue["sql_exposed"] {
-    # lower(resource.type) == "sqladmin.v1beta4.instance"
     input.settings.ipConfiguration.authorizedNetworks[j] == "::/0"
 }
 
 sql_exposed {
-    # lower(input.resources[i].type) == "sqladmin.v1beta4.instance"
     not gc_issue["sql_exposed"]
     not gc_attribute_absence["sql_exposed"]
 }

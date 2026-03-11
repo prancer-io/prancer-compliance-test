@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions
 
@@ -33,7 +31,7 @@ azure_issue["vm_protection"] {
     lower(resource.type) == "microsoft.compute/virtualmachines"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.compute/virtualmachines/extensions";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(resource.properties.type) == "iaasantimalware";
               c := 1]) == 0
 }

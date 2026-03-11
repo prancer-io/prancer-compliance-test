@@ -1,13 +1,24 @@
 package rule
 
+import data.common
+
 #
 # PR-AWS-CLD-AMF-001
 # AWS::Amplify::App
 
-default amplify_basic_auth = true
+default amplify_basic_auth = null
+
+amplify_basic_auth_violation {
+    not input.app.enableBasicAuth
+}
+
+amplify_basic_auth {
+    input.app
+    not amplify_basic_auth_violation
+}
 
 amplify_basic_auth = false {
-    not input.app.enableBasicAuth
+    amplify_basic_auth_violation
 }
 
 amplify_basic_auth_err = "Ensure AWS amplify has basic auth enabled." {
@@ -30,11 +41,20 @@ amplify_basic_auth_metadata := {
 # PR-AWS-CLD-AMF-002
 # AWS::Amplify::App
 
-default amplify_pr_preview = true
+default amplify_pr_preview = null
 
-amplify_pr_preview = false {
+amplify_pr_preview_violation {
     input.app.enableAutoBranchCreation == true
     not input.app.autoBranchCreationConfig.enablePullRequestPreview
+}
+
+amplify_pr_preview {
+    input.app
+    not amplify_pr_preview_violation
+}
+
+amplify_pr_preview = false {
+    amplify_pr_preview_violation
 }
 
 amplify_pr_preview_err = "Ensure AWS amplify has Pull Request Preview enabled." {

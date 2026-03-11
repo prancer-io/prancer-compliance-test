@@ -1,9 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
+import data.common
 
 # https://learn.microsoft.com/en-us/rest/api/cdn/custom-domains/create?tabs=HTTP#customdomain
 #

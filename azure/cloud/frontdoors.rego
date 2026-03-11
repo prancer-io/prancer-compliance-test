@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/frontdoorwebapplicationfirewallpolicies?tabs=json
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/frontdoors?tabs=json
 #

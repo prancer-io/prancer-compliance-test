@@ -1,18 +1,25 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+import data.common
 
 #
 # PR-AWS-CLD-AMI-001
 #
 
-default ami_public_access_disabled = true
+default ami_public_access_disabled = null
 
-ami_public_access_disabled = false {
+ami_public_access_disabled_violation {
     images := input.Images[_]
     images.Public
+}
+
+ami_public_access_disabled {
+    input.Images
+    not ami_public_access_disabled_violation
+}
+
+ami_public_access_disabled = false {
+    ami_public_access_disabled_violation
 }
 
 ami_public_access_disabled_err = "AMI public access currently not disabled. Please remediate." {
@@ -36,13 +43,21 @@ ami_public_access_disabled_metadata := {
 # PR-AWS-CLD-AMI-002
 #
 
-default ami_not_infected_with_mining_malware = true
+default ami_not_infected_with_mining_malware = null
 
-ami_not_infected_with_mining_malware = false {
-    # lower(resource.Type) == "aws::ec2::instance"
+ami_not_infected_with_mining_malware_violation {
     images := input.Images[_]
     contains(lower(images.Platform), "windows")
     contains(lower(images.ImageId), "ami-1e542176")
+}
+
+ami_not_infected_with_mining_malware {
+    input.Images
+    not ami_not_infected_with_mining_malware_violation
+}
+
+ami_not_infected_with_mining_malware = false {
+    ami_not_infected_with_mining_malware_violation
 }
 
 ami_not_infected_with_mining_malware_err = "AMI currently infected with mining malware. Please remediate." {
@@ -66,11 +81,20 @@ ami_not_infected_with_mining_malware_metadata := {
 # PR-AWS-CLD-AMI-003
 #
 
-default ami_not_older_than_180_days = true
+default ami_not_older_than_180_days = null
 
-ami_not_older_than_180_days = false {
+ami_not_older_than_180_days_violation {
     images := input.Images[_]
 	(time.parse_rfc3339_ns(images.CreationDate) - time.now_ns()) > 15552000000000000
+}
+
+ami_not_older_than_180_days {
+    input.Images
+    not ami_not_older_than_180_days_violation
+}
+
+ami_not_older_than_180_days = false {
+    ami_not_older_than_180_days_violation
 }
 
 ami_not_older_than_180_days_err = "180 days older AMIs found. Please remediate." {

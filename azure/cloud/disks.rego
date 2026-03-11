@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks
 
 #
@@ -19,7 +21,6 @@ default disk_encrypt = null
 azure_attribute_absence["disk_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/disks"
-    #resource.properties.osType
     not resource.properties.encryptionSettingsCollection.enabled
 }
 
@@ -27,7 +28,6 @@ azure_attribute_absence["disk_encrypt"] {
 azure_issue["disk_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/disks"
-    #resource.properties.osType
     resource.properties.encryptionSettingsCollection.enabled != true
 }
 

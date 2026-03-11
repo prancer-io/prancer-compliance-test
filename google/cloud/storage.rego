@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://cloud.google.com/storage/docs/json_api/v1/buckets
 
 #
@@ -9,17 +11,14 @@ package rule
 default storage_encrypt = null
 
 gc_attribute_absence["storage_encrypt"] {
-    # lower(resource.type) == "storage.v1.bucket"
     not input.encryption.defaultKmsKeyName
 }
 
 gc_issue["storage_encrypt"] {
-    # lower(resource.type) == "storage.v1.bucket"
-    count(input.encryption.defaultKmsKeyName) == 0
+    not common.non_empty(input.encryption.defaultKmsKeyName)
 }
 
 storage_encrypt {
-    # lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_encrypt"]
     not gc_attribute_absence["storage_encrypt"]
 }
@@ -59,18 +58,15 @@ storage_encrypt_metadata := {
 default storage_versioning = null
 
 gc_attribute_absence["storage_versioning"] {
-    # lower(resource.type) == "storage.v1.bucket"
     not input.versioning
 }
 
 gc_issue["storage_versioning"] {
-    # lower(resource.type) == "storage.v1.bucket"
     contains(lower(input.acl[j].email), "logging")
     not input.versioning.enabled
 }
 
 storage_versioning {
-    # lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_versioning"]
     not gc_attribute_absence["storage_versioning"]
 }
@@ -110,18 +106,15 @@ storage_versioning_metadata := {
 default storage_stack_logging = null
 
 gc_attribute_absence["storage_stack_logging"] {
-    # lower(resource.type) == "storage.v1.bucket"
     not input.logging
 }
 
 gc_issue["storage_stack_logging"] {
-    # lower(resource.type) == "storage.v1.bucket"
     contains(lower(input.acl[j].email), "logging")
     not input.logging
 }
 
 storage_stack_logging {
-    # lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_stack_logging"]
     not gc_attribute_absence["storage_stack_logging"]
 }
@@ -161,12 +154,10 @@ storage_stack_logging_metadata := {
 default storage_logging = null
 
 gc_issue["storage_logging"] {
-    # lower(resource.type) == "storage.v1.bucket"
     not input.logging.logBucket
 }
 
 storage_logging {
-    # lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_logging"]
 }
 
@@ -197,26 +188,22 @@ storage_logging_metadata := {
 default storage_public_logs = null
 
 gc_attribute_absence["storage_public_logs"] {
-    # lower(resource.type) == "storage.v1.bucket"
     not input.acl
 }
 
 gc_issue["storage_public_logs"] {
-    # lower(resource.type) == "storage.v1.bucket"
     acl := input.acl[j]
     contains(lower(acl.email), "logging")
     contains(lower(acl.entity), "allusers")
 }
 
 gc_issue["storage_public_logs"] {
-    # lower(resource.type) == "storage.v1.bucket"
     acl := input.acl[j]
     contains(lower(acl.email), "logging")
     contains(lower(acl.entity), "allauthenticatedusers")
 }
 
 storage_public_logs {
-    # lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_public_logs"]
     not gc_attribute_absence["storage_public_logs"]
 }
@@ -257,22 +244,18 @@ storage_public_logs_metadata := {
 default storage_uniform_bucket_access_enabled = null
 
 gc_attribute_absence["storage_uniform_bucket_access_enabled"] {
-    # lower(resource.type) == "storage.v1.bucket"
     not input.iamConfiguration
 }
 
 gc_attribute_absence["storage_uniform_bucket_access_enabled"] {
-    # lower(resource.type) == "storage.v1.bucket"
     not input.iamConfiguration.uniformBucketLevelAccess
 }
 
 gc_issue["storage_uniform_bucket_access_enabled"] {
-    # lower(resource.type) == "storage.v1.bucket"
     not input.iamConfiguration.uniformBucketLevelAccess.enabled
 }
 
 storage_uniform_bucket_access_enabled {
-    # lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_uniform_bucket_access_enabled"]
     not gc_attribute_absence["storage_uniform_bucket_access_enabled"]
 }
@@ -311,17 +294,14 @@ storage_uniform_bucket_access_enabled_metadata := {
 default storage_event_based_hold = null
 
 gc_attribute_absence["storage_event_based_hold"] {
-    # lower(resource.type) == "storage.v1.bucket"
     not input.defaultEventBasedHold
 }
 
 gc_issue["storage_event_based_hold"] {
-    # lower(resource.type) == "storage.v1.bucket"
     input.defaultEventBasedHold == false   
 }
 
 storage_event_based_hold {
-    # lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_event_based_hold"]
     not gc_attribute_absence["storage_event_based_hold"]
 }
@@ -360,17 +340,14 @@ storage_event_based_hold_metadata := {
 default storage_logging_itself = null
 
 gc_attribute_absence["storage_logging_itself"] {
-    # lower(resource.type) == "storage.v1.bucket"
     not input.logging.logBucket
 }
 
 gc_issue["storage_logging_itself"] {
-    # lower(resource.type) == "storage.v1.bucket"
     input.logging.logBucket == input.name
 }
 
 storage_logging_itself {
-    # lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_logging_itself"]
     not gc_attribute_absence["storage_logging_itself"]
 }
@@ -410,17 +387,14 @@ storage_logging_itself_metadata := {
 default storage_bucket_lock = null
 
 gc_issue["storage_bucket_lock"] {
-    # lower(resource.type) == "storage.v1.bucket"
     not input.retentionPolicy.isLocked
 }
 
 gc_issue["storage_bucket_lock"] {
-    # lower(resource.type) == "storage.v1.bucket"
     lower(input.retentionPolicy.isLocked) == "false"
 }
 
 storage_bucket_lock {
-    # lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_bucket_lock"]
 }
 
@@ -452,23 +426,15 @@ storage_bucket_lock_metadata := {
 default storage_bucket_retention_enable = null
 
 gc_issue["storage_bucket_retention_enable"] {
-    # lower(resource.type) == "storage.v1.bucket"
     not input.retentionPolicy
 }
 
 gc_issue["storage_bucket_retention_enable"] {
-    # lower(resource.type) == "storage.v1.bucket"
-    input.retentionPolicy == null
-}
-
-gc_issue["storage_bucket_retention_enable"] {
-    # lower(resource.type) == "storage.v1.bucket"
-    count(input.retentionPolicy) == 0
+    not common.non_empty(input.retentionPolicy)
 }
 
 
 storage_bucket_retention_enable {
-    # lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_bucket_retention_enable"]
 }
 
@@ -501,7 +467,6 @@ default bucket_not_accessible_publicly_to_all_authenticated_users = null
 
 gcp_issue["bucket_not_accessible_publicly_to_all_authenticated_users"] {
     binding := input.bindings[_]
-    #contains(lower(binding.role), "roles/storage")
     contains(lower(binding.members[_]), "allauthenticatedusers")
 }
 
@@ -538,7 +503,6 @@ default bucket_not_accessible_publicly_to_all_users = null
 
 gcp_issue["bucket_not_accessible_publicly_to_all_users"] {
     binding := input.bindings[_]
-    #contains(lower(binding.role), "roles/storage")
     contains(lower(binding.members[_]), "allusers")
 }
 

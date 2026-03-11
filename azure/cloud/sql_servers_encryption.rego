@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/encryptionprotector
 
@@ -31,7 +29,7 @@ azure_issue["serverKeyType"] {
     lower(resource.type) == "microsoft.sql/servers"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/encryptionprotector";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.serverKeyType) == "azurekeyvault";
               c := 1]) == 0
 }

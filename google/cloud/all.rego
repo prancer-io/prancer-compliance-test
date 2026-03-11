@@ -1,5 +1,6 @@
 package rule
 
+import data.common
 
 #
 # PR-GCP-CLD-PUB-001
@@ -8,22 +9,10 @@ package rule
 default pub_sub_kms = null
 
 gc_issue["pub_sub_kms"] {
-    # lower(resource.type) == "pubsub.v1.topic"
-    not input.kmsKeyName
-}
-
-gc_issue["pub_sub_kms"] {
-    # lower(resource.type) == "pubsub.v1.topic"
-    count(input.kmsKeyName) == 0
-}
-
-gc_issue["pub_sub_kms"] {
-    # lower(resource.type) == "pubsub.v1.topic"
-    input.kmsKeyName == null
+    not common.non_empty(input.kmsKeyName)
 }
 
 pub_sub_kms {
-    # lower(input.resources[i].type) == "pubsub.v1.topic"
     not gc_issue["pub_sub_kms"]
 }
 

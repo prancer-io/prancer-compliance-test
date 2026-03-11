@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html
 
 
@@ -7,9 +9,11 @@ package rule
 # PR-AWS-CLD-SG-001
 #
 
-default port_135 = true
+default port_135 = null
 
-port_135 = false {
+
+
+port_135_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -17,7 +21,7 @@ port_135 = false {
     to_number(ingress.ToPort) >= 135
 }
 
-port_135 = false {
+port_135_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -25,6 +29,14 @@ port_135 = false {
     to_number(ingress.ToPort) >= 135
 }
 
+port_135 {
+    input.SecurityGroups
+    not port_135_violation
+}
+
+port_135 = false {
+    port_135_violation
+}
 port_135_err = "AWS Security Groups allow internet traffic from internet to Windows RPC port (135)" {
     not port_135
 }
@@ -45,9 +57,11 @@ port_135_metadata := {
 # PR-AWS-CLD-SG-002
 #
 
-default port_137 = true
+default port_137 = null
 
-port_137 = false {
+
+
+port_137_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -55,7 +69,7 @@ port_137 = false {
     to_number(ingress.ToPort) >= 137
 }
 
-port_137 = false {
+port_137_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -63,6 +77,14 @@ port_137 = false {
     to_number(ingress.ToPort) >= 137
 }
 
+port_137 {
+    input.SecurityGroups
+    not port_137_violation
+}
+
+port_137 = false {
+    port_137_violation
+}
 port_137_err = "AWS Security Groups allow internet traffic from internet to NetBIOS port (137)" {
     not port_137
 }
@@ -83,9 +105,11 @@ port_137_metadata := {
 # PR-AWS-CLD-SG-003
 #
 
-default port_138 = true
+default port_138 = null
 
-port_138 = false {
+
+
+port_138_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -93,7 +117,7 @@ port_138 = false {
     to_number(ingress.ToPort) >= 138
 }
 
-port_138 = false {
+port_138_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -101,6 +125,14 @@ port_138 = false {
     to_number(ingress.ToPort) >= 138
 }
 
+port_138 {
+    input.SecurityGroups
+    not port_138_violation
+}
+
+port_138 = false {
+    port_138_violation
+}
 port_138_err = "AWS Security Groups allow internet traffic from internet to NetBIOS port (138)" {
     not port_138
 }
@@ -121,9 +153,11 @@ port_138_metadata := {
 # PR-AWS-CLD-SG-004
 #
 
-default port_1433 = true
+default port_1433 = null
 
-port_1433 = false {
+
+
+port_1433_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -131,7 +165,7 @@ port_1433 = false {
     to_number(ingress.ToPort) >= 1433
 }
 
-port_1433 = false {
+port_1433_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -139,6 +173,14 @@ port_1433 = false {
     to_number(ingress.ToPort) >= 1433
 }
 
+port_1433 {
+    input.SecurityGroups
+    not port_1433_violation
+}
+
+port_1433 = false {
+    port_1433_violation
+}
 port_1433_err = "AWS Security Groups allow internet traffic from internet to SQLServer port (1433)" {
     not port_1433
 }
@@ -159,9 +201,11 @@ port_1433_metadata := {
 # PR-AWS-CLD-SG-005
 #
 
-default port_1434 = true
+default port_1434 = null
 
-port_1434 = false {
+
+
+port_1434_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -169,7 +213,7 @@ port_1434 = false {
     to_number(ingress.ToPort) >= 1434
 }
 
-port_1434 = false {
+port_1434_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -177,6 +221,14 @@ port_1434 = false {
     to_number(ingress.ToPort) >= 1434
 }
 
+port_1434 {
+    input.SecurityGroups
+    not port_1434_violation
+}
+
+port_1434 = false {
+    port_1434_violation
+}
 port_1434_err = "AWS Security Groups allow internet traffic from internet to SQLServer port (1434)" {
     not port_1434
 }
@@ -197,9 +249,11 @@ port_1434_metadata := {
 # PR-AWS-CLD-SG-006
 #
 
-default port_20 = true
+default port_20 = null
 
-port_20 = false {
+
+
+port_20_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -207,7 +261,7 @@ port_20 = false {
     to_number(ingress.ToPort) >= 20
 }
 
-port_20 = false {
+port_20_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -215,6 +269,14 @@ port_20 = false {
     to_number(ingress.ToPort) >= 20
 }
 
+port_20 {
+    input.SecurityGroups
+    not port_20_violation
+}
+
+port_20 = false {
+    port_20_violation
+}
 port_20_err = "AWS Security Groups allow internet traffic from internet to FTP-Data port (20)" {
     not port_20
 }
@@ -235,9 +297,11 @@ port_20_metadata := {
 # PR-AWS-CLD-SG-007
 #
 
-default port_21 = true
+default port_21 = null
 
-port_21 = false {
+
+
+port_21_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -245,7 +309,7 @@ port_21 = false {
     to_number(ingress.ToPort) >= 21
 }
 
-port_21 = false {
+port_21_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -253,6 +317,14 @@ port_21 = false {
     to_number(ingress.ToPort) >= 21
 }
 
+port_21 {
+    input.SecurityGroups
+    not port_21_violation
+}
+
+port_21 = false {
+    port_21_violation
+}
 port_21_err = "AWS Security Groups allow internet traffic from internet to FTP port (21)" {
     not port_21
 }
@@ -273,9 +345,11 @@ port_21_metadata := {
 # PR-AWS-CLD-SG-008
 #
 
-default port_22 = true
+default port_22 = null
 
-port_22 = false {
+
+
+port_22_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -283,7 +357,7 @@ port_22 = false {
     to_number(ingress.ToPort) >= 22
 }
 
-port_22 = false {
+port_22_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -291,6 +365,14 @@ port_22 = false {
     to_number(ingress.ToPort) >= 22
 }
 
+port_22 {
+    input.SecurityGroups
+    not port_22_violation
+}
+
+port_22 = false {
+    port_22_violation
+}
 port_22_err = "AWS Security Groups allow internet traffic to SSH port (22)" {
     not port_22
 }
@@ -311,9 +393,11 @@ port_22_metadata := {
 # PR-AWS-CLD-SG-009
 #
 
-default port_23 = true
+default port_23 = null
 
-port_23 = false {
+
+
+port_23_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -321,7 +405,7 @@ port_23 = false {
     to_number(ingress.ToPort) >= 23
 }
 
-port_23 = false {
+port_23_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -329,6 +413,14 @@ port_23 = false {
     to_number(ingress.ToPort) >= 23
 }
 
+port_23 {
+    input.SecurityGroups
+    not port_23_violation
+}
+
+port_23 = false {
+    port_23_violation
+}
 port_23_err = "AWS Security Groups allow internet traffic from internet to Telnet port (23)" {
     not port_23
 }
@@ -349,9 +441,11 @@ port_23_metadata := {
 # PR-AWS-CLD-SG-010
 #
 
-default port_25 = true
+default port_25 = null
 
-port_25 = false {
+
+
+port_25_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -359,7 +453,7 @@ port_25 = false {
     to_number(ingress.ToPort) >= 25
 }
 
-port_25 = false {
+port_25_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -367,6 +461,14 @@ port_25 = false {
     to_number(ingress.ToPort) >= 25
 }
 
+port_25 {
+    input.SecurityGroups
+    not port_25_violation
+}
+
+port_25 = false {
+    port_25_violation
+}
 port_25_err = "AWS Security Groups allow internet traffic from internet to SMTP port (25)" {
     not port_25
 }
@@ -387,9 +489,11 @@ port_25_metadata := {
 # PR-AWS-CLD-SG-011
 #
 
-default port_3306 = true
+default port_3306 = null
 
-port_3306 = false {
+
+
+port_3306_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -397,7 +501,7 @@ port_3306 = false {
     to_number(ingress.ToPort) >= 3306
 }
 
-port_3306 = false {
+port_3306_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -405,6 +509,14 @@ port_3306 = false {
     to_number(ingress.ToPort) >= 3306
 }
 
+port_3306 {
+    input.SecurityGroups
+    not port_3306_violation
+}
+
+port_3306 = false {
+    port_3306_violation
+}
 port_3306_err = "AWS Security Groups allow internet traffic from internet to MYSQL port (3306)" {
     not port_3306
 }
@@ -425,9 +537,11 @@ port_3306_metadata := {
 # PR-AWS-CLD-SG-012
 #
 
-default port_3389 = true
+default port_3389 = null
 
-port_3389 = false {
+
+
+port_3389_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -435,7 +549,7 @@ port_3389 = false {
     to_number(ingress.ToPort) >= 3389
 }
 
-port_3389 = false {
+port_3389_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -443,6 +557,14 @@ port_3389 = false {
     to_number(ingress.ToPort) >= 3389
 }
 
+port_3389 {
+    input.SecurityGroups
+    not port_3389_violation
+}
+
+port_3389 = false {
+    port_3389_violation
+}
 port_3389_err = "AWS Security Groups allow internet traffic from internet to RDP port (3389)" {
     not port_3389
 }
@@ -463,9 +585,11 @@ port_3389_metadata := {
 # PR-AWS-CLD-SG-013
 #
 
-default port_4333 = true
+default port_4333 = null
 
-port_4333 = false {
+
+
+port_4333_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -473,7 +597,7 @@ port_4333 = false {
     to_number(ingress.ToPort) >= 4333
 }
 
-port_4333 = false {
+port_4333_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -481,6 +605,14 @@ port_4333 = false {
     to_number(ingress.ToPort) >= 4333
 }
 
+port_4333 {
+    input.SecurityGroups
+    not port_4333_violation
+}
+
+port_4333 = false {
+    port_4333_violation
+}
 port_4333_err = "AWS Security Groups allow internet traffic from internet to MSQL port (4333)" {
     not port_4333
 }
@@ -501,9 +633,11 @@ port_4333_metadata := {
 # PR-AWS-CLD-SG-014
 #
 
-default port_445 = true
+default port_445 = null
 
-port_445 = false {
+
+
+port_445_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -511,7 +645,7 @@ port_445 = false {
     to_number(ingress.ToPort) >= 445
 }
 
-port_445 = false {
+port_445_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -519,6 +653,14 @@ port_445 = false {
     to_number(ingress.ToPort) >= 445
 }
 
+port_445 {
+    input.SecurityGroups
+    not port_445_violation
+}
+
+port_445 = false {
+    port_445_violation
+}
 port_445_err = "AWS Security Groups allow internet traffic from internet to CIFS port (445)" {
     not port_445
 }
@@ -539,9 +681,11 @@ port_445_metadata := {
 # PR-AWS-CLD-SG-015
 #
 
-default port_53 = true
+default port_53 = null
 
-port_53 = false {
+
+
+port_53_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -549,7 +693,7 @@ port_53 = false {
     to_number(ingress.ToPort) >= 53
 }
 
-port_53 = false {
+port_53_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -557,6 +701,14 @@ port_53 = false {
     to_number(ingress.ToPort) >= 53
 }
 
+port_53 {
+    input.SecurityGroups
+    not port_53_violation
+}
+
+port_53 = false {
+    port_53_violation
+}
 port_53_err = "AWS Security Groups allow internet traffic from internet to DNS port (53)" {
     not port_53
 }
@@ -577,9 +729,11 @@ port_53_metadata := {
 # PR-AWS-CLD-SG-016
 #
 
-default port_5432 = true
+default port_5432 = null
 
-port_5432 = false {
+
+
+port_5432_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -587,7 +741,7 @@ port_5432 = false {
     to_number(ingress.ToPort) >= 5432
 }
 
-port_5432 = false {
+port_5432_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -595,6 +749,14 @@ port_5432 = false {
     to_number(ingress.ToPort) >= 5432
 }
 
+port_5432 {
+    input.SecurityGroups
+    not port_5432_violation
+}
+
+port_5432 = false {
+    port_5432_violation
+}
 port_5432_err = "AWS Security Groups allow internet traffic from internet to PostgreSQL port (5432)" {
     not port_5432
 }
@@ -615,9 +777,11 @@ port_5432_metadata := {
 # PR-AWS-CLD-SG-017
 #
 
-default port_5500 = true
+default port_5500 = null
 
-port_5500 = false {
+
+
+port_5500_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -625,7 +789,7 @@ port_5500 = false {
     to_number(ingress.ToPort) >= 5500
 }
 
-port_5500 = false {
+port_5500_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -633,6 +797,14 @@ port_5500 = false {
     to_number(ingress.ToPort) >= 5500
 }
 
+port_5500 {
+    input.SecurityGroups
+    not port_5500_violation
+}
+
+port_5500 = false {
+    port_5500_violation
+}
 port_5500_err = "AWS Security Groups allow internet traffic from internet to VNC Listener port (5500)" {
     not port_5500
 }
@@ -653,9 +825,11 @@ port_5500_metadata := {
 # PR-AWS-CLD-SG-018
 #
 
-default port_5900 = true
+default port_5900 = null
 
-port_5900 = false {
+
+
+port_5900_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -663,7 +837,7 @@ port_5900 = false {
     to_number(ingress.ToPort) >= 5900
 }
 
-port_5900 = false {
+port_5900_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -671,6 +845,14 @@ port_5900 = false {
     to_number(ingress.ToPort) >= 5900
 }
 
+port_5900 {
+    input.SecurityGroups
+    not port_5900_violation
+}
+
+port_5900 = false {
+    port_5900_violation
+}
 port_5900_err = "AWS Security Groups allow internet traffic from internet to VNC Server port (5900)" {
     not port_5900
 }
@@ -691,22 +873,32 @@ port_5900_metadata := {
 # PR-AWS-CLD-SG-019
 #
 
-default port_all = true
+default port_all = null
 
-port_all = false {
+
+
+port_all_violation {
     SecurityGroups := input.SecurityGroups[_]
     lower(SecurityGroups.GroupName) == "default"
     ingress := SecurityGroups.IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
 }
 
-port_all = false {
+port_all_violation {
     SecurityGroups := input.SecurityGroups[_]
     lower(SecurityGroups.GroupName) == "default"
     ingress := SecurityGroups.IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6 == "::/0"
 }
 
+port_all {
+    input.SecurityGroups
+    not port_all_violation
+}
+
+port_all = false {
+    port_all_violation
+}
 port_all_err = "AWS Default Security Group does not restrict all traffic" {
     not port_all
 }
@@ -727,22 +919,32 @@ port_all_metadata := {
 # PR-AWS-CLD-SG-020
 #
 
-default port_proto_all = true
+default port_proto_all = null
 
-port_proto_all = false {
+
+
+port_proto_all_violation {
     SecurityGroups := input.SecurityGroups[_]
-    lower(SecurityGroups.GroupName) == "default"
-    egress := SecurityGroups.IpPermissionsEgress[_]
-    egress.IpRanges[_].CidrIp == "0.0.0.0/0"
+    ingress := SecurityGroups.IpPermissions[_]
+    ingress.IpProtocol == "-1"
+    ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
+}
+
+port_proto_all_violation {
+    SecurityGroups := input.SecurityGroups[_]
+    ingress := SecurityGroups.IpPermissions[_]
+    ingress.IpProtocol == "-1"
+    ingress.Ipv6Ranges[_].CidrIpv6 == "::/0"
+}
+
+port_proto_all {
+    input.SecurityGroups
+    not port_proto_all_violation
 }
 
 port_proto_all = false {
-    SecurityGroups := input.SecurityGroups[_]
-    lower(SecurityGroups.GroupName) == "default"
-    egress := SecurityGroups.IpPermissionsEgress[_]
-    egress.Ipv6Ranges[_].CidrIpv6 == "::/0"
+    port_proto_all_violation
 }
-
 port_proto_all_err = "AWS Security Groups with Inbound rule overly permissive to All Traffic" {
     not port_proto_all
 }
@@ -763,9 +965,11 @@ port_proto_all_metadata := {
 # PR-AWS-CLD-SG-021
 #
 
-default port_69 = true
+default port_69 = null
 
-port_69 = false {
+
+
+port_69_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -773,7 +977,7 @@ port_69 = false {
     to_number(ingress.ToPort) >= 69
 }
 
-port_69 = false {
+port_69_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -781,6 +985,14 @@ port_69 = false {
     to_number(ingress.ToPort) >= 69
 }
 
+port_69 {
+    input.SecurityGroups
+    not port_69_violation
+}
+
+port_69 = false {
+    port_69_violation
+}
 port_69_err = "AWS Security Groups allow internet traffic from internet to Trivial File Transfer Protocol Port (69)" {
     not port_69
 }
@@ -802,19 +1014,28 @@ port_69_metadata := {
 # PR-AWS-CLD-SG-022
 #
 
-default sg_tag = true
+default sg_tag = null
 
-sg_tag = false {
+
+
+sg_tag_violation {
     SecurityGroups := input.SecurityGroups[_]
     count(SecurityGroups.Tags) == 0
 }
 
-sg_tag = false {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
+sg_tag_violation {
     SecurityGroups := input.SecurityGroups[_]
     not SecurityGroups.Tags
 }
 
+sg_tag {
+    input.SecurityGroups
+    not sg_tag_violation
+}
+
+sg_tag = false {
+    sg_tag_violation
+}
 sg_tag_err = "Ensure AWS resources that support tags have Tags" {
     not sg_tag
 }
@@ -836,32 +1057,40 @@ sg_tag_metadata := {
 # PR-AWS-CLD-SG-023
 #
 
-default sg_description_absent = true
+default sg_description_absent = null
 
-sg_description_absent = false {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
+
+
+
+
+sg_description_absent_violation {
     ipv6_range := input.SecurityGroups[_].IpPermissions[_].Ipv6Ranges[_]
     not ipv6_range.description
 }
 
-sg_description_absent = false {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
+sg_description_absent_violation {
     ipv6_range := input.SecurityGroups[_].IpPermissions[_].Ipv6Ranges[_]
     count(ipv6_range.description) == 0
 }
 
-sg_description_absent = false {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
+sg_description_absent_violation {
     ip_range := input.SecurityGroups[_].IpPermissions[_].IpRanges[_]
     not ip_range.description
 }
 
-sg_description_absent = false {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
+sg_description_absent_violation {
     ip_range := input.SecurityGroups[_].IpPermissions[_].IpRanges[_]
     count(ip_range.description) == 0
 }
 
+sg_description_absent {
+    input.SecurityGroups
+    not sg_description_absent_violation
+}
+
+sg_description_absent = false {
+    sg_description_absent_violation
+}
 sg_description_absent_err = "Ensure every Security Group rule contains a description" {
     not sg_description_absent
 }
@@ -883,9 +1112,11 @@ sg_description_absent_metadata := {
 # PR-AWS-CLD-SG-024
 #
 
-default port_9300 = true
+default port_9300 = null
 
-port_9300 = false {
+
+
+port_9300_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -893,7 +1124,7 @@ port_9300 = false {
     to_number(ingress.ToPort) >= 9300
 }
 
-port_9300 = false {
+port_9300_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -901,6 +1132,14 @@ port_9300 = false {
     to_number(ingress.ToPort) >= 9300
 }
 
+port_9300 {
+    input.SecurityGroups
+    not port_9300_violation
+}
+
+port_9300 = false {
+    port_9300_violation
+}
 port_9300_err = "AWS Security Groups allow internet traffic from internet to ElasticSearch Protocol Port (9300)" {
     not port_9300
 }
@@ -922,9 +1161,11 @@ port_9300_metadata := {
 # PR-AWS-CLD-SG-025
 #
 
-default port_5601 = true
+default port_5601 = null
 
-port_5601 = false {
+
+
+port_5601_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -932,7 +1173,7 @@ port_5601 = false {
     to_number(ingress.ToPort) >= 5601
 }
 
-port_5601 = false {
+port_5601_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -940,6 +1181,14 @@ port_5601 = false {
     to_number(ingress.ToPort) >= 5601
 }
 
+port_5601 {
+    input.SecurityGroups
+    not port_5601_violation
+}
+
+port_5601 = false {
+    port_5601_violation
+}
 port_5601_err = "AWS Security Groups allow internet traffic from internet to Kibana Protocol Port (5601)" {
     not port_5601
 }
@@ -961,9 +1210,11 @@ port_5601_metadata := {
 # PR-AWS-CLD-SG-026
 #
 
-default port_2379 = true
+default port_2379 = null
 
-port_2379 = false {
+
+
+port_2379_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -971,7 +1222,7 @@ port_2379 = false {
     to_number(ingress.ToPort) >= 2379
 }
 
-port_2379 = false {
+port_2379_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -979,6 +1230,14 @@ port_2379 = false {
     to_number(ingress.ToPort) >= 2379
 }
 
+port_2379 {
+    input.SecurityGroups
+    not port_2379_violation
+}
+
+port_2379 = false {
+    port_2379_violation
+}
 port_2379_err = "AWS Security Groups allow internet traffic from internet to etcd-client Protocol Port (2379)" {
     not port_2379
 }
@@ -999,9 +1258,11 @@ port_2379_metadata := {
 # PR-AWS-CLD-SG-027
 #
 
-default port_5986 = true
+default port_5986 = null
 
-port_5986 = false {
+
+
+port_5986_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -1009,7 +1270,7 @@ port_5986 = false {
     to_number(ingress.ToPort) >= 5986
 }
 
-port_5986 = false {
+port_5986_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -1017,6 +1278,14 @@ port_5986 = false {
     to_number(ingress.ToPort) >= 5986
 }
 
+port_5986 {
+    input.SecurityGroups
+    not port_5986_violation
+}
+
+port_5986 = false {
+    port_5986_violation
+}
 port_5986_err = "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986)" {
     not port_5986
 }
@@ -1038,9 +1307,11 @@ port_5986_metadata := {
 # PR-AWS-CLD-SG-028
 #
 
-default port_5985 = true
+default port_5985 = null
 
-port_5985 = false {
+
+
+port_5985_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -1048,7 +1319,7 @@ port_5985 = false {
     to_number(ingress.ToPort) >= 5985
 }
 
-port_5985 = false {
+port_5985_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -1056,6 +1327,14 @@ port_5985 = false {
     to_number(ingress.ToPort) >= 5985
 }
 
+port_5985 {
+    input.SecurityGroups
+    not port_5985_violation
+}
+
+port_5985 = false {
+    port_5985_violation
+}
 port_5985_err = "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985)" {
     not port_5985
 }
@@ -1077,9 +1356,11 @@ port_5985_metadata := {
 # PR-AWS-CLD-SG-029
 #
 
-default port_1270 = true
+default port_1270 = null
 
-port_1270 = false {
+
+
+port_1270_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -1087,7 +1368,7 @@ port_1270 = false {
     to_number(ingress.ToPort) >= 1270
 }
 
-port_1270 = false {
+port_1270_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -1095,6 +1376,14 @@ port_1270 = false {
     to_number(ingress.ToPort) >= 1270
 }
 
+port_1270 {
+    input.SecurityGroups
+    not port_1270_violation
+}
+
+port_1270 = false {
+    port_1270_violation
+}
 port_1270_err = "AWS Security Groups allow internet traffic from internet to Microsoft Operations Manager Protocol Port (1270)" {
     not port_1270
 }
@@ -1115,13 +1404,15 @@ port_1270_metadata := {
 # PR-AWS-CLD-SG-030
 #
 
-default db_exposed = true
+default db_exposed = null
 
 db_ports := [
     1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000
 ]
 
-db_exposed = false {
+
+
+db_exposed_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -1130,7 +1421,7 @@ db_exposed = false {
     to_number(ingress.ToPort) >= port
 }
 
-db_exposed = false {
+db_exposed_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -1139,6 +1430,14 @@ db_exposed = false {
     to_number(ingress.ToPort) >= port
 }
 
+db_exposed {
+    input.SecurityGroups
+    not db_exposed_violation
+}
+
+db_exposed = false {
+    db_exposed_violation
+}
 db_exposed_err = "Publicly exposed DB Ports" {
     not db_exposed
 }
@@ -1159,14 +1458,19 @@ db_exposed_metadata := {
 # PR-AWS-CLD-SG-031
 #
 
-default bitcoin_ports = true
+default bitcoin_ports = null
 
 bc_ports := [
     8332, 8333
 ]
 
-db_exposed = false {
-    # lower(input.Type) == "aws::ec2::securitygroup"	
+
+bitcoin_ports {
+    input.SecurityGroups
+}
+
+db_exposed_violation {
+    # lower(input.Type) == "aws::ec2::securitygroup"
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
     port := bc_ports[_]
@@ -1174,8 +1478,8 @@ db_exposed = false {
     to_number(ingress.ToPort) >= port
 }
 
-db_exposed = false {
-    # lower(input.Type) == "aws::ec2::securitygroup"	
+db_exposed_violation {
+    # lower(input.Type) == "aws::ec2::securitygroup"
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
     port := bc_ports[_]
@@ -1203,13 +1507,15 @@ bitcoin_ports_metadata := {
 # PR-AWS-CLD-SG-032
 #
 
-default ethereum_ports = true
+default ethereum_ports = null
 
 eth_ports := [
     8545, 30303
 ]
 
-ethereum_ports = false {
+
+
+ethereum_ports_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -1218,7 +1524,7 @@ ethereum_ports = false {
     to_number(ingress.ToPort) >= port
 }
 
-ethereum_ports = false {
+ethereum_ports_violation {
     # lower(input.Type) == "aws::ec2::securitygroup"	
     ingress := input.SecurityGroups[_].IpPermissions[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
@@ -1227,6 +1533,14 @@ ethereum_ports = false {
     to_number(ingress.ToPort) >= port
 }
 
+ethereum_ports {
+    input.SecurityGroups
+    not ethereum_ports_violation
+}
+
+ethereum_ports = false {
+    ethereum_ports_violation
+}
 ethereum_ports_err = "Instance is communicating with ports known to mine Ethereum" {
     not ethereum_ports
 }
@@ -1247,21 +1561,29 @@ ethereum_ports_metadata := {
 # PR-AWS-CLD-SG-033
 #
 
-default sg_vpc = true
+default sg_vpc = null
 
-sg_vpc = false {
+
+
+sg_vpc_violation {
     SecurityGroups := input.SecurityGroups[_]
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     not SecurityGroups.VpcId
 }
 
-sg_vpc = false {
+sg_vpc_violation {
     SecurityGroups := input.SecurityGroups[_]
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     not SecurityGroups.VpcId
     count(SecurityGroups.VpcId) == 0
 }
 
+sg_vpc {
+    input.SecurityGroups
+    not sg_vpc_violation
+}
+
+sg_vpc = false {
+    sg_vpc_violation
+}
 sg_vpc_err = "Ensure Security groups has attached to a VPCs" {
     not sg_vpc
 }
@@ -1282,20 +1604,26 @@ sg_vpc_metadata := {
 # PR-AWS-CLD-SG-034
 #
 
-default ec2_instance_has_restricted_access = true
+default ec2_instance_has_restricted_access = null
 
 ec2_instance_allowed_protocols := ["http", "https"]
 
 ec2_instance_allowed_ports := [443, 80]
 
-ec2_instance_has_restricted_access = false {
+
+ec2_instance_has_restricted_access_violation {
 	SecurityRule := input.SecurityGroupRules[_]
 	lower(SecurityRule.CidrIpv6) == "::/0"
     not is_secure["ipv6"]
 }
 
+ec2_instance_has_restricted_access_violation {
+	SecurityRule := input.SecurityGroupRules[_]
+	lower(SecurityRule.CidrIpv4) == "0.0.0.0/0"
+    not is_secure["ipv4"]
+}
+
 is_secure["ipv6"] = true {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     SecurityRule := input.SecurityGroupRules[_]
     lower(SecurityRule.IpProtocol) == ec2_instance_allowed_protocols[_]
     lower(SecurityRule.CidrIpv6) == "::/0"
@@ -1304,20 +1632,22 @@ is_secure["ipv6"] = true {
     SecurityRule.FromPort == SecurityRule.ToPort
 }
 
-ec2_instance_has_restricted_access = false {
-	SecurityRule := input.SecurityGroupRules[_]
-	lower(SecurityRule.CidrIpv4) == "0.0.0.0/0"
-    not is_secure["ipv4"]
-}
-
 is_secure["ipv4"] = true {
-    # lower(resource.Type) == "aws::ec2::securitygroup"
     SecurityRule := input.SecurityGroupRules[_]
     lower(SecurityRule.IpProtocol) == ec2_instance_allowed_protocols[_]
     lower(SecurityRule.CidrIpv4) == "0.0.0.0/0"
 	SecurityRule.FromPort == ec2_instance_allowed_ports[_]
 	SecurityRule.ToPort == ec2_instance_allowed_ports[_]
     SecurityRule.FromPort == SecurityRule.ToPort
+}
+
+ec2_instance_has_restricted_access {
+    input.SecurityGroupRules
+    not ec2_instance_has_restricted_access_violation
+}
+
+ec2_instance_has_restricted_access = false {
+    ec2_instance_has_restricted_access_violation
 }
 
 

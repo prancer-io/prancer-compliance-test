@@ -1,20 +1,29 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html
 
 #
 # PR-AWS-CLD-MSK-001
 #
-default msk_encryption_at_rest_cmk = true
+default msk_encryption_at_rest_cmk = null
 
-msk_encryption_at_rest_cmk = false {
-    # lower(resource.Type) == "aws::msk::cluster"
+msk_encryption_at_rest_cmk_violation {
     not input.ClusterInfo.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId
 }
 
-msk_encryption_at_rest_cmk = false {
-    # lower(resource.Type) == "aws::msk::cluster"
+msk_encryption_at_rest_cmk_violation {
     count(input.ClusterInfo.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId) == 0
+}
+
+msk_encryption_at_rest_cmk {
+    input.ClusterInfo
+    not msk_encryption_at_rest_cmk_violation
+}
+
+msk_encryption_at_rest_cmk = false {
+    msk_encryption_at_rest_cmk_violation
 }
 
 msk_encryption_at_rest_cmk_err = "Use KMS Customer Master Keys for AWS MSK Clusters" {
@@ -36,11 +45,19 @@ msk_encryption_at_rest_cmk_metadata := {
 #
 # PR-AWS-CLD-MSK-002
 #
-default msk_in_transit_encryption = true
+default msk_in_transit_encryption = null
+
+msk_in_transit_encryption_violation {
+    not input.ClusterInfo.EncryptionInfo.EncryptionInTransit.InCluster
+}
+
+msk_in_transit_encryption {
+    input.ClusterInfo
+    not msk_in_transit_encryption_violation
+}
 
 msk_in_transit_encryption = false {
-    # lower(resource.Type) == "aws::msk::cluster"
-    not input.ClusterInfo.EncryptionInfo.EncryptionInTransit.InCluster
+    msk_in_transit_encryption_violation
 }
 
 msk_in_transit_encryption_err = "Ensure data is Encrypted in transit (TLS)" {
@@ -63,16 +80,23 @@ msk_in_transit_encryption_metadata := {
 #
 # PR-AWS-CLD-MSK-003
 #
-default msk_in_transit_encryption_tls = true
+default msk_in_transit_encryption_tls = null
 
-msk_in_transit_encryption_tls = false {
-    # lower(resource.Type) == "aws::msk::cluster"
+msk_in_transit_encryption_tls_violation {
     not input.ClusterInfo.EncryptionInfo.EncryptionInTransit.ClientBroker
 }
 
-msk_in_transit_encryption_tls = false {
-    # lower(resource.Type) == "aws::msk::cluster"
+msk_in_transit_encryption_tls_violation {
     lower(input.ClusterInfo.EncryptionInfo.EncryptionInTransit.ClientBroker) != "tls"
+}
+
+msk_in_transit_encryption_tls {
+    input.ClusterInfo
+    not msk_in_transit_encryption_tls_violation
+}
+
+msk_in_transit_encryption_tls = false {
+    msk_in_transit_encryption_tls_violation
 }
 
 msk_in_transit_encryption_tls_err = "Ensure client authentication is enabled with TLS (mutual TLS authentication)" {
@@ -95,16 +119,23 @@ msk_in_transit_encryption_tls_metadata := {
 #
 # PR-AWS-CLD-MSK-004
 #
-default msk_vpc = true
+default msk_vpc = null
 
-msk_vpc = false {
-    # lower(resource.Type) == "aws::msk::cluster"
+msk_vpc_violation {
     not input.ClusterInfo.BrokerNodeGroupInfo.ClientSubnets
 }
 
-msk_vpc = false {
-    # lower(resource.Type) == "aws::msk::cluster"
+msk_vpc_violation {
     count(input.ClusterInfo.BrokerNodeGroupInfo.ClientSubnets) == 0
+}
+
+msk_vpc {
+    input.ClusterInfo
+    not msk_vpc_violation
+}
+
+msk_vpc = false {
+    msk_vpc_violation
 }
 
 msk_vpc_err = "Ensure MSK cluster is setup in GS VPC" {
@@ -127,11 +158,19 @@ msk_vpc_metadata := {
 #
 # PR-AWS-CLD-MSK-005
 #
-default msk_cluster_logging_enable = true
+default msk_cluster_logging_enable = null
+
+msk_cluster_logging_enable_violation {
+    not input.ClusterInfo.LoggingInfo.BrokerLogs
+}
+
+msk_cluster_logging_enable {
+    input.ClusterInfo
+    not msk_cluster_logging_enable_violation
+}
 
 msk_cluster_logging_enable = false {
-    # lower(resource.Type) == "aws::msk::cluster"
-    not input.ClusterInfo.LoggingInfo.BrokerLogs
+    msk_cluster_logging_enable_violation
 }
 
 msk_cluster_logging_enable_err = "Ensure Amazon MSK cluster has logging enabled" {
@@ -154,21 +193,27 @@ msk_cluster_logging_enable_metadata := {
 # PR-AWS-CLD-MSK-006
 #
 
-default msk_cluster_enhanced_monitoring_enable = true
+default msk_cluster_enhanced_monitoring_enable = null
 
-msk_cluster_enhanced_monitoring_enable = false {
-    # lower(resource.Type) == "aws::msk::cluster"
+msk_cluster_enhanced_monitoring_enable_violation {
     lower(input.ClusterInfo.EnhancedMonitoring) == "default"
 }
 
-msk_cluster_enhanced_monitoring_enable = false {
-    # lower(resource.Type) == "aws::msk::cluster"
+msk_cluster_enhanced_monitoring_enable_violation {
     input.ClusterInfo.EnhancedMonitoring == ""
 }
 
-msk_cluster_enhanced_monitoring_enable = false {
-    # lower(resource.Type) == "aws::msk::cluster"
+msk_cluster_enhanced_monitoring_enable_violation {
     input.ClusterInfo.EnhancedMonitoring == null
+}
+
+msk_cluster_enhanced_monitoring_enable {
+    input.ClusterInfo
+    not msk_cluster_enhanced_monitoring_enable_violation
+}
+
+msk_cluster_enhanced_monitoring_enable = false {
+    msk_cluster_enhanced_monitoring_enable_violation
 }
 
 msk_cluster_enhanced_monitoring_enable_err = "Ensure enhanaced monitoring for AWS MSK is not set to default." {
@@ -191,11 +236,19 @@ msk_cluster_enhanced_monitoring_enable_metadata := {
 # PR-AWS-CLD-MSK-007
 #
 
-default msk_public_access = true
+default msk_public_access = null
+
+msk_public_access_violation {
+    lower(input.ClusterInfo.BrokerNodeGroupInfo.ConnectivityInfo.PublicAccess.Type) != "disabled"
+}
+
+msk_public_access {
+    input.ClusterInfo
+    not msk_public_access_violation
+}
 
 msk_public_access = false {
-    # lower(resource.Type) == "aws::msk::cluster"
-    lower(input.ClusterInfo.BrokerNodeGroupInfo.ConnectivityInfo.PublicAccess.Type) != "disabled"
+    msk_public_access_violation
 }
 
 msk_public_access_err = "Ensure public access is disabled for AWS MSK." {
@@ -220,13 +273,22 @@ msk_public_access_metadata := {
 # aws::msk::cluster
 # aws::kms::key
 
-default msk_data_is_encrypted = true
+default msk_data_is_encrypted = null
 
-msk_data_is_encrypted = false {
+msk_data_is_encrypted_violation {
     X := input.TEST_MSK[_]
     Y := input.TEST_KMS[_]
     X.ClusterInfo.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId == Y.KeyMetadata.Arn
     Y.KeyMetadata.KeyManager != "CUSTOMER"
+}
+
+msk_data_is_encrypted {
+    input.TEST_MSK
+    not msk_data_is_encrypted_violation
+}
+
+msk_data_is_encrypted = false {
+    msk_data_is_encrypted_violation
 }
 
 msk_data_is_encrypted_err = "Ensure AWS MSK data is encrypted using GS managed key." {

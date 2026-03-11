@@ -1,16 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
-
-array_element_contains(target_array, element_string) = true {
-  contains(lower(target_array[_]), lower(element_string))
-} else = false { true }
+import data.common
 
 array_element_startswith(target_array, element_string) = true {
   startswith(lower(target_array[_]), lower(element_string))
@@ -28,7 +18,7 @@ azure_issue["custom_roles_dont_have_overly_permission"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.authorization/roledefinitions"
     lower(resource.properties.type) == "customrole"
-    array_element_contains(resource.properties.assignableScopes, "/")
+    common.array_element_contains(resource.properties.assignableScopes, "/")
     permissions := resource.properties.permissions[_]
     array_element_startswith(permissions.actions, "*")
 }
@@ -79,14 +69,14 @@ azure_issue["role_assignments_dont_have_implicit_role_management_permissions"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.authorization/roleassignments"
     permissions := resource.properties.roleDefinition.properties.permissions[_]
-    array_element_contains(permissions.actions, "roleAssignments")
+    common.array_element_contains(permissions.actions, "roleAssignments")
 }
 
 azure_issue["role_assignments_dont_have_implicit_role_management_permissions"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.authorization/roleassignments"
     permissions := resource.properties.roleDefinition.properties.permissions[_]
-    array_element_contains(permissions.actions, "roleDefinitions")
+    common.array_element_contains(permissions.actions, "roleDefinitions")
 }
 
 role_assignments_dont_have_implicit_role_management_permissions = false {
@@ -126,7 +116,7 @@ azure_issue["role_assignments_dont_have_implicit_managed_identity_permissions"] 
     resource := input.resources[_]
     lower(resource.type) == "microsoft.authorization/roleassignments"
     permissions := resource.properties.roleDefinition.properties.permissions[_]
-    array_element_contains(permissions.actions, "ManagedIdentity")
+    common.array_element_contains(permissions.actions, "ManagedIdentity")
 }
 
 role_assignments_dont_have_implicit_managed_identity_permissions = false {
@@ -205,7 +195,7 @@ azure_issue["custom_roles_dont_have_subscription_owner_permission"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.authorization/roledefinitions"
     lower(resource.properties.type) == "customrole"
-    array_element_contains(resource.properties.assignableScopes, "subscriptions/")
+    common.array_element_contains(resource.properties.assignableScopes, "subscriptions/")
     permissions := resource.properties.permissions[_]
     array_element_startswith(permissions.actions, "*")
 }
@@ -257,7 +247,7 @@ azure_issue["custom_roles_dont_have_wildcard_action"] {
     lower(resource.type) == "microsoft.authorization/roledefinitions"
     lower(resource.properties.type) == "customrole"
     permissions := resource.properties.permissions[_]
-    array_element_contains(permissions.actions, "*")
+    common.array_element_contains(permissions.actions, "*")
 }
 
 custom_roles_dont_have_wildcard_action = false {
@@ -343,7 +333,7 @@ default aad_has_security_default_enabled = null
 azure_attribute_absence["aad_has_security_default_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.graph.identitysecuritydefaultsenforcementpolicy"
-    not has_property(resource.properties, "isEnabled")
+    not common.has_property(resource.properties, "isEnabled")
 }
 
 azure_issue["aad_has_security_default_enabled"] {
@@ -401,7 +391,7 @@ azure_attribute_absence["allowed_to_create_app_is_disabled_for_aad_non_admin_use
 azure_attribute_absence["allowed_to_create_app_is_disabled_for_aad_non_admin_users"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.graph.authorizationpolicy"
-    not has_property(resource.properties.defaultUserRolePermissions, "allowedToCreateApps")
+    not common.has_property(resource.properties.defaultUserRolePermissions, "allowedToCreateApps")
 }
 
 azure_issue["allowed_to_create_app_is_disabled_for_aad_non_admin_users"] {
@@ -505,7 +495,7 @@ default aad_users_has_mfa_enabled = null
 azure_attribute_absence["aad_users_has_mfa_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.graph.userregistrationdetails"
-    not has_property(resource.properties, "isMfaRegistered")
+    not common.has_property(resource.properties, "isMfaRegistered")
 }
 
 azure_issue["aad_users_has_mfa_enabled"] {
@@ -563,7 +553,7 @@ azure_attribute_absence["allowed_to_create_security_group_is_disabled_for_aad_no
 azure_attribute_absence["allowed_to_create_security_group_is_disabled_for_aad_non_admin_users"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.graph.authorizationpolicy"
-    not has_property(resource.properties.defaultUserRolePermissions, "allowedToCreateSecurityGroups")
+    not common.has_property(resource.properties.defaultUserRolePermissions, "allowedToCreateSecurityGroups")
 }
 
 azure_issue["allowed_to_create_security_group_is_disabled_for_aad_non_admin_users"] {
@@ -621,13 +611,13 @@ azure_attribute_absence["aad_users_can_consent_to_apps_accessing_company_data_on
 azure_attribute_absence["aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.graph.authorizationpolicy"
-    not has_property(resource.properties.defaultUserRolePermissions, "permissionGrantPoliciesAssigned")
+    not common.has_property(resource.properties.defaultUserRolePermissions, "permissionGrantPoliciesAssigned")
 }
 
 azure_issue["aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.graph.authorizationpolicy"
-    not array_contains(resource.properties.defaultUserRolePermissions.permissionGrantPoliciesAssigned, "microsoft-user-default-legacy")
+    not common.array_contains(resource.properties.defaultUserRolePermissions.permissionGrantPoliciesAssigned, "microsoft-user-default-legacy")
 }
 
 aad_users_can_consent_to_apps_accessing_company_data_on_their_behalf_is_disabled {

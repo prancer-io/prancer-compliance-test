@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/2018-06-01/servers/firewallrules
 
 # PR-AZR-CLD-SQL-012

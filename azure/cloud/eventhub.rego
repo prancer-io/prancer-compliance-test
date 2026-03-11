@@ -1,9 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
-
+import data.common
 
 #
 # PR-AZR-CLD-EHB-001
@@ -145,7 +142,7 @@ azure_issue["event_hub_namespace_configured_with_private_endpoint"] {
     lower(resource.type) == "microsoft.eventhub/namespaces"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.eventhub/namespaces/privateendpointconnections";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.privateLinkServiceConnectionState.status) == "approved";
               c := 1]) == 0
 }

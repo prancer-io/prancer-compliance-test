@@ -4,60 +4,63 @@ package rule
 
 #
 
-# PR-AZR-TRF-SQL-067
-# Depricated rule. test case should be removed. as All the new Azure SQL Server TDE is enabled by default. There is no way to create an Azure SQL with TDE disabled
-default db_server_encrypt = null
-
-azure_attribute_absence["db_server_encrypt"] {
-    count([c | input.resources[_].type == "azurerm_mssql_server_transparent_data_encryption"; c := 1]) == 0
-}
-
-azure_issue["db_server_encrypt"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server"
-    count([c | r := input.resources[_];
-              r.type == "azurerm_mssql_server_transparent_data_encryption";
-              contains(r.properties.server_id, resource.properties.compiletime_identity);
-              c := 1]) == 0
-    count([c | r := input.resources[_];
-              r.type == "azurerm_mssql_server_transparent_data_encryption";
-              contains(r.properties.server_id, concat(".", [resource.type, resource.name]));
-              c := 1]) == 0
-}
-
-db_server_encrypt = false {
-    lower(input.resources[_].type) == "azurerm_mssql_server"
-    azure_attribute_absence["db_server_encrypt"]
-}
-
-db_server_encrypt {
-    lower(input.resources[_].type) == "azurerm_mssql_server"
-    not azure_attribute_absence["db_server_encrypt"]
-    not azure_issue["db_server_encrypt"]
-}
-
-db_server_encrypt = false {
-   azure_issue["db_server_encrypt"]
-}
-
-db_server_encrypt_err = "azurerm_mssql_server dont have any associative azurerm_mssql_server_transparent_data_encryption resource" {
-    lower(input.resources[_].type) == "azurerm_mssql_server"
-    azure_attribute_absence["db_server_encrypt"]
-} else = "Azure SQL Server currently dont have transparent data encryption enabled" {
-    azure_issue["db_server_encrypt"]
-}
-
-db_server_encrypt_metadata := {
-    "Policy Code": "PR-AZR-TRF-SQL-067",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "Terraform",
-    "Policy Title": "Azure SQL Server should have transparent data encryption enabled",
-    "Policy Description": "Transparent data encryption protects Azure SQL Server against malicious activity.",
-    "Resource Type": "azurerm_mssql_server_transparent_data_encryption",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption"
-}
+# Deprecated rule: db_server_encrypt (was PR-AZR-TRF-SQL-067)
+# Reason: All new Azure SQL Servers have TDE enabled by default. There is no way to create an Azure SQL with TDE disabled.
+# Policy code PR-AZR-TRF-SQL-067 has been reassigned to postgresql_infrastructure_encryption_enabled in postgreSQL.rego.
+# Test case already removed from master-compliance-test.json.
+#
+# default db_server_encrypt = null
+#
+# azure_attribute_absence["db_server_encrypt"] {
+#     count([c | input.resources[_].type == "azurerm_mssql_server_transparent_data_encryption"; c := 1]) == 0
+# }
+#
+# azure_issue["db_server_encrypt"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_mssql_server"
+#     count([c | r := input.resources[_];
+#               r.type == "azurerm_mssql_server_transparent_data_encryption";
+#               contains(r.properties.server_id, resource.properties.compiletime_identity);
+#               c := 1]) == 0
+#     count([c | r := input.resources[_];
+#               r.type == "azurerm_mssql_server_transparent_data_encryption";
+#               contains(r.properties.server_id, concat(".", [resource.type, resource.name]));
+#               c := 1]) == 0
+# }
+#
+# db_server_encrypt = false {
+#     lower(input.resources[_].type) == "azurerm_mssql_server"
+#     azure_attribute_absence["db_server_encrypt"]
+# }
+#
+# db_server_encrypt {
+#     lower(input.resources[_].type) == "azurerm_mssql_server"
+#     not azure_attribute_absence["db_server_encrypt"]
+#     not azure_issue["db_server_encrypt"]
+# }
+#
+# db_server_encrypt = false {
+#    azure_issue["db_server_encrypt"]
+# }
+#
+# db_server_encrypt_err = "azurerm_mssql_server dont have any associative azurerm_mssql_server_transparent_data_encryption resource" {
+#     lower(input.resources[_].type) == "azurerm_mssql_server"
+#     azure_attribute_absence["db_server_encrypt"]
+# } else = "Azure SQL Server currently dont have transparent data encryption enabled" {
+#     azure_issue["db_server_encrypt"]
+# }
+#
+# db_server_encrypt_metadata := {
+#     "Policy Code": "PR-AZR-TRF-SQL-067",
+#     "Type": "IaC",
+#     "Product": "AZR",
+#     "Language": "Terraform",
+#     "Policy Title": "Azure SQL Server should have transparent data encryption enabled",
+#     "Policy Description": "Transparent data encryption protects Azure SQL Server against malicious activity.",
+#     "Resource Type": "azurerm_mssql_server_transparent_data_encryption",
+#     "Policy Help URL": "",
+#     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption"
+# }
 
 
 # PR-AZR-TRF-SQL-046

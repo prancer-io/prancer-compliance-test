@@ -1,5 +1,7 @@
 package rego
 
+import data.common
+
 #
 # PR-GCP-CLD-CF-001
 #
@@ -7,13 +9,11 @@ package rego
 default function_security = null
 
 gc_issue["function_security"] {
-    # lower(resource.type) == "cloudfunctions.v1.function"
     lower(input.status) == "active"
     lower(input.httpsTrigger.securityLevel) != "secure_always"
 }
 
 function_security {
-    # lower(input.resources[i].type) == "cloudfunctions.v1.function"
     not gc_issue["function_security"]
 }
 
@@ -45,13 +45,11 @@ function_security_metadata := {
 default function_ingress_allow_all = null
 
 gc_issue["function_ingress_allow_all"] {
-    # lower(resource.type) == "cloudfunctions.v1.function"
     lower(input.status) == "active"
     lower(input.ingressSettings) == "allow_all"
 }
 
 function_ingress_allow_all {
-    # lower(input.resources[i].type) == "cloudfunctions.v1.function"
     not gc_issue["function_ingress_allow_all"]
 }
 
@@ -83,19 +81,16 @@ function_ingress_allow_all_metadata := {
 default function_vpc_connector = null
 
 gc_issue["function_vpc_connector"] {
-    # lower(resource.type) == "cloudfunctions.v1.function"
     lower(input.status) == "active"
     not input.vpcConnector
 }
 
 gc_issue["function_vpc_connector"] {
-    # lower(resource.type) == "cloudfunctions.v1.function"
     lower(input.status) == "active"
-    count(input.vpcConnector) == 0
+    not common.non_empty(input.vpcConnector)
 }
 
 function_vpc_connector {
-    # lower(input.resources[i].type) == "cloudfunctions.v1.function"
     not gc_issue["function_vpc_connector"]
 }
 

@@ -1,5 +1,7 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/kms/latest/APIReference/
 
 #
@@ -35,7 +37,6 @@ kms_key_rotation_metadata := {
 default kms_key_state = false
 
 kms_key_state = true {
-    # lower(resource.Type) == "aws::kms::key"
     input.KeyMetadata.Enabled == true
 }
 
@@ -59,10 +60,19 @@ kms_key_state_metadata := {
 # PR-AWS-CLD-KMS-004
 # aws::kms::key
 
-default kms_key_not_schedule_deletion = true
+default kms_key_not_schedule_deletion = null
+
+kms_key_not_schedule_deletion_violation {
+    lower(input.KeyMetadata.KeyState) == "pendingdeletion"
+}
+
+kms_key_not_schedule_deletion {
+    input.KeyMetadata
+    not kms_key_not_schedule_deletion_violation
+}
 
 kms_key_not_schedule_deletion = false {
-    lower(input.KeyMetadata.KeyState) == "pendingdeletion"
+    kms_key_not_schedule_deletion_violation
 }
 
 kms_key_not_schedule_deletion_err = "Ensure AWS KMS Key is not scheduled for deletion." {

@@ -1,25 +1,38 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_IAM.html
+import data.common
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_IAM.html
 
 iam_policies_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "AWS:SourceOwner", "kms:CallerAccount"]
 ip_address = ["0.0.0.0/0", "::/0"]
 available_true_choices := ["true", true]
 available_false_choices := ["false", false]
 
+# Skip AWS managed policies - they inherently use wildcards by design
+is_aws_managed_policy {
+    startswith(input.Arn, "arn:aws:iam::aws:policy/")
+}
+
 #
 # PR-AWS-CLD-IAM-001
 #
-default iam_wildcard_resource = true
+default iam_wildcard_resource = null
 
-iam_wildcard_resource = false {
-    # lower(resource.Type) == "aws::iam::policy"
+iam_wildcard_resource_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Resource) == "*"
+}
+
+iam_wildcard_resource {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not iam_wildcard_resource_violation
+}
+
+iam_wildcard_resource = false {
+    iam_wildcard_resource_violation
 }
 
 iam_wildcard_resource_err = "Ensure no wildcards are specified in IAM policy with 'Resource' section" {
@@ -41,19 +54,28 @@ iam_wildcard_resource_metadata := {
 #
 # PR-AWS-CLD-IAM-002
 #
-default iam_wildcard_action = true
+default iam_wildcard_action = null
 
-iam_wildcard_action = false {
-    # lower(resource.Type) == "aws::iam::managedpolicy"
+iam_wildcard_action_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Action) == "*"
 }
 
-
-iam_wildcard_action = false {
-    # lower(resource.Type) == "aws::iam::policy"
+iam_wildcard_action_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Action) == "*"
+}
+
+iam_wildcard_action {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not iam_wildcard_action_violation
+}
+
+iam_wildcard_action = false {
+    iam_wildcard_action_violation
 }
 
 iam_wildcard_action_err = "Ensure no wildcards are specified in IAM policy with 'Action' section" {
@@ -77,12 +99,22 @@ iam_wildcard_action_metadata := {
 #
 # PR-AWS-CLD-IAM-003
 #
-default iam_wildcard_principal = true
+default iam_wildcard_principal = null
 
-iam_wildcard_principal = false {
-    # lower(resource.Type) == "aws::iam::role"
+iam_wildcard_principal_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Principal) == "*"
+}
+
+iam_wildcard_principal {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not iam_wildcard_principal_violation
+}
+
+iam_wildcard_principal = false {
+    iam_wildcard_principal_violation
 }
 
 iam_wildcard_principal_err = "Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section" {
@@ -105,11 +137,22 @@ iam_wildcard_principal_metadata := {
 #
 # PR-AWS-CLD-IAM-004
 #
-default iam_resource_format = true
+default iam_resource_format = null
 
-iam_resource_format = false {
+iam_resource_format_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Resource) == "arn:aws:*:*"
+}
+
+iam_resource_format {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not iam_resource_format_violation
+}
+
+iam_resource_format = false {
+    iam_resource_format_violation
 }
 
 iam_resource_format_err = "Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*'" {
@@ -133,22 +176,32 @@ iam_resource_format_metadata := {
 #
 # PR-AWS-CLD-IAM-005
 #
-default iam_assume_permission = true
+default iam_assume_permission = null
 
-iam_assume_permission = false {
-    # lower(resource.Type) == "aws::iam::policy"
+iam_assume_permission_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Effect) == "allow"
     contains(lower(statement.Action), "sts:assumerole")
     statement.Condition == "*"
 }
 
-iam_assume_permission = false {
-    # lower(resource.Type) == "aws::iam::policy"
+iam_assume_permission_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     lower(statement.Effect) == "allow"
     contains(lower(statement.Action), "sts:assumerole")
     not statement.Condition
+}
+
+iam_assume_permission {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not iam_assume_permission_violation
+}
+
+iam_assume_permission = false {
+    iam_assume_permission_violation
 }
 
 iam_assume_permission_err = "AWS IAM policy allows assume role permission across all services" {
@@ -170,13 +223,23 @@ iam_assume_permission_metadata := {
 #
 # PR-AWS-CLD-IAM-006
 #
-default iam_all_traffic = true
+default iam_all_traffic = null
 
-iam_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policy"
+iam_all_traffic_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     source_ip := statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"][k]
     lower(source_ip) == "0.0.0.0/0"
+}
+
+iam_all_traffic {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not iam_all_traffic_violation
+}
+
+iam_all_traffic = false {
+    iam_all_traffic_violation
 }
 
 iam_all_traffic_err = "AWS IAM policy is overly permissive to all traffic via condition clause" {
@@ -198,14 +261,24 @@ iam_all_traffic_metadata := {
 #
 # PR-AWS-CLD-IAM-007
 #
-default iam_administrative_privileges = true
+default iam_administrative_privileges = null
 
-iam_administrative_privileges = false {
-    # lower(resource.Type) == "aws::iam::policy"
+iam_administrative_privileges_violation {
+    not is_aws_managed_policy
     statement := input.PolicyVersion.Document.Statement[j]
     statement.Action == "*"
     statement.Resource == "*"
     lower(statement.Effect) == "allow"
+}
+
+iam_administrative_privileges {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not iam_administrative_privileges_violation
+}
+
+iam_administrative_privileges = false {
+    iam_administrative_privileges_violation
 }
 
 iam_administrative_privileges_err = "AWS IAM policy allows full administrative privileges" {
@@ -228,16 +301,26 @@ iam_administrative_privileges_metadata := {
 #
 # PR-AWS-CLD-IAM-008
 #
-default iam_user_group_attach = true
+default iam_user_group_attach = null
 
-iam_user_group_attach = false {
-    # lower(resource.Type) == "aws::iam::usertogroupaddition"
+iam_user_group_attach_violation {
+    not is_aws_managed_policy
     not input.PolicyVersion.Document
 }
 
-iam_user_group_attach = false {
-    # lower(resource.Type) == "aws::iam::usertogroupaddition"
+iam_user_group_attach_violation {
+    not is_aws_managed_policy
     count(input.PolicyVersion.Document) < 1
+}
+
+iam_user_group_attach {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not iam_user_group_attach_violation
+}
+
+iam_user_group_attach = false {
+    iam_user_group_attach_violation
 }
 
 iam_user_group_attach_err = "Ensure IAM groups contains at least one IAM user" {
@@ -260,10 +343,10 @@ iam_user_group_attach_metadata := {
 # PR-AWS-CLD-IAM-011
 #
 
-default lambda_iam_policy_not_overly_permissive_to_all_traffic = true
+default lambda_iam_policy_not_overly_permissive_to_all_traffic = null
 
-lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+lambda_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -272,8 +355,8 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
     contains(lower(policy_statement.Action[_]), "lambda:")
 }
 
-lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+lambda_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -282,8 +365,8 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
     contains(lower(policy_statement.Action), "lambda:")
 }
 
-lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+lambda_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -292,14 +375,24 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
     contains(lower(policy_statement.Action[_]), "lambda:")
 }
 
-lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+lambda_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
     contains(lower(policy_statement.Action), "lambda:")
+}
+
+lambda_iam_policy_not_overly_permissive_to_all_traffic {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not lambda_iam_policy_not_overly_permissive_to_all_traffic_violation
+}
+
+lambda_iam_policy_not_overly_permissive_to_all_traffic = false {
+    lambda_iam_policy_not_overly_permissive_to_all_traffic_violation
 }
 
 
@@ -323,10 +416,10 @@ lambda_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 # PR-AWS-CLD-IAM-012
 #
 
-default iam_policy_not_overly_permissive_to_lambda_service = true
+default iam_policy_not_overly_permissive_to_lambda_service = null
 
-iam_policy_not_overly_permissive_to_lambda_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_lambda_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -335,8 +428,8 @@ iam_policy_not_overly_permissive_to_lambda_service = false {
     not policy_statement.Condition
 }
 
-iam_policy_not_overly_permissive_to_lambda_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_lambda_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -345,8 +438,8 @@ iam_policy_not_overly_permissive_to_lambda_service = false {
     not policy_statement.Condition
 }
 
-iam_policy_not_overly_permissive_to_lambda_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_lambda_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -355,14 +448,24 @@ iam_policy_not_overly_permissive_to_lambda_service = false {
     not policy_statement.Condition
 }
 
-iam_policy_not_overly_permissive_to_lambda_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_lambda_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
     policy_statement.Action == "lambda:*"
     policy_statement.Resource == "*"
     not policy_statement.Condition
+}
+
+iam_policy_not_overly_permissive_to_lambda_service {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not iam_policy_not_overly_permissive_to_lambda_service_violation
+}
+
+iam_policy_not_overly_permissive_to_lambda_service = false {
+    iam_policy_not_overly_permissive_to_lambda_service_violation
 }
 
 iam_policy_not_overly_permissive_to_lambda_service_err = "Ensure IAM policy is not overly permissive to Lambda service" {
@@ -386,11 +489,11 @@ iam_policy_not_overly_permissive_to_lambda_service_metadata := {
 # PR-AWS-CLD-IAM-013
 #
 
-default ec2_instance_with_iam_permissions_management_access = true
+default ec2_instance_with_iam_permissions_management_access = null
 
 action := ["iam:AttachGroupPolicy","iam:AttachRolePolicy","iam:AttachUserPolicy","iam:CreatePolicy","iam:CreatePolicyVersion","iam:DeleteAccountPasswordPolicy","iam:DeleteGroupPolicy","iam:DeletePolicy","iam:DeletePolicyVersion","iam:DeleteRolePermissionsBoundary","iam:DeleteRolePolicy","iam:DeleteUserPermissionsBoundary","iam:DeleteUserPolicy","iam:DetachGroupPolicy","iam:DetachRolePolicy","iam:DetachUserPolicy","iam:PutGroupPolicy","iam:PutRolePermissionsBoundary","iam:PutRolePolicy","iam:PutUserPermissionsBoundary","iam:PutUserPolicy","iam:SetDefaultPolicyVersion","iam:UpdateAssumeRolePolicy"]
 
-ec2_instance_with_iam_permissions_management_access = false {
+ec2_instance_with_iam_permissions_management_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -400,7 +503,7 @@ ec2_instance_with_iam_permissions_management_access = false {
     contains(services, "ec2")
 }
 
-ec2_instance_with_iam_permissions_management_access = false {
+ec2_instance_with_iam_permissions_management_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -409,7 +512,7 @@ ec2_instance_with_iam_permissions_management_access = false {
     contains(services, "ec2")
 }
 
-ec2_instance_with_iam_permissions_management_access = false {
+ec2_instance_with_iam_permissions_management_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -418,12 +521,21 @@ ec2_instance_with_iam_permissions_management_access = false {
     contains(policy_statement.Principal.Service, "ec2")
 }
 
-ec2_instance_with_iam_permissions_management_access = false {
+ec2_instance_with_iam_permissions_management_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action[_]
     contains(policy_statement.Principal.Service, "ec2")
+}
+
+ec2_instance_with_iam_permissions_management_access {
+    input.Role
+    not ec2_instance_with_iam_permissions_management_access_violation
+}
+
+ec2_instance_with_iam_permissions_management_access = false {
+    ec2_instance_with_iam_permissions_management_access_violation
 }
 
 ec2_instance_with_iam_permissions_management_access_err = "Ensure that the AWS EC2 instances don't have a risky set of permissions management access to minimize security risks." {
@@ -446,11 +558,11 @@ ec2_instance_with_iam_permissions_management_access_metadata := {
 # PR-AWS-CLD-IAM-014
 #
 
-default lambda_function_with_iam_write_access = true
+default lambda_function_with_iam_write_access = null
 
 action_lambda_function_with_iam_write_access := ["iam:AddClientIDToOpenIDConnectProvider","iam:AddRoleToInstanceProfile","iam:AddUserToGroup","iam:ChangePassword","iam:CreateAccessKey","iam:CreateAccountAlias","iam:CreateGroup","iam:CreateInstanceProfile","iam:CreateLoginProfile","iam:CreateOpenIDConnectProvider","iam:CreateRole","iam:CreateSAMLProvider","iam:CreateServiceLinkedRole","iam:CreateServiceSpecificCredential","iam:CreateUser","iam:CreateVirtualMFADevice","iam:DeactivateMFADevice","iam:DeleteAccessKey","iam:DeleteAccountAlias","iam:DeleteGroup","iam:DeleteInstanceProfile","iam:DeleteLoginProfile","iam:DeleteOpenIDConnectProvider","iam:DeleteRole","iam:DeleteSAMLProvider","iam:DeleteSSHPublicKey","iam:DeleteServerCertificate","iam:DeleteServiceLinkedRole","iam:DeleteServiceSpecificCredential","iam:DeleteSigningCertificate","iam:DeleteUser","iam:DeleteVirtualMFADevice","iam:EnableMFADevice","iam:PassRole","iam:RemoveClientIDFromOpenIDConnectProvider","iam:RemoveRoleFromInstanceProfile","iam:RemoveUserFromGroup","iam:ResetServiceSpecificCredential","iam:ResyncMFADevice","iam:SetSecurityTokenServicePreferences","iam:UpdateAccessKey","iam:UpdateAccountPasswordPolicy","iam:UpdateGroup","iam:UpdateLoginProfile","iam:UpdateOpenIDConnectProviderThumbprint","iam:UpdateRole","iam:UpdateRoleDescription","iam:UpdateSAMLProvider","iam:UpdateSSHPublicKey","iam:UpdateServerCertificate","iam:UpdateServiceSpecificCredential","iam:UpdateSigningCertificate","iam:UpdateUser","iam:UploadSSHPublicKey","iam:UploadServerCertificate","iam:UploadSigningCertificate"]
 
-lambda_function_with_iam_write_access = false {
+lambda_function_with_iam_write_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -460,7 +572,7 @@ lambda_function_with_iam_write_access = false {
     contains(services, "lambda")
 }
 
-lambda_function_with_iam_write_access = false {
+lambda_function_with_iam_write_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -469,7 +581,7 @@ lambda_function_with_iam_write_access = false {
     contains(services, "lambda")
 }
 
-lambda_function_with_iam_write_access = false {
+lambda_function_with_iam_write_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -478,12 +590,21 @@ lambda_function_with_iam_write_access = false {
     contains(policy_statement.Principal.Service, "lambda")
 }
 
-lambda_function_with_iam_write_access = false {
+lambda_function_with_iam_write_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_iam_write_access[_]
     contains(policy_statement.Principal.Service, "lambda")
+}
+
+lambda_function_with_iam_write_access {
+    input.Role
+    not lambda_function_with_iam_write_access_violation
+}
+
+lambda_function_with_iam_write_access = false {
+    lambda_function_with_iam_write_access_violation
 }
 
 lambda_function_with_iam_write_access_err = "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks." {
@@ -506,11 +627,11 @@ lambda_function_with_iam_write_access_metadata := {
 # PR-AWS-CLD-IAM-015
 #
 
-default lambda_function_with_iam_permissions_management_access = true
+default lambda_function_with_iam_permissions_management_access = null
 
 action_lambda_function_with_iam_permissions_management_access := ["iam:AttachGroupPolicy","iam:AttachRolePolicy","iam:AttachUserPolicy","iam:CreatePolicy","iam:CreatePolicyVersion","iam:DeleteAccountPasswordPolicy","iam:DeleteGroupPolicy","iam:DeletePolicy","iam:DeletePolicyVersion","iam:DeleteRolePermissionsBoundary","iam:DeleteRolePolicy","iam:DeleteUserPermissionsBoundary","iam:DeleteUserPolicy","iam:DetachGroupPolicy","iam:DetachRolePolicy","iam:DetachUserPolicy","iam:PutGroupPolicy","iam:PutRolePermissionsBoundary","iam:PutRolePolicy","iam:PutUserPermissionsBoundary","iam:PutUserPolicy","iam:SetDefaultPolicyVersion","iam:UpdateAssumeRolePolicy"]
 
-lambda_function_with_iam_permissions_management_access = false {
+lambda_function_with_iam_permissions_management_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -520,8 +641,7 @@ lambda_function_with_iam_permissions_management_access = false {
     contains(services, "lambda")
 }
 
-lambda_function_with_iam_permissions_management_access = false {
-    # lower(resource.Type) == "aws::iam::role"
+lambda_function_with_iam_permissions_management_access_violation {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_iam_permissions_management_access[_]
@@ -529,7 +649,7 @@ lambda_function_with_iam_permissions_management_access = false {
     contains(services, "lambda")
 }
 
-lambda_function_with_iam_permissions_management_access = false {
+lambda_function_with_iam_permissions_management_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -538,12 +658,20 @@ lambda_function_with_iam_permissions_management_access = false {
     contains(policy_statement.Principal.Service, "lambda")
 }
 
-lambda_function_with_iam_permissions_management_access = false {
-    # lower(resource.Type) == "aws::iam::role"
+lambda_function_with_iam_permissions_management_access_violation {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_iam_permissions_management_access[_]
     contains(policy_statement.Principal.Service, "lambda")
+}
+
+lambda_function_with_iam_permissions_management_access {
+    input.Role
+    not lambda_function_with_iam_permissions_management_access_violation
+}
+
+lambda_function_with_iam_permissions_management_access = false {
+    lambda_function_with_iam_permissions_management_access_violation
 }
 
 lambda_function_with_iam_permissions_management_access_err = "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of permissions management access permissions to minimize security risks." {
@@ -566,11 +694,11 @@ lambda_function_with_iam_permissions_management_access_metadata := {
 # PR-AWS-CLD-IAM-016
 #
 
-default ec2_instance_with_iam_write_access = true
+default ec2_instance_with_iam_write_access = null
 
 action_ec2_instance_with_iam_write_access := ["iam:AddClientIDToOpenIDConnectProvider","iam:AddRoleToInstanceProfile","iam:AddUserToGroup","iam:ChangePassword","iam:CreateAccessKey","iam:CreateAccountAlias","iam:CreateGroup","iam:CreateInstanceProfile","iam:CreateLoginProfile","iam:CreateOpenIDConnectProvider","iam:CreateRole","iam:CreateSAMLProvider","iam:CreateServiceLinkedRole","iam:CreateServiceSpecificCredential","iam:CreateUser","iam:CreateVirtualMFADevice","iam:DeactivateMFADevice","iam:DeleteAccessKey","iam:DeleteAccountAlias","iam:DeleteGroup","iam:DeleteInstanceProfile","iam:DeleteLoginProfile","iam:DeleteOpenIDConnectProvider","iam:DeleteRole","iam:DeleteSAMLProvider","iam:DeleteSSHPublicKey","iam:DeleteServerCertificate","iam:DeleteServiceLinkedRole","iam:DeleteServiceSpecificCredential","iam:DeleteSigningCertificate","iam:DeleteUser","iam:DeleteVirtualMFADevice","iam:EnableMFADevice","iam:PassRole","iam:RemoveClientIDFromOpenIDConnectProvider","iam:RemoveRoleFromInstanceProfile","iam:RemoveUserFromGroup","iam:ResetServiceSpecificCredential","iam:ResyncMFADevice","iam:SetSecurityTokenServicePreferences","iam:UpdateAccessKey","iam:UpdateAccountPasswordPolicy","iam:UpdateGroup","iam:UpdateLoginProfile","iam:UpdateOpenIDConnectProviderThumbprint","iam:UpdateRole","iam:UpdateRoleDescription","iam:UpdateSAMLProvider","iam:UpdateSSHPublicKey","iam:UpdateServerCertificate","iam:UpdateServiceSpecificCredential","iam:UpdateSigningCertificate","iam:UpdateUser","iam:UploadSSHPublicKey","iam:UploadServerCertificate","iam:UploadSigningCertificate"]
 
-ec2_instance_with_iam_write_access = false {
+ec2_instance_with_iam_write_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -580,7 +708,7 @@ ec2_instance_with_iam_write_access = false {
     contains(services, "ec2")
 }
 
-ec2_instance_with_iam_write_access = false {
+ec2_instance_with_iam_write_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -589,7 +717,7 @@ ec2_instance_with_iam_write_access = false {
     contains(services, "ec2")
 }
 
-ec2_instance_with_iam_write_access = false {
+ec2_instance_with_iam_write_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -598,12 +726,21 @@ ec2_instance_with_iam_write_access = false {
     contains(policy_statement.Principal.Service, "ec2")
 }
 
-ec2_instance_with_iam_write_access = false {
+ec2_instance_with_iam_write_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_ec2_instance_with_iam_write_access[_]
     contains(policy_statement.Principal.Service, "ec2")
+}
+
+ec2_instance_with_iam_write_access {
+    input.Role
+    not ec2_instance_with_iam_write_access_violation
+}
+
+ec2_instance_with_iam_write_access = false {
+    ec2_instance_with_iam_write_access_violation
 }
 
 ec2_instance_with_iam_write_access_err = "Ensure that the AWS EC2 instances provisioned in your AWS account don't have a risky set of write permissions to minimize security risks." {
@@ -626,12 +763,11 @@ ec2_instance_with_iam_write_access_metadata := {
 # PR-AWS-CLD-IAM-017
 #
 
-default lambda_function_with_org_write_access = true
+default lambda_function_with_org_write_access = null
 
 action_lambda_function_with_org_write_access := ["organizations:AcceptHandshake","organizations:AttachPolicy","organizations:CancelHandshake","organizations:CreateAccount","organizations:CreateGovCloudAccount","organizations:CreateOrganization","organizations:CreateOrganizationalUnit","organizations:CreatePolicy","organizations:DeclineHandshake","organizations:DeleteOrganization","organizations:DeleteOrganizationalUnit","organizations:DeletePolicy","organizations:DeregisterDelegatedAdministrator","organizations:DetachPolicy","organizations:DisableAWSServiceAccess","organizations:DisablePolicyType","organizations:EnableAWSServiceAccess","organizations:EnableAllFeatures","organizations:EnablePolicyType","organizations:InviteAccountToOrganization","organizations:LeaveOrganization","organizations:MoveAccount","organizations:RegisterDelegatedAdministrator","organizations:RemoveAccountFromOrganization","organizations:UpdateOrganizationalUnit","organizations:UpdatePolicy"]
 
-lambda_function_with_org_write_access = false {
-    # lower(resource.Type) == "aws::iam::role"
+lambda_function_with_org_write_access_violation {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -640,8 +776,7 @@ lambda_function_with_org_write_access = false {
     contains(services, "lambda")
 }
 
-lambda_function_with_org_write_access = false {
-    # lower(resource.Type) == "aws::iam::role"
+lambda_function_with_org_write_access_violation {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_org_write_access[_]
@@ -649,8 +784,7 @@ lambda_function_with_org_write_access = false {
     contains(services, "lambda")
 }
 
-lambda_function_with_org_write_access = false {
-    # lower(resource.Type) == "aws::iam::role"
+lambda_function_with_org_write_access_violation {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_action := policy_statement.Action[_]
@@ -658,12 +792,20 @@ lambda_function_with_org_write_access = false {
     contains(policy_statement.Principal.Service, "lambda")
 }
 
-lambda_function_with_org_write_access = false {
-    # lower(resource.Type) == "aws::iam::role"
+lambda_function_with_org_write_access_violation {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     policy_statement.Action == action_lambda_function_with_org_write_access[_]
     contains(policy_statement.Principal.Service, "lambda")
+}
+
+lambda_function_with_org_write_access {
+    input.Role
+    not lambda_function_with_org_write_access_violation
+}
+
+lambda_function_with_org_write_access = false {
+    lambda_function_with_org_write_access_violation
 }
 
 lambda_function_with_org_write_access_err = "Ensure that the AWS Lambda Function instances provisioned in your AWS account don't have a risky set of org write permissions to minimize security risks." {
@@ -686,9 +828,9 @@ lambda_function_with_org_write_access_metadata := {
 # PR-AWS-CLD-IAM-018
 #
 
-default elasticbeanstalk_platform_with_iam_wildcard_resource_access = true
+default elasticbeanstalk_platform_with_iam_wildcard_resource_access = null
 
-elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
+elasticbeanstalk_platform_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -698,7 +840,7 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
     contains(services, "elasticbeanstalk")
 }
 
-elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
+elasticbeanstalk_platform_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -707,7 +849,7 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
     contains(services, "elasticbeanstalk")
 }
 
-elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
+elasticbeanstalk_platform_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -716,12 +858,21 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
     contains(policy_statement.Principal.Service, "elasticbeanstalk")
 }
 
-elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
+elasticbeanstalk_platform_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Resource) == "*"
     contains(policy_statement.Principal.Service, "elasticbeanstalk")
+}
+
+elasticbeanstalk_platform_with_iam_wildcard_resource_access {
+    input.Role
+    not elasticbeanstalk_platform_with_iam_wildcard_resource_access_violation
+}
+
+elasticbeanstalk_platform_with_iam_wildcard_resource_access = false {
+    elasticbeanstalk_platform_with_iam_wildcard_resource_access_violation
 }
 
 elasticbeanstalk_platform_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of elastic bean stalk." {
@@ -744,9 +895,9 @@ elasticbeanstalk_platform_with_iam_wildcard_resource_access_metadata := {
 # PR-AWS-CLD-IAM-019
 #
 
-default ec2_with_iam_wildcard_resource_access = true
+default ec2_with_iam_wildcard_resource_access = null
 
-ec2_with_iam_wildcard_resource_access = false {
+ec2_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -756,7 +907,7 @@ ec2_with_iam_wildcard_resource_access = false {
     contains(services, "ec2")
 }
 
-ec2_with_iam_wildcard_resource_access = false {
+ec2_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -765,7 +916,7 @@ ec2_with_iam_wildcard_resource_access = false {
     contains(services, "ec2")
 }
 
-ec2_with_iam_wildcard_resource_access = false {
+ec2_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -774,12 +925,21 @@ ec2_with_iam_wildcard_resource_access = false {
     contains(policy_statement.Principal.Service, "ec2")
 }
 
-ec2_with_iam_wildcard_resource_access = false {
+ec2_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Resource) == "*"
     contains(policy_statement.Principal.Service, "ec2")
+}
+
+ec2_with_iam_wildcard_resource_access {
+    input.Role
+    not ec2_with_iam_wildcard_resource_access_violation
+}
+
+ec2_with_iam_wildcard_resource_access = false {
+    ec2_with_iam_wildcard_resource_access_violation
 }
 
 ec2_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ec2." {
@@ -802,9 +962,9 @@ ec2_with_iam_wildcard_resource_access_metadata := {
 # PR-AWS-CLD-IAM-020
 #
 
-default lambda_function_with_iam_wildcard_resource_access = true
+default lambda_function_with_iam_wildcard_resource_access = null
 
-lambda_function_with_iam_wildcard_resource_access = false {
+lambda_function_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -814,8 +974,7 @@ lambda_function_with_iam_wildcard_resource_access = false {
     contains(services, "lambda")
 }
 
-
-lambda_function_with_iam_wildcard_resource_access = false {
+lambda_function_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -824,7 +983,7 @@ lambda_function_with_iam_wildcard_resource_access = false {
     contains(services, "lambda")
 }
 
-lambda_function_with_iam_wildcard_resource_access = false {
+lambda_function_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -833,12 +992,21 @@ lambda_function_with_iam_wildcard_resource_access = false {
     contains(policy_statement.Principal.Service, "lambda")
 }
 
-lambda_function_with_iam_wildcard_resource_access = false {
+lambda_function_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Resource) == "*"
     contains(policy_statement.Principal.Service, "lambda")
+}
+
+lambda_function_with_iam_wildcard_resource_access {
+    input.Role
+    not lambda_function_with_iam_wildcard_resource_access_violation
+}
+
+lambda_function_with_iam_wildcard_resource_access = false {
+    lambda_function_with_iam_wildcard_resource_access_violation
 }
 
 lambda_function_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of lambda function." {
@@ -861,9 +1029,9 @@ lambda_function_with_iam_wildcard_resource_access_metadata := {
 # PR-AWS-CLD-IAM-021
 #
 
-default ecs_task_definition_with_iam_wildcard_resource_access = true
+default ecs_task_definition_with_iam_wildcard_resource_access = null
 
-ecs_task_definition_with_iam_wildcard_resource_access = false {
+ecs_task_definition_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -873,7 +1041,7 @@ ecs_task_definition_with_iam_wildcard_resource_access = false {
     contains(services, "ecs")
 }
 
-ecs_task_definition_with_iam_wildcard_resource_access = false {
+ecs_task_definition_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -882,7 +1050,7 @@ ecs_task_definition_with_iam_wildcard_resource_access = false {
     contains(services, "ecs")
 }
 
-ecs_task_definition_with_iam_wildcard_resource_access = false {
+ecs_task_definition_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
@@ -891,12 +1059,21 @@ ecs_task_definition_with_iam_wildcard_resource_access = false {
     contains(policy_statement.Principal.Service, "ecs")
 }
 
-ecs_task_definition_with_iam_wildcard_resource_access = false {
+ecs_task_definition_with_iam_wildcard_resource_access_violation {
 #     lower(resource.Type) == "aws::iam::role"
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Resource) == "*"
     contains(policy_statement.Principal.Service, "ecs")
+}
+
+ecs_task_definition_with_iam_wildcard_resource_access {
+    input.Role
+    not ecs_task_definition_with_iam_wildcard_resource_access_violation
+}
+
+ecs_task_definition_with_iam_wildcard_resource_access = false {
+    ecs_task_definition_with_iam_wildcard_resource_access_violation
 }
 
 ecs_task_definition_with_iam_wildcard_resource_access_err = "Ensure that the AWS policies don't have '*' in the resource section of the policy statement of ecs task definition." {
@@ -919,25 +1096,32 @@ ecs_task_definition_with_iam_wildcard_resource_access_metadata := {
 # PR-AWS-CLD-IAM-022
 #
 
-default ecr_repository_is_publicly_accessible_through_iam_policies = false
+default ecr_repository_is_publicly_accessible_through_iam_policies = null
 
-ecr_repository_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+ecr_repository_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "ecr")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
-ecr_repository_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+ecr_repository_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "ecr")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
+}
+
+ecr_repository_is_publicly_accessible_through_iam_policies {
+    input.Role
+    not ecr_repository_is_publicly_accessible_through_iam_policies_violation
+}
+
+ecr_repository_is_publicly_accessible_through_iam_policies = false {
+    ecr_repository_is_publicly_accessible_through_iam_policies_violation
 }
 
 ecr_repository_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS ECR Repository resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -960,25 +1144,32 @@ ecr_repository_is_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-023
 #
 
-default lambda_function_is_publicly_accessible_through_iam_policies = false
+default lambda_function_is_publicly_accessible_through_iam_policies = null
 
-lambda_function_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+lambda_function_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "lambda")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
-lambda_function_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+lambda_function_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "lambda")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
+}
+
+lambda_function_is_publicly_accessible_through_iam_policies {
+    input.Role
+    not lambda_function_is_publicly_accessible_through_iam_policies_violation
+}
+
+lambda_function_is_publicly_accessible_through_iam_policies = false {
+    lambda_function_is_publicly_accessible_through_iam_policies_violation
 }
 
 lambda_function_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS Lambda Function resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1001,25 +1192,32 @@ lambda_function_is_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-024
 #
 
-default s3_bucket_is_publicly_accessible_through_iam_policies = false
+default s3_bucket_is_publicly_accessible_through_iam_policies = null
 
-s3_bucket_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+s3_bucket_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "s3")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
-s3_bucket_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+s3_bucket_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "s3")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
+}
+
+s3_bucket_is_publicly_accessible_through_iam_policies {
+    input.Role
+    not s3_bucket_is_publicly_accessible_through_iam_policies_violation
+}
+
+s3_bucket_is_publicly_accessible_through_iam_policies = false {
+    s3_bucket_is_publicly_accessible_through_iam_policies_violation
 }
 
 s3_bucket_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS S3 bucket resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1042,27 +1240,34 @@ s3_bucket_is_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-025
 #
 
-default sqs_queue_is_publicly_accessible_through_iam_policies = false
+default sqs_queue_is_publicly_accessible_through_iam_policies = null
 
 condition_for_sqs := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
 
-sqs_queue_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+sqs_queue_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "sqs")
-    has_property(policy_statement.Condition[string], condition_for_sqs[_])
+    common.has_property(policy_statement.Condition[string], condition_for_sqs[_])
 }
 
-sqs_queue_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+sqs_queue_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "sqs")
-    has_property(policy_statement.Condition[string], condition_for_sqs[_])
+    common.has_property(policy_statement.Condition[string], condition_for_sqs[_])
+}
+
+sqs_queue_is_publicly_accessible_through_iam_policies {
+    input.Role
+    not sqs_queue_is_publicly_accessible_through_iam_policies_violation
+}
+
+sqs_queue_is_publicly_accessible_through_iam_policies = false {
+    sqs_queue_is_publicly_accessible_through_iam_policies_violation
 }
 
 sqs_queue_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS SQS Queue resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1085,25 +1290,32 @@ sqs_queue_is_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-026
 #
 
-default secret_manager_secret_is_publicly_accessible_through_iam_policies = false
+default secret_manager_secret_is_publicly_accessible_through_iam_policies = null
 
-secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+secret_manager_secret_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "secretsmanager")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
 }
 
-secret_manager_secret_is_publicly_accessible_through_iam_policies = true {
-#     lower(resource.Type) == "aws::iam::role"
+secret_manager_secret_is_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "secretsmanager")
-    has_property(policy_statement.Condition[string], iam_policies_condition[_])
+    common.has_property(policy_statement.Condition[string], iam_policies_condition[_])
+}
+
+secret_manager_secret_is_publicly_accessible_through_iam_policies {
+    input.Role
+    not secret_manager_secret_is_publicly_accessible_through_iam_policies_violation
+}
+
+secret_manager_secret_is_publicly_accessible_through_iam_policies = false {
+    secret_manager_secret_is_publicly_accessible_through_iam_policies_violation
 }
 
 secret_manager_secret_is_publicly_accessible_through_iam_policies_err = "Ensure that the AWS Secret Manager Secret resources provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks." {
@@ -1126,12 +1338,11 @@ secret_manager_secret_is_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-027
 #
 
-default iam_policy_permission_may_cause_privilege_escalation = true
+default iam_policy_permission_may_cause_privilege_escalation = null
 
 action_iam_policy_permission_may_cause_privilege_escalation := ["iam:CreatePolicyVersion", "iam:SetDefaultPolicyVersion", "iam:PassRole", "iam:CreateAccessKey", "iam:CreateLoginProfile", "iam:UpdateLoginProfile", "iam:AttachUserPolicy", "iam:AttachGroupPolicy", "iam:AttachRolePolicy", "iam:PutUserPolicy", "iam:PutGroupPolicy", "iam:PutRolePolicy", "iam:AddUserToGroup", "iam:UpdateAssumeRolePolicy", "iam:*"]
 
-iam_policy_permission_may_cause_privilege_escalation = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_permission_may_cause_privilege_escalation_violation {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
@@ -1139,12 +1350,20 @@ iam_policy_permission_may_cause_privilege_escalation = false {
     policy_action == action_iam_policy_permission_may_cause_privilege_escalation[_]
 }
 
-iam_policy_permission_may_cause_privilege_escalation = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_permission_may_cause_privilege_escalation_violation {
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Action == action_iam_policy_permission_may_cause_privilege_escalation[_]
+}
+
+iam_policy_permission_may_cause_privilege_escalation {
+    input.Role
+    not iam_policy_permission_may_cause_privilege_escalation_violation
+}
+
+iam_policy_permission_may_cause_privilege_escalation = false {
+    iam_policy_permission_may_cause_privilege_escalation_violation
 }
 
 iam_policy_permission_may_cause_privilege_escalation_err = "Ensure AWS IAM policy do not have permission which may cause privilege escalation." {
@@ -1167,12 +1386,20 @@ iam_policy_permission_may_cause_privilege_escalation_metadata := {
 # PR-AWS-CLD-IAM-028
 #
 
-default iam_access_key_enabled_on_root_account = true
+default iam_access_key_enabled_on_root_account = null
 
-iam_access_key_enabled_on_root_account = false {
-    # lower(resource.Type) == "aws::iam::policy"
+iam_access_key_enabled_on_root_account_violation {
     input.SummaryMap.AccountAccessKeysPresent == 0
     
+}
+
+iam_access_key_enabled_on_root_account {
+    input.SummaryMap
+    not iam_access_key_enabled_on_root_account_violation
+}
+
+iam_access_key_enabled_on_root_account = false {
+    iam_access_key_enabled_on_root_account_violation
 }
 
 iam_access_key_enabled_on_root_account_err = "Ensure AWS Access key is enabled on root account." {
@@ -1195,10 +1422,10 @@ iam_access_key_enabled_on_root_account_metadata := {
 # PR-AWS-CLD-IAM-029
 #
 
-default iam_policy_not_overly_permissive_to_all_traffic_for_ecs= true
+default iam_policy_not_overly_permissive_to_all_traffic_for_ecs = null
 
-iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1207,8 +1434,8 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
     startswith(lower(policy_statement.Action[_]), "ecs:")
 }
 
-iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1217,8 +1444,8 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
     startswith(lower(policy_statement.Action), "ecs:")
 }
 
-iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1227,14 +1454,24 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
     startswith(lower(policy_statement.Action[_]), "ecs:")
 }
 
-iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
     startswith(lower(policy_statement.Action), "ecs:")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation
+}
+
+iam_policy_not_overly_permissive_to_all_traffic_for_ecs = false {
+    iam_policy_not_overly_permissive_to_all_traffic_for_ecs_violation
 }
 
 
@@ -1258,10 +1495,10 @@ iam_policy_not_overly_permissive_to_all_traffic_for_ecs_metadata := {
 # PR-AWS-CLD-IAM-030
 #
 
-default elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = true
+default elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = null
 
-elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1270,8 +1507,8 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
     startswith(lower(policy_statement.Action[_]), "es:")
 }
 
-elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1280,8 +1517,8 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
     startswith(lower(policy_statement.Action), "es:")
 }
 
-elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1290,14 +1527,24 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
     startswith(lower(policy_statement.Action[_]), "es:")
 }
 
-elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
     startswith(lower(policy_statement.Action), "es:")
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation
+}
+
+elasticsearch_iam_policy_not_overly_permissive_to_all_traffic = false {
+    elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_violation
 }
 
 
@@ -1321,10 +1568,10 @@ elasticsearch_iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 # PR-AWS-CLD-IAM-041
 #
 
-default not_allow_decryption_actions_on_all_kms_keys = true
+default not_allow_decryption_actions_on_all_kms_keys = null
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1334,8 +1581,8 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     not policy_statement.Condition
 }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1345,8 +1592,8 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     not policy_statement.Condition
 }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1356,8 +1603,8 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     not policy_statement.Condition
 }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1367,8 +1614,8 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     not policy_statement.Condition
 }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1378,8 +1625,8 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     not policy_statement.Condition
 }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1389,8 +1636,8 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     not policy_statement.Condition
 }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1400,8 +1647,8 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     not policy_statement.Condition
 }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1411,8 +1658,8 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     not policy_statement.Condition
 }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1422,8 +1669,8 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     not policy_statement.Condition
 }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1433,8 +1680,8 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     not policy_statement.Condition
 }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1444,8 +1691,8 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     not policy_statement.Condition
 }
 
-not_allow_decryption_actions_on_all_kms_keys = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+not_allow_decryption_actions_on_all_kms_keys_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1453,6 +1700,16 @@ not_allow_decryption_actions_on_all_kms_keys = false {
     policy_statement.Resource[_] == "*"
     contains(policy_statement.Action[_], "kms:ReEncryptFrom")
     not policy_statement.Condition
+}
+
+not_allow_decryption_actions_on_all_kms_keys {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not not_allow_decryption_actions_on_all_kms_keys_violation
+}
+
+not_allow_decryption_actions_on_all_kms_keys = false {
+    not_allow_decryption_actions_on_all_kms_keys_violation
 }
 
 not_allow_decryption_actions_on_all_kms_keys_err = "Ensure AWS IAM policy does not allows decryption actions on all KMS keys." {
@@ -1475,11 +1732,20 @@ not_allow_decryption_actions_on_all_kms_keys_metadata := {
 # PR-AWS-CLD-IAM-042
 #
 
-default iam_policy_attached_to_user = true
+default iam_policy_attached_to_user = null
 
-iam_policy_attached_to_user = false {
+iam_policy_attached_to_user_violation {
     UserDetail := input.UserDetailList[_]
     count(UserDetail.AttachedManagedPolicies) != 0
+}
+
+iam_policy_attached_to_user {
+    input.UserDetailList
+    not iam_policy_attached_to_user_violation
+}
+
+iam_policy_attached_to_user = false {
+    iam_policy_attached_to_user_violation
 }
 
 iam_policy_attached_to_user_err = "Ensure IAM policy is attached to group rather than user." {
@@ -1502,10 +1768,10 @@ iam_policy_attached_to_user_metadata := {
 # PR-AWS-CLD-IAM-043
 #
 
-default iam_policy_not_overly_permissive_to_all_traffic = true
+default iam_policy_not_overly_permissive_to_all_traffic = null
 
-iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1514,8 +1780,8 @@ iam_policy_not_overly_permissive_to_all_traffic = false {
     contains(lower(policy_statement.Action[_]), "*")
 }
 
-iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1524,8 +1790,8 @@ iam_policy_not_overly_permissive_to_all_traffic = false {
     contains(lower(policy_statement.Action), "*")
 }
 
-iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1534,14 +1800,24 @@ iam_policy_not_overly_permissive_to_all_traffic = false {
     contains(lower(policy_statement.Action[_]), "*")
 }
 
-iam_policy_not_overly_permissive_to_all_traffic = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"] == ip_address[_]
     contains(lower(policy_statement.Action), "*")
+}
+
+iam_policy_not_overly_permissive_to_all_traffic {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not iam_policy_not_overly_permissive_to_all_traffic_violation
+}
+
+iam_policy_not_overly_permissive_to_all_traffic = false {
+    iam_policy_not_overly_permissive_to_all_traffic_violation
 }
 
 
@@ -1565,10 +1841,10 @@ iam_policy_not_overly_permissive_to_all_traffic_metadata := {
 # PR-AWS-CLD-IAM-044
 #
 
-default iam_policy_not_overly_permissive_to_sts_service = true
+default iam_policy_not_overly_permissive_to_sts_service = null
 
-iam_policy_not_overly_permissive_to_sts_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_sts_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1578,8 +1854,8 @@ iam_policy_not_overly_permissive_to_sts_service = false {
     not policy_statement.Condition
 }
 
-iam_policy_not_overly_permissive_to_sts_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_sts_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1589,8 +1865,8 @@ iam_policy_not_overly_permissive_to_sts_service = false {
     not policy_statement.Condition
 }
 
-iam_policy_not_overly_permissive_to_sts_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_sts_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1600,8 +1876,8 @@ iam_policy_not_overly_permissive_to_sts_service = false {
     not policy_statement.Condition
 }
 
-iam_policy_not_overly_permissive_to_sts_service = false {
-    # lower(resource.Type) == "aws::iam::policyversion"
+iam_policy_not_overly_permissive_to_sts_service_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1609,6 +1885,16 @@ iam_policy_not_overly_permissive_to_sts_service = false {
     policy_statement.Resource[_] == "*"
     contains(lower(policy_statement.Action[_]), "sts:*")
     not policy_statement.Condition
+}
+
+iam_policy_not_overly_permissive_to_sts_service {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not iam_policy_not_overly_permissive_to_sts_service_violation
+}
+
+iam_policy_not_overly_permissive_to_sts_service = false {
+    iam_policy_not_overly_permissive_to_sts_service_violation
 }
 
 iam_policy_not_overly_permissive_to_sts_service_err = "Ensure AWS IAM policy is not overly permissive to STS services." {
@@ -1632,25 +1918,34 @@ iam_policy_not_overly_permissive_to_sts_service_metadata := {
 # PR-AWS-CLD-IAM-045
 # aws::iam::role
 
-default sns_publicly_accessible_through_iam_policies = false
+default sns_publicly_accessible_through_iam_policies = null
 
 sns_condition := ["aws:SourceArn", "aws:VpcSourceIp", "aws:username", "aws:userid", "aws:SourceVpc", "aws:SourceVpce", "aws:SourceIp", "aws:SourceIdentity", "aws:SourceAccount", "aws:PrincipalOrgID", "aws:PrincipalArn", "aws:SourceOwner", "kms:CallerAccount", "kms:PrincipalOrgPaths", "aws:ResourceOrgID", "aws:ResourceOrgPaths", "aws:ResourceAccount"]
 
-sns_publicly_accessible_through_iam_policies = true {
+sns_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     contains(lower(policy_statement.Principal.Service), "sns")
-    has_property(policy_statement.Condition[string], sns_condition[_])
+    common.has_property(policy_statement.Condition[string], sns_condition[_])
 }
 
-sns_publicly_accessible_through_iam_policies = true {
+sns_publicly_accessible_through_iam_policies_violation {
     some string
     role_policy_document := input.Role.AssumeRolePolicyDocument
     policy_statement := role_policy_document.Statement[i]
     services := policy_statement.Principal.Service[_]
     contains(lower(services), "sns")
-    has_property(policy_statement.Condition[string], sns_condition[_])
+    common.has_property(policy_statement.Condition[string], sns_condition[_])
+}
+
+sns_publicly_accessible_through_iam_policies {
+    input.Role
+    not sns_publicly_accessible_through_iam_policies_violation
+}
+
+sns_publicly_accessible_through_iam_policies = false {
+    sns_publicly_accessible_through_iam_policies_violation
 }
 
 sns_publicly_accessible_through_iam_policies_err = "Ensure AWS SNS Topic is not publicly accessible through IAM policies." {
@@ -1674,9 +1969,10 @@ sns_publicly_accessible_through_iam_policies_metadata := {
 # PR-AWS-CLD-IAM-046
 # aws::iam::policyversion
 
-default sagemaker_not_overly_permissive_to_all_traffic = true
+default sagemaker_not_overly_permissive_to_all_traffic = null
 
-sagemaker_not_overly_permissive_to_all_traffic = false {
+sagemaker_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
@@ -1685,13 +1981,24 @@ sagemaker_not_overly_permissive_to_all_traffic = false {
     startswith(lower(policy_statement.Action[_]), "sagemaker:")
 }
 
-sagemaker_not_overly_permissive_to_all_traffic = false {
+sagemaker_not_overly_permissive_to_all_traffic_violation {
+    not is_aws_managed_policy
     version := input.PolicyVersion
     policy_document := version.Document
     policy_statement := policy_document.Statement[i]
     lower(policy_statement.Effect) == "allow"
     policy_statement.Condition.IpAddress["aws:SourceIp"] == ip_address[_]
     startswith(lower(policy_statement.Action), "sagemaker:")
+}
+
+sagemaker_not_overly_permissive_to_all_traffic {
+    input.PolicyVersion
+    not is_aws_managed_policy
+    not sagemaker_not_overly_permissive_to_all_traffic_violation
+}
+
+sagemaker_not_overly_permissive_to_all_traffic = false {
+    sagemaker_not_overly_permissive_to_all_traffic_violation
 }
 
 sagemaker_not_overly_permissive_to_all_traffic_err = "Ensure AWS SageMaker notebook instance IAM policy is not overly permissive to all traffic." {
@@ -1715,12 +2022,21 @@ sagemaker_not_overly_permissive_to_all_traffic_metadata := {
 # aws::iam::policy
 # aws::iam::user
 
-default iam_deprecated_policies = true
+default iam_deprecated_policies = null
 
-iam_deprecated_policies = false {
+iam_deprecated_policies_violation {
     policy := input.AttachedPolicies[_]
     policy.PolicyArn == "arn:aws:iam::aws:policy/AmazonElasticTranscoderFullAccess"
 
+}
+
+iam_deprecated_policies {
+    input.AttachedPolicies
+    not iam_deprecated_policies_violation
+}
+
+iam_deprecated_policies = false {
+    iam_deprecated_policies_violation
 }
 
 iam_deprecated_policies_err = "Ensure AWS IAM deprecated managed policies is not in use by User." {
@@ -1743,10 +2059,19 @@ iam_deprecated_policies_metadata := {
 # PR-AWS-CLD-IAM-048
 #
 
-default iam_root_mfa_device = true
+default iam_root_mfa_device = null
+
+iam_root_mfa_device_violation {
+    input.SummaryMap.AccountMFAEnabled == 0
+}
+
+iam_root_mfa_device {
+    input.SummaryMap
+    not iam_root_mfa_device_violation
+}
 
 iam_root_mfa_device = false {
-    input.SummaryMap.AccountMFAEnabled == 0
+    iam_root_mfa_device_violation
 }
 
 iam_root_mfa_device_err = "Ensure AWS Root account should be protected by the MFA" {
@@ -1768,10 +2093,19 @@ iam_root_mfa_device_metadata := {
 #
 # PR-AWS-CLD-IAM-049
 #
-default iam_mfa_device = true
+default iam_mfa_device = null
+
+iam_mfa_device_violation {
+    count(input.MFADevices) == 0
+}
+
+iam_mfa_device {
+    input.MFADevices
+    not iam_mfa_device_violation
+}
 
 iam_mfa_device = false {
-    count(input.MFADevices) == 0
+    iam_mfa_device_violation
 }
 
 iam_mfa_device_err = "Ensure AWS user account with data access should be protected by MFA" {
@@ -1793,18 +2127,27 @@ iam_mfa_device_metadata := {
 #
 # PR-AWS-CLD-IAM-050
 #
-default iam_instance_profile = true
+default iam_instance_profile = null
 
-iam_instance_profile = false {
+iam_instance_profile_violation {
     role := input.InstanceProfile.Roles[_]
     statement := role.AssumeRolePolicyDocument.Statement[_]
     lower(statement.Action) == "*"
 }
 
-iam_instance_profile = false {
+iam_instance_profile_violation {
     role := input.InstanceProfile.Roles[_]
     statement := role.AssumeRolePolicyDocument.Statement[_]
     lower(statement.Resource) == "*"
+}
+
+iam_instance_profile {
+    input.InstanceProfile
+    not iam_instance_profile_violation
+}
+
+iam_instance_profile = false {
+    iam_instance_profile_violation
 }
 
 iam_instance_profile_err = "Ensure AWS Instance profile IAM should be least privileged" {

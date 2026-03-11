@@ -2,27 +2,12 @@ package rule
 # import future.keywords
 # import future.keywords.every
 
+import data.common
+
 # https://cloud.google.com/compute/docs/reference/rest/v1/firewalls
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
-
-array_element_contains(target_array, element_string) = true {
-  contains(lower(target_array[_]), lower(element_string))
-} else = false { true }
-
-array_element_in(target_array, in_array) = true {
-  lower(target_array[_]) == lower(in_array[_])
-} else = false { true }
-
-array_element_contains_in(target_array, in_array) = true {
-  contains(lower(target_array[_]), lower(in_array[_]))
-} else = false { true }
+# Utility functions (has_property, array_contains, array_element_contains,
+# array_element_in, array_element_contains_in) are now in common.rego
 
 predefined_admin_roles = ["roles/Owner", "roles/Editor"]
 
@@ -34,36 +19,30 @@ default firewall_default = null
 
 
 gc_attribute_absence["firewall_default"] {
-    # lower(resource.type) == "compute.v1.firewall"
     not input.name
 }
 
 gc_issue["firewall_default"] {
-    # lower(resource.type) == "compute.v1.firewall"
     lower(input.name) == "default-allow-ssh"
     input.sourceRanges[j] == "0.0.0.0/0"
 }
 
 gc_issue["firewall_default"] {
-    # lower(resource.type) == "compute.v1.firewall"
     lower(input.name) == "default-allow-icmp"
     input.sourceRanges[j] == "0.0.0.0/0"
 }
 
 gc_issue["firewall_default"] {
-    # lower(resource.type) == "compute.v1.firewall"
     lower(input.name) == "default-allow-internal"
     input.sourceRanges[j] == "0.0.0.0/0"
 }
 
 gc_issue["firewall_default"] {
-    # lower(resource.type) == "compute.v1.firewall"
     lower(input.name) == "default-allow-rdp"
     input.sourceRanges[j] == "0.0.0.0/0"
 }
 
 firewall_default {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_default"]
     not gc_attribute_absence["firewall_default"]
 }
@@ -101,14 +80,12 @@ firewall_default_metadata := {
 default firewall_port_53 = null
 
 gc_issue["firewall_port_53"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "53"
 }
 
 gc_issue["firewall_port_53"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -119,7 +96,6 @@ gc_issue["firewall_port_53"] {
 }
 
 gc_issue["firewall_port_53"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[k]
     count(allow.ports[l]) < 1
@@ -127,7 +103,6 @@ gc_issue["firewall_port_53"] {
 }
 
 gc_issue["firewall_port_53"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[k]
     count(allow.ports[l]) < 1
@@ -135,7 +110,6 @@ gc_issue["firewall_port_53"] {
 }
 
 firewall_port_53 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_53"]
 }
 
@@ -166,14 +140,12 @@ firewall_port_53_metadata := {
 default firewall_port_21 = null
 
 gc_issue["firewall_port_21"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "21"
 }
 
 gc_issue["firewall_port_21"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -184,7 +156,6 @@ gc_issue["firewall_port_21"] {
 }
 
 gc_issue["firewall_port_21"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -192,7 +163,6 @@ gc_issue["firewall_port_21"] {
 }
 
 gc_issue["firewall_port_21"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -200,7 +170,6 @@ gc_issue["firewall_port_21"] {
 }
 
 firewall_port_21 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_21"]
 }
 
@@ -231,14 +200,12 @@ firewall_port_21_metadata := {
 default firewall_port_80 = null
 
 gc_issue["firewall_port_80"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "80"
 }
 
 gc_issue["firewall_port_80"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -249,7 +216,6 @@ gc_issue["firewall_port_80"] {
 }
 
 gc_issue["firewall_port_80"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -257,7 +223,6 @@ gc_issue["firewall_port_80"] {
 }
 
 gc_issue["firewall_port_80"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -265,7 +230,6 @@ gc_issue["firewall_port_80"] {
 }
 
 firewall_port_80 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_80"]
 }
 
@@ -296,14 +260,12 @@ firewall_port_80_metadata := {
 default firewall_port_445 = null
 
 gc_issue["firewall_port_445"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "445"
 }
 
 gc_issue["firewall_port_445"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -314,7 +276,6 @@ gc_issue["firewall_port_445"] {
 }
 
 gc_issue["firewall_port_445"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -322,7 +283,6 @@ gc_issue["firewall_port_445"] {
 }
 
 gc_issue["firewall_port_445"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -330,7 +290,6 @@ gc_issue["firewall_port_445"] {
 }
 
 firewall_port_445 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_445"]
 }
 
@@ -361,14 +320,12 @@ firewall_port_445_metadata := {
 default firewall_port_27017 = null
 
 gc_issue["firewall_port_27017"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "27017"
 }
 
 gc_issue["firewall_port_27017"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -379,7 +336,6 @@ gc_issue["firewall_port_27017"] {
 }
 
 gc_issue["firewall_port_27017"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -387,7 +343,6 @@ gc_issue["firewall_port_27017"] {
 }
 
 gc_issue["firewall_port_27017"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -395,7 +350,6 @@ gc_issue["firewall_port_27017"] {
 }
 
 firewall_port_27017 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_27017"]
 }
 
@@ -426,14 +380,12 @@ firewall_port_27017_metadata := {
 default firewall_port_3306 = null
 
 gc_issue["firewall_port_3306"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "3306"
 }
 
 gc_issue["firewall_port_3306"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -444,7 +396,6 @@ gc_issue["firewall_port_3306"] {
 }
 
 gc_issue["firewall_port_3306"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -452,7 +403,6 @@ gc_issue["firewall_port_3306"] {
 }
 
 gc_issue["firewall_port_3306"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -460,7 +410,6 @@ gc_issue["firewall_port_3306"] {
 }
 
 firewall_port_3306 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_3306"]
 }
 
@@ -491,14 +440,12 @@ firewall_port_3306_metadata := {
 default firewall_port_139 = null
 
 gc_issue["firewall_port_139"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "139"
 }
 
 gc_issue["firewall_port_139"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -509,7 +456,6 @@ gc_issue["firewall_port_139"] {
 }
 
 gc_issue["firewall_port_139"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -517,7 +463,6 @@ gc_issue["firewall_port_139"] {
 }
 
 gc_issue["firewall_port_139"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -525,7 +470,6 @@ gc_issue["firewall_port_139"] {
 }
 
 firewall_port_139 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_139"]
 }
 
@@ -556,14 +500,12 @@ firewall_port_139_metadata := {
 default firewall_port_1521 = null
 
 gc_issue["firewall_port_1521"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "1521"
 }
 
 gc_issue["firewall_port_1521"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -574,7 +516,6 @@ gc_issue["firewall_port_1521"] {
 }
 
 gc_issue["firewall_port_1521"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -582,7 +523,6 @@ gc_issue["firewall_port_1521"] {
 }
 
 gc_issue["firewall_port_1521"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -590,7 +530,6 @@ gc_issue["firewall_port_1521"] {
 }
 
 firewall_port_1521 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_1521"]
 }
 
@@ -621,14 +560,12 @@ firewall_port_1521_metadata := {
 default firewall_port_110 = null
 
 gc_issue["firewall_port_110"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "110"
 }
 
 gc_issue["firewall_port_110"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -639,7 +576,6 @@ gc_issue["firewall_port_110"] {
 }
 
 gc_issue["firewall_port_110"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -647,7 +583,6 @@ gc_issue["firewall_port_110"] {
 }
 
 gc_issue["firewall_port_110"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -655,7 +590,6 @@ gc_issue["firewall_port_110"] {
 }
 
 firewall_port_110 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_110"]
 }
 
@@ -686,14 +620,12 @@ firewall_port_110_metadata := {
 default firewall_port_5432 = null
 
 gc_issue["firewall_port_5432"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "5432"
 }
 
 gc_issue["firewall_port_5432"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -704,7 +636,6 @@ gc_issue["firewall_port_5432"] {
 }
 
 gc_issue["firewall_port_5432"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -712,7 +643,6 @@ gc_issue["firewall_port_5432"] {
 }
 
 gc_issue["firewall_port_5432"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -720,7 +650,6 @@ gc_issue["firewall_port_5432"] {
 }
 
 firewall_port_5432 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_5432"]
 }
 
@@ -751,14 +680,12 @@ firewall_port_5432_metadata := {
 default firewall_port_3389 = null
 
 gc_issue["firewall_port_3389"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "3389"
 }
 
 gc_issue["firewall_port_3389"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -769,7 +696,6 @@ gc_issue["firewall_port_3389"] {
 }
 
 gc_issue["firewall_port_3389"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -777,7 +703,6 @@ gc_issue["firewall_port_3389"] {
 }
 
 gc_issue["firewall_port_3389"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -785,7 +710,6 @@ gc_issue["firewall_port_3389"] {
 }
 
 firewall_port_3389 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_3389"]
 }
 
@@ -816,14 +740,12 @@ firewall_port_3389_metadata := {
 default firewall_port_25 = null
 
 gc_issue["firewall_port_25"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "25"
 }
 
 gc_issue["firewall_port_25"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -834,7 +756,6 @@ gc_issue["firewall_port_25"] {
 }
 
 gc_issue["firewall_port_25"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -842,7 +763,6 @@ gc_issue["firewall_port_25"] {
 }
 
 gc_issue["firewall_port_25"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -850,7 +770,6 @@ gc_issue["firewall_port_25"] {
 }
 
 firewall_port_25 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_25"]
 }
 
@@ -881,14 +800,12 @@ firewall_port_25_metadata := {
 default firewall_port_22 = null
 
 gc_issue["firewall_port_22"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "22"
 }
 
 gc_issue["firewall_port_22"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -899,7 +816,6 @@ gc_issue["firewall_port_22"] {
 }
 
 gc_issue["firewall_port_22"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -907,7 +823,6 @@ gc_issue["firewall_port_22"] {
 }
 
 gc_issue["firewall_port_22"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -915,7 +830,6 @@ gc_issue["firewall_port_22"] {
 }
 
 firewall_port_22 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_22"]
 }
 
@@ -946,14 +860,12 @@ firewall_port_22_metadata := {
 default firewall_port_23 = null
 
 gc_issue["firewall_port_23"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     allow.ports[_] == "23"
 }
 
 gc_issue["firewall_port_23"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     port := allow.ports[_]
@@ -964,7 +876,6 @@ gc_issue["firewall_port_23"] {
 }
 
 gc_issue["firewall_port_23"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -972,7 +883,6 @@ gc_issue["firewall_port_23"] {
 }
 
 gc_issue["firewall_port_23"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     allow := input.allowed[_]
     count(allow.ports[_]) < 1
@@ -980,7 +890,6 @@ gc_issue["firewall_port_23"] {
 }
 
 firewall_port_23 {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_23"]
 }
 
@@ -1011,7 +920,6 @@ firewall_port_23_metadata := {
 default firewall_inbound = null
 
 gc_issue["firewall_inbound"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     lower(input.direction) != "egress"
     not input.targetTags
@@ -1019,7 +927,6 @@ gc_issue["firewall_inbound"] {
 }
 
 gc_issue["firewall_inbound"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     not input.direction
     not input.targetTags
@@ -1027,7 +934,6 @@ gc_issue["firewall_inbound"] {
 }
 
 firewall_inbound {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_inbound"]
 }
 
@@ -1058,13 +964,11 @@ firewall_inbound_metadata := {
 default firewall_inbound_all = null
 
 gc_issue["firewall_inbound_all"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.sourceRanges[j] == "0.0.0.0/0"
     lower(input.allowed[_].IPProtocol) == "all"
 }
 
 firewall_inbound_all {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_inbound_all"]
 }
 
@@ -1096,22 +1000,18 @@ firewall_inbound_all_metadata := {
 default firewall_logging = null
 
 gc_issue["firewall_logging"] {
-    # lower(resource.type) == "compute.v1.firewall"
     not input.logConfig
 }
 
 gc_issue["firewall_logging"] {
-    # lower(resource.type) == "compute.v1.firewall"
     input.logConfig.enable == false
 }
 
 gc_issue["firewall_logging"] {
-    # lower(resource.type) == "compute.v1.firewall"
     lower(input.logConfig.enable) == "false"
 }
 
 firewall_logging {
-    # lower(input.resources[i].type) == "compute.v1.firewall"
     not gc_issue["firewall_logging"]
 }
 
@@ -1184,12 +1084,10 @@ overlly_permissive_traffic_metadata := {
 default disk_encrypt = null
 
 gc_issue["disk_encrypt"] {
-    # lower(resource.type) == "compute.v1.disk"
     not input.diskEncryptionKey
 }
 
 disk_encrypt {
-    # lower(input.resources[i].type) == "compute.v1.disk"
     not gc_issue["disk_encrypt"]
 }
 
@@ -1223,27 +1121,23 @@ disk_encrypt_metadata := {
 default vm_ip_forward = null
 
 gc_issue["vm_ip_forward"] {
-    # lower(resource.type) == "compute.v1.instance"
     input.canIpForward
     not startswith(lower(input.name), "gke-")
 }
 
 gc_issue["vm_ip_forward"] {
-    # lower(resource.type) == "compute.v1.instance"
     input.canIpForward
     startswith(lower(input.name), "gke-")
-    count([c | has_property(input.disks[_].initializeParams[_],"labels") ; c=1]) == 0
+    count([c | common.has_property(input.disks[_].initializeParams[_],"labels") ; c=1]) == 0
 }
 
 gc_issue["vm_ip_forward"] {
-    # lower(resource.type) == "compute.v1.instance"
     input.canIpForward
     startswith(lower(input.name), "gke-")
     count([c | input.disks[_].initializeParams[_].labels ; c=1]) == 0
 }
 
 vm_ip_forward {
-    # lower(input.resources[i].type) == "compute.v1.instance"
     not gc_issue["vm_ip_forward"]
 }
 
@@ -1274,12 +1168,10 @@ vm_ip_forward_metadata := {
 default vm_block_project_ssh_keys = null
 
 gc_issue["vm_block_project_ssh_keys"] {
-    # lower(resource.type) == "compute.v1.instance"
     count([c | contains(lower(input.metadata.items[_].key), "block-project-ssh-keys"); c := 1]) == 0
 }
 
 vm_block_project_ssh_keys {
-    # lower(input.resources[i].type) == "compute.v1.instance"
     not gc_issue["vm_block_project_ssh_keys"]
 }
 
@@ -1310,21 +1202,18 @@ vm_block_project_ssh_keys_metadata := {
 default vm_serial_port = null
 
 gc_issue["vm_serial_port"] {
-    # lower(resource.type) == "compute.v1.instance"
     items := input.metadata.items[_]
     contains(lower(items.key), "serial-port-enable")
     lower(items.value) == "true"
 }
 
 gc_issue["vm_serial_port"] {
-    # lower(resource.type) == "compute.v1.instance"
     items := input.metadata.items[_]
     contains(lower(items.key), "serial-port-enable")
     items.value == true
 }
 
 vm_serial_port {
-    # lower(input.resources[i].type) == "compute.v1.instance"
     not gc_issue["vm_serial_port"]
 }
 
@@ -1355,12 +1244,10 @@ vm_serial_port_metadata := {
 default vm_pre_emptible = null
 
 gc_issue["vm_pre_emptible"] {
-    # lower(resource.type) == "compute.v1.instance"
     input.scheduling.preemptible == true
 }
 
 vm_pre_emptible {
-    # lower(input.resources[i].type) == "compute.v1.instance"
     not gc_issue["vm_pre_emptible"]
 }
 
@@ -1391,17 +1278,14 @@ vm_pre_emptible_metadata := {
 default vm_metadata = null
 
 gc_issue["vm_metadata"] {
-    # lower(resource.type) == "compute.v1.instance"
     not input.metadata.items
 }
 
 gc_issue["vm_metadata"] {
-    # lower(resource.type) == "compute.v1.instance"
-    count(input.metadata.items) == 0
+    not common.non_empty(input.metadata.items)
 }
 
 vm_metadata {
-    # lower(input.resources[i].type) == "compute.v1.instance"
     not gc_issue["vm_metadata"]
 }
 
@@ -1432,17 +1316,14 @@ vm_metadata_metadata := {
 default vm_no_labels = null
 
 gc_issue["vm_no_labels"] {
-    # lower(resource.type) == "compute.v1.instance"
     not input.labels
 }
 
 gc_issue["vm_no_labels"] {
-    # lower(resource.type) == "compute.v1.instance"
-    count(input.labels) == 0
+    not common.non_empty(input.labels)
 }
 
 vm_no_labels {
-    # lower(input.resources[i].type) == "compute.v1.instance"
     not gc_issue["vm_no_labels"]
 }
 
@@ -1473,32 +1354,22 @@ vm_no_labels_metadata := {
 default vm_info = null
 
 gc_issue["vm_info"] {
-    # lower(resource.type) == "compute.v1.instance"
     not input.labels
 }
 
 gc_issue["vm_info"] {
-    # lower(resource.type) == "compute.v1.instance"
-    count(input.labels) == 0
+    not common.non_empty(input.labels)
 }
 
 gc_issue["vm_info"] {
-    # lower(resource.type) == "compute.v1.instance"
-    not input.metadata.items
+    not common.non_empty(input.metadata.items)
 }
 
 gc_issue["vm_info"] {
-    # lower(resource.type) == "compute.v1.instance"
-    count(input.metadata.items) == 0
-}
-
-gc_issue["vm_info"] {
-    # lower(resource.type) == "compute.v1.instance"
     not input.zone
 }
 
 vm_info {
-    # lower(input.resources[i].type) == "compute.v1.instance"
     not gc_issue["vm_info"]
 }
 
@@ -1530,25 +1401,21 @@ vm_info_metadata := {
 default compute_disk_csek = null
 
 gc_issue["compute_disk_csek"] {
-    # lower(resource.type) == "compute.v1.instance"
     disks := input.disks[_]
     not disks.sourceSnapshotEncryptionKey.sha256
 }
 
 gc_issue["compute_disk_csek"] {
-    # lower(resource.type) == "compute.v1.instance"
     disks := input.disks[_]
     count(disks.sourceSnapshotEncryptionKey.sha256) == 0
 }
 
 gc_issue["compute_disk_csek"] {
-    # lower(resource.type) == "compute.v1.instance"
     disks := input.disks[_]
     disks.sourceSnapshotEncryptionKey.sha256 == null
 }
 
 compute_disk_csek {
-    # lower(input.resources[i].type) == "compute.v1.instance"
     not gc_issue["compute_disk_csek"]
 }
 
@@ -1580,13 +1447,11 @@ compute_disk_csek_metadata := {
 default compute_ssl_profile_restricted = null
 
 gc_issue["compute_ssl_profile_restricted"] {
-    # lower(resource.type) == "compute.v1.sslPolicies"
     lower(input.profile) != "custom"
     lower(input.profile) != "restricted"
 }
 
 compute_ssl_profile_restricted {
-    # lower(input.resources[i].type) == "compute.v1.sslPolicies"
     not gc_issue["compute_ssl_profile_restricted"]
 }
 
@@ -1620,12 +1485,10 @@ deprecated_min_tls_version = ["tls_1_0", "tls_1_1"]
 default compute_ssl_min_tls = null
 
 gc_issue["compute_ssl_min_tls"] {
-    # lower(resource.type) == "compute.v1.sslPolicies"
     lower(input.minTlsVersion) == deprecated_min_tls_version[_]
 }
 
 compute_ssl_min_tls {
-    # lower(input.resources[i].type) == "compute.v1.sslPolicies"
     not gc_issue["compute_ssl_min_tls"]
 }
 
@@ -1657,15 +1520,12 @@ compute_ssl_min_tls_metadata := {
 default compute_instance_not_configured_to_use_default_service_account = null
 
 gc_issue["compute_instance_not_configured_to_use_default_service_account"] {
-    # lower(resource.type) == "compute.v1.instance"
-    #lower(input.status) == "running"
     not startswith(lower(input.name), "gke-")
     serviceAccount := input.serviceAccounts[_]
     contains(lower(serviceAccount.email), "compute@developer.gserviceaccount.com")
 }
 
 compute_instance_not_configured_to_use_default_service_account {
-    # lower(input.resources[i].type) == "compute.v1.instance"
     not gc_issue["compute_instance_not_configured_to_use_default_service_account"]
 }
 
@@ -1697,12 +1557,9 @@ compute_instance_not_configured_to_use_default_service_account_metadata := {
 default compute_instance_not_configured_to_use_default_service_account_with_full_access = null
 
 gcp_issue["compute_instance_not_configured_to_use_default_service_account_with_full_access"] {
-    # lower(resource.type) == "compute.v1.instance"
-    #lower(input.status) == "running"
     not startswith(lower(input.name), "gke-")
     serviceAccount := input.serviceAccounts[_]
     contains(lower(serviceAccount.email), "compute@developer.gserviceaccount.com")
-    #lower(serviceAccount.scopes) == "https://www.googleapis.com/auth/cloud-platform"
     count([c | contains(lower(serviceAccount.scopes[_]), "cloud-platform"); c := 1]) > 0
 }
 
@@ -1738,7 +1595,6 @@ compute_instance_not_configured_to_use_default_service_account_with_full_access_
 default compute_shielded_vm = null
 
 gc_issue["compute_shielded_vm"] {
-    # lower(resource.type) == "compute.v1.instance"
     lower(input.status) == "running"
     not startswith(lower(input.name), "gke-")
     input.shieldedInstanceConfig
@@ -1746,7 +1602,6 @@ gc_issue["compute_shielded_vm"] {
 }
 
 gc_issue["compute_shielded_vm"] {
-    # lower(resource.type) == "compute.v1.instance"
     lower(input.status) == "running"
     not startswith(lower(input.name), "gke-")
     input.shieldedInstanceConfig
@@ -1754,7 +1609,6 @@ gc_issue["compute_shielded_vm"] {
 }
 
 compute_shielded_vm {
-    # lower(input.resources[i].type) == "compute.v1.instance"
     not gc_issue["compute_shielded_vm"]
 }
 
@@ -1786,16 +1640,14 @@ compute_shielded_vm_metadata := {
 default compute_instance_external_ip = null
 
 gc_issue["compute_instance_external_ip"] {
-    # lower(resource.type) == "compute.v1.instance"
     lower(input.status) == "running"
     networkInterface := input.networkInterfaces[_]
-    has_property(networkInterface, "accessConfigs")
+    common.has_property(networkInterface, "accessConfigs")
     not startswith(lower(input.name), "gke-")
     not contains(lower(input.name), "default-pool")
 }
 
 compute_instance_external_ip {
-    # lower(input.resources[i].type) == "compute.v1.instance"
     not gc_issue["compute_instance_external_ip"]
 }
 
@@ -1826,14 +1678,12 @@ compute_instance_external_ip_metadata := {
 default compute_ip_forwarding_enable = null
 
 gc_issue["compute_ip_forwarding_enable"] {
-    # lower(resource.type) == "compute.v1.instance"
     lower(input.status) == "running"
     input.canIpForward == true
     not startswith(lower(input.name), "gke-")
 }
 
 compute_ip_forwarding_enable {
-    # lower(input.resources[i].type) == "compute.v1.instance"
     not gc_issue["compute_ip_forwarding_enable"]
 }
 
@@ -1867,18 +1717,18 @@ info_value_list = ["Yes", "Y", "True", "true", "TRUE", "1"]
 
 instance_value_list = ["No", "N", "False", "false", "FALSE", "0"]
 
-default project_os_login_overridden_by_instnace = true
+default project_os_login_overridden_by_instnace = null
 
-project_os_login_overridden_by_instnace = false{
+project_os_login_overridden_by_instnace_violation {
 	X := input.GOOGLE_PROJECT_INFO[_]
-	has_property(X.commonInstanceMetadata, "items")
+	common.has_property(X.commonInstanceMetadata, "items")
 	project_info_items = X.commonInstanceMetadata.items[_]
 	contains(project_info_items.key, "enable-oslogin")
 	count([c | contains(input.GOOGLE_PROJECT_INFO[_].commonInstanceMetadata.items[_].value, info_value_list[_]); c = 1]) != 0
 
 	Y := input.GOOGLE_INSTANCE[_]
-	has_property(Y.metadata, "items")
-	has_property(Y.metadata.items[_], "key")
+	common.has_property(Y.metadata, "items")
+	common.has_property(Y.metadata.items[_], "key")
 	project_instance_items = Y.metadata.items[_]
 	contains(project_instance_items.key, "enable-oslogin")
 	count([c | contains(input.GOOGLE_INSTANCE[_].metadata.items[_].value, instance_value_list[_]); c = 1]) != 0
@@ -1886,6 +1736,16 @@ project_os_login_overridden_by_instnace = false{
 	upper(Y.status) == "RUNNING"
 
 	contains(Y.zone, X.name)
+}
+
+project_os_login_overridden_by_instnace {
+	input.GOOGLE_PROJECT_INFO
+	input.GOOGLE_INSTANCE
+	not project_os_login_overridden_by_instnace_violation
+}
+
+project_os_login_overridden_by_instnace = false {
+	project_os_login_overridden_by_instnace_violation
 }
 
 project_os_login_overridden_by_instnace_err = "Ensure, GCP VM instance OS login overrides Project metadata OS login configuration." {
@@ -1913,13 +1773,13 @@ default compute_instance_dont_have_predefined_admin_roles = null
 gcp_issue["compute_instance_dont_have_predefined_admin_roles"] {
     not startswith(lower(input.name), "gke-")
     serviceAccount := input.serviceAccounts[_]
-    array_element_contains(serviceAccount.scopes, "admin")
+    common.array_element_contains(serviceAccount.scopes, "admin")
 }
 
 gcp_issue["compute_instance_dont_have_predefined_admin_roles"] {
     not startswith(lower(input.name), "gke-")
     serviceAccount := input.serviceAccounts[_]
-    array_element_in(serviceAccount.scopes, predefined_admin_roles)
+    common.array_element_in(serviceAccount.scopes, predefined_admin_roles)
 }
 
 compute_instance_dont_have_predefined_admin_roles {
@@ -1956,13 +1816,13 @@ default compute_instance_dont_have_iam_write_access_level = null
 gcp_issue["compute_instance_dont_have_iam_write_access_level"] {
     not startswith(lower(input.name), "gke-")
     serviceAccount := input.serviceAccounts[_]
-    array_element_contains_in(serviceAccount.scopes, ["admin", "manage", "update", "delete", "enable", "disable"])
+    common.array_element_contains_in(serviceAccount.scopes, ["admin", "manage", "update", "delete", "enable", "disable"])
 }
 
 gcp_issue["compute_instance_dont_have_iam_write_access_level"] {
     not startswith(lower(input.name), "gke-")
     serviceAccount := input.serviceAccounts[_]
-    array_element_in(serviceAccount.scopes, predefined_admin_roles)
+    common.array_element_in(serviceAccount.scopes, predefined_admin_roles)
 }
 
 compute_instance_dont_have_iam_write_access_level {
@@ -2001,7 +1861,7 @@ gc_issue["armor_not_config_with_cve"] {
 }
 
 gc_issue["armor_not_config_with_cve"] {
-    has_property(input, "rules")
+    common.has_property(input, "rules")
     rule := input.rules[_]
     contains(rule.match.expr.expression, "cve-canary")
     rule.action == "allow"
@@ -2039,12 +1899,10 @@ armor_not_config_with_cve_metadata := {
 default net_legacy = null
 
 gc_issue["net_legacy"] {
-    # lower(resource.type) == "compute.v1.network"
     not input.autoCreateSubnetworks
 }
 
 net_legacy {
-    # lower(input.resources[i].type) == "compute.v1.network"
     not gc_issue["net_legacy"]
 }
 
@@ -2076,17 +1934,14 @@ default net_default = null
 
 
 gc_attribute_absence["net_default"] {
-    # lower(resource.type) == "compute.v1.network"
     not input.name
 }
 
 gc_issue["net_default"] {
-    # lower(resource.type) == "compute.v1.network"
     lower(input.name) == "default"
 }
 
 net_default {
-    # lower(input.resources[i].type) == "compute.v1.network"
     not gc_issue["net_default"]
     not gc_attribute_absence["net_default"]
 }
@@ -2124,13 +1979,23 @@ net_default_metadata := {
 # PR-GCP-CLD-NET-003
 #
 
-default ntw_config_with_dns_logging_disabled = true
+default ntw_config_with_dns_logging_disabled = null
 
-ntw_config_with_dns_logging_disabled = false{
+ntw_config_with_dns_logging_disabled_violation {
     X := input.GOOGLE_NETWORK[_]
     Y := input.GOOGLE_DNS_POLICY[_]
     count([c | contains(Y.networks[_].networkUrl, X.name); c=1]) == 0
     not Y.enableLogging
+}
+
+ntw_config_with_dns_logging_disabled {
+    input.GOOGLE_NETWORK
+    input.GOOGLE_DNS_POLICY
+    not ntw_config_with_dns_logging_disabled_violation
+}
+
+ntw_config_with_dns_logging_disabled = false {
+    ntw_config_with_dns_logging_disabled_violation
 }
 
 ntw_config_with_dns_logging_disabled_err = "Ensure, GCP VPC network not configured with DNS policy with logging enabled." {
@@ -2157,12 +2022,10 @@ ntw_config_with_dns_logging_disabled_metadata := {
 default vpc_flow_logs = null
 
 gc_issue["vpc_flow_logs"] {
-    # lower(resource.type) == "compute.v1.subnetwork"
     not input.enableFlowLogs
 }
 
 vpc_flow_logs {
-    # lower(input.resources[i].type) == "compute.v1.subnetwork"
     not gc_issue["vpc_flow_logs"]
 }
 
@@ -2193,12 +2056,10 @@ vpc_flow_logs_metadata := {
 default vpc_private_ip_google = null
 
 gc_issue["vpc_private_ip_google"] {
-    # lower(resource.type) == "compute.v1.subnetwork"
     not input.privateIpGoogleAccess
 }
 
 vpc_private_ip_google {
-    # lower(input.resources[i].type) == "compute.v1.subnetwork"
     not gc_issue["vpc_private_ip_google"]
 }
 
@@ -2230,22 +2091,10 @@ vpc_private_ip_google_metadata := {
 default lbs_ssl_policy = null
 
 gc_issue["lbs_ssl_policy"] {
-    # lower(resource.type) == "compute.v1.targethttpsproxy"
-    not input.sslPolicy
-}
-
-gc_issue["lbs_ssl_policy"] {
-    # lower(resource.type) == "compute.v1.targethttpsproxy"
-    count(input.sslPolicy) == 0
-}
-
-gc_issue["lbs_ssl_policy"] {
-    # lower(resource.type) == "compute.v1.targethttpsproxy"
-    input.sslPolicy == null
+    not common.non_empty(input.sslPolicy)
 }
 
 lbs_ssl_policy {
-    # lower(input.resources[i].type) == "compute.v1.targethttpsproxy"
     not gc_issue["lbs_ssl_policy"]
 }
 
@@ -2276,17 +2125,14 @@ lbs_ssl_policy_metadata := {
 default lbs_quic = null
 
 gc_attribute_absence["lbs_quic"] {
-    # lower(resource.type) == "compute.v1.targethttpsproxy"
     not input.quicOverride
 }
 
 gc_issue["lbs_quic"] {
-    # lower(resource.type) == "compute.v1.targethttpsproxy"
     lower(input.quicOverride) != "enable"
 }
 
 lbs_quic {
-    # lower(input.resources[i].type) == "compute.v1.targethttpsproxy"
     not gc_issue["lbs_quic"]
     not gc_attribute_absence["lbs_quic"]
 }
@@ -2378,7 +2224,7 @@ os_login_disable_metadata := {
 default cld_run_with_over_permission_ingress = null
 
 gc_attribute_absence["cld_run_with_over_permission_ingress"]{
-    count([c | has_property(input.status, "conditions"); c=1]) == 0
+    count([c | common.has_property(input.status, "conditions"); c=1]) == 0
 }
 
 gc_issue["cld_run_with_over_permission_ingress"]{

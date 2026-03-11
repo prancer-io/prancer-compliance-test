@@ -1,12 +1,6 @@
 package rule
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites
 
@@ -27,7 +21,6 @@ azure_issue ["https_only"] {
 }
 
 https_only {
-    #lower(input.resources[_].type) == "microsoft.web/sites"
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     contains(lower(resource.kind), "functionapp")
@@ -82,12 +75,6 @@ azure_attribute_absence ["min_tls_version"] {
     count([c | lower(input.resources[_].type) == "microsoft.web/sites/config"; c := 1]) == 0
 }
 
-# azure_attribute_absence["min_tls_version"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "microsoft.web/sites/config"
-#     not resource.dependsOn
-# }
-
 azure_attribute_absence["min_tls_version"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites/config"
@@ -99,7 +86,6 @@ azure_issue["min_tls_version"] {
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.web/sites/config";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.minTlsVersion) == "1.2";
               c := 1]) == 0
 }
@@ -123,7 +109,6 @@ azure_inner_issue ["min_tls_version"] {
 }
 
 min_tls_version {
-    #lower(input.resources[_].type) == "microsoft.web/sites"
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     contains(lower(resource.kind), "functionapp")
@@ -283,12 +268,6 @@ azure_attribute_absence ["http_20_enabled"] {
     count([c | lower(input.resources[_].type) == "microsoft.web/sites/config"; c := 1]) == 0
 }
 
-# azure_attribute_absence["http_20_enabled"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "microsoft.web/sites/config"
-#     not resource.dependsOn
-# }
-
 azure_attribute_absence["http_20_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites/config"
@@ -300,7 +279,6 @@ azure_issue["http_20_enabled"] {
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.web/sites/config";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.http20Enabled == true;
               c := 1]) == 0
 }
@@ -418,31 +396,12 @@ azure_attribute_absence ["azure_function_app_has_auth_settings_enabled"] {
     count([c | lower(input.resources[_].type) == "microsoft.web/sites/config"; c := 1]) == 0
 }
 
-# azure_attribute_absence["azure_function_app_has_auth_settings_enabled"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "microsoft.web/sites/config"
-#     not resource.dependsOn
-# }
-
-# azure_attribute_absence["azure_function_app_has_auth_settings_enabled"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "microsoft.web/sites/config"
-#     not resource.name
-# }
-
-# azure_attribute_absence["azure_function_app_has_auth_settings_enabled"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "microsoft.web/sites/config"
-#     not resource.properties.enabled
-# }
-
 azure_issue["azure_function_app_has_auth_settings_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.web/sites/config";
               lower(r.name) == "authsettings";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               r.properties.enabled == true;
               c := 1]) == 0
 }

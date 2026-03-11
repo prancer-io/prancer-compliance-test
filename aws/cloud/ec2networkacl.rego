@@ -1,15 +1,16 @@
 package rule
 
+import data.common
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html
 
 #
 # PR-AWS-CLD-NACL-001
 #
 
-default acl_all_icmp_ipv4 = true
+default acl_all_icmp_ipv4 = null
 
-acl_all_icmp_ipv4 = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_all_icmp_ipv4_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress != true
@@ -18,14 +19,22 @@ acl_all_icmp_ipv4 = false {
     lower(Entries.RuleAction) == "allow"
 }
 
-acl_all_icmp_ipv4 = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_all_icmp_ipv4_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress != true
     to_number(Entries.Protocol) == -1
     Entries.CidrBlock == "0.0.0.0/0"
     lower(Entries.RuleAction) == "allow"
+}
+
+acl_all_icmp_ipv4 {
+    input.NetworkAcls
+    not acl_all_icmp_ipv4_violation
+}
+
+acl_all_icmp_ipv4 = false {
+    acl_all_icmp_ipv4_violation
 }
 
 acl_all_icmp_ipv4_err = "AWS Network ACLs with Inbound rule to allow All ICMP IPv4" {
@@ -48,10 +57,9 @@ acl_all_icmp_ipv4_metadata := {
 # PR-AWS-CLD-NACL-002
 #
 
-default acl_all_icmp_ipv6 = true
+default acl_all_icmp_ipv6 = null
 
-acl_all_icmp_ipv6 = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_all_icmp_ipv6_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress != true
@@ -60,14 +68,22 @@ acl_all_icmp_ipv6 = false {
     lower(Entries.RuleAction) == "allow"
 }
 
-acl_all_icmp_ipv6 = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_all_icmp_ipv6_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress != true
     to_number(Entries.Protocol) == -1
     Entries.Ipv6CidrBlock == "::/0"
     lower(Entries.RuleAction) == "allow"
+}
+
+acl_all_icmp_ipv6 {
+    input.NetworkAcls
+    not acl_all_icmp_ipv6_violation
+}
+
+acl_all_icmp_ipv6 = false {
+    acl_all_icmp_ipv6_violation
 }
 
 acl_all_icmp_ipv6_err = "AWS Network ACLs with Inbound rule to allow All ICMP IPv6" {
@@ -90,16 +106,24 @@ acl_all_icmp_ipv6_metadata := {
 # PR-AWS-CLD-NACL-003
 #
 
-default acl_all_traffic = true
+default acl_all_traffic = null
 
-acl_all_traffic = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_all_traffic_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress != true
     to_number(Entries.Protocol) == -1
     Entries.CidrBlock == "0.0.0.0/0"
     lower(Entries.RuleAction) == "allow"
+}
+
+acl_all_traffic {
+    input.NetworkAcls
+    not acl_all_traffic_violation
+}
+
+acl_all_traffic = false {
+    acl_all_traffic_violation
 }
 
 acl_all_traffic_err = "AWS Network ACLs with Inbound rule to allow All Traffic" {
@@ -122,10 +146,9 @@ acl_all_traffic_metadata := {
 # PR-AWS-CLD-NACL-004
 #
 
-default acl_all_icmp_ipv4_out = true
+default acl_all_icmp_ipv4_out = null
 
-acl_all_icmp_ipv4_out = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_all_icmp_ipv4_out_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress == true
@@ -134,14 +157,22 @@ acl_all_icmp_ipv4_out = false {
     lower(Entries.RuleAction) == "allow"
 }
 
-acl_all_icmp_ipv4_out = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_all_icmp_ipv4_out_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress == true
     to_number(Entries.Protocol) == -1
     Entries.CidrBlock == "0.0.0.0/0"
     lower(Entries.RuleAction) == "allow"
+}
+
+acl_all_icmp_ipv4_out {
+    input.NetworkAcls
+    not acl_all_icmp_ipv4_out_violation
+}
+
+acl_all_icmp_ipv4_out = false {
+    acl_all_icmp_ipv4_out_violation
 }
 
 acl_all_icmp_ipv4_out_err = "AWS Network ACLs with Outbound rule to allow All ICMP IPv4" {
@@ -163,10 +194,9 @@ acl_all_icmp_ipv4_out_metadata := {
 # PR-AWS-CLD-NACL-005
 #
 
-default acl_all_icmp_ipv6_out = true
+default acl_all_icmp_ipv6_out = null
 
-acl_all_icmp_ipv6_out = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_all_icmp_ipv6_out_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress == true
@@ -175,14 +205,22 @@ acl_all_icmp_ipv6_out = false {
     lower(Entries.RuleAction) == "allow"
 }
 
-acl_all_icmp_ipv6_out = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_all_icmp_ipv6_out_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress == true
     to_number(Entries.Protocol) == -1
     Entries.Ipv6CidrBlock == "::/0"
     lower(Entries.RuleAction) == "allow"
+}
+
+acl_all_icmp_ipv6_out {
+    input.NetworkAcls
+    not acl_all_icmp_ipv6_out_violation
+}
+
+acl_all_icmp_ipv6_out = false {
+    acl_all_icmp_ipv6_out_violation
 }
 
 acl_all_icmp_ipv6_out_err = "AWS Network ACLs with Outbound rule to allow All ICMP IPv6" {
@@ -205,16 +243,24 @@ acl_all_icmp_ipv6_out_metadata := {
 # PR-AWS-CLD-NACL-006
 #
 
-default acl_all_traffic_out = true
+default acl_all_traffic_out = null
 
-acl_all_traffic_out = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_all_traffic_out_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress == true
     to_number(Entries.Protocol) == -1
     Entries.CidrBlock == "0.0.0.0/0"
     lower(Entries.RuleAction) == "allow"
+}
+
+acl_all_traffic_out {
+    input.NetworkAcls
+    not acl_all_traffic_out_violation
+}
+
+acl_all_traffic_out = false {
+    acl_all_traffic_out_violation
 }
 
 acl_all_traffic_out_err = "AWS Network ACLs with Outbound rule to allow All Traffic" {
@@ -238,10 +284,9 @@ acl_all_traffic_out_metadata := {
 # PR-AWS-CLD-NACL-007
 #
 
-default acl_unrestricted_admin_port = true
+default acl_unrestricted_admin_port = null
 
-acl_unrestricted_admin_port = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_unrestricted_admin_port_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress == false
@@ -251,8 +296,7 @@ acl_unrestricted_admin_port = false {
     lower(Entries.RuleAction) == "allow"
 }
 
-acl_unrestricted_admin_port = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_unrestricted_admin_port_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress == false
@@ -262,8 +306,7 @@ acl_unrestricted_admin_port = false {
     lower(Entries.RuleAction) == "allow"
 }
 
-acl_unrestricted_admin_port = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_unrestricted_admin_port_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress == false
@@ -273,8 +316,7 @@ acl_unrestricted_admin_port = false {
     lower(Entries.RuleAction) == "allow"
 }
 
-acl_unrestricted_admin_port = false {
-    # lower(resource.Type) == "aws::ec2::networkaclentry"
+acl_unrestricted_admin_port_violation {
     NetworkAcls := input.NetworkAcls[_]
     Entries := NetworkAcls.Entries[_]
     Entries.Egress == false
@@ -282,6 +324,15 @@ acl_unrestricted_admin_port = false {
     to_number(Entries.PortRange.To) >= 3389
     Entries.Ipv6CidrBlock == "::/0"
     lower(Entries.RuleAction) == "allow"
+}
+
+acl_unrestricted_admin_port {
+    input.NetworkAcls
+    not acl_unrestricted_admin_port_violation
+}
+
+acl_unrestricted_admin_port = false {
+    acl_unrestricted_admin_port_violation
 }
 
 acl_unrestricted_admin_port_err = "Unrestricted Inbound Traffic on Remote Server Administration Ports" {
@@ -305,12 +356,21 @@ acl_unrestricted_admin_port_metadata := {
 # PR-AWS-CLD-NACL-008
 # aws::ec2::networkaclentry
 
-default acl_no_rules_in_default_vpc = true
+default acl_no_rules_in_default_vpc = null
 
-acl_no_rules_in_default_vpc = false {
+acl_no_rules_in_default_vpc_violation {
     NetworkAcls := input.NetworkAcls[_]
     NetworkAcls.IsDefault == true
     count(NetworkAcls.Entries) == 0
+}
+
+acl_no_rules_in_default_vpc {
+    input.NetworkAcls
+    not acl_no_rules_in_default_vpc_violation
+}
+
+acl_no_rules_in_default_vpc = false {
+    acl_no_rules_in_default_vpc_violation
 }
 
 acl_no_rules_in_default_vpc_err = "Ensure there are no rules in the Default VPC NACL." {

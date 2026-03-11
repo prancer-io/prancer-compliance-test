@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings
 
@@ -27,7 +25,7 @@ azure_issue["sql_db_log_audit"] {
     lower(resource.type) == "microsoft.sql/servers/databases"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/databases/auditingsettings";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               lower(r.properties.state) == "enabled";
               c := 1]) == 0
 }
@@ -149,7 +147,7 @@ azure_issue["sql_db_log_retention"] {
     lower(resource.type) == "microsoft.sql/servers/databases"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/databases/auditingsettings";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               to_number(r.properties.retentionDays) > 0;
               to_number(r.properties.retentionDays) < 90;
               c := 1]) > 0
@@ -160,7 +158,7 @@ azure_issue["sql_db_log_retention"] {
     lower(resource.type) == "microsoft.sql/servers/databases"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/databases/auditingsettings";
-              #array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              #common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               to_number(r.properties.retentionDays) < 0;
               c := 1]) > 0
 }

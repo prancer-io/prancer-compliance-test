@@ -1,8 +1,6 @@
 package rule
 
-array_contains(target_array, element) = true {
-  lower(target_array[_]) == lower(element)
-} else = false { true }
+import data.common
 
 #
 # PR-AZR-CLD-SQL-078
@@ -83,7 +81,7 @@ azure_issue["sql_db_backup_restore_retention_config"] {
     lower(resource.type) == "microsoft.sql/servers/databases"
     count([c | r := input.resources[_];
               lower(r.type) == "microsoft.sql/servers/databases/backupshorttermretentionpolicies";
-              array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
+              common.array_contains(r.dependsOn, concat("/", [resource.type, resource.name]));
               to_number(r.properties.retentionDays) < 35;
               c := 1]) > 0
 }
